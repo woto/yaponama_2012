@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Yaponama2012::Application.config.secret_token = 'b99d7d7a9b4d84f307b0720f65f7c14e7b990a16c9d6280fec3677c0c650760461497da88d0163479821e7a8fd7ffbd3a6aa65d3453ffe36a067d4406f54b418'
+Yaponama2012::Application.config.secret_token = 'aedb8a9c85cea6b03060bc202232a4a70f721b20206f2705ab86ce62b443a42f29368c881bac4c9d86f7c591499dae1c7a2dafc54b94b0b394234ef8d5c9565c'
