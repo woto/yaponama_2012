@@ -1,0 +1,68 @@
+<%- model_class = Car -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:god) %></th>
+      <th><%= model_class.human_attribute_name(:marka) %></th>
+      <th><%= model_class.human_attribute_name(:model) %></th>
+      <th><%= model_class.human_attribute_name(:dvigatel) %></th>
+      <th><%= model_class.human_attribute_name(:tip) %></th>
+      <th><%= model_class.human_attribute_name(:moschnost) %></th>
+      <th><%= model_class.human_attribute_name(:privod) %></th>
+      <th><%= model_class.human_attribute_name(:tip_kuzova) %></th>
+      <th><%= model_class.human_attribute_name(:kpp) %></th>
+      <th><%= model_class.human_attribute_name(:kod_kuzova) %></th>
+      <th><%= model_class.human_attribute_name(:kod_dvigatelya) %></th>
+      <th><%= model_class.human_attribute_name(:rinok) %></th>
+      <th><%= model_class.human_attribute_name(:vin) %></th>
+      <th><%= model_class.human_attribute_name(:frame) %></th>
+      <th><%= model_class.human_attribute_name(:komplektaciya) %></th>
+      <th><%= model_class.human_attribute_name(:invisible) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cars.each do |car| %>
+      <tr>
+        <td><%= link_to car.id, admin_car_path(car) %></td>
+        <td><%= car.god %></td>
+        <td><%= car.marka %></td>
+        <td><%= car.model %></td>
+        <td><%= car.dvigatel %></td>
+        <td><%= car.tip %></td>
+        <td><%= car.moschnost %></td>
+        <td><%= car.privod %></td>
+        <td><%= car.tip_kuzova %></td>
+        <td><%= car.kpp %></td>
+        <td><%= car.kod_kuzova %></td>
+        <td><%= car.kod_dvigatelya %></td>
+        <td><%= car.rinok %></td>
+        <td><%= car.vin %></td>
+        <td><%= car.frame %></td>
+        <td><%= car.komplektaciya %></td>
+        <td><%= car.invisible %></td>
+        <td><%= car.user_id %></td>
+        <td><%=l car.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_admin_car_path(car), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      admin_car_path(car),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_admin_car_path,
+            :class => 'btn btn-primary' %>

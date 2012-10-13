@@ -1,0 +1,31 @@
+<%- model_class = Request -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @request.user_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:car_id) %>:</strong></dt>
+  <dd><%= @request.car_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:catalog_number) %>:</strong></dt>
+  <dd><%= @request.catalog_number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:manufacturer) %>:</strong></dt>
+  <dd><%= @request.manufacturer %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:notes) %>:</strong></dt>
+  <dd><%= @request.notes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:invisible) %>:</strong></dt>
+  <dd><%= @request.invisible %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              admin_requests_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_admin_request_path(@request), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              admin_request_path(@request),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

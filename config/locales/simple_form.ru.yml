@@ -1,0 +1,117 @@
+ru:
+  simple_form:
+    "yes": 'Да'
+    "no": 'Нет'
+    required:
+      text: 'Обязательно к заполнению'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Невозможно продолжить, т.к. форма заполнена не корректно"
+    labels:
+      defaults:
+        approx_days: Дней
+        approx_cost: Цена
+        catalog_number: Каталожный номер
+        manufacturer: Производитель
+        creation_reason: Причина создания
+        email_address: E-mail
+        session_id: Идентификатор
+        created_at: Запись создана
+        updated_at: Запись изменена
+        human_confirmation_datetime: Дата подтв. менеджером
+        robot_confirmation_datetime: Дата подтв. роботом
+        utc_offset_hours: Часов
+        utc_offset_minutes: Минут
+        time_zone: &time_zone Часовой пояс
+        invisible: Служебная информация
+        company: Компания
+        name: Имя
+        phone: Телефон
+        notes: Комментарий
+        postcode: Почтовый индекс
+        region: Регион
+        city: Город
+        street: Улица
+        house: Дом
+        room: Квартира
+        confirmed_by_robot: Подт. автоматически
+        confirmed_by_human: Подтв.  менеджером
+        can_receive_sms: Мобильный
+        vin: VIN код
+        frame: FRAME код
+        god: Год выпуска
+        marka: Марка
+        model: Модель
+        dvigatel: Объем двигателя (литров)
+        tip: Тип двигателя
+        moschnost: Мощность двигателя (лошадинных сил)
+        privod: Привод
+        tip_kuzova: Тип кузова
+        kpp: Тип коробки переключения передач (КПП)
+        kod_kuzova: Код кузова
+        kod_dvigatelya: Код двигателя
+        rinok: Рынок
+        komplektaciya: Комплектация
+      user:
+        time_zone: *time_zone
+    hints:
+      defaults:
+        approx_days: Приблизительно дней
+        approx_cost: Приблизительная цена
+        email_address: Электронный адрес почты
+        session_id: Идентификатор сессии (заполняется в случае посещения пользователем сайта)
+        utc_offset_hours: Смещение относительно UTC
+        utc_offset_minutes: Смещение относительно UTC
+        name: Фамилия, Имя, Отчество
+        region: Название республики, края, области, автономного округа или автономной области, района
+        city: Название населенного пункта (города, поселка, деревни и т. п.)
+        street: Название улицы, проспекта, проезда, переулка, набережной, площади, бульвара, шоссе
+        house: Номер дома, корпуса, строения, владения
+        room: Номер квартиры или офиса
+        confirmed_by_robot: Подтверждается автоматически если клиент производит необходимые действия
+        confirmed_by_human: Подтверждается вручную менеджером
+        can_receive_sms: Телефон может принимать SMS сообщения
+        phone: 10 цифр номера без +7, 8 и прочих символов
+        vin: Идентификационный номер транспортного средства, состоящий из 17 символов. В коде представлена информация о производителе, характеристиках транспортного средства и годе выпуска. Идентификационные номера наносятся на неразъемных составляющих кузова или шасси и на специально изготовленных номерных табличках (шильдиках). VIN код так же указан в свидетельстве о регистрации транспортного средства
+        frame: Идентификационный номер транспортного средства - рама (шасси, кузов, коляска). Является аналогом VIN кода и используется только на автомобилях предназначенных для внутреннего рынка Японии (с правым рулём). Может содержать разное количество символов. FRAME (chassis) код так же указан в свидетельстве о регистрации транспортного средства.
+        god: Год выпуска, а так же если известно годы выпуска модельного ряда
+        marka: Toyota, Lexus, Nissan, Mitubishi, Chrysler и т.д.
+        model: Tiida, Corolla, X-Trail, X5, Accord, ix35, Solaris и т.д.
+        dvigatel: 1.6, 2.0, 2.4, 4.0, 4.3 и т.д.
+        tip: Дизель, Бензин, Гибрид и т.д.
+        moschnost: 61, 84, 150, 218, 485 и т.д.
+        privod: Передний, Задний, Полный и т.д.
+        tip_kuzova: Купе, Внедорожник, Хэтчбэк, Седан и т.д.
+        kpp: Механика, Автомат, Вариатор и т.д.
+        kod_kuzova: Код кузова
+        kod_dvigatelya: Код двигателя
+        rinok: США, Япония, Европа, Великобритания и т.д.
+        komplektaciya: Комплектация
+        company: Компания
+        invisible: Отображается только менеджеру
+      postal_address:
+        notes: &postal_address_notes Подъезд, этаж, код домофона, желаемые часы доставки, предупредить перед доставкой и т.д.
+      postal_addresses:
+        notes: *postal_address_notes
+      phone:
+        notes: &phone_notes Дополнительный внутренний номер, часы в которые можно/нельзя беспокоить, основной номер или дополнительный и т.д.
+      phones:
+        notes: *phone_notes
+        
+    # Labels and hints examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+

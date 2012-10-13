@@ -1,0 +1,18 @@
+<%= simple_form_for([:admin, @email]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :from_addrs %>
+    <%= f.input :return_path %>
+    <%= f.input :from %>
+    <%= f.input :subject %>
+    <%= f.input :in_reply_to %>
+    <%= f.input :to_addrs %>
+    <%= f.input :text_part %>
+    <%= f.input :html_part %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -36,5 +36,14 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'ruby-debug'
-gem "twitter-bootstrap-rails"
+gem 'ruby-debug'
+gem 'twitter-bootstrap-rails'
+gem 'simple_form'
+gem 'cocoon', :git => 'https://github.com/nathanvda/cocoon'
+gem 'russian'
+gem 'mailman'
+gem 'kaminari'
+gem 'ckeditor', :git => 'https://github.com/galetahub/ckeditor.git'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'haml'

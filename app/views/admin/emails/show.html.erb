@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>From addrs:</b>
+  <%= @email.from_addrs %>
+</p>
+
+<p>
+  <b>Return path:</b>
+  <%= raw Base64.decode64 ( @email.return_path ) %>
+</p>
+
+<p>
+  <b>From:</b>
+  <%= @email.from %>
+</p>
+
+<p>
+  <b>Subject:</b>
+  <%= @email.subject %>
+</p>
+
+<p>
+  <b>In reply to:</b>
+  <%= @email.in_reply_to %>
+</p>
+
+<p>
+  <b>To addrs:</b>
+  <%= @email.to_addrs %>
+</p>
+
+<p>
+  <b>Text part:</b>
+  <%= raw Base64.decode64 @email.text_part %>
+</p>
+
+<p>
+  <b>Html part:</b>
+  <%= raw Base64.decode64 @email.html_part %>
+</p>
+
+<%= link_to 'Edit', edit_admin_email_path(@email) %> |
+<%= link_to 'Back', admin_emails_path %>

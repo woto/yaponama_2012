@@ -1,0 +1,2 @@
+module TestModule::TestEntitiesHelper
+end

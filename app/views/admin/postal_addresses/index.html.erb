@@ -1,0 +1,56 @@
+<%- model_class = PostalAddress -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= sortable 'id' %></th>
+      <th><%= sortable 'company' %></th>
+      <th><%= sortable 'postcode' %></th>
+      <th><%= sortable 'region' %></th>
+      <th><%= sortable 'city' %></th>
+      <th><%= sortable 'street' %></th>
+      <th><%= sortable 'house' %></th>
+      <th><%= sortable 'room' %></th>
+      <th><%= sortable 'notes' %></th>
+      <th><%= sortable 'invisible' %></th>
+      <th><%= sortable 'user_id' %></th>
+      <th><%= sortable 'created_at' %></th>
+      <th><%= sortable 'updated_at' %></th>
+      <th><%= t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @postal_addresses.each do |postal_address| %>
+      <tr>
+        <td><%= link_to postal_address.id, admin_postal_address_path(postal_address) %></td>
+        <td><%= postal_address.company %></td>
+        <td><%= postal_address.postcode %></td>
+        <td><%= postal_address.region %></td>
+        <td><%= postal_address.city %></td>
+        <td><%= postal_address.street %></td>
+        <td><%= postal_address.house %></td>
+        <td><%= postal_address.room %></td>
+        <td><%= postal_address.notes %></td>
+        <td><%= postal_address.invisible %></td>
+        <td><%= postal_address.user_id %></td>
+        <td><%=l postal_address.created_at, :format => :short %></td>
+        <td><%=l postal_address.updated_at, :format => :short %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_admin_postal_address_path(postal_address), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      admin_postal_address_path(postal_address),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_admin_postal_address_path,
+            :class => 'btn btn-primary' %>

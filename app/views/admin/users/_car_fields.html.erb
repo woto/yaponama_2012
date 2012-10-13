@@ -1,0 +1,59 @@
+<div class="nested-fields">
+
+  <hr />
+
+  <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1_new_car_" data-toggle="tab">Идентификатор</a></li>
+    <li><a href="#tab2_new_car_" data-toggle="tab">Характеристики</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1_new_car_">
+      <%= f.input :vin %>
+      <%= f.input :frame %>
+    </div>
+
+    <!-- Это трюк, только с этой строчкой происходит динамическая генерация id для табов -->
+    <div id="[new_car]"></div>
+
+    <div class="tab-pane" id="tab2_new_car_">
+      <%= f.input :god %>
+      <%= f.input :marka %>
+      <%= f.input :model %>
+      <%= f.input :dvigatel %>
+      <%= f.input :tip %>
+      <%= f.input :moschnost %>
+      <%= f.input :privod %>
+      <%= f.input :tip_kuzova %>
+      <%= f.input :kpp %>
+      <%= f.input :kod_kuzova %>
+      <%= f.input :kod_dvigatelya %>
+      <%= f.input :rinok %>
+      <%= f.input :komplektaciya %>
+    </div>
+  </div>
+
+  <hr />
+
+  <%= f.input :created_at, :disabled => true %>
+  <%= f.input :updated_at, :disabled => true %>
+  <%= f.input :invisible %>
+
+  <h4 class="muted"> Запросы по этому автомобилю </h4>
+
+  <div id="requests_with_auto" style="margin: 10px; padding: 10px">
+
+      <%= f.simple_fields_for :requests do |request| %>
+        <%= render '/requests/request_fields', :f => request %>
+      <% end %>
+
+    <div class="links">
+      <%= link_to_add_association 'Добавить запрос по этому автомобилю', f, :requests, :class => "btn btn-success", :partial => '/requests/request_fields' %>
+    </div>
+
+  </div>
+
+
+</div>

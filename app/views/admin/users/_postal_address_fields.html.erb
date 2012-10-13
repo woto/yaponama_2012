@@ -1,0 +1,19 @@
+<div class="nested-fields">
+
+  <hr />
+
+  <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
+
+  <%= f.input :company %>
+  <%= f.input :postcode %>
+  <%= f.input :region %>
+  <%= f.input :city %>
+  <%= f.input :street %>
+  <%= f.input :house %>
+  <%= f.input :room %>
+  <%= f.input :notes, :input_html => {:rows => 10} %>
+  <%= f.input :created_at, :disabled => true %>
+  <%= f.input :updated_at, :disabled => true %>
+  <%= f.input :invisible %>
+
+</div>

@@ -1,0 +1,60 @@
+<%= simple_form_for [:admin, @car], :html => { :class => 'form-horizontal' } do |f| %>
+
+  <%= f.association :user %>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Идентификатор</a></li>
+    <li><a href="#tab2" data-toggle="tab">Характеристики</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+      <%= f.input :vin %>
+      <%= f.input :frame %>
+    </div>
+
+    <div class="tab-pane" id="tab2">
+      <%= f.input :god %>
+      <%= f.input :marka %>
+      <%= f.input :model %>
+      <%= f.input :dvigatel %>
+      <%= f.input :tip %>
+      <%= f.input :moschnost %>
+      <%= f.input :privod %>
+      <%= f.input :tip_kuzova %>
+      <%= f.input :kpp %>
+      <%= f.input :kod_kuzova %>
+      <%= f.input :kod_dvigatelya %>
+      <%= f.input :rinok %>
+      <%= f.input :komplektaciya %>
+    </div>
+  </div>
+
+  <hr /> 
+
+  <%= f.input :created_at, :disabled => true %>
+  <%= f.input :updated_at, :disabled => true %>
+  <%= f.input :invisible %>
+
+
+  <div id="requests">
+    <%= f.simple_fields_for :requests, @car.requests do |request| %>
+      <%= render '/requests/request_fields', :f => request %>
+    <% end %>
+
+    <% stack = stack.nil? ? 0 : stack + 1 %>
+
+    <% if stack < 3 %>
+      <div class="links">
+        <%= link_to_add_association 'Добавить request', f, :requests, :class => "btn btn-success", :render_options => {:locals => {:stack => stack}}, :partial => '/requests/request_fields'   %>
+      </div>
+    <% end %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_cars_path, :class => 'btn' %>
+  </div>
+<% end %>

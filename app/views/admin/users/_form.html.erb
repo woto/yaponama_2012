@@ -1,0 +1,95 @@
+<%= simple_form_for [:admin, @user], :html => { :class => 'form-horizontal' } do |f| %>
+
+  <%= f.association :time_zone, :include_blank => true %>
+  <%= f.input :creation_reason, :collection => [['Прислал e-mail', 'email'] ,['Посетил сайт', 'session']], :disabled => true, :as => :radio_buttons %>
+  <%= f.input :created_at, :disabled => true %>
+  <%= f.input :updated_at, :disabled => true %>
+  <%= f.simple_fields_for :ping do |ping| %>
+    <%= ping.input :created_at, :as => :datetime, :disabled => true, :label => 'Пинг', :hint => 'Время последней активности (просмотр страницы пользователем или получение от него письма)', :required => false %>
+  <% end %>
+  <%= f.input :invisible %>
+  <%= f.input :session_id, :disabled => true %>
+
+
+  <h3 class="muted"> Имена </h3>
+
+  <div id="names">
+    <%= f.simple_fields_for :names do |name| %>
+      <%= render 'name_fields', :f => name %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association 'Добавить имя', f, :names, :class => "btn btn-success"   %>
+    </div>
+  </div>
+
+  <h3 class="muted"> Телефоны </h3>
+
+  <div id="phones">
+    <%= f.simple_fields_for :phones do |phone| %>
+      <%= render 'phone_fields', :f => phone %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association 'Добавить телефон', f, :phones, :class => "btn btn-success"   %>
+    </div>
+  </div>
+
+
+  <h3 class="muted">Электронная почта</h3>
+
+  <div id="email_addresses">
+    <%= f.simple_fields_for :email_addresses do |email_address| %>
+      <%= render 'email_address_fields', :f => email_address %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association 'Добавить E-mail', f, :email_addresses, :class => "btn btn-success"  %>
+    </div>
+  </div>
+
+  <h3 class="muted"> Адреса доставки</h3>
+
+  <div id="postal_addresses">
+    <%= f.simple_fields_for :postal_addresses do |postal_address| %>
+      <%= render 'postal_address_fields', :f => postal_address %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association 'Добавить адрес', f, :postal_addresses, :class => "btn btn-success"  %>
+    </div>
+  </div>
+
+  <h3 class="muted"> Автомобили </h3>
+
+  <div id="cars">
+    <%= f.simple_fields_for :cars do |car| %>
+      <%= render 'car_fields', :f => car %>
+    <% end %>
+    
+    <div class="links">
+      <%= link_to_add_association 'Добавить автомобиль', f, :cars, :class => "btn btn-success" %>
+    </div>
+  </div>
+
+
+  <h3 class="muted"> Запросы без указания автомобиля</h3>
+
+  <div id="requests_without_auto">
+
+    <%= f.simple_fields_for :requests, f.object.requests.where("request_id IS NULL").where("car_id IS NULL") do |request| %>
+      <%= render '/requests/request_fields', :f => request %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association 'Добавить запрос без указания автомобиля', f, :requests, :class => "btn btn-success", :partial => '/requests/request_fields' %>
+    </div>
+  </div>
+
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_users_path, :class => 'btn' %>
+  </div>
+<% end %>

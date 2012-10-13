@@ -12,11 +12,14 @@
   <![endif]-->
 
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
 
+  <!-- 
   <link href="images/favicon.ico" rel="shortcut icon">
   <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
   <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+  -->
 
 </head>
 <body>
@@ -32,9 +35,13 @@
         <a class="brand" href="#">Yaponama2012</a>
         <div class="container-fluid nav-collapse">
           <ul class="nav">
-            <li><%= link_to "Link1", "/path1"  %></li>
-            <li><%= link_to "Link2", "/path2"  %></li>
-            <li><%= link_to "Link3", "/path3"  %></li>
+            <li><%= link_to "Корзина", "/path1"  %></li>
+            <li><%= link_to "Заказы", "/path2"  %></li>
+            <li><%= link_to "Избранное", "/path3"  %></li>
+            <li><%= link_to "Автомобили", "/path3"  %></li>
+            <li><%= link_to "Адреса доставки", "/path3"  %></li>
+            <li><%= link_to "Электронная почта", "/path3"  %></li>
+            <li><%= link_to "Телефоны", "/path3"  %></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -44,8 +51,52 @@
 
   <div class="container-fluid">
     <div class="row-fluid">
-      <div class="span3">
+      <div class="span8">
+        <div id="div1">div1</div>
+        <div id="div2">div2</div>
+        <div id="div3">div3</div>
+        <div id="div4">div4</div>
+        <div id="div5">div5</div>
+        <div id="div6">div6</div>
+        <%= yield %>
+      </div>
+      <div class="span4">
+
+        <div class="alert alert-block">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <h4>Подтвердите пожалуйста ваш номер телефона</h4>
+          Мы отправили вам письмо на email для подтверждения вашего адреса и SMS на телефон, чтобы убедиться, что это действительно Ваш номер.
+        </div>
+
         <div class="well sidebar-nav">
+
+          <img src="http://placehold.it/70x80" class="img-polaroid">
+
+          <div style="overflow: auto; width: auto; height: 200px; background: #FFF">
+
+            <div class="span10 offset1 alert alert-info">
+              Вы
+            </div>
+            <div>
+              asdasdfa sdf adsf f
+            </div>
+            <div class="span10 offset1 alert alert-info">
+              Вы
+            </div>
+          
+          </div>
+
+          <br/ > <br />
+
+            <input type="text" placeholder="Номер телефона">
+            <input type="text" placeholder="Адрес электронная почта">
+
+            <form class="navbar-form pull-left">
+              <textarea placeholder="фыва" rows="3"></textarea>
+              <button type="submit" class="btn">Submit</button>
+            </form>
+
+
           <ul class="nav nav-list">
             <li class="nav-header">Sidebar</li>
             <li><%= link_to "Link1", "/path1"  %></li>
@@ -54,9 +105,6 @@
           </ul>
         </div><!--/.well -->
       </div><!--/span-->
-      <div class="span9">
-        <%= yield %>
-      </div>
     </div><!--/row-->
 
     <footer>
@@ -64,11 +112,6 @@
     </footer>
 
   </div> <!-- /container -->
-
-  <!-- Javascripts
-  ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <%= javascript_include_tag "application" %>
 
   </body>
 </html>

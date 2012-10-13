@@ -1,4 +1,27 @@
 Yaponama2012::Application.routes.draw do
+
+  resources :add_requst_id_to_cars
+
+  mount Ckeditor::Engine => '/ckeditor'
+
+  namespace :test_module do 
+    resources :test_entities do
+      match :legacy, :on => :collection
+    end
+  end
+
+  namespace :admin do
+    resources :time_zones
+    resources :postal_addresses
+    resources :phones
+    resources :email_addresses
+    resources :emails
+    resources :users
+    resources :names
+    resources :cars
+    resources :requests
+  end
+
   resources :posts
 
   # The priority is based upon order of creation:
