@@ -1,9 +1,6 @@
 <%= simple_form_for [:admin, @request], :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.association :user %>
-  <div id="car">
-    <%= f.association :car %>
-    <%= link_to_add_association 'Добавить Автомобиль', f, :car, :partial => "users/car_fields" %>
-  </div>
+  <%= f.association :car %>
   <%= f.association :request %>
   <%= f.input :catalog_number %>
   <%= f.input :manufacturer %>
@@ -28,11 +25,11 @@
   <div id="requests">
 
     <%= f.simple_fields_for :requests do |request| %>
-      <%= render 'request_fields', :f => request %>
+      <%= render '/users/request_fields', :f => request, :counter => "", :stack => 0 %>
     <% end %>
 
     <div class="links">
-      <%= link_to_add_association 'Добавить request', f, :requests, :class => "btn btn-success"   %>
+      <%= link_to_add_association 'Добавить request', f, :requests, :class => "btn btn-success", :render_options => {:locals => {:counter => "", :stack => 0}}, :partial => '/users/request_fields' %>
     </div>
 
   </div>

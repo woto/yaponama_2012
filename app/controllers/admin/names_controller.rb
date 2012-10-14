@@ -60,7 +60,7 @@ class Admin::NamesController < Admin::ApplicationController
 
     respond_to do |format|
       if @name.update_attributes(params[:name])
-        format.html { redirect_to @name, :notice => 'Name was successfully updated.' }
+        format.html { redirect_to admin_name_path(@name), :notice => 'Name was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
@@ -76,7 +76,7 @@ class Admin::NamesController < Admin::ApplicationController
     @name.destroy
 
     respond_to do |format|
-      format.html { redirect_to names_url }
+      format.html { redirect_to admin_names_url }
       format.json { head :no_content }
     end
   end

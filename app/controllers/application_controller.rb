@@ -9,4 +9,5 @@ class ApplicationController < ActionController::Base
     user.ping = Ping.new
     user.save
   end
+
 end

@@ -38,15 +38,15 @@
 
 
   <div id="requests">
-    <%= f.simple_fields_for :requests, @car.requests do |request| %>
-      <%= render '/requests/request_fields', :f => request %>
+    <%= f.simple_fields_for :requests, @car.requests.where("request_id IS NULL") do |request| %>
+      <%= render '/users/request_fields', :f => request, :stack => 0 %>
     <% end %>
 
     <% stack = stack.nil? ? 0 : stack + 1 %>
 
     <% if stack < 3 %>
       <div class="links">
-        <%= link_to_add_association 'Добавить request', f, :requests, :class => "btn btn-success", :render_options => {:locals => {:stack => stack}}, :partial => '/requests/request_fields'   %>
+        <%= link_to_add_association 'Добавить request', f, :requests, :class => "btn btn-success", :render_options => {:locals => {:stack => stack}}, :partial => '/users/request_fields'   %>
       </div>
     <% end %>
 

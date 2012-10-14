@@ -1,4 +1,5 @@
 class Request < ActiveRecord::Base
+  include PingCallback
   belongs_to :user, :inverse_of => :requests
   belongs_to :car, :inverse_of => :requests
   has_many :requests, :inverse_of => :request, :dependent => :destroy
