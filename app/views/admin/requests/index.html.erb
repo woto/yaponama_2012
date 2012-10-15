@@ -8,6 +8,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:user_id) %></th>
       <th><%= model_class.human_attribute_name(:car_id) %></th>
+      <th><%= model_class.human_attribute_name(:request_id) %></th>
       <th><%= model_class.human_attribute_name(:catalog_number) %></th>
       <th><%= model_class.human_attribute_name(:manufacturer) %></th>
       <th><%= model_class.human_attribute_name(:notes) %></th>
@@ -24,6 +25,7 @@
         <td><%= link_to request.id, admin_request_path(request) %></td>
         <td><%= request.user_id %></td>
         <td><%= request.car_id %></td>
+        <td><%= request.request_id %></td>
         <td><%= request.catalog_number %></td>
         <td><%= request.manufacturer %></td>
         <td><%= request.notes %></td>

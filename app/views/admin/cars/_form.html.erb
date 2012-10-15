@@ -38,7 +38,7 @@
 
 
   <div id="requests">
-    <%= f.simple_fields_for :requests, @car.requests.where("request_id IS NULL") do |request| %>
+    <%= f.simple_fields_for :requests, f.object.requests.where("request_id IS NULL") do |request| %>
       <%= render '/users/request_fields', :f => request, :stack => 0 %>
     <% end %>
 

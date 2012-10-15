@@ -42,9 +42,16 @@
 
   <div id="requests_with_auto" style="margin: 10px; padding: 10px">
 
+    <!-- TODO попытаться понять почему такое требование -->
+    <% if f.object.new_record? %>
+      <%= f.simple_fields_for :requests do |request| %>
+        <%= render 'request_fields', :f => request, :stack => stack %>
+      <% end %>
+    <% else %>
       <%= f.simple_fields_for :requests, f.object.requests.where("request_id IS NULL") do |request| %>
         <%= render 'request_fields', :f => request, :stack => stack %>
       <% end %>
+    <% end %>
 
     <div class="links">
       <%= link_to_add_association 'Добавить запрос по этому автомобилю', f, :requests, :class => "btn btn-success", :render_options => {:locals => {:stack => stack}} %>

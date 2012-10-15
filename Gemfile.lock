@@ -7,6 +7,13 @@ GIT
       orm_adapter
 
 GIT
+  remote: https://github.com/mbulat/plutus.git
+  revision: 01803e5c3557dbd984ed2243b5b6439c2cf29cd6
+  specs:
+    plutus (0.7.2)
+      rails (~> 3.1)
+
+GIT
   remote: https://github.com/nathanvda/cocoon
   revision: 8118a45953d02d84e4bf6aa6a3ed40dfea910bec
   specs:
@@ -97,8 +104,6 @@ GEM
     multi_json (1.3.6)
     mysql2 (0.3.11)
     orm_adapter (0.4.0)
-    plutus (0.7.0)
-      rails (~> 3.1)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -183,7 +188,7 @@ DEPENDENCIES
   mailman
   mini_magick
   mysql2
-  plutus
+  plutus!
   rails (= 3.2.8)
   ruby-debug
   russian

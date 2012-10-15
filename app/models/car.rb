@@ -11,6 +11,4 @@ class Car < ActiveRecord::Base
     "#{dvigatel} - #{frame} - #{god} - #{kod_dvigatelya} - #{kod_kuzova} - #{komplektaciya} - #{kpp} - #{marka} - #{model} - #{moschnost} - #{privod} - #{rinok} - #{tip} - #{tip_kuzova} - #{vin} - #{invisible}"
   end
 
-  
-
 end

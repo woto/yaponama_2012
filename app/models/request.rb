@@ -11,4 +11,24 @@ class Request < ActiveRecord::Base
     "#{catalog_number} - #{manufacturer} - #{notes} - #{invisible}"
   end
 
+  before_save :set_relational_attributes
+
+  def set_relational_attributes
+    if self.car.present?
+      self.user = self.car.user
+      self.requests.each do |request|
+        request.car = self.car
+        request.user = self.car.user
+      end
+    end
+    if self.user.present?
+      self.requests.each do |request|
+        request.user = self.user
+      end
+    end
+  end
+
+
+
+
 end

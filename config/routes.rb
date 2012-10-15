@@ -3,6 +3,8 @@ Yaponama2012::Application.routes.draw do
   resources :add_requst_id_to_cars
 
   mount Ckeditor::Engine => '/ckeditor'
+  mount Plutus::Engine => "/plutus", :as => "plutus"
+  
 
   namespace :test_module do 
     resources :test_entities do
