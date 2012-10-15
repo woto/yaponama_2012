@@ -11,7 +11,7 @@
   <%= f.input :session_id, :disabled => true %>
 
 
-  <h3 class="muted"> Имена </h3>
+  <h2> Имена </h3>
 
   <div id="names">
     <%= f.simple_fields_for :names do |name| %>
@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <h3 class="muted"> Телефоны </h3>
+  <h2> Телефоны </h3>
 
   <div id="phones">
     <%= f.simple_fields_for :phones do |phone| %>
@@ -36,7 +36,7 @@
   </div>
 
 
-  <h3 class="muted">Электронная почта</h3>
+  <h2>Электронная почта</h3>
 
   <div id="email_addresses">
     <%= f.simple_fields_for :email_addresses do |email_address| %>
@@ -48,7 +48,7 @@
     </div>
   </div>
 
-  <h3 class="muted"> Адреса доставки</h3>
+  <h2> Адреса доставки</h3>
 
   <div id="postal_addresses">
     <%= f.simple_fields_for :postal_addresses do |postal_address| %>
@@ -60,7 +60,7 @@
     </div>
   </div>
 
-  <h3 class="muted"> Автомобили </h3>
+  <h2> Автомобили </h3>
 
   <div id="cars">
     <% counter = 0 %>
@@ -75,16 +75,24 @@
   </div>
 
   
-  <h3 class="muted"> Запросы без указания автомобиля</h3>
+  <h2> Запросы без автомобиля</h3>
 
   <div id="requests_without_auto">
 
-    <%= f.simple_fields_for :requests, f.object.requests.where("request_id IS NULL").where("car_id IS NULL") do |request| %>
-      <%= render '/users/request_fields', :f => request, :stack => 0 %>
+
+    <!-- # TODO  Check аналогично -->
+    <% if f.object.new_record? %>
+      <%= f.simple_fields_for :requests do |request| %>
+        <%= render '/users/request_fields', :f => request, :stack => 0 %>
+      <% end %>
+    <% else %>
+      <%= f.simple_fields_for :requests, f.object.requests.where("request_id IS NULL").where("car_id IS NULL") do |request| %>
+        <%= render '/users/request_fields', :f => request, :stack => 0 %>
+      <% end %>
     <% end %>
 
     <div class="links">
-      <%= link_to_add_association 'Добавить запрос без указания автомобиля', f, :requests, :class => "btn btn-success", :partial => '/users/request_fields', :render_options => {:locals => {:stack => 0}} %>
+      <%= link_to_add_association 'Запрос без авто', f, :requests, :class => "btn btn-info", :partial => '/users/request_fields', :render_options => {:locals => {:stack => 0}} %>
     </div>
   </div>
 

@@ -1,46 +1,46 @@
-<div style="margin: 20px; padding: 20px; background :#<%= "%06x" % (rand * 0xffffff) %>" class="nested-fields">
+<div class="nested-fields">
 
   <hr />
 
-  <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
+  <div style="margin: 10px 0 10px 10px; padding: 10px; border-left: 3px dashed #5BC0DE">
 
-  <%= f.association :user %>
-  <%= f.association :car %>
-  <%= f.association :request %>
-  <%= f.input :catalog_number %>
-  <%= f.input :manufacturer %>
-  <%= f.input :creation_reason, :collection => [
-    ['Выбор клиента', 'client_choose'] ,
-    ['Подобрана по официальному каталогу', 'official'] ,
-    ['Замена по официальному каталогу', 'replacement_official'], 
-    ['Не официальная замена (этот же производитель)', 'replacement_unofficial'], 
-    ['Не брендированная замена (брендовая компание кладет эту фирму)', 'replacement_non_branded'], 
-    ['Качественный аналог', 'analogue_expensive'], 
-    ['Не рекомендуем, но как вариант', 'analogue_cheap'],
-    ['Деталь потребуется при установке родительской', 'needed_for_parent']] %>
-  <%= f.input :check_needed, :collection => [
-    ['Требуется', 'check_needed', ],
-    ['Не требуется', 'check_dont_needed'], ],
-    :label => "Требуется проверка",
-    :hint => "Требуется дополнительная проверка совместимости или корректности замены?"
-  %>
-  <%= f.input :notes, :input_html => {:rows => 4} %>
-  <%= f.input :invisible %>
-  <%= f.input :approx_days %>
-  <%= f.input :approx_cost %>
+    <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
 
-  <div id="requests">
-    <%= f.simple_fields_for :requests do |request| %>
-      <%= render '/users/request_fields', :f => request, :counter =>"", :stack => stack + 1%>
-    <% end %>
+    <%= f.input :catalog_number %>
+    <%= f.input :manufacturer %>
+    <%= f.input :creation_reason, :collection => [
+      ['Выбор клиента', 'client_choose'] ,
+      ['Подобрана по официальному каталогу', 'official'] ,
+      ['Замена по официальному каталогу', 'replacement_official'], 
+      ['Не официальная замена (этот же производитель)', 'replacement_unofficial'], 
+      ['Не брендированная замена (брендовая компание кладет эту фирму)', 'replacement_non_branded'], 
+      ['Качественный аналог', 'analogue_expensive'], 
+      ['Не рекомендуем, но как вариант', 'analogue_cheap'],
+      ['Деталь потребуется при установке родительской', 'needed_for_parent']] %>
+    <%= f.input :check_needed, :collection => [
+      ['Требуется', 'check_needed', ],
+      ['Не требуется', 'check_dont_needed'], ],
+      :label => "Требуется проверка",
+      :hint => "Требуется дополнительная проверка совместимости или корректности замены?"
+    %>
+    <%= f.input :notes, :input_html => {:rows => 4} %>
+    <%= f.input :invisible %>
+    <%= f.input :approx_days %>
+    <%= f.input :approx_cost %>
 
-    <% stack = stack.nil? ? 0 : stack + 1 %>
+    <div id="requests">
+      <%= f.simple_fields_for :requests do |request| %>
+        <%= render '/users/request_fields', :f => request, :counter =>"", :stack => stack + 1%>
+      <% end %>
 
-    <% if stack < 3 %>
-      <div class="links">
-        <%= link_to_add_association 'Добавить request', f, :requests, :class => "btn btn-success", :render_options => {:locals => {:stack => stack}}, :partial => '/users/request_fields'   %>
-      </div>
-    <% end %>
+      <% stack = stack.nil? ? 0 : stack + 1 %>
+
+      <% if stack < 3 %>
+        <div class="links">
+          <%= link_to_add_association 'Вложенный запрос', f, :requests, :class => "btn btn-mini", :render_options => {:locals => {:stack => stack}}, :partial => '/users/request_fields'   %>
+        </div>
+      <% end %>
+    </div>
 
   </div>
 

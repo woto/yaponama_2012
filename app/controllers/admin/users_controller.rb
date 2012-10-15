@@ -25,7 +25,6 @@ class Admin::UsersController < Admin::ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-    @user.requests.new
 
     respond_to do |format|
       format.html # new.html.erb

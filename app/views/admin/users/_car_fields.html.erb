@@ -2,62 +2,64 @@
 
   <hr />
 
-  <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
+  <div style="margin: 10px 0 10px 10px; padding: 0 0 0 10px; border-left: 3px dashed #62C462">
 
-  <ul class="nav nav-tabs">
-    <li class="active"><a class="tab1_toggle<%= counter %>" href="#tab1<%= counter %>" data-toggle="tab">Идентификатор</a></li>
-    <li><a class="tab2_toggle<%= counter %>" href="#tab2<%= counter %>" data-toggle="tab">Характеристики</a></li>
-  </ul>
+    <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
 
-  <div class="tab-content">
-    <div class="tab-pane active" id="tab1<%= counter %>">
-      <%= f.input :vin %>
-      <%= f.input :frame %>
+    <ul class="nav nav-tabs">
+      <li class="active"><a id="tab1_toggle<%= counter %>" href="#tab1<%= counter %>" data-toggle="tab">Идентификатор</a></li>
+      <li><a id="tab2_toggle<%= counter %>" href="#tab2<%= counter %>" data-toggle="tab">Характеристики</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab1<%= counter %>">
+        <%= f.input :vin %>
+        <%= f.input :frame %>
+      </div>
+
+      <div class="tab-pane" id="tab2<%= counter %>">
+        <%= f.input :god %>
+        <%= f.input :marka %>
+        <%= f.input :model %>
+        <%= f.input :dvigatel %>
+        <%= f.input :tip %>
+        <%= f.input :moschnost %>
+        <%= f.input :privod %>
+        <%= f.input :tip_kuzova %>
+        <%= f.input :kpp %>
+        <%= f.input :kod_kuzova %>
+        <%= f.input :kod_dvigatelya %>
+        <%= f.input :rinok %>
+        <%= f.input :komplektaciya %>
+      </div>
     </div>
 
-    <div class="tab-pane" id="tab2<%= counter %>">
-      <%= f.input :god %>
-      <%= f.input :marka %>
-      <%= f.input :model %>
-      <%= f.input :dvigatel %>
-      <%= f.input :tip %>
-      <%= f.input :moschnost %>
-      <%= f.input :privod %>
-      <%= f.input :tip_kuzova %>
-      <%= f.input :kpp %>
-      <%= f.input :kod_kuzova %>
-      <%= f.input :kod_dvigatelya %>
-      <%= f.input :rinok %>
-      <%= f.input :komplektaciya %>
-    </div>
-  </div>
+    <hr />
 
-  <hr />
+    <%= f.input :created_at, :disabled => true %>
+    <%= f.input :updated_at, :disabled => true %>
+    <%= f.input :invisible %>
 
-  <%= f.input :created_at, :disabled => true %>
-  <%= f.input :updated_at, :disabled => true %>
-  <%= f.input :invisible %>
+    <div id="requests_with_auto" class="nested-fields">
 
-  <h4 class="muted"> Запросы по этому автомобилю </h4>
-
-  <div id="requests_with_auto" style="margin: 10px; padding: 10px">
-
-    <!-- TODO попытаться понять почему такое требование -->
-    <% if f.object.new_record? %>
-      <%= f.simple_fields_for :requests do |request| %>
-        <%= render 'request_fields', :f => request, :stack => stack %>
+      <!-- TODO попытаться понять почему такое требование -->
+      <% if f.object.new_record? %>
+        <%= f.simple_fields_for :requests do |request| %>
+          <%= render 'request_fields', :f => request, :stack => stack %>
+        <% end %>
+      <% else %>
+        <%= f.simple_fields_for :requests, f.object.requests.where("request_id IS NULL") do |request| %>
+          <%= render 'request_fields', :f => request, :stack => stack %>
+        <% end %>
       <% end %>
-    <% else %>
-      <%= f.simple_fields_for :requests, f.object.requests.where("request_id IS NULL") do |request| %>
-        <%= render 'request_fields', :f => request, :stack => stack %>
-      <% end %>
-    <% end %>
 
-    <div class="links">
-      <%= link_to_add_association 'Добавить запрос по этому автомобилю', f, :requests, :class => "btn btn-success", :render_options => {:locals => {:stack => stack}} %>
+      <div class="links">
+        <%= link_to_add_association 'Запрос по авто', f, :requests, :class => "btn btn-success btn-info", :render_options => {:locals => {:stack => stack}} %>
+      </div>
+
     </div>
 
   </div>
-
 
 </div>
+

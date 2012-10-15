@@ -13,9 +13,8 @@ GIT
     plutus (0.7.2)
       rails (~> 3.1)
 
-GIT
-  remote: https://github.com/nathanvda/cocoon
-  revision: 8118a45953d02d84e4bf6aa6a3ed40dfea910bec
+PATH
+  remote: ../cocoon
   specs:
     cocoon (1.1.0)
 
