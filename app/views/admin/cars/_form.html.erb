@@ -37,9 +37,18 @@
   <%= f.input :invisible %>
 
 
+
   <div id="requests">
-    <%= f.simple_fields_for :requests, f.object.requests.where("request_id IS NULL") do |request| %>
-      <%= render '/users/request_fields', :f => request, :stack => 0 %>
+
+    <!-- # TODO  Check аналогично -->
+    <% if f.object.new_record? %>
+      <%= f.simple_fields_for :requests do |request| %>
+        <%= render '/users/request_fields', :f => request, :stack => 0 %>
+      <% end %>
+    <% else %>
+      <%= f.simple_fields_for :requests, f.object.requests.where("request_id IS NULL").where("car_id IS NULL") do |request| %>
+        <%= render '/users/request_fields', :f => request, :stack => 0 %>
+      <% end %>
     <% end %>
 
     <% stack = stack.nil? ? 0 : stack + 1 %>
