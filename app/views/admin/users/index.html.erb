@@ -9,6 +9,7 @@
       <th><%= model_class.human_attribute_name(:cars) %></th>
       <th><%= model_class.human_attribute_name(:names) %></th>
       <th><%= model_class.human_attribute_name(:phones) %></th>
+      <th><%= model_class.human_attribute_name(:emails) %></th>
       <th><%= model_class.human_attribute_name(:time_zone) %></th>
       <th><%= model_class.human_attribute_name(:invisible) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -24,6 +25,7 @@
         <td><%= user.cars.collect(&:to_label).join(', ') %></td>
         <td><%= user.names.collect(&:to_label).join(', ') %></td>
         <td><%= user.phones.collect(&:to_label).join(', ') %></td>
+        <td><%= user.email_addresses.collect(&:to_label).join(', ') %></td>
         <td><%= user.time_zone.to_label if user.time_zone.present? %></td>
         <td><%= user.invisible %></td>
         <td><%=l user.created_at %></td>

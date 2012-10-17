@@ -1,7 +1,8 @@
 module PingCallback
 
-  ActionController::Base.instance_eval {
+  ActionController::Base.class_eval {
     def process(*)
+      logger.debug 'Очистка Thread.current[:pinged] = false'
       Thread.current[:pinged] = false
       super
     end
@@ -14,6 +15,7 @@ module PingCallback
     }
 
     def ping_callback
+      logger.info "Текущее состояние Thread.current[:pinged] #{Thread.current[:pinged]}"
       if self.class == User 
         unless self.frozen?
           unless Thread.current[:pinged]
