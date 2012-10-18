@@ -34,7 +34,7 @@ class Admin::UsersController < Admin::ApplicationController
     #start_date = Time.zone.now - 3.days
     #end_date = Time.zone.now
     #@users = User.where(:created_at => start_date..end_date).joins(:ping)
-    @users = User.joins(:ping).order("pings.updated_at DESC").page(params[:page])
+    @users = User.includes(:ping, :email_addresses, :phones, :names, :account).order("pings.updated_at DESC").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

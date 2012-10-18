@@ -1,3 +1,9 @@
+
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %> </h1>
+</div>
+
 <!-- 
   <%= simple_form_for(@user_filter, :url => filter_admin_users_path) do |f| %>
 
@@ -91,12 +97,8 @@
    </div>
 </div>
 
-<%- model_class = User -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %> </h1>
+<%= paginate @users %>
 
-
-</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -132,6 +134,10 @@
         <td><%= user.account.debit %> р.</td>
         <td><%= user.account.credit %> р.</td>
         <td><%= user.prepayment_percent %> %</td>
+        <% unless user.ping %>
+          <% debugger %>
+        <% end %>
+
         <td><%= l user.ping.updated_at, :format => :short %> </td>
         <td>
           <div class="btn-group dropup">
@@ -182,6 +188,8 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @users %>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_admin_user_path,

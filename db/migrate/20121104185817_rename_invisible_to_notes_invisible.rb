@@ -1,8 +1,5 @@
 class RenameInvisibleToNotesInvisible < ActiveRecord::Migration
   def up
-    rename_column :cars, :invisible, :notes_invisible
-    change_column :cars, :notes_invisible, :text
-
     rename_column :deliveries, :invisible, :notes_invisible
     change_column :deliveries, :notes_invisible, :text
 
@@ -24,9 +21,6 @@ class RenameInvisibleToNotesInvisible < ActiveRecord::Migration
 
     rename_column :requests, :invisible, :notes_invisible
     change_column :requests, :notes_invisible, :text
-
-    rename_column :shipments, :invisible, :notes_invisible
-    change_column :shipments, :notes_invisible, :text
 
     rename_column :users, :invisible, :notes_invisible
     change_column :users, :notes_invisible, :text

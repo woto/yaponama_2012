@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20121108092336) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "decimal",          :precision => 8, :scale => 2, :default => 0.0
     t.decimal  "credit",           :precision => 8, :scale => 2, :default => 0.0
     t.integer  "accountable_id"
     t.string   "accountable_type"
@@ -77,31 +78,14 @@ ActiveRecord::Schema.define(:version => 20121108092336) do
     t.string   "komplektaciya"
     t.text     "notes_invisible"
     t.integer  "user_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "request_id"
-    t.boolean  "visible",         :default => true
     t.string   "car_number"
     t.text     "notes"
   end
 
   add_index "cars", ["user_id"], :name => "index_cars_on_user_id"
-
-  create_table "carts", :force => true do |t|
-    t.string   "catalog_number"
-    t.string   "manufacturer"
-    t.integer  "quantity"
-    t.integer  "probability"
-    t.integer  "min_days"
-    t.integer  "max_days"
-    t.integer  "user_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.integer  "quantity_available"
-    t.integer  "order_id"
-  end
-
-  add_index "carts", ["user_id"], :name => "index_carts_on_user_id"
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -152,9 +136,8 @@ ActiveRecord::Schema.define(:version => 20121108092336) do
     t.datetime "human_confirmation_datetime"
     t.text     "notes_invisible"
     t.integer  "user_id"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
-    t.boolean  "visible",                     :default => true
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   add_index "email_addresses", ["user_id"], :name => "index_email_addresses_on_user_id"
@@ -194,9 +177,8 @@ ActiveRecord::Schema.define(:version => 20121108092336) do
     t.string   "creation_reason"
     t.text     "notes_invisible"
     t.integer  "user_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.boolean  "visible",         :default => true
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "orders", :force => true do |t|
@@ -222,9 +204,8 @@ ActiveRecord::Schema.define(:version => 20121108092336) do
     t.boolean  "can_receive_sms"
     t.text     "notes_invisible"
     t.integer  "user_id"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
-    t.boolean  "visible",                     :default => true
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   add_index "phones", ["user_id"], :name => "index_phones_on_user_id"
@@ -248,19 +229,11 @@ ActiveRecord::Schema.define(:version => 20121108092336) do
     t.text     "notes"
     t.text     "notes_invisible"
     t.integer  "user_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.boolean  "visible",         :default => true
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   add_index "postal_addresses", ["user_id"], :name => "index_postal_addresses_on_user_id"
-
-  create_table "posts", :force => true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
 
   create_table "products", :force => true do |t|
     t.string   "catalog_number"
@@ -294,25 +267,18 @@ ActiveRecord::Schema.define(:version => 20121108092336) do
     t.string   "manufacturer"
     t.text     "notes"
     t.text     "notes_invisible"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "parent_request"
     t.string   "type"
     t.integer  "request_id"
     t.string   "creation_reason"
     t.string   "check_needed"
     t.string   "name"
-    t.boolean  "visible",         :default => true
   end
 
   add_index "requests", ["car_id"], :name => "index_requests_on_car_id"
   add_index "requests", ["user_id"], :name => "index_requests_on_user_id"
-
-  create_table "revenues", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -324,21 +290,8 @@ ActiveRecord::Schema.define(:version => 20121108092336) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
-  create_table "shipments", :force => true do |t|
-    t.decimal  "delivery_cost",   :precision => 8, :scale => 2
-    t.text     "notes"
-    t.text     "notes_invisible"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
-  end
-
   create_table "suppliers", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "test_module_test_entities", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -369,12 +322,12 @@ ActiveRecord::Schema.define(:version => 20121108092336) do
     t.string   "session_id"
     t.text     "notes_invisible"
     t.string   "creation_reason"
+    t.decimal  "discount",           :precision => 8, :scale => 2
+    t.decimal  "prepayment_percent", :precision => 8, :scale => 2
     t.integer  "time_zone_id"
     t.integer  "ping_id"
     t.datetime "created_at",                                                           :null => false
     t.datetime "updated_at",                                                           :null => false
-    t.decimal  "discount",           :precision => 8, :scale => 2
-    t.decimal  "prepayment_percent", :precision => 8, :scale => 2
     t.string   "order_rule",                                       :default => "none"
   end
 

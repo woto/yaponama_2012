@@ -7,25 +7,23 @@ class Admin::ProductsController < Admin::ApplicationController
   end
 
   def index
-    products = Product.order("id DESC")
+    @products = Product.order("id DESC").page(params[:page])
 
     if params[:status] && params[:status] != 'all' && params[:status] != 'checked'
-      products = products.where(:status => params[:status])
+      @products = @products.where(:status => params[:status])
     end
 
     if params[:status] == 'checked'
-      products = products.where(['id IN (?)', session[:products].keys])
+      @products = @products.where(['id IN (?)', session[:products].keys])
     end
 
     if params[:order_id]
-      products = products.where(:order_id => params[:order_id])
+      @products = @products.where(:order_id => params[:order_id])
     end
 
     if params[:user_id]
-      products = products.where(:user_id => params[:user_id])
+      @products = @products.where(:user_id => params[:user_id])
     end
-
-    @products = products.all
 
     respond_to do |format|
       format.html

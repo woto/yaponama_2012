@@ -16,7 +16,7 @@ class CreateCars < ActiveRecord::Migration
       t.string :vin
       t.string :frame
       t.string :komplektaciya
-      t.string :invisible
+      t.text :notes_invisible
       t.references :user
 
       t.timestamps

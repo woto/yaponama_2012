@@ -13,16 +13,19 @@ ul.breadcrumb
       span.divider
         |
           /
-  li.active = "Товары: #{params[:status] || 'all'}"
+  li.active = "Товары: #{Rails.configuration.products_status[(params[:status] || 'all').to_sym][:title]}"
 
 - tab_links "myTab", Rails.configuration.products_status  do |hint|
 
   .alert.alert-info
     = hint 
 
+
   = form_tag remember_admin_products_path, :remote => true
 
   = hidden_field_tag 'remembered_products'
+
+  = paginate @products
 
   table.table.table-striped
     thead
@@ -36,7 +39,7 @@ ul.breadcrumb
         th = model_class.human_attribute_name(:probability)
         th = model_class.human_attribute_name(:min_days)
         th = model_class.human_attribute_name(:max_days)
-        th = model_class.human_attribute_name(:status)
+        th = check_box_tag '', '', false, :id => 'check_uncheck_products'
       tr
         th = model_class.human_attribute_name(:buy_cost)
         th = model_class.human_attribute_name(:sell_cost)
@@ -81,7 +84,7 @@ div.btn-group.dropup
     | Action 
     span.caret
   ul.dropdown-menu
-    li = link_to '~> inorder', admin_order_build_path(-1)
+    li = link_to '~> inorder', admin_order_build_path(-1), :method => :post
     li = link_to 'Попытаться запустить товар в работу (На странице не запущенного товара)', '#'
     li = link_to 'Отказ (на страницах не запущенного, запущенного, зак. у пост, выкупленного)', '#'
     li = link_to 'Удалить товар (на страницах корзины, не запущенного и оплаченного)', '#', :method => :delete, :data => { :confirm => 'sure?' }
@@ -99,3 +102,5 @@ div.btn-group.dropup
 
 |  
 = link_to t('.new', :default => t("helpers.links.new")), new_admin_product_path, :class => 'btn btn-primary'
+
+= paginate @products

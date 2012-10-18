@@ -7,7 +7,8 @@ ul.breadcrumb
       span.divider
         |
           /
-  li.active = "Заказы: #{params[:status] || 'all'}"
+
+  li.active = "Заказы: #{Rails.configuration.orders_status[(params[:status] || 'all').to_sym][:title]}"
 
 
 - tab_links "myTab", Rails.configuration.orders_status do |hint|

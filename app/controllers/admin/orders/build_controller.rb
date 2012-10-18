@@ -17,6 +17,7 @@ class Admin::Orders::BuildController < Admin::ApplicationController
   end
 
   def create
+    debugger
     @order = Order.create
     redirect_to wizard_path(steps.first, :order_id => @order.id)
   end
