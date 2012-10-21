@@ -1,0 +1,48 @@
+<%- model_class = Admin::Cart -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:catalog_number) %></th>
+      <th><%= model_class.human_attribute_name(:manufacturer) %></th>
+      <th><%= model_class.human_attribute_name(:quantity) %></th>
+      <th><%= model_class.human_attribute_name(:probability) %></th>
+      <th><%= model_class.human_attribute_name(:min_days) %></th>
+      <th><%= model_class.human_attribute_name(:max_days) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @admin_carts.each do |cart| %>
+      <tr>
+        <td><%= link_to cart.id, admin_cart_path(cart) %></td>
+        <td><%= cart.catalog_number %></td>
+        <td><%= cart.manufacturer %></td>
+        <td><%= cart.quantity %></td>
+        <td><%= cart.probability %></td>
+        <td><%= cart.min_days %></td>
+        <td><%= cart.max_days %></td>
+        <td><%= cart.user_id %></td>
+        <td><%=l cart.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_admin_cart_path(cart), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      admin_cart_path(cart),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_admin_cart_path,
+            :class => 'btn btn-primary' %>

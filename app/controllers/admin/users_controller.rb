@@ -1,4 +1,6 @@
 class Admin::UsersController < Admin::ApplicationController
+  layout 'users'
+
   # GET /users
   # GET /users.json
   def index

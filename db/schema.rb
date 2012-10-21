@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121014215857) do
+ActiveRecord::Schema.define(:version => 20121020235434) do
 
   create_table "add_requst_id_to_cars", :force => true do |t|
     t.integer  "request_id"
@@ -19,6 +20,37 @@ ActiveRecord::Schema.define(:version => 20121014215857) do
   end
 
   add_index "add_requst_id_to_cars", ["request_id"], :name => "index_add_requst_id_to_cars_on_request_id"
+
+  create_table "admin_carts", :force => true do |t|
+    t.string   "catalog_number"
+    t.string   "manufacturer"
+    t.integer  "quantity"
+    t.integer  "probability"
+    t.integer  "min_days"
+    t.integer  "max_days"
+    t.integer  "user_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "admin_carts", ["user_id"], :name => "index_admin_carts_on_user_id"
+
+  create_table "admin_spare_infos", :force => true do |t|
+    t.string   "catalog_number"
+    t.string   "manufacturer"
+    t.text     "content"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "attachments", :force => true do |t|
+    t.integer  "email_id"
+    t.string   "attachment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "attachments", ["email_id"], :name => "index_attachments_on_email_id"
 
   create_table "cars", :force => true do |t|
     t.string   "god"
@@ -76,17 +108,33 @@ ActiveRecord::Schema.define(:version => 20121014215857) do
   add_index "email_addresses", ["user_id"], :name => "index_email_addresses_on_user_id"
 
   create_table "emails", :force => true do |t|
-    t.string   "from_addrs"
-    t.string   "return_path"
-    t.string   "from"
-    t.string   "subject"
-    t.string   "in_reply_to"
-    t.string   "to_addrs"
-    t.text     "html_part"
-    t.text     "text_part"
-    t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.text     "from_addrs"
+    t.text     "return_path"
+    t.text     "from"
+    t.text     "subject"
+    t.text     "in_reply_to"
+    t.text     "to_addrs"
+    t.text     "html_part",        :limit => 2147483647
+    t.text     "text_part",        :limit => 2147483647
+    t.text     "user_id"
+    t.text     "to"
+    t.text     "body",             :limit => 2147483647
+    t.text     "cc_addrs"
+    t.text     "bcc_addrs"
+    t.text     "bcc"
+    t.text     "cc"
+    t.text     "resent_bcc"
+    t.text     "resent_cc"
+    t.text     "is_multipart"
+    t.text     "parts_length"
+    t.text     "date"
+    t.text     "message_id"
+    t.text     "name"
+    t.text     "content_types"
+    t.text     "classes"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.integer  "email_address_id"
   end
 
   create_table "names", :force => true do |t|

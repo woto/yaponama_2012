@@ -1,3 +1,78 @@
+<div class='container-fluid'>
+    <div class="row-fluid">
+      <div class="span6">
+
+        <div class="accordion" id="accordion2">
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                Имя
+              </a>
+            </div>
+            <div id="collapseOne" class="accordion-body collapse in">
+              <div class="accordion-inner">
+                <ul>
+                  <li>Имя</li>
+                  <li>Причина создания</li>
+                  <li>Служебная информация</li>
+                  <li>Запись создана</li>
+                  <li>Запись изменена</li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                Автомобиль
+              </a>
+            </div>
+            <div id="collapseTwo" class="accordion-body collapse">
+              <div class="accordion-inner">
+                vin или frame содержит
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+               E-mail адрес 
+              </a>
+            </div>
+            <div id="collapseThree" class="accordion-body collapse">
+              <div class="accordion-inner">
+                адрес содержит
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+                Телефон
+              </a>
+            </div>
+            <div id="collapseFour" class="accordion-body collapse">
+              <div class="accordion-inner">
+                телефон содержит 
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="span6">
+        <fieldset class="fieldset">
+          <legend>Пресеты</legend>
+            form here
+        </fieldset>
+       </div>
+</div>
+
 <%- model_class = User -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
@@ -6,14 +81,8 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:cars) %></th>
-      <th><%= model_class.human_attribute_name(:names) %></th>
-      <th><%= model_class.human_attribute_name(:phones) %></th>
-      <th><%= model_class.human_attribute_name(:emails) %></th>
       <th><%= model_class.human_attribute_name(:time_zone) %></th>
       <th><%= model_class.human_attribute_name(:invisible) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%= model_class.human_attribute_name(:updated_at) %></th>
       <th><%= model_class.human_attribute_name(:ping) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -22,14 +91,8 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.id, admin_user_path(user) %></td>
-        <td><%= user.cars.collect(&:to_label).join(', ') %></td>
-        <td><%= user.names.collect(&:to_label).join(', ') %></td>
-        <td><%= user.phones.collect(&:to_label).join(', ') %></td>
-        <td><%= user.email_addresses.collect(&:to_label).join(', ') %></td>
         <td><%= user.time_zone.to_label if user.time_zone.present? %></td>
         <td><%= user.invisible %></td>
-        <td><%=l user.created_at %></td>
-        <td><%=l user.updated_at %></td>
         <td><%= user.ping.updated_at %> </td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

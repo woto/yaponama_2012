@@ -1,5 +1,6 @@
 class Request < ActiveRecord::Base
   include PingCallback
+  belongs_to :email, :inverse_of => :requests
   belongs_to :user, :inverse_of => :requests
   belongs_to :car, :inverse_of => :requests
   has_many :requests, :inverse_of => :request, :dependent => :destroy
@@ -12,7 +13,7 @@ class Request < ActiveRecord::Base
   end
 
   before_save :set_relational_attributes
-
+  
   def set_relational_attributes
     if self.car.present?
       self.user = self.car.user

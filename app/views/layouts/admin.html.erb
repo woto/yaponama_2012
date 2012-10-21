@@ -53,13 +53,10 @@
           <ul class="nav nav-list">
             <li class="nav-header">клиенты</li>
             <li><%= link_to "клиенты", admin_users_path  %></li>
-            <li><%= link_to "телефоны", admin_phones_path %></li>
             <li><%= link_to "адреса доставки", admin_postal_addresses_path  %></li>
-            <li><%= link_to "e-mail адреса", admin_email_addresses_path  %></li>
             <li><%= link_to "письма", admin_emails_path  %></li>
-            <li><%= link_to "имена", admin_names_path  %></li>
-            <li><%= link_to "автомобили", admin_cars_path  %></li>
             <li><%= link_to "запросы", admin_requests_path  %></li>
+            <li><%= link_to "корзины", admin_carts_path  %></li>
           </ul>
         </div><!--/.well -->
 
@@ -67,6 +64,7 @@
           <ul class="nav nav-list">
             <li class="nav-header">Настройки</li>
             <li><%= link_to "часовые пояса", admin_time_zones_path  %></li>
+            <li><%= link_to "описания запчастей", admin_spare_infos_path  %></li>
           </ul>
         </div><!--/.well -->
 

@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => "from@example.com"
+  default :from => "boss@yaponama.ru"
 
   def receive(email)
     page = Page.find_by_address(email.to.first)

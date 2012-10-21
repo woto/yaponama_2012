@@ -1,0 +1,14 @@
+<%= simple_form_for @admin_cart, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :catalog_number %>
+  <%= f.input :manufacturer %>
+  <%= f.input :quantity %>
+  <%= f.input :probability %>
+  <%= f.input :min_days %>
+  <%= f.input :max_days %>
+  <%= f.association :user %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_carts_path, :class => 'btn' %>
+  </div>
+<% end %>

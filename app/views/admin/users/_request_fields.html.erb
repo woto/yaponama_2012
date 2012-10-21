@@ -8,18 +8,8 @@
 
     <%= f.input :catalog_number %>
     <%= f.input :manufacturer %>
-    <%= f.input :creation_reason, :collection => [
-      ['Выбор клиента', 'client_choose'] ,
-      ['Подобрана по официальному каталогу', 'official'] ,
-      ['Замена по официальному каталогу', 'replacement_official'], 
-      ['Не официальная замена (этот же производитель)', 'replacement_unofficial'], 
-      ['Не брендированная замена (брендовая компание кладет эту фирму)', 'replacement_non_branded'], 
-      ['Качественный аналог', 'analogue_expensive'], 
-      ['Не рекомендуем, но как вариант', 'analogue_cheap'],
-      ['Деталь потребуется при установке родительской', 'needed_for_parent']] %>
-    <%= f.input :check_needed, :collection => [
-      ['Требуется', 'check_needed', ],
-      ['Не требуется', 'check_dont_needed'], ],
+    <%= f.input :creation_reason, :collection => Rails.configuration.request_creation_reason.map {|k,v| [v,k]} %>
+    <%= f.input :check_needed, :collection => Rails.configuration.request_check_needed.map{|k,v| [v,k]},
       :label => "Требуется проверка",
       :hint => "Требуется дополнительная проверка совместимости или корректности замены?"
     %>

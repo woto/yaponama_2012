@@ -1,5 +1,14 @@
 Yaponama2012::Application.routes.draw do
 
+  namespace :admin do resources :carts end
+
+  namespace :admin do resources :spare_infos end
+
+  get 'trash_help/index'
+  post 'trash_help/merge'
+
+  resources :attachments
+
   resources :add_requst_id_to_cars
 
   mount Ckeditor::Engine => '/ckeditor'
@@ -15,12 +24,18 @@ Yaponama2012::Application.routes.draw do
   namespace :admin do
     resources :time_zones
     resources :postal_addresses
-    resources :phones
     resources :email_addresses
-    resources :emails
+    resources :emails do
+      member do
+        get 'show_body'
+        get 'show_text_part'
+        get 'show_html_part'
+        get 'show_html_part_sanitized'
+      end
+    end
+
+
     resources :users
-    resources :names
-    resources :cars
     resources :requests
   end
 

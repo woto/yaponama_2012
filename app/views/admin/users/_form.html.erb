@@ -1,7 +1,7 @@
 <%= simple_form_for [:admin, @user], :html => { :class => 'form-horizontal' } do |f| %>
 
   <%= f.association :time_zone, :include_blank => true %>
-  <%= f.input :creation_reason, :collection => [['Прислал e-mail', 'email'] ,['Посетил сайт', 'session']], :disabled => true, :as => :radio_buttons %>
+  <%= f.input :creation_reason, :collection => Rails.configuration.user_creation_reason.map {|k,v| [v,k]}, :disabled => true, :as => :radio_buttons %>
   <%= f.input :created_at, :disabled => true %>
   <%= f.input :updated_at, :disabled => true %>
   <%= f.simple_fields_for :ping do |ping| %>

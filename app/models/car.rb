@@ -7,6 +7,9 @@ class Car < ActiveRecord::Base
   validates :user, :presence => true
   accepts_nested_attributes_for :requests, :allow_destroy => true
 
+  #validates :vin, :uniqueness => true, :allow_blank => true
+  #validates :frame, :uniqueness => true, :allow_blank => true
+
   def to_label
     "#{dvigatel} - #{frame} - #{god} - #{kod_dvigatelya} - #{kod_kuzova} - #{komplektaciya} - #{kpp} - #{marka} - #{model} - #{moschnost} - #{privod} - #{rinok} - #{tip} - #{tip_kuzova} - #{vin} - #{invisible}"
   end

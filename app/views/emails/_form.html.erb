@@ -1,0 +1,31 @@
+<%= simple_form_for @email, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :from_addrs %>
+  <%= f.input :return_path %>
+  <%= f.input :from %>
+  <%= f.input :subject %>
+  <%= f.input :in_reply_to %>
+  <%= f.input :to_addrs %>
+  <%= f.input :html_part %>
+  <%= f.input :text_part %>
+  <%= f.input :user_id %>
+  <%= f.input :to %>
+  <%= f.input :body %>
+  <%= f.input :cc_addrs %>
+  <%= f.input :bcc_addrs %>
+  <%= f.input :bcc %>
+  <%= f.input :cc %>
+  <%= f.input :resent_bcc %>
+  <%= f.input :resent_cc %>
+  <%= f.input :is_multipart %>
+  <%= f.input :parts_length %>
+  <%= f.input :date %>
+  <%= f.input :message_id %>
+  <%= f.input :name %>
+  <%= f.input :content_types %>
+  <%= f.input :classes %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                emails_path, :class => 'btn' %>
+  </div>
+<% end %>

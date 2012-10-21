@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
   has_many :postal_addresses, :dependent => :destroy, :inverse_of => :user
   has_many :cars, :dependent => :destroy, :inverse_of => :user
   has_many :names, :dependent => :destroy, :inverse_of => :user
-  has_many :emails, :dependent => :destroy, :inverse_of => :user
   has_many :requests, :dependent => :destroy, :inverse_of => :user
   accepts_nested_attributes_for :phones, :postal_addresses, :email_addresses, :cars, :names, :requests, :allow_destroy => true
   belongs_to :time_zone

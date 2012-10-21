@@ -1,4 +1,40 @@
 class Admin::EmailsController < Admin::ApplicationController
+  def show_body
+    @email = Email.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @email }
+    end
+  end
+
+  def show_text_part
+    @email = Email.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @email }
+    end
+  end
+
+  def show_html_part
+    @email = Email.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @email }
+    end
+  end
+
+  def show_html_part_sanitized
+    @email = Email.find(params[:id])
+
+    respond_to do |format|
+      format.html { render "show_html_part_sanitized", :layout => 'emails'}
+      format.json { render :json => @email }
+    end
+  end
+
   # GET /emails
   # GET /emails.json
   def index
