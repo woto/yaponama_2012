@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121020235434) do
+ActiveRecord::Schema.define(:version => 20121021161952) do
 
   create_table "add_requst_id_to_cars", :force => true do |t|
     t.integer  "request_id"
@@ -243,6 +243,7 @@ ActiveRecord::Schema.define(:version => 20121020235434) do
     t.integer  "days"
     t.integer  "approx_cost"
     t.integer  "approx_days"
+    t.string   "name"
   end
 
   add_index "requests", ["car_id"], :name => "index_requests_on_car_id"

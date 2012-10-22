@@ -1,5 +1,13 @@
+<%= simple_form_for(@user_filter, :url => filter_admin_users_path) do |f| %>
+
+  <% @user_filter.attributes.each do |attr, v| %>
+    <%= f.input attr, :as => :boolean %>
+  <% end %>
+  <%= f.submit %>
+<% end %>
+
 <div class='container-fluid'>
-    <div class="row-fluid">
+   <div class="row-fluid">
       <div class="span6">
 
         <div class="accordion" id="accordion2">
@@ -12,11 +20,11 @@
             <div id="collapseOne" class="accordion-body collapse in">
               <div class="accordion-inner">
                 <ul>
-                  <li>Имя</li>
-                  <li>Причина создания</li>
-                  <li>Служебная информация</li>
-                  <li>Запись создана</li>
-                  <li>Запись изменена</li>
+                  <li>Имя - текст</li>
+                  <li>Причина создания - radiobutton</li>
+                  <li>Служебная информация - текст</li>
+                  <li>Запись создана - интервал</li>
+                  <li>Запись изменена - интервал</li>
                 </ul>
 
               </div>
@@ -31,7 +39,10 @@
             </div>
             <div id="collapseTwo" class="accordion-body collapse">
               <div class="accordion-inner">
-                vin или frame содержит
+                <ul>
+                  <li>VIN</li>
+                  vin или frame содержит
+                </ul>
               </div>
             </div>
           </div>
@@ -44,7 +55,9 @@
             </div>
             <div id="collapseThree" class="accordion-body collapse">
               <div class="accordion-inner">
-                адрес содержит
+                <ul>
+                  <li>адрес содержит</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -61,16 +74,18 @@
               </div>
             </div>
           </div>
-
         </div>
 
       </div>
+
       <div class="span6">
-        <fieldset class="fieldset">
-          <legend>Пресеты</legend>
-            form here
-        </fieldset>
-       </div>
+         <fieldset class="fieldset">
+           <legend>Пресеты</legend>
+              form here
+          </fieldset>
+      </div>
+
+   </div>
 </div>
 
 <%- model_class = User -%>
@@ -85,6 +100,13 @@
       <th><%= model_class.human_attribute_name(:invisible) %></th>
       <th><%= model_class.human_attribute_name(:ping) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
+
+      <% @table_fields.each do |k,v| %>
+        <% v.each do |c| %>
+          <%= raw "<th>#{k}_#{c}</th>" %>
+        <% end %>
+      <% end %>
+
     </tr>
   </thead>
   <tbody>
@@ -93,7 +115,7 @@
         <td><%= link_to user.id, admin_user_path(user) %></td>
         <td><%= user.time_zone.to_label if user.time_zone.present? %></td>
         <td><%= user.invisible %></td>
-        <td><%= user.ping.updated_at %> </td>
+        <td><%= l user.ping.updated_at, :format => :short %> </td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_admin_user_path(user), :class => 'btn btn-mini' %>
@@ -103,6 +125,13 @@
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
         </td>
+        <% @table_fields.each do |k, v| %>
+          <% v.each do |c| %>
+            <td>
+              <%= user.instance_eval "self.#{k}.map{|z| z.#{c}}" %>
+            </td>
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

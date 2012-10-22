@@ -35,9 +35,9 @@
         <a class="brand" href="#">Yaponama2012</a>
         <div class="container-fluid nav-collapse">
           <ul class="nav">
-            <li><%= link_to "Управление", "/path1"  %></li>
-            <li><%= link_to "Интерактив", "/path2"  %></li>
-            <li><%= link_to "Link3", "/path3"  %></li>
+            <li><%= link_to "Клиенты", admin_users_path  %></li>
+            <li><%= link_to "Трэш", "/trash_help/index"  %></li>
+            <li><%= link_to "Предыдущее", "/admin/emails"  %></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -53,7 +53,6 @@
           <ul class="nav nav-list">
             <li class="nav-header">клиенты</li>
             <li><%= link_to "клиенты", admin_users_path  %></li>
-            <li><%= link_to "адреса доставки", admin_postal_addresses_path  %></li>
             <li><%= link_to "письма", admin_emails_path  %></li>
             <li><%= link_to "запросы", admin_requests_path  %></li>
             <li><%= link_to "корзины", admin_carts_path  %></li>

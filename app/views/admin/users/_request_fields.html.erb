@@ -6,6 +6,7 @@
 
     <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
 
+    <%= f.input :name %>
     <%= f.input :catalog_number %>
     <%= f.input :manufacturer %>
     <%= f.input :creation_reason, :collection => Rails.configuration.request_creation_reason.map {|k,v| [v,k]} %>

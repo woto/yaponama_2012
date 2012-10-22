@@ -1,9 +1,5 @@
 Yaponama2012::Application.routes.draw do
 
-  namespace :admin do resources :carts end
-
-  namespace :admin do resources :spare_infos end
-
   get 'trash_help/index'
   post 'trash_help/merge'
 
@@ -22,8 +18,9 @@ Yaponama2012::Application.routes.draw do
   end
 
   namespace :admin do
+    resources :carts
+    resources :spare_infos
     resources :time_zones
-    resources :postal_addresses
     resources :email_addresses
     resources :emails do
       member do
@@ -33,13 +30,13 @@ Yaponama2012::Application.routes.draw do
         get 'show_html_part_sanitized'
       end
     end
-
-
-    resources :users
+    resources :users do
+      collection do
+        post 'filter' => "users#index"
+      end
+    end
     resources :requests
   end
-
-  resources :posts
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
