@@ -7,8 +7,6 @@ Yaponama2012::Application.routes.draw do
   resources :attachments
 
   mount Ckeditor::Engine => '/ckeditor'
-  mount Plutus::Engine => "/plutus", :as => "plutus"
-  
 
   namespace :test_module do 
     resources :test_entities do

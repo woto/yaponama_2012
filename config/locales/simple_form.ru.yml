@@ -12,6 +12,9 @@ ru:
       default_message: "Невозможно продолжить, т.к. форма заполнена не корректно"
     labels:
       defaults:
+        discount: Скидка
+        money_available: Доступно
+        money_locked: Заблокировано
         quantity_ordered: Необходимо шт.
         quantity_available: В наличии шт.
         probability: Вероятность
@@ -67,6 +70,8 @@ ru:
         name: Название
     hints:
       defaults:
+        money_available: Доступно средств для последующих заказов
+        money_locked: Заблокировано до получения товара (окончательное списание средств) или отказа (возврат средств)
         email_address: Электронный адрес почты
         session_id: Идентификатор сессии (заполняется в случае посещения пользователем сайта)
         utc_offset_hours: Смещение относительно UTC

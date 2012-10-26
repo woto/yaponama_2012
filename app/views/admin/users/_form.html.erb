@@ -25,6 +25,9 @@
         <% end %>
         <%= f.input :invisible %>
         <%= f.input :session_id, :disabled => true %>
+        <%= f.input :money_available %>
+        <%= f.input :money_locked %>
+        <%= f.input :discount %>
       </div>
     </div>
 
@@ -141,9 +144,6 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
    
   <script>
