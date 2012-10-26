@@ -31,8 +31,8 @@ module PingCallback
           end
         end
       else
-        if self.user 
-          unless self.user.frozen?
+        if self.class.reflect_on_all_associations.map{|assoc| assoc.name}.include?(:user)
+          if self.user && !self.user.frozen?
             unless Thread.current[:pinged]
               Thread.current[:pinged] = true
               if self.user.ping
@@ -42,14 +42,27 @@ module PingCallback
               end
             end
           end
-        elsif self.car 
-          unless self.car.frozen?
+
+        elsif self.class.reflect_on_all_associations.map{|assoc| assoc.name}.include?(:car)
+          if self.car.user && !self.car.frozen?
             unless Thread.current[:pinged]
               Thread.current[:pinged] = true
               if self.car.user.ping
                 self.car.user.ping.touch
               else
                 self.car.user.create_ping
+              end
+            end
+          end
+
+        elsif self.class.reflect_on_all_associations.map{|assoc| assoc.name}.include?(:order)
+          if self.order.user && !self.order.frozen?
+            unless Thread.current[:pinged]
+              Thread.current[:pinged] = true
+              if self.order.user.ping
+                self.order.user.ping.touch
+              else
+                self.order.user.create_ping
               end
             end
           end

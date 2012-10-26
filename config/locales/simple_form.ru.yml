@@ -12,8 +12,13 @@ ru:
       default_message: "Невозможно продолжить, т.к. форма заполнена не корректно"
     labels:
       defaults:
-        approx_days: Дней
-        approx_cost: Цена
+        quantity_ordered: Необходимо шт.
+        quantity_available: В наличии шт.
+        probability: Вероятность
+        min_days: Минимальный срок
+        max_days: Максимальный срок 
+        cost: Стоимость
+        status: Статус позиции
         catalog_number: Каталожный номер
         manufacturer: Производитель
         creation_reason: Причина создания
@@ -62,8 +67,6 @@ ru:
         name: Название
     hints:
       defaults:
-        approx_days: Приблизительно дней
-        approx_cost: Приблизительная цена
         email_address: Электронный адрес почты
         session_id: Идентификатор сессии (заполняется в случае посещения пользователем сайта)
         utc_offset_hours: Смещение относительно UTC

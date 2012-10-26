@@ -1,11 +1,10 @@
 Yaponama2012::Application.routes.draw do
 
+
   get 'trash_help/index'
   post 'trash_help/merge'
 
   resources :attachments
-
-  resources :add_requst_id_to_cars
 
   mount Ckeditor::Engine => '/ckeditor'
   mount Plutus::Engine => "/plutus", :as => "plutus"
@@ -18,6 +17,9 @@ Yaponama2012::Application.routes.draw do
   end
 
   namespace :admin do
+    resources :orders
+    resources :products
+    resources :names
     resources :carts
     resources :spare_infos
     resources :time_zones

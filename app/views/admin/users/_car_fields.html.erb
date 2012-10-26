@@ -1,10 +1,14 @@
-<div class="nested-fields">
+<div class="nested-fields top-space">
 
-  <hr />
+  <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
 
-  <div style="margin: 10px 0 20px 10px; padding: 0 0 0 10px; border-left: 3px dashed #62C462">
+  <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-arrow-down"></i></a>
+  <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-arrow-up"></i></a>
+  <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-minus"></i></a>
 
-    <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
+  <div class="clearfix bottom-space"></div>
+
+  <div class="nested-visualize" style="border-left: 3px dashed #62C462">
 
     <ul class="nav nav-tabs">
       <li class="active"><a id="tab1_toggle<%= counter %>" href="#tab1<%= counter %>" data-toggle="tab">Идентификатор</a></li>
@@ -54,12 +58,14 @@
       <% end %>
 
       <div class="links">
-        <%= link_to_add_association 'Запрос по авто', f, :requests, :class => "btn btn-success btn-info", :render_options => {:locals => {:stack => stack}} %>
+        <%= link_to_add_association 'Добавить запрос', f, :requests, :class => "btn btn-success btn-success", :render_options => {:locals => {:stack => stack}} %>
       </div>
 
     </div>
 
   </div>
+
+  <hr />
 
 </div>
 

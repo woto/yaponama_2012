@@ -17,3 +17,24 @@
 .datetime {
   width: auto
 }
+
+.right-space {
+  margin-right: 10px
+}
+
+.bottom-space {
+  margin-bottom: 10px;
+}
+
+.top-space {
+  margin-top: 10px;
+}
+
+.bottom-space {
+  margin-bottom: 20px;
+}
+
+.nested-visualize {
+  margin: 0px 0 20px 0px; 
+  padding: 0 0 0 20px; 
+}

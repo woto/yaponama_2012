@@ -1,7 +1,8 @@
 class Name < ActiveRecord::Base
   include PingCallback
-  attr_accessible :name, :invisible, :user_id
+  attr_accessible :name, :invisible, :user_id, :visible
   belongs_to :user
+  has_many :orders, :inverse_of => :name
   validates :name, :presence => true
   #validates :name, :uniqueness => {:scope => :user_id}
 

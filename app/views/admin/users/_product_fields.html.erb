@@ -8,15 +8,23 @@
 
   <div class="clearfix bottom-space"></div>
 
-  <%= f.input :email_address %>
-  <%= f.input :confirmed_by_human %>
-  <%= f.input :human_confirmation_datetime %>
-  <%= f.input :confirmed_by_robot, :disabled => true %>
-  <%= f.input :robot_confirmation_datetime, :disabled => true %>
-  <%= f.input :created_at, :disabled => true %>
-  <%= f.input :updated_at, :disabled => true %>
-  <%= f.input :invisible %>
+  <div class="nested-visualize" style="border-left: 3px dashed #5BC0DE">
+
+    <%= f.input :catalog_number %>
+    <%= f.input :manufacturer %>
+    <%= f.input :quantity_ordered %>
+    <%= f.input :cost %>
+    <%= f.input :quantity_available %>
+    <%= f.input :probability %>
+    <%= f.input :min_days %>
+    <%= f.input :max_days %>
+    <%= f.input :status %>
+    <%= f.input :created_at, :disabled => true %>
+    <%= f.input :updated_at, :disabled => true %>
+
+  </div>
 
   <hr />
 
 </div>
+

@@ -1,8 +1,12 @@
-<div class="nested-fields">
-
-  <hr />
+<div class="nested-fields top-space">
 
   <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
+ 
+  <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-arrow-down"></i></a>
+  <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-arrow-up"></i></a>
+  <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-minus"></i></a>
+
+  <div class="clearfix bottom-space"></div>
 
   <%= f.input :phone %>
   <%= f.input :can_receive_sms, :as => :radio_buttons, :required => true %>
@@ -14,5 +18,7 @@
   <%= f.input :created_at, :disabled => true %>
   <%= f.input :updated_at, :disabled => true %>
   <%= f.input :invisible %>
+
+  <hr />
 
 </div>

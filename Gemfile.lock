@@ -19,6 +19,16 @@ GIT
   specs:
     cocoon (1.1.0)
 
+GIT
+  remote: https://github.com/seyhunak/twitter-bootstrap-rails.git
+  revision: 9636f4aa3cb43c3e9e38ca62682f3d01c96b3a3f
+  specs:
+    twitter-bootstrap-rails (2.1.4)
+      actionpack (>= 3.1)
+      less-rails (~> 2.2.3)
+      railties (>= 3.1)
+      therubyracer (>= 0.10.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -90,7 +100,7 @@ GEM
     kgio (2.7.4)
     less (2.2.2)
       commonjs (~> 0.2.6)
-    less-rails (2.2.3)
+    less-rails (2.2.4)
       actionpack (>= 3.1)
       less (~> 2.2.0)
     libv8 (3.3.10.4)
@@ -164,11 +174,6 @@ GEM
     treetop (1.4.11)
       polyglot
       polyglot (>= 0.3.1)
-    twitter-bootstrap-rails (2.1.4)
-      actionpack (>= 3.1)
-      less-rails (~> 2.2.3)
-      railties (>= 3.1)
-      therubyracer (>= 0.10.2)
     tzinfo (0.3.33)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
@@ -201,6 +206,6 @@ DEPENDENCIES
   sanitize
   sass-rails (~> 3.2.3)
   simple_form
-  twitter-bootstrap-rails
+  twitter-bootstrap-rails!
   uglifier (>= 1.0.3)
   unicorn

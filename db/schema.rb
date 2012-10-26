@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121021161952) do
+ActiveRecord::Schema.define(:version => 20121024214611) do
 
   create_table "add_requst_id_to_cars", :force => true do |t|
     t.integer  "request_id"
@@ -20,20 +20,6 @@ ActiveRecord::Schema.define(:version => 20121021161952) do
   end
 
   add_index "add_requst_id_to_cars", ["request_id"], :name => "index_add_requst_id_to_cars_on_request_id"
-
-  create_table "admin_carts", :force => true do |t|
-    t.string   "catalog_number"
-    t.string   "manufacturer"
-    t.integer  "quantity"
-    t.integer  "probability"
-    t.integer  "min_days"
-    t.integer  "max_days"
-    t.integer  "user_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  add_index "admin_carts", ["user_id"], :name => "index_admin_carts_on_user_id"
 
   create_table "admin_spare_infos", :force => true do |t|
     t.string   "catalog_number"
@@ -70,12 +56,29 @@ ActiveRecord::Schema.define(:version => 20121021161952) do
     t.string   "komplektaciya"
     t.string   "invisible"
     t.integer  "user_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "request_id"
+    t.boolean  "visible",        :default => true
   end
 
   add_index "cars", ["user_id"], :name => "index_cars_on_user_id"
+
+  create_table "carts", :force => true do |t|
+    t.string   "catalog_number"
+    t.string   "manufacturer"
+    t.integer  "quantity"
+    t.integer  "probability"
+    t.integer  "min_days"
+    t.integer  "max_days"
+    t.integer  "user_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "quantity_available"
+    t.integer  "order_id"
+  end
+
+  add_index "carts", ["user_id"], :name => "index_carts_on_user_id"
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -101,8 +104,9 @@ ActiveRecord::Schema.define(:version => 20121021161952) do
     t.datetime "human_confirmation_datetime"
     t.string   "invisible"
     t.integer  "user_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.boolean  "visible",                     :default => true
   end
 
   add_index "email_addresses", ["user_id"], :name => "index_email_addresses_on_user_id"
@@ -142,8 +146,18 @@ ActiveRecord::Schema.define(:version => 20121021161952) do
     t.string   "creation_reason"
     t.string   "invisible"
     t.integer  "user_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.boolean  "visible",         :default => true
+  end
+
+  create_table "orders", :force => true do |t|
+    t.integer  "name_id"
+    t.integer  "postal_address_id"
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "phones", :force => true do |t|
@@ -156,8 +170,9 @@ ActiveRecord::Schema.define(:version => 20121021161952) do
     t.boolean  "can_receive_sms"
     t.string   "invisible"
     t.integer  "user_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.boolean  "visible",                     :default => true
   end
 
   add_index "phones", ["user_id"], :name => "index_phones_on_user_id"
@@ -212,8 +227,9 @@ ActiveRecord::Schema.define(:version => 20121021161952) do
     t.text     "notes"
     t.string   "invisible"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.boolean  "visible",    :default => true
   end
 
   add_index "postal_addresses", ["user_id"], :name => "index_postal_addresses_on_user_id"
@@ -225,6 +241,25 @@ ActiveRecord::Schema.define(:version => 20121021161952) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "products", :force => true do |t|
+    t.string   "catalog_number"
+    t.string   "manufacturer"
+    t.integer  "quantity_ordered"
+    t.integer  "quantity_available"
+    t.integer  "probability"
+    t.integer  "min_days"
+    t.integer  "max_days"
+    t.integer  "user_id"
+    t.integer  "order_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "status"
+    t.integer  "cost"
+  end
+
+  add_index "products", ["order_id"], :name => "index_products_on_order_id"
+  add_index "products", ["user_id"], :name => "index_products_on_user_id"
+
   create_table "requests", :force => true do |t|
     t.integer  "user_id"
     t.integer  "car_id"
@@ -232,18 +267,15 @@ ActiveRecord::Schema.define(:version => 20121021161952) do
     t.string   "manufacturer"
     t.text     "notes"
     t.string   "invisible"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "parent_request"
     t.string   "type"
     t.integer  "request_id"
     t.string   "creation_reason"
     t.string   "check_needed"
-    t.integer  "cost"
-    t.integer  "days"
-    t.integer  "approx_cost"
-    t.integer  "approx_days"
     t.string   "name"
+    t.boolean  "visible",         :default => true
   end
 
   add_index "requests", ["car_id"], :name => "index_requests_on_car_id"

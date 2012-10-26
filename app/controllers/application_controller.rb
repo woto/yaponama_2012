@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def create_user
     user = User.find_or_initialize_by_session_id(request.session_options[:id])
     user.creation_reason = "session"
-    user.ping = Ping.new
+    #user.ping = Ping.new
     user.save
   end
 
