@@ -6,7 +6,9 @@
   <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-arrow-up"></i></a>
 
   <% #TODO вынести в helper %>
-  
+
+  <% class_for_visible = nil %>
+
   <% if f.object.id %>
 
     <% if f.object.visible? %>
@@ -20,11 +22,14 @@
 
   <div class="clearfix bottom-space"></div>
 
-  <%= f.input :name %>
-  <%= f.input :creation_reason, :collection => Rails.configuration.user_name_creation_reason.map {|k,v| [v,k]}.to_a, :disabled => true, :as => :radio_buttons %>
-  <%= f.input :invisible %>
-  <%= f.input :created_at, :disabled => true %>
-  <%= f.input :updated_at, :disabled => true %>
+  <% if class_for_visible == 'minus' || !f.object.id %>
+
+    <%= f.input :name %>
+    <%= f.input :creation_reason, :collection => Rails.configuration.user_name_creation_reason.map {|k,v| [v,k]}.to_a, :disabled => true, :as => :radio_buttons %>
+    <%= f.input :invisible %>
+    <%= f.input :created_at, :disabled => true %>
+    <%= f.input :updated_at, :disabled => true %>
+  <% end %>
 
   <hr />
 

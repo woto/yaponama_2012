@@ -1,43 +1,63 @@
 <div class="nested-fields top-space">
 
-  <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-arrow-down"></i></a>
-  <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-arrow-up"></i></a>
-  <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-minus"></i></a>
 
   <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
 
+  <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-arrow-down"></i></a>
+  <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-arrow-up"></i></a>
+
+
+  <% #TODO вынести в helper %>
+
+  <% class_for_visible = nil %>
+
+  <% if f.object.id %>
+
+    <% if f.object.visible? %>
+      <% class_for_visible = 'minus' %>
+    <% else %>
+      <% class_for_visible = 'plus' %>
+    <% end %>
+
+    <%= link_to("<i class='icon-#{class_for_visible}'></i>".html_safe, admin_request_path(f.object.id, :request => {:visible => f.object.visible? ? "false" : "true"}), :method => :put, :class => 'btn btn-info btn-mini pull-left right-space' ) %>
+  <% end %>
+
   <div class="clearfix bottom-space"></div>
 
-  <div class="nested-visualize" style="border-left: 3px dashed #5BC0DE">
+  <% if class_for_visible == 'minus' || !f.object.id %>
 
-    <%= f.input :name %>
-    <%= f.input :catalog_number %>
-    <%= f.input :manufacturer %>
-    <%= f.input :creation_reason, :collection => Rails.configuration.request_creation_reason.map {|k,v| [v,k]} %>
-    <%= f.input :check_needed, :collection => Rails.configuration.request_check_needed.map{|k,v| [v,k]},
-      :label => "Требуется проверка",
-      :hint => "Требуется дополнительная проверка совместимости или корректности замены?"
-    %>
-    <%= f.input :notes, :input_html => {:rows => 4} %>
-    <%= f.input :created_at, :disabled => true %>
-    <%= f.input :updated_at, :disabled => true %>
-    <%= f.input :invisible %>
+    <div class="nested-visualize" style="border-left: 3px dashed #5BC0DE">
 
-    <div id="requests">
-      <%= f.simple_fields_for :requests do |request| %>
-        <%= render '/users/request_fields', :f => request, :counter =>"", :stack => stack + 1%>
-      <% end %>
+      <%= f.input :name %>
+      <%= f.input :catalog_number %>
+      <%= f.input :manufacturer %>
+      <%= f.input :creation_reason, :collection => Rails.configuration.request_creation_reason.map {|k,v| [v,k]} %>
+      <%= f.input :check_needed, :collection => Rails.configuration.request_check_needed.map{|k,v| [v,k]},
+        :label => "Требуется проверка",
+        :hint => "Требуется дополнительная проверка совместимости или корректности замены?"
+      %>
+      <%= f.input :notes, :input_html => {:rows => 4} %>
+      <%= f.input :created_at, :disabled => true %>
+      <%= f.input :updated_at, :disabled => true %>
+      <%= f.input :invisible %>
 
-      <% stack = stack.nil? ? 0 : stack + 1 %>
+      <div id="requests">
+        <%= f.simple_fields_for :requests do |request| %>
+          <%= render '/users/request_fields', :f => request, :counter =>"", :stack => stack + 1%>
+        <% end %>
 
-      <% if stack < 3 %>
-        <div class="links">
-          <%= link_to_add_association 'Добавить запрос', f, :requests, :class => "btn btn-mini btn-success", :render_options => {:locals => {:stack => stack}}, :partial => '/users/request_fields'   %>
-        </div>
-      <% end %>
+        <% stack = stack.nil? ? 0 : stack + 1 %>
+
+        <% if stack < 3 %>
+          <div class="links">
+            <%= link_to_add_association 'Добавить запрос', f, :requests, :class => "btn btn-mini btn-success", :render_options => {:locals => {:stack => stack}}, :partial => '/users/request_fields'   %>
+          </div>
+        <% end %>
+      </div>
+
     </div>
 
-  </div>
+  <% end %>
 
   <hr />
 
