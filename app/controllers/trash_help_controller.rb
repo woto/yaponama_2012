@@ -3,8 +3,16 @@ class TrashHelpController < ApplicationController
 
   end
 
-  def merge
+  def make_order
+    user = User.find(params[:user_id])
+    order = user.orders.build
+    products_incart = user.products.where(:status => :incart)
+    order.products = products_incart
+    products_incart.update_all(:status => :inorder)
+    order.save
+  end
 
+  def merge
     user_1 = User.find(params[:id_1])
     user_2 = User.find(params[:id_2])
     user_3 = User.new

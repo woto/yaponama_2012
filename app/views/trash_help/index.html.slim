@@ -1,0 +1,9 @@
+h1 TrashHelp#merge
+= form_tag(trash_help_merge_path) do
+  = text_field_tag(:id_1)
+  = text_field_tag(:id_2)
+  = submit_tag("Объединить")
+
+= form_tag(trash_help_make_order_path) do
+  = text_field_tag(:user_id)
+  = submit_tag("Отправить в заказ")

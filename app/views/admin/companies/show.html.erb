@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Inn:</b>
+  <%= @admin_company.inn %>
+</p>
+
+<p>
+  <b>Kpp:</b>
+  <%= @admin_company.kpp %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @admin_company.name %>
+</p>
+
+<p>
+  <b>Bank account:</b>
+  <%= @admin_company.bank_account %>
+</p>
+
+<p>
+  <b>Account:</b>
+  <%= @admin_company.account %>
+</p>
+
+<p>
+  <b>Correspondent account:</b>
+  <%= @admin_company.correspondent_account %>
+</p>
+
+<p>
+  <b>Bic:</b>
+  <%= @admin_company.bic %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_company_path(@admin_company) %> |
+<%= link_to 'Back', admin_companies_path %>

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121026202817) do
+ActiveRecord::Schema.define(:version => 20121027175844) do
+
+  create_table "accounts", :force => true do |t|
+    t.integer  "money_available",  :default => 0
+    t.integer  "money_locked",     :default => 0
+    t.integer  "accountable_id"
+    t.string   "accountable_type"
+    t.string   "name"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
 
   create_table "add_requst_id_to_cars", :force => true do |t|
     t.integer  "request_id"
@@ -155,7 +165,7 @@ ActiveRecord::Schema.define(:version => 20121026202817) do
     t.integer  "name_id"
     t.integer  "postal_address_id"
     t.integer  "user_id"
-    t.integer  "product_id"
+    t.integer  "money"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
@@ -218,12 +228,14 @@ ActiveRecord::Schema.define(:version => 20121026202817) do
     t.integer  "probability"
     t.integer  "min_days"
     t.integer  "max_days"
+    t.string   "status"
+    t.text     "notes"
+    t.string   "invisible"
+    t.integer  "money"
     t.integer  "user_id"
     t.integer  "order_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.string   "status"
-    t.integer  "cost"
   end
 
   add_index "products", ["order_id"], :name => "index_products_on_order_id"
@@ -260,6 +272,12 @@ ActiveRecord::Schema.define(:version => 20121026202817) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
+  create_table "suppliers", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "test_module_test_entities", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -273,6 +291,20 @@ ActiveRecord::Schema.define(:version => 20121026202817) do
     t.datetime "updated_at",         :null => false
   end
 
+  create_table "transactions", :force => true do |t|
+    t.integer  "left_account_id"
+    t.integer  "right_account_id"
+    t.boolean  "left_real"
+    t.boolean  "right_real"
+    t.integer  "left_money"
+    t.integer  "right_money"
+    t.text     "notes"
+    t.integer  "documentable_id"
+    t.string   "documentable_type"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "session_id"
     t.string   "invisible"
@@ -281,8 +313,6 @@ ActiveRecord::Schema.define(:version => 20121026202817) do
     t.integer  "ping_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.integer  "money_available"
-    t.integer  "money_locked"
     t.integer  "discount"
   end
 

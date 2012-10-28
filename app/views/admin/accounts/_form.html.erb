@@ -1,0 +1,12 @@
+<%= simple_form_for [:admin, @account], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name %>
+  <%= f.input :money_available %>
+  <%= f.input :money_locked %>
+  <%= f.input :accountable_id, :disabled => true %>
+  <%= f.input :accountable_type, :disabled => true %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_accounts_path, :class => 'btn' %>
+  </div>
+<% end %>

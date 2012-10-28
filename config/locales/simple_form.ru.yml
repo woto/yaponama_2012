@@ -20,7 +20,7 @@ ru:
         probability: Вероятность
         min_days: Минимальный срок
         max_days: Максимальный срок 
-        cost: Стоимость
+        cost: Стоимость 1 шт.
         status: Статус позиции
         catalog_number: Каталожный номер
         manufacturer: Производитель
@@ -62,16 +62,22 @@ ru:
         kod_dvigatelya: Код двигателя
         rinok: Рынок
         komplektaciya: Комплектация
+      products_incart:
+        money: &products_money Цена 1 шт.
+      products_inorder:
+        money: *products_money
       user:
         time_zone: *time_zone
       names:
         name: Имя
       requests:
         name: Название
+      account:
+        name: Название аккаунта
     hints:
       defaults:
         money_available: Доступно средств для последующих заказов
-        money_locked: Заблокировано до получения товара (окончательное списание средств) или отказа (возврат средств)
+        money_locked: Заблокировано средств до получения товара (окончательное списание средств) или отказа (возврат средств)
         email_address: Электронный адрес почты
         session_id: Идентификатор сессии (заполняется в случае посещения пользователем сайта)
         utc_offset_hours: Смещение относительно UTC

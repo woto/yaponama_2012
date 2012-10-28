@@ -1,0 +1,27 @@
+.nested-fields.top-space
+
+  = link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?'
+
+  a href="" class="btn btn-info btn-mini pull-left right-space" : i class="icon-arrow-down"
+  a href="" class="btn btn-info btn-mini pull-left right-space" : i class="icon-arrow-up"
+  a href="" class="btn btn-info btn-mini pull-left right-space" : i class="icon-minus"
+
+  .clearfix.bottom-space
+
+  .nested-visualize style="border-left: 3px dashed #5BC0DE"
+
+    = f.input :catalog_number 
+    = f.input :manufacturer 
+    = f.input :quantity_ordered 
+    = f.input :money
+    = f.input :quantity_available 
+    = f.input :probability 
+    = f.input :min_days 
+    = f.input :max_days 
+    = f.input :status 
+    = f.input :notes, :input_html => {:rows => 3}
+    = f.input :invisible
+    = f.input :created_at, :disabled => true 
+    = f.input :updated_at, :disabled => true 
+
+  hr

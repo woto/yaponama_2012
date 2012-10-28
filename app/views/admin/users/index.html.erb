@@ -1,10 +1,12 @@
-<%= simple_form_for(@user_filter, :url => filter_admin_users_path) do |f| %>
+<!-- 
+  <%= simple_form_for(@user_filter, :url => filter_admin_users_path) do |f| %>
 
-  <% @user_filter.attributes.each do |attr, v| %>
-    <%= f.input attr, :as => :boolean %>
+    <% @user_filter.attributes.each do |attr, v| %>
+      <%= f.input attr, :as => :boolean %>
+    <% end %>
+    <%= f.submit %>
   <% end %>
-  <%= f.submit %>
-<% end %>
+-->
 
 <div class='container-fluid'>
    <div class="row-fluid">

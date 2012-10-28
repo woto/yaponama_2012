@@ -1,0 +1,12 @@
+<%= simple_form_for [:admin, @order], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.association :name %>
+  <%= f.association :postal_address %>
+  <%= f.association :user %>
+  <%= f.input :money %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_orders_path, :class => 'btn' %>
+  </div>
+<% end %>
+

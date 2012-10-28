@@ -1,18 +1,15 @@
 Yaponama2012::Application.routes.draw do
 
 
+  namespace :admin do resources :companies end
+
   get 'trash_help/index'
   post 'trash_help/merge'
+  post 'trash_help/make_order'
 
   resources :attachments
 
   mount Ckeditor::Engine => '/ckeditor'
-
-  namespace :test_module do 
-    resources :test_entities do
-      match :legacy, :on => :collection
-    end
-  end
 
   namespace :admin do
     resources :orders
@@ -35,6 +32,10 @@ Yaponama2012::Application.routes.draw do
       end
     end
     resources :requests
+    resources :accounts
+    resources :transactions
+    resources :suppliers
+
   end
 
   # The priority is based upon order of creation:

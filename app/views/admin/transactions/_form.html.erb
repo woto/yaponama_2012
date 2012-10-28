@@ -1,0 +1,16 @@
+<%= simple_form_for [:admin, @transaction], :html => { :class => 'form-horizontal' } do |f| %>
+
+  <%= f.association :left_account %>
+  <%= f.association :right_account %>
+  <%= f.input :left_real %>
+  <%= f.input :right_real %>
+  <%= f.input :left_money %>
+  <%= f.input :right_money %>
+  <%= f.input :documentable, :disabled => true %>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_transactions_path, :class => 'btn' %>
+  </div>
+<% end %>

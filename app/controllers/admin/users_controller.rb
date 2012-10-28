@@ -50,6 +50,10 @@ class Admin::UsersController < Admin::ApplicationController
   def new
     @user = User.new
 
+    if @user.account.blank?
+      @user.account = Account.new
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @user }

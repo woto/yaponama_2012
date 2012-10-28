@@ -1,0 +1,28 @@
+.nested-fields.top-space
+
+  = link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?'
+
+  a href="" class="btn btn-info btn-mini pull-left right-space" : i class="icon-arrow-down"
+  a href="" class="btn btn-info btn-mini pull-left right-space" : i class="icon-arrow-up"
+  a href="" class="btn btn-info btn-mini pull-left right-space" : i class="icon-minus"
+
+  .clearfix.bottom-space
+
+  .nested-visualize style="border-left: 3px dashed #62C462"
+
+    = f.association :name, :collection => @user.names.select
+    = f.association :postal_address, :collection => @user.postal_addresses.select
+    = f.input :money, :disabled => true
+    = f.input :created_at
+    = f.input :updated_at
+
+    #products_inorder.nested-fields
+
+      = f.simple_fields_for :products_inorder do |product|
+        = render 'product_fields', :f => product, :stack => stack
+      end
+
+      .links
+        = link_to_add_association 'Добавить товар', f, :products_inorder, :class => "btn btn-success btn-success", :render_options => {:locals => {:stack => stack}}, :partial => 'product_fields'
+
+  hr
