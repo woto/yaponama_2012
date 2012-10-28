@@ -18,7 +18,6 @@ Yaponama2012::Application.routes.draw do
     resources :orders
     resources :products
     resources :names
-    resources :carts
     resources :spare_infos
     resources :time_zones
     resources :email_addresses
