@@ -6,9 +6,20 @@ class Transaction < ActiveRecord::Base
   belongs_to :documentable, :polymorphic => true
 
   before_save :update_money
+  after_save :check_orders
 
+  def check_orders
+    debugger
+    puts '1'
+    #left_account.user.orders:where
+    #if left_account.user.money_locked - (left_account.user.money_locked / 100 * left_account.user.prepayment_percent) > left_account.user.money_available
+
+  end
 
   def update_money
+    debugger
+    puts '1'
+    return
 
     if left_account
       if left_real

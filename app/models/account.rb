@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  attr_accessible :money_available, :money_locked, :name
+  attr_accessible :name, :debit, :credit, :accountable_id, :accountable_type
   belongs_to :accountable, :polymorphic => true
   has_many :transactions, :inverse_of => :account
 

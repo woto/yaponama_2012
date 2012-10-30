@@ -26,10 +26,11 @@
         <%= f.input :invisible %>
         <%= f.input :session_id, :disabled => true %>
         <%= f.simple_fields_for :account do |account| %>
-          <%= account.input :money_available %>
-          <%= account.input :money_locked %>
+          <%= account.input :debit %>
+          <%= account.input :credit %>
           <%= account.input :name %>
         <% end %>
+        <%= f.input :prepayment_percent %>
         <%= f.input :discount %>
       </div>
     </div>

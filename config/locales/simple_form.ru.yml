@@ -12,16 +12,16 @@ ru:
       default_message: "Невозможно продолжить, т.к. форма заполнена не корректно"
     labels:
       defaults:
+        prepayment_percent: Процент предоплаты
         discount: Скидка
-        money_available: Доступно
-        money_locked: Заблокировано
+        debit: Дебет 
+        credit: Кредит
         quantity_ordered: Необходимо шт.
         quantity_available: В наличии шт.
         probability: Вероятность
         min_days: Минимальный срок
         max_days: Максимальный срок 
         cost: Стоимость 1 шт.
-        status: Статус позиции
         catalog_number: Каталожный номер
         manufacturer: Производитель
         creation_reason: Причина создания
@@ -62,6 +62,8 @@ ru:
         kod_dvigatelya: Код двигателя
         rinok: Рынок
         komplektaciya: Комплектация
+      orders:
+        status: Статус заказа
       products_incart:
         money: &products_money Цена 1 шт.
       products_inorder:
@@ -76,6 +78,7 @@ ru:
         name: Название аккаунта
     hints:
       defaults:
+        prepayment_percent: Процент предоплаты, после которого заказ начинает исполняться
         money_available: Доступно средств для последующих заказов
         money_locked: Заблокировано средств до получения товара (окончательное списание средств) или отказа (возврат средств)
         email_address: Электронный адрес почты

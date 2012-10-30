@@ -13,6 +13,7 @@
     = f.association :name, :collection => @user.names.select
     = f.association :postal_address, :collection => @user.postal_addresses.select
     = f.input :money, :disabled => true
+    = f.input :status, :disabled => true
     = f.input :created_at
     = f.input :updated_at
 

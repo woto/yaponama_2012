@@ -5,11 +5,26 @@ class TrashHelpController < ApplicationController
 
   def make_order
     user = User.find(params[:user_id])
-    order = user.orders.build
+    order = user.orders.build(:status => :inorder)
     products_incart = user.products.where(:status => :incart)
     order.products = products_incart
     products_incart.update_all(:status => :inorder)
     order.save
+    user.check_orders
+  end
+
+  def make_payment
+    user = User.find(params[:user_id])
+    user.account.credit = user.account.credit + params[:money].to_i
+    #user.documents.build(
+    #  :left_account => user.account,
+    #  :left_real => true,
+    #  :left_money => params[:money],
+    #)
+    
+    user.check_orders
+    user.save
+
   end
 
   def merge

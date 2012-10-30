@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121027175844) do
+ActiveRecord::Schema.define(:version => 20121029230812) do
 
   create_table "accounts", :force => true do |t|
-    t.integer  "money_available",  :default => 0
-    t.integer  "money_locked",     :default => 0
+    t.integer  "debit",            :default => 0
+    t.integer  "credit",           :default => 0
     t.integer  "accountable_id"
     t.string   "accountable_type"
     t.string   "name"
@@ -30,6 +30,18 @@ ActiveRecord::Schema.define(:version => 20121027175844) do
   end
 
   add_index "add_requst_id_to_cars", ["request_id"], :name => "index_add_requst_id_to_cars_on_request_id"
+
+  create_table "admin_companies", :force => true do |t|
+    t.string   "inn"
+    t.string   "kpp"
+    t.string   "name"
+    t.string   "bank_account"
+    t.string   "account"
+    t.string   "correspondent_account"
+    t.string   "bic"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
 
   create_table "admin_spare_infos", :force => true do |t|
     t.string   "catalog_number"
@@ -168,6 +180,7 @@ ActiveRecord::Schema.define(:version => 20121027175844) do
     t.integer  "money"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "status"
   end
 
   create_table "phones", :force => true do |t|
@@ -262,6 +275,12 @@ ActiveRecord::Schema.define(:version => 20121027175844) do
   add_index "requests", ["car_id"], :name => "index_requests_on_car_id"
   add_index "requests", ["user_id"], :name => "index_requests_on_user_id"
 
+  create_table "revenues", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
@@ -311,9 +330,10 @@ ActiveRecord::Schema.define(:version => 20121027175844) do
     t.string   "creation_reason"
     t.integer  "time_zone_id"
     t.integer  "ping_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "discount"
+    t.integer  "prepayment_percent"
   end
 
 end

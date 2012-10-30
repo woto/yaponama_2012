@@ -6,13 +6,22 @@ Yaponama2012::Application.routes.draw do
   get 'trash_help/index'
   post 'trash_help/merge'
   post 'trash_help/make_order'
+  post 'trash_help/make_payment'
 
   resources :attachments
 
   mount Ckeditor::Engine => '/ckeditor'
 
   namespace :admin do
-    resources :orders
+    resources :orders do
+      collection do
+        get 'ordered'
+        get 'inorder'
+        get 'inwork'
+      end
+    end
+
+    resources :carts
     resources :products
     resources :names
     resources :spare_infos

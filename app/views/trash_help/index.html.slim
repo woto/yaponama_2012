@@ -1,9 +1,20 @@
-h1 TrashHelp#merge
+h1 Свалка
+
+= form_tag(trash_help_make_payment_path) do
+  | user_id
+  = text_field_tag :user_id
+  | $
+  = text_field_tag :money
+  = submit_tag("Пополнить баланс")
+
 = form_tag(trash_help_merge_path) do
+  | id_1
   = text_field_tag(:id_1)
+  | id_2
   = text_field_tag(:id_2)
   = submit_tag("Объединить")
 
 = form_tag(trash_help_make_order_path) do
+  | user_id
   = text_field_tag(:user_id)
   = submit_tag("Отправить в заказ")
