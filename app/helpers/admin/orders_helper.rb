@@ -1,13 +1,24 @@
 module Admin::OrdersHelper
 
-  def tab_links(id, h)
+  def tab_links(id, h, meth, &block)
 
-    content_tag(:ul, :id => id, :class => 'nav nav-tabs') do
-      h.collect do |k, v|
-        css_class = "active" if current_page?(admin_orders_path(:status => k))
-        concat(content_tag(:li, link_to(v, admin_orders_path(:status => k)), :class => css_class))
+    hint = ''
+
+    workaround = Proc.new do 
+      content_tag(:ul, :id => id, :class => 'nav nav-tabs') do
+        h.collect do |k, v|
+          if current_page?(meth.call(:status => k))
+            css_class = "active"  
+            hint = v[:hint]
+          end
+          concat(content_tag(:li, link_to(v[:title], meth.call(:status => k)), :class => css_class))
+        end
       end
     end
+
+    concat(capture(&workaround))
+    concat(capture(hint, &block))
+
   end
  
 end
