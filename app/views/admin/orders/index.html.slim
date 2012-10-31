@@ -1,7 +1,7 @@
 - model_class = Order
 
 .page-header
-  h1 = t '.title', :default => model_class.model_name.human.pluralize
+  h1 = t '.title', :default => model_class.model_name.human
 
 - tab_links "myTab", Rails.configuration.orders_status, method(:admin_orders_path) do |hint|
 

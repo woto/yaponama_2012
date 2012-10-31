@@ -2,8 +2,8 @@
   <%= f.input :name %>
   <%= f.simple_fields_for :account do |account| %>
     <%= account.input :name %>
-    <%= account.input :money_available %>
-    <%= account.input :money_locked %>
+    <%= account.input :debit %>
+    <%= account.input :credit %>
   <% end %>
 
   <div class="form-actions">

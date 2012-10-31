@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121029230812) do
+ActiveRecord::Schema.define(:version => 20121031170331) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "debit",            :default => 0
@@ -249,6 +249,7 @@ ActiveRecord::Schema.define(:version => 20121029230812) do
     t.integer  "order_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "supplier_id"
   end
 
   add_index "products", ["order_id"], :name => "index_products_on_order_id"
@@ -330,10 +331,11 @@ ActiveRecord::Schema.define(:version => 20121029230812) do
     t.string   "creation_reason"
     t.integer  "time_zone_id"
     t.integer  "ping_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.integer  "discount"
     t.integer  "prepayment_percent"
+    t.string   "order_rule",         :default => "none"
   end
 
 end

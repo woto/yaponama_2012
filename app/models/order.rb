@@ -6,6 +6,8 @@ class Order < ActiveRecord::Base
   belongs_to :postal_address, :inverse_of => :orders
 
   has_many :products, :dependent => :destroy, :inverse_of => :order
+  attr_accessible :products_attributes
+  accepts_nested_attributes_for :products, :allow_destroy => true
 
   has_many :products_inorder, :dependent => :destroy, :inverse_of => :order, :conditions => {:products => {:status => :inorder}}, :class_name => "Product"
   attr_accessible :products_inorder_attributes
@@ -24,8 +26,10 @@ class Order < ActiveRecord::Base
   has_many :documents, :as => :documentable, :class_name => "Transaction"
 
   def to_label
-    "#{name_id} - #{postal_address_id} - #{user_id} - #{product_id} - #{created_at} - #{updated_at}"
+    "#{name_id} - #{postal_address_id} - #{user_id} - #{created_at} - #{updated_at}"
   end
+
+  validate :money, :numericality => { :only_integer => true }
 
   before_save :update_money
   #before_create :build_transaction

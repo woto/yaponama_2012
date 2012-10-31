@@ -7,6 +7,10 @@ Yaponama2012::Application.routes.draw do
   post 'trash_help/merge'
   post 'trash_help/make_order'
   post 'trash_help/make_payment'
+  namespace 'trash_help' do
+    post 'check_orders_inorder'
+  end
+  post 'trash_help/make_payment_to_supplier'
 
   resources :attachments
 
@@ -21,7 +25,6 @@ Yaponama2012::Application.routes.draw do
       end
     end
 
-    resources :carts
     resources :products
     resources :names
     resources :spare_infos

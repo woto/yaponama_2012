@@ -30,6 +30,7 @@
           <%= account.input :credit %>
           <%= account.input :name %>
         <% end %>
+        <%= f.input :order_rule, :collection => Rails.configuration.user_order_rule.map { |k, v| [v, k] } %>
         <%= f.input :prepayment_percent %>
         <%= f.input :discount %>
       </div>

@@ -63,6 +63,11 @@ class Admin::UsersController < Admin::ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+
+    if @user.account.blank?
+      @user.account = Account.new
+    end
+
   end
 
   # POST /users

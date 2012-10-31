@@ -7,6 +7,8 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:debit) %></th>
+      <th><%= model_class.human_attribute_name(:credit) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -16,6 +18,8 @@
       <tr>
         <td><%= link_to supplier.id, admin_supplier_path(supplier) %></td>
         <td><%= supplier.name %></td>
+        <td><%= supplier.account.debit %></td>
+        <td><%= supplier.account.credit %></td>
         <td><%=l supplier.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

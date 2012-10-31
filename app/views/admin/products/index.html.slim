@@ -10,6 +10,7 @@
   table.table.table-striped
     thead
       tr
+        th = model_class.human_attribute_name(:id)
         th = model_class.human_attribute_name(:catalog_number)
         th = model_class.human_attribute_name(:manufacturer)
         th = model_class.human_attribute_name(:quantity_ordered)
@@ -23,12 +24,14 @@
         th = model_class.human_attribute_name(:money)
         th = model_class.human_attribute_name(:user_id)
         th = model_class.human_attribute_name(:order_id)
+        th = model_class.human_attribute_name(:supplier_id)
         th = model_class.human_attribute_name(:created_at)
         th = model_class.human_attribute_name(:updated_at)
         th =t '.actions', :default => t("helpers.actions")
     tbody
       - @products.each do |product|
         tr
+          td = link_to product.id, admin_product_path(product)
           td = product.catalog_number
           td = product.manufacturer
           td = product.quantity_ordered
@@ -42,12 +45,15 @@
           td = product.money
           td = product.user_id
           td = product.order_id
+          td = product.supplier_id
           td = product.created_at
           td = product.updated_at
           td
-            = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_cart_path(product), :class => 'btn btn-mini'
+            = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_product_path(product), :class => 'btn btn-mini'
             = link_to t('.destroy', :default => t("helpers.links.destroy")),
-                        admin_cart_path(product),
+                        admin_product_path(product),
                         :method => :delete,
                         :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                         :class => 'btn btn-mini btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_admin_product_path, :class => 'btn btn-primary'

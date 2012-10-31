@@ -2,10 +2,15 @@
   = f.association :name
   = f.association :postal_address
   = f.association :user
-  = f.input :status, :disabled => true
+  = f.input :status
   = f.input :money, :disabled => true
   = f.input :created_at
   = f.input :updated_at
+
+  = f.simple_fields_for :products do |product|
+    = render '/users/product_fields', :f => product
+  
+
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_orders_path, :class => 'btn'

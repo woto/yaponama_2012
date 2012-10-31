@@ -21,7 +21,10 @@
     = f.input :status 
     = f.input :notes, :input_html => {:rows => 3}
     = f.input :invisible
-    = f.input :created_at, :disabled => true 
-    = f.input :updated_at, :disabled => true 
+    = f.input :created_at
+    = f.input :updated_at
+    = f.input :user_id, :disabled => true
+    = f.input :order_id, :disabled => true
+    = f.input :supplier_id, :disabled => true
 
   hr

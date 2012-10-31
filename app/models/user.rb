@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  attr_accessible :order_rule
+
   has_many :products, :dependent => :destroy, :inverse_of => :user
 
   has_many :products_incart, :dependent => :destroy, :inverse_of => :user, :conditions => {:status => :incart}, :class_name => "Product"
@@ -20,6 +22,8 @@ class User < ActiveRecord::Base
   has_one :ping, :dependent => :destroy, :inverse_of => :user
   has_many :documents, :as => :documentable, :class_name => "Transaction"
 
+  validates :prepayment_percent, :numericality => { :only_integer => true }
+
   # Financial
   attr_accessible :account_attributes
   has_one :account, :as => :accountable
@@ -30,17 +34,29 @@ class User < ActiveRecord::Base
   end
 
   def check_orders
-    orders.where(:status => :inorder).each do |order|
-      if (account.debit + order.money) * prepayment_percent / 100 <= account.credit
-        order.status = :ordered
-        order.products.each do |product|
-          product.update_attributes(:status => :ordered)
+    # TODO CHECK
+    unless order_rule.to_sym == :none
+      inorder_orders = orders.where(:status => :inorder)
+      if order_rule.to_sym == :lifo
+        inorder_orders = inorder_orders.order("id DESC")
+      elsif order_rule.to_sym == :fifo
+        inorder_orders = inorder_orders.order("id ASC")
+      elsif order_rule.to_sym == :one
+        unless inorder_orders.size == 1
+          return
         end
-        account.debit += order.money
-        order.save
-        account.save
+      end
+      inorder_orders.each do |order|
+        if (account.debit + order.money) * prepayment_percent / 100.00 <= account.credit
+          order.status = :ordered
+          order.products.each do |product|
+            product.update_attributes(:status => :ordered)
+          end
+          account.debit += order.money
+          order.save
+          account.save
+        end
       end
     end
   end
-
 end

@@ -1,0 +1,47 @@
+<%- model_class = Product -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:catalog_number) %>:</strong></dt>
+  <dd><%= @product.catalog_number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:manufacturer) %>:</strong></dt>
+  <dd><%= @product.manufacturer %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:quantity_ordered) %>:</strong></dt>
+  <dd><%= @product.quantity_ordered %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:quantity_available) %>:</strong></dt>
+  <dd><%= @product.quantity_available %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:probability) %>:</strong></dt>
+  <dd><%= @product.probability %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:min_days) %>:</strong></dt>
+  <dd><%= @product.min_days %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:max_days) %>:</strong></dt>
+  <dd><%= @product.max_days %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
+  <dd><%= @product.status %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:notes) %>:</strong></dt>
+  <dd><%= @product.notes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:invisible) %>:</strong></dt>
+  <dd><%= @product.invisible %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:money) %>:</strong></dt>
+  <dd><%= @product.money %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @product.user_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:order_id) %>:</strong></dt>
+  <dd><%= @product.order_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:supplier_id) %>:</strong></dt>
+  <dd><%= @product.supplier_id %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              admin_products_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_admin_product_path(@product), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              admin_product_path(@product),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
