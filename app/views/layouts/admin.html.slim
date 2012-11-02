@@ -41,15 +41,17 @@ html lang="ru"
 
         .well.sidebar-nav
           ul.nav.nav-list
-            li.nav-header оперативные действия
+            li.nav-header Торговля
             li = link_to "заказы", admin_orders_path
             li = link_to "товар", admin_products_path
-            li = link_to "запросы", admin_requests_path
-            li = link_to "письма", admin_emails_path
-            
-            li.nav-header торговля
             li = link_to "клиенты", admin_users_path
             li = link_to "аккаунты", admin_accounts_path
+
+            li.nav-header Общение
+            li = link_to "запросы", admin_requests_path
+            li = link_to "письма", admin_emails_path
+
+            li.nav-header торговля
             li = link_to "поставщики", admin_suppliers_path
             li = link_to "транзакции", admin_transactions_path
 
@@ -57,6 +59,7 @@ html lang="ru"
           ul.nav.nav-list
             li.nav-header Настройки
             li = link_to "часовые пояса", admin_time_zones_path
+            li = link_to "доставка", admin_deliveries_path
             li = link_to "описания запчастей", admin_spare_infos_path
 
       .span9

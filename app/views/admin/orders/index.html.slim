@@ -3,7 +3,7 @@
 .page-header
   h1 = t '.title', :default => model_class.model_name.human
 
-- tab_links "myTab", Rails.configuration.orders_status, method(:admin_orders_path) do |hint|
+- tab_links "myTab", Rails.configuration.orders_status do |hint|
 
   .alert.alert-info
     = hint 
@@ -18,8 +18,10 @@
             th = model_class.human_attribute_name(:name)
             th = model_class.human_attribute_name(:postal_address)
             th = model_class.human_attribute_name(:user)
-            th = model_class.human_attribute_name(:money)
+            th = model_class.human_attribute_name(:order_cost)
+            th = model_class.human_attribute_name(:delivery_cost)
             th = model_class.human_attribute_name(:created_at)
+            th 
             th =t '.actions', :default => t("helpers.actions")
         tbody
           - @orders.each do |order|
@@ -28,8 +30,10 @@
               td = order.name.try(:to_label)
               td = order.postal_address.try(:to_label)
               td = order.user
-              td = order.money
+              td = order.order_cost
+              td = order.delivery_cost
               td = link_to order.user.try(:to_label), edit_admin_user_path(order.user)
+              td = link_to 'Order products', admin_order_products_path(order)
               td = l order.created_at
               td = l order.updated_at
               td

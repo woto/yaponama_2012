@@ -4,7 +4,6 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :name_id
       t.integer :postal_address_id
       t.integer :user_id
-      t.integer :money
       t.timestamps
     end
   end

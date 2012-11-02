@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031170331) do
+ActiveRecord::Schema.define(:version => 20121101161128) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "debit",            :default => 0
@@ -118,6 +118,16 @@ ActiveRecord::Schema.define(:version => 20121031170331) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
+  create_table "deliveries", :force => true do |t|
+    t.string   "name"
+    t.text     "notes"
+    t.boolean  "available"
+    t.boolean  "prepayment"
+    t.text     "invisible"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "email_addresses", :force => true do |t|
     t.string   "email_address"
     t.boolean  "confirmed_by_robot"
@@ -177,10 +187,11 @@ ActiveRecord::Schema.define(:version => 20121031170331) do
     t.integer  "name_id"
     t.integer  "postal_address_id"
     t.integer  "user_id"
-    t.integer  "money"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "status"
+    t.decimal  "delivery_cost",     :precision => 8, :scale => 2
+    t.decimal  "order_cost",        :precision => 8, :scale => 2
   end
 
   create_table "phones", :force => true do |t|

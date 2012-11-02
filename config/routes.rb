@@ -1,6 +1,8 @@
 Yaponama2012::Application.routes.draw do
 
 
+  namespace :admin do resources :deliveries end
+
   namespace :admin do resources :companies end
 
   get 'trash_help/index'
@@ -18,11 +20,7 @@ Yaponama2012::Application.routes.draw do
 
   namespace :admin do
     resources :orders do
-      collection do
-        get 'ordered'
-        get 'inorder'
-        get 'inwork'
-      end
+      resources :products
     end
 
     resources :products
