@@ -5,6 +5,7 @@ ru:
   activerecord:
     models:
       order: Заказы
+      product: Товар
     attributes:
       order:
         postal_address: Почтовый адрес

@@ -29,15 +29,15 @@ class Order < ActiveRecord::Base
     "#{name_id} - #{postal_address_id} - #{user_id} - #{created_at} - #{updated_at}"
   end
 
-  validate :money, :numericality => { :only_integer => true }
+  validate :order_cost, :numericality => true
 
-  before_save :update_money
+  before_save :update_order_cost
   #before_create :build_transaction
 
 private
 
-  def update_money
-    self.money = products.reduce(0) {|summ, pi| summ + (pi.money * pi.quantity_ordered)}
+  def update_order_cost
+    self.order_cost = products.reduce(0) {|summ, pi| summ + (pi.cost_sell * pi.quantity_ordered)}
   end
 
   #def build_transaction

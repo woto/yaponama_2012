@@ -1,19 +1,20 @@
 = simple_form_for [:admin, @product], :html => { :class => 'form-horizontal' } do |f|
     = f.input :catalog_number 
     = f.input :manufacturer 
-    = f.input :quantity_ordered 
-    = f.input :quantity_available 
-    = f.input :probability 
-    = f.input :min_days 
-    = f.input :max_days 
-    = f.input :status 
+    = f.input :quantity_ordered
+    = f.input :quantity_available
+    = f.input :cost_buy
+    = f.input :cost_sell
+    = f.input :probability
+    = f.input :min_days
+    = f.input :max_days
+    = f.input :status, :collection => Rails.configuration.products_status.map {|k,v| [v[:title],k]} 
     = f.input :notes, :input_html => {:rows => 3}
-    = f.input :money
-    = f.input :invisible
+    = f.input :notes_invisible, :input_html => {:rows => 3}
     = f.input :created_at
     = f.input :updated_at
     = f.association :user, :disabled => true
-    = f.association :order
+    = f.association :order, :disabled => true
     = f.association :supplier
     .form-actions
       = f.button :submit, :class => 'btn-primary'

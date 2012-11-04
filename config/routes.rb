@@ -1,6 +1,8 @@
 Yaponama2012::Application.routes.draw do
 
 
+  namespace :admin do resources :shipments end
+
   namespace :admin do resources :deliveries end
 
   namespace :admin do resources :companies end
@@ -23,7 +25,17 @@ Yaponama2012::Application.routes.draw do
       resources :products
     end
 
-    resources :products
+    resources :products do
+      member do
+        match 'set_to_pre_supplier_form'
+        match 'set_to_pre_supplier_action'
+        match 'set_to_post_supplier_action'
+        match 'set_cancel_action'
+        match 'set_stock_action'
+        match 'set_complete_action'
+      end
+    end
+
     resources :names
     resources :spare_infos
     resources :time_zones

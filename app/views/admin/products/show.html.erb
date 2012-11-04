@@ -12,6 +12,10 @@
   <dd><%= @product.quantity_ordered %></dd>
   <dt><strong><%= model_class.human_attribute_name(:quantity_available) %>:</strong></dt>
   <dd><%= @product.quantity_available %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:cost_buy) %>:</strong></dt>
+  <dd><%= @product.cost_buy %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:cost_sell) %>:</strong></dt>
+  <dd><%= @product.cost_sell %></dd>
   <dt><strong><%= model_class.human_attribute_name(:probability) %>:</strong></dt>
   <dd><%= @product.probability %></dd>
   <dt><strong><%= model_class.human_attribute_name(:min_days) %>:</strong></dt>
@@ -19,19 +23,17 @@
   <dt><strong><%= model_class.human_attribute_name(:max_days) %>:</strong></dt>
   <dd><%= @product.max_days %></dd>
   <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
-  <dd><%= @product.status %></dd>
+  <dd><%= Rails.configuration.products_status[@product.status] %></dd>
   <dt><strong><%= model_class.human_attribute_name(:notes) %>:</strong></dt>
   <dd><%= @product.notes %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:invisible) %>:</strong></dt>
-  <dd><%= @product.invisible %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:money) %>:</strong></dt>
-  <dd><%= @product.money %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @product.user_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:order_id) %>:</strong></dt>
-  <dd><%= @product.order_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:supplier_id) %>:</strong></dt>
-  <dd><%= @product.supplier_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:notes_invisible) %>:</strong></dt>
+  <dd><%= @product.notes_invisible, :input_html => {:rows => 3} %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:user) %>:</strong></dt>
+  <dd><%= @product.user.to_label %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:order) %>:</strong></dt>
+  <dd><%= @product.order.to_label %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:supplier) %>:</strong></dt>
+  <dd><%= @product.supplier.to_label %></dd>
 </dl>
 
 <div class="form-actions">

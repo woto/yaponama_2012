@@ -3,15 +3,9 @@ class CreateProducts < ActiveRecord::Migration
     create_table :products do |t|
       t.string :catalog_number
       t.string :manufacturer
-      t.integer :quantity_ordered
-      t.integer :quantity_available
-      t.integer :probability
-      t.integer :min_days
-      t.integer :max_days
       t.string :status
       t.text :notes
       t.string :invisible
-      t.integer :money
       t.references :user
       t.references :order
 

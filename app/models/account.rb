@@ -3,8 +3,8 @@ class Account < ActiveRecord::Base
   belongs_to :accountable, :polymorphic => true
   has_many :transactions, :inverse_of => :account
 
-  validates :credit, :numericality => { :only_integer => true } 
-  validates :debit, :numericality => { :only_integer => true }
+  validates :credit, :numericality => true
+  validates :debit, :numericality => true
 
   #before_save :create_transaction
 

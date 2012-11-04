@@ -12,6 +12,8 @@ ru:
       default_message: "Невозможно продолжить, т.к. форма заполнена не корректно"
     labels:
       defaults:
+        cost_buy: Закупочная цена 1 шт.
+        cost_sell:  Продажная цена 1 шт.
         order_rule: Правило оплаты
         prepayment_percent: Процент предоплаты
         discount: Процент скидки
@@ -22,7 +24,7 @@ ru:
         probability: Вероятность
         min_days: Минимальный срок
         max_days: Максимальный срок 
-        cost: Стоимость 1 шт.
+        # cost: Стоимость 1 шт.
         catalog_number: Каталожный номер
         manufacturer: Производитель
         creation_reason: Причина создания
@@ -35,7 +37,7 @@ ru:
         utc_offset_hours: Часов
         utc_offset_minutes: Минут
         time_zone: &time_zone Часовой пояс
-        invisible: Служебная информация
+        notes_invisible: Служебная информация
         company: Компания
         phone: Телефон
         notes: Комментарий
@@ -66,9 +68,9 @@ ru:
       orders:
         status: Статус заказа
       products_incart:
-        money: &products_money Цена 1 шт.
+        #money: &products_money Цена 1 шт.
       products_inorder:
-        money: *products_money
+        #money: *products_money
       user:
         time_zone: *time_zone
       names:
@@ -81,8 +83,8 @@ ru:
       defaults:
         order_rule: Правило автоматического заказа при поступлении средств
         prepayment_percent: Процент предоплаты, после которого заказ начинает исполняться (действует только на новые заказы)
-        money_available: Доступно средств для последующих заказов
-        money_locked: Заблокировано средств до получения товара (окончательное списание средств) или отказа (возврат средств)
+        #money_available: Доступно средств для последующих заказов
+        #money_locked: Заблокировано средств до получения товара (окончательное списание средств) или отказа (возврат средств)
         email_address: Электронный адрес почты
         session_id: Идентификатор сессии (заполняется в случае посещения пользователем сайта)
         utc_offset_hours: Смещение относительно UTC

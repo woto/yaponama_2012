@@ -37,7 +37,11 @@ gem 'jquery-rails'
 
 # To use debugger
 gem 'debugger'
-gem 'twitter-bootstrap-rails', :git => 'https://github.com/seyhunak/twitter-bootstrap-rails.git'
+
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
+
 gem 'simple_form'
 gem 'cocoon', :git => 'https://github.com/nathanvda/cocoon'
 gem 'russian'

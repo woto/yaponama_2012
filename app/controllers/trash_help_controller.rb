@@ -24,13 +24,13 @@ class TrashHelpController < ApplicationController
 
   def make_payment_to_supplier
     supplier = Supplier.find(params[:supplier_id])
-    supplier.account.debit += params[:money].to_i
+    supplier.account.debit += params[:money].to_d
     supplier.save
   end
 
   def make_payment
     user = User.find(params[:user_id])
-    user.account.credit = user.account.credit + params[:money].to_i
+    user.account.credit = user.account.credit + params[:money].to_d
     #user.documents.build(
     #  :left_account => user.account,
     #  :left_real => true,
@@ -39,7 +39,6 @@ class TrashHelpController < ApplicationController
     
     user.check_orders
     user.save
-
   end
 
   def merge
@@ -75,7 +74,5 @@ EOF
     #end
 
     user_3.save
-    debugger
-    puts '1'
   end
 end

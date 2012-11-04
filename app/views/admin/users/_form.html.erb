@@ -23,7 +23,7 @@
         <%= f.simple_fields_for :ping do |ping| %>
           <%= ping.input :created_at, :as => :datetime, :disabled => true, :label => 'Пинг', :hint => 'Время последней активности (просмотр страницы пользователем или получение от него письма)', :required => false %>
         <% end %>
-        <%= f.input :invisible %>
+        <%= f.input :notes_invisible, :input_html => {:rows => 3} %>
         <%= f.input :session_id, :disabled => true %>
         <%= f.simple_fields_for :account do |account| %>
           <%= account.input :debit %>

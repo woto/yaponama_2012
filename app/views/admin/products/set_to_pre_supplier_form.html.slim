@@ -1,0 +1,5 @@
+= simple_form_for [:admin, @product], :url => set_to_pre_supplier_action_admin_product_path, :html => { :class => 'form-horizontal' } do |f|
+    = f.association :supplier
+    .form-actions
+      = f.button :submit, :class => 'btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_products_path, :class => 'btn'

@@ -4,4 +4,8 @@ class Supplier < ActiveRecord::Base
   accepts_nested_attributes_for :account
 
   has_many :products, :inverse_of => :supplier
+
+  def to_label
+    name
+  end
 end

@@ -26,9 +26,9 @@
 
     <%= f.input :name %>
     <%= f.input :creation_reason, :collection => Rails.configuration.user_name_creation_reason.map {|k,v| [v,k]}.to_a, :disabled => true, :as => :radio_buttons %>
-    <%= f.input :invisible %>
     <%= f.input :created_at, :disabled => true %>
     <%= f.input :updated_at, :disabled => true %>
+    <%= f.input :notes_invisible, :input_html => {:rows => 3} %>
   <% end %>
 
   <hr />

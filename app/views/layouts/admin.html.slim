@@ -20,50 +20,51 @@ html lang="ru"
       <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
 
   body
+    .navbar.navbar-fixed-top.navbar-inverse
+      .navbar-inner
+        .container
+          a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
+            span.icon-bar 
+            span.icon-bar 
+            span.icon-bar 
+          a.brand href="#" Yaponama 2012
+          .nav-collapse.collapse
+            ul.nav
+              li.dropdown
+                a.dropdown-toggle href="#" data-toggle="dropdown" 
+                  | Торговля 
+                  b.caret
+                ul.dropdown-menu
+                  li = link_to "Заказы", admin_orders_path
+                  li = link_to "Товар", admin_products_path
+                  li = link_to "Отгрузка", admin_shipments_path
+                  li.divider
+                  li = link_to "Клиенты", admin_users_path
+                  li = link_to "Поставщики", admin_suppliers_path
+              li.dropdown
+                a.dropdown-toggle href="#" data-toggle="dropdown"
+                  | Настройки 
+                  b.caret
+                ul.dropdown-menu
+                  li = link_to "Часовые пояса", admin_time_zones_path
+                  li = link_to "Доставка", admin_deliveries_path
+                  li = link_to "Описания запчастей", admin_spare_infos_path
+              li.dropdown
+                a.dropdown-toggle href="#" data-toggle="dropdown"
+                  | Трэш 
+                  b.caret
+                ul.dropdown-menu
+                  li = link_to "Фронт", "/trash_help/index"
+                  li = link_to "Транзакции", admin_transactions_path
+                  li = link_to "Запросы", admin_requests_path
+                  li = link_to "Письма", admin_emails_path
+                  li = link_to "Аккаунты", admin_accounts_path
 
-  .navbar.navbar-fixed-top
-    .navbar-inner
-      .container-fluid
-        a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
-          span.icon-bar"
-          span.icon-bar"
-          span.icon-bar"
-        a.brand href="#" Yaponama2012
-        .container-fluid.nav-collapse
-          ul.nav
-            li = link_to "Клиенты", admin_users_path
-            li = link_to "Трэш", "/trash_help/index"
-            li = link_to "Предыдущее", "/admin/emails"
+    .container-fluid
+      .row-fluid
+        .span12
+          = yield
 
-  .container-fluid
-    .row-fluid
-      .span3
-
-        .well.sidebar-nav
-          ul.nav.nav-list
-            li.nav-header Торговля
-            li = link_to "заказы", admin_orders_path
-            li = link_to "товар", admin_products_path
-            li = link_to "клиенты", admin_users_path
-            li = link_to "аккаунты", admin_accounts_path
-
-            li.nav-header Общение
-            li = link_to "запросы", admin_requests_path
-            li = link_to "письма", admin_emails_path
-
-            li.nav-header торговля
-            li = link_to "поставщики", admin_suppliers_path
-            li = link_to "транзакции", admin_transactions_path
-
-        .well.sidebar-nav
-          ul.nav.nav-list
-            li.nav-header Настройки
-            li = link_to "часовые пояса", admin_time_zones_path
-            li = link_to "доставка", admin_deliveries_path
-            li = link_to "описания запчастей", admin_spare_infos_path
-
-      .span9
-        = yield
-
-    footer
-      p &copy; Company 2012
+      hr
+      footer
+        p &copy; Company 2012

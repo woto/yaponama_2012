@@ -3,10 +3,12 @@ class Product < ActiveRecord::Base
 
   attr_accessible :catalog_number, :manufacturer
   validates :catalog_number, :manufacturer, :presence => true
-  validates :money, :presence => true
-  validates :money, :numericality => { :only_integer => true }
-  validates :quantity_ordered, :presence => true
-  validates :quantity_ordered, :numericality => { :only_integer => true }
+
+  attr_accessible :cost_buy, :cost_sell
+  validates :cost_buy, :numericality => { :greater_than => 0}
+  validates :cost_sell, :numericality => { :greater_than => 0}
+
+  validates :quantity_ordered, :numericality => { :greater_than_or_equal_to => 1 }
 
   belongs_to :user, :inverse_of => :products
   belongs_to :user, :inverse_of => :products_incart
@@ -16,7 +18,7 @@ class Product < ActiveRecord::Base
 
   belongs_to :supplier, :inverse_of => :products
 
-  attr_accessible :notes, :invisible, :max_days, :min_days, :probability, :quantity_available, :quantity_ordered, :money, :status, :user_id, :order_id, :created_at, :updated_at
+  attr_accessible :notes, :notes_invisible, :max_days, :min_days, :probability, :quantity_available, :quantity_ordered, :status, :user_id, :order_id, :created_at, :updated_at
 
   attr_accessible :supplier_id
 

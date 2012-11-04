@@ -99,12 +99,13 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:time_zone) %></th>
-      <th><%= model_class.human_attribute_name(:invisible) %></th>
+      <th><%= model_class.human_attribute_name(:notes_invisible) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:email_address) %></th>
       <th><%= model_class.human_attribute_name(:phone) %></th>
       <th><%= model_class.human_attribute_name(:debit) %></th>
       <th><%= model_class.human_attribute_name(:credit) %></th>
+      <th><%= model_class.human_attribute_name(:prepayment_percent) %></th>
       <th><%= model_class.human_attribute_name(:ping) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
 
@@ -121,12 +122,13 @@
       <tr>
         <td><%= link_to user.id, admin_user_path(user) %></td>
         <td><%= user.time_zone.to_label if user.time_zone.present? %></td>
-        <td><%= user.invisible %></td>
+        <td><%= user.notes_invisible %></td>
         <td><%= user.names.collect(&:name).join(', ') %></td>
         <td><%= user.email_addresses.collect(&:email_address).join(', ') %></td>
         <td><%= user.phones.collect(&:phone).join(', ') %></td>
         <td><%= user.account.debit %></td>
         <td><%= user.account.credit %></td>
+        <td><%= user.prepayment_percent %></td>
         <td><%= l user.ping.updated_at, :format => :short %> </td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
