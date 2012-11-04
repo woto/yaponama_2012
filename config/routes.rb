@@ -1,8 +1,6 @@
 Yaponama2012::Application.routes.draw do
 
 
-  namespace :admin do resources :shipments end
-
   namespace :admin do resources :deliveries end
 
   namespace :admin do resources :companies end
