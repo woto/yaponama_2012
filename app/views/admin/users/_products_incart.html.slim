@@ -1,0 +1,8 @@
+#products_incart-tab.tab-pane.active
+  #products_incart
+    = f.simple_fields_for :products_incart do |product| 
+      = render 'product_fields', :f => product 
+    
+    .links
+      = link_to_add_association 'Добавить товар', f, :products_incart, :class => "btn btn-success", :partial => 'product_fields' 
+

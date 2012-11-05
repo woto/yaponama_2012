@@ -6,7 +6,6 @@ table.table.table-striped
   thead
     tr
       th = model_class.human_attribute_name(:id)
-      th = model_class.human_attribute_name(:name)
       th = model_class.human_attribute_name(:debit)
       th = model_class.human_attribute_name(:credit)
       th = model_class.human_attribute_name(:account)
@@ -16,7 +15,6 @@ table.table.table-striped
     - @accounts.each do |account|
       tr
         td = link_to account.id, admin_account_path(account)
-        td = account.name
         td = account.debit
         td = account.credit
         td = link_to 'Контрагент', [:admin, account.accountable] if account.accountable.present?

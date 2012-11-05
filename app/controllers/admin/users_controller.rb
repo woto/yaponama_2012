@@ -3,6 +3,9 @@
 #
 class Admin::UsersController < Admin::ApplicationController
 
+  before_filter { @tab = params[:tab] || 'phones' }
+
+
   # GET /users
   # GET /users.json
   def index
@@ -44,33 +47,21 @@ class Admin::UsersController < Admin::ApplicationController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.json
-  def new
-    @user = User.new(
-      :prepayment_percent => Rails.configuration.default_prepayment_percent_for_new_users, 
-      :discount => Rails.configuration.default_discount_for_new_users,
-      :order_rule => Rails.configuration.default_order_rule_for_new_users,
-    )
-
-    @user.creation_reason = :manager
-
-    if @user.account.blank?
-      @user.account = Account.new
-    end
-
-    respond_to do |format|
-      format.html # new.html.erb
-    end
-  end
-
-  # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
 
-    if @user.account.blank?
+    @user = User.where(:id => params[:id]).first
+
+    unless @user
+      @user = User.new(
+        :prepayment_percent => Rails.configuration.default_prepayment_percent_for_new_users, 
+        :discount => Rails.configuration.default_discount_for_new_users,
+        :order_rule => Rails.configuration.default_order_rule_for_new_users,
+      )
       @user.account = Account.new
+      @user.creation_reason = :manager
     end
+
+    render "edit"
 
   end
 
@@ -83,7 +74,7 @@ class Admin::UsersController < Admin::ApplicationController
       if @user.save
         format.html { redirect_to edit_admin_user_path(@user), :notice => 'User was successfully created.' }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "edit" }
       end
     end
   end

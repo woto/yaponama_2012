@@ -1,0 +1,8 @@
+#email_addresses-tab.tab-pane.active
+  #email_addresses
+    = f.simple_fields_for :email_addresses do |email_address| 
+      = render 'email_address_fields', :f => email_address 
+
+    .links
+      = link_to_add_association 'Добавить e-mail', f, :email_addresses, :class => "btn btn-success"  
+

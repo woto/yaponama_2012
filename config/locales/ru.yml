@@ -14,8 +14,6 @@ ru:
     users:
       index:
         title: Покупатели
-      new:
-        title: Новый Покупатель
       edit:
         title: Редактирование Покупателя
 

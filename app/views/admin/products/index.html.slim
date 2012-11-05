@@ -60,7 +60,7 @@
               button.btn.btn-primary.dropdown-toggle data-toggle="dropdown"
                 | Action 
                 span.caret
-              ul.dropdown-menu
+              ul.dropdown-menu.pull-right
                 li = link_to '=> Order', set_to_pre_supplier_form_admin_product_path(product)
                 li = link_to '=> Ordered', set_to_post_supplier_action_admin_product_path(product)
                 li = link_to '=> Cancel', set_cancel_action_admin_product_path(product)

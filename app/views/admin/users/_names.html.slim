@@ -1,0 +1,7 @@
+#names-tab.tab-pane.active
+  #names
+    = f.simple_fields_for :names do |name| 
+      = render 'name_fields', :f => name 
+
+    .links
+      = link_to_add_association 'Добавить имя', f, :names, :class => "btn btn-success"   

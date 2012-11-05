@@ -1,0 +1,13 @@
+#requests-tab.tab-pane.active
+  #requests
+    /! TODO  Check аналогично
+    - if f.object.new_record? 
+      = f.simple_fields_for :requests do |request| 
+        = render 'request_fields', :f => request, :stack => 0 
+    - else 
+      = f.simple_fields_for :requests, f.object.requests.where("request_id IS NULL").where("car_id IS NULL") do |request| 
+        = render 'request_fields', :f => request, :stack => 0 
+
+    .links
+      = link_to_add_association 'Добавить запрос', f, :requests, :class => "btn btn-success", :render_options => {:locals => {:stack => 0}} 
+
