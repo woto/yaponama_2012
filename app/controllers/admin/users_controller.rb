@@ -25,7 +25,7 @@ class Admin::UsersController < Admin::ApplicationController
     #start_date = Time.zone.now - 3.days
     #end_date = Time.zone.now
     #@users = User.where(:created_at => start_date..end_date).joins(:ping)
-    @users = User.joins(:ping).order("pings.updated_at DESC")
+    @users = User.joins(:ping).order("pings.updated_at DESC").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -47,7 +47,13 @@ class Admin::UsersController < Admin::ApplicationController
   # GET /users/new
   # GET /users/new.json
   def new
-    @user = User.new
+    @user = User.new(
+      :prepayment_percent => Rails.configuration.default_prepayment_percent_for_new_users, 
+      :discount => Rails.configuration.default_discount_for_new_users,
+      :order_rule => Rails.configuration.default_order_rule_for_new_users,
+    )
+
+    @user.creation_reason = :manager
 
     if @user.account.blank?
       @user.account = Account.new
@@ -55,7 +61,6 @@ class Admin::UsersController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @user }
     end
   end
 
@@ -76,11 +81,9 @@ class Admin::UsersController < Admin::ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to admin_user_path(@user), :notice => 'User was successfully created.' }
-        format.json { render :json => @user, :status => :created, :location => @user }
+        format.html { redirect_to edit_admin_user_path(@user), :notice => 'User was successfully created.' }
       else
         format.html { render :action => "new" }
-        format.json { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -92,7 +95,7 @@ class Admin::UsersController < Admin::ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to admin_user_path(@user), :notice => 'User was successfully updated.' }
+        format.html { redirect_to edit_admin_user_path(@user), :notice => 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }

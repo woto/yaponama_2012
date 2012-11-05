@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121104185817) do
+ActiveRecord::Schema.define(:version => 20121105005138) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -196,7 +196,7 @@ ActiveRecord::Schema.define(:version => 20121104185817) do
 
   create_table "phones", :force => true do |t|
     t.string   "phone"
-    t.string   "notes"
+    t.text     "notes"
     t.boolean  "confirmed_by_robot"
     t.boolean  "confirmed_by_human"
     t.datetime "robot_confirmation_datetime"
@@ -260,8 +260,10 @@ ActiveRecord::Schema.define(:version => 20121104185817) do
     t.integer  "probability"
     t.integer  "min_days"
     t.integer  "max_days"
-    t.decimal  "cost_buy",           :precision => 8, :scale => 2
-    t.decimal  "cost_sell",          :precision => 8, :scale => 2
+    t.decimal  "buy_cost",           :precision => 8, :scale => 2
+    t.decimal  "sell_cost",          :precision => 8, :scale => 2
+    t.string   "short_name"
+    t.text     "long_name"
   end
 
   add_index "products", ["order_id"], :name => "index_products_on_order_id"

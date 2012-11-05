@@ -2,7 +2,13 @@ class Admin::OrdersController < Admin::ApplicationController
   # GET /admin/orders
   # GET /admin/orders.json
   def index
-    @orders = Order.where(:status => params[:status]).all
+    orders = Order.scoped
+
+    if params[:status] && params[:status] != 'all'
+      orders = orders.where(:status => params[:status])
+    end
+
+    @orders = orders.all
 
     respond_to do |format|
       format.html # index.html.erb

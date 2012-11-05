@@ -37,7 +37,7 @@ class Order < ActiveRecord::Base
 private
 
   def update_order_cost
-    self.order_cost = products.reduce(0) {|summ, pi| summ + (pi.cost_sell * pi.quantity_ordered)}
+    self.order_cost = products.reduce(0) {|summ, pi| summ + (pi.sell_cost * pi.quantity_ordered)}
   end
 
   #def build_transaction

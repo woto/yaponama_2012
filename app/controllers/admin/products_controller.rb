@@ -1,6 +1,12 @@
 class Admin::ProductsController < Admin::ApplicationController
   def index
-    @products = Product.where(:status => params[:status])
+    products = Product.scoped
+
+    if params[:status] && params[:status] != 'all'
+      products = products.where(:status => params[:status])
+    end
+
+    @products = products.all
 
     respond_to do |format|
       format.html
@@ -56,7 +62,7 @@ class Admin::ProductsController < Admin::ApplicationController
     @product.save
 
     supplier = Supplier.find(params[:product][:supplier_id])
-    supplier.account.credit += @product.cost_buy * @product.quantity_ordered
+    supplier.account.credit += @product.buy_cost * @product.quantity_ordered
     supplier.save
     redirect_to admin_products_path
   end
@@ -72,9 +78,9 @@ class Admin::ProductsController < Admin::ApplicationController
     @product = Product.find(params[:id])
     @product.status = :cancel
     user = @product.user
-    user.account.debit -= @product.cost_sell * @product.quantity_ordered
+    user.account.debit -= @product.sell_cost * @product.quantity_ordered
     supplier = @product.supplier
-    supplier.account.credit -= @product.cost_buy * @product.quantity_ordered
+    supplier.account.credit -= @product.buy_cost * @product.quantity_ordered
     @product.save
     user.save
     supplier.save
@@ -86,8 +92,8 @@ class Admin::ProductsController < Admin::ApplicationController
     @product.status = :stock
     @product.save
     supplier = @product.supplier
-    supplier.account.credit -= @product.cost_buy * @product.quantity_ordered
-    supplier.account.debit -= @product.cost_buy * @product.quantity_ordered
+    supplier.account.credit -= @product.buy_cost * @product.quantity_ordered
+    supplier.account.debit -= @product.buy_cost * @product.quantity_ordered
     supplier.save
     redirect_to :back
   end

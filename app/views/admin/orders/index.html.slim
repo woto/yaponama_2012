@@ -1,7 +1,7 @@
 - model_class = Order
 
 .page-header
-  h1 = t '.title', :default => model_class.model_name.human
+  h1 = t '.title', :default => model_class.model_name.human.pluralize
 
 - tab_links "myTab", Rails.configuration.orders_status do |hint|
 
@@ -20,8 +20,9 @@
             th = model_class.human_attribute_name(:user)
             th = model_class.human_attribute_name(:order_cost)
             th = model_class.human_attribute_name(:delivery_cost)
+            th = model_class.human_attribute_name(:products)
             th = model_class.human_attribute_name(:created_at)
-            th 
+            th = model_class.human_attribute_name(:updated_at)
             th =t '.actions', :default => t("helpers.actions")
         tbody
           - @orders.each do |order|
@@ -29,13 +30,12 @@
               td = link_to order.id, admin_order_path(order)
               td = order.name.try(:to_label)
               td = order.postal_address.try(:to_label)
-              td = order.user
+              td = link_to order.user.try(:to_label), edit_admin_user_path(order.user)
               td = order.order_cost
               td = order.delivery_cost
-              td = link_to order.user.try(:to_label), edit_admin_user_path(order.user)
-              td = link_to 'Order products', admin_order_products_path(order)
-              td = l order.created_at
-              td = l order.updated_at
+              td = link_to 'products', admin_order_products_path(order)
+              td = l order.created_at, :format => :short
+              td = l order.updated_at, :format => :short
               td
                 = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_order_path(order), :class => 'btn btn-mini'
                 = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_order_path(order), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'

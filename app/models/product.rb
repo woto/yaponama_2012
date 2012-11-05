@@ -1,12 +1,12 @@
 class Product < ActiveRecord::Base
   include PingCallback
 
-  attr_accessible :catalog_number, :manufacturer
+  attr_accessible :catalog_number, :manufacturer, :short_name, :long_name
   validates :catalog_number, :manufacturer, :presence => true
 
-  attr_accessible :cost_buy, :cost_sell
-  validates :cost_buy, :numericality => { :greater_than => 0}
-  validates :cost_sell, :numericality => { :greater_than => 0}
+  attr_accessible :buy_cost, :sell_cost
+  validates :buy_cost, :numericality => { :greater_than => 0}
+  validates :sell_cost, :numericality => { :greater_than => 0}
 
   validates :quantity_ordered, :numericality => { :greater_than_or_equal_to => 1 }
 

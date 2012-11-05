@@ -2,7 +2,7 @@ class CreatePhones < ActiveRecord::Migration
   def change
     create_table :phones do |t|
       t.string :phone
-      t.string :notes
+      t.text :notes
       t.boolean :confirmed_by_robot
       t.boolean :confirmed_by_human
       t.datetime :robot_confirmation_datetime

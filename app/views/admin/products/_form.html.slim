@@ -1,10 +1,12 @@
 = simple_form_for [:admin, @product], :html => { :class => 'form-horizontal' } do |f|
     = f.input :catalog_number 
     = f.input :manufacturer 
+    = f.input :short_name
+    = f.input :long_name, :input_html => {:rows => 3}
     = f.input :quantity_ordered
     = f.input :quantity_available
-    = f.input :cost_buy
-    = f.input :cost_sell
+    = f.input :buy_cost
+    = f.input :sell_cost
     = f.input :probability
     = f.input :min_days
     = f.input :max_days

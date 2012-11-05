@@ -7,7 +7,7 @@ module Admin::OrdersHelper
     workaround = Proc.new do 
       content_tag(:ul, :id => id, :class => 'nav nav-tabs') do
         h.collect do |k, v|
-          if current_page?(url_for(:status => k))
+          if current_page?(url_for(:status => k)) || ( (k == :all) && (params[:status] == 'all' || params[:status].blank? ))
             css_class = "active"  
             hint = v[:hint]
           end

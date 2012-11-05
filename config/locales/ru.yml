@@ -2,11 +2,55 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 ru:
+  helpers:
+    actions: Действия
+  admin:
+    products:
+      index:
+        title: Товары
+    orders:
+      index:
+        title: Заказы
+    users:
+      index:
+        title: Покупатели
+      new:
+        title: Новый Покупатель
+      edit:
+        title: Редактирование Покупателя
+
   activerecord:
     models:
-      order: Заказы
+      order: Заказ
       product: Товар
+
     attributes:
       order:
         postal_address: Почтовый адрес
-  hello: "Hello world"
+        name: Получатель
+        user: Покупатель
+        order_cost: Сумма заказа
+        delivery_cost: Сумма доставки
+        products: Заказанные товары
+        created_at: Создан
+        updated_at: Изменен
+      product:
+        short_name: Название
+        long_name: Всевозможные названия
+        catalog_number: Артикул
+        manufacturer: Производитель
+        quantity_available: Доступно штук
+        probability: Вероятность
+        min_days: Мин. срок
+        max_days: Макс. срок
+        buy_cost: Сумма закупки
+        sell_cost: Сумма продажи
+        status: Статус
+        notes: Заметки
+        notes_invisible: Служ. заметки
+        user: Клиент
+        order: Заказ
+        supplier: Поставщик
+        created_at: Создан
+        updated_at: Изменен
+      

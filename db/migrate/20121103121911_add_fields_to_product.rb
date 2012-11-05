@@ -5,7 +5,7 @@ class AddFieldsToProduct < ActiveRecord::Migration
     add_column :products, :probability, :integer
     add_column :products, :min_days, :integer
     add_column :products, :max_days, :integer
-    add_column :products, :cost_buy, :integer
-    add_column :products, :cost_sell, :integer
+    add_column :products, :buy_cost, :decimal, :precision => 8, :scale => 2
+    add_column :products, :sell_cost, :decimal, :precision => 8, :scale => 2
   end
 end

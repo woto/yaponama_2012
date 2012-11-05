@@ -1,4 +1,5 @@
 - model_class = Product
+
 .page-header
   h1 =t '.title', :default => model_class.model_name.human.pluralize
 
@@ -13,13 +14,16 @@
         th = model_class.human_attribute_name(:id)
         th = model_class.human_attribute_name(:catalog_number)
         th = model_class.human_attribute_name(:manufacturer)
+        th = model_class.human_attribute_name(:short_name)
+        th = model_class.human_attribute_name(:long_name)
         th = model_class.human_attribute_name(:quantity_available)
         th = model_class.human_attribute_name(:probability)
         th = model_class.human_attribute_name(:min_days)
         th = model_class.human_attribute_name(:max_days)
-        th = model_class.human_attribute_name(:cost_buy)
-        th = model_class.human_attribute_name(:cost_sell)
-        th = model_class.human_attribute_name(:status)
+        th =  
+      tr
+        th = model_class.human_attribute_name(:buy_cost)
+        th = model_class.human_attribute_name(:sell_cost)
         th = model_class.human_attribute_name(:notes)
         th = model_class.human_attribute_name(:notes_invisible)
         th = model_class.human_attribute_name(:user)
@@ -34,24 +38,29 @@
           td = link_to product.id, admin_product_path(product)
           td = product.catalog_number
           td = product.manufacturer
+          td = product.short_name
+          td = product.long_name
           td = product.quantity_available
           td = product.probability
           td = product.min_days
           td = product.max_days
-          td = "#{product.cost_buy} x #{product.quantity_ordered} = #{product.cost_buy * product.quantity_ordered}"
-          td = "#{product.cost_sell} x #{product.quantity_ordered} = #{product.cost_sell * product.quantity_ordered}"
-          td = Rails.configuration.products_status[product.status.to_sym][:title]
+          td =  
+        tr
+          td = "#{product.buy_cost} x #{product.quantity_ordered} = #{product.buy_cost * product.quantity_ordered}"
+          td = "#{product.sell_cost} x #{product.quantity_ordered} = #{product.sell_cost * product.quantity_ordered}"
           td = product.notes
           td = product.notes_invisible
           td = link_to product.user.to_label
           td = product.order.try(:to_label)
           td = product.supplier.try(:to_label)
-          td = product.created_at
-          td = product.updated_at
+          td = l product.created_at, :format => :short
+          td = l product.updated_at, :format => :short
           td
-            <div class="btn-group">
-              <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
-              <ul class="dropdown-menu">
+            div.btn-group
+              button.btn.btn-primary.dropdown-toggle data-toggle="dropdown"
+                | Action 
+                span.caret
+              ul.dropdown-menu
                 li = link_to '=> Order', set_to_pre_supplier_form_admin_product_path(product)
                 li = link_to '=> Ordered', set_to_post_supplier_action_admin_product_path(product)
                 li = link_to '=> Cancel', set_cancel_action_admin_product_path(product)
@@ -60,8 +69,6 @@
                 li.divider
                 li = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_product_path(product)
                 li = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_product_path(product), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
-              </ul>
-            </div>
 
 
 = link_to t('.new', :default => t("helpers.links.new")), new_admin_product_path, :class => 'btn btn-primary'
