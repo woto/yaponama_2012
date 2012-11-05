@@ -3,7 +3,7 @@
 #
 class Admin::UsersController < Admin::ApplicationController
 
-  before_filter { @tab = params[:tab] || 'phones' }
+  before_filter { @tab = params[:tab] || 'users' }
 
 
   # GET /users

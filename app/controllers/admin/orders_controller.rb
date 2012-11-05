@@ -8,6 +8,10 @@ class Admin::OrdersController < Admin::ApplicationController
       orders = orders.where(:status => params[:status])
     end
 
+    if params[:user_id]
+      orders = orders.where(:user_id => params[:user_id])
+    end
+
     @orders = orders.all
 
     respond_to do |format|

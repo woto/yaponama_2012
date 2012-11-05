@@ -1,3 +1,15 @@
+- unless @user.new_record?
+  b Товары покупателя
+  ul
+    li = link_to "Все", admin_user_products_path(@user)
+    li = link_to "В корзине", admin_user_products_path(@user, :status => :inorder)
+
+  b Заказы покупателя
+  ul
+    li = link_to "Все", admin_user_orders_path(@user)
+    li = link_to "Укомплектованы", admin_user_orders_path(@user, :status => :stock)
+    li ...
+
 #users-tab.tab-pane.active
   #users.top-space
     = f.association :time_zone, :include_blank => true

@@ -19,8 +19,19 @@ Yaponama2012::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   namespace :admin do
+
     resources :orders do
       resources :products
+    end
+
+    resources :users do
+      resources :products
+    end
+
+    resources :users do
+      resources :orders do
+        resources :products
+      end
     end
 
     resources :products do
@@ -29,6 +40,7 @@ Yaponama2012::Application.routes.draw do
         match 'set_to_pre_supplier_action'
         match 'set_to_post_supplier_action'
         match 'set_cancel_action'
+        match 'set_cart_action'
         match 'set_stock_action'
         match 'set_complete_action'
       end

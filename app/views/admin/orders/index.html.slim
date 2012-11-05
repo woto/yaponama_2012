@@ -1,7 +1,14 @@
 - model_class = Order
 
-.page-header
-  h1 = t '.title', :default => model_class.model_name.human.pluralize
+ul.breadcrumb
+  - if params[:user_id]
+    li
+      = link_to User.find(params[:user_id]).to_label, edit_admin_user_path(params[:user_id])
+      span.divider
+        |
+          /
+  li.active = "Заказы: #{params[:status] || 'all'}"
+
 
 - tab_links "myTab", Rails.configuration.orders_status do |hint|
 
@@ -33,7 +40,7 @@
               td = link_to order.user.try(:to_label), edit_admin_user_path(order.user)
               td = order.order_cost
               td = order.delivery_cost
-              td = link_to 'products', admin_order_products_path(order)
+              td = link_to 'products', admin_user_order_products_path(order.user, order)
               td = l order.created_at, :format => :short
               td = l order.updated_at, :format => :short
               td

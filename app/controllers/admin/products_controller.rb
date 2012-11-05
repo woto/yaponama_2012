@@ -6,10 +6,27 @@ class Admin::ProductsController < Admin::ApplicationController
       products = products.where(:status => params[:status])
     end
 
+    if params[:order_id]
+      products = products.where(:order_id => params[:order_id])
+    end
+
+    if params[:user_id]
+      products = products.where(:user_id => params[:user_id])
+    end
+
     @products = products.all
 
     respond_to do |format|
       format.html
+    end
+  end
+
+  def new
+    @product = Product.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render :json => @product }
     end
   end
 
@@ -64,6 +81,14 @@ class Admin::ProductsController < Admin::ApplicationController
     supplier = Supplier.find(params[:product][:supplier_id])
     supplier.account.credit += @product.buy_cost * @product.quantity_ordered
     supplier.save
+    redirect_to admin_products_path
+  end
+
+  def set_cart_action
+    @product = Product.find(params[:id])
+    @product.status = :incart
+    @product.supplier_id = nil
+    @product.save
     redirect_to admin_products_path
   end
 

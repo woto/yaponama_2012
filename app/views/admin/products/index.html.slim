@@ -1,7 +1,19 @@
 - model_class = Product
 
-.page-header
-  h1 =t '.title', :default => model_class.model_name.human.pluralize
+ul.breadcrumb
+  - if params[:user_id]
+    li
+      = link_to User.find(params[:user_id]).to_label, edit_admin_user_path(params[:user_id])
+      span.divider
+        |
+          /
+  - if params[:order_id]
+    li 
+      = "Заказ: #{Order.find(params[:order_id]).to_label}"
+      span.divider
+        |
+          /
+  li.active = "Товары: #{params[:status] || 'all'}"
 
 - tab_links "myTab", Rails.configuration.products_status  do |hint|
 
@@ -39,18 +51,18 @@
           td = product.catalog_number
           td = product.manufacturer
           td = product.short_name
-          td = product.long_name
-          td = product.quantity_available
-          td = product.probability
-          td = product.min_days
-          td = product.max_days
+          td = truncate product.long_name
+          td = "#{product.quantity_available} шт."
+          td = "#{product.probability} %"
+          td = "#{product.min_days} дн."
+          td = "#{product.max_days} дн."
           td =  
         tr
           td = "#{product.buy_cost} x #{product.quantity_ordered} = #{product.buy_cost * product.quantity_ordered}"
           td = "#{product.sell_cost} x #{product.quantity_ordered} = #{product.sell_cost * product.quantity_ordered}"
           td = product.notes
           td = product.notes_invisible
-          td = link_to product.user.to_label
+          td = link_to product.user.to_label, edit_admin_user_path(product.user)
           td = product.order.try(:to_label)
           td = product.supplier.try(:to_label)
           td = l product.created_at, :format => :short
@@ -61,6 +73,7 @@
                 | Action 
                 span.caret
               ul.dropdown-menu.pull-right
+                li = link_to '=> Cart', set_cart_action_admin_product_path(product)
                 li = link_to '=> Order', set_to_pre_supplier_form_admin_product_path(product)
                 li = link_to '=> Ordered', set_to_post_supplier_action_admin_product_path(product)
                 li = link_to '=> Cancel', set_cancel_action_admin_product_path(product)
