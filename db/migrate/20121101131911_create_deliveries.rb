@@ -4,7 +4,6 @@ class CreateDeliveries < ActiveRecord::Migration
       t.string :name
       t.text :notes
       t.boolean :available
-      t.boolean :prepayment
       t.text :invisible
 
       t.timestamps

@@ -1,0 +1,17 @@
+ul.breadcrumb
+  li
+    = link_to @products.first.user.to_label, edit_admin_user_path(@products.first.user)
+    span.divider
+      |
+        /
+  li.active Формирование заказа
+
+= debug @products
+
+= form_tag inorder_step_two_admin_products_path do
+  - op = options_for_select [['Please select ...', nil], ['New order', 'new']] + @products.first.user.orders.all.map{|order| [order.to_label, order.id]}
+  - @products.each do |product|
+    = hidden_field_tag 'product_ids[]', product.id
+  = select_tag(:order_id, op)
+  br
+  = submit_tag "Далее", :class => "btn btn-success"

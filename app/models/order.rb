@@ -1,6 +1,7 @@
 class Order < ActiveRecord::Base
-  # attr_accessible :title, :body
   include PingCallback
+  attr_accessible :delivery_id, :delivery_cost
+  belongs_to :delivery, :inverse_of => :orders
   belongs_to :user, :inverse_of => :orders
   belongs_to :name, :inverse_of => :orders
   belongs_to :postal_address, :inverse_of => :orders

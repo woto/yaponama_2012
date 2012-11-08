@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121105140216) do
+ActiveRecord::Schema.define(:version => 20121108050447) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(:version => 20121105140216) do
     t.datetime "updated_at",                        :null => false
     t.integer  "request_id"
     t.boolean  "visible",         :default => true
+    t.string   "car_number"
+    t.text     "notes"
   end
 
   add_index "cars", ["user_id"], :name => "index_cars_on_user_id"
@@ -121,10 +123,24 @@ ActiveRecord::Schema.define(:version => 20121105140216) do
     t.string   "name"
     t.text     "notes"
     t.boolean  "available"
-    t.boolean  "prepayment"
+    t.text     "notes_invisible"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.boolean  "name_required"
+    t.boolean  "postal_address_required"
+    t.boolean  "full_prepayment_required"
+    t.boolean  "delivery_cost_required"
+    t.integer  "sequence"
+    t.integer  "delivery_category_id"
+  end
+
+  create_table "delivery_categories", :force => true do |t|
+    t.string   "name"
+    t.text     "notes"
     t.text     "notes_invisible"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "image"
   end
 
   create_table "email_addresses", :force => true do |t|
@@ -191,6 +207,7 @@ ActiveRecord::Schema.define(:version => 20121105140216) do
     t.string   "status"
     t.decimal  "delivery_cost",     :precision => 8, :scale => 2
     t.decimal  "order_cost",        :precision => 8, :scale => 2
+    t.integer  "delivery_id"
   end
 
   create_table "phones", :force => true do |t|

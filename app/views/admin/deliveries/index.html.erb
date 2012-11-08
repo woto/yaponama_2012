@@ -6,12 +6,18 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:delivery_category) %></th>
+      <th><%= model_class.human_attribute_name(:sequence) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:notes) %></th>
       <th><%= model_class.human_attribute_name(:available) %></th>
-      <th><%= model_class.human_attribute_name(:prepayment) %></th>
+      <th><%= model_class.human_attribute_name(:full_prepayment_required) %></th>
+      <th><%= model_class.human_attribute_name(:name_required) %></th>
+      <th><%= model_class.human_attribute_name(:postal_address_required) %></th>
+      <th><%= model_class.human_attribute_name(:delivery_cost_required) %></th>
       <th><%= model_class.human_attribute_name(:notes_invisible) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:updated_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -19,12 +25,21 @@
     <% @deliveries.each do |delivery| %>
       <tr>
         <td><%= link_to delivery.id, admin_delivery_path(delivery) %></td>
+        <td>
+          <% if delivery.delivery_category_id %>
+            <%= link_to delivery.delivery_category.try(:to_label), admin_delivery_category_path(delivery.delivery_category_id) %></td>
+        <% end %>
+        <td><%= delivery.sequence %></td>
         <td><%= delivery.name %></td>
         <td><%= delivery.notes %></td>
         <td><%= delivery.available %></td>
-        <td><%= delivery.prepayment %></td>
-        <td><%= delivery.notes_invisible, :input_html => {:rows => 3} %></td>
+        <td><%= delivery.full_prepayment_required %></td>
+        <td><%= delivery.name_required %></td>
+        <td><%= delivery.postal_address_required %></td>
+        <td><%= delivery.delivery_cost_required %></td>
+        <td><%= delivery.notes_invisible %></td>
         <td><%=l delivery.created_at %></td>
+        <td><%=l delivery.updated_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_admin_delivery_path(delivery), :class => 'btn btn-mini' %>

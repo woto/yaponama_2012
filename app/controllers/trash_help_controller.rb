@@ -9,17 +9,7 @@ class TrashHelpController < ApplicationController
   end
 
   def make_order
-    user = User.find(params[:user_id])
-    products_incart = user.products.where(:status => :incart)
-    if products_incart.size > 0
-      order = user.orders.build(:status => :inorder)
-      order.products = products_incart
-      products_incart.each do |product_incart|
-        product_incart.update_attributes(:status => :inorder)
-      end
-      order.save
-      user.check_orders
-    end
+    raise '1'
   end
 
   def make_payment_to_supplier

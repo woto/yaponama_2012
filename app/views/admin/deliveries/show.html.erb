@@ -10,10 +10,18 @@
   <dd><%= @delivery.notes %></dd>
   <dt><strong><%= model_class.human_attribute_name(:available) %>:</strong></dt>
   <dd><%= @delivery.available %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:prepayment) %>:</strong></dt>
-  <dd><%= @delivery.prepayment %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:full_prepayment_required) %>:</strong></dt>
+  <dd><%= @delivery.full_prepayment_required %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:name_required) %>:</strong></dt>
+  <dd><%= @delivery.name_required %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:postal_address_required) %>:</strong></dt>
+  <dd><%= @delivery.postal_address_required %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:delivery_cost_required) %>:</strong></dt>
+  <dd><%= @delivery.delivery_cost_required %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:sequence) %>:</strong></dt>
+  <dd><%= @delivery.sequence %></dd>
   <dt><strong><%= model_class.human_attribute_name(:notes_invisible) %>:</strong></dt>
-  <dd><%= @delivery.notes_invisible, :input_html => {:rows => 3} %></dd>
+  <dd><%= @delivery.notes_invisible %></dd>
 </dl>
 
 <div class="form-actions">

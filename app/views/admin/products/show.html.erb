@@ -27,13 +27,13 @@
   <dt><strong><%= model_class.human_attribute_name(:notes) %>:</strong></dt>
   <dd><%= @product.notes %></dd>
   <dt><strong><%= model_class.human_attribute_name(:notes_invisible) %>:</strong></dt>
-  <dd><%= @product.notes_invisible, :input_html => {:rows => 3} %></dd>
+  <dd><%= @product.notes_invisible %></dd>
   <dt><strong><%= model_class.human_attribute_name(:user) %>:</strong></dt>
-  <dd><%= @product.user.to_label %></dd>
+  <dd><%= @product.user.try(:to_label) %></dd>
   <dt><strong><%= model_class.human_attribute_name(:order) %>:</strong></dt>
-  <dd><%= @product.order.to_label %></dd>
+  <dd><%= @product.order.try(:to_label) %></dd>
   <dt><strong><%= model_class.human_attribute_name(:supplier) %>:</strong></dt>
-  <dd><%= @product.supplier.to_label %></dd>
+  <dd><%= @product.supplier.try(:to_label) %></dd>
 </dl>
 
 <div class="form-actions">

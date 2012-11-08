@@ -2,7 +2,7 @@ class Admin::DeliveriesController < Admin::ApplicationController
   # GET /admin/deliveries
   # GET /admin/deliveries.json
   def index
-    @deliveries = Delivery.all
+    @deliveries = Delivery.order(:sequence).all
 
     respond_to do |format|
       format.html # index.html.erb

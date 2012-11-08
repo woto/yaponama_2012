@@ -1,5 +1,11 @@
 class User < ActiveRecord::Base
 
+  after_initialize  do |user|
+    unless user.account
+      user.account = Account.new
+    end
+  end
+
   attr_accessible :order_rule
 
   has_many :products, :dependent => :destroy, :inverse_of => :user
@@ -34,6 +40,7 @@ class User < ActiveRecord::Base
   end
 
   def check_orders
+    raise '1'
     # TODO CHECK
     
     if order_rule.to_sym == :none

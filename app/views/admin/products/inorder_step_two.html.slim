@@ -1,0 +1,43 @@
+ul.breadcrumb
+  li
+    = link_to @products.first.user.to_label, edit_admin_user_path(@products.first.user)
+    span.divider
+      |
+        /
+  li.active Формирование заказа
+
+= form_tag inorder_step_three_admin_products_path do
+  - @products.each do |product|
+    = hidden_field_tag 'product_ids[]', product.id
+  = hidden_field_tag :order_id, @order.id
+  table.table.table-striped
+    - DeliveryCategory.scoped.each do |delivery_category|
+      tr
+        td 
+          b = delivery_category.name
+          br
+          = delivery_category.notes
+          br
+          center = image_tag delivery_category.image if delivery_category.image.present?
+        td
+          - delivery_category.deliveries.where(:available => true).order(:sequence).each do |delivery|
+            = radio_button_tag(:delivery_id, delivery.id, delivery.id == @order.delivery_id)   
+            |   
+            b = delivery.name
+            - if delivery.notes.present?
+              br
+              br
+              = delivery.notes
+            br
+            = "100% предоплата от стомости заказанных товаров." if delivery.full_prepayment_required
+            br
+            br
+
+  br
+  | Предполагаемая стоимость доставки (Если предусматривает способ доставки)
+  br
+  br
+  = text_field_tag :delivery_cost, @order.delivery_cost
+  br
+  br
+  = submit_tag "В заказ", :class => "btn btn-success"

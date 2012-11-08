@@ -1,13 +1,14 @@
 Yaponama2012::Application.routes.draw do
 
 
+  namespace :admin do resources :delivery_categories end
+
   namespace :admin do resources :deliveries end
 
   namespace :admin do resources :companies end
 
   get 'trash_help/index'
   post 'trash_help/merge'
-  post 'trash_help/make_order'
   post 'trash_help/make_payment'
   namespace 'trash_help' do
     post 'check_orders_inorder'
@@ -43,6 +44,12 @@ Yaponama2012::Application.routes.draw do
         match 'set_cart_action'
         match 'set_stock_action'
         match 'set_complete_action'
+      end
+      collection do
+        match 'inorder_step_one'
+        match 'inorder_step_two'
+        match 'inorder_step_three'
+        match 'multiple_form'
       end
     end
 

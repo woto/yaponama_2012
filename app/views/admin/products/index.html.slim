@@ -20,6 +20,7 @@ ul.breadcrumb
   .alert.alert-info
     = hint 
 
+  = form_tag ""
   table.table.table-striped
     thead
       tr
@@ -32,7 +33,7 @@ ul.breadcrumb
         th = model_class.human_attribute_name(:probability)
         th = model_class.human_attribute_name(:min_days)
         th = model_class.human_attribute_name(:max_days)
-        th =  
+        th = model_class.human_attribute_name(:status)
       tr
         th = model_class.human_attribute_name(:buy_cost)
         th = model_class.human_attribute_name(:sell_cost)
@@ -56,7 +57,7 @@ ul.breadcrumb
           td = "#{product.probability} %"
           td = "#{product.min_days} дн."
           td = "#{product.max_days} дн."
-          td =  
+          td =  product.status
         tr
           td = "#{product.buy_cost} x #{product.quantity_ordered} = #{product.buy_cost * product.quantity_ordered}"
           td = "#{product.sell_cost} x #{product.quantity_ordered} = #{product.sell_cost * product.quantity_ordered}"
@@ -67,21 +68,29 @@ ul.breadcrumb
           td = product.supplier.try(:to_label)
           td = l product.created_at, :format => :short
           td = l product.updated_at, :format => :short
-          td
-            div.btn-group
-              button.btn.btn-primary.dropdown-toggle data-toggle="dropdown"
-                | Action 
-                span.caret
-              ul.dropdown-menu.pull-right
-                li = link_to '=> Cart', set_cart_action_admin_product_path(product)
-                li = link_to '=> Order', set_to_pre_supplier_form_admin_product_path(product)
-                li = link_to '=> Ordered', set_to_post_supplier_action_admin_product_path(product)
-                li = link_to '=> Cancel', set_cancel_action_admin_product_path(product)
-                li = link_to '=> Stock', set_stock_action_admin_product_path(product)
-                li = link_to '=> Complete', set_complete_action_admin_product_path(product)
-                li.divider
-                li = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_product_path(product)
-                li = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_product_path(product), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
+          td = check_box_tag "product_ids[]", product.id
 
 
+div.btn-group.dropup
+  button.btn.btn-primary.dropdown-toggle data-toggle="dropdown"
+    | Action 
+    span.caret
+  ul.dropdown-menu
+    li = link_to '~> inorder', '#', :onclick => "$('form').attr('action', '#{inorder_step_one_admin_products_path}').submit()".html_safe
+    li = link_to 'Попытаться запустить товар в работу (На странице не запущенного товара)', '#'
+    li = link_to 'Отказ (на страницах не запущенного, запущенного, зак. у пост, выкупленного)', '#'
+    li = link_to 'Удалить товар (на страницах корзины, не запущенного и оплаченного)', '#', :method => :delete, :data => { :confirm => 'sure?' }
+    / li = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_product_path(-1), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
+    li = link_to '=> Cart', set_cart_action_admin_product_path(-1)
+    li = link_to '=> Order', set_to_pre_supplier_form_admin_product_path(-1)
+    li = link_to '=> Ordered', set_to_post_supplier_action_admin_product_path(-1)
+    li = link_to '=> Cancel', set_cancel_action_admin_product_path(-1)
+    li = link_to '=> Stock', set_stock_action_admin_product_path(-1)
+    li = link_to '=> Complete', set_complete_action_admin_product_path(-1)
+    li.divider
+    li = link_to 'Разбить товар', '#'
+    li = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_product_path(-1)
+    li = link_to t('.destroy', :default => t("helpers.links.destroy")), "#", :onclick => "return confirm('#{t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))}') && $('form').attr('action', '#{multiple_form_admin_products_path}').submit()".html_safe
+
+|  
 = link_to t('.new', :default => t("helpers.links.new")), new_admin_product_path, :class => 'btn btn-primary'

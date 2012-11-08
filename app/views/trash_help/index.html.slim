@@ -28,19 +28,3 @@ span Проверить статусы заказов (фактически за
   | user_id
   = text_field_tag :user_id
   = submit_tag "Проверить"
-
-hr
-
-= form_tag(trash_help_make_order_path) do
-  = text_field_tag(:user_id)
-  span  user_id
-  br
-  = select_tag(:delivery, options_from_collection_for_select(Delivery.all, :id, :name))
-  span  Способ доставки 
-  br
-  = text_field_tag(:prepayment)
-  br
-  span  Величина предоплаты (если таковая предусмотрена способом доставки) Должна быть заведомо больше стоимости доставки, разница остается на внутрннем счете клиента (достигается экономии за счет отсутствия платы транспортной компании за услугу наложенного платежа)
-  br
-  br
-  = submit_tag("Отправить в заказ из корзины")

@@ -1,6 +1,6 @@
 class Admin::ProductsController < Admin::ApplicationController
   def index
-    products = Product.scoped
+    products = Product.order("id DESC")
 
     if params[:status] && params[:status] != 'all'
       products = products.where(:status => params[:status])
@@ -60,10 +60,15 @@ class Admin::ProductsController < Admin::ApplicationController
 
   def destroy
     @product = Product.find(params[:id])
-    @product.destroy
+
+    if @product.destroy
+      result = { :notice => "Product Successfully deleted" }
+    else
+      result = { :alert => "Product can't be deleted: #{@product.errors[:base].to_s}" }
+    end
 
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_to :back, result }
       format.json { head :no_content }
     end
   end
@@ -130,5 +135,120 @@ class Admin::ProductsController < Admin::ApplicationController
     redirect_to :back
   end
 
+  # Отображение оформляемых товаров, выбор заказа или предложение создать новый заказ.
+  def inorder_step_one
+    @products = Product.find(params[:product_ids])
+    errors = []
+    errors += check_products_belongs_to_one_user(@products)
+    errors += check_products_statuses_is_incart(@products)
+
+    if errors.present?
+      redirect_to :back, :alert => errors.uniq
+    end
+  end
+
+  # Выбор способа доставки
+  def inorder_step_two
+    @order = Order.where(:id => params[:order_id]).first
+    if @order.blank?
+      @order = Order.new
+    end
+    @products = Product.find(params[:product_ids])
+    errors = []
+    errors += check_products_belongs_to_one_user(@products)
+    errors += check_products_statuses_is_incart(@products)
+    if errors.present?
+      render 'inorder_step_one', :alert => errors.uniq
+    end
+  end
+
+  def inorder_step_three
+  
+  end
+
+  def inorder_step_four
+
+  end
+
+  def inorder_step_five
+    @order = Order.where(:id => params[:order_id]).first
+    @products = Product.find(params[:product_ids])
+    errors = []
+    errors += check_products_belongs_to_one_user(@products)
+    errors += check_products_statuses_is_incart(@products)
+
+    ActiveRecord::Base.transaction do
+      user = @products.first.user
+      if @order
+        @order.update_attributes(:delivery_id => params[:delivery_id], :delivery_cost => params[:delivery_cost])
+      else
+        @order = user.orders.build(:delivery_id => params[:delivery_id], :delivery_cost => params[:delivery_cost])
+      end
+      @order.products << @products
+      @products.each do |product|
+        product.update_attributes(:status => "inorder")
+      end
+
+      unless user.save
+        errors += user.errors
+      end
+      unless @order.save
+        errors += @order.errors
+      end
+      #user.check_orders
+
+      redirect_to admin_user_order_products_path(@order.user, @order), :notice => 'Order successfully created'
+    end
+  end
+  
+  def update_multiple
+  end
+
+  def destroy_multiple
+    @products = Product.find(params[:product_ids])
+
+    result = {}
+
+    @products.each do |product|
+      if product.destroy
+        result = { :notice => "Product Successfully deleted" }
+      else
+        result = { :alert => "Product can't be deleted: #{product.errors[:base].to_s}" }
+        break
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to :back, result }
+      format.json { head :no_content }
+    end
+
+  end
+
+  private
+
+  def check_products_statuses_is_incart products
+    errors = []
+    # Нельзя послать товар в заказ не находящийся в корзине
+    products.each do |product|
+      unless ["incart", "inorder"].include? product.status
+        errors << "Products not in status incart"
+      end
+    end
+    errors
+  end
+
+  def check_products_belongs_to_one_user products
+    errors = []
+    # Нельзя послать в заказ товары разных пользователей
+    first_user = products.first.user
+
+    products.each do |product|
+      unless product.user == first_user
+        errors << "Products in different carts of different users."
+      end
+    end
+    errors
+  end
 
 end

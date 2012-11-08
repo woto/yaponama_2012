@@ -2,7 +2,7 @@
   b Товары покупателя
   ul
     li = link_to "Все", admin_user_products_path(@user)
-    li = link_to "В корзине", admin_user_products_path(@user, :status => :inorder)
+    li = link_to "В корзине", admin_user_products_path(@user, :status => :incart)
 
   b Заказы покупателя
   ul

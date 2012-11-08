@@ -3,6 +3,12 @@
 #
 class Admin::UsersController < Admin::ApplicationController
 
+  DEFAULT_USER_ATTRIBUTES = {
+    :prepayment_percent => Rails.configuration.default_prepayment_percent_for_new_users, 
+    :discount => Rails.configuration.default_discount_for_new_users,
+    :order_rule => Rails.configuration.default_order_rule_for_new_users
+  }
+
   before_filter { @tab = params[:tab] || 'users' }
 
 
@@ -48,16 +54,10 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def edit
-
     @user = User.where(:id => params[:id]).first
 
     unless @user
-      @user = User.new(
-        :prepayment_percent => Rails.configuration.default_prepayment_percent_for_new_users, 
-        :discount => Rails.configuration.default_discount_for_new_users,
-        :order_rule => Rails.configuration.default_order_rule_for_new_users,
-      )
-      @user.account = Account.new
+      @user = User.new(DEFAULT_USER_ATTRIBUTES)
       @user.creation_reason = :manager
     end
 
@@ -68,7 +68,11 @@ class Admin::UsersController < Admin::ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    @user = User.new(DEFAULT_USER_ATTRIBUTES.merge(params[:user] || {}))
+
+    unless @user.persisted?
+      @user.creation_reason = :manager
+    end
 
     respond_to do |format|
       if @user.save
@@ -89,7 +93,7 @@ class Admin::UsersController < Admin::ApplicationController
         format.html { redirect_to edit_admin_user_path(@user), :notice => 'User was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => "edit", :alert => 'Unable to save user' }
         format.json { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end
@@ -106,4 +110,5 @@ class Admin::UsersController < Admin::ApplicationController
       format.json { head :no_content }
     end
   end
+
 end
