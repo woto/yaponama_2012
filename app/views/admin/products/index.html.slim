@@ -20,7 +20,10 @@ ul.breadcrumb
   .alert.alert-info
     = hint 
 
-  = form_tag ""
+  = form_tag remember_admin_products_path, :remote => true
+
+  = hidden_field_tag 'remembered_products'
+
   table.table.table-striped
     thead
       tr
@@ -68,7 +71,9 @@ ul.breadcrumb
           td = product.supplier.try(:to_label)
           td = l product.created_at, :format => :short
           td = l product.updated_at, :format => :short
-          td = check_box_tag "product_ids[]", product.id
+          td
+            = hidden_field_tag "product_ids[#{product.id}]", "0"
+            = check_box_tag "product_ids[#{product.id}]", "1", session[:products][product.id.to_s] == '1', :class => 'product'
 
 
 div.btn-group.dropup
@@ -76,7 +81,7 @@ div.btn-group.dropup
     | Action 
     span.caret
   ul.dropdown-menu
-    li = link_to '~> inorder', '#', :onclick => "$('form').attr('action', '#{inorder_step_one_admin_products_path}').submit()".html_safe
+    li = link_to '~> inorder', admin_order_build_path(-1)
     li = link_to 'Попытаться запустить товар в работу (На странице не запущенного товара)', '#'
     li = link_to 'Отказ (на страницах не запущенного, запущенного, зак. у пост, выкупленного)', '#'
     li = link_to 'Удалить товар (на страницах корзины, не запущенного и оплаченного)', '#', :method => :delete, :data => { :confirm => 'sure?' }

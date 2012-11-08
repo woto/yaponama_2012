@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121108065744) do
+ActiveRecord::Schema.define(:version => 20121108092336) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -209,6 +209,7 @@ ActiveRecord::Schema.define(:version => 20121108065744) do
     t.decimal  "delivery_cost",     :precision => 8, :scale => 2
     t.decimal  "order_cost",        :precision => 8, :scale => 2
     t.integer  "delivery_id"
+    t.string   "active"
   end
 
   create_table "phones", :force => true do |t|

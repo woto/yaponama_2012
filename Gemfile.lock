@@ -179,6 +179,9 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    wicked (0.3.0)
+      activesupport (>= 3.0.7)
+      rails (>= 3.0.7)
 
 PLATFORMS
   ruby
@@ -209,3 +212,4 @@ DEPENDENCIES
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   unicorn
+  wicked

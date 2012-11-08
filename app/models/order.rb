@@ -1,4 +1,9 @@
 class Order < ActiveRecord::Base
+
+  def active?
+    status == 'active'
+  end
+
   include PingCallback
   attr_accessible :delivery_id, :delivery_cost
   belongs_to :delivery, :inverse_of => :orders

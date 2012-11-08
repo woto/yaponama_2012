@@ -1,9 +1,20 @@
 class Admin::ProductsController < Admin::ApplicationController
+
+  def remember
+    session[:products] = {} unless session[:products]
+    session[:products] = (session[:products].merge params[:product_ids]).select{|k, v| v == '1'}
+    render :nothing => true
+  end
+
   def index
     products = Product.order("id DESC")
 
-    if params[:status] && params[:status] != 'all'
+    if params[:status] && params[:status] != 'all' && params[:status] != 'checked'
       products = products.where(:status => params[:status])
+    end
+
+    if params[:status] == 'checked'
+      products = products.where(['id IN (?)', session[:products].keys])
     end
 
     if params[:order_id]

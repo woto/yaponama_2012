@@ -48,4 +48,8 @@ ul.breadcrumb
   = text_field_tag :delivery_cost, @order.delivery_cost
   br
   br
+  | Адрес доставки
+  = f.fields_for :postal_address do |postal_address|
+    = render '/users/postal_address_fields'
+  br
   = submit_tag "В заказ", :class => "btn btn-success"
