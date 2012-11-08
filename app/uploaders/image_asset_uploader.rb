@@ -1,8 +1,6 @@
 # encoding: utf-8
 
-class DeliveryCategoryImageUploader < CarrierWave::Uploader::Base
-  include CarrierWave::RMagick
-  process :resize_to_fit => [200, 100]
+class ImageAssetUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick

@@ -8,6 +8,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:delivery_category) %></th>
       <th><%= model_class.human_attribute_name(:sequence) %></th>
+      Жth><%= model_class.human_attribute_name(:image) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:notes) %></th>
       <th><%= model_class.human_attribute_name(:available) %></th>
@@ -30,6 +31,7 @@
             <%= link_to delivery.delivery_category.try(:to_label), admin_delivery_category_path(delivery.delivery_category_id) %></td>
         <% end %>
         <td><%= delivery.sequence %></td>
+        <td><%= image_tag delivery.image if delivery.image.present? %></td>
         <td><%= delivery.name %></td>
         <td><%= delivery.notes %></td>
         <td><%= delivery.available %></td>
