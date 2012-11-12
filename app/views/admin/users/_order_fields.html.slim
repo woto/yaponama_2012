@@ -10,13 +10,17 @@
 
   .nested-visualize style="border-left: 3px dashed #62C462"
 
+    = f.association :delivery
     = f.association :name, :collection => @user.names.select
     = f.association :postal_address, :collection => @user.postal_addresses.select
+    = f.association :phone, :collection => @user.phones.select
     = f.input :order_cost, :disabled => true
     = f.input :delivery_cost, :disabled => true
     = f.input :status, :collection => Rails.configuration.products_status.map {|k,v| [v[:title],k]}, :disabled => true
     = f.input :created_at
     = f.input :updated_at
+    = f.input :notes, :input_html => {:rows => 3}
+    = f.input :notes_invisible, :input_html => {:rows => 3}
 
     #products_inorder.nested-fields
 

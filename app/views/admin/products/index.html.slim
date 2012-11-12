@@ -1,5 +1,3 @@
-- model_class = Product
-
 ul.breadcrumb
   - if params[:user_id]
     li
@@ -13,7 +11,7 @@ ul.breadcrumb
       span.divider
         |
           /
-  li.active = "Товары: #{Rails.configuration.products_status[(params[:status] || 'all').to_sym][:title]}"
+  li = "Товары: #{Rails.configuration.products_status[(params[:status] || 'all')]['title']}"
 
 - tab_links "myTab", Rails.configuration.products_status  do |hint|
 
@@ -23,68 +21,22 @@ ul.breadcrumb
 
   = form_tag remember_admin_products_path, :remote => true
 
-  = hidden_field_tag 'remembered_products'
+  / = hidden_field_tag 'remembered_products'
 
   = paginate @products
 
-  table.table.table-striped
-    thead
-      tr
-        th = model_class.human_attribute_name(:id)
-        th = model_class.human_attribute_name(:catalog_number)
-        th = model_class.human_attribute_name(:manufacturer)
-        th = model_class.human_attribute_name(:short_name)
-        th = model_class.human_attribute_name(:long_name)
-        th = model_class.human_attribute_name(:quantity_available)
-        th = model_class.human_attribute_name(:probability)
-        th = model_class.human_attribute_name(:min_days)
-        th = model_class.human_attribute_name(:max_days)
-        th = check_box_tag '', '', false, :id => 'check_uncheck_products'
-      tr
-        th = model_class.human_attribute_name(:buy_cost)
-        th = model_class.human_attribute_name(:sell_cost)
-        th = model_class.human_attribute_name(:notes)
-        th = model_class.human_attribute_name(:notes_invisible)
-        th = model_class.human_attribute_name(:user)
-        th = model_class.human_attribute_name(:order)
-        th = model_class.human_attribute_name(:supplier)
-        th = model_class.human_attribute_name(:created_at)
-        th = model_class.human_attribute_name(:updated_at)
-        th =t '.actions', :default => t("helpers.actions")
-    tbody
-      - @products.each do |product|
-        tr
-          td = link_to product.id, admin_product_path(product)
-          td = product.catalog_number
-          td = product.manufacturer
-          td = product.short_name
-          td = truncate product.long_name
-          td = "#{product.quantity_available} шт."
-          td = "#{product.probability} %"
-          td = "#{product.min_days} дн."
-          td = "#{product.max_days} дн."
-          td =  product.status
-        tr
-          td = "#{product.buy_cost} x #{product.quantity_ordered} = #{product.buy_cost * product.quantity_ordered}"
-          td = "#{product.sell_cost} x #{product.quantity_ordered} = #{product.sell_cost * product.quantity_ordered}"
-          td = product.notes
-          td = product.notes_invisible
-          td = link_to product.user.to_label, edit_admin_user_path(product.user)
-          td = product.order.try(:to_label)
-          td = product.supplier.try(:to_label)
-          td = l product.created_at, :format => :short
-          td = l product.updated_at, :format => :short
-          td
-            = hidden_field_tag "product_ids[#{product.id}]", "0"
-            = check_box_tag "product_ids[#{product.id}]", "1", session[:products][product.id.to_s] == '1', :class => 'product'
-
+  = render :partial => 'index'
 
 div.btn-group.dropup
   button.btn.btn-primary.dropdown-toggle data-toggle="dropdown"
     | Action 
     span.caret
   ul.dropdown-menu
-    li = link_to '~> inorder', admin_order_build_path(-1), :method => :post
+    / - debugger
+    /li = url_for [:admin, :order, :builds]
+    /puts '1'
+    /return
+    li = link_to '~> inorder', inorder_form_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id])
     li = link_to 'Попытаться запустить товар в работу (На странице не запущенного товара)', '#'
     li = link_to 'Отказ (на страницах не запущенного, запущенного, зак. у пост, выкупленного)', '#'
     li = link_to 'Удалить товар (на страницах корзины, не запущенного и оплаченного)', '#', :method => :delete, :data => { :confirm => 'sure?' }

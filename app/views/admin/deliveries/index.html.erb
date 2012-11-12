@@ -8,12 +8,13 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:delivery_category) %></th>
       <th><%= model_class.human_attribute_name(:sequence) %></th>
-      Жth><%= model_class.human_attribute_name(:image) %></th>
+      <th><%= model_class.human_attribute_name(:image) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:notes) %></th>
       <th><%= model_class.human_attribute_name(:available) %></th>
       <th><%= model_class.human_attribute_name(:full_prepayment_required) %></th>
       <th><%= model_class.human_attribute_name(:name_required) %></th>
+      <th><%= model_class.human_attribute_name(:phone_required) %></th>
       <th><%= model_class.human_attribute_name(:postal_address_required) %></th>
       <th><%= model_class.human_attribute_name(:delivery_cost_required) %></th>
       <th><%= model_class.human_attribute_name(:notes_invisible) %></th>
@@ -37,6 +38,7 @@
         <td><%= delivery.available %></td>
         <td><%= delivery.full_prepayment_required %></td>
         <td><%= delivery.name_required %></td>
+        <td><%= delivery.phone_required %></td>
         <td><%= delivery.postal_address_required %></td>
         <td><%= delivery.delivery_cost_required %></td>
         <td><%= delivery.notes_invisible %></td>

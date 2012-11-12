@@ -1,0 +1,41 @@
+table.table.table-striped
+  - DeliveryCategory.scoped.each do |delivery_category|
+    tr
+      td 
+        b = delivery_category.name
+        br
+        = delivery_category.notes
+        br
+      td
+        - first = true
+        - delivery_category.deliveries.where(:available => true).order(:sequence).each do |delivery|
+          - if first 
+            - first = false
+          - else 
+            hr
+          = radio_button_tag(:delivery_id, delivery.id, delivery.id == @order[:order].delivery_id)   
+          |   
+          b = delivery.name
+          br
+          - if delivery.image.present?
+            = image_tag delivery.image
+          - elsif delivery_category.image.present?
+            = image_tag delivery_category.image
+          - if delivery.notes.present?
+            br
+            br
+            = delivery.notes
+          br
+          = "100% предоплата от стомости заказанных товаров." if delivery.full_prepayment_required
+          br
+
+/br
+/| Предполагаемая стоимость доставки (Если предусматривает способ доставки)
+/br
+/br
+/= text_field_tag :delivery_cost, @order.delivery_cost
+/br
+/br
+/| Адрес доставки
+/= f.fields_for :postal_address do |postal_address|
+/  = render '/users/postal_address_fields'

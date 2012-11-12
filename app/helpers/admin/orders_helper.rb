@@ -8,11 +8,11 @@ module Admin::OrdersHelper
       content_tag(:ul, :id => id, :class => 'nav nav-tabs') do
         h.collect do |k, v|
           if current_page?(:status => k, :page => params[:page]) || 
-            ((k == :all) && (params[:status] == 'all' || params[:status].blank? ))
+            ((k == 'all') && (params[:status] == 'all' || params[:status].blank? ))
             css_class = "active"  
-            hint = v[:hint]
+            hint = v['hint']
           end
-          concat(content_tag(:li, link_to(v[:title], url_for(:status => k)), :class => css_class))
+          concat(content_tag(:li, link_to(v['title'], url_for(:status => k)), :class => css_class))
         end
       end
     end

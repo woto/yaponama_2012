@@ -1,0 +1,6 @@
+- options = options_for_select [['Please select ...', nil], ['New order', 'new']] + @products.first.user.orders.all.map{|order| [order.to_label, order.id]}
+= select_tag(:new_order_id, options)
+/- @products.each do |product|
+/  = hidden_field_tag 'product_ids[]', product.id
+/= select_tag(:order_id, op)
+/ = f.association :delivery, :collection => Delivery.where(:available => true).order(:sequence), :prompt => "Choose a Company", :prompt => "Choose...", :include_blank => 'New'

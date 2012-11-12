@@ -1,9 +1,13 @@
 class EmailAddress < ActiveRecord::Base
   include PingCallback
-  belongs_to :user, :inverse_of => :email_addresses
   attr_accessible :confirmed_by_human, :email_address, :notes_invisible, :user_id, :human_confirmation_datetime, :visible
+  #validates :user, :presence => true
+
+  belongs_to :user, :inverse_of => :email_addresses, :validate => true
   validates :user, :presence => true
+
   has_many :emails
+  validates :email_address, :format => {:with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/}
   #validates :email_address, :presence => true, :uniqueness => true
   
 
@@ -11,3 +15,11 @@ class EmailAddress < ActiveRecord::Base
     email_address
   end
 end
+
+#class EmailAddress < ActiveRecord::Base
+#  attr_accessible :email_address
+#  attr_accessible :confirmed_by_human, :human_confirmation_datetime, :notes_invisible
+#
+#  belongs_to :user
+#  validates :email_address, :format => {:with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/}
+#end

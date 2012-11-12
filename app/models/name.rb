@@ -1,9 +1,16 @@
 class Name < ActiveRecord::Base
   include PingCallback
-  attr_accessible :name, :notes_invisible, :user_id, :visible
-  belongs_to :user
+  attr_accessible :name
+  attr_accessible :notes, :notes_invisible, :user_id, :visible
+  attr_accessible :created_at, :updated_at
+
   has_many :orders, :inverse_of => :name
+
   validates :name, :presence => true
+
+  belongs_to :user, :inverse_of => :names, :validate => true
+  validates :user, :presence => true
+
   #validates :name, :uniqueness => {:scope => :user_id}
 
   def to_label

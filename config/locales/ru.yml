@@ -25,6 +25,7 @@ ru:
     attributes:
       order:
         postal_address: Почтовый адрес
+        phone: Телефон
         name: Получатель
         user: Покупатель
         order_cost: Сумма заказа

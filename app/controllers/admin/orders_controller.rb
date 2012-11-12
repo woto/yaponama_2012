@@ -2,17 +2,15 @@ class Admin::OrdersController < Admin::ApplicationController
   # GET /admin/orders
   # GET /admin/orders.json
   def index
-    orders = Order.scoped
-
-    if params[:status] && params[:status] != 'all'
-      orders = orders.where(:status => params[:status])
-    end
+    @orders = Order.order("id DESC").page(params[:page])
 
     if params[:user_id]
-      orders = orders.where(:user_id => params[:user_id])
+      @orders = @orders.where(:user_id => params[:user_id])
     end
 
-    @orders = orders.all
+    if Rails.configuration.orders_status.select{|k, v| v[:real]}.keys.include? params[:status]
+      @orders = @orders.where(:status => params[:status])
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -90,4 +88,5 @@ class Admin::OrdersController < Admin::ApplicationController
       format.json { head :no_content }
     end
   end
+
 end

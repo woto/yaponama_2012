@@ -1,8 +1,14 @@
 
 <%- model_class = User -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %> </h1>
+  <h1>
+    <%=t '.title', :default => model_class.model_name.human.pluralize %> 
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                edit_admin_user_path('new'),
+                :class => 'btn btn-primary' %>
+  </h1>
 </div>
+
 
 <!-- 
   <%= simple_form_for(@user_filter, :url => filter_admin_users_path) do |f| %>
@@ -13,7 +19,6 @@
     <%= f.submit %>
   <% end %>
 -->
-
 
 <div class='container-fluid'>
    <div class="row-fluid">
@@ -134,9 +139,6 @@
         <td><%= user.account.debit %> р.</td>
         <td><%= user.account.credit %> р.</td>
         <td><%= user.prepayment_percent %> %</td>
-        <% unless user.ping %>
-          <% debugger %>
-        <% end %>
 
         <td><%= l user.ping.updated_at, :format => :short %> </td>
         <td>
@@ -146,16 +148,16 @@
               <li class="dropdown-submenu pull-left">
                 <%= link_to("Заказы", admin_user_orders_path(user)) %>
                 <ul class="dropdown-menu">
-                  <%= content_tag(:li, link_to("Все", admin_user_orders_path(user))) %>
                   <%= content_tag(:li, link_to("Укомплектованы", admin_user_orders_path(user, :status => :stock))) %>
+                  <%= content_tag(:li, link_to("...", admin_user_orders_path(user))) %>
                 </ul>
               </li>
               <li class="dropdown-submenu pull-left">
                 <%= link_to("Товары", admin_user_products_path(user)) %>
                 <ul class="dropdown-menu">
-                  <%= content_tag(:li, link_to("Все", admin_user_products_path(user))) %>
                   <%= content_tag(:li, link_to("В корзине", admin_user_products_path(user, :status => :incart))) %>
                   <%= content_tag(:li, link_to("Сформирован", admin_user_products_path(user, :status => :inorder))) %>
+                  <%= content_tag(:li, link_to("...", admin_user_products_path(user))) %>
                 </ul>
               </li>
               <li class="divider"> </li>
@@ -191,6 +193,3 @@
 
 <%= paginate @users %>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_admin_user_path,
-            :class => 'btn btn-primary' %>

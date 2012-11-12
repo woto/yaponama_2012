@@ -24,8 +24,8 @@ Yaponama2012::Application.routes.draw do
     resources :companies
 
     resources :orders do
-      post 'build' => 'orders/build#create'
-      resources :build, :controller => 'orders/build'
+      #post 'makes' => 'orders/build#create'
+      #resources :build, :controller => 'orders/build'
       resources :products
     end
 
@@ -40,6 +40,8 @@ Yaponama2012::Application.routes.draw do
     end
 
     resources :products do
+      match 'inorder_form', :on => :collection
+      match 'inorder_action', :on => :collection
       match 'remember', :on => :collection
 
       member do
@@ -51,6 +53,7 @@ Yaponama2012::Application.routes.draw do
         match 'set_stock_action'
         match 'set_complete_action'
       end
+
       collection do
         match 'inorder_step_one'
         match 'inorder_step_two'
@@ -83,6 +86,7 @@ Yaponama2012::Application.routes.draw do
 
   end
 
+  get 'clear_order_session' => "admin::products#clear_order_session"
   root :to => 'welcome#index'
 
 end

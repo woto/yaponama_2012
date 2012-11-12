@@ -76,7 +76,7 @@ class Admin::UsersController < Admin::ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to edit_admin_user_path(@user), :notice => 'User was successfully created.' }
+        format.html { redirect_to edit_admin_user_path(@user, :tab => params[:tab]), :notice => 'User was successfully created.' }
       else
         format.html { render :action => "edit" }
       end
@@ -90,7 +90,7 @@ class Admin::UsersController < Admin::ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to edit_admin_user_path(@user), :notice => 'User was successfully updated.' }
+        format.html { redirect_to edit_admin_user_path(@user, :tab => params[:tab]), :notice => 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit", :alert => 'Unable to save user' }

@@ -1,30 +1,40 @@
 class Order < ActiveRecord::Base
-
-  def active?
-    status == 'active'
-  end
-
   include PingCallback
+  attr_accessible :phone_id, :notes, :notes_invisible
   attr_accessible :delivery_id, :delivery_cost
   belongs_to :delivery, :inverse_of => :orders
-  belongs_to :user, :inverse_of => :orders
   belongs_to :name, :inverse_of => :orders
+  belongs_to :phone, :inverse_of => :orders
   belongs_to :postal_address, :inverse_of => :orders
+
+
+  belongs_to :user, :inverse_of => :orders, :validate => true
+  validates :user, :presence => true
+
+  validates_associated :delivery
+  validates_associated :postal_address
+  validates_associated :name
+  validates_associated :phone
 
   has_many :products, :dependent => :destroy, :inverse_of => :order
   attr_accessible :products_attributes
   accepts_nested_attributes_for :products, :allow_destroy => true
 
-  has_many :products_inorder, :dependent => :destroy, :inverse_of => :order, :conditions => {:products => {:status => :inorder}}, :class_name => "Product"
+  has_many :products_inorder, :dependent => :destroy, :inverse_of => :order, 
+    :conditions => {:products => {:status => 'inorder'}}, :class_name => "Product",
+    :after_add => Proc.new{|p, d| p.status = 'inorder'}
   attr_accessible :products_inorder_attributes
   accepts_nested_attributes_for :products_inorder, :allow_destroy => true
 
-  has_many :products_ordered, :dependent => :destroy, :inverse_of => :order, :conditions => {:products => {:status => :ordered}}, :class_name => "Product"
+  has_many :products_ordered, :dependent => :destroy, :inverse_of => :order, 
+    :conditions => {:products => {:status => 'ordered'}}, :class_name => "Product",
+    :after_add => Proc.new{|p, d| p.status = 'ordered'}
   attr_accessible :products_ordered_attributes
   accepts_nested_attributes_for :products_ordered, :allow_destroy => true
 
-
-  has_many :products_inwork, :dependent => :destroy, :inverse_of => :order, :conditions => {:products => {:status => :inwork}}, :class_name => "Product"
+  has_many :products_inwork, :dependent => :destroy, :inverse_of => :order, 
+    :conditions => {:products => {:status => 'inwork'}}, :class_name => "Product",
+    :after_add => Proc.new{|p, d| p.status = 'inwork'}
   attr_accessible :products_inwork_attributes
   accepts_nested_attributes_for :products_inwork, :allow_destroy => true
 
@@ -40,6 +50,36 @@ class Order < ActiveRecord::Base
   before_save :update_order_cost
   #before_create :build_transaction
 
+
+  def active?
+    raise 'method active? deprecated'
+    status == 'active'
+  end
+
+  validate :multistep_order
+
+  def multistep_order
+    unless delivery
+      errors.add(:delivery, "Delivery required for order")
+    else
+      if delivery.postal_address_required && postal_address.blank?
+        errors.add(:postal_address, "Postal address required for this delivery method")
+      end
+      if delivery.name_required && name.blank?
+        errors.add(:name, "Name required for this delivery method")
+      end
+      if delivery.phone_required && phone.blank?
+        errors.add(:phone, "Phone required for this delivery method")
+      end
+      if delivery.delivery_cost_required && delivery_cost.blank?
+        errors.add(:delivery_cost, "Delivery cost required for this delivery method")
+      end
+      if products.blank?
+        errors.add(:products, 'There is no products in this order')
+      end
+    end
+  end
+
 private
 
   def update_order_cost
@@ -53,5 +93,6 @@ private
   #    :left_money => user.account.money_locked + self.money,
   #  )
   #end
+  #
 
 end

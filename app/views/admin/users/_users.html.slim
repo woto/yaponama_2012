@@ -14,11 +14,8 @@
   #users.top-space
     = f.association :time_zone, :include_blank => true
     = f.input :creation_reason, :collection => Rails.configuration.user_creation_reason.map {|k,v| [v,k]}, :disabled => true, :as => :radio_buttons
-    = f.input :created_at, :disabled => true 
-    = f.input :updated_at, :disabled => true 
     = f.simple_fields_for :ping do |ping| 
       = ping.input :created_at, :as => :datetime, :disabled => true, :label => 'Пинг', :hint => 'Время последней активности (просмотр страницы пользователем или получение от него письма)', :required => false 
-    = f.input :notes_invisible, :input_html => {:rows => 3} 
     = f.input :session_id, :disabled => true 
     = f.simple_fields_for :account do |account| 
       = account.input :debit 
@@ -26,4 +23,7 @@
     = f.input :order_rule, :collection => Rails.configuration.user_order_rule.map { |k, v| [v, k] } 
     = f.input :prepayment_percent 
     = f.input :discount 
-
+    = f.input :created_at
+    = f.input :updated_at
+    = f.input :notes, :input_html => {:rows => 3} 
+    = f.input :notes_invisible, :input_html => {:rows => 3} 

@@ -14,8 +14,10 @@ class Product < ActiveRecord::Base
 
   validates :quantity_ordered, :numericality => { :greater_than_or_equal_to => 1 }
 
-  belongs_to :user, :inverse_of => :products
-  belongs_to :user, :inverse_of => :products_incart
+  belongs_to :user, :inverse_of => :products, :validate => true
+  validates :user, :presence => true
+
+  belongs_to :order, :inverse_of => :products_incart
   belongs_to :order, :inverse_of => :products_inorder
   belongs_to :order, :inverse_of => :products_ordered
   belongs_to :order, :inverse_of => :products
@@ -102,7 +104,6 @@ class Product < ActiveRecord::Base
       user.account.debit -= sell_cost * quantity_ordered
       user.save
     end
-
   end
 
 end
