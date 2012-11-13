@@ -1,5 +1,6 @@
 <div class="nested-fields top-space">
 
+  <%= f.error_notification :message => f.error(:base) %>
 
   <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
 

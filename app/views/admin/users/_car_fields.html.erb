@@ -1,5 +1,7 @@
 <div class="nested-fields top-space">
 
+  <%= f.error_notification %>
+
   <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
 
   <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-arrow-down"></i></a>
@@ -48,19 +50,12 @@
 
     <div id="requests_with_auto" class="nested-fields">
 
-      <!-- TODO попытаться понять почему такое требование -->
-      <% if f.object.new_record? %>
-        <%= f.simple_fields_for :requests do |request| %>
-          <%= render 'request_fields', :f => request, :stack => stack %>
-        <% end %>
-      <% else %>
-        <%= f.simple_fields_for :requests, f.object.requests.where("request_id IS NULL") do |request| %>
-          <%= render 'request_fields', :f => request, :stack => stack %>
-        <% end %>
+      <%= f.simple_fields_for :root_requests_with_car do |request| %>
+        <%= render 'request_fields', :f => request, :stack => stack %>
       <% end %>
 
       <div class="links">
-        <%= link_to_add_association 'Добавить запрос', f, :requests, :class => "btn btn-success btn-success", :render_options => {:locals => {:stack => stack}} %>
+        <%= link_to_add_association 'Добавить запрос', f, :root_requests_with_car, :class => "btn btn-success btn-success", :render_options => {:locals => {:stack => stack}}, :partial => 'request_fields' %>
       </div>
 
     </div>

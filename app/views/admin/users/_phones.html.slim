@@ -1,6 +1,7 @@
 #phones-tab.tab-pane.active
   #phones
     = f.simple_fields_for :phones do |phone| 
+
       = render 'phone_fields', :f => phone 
 
     .links

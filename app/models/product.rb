@@ -14,15 +14,12 @@ class Product < ActiveRecord::Base
 
   validates :quantity_ordered, :numericality => { :greater_than_or_equal_to => 1 }
 
-  belongs_to :user, :inverse_of => :products, :validate => true
+  belongs_to :user, :validate => true
   validates :user, :presence => true
 
-  belongs_to :order, :inverse_of => :products_incart
-  belongs_to :order, :inverse_of => :products_inorder
-  belongs_to :order, :inverse_of => :products_ordered
-  belongs_to :order, :inverse_of => :products
+  belongs_to :order
 
-  belongs_to :supplier, :inverse_of => :products
+  belongs_to :supplier
 
   attr_accessible :notes, :notes_invisible, :max_days, :min_days, :probability, :quantity_available, :quantity_ordered, :status, :user_id, :order_id, :created_at, :updated_at
 

@@ -4,9 +4,9 @@
 class Admin::UsersController < Admin::ApplicationController
 
   DEFAULT_USER_ATTRIBUTES = {
-    :prepayment_percent => Rails.configuration.default_prepayment_percent_for_new_users, 
-    :discount => Rails.configuration.default_discount_for_new_users,
-    :order_rule => Rails.configuration.default_order_rule_for_new_users
+    'prepayment_percent' => Rails.configuration.default_prepayment_percent_for_new_users, 
+    'discount' => Rails.configuration.default_discount_for_new_users,
+    'order_rule' => Rails.configuration.default_order_rule_for_new_users
   }
 
   before_filter { @tab = params[:tab] || 'users' }

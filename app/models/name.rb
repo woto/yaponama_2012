@@ -4,11 +4,11 @@ class Name < ActiveRecord::Base
   attr_accessible :notes, :notes_invisible, :user_id, :visible
   attr_accessible :created_at, :updated_at
 
-  has_many :orders, :inverse_of => :name
+  has_many :orders
 
   validates :name, :presence => true
 
-  belongs_to :user, :inverse_of => :names, :validate => true
+  belongs_to :user, :validate => true
   validates :user, :presence => true
 
   #validates :name, :uniqueness => {:scope => :user_id}

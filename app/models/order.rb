@@ -2,13 +2,13 @@ class Order < ActiveRecord::Base
   include PingCallback
   attr_accessible :phone_id, :notes, :notes_invisible
   attr_accessible :delivery_id, :delivery_cost
-  belongs_to :delivery, :inverse_of => :orders
-  belongs_to :name, :inverse_of => :orders
-  belongs_to :phone, :inverse_of => :orders
-  belongs_to :postal_address, :inverse_of => :orders
+  belongs_to :delivery
+  belongs_to :name
+  belongs_to :phone
+  belongs_to :postal_address
 
 
-  belongs_to :user, :inverse_of => :orders, :validate => true
+  belongs_to :user, :validate => true
   validates :user, :presence => true
 
   validates_associated :delivery
@@ -16,23 +16,23 @@ class Order < ActiveRecord::Base
   validates_associated :name
   validates_associated :phone
 
-  has_many :products, :dependent => :destroy, :inverse_of => :order
+  has_many :products, :dependent => :destroy
   attr_accessible :products_attributes
   accepts_nested_attributes_for :products, :allow_destroy => true
 
-  has_many :products_inorder, :dependent => :destroy, :inverse_of => :order, 
+  has_many :products_inorder, :dependent => :destroy,
     :conditions => {:products => {:status => 'inorder'}}, :class_name => "Product",
     :after_add => Proc.new{|p, d| p.status = 'inorder'}
   attr_accessible :products_inorder_attributes
   accepts_nested_attributes_for :products_inorder, :allow_destroy => true
 
-  has_many :products_ordered, :dependent => :destroy, :inverse_of => :order, 
+  has_many :products_ordered, :dependent => :destroy,
     :conditions => {:products => {:status => 'ordered'}}, :class_name => "Product",
     :after_add => Proc.new{|p, d| p.status = 'ordered'}
   attr_accessible :products_ordered_attributes
   accepts_nested_attributes_for :products_ordered, :allow_destroy => true
 
-  has_many :products_inwork, :dependent => :destroy, :inverse_of => :order, 
+  has_many :products_inwork, :dependent => :destroy,
     :conditions => {:products => {:status => 'inwork'}}, :class_name => "Product",
     :after_add => Proc.new{|p, d| p.status = 'inwork'}
   attr_accessible :products_inwork_attributes

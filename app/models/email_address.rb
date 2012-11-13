@@ -1,9 +1,12 @@
 class EmailAddress < ActiveRecord::Base
   include PingCallback
-  attr_accessible :confirmed_by_human, :email_address, :notes_invisible, :user_id, :human_confirmation_datetime, :visible
+
+  attr_accessible :notes, :notes_invisible 
+  attr_accessible :confirmed_by_human, :email_address, :user_id, :human_confirmation_datetime, :visible
+
   #validates :user, :presence => true
 
-  belongs_to :user, :inverse_of => :email_addresses, :validate => true
+  belongs_to :user, :validate => true
   validates :user, :presence => true
 
   has_many :emails

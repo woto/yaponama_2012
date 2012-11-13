@@ -1,7 +1,7 @@
 class Account < ActiveRecord::Base
   attr_accessible :name, :debit, :credit, :accountable_id, :accountable_type
   belongs_to :accountable, :polymorphic => true
-  has_many :transactions, :inverse_of => :account
+  has_many :transactions
 
   validates :credit, :numericality => true
   validates :debit, :numericality => true

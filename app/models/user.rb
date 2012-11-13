@@ -9,24 +9,37 @@ class User < ActiveRecord::Base
     end
   end
 
-  has_many :products, :dependent => :destroy, :inverse_of => :user
+  attr_accessible :cars_attributes
+  has_many :cars, :dependent => :destroy
+  accepts_nested_attributes_for :cars, :allow_destroy => true 
 
-  has_many :products_incart, :dependent => :destroy, :inverse_of => :user, :conditions => {:status => :incart}, :class_name => "Product"
+  attr_accessible :requests_attributes
+  has_many :requests, :dependent => :destroy
+  accepts_nested_attributes_for :requests, :allow_destroy => true 
+
+  attr_accessible :root_requests_without_car_attributes
+  has_many :root_requests_without_car, :dependent => :destroy,
+    :conditions => ["request_id IS NULL AND car_id IS NULL"], :class_name => "Request"
+  accepts_nested_attributes_for :root_requests_without_car, :allow_destroy => true
+
+  has_many :products, :dependent => :destroy
+  has_many :products_incart, :dependent => :destroy,
+    :conditions => {:status => :incart}, :class_name => "Product"
+
   attr_accessible :products_incart_attributes
   accepts_nested_attributes_for :products_incart, :allow_destroy => true
 
   include PingCallback
-  attr_accessible :name, :phones_attributes, :email_addresses_attributes, :postal_addresses_attributes, :cars_attributes, :names_attributes, :requests_attributes, :time_zone_id, :human_confirmation_datetime, :orders_attributes, :money_available, :money_locked, :discount, :prepayment_percent
-  has_many :email_addresses, :dependent => :destroy, :inverse_of => :user
-  has_many :phones, :dependent => :destroy, :inverse_of => :user
-  has_many :postal_addresses, :dependent => :destroy, :inverse_of => :user
-  has_many :cars, :dependent => :destroy, :inverse_of => :user
-  has_many :names, :dependent => :destroy, :inverse_of => :user
-  has_many :requests, :dependent => :destroy, :inverse_of => :user
-  has_many :orders, :dependent => :destroy, :inverse_of => :user
-  accepts_nested_attributes_for :phones, :postal_addresses, :email_addresses, :cars, :names, :requests, :orders, :allow_destroy => true
+
+  attr_accessible :name, :phones_attributes, :email_addresses_attributes, :postal_addresses_attributes, :names_attributes, :time_zone_id, :human_confirmation_datetime, :orders_attributes, :money_available, :money_locked, :discount, :prepayment_percent
+  has_many :email_addresses, :dependent => :destroy
+  has_many :phones, :dependent => :destroy
+  has_many :postal_addresses, :dependent => :destroy
+  has_many :names, :dependent => :destroy
+  has_many :orders, :dependent => :destroy
+  accepts_nested_attributes_for :phones, :postal_addresses, :email_addresses, :names, :orders, :allow_destroy => true
   belongs_to :time_zone, :validate => true
-  has_one :ping, :dependent => :destroy, :inverse_of => :user
+  has_one :ping, :dependent => :destroy
   has_many :documents, :as => :documentable, :class_name => "Transaction"
 
   validates :prepayment_percent, :numericality => true

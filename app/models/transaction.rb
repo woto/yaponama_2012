@@ -1,8 +1,8 @@
 class Transaction < ActiveRecord::Base
   attr_accessible :left_money, :right_money, :left_real, :right_real, :left_account, :right_account
   attr_accessible :left_account_id, :right_account_id
-  belongs_to :left_account, :inverse_of => :transactions, :class_name => "Account"
-  belongs_to :right_account, :inverse_of => :transactions, :class_name => "Account"
+  belongs_to :left_account, :class_name => "Account"
+  belongs_to :right_account, :class_name => "Account"
   belongs_to :documentable, :polymorphic => true
 
   before_save :update_money

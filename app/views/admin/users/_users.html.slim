@@ -18,11 +18,11 @@
       = ping.input :created_at, :as => :datetime, :disabled => true, :label => 'Пинг', :hint => 'Время последней активности (просмотр страницы пользователем или получение от него письма)', :required => false 
     = f.input :session_id, :disabled => true 
     = f.simple_fields_for :account do |account| 
-      = account.input :debit 
-      = account.input :credit 
+      = account.input :debit, :as => :string
+      = account.input :credit, :as => :string
     = f.input :order_rule, :collection => Rails.configuration.user_order_rule.map { |k, v| [v, k] } 
-    = f.input :prepayment_percent 
-    = f.input :discount 
+    = f.input :prepayment_percent, :as => :string
+    = f.input :discount, :as => :string 
     = f.input :created_at
     = f.input :updated_at
     = f.input :notes, :input_html => {:rows => 3} 

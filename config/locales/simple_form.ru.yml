@@ -76,8 +76,12 @@ ru:
         time_zone: *time_zone
       names:
         name: Имя
+      root_requests_without_car:
+        name: &request_name Название
+      root_requests_with_car:
+        name: *request_name
       requests:
-        name: Название
+        name: *request_name
       account:
         name: Название аккаунта
       phones:
@@ -129,8 +133,12 @@ ru:
         confirmed_by_human: Подтверждение ставится только если удалось дозвониться до клиента по этому номеру или клиент позвонил с этого номера
       names:
         name: Фамилия, Имя, Отчество
+      root_requests_without_car:
+        name: &request_name товара, детали, запчасти...
+      root_requests_with_car:
+        name: *request_name
       requests:
-        name: товара, детали, запчасти...
+        name: *request_name
         
         
     # Labels and hints examples

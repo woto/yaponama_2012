@@ -42,8 +42,6 @@ table.table.table-striped
         td = "#{product.sell_cost} x #{product.quantity_ordered} = #{product.sell_cost * product.quantity_ordered}"
         td = product.notes
         td = product.notes_invisible
-        - if product.user.blank?
-          - debugger
         td = link_to product.user.to_label, edit_admin_user_path(product.user)
         td = product.order.try(:to_label)
         td = product.supplier.try(:to_label)
