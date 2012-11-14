@@ -26,6 +26,7 @@ ru:
       order:
         postal_address: Почтовый адрес
         phone: Телефон
+        delivery: Способ доставки
         name: Получатель
         user: Покупатель
         order_cost: Сумма заказа

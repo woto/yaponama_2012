@@ -27,6 +27,11 @@ Yaponama2012::Application.routes.draw do
       match 'inorder_index', :on => :collection
       match 'inorder_order_select', :on => :collection
       match 'inorder_action', :on => :member
+      #match 'inorder_create', :on => :member
+
+      match 'inorder_doit' => "orders#inorder_doit_create", :on => :collection
+      match 'inorder_doit' => "orders#inorder_doit_update", :on => :member
+
       #post 'makes' => 'orders/build#create'
       #resources :build, :controller => 'orders/build'
       resources :products

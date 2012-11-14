@@ -1,0 +1,25 @@
+ul.breadcrumb
+  li
+    = link_to @products.first.user.to_label, edit_admin_user_path(@products.first.user)
+    span.divider
+      |
+        /
+  li Формирование заказа
+
+
+= simple_form_for @order, :url => polymorphic_path([:inorder_doit, :admin, @order], :user_id => params[:user_id], :order_id => params[:order_id]) do |f|
+
+  = f.error_notification
+  - f.object.errors.full_messages do |error|
+    = error
+
+  = f.association :delivery
+  = f.association :name, :collection => @products.first.user.names
+  = f.association :postal_address, :collection => @products.first.user.postal_addresses 
+  = f.association :phone, :collection => @products.first.user.phones
+  = f.input :delivery_cost, :as => :string
+  = f.input :notes, :input_html => {:rows => 3}
+  = f.input :notes_invisible, :input_html => {:rows => 3}
+  = f.submit :class => "btn btn-success"
+  /= f.simple_fields_for :delivery do |delivery|
+  /  = delivery.association :postal_address

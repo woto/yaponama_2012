@@ -40,7 +40,7 @@ ul.breadcrumb
               td = link_to order.id, admin_order_path(order)
               td = order.name.try(:to_label)
               td = order.postal_address.try(:to_label)
-              td = order.phone
+              td = order.phone.try(:to_label)
               td = link_to order.user.try(:to_label), edit_admin_user_path(order.user)
               td = order.order_cost
               td = order.delivery_cost

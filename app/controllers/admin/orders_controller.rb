@@ -89,6 +89,37 @@ class Admin::OrdersController < Admin::ApplicationController
     end
   end
 
+  def inorder_doit_create
+    inorder_products_validation
+    @order = Order.new(params[:order])
+    @order.products = @products
+    @order.user = @products.first.user
+    if @order.save
+      @products.each do |product|
+        product.update_attributes(:status => 'inorder')
+      end
+      render :text => "Ok!"
+    else
+      render 'inorder_action'
+    end
+  end
+
+  def inorder_doit_update
+    inorder_products_validation
+    @order = Order.find(params[:id])
+    @order.assign_attributes(params[:order])
+    @order.products = @products
+    @order.user = @products.first.user
+    if @order.save
+      @products.each do |product|
+        product.update_attributes(:status => 'inorder')
+      end
+      render :text => "Ok!"
+    else
+      render 'inorder_action'
+    end
+  end
+
 
   def inorder_index
     inorder_products_validation
@@ -97,8 +128,21 @@ class Admin::OrdersController < Admin::ApplicationController
   def inorder_action
     inorder_products_validation
     @order = Order.where(:id => params[:id]).first
-    render :text => 'asdf'
+    unless @order
+      @order = Order.new
+    end
   end
+
+  #def inorder_create
+  #  @order = Order.where(:id => params[:id]).first
+  #  unless @order
+  #    @order = Order.new
+  #  end
+
+  #  @order.valid?
+  #  render 'inorder_action'
+
+  #end
 
   def inorder_order_select
     inorder_products_validation
