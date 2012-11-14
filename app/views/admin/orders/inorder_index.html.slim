@@ -1,0 +1,30 @@
+ul.breadcrumb
+  li
+    = link_to @products.first.user.to_label, edit_admin_user_path(@products.first.user)
+    span.divider
+      |
+        /
+  li Формирование заказа
+
+= form_tag inorder_order_select_admin_orders_path(:user_id => params[:user_id], :order_id => params[:order_id]) do |f|
+
+  = render :partial => 'products/index'
+  br  
+  - options = options_for_select [['Please select ...', nil], ['New order', 'new']] + @products.first.user.orders.all.map{|order| [order.to_label, order.id]}
+  = select_tag(:new_order_id, options)
+  / - step = session['orders'][session['orders']['current_order_id']]['step']
+  /- step = 'order'
+  /= render "#{step}_step", :f => f
+  br
+  /= submit_tag "Назад", :name => "back_button", :class => "btn" unless Admin::ProductsController::ORDER_STEPS.first == step
+  /|  
+  /= submit_tag "Далее", :name => "next_button", :class => "btn btn-success"
+  = submit_tag "Далее", :class => "btn btn-success"
+
+
+//////////- options = options_for_select [['Please select ...', nil], ['New order', 'new']] + @products.first.user.orders.all.map{|order| [order.to_label, order.id]}
+//////////= select_tag(:new_order_id, options)
+///////////- @products.each do |product|
+///////////  = hidden_field_tag 'product_ids[]', product.id
+///////////= select_tag(:order_id, op)
+/////////// = f.association :delivery, :collection => Delivery.where(:available => true).order(:sequence), :prompt => "Choose a Company", :prompt => "Choose...", :include_blank => 'New'

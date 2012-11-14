@@ -36,7 +36,7 @@ div.btn-group.dropup
     /li = url_for [:admin, :order, :builds]
     /puts '1'
     /return
-    li = link_to '~> inorder', inorder_form_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id])
+    li = link_to '~> inorder', polymorphic_path([:inorder_index, :admin, :orders], :user_id => params[:user_id], :order_id => params[:order_id])
     li = link_to 'Попытаться запустить товар в работу (На странице не запущенного товара)', '#'
     li = link_to 'Отказ (на страницах не запущенного, запущенного, зак. у пост, выкупленного)', '#'
     li = link_to 'Удалить товар (на страницах корзины, не запущенного и оплаченного)', '#', :method => :delete, :data => { :confirm => 'sure?' }

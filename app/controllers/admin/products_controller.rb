@@ -82,16 +82,6 @@ class Admin::ProductsController < Admin::ApplicationController
     render :nothing => true
   end
 
-  def inorder_form
-    if inorder_products_validation
-    end
-  end
-
-  def inorder_action
-    if inorder_products_validation
-    end
-  end
-
   #def set_to_pre_supplier_form
   #  @product = Product.find(params[:id])
   #end
@@ -249,86 +239,5 @@ class Admin::ProductsController < Admin::ApplicationController
     render :text => session
     reset_session
   end
-
-  private
-
-
-  def inorder_products_validation
-
-    # Сужение области по покупателю и заказу на основе текущего местоположения (адреса страницы) менеджера
-    @products = products_user_order_tab_scope( Product.scoped, 'checked' )
-
-    unless @products.present?
-      redirect_to :back, :alert => ['Neither products selected'] and return false
-    end
-
-    # Проверка принадлежности товаров одному пользователю (независимо с какой страницы был сделан запрос)
-    if ( errors = products_belongs_to_one_user_validation(@products) ).present?
-     redirect_to :back, :alert => errors and return false
-    end
-
-    # Проверка допустимых статусов товаров для данного действия
-    if ( errors = products_in_allowed_statuses_validation(@products) ).present?
-      redirect_to :back, :alert => errors and return false
-    end
-
-    return true
-
-  end
-
-  # Проверка принадлежности продуктов одному покупателю
-  def products_belongs_to_one_user_validation products
-
-    errors = []
-
-    first_user = products.first.user
-
-    products.each do |product|
-      unless product.user == first_user
-        errors << "Inordered products must be of one user, but there is: '#{product.user.to_label}' and '#{first_user.to_label}'"
-      end
-    end
-
-    errors
-
-  end
-
-  # Нельзя обрабатывать товар, не находящийся в корзине, либо в заказе
-  def products_in_allowed_statuses_validation products
-
-    errors = []
-
-    products.each do |product|
-      unless ["incart", "inorder", "ordered"].include? product.status
-        errors << "Inordered product can't be in status: '#{product.status}'"
-      end
-    end
-
-    errors
-
-  end
-
-  def products_user_order_tab_scope products, status
-
-    if params[:user_id]
-      products = products.where(:user_id => params[:user_id])
-    end
-
-    if params[:order_id]
-      products = products.where(:order_id => params[:order_id]) 
-    end
-
-    case status
-      when *Rails.configuration.products_status.select{|k, v| v[:real]}.keys
-        products = products.where(:status => status)
-      when 'checked'
-        products = products.where('id IN (?)', session[:products] && session[:products].keys)
-    end
-
-    products
-    
-  end
-
-
 
 end

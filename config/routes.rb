@@ -24,6 +24,9 @@ Yaponama2012::Application.routes.draw do
     resources :companies
 
     resources :orders do
+      match 'inorder_index', :on => :collection
+      match 'inorder_order_select', :on => :collection
+      match 'inorder_action', :on => :member
       #post 'makes' => 'orders/build#create'
       #resources :build, :controller => 'orders/build'
       resources :products
@@ -40,8 +43,6 @@ Yaponama2012::Application.routes.draw do
     end
 
     resources :products do
-      match 'inorder_form', :on => :collection
-      match 'inorder_action', :on => :collection
       match 'remember', :on => :collection
 
       member do

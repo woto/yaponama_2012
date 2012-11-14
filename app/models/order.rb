@@ -7,7 +7,6 @@ class Order < ActiveRecord::Base
   belongs_to :phone
   belongs_to :postal_address
 
-
   belongs_to :user, :validate => true
   validates :user, :presence => true
 
@@ -42,7 +41,7 @@ class Order < ActiveRecord::Base
   has_many :documents, :as => :documentable, :class_name => "Transaction"
 
   def to_label
-    "#{name_id} - #{postal_address_id} - #{user_id} - #{created_at} - #{updated_at}"
+    "#{id}"
   end
 
   validate :order_cost, :numericality => true

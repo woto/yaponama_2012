@@ -89,4 +89,84 @@ class Admin::OrdersController < Admin::ApplicationController
     end
   end
 
+
+  def inorder_index
+    inorder_products_validation
+  end
+
+  def inorder_action
+    inorder_products_validation
+    @order = Order.where(:id => params[:id]).first
+    render :text => 'asdf'
+  end
+
+  def inorder_order_select
+    inorder_products_validation
+
+    @order = Order.where(:id => params[:new_order_id]).first
+
+    if @order.present? || params[:new_order_id] == 'new'
+      redirect_to inorder_action_admin_order_path((@order.present? && @order.persisted?) ? @order : 'new', :user_id => params[:user_id], :order_id => params[:order_id]) and return
+    else
+      redirect_to polymorphic_path([:inorder_index, :admin, :orders], :user_id => params[:user_id], :order_id => params[:order_id]), :alert => 'Please choose order or create new' and return
+    end
+  end
+
+  private
+
+
+  def inorder_products_validation
+
+    @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+
+    unless @products.present?
+      redirect_to :back, :alert => ['Neither products selected'] and return false
+    end
+
+    # Проверка принадлежности товаров одному пользователю (независимо с какой страницы был сделан запрос)
+    if ( errors = products_belongs_to_one_user_validation(@products) ).present?
+     redirect_to :back, :alert => errors and return false
+    end
+
+    # Проверка допустимых статусов товаров для данного действия
+    if ( errors = products_in_allowed_statuses_validation(@products) ).present?
+      redirect_to :back, :alert => errors and return false
+    end
+
+    return true
+
+  end
+
+  # Проверка принадлежности продуктов одному покупателю
+  def products_belongs_to_one_user_validation products
+
+    errors = []
+
+    first_user = products.first.user
+
+    products.each do |product|
+      unless product.user == first_user
+        errors << "Inordered products must be of one user, but there is: '#{product.user.to_label}' and '#{first_user.to_label}'"
+      end
+    end
+
+    errors
+
+  end
+
+  # Нельзя обрабатывать товар, не находящийся в корзине, либо в заказе
+  def products_in_allowed_statuses_validation products
+
+    errors = []
+
+    products.each do |product|
+      unless ["incart", "inorder", "ordered"].include? product.status
+        errors << "Inordered product can't be in status: '#{product.status}'"
+      end
+    end
+
+    errors
+
+  end
+
 end
