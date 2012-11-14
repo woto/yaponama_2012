@@ -73,10 +73,27 @@ class Order < ActiveRecord::Base
       if delivery.delivery_cost_required && delivery_cost.blank?
         errors.add(:delivery_cost, "Delivery cost required for this delivery method")
       end
-      if products.blank?
+      unless products.present? || products_inorder.present? || products_ordered.present?
         errors.add(:products, 'There is no products in this order')
       end
     end
+  end
+
+  before_validation :set_relational_attributes
+
+  def set_relational_attributes
+    if products_inorder
+      products_inorder.each do |product|
+        product.user = self.user
+      end
+    end
+
+    #if products_ordered
+    #  products_inorder.each do |product|
+    #    product.user = self.user
+    #  end
+    #end
+
   end
 
 private

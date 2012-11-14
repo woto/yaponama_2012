@@ -4,7 +4,7 @@ class Request < ActiveRecord::Base
 
   include PingCallback
 
-  belongs_to :user
+  belongs_to :user, :validate => true
   validates :user, :presence => true
 
   belongs_to :car

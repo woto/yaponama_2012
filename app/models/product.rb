@@ -12,7 +12,7 @@ class Product < ActiveRecord::Base
   validates :buy_cost, :numericality => { :greater_than => 0}
   validates :sell_cost, :numericality => { :greater_than => 0}
 
-  validates :quantity_ordered, :numericality => { :greater_than_or_equal_to => 1 }
+  validates :quantity_ordered, :numericality => { :greater_than_or_equal_to => 1, :only_integer => true }
 
   belongs_to :user, :validate => true
   validates :user, :presence => true

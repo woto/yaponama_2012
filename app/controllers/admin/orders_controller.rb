@@ -92,7 +92,7 @@ class Admin::OrdersController < Admin::ApplicationController
   def inorder_doit_create
     inorder_products_validation
     @order = Order.new(params[:order])
-    @order.products = @products
+    @order.products << @products
     @order.user = @products.first.user
     if @order.save
       @products.each do |product|
@@ -108,7 +108,7 @@ class Admin::OrdersController < Admin::ApplicationController
     inorder_products_validation
     @order = Order.find(params[:id])
     @order.assign_attributes(params[:order])
-    @order.products = @products
+    @order.products << @products
     @order.user = @products.first.user
     if @order.save
       @products.each do |product|

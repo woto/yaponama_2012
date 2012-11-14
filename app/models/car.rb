@@ -11,7 +11,7 @@ class Car < ActiveRecord::Base
     :conditions => ["request_id IS NULL"], :class_name => "Request"
   accepts_nested_attributes_for :root_requests_with_car, :allow_destroy => true
 
-  belongs_to :user
+  belongs_to :user, :validate => true
   validates :user, :presence => true
 
   attr_accessible :car_number, :notes, :dvigatel, :frame, :god, :kod_dvigatelya, :kod_kuzova, :komplektaciya, :kpp, :marka, :model, :moschnost, :privod, :rinok, :tip, :tip_kuzova, :vin, :notes_invisible, :visible

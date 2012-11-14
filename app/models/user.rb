@@ -24,21 +24,25 @@ class User < ActiveRecord::Base
 
   has_many :products, :dependent => :destroy
   has_many :products_incart, :dependent => :destroy,
-    :conditions => {:status => :incart}, :class_name => "Product"
+    :conditions => {:status => 'incart'}, :class_name => "Product"
 
   attr_accessible :products_incart_attributes
   accepts_nested_attributes_for :products_incart, :allow_destroy => true
 
   include PingCallback
 
-  attr_accessible :name, :phones_attributes, :email_addresses_attributes, :postal_addresses_attributes, :names_attributes, :time_zone_id, :human_confirmation_datetime, :orders_attributes, :money_available, :money_locked, :discount, :prepayment_percent
+  attr_accessible :name, :phones_attributes, :email_addresses_attributes, :postal_addresses_attributes, :names_attributes, :human_confirmation_datetime, :orders_attributes, :money_available, :money_locked, :discount, :prepayment_percent
   has_many :email_addresses, :dependent => :destroy
   has_many :phones, :dependent => :destroy
   has_many :postal_addresses, :dependent => :destroy
   has_many :names, :dependent => :destroy
   has_many :orders, :dependent => :destroy
   accepts_nested_attributes_for :phones, :postal_addresses, :email_addresses, :names, :orders, :allow_destroy => true
+
+  attr_accessible :time_zone_id
   belongs_to :time_zone, :validate => true
+  validates :time_zone, :presence => true
+
   has_one :ping, :dependent => :destroy
   has_many :documents, :as => :documentable, :class_name => "Transaction"
 
@@ -84,4 +88,70 @@ class User < ActiveRecord::Base
     end
 
   end
+
+  before_validation :set_relational_attributes
+
+  def set_relational_attributes
+    if names
+      names.each do |name|
+        name.user = self
+      end
+    end
+
+    if phones
+      phones.each do |phone|
+        phone.user = self
+      end
+    end
+
+    if email_addresses
+      email_addresses.each do |email_address|
+        email_address.user = self
+      end
+    end
+
+    if postal_addresses
+      postal_addresses.each do |postal_address|
+        postal_address.user = self
+      end
+    end
+
+    if cars
+      cars.each do |car|
+        car.user = self
+      end
+    end
+
+    if requests
+      requests.each do |request|
+        request.user = self
+      end
+    end
+
+    if root_requests_without_car
+      root_requests_without_car.each do |request|
+        request.user = self
+      end
+    end
+
+    if products_incart
+      products_incart.each do |product|
+        product.user = self
+      end
+    end
+
+    if products
+      products.each do |product|
+        product.user = self
+      end
+    end
+
+    if orders
+      orders.each do |order|
+        order.user = self
+      end
+    end
+
+  end
+
 end

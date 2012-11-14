@@ -16,4 +16,5 @@ class Name < ActiveRecord::Base
   def to_label
     name
   end
+
 end
