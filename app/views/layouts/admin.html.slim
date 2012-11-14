@@ -45,6 +45,13 @@ html lang="ru"
                   li = link_to "Поставщики", admin_suppliers_path
               li.dropdown
                 a.dropdown-toggle href="#" data-toggle="dropdown"
+                  | Транзакции
+                  b.caret
+                ul.dropdown-menu
+                  li = link_to "Товар", "#"
+                  li = link_to "Деньги", "#"
+              li.dropdown
+                a.dropdown-toggle href="#" data-toggle="dropdown"
                   | Настройки 
                   b.caret
                 ul.dropdown-menu
@@ -65,6 +72,7 @@ html lang="ru"
                   li = link_to "Запросы", admin_requests_path
                   li = link_to "Письма", admin_emails_path
                   li = link_to "Аккаунты", admin_accounts_path
+                  li = link_to "Очистить сессию", clear_session_path
 
     .container-fluid
 

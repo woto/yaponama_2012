@@ -40,8 +40,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :phones, :postal_addresses, :email_addresses, :names, :orders, :allow_destroy => true
 
   attr_accessible :time_zone_id
-  belongs_to :time_zone, :validate => true
-  validates :time_zone, :presence => true
+  belongs_to :time_zone#, :validate => true
+  #validates :time_zone, :presence => true
 
   has_one :ping, :dependent => :destroy
   has_many :documents, :as => :documentable, :class_name => "Transaction"

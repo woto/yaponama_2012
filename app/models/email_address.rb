@@ -10,7 +10,7 @@ class EmailAddress < ActiveRecord::Base
   validates :user, :presence => true
 
   has_many :emails
-  validates :email_address, :format => {:with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/}
+  validates :email_address, :format => {:with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/}, :uniqueness => true
   #validates :email_address, :presence => true, :uniqueness => true
   
 

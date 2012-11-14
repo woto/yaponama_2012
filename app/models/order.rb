@@ -82,17 +82,24 @@ class Order < ActiveRecord::Base
   before_validation :set_relational_attributes
 
   def set_relational_attributes
+
+    if products
+      products.each do |product|
+        product.user = self.user
+      end
+    end
+
     if products_inorder
       products_inorder.each do |product|
         product.user = self.user
       end
     end
 
-    #if products_ordered
-    #  products_inorder.each do |product|
-    #    product.user = self.user
-    #  end
-    #end
+    if products_ordered
+      products_ordered.each do |product|
+        product.user = self.user
+      end
+    end
 
   end
 

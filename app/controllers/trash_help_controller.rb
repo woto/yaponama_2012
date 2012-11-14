@@ -65,4 +65,10 @@ EOF
 
     user_3.save
   end
+
+  def clear_session
+    render :text => session
+    reset_session
+  end
+
 end

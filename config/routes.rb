@@ -32,8 +32,6 @@ Yaponama2012::Application.routes.draw do
       match 'inorder_doit' => "orders#inorder_doit_create", :on => :collection
       match 'inorder_doit' => "orders#inorder_doit_update", :on => :member
 
-      #post 'makes' => 'orders/build#create'
-      #resources :build, :controller => 'orders/build'
       resources :products
     end
 
@@ -49,23 +47,8 @@ Yaponama2012::Application.routes.draw do
 
     resources :products do
       match 'remember', :on => :collection
-
-      member do
-        match 'set_to_pre_supplier_form'
-        match 'set_to_pre_supplier_action'
-        match 'set_to_post_supplier_action'
-        match 'set_cancel_action'
-        match 'set_cart_action'
-        match 'set_stock_action'
-        match 'set_complete_action'
-      end
-
-      collection do
-        match 'inorder_step_one'
-        match 'inorder_step_two'
-        match 'inorder_step_three'
-        match 'multiple_form'
-      end
+      match 'incart_index', :on => :collection
+      match 'incart_action', :on => :collection
     end
 
     resources :names
@@ -92,7 +75,8 @@ Yaponama2012::Application.routes.draw do
 
   end
 
-  get 'clear_order_session' => "admin::products#clear_order_session"
-  root :to => 'welcome#index'
+  get 'clear_session' => "trash_help#clear_session"
+
+  root :to => 'admin/users#index'
 
 end

@@ -163,6 +163,7 @@ class Admin::OrdersController < Admin::ApplicationController
 
     @products = products_user_order_tab_scope( Product.scoped, 'checked' )
 
+    # Нет товаров, нет заказа
     unless @products.present?
       redirect_to :back, :alert => ['Neither products selected'] and return false
     end
