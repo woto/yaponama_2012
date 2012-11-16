@@ -4,6 +4,10 @@
 ru:
   helpers:
     actions: Действия
+    links:
+      new: Создать
+      destroy: Удалить
+      edit: Редактировать
   admin:
     products:
       index:

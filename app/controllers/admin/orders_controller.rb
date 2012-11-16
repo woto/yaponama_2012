@@ -98,6 +98,7 @@ class Admin::OrdersController < Admin::ApplicationController
       @products.each do |product|
         product.update_attributes(:status => 'inorder')
       end
+      redirect_to admin_user_order_products_path(@order.user, @order), :notice => "Order sucessfully created"
       render :text => "Ok!"
     else
       render 'inorder_action'
@@ -114,7 +115,7 @@ class Admin::OrdersController < Admin::ApplicationController
       @products.each do |product|
         product.update_attributes(:status => 'inorder')
       end
-      render :text => "Ok!"
+      redirect_to admin_user_order_products_path(@order.user, @order), :notice => "Order sucessfully updated"
     else
       render 'inorder_action'
     end

@@ -16,13 +16,13 @@
     = f.input :manufacturer 
     = f.input :short_name
     = f.input :long_name, :input_html => {:rows => 3}
-    = f.input :quantity_ordered, :required => true
-    = f.input :quantity_available
-    = f.input :buy_cost, :required => true
-    = f.input :sell_cost, :required => true
-    = f.input :probability
-    = f.input :min_days
-    = f.input :max_days
+    = f.input :quantity_ordered, :required => true, :as => :string
+    = f.input :quantity_available, :as => :string
+    = f.input :buy_cost, :required => true, :as => :string
+    = f.input :sell_cost, :required => true, :as => :string
+    = f.input :probability, :as => :string
+    = f.input :min_days, :as => :string
+    = f.input :max_days, :as => :string
     = f.input :created_at
     = f.input :updated_at
     = f.input :notes, :input_html => {:rows => 3}

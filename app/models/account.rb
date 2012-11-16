@@ -6,6 +6,10 @@ class Account < ActiveRecord::Base
   validates :credit, :numericality => true
   validates :debit, :numericality => true
 
+  def to_label
+    accountable.to_label
+  end
+
   #before_save :create_transaction
 
   #def create_transaction

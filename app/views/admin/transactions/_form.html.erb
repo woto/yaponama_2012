@@ -1,6 +1,6 @@
 <%= simple_form_for [:admin, @transaction], :html => { :class => 'form-horizontal' } do |f| %>
 
-  <%= f.association :left_account %>
+  <%= f.association :left_account, :label_method => :to_label, :value_method => :id  %>
   <%= f.association :right_account %>
   <%= f.input :left_real %>
   <%= f.input :right_real %>
