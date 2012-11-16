@@ -46,9 +46,18 @@ Yaponama2012::Application.routes.draw do
     end
 
     resources :products do
-      match 'remember', :on => :collection
-      match 'incart_index', :on => :collection
-      match 'incart_action', :on => :collection
+      collection do
+        match 'remember'
+
+        # TODO How to make it DRY?
+        get 'split' => "products/split#index"
+        put 'split' => "products/split#update"
+
+        get 'incart' => "products/incart#index"
+        put 'incart' => "products/incart#update"
+
+
+      end
     end
 
     resources :names

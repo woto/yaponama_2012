@@ -21,6 +21,9 @@ class Product < ActiveRecord::Base
 
   belongs_to :supplier
 
+  belongs_to :product
+  has_many :products
+
   attr_accessible :notes, :notes_invisible, :max_days, :min_days, :probability, :quantity_available, :quantity_ordered, :status, :user_id, :order_id, :created_at, :updated_at
 
   attr_accessible :supplier_id
@@ -39,53 +42,71 @@ class Product < ActiveRecord::Base
     if self.changes["status"]
       old_status = self.changes["status"][0]
       new_status = self.changes["status"][1]
+
       case old_status
 
         when 'incart'
           case new_status
             when 'inorder'
+            when 'cancel'
             else
-              raise 'can\'tasdf asdf '
+              raise 'can not'
               #errors.add(:status, 'Products in cart in status "incart" can only change self status on "inorder" i.e. placed in order, or be destroyed')
               return false
           end
 
+
         when 'inorder'
           case new_status
-            when 'ordered'
             when 'cancel'
             when 'incart'
             else
-              raise 'can\'t afdafadf'
+              raise 'can not'
           end
 
+
         when 'ordered'
-          case new_status
-            when 'cancel'
-              user.account.debit -= sell_cost * quantity_ordered
-              user.save
-            else
-              raise 'can\'t'
-            end
+          raise '1'
+          #case new_status
+          #  when 'cancel'
+          #    user.account.debit -= sell_cost * quantity_ordered
+          #    user.save
+          #  else
+          #    raise 'can\'t'
+          #  end
+         
         when 'pre_supplier'
+          raise '2'
+        
+
         when 'post_supplier'
+          raise '3'
+
+
         when 'stock'
-          case new_status
-            when 'cancel'
-              user.account.debit -= sell_cost * quantity_ordered
-            when 'complete'
-              #user.account.debit -= sell_cost * quantity_ordered
-              #user.account.credit -= (sell_cost * quantity_ordered) * prepayment_percent / 100
-              #user.save
-              raise 'right count the money'
-            else
-              raise '"stock" status can be changed only to "cancel" or "complete"'
-          end
+          raise '4'
+          #case new_status
+          #  when 'cancel'
+          #    user.account.debit -= sell_cost * quantity_ordered
+          #  when 'complete'
+          #    #user.account.debit -= sell_cost * quantity_ordered
+          #    #user.account.credit -= (sell_cost * quantity_ordered) * prepayment_percent / 100
+          #    #user.save
+          #    raise 'right count the money'
+          #  else
+          #    raise '"stock" status can be changed only to "cancel" or "complete"'
+          #end
+
+
         when 'complete'
-          raise '"complete" status can\'t be modified'
+          raise '5'
+
+
         when 'cancel'
-          raise 'todo'
+          raise '6'
         end
+
+
       end
   end
 

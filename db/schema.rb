@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121111225008) do
+ActiveRecord::Schema.define(:version => 20121116160324) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -298,6 +298,7 @@ ActiveRecord::Schema.define(:version => 20121111225008) do
     t.decimal  "sell_cost",          :precision => 8, :scale => 2
     t.string   "short_name"
     t.text     "long_name"
+    t.integer  "product_id"
   end
 
   add_index "products", ["order_id"], :name => "index_products_on_order_id"

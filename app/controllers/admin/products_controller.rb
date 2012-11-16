@@ -63,16 +63,4 @@ class Admin::ProductsController < Admin::ApplicationController
     render :nothing => true
   end
 
-  def incart_index
-    @products = products_user_order_tab_scope( Product.scoped, 'checked' )
-  end
-
-  def incart_action
-    @products = products_user_order_tab_scope( Product.scoped, 'checked' )
-    @products.each do |product|
-      product.status = 'incart'
-      product.save
-    end
-  end
-
 end

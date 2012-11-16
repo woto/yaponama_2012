@@ -4,11 +4,12 @@ ul.breadcrumb
     span.divider
       |
         /
-  li Смена статуса на "В корзине"
+  li Смена статуса на "Разбитие товара"
 
-= form_tag incart_action_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id]) do |f|
+= form_tag split_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id]), :method => :put do |f|
 
   = render :partial => 'products/index'
 
+  = text_field_tag :quantity
   br  
   = submit_tag "Ок", :class => "btn btn-success"

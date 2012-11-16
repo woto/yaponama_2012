@@ -32,11 +32,11 @@ div.btn-group.dropup
     | Action 
     span.caret
   ul.dropdown-menu
-    li = link_to '~> incart', polymorphic_path([:incart_index, :admin, :products], :user_id => params[:user_id], :order_id => params[:order_id])
+    li = link_to '~> incart', polymorphic_path([:incart, :admin, :products], :user_id => params[:user_id], :order_id => params[:order_id])
     li = link_to '~> inorder', polymorphic_path([:inorder_index, :admin, :orders], :user_id => params[:user_id], :order_id => params[:order_id])
     li = link_to '~> ordered', '#'
     li.divider
-    li = link_to 'Разбить товар', '#'
+    li = link_to 'Разбить товар', admin_split_products_path(:user_id => params[:user_id], :order_id => params[:order_id])
     li = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_product_path(-1)
 
 |  
