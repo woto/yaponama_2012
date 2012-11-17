@@ -92,14 +92,10 @@ class Admin::OrdersController < Admin::ApplicationController
   def inorder_doit_create
     inorder_products_validation
     @order = Order.new(params[:order])
-    @order.products << @products
+    @order.products_inorder << @products
     @order.user = @products.first.user
     if @order.save
-      @products.each do |product|
-        product.update_attributes(:status => 'inorder')
-      end
-      redirect_to admin_user_order_products_path(@order.user, @order), :notice => "Order sucessfully created"
-      render :text => "Ok!"
+      redirect_to admin_user_order_products_path(@order.user, @order), :notice => "Order sucessfully created" and return
     else
       render 'inorder_action'
     end
@@ -109,13 +105,10 @@ class Admin::OrdersController < Admin::ApplicationController
     inorder_products_validation
     @order = Order.find(params[:id])
     @order.assign_attributes(params[:order])
-    @order.products << @products
+    @order.products_inorder << @products
     @order.user = @products.first.user
     if @order.save
-      @products.each do |product|
-        product.update_attributes(:status => 'inorder')
-      end
-      redirect_to admin_user_order_products_path(@order.user, @order), :notice => "Order sucessfully updated"
+      redirect_to admin_user_order_products_path(@order.user, @order), :notice => "Order sucessfully updated" and return
     else
       render 'inorder_action'
     end

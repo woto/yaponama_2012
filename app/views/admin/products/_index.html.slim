@@ -49,4 +49,12 @@ table.table.table-striped
         td = l product.updated_at, :format => :short
         td
           = hidden_field_tag "product_ids[#{product.id}]", "0"
-          = check_box_tag "product_ids[#{product.id}]", "1", (session[:products] ? session[:products][product.id.to_s] == '1' : false), :class => 'product'
+          center = check_box_tag "product_ids[#{product.id}]", "1", (session[:products] ? session[:products][product.id.to_s] == '1' : false), :class => 'product'
+          br
+          .btn-group
+            a.btn.dropdown-toggle data-toggle="dropdown" href="#"
+              = t '.action', :default => t('helpers.actions')
+              span.caret
+            ul.dropdown-menu.pull-right
+              li = link_to 'Разбить', split_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id])
+              li = link_to 'Перезаказать', "#"

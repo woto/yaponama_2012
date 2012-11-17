@@ -1,5 +1,8 @@
 class Order < ActiveRecord::Base
   include PingCallback
+
+  #before_create :build_transaction
+
   attr_accessible :phone_id, :notes, :notes_invisible
   attr_accessible :delivery_id, :delivery_cost
   belongs_to :delivery
@@ -21,21 +24,21 @@ class Order < ActiveRecord::Base
 
   has_many :products_inorder, :dependent => :destroy,
     :conditions => {:products => {:status => 'inorder'}}, :class_name => "Product",
-    :after_add => Proc.new{|p, d| p.status = 'inorder'}
+    :after_add => Proc.new{|o, p| p.status = 'inorder'}
   attr_accessible :products_inorder_attributes
   accepts_nested_attributes_for :products_inorder, :allow_destroy => true
 
   has_many :products_ordered, :dependent => :destroy,
     :conditions => {:products => {:status => 'ordered'}}, :class_name => "Product",
-    :after_add => Proc.new{|p, d| p.status = 'ordered'}
+    :after_add => Proc.new{|o, p| d.status = 'ordered'}
   attr_accessible :products_ordered_attributes
   accepts_nested_attributes_for :products_ordered, :allow_destroy => true
 
-  has_many :products_inwork, :dependent => :destroy,
-    :conditions => {:products => {:status => 'inwork'}}, :class_name => "Product",
-    :after_add => Proc.new{|p, d| p.status = 'inwork'}
-  attr_accessible :products_inwork_attributes
-  accepts_nested_attributes_for :products_inwork, :allow_destroy => true
+  #has_many :products_inwork, :dependent => :destroy,
+  #  :conditions => {:products => {:status => 'inwork'}}, :class_name => "Product",
+  #  :after_add => Proc.new{|i, p| p.status = 'inwork'}
+  #attr_accessible :products_inwork_attributes
+  #accepts_nested_attributes_for :products_inwork, :allow_destroy => true
 
   attr_accessible :name_id, :postal_address_id, :created_at, :updated_at, :status
   has_many :documents, :as => :documentable, :class_name => "Transaction"
@@ -43,12 +46,6 @@ class Order < ActiveRecord::Base
   def to_label
     "#{id}"
   end
-
-  validate :order_cost, :numericality => true
-
-  before_save :update_order_cost
-  #before_create :build_transaction
-
 
   def active?
     raise 'method active? deprecated'
@@ -103,11 +100,17 @@ class Order < ActiveRecord::Base
 
   end
 
-private
-
-  def update_order_cost
-    self.order_cost = products.reduce(0) {|summ, pi| summ + (pi.sell_cost * pi.quantity_ordered)}
+  def inorder_order_cost
+    products_inorder.reduce(0) {|summ, pi| summ + (pi.sell_cost * pi.quantity_ordered)}
   end
+  
+  def ordered_order_cost
+    products_ordered.reduce(0) {|summ, pi| summ + (pi.sell_cost * pi.quantity_ordered)}
+  end
+
+
+  
+private
 
   #def build_transaction
   #  documents.build(

@@ -33,7 +33,8 @@ ru:
         delivery: Способ доставки
         name: Получатель
         user: Покупатель
-        order_cost: Сумма заказа
+        inorder_order_cost: Сформировано
+        ordered_order_cost: Запущено
         delivery_cost: Сумма доставки
         products: Заказанные товары
         created_at: Создан

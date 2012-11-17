@@ -36,7 +36,6 @@ div.btn-group.dropup
     li = link_to '~> inorder', polymorphic_path([:inorder_index, :admin, :orders], :user_id => params[:user_id], :order_id => params[:order_id])
     li = link_to '~> ordered', '#'
     li.divider
-    li = link_to 'Разбить товар', admin_split_products_path(:user_id => params[:user_id], :order_id => params[:order_id])
     li = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_product_path(-1)
 
 |  

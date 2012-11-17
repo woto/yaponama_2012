@@ -1,6 +1,9 @@
 class Product < ActiveRecord::Base
   include PingCallback
 
+  before_save :process_before_save
+  before_destroy :process_before_destroy
+
   # Виртуальные аттрибуты
   attr_accessor :delivery_id, :delivery_cost
   attr_accessible :delivery_id, :delivery_cost
@@ -36,9 +39,8 @@ class Product < ActiveRecord::Base
     end
   end
 
-  before_save :process_product_before_save
+  def process_before_save
 
-  def process_product_before_save
     if self.changes["status"]
       old_status = self.changes["status"][0]
       new_status = self.changes["status"][1]
@@ -106,13 +108,10 @@ class Product < ActiveRecord::Base
           raise '6'
         end
 
-
       end
   end
 
-  before_destroy :process_product_before_destroy
-
-  def process_product_before_destroy
+  def process_before_destroy
     unless ["incart", "inorder", "ordered"].include? status
       errors.add(:base, "Not in status incart, inorder or ordered.")
       return false
