@@ -4,13 +4,12 @@ ul.breadcrumb
     span.divider
       |
         /
-  li Смена статуса на "Разбитие товара"
+  li Смена статуса на "Заказан"
 
-= form_tag split_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id]), :method => :put do |f|
+= form_tag pre_supplier_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id]), :method => :put do |f|
 
   = render :partial => 'products/index'
 
-  = text_field_tag :quantity
   br  
   = link_to "Назад", :back, :class => "btn"
   |  

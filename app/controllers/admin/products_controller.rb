@@ -44,18 +44,39 @@ class Admin::ProductsController < Admin::ApplicationController
     end
   end
 
-  def destroy
-    @product = Product.find(params[:id])
-    if @product.destroy
-      result = { :notice => "Product Successfully deleted" }
-    else
-      result = { :alert => "Product can't be deleted: #{@product.errors[:base].to_s}" }
+  def multiple_destroy
+
+    @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+
+    result = {}
+
+    @products.each do |product|
+      if product.destroy
+        result = { :notice => "Product Successfully deleted" }
+      else
+        result = { :alert => "Product can't be deleted: #{product.errors[:base].to_s}" }
+        break
+      end
     end
+
     respond_to do |format|
       format.html { redirect_to :back, result }
       format.json { head :no_content }
     end
   end
+
+  #def destroy
+  #  @product = Product.find(params[:id])
+  #  if @product.destroy
+  #    result = { :notice => "Product Successfully deleted" }
+  #  else
+  #    result = { :alert => "Product can't be deleted: #{@product.errors[:base].to_s}" }
+  #  end
+  #  respond_to do |format|
+  #    format.html { redirect_to :back, result }
+  #    format.json { head :no_content }
+  #  end
+  #end
 
   def remember
     session[:products] = {} unless session[:products]

@@ -7,7 +7,7 @@ ul.breadcrumb
   li Формирование заказа
 
 
-= simple_form_for @order, :url => polymorphic_path([:inorder_doit, :admin, @order], :user_id => params[:user_id], :order_id => params[:order_id]) do |f|
+= simple_form_for @order, :url => polymorphic_path([:admin, @order], :user_id => params[:user_id], :order_id => params[:order_id]) do |f|
 
   = f.error_notification
   - f.object.errors.full_messages do |error|

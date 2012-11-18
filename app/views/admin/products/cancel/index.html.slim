@@ -1,0 +1,28 @@
+ul.breadcrumb
+  li
+    = link_to @products.first.user.to_label, edit_admin_user_path(@products.first.user)
+    span.divider
+      |
+        /
+  li Смена статуса на "Отказ"
+
+= form_tag cancel_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id]), :method => :put do |f|
+
+  = render :partial => 'products/index'
+
+  p Уменьшить сумму долга перед поставщиком на:
+  = text_field_tag :aaa
+
+  p Уменьшить сумму фактической предоплаты поставщику на:
+  = text_field_tag :bbb
+
+  p Уменьшить долг клиента на:
+  = text_field_tag :ccc
+
+  p Уменьшить сумму фактической предоплаты клиентом на:
+  = text_field_tag :ccc
+
+
+
+  br  
+  = submit_tag "Ок", :class => "btn btn-success"

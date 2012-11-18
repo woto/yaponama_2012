@@ -1,4 +1,5 @@
-class Admin::Products::IncartController < Admin::ProductsController
+class Admin::Products::PreSupplierController < Admin::ProductsController
+
   before_filter do 
     @products = products_user_order_tab_scope( Product.scoped, 'checked' )
 
@@ -6,18 +7,22 @@ class Admin::Products::IncartController < Admin::ProductsController
       redirect_to :back, :alert => "None products selected" and return
     end
 
+    unless @products.all?{|product| product.status == 'ordered'}
+      redirect_to :back, :alert => 'At least one product not in status ordered'
+    end
   end
+
 
   def index
   end
 
+
   def update
     @products.each do |product|
-      product.status = 'incart'
+      product.status = 'pre_supplier'
       unless product.save
         redirect_to :back, :alert => product.errors.full_messages and return
       end
     end
   end
-
 end

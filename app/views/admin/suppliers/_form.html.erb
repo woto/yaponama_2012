@@ -1,7 +1,6 @@
 <%= simple_form_for [:admin, @supplier], :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :name %>
   <%= f.simple_fields_for :account do |account| %>
-    <%= account.input :name %>
     <%= account.input :debit %>
     <%= account.input :credit %>
   <% end %>

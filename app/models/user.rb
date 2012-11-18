@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 
+
   attr_accessible :notes, :notes_invisible
   attr_accessible :created_at, :updated_at
 
@@ -7,6 +8,10 @@ class User < ActiveRecord::Base
     unless user.account
       user.account = Account.new
     end
+  end
+
+  def products_inwork
+    products.where("FIND_IN_SET(status, 'pre_supplier,post_supplier,stock')").sum("sell_cost * quantity_ordered")
   end
 
   attr_accessible :cars_attributes
@@ -23,6 +28,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :root_requests_without_car, :allow_destroy => true
 
   has_many :products, :dependent => :destroy
+
   has_many :products_incart, :dependent => :destroy,
     :conditions => {:status => 'incart'}, :class_name => "Product"
 

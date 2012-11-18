@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
   include PingCallback
 
   before_save :process_before_save
-  before_destroy :process_before_destroy
+  #before_destroy :process_before_destroy
 
   # Виртуальные аттрибуты
   attr_accessor :delivery_id, :delivery_cost
@@ -52,41 +52,75 @@ class Product < ActiveRecord::Base
             when 'inorder'
             when 'cancel'
             else
-              raise 'can not'
-              #errors.add(:status, 'Products in cart in status "incart" can only change self status on "inorder" i.e. placed in order, or be destroyed')
+              errors.add(:status, 'Products in cart in status "incart" can only change self status on "inorder" i.e. placed in order, or be destroyed')
               return false
           end
 
 
         when 'inorder'
           case new_status
-            when 'cancel'
             when 'incart'
+            when 'inorder'
+            when 'cancel'
+            when 'ordered'
+              user.account.credit += sell_cost * quantity_ordered
+              user.save
             else
-              raise 'can not'
+              errors.add(:status, "Product with status inorder can not change status to #{new_status}")
+              return false
           end
 
 
         when 'ordered'
-          raise '1'
-          #case new_status
-          #  when 'cancel'
-          #    user.account.debit -= sell_cost * quantity_ordered
-          #    user.save
-          #  else
-          #    raise 'can\'t'
-          #  end
+          case new_status
+            when 'cancel'
+              user.account.credit -= sell_cost * quantity_ordered
+              user.save
+            when 'pre_supplier'
+            when 'inorder'
+              user.account.credit -= sell_cost * quantity_ordered
+              user.save
+            else
+              errors.add(:status, "Can not")
+              return false
+            end
          
+
         when 'pre_supplier'
-          raise '2'
+          case new_status
+          when 'cancel'
+            user.account.credit -= sell_cost * quantity_ordered
+            user.save
+          when 'post_supplier'
+            supplier.account.credit += buy_cost * quantity_ordered
+            supplier.save
+          else
+            raise '2'
+          end
         
 
         when 'post_supplier'
-          raise '3'
-
-
+          case new_status
+          when 'cancel'
+            raise '1'
+            #user.account.credit -= sell_cost * quantity_ordered
+            #supplier.account.credit -= buy_cost * quantity_ordered
+            #user.save
+            #supplier.save
+          when 'stock'
+            supplier.account.credit -= buy_cost * quantity_ordered
+            supplier.save
+          else
+            raise '3'
+          end
         when 'stock'
-          raise '4'
+          case new_status
+          when 'complete'
+            user.account.credit -= sell_cost * quantity_ordered
+            user.save
+          else
+            raise '4'
+          end
           #case new_status
           #  when 'cancel'
           #    user.account.debit -= sell_cost * quantity_ordered
@@ -101,8 +135,9 @@ class Product < ActiveRecord::Base
 
 
         when 'complete'
-          raise '5'
-
+          debugger
+          errors.add(:status, 'Products in complete is finit state.')
+          return false
 
         when 'cancel'
           raise '6'
@@ -111,16 +146,16 @@ class Product < ActiveRecord::Base
       end
   end
 
-  def process_before_destroy
-    unless ["incart", "inorder", "ordered"].include? status
-      errors.add(:base, "Not in status incart, inorder or ordered.")
-      return false
-    end
+  #def process_before_destroy
+  #  unless ["incart", "inorder", "ordered"].include? status
+  #    errors.add(:base, "Not in status incart, inorder or ordered.")
+  #    return false
+  #  end
 
-    if ["ordered"].include? status
-      user.account.debit -= sell_cost * quantity_ordered
-      user.save
-    end
-  end
+  #  if ["ordered"].include? status
+  #    user.account.debit -= sell_cost * quantity_ordered
+  #    user.save
+  #  end
+  #end
 
 end

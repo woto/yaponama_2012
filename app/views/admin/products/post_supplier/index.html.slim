@@ -1,0 +1,20 @@
+ul.breadcrumb
+  li
+    = link_to @products.first.user.to_label, edit_admin_user_path(@products.first.user)
+    span.divider
+      |
+        /
+  li Смена статуса на "Выкуплен"
+
+= form_tag post_supplier_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id]), :method => :put do |f|
+
+  = render :partial => 'products/index'
+
+  - options = options_for_select [['Please select ...', nil]] + Supplier.all.collect {|p| [ p.to_label, p.id ]}
+
+  = select_tag(:supplier_id, options)
+
+  br  
+  = link_to "Назад", :back, :class => "btn"
+  |  
+  = submit_tag "Ок", :class => "btn btn-success"

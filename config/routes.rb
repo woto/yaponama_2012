@@ -24,14 +24,6 @@ Yaponama2012::Application.routes.draw do
     resources :companies
 
     resources :orders do
-      match 'inorder_index', :on => :collection
-      match 'inorder_order_select', :on => :collection
-      match 'inorder_action', :on => :member
-      #match 'inorder_create', :on => :member
-
-      match 'inorder_doit' => "orders#inorder_doit_create", :on => :collection
-      match 'inorder_doit' => "orders#inorder_doit_update", :on => :member
-
       resources :products
     end
 
@@ -46,7 +38,9 @@ Yaponama2012::Application.routes.draw do
     end
 
     resources :products do
+
       collection do
+
         match 'remember'
 
         # TODO How to make it DRY?
@@ -56,11 +50,41 @@ Yaponama2012::Application.routes.draw do
         get 'incart' => "products/incart#index"
         put 'incart' => "products/incart#update"
 
+        get 'ordered' => "products/ordered#index"
+        put 'ordered' => "products/ordered#update"
+
+        get 'cancel' => "products/cancel#index"
+        put 'cancel' => "products/cancel#update"
+        
+        get 'pre_supplier' => "products/pre_supplier#index"
+        put 'pre_supplier' => "products/pre_supplier#update"
+
+        get 'post_supplier' => "products/post_supplier#index"
+        put 'post_supplier' => "products/post_supplier#update"
+
+        get 'stock' => "products/stock#index"
+        put 'stock' => "products/stock#update"
+
+        get 'complete' => "products/complete#index"
+        put 'complete' => "products/complete#update"
+
+        get 'inorder' => "products/inorder#index"
+        match 'order_select' => "products/inorder#order_select"
+
+        match 'doit' => "products/inorder#doit_create"
+
+        delete 'multiple_destroy' => "products#multiple_destroy"
+
+      end
+
+      member do
+
+        match 'action' => "products/inorder#action"
+        match 'doit' => "products/inorder#doit_update"
 
       end
     end
-
-    resources :names
+resources :names
     resources :spare_infos
     resources :time_zones
     resources :email_addresses
