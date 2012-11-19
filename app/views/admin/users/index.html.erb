@@ -148,16 +148,17 @@
               <li class="dropdown-submenu pull-left">
                 <%= link_to("Заказы", admin_user_orders_path(user)) %>
                 <ul class="dropdown-menu">
-                  <%= content_tag(:li, link_to("Укомплектованы", admin_user_orders_path(user, :status => :stock))) %>
-                  <%= content_tag(:li, link_to("...", admin_user_orders_path(user))) %>
+                  <% Rails.configuration.orders_status.each do |k, v| %>
+                    <%= content_tag(:li, link_to(v["title"], admin_user_orders_path(user, :status => k))) %>
+                  <% end %>
                 </ul>
               </li>
               <li class="dropdown-submenu pull-left">
                 <%= link_to("Товары", admin_user_products_path(user)) %>
                 <ul class="dropdown-menu">
-                  <%= content_tag(:li, link_to("В корзине", admin_user_products_path(user, :status => :incart))) %>
-                  <%= content_tag(:li, link_to("Сформирован", admin_user_products_path(user, :status => :inorder))) %>
-                  <%= content_tag(:li, link_to("...", admin_user_products_path(user))) %>
+                  <% Rails.configuration.products_status.each do |k, v| %>
+                    <%= content_tag(:li, link_to(v["title"], admin_user_products_path(user, :status => k))) %>
+                  <% end %>
                 </ul>
               </li>
               <li class="divider"> </li>
@@ -170,6 +171,7 @@
                   <%= content_tag(:li, link_to("E-mail", edit_admin_user_path(user, :tab => :email_addresses))) %>
                   <%= content_tag(:li, link_to("Адрес", edit_admin_user_path(user, :tab => :postal_addresses))) %>
                   <%= content_tag(:li, link_to("Авто", edit_admin_user_path(user, :tab => :cars))) %>
+                  <li class="divider"></li>
                   <%= content_tag(:li, link_to("Запросы", edit_admin_user_path(user, :tab => :requests))) %>
                   <%= content_tag(:li, link_to("Корзина", edit_admin_user_path(user, :tab => :products_incart))) %>
                   <%= content_tag(:li, link_to("Заказы", edit_admin_user_path(user, :tab => :orders))) %>
