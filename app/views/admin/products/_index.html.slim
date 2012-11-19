@@ -36,7 +36,7 @@ table.table.table-striped
         td = "#{product.probability} %"
         td = "#{product.min_days} дн."
         td = "#{product.max_days} дн."
-        td =  product.status
+        td = link_to Rails.configuration.products_status[product.status]['title'], admin_user_products_path(product.user, :status => product.status)
       tr
         td = "#{product.buy_cost} x #{product.quantity_ordered} = #{product.buy_cost * product.quantity_ordered}"
         td = "#{product.sell_cost} x #{product.quantity_ordered} = #{product.sell_cost * product.quantity_ordered}"

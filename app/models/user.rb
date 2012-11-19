@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   end
 
   def products_inwork
-    products.where("FIND_IN_SET(status, 'pre_supplier,post_supplier,stock')").sum("sell_cost * quantity_ordered")
+    products.where("FIND_IN_SET(status, 'ordered,pre_supplier,post_supplier,stock')").sum("sell_cost * quantity_ordered")
   end
 
   attr_accessible :cars_attributes
