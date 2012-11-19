@@ -1,7 +1,8 @@
 class Account < ActiveRecord::Base
   attr_accessible :name, :debit, :credit, :accountable_id, :accountable_type
   belongs_to :accountable, :polymorphic => true
-  has_many :transactions
+  has_many :left_transactions, :class_name => "Transaction", :foreign_key => "left_account_id"
+  has_many :right_transactions, :class_name => "Transaction", :foreign_key => "right_account_id"
 
   validates :credit, :numericality => true
   validates :debit, :numericality => true
@@ -10,20 +11,23 @@ class Account < ActiveRecord::Base
     accountable.to_label
   end
 
-  #before_save :create_transaction
+  before_save :create_transaction
 
-  #def create_transaction
-  #  if changes[:money_available] && changes[:money_locked]
-  #    raise 'Unable to make both changes in account'
-  #  end
+  def create_transaction
+    #if changes[:money_available] && changes[:money_locked]
+    #  raise 'Unable to make both changes in account'
+    #end
 
-  #  if changes[:money_available]
-  #    transactions.build(:account => self, :money => changes[:money_available][1])
-  #  end
+    if changes[:credit]
+      left_transactions.build(:left_account => self, :left_money => changes[:credit][1])
+    end
 
-  #  if changes[:money_locked]
-  #    transactions.build(:account => self, :money => changes[:money_locked][1])
-  #  end
-  #end
+    if changes[:debit]
+      right_transactions.build(:right_account => self, :right_money => changes[:debit][1])
+    end
+
+    debugger
+    puts '1'
+  end
 
 end
