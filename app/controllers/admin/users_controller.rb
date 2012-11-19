@@ -15,25 +15,6 @@ class Admin::UsersController < Admin::ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @user_filter = UserFilter.new(params[:user_filter])
-    @table_fields = Hash.new{|h,k| h[k] = [] }
-    @users = User.scoped
-    @user_filter.attributes.select{|k, v| v == '1'}.each do |k, v|
-      captures = k.match(/(.*)___(.*)/).captures
-      @table_fields[captures[0]] << captures[1]
-    end
-
-    # @users = User.joins(:ping).order("pings.updated_at DESC")
-
-    # @users = User.joins(:ping).order("pings.updated_at DESC").joins(:names).where(names[:name].matches("%кась%")).uniq
-    
-    requests = Request.arel_table
-    names = Name.arel_table
-    #@users = User.joins(:names).where(names[:name].matches("%дени%")).joins(:requests).where(requests[:notes].matches("%шар%")).uniq
-    # @users = User.joins(:ping).order("pings.updated_at DESC").joins(:names).where(names[:name].matches("%кась%")).uniq
-    #start_date = Time.zone.now - 3.days
-    #end_date = Time.zone.now
-    #@users = User.where(:created_at => start_date..end_date).joins(:ping)
     @users = User.includes(:ping, :email_addresses, :phones, :names, :account).order("pings.updated_at DESC").page(params[:page])
 
     respond_to do |format|

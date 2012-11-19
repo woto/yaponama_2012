@@ -1,0 +1,69 @@
+- model_class = User
+.page-header
+  h1
+    =' t '.title', :default => model_class.model_name.human.pluralize
+    = link_to t('.new', :default => t("helpers.links.new")), edit_admin_user_path('new'), :class => 'btn btn-primary'
+
+= paginate @users
+
+table.table.table-striped
+  thead
+    tr
+      th = model_class.human_attribute_name(:id)
+      th = model_class.human_attribute_name(:time_zone)
+      th = model_class.human_attribute_name(:notes_invisible)
+      th = model_class.human_attribute_name(:name)
+      th = model_class.human_attribute_name(:email_address)
+      th = model_class.human_attribute_name(:phone)
+      th = model_class.human_attribute_name(:debit)
+      th = model_class.human_attribute_name(:credit)
+      th = model_class.human_attribute_name(:prepayment_percent)
+      th = model_class.human_attribute_name(:ping)
+      th = t '.actions', :default => t("helpers.actions")
+
+  tbody
+    - @users.each do |user|
+      tr
+        td = link_to user.id, admin_user_path(user)
+        td = user.time_zone.to_label if user.time_zone.present?
+        td = user.notes_invisible
+        td = user.names.collect(&:name).join(', ')
+        td = user.email_addresses.collect(&:email_address).join(', ')
+        td = user.phones.collect(&:phone).join(', ')
+        td = user.account.debit 
+        td = user.account.credit 
+        td = user.prepayment_percent 
+        td = l(user.ping.updated_at, :format => :short)
+        td
+          .btn-group.dropup
+            button.btn.btn-primary.dropdown-toggle data-toggle="dropdown"
+              | Дейсвтия 
+              span.caret
+            ul.dropdown-menu.pull-right
+              li.dropdown-submenu.pull-left
+                = link_to("Заказы", admin_user_orders_path(user))
+                ul.dropdown-menu
+                  - Rails.configuration.orders_status.each do |k, v|
+                    = content_tag(:li, link_to(v["title"], admin_user_orders_path(user, :status => k)))
+              li.dropdown-submenu.pull-left
+                = link_to("Товары", admin_user_products_path(user))
+                ul.dropdown-menu
+                  - Rails.configuration.products_status.each do |k, v|
+                    = content_tag(:li, link_to(v["title"], admin_user_products_path(user, :status => k)))
+              li.divider
+              li.dropdown-submenu.pull-left
+                = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_user_path(user)
+                ul.dropdown-menu
+                  = content_tag(:li, link_to("Главная", edit_admin_user_path(user, :tab => :users)))
+                  = content_tag(:li, link_to("Имя", edit_admin_user_path(user, :tab => :names)))
+                  = content_tag(:li, link_to("Телефон", edit_admin_user_path(user, :tab => :phones)))
+                  = content_tag(:li, link_to("E-mail", edit_admin_user_path(user, :tab => :email_addresses)))
+                  = content_tag(:li, link_to("Адрес", edit_admin_user_path(user, :tab => :postal_addresses)))
+                  = content_tag(:li, link_to("Авто", edit_admin_user_path(user, :tab => :cars)))
+                  li.divider
+                  = content_tag(:li, link_to("Запросы", edit_admin_user_path(user, :tab => :requests)))
+                  = content_tag(:li, link_to("Корзина", edit_admin_user_path(user, :tab => :products_incart)))
+                  = content_tag(:li, link_to("Заказы", edit_admin_user_path(user, :tab => :orders)))
+              li = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_user_path(user), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
+
+= paginate @users
