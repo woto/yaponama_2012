@@ -27,9 +27,9 @@ table.table.table-striped
         td = link_to user.id, admin_user_path(user)
         td = user.time_zone.to_label if user.time_zone.present?
         td = user.notes_invisible
-        td = user.names.collect(&:name).join(', ')
-        td = user.email_addresses.collect(&:email_address).join(', ')
-        td = user.phones.collect(&:phone).join(', ')
+        td = link_to(user.names.collect(&:name).join(', '), edit_admin_user_path(user, :tab => :names))
+        td = link_to(user.email_addresses.collect(&:email_address).join(', '), edit_admin_user_path(user, :tab => :email_addresses))
+        td = link_to(user.phones.collect(&:phone).join(', '), edit_admin_user_path(user, :tab => :phones))
         td = user.account.debit 
         td = user.account.credit 
         td = user.prepayment_percent 
@@ -55,9 +55,6 @@ table.table.table-striped
                 = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_user_path(user)
                 ul.dropdown-menu
                   = content_tag(:li, link_to("Главная", edit_admin_user_path(user, :tab => :users)))
-                  = content_tag(:li, link_to("Имя", edit_admin_user_path(user, :tab => :names)))
-                  = content_tag(:li, link_to("Телефон", edit_admin_user_path(user, :tab => :phones)))
-                  = content_tag(:li, link_to("E-mail", edit_admin_user_path(user, :tab => :email_addresses)))
                   = content_tag(:li, link_to("Адрес", edit_admin_user_path(user, :tab => :postal_addresses)))
                   = content_tag(:li, link_to("Авто", edit_admin_user_path(user, :tab => :cars)))
                   li.divider

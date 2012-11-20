@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :account
 
   def to_label
-    "#{id} - #{names.collect(&:name).join(', ')} - #{phones.collect(&:phone).join(', ')} - #{email_addresses.collect(&:email_address).join(', ')} - #{postal_addresses.collect(&:city).join(', ')}"
+    "#{names.collect(&:name).join(', ')}"
   end
 
   def check_orders

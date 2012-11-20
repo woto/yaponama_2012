@@ -1,16 +1,11 @@
 - model_class = Order
 
-ul.breadcrumb
-
-  - if params[:user_id]
-    li
-      = link_to User.find(params[:user_id]).to_label, edit_admin_user_path(params[:user_id])
-      span.divider
-        |
-          /
-
-  li = "Заказы: #{Rails.configuration.orders_status[(params[:status] || 'all')]['title']}"
-
+.page-header
+  h1
+    - if params[:user_id]
+      =' link_to User.find(params[:user_id]).to_label, edit_admin_user_path(params[:user_id])
+    - if params[:order_id]
+      = "Заказ: #{Order.find(params[:order_id]).to_label}"
 
 - tab_links "myTab", Rails.configuration.orders_status do |hint|
 

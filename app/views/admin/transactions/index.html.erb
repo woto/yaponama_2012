@@ -24,8 +24,8 @@
         <td><%= transaction.right_account_id %></td>
         <td><%= transaction.left_real %></td>
         <td><%= transaction.right_real %></td>
-        <td><%= transaction.left_money %></td>
-        <td><%= transaction.right_money %></td>
+        <td><%= ((transaction.left_money && transaction.left_money > 0) ? "+ " : "" ) + transaction.left_money.to_s %></td>
+        <td><%= ((transaction.right_money && transaction.right_money > 0) ? "+ " : "" ) + transaction.right_money.to_s %></td>
         <td><%=l transaction.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

@@ -81,7 +81,7 @@ class Admin::OrdersController < Admin::ApplicationController
         format.html { redirect_to admin_user_order_products_path(@order.user, @order), :notice => "Order sucessfully updated" and return }
         format.json { head :no_content }
       else
-        format.html { render action: "action" }
+        format.html { render template: "/admin/products/inorder/action" }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
