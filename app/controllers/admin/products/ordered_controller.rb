@@ -12,6 +12,8 @@ class Admin::Products::OrderedController < Admin::ProductsController
   end
 
   def index
+    session[:return_url] = view_context.url_for(:back)
+
     @user = @products.first.user
     @current_debit = @user.account.debit
     @current_credit = @user.account.credit
@@ -28,5 +30,8 @@ class Admin::Products::OrderedController < Admin::ProductsController
         redirect_to :back, :alert => product.errors.full_messages and return
       end
     end
+
+    redirect_to_relative_path('ordered')
+
   end
 end

@@ -9,6 +9,17 @@ class Admin::ApplicationController < ActionController::Base
 
   private
 
+  def redirect_to_relative_path status
+    user, order = nil
+    if params[:user_id]
+      user = User.find(params[:user_id])
+    end
+    if params[:order_id]
+      order = Order.find(params[:order_id])
+    end
+    redirect_to polymorphic_path([:admin, user, order, :products], :status => status)
+  end
+
 
   # Сужение области по покупателю и заказу на основе текущего местоположения (адреса страницы) менеджера,
   # а так же таба (отдельные случаи - виртуальные табы all и checked)

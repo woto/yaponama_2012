@@ -74,7 +74,7 @@ class Admin::UsersController < Admin::ApplicationController
         format.html { redirect_to edit_admin_user_path(@user, :tab => params[:tab]), :notice => 'User was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render :action => "edit", :alert => 'Unable to save user' }
+        format.html { render :action => "edit" }
         format.json { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end

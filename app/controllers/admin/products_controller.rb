@@ -19,6 +19,7 @@ class Admin::ProductsController < Admin::ApplicationController
   end
 
   def edit
+    session[:return_url] = view_context.url_for(:back)
     @product = Product.find(params[:id])
   end
 
@@ -27,20 +28,12 @@ class Admin::ProductsController < Admin::ApplicationController
     @product = Product.find(params[:id])
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        format.html { redirect_to admin_product_path(@product), notice: 'Product info was successfully updated.' }
+        format.html { redirect_to(session[:return_url]) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  def show
-    @product = Product.find(params[:id])
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @product }
     end
   end
 

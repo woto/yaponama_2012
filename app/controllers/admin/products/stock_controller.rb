@@ -14,6 +14,7 @@ class Admin::Products::StockController < Admin::ProductsController
 
 
   def index
+    session[:return_url] = view_context.url_for(:back)
   end
 
 
@@ -24,5 +25,8 @@ class Admin::Products::StockController < Admin::ProductsController
         redirect_to :back, :alert => product.errors.full_messages and return
       end
     end
+
+    redirect_to_relative_path('stock')
+
   end
 end

@@ -19,6 +19,7 @@ class Admin::Products::SplitController < Admin::ProductsController
 
   # Keep it for running controller filters
   def index
+    session[:return_url] = view_context.url_for(:back)
   end
 
   def update
@@ -44,6 +45,8 @@ class Admin::Products::SplitController < Admin::ProductsController
       # Run callbacks, but don't validate
       product.update_attribute(:status, "cancel")
     end
+
+    redirect_to(session[:return_url])
 
   end
 

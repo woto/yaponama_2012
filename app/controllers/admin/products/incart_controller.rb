@@ -9,6 +9,7 @@ class Admin::Products::IncartController < Admin::ProductsController
   end
 
   def index
+    session[:return_url] = view_context.url_for(:back)
   end
 
   def update
@@ -18,6 +19,9 @@ class Admin::Products::IncartController < Admin::ProductsController
         redirect_to :back, :alert => product.errors.full_messages and return
       end
     end
+
+    redirect_to_relative_path('incart')
+
   end
 
 end

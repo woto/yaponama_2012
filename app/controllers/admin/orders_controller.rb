@@ -57,7 +57,7 @@ class Admin::OrdersController < Admin::ApplicationController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to admin_user_order_products_path(@order.user, @order), :notice => "Order sucessfully created" and return }
+        format.html { redirect_to_relative_path('inorder') and return }
         format.json { render json: @order, status: :created, location: @order }
       else
         format.html { render template: "/admin/products/inorder/action" }
@@ -78,7 +78,8 @@ class Admin::OrdersController < Admin::ApplicationController
       
     respond_to do |format|
     if @order.save
-        format.html { redirect_to admin_user_order_products_path(@order.user, @order), :notice => "Order sucessfully updated" and return }
+        format.html { redirect_to_relative_path('inorder') and return }
+    
         format.json { head :no_content }
       else
         format.html { render template: "/admin/products/inorder/action" }
