@@ -2,7 +2,7 @@ class Admin::TransactionsController < Admin::ApplicationController
   # GET /admin/transactions
   # GET /admin/transactions.json
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.order("id DESC").page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb

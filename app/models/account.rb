@@ -18,16 +18,18 @@ class Account < ActiveRecord::Base
     #  raise 'Unable to make both changes in account'
     #end
 
-    if changes[:credit]
-      left_transactions.build(:left_account => self, :left_money => changes[:credit][1])
-    end
+    if changes.present?
 
-    if changes[:debit]
-      right_transactions.build(:right_account => self, :right_money => changes[:debit][1])
-    end
+      # TODO check
+      if changes[:credit]# && changes[:credit][0] != changes[:credit][1]
+        left_transactions.build(:left_account => self, :left_money => changes[:credit][1] - changes[:credit][0] )
+      end
 
-    debugger
-    puts '1'
+      if changes[:debit]# && changes[:debit][0] != changes[:debit][1]
+        right_transactions.build(:right_account => self, :right_money => changes[:debit][1] - changes[:debit][0])
+      end
+
+    end
   end
 
 end

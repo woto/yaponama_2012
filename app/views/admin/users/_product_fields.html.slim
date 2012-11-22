@@ -1,6 +1,6 @@
 .nested-fields.top-space
 
-  = f.error_notification
+  = f.error_notification :message => f.error(:base)
 
   = link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?'
 
@@ -35,12 +35,12 @@
 
     #products
       = f.simple_fields_for :products do |product|
-        = render '/users/product_fields', :f => product, :counter => "", :stack => stack +1
+        = render '/users/product_fields', :f => product, :stack => stack +1
 
       - stack = stack.nil? ? 0 : stack + 1
 
       - if stack < 3
         .links
-          = link_to_add_association 'Перезаказ', f, :products, :class => "btn btn-mini btn-success", :render_options => {:locals => {:stack => stack}}, :partial => '/users/product_fields'
+          = link_to_add_association 'Перезаказать', f, :products, :class => "btn btn-mini btn-success", :render_options => {:locals => {:stack => stack}}, :partial => '/users/product_fields'
 
   hr

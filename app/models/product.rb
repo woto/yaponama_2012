@@ -4,9 +4,6 @@ class Product < ActiveRecord::Base
 
   include PingCallback
 
-  before_save :process_before_save
-  #before_destroy :process_before_destroy
-
   # Виртуальные аттрибуты
   attr_accessor :delivery_id, :delivery_cost
   attr_accessible :delivery_id, :delivery_cost
@@ -45,22 +42,34 @@ class Product < ActiveRecord::Base
   belongs_to :supplier
 
   belongs_to :product
-  has_many :products
 
-  attr_accessible :notes, :notes_invisible, :max_days, :min_days, :probability, :quantity_available, :quantity_ordered, :status, :user_id, :order_id, :created_at, :updated_at
+  attr_accessible :products_attributes
+  has_many :products, :dependent => :destroy
+  accepts_nested_attributes_for :products, :allow_destroy => true
+
+  attr_accessible :status
+  validates :status, :inclusion => {:in => Rails.configuration.products_status.select{|k, v| v['real'] == true}.keys}
+
+  scope :inwork, where("FIND_IN_SET(products.status, 'ordered,pre_supplier,post_supplier,stock')")
+  #scope :inorder, where(:status => "inorder")
+
+  attr_accessible :notes, :notes_invisible, :max_days, :min_days, :probability, :quantity_available, :quantity_ordered, :user_id, :order_id, :created_at, :updated_at
 
   attr_accessible :supplier_id
 
-  before_save :set_relational_attributes
+  #before_save :set_relational_attributes_save
+  #
+  #def set_relational_attributes_save
+  #  if self.order.present?
+  #    self.user = self.order.user
+  #  end
+  #end
 
-  def set_relational_attributes
-    if self.order.present?
-      self.user = self.order.user
-    end
-  end
+  before_save :process_before_save
 
   def process_before_save
 
+    # TODO check later
     ## Sell cost doesn't mutable
     #if self.persisted? && self.changes["sell_cost"]
     #  errors.add(:sell_cost, "Unable to change sell cost, make cancel and reorder")
@@ -78,8 +87,8 @@ class Product < ActiveRecord::Base
             when 'inorder'
             when 'cancel'
             else
-            errors.add(:status, 'Product can not change status on this')
-            return false
+              errors.add(:status, 'Product can not change status on this')
+              return false
           end
 
 
@@ -137,41 +146,67 @@ class Product < ActiveRecord::Base
             supplier.account.credit -= buy_cost * quantity_ordered
             supplier.save
           else
-            raise '3'
+            errors.add(:base, 'Product can not change status on this')
+            return false
           end
         when 'stock'
           case new_status
           when 'complete'
             user.account.credit -= sell_cost * quantity_ordered
             user.save
+          when 'cancel'
           else
-            raise '4'
+            errors.add(:base, 'Product can not change status on this')
+            return false
           end
-          #case new_status
-          #  when 'cancel'
-          #    user.account.debit -= sell_cost * quantity_ordered
-          #  when 'complete'
-          #    #user.account.debit -= sell_cost * quantity_ordered
-          #    #user.account.credit -= (sell_cost * quantity_ordered) * prepayment_percent / 100
-          #    #user.save
-          #    raise 'right count the money'
-          #  else
-          #    raise '"stock" status can be changed only to "cancel" or "complete"'
-          #end
-
 
         when 'complete'
-          debugger
-          errors.add(:status, 'Products in complete is finit state.')
-          return false
+          case new_status
+          when 'cancel'
+          else
+            errors.add(:base, 'Product can not change status on this')
+            return false
+          end
 
         when 'cancel'
-          raise '6'
-        end
-
+          errors.add(:base, 'Product can not change status on this')
+          return false
       end
+    end
   end
 
+  before_validation :set_relational_attributes_validation
+  
+  def set_relational_attributes_validation
+
+    # У новых товаров статус по-умолчанию - в корзине
+    if self.status == nil
+      self.status = "incart"
+    end
+
+    if self.products.present? && self.status != 'cancel'
+      errors.add(:base, 'Невозможно перезаказать товар, пока по нему не выставлен отказ.')
+    end
+
+    if self.user.present?
+      self.products.each do |product|
+        product.user = self.user
+      end
+    end
+
+    debugger
+    if self.order.present?
+      self.user = self.order.user
+      self.products.each do |product|
+        product.order = self.order
+        product.user = self.user
+      end
+    end
+
+  end
+
+  #before_destroy :process_before_destroy
+ 
   #def process_before_destroy
   #  unless ["incart", "inorder", "ordered"].include? status
   #    errors.add(:base, "Not in status incart, inorder or ordered.")

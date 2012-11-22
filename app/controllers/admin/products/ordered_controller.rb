@@ -19,6 +19,13 @@ class Admin::Products::OrderedController < Admin::ProductsController
     @after_credit = @current_credit + @products.inject(0){|sum, product| sum += product.sell_cost * product.quantity_ordered}
     @after_debit = @current_credit * @user.prepayment_percent / 100 + @products.inject(0){|sum, product| sum += product.sell_cost * product.quantity_ordered} * @user.prepayment_percent / 100
 
+    # TODO Это вакханалия. Переделать с использованием кеширования на уровне заказа(?)
+    @after_debit_magic = 
+      (@user.products.inwork.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => true}).sum("quantity_ordered * sell_cost").to_d) + 
+      (@user.products.inwork.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => false}).sum("quantity_ordered * sell_cost").to_d * @user.prepayment_percent / 100) +
+      (Product.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => true}).where("products.id IN (#{@products.map{|product| product.id}.join(',')})").sum("products.quantity_ordered * products.sell_cost").to_d) +
+      (Product.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => false}).where("products.id IN (#{@products.map{|product| product.id}.join(',')})").sum("products.quantity_ordered * products.sell_cost").to_d * @user.prepayment_percent / 100)
+
   end
 
   def update

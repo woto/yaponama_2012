@@ -78,8 +78,6 @@ Yaponama2012::Application.routes.draw do
       end
 
       member do
-        #match 'split' => "products/split#index"
-        #match 'split' => "products/split#index"
         get 'split' => "products/split#index"
         put 'split' => "products/split#update"
 

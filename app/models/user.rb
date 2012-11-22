@@ -139,8 +139,8 @@ class User < ActiveRecord::Base
       end
     end
 
-    if products_incart
-      products_incart.each do |product|
+    if root_products
+      root_products.each do |product|
         product.user = self
       end
     end
