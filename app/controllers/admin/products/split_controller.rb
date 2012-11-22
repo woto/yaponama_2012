@@ -1,52 +1,38 @@
+# encoding: utf-8
+#
 class Admin::Products::SplitController < Admin::ProductsController
 
   before_filter do 
-    @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+    @product = Product.find(params[:id])
 
-    if @products.blank?
-      redirect_to :back, :alert => "None products selected" and return
+    if @product.quantity_ordered <= 1
+      redirect_to :back, :alert => "Невозможно разбить 1 единицу товара на 2 партии." and return
     end
-
-    if @products.first.quantity_ordered <= 1
-      redirect_to :back, :alert => "Can not split 1 ordered product" and return
-    end
-
-    if @products.size > 1
-      redirect_to :back, :alert => "Can not split more than one product at once" and return
-    end
-
   end
 
-  # Keep it for running controller filters
   def index
-    session[:return_url] = view_context.url_for(:back)
   end
 
   def update
-    product = @products.first
-    quantity = params[:quantity].to_i
+    Rails.application.routes.recognize_path params[:return_path]
 
-    if quantity.to_i >= product.quantity_ordered
-      redirect_to :back, :alert => "Can not split because of bad quantity entered" and return
-    end
+    split_quantity_ordered = params[:product][:split_quantity_ordered].to_i
 
-    p1 = @products.first.dup
-    p2 = @products.first.dup
+    @p1 = @product.dup
+    @p2 = @product.dup
 
-    p1.product = p2.product = product
+    @p1.product = @p2.product = @product
 
-    p1.quantity_ordered = quantity
-    p2.quantity_ordered = product.quantity_ordered - quantity
+    @p1.quantity_ordered = split_quantity_ordered
+    @p2.quantity_ordered = @product.quantity_ordered - split_quantity_ordered
 
     ActiveRecord::Base.transaction do
-      p1.save
-      p2.save
-
-      # Run callbacks, but don't validate
-      product.update_attribute(:status, "cancel")
+      unless @product.update_attributes(params[:product].merge(:status => "cancel")) && @p1.save && @p2.save
+        render 'index' and return
+      end
     end
 
-    redirect_to(session[:return_url])
+    redirect_to(params[:return_path], :notice => "Товар успешно разбит на 2 партии.")
 
   end
 

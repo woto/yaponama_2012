@@ -14,7 +14,6 @@ class Admin::Products::PostSupplierController < Admin::ProductsController
 
 
   def index
-    session[:return_url] = view_context.url_for(:back)
   end
 
 

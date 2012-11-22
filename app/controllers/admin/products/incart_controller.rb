@@ -9,7 +9,6 @@ class Admin::Products::IncartController < Admin::ProductsController
   end
 
   def index
-    session[:return_url] = view_context.url_for(:back)
   end
 
   def update

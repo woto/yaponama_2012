@@ -2,7 +2,6 @@ class Admin::Products::InorderController < Admin::ProductsController
 
   def index
     products_validation
-    session[:return_url] = view_context.url_for(:back)
   end
 
 

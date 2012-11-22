@@ -10,25 +10,20 @@ class Admin::ProductsController < Admin::ApplicationController
     end
   end
 
-  def new
-    @product = Product.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @product }
-    end
-  end
-
   def edit
-    session[:return_url] = view_context.url_for(:back)
+    Rails.application.routes.recognize_path params[:return_path]
+
     @product = Product.find(params[:id])
   end
 
 
   def update
+    Rails.application.routes.recognize_path params[:return_path]
+
     @product = Product.find(params[:id])
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        format.html { redirect_to(session[:return_url]) }
+        format.html { redirect_to(params[:return_path]) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

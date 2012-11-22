@@ -27,5 +27,20 @@
     = f.input :updated_at
     = f.input :notes, :input_html => {:rows => 3}
     = f.input :notes_invisible, :input_html => {:rows => 3}
+    hr
+    = f.input :status, :collection => Rails.configuration.products_status.map {|k,v| [v['title'],k]}, :disabled => true
+    = f.association :user, :disabled => true
+    = f.association :order, :disabled => true
+    = f.association :supplier, :disabled => true
+
+    #products
+      = f.simple_fields_for :products do |product|
+        = render '/users/product_fields', :f => product, :counter => "", :stack => stack +1
+
+      - stack = stack.nil? ? 0 : stack + 1
+
+      - if stack < 3
+        .links
+          = link_to_add_association 'Перезаказ', f, :products, :class => "btn btn-mini btn-success", :render_options => {:locals => {:stack => stack}}, :partial => '/users/product_fields'
 
   hr

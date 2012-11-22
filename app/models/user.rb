@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-
+  include PingCallback
 
   attr_accessible :notes, :notes_invisible
   attr_accessible :created_at, :updated_at
@@ -8,10 +8,6 @@ class User < ActiveRecord::Base
     unless user.account
       user.account = Account.new
     end
-  end
-
-  def products_inwork
-    products.where("FIND_IN_SET(status, 'ordered,pre_supplier,post_supplier,stock')").sum("sell_cost * quantity_ordered")
   end
 
   attr_accessible :cars_attributes
@@ -27,15 +23,18 @@ class User < ActiveRecord::Base
     :conditions => ["request_id IS NULL AND car_id IS NULL"], :class_name => "Request"
   accepts_nested_attributes_for :root_requests_without_car, :allow_destroy => true
 
+  def products_inwork
+    products.where("FIND_IN_SET(status, 'ordered,pre_supplier,post_supplier,stock')").sum("sell_cost * quantity_ordered").to_d
+  end
+
+  attr_accessible :products_attributes
   has_many :products, :dependent => :destroy
+  accepts_nested_attributes_for :products, :allow_destroy => true
 
-  has_many :products_incart, :dependent => :destroy,
-    :conditions => {:status => 'incart'}, :class_name => "Product"
-
-  attr_accessible :products_incart_attributes
-  accepts_nested_attributes_for :products_incart, :allow_destroy => true
-
-  include PingCallback
+  attr_accessible :root_products_attributes
+  has_many :root_products, :dependent => :destroy,
+    :conditions => ["product_id IS NULL"], :class_name => "Product"
+  accepts_nested_attributes_for :root_products, :allow_destroy => true
 
   attr_accessible :name, :phones_attributes, :email_addresses_attributes, :postal_addresses_attributes, :names_attributes, :human_confirmation_datetime, :orders_attributes, :money_available, :money_locked, :discount, :prepayment_percent
   has_many :email_addresses, :dependent => :destroy

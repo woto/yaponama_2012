@@ -1,4 +1,7 @@
+# encoding: utf-8
+#
 class Product < ActiveRecord::Base
+
   include PingCallback
 
   before_save :process_before_save
@@ -7,6 +10,23 @@ class Product < ActiveRecord::Base
   # Виртуальные аттрибуты
   attr_accessor :delivery_id, :delivery_cost
   attr_accessible :delivery_id, :delivery_cost
+
+  # TODO remove later, when normalized situation around edit view product_fields
+  attr_accessor :_destroy
+  attr_accessible :_destroy
+
+  # SPLIT
+  attr_accessor :split_quantity_ordered
+  attr_accessible :split_quantity_ordered
+
+  validate :check_split_quantity_ordered, :on => :update, :if => Proc.new{|p| split_quantity_ordered}
+  
+  def check_split_quantity_ordered
+    if @split_quantity_ordered.to_i < 1 || @split_quantity_ordered.to_i >= quantity_ordered
+      errors.add(:split_quantity_ordered, "Wrong split_quantity_ordered value")
+    end
+  end
+  # /SPLIT
 
   attr_accessible :catalog_number, :manufacturer, :short_name, :long_name
   validates :catalog_number, :manufacturer, :presence => true
@@ -41,6 +61,12 @@ class Product < ActiveRecord::Base
 
   def process_before_save
 
+    ## Sell cost doesn't mutable
+    #if self.persisted? && self.changes["sell_cost"]
+    #  errors.add(:sell_cost, "Unable to change sell cost, make cancel and reorder")
+    #  return false
+    #end
+
     if self.changes["status"]
       old_status = self.changes["status"][0]
       new_status = self.changes["status"][1]
@@ -52,8 +78,8 @@ class Product < ActiveRecord::Base
             when 'inorder'
             when 'cancel'
             else
-              errors.add(:status, 'Products in cart in status "incart" can only change self status on "inorder" i.e. placed in order, or be destroyed')
-              return false
+            errors.add(:status, 'Product can not change status on this')
+            return false
           end
 
 
@@ -66,7 +92,7 @@ class Product < ActiveRecord::Base
               user.account.credit += sell_cost * quantity_ordered
               user.save
             else
-              errors.add(:status, "Product with status inorder can not change status to #{new_status}")
+              errors.add(:base, 'Product can not change status on this')
               return false
           end
 
@@ -81,7 +107,7 @@ class Product < ActiveRecord::Base
               user.account.credit -= sell_cost * quantity_ordered
               user.save
             else
-              errors.add(:status, "Can not")
+              errors.add(:base, 'Product can not change status on this')
               return false
             end
          
@@ -95,14 +121,14 @@ class Product < ActiveRecord::Base
             supplier.account.credit += buy_cost * quantity_ordered
             supplier.save
           else
-            raise '2'
+            errors.add(:base, 'Product can not change status on this')
+            return false
           end
         
 
         when 'post_supplier'
           case new_status
           when 'cancel'
-            raise '1'
             #user.account.credit -= sell_cost * quantity_ordered
             #supplier.account.credit -= buy_cost * quantity_ordered
             #user.save

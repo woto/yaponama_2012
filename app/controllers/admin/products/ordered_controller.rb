@@ -12,8 +12,6 @@ class Admin::Products::OrderedController < Admin::ProductsController
   end
 
   def index
-    session[:return_url] = view_context.url_for(:back)
-
     @user = @products.first.user
     @current_debit = @user.account.debit
     @current_credit = @user.account.credit

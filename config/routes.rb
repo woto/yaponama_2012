@@ -44,9 +44,6 @@ Yaponama2012::Application.routes.draw do
         match 'remember'
 
         # TODO How to make it DRY?
-        get 'split' => "products/split#index"
-        put 'split' => "products/split#update"
-
         get 'incart' => "products/incart#index"
         put 'incart' => "products/incart#update"
 
@@ -68,6 +65,9 @@ Yaponama2012::Application.routes.draw do
         get 'complete' => "products/complete#index"
         put 'complete' => "products/complete#update"
 
+        get 'return' => "products/return#index"
+        put 'return' => "products/return#update"
+
         get 'inorder' => "products/inorder#index"
         match 'order_select' => "products/inorder#order_select"
 
@@ -78,6 +78,10 @@ Yaponama2012::Application.routes.draw do
       end
 
       member do
+        #match 'split' => "products/split#index"
+        #match 'split' => "products/split#index"
+        get 'split' => "products/split#index"
+        put 'split' => "products/split#update"
 
         match 'action' => "products/inorder#action"
         match 'doit' => "products/inorder#doit_update"

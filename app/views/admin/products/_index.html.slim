@@ -3,19 +3,20 @@
 table.table.table-striped
   thead
     tr
-      th = model_class.human_attribute_name(:id)
       th = model_class.human_attribute_name(:catalog_number)
       th = model_class.human_attribute_name(:manufacturer)
       th = model_class.human_attribute_name(:short_name)
-      th = model_class.human_attribute_name(:long_name)
+      th = model_class.human_attribute_name(:buy_cost)
+      th = model_class.human_attribute_name(:sell_cost)
       th = model_class.human_attribute_name(:quantity_available)
       th = model_class.human_attribute_name(:probability)
       th = model_class.human_attribute_name(:min_days)
       th = model_class.human_attribute_name(:max_days)
-      th = check_box_tag '', '', false, :id => 'check_uncheck_products'
+      th 
+        center = check_box_tag '', '', false, :id => 'check_uncheck_products'
     tr
-      th = model_class.human_attribute_name(:buy_cost)
-      th = model_class.human_attribute_name(:sell_cost)
+      th  
+      th  
       th = model_class.human_attribute_name(:notes)
       th = model_class.human_attribute_name(:notes_invisible)
       th = model_class.human_attribute_name(:user)
@@ -25,21 +26,26 @@ table.table.table-striped
       th = model_class.human_attribute_name(:updated_at)
       th =t '.actions', :default => t("helpers.actions")
   tbody
+
     - @products.each do |product|
       tr
-        td = link_to product.id, admin_product_path(product)
         td = product.catalog_number
         td = product.manufacturer
-        td = product.short_name
-        td = truncate product.long_name
+        td
+          a href="#" rel="tooltip" title="#{product.long_name}" #{product.short_name}
+        td = "#{product.buy_cost} x #{product.quantity_ordered} = #{product.buy_cost * product.quantity_ordered} р."
+        td = "#{product.sell_cost} x #{product.quantity_ordered} = #{product.sell_cost * product.quantity_ordered} р."
         td = "#{product.quantity_available} шт."
         td = "#{product.probability} %"
         td = "#{product.min_days} дн."
         td = "#{product.max_days} дн."
-        td = link_to Rails.configuration.products_status[product.status]['title'], admin_user_products_path(product.user, :status => product.status)
+        td
+          = hidden_field_tag "product_ids[#{product.id}]", "0"
+          center =' link_to Rails.configuration.products_status[product.status]['title'], admin_user_products_path(product.user, :status => product.status)
+          center = check_box_tag "product_ids[#{product.id}]", "1", (session[:products] ? session[:products][product.id.to_s] == '1' : false), :class => 'product'
       tr
-        td = "#{product.buy_cost} x #{product.quantity_ordered} = #{product.buy_cost * product.quantity_ordered}"
-        td = "#{product.sell_cost} x #{product.quantity_ordered} = #{product.sell_cost * product.quantity_ordered}"
+        td  
+        td  
         td = product.notes
         td = product.notes_invisible
         td = link_to product.user.to_label, edit_admin_user_path(product.user)
@@ -48,13 +54,14 @@ table.table.table-striped
         td = l product.created_at, :format => :short
         td = l product.updated_at, :format => :short
         td
-          = hidden_field_tag "product_ids[#{product.id}]", "0"
-          center = check_box_tag "product_ids[#{product.id}]", "1", (session[:products] ? session[:products][product.id.to_s] == '1' : false), :class => 'product'
-          br
           .btn-group
-            a.btn.dropdown-toggle data-toggle="dropdown" href="#"
-              = t '.action', :default => t('helpers.actions')
+            a.btn.btn-primary.dropdown-toggle data-toggle="dropdown" href="#"
+              =' t '.action', :default => t('helpers.actions')
               span.caret
             ul.dropdown-menu.pull-right
-              li = link_to 'Разбить', split_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id])
-              li = link_to 'Перезаказать', "#"
+              - Rails.configuration.products_status.select{|k, v| v['real'] == true}.each do |k, v|
+                li = link_to v["action"], polymorphic_path([k.to_sym, :admin, :products], :user_id => params[:user_id], :order_id => params[:order_id])
+              li.divider
+              li = link_to 'Разбить', split_admin_product_path(product, :return_path => request.fullpath)
+              li = link_to 'Перезаказать [TODO]', "#"
+              li = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_product_path(product, :return_path => request.fullpath)
