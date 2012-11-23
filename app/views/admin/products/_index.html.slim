@@ -60,7 +60,7 @@ table.table.table-striped
               span.caret
             ul.dropdown-menu.pull-right
               - Rails.configuration.products_status.select{|k, v| v['real'] == true}.each do |k, v|
-                li = link_to v["action"], polymorphic_path([k.to_sym, :admin, :products], :user_id => params[:user_id], :order_id => params[:order_id])
+                li = link_to v["action"], polymorphic_path([k.to_sym, :admin, product], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => request.fullpath)
               li.divider
               li = link_to 'Разбить', split_admin_product_path(product, :return_path => request.fullpath)
               li = link_to 'Перезаказать [TODO]', "#"

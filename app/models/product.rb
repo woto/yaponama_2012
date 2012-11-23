@@ -169,8 +169,12 @@ class Product < ActiveRecord::Base
           end
 
         when 'cancel'
-          errors.add(:base, 'Product can not change status on this')
-          return false
+          case new_status
+          when 'incart'
+          else
+            errors.add(:base, 'Product can not change status on this')
+            return false
+          end
       end
     end
   end
@@ -194,14 +198,13 @@ class Product < ActiveRecord::Base
       end
     end
 
-    debugger
-    if self.order.present?
-      self.user = self.order.user
-      self.products.each do |product|
-        product.order = self.order
-        product.user = self.user
-      end
-    end
+    #if self.order.present?
+    #  self.user = self.order.user
+    #  self.products.each do |product|
+    #    product.order = self.order
+    #    product.user = self.user
+    #  end
+    #end
 
   end
 

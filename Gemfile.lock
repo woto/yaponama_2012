@@ -8,9 +8,9 @@ GIT
 
 GIT
   remote: https://github.com/nathanvda/cocoon
-  revision: 22cfa784d46ae178318dd14bb175300bd05b7e21
+  revision: a7a9147ad40e3f899fcf437568b507ad27a690a0
   specs:
-    cocoon (1.1.0)
+    cocoon (1.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -88,7 +88,7 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.2.0)
     libv8 (3.3.10.4)
-    listen (0.5.3)
+    listen (0.6.0)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
