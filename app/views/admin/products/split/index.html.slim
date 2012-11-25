@@ -1,24 +1,19 @@
 ul.breadcrumb
   li
-    = link_to @product.user.to_label, edit_admin_user_path(@product.user)
+    = link_to @products.first.user.to_label, edit_admin_user_path(@products.first.user)
     span.divider
       |
         /
   li Разбитие товара
 
 
-= simple_form_for @product, :url => split_admin_product_path(@product, :user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]) do |f|
-
-  = f.error_notification
-
-  / Needed for split controller. I.e. when we have only one @product
-  - if @product.present?
-    - @products = [@product]
+= form_tag split_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]), :method => :put do |f|
 
   = render :partial => 'products/index'
 
-  = f.input :split_quantity_ordered
+  = text_field_tag :quantity
+
   br  
-  = link_to "Назад", :back, :class => "btn"
+  = link_to "Назад", params[:return_path], :class => "btn"
   |  
   = submit_tag "Ок", :class => "btn btn-success"

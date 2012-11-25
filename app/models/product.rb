@@ -12,19 +12,6 @@ class Product < ActiveRecord::Base
   attr_accessor :_destroy
   attr_accessible :_destroy
 
-  # SPLIT
-  attr_accessor :split_quantity_ordered
-  attr_accessible :split_quantity_ordered
-
-  validate :check_split_quantity_ordered, :on => :update, :if => Proc.new{|p| split_quantity_ordered}
-  
-  def check_split_quantity_ordered
-    if @split_quantity_ordered.to_i < 1 || @split_quantity_ordered.to_i >= quantity_ordered
-      errors.add(:split_quantity_ordered, "Wrong split_quantity_ordered value")
-    end
-  end
-  # /SPLIT
-
   attr_accessible :catalog_number, :manufacturer, :short_name, :long_name
   validates :catalog_number, :manufacturer, :presence => true
 
