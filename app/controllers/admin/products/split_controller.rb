@@ -23,7 +23,7 @@ class Admin::Products::SplitController < Admin::ProductsController
   def index
   end
 
-  def update
+  def create
     Rails.application.routes.recognize_path params[:return_path]
     product = @products.first
     quantity = params[:quantity].to_i

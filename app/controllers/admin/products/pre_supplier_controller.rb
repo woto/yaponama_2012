@@ -17,7 +17,7 @@ class Admin::Products::PreSupplierController < Admin::ProductsController
   end
 
 
-  def update
+  def create
     @products.each do |product|
       product.status = 'pre_supplier'
       unless product.save

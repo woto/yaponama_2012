@@ -1,6 +1,5 @@
 Yaponama2012::Application.routes.draw do
 
-
   #get "build/show"
   #get "build/update"
   #get "build/create"
@@ -37,59 +36,53 @@ Yaponama2012::Application.routes.draw do
       end
     end
 
-    resources :products do
-
-      collection do
-
-        match 'remember'
-
-        # TODO How to make it DRY?
-        get 'incart' => "products/incart#index"
-        put 'incart' => "products/incart#update"
-
-        get 'ordered' => "products/ordered#index"
-        put 'ordered' => "products/ordered#update"
-
-        get 'cancel' => "products/cancel#index"
-        put 'cancel' => "products/cancel#update"
-        
-        get 'pre_supplier' => "products/pre_supplier#index"
-        put 'pre_supplier' => "products/pre_supplier#update"
-
-        get 'post_supplier' => "products/post_supplier#index"
-        put 'post_supplier' => "products/post_supplier#update"
-
-        get 'stock' => "products/stock#index"
-        put 'stock' => "products/stock#update"
-
-        get 'complete' => "products/complete#index"
-        put 'complete' => "products/complete#update"
-
-        get 'return' => "products/return#index"
-        put 'return' => "products/return#update"
-
-        get 'inorder' => "products/inorder#index"
-        match 'order_select' => "products/inorder#order_select"
-
-        match 'doit' => "products/inorder#doit_create"
-
-        delete 'multiple_destroy' => "products#multiple_destroy"
-
-      end
-
-      member do
-        get 'split' => "products/split#index"
-        put 'split' => "products/split#update"
-
-        match 'action' => "products/inorder#action"
-        match 'doit' => "products/inorder#doit_update"
-
+    namespace :products do
+      resources :incart
+      resources :ordered
+      resources :cancel
+      resources :pre_supplier
+      resources :post_supplier
+      resources :stock
+      resources :complete
+      resources :return
+      resources :split
+      resources :inorder do
+        member do
+          match 'action'
+        end
+        collection do
+          match 'order_select'
+        end
       end
     end
-resources :names
+
+    resources :products do
+
+      scope :module => "products" do 
+        resources :incart
+        resources :ordered
+        resources :cancel
+        resources :pre_supplier
+        resources :post_supplier
+        resources :stock
+        resources :complete
+        resources :return
+        resources :split
+        resources :inorder
+      end
+
+      collection do
+        match 'remember'
+        delete 'multiple_destroy' => "products#multiple_destroy"
+      end
+      
+    end
+
+    resources :names
     resources :spare_infos
     resources :time_zones
     resources :email_addresses
+
     resources :emails do
       member do
         get 'show_body'
@@ -98,11 +91,13 @@ resources :names
         get 'show_html_part_sanitized'
       end
     end
+
     resources :users do
       collection do
         post 'filter' => "users#index"
       end
     end
+
     resources :requests
     resources :accounts
     resources :transactions

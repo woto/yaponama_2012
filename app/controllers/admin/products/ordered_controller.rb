@@ -28,7 +28,7 @@ class Admin::Products::OrderedController < Admin::ProductsController
 
   end
 
-  def update
+  def create
     @products.each do |product|
       product.status = 'ordered'
       unless product.save

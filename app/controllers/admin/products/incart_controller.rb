@@ -11,7 +11,7 @@ class Admin::Products::IncartController < Admin::ProductsController
   def index
   end
 
-  def update
+  def create
     @products.each do |product|
       product.status = 'incart'
       unless product.save

@@ -7,7 +7,7 @@ ul.breadcrumb
   li Разбитие товара
 
 
-= form_tag split_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]), :method => :put do |f|
+= form_tag admin_products_split_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]) do |f|
 
   = render :partial => 'products/index'
 

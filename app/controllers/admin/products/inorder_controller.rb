@@ -11,7 +11,7 @@ class Admin::Products::InorderController < Admin::ProductsController
     @order = Order.where(:id => params[:new_order_id]).first
 
     if @order.present? || params[:new_order_id] == 'new'
-      redirect_to action_admin_product_path((@order.present? && @order.persisted?) ? @order : 'new', :user_id => params[:user_id], :order_id => params[:order_id]) and return
+      redirect_to action_admin_products_inorder_path((@order.present? && @order.persisted?) ? @order : 'new', :user_id => params[:user_id], :order_id => params[:order_id]) and return
     else
       redirect_to polymorphic_path([:inorder, :admin, :products], :user_id => params[:user_id], :order_id => params[:order_id]), :alert => 'Please choose order or create new' and return
     end

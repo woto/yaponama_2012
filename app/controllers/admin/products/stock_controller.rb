@@ -17,7 +17,7 @@ class Admin::Products::StockController < Admin::ProductsController
   end
 
 
-  def update
+  def create
     @products.each do |product|
       product.status = 'stock'
       unless product.save

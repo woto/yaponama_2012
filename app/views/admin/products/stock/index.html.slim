@@ -6,7 +6,7 @@ ul.breadcrumb
         /
   li Смена статуса на "Получено"
 
-= form_tag stock_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id]), :method => :put do |f|
+= form_tag admin_products_stack_index_path(:user_id => params[:user_id], :order_id => params[:order_id]) do |f|
 
   = render :partial => 'products/index'
 

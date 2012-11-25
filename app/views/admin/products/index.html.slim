@@ -26,7 +26,7 @@ div.btn-group.dropup
     span.caret
   ul.dropdown-menu
     - Rails.configuration.products_status.select{|k, v| v['real'] == true}.each do |k, v|
-        li = link_to v["action"], polymorphic_path([k.to_sym, :admin, :products], :user_id => params[:user_id], :order_id => params[:order_id])
+        li = link_to v["action"], polymorphic_path([:admin, :products, k.to_sym, :index], :user_id => params[:user_id], :order_id => params[:order_id])
     li.divider
     li = link_to t('.destroy', :default => t("helpers.links.destroy")), multiple_destroy_admin_products_path, :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } 
     li = link_to 'Разбить', split_admin_products_path(:return_path => request.fullpath)

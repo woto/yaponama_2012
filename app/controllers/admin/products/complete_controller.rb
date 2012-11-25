@@ -17,7 +17,7 @@ class Admin::Products::CompleteController < Admin::ProductsController
   end
 
 
-  def update
+  def create
     @products.each do |product|
       product.status = 'complete'
       unless product.save

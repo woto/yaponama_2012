@@ -17,7 +17,7 @@ class Admin::Products::PostSupplierController < Admin::ProductsController
   end
 
 
-  def update
+  def create
     supplier = Supplier.where(:id => params[:supplier_id]).first
 
     if supplier.blank?

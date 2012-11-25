@@ -13,7 +13,7 @@ class Admin::Products::CancelController < Admin::ProductsController
   end
 
 
-  def update
+  def create
     @products.each do |product|
       product.status = 'cancel'
       unless product.save
