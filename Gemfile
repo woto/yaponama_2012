@@ -21,6 +21,21 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :development, :test do
+  gem 'debugger'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'cucumber-rails', :require => false
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'email_spec'
+  gem 'timecop'
+  gem 'launchy'
+end
+
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
@@ -34,9 +49,6 @@ gem 'jquery-rails'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
-# To use debugger
-gem 'debugger'
 
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
