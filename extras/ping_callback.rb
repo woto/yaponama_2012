@@ -3,21 +3,32 @@
 #
 module PingCallback
 
-  ActionController::Base.class_eval {
-    def process(*)
-      logger.debug 'Очистка Thread.current[:pinged] = false'
-      Thread.current[:pinged] = false
-      super
-    end
-  }
+  # TODO check заменил на after_commit
+  #ActionController::Base.class_eval {
+  #  def process(*)
+  #    logger.debug 'Очистка Thread.current[:pinged] = false'
+  #    Thread.current[:pinged] = false
+  #    super
+  #  end
+  #}
 
   def self.included(base)
     base.instance_eval{
       after_save :ping_callback
       after_destroy :ping_callback
+      after_commit :flush
     }
 
+    # TODO check Закомментировал process, сейчас попробую используя after_commit
+    def flush
+      logger.debug 'Очистка Thread.current[:pinged] = false'
+      Thread.current[:pinged] = false
+    end
+
+
     def ping_callback
+      # TODO Добавить товары и прочие ассоциации
+      #
       logger.info "Текущее состояние Thread.current[:pinged] #{Thread.current[:pinged]}"
       if self.class == User 
         unless self.frozen?
