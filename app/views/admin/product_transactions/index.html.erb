@@ -1,0 +1,71 @@
+<%- model_class = ProductTransaction -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:log_id) %></th>
+      <th><%= model_class.human_attribute_name(:log_catalog_number) %></th>
+      <th><%= model_class.human_attribute_name(:log_manufacturer) %></th>
+      <th><%= model_class.human_attribute_name(:log_status) %></th>
+      <th><%= model_class.human_attribute_name(:log_notes) %></th>
+      <th><%= model_class.human_attribute_name(:log_notes_invisible) %></th>
+      <th><%= model_class.human_attribute_name(:log_user_id) %></th>
+      <th><%= model_class.human_attribute_name(:log_order_id) %></th>
+      <th><%= model_class.human_attribute_name(:log_supplier_id) %></th>
+      <th><%= model_class.human_attribute_name(:log_quantity_ordered) %></th>
+      <th><%= model_class.human_attribute_name(:log_quantity_available) %></th>
+      <th><%= model_class.human_attribute_name(:log_probability) %></th>
+      <th><%= model_class.human_attribute_name(:log_min_days) %></th>
+      <th><%= model_class.human_attribute_name(:log_max_days) %></th>
+      <th><%= model_class.human_attribute_name(:log_buy_cost) %></th>
+      <th><%= model_class.human_attribute_name(:log_sell_cost) %></th>
+      <th><%= model_class.human_attribute_name(:log_short_name) %></th>
+      <th><%= model_class.human_attribute_name(:log_long_name) %></th>
+      <th><%= model_class.human_attribute_name(:log_product_id) %></th>
+      <th><%= model_class.human_attribute_name(:log_created_at) %></th>
+      <th><%= model_class.human_attribute_name(:log_updated_at) %></th>
+      <th><%= model_class.human_attribute_name(:product_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:updated_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @product_transactions.each do |product_transaction| %>
+      <tr>
+        <td><%= link_to product_transaction.id, admin_product_transaction_path(product_transaction) %></td>
+        <td><%= product_transaction.log_catalog_number %></td>
+        <td><%= product_transaction.log_manufacturer %></td>
+        <td><%= product_transaction.log_status %></td>
+        <td><%= product_transaction.log_notes %></td>
+        <td><%= product_transaction.log_notes_invisible %></td>
+        <td><%= product_transaction.log_user_id %></td>
+        <td><%= product_transaction.log_order_id %></td>
+        <td><%= product_transaction.log_supplier_id %></td>
+        <td><%= product_transaction.log_quantity_ordered %></td>
+        <td><%= product_transaction.log_quantity_available %></td>
+        <td><%= product_transaction.log_probability %></td>
+        <td><%= product_transaction.log_min_days %></td>
+        <td><%= product_transaction.log_max_days %></td>
+        <td><%= product_transaction.log_buy_cost %></td>
+        <td><%= product_transaction.log_sell_cost %></td>
+        <td><%= product_transaction.log_short_name %></td>
+        <td><%= product_transaction.log_long_name %></td>
+        <td><%= product_transaction.log_product_id %></td>
+        <td><%=l product_transaction.log_created_at if product_transaction.log_created_at %></td>
+        <td><%=l product_transaction.log_updated_at if product_transaction.log_updated_at  %></td>
+        <td><%= product_transaction.product_id %></td>
+        <td><%=l product_transaction.created_at if product_transaction.created_at %></td>
+        <td><%=l product_transaction.updated_at if product_transaction.updated_at  %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_product_transaction_path(product_transaction), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")), admin_product_transaction_path(product_transaction), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")), new_admin_product_transaction_path, :class => 'btn btn-primary' %>

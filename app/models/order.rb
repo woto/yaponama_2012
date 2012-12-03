@@ -24,19 +24,32 @@ class Order < ActiveRecord::Base
 
   has_many :products_inorder, :dependent => :destroy,
     :conditions => {:products => {:status => 'inorder'}}, :class_name => "Product",
-    :after_add => Proc.new{|o, p| p.status = 'inorder'}
+    :after_add => :after_add_inorder
+  
+  def after_add_inorder p
+    p.status = 'inorder'
+    p.status_will_change!
+  end
+
   attr_accessible :products_inorder_attributes
   accepts_nested_attributes_for :products_inorder, :allow_destroy => true
 
   has_many :products_ordered, :dependent => :destroy,
     :conditions => {:products => {:status => 'ordered'}}, :class_name => "Product",
-    :after_add => Proc.new{|o, p| d.status = 'ordered'}
+    :after_add => :after_add_ordered
+
+  def after_add_ordered
+    p.status = 'ordered'
+    p.status_will_change!
+  end
+
   attr_accessible :products_ordered_attributes
   accepts_nested_attributes_for :products_ordered, :allow_destroy => true
 
   #has_many :products_inwork, :dependent => :destroy,
   #  :conditions => {:products => {:status => 'inwork'}}, :class_name => "Product",
-  #  :after_add => Proc.new{|i, p| p.status = 'inwork'}
+  #  # TODO если буду раскомментировать блок, то переделать как вверху
+  #  :after_add => Proc.new{|i, p| p.status = 'inwork'; d.status_will_change!}
   #attr_accessible :products_inwork_attributes
   #accepts_nested_attributes_for :products_inwork, :allow_destroy => true
 

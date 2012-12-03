@@ -4,6 +4,9 @@ class Product < ActiveRecord::Base
 
   include PingCallback
 
+  # Продукты по которым ожидается движение
+  scope :active, where("STRPOS(?, status) > 0", "ordered,pre_supplier,post_supplier,stock")
+
   # Виртуальные аттрибуты
   attr_accessor :delivery_id, :delivery_cost
   attr_accessible :delivery_id, :delivery_cost
@@ -37,7 +40,8 @@ class Product < ActiveRecord::Base
   attr_accessible :status
   validates :status, :inclusion => {:in => Rails.configuration.products_status.select{|k, v| v['real'] == true}.keys}
 
-  scope :inwork, where("FIND_IN_SET(products.status, 'ordered,pre_supplier,post_supplier,stock')")
+  scope :inwork, where("STRPOS(?, products.status) > 0", "ordered,pre_supplier,post_supplier,stock")
+
   #scope :inorder, where(:status => "inorder")
 
   attr_accessible :notes, :notes_invisible, :max_days, :min_days, :probability, :quantity_available, :quantity_ordered, :user_id, :order_id, :created_at, :updated_at
@@ -52,20 +56,41 @@ class Product < ActiveRecord::Base
   #  end
   #end
 
+
+  # Product Transaction
+  #
+  has_many :product_transactions
+  before_save :log_product_transactions
+
+  def log_product_transactions
+    if self.changes
+      product_transaction = self.product_transactions.build
+      h = {}
+      self.changes.map{|k,v| h["log_#{k}"] = v[1]}
+      product_transaction.assign_attributes(h)
+    end
+  end
+  #
+  # /Product Transaction
+
+  #before_save :buy_cost_changes
+  #
+  #def buy_cost_changes
+  #  if self.persisted? && self.changes["buy_cost"]
+  #    errors.add(:buy_cost, "Unable to change buy cost, make cancel and reorder")
+  #    return false
+  #  end
+  #end
+
   before_save :process_before_save
 
   def process_before_save
 
-    # TODO check later
-    ## Sell cost doesn't mutable
-    #if self.persisted? && self.changes["sell_cost"]
-    #  errors.add(:sell_cost, "Unable to change sell cost, make cancel and reorder")
-    #  return false
-    #end
-
+    # TODO В принципе тогда это можно потом убрать
     if self.changes["status"]
       old_status = self.changes["status"][0]
       new_status = self.changes["status"][1]
+    # До сюда
 
       case old_status
 
@@ -74,7 +99,7 @@ class Product < ActiveRecord::Base
             when 'inorder'
             when 'cancel'
             else
-              errors.add(:status, 'Product can not change status on this')
+              errors.add(:status, "Product can not change status from #{old_status} to #{new_status}")
               return false
           end
 
@@ -85,10 +110,10 @@ class Product < ActiveRecord::Base
             when 'inorder'
             when 'cancel'
             when 'ordered'
-              user.account.credit += sell_cost * quantity_ordered
+              user.account(true).credit += (sell_cost * quantity_ordered)
               user.save
             else
-              errors.add(:base, 'Product can not change status on this')
+              errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
               return false
           end
 
@@ -96,62 +121,73 @@ class Product < ActiveRecord::Base
         when 'ordered'
           case new_status
             when 'cancel'
-              user.account.credit -= sell_cost * quantity_ordered
+              user.account(true).credit -= (sell_cost * quantity_ordered)
               user.save
             when 'pre_supplier'
             when 'inorder'
-              user.account.credit -= sell_cost * quantity_ordered
+              user.account(true).credit -= (sell_cost * quantity_ordered)
               user.save
             else
-              errors.add(:base, 'Product can not change status on this')
+              errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
               return false
             end
-         
+
 
         when 'pre_supplier'
           case new_status
           when 'cancel'
-            user.account.credit -= sell_cost * quantity_ordered
-            user.save
+            raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
+            #  #user.account.credit -= sell_cost * quantity_ordered
+            #  #user.save
           when 'post_supplier'
-            supplier.account.credit += buy_cost * quantity_ordered
+            supplier.account(true).credit += (buy_cost * quantity_ordered)
             supplier.save
           else
-            errors.add(:base, 'Product can not change status on this')
+            errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
             return false
           end
-        
+
 
         when 'post_supplier'
           case new_status
           when 'cancel'
+            raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
             #user.account.credit -= sell_cost * quantity_ordered
             #supplier.account.credit -= buy_cost * quantity_ordered
             #user.save
             #supplier.save
           when 'stock'
-            supplier.account.credit -= buy_cost * quantity_ordered
-            supplier.save
+          when 'post_supplier'
+            ActiveRecord::Base.transaction do
+              if self.supplier_id_changed?
+                supplier_was = Supplier.find(changes["supplier_id"][0])
+                supplier_was.account(true).credit -= (buy_cost * quantity_ordered) 
+                supplier_was.save
+                supplier.account(true).credit += (buy_cost * quantity_ordered)
+                supplier.save
+              end
+            end
           else
-            errors.add(:base, 'Product can not change status on this')
+            errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
             return false
           end
+
         when 'stock'
           case new_status
-          when 'complete'
-            user.account.credit -= sell_cost * quantity_ordered
-            user.save
           when 'cancel'
+            raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
+          when 'complete'
           else
-            errors.add(:base, 'Product can not change status on this')
+            errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
             return false
           end
 
         when 'complete'
           case new_status
           when 'cancel'
+            raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
           else
-            errors.add(:base, 'Product can not change status on this')
+            errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
             return false
           end
 
@@ -159,9 +195,24 @@ class Product < ActiveRecord::Base
           case new_status
           when 'incart'
           else
-            errors.add(:base, 'Product can not change status on this')
+            errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
             return false
           end
+      end
+    # Если не происходила смена статуса
+    else
+      if sell_cost_changed? || quantity_ordered_changed?
+        if ["ordered", "pre_supplier", "post_supplier", "stock", "complete", "cancel"].include? status
+          user.account(true).credit += ( (sell_cost * quantity_ordered) - (sell_cost_was * quantity_ordered_was) )
+          user.save
+        end
+      end
+
+      if buy_cost_changed? || quantity_ordered_changed?
+        if ["post_supplier", "stock", "complete", "cancel"].include? status
+          supplier.account(true).credit += ( (buy_cost * quantity_ordered) - (buy_cost_was * quantity_ordered_was) )
+          supplier.save
+        end
       end
     end
   end

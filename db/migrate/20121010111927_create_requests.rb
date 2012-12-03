@@ -8,6 +8,11 @@ class CreateRequests < ActiveRecord::Migration
       t.text :notes
       t.string :invisible
 
+      # TODO
+      # Вернул для совместимости с видом, хотя из миграций уже удалил
+      # если не ошибаюсь, то используется в экспериментах с сверткой/разверткой
+      t.boolean :visible, :default => true
+
       t.timestamps
     end
     add_index :requests, :user_id

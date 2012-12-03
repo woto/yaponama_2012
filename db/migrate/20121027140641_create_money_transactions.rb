@@ -1,12 +1,12 @@
-class CreateTransactions < ActiveRecord::Migration
+class CreateMoneyTransactions < ActiveRecord::Migration
   def change
-    create_table :transactions do |t|
+    create_table :money_transactions do |t|
       t.references :left_account
       t.references :right_account
       t.boolean :left_real
       t.boolean :right_real
-      t.integer :left_money
-      t.integer :right_money
+      t.decimal :left_money, :precision => 8, :scale => 2
+      t.decimal :right_money, :precision => 8, :scale => 2
       t.text :notes
       t.references :documentable, :polymorphic => true
 

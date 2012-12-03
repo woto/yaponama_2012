@@ -40,6 +40,8 @@ Yaponama2012::Application.routes.draw do
       resources :incart
       resources :ordered
       resources :cancel
+      resources :client_cancel
+      resources :supplier_cancel
       resources :pre_supplier
       resources :post_supplier
       resources :stock
@@ -57,11 +59,13 @@ Yaponama2012::Application.routes.draw do
     end
 
     resources :products do
-
+      resources :product_transactions
       scope :module => "products" do 
         resources :incart
         resources :ordered
         resources :cancel
+        resources :client_cancel
+        resources :supplier_cancel
         resources :pre_supplier
         resources :post_supplier
         resources :stock
@@ -100,7 +104,8 @@ Yaponama2012::Application.routes.draw do
 
     resources :requests
     resources :accounts
-    resources :transactions
+    resources :money_transactions
+    resources :product_transactions
     resources :suppliers
 
   end

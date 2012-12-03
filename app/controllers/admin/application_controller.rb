@@ -36,6 +36,8 @@ class Admin::ApplicationController < ActionController::Base
     case status
       when *Rails.configuration.products_status.select{|k, v| v['real']}.keys
         products = products.where(:status => status)
+      when 'active'
+        products = products.active
       when 'checked'
         products = products.where('id IN (?)', session[:products] && session[:products].keys)
     end
@@ -68,6 +70,26 @@ class Admin::ApplicationController < ActionController::Base
 
   end
 
+  # Проверка принадлежности продуктов одному поставщику
+  def products_belongs_to_one_supplier_validation products
+
+    errors = []
+
+    unless products.all?{|p| p.supplier}
+      errors << "At least one product does not have supplier"
+    end
+
+    first_supplier = products.first.supplier
+
+    products.each do |product|
+      unless product.supplier == first_supplier
+        errors << "Products must belongs to one supplier, but there is: '#{product.supplier.to_label}' and '#{first_supplier.to_label}'"
+      end
+    end
+
+    errors
+  end
+
   # Проверка принадлежности продуктов одному покупателю
   def products_belongs_to_one_user_validation products
 
@@ -77,7 +99,7 @@ class Admin::ApplicationController < ActionController::Base
 
     products.each do |product|
       unless product.user == first_user
-        errors << "Inordered products must be of one user, but there is: '#{product.user.to_label}' and '#{first_user.to_label}'"
+        errors << "Selected products must be of one user, but there is: '#{product.user.to_label}' and '#{first_user.to_label}'"
       end
     end
 

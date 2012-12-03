@@ -79,7 +79,6 @@ class Admin::OrdersController < Admin::ApplicationController
     respond_to do |format|
     if @order.save
         format.html { redirect_to_relative_path('inorder') and return }
-    
         format.json { head :no_content }
       else
         format.html { render template: "/admin/products/inorder/action" }

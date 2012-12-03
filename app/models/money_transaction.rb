@@ -1,4 +1,4 @@
-class Transaction < ActiveRecord::Base
+class MoneyTransaction < ActiveRecord::Base
   attr_accessible :left_money, :right_money, :left_real, :right_real, :left_account, :right_account
   attr_accessible :left_account_id, :right_account_id
   belongs_to :left_account, :class_name => "Account"

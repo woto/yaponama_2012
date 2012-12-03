@@ -41,7 +41,7 @@ table.table.table-striped
         td = "#{product.max_days} дн."
         td
           = hidden_field_tag "product_ids[#{product.id}]", "0"
-          center =' link_to Rails.configuration.products_status[product.status]['title'], admin_user_products_path(product.user, :status => product.status)
+          center =' link_to Rails.configuration.products_status[product.status]['title'], admin_product_product_transactions_path(product)
           center = check_box_tag "product_ids[#{product.id}]", "1", (session[:products] ? session[:products][product.id.to_s] == '1' : false), :class => 'product'
       tr
         td  

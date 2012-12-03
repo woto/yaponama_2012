@@ -3,26 +3,41 @@ class Admin::Products::StockController < Admin::ProductsController
   before_filter do 
     @products = products_user_order_tab_scope( Product.scoped, 'checked' )
 
-    unless @products.all?{|product| product.status == "post_supplier"}
-      redirect_to :back, :alert => "At least one product not in status post_supplier"
-    end
-
     if @products.blank?
       redirect_to :back, :alert => "None products selected" and return
+    end
+
+    unless @products.all?{|product| product.status == "post_supplier"}
+      redirect_to :back, :alert => "At least one product not in status post_supplier" and return
+    end
+
+    if ( errors = products_belongs_to_one_supplier_validation(@products) ).present?
+      redirect_to :back, :alert => errors and return
     end
   end
 
 
   def index
+    @products_buy_cost = @products.inject(0){|summ, p| summ += p.buy_cost * p.quantity_ordered}
   end
 
 
   def create
-    @products.each do |product|
-      product.status = 'stock'
-      unless product.save
-        redirect_to :back, :alert => product.errors.full_messages and return
+    supplier_credit = params[:supplier_credit].to_d
+    supplier_debit = params[:supplier_debit].to_d
+
+    ActiveRecord::Base.transaction do
+      @products.each do |product|
+        product.status = 'stock'
+        product.status_will_change!
+        unless product.save
+          redirect_to :back, :alert => product.errors.full_messages and return
+        end
       end
+
+      @products.first.supplier.account.credit -= supplier_credit
+      @products.first.supplier.account.debit -= supplier_debit
+      @products.first.supplier.account.save
     end
 
     redirect_to_relative_path('stock')

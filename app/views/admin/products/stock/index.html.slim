@@ -6,15 +6,15 @@ ul.breadcrumb
         /
   li Смена статуса на "Получено"
 
-= form_tag admin_products_stack_index_path(:user_id => params[:user_id], :order_id => params[:order_id]) do |f|
+= form_tag admin_products_stock_index_path(:user_id => params[:user_id], :order_id => params[:order_id]) do |f|
 
   = render :partial => 'products/index'
 
   p Уменьшить сумму долга перед поставщиком на:
-  = text_field_tag :aaa
+  = text_field_tag :supplier_credit, @products_buy_cost
 
   p Уменьшить сумму фактической предоплаты поставщику на:
-  = text_field_tag :bbb
+  = text_field_tag :supplier_debit, @products_buy_cost
 
   br  
   = link_to "Назад", :back, :class => "btn"

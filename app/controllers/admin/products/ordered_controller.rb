@@ -2,6 +2,11 @@ class Admin::Products::OrderedController < Admin::ProductsController
   before_filter do 
     @products = products_user_order_tab_scope( Product.scoped, 'checked' )
 
+    # TODO товары должны принадлежать одному покупателю иначе от кого мы берем предоплату и в пользу кого?
+    if ( errors = products_belongs_to_one_user_validation @products ).present?
+      redirect_to :back, :alert => errors and return
+    end
+
     if @products.blank?
       redirect_to :back, :alert => "None products selected" and return
     end
@@ -29,11 +34,19 @@ class Admin::Products::OrderedController < Admin::ProductsController
   end
 
   def create
-    @products.each do |product|
-      product.status = 'ordered'
-      unless product.save
-        redirect_to :back, :alert => product.errors.full_messages and return
+    client_debit = params[:client_debit].to_d
+
+    ActiveRecord::Base.transaction do
+      @products.each do |product|
+        product.status = 'ordered'
+        product.status_will_change!
+        unless product.save
+          redirect_to :back, :alert => product.errors.full_messages and return
+        end
       end
+
+      @products.first.user.account.debit += client_debit
+      @products.first.user.save
     end
 
     redirect_to_relative_path('ordered')

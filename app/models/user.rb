@@ -4,12 +4,6 @@ class User < ActiveRecord::Base
   attr_accessible :notes, :notes_invisible
   attr_accessible :created_at, :updated_at
 
-  after_initialize  do |user|
-    unless user.account
-      user.account = Account.new
-    end
-  end
-
   attr_accessible :cars_attributes
   has_many :cars, :dependent => :destroy
   accepts_nested_attributes_for :cars, :allow_destroy => true 
@@ -24,7 +18,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :root_requests_without_car, :allow_destroy => true
 
   def products_inwork
-    products.where("FIND_IN_SET(status, 'ordered,pre_supplier,post_supplier,stock')").sum("sell_cost * quantity_ordered").to_d
+    products.where("STRPOS(?, status) > 0", "ordered,pre_supplier,post_supplier,stock").sum("sell_cost * quantity_ordered").to_d
   end
 
   attr_accessible :products_attributes
@@ -59,8 +53,10 @@ class User < ActiveRecord::Base
 
   # Financial
   attr_accessible :account_attributes
-  has_one :account, :as => :accountable
+  has_one :account, :as => :accountable, :dependent => :destroy
   accepts_nested_attributes_for :account
+  validates :account, :presence => true
+
 
   def to_label
     "#{names.collect(&:name).join(', ')}"

@@ -1,0 +1,57 @@
+<%- model_class = ProductTransaction -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:catalog_number) %>:</strong></dt>
+  <dd><%= @product_transaction.catalog_number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:manufacturer) %>:</strong></dt>
+  <dd><%= @product_transaction.manufacturer %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
+  <dd><%= @product_transaction.status %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:notes) %>:</strong></dt>
+  <dd><%= @product_transaction.notes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:notes_invisible) %>:</strong></dt>
+  <dd><%= @product_transaction.notes_invisible %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @product_transaction.user_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:order_id) %>:</strong></dt>
+  <dd><%= @product_transaction.order_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:supplier_id) %>:</strong></dt>
+  <dd><%= @product_transaction.supplier_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:quantity_ordered) %>:</strong></dt>
+  <dd><%= @product_transaction.quantity_ordered %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:quantity_available) %>:</strong></dt>
+  <dd><%= @product_transaction.quantity_available %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:probability) %>:</strong></dt>
+  <dd><%= @product_transaction.probability %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:min_days) %>:</strong></dt>
+  <dd><%= @product_transaction.min_days %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:max_days) %>:</strong></dt>
+  <dd><%= @product_transaction.max_days %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:buy_cost) %>:</strong></dt>
+  <dd><%= @product_transaction.buy_cost %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:sell_cost) %>:</strong></dt>
+  <dd><%= @product_transaction.sell_cost %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:short_name) %>:</strong></dt>
+  <dd><%= @product_transaction.short_name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:long_name) %>:</strong></dt>
+  <dd><%= @product_transaction.long_name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:product_id) %>:</strong></dt>
+  <dd><%= @product_transaction.product_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:transaction_product_id) %>:</strong></dt>
+  <dd><%= @product_transaction.transaction_product_id %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              product_transactions_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_product_transaction_path(@product_transaction), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              product_transaction_path(@product_transaction),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

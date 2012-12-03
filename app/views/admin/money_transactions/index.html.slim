@@ -1,4 +1,4 @@
-- model_class = Transaction
+- model_class = MoneyTransaction
 
 .page-header
   h1
@@ -21,7 +21,7 @@ table.table.table-striped
   tbody
     - @transactions.each do |transaction|
       tr
-        td = link_to transaction.id, admin_transaction_path(transaction)
+        td = link_to transaction.id, admin_money_transaction_path(transaction)
         td = transaction.left_account_id
         td = transaction.right_account_id
         td = transaction.left_real
@@ -30,9 +30,9 @@ table.table.table-striped
         td = ((transaction.right_money && transaction.right_money > 0) ? "+" : "" ) + transaction.right_money.to_s
         td =l transaction.created_at
         td
-          =' link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_transaction_path(transaction), :class => 'btn btn-mini'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_transaction_path(transaction), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+          =' link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_money_transaction_path(transaction), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_money_transaction_path(transaction), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
-= link_to t('.new', :default => t("helpers.links.new")), new_admin_transaction_path, :class => 'btn btn-primary'
+= link_to t('.new', :default => t("helpers.links.new")), new_admin_money_transaction_path, :class => 'btn btn-primary'
 
 = paginate @transactions

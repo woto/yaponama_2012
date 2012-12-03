@@ -1,0 +1,110 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Catalog number:</b>
+  <%= @admin_product_transaction.catalog_number %>
+</p>
+
+<p>
+  <b>Manufacturer:</b>
+  <%= @admin_product_transaction.manufacturer %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @admin_product_transaction.status %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @admin_product_transaction.notes %>
+</p>
+
+<p>
+  <b>Notes invisible:</b>
+  <%= @admin_product_transaction.notes_invisible %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @admin_product_transaction.user_id %>
+</p>
+
+<p>
+  <b>Order:</b>
+  <%= @admin_product_transaction.order_id %>
+</p>
+
+<p>
+  <b>Created at:</b>
+  <%= @admin_product_transaction.created_at %>
+</p>
+
+<p>
+  <b>Updated at:</b>
+  <%= @admin_product_transaction.updated_at %>
+</p>
+
+<p>
+  <b>Supplier:</b>
+  <%= @admin_product_transaction.supplier_id %>
+</p>
+
+<p>
+  <b>Quantity ordered:</b>
+  <%= @admin_product_transaction.quantity_ordered %>
+</p>
+
+<p>
+  <b>Quantity available:</b>
+  <%= @admin_product_transaction.quantity_available %>
+</p>
+
+<p>
+  <b>Probability:</b>
+  <%= @admin_product_transaction.probability %>
+</p>
+
+<p>
+  <b>Min days:</b>
+  <%= @admin_product_transaction.min_days %>
+</p>
+
+<p>
+  <b>Max days:</b>
+  <%= @admin_product_transaction.max_days %>
+</p>
+
+<p>
+  <b>Buy cost:</b>
+  <%= @admin_product_transaction.buy_cost %>
+</p>
+
+<p>
+  <b>Sell cost:</b>
+  <%= @admin_product_transaction.sell_cost %>
+</p>
+
+<p>
+  <b>Short name:</b>
+  <%= @admin_product_transaction.short_name %>
+</p>
+
+<p>
+  <b>Long name:</b>
+  <%= @admin_product_transaction.long_name %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%= @admin_product_transaction.product_id %>
+</p>
+
+<p>
+  <b>Transaction product:</b>
+  <%= @admin_product_transaction.transaction_product_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_product_transaction_path(@admin_product_transaction) %> |
+<%= link_to 'Back', admin_product_transactions_path %>

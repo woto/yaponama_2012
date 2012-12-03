@@ -5,6 +5,8 @@ class CreateNames < ActiveRecord::Migration
       t.string :creation_reason
       t.string :invisible
       t.references :user
+      # TODO аналогично как и в каком-то другом месте, позже разобраться с необходимостью этого поля
+      t.boolean :visible, :default => true
 
       t.timestamps
     end

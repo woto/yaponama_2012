@@ -40,6 +40,10 @@ class Admin::UsersController < Admin::ApplicationController
     unless @user
       @user = User.new(DEFAULT_USER_ATTRIBUTES)
       @user.creation_reason = :manager
+
+      unless @user.account
+        @user.build_account
+      end
     end
 
     render "edit"

@@ -7,8 +7,8 @@ class Admin::Products::PostSupplierController < Admin::ProductsController
       redirect_to :back, :alert => "None products selected" and return
     end
 
-    unless @products.all?{|product| product.status == 'pre_supplier'}
-      redirect_to :back, :alert => 'At least one product not in status pre_supplier'
+    unless @products.all?{|p| ['pre_supplier', 'post_supplier'].include? p.status}
+      redirect_to :back, :alert => 'At least one product not in status pre_supplier or post_supplier'
     end
   end
 
@@ -27,6 +27,7 @@ class Admin::Products::PostSupplierController < Admin::ProductsController
     @products.each do |product|
       product.supplier = supplier
       product.status = 'post_supplier'
+      product.status_will_change!
       unless product.save
         redirect_to :back, :alert => product.errors.full_messages and return
       end
