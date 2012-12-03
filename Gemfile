@@ -5,7 +5,7 @@ gem 'rails', '3.2.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'pg'
 
 gem 'json'
 
@@ -24,13 +24,13 @@ end
 group :development, :test do
   gem 'debugger'
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 group :test do
   gem 'cucumber-rails', :require => false
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
   gem 'email_spec'
   gem 'timecop'
   gem 'launchy'
