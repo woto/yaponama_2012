@@ -40,6 +40,7 @@ class Product < ActiveRecord::Base
   attr_accessible :status
   validates :status, :inclusion => {:in => Rails.configuration.products_status.select{|k, v| v['real'] == true}.keys}
 
+  # Необходимо для подсчета суммы внесения предоплаты для запуска заказа в работу (при переводе в статус ordered)
   scope :inwork, where("STRPOS(?, products.status) > 0", "ordered,pre_supplier,post_supplier,stock")
 
   #scope :inorder, where(:status => "inorder")

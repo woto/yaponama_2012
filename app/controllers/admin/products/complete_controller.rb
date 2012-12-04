@@ -35,8 +35,8 @@ class Admin::Products::CompleteController < Admin::ProductsController
         end
       end
 
-      @products.first.user.account.credit -= credit
-      @products.first.user.account.debit -= debit
+      @products.first.user.account.credit -= client_credit
+      @products.first.user.account.debit -= client_debit
       @products.first.user.account.save
 
     end

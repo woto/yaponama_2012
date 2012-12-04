@@ -33,7 +33,10 @@ FactoryGirl.define do
     quantity_ordered { generate(:random_quantity_ordered) }
     buy_cost{ generate(:random_buy_cost) }
     sell_cost{ generate(:random_sell_cost) }
-    association :user, factory: :full_filled_user
+
+    factory :product_with_user do
+      association :user, factory: :full_filled_user
+    end
   end
 
 end

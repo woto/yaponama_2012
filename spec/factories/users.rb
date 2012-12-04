@@ -28,7 +28,7 @@ FactoryGirl.define do
           u.names = Random.new.rand(5).times.map{|n| FactoryGirl.build(:name, user:  u)}
           u.phones = Random.new.rand(5).times.map{|n| FactoryGirl.build(:phone, user: u)}
           u.account = FactoryGirl.build(:account, accountable: u)
-
+          u.products = Random.new.rand(5).times.map{|n| FactoryGirl.build(:product, user: u)}
           #u.account.debit = 1
         end
 

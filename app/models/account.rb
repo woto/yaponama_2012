@@ -18,8 +18,6 @@ class Account < ActiveRecord::Base
     #  raise 'Unable to make both changes in account'
     #end
 
-    debugger
-
     if changes.present?
 
       # TODO Why we need additional compare changes ???
