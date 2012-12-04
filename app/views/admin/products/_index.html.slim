@@ -48,7 +48,9 @@ table.table.table-striped
         td  
         td = product.notes
         td = product.notes_invisible
-        td = link_to product.user.to_label, edit_admin_user_path(product.user)
+        td 
+          = link_to product.user.to_label, edit_admin_user_path(product.user)
+          = render :partial => "/users/button", :locals => {:user_id => product.user_id}
         td = product.order.try(:to_label)
         td = product.supplier.try(:to_label)
         td = l product.created_at, :format => :short
