@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20121125160933) do
     t.string   "komplektaciya"
     t.text     "notes_invisible"
     t.integer  "user_id"
+    t.boolean  "visible"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "request_id"

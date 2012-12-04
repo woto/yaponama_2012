@@ -25,10 +25,10 @@ FactoryGirl.define do
       factory :full_filled_user do |u|
 
         after(:build) do |u, evaluator|
-          u.names = [FactoryGirl.build(:name, :user => u)]
-          u.phones = [FactoryGirl.build(:phone, :user => u)]
-          debugger
-          puts '1'
+          u.names = Random.new.rand(5).times.map{|n| FactoryGirl.build(:name, user:  u)}
+          u.phones = Random.new.rand(5).times.map{|n| FactoryGirl.build(:phone, user: u)}
+          u.account = FactoryGirl.build(:account, accountable: u)
+
           #u.account.debit = 1
         end
 

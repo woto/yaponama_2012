@@ -3,7 +3,7 @@
 FactoryGirl.define do
 
   sequence :random_name do |n|
-    "Покупатель #{n}"
+    "Имя #{n}"
   end
 
   factory :name do
