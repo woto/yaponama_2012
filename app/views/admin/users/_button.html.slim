@@ -1,28 +1,10 @@
-.dropdown
-  a#dLabel.dropdown-toggle role="button" data-toggle="dropdown" data-target="#" href="/page.html"
-    |  Dropdown 
-    b.caret
-  ul.dropdown-menu role="menu" aria-labelledby="dLabel"
-    li
-      a href="#" a
-    li
-      a href="#" b
-    li
-      a href="#" c
-
-
-- if params[:controller] == 'admin/users'
-  - user_id = params[:id]
-- elsif params[:user_id]
-  - user_id = params[:user_id]
-
-- if user_id
-  - user = User.where(:id => user_id).first
+- user = User.where(:id => user_id).first
 
 - if user.present?
-  div.btn-group
-    a.btn.dropdown-toggle data-toggle="dropdown" href="#"
-      i.icon-user
+  .dropdown
+    a.dropdown-toggle role="button" data-toggle="dropdown" data-target="#" href="#"
+      =' user_label
+      i.icon-user style="display: inline-block"
     ul.dropdown-menu
       li.dropdown-submenu
         = link_to "Товары", admin_user_products_path(user_id)

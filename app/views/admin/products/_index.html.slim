@@ -12,8 +12,7 @@ table.table.table-striped
       th = model_class.human_attribute_name(:probability)
       th = model_class.human_attribute_name(:min_days)
       th = model_class.human_attribute_name(:max_days)
-      th 
-        center = check_box_tag '', '', false, :id => 'check_uncheck_products'
+      th Движение
     tr
       th  
       th  
@@ -29,7 +28,10 @@ table.table.table-striped
 
     - @products.each do |product|
       tr
-        td = product.catalog_number
+        td 
+          = product.catalog_number
+          = hidden_field_tag "product_ids[#{product.id}]", "0"
+          center = check_box_tag "product_ids[#{product.id}]", "1", (session[:products] ? session[:products][product.id.to_s] == '1' : false), :class => 'product'
         td = product.manufacturer
         td
           a href="#" rel="tooltip" title="#{product.long_name}" #{product.short_name}
@@ -40,17 +42,13 @@ table.table.table-striped
         td = "#{product.min_days} дн."
         td = "#{product.max_days} дн."
         td
-          = hidden_field_tag "product_ids[#{product.id}]", "0"
           center =' link_to Rails.configuration.products_status[product.status]['title'], admin_product_product_transactions_path(product)
-          center = check_box_tag "product_ids[#{product.id}]", "1", (session[:products] ? session[:products][product.id.to_s] == '1' : false), :class => 'product'
       tr
         td  
         td  
         td = product.notes
         td = product.notes_invisible
-        td 
-          = link_to product.user.to_label, edit_admin_user_path(product.user)
-          = render :partial => "/users/button", :locals => {:user_id => product.user_id}
+        td = render :partial => "/users/button", :locals => {:user_id => product.user_id, :user_label => product.user.to_label}
         td = product.order.try(:to_label)
         td = product.supplier.try(:to_label)
         td = l product.created_at, :format => :short

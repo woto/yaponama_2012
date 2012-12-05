@@ -1,11 +1,24 @@
 - model_class = User
 
 .page-header
-  h1
-    =' t '.title', :default => model_class.model_name.human.pluralize
-    = link_to t('.new', :default => t("helpers.links.new")), edit_admin_user_path('new'), :class => 'btn btn-primary'
+  =' t '.title', :default => model_class.model_name.human.pluralize
 
-= paginate @users
+#toolbar
+  #toolbar-affix data-spy="affix" data-offset-top="60"
+    #toolbar-affix-inner.clearfix
+      .pull-left
+        .margin-on-left
+          .btn-group.right-space
+            button.btn =' check_box_tag '', '', false, :id => 'check_uncheck_products'
+            button.btn.dropdown-toggle data-toggle="dropdown"
+              span.caret
+            ul.dropdown-menu
+              li : a href="#" Все
+              li : a href="#" Ни одного
+          = link_to t('.new', :default => t("helpers.links.new")), edit_admin_user_path('new'), :class => 'btn btn-primary'
+      .pull-right
+        .margin-on-right
+          = paginate @users
 
 table.table.table-striped
   thead

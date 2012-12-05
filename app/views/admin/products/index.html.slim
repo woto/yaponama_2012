@@ -1,35 +1,44 @@
 - if params[:user_id] || params[:order_id] 
   .page-header
-    h1
-      - if params[:user_id]
-        =' link_to User.find(params[:user_id]).to_label, edit_admin_user_path(params[:user_id])
-      - if params[:order_id]
-        =' "Заказ: #{Order.find(params[:order_id]).to_label}"
-      = render :partial => "/users/button"
-
+    - if params[:user_id]
+      = render :partial => "/users/button", :locals => {:user_id => params[:user_id], :user_label => User.find(params[:user_id]).to_label}
+    - if params[:order_id]
+      =' "Заказ: #{Order.find(params[:order_id]).to_label}"
 
 - tab_links "myTab", Rails.configuration.products_status  do |hint|
-
-  .alert.alert-info
-    = hint 
 
   = form_tag remember_admin_products_path, :remote => true
 
   / = hidden_field_tag 'remembered_products'
 
-  = paginate @products
+  #toolbar
+    #toolbar-affix data-spy="affix" data-offset-top="60"
+      #toolbar-affix-inner.clearfix
+        .margin-on-left
+          .pull-left.right-space
+            .btn-group
+              button.btn =' check_box_tag '', '', false, :id => 'check_uncheck_products'
+              button.btn.dropdown-toggle data-toggle="dropdown"
+                span.caret
+              ul.dropdown-menu
+                li : a href="#" Все
+                li : a href="#" Ни одного
+          .pull-left.right-space
+            .btn-group
+              button.btn.btn-primary.dropdown-toggle data-toggle="dropdown"
+                =' t('.action', :default => t('helpers.actions')) 
+                span.caret
+              ul.dropdown-menu
+                - Rails.configuration.products_status.select{|k, v| v['real'] == true}.each do |k, v|
+                    li = link_to v["action"], polymorphic_path([:admin, :products, k.to_sym, :index], :user_id => params[:user_id], :order_id => params[:order_id])
+                li.divider
+                li = link_to t('.destroy', :default => t("helpers.links.destroy")), multiple_destroy_admin_products_path, :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } 
+                li = link_to 'Разбить', admin_products_split_index_path(:return_path => request.fullpath)
+        .margin-on-right
+          .pull-right
+            = paginate @products
 
   = render :partial => 'index'
 
-div.btn-group.dropup
-  button.btn.btn-primary.dropdown-toggle data-toggle="dropdown"
-    =' t('.action', :default => t('helpers.actions')) 
-    span.caret
-  ul.dropdown-menu
-    - Rails.configuration.products_status.select{|k, v| v['real'] == true}.each do |k, v|
-        li = link_to v["action"], polymorphic_path([:admin, :products, k.to_sym, :index], :user_id => params[:user_id], :order_id => params[:order_id])
-    li.divider
-    li = link_to t('.destroy', :default => t("helpers.links.destroy")), multiple_destroy_admin_products_path, :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } 
-    li = link_to 'Разбить', admin_products_split_index_path(:return_path => request.fullpath)
-
-= paginate @products
+  .alert.alert-info
+    = hint 
