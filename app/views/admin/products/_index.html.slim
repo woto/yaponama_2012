@@ -23,7 +23,7 @@ table.table.table-striped
       th = model_class.human_attribute_name(:supplier)
       th = model_class.human_attribute_name(:created_at)
       th = model_class.human_attribute_name(:updated_at)
-      th =t '.actions', :default => t("helpers.actions")
+      th
   tbody
 
     - @products.each do |product|
@@ -54,14 +54,3 @@ table.table.table-striped
         td = l product.created_at, :format => :short
         td = l product.updated_at, :format => :short
         td
-          .btn-group
-            a.btn.btn-primary.dropdown-toggle data-toggle="dropdown" href="#"
-              =' t '.action', :default => t('helpers.actions')
-              span.caret
-            ul.dropdown-menu.pull-right
-              - Rails.configuration.products_status.select{|k, v| v['real'] == true}.each do |k, v|
-                li = link_to v["action"], polymorphic_path([:admin, product, k.to_sym, :index], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => request.fullpath)
-              li.divider
-              li = link_to 'Разбить', admin_product_split_index_path(product, :return_path => request.fullpath)
-              li = link_to 'Перезаказать [TODO]', "#"
-              li = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_product_path(product, :return_path => request.fullpath)

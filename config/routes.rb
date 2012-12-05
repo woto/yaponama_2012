@@ -37,6 +37,7 @@ Yaponama2012::Application.routes.draw do
     end
 
     namespace :products do
+      resources :edit
       resources :incart
       resources :ordered
       resources :cancel
@@ -60,21 +61,6 @@ Yaponama2012::Application.routes.draw do
 
     resources :products do
       resources :product_transactions
-      scope :module => "products" do 
-        resources :incart
-        resources :ordered
-        resources :cancel
-        resources :client_cancel
-        resources :supplier_cancel
-        resources :pre_supplier
-        resources :post_supplier
-        resources :stock
-        resources :complete
-        resources :return
-        resources :split
-        resources :inorder
-      end
-
       collection do
         match 'remember'
         delete 'multiple_destroy' => "products#multiple_destroy"
