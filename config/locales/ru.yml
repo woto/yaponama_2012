@@ -44,7 +44,7 @@ ru:
         long_name: Всевозможные названия
         catalog_number: Артикул
         manufacturer: Производитель
-        quantity_available: Доступно штук
+        quantity_available: Дост. шт.
         probability: Вероятность
         min_days: Мин. срок
         max_days: Макс. срок
