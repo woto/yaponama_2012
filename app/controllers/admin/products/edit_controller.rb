@@ -16,13 +16,12 @@ class Admin::Products::EditController < Admin::ProductsController
   end
 
   def create
-    debugger
     Rails.application.routes.recognize_path params[:return_path]
     product = @products.first
 
     respond_to do |format|
       if product.update_attributes(params[:product])
-        format.html { redirect_to(params[:return_path]) }
+        format.html { redirect_to(params[:return_path], :notice => "Product sucessfully updated.") }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
