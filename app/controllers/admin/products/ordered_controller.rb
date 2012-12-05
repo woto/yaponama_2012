@@ -30,7 +30,6 @@ class Admin::Products::OrderedController < Admin::ProductsController
       (@user.products.inwork.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => false}).sum("quantity_ordered * sell_cost").to_d * @user.prepayment_percent / 100) +
       (Product.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => true}).where("products.id IN (#{@products.map{|product| product.id}.join(',')})").sum("products.quantity_ordered * products.sell_cost").to_d) +
       (Product.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => false}).where("products.id IN (#{@products.map{|product| product.id}.join(',')})").sum("products.quantity_ordered * products.sell_cost").to_d * @user.prepayment_percent / 100)
-
   end
 
   def create

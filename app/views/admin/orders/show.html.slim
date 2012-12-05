@@ -1,4 +1,5 @@
 - model_class = Order
+
 .page-header
   h1 =t '.title', :default => model_class.model_name.human
 
@@ -45,11 +46,11 @@ dl.dl-horizontal
 
   dt 
     strong
-      = model_class.human_attribute_name(:delivery_id) 
+      = model_class.human_attribute_name(:delivery) 
       | :
   dd.clearfix
-    = @order.delivery_id
-
+    - if @order.delivery_id
+      = @order.delivery.to_label
 
   dt 
     strong
