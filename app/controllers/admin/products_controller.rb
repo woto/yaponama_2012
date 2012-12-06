@@ -47,7 +47,9 @@ class Admin::ProductsController < Admin::ApplicationController
   def remember
     session[:products] = {} unless session[:products]
     session[:products] = (session[:products].merge params[:product_ids]).select{|k, v| v == '1'}
-    render :nothing => true
+    respond_to do |format|
+      format.js
+    end
   end
 
 end

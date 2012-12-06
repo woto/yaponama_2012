@@ -41,8 +41,6 @@ Yaponama2012::Application.routes.draw do
       resources :incart
       resources :ordered
       resources :cancel
-      resources :client_cancel
-      resources :supplier_cancel
       resources :pre_supplier
       resources :post_supplier
       resources :stock

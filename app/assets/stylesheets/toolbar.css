@@ -31,3 +31,7 @@
 #toolbar-affix-inner {
   margin-left: 0
 }
+
+#toolbar-status {
+  margin-top: 5px;
+}

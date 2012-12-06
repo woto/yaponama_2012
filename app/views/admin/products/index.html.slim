@@ -7,7 +7,7 @@
 
 - tab_links "myTab", Rails.configuration.products_status  do |hint|
 
-  = form_tag remember_admin_products_path, :remote => true
+  = form_tag remember_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id]), :remote => true
 
   / = hidden_field_tag 'remembered_products'
 
@@ -36,6 +36,8 @@
                 li = link_to 'Разбить', admin_products_split_index_path(:return_path => request.fullpath)
                 li = link_to 'Перезаказать [TODO]', "#"
                 li = link_to t('.edit', :default => t("helpers.links.edit")), admin_products_edit_index_path(:return_path => request.fullpath)
+        .pull-left
+          div#toolbar-status = render :partial => "products/toolbar_status"
         .margin-on-right
           .pull-right
             = paginate @products
