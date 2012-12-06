@@ -31,7 +31,7 @@ table.table.table-striped
         td 
           = product.catalog_number
           = hidden_field_tag "product_ids[#{product.id}]", "0"
-          center = check_box_tag "product_ids[#{product.id}]", "1", (session[:products] ? session[:products][product.id.to_s] == '1' : false), :class => 'product'
+          center = check_box_tag "product_ids[#{product.id}]", "1", (session[:products] ? session[:products][product.id.to_s] == '1' : false), :class => 'item'
         td = product.manufacturer
         td
           a href="#" rel="tooltip" title="#{product.long_name}" #{product.short_name}
@@ -48,7 +48,7 @@ table.table.table-striped
         td  
         td = product.notes
         td = product.notes_invisible
-        td = render :partial => "/users/button", :locals => {:user_id => product.user_id, :user_label => product.user.to_label}
+        td = render :partial => "shared/button", :locals => {:user_id => product.user_id, :user_label => product.user.to_label}
         td 
           - if product.order
             = link_to admin_order_path(product.order) do 

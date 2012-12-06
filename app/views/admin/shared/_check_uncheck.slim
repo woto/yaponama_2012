@@ -1,0 +1,8 @@
+.btn-group
+  button.btn =' check_box_tag '', '', false, :id => 'check-uncheck-items'
+  button.btn.dropdown-toggle data-toggle="dropdown"
+    span.caret
+  ul.dropdown-menu
+    li : a#check-items href="#" Все
+    li : a#uncheck-items href="#" Ни одного
+

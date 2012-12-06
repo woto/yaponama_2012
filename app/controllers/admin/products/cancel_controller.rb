@@ -1,7 +1,6 @@
 class Admin::Products::CancelController < Admin::ProductsController
 
   before_filter do 
-    raise 'TODO rewrite'
     @products = products_user_order_tab_scope( Product.scoped, 'checked' )
 
     if @products.blank?

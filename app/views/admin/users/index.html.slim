@@ -9,12 +9,7 @@
       .pull-left
         .margin-on-left
           .btn-group.right-space
-            button.btn =' check_box_tag '', '', false, :id => 'check_uncheck_products'
-            button.btn.dropdown-toggle data-toggle="dropdown"
-              span.caret
-            ul.dropdown-menu
-              li : a href="#" Все
-              li : a href="#" Ни одного
+            = render :partial => "shared/check_uncheck"
           = link_to t('.new', :default => t("helpers.links.new")), edit_admin_user_path('new'), :class => 'btn btn-primary'
       .pull-right
         .margin-on-right
@@ -38,7 +33,10 @@ table.table.table-striped
   tbody
     - @users.each do |user|
       tr
-        td = link_to user.id, admin_user_path(user)
+        td 
+          = link_to user.id, admin_user_path(user)
+          = hidden_field_tag "user_ids[#{user.id}]", "0"
+          center = check_box_tag "user_ids[#{user.id}]", "1", (session[:users] ? session[:users][user.id.to_s] == '1' : false), :class => 'item'
         td = user.time_zone.to_label if user.time_zone.present?
         td = user.notes_invisible
         td = link_to(user.names.collect(&:name).join(', '), edit_admin_user_path(user, :tab => :names))

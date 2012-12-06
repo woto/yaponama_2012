@@ -1,6 +1,6 @@
 - model_class = User
 
 .page-header
-  = render :partial => "/users/button", :locals => {:user_id => @user.id, :user_label => @user.new_record? ? "Новый покупатель" :  @user.to_label}
+  = render :partial => "shared/button", :locals => {:user_id => @user.id, :user_label => @user.new_record? ? "Новый покупатель" :  @user.to_label}
 
 = render :partial => 'form'

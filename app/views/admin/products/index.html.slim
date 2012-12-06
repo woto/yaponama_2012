@@ -1,7 +1,7 @@
 - if params[:user_id] || params[:order_id] 
   .page-header
     - if params[:user_id]
-      = render :partial => "/users/button", :locals => {:user_id => params[:user_id], :user_label => User.find(params[:user_id]).to_label}
+      = render :partial => "shared/button", :locals => {:user_id => params[:user_id], :user_label => User.find(params[:user_id]).to_label}
     - if params[:order_id]
       =' "Заказ: #{Order.find(params[:order_id]).to_label}"
 
@@ -16,13 +16,7 @@
       #toolbar-affix-inner.clearfix
         .margin-on-left
           .pull-left.right-space
-            .btn-group
-              button.btn =' check_box_tag '', '', false, :id => 'check_uncheck_products'
-              button.btn.dropdown-toggle data-toggle="dropdown"
-                span.caret
-              ul.dropdown-menu
-                li : a href="#" Все
-                li : a href="#" Ни одного
+            = render :partial => "shared/check_uncheck"
           .pull-left.right-space
             .btn-group
               button.btn.btn-primary.dropdown-toggle data-toggle="dropdown"
