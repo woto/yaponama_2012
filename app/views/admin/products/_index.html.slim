@@ -42,7 +42,9 @@ table.table.table-striped
         td = "#{product.min_days} дн."
         td = "#{product.max_days} дн."
         td
-          center =' link_to Rails.configuration.products_status[product.status]['title'], admin_product_product_transactions_path(product)
+          center 
+            = link_to admin_product_product_transactions_path(product) do
+              span class="label label-#{product.status}" =' Rails.configuration.products_status[product.status]['title']
       tr
         td  
         td  
@@ -54,9 +56,11 @@ table.table.table-striped
             = link_to admin_order_path(product.order) do 
               =' product.order.to_label 
               i.icon-shopping-cart
-              
-
-        td = product.supplier.try(:to_label)
+        td 
+          - if product.supplier
+            = link_to admin_supplier_path(product.supplier) do
+              =' product.supplier.to_label
+              i.icon-road
         td = l product.created_at, :format => :short
         td = l product.updated_at, :format => :short
         td

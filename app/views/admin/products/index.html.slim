@@ -24,7 +24,11 @@
                 span.caret
               ul.dropdown-menu
                 - Rails.configuration.products_status.select{|k, v| v['real'] == true}.each do |k, v|
-                    li = link_to v["action"], polymorphic_path([:admin, :products, k.to_sym, :index], :user_id => params[:user_id], :order_id => params[:order_id])
+                  li 
+                    = link_to polymorphic_path([:admin, :products, k.to_sym, :index], :user_id => params[:user_id], :order_id => params[:order_id]) do
+                      =' v["action"]
+                      - if v['badge'].present?
+                        span class="badge badge-#{k}" = v['badge']
                 li.divider
                 li = link_to t('.destroy', :default => t("helpers.links.destroy")), multiple_destroy_admin_products_path, :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } 
                 li = link_to 'Разбить', admin_products_split_index_path(:return_path => request.fullpath)

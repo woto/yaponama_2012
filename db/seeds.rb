@@ -18,8 +18,8 @@ end
 
 # TODO этого здесь не должно быть
 russian_post = DeliveryCategory.create(:name => "Почта России")
-Delivery.create(name:  "Наложенный платеж", available: true, delivery_category: russian_post)
-Delivery.create(name:  "Предоплата за доставку", full_prepayment_required: true, available: true, delivery_category: russian_post)
+Delivery.create!(name:  "Наложенный платеж", available: true, delivery_category: russian_post, full_prepayment_required: false, phone_required: false, name_required: false, postal_address_required: false, delivery_cost_required: false)
+Delivery.create!(name:  "Предоплата за доставку", available: true, delivery_category: russian_post, full_prepayment_required: true, phone_required: false, name_required: false, postal_address_required: false, delivery_cost_required: false)
 
 supplier = Supplier.new(name: "8-я миля")
 supplier.build_account

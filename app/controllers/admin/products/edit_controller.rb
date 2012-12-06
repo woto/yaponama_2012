@@ -24,7 +24,7 @@ class Admin::Products::EditController < Admin::ProductsController
         format.html { redirect_to(params[:return_path], :notice => "Product sucessfully updated.") }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "index" }
         format.json { render json: product.errors, status: :unprocessable_entity }
       end
     end

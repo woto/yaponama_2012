@@ -12,7 +12,12 @@ module Admin::ApplicationHelper
             css_class = "active"  
             hint = v['hint']
           end
-          concat(content_tag(:li, link_to(v['title'], url_for(:status => k)), :class => css_class))
+
+          label = ''
+          if v['badge'].present?
+            label = content_tag(:span, v['badge'], :class => "badge badge-#{k}")
+          end
+          concat(content_tag(:li, link_to(v['title'].html_safe + "   " + label , url_for(:status => k)), :class => css_class))
         end
       end
     end

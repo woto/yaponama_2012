@@ -1,0 +1,49 @@
+.label-all, .badge-all {
+  background-color: white;
+  color: black;
+}
+
+.label-active, .badge-active {
+  background-color: white;
+  color: black;
+}
+
+.label-checked, .badge-checked {
+  background-color: white;
+  color: black;
+}
+
+.label-incart, .badge-incart {
+  background-color: #999999;
+}
+
+.label-inorder, .badge-inorder {
+  background-color: #468847;
+}
+
+.label-ordered, .badge-ordered {
+  background-color: #B94A48;
+}
+
+.label-pre_supplier, .badge-pre_supplier {
+  background-color: #3A87AD;
+}
+
+.label-post_supplier, .badge-post_supplier {
+  background-color: #F89406;
+}
+
+.label-stock, .badge-stock{
+  background-color: #333;
+}
+
+
+.label-complete, .badge-complete{
+  background-color: white;
+  color: black;
+}
+
+.label-cancel, .badge-cancel {
+  background-color: white;
+  color: black;
+}
