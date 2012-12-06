@@ -67,4 +67,4 @@ gem 'active_attr'
 gem 'slim-rails'
 gem 'thin'
 gem 'rmagick'
-gem 'wicked'
+gem "cancan"
