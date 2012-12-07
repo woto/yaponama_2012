@@ -5,6 +5,7 @@ class AddRequiredAttributesToDelivery < ActiveRecord::Migration
     add_column :deliveries, :full_prepayment_required, :boolean
     add_column :deliveries, :delivery_cost_required, :boolean
     add_column :deliveries, :phone_required, :boolean
+    add_column :deliveries, :metro_required, :boolean
     add_column :deliveries, :sequence, :integer
 
   end
