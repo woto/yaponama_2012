@@ -6,15 +6,19 @@ class Admin::Products::SplitController < Admin::ProductsController
     @products = products_user_order_tab_scope( Product.scoped, 'checked' )
 
     if @products.blank?
-      redirect_to :back, :alert => "None products selected" and return
+      redirect_to :back, :alert => "Невозможно разбить. Ни одна позиция не выделена." and return
     end
 
-    if @products.first.quantity_ordered <= 1
-      redirect_to :back, :alert => "Can not split 1 ordered product" and return
+    if @products.any? {|product| product.status == "cancel" }
+      redirect_to :back, :alert => "Невозможно разбить отказанный товар. Операция не имеет смысла." and return
     end
 
     if @products.size > 1
-      redirect_to :back, :alert => "Can not split more than one product at once" and return
+      redirect_to :back, :alert => "Невозможно разбить за раз несколько позиций. Выделите только одну позицию." and return
+    end
+
+    if @products.first.quantity_ordered <= 1
+      redirect_to :back, :alert => "Невозможно разбить 1 заказанную позицию." and return
     end
 
   end
@@ -29,7 +33,7 @@ class Admin::Products::SplitController < Admin::ProductsController
     quantity = params[:quantity].to_i
 
     if quantity.to_i < 1 || quantity.to_i >= product.quantity_ordered
-      redirect_to :back, :alert => "Can not split because of bad quantity entered" and return
+      redirect_to :back, :alert => "Разбитие позиции не удалось, т.к. введено не корректное значение для первой партии. Число первой партии не может быть более #{product.quantity_ordered.to_i - 1}." and return
     end
 
     p1 = @products.first.dup
@@ -49,7 +53,7 @@ class Admin::Products::SplitController < Admin::ProductsController
       product.status_will_change!
     end
 
-    redirect_to params[:return_path], :notice => "Товар успешно разбит на 2 партии."
+    redirect_to params[:return_path], :notice => "Товар успешно разбит на две партии. Первая - #{p1.quantity_ordered} шт., вторая - #{p2.quantity_ordered} шт."
 
   end
 
