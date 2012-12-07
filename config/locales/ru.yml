@@ -45,6 +45,7 @@ ru:
         catalog_number: Артикул
         manufacturer: Производитель
         quantity_available: Дост. шт.
+        quantity_ordered: Заказ. шт.
         probability: Вероятность
         min_days: Мин. срок
         max_days: Макс. срок
@@ -58,4 +59,3 @@ ru:
         supplier: Поставщик
         created_at: Создан
         updated_at: Изменен
-      

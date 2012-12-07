@@ -1,4 +1,4 @@
-- model_class = ProductTransaction
+- model_class = Product
 .page-header
   h1 =t '.title', :default => model_class.model_name.human.pluralize
 
@@ -7,27 +7,27 @@
 table.table.table-striped
   thead
     tr
-      th = model_class.human_attribute_name(:log_id)
-      th = model_class.human_attribute_name(:log_catalog_number)
-      th = model_class.human_attribute_name(:log_manufacturer)
-      th = model_class.human_attribute_name(:log_status)
-      th = model_class.human_attribute_name(:log_notes)
-      th = model_class.human_attribute_name(:log_notes_invisible)
-      th = model_class.human_attribute_name(:log_user_id)
-      th = model_class.human_attribute_name(:log_order_id)
-      th = model_class.human_attribute_name(:log_supplier_id)
-      th = model_class.human_attribute_name(:log_quantity_ordered)
-      th = model_class.human_attribute_name(:log_quantity_available)
-      th = model_class.human_attribute_name(:log_probability)
-      th = model_class.human_attribute_name(:log_min_days)
-      th = model_class.human_attribute_name(:log_max_days)
-      th = model_class.human_attribute_name(:log_buy_cost)
-      th = model_class.human_attribute_name(:log_sell_cost)
-      th = model_class.human_attribute_name(:log_short_name)
-      th = model_class.human_attribute_name(:log_long_name)
+      th = model_class.human_attribute_name(:id)
+      th = model_class.human_attribute_name(:catalog_number)
+      th = model_class.human_attribute_name(:manufacturer)
+      th = model_class.human_attribute_name(:status)
+      th = model_class.human_attribute_name(:notes)
+      th = model_class.human_attribute_name(:notes_invisible)
+      th = model_class.human_attribute_name(:user)
+      th = model_class.human_attribute_name(:order)
+      th = model_class.human_attribute_name(:supplier)
+      th = model_class.human_attribute_name(:quantity_ordered)
+      th = model_class.human_attribute_name(:quantity_available)
+      th = model_class.human_attribute_name(:probability)
+      th = model_class.human_attribute_name(:min_days)
+      th = model_class.human_attribute_name(:max_days)
+      th = model_class.human_attribute_name(:buy_cost)
+      th = model_class.human_attribute_name(:sell_cost)
+      th = model_class.human_attribute_name(:short_name)
+      th = model_class.human_attribute_name(:long_name)
       th = model_class.human_attribute_name(:log_product_id)
-      th = model_class.human_attribute_name(:log_created_at)
-      th = model_class.human_attribute_name(:log_updated_at)
+      th = model_class.human_attribute_name(:created_at)
+      th = model_class.human_attribute_name(:updated_at)
       th = model_class.human_attribute_name(:product_id)
       th = model_class.human_attribute_name(:created_at)
       th = model_class.human_attribute_name(:updated_at)
@@ -38,12 +38,29 @@ table.table.table-striped
         td = link_to product_transaction.id, admin_product_transaction_path(product_transaction)
         td = product_transaction.log_catalog_number
         td = product_transaction.log_manufacturer
-        td = product_transaction.log_status
+        td 
+          center
+            - if product_transaction.log_status
+              span class="label label-#{product_transaction.log_status}" =' Rails.configuration.products_status[product_transaction.log_status]['title']
         td = product_transaction.log_notes
         td = product_transaction.log_notes_invisible
-        td = product_transaction.log_user_id
-        td = product_transaction.log_order_id
-        td = product_transaction.log_supplier_id
+
+        td 
+          - if product_transaction.log_user_id
+            = render :partial => "shared/button", :locals => {:user_id => product_transaction.log_user_id, :user_label => User.find(product_transaction.log_user_id).to_label}
+
+        td 
+          - if product_transaction.log_order_id
+            = link_to admin_order_path(order = Order.find(product_transaction.log_order_id)) do 
+              =' order.to_label 
+              i.icon-shopping-cart
+
+        td 
+          - if product_transaction.log_supplier_id
+            = link_to admin_supplier_path(supplier = Supplier.find(product_transaction.log_supplier_id)) do
+              =' supplier.to_label
+              i.icon-road
+
         td = product_transaction.log_quantity_ordered
         td = product_transaction.log_quantity_available
         td = product_transaction.log_probability
@@ -54,11 +71,11 @@ table.table.table-striped
         td = product_transaction.log_short_name
         td = product_transaction.log_long_name
         td = product_transaction.log_product_id
-        td =l product_transaction.log_created_at if product_transaction.log_created_at
-        td =l product_transaction.log_updated_at if product_transaction.log_updated_at
+        td =l product_transaction.log_created_at, :format => :short if product_transaction.log_created_at
+        td =l product_transaction.log_updated_at, :format => :short if product_transaction.log_updated_at
         td = product_transaction.product_id
-        td =l product_transaction.created_at if product_transaction.created_at
-        td =l product_transaction.updated_at if product_transaction.updated_at
+        td =l product_transaction.created_at, :format => :short if product_transaction.created_at
+        td =l product_transaction.updated_at, :format => :short if product_transaction.updated_at
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_product_transaction_path(product_transaction), :class => 'btn btn-mini'
           = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_product_transaction_path(product_transaction), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'

@@ -261,4 +261,10 @@ class Product < ActiveRecord::Base
   #  end
   #end
 
+
+  def to_label
+    catalog_number + " - " + manufacturer
+
+  end
+
 end
