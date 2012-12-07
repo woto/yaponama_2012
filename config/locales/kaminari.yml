@@ -1,0 +1,8 @@
+ru:
+  views:
+    pagination:
+      first: "&laquo; Перв"
+      last: "Посл &raquo;"
+      previous: "&lsaquo; Пред"
+      next: "След &rsaquo;"
+      truncate: "..."
