@@ -67,6 +67,9 @@ ru:
         kod_dvigatelya: Код двигателя
         rinok: Рынок
         komplektaciya: Комплектация
+      metro:
+        metro: Станция метро
+        delivery_cost: Стоимость доставки
       orders:
         status: Статус заказа
       products_incart:

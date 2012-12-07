@@ -18,6 +18,7 @@ Yaponama2012::Application.routes.draw do
 
   namespace :admin do
 
+    resources :metro
     resources :delivery_categories
     resources :deliveries
     resources :companies

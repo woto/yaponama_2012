@@ -27,7 +27,13 @@ ru:
       product: Товар
 
     attributes:
+      metro:
+        metro: Станция метро
+        delivery_cost: Стоимость доставки
+        created_at: Создан
+        updated_at: Изменен
       order:
+        metro: Станция метро
         postal_address: Почтовый адрес
         phone: Телефон
         delivery: Способ доставки
