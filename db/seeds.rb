@@ -18,8 +18,11 @@ end
 
 # TODO этого здесь не должно быть
 russian_post = DeliveryCategory.create(:name => "Почта России")
-Delivery.create!(name:  "Наложенный платеж", available: true, delivery_category: russian_post, full_prepayment_required: false, phone_required: false, name_required: false, postal_address_required: false, delivery_cost_required: false)
-Delivery.create!(name:  "Предоплата за доставку", available: true, delivery_category: russian_post, full_prepayment_required: true, phone_required: false, name_required: false, postal_address_required: false, delivery_cost_required: false)
+Delivery.create!(name:  "Наложенный платеж", available: true, delivery_category: russian_post, full_prepayment_required: false, phone_required: false, name_required: false, postal_address_required: false, delivery_cost_required: false, metro_required: false)
+Delivery.create!(name:  "Предоплата за доставку", available: true, delivery_category: russian_post, full_prepayment_required: true, phone_required: false, name_required: false, postal_address_required: false, delivery_cost_required: false, metro_required: false)
+
+moscow = DeliveryCategory.create(:name => "Доставка по Москве")
+Delivery.create!(name:  "Доставка до любой станции метро", available: true, delivery_category: moscow, full_prepayment_required: false, phone_required: false, name_required: false, postal_address_required: false, delivery_cost_required: false, metro_required: true)
 
 supplier = Supplier.new(name: "8-я миля")
 supplier.build_account
@@ -28,4 +31,9 @@ supplier.save!
 supplier = Supplier.new(name: "Авториф")
 supplier.build_account
 supplier.save!
+
+metro = Metro.create!(metro: "Алтуфьево", delivery_cost: 300)
+metro = Metro.create!(metro: "Динамо", delivery_cost: 100)
+metro = Metro.create!(metro: "Аэропорт", delivery_cost: 100)
+metro = Metro.create!(metro: "Сокол", delivery_cost: 200)
 # /этого здесь не должно быть
