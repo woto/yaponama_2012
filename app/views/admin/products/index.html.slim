@@ -38,7 +38,7 @@
           div#toolbar-status = render :partial => "products/toolbar_status"
         .margin-on-right
           .pull-right
-            = paginate @products
+            = paginate @products, :theme => :toolbar, :window => 0
 
   = render :partial => 'index'
 
