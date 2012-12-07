@@ -10,6 +10,10 @@ class Order < ActiveRecord::Base
   belongs_to :phone
   belongs_to :postal_address
 
+  belongs_to :metro
+  attr_accessible :metro_id
+  validates_associated :metro
+
   belongs_to :user, :validate => true
   validates :user, :presence => true
 
@@ -81,6 +85,9 @@ class Order < ActiveRecord::Base
       end
       if delivery.phone_required && phone.blank?
         errors.add(:phone, "Phone required for this delivery method")
+      end
+      if delivery.metro_required && metro.blank?
+        errors.add(:metro, "Metro required for this delivery method")
       end
       if delivery.delivery_cost_required && delivery_cost.blank?
         errors.add(:delivery_cost, "Delivery cost required for this delivery method")

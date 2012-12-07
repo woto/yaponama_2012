@@ -17,6 +17,7 @@ ul.breadcrumb
   = f.association :name, :collection => @products.first.user.names
   = f.association :postal_address, :collection => @products.first.user.postal_addresses 
   = f.association :phone, :collection => @products.first.user.phones
+  = f.association :metro, :collection => Metro.all.map{|metro| [metro.metro, metro.id]}
   = f.input :delivery_cost, :as => :string
   = f.input :notes, :input_html => {:rows => 3}
   = f.input :notes_invisible, :input_html => {:rows => 3}
