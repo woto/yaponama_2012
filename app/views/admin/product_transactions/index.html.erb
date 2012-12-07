@@ -2,6 +2,9 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
+
+<%= paginate @product_transactions %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -67,5 +70,7 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @product_transactions %>
 
 <%= link_to t('.new', :default => t("helpers.links.new")), new_admin_product_transaction_path, :class => 'btn btn-primary' %>

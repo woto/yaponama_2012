@@ -2,7 +2,8 @@ class Admin::ProductTransactionsController < Admin::ApplicationController
   # GET /admin/product_transactions
   # GET /admin/product_transactions.json
   def index
-    product_transaction = ProductTransaction.scoped
+    product_transaction = ProductTransaction.scoped.order("id DESC").page params[:page]
+
     if params[:product_id]
       product_transaction = product_transaction.where(:product_id => params[:product_id])
     end
