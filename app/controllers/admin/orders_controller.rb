@@ -74,6 +74,13 @@ class Admin::OrdersController < Admin::ApplicationController
     @order = Order.find(params[:id])
     @order.assign_attributes(params[:order])
     @order.products_inorder << @products
+
+    # При таком коде транзакция товара записывается как единая
+    #@products.each do |p|
+    #  p.assign_attributes(:status => "inorder")
+    #end
+    #@order.products << @products
+ 
     @order.user = @products.first.user
       
     respond_to do |format|

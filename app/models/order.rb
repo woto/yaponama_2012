@@ -24,11 +24,12 @@ class Order < ActiveRecord::Base
 
   has_many :products_inorder, :dependent => :destroy,
     :conditions => {:products => {:status => 'inorder'}}, :class_name => "Product",
-    :after_add => :after_add_inorder
+    :before_add => :before_add_inorder
   
-  def after_add_inorder p
+  def before_add_inorder p
     p.status = 'inorder'
-    p.status_will_change!
+    # TODO check
+    #p.status_will_change!
   end
 
   attr_accessible :products_inorder_attributes
@@ -36,11 +37,12 @@ class Order < ActiveRecord::Base
 
   has_many :products_ordered, :dependent => :destroy,
     :conditions => {:products => {:status => 'ordered'}}, :class_name => "Product",
-    :after_add => :after_add_ordered
+    :before_add => :before_add_ordered
 
-  def after_add_ordered
+  def before_add_ordered
     p.status = 'ordered'
-    p.status_will_change!
+    # TODO check
+    #p.status_will_change!
   end
 
   attr_accessible :products_ordered_attributes
