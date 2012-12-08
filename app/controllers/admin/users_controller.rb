@@ -57,6 +57,7 @@ class Admin::UsersController < Admin::ApplicationController
 
     unless @user.persisted?
       @user.creation_reason = :manager
+      @user.build_account
     end
 
     respond_to do |format|
