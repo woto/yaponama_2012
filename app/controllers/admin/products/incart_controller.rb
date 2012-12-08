@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Admin::Products::IncartController < Admin::ProductsController
   before_filter do 
     @products = products_user_order_tab_scope( Product.scoped, 'checked' )

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Admin::Products::PostSupplierController < Admin::ProductsController
 
   before_filter do 

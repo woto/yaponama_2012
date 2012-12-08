@@ -1,5 +1,5 @@
 # encoding: utf-8
-#
+
 class Admin::Products::SplitController < Admin::ProductsController
 
   before_filter do 

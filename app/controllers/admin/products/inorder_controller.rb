@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Admin::Products::InorderController < Admin::ProductsController
 
   def index

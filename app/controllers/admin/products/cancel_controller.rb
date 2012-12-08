@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Admin::Products::CancelController < Admin::ProductsController
 
   before_filter do 
