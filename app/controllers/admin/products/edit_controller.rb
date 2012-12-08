@@ -3,19 +3,22 @@
 class Admin::Products::EditController < Admin::ProductsController
 
   before_filter do
-    @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+    begin
 
-    if @products.blank?
-      redirect_to :back, :alert => "None products selected" and return
+      @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+      products_any_checked_validation
+      products_only_one_validation
+
+    rescue ValidationError => e
+      redirect_to :back, :alert => e.message
     end
 
-    if @products.size > 1
-      redirect_to :back, :alert => "Can not edit more than one product at once" and return
-    end
   end
+
 
   def index
   end
+
 
   def create
     Rails.application.routes.recognize_path params[:return_path]

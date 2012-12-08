@@ -3,27 +3,26 @@
 class Admin::Products::CancelController < Admin::ProductsController
 
   before_filter do 
-    @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+    begin
 
-    if @products.blank?
-      redirect_to :back, :alert => "None products selected" and return
+      @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+      products_any_checked_validation
+      products_belongs_to_one_user_validation!
+
+      # Если хотя бы у одной позиции есть поставщик, то он должен быть у всех и именно такой же
+      if @products.any?(&:supplier)
+        products_belongs_to_one_supplier_validation!
+      end
+
+      # У обрабатываемых позиций должен быть один и тот же статус
+      if (statuses = @products.map(&:status).uniq).size > 1
+        raise ValidateError.new "У обрабатываемых позиций должен быть один и тот же статус, а сейчас: #{statuses.join(', ')}"
+      end
+
+    rescue ValidationError => e
+      redirect_to :back, :alert => e.message
     end
 
-    # Финансовый вопрос не важен если товар находится в статусах incart или inorder
-    if @products.all?{|p| ["incart", "inorder"].include? p.status}
-      return
-    end
-
-    #if @products.any? {|product| product.status == "cancel" }
-    #  redirect_to :back, :alert => "At least one of the products in cancel status" and return
-    #end
-
-    ## Может отсутствовать поставщик когда в отказ с статуса ordered например
-    #if @products.any?(&:supplier)
-    #  if ( errors = products_belongs_to_one_supplier_validation(@products) ).present?
-    #    redirect_to :back, :alert => errors and return
-    #  end
-    #end
   end
 
 
@@ -34,8 +33,10 @@ class Admin::Products::CancelController < Admin::ProductsController
 
 
   def create
-    supplier_credit = params[:supplier_credit].to_d
-    supplier_debit = params[:supplier_debit].to_d
+    supplier_credit = params[:supplier_credit].to_d if params[:supplier_credit]
+    supplier_debit = params[:supplier_debit].to_d if params[:supplier_debit]
+    client_credit = params[:client_credit].to_d if params[:client_credit]
+    client_debit = params[:client_debit].to_d if params[:client_debit]
 
     ActiveRecord::Base.transaction do
       @products.each do |product|
@@ -46,11 +47,17 @@ class Admin::Products::CancelController < Admin::ProductsController
         end
       end
 
-      #if @products.any?(&:supplier)
-      #  @products.first.supplier.account.credit -= supplier_credit
-      #  @products.first.supplier.account.debit -= supplier_debit
-      #  @products.first.supplier.account.save
-      #end
+      if supplier_credit.present? || supplier_debit.present?
+        @products.first.supplier.account.credit -= supplier_credit
+        @products.first.supplier.account.debit -= supplier_debit
+        @products.first.supplier.account.save
+      end
+
+      if client_credit.present? || client_debit.present?
+        @products.first.user.account.credit -= client_credit
+        @products.first.user.account.debit -= client_debit
+        @products.first.user.account.save
+      end
 
     end
 

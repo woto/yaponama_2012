@@ -12,23 +12,32 @@ class Admin::ProductsController < Admin::ApplicationController
 
   def multiple_destroy
 
-    @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+    begin
 
-    result = {}
+      @products = products_user_order_tab_scope( Product.scoped, 'checked' )
 
-    @products.each do |product|
-      if product.destroy
-        result = { :notice => "Product Successfully deleted" }
-      else
-        result = { :alert => "Product can't be deleted: #{product.errors[:base].to_s}" }
-        break
+      products_any_checked_validation
+
+      result = {}
+
+      @products.each do |product|
+        if product.destroy
+          result = { :notice => "Product Successfully deleted" }
+        else
+          result = { :alert => "Product can't be deleted: #{product.errors[:base].to_s}" }
+          break
+        end
       end
+
+      respond_to do |format|
+        format.html { redirect_to :back, result }
+        format.json { head :no_content }
+      end
+
+    rescue ValidationError => e
+      redirect_to :back, :alert => e.message
     end
 
-    respond_to do |format|
-      format.html { redirect_to :back, result }
-      format.json { head :no_content }
-    end
   end
 
   #def destroy

@@ -3,29 +3,28 @@
 class Admin::Products::SplitController < Admin::ProductsController
 
   before_filter do 
-    @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+    begin
 
-    if @products.blank?
-      redirect_to :back, :alert => "Невозможно разбить. Ни одна позиция не выделена." and return
-    end
+      @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+      products_any_checked_validation
+      products_all_statuses_validation ['incart', 'inorder', 'ordered', 'pre_supplier', 'post_supplier', 'stock', 'complete']
+      products_only_one_validation
 
-    if @products.any? {|product| product.status == "cancel" }
-      redirect_to :back, :alert => "Невозможно разбить отказанный товар. Операция не имеет смысла." and return
-    end
+      if @products.first.quantity_ordered <= 1
+        raise ValidationError.new "Невозможно разбить позицию состоящую из одного товара."
+      end
 
-    if @products.size > 1
-      redirect_to :back, :alert => "Невозможно разбить за раз несколько позиций. Выделите только одну позицию." and return
-    end
-
-    if @products.first.quantity_ordered <= 1
-      redirect_to :back, :alert => "Невозможно разбить 1 заказанную позицию." and return
+    rescue ValidationError => e
+      redirect_to :back, :alert => e.message
     end
 
   end
+
 
   # Keep it for running controller filters
   def index
   end
+
 
   def create
     Rails.application.routes.recognize_path params[:return_path]

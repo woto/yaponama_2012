@@ -1,16 +1,16 @@
 # encoding: utf-8
 
 class Admin::Products::IncartController < Admin::ProductsController
+
   before_filter do 
-    @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+    begin
 
-    if @products.blank?
-      redirect_to :back, :alert => "None products selected" and return
-    end
+      @products = products_user_order_tab_scope( Product.scoped, 'checked' ) 
+      products_any_checked_validation
+      products_all_statuses_validation ['inorder']
 
-    # Бред какой-то TODO
-    unless @products.all?{|product| product.status == 'inorder'}
-      redirect_to :back, :alert => 'At least one product not in status inorder'
+    rescue ValidationError => e
+      redirect_to :back, :alert => e.message
     end
 
   end
@@ -20,8 +20,12 @@ class Admin::Products::IncartController < Admin::ProductsController
   end
 
   def create
+    Rails.application.routes.recognize_path params[:return_path]
+
     @products.each do |product|
       product.status = 'incart'
+      # TODO надо/не надо?
+      #product.order = nil
       product.status_will_change!
       unless product.save
         redirect_to :back, :alert => product.errors.full_messages and return

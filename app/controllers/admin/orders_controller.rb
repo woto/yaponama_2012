@@ -1,4 +1,19 @@
 class Admin::OrdersController < Admin::ApplicationController
+
+  before_filter :only => [:create, :update] do
+    begin
+
+      @products = products_user_order_tab_scope( Product.scoped, 'checked' ) 
+      products_any_checked_validation
+      products_belongs_to_one_user_validation!
+      products_all_statuses_validation ["incart", "inorder", "ordered"]
+
+    rescue ValidationError => e
+      redirect_to :back, :alert => e.message
+    end
+
+  end
+
   # GET /admin/orders
   # GET /admin/orders.json
   def index
@@ -48,8 +63,6 @@ class Admin::OrdersController < Admin::ApplicationController
   # POST /admin/orders
   # POST /admin/orders.json
   def create
-    products_validation
-
     @order = Order.new(params[:order])
     @order.products_inorder << @products
     @order.user = @products.first.user
@@ -69,18 +82,9 @@ class Admin::OrdersController < Admin::ApplicationController
   # PUT /admin/orders/1
   # PUT /admin/orders/1.json
   def update
-    products_validation
-
     @order = Order.find(params[:id])
     @order.assign_attributes(params[:order])
     @order.products_inorder << @products
-
-    # При таком коде транзакция товара записывается как единая
-    #@products.each do |p|
-    #  p.assign_attributes(:status => "inorder")
-    #end
-    #@order.products << @products
- 
     @order.user = @products.first.user
       
     respond_to do |format|

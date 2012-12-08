@@ -6,8 +6,7 @@ ul.breadcrumb
         /
   li Формирование заказа
 
-
-= simple_form_for @order, :url => polymorphic_path([:admin, @order], :user_id => params[:user_id], :order_id => params[:order_id]) do |f|
+= simple_form_for @order, :url => polymorphic_path([:admin, @order], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]) do |f|
 
   = f.error_notification
   - f.object.errors.full_messages do |error|
@@ -21,6 +20,7 @@ ul.breadcrumb
   = f.input :delivery_cost, :as => :string
   = f.input :notes, :input_html => {:rows => 3}
   = f.input :notes_invisible, :input_html => {:rows => 3}
+  =' link_to "Назад", params[:return_path], :class => "btn"
   = f.submit :class => "btn btn-success"
   /= f.simple_fields_for :delivery do |delivery|
   /  = delivery.association :postal_address

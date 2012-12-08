@@ -6,16 +6,18 @@ ul.breadcrumb
         /
   li Формирование заказа
 
-= form_tag order_select_admin_products_inorder_index_path(:user_id => params[:user_id], :order_id => params[:order_id]) do |f|
+
+= form_tag order_select_admin_products_inorder_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]) do |f|
 
   = render :partial => 'products/index'
   br  
-  - options = options_for_select [['Please select ...', nil], ['New order', 'new']] + @products.first.user.orders.all.map{|order| [order.to_label, order.id]}
+  - options = options_for_select [['Выберите...', nil], ['Новый заказ', 'new']] + @products.first.user.orders.all.map{|order| [order.to_label, order.id]}
   = select_tag(:new_order_id, options)
   / - step = session['orders'][session['orders']['current_order_id']]['step']
   /- step = 'order'
   /= render "#{step}_step", :f => f
   br
+  =' link_to "Назад", params[:return_path], :class => "btn"
   /= submit_tag "Назад", :name => "back_button", :class => "btn" unless Admin::ProductsController::ORDER_STEPS.first == step
   /|  
   /= submit_tag "Далее", :name => "next_button", :class => "btn btn-success"

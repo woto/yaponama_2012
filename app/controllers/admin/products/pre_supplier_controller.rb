@@ -3,15 +3,16 @@
 class Admin::Products::PreSupplierController < Admin::ProductsController
 
   before_filter do 
-    @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+    begin
 
-    if @products.blank?
-      redirect_to :back, :alert => "None products selected" and return
+      @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+      products_any_checked_validation
+      products_all_statuses_validation ['ordered']
+
+    rescue ValidationError => e
+      redirect_to :back, :alert => e.message
     end
 
-    unless @products.all?{|product| product.status == 'ordered'}
-      redirect_to :back, :alert => 'At least one product not in status ordered'
-    end
   end
 
 
@@ -27,8 +28,7 @@ class Admin::Products::PreSupplierController < Admin::ProductsController
         redirect_to :back, :alert => product.errors.full_messages and return
       end
     end
-
     redirect_to_relative_path('pre_supplier')
-
   end
+
 end

@@ -3,15 +3,16 @@
 class Admin::Products::PostSupplierController < Admin::ProductsController
 
   before_filter do 
-    @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+    begin
 
-    if @products.blank?
-      redirect_to :back, :alert => "None products selected" and return
+      @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+      products_any_checked_validation
+      products_all_statuses_validation ['pre_supplier', 'post_supplier']
+
+    rescue ValidationError => e
+      redirect_to :back, :alert => e.message
     end
 
-    unless @products.all?{|p| ['pre_supplier', 'post_supplier'].include? p.status}
-      redirect_to :back, :alert => 'At least one product not in status pre_supplier or post_supplier'
-    end
   end
 
 

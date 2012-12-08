@@ -100,7 +100,7 @@ class Product < ActiveRecord::Base
             when 'inorder'
             when 'cancel'
             else
-              errors.add(:status, "Product can not change status from #{old_status} to #{new_status}")
+              errors.add(:status, "Позиция не может изменить свой статус с #{old_status} на #{new_status}")
               return false
           end
 
@@ -114,7 +114,7 @@ class Product < ActiveRecord::Base
               user.account(true).credit += (sell_cost * quantity_ordered)
               user.save
             else
-              errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
+              errors.add(:base, "Позиция не может изменить свой статус с #{old_status} на #{new_status}")
               return false
           end
 
@@ -122,8 +122,9 @@ class Product < ActiveRecord::Base
         when 'ordered'
           case new_status
             when 'cancel'
-              user.account(true).credit -= (sell_cost * quantity_ordered)
-              user.save
+              # TODO закомментировал
+              #user.account(true).credit -= (sell_cost * quantity_ordered)
+              #user.save
             when 'pre_supplier'
             when 'inorder'
               user.account(true).credit -= (sell_cost * quantity_ordered)
@@ -137,7 +138,7 @@ class Product < ActiveRecord::Base
         when 'pre_supplier'
           case new_status
           when 'cancel'
-            raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
+            # raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
             #  #user.account.credit -= sell_cost * quantity_ordered
             #  #user.save
           when 'post_supplier'
@@ -152,12 +153,15 @@ class Product < ActiveRecord::Base
         when 'post_supplier'
           case new_status
           when 'cancel'
-            raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
+            # raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
             #user.account.credit -= sell_cost * quantity_ordered
             #supplier.account.credit -= buy_cost * quantity_ordered
             #user.save
             #supplier.save
           when 'stock'
+            # TODO закомментировал
+            #supplier.account(true).credit -= buy_cost * quantity_ordered
+            #supplier.save
           when 'post_supplier'
             ActiveRecord::Base.transaction do
               if self.supplier_id_changed?
@@ -176,7 +180,7 @@ class Product < ActiveRecord::Base
         when 'stock'
           case new_status
           when 'cancel'
-            raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
+            # raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
           when 'complete'
           else
             errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
@@ -186,7 +190,7 @@ class Product < ActiveRecord::Base
         when 'complete'
           case new_status
           when 'cancel'
-            raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
+            # raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
           else
             errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
             return false

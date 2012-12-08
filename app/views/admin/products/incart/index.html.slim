@@ -6,11 +6,11 @@ ul.breadcrumb
         /
   li Смена статуса на "В корзине"
 
-= form_tag admin_products_incart_index_path(:user_id => params[:user_id], :order_id => params[:order_id]) do |f|
+= form_tag admin_products_incart_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]) do |f|
 
   = render :partial => 'products/index'
 
   br  
-  = link_to "Назад", :back, :class => "btn"
+  = link_to "Назад", params[:return_path], :class => "btn"
   |  
   = submit_tag "Ок", :class => "btn btn-success"
