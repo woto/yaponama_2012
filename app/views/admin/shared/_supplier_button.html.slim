@@ -1,0 +1,6 @@
+- supplier = Supplier.where(:id => supplier_id).first
+
+- if supplier.present?
+  = link_to admin_supplier_path(supplier_id) do
+    =' supplier_label
+    i.icon-road

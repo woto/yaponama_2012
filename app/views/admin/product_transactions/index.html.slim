@@ -47,7 +47,7 @@ table.table.table-striped
 
         td 
           - if product_transaction.log_user_id
-            = render :partial => "shared/button", :locals => {:user_id => product_transaction.log_user_id, :user_label => User.find(product_transaction.log_user_id).to_label}
+            = render :partial => "shared/client_button", :locals => {:user_id => product_transaction.log_user_id, :user_label => User.find(product_transaction.log_user_id).to_label}
 
         td 
           - if product_transaction.log_order_id
@@ -57,9 +57,7 @@ table.table.table-striped
 
         td 
           - if product_transaction.log_supplier_id
-            = link_to admin_supplier_path(supplier = Supplier.find(product_transaction.log_supplier_id)) do
-              =' supplier.to_label
-              i.icon-road
+            = render :partial => "shared/supplier_button", :locals => {:supplier_id => product_transaction.log_supplier_id, :supplier_label => Supplier.find(product_transaction.log_supplier_id).to_label}
 
         td = product_transaction.log_quantity_ordered
         td = product_transaction.log_quantity_available

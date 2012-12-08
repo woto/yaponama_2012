@@ -26,16 +26,16 @@ table.table.table-striped
           - if transaction.left_account_id
             = link_to polymorphic_path([:admin, transaction.left_account]) do
               - if transaction.left_account.accountable_type == 'User'
-                = render :partial => "shared/button", :locals => {:user_id => transaction.left_account.accountable_id, :user_label => transaction.left_account.to_label}
-              - else
-                = '[TODO] реализовать'
+                = render :partial => "shared/client_button", :locals => {:user_id => transaction.left_account.accountable_id, :user_label => transaction.left_account.to_label}
+              - elsif transaction.left_account.accountable_type == 'Supplier'
+                = render :partial => "shared/supplier_button", :locals => {:supplier_id => transaction.left_account.accountable_id, :supplier_label => transaction.left_account.to_label}
         td 
           - if transaction.right_account_id
             = link_to polymorphic_path([:admin, transaction.right_account]) do
               - if transaction.right_account.accountable_type == 'User'
-                = render :partial => "shared/button", :locals => {:user_id => transaction.right_account.accountable_id, :user_label => transaction.right_account.to_label}
-              - else
-                = '[TODO] реализовать'
+                = render :partial => "shared/client_button", :locals => {:user_id => transaction.right_account.accountable_id, :user_label => transaction.right_account.to_label}
+              - elsif transaction.right_account.accountable_type == 'Supplier'
+                = render :partial => "shared/supplier_button", :locals => {:supplier_id => transaction.right_account.accountable_id, :supplier_label => transaction.right_account.to_label}
         td = transaction.left_real
         td = transaction.right_real
         td = ((transaction.left_money && transaction.left_money > 0) ? "+" : "" ) + transaction.left_money.to_s

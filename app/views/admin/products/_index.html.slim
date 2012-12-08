@@ -50,7 +50,7 @@ table.table.table-striped
         td  
         td = product.notes
         td = product.notes_invisible
-        td = render :partial => "shared/button", :locals => {:user_id => product.user_id, :user_label => product.user.to_label}
+        td = render :partial => "shared/client_button", :locals => {:user_id => product.user_id, :user_label => product.user.to_label}
         td 
           - if product.order
             = link_to admin_order_path(product.order) do 
@@ -58,9 +58,7 @@ table.table.table-striped
               i.icon-shopping-cart
         td 
           - if product.supplier
-            = link_to admin_supplier_path(product.supplier) do
-              =' product.supplier.to_label
-              i.icon-road
+            = render :partial => "shared/supplier_button", :locals => {:supplier_id => product.supplier_id, :supplier_label => product.supplier.to_label}
         td = l product.created_at, :format => :short
         td = l product.updated_at, :format => :short
         td
