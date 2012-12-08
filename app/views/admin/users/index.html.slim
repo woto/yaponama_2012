@@ -13,7 +13,7 @@
           = link_to t('.new', :default => t("helpers.links.new")), edit_admin_user_path('new'), :class => 'btn btn-primary'
       .pull-right
         .margin-on-right
-          = paginate @users
+          = paginate @users, :theme => :toolbar
 
 table.table.table-striped
   thead
@@ -77,5 +77,3 @@ table.table.table-striped
                   li = link_to("Товары", edit_admin_user_path(user, :tab => :root_products))
                   li = link_to("Заказы", edit_admin_user_path(user, :tab => :orders))
               li = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_user_path(user), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
-
-= paginate @users
