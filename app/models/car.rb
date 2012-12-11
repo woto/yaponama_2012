@@ -11,6 +11,7 @@ class Car < ActiveRecord::Base
     :conditions => ["request_id IS NULL"], :class_name => "Request"
   accepts_nested_attributes_for :root_requests_with_car, :allow_destroy => true
 
+  # TODO когда был в Авторифе и демонстрировал Николаеву всплыл опять этот баг! Доколе блиа? 1/2
   belongs_to :user, :validate => true
   validates :user, :presence => true
 
