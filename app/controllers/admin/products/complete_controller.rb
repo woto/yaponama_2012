@@ -9,7 +9,6 @@ class Admin::Products::CompleteController < Admin::ProductsController
       @products = products_user_order_tab_scope( Product.scoped, 'checked' )
       products_any_checked_validation
       products_all_statuses_validation ['stock']
-      products_belongs_to_one_user_validation!
 
     rescue ValidationError => e
       redirect_to :back, :alert => e.message
@@ -19,13 +18,10 @@ class Admin::Products::CompleteController < Admin::ProductsController
 
 
   def index
-    @products_sell_cost = @products.inject(0){|summ, p| summ += p.sell_cost * p.quantity_ordered}
   end
 
 
   def create
-    client_credit = params[:client_credit].to_d
-    client_debit = params[:client_debit].to_d
 
     ActiveRecord::Base.transaction do
       @products.each do |product|
@@ -35,10 +31,6 @@ class Admin::Products::CompleteController < Admin::ProductsController
           redirect_to :back, :alert => product.errors.full_messages and return
         end
       end
-
-      @products.first.user.account.credit -= client_credit
-      @products.first.user.account.debit -= client_debit
-      @products.first.user.account.save
 
     end
 

@@ -183,6 +183,9 @@ class Product < ActiveRecord::Base
           when 'cancel'
             # raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
           when 'complete'
+            user.account(true).credit -= sell_cost * quantity_ordered
+            user.account.debit -= sell_cost * quantity_ordered
+            user.save
           else
             errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
             return false
