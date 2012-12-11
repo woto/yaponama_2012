@@ -5,6 +5,7 @@ class Admin::Products::SplitController < Admin::ProductsController
   before_filter do 
     begin
 
+      Rails.application.routes.recognize_path params[:return_path]
       @products = products_user_order_tab_scope( Product.scoped, 'checked' )
       products_any_checked_validation
       products_all_statuses_validation ['incart', 'inorder', 'ordered', 'pre_supplier', 'post_supplier', 'stock', 'complete']
@@ -27,7 +28,6 @@ class Admin::Products::SplitController < Admin::ProductsController
 
 
   def create
-    Rails.application.routes.recognize_path params[:return_path]
     product = @products.first
     quantity = params[:quantity].to_i
 

@@ -5,6 +5,7 @@ class Admin::Products::CancelController < Admin::ProductsController
   before_filter do 
     begin
 
+      Rails.application.routes.recognize_path params[:return_path]
       @products = products_user_order_tab_scope( Product.scoped, 'checked' )
       products_any_checked_validation
       products_belongs_to_one_user_validation!

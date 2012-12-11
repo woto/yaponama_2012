@@ -5,6 +5,7 @@ class Admin::Products::EditController < Admin::ProductsController
   before_filter do
     begin
 
+      Rails.application.routes.recognize_path params[:return_path]
       @products = products_user_order_tab_scope( Product.scoped, 'checked' )
       products_any_checked_validation
       products_only_one_validation
@@ -21,7 +22,6 @@ class Admin::Products::EditController < Admin::ProductsController
 
 
   def create
-    Rails.application.routes.recognize_path params[:return_path]
     product = @products.first
 
     respond_to do |format|
