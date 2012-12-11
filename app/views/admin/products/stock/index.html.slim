@@ -10,12 +10,6 @@ ul.breadcrumb
 
   = render :partial => 'products/index'
 
-  p Уменьшить сумму долга перед поставщиком на:
-  = text_field_tag :supplier_credit, @products_buy_cost
-
-  p Уменьшить сумму фактической предоплаты поставщику на:
-  = text_field_tag :supplier_debit, @products_buy_cost
-
   br  
   =' link_to "Назад", params[:return_path], :class => "btn"
   = submit_tag "Ок", :class => "btn btn-success"

@@ -159,9 +159,10 @@ class Product < ActiveRecord::Base
             #user.save
             #supplier.save
           when 'stock'
-            # TODO закомментировал
-            #supplier.account(true).credit -= buy_cost * quantity_ordered
-            #supplier.save
+            supplier.account(true).credit -= buy_cost * quantity_ordered
+            supplier.account.debit -= buy_cost * quantity_ordered
+            supplier.save
+
           when 'post_supplier'
             ActiveRecord::Base.transaction do
               if self.supplier_id_changed?
@@ -191,6 +192,10 @@ class Product < ActiveRecord::Base
           case new_status
           when 'cancel'
             # raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
+          when 'stock'
+            user.account(true).credit += sell_cost * quantity_ordered
+            user.account.debit += sell_cost * quantity_ordered
+            user.save
           else
             errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
             return false

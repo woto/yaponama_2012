@@ -8,8 +8,8 @@ class Admin::Products::StockController < Admin::ProductsController
       Rails.application.routes.recognize_path params[:return_path]
       @products = products_user_order_tab_scope( Product.scoped, 'checked' )
       products_any_checked_validation
-      products_all_statuses_validation ['post_supplier']
-      products_belongs_to_one_supplier_validation!
+      products_all_statuses_validation ['post_supplier', 'complete']
+      #products_belongs_to_one_supplier_validation!
 
     rescue ValidationError => e
       redirect_to :back, :alert => e.message
@@ -19,13 +19,10 @@ class Admin::Products::StockController < Admin::ProductsController
 
 
   def index
-    @products_buy_cost = @products.inject(0){|summ, p| summ += p.buy_cost * p.quantity_ordered}
   end
 
 
   def create
-    supplier_credit = params[:supplier_credit].to_d
-    supplier_debit = params[:supplier_debit].to_d
 
     ActiveRecord::Base.transaction do
       @products.each do |product|
@@ -36,9 +33,6 @@ class Admin::Products::StockController < Admin::ProductsController
         end
       end
 
-      @products.first.supplier.account.credit -= supplier_credit
-      @products.first.supplier.account.debit -= supplier_debit
-      @products.first.supplier.account.save
     end
 
     redirect_to_relative_path('stock')
