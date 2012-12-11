@@ -1,2 +1,3 @@
 - products = products_user_order_tab_scope(Product, 'checked')
-span Выделено позиций: #{products.size}, закупка: #{products.inject(0){|sum, p| sum += (p.buy_cost * p.quantity_ordered)}} р., продажа: #{products.inject(0){|sum, p| sum += (p.sell_cost * p.quantity_ordered)}} р.
+- if products.present?
+  span Выделено позиций: #{products.size}, закупка: #{products.inject(0){|sum, p| sum += (p.buy_cost * p.quantity_ordered)}} р., продажа: #{products.inject(0){|sum, p| sum += (p.sell_cost * p.quantity_ordered)}} р.
