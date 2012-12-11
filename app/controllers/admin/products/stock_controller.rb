@@ -9,7 +9,6 @@ class Admin::Products::StockController < Admin::ProductsController
       @products = products_user_order_tab_scope( Product.scoped, 'checked' )
       products_any_checked_validation
       products_all_statuses_validation ['post_supplier', 'complete']
-      #products_belongs_to_one_supplier_validation!
 
     rescue ValidationError => e
       redirect_to :back, :alert => e.message
