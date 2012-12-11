@@ -7,13 +7,17 @@ FactoryGirl.define do
   end
 
   factory :account do
-    debit{ generate(:random_debit) }
 
-    #name{ generate(:random_name) }
+    factory :minimal_valid_account do
 
-    #factory :name_with_user do
-    #  association :user, factory: :minimal_valid_user
-    #end
+      debit 0
+      credit 0
+
+      factory :random_account do
+        debit{ generate(:random_debit) }
+      end
+
+    end
 
   end
 
