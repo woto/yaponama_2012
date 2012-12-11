@@ -10,11 +10,10 @@ ul.breadcrumb
 
   = render :partial => 'products/index'
 
-  - options = options_for_select [['Please select ...', nil]] + Supplier.all.collect {|p| [ p.to_label, p.id ]}
+  - options = options_for_select [['Выберите...', nil]] + Supplier.all.collect {|p| [ p.to_label, p.id ]}
 
   = select_tag(:supplier_id, options)
 
   br  
-  = link_to "Назад", :back, :class => "btn"
-  |  
+  =' link_to "Назад", params[:return_path], :class => "btn"
   = submit_tag "Ок", :class => "btn btn-success"

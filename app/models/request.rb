@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Request < ActiveRecord::Base
 
   ANY_DATA = %w(name catalog_number manufacturer notes)
@@ -27,7 +29,7 @@ class Request < ActiveRecord::Base
 
   def any_data?
     unless (ANY_DATA.any?{|attr| self.attributes[attr].present?})
-      errors.add(:base, "Please fill any request data")
+      errors.add(:base, "Пожалуйста заполните хотя бы какие-нибудь существенные данные по запросу.")
     end
   end
 

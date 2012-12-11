@@ -24,7 +24,7 @@ class Admin::Products::PostSupplierController < Admin::ProductsController
     supplier = Supplier.where(:id => params[:supplier_id]).first
 
     if supplier.blank?
-      redirect_to :back, :alert => "Please choose supplier" and return
+      redirect_to :back, :alert => "Пожалуйста выберите поставщика." and return
     end
 
     @products.each do |product|

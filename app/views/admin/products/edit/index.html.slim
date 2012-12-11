@@ -9,5 +9,5 @@
     = render '/users/product_fields', :f => f, :stack => 0
 
     .form-actions
-      =' f.button :submit, :class => 'btn-primary'
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), params[:return_path], :class => 'btn'
+      =' link_to "Назад", params[:return_path], :class => "btn"
+      = f.button :submit, :class => 'btn-primary'

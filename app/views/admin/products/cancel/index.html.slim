@@ -29,4 +29,5 @@ ul.breadcrumb
     = text_field_tag :client_debit, @products_sell_cost
 
   br  
+  =' link_to "Назад", params[:return_path], :class => "btn"
   = submit_tag "Ок", :class => "btn btn-success"
