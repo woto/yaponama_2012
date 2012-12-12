@@ -9,12 +9,12 @@ ul.breadcrumb : li Смена статуса на "#{Rails.configuration.product
   / - step = session['orders'][session['orders']['current_order_id']]['step']
   /- step = 'order'
   /= render "#{step}_step", :f => f
-  br
-  =' link_to "Назад", params[:return_path], :class => "btn"
-  /= submit_tag "Назад", :name => "back_button", :class => "btn" unless Admin::ProductsController::ORDER_STEPS.first == step
-  /|  
-  /= submit_tag "Далее", :name => "next_button", :class => "btn btn-success"
-  = submit_tag "Далее", :class => "btn btn-success"
+  .form-actions
+    =' link_to "Назад", params[:return_path], :class => "btn"
+    /= submit_tag "Назад", :name => "back_button", :class => "btn" unless Admin::ProductsController::ORDER_STEPS.first == step
+    /|  
+    /= submit_tag "Далее", :name => "next_button", :class => "btn btn-success"
+    = submit_tag "Далее", :class => "btn btn-primary"
 
 
 //////////- options = options_for_select [['Please select ...', nil], ['New order', 'new']] + @products.first.user.orders.all.map{|order| [order.to_label, order.id]}

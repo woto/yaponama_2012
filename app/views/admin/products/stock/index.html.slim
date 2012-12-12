@@ -4,6 +4,6 @@ ul.breadcrumb : li Смена статуса на "#{Rails.configuration.product
 
   = render :partial => 'products/index'
 
-  br  
-  =' link_to "Назад", params[:return_path], :class => "btn"
-  = submit_tag "Ок", :class => "btn btn-success"
+  .form-actions
+    =' link_to "Назад", params[:return_path], :class => "btn"
+    = submit_tag "Ок", :class => "btn btn-primary" 

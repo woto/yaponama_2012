@@ -29,6 +29,6 @@ ul.breadcrumb : li Смена статуса на "#{Rails.configuration.product
   = text_field_tag :client_debit, @after_debit_magic - @current_debit
   br
 
-  br
-  =' link_to "Назад", params[:return_path], :class => "btn"
-  = submit_tag "Ок", :class => "btn btn-success"
+  .form-actions
+    =' link_to "Назад", params[:return_path], :class => "btn"
+    = submit_tag "Ок", :class => "btn btn-primary"

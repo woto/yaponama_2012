@@ -21,6 +21,6 @@ ul.breadcrumb : li Смена статуса на "#{Rails.configuration.product
     p Уменьшить сумму фактической предоплаты клиентом на:
     = text_field_tag :client_debit, @products_sell_cost
 
-  br  
-  =' link_to "Назад", params[:return_path], :class => "btn"
-  = submit_tag "Ок", :class => "btn btn-success"
+    .form-actions
+      =' link_to "Назад", params[:return_path], :class => "btn"
+      = submit_tag "Ок", :class => "btn btn-primary"

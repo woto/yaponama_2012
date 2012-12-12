@@ -8,6 +8,6 @@ ul.breadcrumb : li Смена статуса на "#{Rails.configuration.product
 
   = select_tag(:supplier_id, options)
 
-  br  
-  =' link_to "Назад", params[:return_path], :class => "btn"
-  = submit_tag "Ок", :class => "btn btn-success"
+  .form-actions
+    =' link_to "Назад", params[:return_path], :class => "btn"
+    = submit_tag "Ок", :class => "btn btn-primary"

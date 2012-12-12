@@ -14,7 +14,9 @@ ul.breadcrumb : li Смена статуса на "#{Rails.configuration.product
   = f.input :delivery_cost, :as => :string
   = f.input :notes, :input_html => {:rows => 3}
   = f.input :notes_invisible, :input_html => {:rows => 3}
-  =' link_to "Назад", params[:return_path], :class => "btn"
-  = f.submit :class => "btn btn-success"
+
+  .form-actions
+    =' link_to "Назад", params[:return_path], :class => "btn"
+    = f.submit :class => "btn btn-primary"
   /= f.simple_fields_for :delivery do |delivery|
   /  = delivery.association :postal_address

@@ -1,7 +1,6 @@
 - model_class = Product
 
-.page-header
-  h1 =t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human, :default => "Edit #{model_class.model_name.human}")
+ul.breadcrumb : li Редактирование позиции
 
 #products
 
@@ -10,4 +9,4 @@
 
     .form-actions
       =' link_to "Назад", params[:return_path], :class => "btn"
-      = f.button :submit, :class => 'btn-primary'
+      = f.button :submit, :class => 'btn btn-primary'
