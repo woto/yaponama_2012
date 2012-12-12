@@ -145,6 +145,7 @@ class Product < ActiveRecord::Base
             # raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
             #  #user.account.credit -= sell_cost * quantity_ordered
             #  #user.save
+          when 'pre_supplier'
           when 'post_supplier'
             supplier.account(true).credit += (buy_cost * quantity_ordered)
             supplier.save
@@ -162,6 +163,9 @@ class Product < ActiveRecord::Base
 
         when 'post_supplier'
           case new_status
+          when 'pre_supplier'
+            supplier.account(true).credit -= (buy_cost * quantity_ordered)
+            supplier.save
           when 'cancel'
             # raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
             #user.account.credit -= sell_cost * quantity_ordered
