@@ -56,7 +56,11 @@ table.table.table-striped
                 = link_to("Товары", admin_user_products_path(user))
                 ul.dropdown-menu
                   - Rails.configuration.products_status.each do |k, v|
-                    = content_tag(:li, link_to(v["title"], admin_user_products_path(user, :status => k)))
+                    li 
+                      = link_to admin_user_products_path(user, :status => k) do
+                        =' v["title"]
+                        - if v['badge'].present?
+                          span class="badge badge-#{k}" = v['badge']
               li.dropdown-submenu.pull-left
                 = link_to("Заказы", admin_user_orders_path(user))
                 ul.dropdown-menu
