@@ -232,17 +232,26 @@ class Product < ActiveRecord::Base
       end
     # Если не происходила смена статуса
     else
+      # TODO необходимо доработать в контроллере вопрос уведомления покупателя
       if sell_cost_changed? || quantity_ordered_changed?
-        if ["ordered", "pre_supplier", "post_supplier", "stock", "complete", "cancel"].include? status
+        if ["ordered", "pre_supplier", "post_supplier", "stock"].include? status
           user.account(true).credit += ( (sell_cost * quantity_ordered) - (sell_cost_was * quantity_ordered_was) )
           user.save
+        elsif ["incart", "inorder"].include? status
+        else
+          errors.add(:sell_cost, "Невозможно изменить продажную цену у позиций в данном статусе")
+          return false
         end
       end
 
       if buy_cost_changed? || quantity_ordered_changed?
-        if ["post_supplier", "stock", "complete", "cancel"].include? status
+        if ["post_supplier"].include? status
           supplier.account(true).credit += ( (buy_cost * quantity_ordered) - (buy_cost_was * quantity_ordered_was) )
           supplier.save
+        elsif ["incart", "inorder", "ordered", "pre_supplier"].include? status
+        else
+          errors.add(:buy_cost, "Невозможно изменить закупочную цену у позиции в данном состоянии.")
+          return false
         end
       end
     end
