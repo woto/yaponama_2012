@@ -6,7 +6,7 @@ class Admin::Products::SplitController < Admin::ProductsController
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
-      @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+      @products = products_user_order_tab_scope( Product.order("updated_at DESC"), 'checked' )
       products_any_checked_validation
       products_all_statuses_validation ['incart', 'inorder', 'ordered', 'pre_supplier', 'post_supplier', 'stock', 'complete']
       products_only_one_validation

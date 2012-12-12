@@ -3,7 +3,7 @@ class Admin::ProductsController < Admin::ApplicationController
   ORDER_STEPS = %w[order delivery postal_address phone name notes]
  
   def index
-    products = Product.order("id DESC").page(params[:page])
+    products = Product.order("updated_at DESC").page(params[:page])
     @products = products_user_order_tab_scope(products, params[:status])
     respond_to do |format|
       format.html
@@ -14,7 +14,7 @@ class Admin::ProductsController < Admin::ApplicationController
 
     begin
 
-      @products = products_user_order_tab_scope( Product.scoped, 'checked' )
+      @products = products_user_order_tab_scope( Product.order("updated_at DESC"), 'checked' )
 
       products_any_checked_validation
 
