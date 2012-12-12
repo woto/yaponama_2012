@@ -8,7 +8,7 @@ class Admin::Products::StockController < Admin::ProductsController
       Rails.application.routes.recognize_path params[:return_path]
       @products = products_user_order_tab_scope( Product.order("updated_at DESC"), 'checked' )
       products_any_checked_validation
-      products_all_statuses_validation ['post_supplier', 'complete']
+      products_all_statuses_validation ['post_supplier', 'complete', 'cancel']
 
     rescue ValidationError => e
       redirect_to :back, :alert => e.message

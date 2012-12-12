@@ -126,9 +126,8 @@ class Product < ActiveRecord::Base
               user.account(true).credit -= (sell_cost * quantity_ordered)
               user.save
             when 'cancel'
-              # TODO закомментировал
-              #user.account(true).credit -= (sell_cost * quantity_ordered)
-              #user.save
+              user.account(true).credit -= (sell_cost * quantity_ordered)
+              user.save
             when 'pre_supplier'
             when 'inorder'
               user.account(true).credit -= (sell_cost * quantity_ordered)
@@ -142,9 +141,9 @@ class Product < ActiveRecord::Base
         when 'pre_supplier'
           case new_status
           when 'cancel'
-            # raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
-            #  #user.account.credit -= sell_cost * quantity_ordered
-            #  #user.save
+            # TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
+            user.account(true).credit -= (sell_cost * quantity_ordered)
+            user.save
           when 'pre_supplier'
           when 'post_supplier'
             supplier.account(true).credit += (buy_cost * quantity_ordered)
@@ -167,11 +166,11 @@ class Product < ActiveRecord::Base
             supplier.account(true).credit -= (buy_cost * quantity_ordered)
             supplier.save
           when 'cancel'
-            # raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
-            #user.account.credit -= sell_cost * quantity_ordered
-            #supplier.account.credit -= buy_cost * quantity_ordered
-            #user.save
-            #supplier.save
+            # TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
+            user.account.credit -= sell_cost * quantity_ordered
+            supplier.account.credit -= buy_cost * quantity_ordered
+            user.save
+            supplier.save
           when 'stock'
             supplier.account(true).credit -= buy_cost * quantity_ordered
             supplier.account.debit -= buy_cost * quantity_ordered
@@ -195,7 +194,9 @@ class Product < ActiveRecord::Base
         when 'stock'
           case new_status
           when 'cancel'
-            # raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
+            # TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
+            user.account(true).credit -= sell_cost * quantity_ordered
+            user.save
           when 'post_supplier'
             supplier.account(true).credit += (buy_cost * quantity_ordered)
             supplier.account.debit += buy_cost * quantity_ordered
@@ -212,7 +213,9 @@ class Product < ActiveRecord::Base
         when 'complete'
           case new_status
           when 'cancel'
-            # raise '# TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
+            # WTF? TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
+            # user.account(true).credit -= sell_cost * quantity_ordered
+            # user.save
           when 'stock'
             user.account(true).credit += sell_cost * quantity_ordered
             user.account.debit += sell_cost * quantity_ordered
@@ -225,6 +228,12 @@ class Product < ActiveRecord::Base
         when 'cancel'
           case new_status
           when 'incart'
+          when 'inorder'
+          when 'ordered'
+          when 'pre_supplier'
+          when 'post_supplier'
+          when 'stock'
+          when 'complete'
           else
             errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
             return false

@@ -9,6 +9,7 @@ class Admin::Products::EditController < Admin::ProductsController
       @products = products_user_order_tab_scope( Product.order("updated_at DESC"), 'checked' )
       products_any_checked_validation
       products_only_one_validation
+      products_all_statuses_validation ['incart', 'inorder', 'ordered', 'pre_supplier', 'post_supplier', 'stock', 'complete']
 
     rescue ValidationError => e
       redirect_to :back, :alert => e.message
