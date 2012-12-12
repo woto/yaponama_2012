@@ -1,10 +1,4 @@
-ul.breadcrumb
-  li
-    = link_to @products.first.user.to_label, edit_admin_user_path(@products.first.user)
-    span.divider
-      |
-        /
-  li Смена статуса на "Запущено"
+ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['ordered']['title']}"
 
 .alert.alert-block
   button.close type="button" data-dismiss="alert" ×

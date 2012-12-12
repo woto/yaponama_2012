@@ -1,18 +1,11 @@
-ul.breadcrumb
-  li
-    = link_to @products.first.user.to_label, edit_admin_user_path(@products.first.user)
-    span.divider
-      |
-        /
-  li Смена статуса на "Отказ"
+ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['cancel']['title']}"
 
 = form_tag admin_products_cancel_index_path(:user_id => params[:user_id], :order_id => params[:order_id]) do |f|
 
   = render :partial => 'products/index'
 
 
-  # По идее такого быть не должно в виде. В результате этого действия еще и в контроллере дополнительная логика по списанию средств с счета покупателя, поставщика.
-  # TODO, но по крайней мере это дает единое место для понимания и анализа что необходимо сделать в дальнейшем.
+  / По идее такого быть не должно в виде. В результате этого действия еще и в контроллере дополнительная логика по списанию средств с счета покупателя, поставщика. TODO, но по крайней мере это дает единое место для понимания и анализа что необходимо сделать в дальнейшем.
   - if @products.all?(&:supplier)
     p Уменьшить сумму долга перед поставщиком на:
     = text_field_tag :supplier_credit, @products_buy_cost

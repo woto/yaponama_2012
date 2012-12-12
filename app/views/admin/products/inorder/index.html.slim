@@ -1,11 +1,4 @@
-ul.breadcrumb
-  li
-    = link_to @products.first.user.to_label, edit_admin_user_path(@products.first.user)
-    span.divider
-      |
-        /
-  li Формирование заказа
-
+ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['inorder']['title']}"
 
 = form_tag order_select_admin_products_inorder_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]) do |f|
 

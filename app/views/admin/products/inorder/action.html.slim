@@ -1,10 +1,4 @@
-ul.breadcrumb
-  li
-    = link_to @products.first.user.to_label, edit_admin_user_path(@products.first.user)
-    span.divider
-      |
-        /
-  li Формирование заказа
+ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['inorder']['title']}"
 
 = simple_form_for @order, :url => polymorphic_path([:admin, @order], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]) do |f|
 
