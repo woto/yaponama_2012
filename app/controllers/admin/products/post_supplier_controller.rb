@@ -8,7 +8,7 @@ class Admin::Products::PostSupplierController < Admin::ProductsController
       Rails.application.routes.recognize_path params[:return_path]
       @products = products_user_order_tab_scope( Product.scoped, 'checked' )
       products_any_checked_validation
-      products_all_statuses_validation ['pre_supplier', 'post_supplier']
+      products_all_statuses_validation ['pre_supplier', 'post_supplier', 'stock']
 
     rescue ValidationError => e
       redirect_to :back, :alert => e.message
@@ -23,6 +23,14 @@ class Admin::Products::PostSupplierController < Admin::ProductsController
 
   def create
     supplier = Supplier.where(:id => params[:supplier_id]).first
+
+    @products.each do |product|
+      if product.status == 'stock'
+        unless product.supplier == supplier
+          redirect_to :back, :alert => "Отменить операцию можно только выбрав именно того же самого поставщика у которого был осуществлен заказ." and return
+        end
+      end
+    end
 
     if supplier.blank?
       redirect_to :back, :alert => "Пожалуйста выберите поставщика." and return
