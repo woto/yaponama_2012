@@ -17,7 +17,7 @@ class Admin::Products::CancelController < Admin::ProductsController
 
       # У обрабатываемых позиций должен быть один и тот же статус
       if (statuses = @products.map(&:status).uniq).size > 1
-        raise ValidateError.new "У обрабатываемых позиций должен быть один и тот же статус, а сейчас: #{statuses.join(', ')}"
+        raise ValidationError.new "У обрабатываемых позиций должен быть один и тот же статус, а сейчас: #{statuses.map{|status| '"' + Rails.configuration.products_status[status]['title'] + '"'}.join(', ')}"
       end
 
     rescue ValidationError => e
