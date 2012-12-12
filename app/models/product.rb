@@ -97,6 +97,7 @@ class Product < ActiveRecord::Base
 
         when 'incart'
           case new_status
+            when 'incart'
             when 'inorder'
             when 'cancel'
             else
@@ -121,6 +122,9 @@ class Product < ActiveRecord::Base
 
         when 'ordered'
           case new_status
+            when 'incart'
+              user.account(true).credit -= (sell_cost * quantity_ordered)
+              user.save
             when 'cancel'
               # TODO закомментировал
               #user.account(true).credit -= (sell_cost * quantity_ordered)
@@ -144,6 +148,12 @@ class Product < ActiveRecord::Base
           when 'post_supplier'
             supplier.account(true).credit += (buy_cost * quantity_ordered)
             supplier.save
+          when 'incart'
+            user.account(true).credit -= (sell_cost * quantity_ordered)
+            user.save
+          when 'inorder'
+            user.account(true).credit -= (sell_cost * quantity_ordered)
+            user.save
           else
             errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
             return false

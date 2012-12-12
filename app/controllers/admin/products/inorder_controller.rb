@@ -9,7 +9,7 @@ class Admin::Products::InorderController < Admin::ProductsController
       @products = products_user_order_tab_scope( Product.scoped, 'checked' ) 
       products_any_checked_validation
       products_belongs_to_one_user_validation!
-      products_all_statuses_validation ["incart", "inorder", "ordered"]
+      products_all_statuses_validation ["incart", "inorder", "ordered", "pre_supplier"]
 
     rescue ValidationError => e
       redirect_to :back, :alert => e.message
