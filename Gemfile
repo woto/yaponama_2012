@@ -26,12 +26,12 @@ group :development, :test do
   gem 'debugger'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
 
 group :test do
   gem 'cucumber-rails', :require => false
   gem 'capybara', '~> 1.1.4'
-  gem 'database_cleaner'
   gem 'email_spec'
   gem 'timecop'
   gem 'launchy'
