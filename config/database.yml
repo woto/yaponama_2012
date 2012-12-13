@@ -18,7 +18,9 @@ development:
   database: yaponama_2012_development
   pool: 5
   username: yaponama_2012
-  password:
+  password: yaponama_2012
+  host: localhost
+  pool: 5
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -44,7 +46,9 @@ test:
   database: yaponama_2012_test
   pool: 5
   username: yaponama_2012
-  password:
+  password: yaponama_2012
+  host: localhost
+  pool: 5
 
 production:
   adapter: postgresql
@@ -52,4 +56,6 @@ production:
   database: yaponama_2012_production
   pool: 5
   username: yaponama_2012
-  password:
+  password: yaponama_2012
+  host: localhost
+  pool: 5
