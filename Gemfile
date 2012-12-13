@@ -30,7 +30,7 @@ end
 
 group :test do
   gem 'cucumber-rails', :require => false
-  gem 'capybara'
+  gem 'capybara', '~> 1.1.4'
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'timecop'
