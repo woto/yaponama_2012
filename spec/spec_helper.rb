@@ -8,14 +8,18 @@ require 'rspec/autorun'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-DatabaseCleaner.strategy = :truncation
-DatabaseCleaner.clean_with(:truncation)
 
+DatabaseCleaner.strategy = :truncation
 
 RSpec.configure do |config|
 
-  config.before(:each) { DatabaseCleaner.start }
-  config.after(:each) { DatabaseCleaner.clean }
+  config.before(:suite) do
+    DatabaseCleaner.clean
+    require Rails.root.join('db','seeds')
+  end
+
+  #config.before(:each) { DatabaseCleaner.start }
+  #config.after(:each) { DatabaseCleaner.clean }
 
   # ## Mock Framework
   #

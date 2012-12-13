@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe "TestControllers", :js => true do
@@ -5,8 +7,6 @@ describe "TestControllers", :js => true do
     it "works! (now write some real specs)", :js => true do
       full_filled_user = FactoryGirl.create(:full_filled_user)
 
-      puts '1'
- 
       visit admin_user_products_path(full_filled_user)
 
       # Найти первый нужный чекбокс
@@ -14,12 +14,30 @@ describe "TestControllers", :js => true do
       check checkbox
 
       first(:css, ".btn.btn-primary.dropdown-toggle").click
+      #find(:css, ".dropdown-menu>li[2]>a")
+      click_link 'form_inorder_action'
 
-      first(:css, ".dropdown-menu>li>a").click
+      page.wait_until() do
+        page.has_content? 'Выберите'
+      end
+
+      select('Новый заказ', :from => 'new_order_id')
+      click_button 'Далее'
+
+      page.wait_until() do
+        page.has_content? 'Способ доставки'
+      end
+
+      select('Доставка по Москве -> Доставка до любой станции метро', :from => 'order_delivery_id')
+      select('Динамо', :from => 'order_metro_id')
+      click_button 'Создать'
+
+
+      debugger
+
 
       #.dropdown-menu>li>a
 
-      save_and_open_page
       #debugger
       #save_screenshot('screenshot.png')
       get test_controllers_path

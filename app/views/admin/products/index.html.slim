@@ -25,7 +25,7 @@
               ul.dropdown-menu
                 - Rails.configuration.products_status.select{|k, v| v['real'] == true}.each do |k, v|
                   li 
-                    = link_to polymorphic_path([:admin, :products, k.to_sym, :index], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => request.fullpath) do
+                    = link_to polymorphic_path([:admin, :products, k.to_sym, :index], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => request.fullpath), id: "form_#{k}_action" do
                       =' v["action"]
                       - if v['badge'].present?
                         span class="badge badge-#{k}" = v['badge']
