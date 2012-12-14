@@ -28,6 +28,8 @@ end
 FactoryGirl.define do
 
   factory :product do
+    updated_at 0.minutes.ago
+    created_at 0.minutes.ago
     catalog_number
     manufacturer
     quantity_ordered { generate(:random_quantity_ordered) }
@@ -35,7 +37,7 @@ FactoryGirl.define do
     sell_cost{ generate(:random_sell_cost) }
 
     factory :product_with_user do
-      association :user, factory: :full_filled_user
+      association :user, factory: :minimal_valid_user
     end
   end
 

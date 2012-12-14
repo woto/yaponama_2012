@@ -31,6 +31,10 @@ FactoryGirl.define do
       discount { generate(:random_discount) }
       order_rule{ generate(:random_order_rule) }
 
+      after(:build) do |u, evaluator|
+        u.account = FactoryGirl.build(:minimal_valid_account, accountable: u)
+      end
+
       factory :full_filled_user do |u|
 
         u.notes_invisible{ generate(:random_notes_invisible) }
@@ -39,7 +43,6 @@ FactoryGirl.define do
         after(:build) do |u, evaluator|
           u.names = Random.new.rand(5).times.map{|n| FactoryGirl.build(:name, user:  u)}
           u.phones = Random.new.rand(5).times.map{|n| FactoryGirl.build(:phone, user: u)}
-          u.account = FactoryGirl.build(:minimal_valid_account, accountable: u)
           u.products = Random.new.rand(50..100).times.map{|n| FactoryGirl.build(:product, user: u)}
           u.email_addresses = Random.new.rand(3).times.map{|n| FactoryGirl.build(:email_address, user: u)}
           u.time_zone = TimeZone.order("RANDOM()").first
