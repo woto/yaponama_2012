@@ -28,13 +28,20 @@ Yaponama2012::Application.routes.draw do
     end
 
     resources :users do
-      resources :products
-    end
 
-    resources :users do
+      resources :products
+
       resources :orders do
         resources :products
       end
+
+      resources :money_transactions
+      resources :product_transactions
+
+      collection do
+        post 'filter' => "users#index"
+      end
+
     end
 
     namespace :products do
@@ -78,12 +85,6 @@ Yaponama2012::Application.routes.draw do
         get 'show_text_part'
         get 'show_html_part'
         get 'show_html_part_sanitized'
-      end
-    end
-
-    resources :users do
-      collection do
-        post 'filter' => "users#index"
       end
     end
 

@@ -7,6 +7,7 @@ class Admin::ProductTransactionsController < Admin::ApplicationController
     if params[:product_id]
       product_transaction = product_transaction.where(:product_id => params[:product_id])
     end
+
     @product_transactions = product_transaction
 
     respond_to do |format|

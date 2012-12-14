@@ -4,7 +4,7 @@
   h1
     =t '.title', :default => model_class.model_name.human.pluralize
 
-= paginate @transactions, :theme => :default
+= paginate @money_transactions, :theme => :default
 
 table.table.table-striped
   thead
@@ -19,32 +19,32 @@ table.table.table-striped
       th = model_class.human_attribute_name(:created_at)
       th =t '.actions', :default => t("helpers.actions")
   tbody
-    - @transactions.each do |transaction|
+    - @money_transactions.each do |money_transaction|
       tr
-        td = link_to transaction.id, admin_money_transaction_path(transaction)
+        td = link_to money_transaction.id, admin_money_transaction_path(money_transaction)
         td 
-          - if transaction.left_account_id
-            = link_to polymorphic_path([:admin, transaction.left_account]) do
-              - if transaction.left_account.accountable_type == 'User'
-                = render :partial => "shared/client_button", :locals => {:user_id => transaction.left_account.accountable_id, :user_label => transaction.left_account.to_label}
-              - elsif transaction.left_account.accountable_type == 'Supplier'
-                = render :partial => "shared/supplier_button", :locals => {:supplier_id => transaction.left_account.accountable_id, :supplier_label => transaction.left_account.to_label}
+          - if money_transaction.left_account_id
+            = link_to polymorphic_path([:admin, money_transaction.left_account]) do
+              - if money_transaction.left_account.accountable_type == 'User'
+                = render :partial => "shared/client_button", :locals => {:user_id => money_transaction.left_account.accountable_id, :user_label => money_transaction.left_account.to_label}
+              - elsif money_transaction.left_account.accountable_type == 'Supplier'
+                = render :partial => "shared/supplier_button", :locals => {:supplier_id => money_transaction.left_account.accountable_id, :supplier_label => money_transaction.left_account.to_label}
         td 
-          - if transaction.right_account_id
-            = link_to polymorphic_path([:admin, transaction.right_account]) do
-              - if transaction.right_account.accountable_type == 'User'
-                = render :partial => "shared/client_button", :locals => {:user_id => transaction.right_account.accountable_id, :user_label => transaction.right_account.to_label}
-              - elsif transaction.right_account.accountable_type == 'Supplier'
-                = render :partial => "shared/supplier_button", :locals => {:supplier_id => transaction.right_account.accountable_id, :supplier_label => transaction.right_account.to_label}
-        td = transaction.left_real
-        td = transaction.right_real
-        td = ((transaction.left_money && transaction.left_money > 0) ? "+" : "" ) + transaction.left_money.to_s
-        td = ((transaction.right_money && transaction.right_money > 0) ? "+" : "" ) + transaction.right_money.to_s
-        td =l transaction.created_at
+          - if money_transaction.right_account_id
+            = link_to polymorphic_path([:admin, money_transaction.right_account]) do
+              - if money_transaction.right_account.accountable_type == 'User'
+                = render :partial => "shared/client_button", :locals => {:user_id => money_transaction.right_account.accountable_id, :user_label => money_transaction.right_account.to_label}
+              - elsif money_transaction.right_account.accountable_type == 'Supplier'
+                = render :partial => "shared/supplier_button", :locals => {:supplier_id => money_transaction.right_account.accountable_id, :supplier_label => money_transaction.right_account.to_label}
+        td = money_transaction.left_real
+        td = money_transaction.right_real
+        td = ((money_transaction.left_money && money_transaction.left_money > 0) ? "+" : "" ) + money_transaction.left_money.to_s
+        td = ((money_transaction.right_money && money_transaction.right_money > 0) ? "+" : "" ) + money_transaction.right_money.to_s
+        td =l money_transaction.created_at
         td
-          =' link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_money_transaction_path(transaction), :class => 'btn btn-mini'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_money_transaction_path(transaction), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+          =' link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_money_transaction_path(money_transaction), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_money_transaction_path(money_transaction), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
 = link_to t('.new', :default => t("helpers.links.new")), new_admin_money_transaction_path, :class => 'btn btn-primary'
 
-= paginate @transactions, :theme => :default
+= paginate @money_transactions, :theme => :default

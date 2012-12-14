@@ -2,7 +2,22 @@ class Admin::MoneyTransactionsController < Admin::ApplicationController
   # GET /admin/transactions
   # GET /admin/transactions.json
   def index
-    @transactions = MoneyTransaction.order("id DESC").page params[:page]
+    money_transactions = MoneyTransaction.order("id DESC").page params[:page]
+
+    if params[:user_id]
+
+      t = MoneyTransaction.arel_table
+
+      account_id = User.find(params[:user_id]).account.id
+
+      money_transactions = money_transactions.where(
+        t[:left_account_id].eq(account_id).
+        or(t[:right_account_id].eq(account_id))
+      )
+    end
+
+    @money_transactions = money_transactions
+
 
     respond_to do |format|
       format.html # index.html.erb
