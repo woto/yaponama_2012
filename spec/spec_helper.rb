@@ -8,11 +8,9 @@ require 'rspec/autorun'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-
 DatabaseCleaner.strategy = :truncation
 
 RSpec.configure do |config|
-
   config.before(:suite) do
     DatabaseCleaner.clean
     require Rails.root.join('db','seeds')
