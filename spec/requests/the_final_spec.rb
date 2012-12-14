@@ -9,9 +9,11 @@ describe "TestControllers", :js => true do
 
       visit admin_user_products_path(full_filled_user)
 
-      # Найти первый нужный чекбокс
-      checkbox = first(:css, 'table input[type=checkbox]').native.attribute('id')
-      check checkbox
+      # СФОРМИРОВАНО
+      10.times do |i|
+        checkbox = all(:css, "table input[type=checkbox]")[i].native.attribute('id')
+        check checkbox
+      end
 
       first(:css, ".btn.btn-primary.dropdown-toggle").click
       #find(:css, ".dropdown-menu>li[2]>a")
@@ -32,16 +34,56 @@ describe "TestControllers", :js => true do
       select('Динамо', :from => 'order_metro_id')
       click_button 'Создать'
 
+      # ОПЛАЧЕНО
+      2.times do |i|
+        checkbox = all(:css, "table input[type=checkbox]")[i].native.attribute('id')
+        uncheck checkbox
+      end
 
-      debugger
+      first(:css, ".btn.btn-primary.dropdown-toggle").click
+      click_link 'form_ordered_action'
 
+      wait_until do
+        has_content? 'Смена статуса'
+      end
 
-      #.dropdown-menu>li>a
+      click_button 'Ок'
 
-      #debugger
-      #save_screenshot('screenshot.png')
-      get test_controllers_path
-      response.status.should be(200)
+      # ЗАБЛОКИРОВАНО
+      2.times do |i|
+        checkbox = all(:css, "table input[type=checkbox]")[i].native.attribute('id')
+        uncheck checkbox
+      end
+
+      first(:css, ".btn.btn-primary.dropdown-toggle").click
+      click_link 'form_pre_supplier_action'
+
+      wait_until do
+        has_content? 'Смена статуса'
+      end
+
+      click_button 'Ок'
+
+      #ЗАКАЗАНО
+      2.times do |i|
+        checkbox = all(:css, "table input[type=checkbox]")[i].native.attribute('id')
+        uncheck checkbox
+      end
+
+      first(:css, ".btn.btn-primary.dropdown-toggle").click
+      click_link 'form_post_supplier_action'
+
+      wait_until do
+        has_content? 'Смена статуса'
+      end
+
+      select('8-я миля', :from => 'supplier_id')
+      click_button 'Ок'
+
+      wait_until do
+        page.should have_content('Товар заказан у поставщика')
+      end
+
     end
   end
 end

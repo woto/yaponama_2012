@@ -40,7 +40,7 @@ FactoryGirl.define do
           u.names = Random.new.rand(5).times.map{|n| FactoryGirl.build(:name, user:  u)}
           u.phones = Random.new.rand(5).times.map{|n| FactoryGirl.build(:phone, user: u)}
           u.account = FactoryGirl.build(:minimal_valid_account, accountable: u)
-          u.products = Random.new.rand(10..30).times.map{|n| FactoryGirl.build(:product, user: u)}
+          u.products = Random.new.rand(50..100).times.map{|n| FactoryGirl.build(:product, user: u)}
           u.email_addresses = Random.new.rand(3).times.map{|n| FactoryGirl.build(:email_address, user: u)}
           u.time_zone = TimeZone.order("RANDOM()").first
           #u.account.debit = 1
