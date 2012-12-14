@@ -4,16 +4,20 @@ class Admin::MoneyTransactionsController < Admin::ApplicationController
   def index
     money_transactions = MoneyTransaction.order("id DESC").page params[:page]
 
-    if params[:user_id]
+    opts = ['user', 'supplier']
 
-      t = MoneyTransaction.arel_table
+    opts.each do |opt|
+      if params["#{opt}_id"].present?
+        t = MoneyTransaction.arel_table
 
-      account_id = User.find(params[:user_id]).account.id
+        klass = eval(opt.capitalize)
+        account_id = klass.find(params["#{opt}_id"]).account.id
 
-      money_transactions = money_transactions.where(
-        t[:left_account_id].eq(account_id).
-        or(t[:right_account_id].eq(account_id))
-      )
+        money_transactions = money_transactions.where(
+          t[:left_account_id].eq(account_id).
+          or(t[:right_account_id].eq(account_id))
+        )
+      end
     end
 
     @money_transactions = money_transactions

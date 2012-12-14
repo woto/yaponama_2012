@@ -1,6 +1,14 @@
 - supplier = Supplier.where(:id => supplier_id).first
 
 - if supplier.present?
-  = link_to admin_supplier_path(supplier_id) do
-    =' supplier_label
-    i.icon-road
+  .dropdown
+    a.dropdown-toggle role="button" data-toggle="dropdown" data-target="#" href="#"
+      =' supplier_label
+      i.icon-road
+    ul.dropdown-menu
+      li.dropdown-submenu
+        = link_to "Транзакции", "#"
+        ul.dropdown-menu
+          li = link_to "Деньги", admin_supplier_money_transactions_path(supplier_id)
+          li = link_to "Товары", admin_supplier_product_transactions_path(supplier_id)
+      li = link_to "Редактировать", admin_supplier_path(supplier_id)

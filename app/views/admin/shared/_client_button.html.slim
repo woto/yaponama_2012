@@ -17,7 +17,7 @@
                   span class="badge badge-#{k}" = v['badge']
 
       li.dropdown-submenu
-        = link_to "Транзакции" 
+        = link_to "Транзакции", "#"
         ul.dropdown-menu
           li = link_to "Деньги", admin_user_money_transactions_path(user_id)
           li = link_to "Товары", admin_user_product_transactions_path(user_id)

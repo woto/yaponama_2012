@@ -92,7 +92,10 @@ Yaponama2012::Application.routes.draw do
     resources :accounts
     resources :money_transactions
     resources :product_transactions
-    resources :suppliers
+    resources :suppliers do
+      resources :money_transactions
+      resources :product_transactions
+    end
 
   end
 
