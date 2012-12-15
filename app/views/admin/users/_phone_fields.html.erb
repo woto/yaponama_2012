@@ -11,7 +11,7 @@
   <div class="clearfix bottom-space"></div>
 
   <%= f.input :phone %>
-  <%= f.input :can_receive_sms, :as => :radio_buttons, :required => true %>
+  <%= f.input :can_receive_sms, :collection => ['Да', 'Нет', 'Неизвестно'], :as => :radio_buttons, :required => true %>
   <%= f.input :confirmed_by_human %>
   <%= f.input :human_confirmation_datetime %>
   <%= f.input :confirmed_by_robot, :disabled => true %>
