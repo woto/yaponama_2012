@@ -248,7 +248,11 @@ class Product < ActiveRecord::Base
           user.save
         elsif ["incart", "inorder"].include? status
         else
-          errors.add(:sell_cost, "Невозможно изменить продажную цену у позиций в данном статусе.")
+          if sell_cost_changed?
+            errors.add(:sell_cost, "Невозможно изменить продажную цену у позиции в данном статусе.")
+          elsif quantity_ordered_changed?
+            errors.add(:quantity_ordered, "Невозможно изменить количество у позиции в данном статусе.")
+          end
         end
       end
 
@@ -258,7 +262,11 @@ class Product < ActiveRecord::Base
           supplier.save
         elsif ["incart", "inorder", "ordered", "pre_supplier"].include? status
         else
-          errors.add(:buy_cost, "Невозможно изменить закупочную цену у позиции в данном статусе.")
+          if buy_cost_changed?
+            errors.add(:buy_cost, "Невозможно изменить закупочную цену у позиции в данном статусе.")
+          elsif quantity_ordered_changed?
+            errors.add(:quantity_ordered, "Невозможно изменить количество у позиции в данном статусе.")
+          end
         end
       end
 
