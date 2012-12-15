@@ -231,3 +231,17 @@ TODO
 - Mail::Message
 - --
 - http://steve.dynedge.co.uk/2010/11/29/receiving-test-driven-incoming-email-for-rails-3/
+
+---
+
+Postgres + Spec
+-
+
+- http://kerryb.github.com/iprug-rspec-presentation/#27
+- http://rspec.info/
+- https://github.com/rspec/rspec
+- http://rspec.info/
+- https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md
+- http://rubydoc.info/gems/rspec-rails/frames
+- https://github.com/jnicklas/capybara
+- http://www.youtube.com/watch?v=qMpF3eMq_Kc&feature=g-wl&list=WLCBC1429D9ADDF173
