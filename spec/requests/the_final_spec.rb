@@ -28,14 +28,14 @@ describe "TestControllers", :js => true do
         #find(:css, ".dropdown-menu>li[2]>a")
         click_link 'form_inorder_action'
 
-        page.wait_until(10) do
+        page.wait_until do
           page.has_content? 'Выберите'
         end
 
         select('Новый заказ', :from => 'new_order_id')
         click_button 'Далее'
 
-        page.wait_until(10) do
+        page.wait_until do
           page.has_content? 'Способ доставки'
         end
 
@@ -58,7 +58,7 @@ describe "TestControllers", :js => true do
         first(:css, ".btn.btn-primary.dropdown-toggle").click
         click_link 'form_ordered_action'
 
-        wait_until(10) do
+        wait_until do
           has_content? 'Смена статуса'
         end
 
@@ -73,7 +73,7 @@ describe "TestControllers", :js => true do
         first(:css, ".btn.btn-primary.dropdown-toggle").click
         click_link 'form_pre_supplier_action'
 
-        wait_until(10) do
+        wait_until do
           has_content? 'Смена статуса'
         end
 
@@ -88,7 +88,7 @@ describe "TestControllers", :js => true do
         first(:css, ".btn.btn-primary.dropdown-toggle").click
         click_link 'form_post_supplier_action'
 
-        wait_until(10) do
+        wait_until do
           has_content? 'Смена статуса'
         end
 
@@ -101,7 +101,7 @@ describe "TestControllers", :js => true do
 
         click_button 'Ок'
 
-        wait_until(10) do
+        wait_until do
           page.should have_content('Товар заказан у поставщика')
         end
 
@@ -114,7 +114,7 @@ describe "TestControllers", :js => true do
         first(:css, ".btn.btn-primary.dropdown-toggle").click
         click_link 'form_stock_action'
 
-        wait_until(10) do
+        wait_until do
           has_content? 'Смена статуса'
         end
 
@@ -129,7 +129,7 @@ describe "TestControllers", :js => true do
         first(:css, ".btn.btn-primary.dropdown-toggle").click
         click_link 'form_complete_action'
 
-        wait_until(10) do
+        wait_until do
           has_content? 'Смена статуса'
         end
 
