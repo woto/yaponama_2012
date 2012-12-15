@@ -14,7 +14,7 @@
 # --
 # http://steve.dynedge.co.uk/2010/11/29/receiving-test-driven-incoming-email-for-rails-3/
 
-Проверка
+Проверка wtf?
 <table>
     <tr>
         <td>Foo</td>
