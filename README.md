@@ -70,57 +70,54 @@ Yaponama 2012
         <td>Статус</td>
         <td>Изм. продажной</td>
         <td>Изм. закупочной цены</td>
-        <td>Изм. кол-ва</td>
     </tr>
     <tr>
         <td>incart</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
+        <td>0/0</td>
+        <td>0/0</td>
     </tr>
     <tr>
         <td>inorder</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
+        <td>0/0</td>
+        <td>0/0</td>
     </tr>
     <tr>
         <td>ordered</td>
-        <td>Y</td>
-        <td>0</td>
-        <td>Y</td>
+        <td>Y/Y</td>
+        <td>0/0</td>
     </tr>
     <tr>
         <td>pre_supplier</td>
-        <td>Y</td>
-        <td>0</td>
-        <td>Y</td>
+        <td>Y/Y</td>
+        <td>0/0</td>
     </tr>
     <tr>
         <td>post_supplier</td>
-        <td>Y</td>
-        <td>Y</td>
-        <td>N</td>
+        <td>Y/Y</td>
+        <td>Y/Y</td>
     </tr>
     <tr>
         <td>stock</td>
-        <td>Y</td>
-        <td>N</td>
-        <td>N</td>
+        <td>Y/N</td>
+        <td>N/N</td>
     </tr>
     <tr>
         <td>complete</td>
-        <td>N</td>
-        <td>N</td>
-        <td>N</td>
+        <td>N/N</td>
+        <td>N/N</td>
     </tr>
     <tr>
         <td>cancel</td>
-        <td>N</td>
-        <td>N</td>
-        <td>N</td>
+        <td>N/N</td>
+        <td>N/N</td>
     </tr>  
 </table>
+
+- 0 Означает, что изменение этого поля никак не влияет на долг.
+- Y Означает возможность изменения этого поля и влечет за собой изменение долга.
+- N Означает отсутствие возможности изменения этого поля.
+--
+Первое значение - сумма, второе - количество
 
 TODO
 ----
