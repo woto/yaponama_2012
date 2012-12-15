@@ -28,28 +28,28 @@ Yaponama 2012
     </tr>
     <tr>
         <td>ordered</td>
-        <td>?</td>
+        <td>-</td>
         <td>0</td>
         <td>0</td>
         <td>0</td>
     </tr>
     <tr>
         <td>pre_supplier</td>
-        <td>?</td>
+        <td>-</td>
         <td>0</td>
         <td>0</td>
         <td>0</td>
     </tr>
     <tr>
         <td>post_supplier</td>
-        <td>?</td>
+        <td>-</td>
         <td>0</td>
-        <td>?</td>
+        <td>-</td>
         <td>0</td>
     </tr>
     <tr>
         <td>stock</td>
-        <td>?</td>
+        <td>-</td>
         <td>0</td>
         <td>0</td>
         <td>0</td>
@@ -63,6 +63,64 @@ Yaponama 2012
     </tr>
 </table>
 
+Влияние изменения закупочной, продажной цен и количества позиций на сумму в работе у поставщика или покупателя
+-
+<table>
+    <tr>
+        <td>Статус</td>
+        <td>Изм. продажной</td>
+        <td>Изм. закупочной цены</td>
+        <td>Изм. кол-ва</td>
+    </tr>
+    <tr>
+        <td>incart</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>inorder</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>ordered</td>
+        <td>Y</td>
+        <td>0</td>
+        <td>Y</td>
+    </tr>
+    <tr>
+        <td>pre_supplier</td>
+        <td>Y</td>
+        <td>0</td>
+        <td>Y</td>
+    </tr>
+    <tr>
+        <td>post_supplier</td>
+        <td>Y</td>
+        <td>Y</td>
+        <td>N</td>
+    </tr>
+    <tr>
+        <td>stock</td>
+        <td>Y</td>
+        <td>N</td>
+        <td>N</td>
+    </tr>
+    <tr>
+        <td>complete</td>
+        <td>N</td>
+        <td>N</td>
+        <td>N</td>
+    </tr>
+    <tr>
+        <td>cancel</td>
+        <td>N</td>
+        <td>N</td>
+        <td>N</td>
+    </tr>  
+</table>
 
 TODO
 ----
