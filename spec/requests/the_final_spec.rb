@@ -18,6 +18,10 @@ describe "TestControllers", :js => true do
 
         click_link "next_page"
 
+        wait_until do
+          has_content? "Пред"
+        end
+
         2.times do |i|
           checkbox = all(:css, "table input[type=checkbox]")[i].native.attribute('id')
           check checkbox
@@ -28,15 +32,15 @@ describe "TestControllers", :js => true do
         #find(:css, ".dropdown-menu>li[2]>a")
         click_link 'form_inorder_action'
 
-        page.wait_until do
-          page.has_content? 'Выберите'
+        wait_until do
+          has_content? 'Выберите'
         end
 
         select('Новый заказ', :from => 'new_order_id')
         click_button 'Далее'
 
-        page.wait_until do
-          page.has_content? 'Способ доставки'
+        wait_until do
+          has_content? 'Способ доставки'
         end
 
         case rand(0..1)
