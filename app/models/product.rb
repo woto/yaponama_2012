@@ -87,11 +87,9 @@ class Product < ActiveRecord::Base
 
   def process_before_save
 
-    # TODO В принципе тогда это можно потом убрать
     if self.changes["status"]
       old_status = self.changes["status"][0]
       new_status = self.changes["status"][1]
-    # До сюда
 
       case old_status
 
@@ -175,17 +173,6 @@ class Product < ActiveRecord::Base
             supplier.account(true).credit -= buy_cost * quantity_ordered
             supplier.account.debit -= buy_cost * quantity_ordered
             supplier.save
-
-          when 'post_supplier'
-            ActiveRecord::Base.transaction do
-              if self.supplier_id_changed?
-                supplier_was = Supplier.find(changes["supplier_id"][0])
-                supplier_was.account(true).credit -= (buy_cost * quantity_ordered) 
-                supplier_was.save
-                supplier.account(true).credit += (buy_cost * quantity_ordered)
-                supplier.save
-              end
-            end
           else
             errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
             return false
@@ -241,6 +228,19 @@ class Product < ActiveRecord::Base
       end
     # Если не происходила смена статуса
     else
+
+      # При смене поставщика не присходит смена статуса
+      # случай если меняется только поставщик post_supplier -> post_supplier
+      if self.supplier_id_changed?
+        ActiveRecord::Base.transaction do
+          supplier_was = Supplier.find(changes["supplier_id"][0])
+          supplier_was.account(true).credit -= (buy_cost * quantity_ordered) 
+          supplier_was.save
+          supplier.account(true).credit += (buy_cost * quantity_ordered)
+          supplier.save
+        end
+      end
+
       # TODO необходимо доработать в контроллере вопрос уведомления покупателя
       if sell_cost_changed? || quantity_ordered_changed?
         if ["ordered", "pre_supplier", "post_supplier", "stock"].include? status

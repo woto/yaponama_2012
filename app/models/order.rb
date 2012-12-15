@@ -32,8 +32,6 @@ class Order < ActiveRecord::Base
   
   def before_add_inorder p
     p.status = 'inorder'
-    # TODO check
-    #p.status_will_change!
   end
 
   attr_accessible :products_inorder_attributes
@@ -45,8 +43,6 @@ class Order < ActiveRecord::Base
 
   def before_add_ordered
     p.status = 'ordered'
-    # TODO check
-    #p.status_will_change!
   end
 
   attr_accessible :products_ordered_attributes
@@ -55,7 +51,7 @@ class Order < ActiveRecord::Base
   #has_many :products_inwork, :dependent => :destroy,
   #  :conditions => {:products => {:status => 'inwork'}}, :class_name => "Product",
   #  # TODO если буду раскомментировать блок, то переделать как вверху
-  #  :after_add => Proc.new{|i, p| p.status = 'inwork'; d.status_will_change!}
+  #  :after_add => Proc.new{|i, p| p.status = 'inwork'}
   #attr_accessible :products_inwork_attributes
   #accepts_nested_attributes_for :products_inwork, :allow_destroy => true
 

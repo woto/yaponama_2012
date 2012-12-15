@@ -49,7 +49,6 @@ class Admin::Products::SplitController < Admin::ProductsController
 
       # Run callbacks, but don't validate
       product.update_attribute(:status, "cancel")
-      product.status_will_change!
     end
 
     redirect_to params[:return_path], :notice => "Товар успешно разбит на две партии. Первая - #{p1.quantity_ordered} шт., вторая - #{p2.quantity_ordered} шт."

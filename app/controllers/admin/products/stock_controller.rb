@@ -26,7 +26,6 @@ class Admin::Products::StockController < Admin::ProductsController
     ActiveRecord::Base.transaction do
       @products.each do |product|
         product.status = 'stock'
-        product.status_will_change!
         unless product.save
           redirect_to :back, :alert => product.errors.full_messages and return
         end

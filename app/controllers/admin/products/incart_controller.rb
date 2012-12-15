@@ -26,7 +26,6 @@ class Admin::Products::IncartController < Admin::ProductsController
       product.status = 'incart'
       # TODO надо/не надо?
       #product.order = nil
-      product.status_will_change!
       unless product.save
         redirect_to :back, :alert => product.errors.full_messages and return
       end

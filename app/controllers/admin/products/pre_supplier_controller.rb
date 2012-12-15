@@ -24,7 +24,6 @@ class Admin::Products::PreSupplierController < Admin::ProductsController
   def create
     @products.each do |product|
       product.status = 'pre_supplier'
-      product.status_will_change!
       unless product.save
         redirect_to :back, :alert => product.errors.full_messages and return
       end

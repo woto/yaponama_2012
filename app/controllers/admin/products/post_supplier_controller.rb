@@ -39,7 +39,6 @@ class Admin::Products::PostSupplierController < Admin::ProductsController
     @products.each do |product|
       product.supplier = supplier
       product.status = 'post_supplier'
-      product.status_will_change!
       unless product.save
         redirect_to :back, :alert => product.errors.full_messages and return
       end
