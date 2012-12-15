@@ -13,3 +13,15 @@
 # Mail::Message
 # --
 # http://steve.dynedge.co.uk/2010/11/29/receiving-test-driven-incoming-email-for-rails-3/
+
+Проверка
+<table>
+    <tr>
+        <td>Foo</td>
+        <td>Bar</td>
+    </tr>
+    <tr>
+        <td>Foo</td>
+        <td>Bar</td>
+    </tr>
+</table>
