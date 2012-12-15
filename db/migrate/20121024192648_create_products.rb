@@ -4,8 +4,8 @@ class CreateProducts < ActiveRecord::Migration
       t.string :catalog_number
       t.string :manufacturer
       t.string :status
-      t.text :notes
-      t.string :invisible
+      t.text :notes, :default => ""
+      t.string :invisible, :default => ""
       t.references :user
       t.references :order
 

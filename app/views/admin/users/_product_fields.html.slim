@@ -23,8 +23,8 @@
     = f.input :probability, :as => :string
     = f.input :min_days, :as => :string
     = f.input :max_days, :as => :string
-    = f.input :created_at
-    = f.input :updated_at
+    = f.input :created_at, :include_seconds => true
+    = f.input :updated_at, :include_seconds => true
     = f.input :notes, :input_html => {:rows => 3}
     = f.input :notes_invisible, :input_html => {:rows => 3}
     hr

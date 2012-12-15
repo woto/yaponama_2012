@@ -294,12 +294,12 @@ ActiveRecord::Schema.define(:version => 20121207143942) do
     t.string   "catalog_number"
     t.string   "manufacturer"
     t.string   "status"
-    t.text     "notes"
-    t.text     "notes_invisible"
+    t.text     "notes",                                            :default => ""
+    t.text     "notes_invisible",                                  :default => ""
     t.integer  "user_id"
     t.integer  "order_id"
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
     t.integer  "supplier_id"
     t.integer  "quantity_ordered"
     t.integer  "quantity_available"
@@ -308,8 +308,8 @@ ActiveRecord::Schema.define(:version => 20121207143942) do
     t.integer  "max_days"
     t.decimal  "buy_cost",           :precision => 8, :scale => 2
     t.decimal  "sell_cost",          :precision => 8, :scale => 2
-    t.string   "short_name"
-    t.text     "long_name"
+    t.string   "short_name",                                       :default => ""
+    t.text     "long_name",                                        :default => ""
     t.integer  "product_id"
   end
 

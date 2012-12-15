@@ -64,7 +64,7 @@ class Product < ActiveRecord::Base
   before_save :log_product_transactions
 
   def log_product_transactions
-    if self.changes
+    if self.changes.present?
       product_transaction = self.product_transactions.build
       h = {}
       self.changes.map{|k,v| h["log_#{k}"] = v[1]}
