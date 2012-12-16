@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
   attr_accessible :metro_id
   validates_associated :metro
 
-  belongs_to :user, :validate => true
+  belongs_to :user#, :validate => true
   validates :user, :presence => true
 
   validates_associated :delivery

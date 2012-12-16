@@ -8,7 +8,7 @@ class Name < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  belongs_to :user, :validate => true
+  belongs_to :user#, :validate => true
   validates :user, :presence => true
 
   #validates :name, :uniqueness => {:scope => :user_id}

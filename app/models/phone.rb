@@ -5,7 +5,7 @@ class Phone < ActiveRecord::Base
 
   has_many :orders
 
-  belongs_to :user, :validate => true
+  belongs_to :user#, :validate => true
   validates :user, :presence => true
 
   attr_accessible :confirmed_by_human, :can_receive_sms, :notes, :phone, :notes_invisible, :user_id, :human_confirmation_datetime

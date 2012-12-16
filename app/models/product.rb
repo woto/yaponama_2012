@@ -24,7 +24,7 @@ class Product < ActiveRecord::Base
 
   validates :quantity_ordered, :numericality => { :greater_than_or_equal_to => 1, :only_integer => true }
 
-  belongs_to :user, :validate => true
+  belongs_to :user#, :validate => true
   validates :user, :presence => true
 
   belongs_to :order

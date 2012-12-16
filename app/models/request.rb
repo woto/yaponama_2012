@@ -7,7 +7,7 @@ class Request < ActiveRecord::Base
   include PingCallback
 
   # TODO когда был в Авторифе и демонстрировал Николаеву всплыл опять этот баг! Доколе блиа? 2/2
-  belongs_to :user, :validate => true
+  belongs_to :user#, :validate => true
   validates :user, :presence => true
 
   belongs_to :car

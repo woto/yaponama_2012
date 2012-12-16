@@ -2,7 +2,7 @@ class PostalAddress < ActiveRecord::Base
   include PingCallback
   has_many :orders
 
-  belongs_to :user, :validate => true
+  belongs_to :user#, :validate => true
   validates :user, :presence => true
 
   attr_accessible :city, :house, :notes, :postcode, :region, :room, :street, :company, :notes_invisible, :user_id, :human_confirmation_datetime, :visible
