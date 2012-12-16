@@ -3,12 +3,6 @@
 #
 class Admin::UsersController < Admin::ApplicationController
 
-  DEFAULT_USER_ATTRIBUTES = {
-    'prepayment_percent' => Rails.configuration.default_prepayment_percent_for_new_users, 
-    'discount' => Rails.configuration.default_discount_for_new_users,
-    'order_rule' => Rails.configuration.default_order_rule_for_new_users
-  }
-
   before_filter { @tab = params[:tab] || 'users' }
 
 
@@ -38,7 +32,7 @@ class Admin::UsersController < Admin::ApplicationController
     @user = User.where(:id => params[:id]).first
 
     unless @user
-      @user = User.new(DEFAULT_USER_ATTRIBUTES)
+      @user = User.new(Rails.configuration.default_user_attributes)
       @user.creation_reason = :manager
 
       unless @user.account
@@ -53,7 +47,7 @@ class Admin::UsersController < Admin::ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(DEFAULT_USER_ATTRIBUTES.merge(params[:user] || {}))
+    @user = User.new(Rails.configuration.default_user_attributes.merge(params[:user] || {}))
 
     unless @user.persisted?
       @user.creation_reason = :manager
