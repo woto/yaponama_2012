@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class EmailAddress < ActiveRecord::Base
   include PingCallback
 
@@ -12,6 +14,7 @@ class EmailAddress < ActiveRecord::Base
   has_many :emails
   validates :email_address, :format => {:with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/}, :uniqueness => true
   #validates :email_address, :presence => true, :uniqueness => true
+  validates :added_by, :inclusion => { :in => ['Покупателем', 'Менеджером'] }
   
 
   def to_label

@@ -7,6 +7,7 @@ class CreatePhones < ActiveRecord::Migration
       t.boolean :confirmed_by_human
       t.datetime :robot_confirmation_datetime
       t.datetime :human_confirmation_datetime
+      t.string :added_by
       t.string :can_receive_sms
       t.string :invisible
       t.references :user

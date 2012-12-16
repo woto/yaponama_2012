@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121215215311) do
+ActiveRecord::Schema.define(:version => 20121216034244) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(:version => 20121215215311) do
     t.string   "email_address"
     t.boolean  "confirmed_by_robot"
     t.boolean  "confirmed_by_human"
+    t.string   "added_by"
     t.datetime "robot_confirmation_datetime"
     t.datetime "human_confirmation_datetime"
     t.text     "notes_invisible"
@@ -230,6 +231,7 @@ ActiveRecord::Schema.define(:version => 20121215215311) do
     t.boolean  "confirmed_by_human"
     t.datetime "robot_confirmation_datetime"
     t.datetime "human_confirmation_datetime"
+    t.string   "added_by"
     t.string   "can_receive_sms"
     t.text     "notes_invisible"
     t.integer  "user_id"

@@ -48,6 +48,7 @@ class Admin::UsersController < Admin::ApplicationController
   # POST /users.json
   def create
     @user = User.new(Rails.configuration.default_user_attributes.merge(params[:user] || {}))
+    set_predefined_added_by
 
     unless @user.persisted?
       @user.creation_reason = :manager
@@ -69,7 +70,9 @@ class Admin::UsersController < Admin::ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      @user.assign_attributes params[:user]
+      set_predefined_added_by
+      if @user.save
         format.html { redirect_to edit_admin_user_path(@user, :tab => params[:tab]), :notice => 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -90,5 +93,43 @@ class Admin::UsersController < Admin::ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  # TODO это только для того чтобы выставить начальное значение added_by -> manager
+  def set_predefined_added_by
+
+    # Хех, так не получится, т.к. mass assignment
+    #if params["user"] && params["user"]["phones_attributes"]
+    #  params["user"]["phones_attributes"].each do |phone|
+    #    phone[1]["added_by"] = 'Менеджером'
+    #  end
+    #end
+    #
+    #if params["user"] && params["user"]["email_addresses_attributes"]
+    #  params["user"]["email_addresses"].each do |email_address|
+    #    email_address[1]["added_by"] = 'Менеджером'
+    #  end
+    #end
+
+    if @user.phones.present?
+      @user.phones.each do |phone|
+        unless phone.persisted?
+          phone.added_by = "Менеджером"
+        end
+      end
+    end
+
+
+    if @user.email_addresses.present?
+      @user.email_addresses.each do |email_address|
+        unless email_address.persisted?
+          email_address.added_by = "Менеджером"
+        end
+      end
+    end
+
+  end
+
 
 end

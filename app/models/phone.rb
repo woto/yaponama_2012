@@ -12,6 +12,7 @@ class Phone < ActiveRecord::Base
 
   validates :can_receive_sms, :inclusion => { :in => ['Да', 'Нет', 'Неизвестно'] }
   validates :phone, :presence => true, :uniqueness => true
+  validates :added_by, :inclusion => { :in => ['Покупателем', 'Менеджером'] }
 
   def to_label
     phone

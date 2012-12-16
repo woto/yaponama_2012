@@ -12,6 +12,7 @@ ru:
       default_message: "Невозможно продолжить, т.к. форма заполнена не корректно"
     labels:
       defaults:
+        added_by: Кем добавлено
         split_quantity_ordered: Количество первой партии
         car_number: Автомобильный номер
         buy_cost: Закупочная цена 1 шт.
