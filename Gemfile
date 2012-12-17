@@ -18,12 +18,11 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', '0.10.2'
   gem 'libv8', '3.3.10.4'
-
   gem 'uglifier', '>= 1.0.3'
 end
 
 group :development, :test do
-  gem 'debugger'
+  gem 'ruby-debug19'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
@@ -66,7 +65,6 @@ gem 'sanitize'
 gem 'active_attr'
 gem 'slim-rails'
 gem 'thin'
-gem 'rmagick'
 gem "cancan"
 gem 'ckeditor_rails'
 gem 'bcrypt-ruby'
