@@ -9,8 +9,14 @@
   <dt><strong><%= model_class.human_attribute_name(:manufacturer) %>:</strong></dt>
   <dd><%= @admin_spare_info.manufacturer %></dd>
   <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
-  <dd><%= raw Sanitize.clean(@admin_spare_info.content, Rails.configuration.sanitize_config) %></dd>
+  <dd>
+    <div id="editable" contenteditable="true">
+      <%= raw Sanitize.clean @admin_spare_info.content, Rails.configuration.sanitize_config %>
+    </div>
+  </dd>
 </dl>
+
+
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

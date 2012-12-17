@@ -11,8 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require ckeditor-jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require cocoon
-//= require ckeditor/init
 //= require_tree .

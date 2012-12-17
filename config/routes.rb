@@ -14,8 +14,6 @@ Yaponama2012::Application.routes.draw do
 
   resources :attachments
 
-  mount Ckeditor::Engine => '/ckeditor'
-
   namespace :admin do
 
     resources :metro
