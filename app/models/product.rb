@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 class Product < ActiveRecord::Base
-
+  include BelongsToCreator
   include PingCallback
 
   # Продукты по которым ожидается движение
@@ -13,12 +13,12 @@ class Product < ActiveRecord::Base
 
   # TODO remove later, when normalized situation around edit view product_fields
   attr_accessor :_destroy
-  attr_accessible :_destroy
+  attr_accessible :_destroy, :as => [:admin, :manager, :user]
 
-  attr_accessible :catalog_number, :manufacturer, :short_name, :long_name
+  attr_accessible :catalog_number, :manufacturer, :short_name, :long_name, :as => [:admin, :manager, :user]
   validates :catalog_number, :manufacturer, :presence => true
 
-  attr_accessible :buy_cost, :sell_cost
+  attr_accessible :buy_cost, :sell_cost, :as => [:admin, :manager, :user]
   validates :buy_cost, :numericality => { :greater_than => 0}
   validates :sell_cost, :numericality => { :greater_than => 0}
 
@@ -33,7 +33,7 @@ class Product < ActiveRecord::Base
 
   belongs_to :product
 
-  attr_accessible :products_attributes
+  attr_accessible :products_attributes, :as => [:admin, :manager, :user]
   has_many :products, :dependent => :destroy
   accepts_nested_attributes_for :products, :allow_destroy => true
 
@@ -45,7 +45,7 @@ class Product < ActiveRecord::Base
 
   #scope :inorder, where(:status => "inorder")
 
-  attr_accessible :notes, :notes_invisible, :max_days, :min_days, :probability, :quantity_available, :quantity_ordered, :user_id, :order_id, :created_at, :updated_at
+  attr_accessible :notes, :notes_invisible, :max_days, :min_days, :probability, :quantity_available, :quantity_ordered, :user_id, :order_id, :created_at, :updated_at, :as => [:admin, :manager, :user]
 
   attr_accessible :supplier_id
 
@@ -68,7 +68,7 @@ class Product < ActiveRecord::Base
       product_transaction = self.product_transactions.build
       h = {}
       self.changes.map{|k,v| h["log_#{k}"] = v[1]}
-      product_transaction.assign_attributes(h)
+      product_transaction.update_attributes(h, :without_protection => true)
     end
   end
   #

@@ -17,7 +17,8 @@ class CreateCars < ActiveRecord::Migration
       t.string :frame
       t.string :komplektaciya
       t.text :notes_invisible
-      t.references :user
+      t.integer :user_id
+      t.integer :creator_id
       # TODO аналогично видимость (свертка/развертка)
       t.boolean :visible
 

@@ -7,6 +7,7 @@ class CreateProductTransactions < ActiveRecord::Migration
       t.text :log_notes
       t.text :log_notes_invisible
       t.integer :log_user_id
+      t.integer :log_creator_id
       t.integer :log_order_id
       t.datetime :log_created_at
       t.datetime :log_updated_at

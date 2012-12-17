@@ -27,11 +27,12 @@
   <% if class_for_visible == 'minus' || !f.object.id %>
 
     <%= f.input :name %>
-    <%= f.input :creation_reason, :collection => Rails.configuration.user_name_creation_reason.map {|k,v| [v,k]}.to_a, :disabled => true, :as => :radio_buttons %>
     <%= f.input :created_at %>
     <%= f.input :updated_at %>
     <%= f.input :notes, :input_html => {:rows => 3} %>
     <%= f.input :notes_invisible, :input_html => {:rows => 3} %>
+    <%= f.association :creator, :disabled => true %>
+    <% raise 'Restore creation_reason in name_fields'
   <% end %>
 
   <hr />

@@ -6,7 +6,8 @@ class CreateProducts < ActiveRecord::Migration
       t.string :status
       t.text :notes, :default => ""
       t.string :invisible, :default => ""
-      t.references :user
+      t.integer :user_id
+      t.integer :creator_id
       t.references :order
 
       t.timestamps

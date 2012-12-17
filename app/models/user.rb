@@ -1,10 +1,32 @@
 class User < ActiveRecord::Base
+  include BelongsToCreator
   include PingCallback
 
-  attr_accessible :notes, :notes_invisible
-  attr_accessible :created_at, :updated_at
+  attr_accessible :role, :as => [:admin, :manager, :user]
+  validates :role, :inclusion => Rails.configuration.user_roles.keys
 
-  attr_accessible :cars_attributes
+  def self.current_user=(current_user)
+    Thread.current[:current_user] = current_user
+  end
+  
+  def self.current_user
+    Thread.current[:current_user]
+  end
+
+  # override has_secure_password to customize validation until Rails 4. Railscasts 393
+  # has_secure_password(validation: false)
+  require 'bcrypt'
+  attr_reader :password
+  include ActiveModel::SecurePassword::InstanceMethodsOnActivation
+  # until this
+  
+  attr_accessible :password, :password_confirmation
+  validates :password_digest, unless: role == "guest"
+
+  attr_accessible :notes, :notes_invisible, :as => [:admin, :manager, :user]
+  attr_accessible :created_at, :updated_at, :as => [:admin, :manager, :user]
+
+  attr_accessible :cars_attributes, :as => [:admin, :manager, :user]
   has_many :cars, :dependent => :destroy
   accepts_nested_attributes_for :cars, :allow_destroy => true 
 
@@ -12,7 +34,7 @@ class User < ActiveRecord::Base
   has_many :requests, :dependent => :destroy
   accepts_nested_attributes_for :requests, :allow_destroy => true 
 
-  attr_accessible :root_requests_without_car_attributes
+  attr_accessible :root_requests_without_car_attributes, :as => [:admin, :manager, :user]
   has_many :root_requests_without_car, :dependent => :destroy,
     :conditions => ["request_id IS NULL AND car_id IS NULL"], :class_name => "Request"
   accepts_nested_attributes_for :root_requests_without_car, :allow_destroy => true
@@ -21,16 +43,17 @@ class User < ActiveRecord::Base
     products.where("STRPOS(?, status) > 0", "ordered,pre_supplier,post_supplier,stock").sum("sell_cost * quantity_ordered").to_d
   end
 
-  attr_accessible :products_attributes
+  attr_accessible :products_attributes, :as => [:admin, :manager, :user]
   has_many :products, :dependent => :destroy
   accepts_nested_attributes_for :products, :allow_destroy => true
 
-  attr_accessible :root_products_attributes
+  attr_accessible :root_products_attributes, :as => [:admin, :manager, :user]
   has_many :root_products, :dependent => :destroy,
     :conditions => ["product_id IS NULL"], :class_name => "Product"
   accepts_nested_attributes_for :root_products, :allow_destroy => true
 
-  attr_accessible :name, :phones_attributes, :email_addresses_attributes, :postal_addresses_attributes, :names_attributes, :human_confirmation_datetime, :orders_attributes, :money_available, :money_locked, :discount, :prepayment_percent
+  attr_accessible :phones_attributes, :email_addresses_attributes, :postal_addresses_attributes, :names_attributes, :human_confirmation_datetime, :orders_attributes, :discount, :prepayment_percent, :as => [:admin, :manager, :user]
+
   has_many :email_addresses, :dependent => :destroy
   has_many :phones, :dependent => :destroy
   has_many :postal_addresses, :dependent => :destroy
@@ -38,21 +61,22 @@ class User < ActiveRecord::Base
   has_many :orders, :dependent => :destroy
   accepts_nested_attributes_for :phones, :postal_addresses, :email_addresses, :names, :orders, :allow_destroy => true
 
-  attr_accessible :time_zone_id
+  attr_accessible :time_zone_id, :as => [:admin, :manager, :user]
   belongs_to :time_zone#, :validate => true
   #validates :time_zone, :presence => true
 
   has_one :ping, :dependent => :destroy
-  has_many :documents, :as => :documentable, :class_name => "Transaction"
+  # TODO позже разобраться (обнаружил как неиспользуемую ассоциацию)
+  #has_many :documents, :as => :documentable, :class_name => "Transaction"
 
   validates :prepayment_percent, :numericality => true
   validates :discount, :numericality => true
 
-  attr_accessible :order_rule
+  attr_accessible :order_rule, :as => [:admin, :manager, :user]
   validates :order_rule, :inclusion => { :in => Rails.configuration.user_order_rule.keys }
 
   # Financial
-  attr_accessible :account_attributes
+  attr_accessible :account_attributes, :as => [:administrator, :manager, :user]
   has_one :account, :as => :accountable, :dependent => :destroy
   accepts_nested_attributes_for :account
   validates :account, :presence => true

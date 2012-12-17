@@ -1,6 +1,7 @@
 # encoding: utf-8
 #
-class Admin::ApplicationController < ActionController::Base
+class Admin::ApplicationController < ApplicationController
+
   layout 'admin'
   protect_from_forgery
   before_filter :prepend_view_paths

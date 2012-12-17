@@ -5,6 +5,7 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :postal_address_id
       t.integer :metro_id
       t.integer :user_id
+      t.integer :creator_id
       t.timestamps
     end
   end

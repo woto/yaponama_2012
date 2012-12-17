@@ -12,7 +12,9 @@
     = f.input :order_rule, :collection => Rails.configuration.user_order_rule.map { |k, v| [v, k] } 
     = f.input :prepayment_percent, :as => :string
     = f.input :discount, :as => :string 
+    = f.input :role, :collection => Rails.configuration.user_roles, :value_method => :first, :label_method => :last, :include_blank => false
     = f.input :created_at
     = f.input :updated_at
     = f.input :notes, :input_html => {:rows => 3} 
     = f.input :notes_invisible, :input_html => {:rows => 3} 
+    = f.association :creator, :disabled => true

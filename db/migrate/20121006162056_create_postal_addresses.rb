@@ -10,7 +10,8 @@ class CreatePostalAddresses < ActiveRecord::Migration
       t.string :room
       t.text :notes
       t.string :invisible
-      t.references :user
+      t.integer :user_id
+      t.integer :creator_id
 
       t.timestamps
     end

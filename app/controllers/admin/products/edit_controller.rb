@@ -26,7 +26,7 @@ class Admin::Products::EditController < Admin::ProductsController
     product = @products.first
 
     respond_to do |format|
-      if product.update_attributes(params[:product])
+      if product.update_attributes(params[:product], :as => current_user.role.to_sym)
         format.html { redirect_to(params[:return_path], :notice => "Product sucessfully updated.") }
         format.json { head :no_content }
       else

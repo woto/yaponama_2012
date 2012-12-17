@@ -2,6 +2,10 @@
 
 FactoryGirl.define do
 
+  sequence(:random_role) do |n|
+    Rails.configuration.user_roles.keys.sample
+  end
+
   sequence(:random_notes_invisible) do |n| 
     "Скрытый комментарий #{n}"
   end
@@ -30,6 +34,7 @@ FactoryGirl.define do
       prepayment_percent{ generate(:random_prepayment_percent) } 
       discount { generate(:random_discount) }
       order_rule{ generate(:random_order_rule) }
+      role{ generate(:random_role) }
 
       after(:build) do |u, evaluator|
         u.account = FactoryGirl.build(:minimal_valid_account, accountable: u)

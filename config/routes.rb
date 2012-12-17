@@ -99,6 +99,8 @@ Yaponama2012::Application.routes.draw do
 
   get 'clear_session' => "trash_help#clear_session"
 
-  root :to => 'admin/users#index'
+  get 'admin' => 'admin/users#index'
+
+  root :to => 'trash_help#index'
 
 end

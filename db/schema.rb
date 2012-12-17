@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121216034244) do
+ActiveRecord::Schema.define(:version => 20121216003225) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20121216034244) do
     t.string   "komplektaciya"
     t.text     "notes_invisible"
     t.integer  "user_id"
+    t.integer  "creator_id"
     t.boolean  "visible"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
@@ -118,11 +119,11 @@ ActiveRecord::Schema.define(:version => 20121216034244) do
     t.string   "email_address"
     t.boolean  "confirmed_by_robot"
     t.boolean  "confirmed_by_human"
-    t.string   "added_by"
     t.datetime "robot_confirmation_datetime"
     t.datetime "human_confirmation_datetime"
     t.text     "notes_invisible"
     t.integer  "user_id"
+    t.integer  "creator_id"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
     t.text     "notes"
@@ -186,6 +187,7 @@ ActiveRecord::Schema.define(:version => 20121216034244) do
     t.string   "creation_reason"
     t.text     "notes_invisible"
     t.integer  "user_id"
+    t.integer  "creator_id"
     t.boolean  "visible",         :default => true
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
@@ -197,6 +199,7 @@ ActiveRecord::Schema.define(:version => 20121216034244) do
     t.integer  "postal_address_id"
     t.integer  "metro_id"
     t.integer  "user_id"
+    t.integer  "creator_id"
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
     t.string   "status"
@@ -215,10 +218,10 @@ ActiveRecord::Schema.define(:version => 20121216034244) do
     t.boolean  "confirmed_by_human"
     t.datetime "robot_confirmation_datetime"
     t.datetime "human_confirmation_datetime"
-    t.string   "added_by"
     t.string   "can_receive_sms"
     t.text     "notes_invisible"
     t.integer  "user_id"
+    t.integer  "creator_id"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
@@ -244,6 +247,7 @@ ActiveRecord::Schema.define(:version => 20121216034244) do
     t.text     "notes"
     t.text     "notes_invisible"
     t.integer  "user_id"
+    t.integer  "creator_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
@@ -257,6 +261,7 @@ ActiveRecord::Schema.define(:version => 20121216034244) do
     t.text     "log_notes"
     t.text     "log_notes_invisible"
     t.integer  "log_user_id"
+    t.integer  "log_creator_id"
     t.integer  "log_order_id"
     t.datetime "log_created_at"
     t.datetime "log_updated_at"
@@ -283,6 +288,7 @@ ActiveRecord::Schema.define(:version => 20121216034244) do
     t.text     "notes",                                            :default => ""
     t.text     "notes_invisible",                                  :default => ""
     t.integer  "user_id"
+    t.integer  "creator_id"
     t.integer  "order_id"
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false
@@ -303,12 +309,13 @@ ActiveRecord::Schema.define(:version => 20121216034244) do
   add_index "products", ["user_id"], :name => "index_products_on_user_id"
 
   create_table "requests", :force => true do |t|
-    t.integer  "user_id"
     t.integer  "car_id"
     t.string   "catalog_number"
     t.string   "manufacturer"
     t.text     "notes"
     t.text     "notes_invisible"
+    t.integer  "user_id"
+    t.integer  "creator_id"
     t.boolean  "visible",         :default => true
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
@@ -348,6 +355,7 @@ ActiveRecord::Schema.define(:version => 20121216034244) do
   end
 
   create_table "users", :force => true do |t|
+    t.integer  "creator_id"
     t.string   "session_id"
     t.text     "notes_invisible"
     t.string   "creation_reason"
@@ -355,10 +363,12 @@ ActiveRecord::Schema.define(:version => 20121216034244) do
     t.decimal  "prepayment_percent", :precision => 8, :scale => 2
     t.integer  "time_zone_id"
     t.integer  "ping_id"
+    t.string   "role"
     t.datetime "created_at",                                       :null => false
     t.datetime "updated_at",                                       :null => false
     t.string   "order_rule"
     t.text     "notes"
+    t.string   "password_digest"
   end
 
 end

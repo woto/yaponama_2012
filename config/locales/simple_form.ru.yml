@@ -12,7 +12,8 @@ ru:
       default_message: "Невозможно продолжить, т.к. форма заполнена не корректно"
     labels:
       defaults:
-        added_by: Кем добавлено
+        content: Содержание
+        role: Права
         split_quantity_ordered: Количество первой партии
         car_number: Автомобильный номер
         buy_cost: Закупочная цена 1 шт.
@@ -31,6 +32,7 @@ ru:
         catalog_number: Каталожный номер
         manufacturer: Производитель
         creation_reason: Причина создания
+        creator_id: Создатель
         email_address: E-mail
         session_id: Идентификатор
         created_at: Запись создана

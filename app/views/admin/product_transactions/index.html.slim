@@ -26,6 +26,7 @@ table.table.table-striped
       th = model_class.human_attribute_name(:short_name)
       th = model_class.human_attribute_name(:long_name)
       th = model_class.human_attribute_name(:log_product_id)
+      th = model_class.human_attribute_name(:log_creator_id)
       th = model_class.human_attribute_name(:created_at)
       th = model_class.human_attribute_name(:updated_at)
       th = model_class.human_attribute_name(:product_id)
@@ -69,6 +70,7 @@ table.table.table-striped
         td = product_transaction.log_short_name
         td = product_transaction.log_long_name
         td = product_transaction.log_product_id
+        td = product_transaction.log_creator_id
         td =l product_transaction.log_created_at, :format => :short if product_transaction.log_created_at
         td =l product_transaction.log_updated_at, :format => :short if product_transaction.log_updated_at
         td = product_transaction.product_id

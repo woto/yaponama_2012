@@ -47,6 +47,7 @@
     <%= f.input :updated_at, :disabled => true %>
     <%= f.input :notes, :input_html => {:rows => 3} %>
     <%= f.input :notes_invisible, :input_html => {:rows => 3} %>
+    <%= f.association :creator, :disabled => true %>
 
     <div id="requests_with_auto" class="nested-fields">
 

@@ -5,7 +5,7 @@ require 'spec_helper'
 describe "TestControllers", :js => true do
   describe "GET /test_controllers", :js => true do
     it "works! (now write some real specs)", :js => true do
-      1.times do |k|
+      10.times do |k|
 
         full_filled_user = FactoryGirl.create(:full_filled_user)
 

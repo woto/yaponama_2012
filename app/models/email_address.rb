@@ -1,10 +1,11 @@
 #encoding: utf-8
 
 class EmailAddress < ActiveRecord::Base
+  include BelongsToCreator
   include PingCallback
 
-  attr_accessible :notes, :notes_invisible 
-  attr_accessible :confirmed_by_human, :email_address, :user_id, :human_confirmation_datetime, :visible
+  attr_accessible :notes, :notes_invisible, :as => [:admin, :manager, :user]
+  attr_accessible :confirmed_by_human, :email_address, :user_id, :human_confirmation_datetime, :visible, :as => [:admin, :manager, :user]
 
   #validates :user, :presence => true
 
@@ -14,8 +15,6 @@ class EmailAddress < ActiveRecord::Base
   has_many :emails
   validates :email_address, :format => {:with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/}, :uniqueness => true
   #validates :email_address, :presence => true, :uniqueness => true
-  validates :added_by, :inclusion => { :in => ['Покупателем', 'Менеджером'] }
-  
 
   def to_label
     email_address

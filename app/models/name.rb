@@ -1,8 +1,9 @@
 class Name < ActiveRecord::Base
+  include BelongsToCreator
   include PingCallback
-  attr_accessible :name
-  attr_accessible :notes, :notes_invisible, :user_id, :visible
-  attr_accessible :created_at, :updated_at
+  attr_accessible :name, :as => [:admin, :manager, :user]
+  attr_accessible :notes, :notes_invisible, :user_id, :visible, :as => [:admin, :manager, :user]
+  attr_accessible :created_at, :updated_at, :as => [:admin, :manager, :user]
 
   has_many :orders
 

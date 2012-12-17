@@ -1,12 +1,13 @@
 class CreateRequests < ActiveRecord::Migration
   def change
     create_table :requests do |t|
-      t.references :user
       t.references :car
       t.string :catalog_number
       t.string :manufacturer
       t.text :notes
       t.string :invisible
+      t.integer :user_id
+      t.integer :creator_id
 
       # TODO
       # Вернул для совместимости с видом, хотя из миграций уже удалил

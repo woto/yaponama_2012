@@ -1,3 +1,5 @@
+/ TODO вынести в shared, т.к. используется и в user и в edit контроллерах
+
 .nested-fields.top-space
 
   = f.error_notification :message => f.error(:base)
@@ -28,6 +30,7 @@
     = f.input :notes, :input_html => {:rows => 3}
     = f.input :notes_invisible, :input_html => {:rows => 3}
     hr
+    = f.association :creator, :disabled => true
     = f.input :status, :collection => Rails.configuration.products_status.map {|k,v| [v['title'],k]}, :disabled => true
     = f.association :user, :disabled => true
     = f.association :order, :disabled => true

@@ -4,11 +4,11 @@ class CreateEmailAddresses < ActiveRecord::Migration
       t.string :email_address
       t.boolean :confirmed_by_robot
       t.boolean :confirmed_by_human
-      t.string :added_by
       t.datetime :robot_confirmation_datetime
       t.datetime :human_confirmation_datetime
       t.string :invisible
-      t.references :user
+      t.integer :user_id
+      t.integer :creator_id
 
       t.timestamps
     end

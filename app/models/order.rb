@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
   include PingCallback
+  include BelongsToCreator
 
   #before_create :build_transaction
 
