@@ -22,7 +22,7 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'ruby-debug19'
+  gem 'debugger'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
