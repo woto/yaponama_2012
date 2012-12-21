@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   attr_accessible :password_confirmation, :as => [:admin, :manager, :user, :guest]
 
   # Railscasts 274
- 
+  #
   before_create { generate_token(:auth_token) }
 
   def generate_token(column)
@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
   end
+  #
   # /Railscasts 274
   
   validate :role do

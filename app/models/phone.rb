@@ -13,7 +13,7 @@ class Phone < ActiveRecord::Base
 
   validates :phone_type, :inclusion => { :in => Rails.configuration.phone_types.keys }
 
-  validates :phone, :presence => true, :uniqueness => true
+  validates :phone, :presence => true, :uniqueness => { case_sensitive: false } 
   validates :phone, :numericality => { :only_integer => true }, :length => { :within => 10..10 }, :if => Proc.new{ phone_type == 'mobile_russia' }
 
   def to_label
