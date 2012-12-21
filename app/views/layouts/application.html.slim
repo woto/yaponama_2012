@@ -1,88 +1,77 @@
-doctype html
-html lang="ru"
-  head
-    meta charset="utf-8"
-    meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title = content_for?(:title) ? yield(:title) : "Yaponama 2012"
-    = csrf_meta_tags
+= render :partial => "layouts/head"
 
-    /! Le HTML5 shim, for IE6-8 support of HTML elements
-    /[if lt IE 9]
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+body
 
-    = stylesheet_link_tag    "application", :media => "all"
-    = javascript_include_tag "application"
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      .container-fluid
+        a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.brand href="#" Yaponama2012
+        .container-fluid.nav-collapse
+          ul.nav
+            li = link_to "Корзина", "/path1" 
+            li = link_to "Заказы", "/path2"
+            li = link_to "Регистрация", register_path
+            li = link_to "Вход", login_path
+            li = link_to "Выход", logout_path, :method => :delete
+            li = link_to "Очистить сессию и печеньки", clear_session_path
 
-    /!
-      <link href="images/favicon.ico" rel="shortcut icon">
-      <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
-      <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
-      <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+  .container-fluid
 
-  body
+    = bootstrap_flash
+    = yield :error_notification
 
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container-fluid
-          a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.brand href="#" Yaponama2012
-          .container-fluid.nav-collapse
-            ul.nav
-              li = link_to "Корзина", "/path1" 
-              li = link_to "Заказы", "/path2"
-              li = link_to "Избранное", "/path3"
-              li = link_to "Автомобили", "/path3"
-              li = link_to "Адреса доставки", "/path3"
-              li = link_to "Электронная почта", "/path3"
-              li = link_to "Телефоны", "/path3"
+    .row-fluid
+      .span8
+        li = link_to "Избранное", "/path3"
+        li = link_to "Автомобили", "/path3"
+        li = link_to "Адреса доставки", "/path3"
+        li = link_to "Электронная почта", "/path3"
+        li = link_to "Телефоны", "/path3"
+        #div1 div1
+        #div2 div2
+        #div3 div3
+        #div4 div4
+        #div5 div5
+        #div6 div6
+        = yield
 
-    .container-fluid
-      .row-fluid
-        .span8
-          #div1 div1
-          #div2 div2
-          #div3 div3
-          #div4 div4
-          #div5 div5
-          #div6 div6
-          = yield
+      .span4
+        .alert.alert-block
+          button type="button" class="close" data-dismiss="alert" ×
+          h4 Подтвердите пожалуйста ваш номер телефона
+          | Мы отправили вам письмо на email для подтверждения вашего адреса и SMS на телефон, чтобы убедиться, что это действительно Ваш номер.
 
-        .span4
-          .alert.alert-block
-            button type="button" class="close" data-dismiss="alert" ×
-            h4 Подтвердите пожалуйста ваш номер телефона
-            | Мы отправили вам письмо на email для подтверждения вашего адреса и SMS на телефон, чтобы убедиться, что это действительно Ваш номер.
+        .well.sidebar-nav
 
-          .well.sidebar-nav
+          img src="http://placehold.it/70x80" class="img-polaroid"
 
-            img src="http://placehold.it/70x80" class="img-polaroid"
+          div style="overflow: auto; width: auto; height: 200px; background: #FFF"
+            .span10.offset1.alert.alert-info
+              | Вы
+            div
+              | asdasdfa sdf adsf f
+            .span10.offset1.alert.alert-info
+              | Вы
+          
+          br 
+          br
 
-            div style="overflow: auto; width: auto; height: 200px; background: #FFF"
-              .span10.offset1.alert.alert-info
-                | Вы
-              div
-                | asdasdfa sdf adsf f
-              .span10.offset1.alert.alert-info
-                | Вы
-            
-            br 
-            br
+            input type="text" placeholder="Номер телефона"
+            input type="text" placeholder="Адрес электронная почта"
 
-              input type="text" placeholder="Номер телефона"
-              input type="text" placeholder="Адрес электронная почта"
+            form class="navbar-form pull-left"
+              textarea placeholder="фыва" rows="3"
+              button type="submit" class="btn" Submit
 
-              form class="navbar-form pull-left"
-                textarea placeholder="фыва" rows="3"
-                button type="submit" class="btn" Submit
+          ul.nav.nav-list
+            li class="nav-header" Sidebar
+            li = link_to "Link1", "/path1"
+            li = link_to "Link2", "/path2"
+            li = link_to "Link3", "/path3"
 
-            ul.nav.nav-list
-              li class="nav-header" Sidebar
-              li = link_to "Link1", "/path1"
-              li = link_to "Link2", "/path2"
-              li = link_to "Link3", "/path3"
-
-      footer
-        p &copy; Company 2012
+    footer
+      p &copy; Company 2012

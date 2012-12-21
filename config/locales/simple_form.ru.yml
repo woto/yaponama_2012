@@ -13,6 +13,8 @@ ru:
     labels:
       defaults:
         content: Содержание
+        password: Пароль
+        password_confirmation: Подтверждение пароля
         role: Права
         split_quantity_ordered: Количество первой партии
         car_number: Автомобильный номер

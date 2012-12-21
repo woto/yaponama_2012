@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class TrashHelpController < ApplicationController
   def index
 
@@ -67,8 +69,10 @@ EOF
   end
 
   def clear_session
-    render :text => session
+    cookies.delete :auth_token
     reset_session
+    redirect_to root_path, :notice => "Очистка завершена."
+
   end
 
 end

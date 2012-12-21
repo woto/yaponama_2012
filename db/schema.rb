@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121216003225) do
+ActiveRecord::Schema.define(:version => 20121219165349) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -359,16 +359,19 @@ ActiveRecord::Schema.define(:version => 20121216003225) do
     t.string   "session_id"
     t.text     "notes_invisible"
     t.string   "creation_reason"
-    t.decimal  "discount",           :precision => 8, :scale => 2
-    t.decimal  "prepayment_percent", :precision => 8, :scale => 2
+    t.decimal  "discount",               :precision => 8, :scale => 2
+    t.decimal  "prepayment_percent",     :precision => 8, :scale => 2
     t.integer  "time_zone_id"
     t.integer  "ping_id"
     t.string   "role"
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
     t.string   "order_rule"
     t.text     "notes"
     t.string   "password_digest"
+    t.string   "auth_token"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
 end

@@ -1,5 +1,4 @@
 class Admin::SuppliersController < Admin::ApplicationController
-
   # GET /admin/suppliers
   # GET /admin/suppliers.json
   def index

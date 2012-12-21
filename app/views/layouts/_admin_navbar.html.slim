@@ -1,0 +1,77 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container-fluid
+      a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
+        span.icon-bar 
+        span.icon-bar 
+        span.icon-bar 
+      a.brand href="#" Yaponama 2012
+      .container-fluid.nav-collapse.collapse
+        ul.nav
+          li.dropdown
+            a.dropdown-toggle href="#" data-toggle="dropdown" 
+              span Торговля 
+              b.caret
+            ul.dropdown-menu
+              li = link_to "Заказы", admin_orders_path
+              
+              li.dropdown-submenu
+                = link_to "Товары", admin_products_path
+                ul.dropdown-menu
+                  - Rails.configuration.products_status.each do |k, v|
+                    li 
+                      = link_to admin_products_path(:status => k) do
+                        =' v["title"]
+                        - if v['badge'].present?
+                          span class="badge badge-#{k}" = v['badge']
+
+              li.divider
+
+              li.dropdown-submenu
+               = link_to "Покупатели", admin_users_path
+               ul.dropdown-menu
+                li = link_to "Новый", edit_admin_user_path('new')
+
+              li = link_to "Поставщики", admin_suppliers_path
+          li.dropdown
+            a.dropdown-toggle href="#" data-toggle="dropdown"
+              span Транзакции 
+              b.caret
+            ul.dropdown-menu
+              li = link_to "Товар", admin_product_transactions_path
+              li = link_to "Деньги", admin_money_transactions_path
+          li.dropdown
+            a.dropdown-toggle href="#" data-toggle="dropdown"
+              span Настройки 
+              b.caret
+            ul.dropdown-menu
+              li = link_to "Банковские Счета", "#"
+              li = link_to "Часовые пояса", admin_time_zones_path
+              li.dropdown-submenu
+                = link_to "Доставка", "#"
+                ul.dropdown-menu
+                  li = link_to "Категории доставки", admin_delivery_categories_path
+                  li = link_to "Способы доставки", admin_deliveries_path
+                  li = link_to "Станции метро", admin_metro_index_path
+              li = link_to "Описания запчастей", admin_spare_infos_path
+          li.dropdown
+            a.dropdown-toggle href="#" data-toggle="dropdown"
+              | Трэш 
+              b.caret
+            ul.dropdown-menu
+              li = link_to "Фронт", "/trash_help/index"
+              li = link_to "Запросы", admin_requests_path
+              li = link_to "Письма", admin_emails_path
+              li = link_to "Аккаунты", admin_accounts_path
+              li = link_to "Очистить сессию", clear_session_path
+
+
+        ul.nav.pull-right
+          li.dropdown
+            a.dropdown-toggle href="#" data-toggle="dropdown"
+              =' current_user.names.any? ? current_user.names.map(&:name).join(' ,') : "Без имени"
+              b.caret
+            ul.dropdown-menu
+              li = link_to "Редактирование профиля", edit_admin_user_path(current_user)
+              li = link_to "Выход", logout_path, :method => :delete
+

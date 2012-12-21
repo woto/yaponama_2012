@@ -1,0 +1,12 @@
+h1 Sign Up
+
+= simple_form_for @user, :url => register_path do |f|
+  = f.error_notification
+  = f.simple_fields_for :email_addresses do |email_address|
+    = email_address.input :email_address
+  = f.simple_fields_for :phones do |phone|
+    = phone.input :phone
+    = phone.input :can_receive_sms, :as => :hidden, :input_html => { :value => :unknown }
+  = f.input :password
+  = f.input :password_confirmation
+  = f.button :submit, 'Зарегистрироваться', :class => "btn btn-primary"

@@ -1,0 +1,10 @@
+= render 'shared/login_style'
+
+.admin-signin
+  = form_tag polymorphic_path([namespace_helper, :password_resets]), :method => :post, :class => 'form-signin' do
+    h2.form-signin-heading Забыли пароль? 
+    = text_field_tag :login, params[:login], :placeholder => "E-mail или телефон"
+    = submit_tag "Продолжить", :class => "button btn btn-primary actions"
+    |  или 
+    = link_to "вход на сайт", polymorphic_path([namespace_helper, :login])
+    / admin_password_resets_path

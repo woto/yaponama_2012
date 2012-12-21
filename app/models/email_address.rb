@@ -5,7 +5,7 @@ class EmailAddress < ActiveRecord::Base
   include PingCallback
 
   attr_accessible :notes, :notes_invisible, :as => [:admin, :manager, :user]
-  attr_accessible :confirmed_by_human, :email_address, :user_id, :human_confirmation_datetime, :visible, :as => [:admin, :manager, :user]
+  attr_accessible :confirmed_by_human, :email_address, :user_id, :human_confirmation_datetime, :visible, :as => [:admin, :manager, :user, :guest]
 
   #validates :user, :presence => true
 

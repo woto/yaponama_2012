@@ -5,13 +5,19 @@
     = f.simple_fields_for :ping do |ping| 
       = ping.input :created_at, :as => :datetime, :disabled => true, :label => 'Пинг', :hint => 'Время последней активности (просмотр страницы пользователем или получение от него письма)', :required => false 
     = f.input :session_id, :disabled => true 
+    = f.input :auth_token, :disabled => true 
     = f.simple_fields_for :account do |account| 
       = account.input :debit, :as => :string
       = account.input :credit, :as => :string
     = f.input :products_inwork, :as => :string, :disabled => true
     = f.input :order_rule, :collection => Rails.configuration.user_order_rule.map { |k, v| [v, k] } 
     = f.input :prepayment_percent, :as => :string
-    = f.input :discount, :as => :string 
+    = f.input :discount, :as => :string
+    = f.input :password
+    = f.input :password_confirmation
+    = f.input :password_digest, :disabled => true
+    = f.input :password_reset_token, :disabled => true
+    = f.input :password_reset_sent_at, :disabled => true
     = f.input :role, :collection => Rails.configuration.user_roles, :value_method => :first, :label_method => :last, :include_blank => false
     = f.input :created_at
     = f.input :updated_at
