@@ -1,6 +1,8 @@
 # encoding: utf-8
 
-class Admin::Products::SplitController < Admin::ProductsController
+class Admin::Products::SplitController < Admin::ApplicationController
+  include Admin::AddAdminViewPathHelper
+  include ProductsHelper
 
   before_filter do 
     begin

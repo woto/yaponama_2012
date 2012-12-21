@@ -1,6 +1,8 @@
 # encoding: utf-8
 
-class Admin::Products::PostSupplierController < Admin::ProductsController
+class Admin::Products::PostSupplierController < Admin::ApplicationController
+  include Admin::AddAdminViewPathHelper
+  include ProductsHelper
 
   before_filter do 
     begin

@@ -1,6 +1,8 @@
 # encoding: utf-8
 
-class Admin::Products::EditController < Admin::ProductsController
+class Admin::Products::EditController < Admin::ApplicationController
+  include Admin::AddAdminViewPathHelper
+  include ProductsHelper
 
   before_filter do
     begin
@@ -27,7 +29,7 @@ class Admin::Products::EditController < Admin::ProductsController
 
     respond_to do |format|
       if product.update_attributes(params[:product], :as => current_user.role.to_sym)
-        format.html { redirect_to(params[:return_path], :notice => "Product sucessfully updated.") }
+        format.html { redirect_to(params[:return_path], :notice => "Позиция успешно изменена.") }
         format.json { head :no_content }
       else
         format.html { render action: "index" }
