@@ -6,7 +6,7 @@ h1 Sign Up
     = email_address.input :email_address
   = f.simple_fields_for :phones do |phone|
     = phone.input :phone
-    = phone.input :can_receive_sms, :as => :hidden, :input_html => { :value => :unknown }
+    = phone.input :phone_type, :as => :hidden, :input_html => { :value => 'unknown' }
   = f.input :password
   = f.input :password_confirmation
   = f.button :submit, 'Зарегистрироваться', :class => "btn btn-primary"

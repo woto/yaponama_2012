@@ -7,7 +7,7 @@ FactoryGirl.define do
   end
 
   sequence :random_can_receive_sms do |n|
-    ['Да', 'Нет', 'Неизвестно'].sample
+    Rails.configuration.phone_types.sample
   end
 
   factory :phone do

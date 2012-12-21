@@ -44,7 +44,7 @@ user.assign_attributes( Rails.configuration.default_user_attributes, :without_pr
 user.role = "admin"
 user.password = '1111111111'
 phone = user.phones.build
-phone.assign_attributes({:phone => '1111111111', :can_receive_sms => 'yes'}, :without_protection => true)
+phone.assign_attributes({:phone => '1111111111', :phone_type => 'mobile_russia'}, :without_protection => true)
 email_address = user.email_addresses.build
 email_address.assign_attributes({:email_address => 'demo@example.com'}, :without_protection => true)
 user.save!

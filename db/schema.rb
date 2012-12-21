@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121219165349) do
+ActiveRecord::Schema.define(:version => 20121221143230) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -218,7 +218,7 @@ ActiveRecord::Schema.define(:version => 20121219165349) do
     t.boolean  "confirmed_by_human"
     t.datetime "robot_confirmation_datetime"
     t.datetime "human_confirmation_datetime"
-    t.string   "can_receive_sms"
+    t.string   "phone_type"
     t.text     "notes_invisible"
     t.integer  "user_id"
     t.integer  "creator_id"

@@ -41,7 +41,7 @@ table.table.table-striped
         td = user.notes_invisible
         td = link_to(user.names.collect(&:name).join(', '), edit_admin_user_path(user, :tab => :names))
         td = link_to(user.email_addresses.collect(&:email_address).join(', '), edit_admin_user_path(user, :tab => :email_addresses))
-        td = link_to(user.phones.collect(&:phone).join(', '), edit_admin_user_path(user, :tab => :phones))
+        td = link_to(user.phones.collect{|phone| phone.to_label}.join(', '), edit_admin_user_path(user, :tab => :phones))
         td = user.account.debit 
         td = user.account.credit 
         td = user.prepayment_percent 
