@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class Admin::Products::CancelController < Admin::ApplicationController
-  include Admin::AddAdminViewPathHelper
   include ProductsHelper
 
   before_filter do 
