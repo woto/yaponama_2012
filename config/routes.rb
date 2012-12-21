@@ -26,6 +26,8 @@ Yaponama2012::Application.routes.draw do
 
   get 'admin' => 'admin/users#index'
 
+  get 'robots.txt' => "robots_txt#index"
+
   root :to => 'trash_help#index'
 
 end

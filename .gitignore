@@ -4,8 +4,8 @@
 /.bundle
 /.bundler
 
-/config/database.yml
-/config/config.yml
+#/config/database.yml
+#/config/config.yml
 
 /public/assets
 /public/uploads
