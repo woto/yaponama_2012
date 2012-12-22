@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require ckeditor-jquery
+//= require jquery-fileupload
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require cocoon

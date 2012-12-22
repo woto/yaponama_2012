@@ -1,6 +1,9 @@
 Yaponama2012::Application.routes.draw do
 
 
+  resources :uploads
+
+
   resources :pages
 
   get "register" => "users#edit", :as => "register"

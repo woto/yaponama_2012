@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Upload file name:
+  = @upload.upload_file_name
+p
+  strong Upload content type:
+  = @upload.upload_content_type
+p
+  strong Upload file size:
+  = @upload.upload_file_size
+p
+  strong Upload updated ad:
+  = @upload.upload_updated_ad
+
+= link_to 'Edit', edit_upload_path(@upload)
+'|
+= link_to 'Back', uploads_path
