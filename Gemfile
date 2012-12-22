@@ -22,6 +22,8 @@ group :assets do
 end
 
 group :development, :test do
+  gem "better_errors"
+  gem "binding_of_caller"
   gem 'debugger'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
