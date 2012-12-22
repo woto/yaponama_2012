@@ -2,6 +2,8 @@ Yaponama2012::Application.routes.draw do
 
   namespace :admin do
 
+    resources :uploads
+
     match 'pages/new/:path' => "pages#new", :as => 'new_predefined_page', :constraints => {:path => /.*/}
     resources :pages
 

@@ -12,8 +12,7 @@ body
         a.brand href="#" Yaponama2012
         .container-fluid.nav-collapse
           ul.nav
-            li = link_to "Корзина", "/path1" 
-            li = link_to "Заказы", "/path2"
+            li = link_to "Закачка", uploads_path
             li = link_to "Регистрация", register_path
             li = link_to "Вход", login_path
             li = link_to "Выход", logout_path, :method => :delete
@@ -30,6 +29,8 @@ body
 
     .row-fluid
       .span8
+        li = link_to "Корзина", "/path1" 
+        li = link_to "Заказы", "/path2"
         li = link_to "Избранное", "/path3"
         li = link_to "Автомобили", "/path3"
         li = link_to "Адреса доставки", "/path3"
