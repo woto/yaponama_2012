@@ -1,0 +1,44 @@
+.page-header
+  h1 = @meta_title = "Страницы"
+
+= paginate @pages
+
+table
+  tr
+    th Путь
+    th Содержание
+    th Ключевые слова SEO
+    th Описание SEO
+    th Заголовок
+    th Запрет индексации и следования
+    / TODO не забыть если управление где-то еще понадобится, то вынесу в css стиль
+    th style="width: 140px" Управление
+
+  - @pages.each do |page|
+    tr
+      td = truncate page.path
+      td = truncate page.content
+      td = truncate page.keywords
+      td = truncate page.description
+      td = truncate page.title
+      td = truncate page.robots
+      td
+        / TODO если где-то еще так буду делать, то вынести в css стиль
+        ul style="list-style-type: none;"
+          li = link_to "/#{page.path}", :target => "_blank" do
+            i.icon-share
+            | Просмотр
+          li = link_to edit_admin_page_path(page) do
+            i.icon-edit
+            | Редактировать
+          li = link_to admin_page_path(page), :confirm => "Вы увереные, что хотите удалить страницу?", :method => :delete do
+            i.icon-remove
+            | Удалить
+          / TODO не используется, вообще надо?
+          / = link_to 'Show', admin_page_path(page)
+
+br
+
+= paginate @pages
+
+= link_to 'Создать страницу', new_admin_page_path, :class => "btn btn-primary"

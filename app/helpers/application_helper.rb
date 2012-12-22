@@ -1,5 +1,6 @@
 module ApplicationHelper
 
+
   #def breadcrumb_divider
   #  content_tag(:span, '/', :class => 'divider')
   #end

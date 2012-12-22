@@ -211,6 +211,17 @@ ActiveRecord::Schema.define(:version => 20121221143230) do
     t.text     "notes_invisible"
   end
 
+  create_table "pages", :force => true do |t|
+    t.string   "path"
+    t.text     "content"
+    t.text     "keywords"
+    t.text     "description"
+    t.string   "title"
+    t.string   "robots"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "phones", :force => true do |t|
     t.string   "phone"
     t.text     "notes"

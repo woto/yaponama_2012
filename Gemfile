@@ -70,3 +70,4 @@ gem 'bcrypt-ruby'
 gem 'whenever'
 # TODO версия перенесена как есть, потом посмотреть что нового
 gem 'sitemap_generator', :git => 'https://github.com/kjvarga/sitemap_generator.git', :tag => 'v3.1.1'
+gem 'fastercsv'

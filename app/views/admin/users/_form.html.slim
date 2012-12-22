@@ -1,6 +1,7 @@
 = simple_form_for @user, :url => polymorphic_path([:admin, @user], :tab => params[:tab]), :html => { :class => 'form-horizontal' } do |f|
 
-  = f.error_notification
+  - content_for :form_error do
+    = f.error_notification
 
   ul.nav.nav-tabs
     = content_tag(:li, link_to("Главная", edit_admin_user_path(@user.id || 'new', :tab => :users)), :class => ((@tab == 'users') ? 'active' : '') )

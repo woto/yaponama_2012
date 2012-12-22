@@ -7,7 +7,35 @@ html lang="ru"
     meta name="description" content=""
     meta name="author" content=""
 
+    / TODO пересмотреть еще раз более детально
+
+    - if @meta_title.present?
+      title 
+        = "#{@meta_title} - " if @meta_title.present? 
+        / TODO разобраться
+        / = render(:partial => "blocks/show.erb", :locals => {:block_name => 'title'})
+
+
+    - if @meta_keywords.present?
+      meta name="Keywords" content="#{@meta_keywords}"/>
+
+    / Удалить ключ 'meta_keywords_default' %>
+
+    - if @meta_description.present?
+      meta name="Description" content="#{@meta_description}"/>
+
+    / Удалить ключ 'meta_description_default
+
+    - if @meta_robots.present?
+      meta name="robots" content="#{@meta_robots}" />
+
+    - if @meta_canonical.present?
+      link rel="canonical" href="#{@meta_canonical}" />
+
+    / /TODO пересмотреть еще раз более детально.
+
     title = content_for?(:title) ? yield(:title) : "Yaponama 2012"
+
     = csrf_meta_tags
 
     /[if lt IE 9]

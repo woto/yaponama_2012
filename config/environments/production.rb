@@ -64,8 +64,4 @@ Yaponama2012::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  
-  # Procompile ckeditor js and css files (config/environments/production.rb):
-  config.assets.precompile += Ckeditor.assets
-  
 end

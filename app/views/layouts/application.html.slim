@@ -18,11 +18,15 @@ body
             li = link_to "Вход", login_path
             li = link_to "Выход", logout_path, :method => :delete
             li = link_to "Очистить сессию и печеньки", clear_session_path
+            / TODO пока просто перенес
+            - if content_for :pages_controler
+              = yield(:pages_controller)
+            li.divider
 
   .container-fluid
 
     = bootstrap_flash
-    = yield :error_notification
+    = yield :form_error
 
     .row-fluid
       .span8

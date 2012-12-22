@@ -1,5 +1,8 @@
 Yaponama2012::Application.routes.draw do
 
+
+  resources :pages
+
   get "register" => "users#edit", :as => "register"
   put "register" => "users#update"
   get 'login' => 'sessions#new', :as => 'login'
@@ -27,6 +30,7 @@ Yaponama2012::Application.routes.draw do
   get 'admin' => 'admin/users#index'
 
   get 'robots.txt' => "robots_txt#index"
+
 
   root :to => 'trash_help#index'
 
