@@ -32,11 +32,6 @@ class UploadsController < ApplicationController
     end
   end
 
-  # GET /uploads/1/edit
-  def edit
-    @upload = Upload.find(params[:id])
-  end
-
   # POST /uploads
   # POST /uploads.json
   def create
@@ -52,22 +47,6 @@ class UploadsController < ApplicationController
         format.json { render json: [@upload.to_jq_upload].to_json, status: :created, location: @upload }
       else
         format.html { render action: "new" }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /uploads/1
-  # PUT /uploads/1.json
-  def update
-    @upload = Upload.find(params[:id])
-
-    respond_to do |format|
-      if @upload.update_attributes(params[:upload])
-        format.html { redirect_to @upload, notice: 'Upload was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
         format.json { render json: @upload.errors, status: :unprocessable_entity }
       end
     end
