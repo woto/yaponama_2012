@@ -63,14 +63,21 @@ gem 'kaminari'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'sanitize'
-gem 'active_attr'
 gem 'slim-rails'
 gem 'webrick'
 gem "cancan"
 gem 'ckeditor_rails'
 gem 'bcrypt-ruby'
 gem 'whenever'
-# TODO версия перенесена как есть, потом посмотреть что нового
-gem 'sitemap_generator', :git => 'https://github.com/kjvarga/sitemap_generator.git', :tag => 'v3.1.1'
+gem 'sitemap_generator'
 gem 'fastercsv'
 gem "jquery-fileupload-rails"
+gem 'yandex_mystem'
+gem 'ipgeobase'
+gem 'activemerchant', :require => 'active_merchant', :git => 'https://github.com/Shopify/active_merchant', :ref => 'b14e285774e599697653325c471e1c85a7163d64'
+gem 'delayed_job'
+gem 'backbone-rails'
+gem "hiredis", "~> 0.3.1"
+gem "redis", "~> 2.2.0", :require => ["redis/connection/hiredis", "redis"]
+gem 'juggernaut', :git => 'git@github.com:woto/juggernaut.git'
+gem 'ruby-growl'
