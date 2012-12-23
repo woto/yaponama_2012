@@ -135,3 +135,28 @@
 
   });
 </script>
+
+<!-- TODO don't forget to try own server for converting because appspot... doesn't available, 503 error -->
+<script src="http://www.maxnov.com/getimagedata/jquery.getimagedata.js"></script>
+<!-- <script src="https://raw.github.com/betamax/getImageData/master/jquery.getimagedata.min.js"></script> -->
+<script>
+$(document).bind('drop', function (e) {
+    var url = $(e.originalEvent.dataTransfer.getData('text/html')).filter('img').attr('src');
+    if (url) {
+        $.getImageData({
+            url: url,
+            success: function (img) {
+                var canvas = document.createElement('canvas');
+		canvas.width = img.width;
+		canvas.height = img.height;
+                if (canvas.getContext && canvas.toBlob) {
+                    canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
+                    canvas.toBlob(function (blob) {
+                        $('#fileupload').fileupload('add', {files: [blob]});
+                    }, "image/jpeg");
+                }
+            }
+        });
+    }
+});
+</script>

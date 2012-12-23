@@ -1,3 +1,14 @@
+<script>
+  $(function(){
+    
+    $("#zzz").on("click", function(){
+      var data = CKEDITOR.instances.editor1.getData();
+      alert(data);
+    });
+  })
+    // Your code to save "data", usually though Ajax.
+</script>
+
 <%- model_class = Admin::SpareInfo -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human %></h1>
@@ -15,6 +26,9 @@
     </div>
   </dd>
 </dl>
+
+<button id="zzz"></button>
+
 
 
 
