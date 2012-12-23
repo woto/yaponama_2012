@@ -21,4 +21,11 @@ CKEDITOR.editorConfig = (config) ->
     { name: 'tools' },
     { name: 'others' },
     { name: 'about' }
+
+    config.filebrowserBrowseUrl = '/browser/browse/type/all';
+    #config.filebrowserUploadUrl = '/browser/upload/type/all';
+    config.filebrowserImageBrowseUrl = '/admin/uploads';
+    #config.filebrowserImageUploadUrl = '/admin/uploads';
+    config.filebrowserWindowWidth  = 800;
+    config.filebrowserWindowHeight = 500;
   ]

@@ -160,3 +160,16 @@ $(document).bind('drop', function (e) {
     }
 });
 </script>
+
+<script type="text/javascript">
+  function select_image() {
+    var CKEditorFuncNum = <%= params['CKEditorFuncNum'] %>;
+    window.parent.opener.CKEDITOR.tools.callFunction( CKEditorFuncNum, 'http://localhost:3000/uploads/upload/upload/96/thumb_6a1bd8ad7ee7fd44f63849371cc07862.jpg', '' );
+    self.close();
+  }
+</script>
+
+</head>
+<body>
+
+<a href="javascript:select_image();">Insert this image</a>
