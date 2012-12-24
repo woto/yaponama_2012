@@ -75,7 +75,10 @@ gem "jquery-fileupload-rails"
 gem 'yandex_mystem'
 gem 'ipgeobase'
 gem 'activemerchant', :require => 'active_merchant', :git => 'https://github.com/Shopify/active_merchant', :ref => 'b14e285774e599697653325c471e1c85a7163d64'
+
 gem 'delayed_job'
+gem 'delayed_job_active_record'
+
 gem 'backbone-rails'
 gem "hiredis", "~> 0.3.1"
 gem "redis", "~> 2.2.0", :require => ["redis/connection/hiredis", "redis"]
