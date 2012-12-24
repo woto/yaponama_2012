@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include CurrentUserInModel
+  include SmsSenderHelper
   protect_from_forgery
   helper_method :current_user
   helper_method :namespace_helper

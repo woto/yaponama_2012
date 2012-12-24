@@ -72,7 +72,11 @@ EOF
     cookies.delete :auth_token
     reset_session
     redirect_to root_path, :notice => "Очистка завершена."
+  end
 
+  def notify_sms
+    notify({:destination_address => '+71112223344', :message_data => 'Это тест. This is a test'})
+    redirect_to :back
   end
 
 end

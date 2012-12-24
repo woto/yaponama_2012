@@ -17,6 +17,7 @@ Yaponama2012::Application.routes.draw do
   #get "build/update"
   #get "build/create"
 
+  get 'trash_help/notify_sms'
   get 'trash_help/index'
   post 'trash_help/merge'
   post 'trash_help/make_payment'
