@@ -4,6 +4,8 @@ class CreateUploads < ActiveRecord::Migration
       t.string :upload
       t.string :content_type
       t.integer :file_size
+      t.integer :user_id
+      t.integer :page_id
 
       t.timestamps
     end

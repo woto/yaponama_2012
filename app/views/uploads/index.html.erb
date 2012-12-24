@@ -1,6 +1,3 @@
-<div class="form-header">
-  <h2>Upload file</h2>
-</div>
 
 <%= form_for Upload.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
   <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
@@ -9,20 +6,20 @@
       <!-- The fileinput-button span is used to style the file input field as button -->
       <span class="btn btn-success fileinput-button">
         <i class="icon-plus icon-white"></i>
-        <span>Add files...</span>
+        <span>Выбрать</span>
         <%= f.file_field :upload, multiple: true, name: 'upload[upload]' %>
       </span>
       <button type="submit" class="btn btn-primary start">
         <i class="icon-upload icon-white"></i>
-        <span>Start upload</span>
+        <span>Закачать</span>
       </button>
       <button type="reset" class="btn btn-warning cancel">
         <i class="icon-ban-circle icon-white"></i>
-        <span>Cancel upload</span>
+        <span>Отменить</span>
       </button>
       <button type="button" class="btn btn-danger delete">
         <i class="icon-trash icon-white"></i>
-        <span>Delete</span>
+        <span>Удалить</span>
       </button>
       <input type="checkbox" class="toggle">
     </div>
@@ -36,12 +33,35 @@
   <!-- The loading indicator is shown during image processing -->
   <div class="fileupload-loading"></div>
   <br>
-  <!-- The table listing the files available for upload/download -->
-  <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
-  </table>
+
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Текущие</a></li>
+    <li><a href="#tab2" data-toggle="tab">Уже используемые</a></li>
+    <li><a href="#tab3" data-toggle="tab">Не используемые</a></li>
+  </ul>
+  <div class="tab-content">
+
+    <div class="tab-pane active" id="tab1">
+      <!-- The table listing the files available for upload/download -->
+      <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
+    </div>
+
+    <div class="tab-pane" id="tab2">
+      <p>Howdy, I'm in Section 2.</p>
+    </div>
+
+    <div class="tab-pane" id="tab3">
+      <p>Howdy, I'm in Section 3.</p>
+    </div>
+
+  </div>
+</div>
+
 <% end %>
 
 <script>
+  /* is this used? TODO */
   var fileUploadErrors = {
   maxFileSize: 'File is too big',
   minFileSize: 'File is too small',
@@ -116,7 +136,10 @@
 <script type="text/javascript" charset="utf-8">
   $(function () {
       // Initialize the jQuery File Upload widget:
-      $('#fileupload').fileupload();
+      $('#fileupload').fileupload({
+          previewMaxHeight: 250,
+          previewMaxWidth: 250
+        });
       // 
       // Load existing files:
       $.getJSON($('#fileupload').prop('action'), function (files) {
@@ -147,8 +170,8 @@ $(document).bind('drop', function (e) {
             url: url,
             success: function (img) {
                 var canvas = document.createElement('canvas');
-		canvas.width = img.width;
-		canvas.height = img.height;
+                canvas.width = img.width;
+                canvas.height = img.height;
                 if (canvas.getContext && canvas.toBlob) {
                     canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
                     canvas.toBlob(function (blob) {
@@ -162,14 +185,12 @@ $(document).bind('drop', function (e) {
 </script>
 
 <script type="text/javascript">
-  function select_image() {
+  select_image = (function() {
     var CKEditorFuncNum = <%= params['CKEditorFuncNum'] %>;
     window.parent.opener.CKEDITOR.tools.callFunction( CKEditorFuncNum, 'http://localhost:3000/uploads/upload/upload/96/thumb_6a1bd8ad7ee7fd44f63849371cc07862.jpg', '' );
+    window.parent.opener.CKEDITOR.dialog.getCurrent().hide();
     self.close();
-  }
+  })
 </script>
-
-</head>
-<body>
 
 <a href="javascript:select_image();">Insert this image</a>

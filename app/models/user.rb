@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   include BelongsToCreator
   include PingCallback
 
+  has_many :uploads
+
   def self.current_user=(current_user)
     Thread.current[:current_user] = current_user
   end

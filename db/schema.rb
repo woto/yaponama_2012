@@ -385,6 +385,8 @@ ActiveRecord::Schema.define(:version => 20121222095424) do
     t.string   "upload"
     t.string   "content_type"
     t.integer  "file_size"
+    t.integer  "user_id"
+    t.integer  "page_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

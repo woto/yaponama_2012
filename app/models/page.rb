@@ -5,6 +5,8 @@ class Page < ActiveRecord::Base
 
   validates :path, :presence => true
 
+  has_many :uploads
+
   def cut_first_slash
     self.path = self.path.gsub(/^\/+/, '')
   end

@@ -8,8 +8,8 @@ class Admin::ApplicationController < ApplicationController
   private
 
   def only_authenticated_filter
-    unless ["admin", "manager"].include? current_user.role
-      redirect_to root_path, :alert => "У вас нет доступа к этой части сайта." and return
+    if ["guest"].include? current_user.role
+      redirect_to admin_login_path, :alert => "У вас нет доступа к этой части сайта. Пожалуйста войдите на сайт." and return
     end
   end
 

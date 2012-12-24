@@ -12,10 +12,12 @@ body
         a.brand href="#" Yaponama2012
         .container-fluid.nav-collapse
           ul.nav
+
             li = link_to "Закачка", uploads_path
             li = link_to "Регистрация", register_path
             li = link_to "Вход", login_path
             li = link_to "Выход", logout_path, :method => :delete
+            li = link_to "Администрирование", admin_path
             li = link_to "Очистить сессию и печеньки", clear_session_path
             / TODO пока просто перенес
             - if content_for :pages_controler
@@ -52,7 +54,7 @@ body
 
         .well.sidebar-nav
 
-          img src="http://placehold.it/70x80" class="img-polaroid"
+          img class="media-object" class="img-rounded" data-src="holder.js/96x96"
 
           div style="overflow: auto; width: auto; height: 200px; background: #FFF"
             .span10.offset1.alert.alert-info
