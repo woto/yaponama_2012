@@ -36,8 +36,8 @@
 
 <div class="tabbable"> <!-- Only required for left/right tabs -->
   <ul class="nav nav-tabs">
-    <li class="active"><a href="#tab1" data-toggle="tab">Текущие</a></li>
-    <li><a href="#tab2" data-toggle="tab">Уже используемые</a></li>
+    <li class="active"><a href="#tab1" data-toggle="tab">Новые</a></li>
+    <li><a href="#tab2" data-toggle="tab">Используемые</a></li>
     <li><a href="#tab3" data-toggle="tab">Не используемые</a></li>
   </ul>
   <div class="tab-content">
@@ -159,14 +159,13 @@
   });
 </script>
 
-<!-- TODO don't forget to try own server for converting because appspot... doesn't available, 503 error -->
-<script src="http://www.maxnov.com/getimagedata/jquery.getimagedata.js"></script>
-<!-- <script src="https://raw.github.com/betamax/getImageData/master/jquery.getimagedata.min.js"></script> -->
+<script src="https://raw.github.com/betamax/getImageData/master/jquery.getimagedata.js"></script>
 <script>
 $(document).bind('drop', function (e) {
     var url = $(e.originalEvent.dataTransfer.getData('text/html')).filter('img').attr('src');
     if (url) {
         $.getImageData({
+            server: "http://localhost:3000/",
             url: url,
             success: function (img) {
                 var canvas = document.createElement('canvas');
