@@ -159,13 +159,12 @@
   });
 </script>
 
-<script src="https://raw.github.com/betamax/getImageData/master/jquery.getimagedata.js"></script>
 <script>
 $(document).bind('drop', function (e) {
     var url = $(e.originalEvent.dataTransfer.getData('text/html')).filter('img').attr('src');
     if (url) {
         $.getImageData({
-            server: "http://localhost:3000/",
+            server: "http://192.168.2.7:8800/",
             url: url,
             success: function (img) {
                 var canvas = document.createElement('canvas');
