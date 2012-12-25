@@ -4,7 +4,7 @@
   h1
     =t '.title', :default => model_class.model_name.human.pluralize
 
-= paginate @money_transactions, :theme => :default
+= paginate @money_transactions
 
 table.table.table-striped
   thead
@@ -47,4 +47,4 @@ table.table.table-striped
 
 = link_to t('.new', :default => t("helpers.links.new")), new_admin_money_transaction_path, :class => 'btn btn-primary'
 
-= paginate @money_transactions, :theme => :default
+= paginate @money_transactions

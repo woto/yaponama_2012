@@ -64,7 +64,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'sanitize'
 gem 'slim-rails'
-gem 'webrick'
+gem 'thin'
 gem "cancan"
 gem 'ckeditor_rails'
 gem 'bcrypt-ruby'
