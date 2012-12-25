@@ -3,7 +3,7 @@ $(function(){
       var url = $(e.originalEvent.dataTransfer.getData('text/html')).filter('img').attr('src');
       if (url) {
           $.getImageData({
-              server: "http://192.168.2.7:8800/",
+              server: "<%= Rails.configuration.getimagedata %>",
               url: url,
               success: function (img) {
                   var canvas = document.createElement('canvas');
