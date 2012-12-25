@@ -32,3 +32,8 @@
 //=require jquery.dirtyforms/dirtyforms
 
 //=require jquery.facebox
+
+//=require jquery.jsonp
+//=require jquery.getimagedata
+
+//=require uploads/drag_and_drop_from_another_site
