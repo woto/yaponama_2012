@@ -10,12 +10,12 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+
 //= require jquery
 //= require ckeditor-jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require cocoon
-//= require_tree .
 
 //=require jquery-fileupload/vendor/jquery.ui.widget
 //=require jquery-fileupload/vendor/load-image
@@ -26,3 +26,9 @@
 //=require jquery-fileupload/jquery.fileupload-fp
 //=require jquery-fileupload/jquery.fileupload-ui
 //=require jquery-fileupload/locale
+
+//=require jquery.dirtyforms/jquery.dirtyforms
+//=require jquery.dirtyforms/ckeditor
+//=require jquery.dirtyforms/dirtyforms
+
+//=require jquery.facebox
