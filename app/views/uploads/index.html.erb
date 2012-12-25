@@ -2,7 +2,7 @@
 <%= form_for Upload.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
   <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
   <div class="row-fluid fileupload-buttonbar">
-    <div class="span9">
+    <div class="span7">
       <!-- The fileinput-button span is used to style the file input field as button -->
       <span class="btn btn-success fileinput-button">
         <i class="icon-plus icon-white"></i>
@@ -23,10 +23,15 @@
       </button>
       <input type="checkbox" class="toggle">
     </div>
-    <div class="span3">
-      <!-- The global progress bar -->
-      <div class="progress progress-success progress-striped active fade">
-        <div class="bar" style="width:0%;"></div>
+    <div class="span5">
+      <!-- The global progress information -->
+      <div class="fileupload-progress fade">
+          <!-- The global progress bar -->
+          <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+              <div class="bar" style="width:0%;"></div>
+          </div>
+          <!-- The extended global progress information -->
+          <div class="progress-extended">&nbsp;</div>
       </div>
     </div>
   </div>
@@ -157,29 +162,6 @@
       });
 
   });
-</script>
-
-<script>
-$(document).bind('drop', function (e) {
-    var url = $(e.originalEvent.dataTransfer.getData('text/html')).filter('img').attr('src');
-    if (url) {
-        $.getImageData({
-            server: "http://192.168.2.7:8800/",
-            url: url,
-            success: function (img) {
-                var canvas = document.createElement('canvas');
-                canvas.width = img.width;
-                canvas.height = img.height;
-                if (canvas.getContext && canvas.toBlob) {
-                    canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
-                    canvas.toBlob(function (blob) {
-                        $('#fileupload').fileupload('add', {files: [blob]});
-                    }, "image/jpeg");
-                }
-            }
-        });
-    }
-});
 </script>
 
 <script type="text/javascript">
