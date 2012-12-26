@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Content:
+  = @admin_block.content
+p
+  strong Name:
+  = @admin_block.name
+
+= link_to 'Edit', edit_admin_block_path(@admin_block)
+'|
+= link_to 'Back', admin_blocks_path

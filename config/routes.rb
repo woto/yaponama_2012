@@ -1,6 +1,11 @@
 Yaponama2012::Application.routes.draw do
 
 
+  namespace :admin do
+    resources :blocks
+  end
+
+
   resources :uploads
 
   resources :pages

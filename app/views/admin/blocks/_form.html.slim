@@ -1,0 +1,15 @@
+= form_for @admin_block do |f|
+  - if @admin_block.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@admin_block.errors.count, "error")} prohibited this admin_block from being saved:"
+      ul
+        - @admin_block.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :content
+    = f.text_area :content
+  .field
+    = f.label :name
+    = f.text_field :name
+  .actions = f.submit 'Save'

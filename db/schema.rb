@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121222095424) do
+ActiveRecord::Schema.define(:version => 20121224004534) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(:version => 20121222095424) do
   end
 
   add_index "add_requst_id_to_cars", ["request_id"], :name => "index_add_requst_id_to_cars_on_request_id"
+
+  create_table "admin_blocks", :force => true do |t|
+    t.text     "content"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "admin_companies", :force => true do |t|
     t.string   "inn"
