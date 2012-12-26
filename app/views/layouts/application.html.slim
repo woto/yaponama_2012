@@ -44,7 +44,14 @@ body
         #div4 div4
         #div5 div5
         #div6 div6
-        <img src="http://localhost:3000/uploads/upload/upload/96/thumb_6a1bd8ad7ee7fd44f63849371cc07862.jpg" id="img" />
+        div
+          h3 Rotate
+          = image_tag image_path('rails.png'), :class => "img-rotate"
+        div.jcrop-hack
+          h3 Crop
+          = image_tag image_path('rails.png'), :class => "img-crop"
+
+
         = yield
 
       .span4

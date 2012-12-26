@@ -36,6 +36,9 @@
 //=require jquery-getimagedata/jquery.getimagedata
 //=require jquery-getimagedata/getimagedata
 
+//=require rotate_test
+//=require crop_test
+
 
 // VENDORED
 //=require jquery.jsonp

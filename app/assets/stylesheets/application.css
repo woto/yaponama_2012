@@ -58,3 +58,7 @@
 .help-block {
   color: #999;
 }
+
+.jcrop-hack img {
+  max-width: none;
+}
