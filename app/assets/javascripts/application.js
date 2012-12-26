@@ -26,16 +26,22 @@
 //=require jquery-fileupload/jquery.fileupload-fp
 //=require jquery-fileupload/jquery.fileupload-ui
 //=require jquery-fileupload/locale
-//=require jquery-fileupload/bootstrap-image-gallery
+//
+//=require bootstrap-image-gallery/bootstrap-image-gallery
 
-//=require jquery.facebox
 //=require jquery-dirtyforms/jquery.dirtyforms
 //=require jquery-dirtyforms/ckeditor
 //=require jquery-dirtyforms/dirtyforms
 
-//=require jquery.jsonp
 //=require jquery-getimagedata/jquery.getimagedata
 //=require jquery-getimagedata/getimagedata
 
-//=jquery.rotate.js
-//=jquery.jcrop.js
+
+// VENDORED
+//=require jquery.jsonp
+//=require jquery.rotate
+//=require jquery.jcrop
+//=require holder.js/holder
+
+// VENDORED IN GEMS
+//=require jquery.facebox

@@ -9,8 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require jquery.facebox
- *= require bootstrap_and_overrides
- *= require jquery-fileupload/bootstrap-image-gallery
+ *= require bootstrap/main
+
+ *= require bootstrap-image-gallery/bootstrap-image-gallery
+
  *= require jquery.fileupload-ui
  *= require_self
  *= require_tree .
