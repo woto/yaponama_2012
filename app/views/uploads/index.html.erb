@@ -1,28 +1,43 @@
+<style>
+  .files .preview * {
+    width: auto !important;
+  }
+  @media (max-width: 480px) {
+    .max480 {
+      display: none;
+    }
+  }
+  @media (min-width: 481px) {
+    .min481 {
+      display: none;
+    }
+  }
+</style>
 <%= form_for Upload.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
   <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
   <div class="row-fluid fileupload-buttonbar">
     <div class="span7">
       <!-- The fileinput-button span is used to style the file input field as button -->
-      <span class="btn btn-success fileinput-button">
+      <button class="btn btn-success fileinput-button">
         <i class="icon-plus icon-white"></i>
-        <span>Выбрать</span>
+        <span class="max480">Выбр.</span>
         <%= f.file_field :upload, multiple: true, name: 'upload[upload]' %>
-      </span>
+      </button>
       <button type="submit" class="btn btn-primary start">
         <i class="icon-upload icon-white"></i>
-        <span>Закачать</span>
+        <span class="max480">Закач.</span>
       </button>
       <button type="reset" class="btn btn-warning cancel">
         <i class="icon-ban-circle icon-white"></i>
-        <span>Отменить</span>
+        <span class="max480">Отм.</span>
       </button>
       <button type="button" class="btn btn-danger delete">
         <i class="icon-trash icon-white"></i>
-        <span>Удалить</span>
+        <span class="max480">Удал.</span>
       </button>
       <input type="checkbox" class="toggle">
     </div>
-    <div class="span5">
+    <div class="span5" id="progress-all" style="display: none;">
       <!-- The global progress information -->
       <div class="fileupload-progress fade">
           <!-- The global progress bar -->
@@ -40,15 +55,30 @@
 
 <div class="tabbable"> <!-- Only required for left/right tabs -->
   <ul class="nav nav-tabs">
-    <li class="active"><a href="#tab1" data-toggle="tab">Новые</a></li>
-    <li><a href="#tab2" data-toggle="tab">Используемые</a></li>
-    <li><a href="#tab3" data-toggle="tab">Не используемые</a></li>
+    <li class="active">
+      <a href="#tab1" data-toggle="tab">
+        <span class="max480">Новые</span>
+        <span class="min481">Нов.</span>
+      </a>
+    </li>
+    <li>
+      <a href="#tab2" data-toggle="tab">
+        <span class="max480">Используемые</span>
+        <span class="min481">Исп.</span>
+      </a>
+    </li>
+    <li>
+      <a href="#tab3" data-toggle="tab">
+        <span class="max480">Не используемые</span>
+        <span class="min481">Не исп.</span>
+      </a>
+    </li>
   </ul>
   <div class="tab-content">
 
     <div class="tab-pane active" id="tab1">
       <!-- The table listing the files available for upload/download -->
-      <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
+      <table class="table"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
     </div>
 
     <div class="tab-pane" id="tab2">
@@ -94,18 +124,6 @@
 </div>
 
 
-<script>
-  /* is this used? TODO */
-  var fileUploadErrors = {
-  maxFileSize: 'File is too big',
-  minFileSize: 'File is too small',
-  acceptFileTypes: 'Filetype not allowed',
-  maxNumberOfFiles: 'Max number of files exceeded',
-  uploadedBytes: 'Uploaded bytes exceed file size',
-  emptyResult: 'Empty file upload result'
-  };
-</script>
-
 <%= render "template-upload" %>
 
 <%= render "template-download" %>
@@ -114,10 +132,17 @@
   $(function () {
       // Initialize the jQuery File Upload widget:
       $('#fileupload').fileupload({
-          previewMaxHeight: 250,
-          previewMaxWidth: 250,
+          previewMaxHeight: 270,
+          previewMaxWidth: 270,
+          maxFileSize: 20971520,
+          maxNumberOfFiles: 20,
           prependFiles: true,
-        });
+          }).bind('fileuploadsubmit', 
+            function (e) {
+              $('#progress-all').attr("style", "display: block");
+            }).bind('fileuploadstop', function(){
+              $('#progress-all').attr("style", "display: none");
+            });
       // 
       // Load existing files:
       $.getJSON($('#fileupload').prop('action'), function (files) {

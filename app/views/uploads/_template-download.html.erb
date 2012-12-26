@@ -3,21 +3,21 @@
 {% for (var i=0, file; file=o.files[i]; i++) { %}
   <tr class="template-download fade">
       {% if (file.error) { %}
-        <td style="width: 250px">
+        <td>
         </td>
         <td>
-          <div class="name"><span>{%=file.name%}</span> - <span>{%=o.formatFileSize(file.size)%}</span></div><br />
+          <div class="name">{%=file.name%} - {%=o.formatFileSize(file.size)%}</div><br />
           <div class="error"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</div> <br />
         {% } else { %}
-        <td style="width: 250px">
+        <td>
         <div class="preview">{% if (file.thumbnail_url) { %}
-          <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+          <a style="display: inline; width: auto" href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
           {% } %}</div>
         </td>
         <td>
         <div class="name">
-          <span><a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a></span> - 
-          <span>{%=o.formatFileSize(file.size)%}</span> <br /><br />
+          <a style="display: inline; width:auto" href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a> - 
+          {%=o.formatFileSize(file.size)%} <br /><br />
         </div>
         {% } %}
         <div class="delete">

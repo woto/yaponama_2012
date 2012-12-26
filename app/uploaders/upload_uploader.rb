@@ -11,7 +11,7 @@ class UploadUploader < CarrierWave::Uploader::Base
   end
 
   version :thumb, :if => :image? do
-    process :resize_to_fit => [250, 250]
+    process :resize_to_fit => [270, 270]
   end
 
   protected
