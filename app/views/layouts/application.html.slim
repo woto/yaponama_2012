@@ -46,11 +46,10 @@ body
         #div6 div6
         div
           h3 Rotate
-          = image_tag image_path('rails.png'), :class => "img-rotate"
+          = image_tag 'rails.png', :class => "img-rotate"
         div.jcrop-hack
           h3 Crop
-          = image_tag image_path('rails.png'), :class => "img-crop"
-
+          = image_tag 'rails.png', :class => "img-crop"
 
         = yield
 

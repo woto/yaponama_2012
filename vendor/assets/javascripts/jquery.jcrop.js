@@ -1,22 +1,1695 @@
 /**
- * jquery.Jcrop.min.js v0.9.10 (build:20121214)
- * jQuery Image Cropping Plugin - released under MIT License
- * Copyright (c) 2008-2012 Tapmodo Interactive LLC
- * https://github.com/tapmodo/Jcrop
+ * jquery.Jcrop.js v0.9.10
+ * jQuery Image Cropping Plugin - released under MIT License 
+ * Author: Kelly Hallman <khallman@gmail.com>
+ * http://github.com/tapmodo/Jcrop
+ * Copyright (c) 2008-2012 Tapmodo Interactive LLC {{{
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * }}}
  */
-(function(a){a.Jcrop=function(b,c){function h(a){return Math.round(a)+"px"}function i(a){return d.baseClass+"-"+a}function j(){return a.fx.step.hasOwnProperty("backgroundColor")}function k(b){var c=a(b).offset();return[c.left,c.top]}function l(a){return[a.pageX-e[0],a.pageY-e[1]]}function m(b){typeof b!="object"&&(b={}),d=a.extend(d,b),a.each(["onChange","onSelect","onRelease","onDblClick"],function(a,b){typeof d[b]!="function"&&(d[b]=function(){})})}function n(a,b){e=k(C),bb.setCursor(a==="move"?a:a+"-resize");if(a==="move")return bb.activateHandlers(p(b),u);var c=Z.getFixed(),d=q(a),f=Z.getCorner(q(d));Z.setPressed(Z.getCorner(d)),Z.setCurrent(f),bb.activateHandlers(o(a,c),u)}function o(a,b){return function(c){if(!d.aspectRatio)switch(a){case"e":c[1]=b.y2;break;case"w":c[1]=b.y2;break;case"n":c[0]=b.x2;break;case"s":c[0]=b.x2}else switch(a){case"e":c[1]=b.y+1;break;case"w":c[1]=b.y+1;break;case"n":c[0]=b.x+1;break;case"s":c[0]=b.x+1}Z.setCurrent(c),ba.update()}}function p(a){var b=a;return bc.watchKeys(),function(
-a){Z.moveOffset([a[0]-b[0],a[1]-b[1]]),b=a,ba.update()}}function q(a){switch(a){case"n":return"sw";case"s":return"nw";case"e":return"nw";case"w":return"ne";case"ne":return"sw";case"nw":return"se";case"se":return"nw";case"sw":return"ne"}}function r(a){return function(b){return d.disabled?!1:a==="move"&&!d.allowMove?!1:(e=k(C),V=!0,n(a,l(b)),b.stopPropagation(),b.preventDefault(),!1)}}function s(a,b,c){var d=a.width(),e=a.height();d>b&&b>0&&(d=b,e=b/a.width()*a.height()),e>c&&c>0&&(e=c,d=c/a.height()*a.width()),S=a.width()/d,T=a.height()/e,a.width(d).height(e)}function t(a){return{x:a.x*S,y:a.y*T,x2:a.x2*S,y2:a.y2*T,w:a.w*S,h:a.h*T}}function u(a){var b=Z.getFixed();b.w>d.minSelect[0]&&b.h>d.minSelect[1]?(ba.enableHandles(),ba.done()):ba.release(),bb.setCursor(d.allowSelect?"crosshair":"default")}function v(a){if(d.disabled)return!1;if(!d.allowSelect)return!1;V=!0,e=k(C),ba.disableHandles(),bb.setCursor("crosshair");var b=l(a);return Z.setPressed(b),ba.update(),bb.activateHandlers(w,u),bc.watchKeys(),a.stopPropagation
-(),a.preventDefault(),!1}function w(a){Z.setCurrent(a),ba.update()}function x(){var b=a("<div></div>").addClass(i("tracker"));return a.browser.msie&&b.css({opacity:0,backgroundColor:"white"}),b}function bd(a){F.removeClass().addClass(i("holder")).addClass(a)}function be(a,b){function t(){window.setTimeout(u,l)}var c=a[0]/S,e=a[1]/T,f=a[2]/S,g=a[3]/T;if(W)return;var h=Z.flipCoords(c,e,f,g),i=Z.getFixed(),j=[i.x,i.y,i.x2,i.y2],k=j,l=d.animationDelay,m=h[0]-j[0],n=h[1]-j[1],o=h[2]-j[2],p=h[3]-j[3],q=0,r=d.swingSpeed;c=k[0],e=k[1],f=k[2],g=k[3],ba.animMode(!0);var s,u=function(){return function(){q+=(100-q)/r,k[0]=Math.round(c+q/100*m),k[1]=Math.round(e+q/100*n),k[2]=Math.round(f+q/100*o),k[3]=Math.round(g+q/100*p),q>=99.8&&(q=100),q<100?(bg(k),t()):(ba.done(),ba.animMode(!1),typeof b=="function"&&b.call(br))}}();t()}function bf(a){bg([a[0]/S,a[1]/T,a[2]/S,a[3]/T]),d.onSelect.call(br,t(Z.getFixed())),ba.enableHandles()}function bg(a){Z.setPressed([a[0],a[1]]),Z.setCurrent([a[2],a[3]]),ba.update()}function bh(){return t
-(Z.getFixed())}function bi(){return Z.getFixed()}function bj(a){m(a),bq()}function bk(){d.disabled=!0,ba.disableHandles(),ba.setCursor("default"),bb.setCursor("default")}function bl(){d.disabled=!1,bq()}function bm(){ba.done(),bb.activateHandlers(null,null)}function bn(){F.remove(),z.show(),z.css("visibility","visible"),a(b).removeData("Jcrop")}function bo(a,b){ba.release(),bk();var c=new Image;c.onload=function(){var e=c.width,f=c.height,g=d.boxWidth,h=d.boxHeight;C.width(e).height(f),C.attr("src",a),G.attr("src",a),s(C,g,h),D=C.width(),E=C.height(),G.width(D).height(E),L.width(D+K*2).height(E+K*2),F.width(D).height(E),_.resize(D,E),bl(),typeof b=="function"&&b.call(br)},c.src=a}function bp(a,b,c){var e=b||d.bgColor;d.bgFade&&j()&&d.fadeTime&&!c?a.animate({backgroundColor:e},{queue:!1,duration:d.fadeTime}):a.css("backgroundColor",e)}function bq(a){d.allowResize?a?ba.enableOnly():ba.enableHandles():ba.disableHandles(),bb.setCursor(d.allowSelect?"crosshair":"default"),ba.setCursor(d.allowMove?"move":"default"),
-d.hasOwnProperty("trueSize")&&(S=d.trueSize[0]/D,T=d.trueSize[1]/E),d.hasOwnProperty("setSelect")&&(bf(d.setSelect),ba.done(),delete d.setSelect),_.refresh(),d.bgColor!=M&&(bp(d.shade?_.getShades():F,d.shade?d.shadeColor||d.bgColor:d.bgColor),M=d.bgColor),N!=d.bgOpacity&&(N=d.bgOpacity,d.shade?_.refresh():ba.setBgOpacity(N)),O=d.maxSize[0]||0,P=d.maxSize[1]||0,Q=d.minSize[0]||0,R=d.minSize[1]||0,d.hasOwnProperty("outerImage")&&(C.attr("src",d.outerImage),delete d.outerImage),ba.refresh()}var d=a.extend({},a.Jcrop.defaults),e,f,g=!1;a.browser.msie&&a.browser.version.split(".")[0]==="6"&&(g=!0),typeof b!="object"&&(b=a(b)[0]),typeof c!="object"&&(c={}),m(c);var y={border:"none",visibility:"visible",margin:0,padding:0,position:"absolute",top:0,left:0},z=a(b),A=!0;if(b.tagName=="IMG"){if(z[0].width!=0&&z[0].height!=0)z.width(z[0].width),z.height(z[0].height);else{var B=new Image;B.src=z[0].src,z.width(B.width),z.height(B.height)}var C=z.clone().removeAttr("id").css(y).show();C.width(z.width()),C.height(z.height())
-,z.after(C).hide()}else C=z.css(y).show(),A=!1,d.shade===null&&(d.shade=!0);s(C,d.boxWidth,d.boxHeight);var D=C.width(),E=C.height(),F=a("<div />").width(D).height(E).addClass(i("holder")).css({position:"relative",backgroundColor:d.bgColor}).insertAfter(z).append(C);d.addClass&&F.addClass(d.addClass);var G=a("<div />"),H=a("<div />").width("100%").height("100%").css({zIndex:310,position:"absolute",overflow:"hidden"}),I=a("<div />").width("100%").height("100%").css("zIndex",320),J=a("<div />").css({position:"absolute",zIndex:600}).dblclick(function(){var a=Z.getFixed();d.onDblClick.call(br,a)}).insertBefore(C).append(H,I);A&&(G=a("<img />").attr("src",C.attr("src")).css(y).width(D).height(E),H.append(G)),g&&J.css({overflowY:"hidden"});var K=d.boundary,L=x().width(D+K*2).height(E+K*2).css({position:"absolute",top:h(-K),left:h(-K),zIndex:290}).mousedown(v),M=d.bgColor,N=d.bgOpacity,O,P,Q,R,S,T,U=!0,V,W,X;e=k(C);var Y=function(){function a(){var a={},b=["touchstart","touchmove","touchend"],c=document.createElement
-("div"),d;try{for(d=0;d<b.length;d++){var e=b[d];e="on"+e;var f=e in c;f||(c.setAttribute(e,"return;"),f=typeof c[e]=="function"),a[b[d]]=f}return a.touchstart&&a.touchend&&a.touchmove}catch(g){return!1}}function b(){return d.touchSupport===!0||d.touchSupport===!1?d.touchSupport:a()}return{createDragger:function(a){return function(b){return b.pageX=b.originalEvent.changedTouches[0].pageX,b.pageY=b.originalEvent.changedTouches[0].pageY,d.disabled?!1:a==="move"&&!d.allowMove?!1:(V=!0,n(a,l(b)),b.stopPropagation(),b.preventDefault(),!1)}},newSelection:function(a){return a.pageX=a.originalEvent.changedTouches[0].pageX,a.pageY=a.originalEvent.changedTouches[0].pageY,v(a)},isSupported:a,support:b()}}(),Z=function(){function h(d){d=n(d),c=a=d[0],e=b=d[1]}function i(a){a=n(a),f=a[0]-c,g=a[1]-e,c=a[0],e=a[1]}function j(){return[f,g]}function k(d){var f=d[0],g=d[1];0>a+f&&(f-=f+a),0>b+g&&(g-=g+b),E<e+g&&(g+=E-(e+g)),D<c+f&&(f+=D-(c+f)),a+=f,c+=f,b+=g,e+=g}function l(a){var b=m();switch(a){case"ne":return[b.x2,b.y];case"nw"
-:return[b.x,b.y];case"se":return[b.x2,b.y2];case"sw":return[b.x,b.y2]}}function m(){if(!d.aspectRatio)return p();var f=d.aspectRatio,g=d.minSize[0]/S,h=d.maxSize[0]/S,i=d.maxSize[1]/T,j=c-a,k=e-b,l=Math.abs(j),m=Math.abs(k),n=l/m,r,s,t,u;return h===0&&(h=D*10),i===0&&(i=E*10),n<f?(s=e,t=m*f,r=j<0?a-t:t+a,r<0?(r=0,u=Math.abs((r-a)/f),s=k<0?b-u:u+b):r>D&&(r=D,u=Math.abs((r-a)/f),s=k<0?b-u:u+b)):(r=c,u=l/f,s=k<0?b-u:b+u,s<0?(s=0,t=Math.abs((s-b)*f),r=j<0?a-t:t+a):s>E&&(s=E,t=Math.abs(s-b)*f,r=j<0?a-t:t+a)),r>a?(r-a<g?r=a+g:r-a>h&&(r=a+h),s>b?s=b+(r-a)/f:s=b-(r-a)/f):r<a&&(a-r<g?r=a-g:a-r>h&&(r=a-h),s>b?s=b+(a-r)/f:s=b-(a-r)/f),r<0?(a-=r,r=0):r>D&&(a-=r-D,r=D),s<0?(b-=s,s=0):s>E&&(b-=s-E,s=E),q(o(a,b,r,s))}function n(a){return a[0]<0&&(a[0]=0),a[1]<0&&(a[1]=0),a[0]>D&&(a[0]=D),a[1]>E&&(a[1]=E),[a[0],a[1]]}function o(a,b,c,d){var e=a,f=c,g=b,h=d;return c<a&&(e=c,f=a),d<b&&(g=d,h=b),[e,g,f,h]}function p(){var d=c-a,f=e-b,g;return O&&Math.abs(d)>O&&(c=d>0?a+O:a-O),P&&Math.abs(f)>P&&(e=f>0?b+P:b-P),R/T&&Math.abs(f)<R/
-T&&(e=f>0?b+R/T:b-R/T),Q/S&&Math.abs(d)<Q/S&&(c=d>0?a+Q/S:a-Q/S),a<0&&(c-=a,a-=a),b<0&&(e-=b,b-=b),c<0&&(a-=c,c-=c),e<0&&(b-=e,e-=e),c>D&&(g=c-D,a-=g,c-=g),e>E&&(g=e-E,b-=g,e-=g),a>D&&(g=a-E,e-=g,b-=g),b>E&&(g=b-E,e-=g,b-=g),q(o(a,b,c,e))}function q(a){return{x:a[0],y:a[1],x2:a[2],y2:a[3],w:a[2]-a[0],h:a[3]-a[1]}}var a=0,b=0,c=0,e=0,f,g;return{flipCoords:o,setPressed:h,setCurrent:i,getOffset:j,moveOffset:k,getCorner:l,getFixed:m}}(),_=function(){function f(a,b){e.left.css({height:h(b)}),e.right.css({height:h(b)})}function g(){return i(Z.getFixed())}function i(a){e.top.css({left:h(a.x),width:h(a.w),height:h(a.y)}),e.bottom.css({top:h(a.y2),left:h(a.x),width:h(a.w),height:h(E-a.y2)}),e.right.css({left:h(a.x2),width:h(D-a.x2)}),e.left.css({width:h(a.x)})}function j(){return a("<div />").css({position:"absolute",backgroundColor:d.shadeColor||d.bgColor}).appendTo(c)}function k(){b||(b=!0,c.insertBefore(C),g(),ba.setBgOpacity(1,0,1),G.hide(),l(d.shadeColor||d.bgColor,1),ba.isAwake()?n(d.bgOpacity,1):n(1,1))}function l
-(a,b){bp(p(),a,b)}function m(){b&&(c.remove(),G.show(),b=!1,ba.isAwake()?ba.setBgOpacity(d.bgOpacity,1,1):(ba.setBgOpacity(1,1,1),ba.disableHandles()),bp(F,0,1))}function n(a,e){b&&(d.bgFade&&!e?c.animate({opacity:1-a},{queue:!1,duration:d.fadeTime}):c.css({opacity:1-a}))}function o(){d.shade?k():m(),ba.isAwake()&&n(d.bgOpacity)}function p(){return c.children()}var b=!1,c=a("<div />").css({position:"absolute",zIndex:240,opacity:0}),e={top:j(),left:j().height(E),right:j().height(E),bottom:j()};return{update:g,updateRaw:i,getShades:p,setBgColor:l,enable:k,disable:m,resize:f,refresh:o,opacity:n}}(),ba=function(){function k(b){var c=a("<div />").css({position:"absolute",opacity:d.borderOpacity}).addClass(i(b));return H.append(c),c}function l(b,c){var d=a("<div />").mousedown(r(b)).css({cursor:b+"-resize",position:"absolute",zIndex:c}).addClass("ord-"+b);return Y.support&&d.bind("touchstart.jcrop",Y.createDragger(b)),I.append(d),d}function m(a){var b=d.handleSize;return l(a,c++).css({opacity:d.handleOpacity}).width
-(b).height(b).addClass(i("handle"))}function n(a){return l(a,c++).addClass("jcrop-dragbar")}function o(a){var b;for(b=0;b<a.length;b++)g[a[b]]=n(a[b])}function p(a){var b,c;for(c=0;c<a.length;c++){switch(a[c]){case"n":b="hline";break;case"s":b="hline bottom";break;case"e":b="vline right";break;case"w":b="vline"}e[a[c]]=k(b)}}function q(a){var b;for(b=0;b<a.length;b++)f[a[b]]=m(a[b])}function s(a,b){d.shade||G.css({top:h(-b),left:h(-a)}),J.css({top:h(b),left:h(a)})}function u(a,b){J.width(Math.round(a)).height(Math.round(b))}function v(){var a=Z.getFixed();Z.setPressed([a.x,a.y]),Z.setCurrent([a.x2,a.y2]),w()}function w(a){if(b)return y(a)}function y(a){var c=Z.getFixed();u(c.w,c.h),s(c.x,c.y),d.shade&&_.updateRaw(c),b||A(),a?d.onSelect.call(br,t(c)):d.onChange.call(br,t(c))}function z(a,c,e){if(!b&&!c)return;d.bgFade&&!e?C.animate({opacity:a},{queue:!1,duration:d.fadeTime}):C.css("opacity",a)}function A(){J.show(),d.shade?_.opacity(N):z(N,!0),b=!0}function B(){F(),J.hide(),d.shade?_.opacity(1):z(1),b=!1,d.onRelease
-.call(br)}function D(){j&&I.show()}function E(){j=!0;if(d.allowResize)return I.show(),!0}function F(){j=!1,I.hide()}function K(a){a?(W=!0,F()):(W=!1,E())}function L(){K(!1),v()}var b,c=370,e={},f={},g={},j=!1;d.dragEdges&&a.isArray(d.createDragbars)&&o(d.createDragbars),a.isArray(d.createHandles)&&q(d.createHandles),d.drawBorders&&a.isArray(d.createBorders)&&p(d.createBorders),a(document).bind("touchstart.jcrop-ios",function(b){a(b.currentTarget).hasClass("jcrop-tracker")&&b.stopPropagation()});var M=x().mousedown(r("move")).css({cursor:"move",position:"absolute",zIndex:360});return Y.support&&M.bind("touchstart.jcrop",Y.createDragger("move")),H.append(M),F(),{updateVisible:w,update:y,release:B,refresh:v,isAwake:function(){return b},setCursor:function(a){M.css("cursor",a)},enableHandles:E,enableOnly:function(){j=!0},showHandles:D,disableHandles:F,animMode:K,setBgOpacity:z,done:L}}(),bb=function(){function f(){L.css({zIndex:450}),Y.support&&a(document).bind("touchmove.jcrop",k).bind("touchend.jcrop",m),e&&a(document
-).bind("mousemove.jcrop",h).bind("mouseup.jcrop",i)}function g(){L.css({zIndex:290}),a(document).unbind(".jcrop")}function h(a){return b(l(a)),!1}function i(a){return a.preventDefault(),a.stopPropagation(),V&&(V=!1,c(l(a)),ba.isAwake()&&d.onSelect.call(br,t(Z.getFixed())),g(),b=function(){},c=function(){}),!1}function j(a,d){return V=!0,b=a,c=d,f(),!1}function k(a){return a.pageX=a.originalEvent.changedTouches[0].pageX,a.pageY=a.originalEvent.changedTouches[0].pageY,h(a)}function m(a){return a.pageX=a.originalEvent.changedTouches[0].pageX,a.pageY=a.originalEvent.changedTouches[0].pageY,i(a)}function n(a){L.css("cursor",a)}var b=function(){},c=function(){},e=d.trackDocument;return e||L.mousemove(h).mouseup(i).mouseout(i),C.before(L),{activateHandlers:j,setCursor:n}}(),bc=function(){function e(){d.keySupport&&(b.show(),b.focus())}function f(a){b.hide()}function h(a,b,c){d.allowMove&&(Z.moveOffset([b,c]),ba.updateVisible(!0)),a.preventDefault(),a.stopPropagation()}function i(a){if(a.ctrlKey||a.metaKey)return!0;X=
-a.shiftKey?!0:!1;var b=X?10:1;switch(a.keyCode){case 37:h(a,-b,0);break;case 39:h(a,b,0);break;case 38:h(a,0,-b);break;case 40:h(a,0,b);break;case 27:d.allowSelect&&ba.release();break;case 9:return!0}return!1}var b=a('<input type="radio" />').css({position:"fixed",left:"-120px",width:"12px"}).addClass("jcrop-keymgr"),c=a("<div />").css({position:"absolute",overflow:"hidden"}).append(b);return d.keySupport&&(b.keydown(i).blur(f),g||!d.fixedSupport?(b.css({position:"absolute",left:"-20px"}),c.append(b).insertBefore(C)):b.insertBefore(C)),{watchKeys:e}}();Y.support&&L.bind("touchstart.jcrop",Y.newSelection),I.hide(),bq(!0);var br={setImage:bo,animateTo:be,setSelect:bf,setOptions:bj,tellSelect:bh,tellScaled:bi,setClass:bd,disable:bk,enable:bl,cancel:bm,release:ba.release,destroy:bn,focus:bc.watchKeys,getBounds:function(){return[D*S,E*T]},getWidgetSize:function(){return[D,E]},getScaleFactor:function(){return[S,T]},getOptions:function(){return d},ui:{holder:F,selection:J}};return a.browser.msie&&F.bind("selectstart"
-,function(){return!1}),z.data("Jcrop",br),br},a.fn.Jcrop=function(b,c){var d;return this.each(function(){if(a(this).data("Jcrop")){if(b==="api")return a(this).data("Jcrop");a(this).data("Jcrop").setOptions(b)}else this.tagName=="IMG"?a.Jcrop.Loader(this,function(){a(this).css({display:"block",visibility:"hidden"}),d=a.Jcrop(this,b),a.isFunction(c)&&c.call(d)}):(a(this).css({display:"block",visibility:"hidden"}),d=a.Jcrop(this,b),a.isFunction(c)&&c.call(d))}),this},a.Jcrop.Loader=function(b,c,d){function g(){f.complete?(e.unbind(".jcloader"),a.isFunction(c)&&c.call(f)):window.setTimeout(g,50)}var e=a(b),f=e[0];e.bind("load.jcloader",g).bind("error.jcloader",function(b){e.unbind(".jcloader"),a.isFunction(d)&&d.call(f)}),f.complete&&a.isFunction(c)&&(e.unbind(".jcloader"),c.call(f))},a.Jcrop.defaults={allowSelect:!0,allowMove:!0,allowResize:!0,trackDocument:!0,baseClass:"jcrop",addClass:null,bgColor:"black",bgOpacity:.6,bgFade:!1,borderOpacity:.4,handleOpacity:.5,handleSize:7,aspectRatio:0,keySupport:!0,createHandles
-:["n","s","e","w","nw","ne","se","sw"],createDragbars:["n","s","e","w"],createBorders:["n","s","e","w"],drawBorders:!0,dragEdges:!0,fixedSupport:!0,touchSupport:null,shade:null,boxWidth:0,boxHeight:0,boundary:2,fadeTime:400,animationDelay:20,swingSpeed:3,minSelect:[0,0],maxSize:[0,0],minSize:[0,0],onChange:function(){},onSelect:function(){},onDblClick:function(){},onRelease:function(){}}})(jQuery);
+
+(function ($) {
+
+  $.Jcrop = function (obj, opt) {
+    var options = $.extend({}, $.Jcrop.defaults),
+        docOffset, lastcurs, ie6mode = false;
+
+    // Internal Methods {{{
+    function px(n) {
+      return n + 'px';
+    }
+    function cssClass(cl) {
+      return options.baseClass + '-' + cl;
+    }
+    function supportsColorFade() {
+      return $.fx.step.hasOwnProperty('backgroundColor');
+    }
+    function getPos(obj) //{{{
+    {
+      var pos = $(obj).offset();
+      return [pos.left, pos.top];
+    }
+    //}}}
+    function mouseAbs(e) //{{{
+    {
+      return [(e.pageX - docOffset[0]), (e.pageY - docOffset[1])];
+    }
+    //}}}
+    function setOptions(opt) //{{{
+    {
+      if (typeof(opt) !== 'object') opt = {};
+      options = $.extend(options, opt);
+
+      $.each(['onChange','onSelect','onRelease','onDblClick'],function(i,e) {
+        if (typeof(options[e]) !== 'function') options[e] = function () {};
+      });
+    }
+    //}}}
+    function startDragMode(mode, pos) //{{{
+    {
+      docOffset = getPos($img);
+      Tracker.setCursor(mode === 'move' ? mode : mode + '-resize');
+
+      if (mode === 'move') {
+        return Tracker.activateHandlers(createMover(pos), doneSelect);
+      }
+
+      var fc = Coords.getFixed();
+      var opp = oppLockCorner(mode);
+      var opc = Coords.getCorner(oppLockCorner(opp));
+
+      Coords.setPressed(Coords.getCorner(opp));
+      Coords.setCurrent(opc);
+
+      Tracker.activateHandlers(dragmodeHandler(mode, fc), doneSelect);
+    }
+    //}}}
+    function dragmodeHandler(mode, f) //{{{
+    {
+      return function (pos) {
+        if (!options.aspectRatio) {
+          switch (mode) {
+          case 'e':
+            pos[1] = f.y2;
+            break;
+          case 'w':
+            pos[1] = f.y2;
+            break;
+          case 'n':
+            pos[0] = f.x2;
+            break;
+          case 's':
+            pos[0] = f.x2;
+            break;
+          }
+        } else {
+          switch (mode) {
+          case 'e':
+            pos[1] = f.y + 1;
+            break;
+          case 'w':
+            pos[1] = f.y + 1;
+            break;
+          case 'n':
+            pos[0] = f.x + 1;
+            break;
+          case 's':
+            pos[0] = f.x + 1;
+            break;
+          }
+        }
+        Coords.setCurrent(pos);
+        Selection.update();
+      };
+    }
+    //}}}
+    function createMover(pos) //{{{
+    {
+      var lloc = pos;
+      KeyManager.watchKeys();
+
+      return function (pos) {
+        Coords.moveOffset([pos[0] - lloc[0], pos[1] - lloc[1]]);
+        lloc = pos;
+
+        Selection.update();
+      };
+    }
+    //}}}
+    function oppLockCorner(ord) //{{{
+    {
+      switch (ord) {
+      case 'n':
+        return 'sw';
+      case 's':
+        return 'nw';
+      case 'e':
+        return 'nw';
+      case 'w':
+        return 'ne';
+      case 'ne':
+        return 'sw';
+      case 'nw':
+        return 'se';
+      case 'se':
+        return 'nw';
+      case 'sw':
+        return 'ne';
+      }
+    }
+    //}}}
+    function createDragger(ord) //{{{
+    {
+      return function (e) {
+        if (options.disabled) {
+          return false;
+        }
+        if ((ord === 'move') && !options.allowMove) {
+          return false;
+        }
+        
+        // Fix position of crop area when dragged the very first time.
+        // Necessary when crop image is in a hidden element when page is loaded.
+        docOffset = getPos($img);
+
+        btndown = true;
+        startDragMode(ord, mouseAbs(e));
+        e.stopPropagation();
+        e.preventDefault();
+        return false;
+      };
+    }
+    //}}}
+    function presize($obj, w, h) //{{{
+    {
+      var nw = $obj.width(),
+          nh = $obj.height();
+      if ((nw > w) && w > 0) {
+        nw = w;
+        nh = (w / $obj.width()) * $obj.height();
+      }
+      if ((nh > h) && h > 0) {
+        nh = h;
+        nw = (h / $obj.height()) * $obj.width();
+      }
+      xscale = $obj.width() / nw;
+      yscale = $obj.height() / nh;
+      $obj.width(nw).height(nh);
+    }
+    //}}}
+    function unscale(c) //{{{
+    {
+      return {
+        x: c.x * xscale,
+        y: c.y * yscale,
+        x2: c.x2 * xscale,
+        y2: c.y2 * yscale,
+        w: c.w * xscale,
+        h: c.h * yscale
+      };
+    }
+    //}}}
+    function doneSelect(pos) //{{{
+    {
+      var c = Coords.getFixed();
+      if ((c.w > options.minSelect[0]) && (c.h > options.minSelect[1])) {
+        Selection.enableHandles();
+        Selection.done();
+      } else {
+        Selection.release();
+      }
+      Tracker.setCursor(options.allowSelect ? 'crosshair' : 'default');
+    }
+    //}}}
+    function newSelection(e) //{{{
+    {
+      if (options.disabled) {
+        return false;
+      }
+      if (!options.allowSelect) {
+        return false;
+      }
+      btndown = true;
+      docOffset = getPos($img);
+      Selection.disableHandles();
+      Tracker.setCursor('crosshair');
+      var pos = mouseAbs(e);
+      Coords.setPressed(pos);
+      Selection.update();
+      Tracker.activateHandlers(selectDrag, doneSelect);
+      KeyManager.watchKeys();
+
+      e.stopPropagation();
+      e.preventDefault();
+      return false;
+    }
+    //}}}
+    function selectDrag(pos) //{{{
+    {
+      Coords.setCurrent(pos);
+      Selection.update();
+    }
+    //}}}
+    function newTracker() //{{{
+    {
+      var trk = $('<div></div>').addClass(cssClass('tracker'));
+      if ($.browser.msie) {
+        trk.css({
+          opacity: 0,
+          backgroundColor: 'white'
+        });
+      }
+      return trk;
+    }
+    //}}}
+
+    // }}}
+    // Initialization {{{
+    // Sanitize some options {{{
+    if ($.browser.msie && ($.browser.version.split('.')[0] === '6')) {
+      ie6mode = true;
+    }
+    if (typeof(obj) !== 'object') {
+      obj = $(obj)[0];
+    }
+    if (typeof(opt) !== 'object') {
+      opt = {};
+    }
+    // }}}
+    setOptions(opt);
+    // Initialize some jQuery objects {{{
+    // The values are SET on the image(s) for the interface
+    // If the original image has any of these set, they will be reset
+    // However, if you destroy() the Jcrop instance the original image's
+    // character in the DOM will be as you left it.
+    var img_css = {
+      border: 'none',
+      visibility: 'visible',
+      margin: 0,
+      padding: 0,
+      position: 'absolute',
+      top: 0,
+      left: 0
+    };
+
+    var $origimg = $(obj),
+      img_mode = true;
+
+    if (obj.tagName == 'IMG') {
+      // Fix size of crop image.
+      // Necessary when crop image is within a hidden element when page is loaded.
+      if ($origimg[0].width != 0 && $origimg[0].height != 0) {
+        // Obtain dimensions from contained img element.
+        $origimg.width($origimg[0].width);
+        $origimg.height($origimg[0].height);
+      } else {
+        // Obtain dimensions from temporary image in case the original is not loaded yet (e.g. IE 7.0). 
+        var tempImage = new Image();
+        tempImage.src = $origimg[0].src;
+        $origimg.width(tempImage.width);
+        $origimg.height(tempImage.height);
+      } 
+
+      var $img = $origimg.clone().removeAttr('id').css(img_css).show();
+
+      $img.width($origimg.width());
+      $img.height($origimg.height());
+      $origimg.after($img).hide();
+
+    } else {
+      $img = $origimg.css(img_css).show();
+      img_mode = false;
+      if (options.shade === null) { options.shade = true; }
+    }
+
+    presize($img, options.boxWidth, options.boxHeight);
+
+    var boundx = $img.width(),
+        boundy = $img.height(),
+        
+        
+        $div = $('<div />').width(boundx).height(boundy).addClass(cssClass('holder')).css({
+        position: 'relative',
+        backgroundColor: options.bgColor
+      }).insertAfter($origimg).append($img);
+
+    if (options.addClass) {
+      $div.addClass(options.addClass);
+    }
+
+    var $img2 = $('<div />'),
+
+        $img_holder = $('<div />') 
+        .width('100%').height('100%').css({
+          zIndex: 310,
+          position: 'absolute',
+          overflow: 'hidden'
+        }),
+
+        $hdl_holder = $('<div />') 
+        .width('100%').height('100%').css('zIndex', 320), 
+
+        $sel = $('<div />') 
+        .css({
+          position: 'absolute',
+          zIndex: 600
+        }).dblclick(function(){
+          var c = Coords.getFixed();
+          options.onDblClick.call(api,c);
+        }).insertBefore($img).append($img_holder, $hdl_holder); 
+
+    if (img_mode) {
+
+      $img2 = $('<img />')
+          .attr('src', $img.attr('src')).css(img_css).width(boundx).height(boundy),
+
+      $img_holder.append($img2);
+
+    }
+
+    if (ie6mode) {
+      $sel.css({
+        overflowY: 'hidden'
+      });
+    }
+
+    var bound = options.boundary;
+    var $trk = newTracker().width(boundx + (bound * 2)).height(boundy + (bound * 2)).css({
+      position: 'absolute',
+      top: px(-bound),
+      left: px(-bound),
+      zIndex: 290
+    }).mousedown(newSelection);
+
+    /* }}} */
+    // Set more variables {{{
+    var bgcolor = options.bgColor,
+        bgopacity = options.bgOpacity,
+        xlimit, ylimit, xmin, ymin, xscale, yscale, enabled = true,
+        btndown, animating, shift_down;
+
+    docOffset = getPos($img);
+    // }}}
+    // }}}
+    // Internal Modules {{{
+    // Touch Module {{{ 
+    var Touch = (function () {
+      // Touch support detection function adapted (under MIT License)
+      // from code by Jeffrey Sambells - http://github.com/iamamused/
+      function hasTouchSupport() {
+        var support = {},
+            events = ['touchstart', 'touchmove', 'touchend'],
+            el = document.createElement('div'), i;
+
+        try {
+          for(i=0; i<events.length; i++) {
+            var eventName = events[i];
+            eventName = 'on' + eventName;
+            var isSupported = (eventName in el);
+            if (!isSupported) {
+              el.setAttribute(eventName, 'return;');
+              isSupported = typeof el[eventName] == 'function';
+            }
+            support[events[i]] = isSupported;
+          }
+          return support.touchstart && support.touchend && support.touchmove;
+        }
+        catch(err) {
+          return false;
+        }
+      }
+
+      function detectSupport() {
+        if ((options.touchSupport === true) || (options.touchSupport === false)) return options.touchSupport;
+          else return hasTouchSupport();
+      }
+      return {
+        createDragger: function (ord) {
+          return function (e) {
+            e.pageX = e.originalEvent.changedTouches[0].pageX;
+            e.pageY = e.originalEvent.changedTouches[0].pageY;
+            if (options.disabled) {
+              return false;
+            }
+            if ((ord === 'move') && !options.allowMove) {
+              return false;
+            }
+            btndown = true;
+            startDragMode(ord, mouseAbs(e));
+            e.stopPropagation();
+            e.preventDefault();
+            return false;
+          };
+        },
+        newSelection: function (e) {
+          e.pageX = e.originalEvent.changedTouches[0].pageX;
+          e.pageY = e.originalEvent.changedTouches[0].pageY;
+          return newSelection(e);
+        },
+        isSupported: hasTouchSupport,
+        support: detectSupport()
+      };
+    }());
+    // }}}
+    // Coords Module {{{
+    var Coords = (function () {
+      var x1 = 0,
+          y1 = 0,
+          x2 = 0,
+          y2 = 0,
+          ox, oy;
+
+      function setPressed(pos) //{{{
+      {
+        pos = rebound(pos);
+        x2 = x1 = pos[0];
+        y2 = y1 = pos[1];
+      }
+      //}}}
+      function setCurrent(pos) //{{{
+      {
+        pos = rebound(pos);
+        ox = pos[0] - x2;
+        oy = pos[1] - y2;
+        x2 = pos[0];
+        y2 = pos[1];
+      }
+      //}}}
+      function getOffset() //{{{
+      {
+        return [ox, oy];
+      }
+      //}}}
+      function moveOffset(offset) //{{{
+      {
+        var ox = offset[0],
+            oy = offset[1];
+
+        if (0 > x1 + ox) {
+          ox -= ox + x1;
+        }
+        if (0 > y1 + oy) {
+          oy -= oy + y1;
+        }
+
+        if (boundy < y2 + oy) {
+          oy += boundy - (y2 + oy);
+        }
+        if (boundx < x2 + ox) {
+          ox += boundx - (x2 + ox);
+        }
+
+        x1 += ox;
+        x2 += ox;
+        y1 += oy;
+        y2 += oy;
+      }
+      //}}}
+      function getCorner(ord) //{{{
+      {
+        var c = getFixed();
+        switch (ord) {
+        case 'ne':
+          return [c.x2, c.y];
+        case 'nw':
+          return [c.x, c.y];
+        case 'se':
+          return [c.x2, c.y2];
+        case 'sw':
+          return [c.x, c.y2];
+        }
+      }
+      //}}}
+      function getFixed() //{{{
+      {
+        if (!options.aspectRatio) {
+          return getRect();
+        }
+        // This function could use some optimization I think...
+        var aspect = options.aspectRatio,
+            min_x = options.minSize[0] / xscale,
+            
+            
+            //min_y = options.minSize[1]/yscale,
+            max_x = options.maxSize[0] / xscale,
+            max_y = options.maxSize[1] / yscale,
+            rw = x2 - x1,
+            rh = y2 - y1,
+            rwa = Math.abs(rw),
+            rha = Math.abs(rh),
+            real_ratio = rwa / rha,
+            xx, yy, w, h;
+
+        if (max_x === 0) {
+          max_x = boundx * 10;
+        }
+        if (max_y === 0) {
+          max_y = boundy * 10;
+        }
+        if (real_ratio < aspect) {
+          yy = y2;
+          w = rha * aspect;
+          xx = rw < 0 ? x1 - w : w + x1;
+
+          if (xx < 0) {
+            xx = 0;
+            h = Math.abs((xx - x1) / aspect);
+            yy = rh < 0 ? y1 - h : h + y1;
+          } else if (xx > boundx) {
+            xx = boundx;
+            h = Math.abs((xx - x1) / aspect);
+            yy = rh < 0 ? y1 - h : h + y1;
+          }
+        } else {
+          xx = x2;
+          h = rwa / aspect;
+          yy = rh < 0 ? y1 - h : y1 + h;
+          if (yy < 0) {
+            yy = 0;
+            w = Math.abs((yy - y1) * aspect);
+            xx = rw < 0 ? x1 - w : w + x1;
+          } else if (yy > boundy) {
+            yy = boundy;
+            w = Math.abs(yy - y1) * aspect;
+            xx = rw < 0 ? x1 - w : w + x1;
+          }
+        }
+
+        // Magic %-)
+        if (xx > x1) { // right side
+          if (xx - x1 < min_x) {
+            xx = x1 + min_x;
+          } else if (xx - x1 > max_x) {
+            xx = x1 + max_x;
+          }
+          if (yy > y1) {
+            yy = y1 + (xx - x1) / aspect;
+          } else {
+            yy = y1 - (xx - x1) / aspect;
+          }
+        } else if (xx < x1) { // left side
+          if (x1 - xx < min_x) {
+            xx = x1 - min_x;
+          } else if (x1 - xx > max_x) {
+            xx = x1 - max_x;
+          }
+          if (yy > y1) {
+            yy = y1 + (x1 - xx) / aspect;
+          } else {
+            yy = y1 - (x1 - xx) / aspect;
+          }
+        }
+
+        if (xx < 0) {
+          x1 -= xx;
+          xx = 0;
+        } else if (xx > boundx) {
+          x1 -= xx - boundx;
+          xx = boundx;
+        }
+
+        if (yy < 0) {
+          y1 -= yy;
+          yy = 0;
+        } else if (yy > boundy) {
+          y1 -= yy - boundy;
+          yy = boundy;
+        }
+
+        return makeObj(flipCoords(x1, y1, xx, yy));
+      }
+      //}}}
+      function rebound(p) //{{{
+      {
+        if (p[0] < 0) {
+          p[0] = 0;
+        }
+        if (p[1] < 0) {
+          p[1] = 0;
+        }
+
+        if (p[0] > boundx) {
+          p[0] = boundx;
+        }
+        if (p[1] > boundy) {
+          p[1] = boundy;
+        }
+
+        return [p[0], p[1]];
+      }
+      //}}}
+      function flipCoords(x1, y1, x2, y2) //{{{
+      {
+        var xa = x1,
+            xb = x2,
+            ya = y1,
+            yb = y2;
+        if (x2 < x1) {
+          xa = x2;
+          xb = x1;
+        }
+        if (y2 < y1) {
+          ya = y2;
+          yb = y1;
+        }
+        return [xa, ya, xb, yb];
+      }
+      //}}}
+      function getRect() //{{{
+      {
+        var xsize = x2 - x1,
+            ysize = y2 - y1,
+            delta;
+
+        if (xlimit && (Math.abs(xsize) > xlimit)) {
+          x2 = (xsize > 0) ? (x1 + xlimit) : (x1 - xlimit);
+        }
+        if (ylimit && (Math.abs(ysize) > ylimit)) {
+          y2 = (ysize > 0) ? (y1 + ylimit) : (y1 - ylimit);
+        }
+
+        if (ymin / yscale && (Math.abs(ysize) < ymin / yscale)) {
+          y2 = (ysize > 0) ? (y1 + ymin / yscale) : (y1 - ymin / yscale);
+        }
+        if (xmin / xscale && (Math.abs(xsize) < xmin / xscale)) {
+          x2 = (xsize > 0) ? (x1 + xmin / xscale) : (x1 - xmin / xscale);
+        }
+
+        if (x1 < 0) {
+          x2 -= x1;
+          x1 -= x1;
+        }
+        if (y1 < 0) {
+          y2 -= y1;
+          y1 -= y1;
+        }
+        if (x2 < 0) {
+          x1 -= x2;
+          x2 -= x2;
+        }
+        if (y2 < 0) {
+          y1 -= y2;
+          y2 -= y2;
+        }
+        if (x2 > boundx) {
+          delta = x2 - boundx;
+          x1 -= delta;
+          x2 -= delta;
+        }
+        if (y2 > boundy) {
+          delta = y2 - boundy;
+          y1 -= delta;
+          y2 -= delta;
+        }
+        if (x1 > boundx) {
+          delta = x1 - boundy;
+          y2 -= delta;
+          y1 -= delta;
+        }
+        if (y1 > boundy) {
+          delta = y1 - boundy;
+          y2 -= delta;
+          y1 -= delta;
+        }
+
+        return makeObj(flipCoords(x1, y1, x2, y2));
+      }
+      //}}}
+      function makeObj(a) //{{{
+      {
+        return {
+          x: a[0],
+          y: a[1],
+          x2: a[2],
+          y2: a[3],
+          w: a[2] - a[0],
+          h: a[3] - a[1]
+        };
+      }
+      //}}}
+
+      return {
+        flipCoords: flipCoords,
+        setPressed: setPressed,
+        setCurrent: setCurrent,
+        getOffset: getOffset,
+        moveOffset: moveOffset,
+        getCorner: getCorner,
+        getFixed: getFixed
+      };
+    }());
+
+    //}}}
+    // Shade Module {{{
+    var Shade = (function() {
+      var enabled = false,
+          holder = $('<div />').css({
+            position: 'absolute',
+            zIndex: 240,
+            opacity: 0
+          }),
+          shades = {
+            top: createShade(),
+            left: createShade().height(boundy),
+            right: createShade().height(boundy),
+            bottom: createShade()
+          };
+
+      function resizeShades(w,h) {
+        shades.left.css({ height: px(h) });
+        shades.right.css({ height: px(h) });
+      }
+      function updateAuto()
+      {
+        return updateShade(Coords.getFixed());
+      }
+      function updateShade(c)
+      {
+        shades.top.css({
+          left: px(c.x),
+          width: px(c.w),
+          height: px(c.y)
+        });
+        shades.bottom.css({
+          top: px(c.y2),
+          left: px(c.x),
+          width: px(c.w),
+          height: px(boundy-c.y2)
+        });
+        shades.right.css({
+          left: px(c.x2),
+          width: px(boundx-c.x2)
+        });
+        shades.left.css({
+          width: px(c.x)
+        });
+      }
+      function createShade() {
+        return $('<div />').css({
+          position: 'absolute',
+          backgroundColor: options.shadeColor||options.bgColor
+        }).appendTo(holder);
+      }
+      function enableShade() {
+        if (!enabled) {
+          enabled = true;
+          holder.insertBefore($img);
+          updateAuto();
+          Selection.setBgOpacity(1,0,1);
+          $img2.hide();
+
+          setBgColor(options.shadeColor||options.bgColor,1);
+          if (Selection.isAwake())
+          {
+            setOpacity(options.bgOpacity,1);
+          }
+            else setOpacity(1,1);
+        }
+      }
+      function setBgColor(color,now) {
+        colorChangeMacro(getShades(),color,now);
+      }
+      function disableShade() {
+        if (enabled) {
+          holder.remove();
+          $img2.show();
+          enabled = false;
+          if (Selection.isAwake()) {
+            Selection.setBgOpacity(options.bgOpacity,1,1);
+          } else {
+            Selection.setBgOpacity(1,1,1);
+            Selection.disableHandles();
+          }
+          colorChangeMacro($div,0,1);
+        }
+      }
+      function setOpacity(opacity,now) {
+        if (enabled) {
+          if (options.bgFade && !now) {
+            holder.animate({
+              opacity: 1-opacity
+            },{
+              queue: false,
+              duration: options.fadeTime
+            });
+          }
+          else holder.css({opacity:1-opacity});
+        }
+      }
+      function refreshAll() {
+        options.shade ? enableShade() : disableShade();
+        if (Selection.isAwake()) setOpacity(options.bgOpacity);
+      }
+      function getShades() {
+        return holder.children();
+      }
+
+      return {
+        update: updateAuto,
+        updateRaw: updateShade,
+        getShades: getShades,
+        setBgColor: setBgColor,
+        enable: enableShade,
+        disable: disableShade,
+        resize: resizeShades,
+        refresh: refreshAll,
+        opacity: setOpacity
+      };
+    }());
+    // }}}
+    // Selection Module {{{
+    var Selection = (function () {
+      var awake,
+          hdep = 370,
+          borders = {},
+          handle = {},
+          dragbar = {},
+          seehandles = false;
+
+      // Private Methods
+      function insertBorder(type) //{{{
+      {
+        var jq = $('<div />').css({
+          position: 'absolute',
+          opacity: options.borderOpacity
+        }).addClass(cssClass(type));
+        $img_holder.append(jq);
+        return jq;
+      }
+      //}}}
+      function dragDiv(ord, zi) //{{{
+      {
+        var jq = $('<div />').mousedown(createDragger(ord)).css({
+          cursor: ord + '-resize',
+          position: 'absolute',
+          zIndex: zi
+        }).addClass('ord-'+ord);
+
+        if (Touch.support) {
+          jq.bind('touchstart.jcrop', Touch.createDragger(ord));
+        }
+
+        $hdl_holder.append(jq);
+        return jq;
+      }
+      //}}}
+      function insertHandle(ord) //{{{
+      {
+        var hs = options.handleSize;
+        return dragDiv(ord, hdep++).css({
+          opacity: options.handleOpacity
+        }).width(hs).height(hs).addClass(cssClass('handle'));
+      }
+      //}}}
+      function insertDragbar(ord) //{{{
+      {
+        return dragDiv(ord, hdep++).addClass('jcrop-dragbar');
+      }
+      //}}}
+      function createDragbars(li) //{{{
+      {
+        var i;
+        for (i = 0; i < li.length; i++) {
+          dragbar[li[i]] = insertDragbar(li[i]);
+        }
+      }
+      //}}}
+      function createBorders(li) //{{{
+      {
+        var cl,i;
+        for (i = 0; i < li.length; i++) {
+          switch(li[i]){
+            case'n': cl='hline'; break;
+            case's': cl='hline bottom'; break;
+            case'e': cl='vline right'; break;
+            case'w': cl='vline'; break;
+          }
+          borders[li[i]] = insertBorder(cl);
+        }
+      }
+      //}}}
+      function createHandles(li) //{{{
+      {
+        var i;
+        for (i = 0; i < li.length; i++) {
+          handle[li[i]] = insertHandle(li[i]);
+        }
+      }
+      //}}}
+      function moveto(x, y) //{{{
+      {
+        if (!options.shade) {
+          $img2.css({
+            top: px(-y),
+            left: px(-x)
+          });
+        }
+        $sel.css({
+          top: px(y),
+          left: px(x)
+        });
+      }
+      //}}}
+      function resize(w, h) //{{{
+      {
+        $sel.width(w).height(h);
+      }
+      //}}}
+      function refresh() //{{{
+      {
+        var c = Coords.getFixed();
+
+        Coords.setPressed([c.x, c.y]);
+        Coords.setCurrent([c.x2, c.y2]);
+
+        updateVisible();
+      }
+      //}}}
+
+      // Internal Methods
+      function updateVisible(select) //{{{
+      {
+        if (awake) {
+          return update(select);
+        }
+      }
+      //}}}
+      function update(select) //{{{
+      {
+        var c = Coords.getFixed();
+
+        resize(c.w, c.h);
+        moveto(c.x, c.y);
+        if (options.shade) Shade.updateRaw(c);
+
+        awake || show();
+
+        if (select) {
+          options.onSelect.call(api, unscale(c));
+        } else {
+          options.onChange.call(api, unscale(c));
+        }
+      }
+      //}}}
+      function setBgOpacity(opacity,force,now) //{{{
+      {
+        if (!awake && !force) return;
+        if (options.bgFade && !now) {
+          $img.animate({
+            opacity: opacity
+          },{
+            queue: false,
+            duration: options.fadeTime
+          });
+        } else {
+          $img.css('opacity', opacity);
+        }
+      }
+      //}}}
+      function show() //{{{
+      {
+        $sel.show();
+
+        if (options.shade) Shade.opacity(bgopacity);
+          else setBgOpacity(bgopacity,true);
+
+        awake = true;
+      }
+      //}}}
+      function release() //{{{
+      {
+        disableHandles();
+        $sel.hide();
+
+        if (options.shade) Shade.opacity(1);
+          else setBgOpacity(1);
+
+        awake = false;
+        options.onRelease.call(api);
+      }
+      //}}}
+      function showHandles() //{{{
+      {
+        if (seehandles) {
+          $hdl_holder.show();
+        }
+      }
+      //}}}
+      function enableHandles() //{{{
+      {
+        seehandles = true;
+        if (options.allowResize) {
+          $hdl_holder.show();
+          return true;
+        }
+      }
+      //}}}
+      function disableHandles() //{{{
+      {
+        seehandles = false;
+        $hdl_holder.hide();
+      } 
+      //}}}
+      function animMode(v) //{{{
+      {
+        if (animating === v) {
+          disableHandles();
+        } else {
+          enableHandles();
+        }
+      } 
+      //}}}
+      function done() //{{{
+      {
+        animMode(false);
+        refresh();
+      } 
+      //}}}
+      // Insert draggable elements {{{
+      // Insert border divs for outline
+
+      if (options.dragEdges && $.isArray(options.createDragbars))
+        createDragbars(options.createDragbars);
+
+      if ($.isArray(options.createHandles))
+        createHandles(options.createHandles);
+
+      if (options.drawBorders && $.isArray(options.createBorders))
+        createBorders(options.createBorders);
+
+      //}}}
+
+      // This is a hack for iOS5 to support drag/move touch functionality
+      $(document).bind('touchstart.jcrop-ios',function(e) {
+        if ($(e.currentTarget).hasClass('jcrop-tracker')) e.stopPropagation();
+      });
+
+      var $track = newTracker().mousedown(createDragger('move')).css({
+        cursor: 'move',
+        position: 'absolute',
+        zIndex: 360
+      });
+
+      if (Touch.support) {
+        $track.bind('touchstart.jcrop', Touch.createDragger('move'));
+      }
+
+      $img_holder.append($track);
+      disableHandles();
+
+      return {
+        updateVisible: updateVisible,
+        update: update,
+        release: release,
+        refresh: refresh,
+        isAwake: function () {
+          return awake;
+        },
+        setCursor: function (cursor) {
+          $track.css('cursor', cursor);
+        },
+        enableHandles: enableHandles,
+        enableOnly: function () {
+          seehandles = true;
+        },
+        showHandles: showHandles,
+        disableHandles: disableHandles,
+        animMode: animMode,
+        setBgOpacity: setBgOpacity,
+        done: done
+      };
+    }());
+    
+    //}}}
+    // Tracker Module {{{
+    var Tracker = (function () {
+      var onMove = function () {},
+          onDone = function () {},
+          trackDoc = options.trackDocument;
+
+      function toFront() //{{{
+      {
+        $trk.css({
+          zIndex: 450
+        });
+        if (Touch.support) {
+          $(document)
+            .bind('touchmove.jcrop', trackTouchMove)
+            .bind('touchend.jcrop', trackTouchEnd);
+        }
+        if (trackDoc) {
+          $(document)
+            .bind('mousemove.jcrop',trackMove)
+            .bind('mouseup.jcrop',trackUp);
+        }
+      } 
+      //}}}
+      function toBack() //{{{
+      {
+        $trk.css({
+          zIndex: 290
+        });
+        $(document).unbind('.jcrop');
+      } 
+      //}}}
+      function trackMove(e) //{{{
+      {
+        onMove(mouseAbs(e));
+        return false;
+      } 
+      //}}}
+      function trackUp(e) //{{{
+      {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (btndown) {
+          btndown = false;
+
+          onDone(mouseAbs(e));
+
+          if (Selection.isAwake()) {
+            options.onSelect.call(api, unscale(Coords.getFixed()));
+          }
+
+          toBack();
+          onMove = function () {};
+          onDone = function () {};
+        }
+
+        return false;
+      }
+      //}}}
+      function activateHandlers(move, done) //{{{
+      {
+        btndown = true;
+        onMove = move;
+        onDone = done;
+        toFront();
+        return false;
+      }
+      //}}}
+      function trackTouchMove(e) //{{{
+      {
+        e.pageX = e.originalEvent.changedTouches[0].pageX;
+        e.pageY = e.originalEvent.changedTouches[0].pageY;
+        return trackMove(e);
+      }
+      //}}}
+      function trackTouchEnd(e) //{{{
+      {
+        e.pageX = e.originalEvent.changedTouches[0].pageX;
+        e.pageY = e.originalEvent.changedTouches[0].pageY;
+        return trackUp(e);
+      }
+      //}}}
+      function setCursor(t) //{{{
+      {
+        $trk.css('cursor', t);
+      }
+      //}}}
+
+      if (!trackDoc) {
+        $trk.mousemove(trackMove).mouseup(trackUp).mouseout(trackUp);
+      }
+
+      $img.before($trk);
+      return {
+        activateHandlers: activateHandlers,
+        setCursor: setCursor
+      };
+    }());
+    //}}}
+    // KeyManager Module {{{
+    var KeyManager = (function () {
+      var $keymgr = $('<input type="radio" />').css({
+        position: 'fixed',
+        left: '-120px',
+        width: '12px'
+      }),
+          $keywrap = $('<div />').css({
+          position: 'absolute',
+          overflow: 'hidden'
+        }).append($keymgr);
+
+      function watchKeys() //{{{
+      {
+        if (options.keySupport) {
+          $keymgr.show();
+          $keymgr.focus();
+        }
+      }
+      //}}}
+      function onBlur(e) //{{{
+      {
+        $keymgr.hide();
+      }
+      //}}}
+      function doNudge(e, x, y) //{{{
+      {
+        if (options.allowMove) {
+          Coords.moveOffset([x, y]);
+          Selection.updateVisible(true);
+        }
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      //}}}
+      function parseKey(e) //{{{
+      {
+        if (e.ctrlKey || e.metaKey) {
+          return true;
+        }
+        shift_down = e.shiftKey ? true : false;
+        var nudge = shift_down ? 10 : 1;
+
+        switch (e.keyCode) {
+        case 37:
+          doNudge(e, -nudge, 0);
+          break;
+        case 39:
+          doNudge(e, nudge, 0);
+          break;
+        case 38:
+          doNudge(e, 0, -nudge);
+          break;
+        case 40:
+          doNudge(e, 0, nudge);
+          break;
+        case 27:
+          if (options.allowSelect) Selection.release();
+          break;
+        case 9:
+          return true;
+        }
+
+        return false;
+      }
+      //}}}
+
+      if (options.keySupport) {
+        $keymgr.keydown(parseKey).blur(onBlur);
+        if (ie6mode || !options.fixedSupport) {
+          $keymgr.css({
+            position: 'absolute',
+            left: '-20px'
+          });
+          $keywrap.append($keymgr).insertBefore($img);
+        } else {
+          $keymgr.insertBefore($img);
+        }
+      }
+
+
+      return {
+        watchKeys: watchKeys
+      };
+    }());
+    //}}}
+    // }}}
+    // API methods {{{
+    function setClass(cname) //{{{
+    {
+      $div.removeClass().addClass(cssClass('holder')).addClass(cname);
+    }
+    //}}}
+    function animateTo(a, callback) //{{{
+    {
+      var x1 = a[0] / xscale,
+          y1 = a[1] / yscale,
+          x2 = a[2] / xscale,
+          y2 = a[3] / yscale;
+
+      if (animating) {
+        return;
+      }
+
+      var animto = Coords.flipCoords(x1, y1, x2, y2),
+          c = Coords.getFixed(),
+          initcr = [c.x, c.y, c.x2, c.y2],
+          animat = initcr,
+          interv = options.animationDelay,
+          ix1 = animto[0] - initcr[0],
+          iy1 = animto[1] - initcr[1],
+          ix2 = animto[2] - initcr[2],
+          iy2 = animto[3] - initcr[3],
+          pcent = 0,
+          velocity = options.swingSpeed;
+
+      x = animat[0];
+      y = animat[1];
+      x2 = animat[2];
+      y2 = animat[3];
+
+      Selection.animMode(true);
+      var anim_timer;
+
+      function queueAnimator() {
+        window.setTimeout(animator, interv);
+      }
+      var animator = (function () {
+        return function () {
+          pcent += (100 - pcent) / velocity;
+
+          animat[0] = x + ((pcent / 100) * ix1);
+          animat[1] = y + ((pcent / 100) * iy1);
+          animat[2] = x2 + ((pcent / 100) * ix2);
+          animat[3] = y2 + ((pcent / 100) * iy2);
+
+          if (pcent >= 99.8) {
+            pcent = 100;
+          }
+          if (pcent < 100) {
+            setSelectRaw(animat);
+            queueAnimator();
+          } else {
+            Selection.done();
+            if (typeof(callback) === 'function') {
+              callback.call(api);
+            }
+          }
+        };
+      }());
+      queueAnimator();
+    }
+    //}}}
+    function setSelect(rect) //{{{
+    {
+      setSelectRaw([rect[0] / xscale, rect[1] / yscale, rect[2] / xscale, rect[3] / yscale]);
+      options.onSelect.call(api, unscale(Coords.getFixed()));
+      Selection.enableHandles();
+    }
+    //}}}
+    function setSelectRaw(l) //{{{
+    {
+      Coords.setPressed([l[0], l[1]]);
+      Coords.setCurrent([l[2], l[3]]);
+      Selection.update();
+    }
+    //}}}
+    function tellSelect() //{{{
+    {
+      return unscale(Coords.getFixed());
+    }
+    //}}}
+    function tellScaled() //{{{
+    {
+      return Coords.getFixed();
+    }
+    //}}}
+    function setOptionsNew(opt) //{{{
+    {
+      setOptions(opt);
+      interfaceUpdate();
+    }
+    //}}}
+    function disableCrop() //{{{
+    {
+      options.disabled = true;
+      Selection.disableHandles();
+      Selection.setCursor('default');
+      Tracker.setCursor('default');
+    }
+    //}}}
+    function enableCrop() //{{{
+    {
+      options.disabled = false;
+      interfaceUpdate();
+    }
+    //}}}
+    function cancelCrop() //{{{
+    {
+      Selection.done();
+      Tracker.activateHandlers(null, null);
+    }
+    //}}}
+    function destroy() //{{{
+    {
+      $div.remove();
+      $origimg.show();
+      $(obj).removeData('Jcrop');
+    }
+    //}}}
+    function setImage(src, callback) //{{{
+    {
+      Selection.release();
+      disableCrop();
+      var img = new Image();
+      img.onload = function () {
+        var iw = img.width;
+        var ih = img.height;
+        var bw = options.boxWidth;
+        var bh = options.boxHeight;
+        $img.width(iw).height(ih);
+        $img.attr('src', src);
+        $img2.attr('src', src);
+        presize($img, bw, bh);
+        boundx = $img.width();
+        boundy = $img.height();
+        $img2.width(boundx).height(boundy);
+        $trk.width(boundx + (bound * 2)).height(boundy + (bound * 2));
+        $div.width(boundx).height(boundy);
+        Shade.resize(boundx,boundy);
+        enableCrop();
+
+        if (typeof(callback) === 'function') {
+          callback.call(api);
+        }
+      };
+      img.src = src;
+    }
+    //}}}
+    function colorChangeMacro($obj,color,now) {
+      var mycolor = color || options.bgColor;
+      if (options.bgFade && supportsColorFade() && options.fadeTime && !now) {
+        $obj.animate({
+          backgroundColor: mycolor
+        }, {
+          queue: false,
+          duration: options.fadeTime
+        });
+      } else {
+        $obj.css('backgroundColor', mycolor);
+      }
+    }
+    function interfaceUpdate(alt) //{{{
+    // This method tweaks the interface based on options object.
+    // Called when options are changed and at end of initialization.
+    {
+      if (options.allowResize) {
+        if (alt) {
+          Selection.enableOnly();
+        } else {
+          Selection.enableHandles();
+        }
+      } else {
+        Selection.disableHandles();
+      }
+
+      Tracker.setCursor(options.allowSelect ? 'crosshair' : 'default');
+      Selection.setCursor(options.allowMove ? 'move' : 'default');
+
+      if (options.hasOwnProperty('trueSize')) {
+        xscale = options.trueSize[0] / boundx;
+        yscale = options.trueSize[1] / boundy;
+      }
+
+      if (options.hasOwnProperty('setSelect')) {
+        setSelect(options.setSelect);
+        Selection.done();
+        delete(options.setSelect);
+      }
+
+      Shade.refresh();
+
+      if (options.bgColor != bgcolor) {
+        colorChangeMacro(
+          options.shade? Shade.getShades(): $div,
+          options.shade?
+            (options.shadeColor || options.bgColor):
+            options.bgColor
+        );
+        bgcolor = options.bgColor;
+      }
+
+      if (bgopacity != options.bgOpacity) {
+        bgopacity = options.bgOpacity;
+        if (options.shade) Shade.refresh();
+          else Selection.setBgOpacity(bgopacity);
+      }
+
+      xlimit = options.maxSize[0] || 0;
+      ylimit = options.maxSize[1] || 0;
+      xmin = options.minSize[0] || 0;
+      ymin = options.minSize[1] || 0;
+
+      if (options.hasOwnProperty('outerImage')) {
+        $img.attr('src', options.outerImage);
+        delete(options.outerImage);
+      }
+
+      Selection.refresh();
+    }
+    //}}}
+    //}}}
+
+    if (Touch.support) $trk.bind('touchstart.jcrop', Touch.newSelection);
+
+    $hdl_holder.hide();
+    interfaceUpdate(true);
+
+    var api = {
+      setImage: setImage,
+      animateTo: animateTo,
+      setSelect: setSelect,
+      setOptions: setOptionsNew,
+      tellSelect: tellSelect,
+      tellScaled: tellScaled,
+      setClass: setClass,
+
+      disable: disableCrop,
+      enable: enableCrop,
+      cancel: cancelCrop,
+      release: Selection.release,
+      destroy: destroy,
+
+      focus: KeyManager.watchKeys,
+
+      getBounds: function () {
+        return [boundx * xscale, boundy * yscale];
+      },
+      getWidgetSize: function () {
+        return [boundx, boundy];
+      },
+      getScaleFactor: function () {
+        return [xscale, yscale];
+      },
+      getOptions: function() {
+        // careful: internal values are returned
+        return options;
+      },
+
+      ui: {
+        holder: $div,
+        selection: $sel
+      }
+    };
+
+    if ($.browser.msie)
+      $div.bind('selectstart', function () { return false; });
+
+    $origimg.data('Jcrop', api);
+    return api;
+  };
+  $.fn.Jcrop = function (options, callback) //{{{
+  {
+    var api;
+    // Iterate over each object, attach Jcrop
+    this.each(function () {
+      // If we've already attached to this object
+      if ($(this).data('Jcrop')) {
+        // The API can be requested this way (undocumented)
+        if (options === 'api') return $(this).data('Jcrop');
+        // Otherwise, we just reset the options...
+        else $(this).data('Jcrop').setOptions(options);
+      }
+      // If we haven't been attached, preload and attach
+      else {
+        if (this.tagName == 'IMG')
+          $.Jcrop.Loader(this,function(){
+            $(this).css({display:'block',visibility:'hidden'});
+            api = $.Jcrop(this, options);
+            if ($.isFunction(callback)) callback.call(api);
+          });
+        else {
+          $(this).css({display:'block',visibility:'hidden'});
+          api = $.Jcrop(this, options);
+          if ($.isFunction(callback)) callback.call(api);
+        }
+      }
+    });
+
+    // Return "this" so the object is chainable (jQuery-style)
+    return this;
+  };
+  //}}}
+  // $.Jcrop.Loader - basic image loader {{{
+
+  $.Jcrop.Loader = function(imgobj,success,error){
+    var $img = $(imgobj), img = $img[0];
+
+    function completeCheck(){
+      if (img.complete) {
+        $img.unbind('.jcloader');
+        if ($.isFunction(success)) success.call(img);
+      }
+      else window.setTimeout(completeCheck,50);
+    }
+
+    $img
+      .bind('load.jcloader',completeCheck)
+      .bind('error.jcloader',function(e){
+        $img.unbind('.jcloader');
+        if ($.isFunction(error)) error.call(img);
+      });
+
+    if (img.complete && $.isFunction(success)){
+      $img.unbind('.jcloader');
+      success.call(img);
+    }
+  };
+
+  //}}}
+  // Global Defaults {{{
+  $.Jcrop.defaults = {
+
+    // Basic Settings
+    allowSelect: true,
+    allowMove: true,
+    allowResize: true,
+
+    trackDocument: true,
+
+    // Styling Options
+    baseClass: 'jcrop',
+    addClass: null,
+    bgColor: 'black',
+    bgOpacity: 0.6,
+    bgFade: false,
+    borderOpacity: 0.4,
+    handleOpacity: 0.5,
+    handleSize: 7,
+
+    aspectRatio: 0,
+    keySupport: true,
+    createHandles: ['n','s','e','w','nw','ne','se','sw'],
+    createDragbars: ['n','s','e','w'],
+    createBorders: ['n','s','e','w'],
+    drawBorders: true,
+    dragEdges: true,
+    fixedSupport: true,
+    touchSupport: null,
+
+    shade: null,
+
+    boxWidth: 0,
+    boxHeight: 0,
+    boundary: 2,
+    fadeTime: 400,
+    animationDelay: 20,
+    swingSpeed: 3,
+
+    minSelect: [0, 0],
+    maxSize: [0, 0],
+    minSize: [0, 0],
+
+    // Callbacks / Event Handlers
+    onChange: function () {},
+    onSelect: function () {},
+    onDblClick: function () {},
+    onRelease: function () {}
+  };
+
+  // }}}
+}(jQuery));

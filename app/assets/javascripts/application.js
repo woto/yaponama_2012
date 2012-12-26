@@ -43,8 +43,11 @@
 // VENDORED
 //=require jquery.jsonp
 //=require jquery.rotate
-//=require jquery.jcrop
 //=require holder.js/holder
 
 // VENDORED IN GEMS
 //=require jquery.facebox
+//
+//
+// ---------------------
+//=require jquery.Jcrop

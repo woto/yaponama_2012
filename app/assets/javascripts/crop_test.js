@@ -1,3 +1,5 @@
 $(function(){ 
-  $('.img-crop').Jcrop(); 
+  $('.img-crop').Jcrop({
+    keySupport: false
+  }); 
 });

@@ -13,6 +13,8 @@
 
  *= require bootstrap-image-gallery/bootstrap-image-gallery
 
+ *= require jquery.Jcrop
+
  *= require jquery.fileupload-ui
  *= require_self
  *= require_tree .
@@ -22,21 +24,6 @@
   width: auto
 }
 
-.right-space {
-  margin-right: 10px
-}
-
-.bottom-space {
-  margin-bottom: 10px;
-}
-
-.top-space {
-  margin-top: 10px;
-}
-
-.bottom-space {
-  margin-bottom: 20px;
-}
 
 .nested-visualize {
   margin: 0px 0 20px 0px; 
@@ -53,12 +40,4 @@
   body { 
     padding-top: 60px;
   }
-}
-
-.help-block {
-  color: #999;
-}
-
-.jcrop-hack img {
-  max-width: none;
 }

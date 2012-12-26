@@ -85,4 +85,3 @@ gem "redis", "~> 2.2.0", :require => ["redis/connection/hiredis", "redis"]
 gem 'juggernaut', :git => 'git@github.com:woto/juggernaut.git'
 gem 'ruby-growl'
 gem 'facebox-rails'
-

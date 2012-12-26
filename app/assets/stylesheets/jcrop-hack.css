@@ -1,0 +1,3 @@
+.jcrop-hack img {
+  max-width: none;
+}
