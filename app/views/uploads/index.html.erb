@@ -14,46 +14,16 @@
   }
 </style>
 <%= form_for Upload.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
-  <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-  <div class="row-fluid fileupload-buttonbar">
-    <div class="span7">
-      <!-- The fileinput-button span is used to style the file input field as button -->
-      <button class="btn btn-success fileinput-button">
-        <i class="icon-plus icon-white"></i>
-        <span class="max480">Выбр.</span>
-        <%= f.file_field :upload, multiple: true, name: 'upload[upload]' %>
-      </button>
-      <button type="submit" class="btn btn-primary start">
-        <i class="icon-upload icon-white"></i>
-        <span class="max480">Закач.</span>
-      </button>
-      <button type="reset" class="btn btn-warning cancel">
-        <i class="icon-ban-circle icon-white"></i>
-        <span class="max480">Отм.</span>
-      </button>
-      <button type="button" class="btn btn-danger delete">
-        <i class="icon-trash icon-white"></i>
-        <span class="max480">Удал.</span>
-      </button>
-      <input type="checkbox" class="toggle">
-    </div>
-    <div class="span5" id="progress-all" style="display: none;">
-      <!-- The global progress information -->
-      <div class="fileupload-progress fade">
-          <!-- The global progress bar -->
-          <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-              <div class="bar" style="width:0%;"></div>
-          </div>
-          <!-- The extended global progress information -->
-          <div class="progress-extended">&nbsp;</div>
-      </div>
-    </div>
-  </div>
-  <!-- The loading indicator is shown during image processing -->
-  <div class="fileupload-loading"></div>
-  <br>
 
-<div class="tabbable"> <!-- Only required for left/right tabs -->
+<div class="fileupload-buttonbar pull-right">
+  <button type="button" class="btn btn-danger delete">
+    <i class="icon-trash icon-white"></i>
+    <span class="max480">Удал.</span>
+  </button>
+  <input type="checkbox" class="toggle">
+</div>
+
+<div class="tabbable top-space"> <!-- Only required for left/right tabs -->
   <ul class="nav nav-tabs">
     <li class="active">
       <a href="#tab1" data-toggle="tab">
@@ -77,6 +47,42 @@
   <div class="tab-content">
 
     <div class="tab-pane active" id="tab1">
+
+      <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+      <div class="row-fluid fileupload-buttonbar">
+        <div class="span12">
+          <!-- The fileinput-button span is used to style the file input field as button -->
+          <button class="btn btn-success fileinput-button">
+            <i class="icon-plus icon-white"></i>
+            <span class="max480">Выбр.</span>
+            <%= f.file_field :upload, multiple: true, name: 'upload[upload]' %>
+          </button>
+          <button type="submit" class="btn btn-primary start">
+            <i class="icon-upload icon-white"></i>
+            <span class="max480">Закач.</span>
+          </button>
+          <button type="reset" class="btn btn-warning cancel">
+            <i class="icon-ban-circle icon-white"></i>
+            <span class="max480">Отм.</span>
+          </button>
+        </div>
+      </div>
+      <div class="row-fluid top-space">
+        <div class="span12" id="progress-all" style="display: none;">
+          <!-- The global progress information -->
+          <div class="fileupload-progress fade">
+              <!-- The global progress bar -->
+              <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                  <div class="bar" style="width:0%;"></div>
+              </div>
+              <!-- The extended global progress information -->
+              <div class="progress-extended">&nbsp;</div>
+          </div>
+        </div>
+      </div>
+      <!-- The loading indicator is shown during image processing -->
+      <div class="fileupload-loading"></div>
+
       <!-- The table listing the files available for upload/download -->
       <table class="table"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
     </div>
