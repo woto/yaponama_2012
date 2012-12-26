@@ -26,6 +26,6 @@ CKEDITOR.editorConfig = (config) ->
     #config.filebrowserUploadUrl = '/browser/upload/type/all';
     config.filebrowserImageBrowseUrl = '/admin/uploads';
     #config.filebrowserImageUploadUrl = '/admin/uploads';
-    config.filebrowserWindowWidth  = 700;
-    config.filebrowserWindowHeight = 600;
+    config.filebrowserWindowWidth  = 600;
+    config.filebrowserWindowHeight = 300;
   ]
