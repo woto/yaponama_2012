@@ -17,6 +17,8 @@
 //= require twitter/bootstrap
 //= require cocoon
 
+//= require backbone-rails
+
 //=require jquery-fileupload/vendor/jquery.ui.widget
 //=require jquery-fileupload/vendor/load-image
 //=require jquery-fileupload/vendor/canvas-to-blob
@@ -39,6 +41,7 @@
 //=require rotate_test
 //=require crop_test
 
+//=require insert_images_dialog
 
 // VENDORED
 //=require jquery.jsonp
@@ -51,3 +54,4 @@
 //
 // ---------------------
 //=require jquery.Jcrop
+//

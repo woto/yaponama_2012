@@ -1,18 +1,3 @@
-<style>
-  .files .preview * {
-    width: auto !important;
-  }
-  @media (max-width: 480px) {
-    .max480 {
-      display: none;
-    }
-  }
-  @media (min-width: 481px) {
-    .min481 {
-      display: none;
-    }
-  }
-</style>
 <%= form_for Upload.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
 
 <div class="fileupload-buttonbar pull-right">
@@ -168,13 +153,14 @@
   });
 </script>
 
-<script type="text/javascript">
-  select_image = (function() {
-    var CKEditorFuncNum = <%= params['CKEditorFuncNum'] %>;
-    window.parent.opener.CKEDITOR.tools.callFunction( CKEditorFuncNum, 'http://localhost:3000/uploads/upload/upload/96/thumb_6a1bd8ad7ee7fd44f63849371cc07862.jpg', '' );
-    window.parent.opener.CKEDITOR.dialog.getCurrent().hide();
-    self.close();
-  })
+<a href="javascript:select_image();">Insert this image</a>
+
+<script>
+  window.CKEditorFuncNum = <%= params['CKEditorFuncNum'] %>;
 </script>
 
-<a href="javascript:select_image();">Insert this image</a>
+<!-- TODO, доработать табы -->
+http://www.mightywebdeveloper.com/coding/bootstrap-2-tabs-jquery-load-content/
+http://www.dba-resources.com/scripting-programming/ajax-tabs-in-bootstrap-2-1/
+http://www.mightywebdeveloper.com/coding/bootstrap-2-tabs-jquery-load-content/
+http://stackoverflow.com/questions/8456974/how-to-using-ajax-loading-with-bootstrap-tabs-js

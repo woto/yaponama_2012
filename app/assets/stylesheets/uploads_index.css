@@ -1,0 +1,13 @@
+.files .preview * {
+  width: auto !important;
+}
+@media (max-width: 480px) {
+  .max480 {
+    display: none;
+  }
+}
+@media (min-width: 481px) {
+  .min481 {
+    display: none;
+  }
+}
