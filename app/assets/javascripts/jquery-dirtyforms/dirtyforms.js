@@ -1,4 +1,7 @@
 $(function(){
+
+  $.DirtyForms.message = "Некоторые параметры были изменены. Вы уверены, что желаете закрыть без сохранения?";
+  $.DirtyForms.title = "Вы уверены, что хотите покинуть страницу?";
+
   $('form').dirtyForms();
-  //$.DirtyForms.debug = true;
 })
