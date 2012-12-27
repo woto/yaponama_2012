@@ -2,6 +2,8 @@
 
 (function($){
   var ckeditor = {
+    // pull request https://github.com/snikch/jquery.dirtyforms/pull/41
+    ignoreAnchorSelector: '.cke_dialog_ui_button',
     isDirty: function(form){
       editors = ckeditors(form);
       $.DirtyForms.dirtylog('Checking ' + editors.length + ' ckeditors for dirtyness.');
