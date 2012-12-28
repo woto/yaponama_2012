@@ -11,10 +11,8 @@
  *= require jquery.facebox
  *= require bootstrap/main
 
- *= require bootstrap-image-gallery/bootstrap-image-gallery
-
- *= require jquery.Jcrop
-
+ *= require jquery-jcrop/jquery.Jcrop
+ 
  *= require jquery.fileupload-ui
  *= require_self
  *= require_tree .

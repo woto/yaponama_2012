@@ -11,3 +11,9 @@
     display: none;
   }
 }
+
+@media (max-width: 480px) {
+  .files .progress {
+    width: auto;
+  }
+}
