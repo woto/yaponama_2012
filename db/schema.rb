@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224004534) do
+ActiveRecord::Schema.define(:version => 20121228131534) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -243,6 +243,11 @@ ActiveRecord::Schema.define(:version => 20121224004534) do
     t.string   "robots"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "pages_uploads", :id => false, :force => true do |t|
+    t.integer "page_id"
+    t.integer "upload_id"
   end
 
   create_table "phones", :force => true do |t|

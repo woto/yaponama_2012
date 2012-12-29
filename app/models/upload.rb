@@ -1,6 +1,6 @@
 class Upload < ActiveRecord::Base
   belongs_to :user
-  belongs_to :page
+  has_and_belongs_to_many :pages
   before_save :update_asset_attributes
   attr_accessible :upload
   mount_uploader :upload, UploadUploader
