@@ -3,7 +3,7 @@
 (function($){
   var ckeditor = {
     // pull request https://github.com/snikch/jquery.dirtyforms/pull/41
-    ignoreAnchorSelector: '.cke_dialog_ui_button',
+    ignoreAnchorSelector: '.cke_dialog_ui_button, .cke_tpl_list a',
     isDirty: function(form){
       editors = ckeditors(form);
       $.DirtyForms.dirtylog('Checking ' + editors.length + ' ckeditors for dirtyness.');
@@ -34,4 +34,3 @@
   }
   $.DirtyForms.helpers.push(ckeditor);
 })(jQuery);
-
