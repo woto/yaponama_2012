@@ -18,6 +18,9 @@ class Account < ActiveRecord::Base
     #  raise 'Unable to make both changes in account'
     #end
 
+
+    # TODO FIXME WARNING при создании юзера (и по-видимому поставщика) не фиксируется начальные значения!!!
+
     if changes.present?
 
       # TODO Why we need additional compare changes ???
