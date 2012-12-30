@@ -38,8 +38,6 @@
 
 //=require holder.js/holder
 
-//=require jquery.facebox
-
 //=require jquery-fileupload/vendor/jquery.ui.widget
 //=require jquery-fileupload/vendor/load-image
 //=require jquery-fileupload/vendor/canvas-to-blob
