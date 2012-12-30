@@ -275,6 +275,8 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    turbolinks (0.6.1)
+      coffee-rails
     twitter-bootstrap-rails (2.1.9)
       actionpack (>= 3.1)
       execjs
@@ -342,6 +344,7 @@ DEPENDENCIES
   therubyracer (= 0.10.2)
   thin
   timecop
+  turbolinks
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   whenever
