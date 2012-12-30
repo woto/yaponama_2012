@@ -1,7 +1,7 @@
 ul.breadcrumb : li Разбитие позиции на партии
 
 
-= form_tag admin_products_split_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]) do |f|
+= form_tag admin_products_split_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]), :class => "dirtyforms" do |f|
 
   = render :partial => 'products/index'
 

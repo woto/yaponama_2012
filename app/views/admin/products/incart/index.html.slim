@@ -1,6 +1,6 @@
 ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['incart']['title']}"
 
-= form_tag admin_products_incart_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]) do |f|
+= form_tag admin_products_incart_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]), :class => "dirtyforms" do |f|
 
   = render :partial => 'products/index'
 

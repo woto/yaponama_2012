@@ -1,6 +1,6 @@
 ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['inorder']['title']}"
 
-= form_tag order_select_admin_products_inorder_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]) do |f|
+= form_tag order_select_admin_products_inorder_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]), :class => "dirtyforms" do |f|
 
   = render :partial => 'products/index'
   br  

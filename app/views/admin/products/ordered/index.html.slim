@@ -20,7 +20,7 @@ ul.breadcrumb : li Смена статуса на "#{Rails.configuration.product
   hr
   p После отправки этих товаров в заказ, в работе будет товаров на сумму: #{@after_credit} р.
   
-= form_tag admin_products_ordered_index_path(:user_id => params[:user_id], :order_id => params[:order_id]) do |f|
+= form_tag admin_products_ordered_index_path(:user_id => params[:user_id], :order_id => params[:order_id]), :class => "dirtyforms" do |f|
   br
 
   = render :partial => 'products/index'

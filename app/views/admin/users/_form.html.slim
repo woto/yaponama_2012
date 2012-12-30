@@ -1,4 +1,4 @@
-= simple_form_for @user, :url => polymorphic_path([:admin, @user], :tab => params[:tab]), :html => { :class => 'form-horizontal' } do |f|
+= simple_form_for @user, :url => polymorphic_path([:admin, @user], :tab => params[:tab]), :html => { :class => 'form-horizontal dirtyforms' } do |f|
 
   - content_for :form_error do
     = f.error_notification

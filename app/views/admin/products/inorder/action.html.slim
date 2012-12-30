@@ -1,6 +1,6 @@
 ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['inorder']['title']}"
 
-= simple_form_for @order, :url => polymorphic_path([:admin, @order], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]) do |f|
+= simple_form_for(@order, :url => polymorphic_path([:admin, @order], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]), :html => {:class => "dirtyforms"})  do |f|
 
   = f.error_notification
   - f.object.errors.full_messages do |error|

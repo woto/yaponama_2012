@@ -1,4 +1,4 @@
-= form_for @admin_block do |f|
+= form_for @admin_block, :html => {:class => "dirtyforms"} do |f|
   - if @admin_block.errors.any?
     #error_explanation
       h2 = "#{pluralize(@admin_block.errors.count, "error")} prohibited this admin_block from being saved:"

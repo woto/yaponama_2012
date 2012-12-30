@@ -1,6 +1,6 @@
 ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['stock']['title']}"
 
-= form_tag admin_products_stock_index_path(:user_id => params[:user_id], :order_id => params[:order_id]) do |f|
+= form_tag admin_products_stock_index_path(:user_id => params[:user_id], :order_id => params[:order_id]), :class => "dirtyforms" do |f|
 
   = render :partial => 'products/index'
 

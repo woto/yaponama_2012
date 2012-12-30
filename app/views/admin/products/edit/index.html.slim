@@ -4,7 +4,7 @@ ul.breadcrumb : li Редактирование позиции
 
 #products
 
-  = simple_form_for [:admin, @products.first], :url => admin_products_edit_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]), :method => :post, :html => {:class => 'form-horizontal' } do |f|
+  = simple_form_for [:admin, @products.first], :url => admin_products_edit_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]), :method => :post, :html => {:class => 'form-horizontal dirtyforms' } do |f|
     = render '/users/product_fields', :f => f, :stack => 0
 
     .form-actions

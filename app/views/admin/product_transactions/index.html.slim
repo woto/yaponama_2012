@@ -32,7 +32,6 @@ table.table.table-striped
       th = model_class.human_attribute_name(:product_id)
       th = model_class.human_attribute_name(:created_at)
       th = model_class.human_attribute_name(:updated_at)
-      th =t '.actions', :default => t("helpers.actions")
   tbody
     - @product_transactions.each do |product_transaction|
       tr
@@ -76,10 +75,5 @@ table.table.table-striped
         td = product_transaction.product_id
         td =l product_transaction.created_at, :format => :short if product_transaction.created_at
         td =l product_transaction.updated_at, :format => :short if product_transaction.updated_at
-        td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_product_transaction_path(product_transaction), :class => 'btn btn-mini'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_product_transaction_path(product_transaction), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
 = paginate @product_transactions
-
-= link_to t('.new', :default => t("helpers.links.new")), new_admin_product_transaction_path, :class => 'btn btn-primary'
