@@ -27,7 +27,7 @@ table.table.table-striped
         td
           / TODO если где-то еще так буду делать, то вынести в css стиль
           ul style="list-style-type: none;"
-            li = link_to "/#{page.path}", :target => "_blank" do
+            li = link_to "/#{page.path}" do
               i.icon-share
               | Просмотр
             li = link_to edit_admin_page_path(page) do

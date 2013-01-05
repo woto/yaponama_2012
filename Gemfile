@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+# TODO rails 3.2.10
 gem 'rails', '3.2.9'
 
 # Bundle edge Rails instead:
@@ -66,7 +67,6 @@ gem 'sanitize'
 gem 'slim-rails'
 gem 'thin'
 gem "cancan"
-gem 'ckeditor_rails'
 gem 'bcrypt-ruby'
 gem 'whenever'
 gem 'sitemap_generator'
@@ -85,3 +85,4 @@ gem "redis", "~> 2.2.0", :require => ["redis/connection/hiredis", "redis"]
 gem 'juggernaut', :git => 'git@github.com:woto/juggernaut.git'
 gem 'ruby-growl'
 gem 'turbolinks'
+gem 'ancestry'

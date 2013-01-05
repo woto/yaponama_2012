@@ -1,6 +1,9 @@
 Yaponama2012::Application.routes.draw do
 
 
+  resources :comments
+
+
   namespace :admin do
     resources :blocks
   end

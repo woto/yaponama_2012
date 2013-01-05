@@ -2,7 +2,7 @@
 
   <%= f.error_notification %>
 
-  <%= link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?' %>
+  <%= link_to_remove_association '<i class="icon-trash ignoredirty"></i>'.html_safe, f, :class => "btn btn-danger pull-right ignoredirty", :confirm => 'Are you sure?' %>
 
   <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-arrow-down"></i></a>
   <a href="" class="btn btn-info btn-mini pull-left right-space"><i class="icon-arrow-up"></i></a>
@@ -13,8 +13,8 @@
   <div class="nested-visualize" style="border-left: 3px dashed #62C462">
 
     <ul class="nav nav-tabs">
-      <li class="active"><a id="tab1_toggle<%= counter %>" href="#tab1<%= counter %>" data-toggle="tab">Идентификатор</a></li>
-      <li><a id="tab2_toggle<%= counter %>" href="#tab2<%= counter %>" data-toggle="tab">Характеристики</a></li>
+      <li class="active"><a class="ignoredirty" id="tab1_toggle<%= counter %>" href="#tab1<%= counter %>" data-toggle="tab">Идентификатор</a></li>
+      <li><a class="ignoredirty" id="tab2_toggle<%= counter %>" href="#tab2<%= counter %>" data-toggle="tab">Характеристики</a></li>
     </ul>
 
     <div class="tab-content">
@@ -56,7 +56,7 @@
       <% end %>
 
       <div class="links">
-        <%= link_to_add_association 'Добавить запрос', f, :root_requests_with_car, :class => "btn btn-success btn-success", :render_options => {:locals => {:stack => stack}}, :partial => 'request_fields' %>
+        <%= link_to_add_association 'Добавить запрос', f, :root_requests_with_car, :class => "btn btn-success btn-success ignoredirty", :render_options => {:locals => {:stack => stack}}, :partial => 'request_fields' %>
       </div>
 
     </div>

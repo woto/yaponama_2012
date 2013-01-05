@@ -1,0 +1,10 @@
+div id="comment-#{comment.id}"
+  div.date
+    = l comment.created_at, format: :short
+  div.author 
+    strong = comment.user.to_label
+  div.content == comment.content
+  =' link_to 'Редактировать', edit_comment_path(comment)
+  =' link_to 'Удалить', comment, :confirm => 'Are you sure?', :method => :delete, :remote => true
+  =' link_to 'Ответить', new_comment_path(:parent_id => comment), :remote => true
+  hr

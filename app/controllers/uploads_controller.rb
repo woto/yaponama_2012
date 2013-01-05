@@ -1,4 +1,5 @@
 class UploadsController < ApplicationController
+  before_filter {@hide_toolbar = true}
   # GET /uploads
   # GET /uploads.json
   def index

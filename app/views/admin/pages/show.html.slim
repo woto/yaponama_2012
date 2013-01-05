@@ -27,7 +27,7 @@ p
  strong Содержание: 
  = @page.content
 
-= link_to "Просмотр", "/#{@page.path}", :target => "_blank"
+= link_to "Просмотр", "/#{@page.path}"
 |  | 
 = link_to 'Редактировать', edit_admin_page_path(@page)
 |  | 

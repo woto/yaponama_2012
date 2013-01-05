@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :uploads
 
+  #has_many :comments
+
   def self.current_user=(current_user)
     Thread.current[:current_user] = current_user
   end

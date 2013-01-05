@@ -2,6 +2,8 @@ h1 Sign Up
 
 = simple_form_for @user, :url => register_path do |f|
   = f.error_notification
+  = f.simple_fields_for :names do |name|
+    = name.input :name
   = f.simple_fields_for :email_addresses do |email_address|
     = email_address.input :email_address
   = f.simple_fields_for :phones do |phone|

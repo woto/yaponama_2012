@@ -2,7 +2,7 @@
 
   = f.error_notification
 
-  = link_to_remove_association '<i class="icon-trash"></i>'.html_safe, f, :class => "btn btn-danger pull-right", :confirm => 'Are you sure?'
+  = link_to_remove_association '<i class="icon-trash ignoredirty"></i>'.html_safe, f, :class => "btn btn-danger pull-right ignoredirty", :confirm => 'Are you sure?'
 
   a href="" class="btn btn-info btn-mini pull-left right-space" : i class="icon-arrow-down"
   a href="" class="btn btn-info btn-mini pull-left right-space" : i class="icon-arrow-up"
@@ -31,6 +31,6 @@
       end
 
       .links
-        = link_to_add_association 'Добавить товар', f, :products_inorder, :class => "btn btn-success btn-success", :render_options => {:locals => {:stack => stack}}, :partial => 'product_fields'
+        = link_to_add_association 'Добавить товар', f, :products_inorder, :class => "btn btn-success btn-success ignoredirty", :render_options => {:locals => {:stack => stack}}, :partial => 'product_fields'
 
   hr

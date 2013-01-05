@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Page < ActiveRecord::Base
   attr_accessible :content, :description, :keywords, :path, :robots, :title
 
@@ -9,6 +11,12 @@ class Page < ActiveRecord::Base
 
   def cut_first_slash
     self.path = self.path.gsub(/^\/+/, '')
+    if self.path.length <= 0
+      errors.add(:path, "не может быть пустым.")
+      return false
+    end
   end
+
+  has_many :comments, :as => :commentable
 
 end

@@ -9,9 +9,9 @@
       .container-fluid.nav-collapse.collapse
         ul.nav
           li.dropdown
-            a.dropdown-toggle href="#" data-toggle="dropdown" 
-              span Торговля 
-              b.caret
+            a.ignoredirty.dropdown-toggle href="#" data-toggle="dropdown" 
+              span.ignoredirty Торговля 
+              b.ignoredirty.caret
             ul.dropdown-menu
               li = link_to "Заказы", admin_orders_path
               
@@ -34,16 +34,24 @@
 
               li = link_to "Поставщики", admin_suppliers_path
           li.dropdown
-            a.dropdown-toggle href="#" data-toggle="dropdown"
-              span Транзакции 
-              b.caret
+            a.ignoredirty.dropdown-toggle href="#" data-toggle="dropdown"
+              span.ignoredirty Транзакции 
+              b.ignoredirty.caret
             ul.dropdown-menu
               li = link_to "Товар", admin_product_transactions_path
               li = link_to "Деньги", admin_money_transactions_path
           li.dropdown
-            a.dropdown-toggle href="#" data-toggle="dropdown"
-              span Настройки 
-              b.caret
+            a.ignoredirty.dropdown-toggle href="#" data-toggle="dropdown"
+              span.ignoredirty Материал 
+              b.ignoredirty.caret
+            ul.dropdown-menu
+              li = link_to "Описания запчастей", admin_spare_infos_path
+              li = link_to "Страницы", admin_pages_path
+              li = link_to "Закачка", admin_uploads_path
+          li.dropdown
+            a.ignoredirty.dropdown-toggle href="#" data-toggle="dropdown"
+              span.ignoredirty Настройки 
+              b.ignoredirty.caret
             ul.dropdown-menu
               li = link_to "Банковские Счета", "#"
               li = link_to "Часовые пояса", admin_time_zones_path
@@ -53,13 +61,10 @@
                   li = link_to "Категории доставки", admin_delivery_categories_path
                   li = link_to "Способы доставки", admin_deliveries_path
                   li = link_to "Станции метро", admin_metro_index_path
-              li = link_to "Описания запчастей", admin_spare_infos_path
-              li = link_to "Страницы", admin_pages_path
-              li = link_to "Закачка", admin_uploads_path
           li.dropdown
-            a.dropdown-toggle href="#" data-toggle="dropdown"
-              | Трэш 
-              b.caret
+            a.ignoredirty.dropdown-toggle href="#" data-toggle="dropdown"
+              span.ignoredirty Трэш 
+              b.ignoredirty.caret
             ul.dropdown-menu
               li = link_to "Фронт", "/trash_help/index"
               li = link_to "Запросы", admin_requests_path
@@ -70,9 +75,9 @@
 
         ul.nav.pull-right
           li.dropdown
-            a.dropdown-toggle href="#" data-toggle="dropdown"
-              =' current_user.names.any? ? current_user.names.map(&:name).join(' ,') : "Без имени"
-              b.caret
+            a.ignoredirty.dropdown-toggle href="#" data-toggle="dropdown"
+              span.ignoredirty =' current_user.names.any? ? current_user.names.map(&:name).join(' ,') : "Без имени"
+              b.ignoredirty.caret
             ul.dropdown-menu
               li = link_to "Редактирование профиля", edit_admin_user_path(current_user)
               li = link_to "Выход", logout_path, :method => :delete

@@ -1,6 +1,5 @@
 // CkEditor helper, checks to see if CkEditor editors in the given form are dirty
-
-(function($){
+window.initCkeditorHelper = function(){
   var ckeditor = {
     // pull request https://github.com/snikch/jquery.dirtyforms/pull/41
     ignoreAnchorSelector: '.cke_dialog_ui_button, .cke_tpl_list a',
@@ -33,4 +32,4 @@
     return $(editors);
   }
   $.DirtyForms.helpers.push(ckeditor);
-})(jQuery);
+}

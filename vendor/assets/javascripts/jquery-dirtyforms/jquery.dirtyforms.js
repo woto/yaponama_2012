@@ -151,6 +151,7 @@ if (typeof jQuery == 'undefined') throw ("jQuery Required");
 		},
 		// Marks the element(s) that match the selector dirty
 		setDirty : function() {
+			$(document).trigger('dirty.dirtyforms', [this])
 			dirtylog('setDirty called');
 			return this.each(function(e){
 				$(this).addClass($.DirtyForms.dirtyClass).parents('form').addClass($.DirtyForms.dirtyClass);
@@ -260,7 +261,7 @@ if (typeof jQuery == 'undefined') throw ("jQuery Required");
 	}
 	
 	var bindExit = function(){
-		if(settings.exitBound) return;
+		//if(settings.exitBound) return;
 
 		var inIframe = (top !== self);
 		
@@ -350,12 +351,13 @@ if (typeof jQuery == 'undefined') throw ("jQuery Required");
 		if($(ev.target).hasClass(settings.ignoreClass) || isDifferentTarget(ev)){
 			dirtylog('Leaving: Element has ignore class or has target=\'_blank\'');
 			if(!ev.isDefaultPrevented()){
-				clearUnload();
+				//clearUnload();
 			}
 			return false;
 		}
 
 		if(settings.deciding){
+      settings.dialog.close();
 			dirtylog('Leaving: Already in the deciding process');
 			return false;
 		}
@@ -368,7 +370,7 @@ if (typeof jQuery == 'undefined') throw ("jQuery Required");
 		if(!settings.isDirty()){
 			dirtylog('Leaving: Not dirty');
 			if(!ev.isDefaultPrevented()){
-				clearUnload();
+				//clearUnload();
 			}
 			return false;
 		}
@@ -451,7 +453,10 @@ if (typeof jQuery == 'undefined') throw ("jQuery Required");
 	}
 
 	var decidingContinue = function(ev){
-		window.onbeforeunload = null; // fix for chrome
+    console.log('decidingContinue');
+    clearUnload();
+		//window.onbeforeunload = null; // fix for chrome
+		//$(window).unbind('beforeunload', beforeunloadBindFn);
 		ev.preventDefault();
 		settings.dialogStash = false;
 		$(document).trigger('decidingcontinued.dirtyforms');
@@ -460,6 +465,7 @@ if (typeof jQuery == 'undefined') throw ("jQuery Required");
 	}
 
 	var clearUnload = function(){
+    console.log('clearUnload');
 		// I'd like to just be able to unbind this but there seems
 		// to be a bug in jQuery which doesn't unbind onbeforeunload
 		dirtylog('Clearing the beforeunload event');

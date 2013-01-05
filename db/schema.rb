@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121228131534) do
+ActiveRecord::Schema.define(:version => 20130101182056) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -94,6 +94,18 @@ ActiveRecord::Schema.define(:version => 20121228131534) do
   end
 
   add_index "cars", ["user_id"], :name => "index_cars_on_user_id"
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "ancestry"
+  end
+
+  add_index "comments", ["ancestry"], :name => "index_comments_on_ancestry"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -398,7 +410,6 @@ ActiveRecord::Schema.define(:version => 20121228131534) do
     t.string   "content_type"
     t.integer  "file_size"
     t.integer  "user_id"
-    t.integer  "page_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

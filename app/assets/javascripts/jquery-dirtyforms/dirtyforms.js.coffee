@@ -1,14 +1,18 @@
 $ ->
-  initDirtyForms()
+  window.initDirtyForms()
 
 $(window).bind "page:change", ->
-  initDirtyForms()
+  window.initDirtyForms()
 
-initDirtyForms = ->
+window.initDirtyForms = ->
   $.DirtyForms.message = "Некоторые данные были изменены. Вы уверены, что хотите продолжить без сохранения?"
   $.DirtyForms.title = "Имеются не сохраненные данные"
+  #$.DirtyForms.debug = true
 
   $.DirtyForms.dialog =
+    close: ->
+      $("#confirm").modal "hide"
+
     refire: (content, ev) ->
       
       # Launch twitter modal here
@@ -21,14 +25,11 @@ initDirtyForms = ->
       $("body").append content
       $("#confirm").modal "show"
 
-      #for dirty in $(':dirty')
-      #  $(dirty).closest('.control-group').attr('style', 'border: 1px dashed red');
-
     bind: ->
       $("#confirm").on "hidden", $.DirtyForms.decidingCancel
       $("#confirm .cancel").click $.DirtyForms.decidingCancel
       $("#confirm .continue").click $.DirtyForms.decidingContinue
-      $(document).bind "decidingcancelled.dirtyforms", ->
+      false
 
     # Close Twitter Modal here
     stash: ->
@@ -38,3 +39,12 @@ initDirtyForms = ->
     selector: "#confirm .modal-body"
 
   $("form.dirtyforms").dirtyForms()
+
+  $(document).on 'dirty.dirtyforms', (event, element) ->
+    #$(element).attr('style', 'border: 1px solid black')
+    #for dirty in $(':dirty')
+    $(element).closest('.control-group').attr('style', 'background: #ffe');
+
+  window.initCkeditorHelper()
+
+window.initDirtyForms()

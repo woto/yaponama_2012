@@ -12,16 +12,24 @@
 //
 
 //= require jquery
-//= require ckeditor-jquery
+//=require jquery-dirtyforms/jquery.dirtyforms
+//=require jquery-dirtyforms/ckeditor
+//=require jquery-dirtyforms/dirtyforms
+
+// ui действительно нужен? TODO по-моему нет
+//= require jquery-ui
+//
+//= require ckeditor/basepath
+//= require ckeditor/ckeditor
+//
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require cocoon
 
 //= require backbone-rails
 
-//=require jquery-dirtyforms/jquery.dirtyforms
-//=require jquery-dirtyforms/ckeditor
-//=require jquery-dirtyforms/dirtyforms
+//=require ckeditor/ckeditor-simple
+//=require ckeditor/ckeditor-extended
 
 //=require jquery-getimagedata/jquery.getimagedata
 //=require jquery-getimagedata/getimagedata
@@ -49,3 +57,7 @@
 //=require jquery-fileupload/locale
 
 //=require turbolinks
+
+//=require toolbar-checkboxes
+
+//=require tests
