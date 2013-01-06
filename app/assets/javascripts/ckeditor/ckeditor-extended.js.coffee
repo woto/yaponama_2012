@@ -1,7 +1,5 @@
 $ ->
-  window.initExtendedCkeditor()
 
-$(window).bind "page:change", ->
   window.initExtendedCkeditor()
 
 window.initExtendedCkeditor = ->

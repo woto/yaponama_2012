@@ -5,6 +5,8 @@
   .inputs
     = f.input :name do
       = text_field_tag :name, @name
+    = f.input :email_address do
+      = text_field_tag :email_address, @email_address
     = f.input :content, input_html: {class: "ckeditor-simple"}, label: false
     = f.input :parent_id, as: :hidden
     = f.input :commentable_id, as: :hidden

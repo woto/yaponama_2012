@@ -1,9 +1,6 @@
 $ ->
   window.initDirtyForms()
 
-$(window).bind "page:change", ->
-  window.initDirtyForms()
-
 window.initDirtyForms = ->
   $.DirtyForms.message = "Некоторые данные были изменены. Вы уверены, что хотите продолжить без сохранения?"
   $.DirtyForms.title = "Имеются не сохраненные данные"
@@ -46,5 +43,3 @@ window.initDirtyForms = ->
     $(element).closest('.control-group').attr('style', 'background: #ffe');
 
   window.initCkeditorHelper()
-
-window.initDirtyForms()

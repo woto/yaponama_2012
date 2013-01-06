@@ -56,8 +56,6 @@
 //=require jquery-fileupload/jquery.fileupload-ui
 //=require jquery-fileupload/locale
 
-//=require turbolinks
-
 //=require toolbar-checkboxes
 
 //=require tests

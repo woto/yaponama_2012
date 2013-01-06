@@ -3,9 +3,6 @@
 $ ->
   window.initSimpleCkeditor()
 
-$(window).bind "page:change", ->
-  window.initSimpleCkeditor()
-
 window.initSimpleCkeditor = ->
   for ckeditor, i in $('.ckeditor-simple')
     CKEDITOR.replace(ckeditor, {

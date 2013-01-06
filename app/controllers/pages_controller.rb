@@ -13,7 +13,8 @@ class PagesController < ApplicationController
       @comments = Comment.where(:commentable_id => @page.id, :commentable_type => @page.class).arrange(:order => :created_at)
       @comment = Comment.new()
       @comment.commentable = @page
-      @name = current_user.names.where(:creation_reason => Rails.configuration.user_name_creation_reason['self']).first
+      @name = current_user.names.where(:creation_reason => Rails.configuration.user_name_creation_reason['self']).first.try(:to_label)
+      @email_address = current_user.email_addresses.first.try(:to_label)
 
     else
       raise ActionController::RoutingError, "Страница #{params[:path]} не существует"
