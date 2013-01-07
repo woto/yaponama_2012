@@ -1,0 +1,46 @@
+javascript:
+  $(function(){
+    $('#original').css({ opacity: 0.8 })
+    $('#thumb').css({ opacity: 0.8 })
+  })
+
+- model_class = Brand
+div class="page-header"
+  h1=t '.title', :default => model_class.model_name.human
+
+p
+  strong= model_class.human_attribute_name(:name) + ':'
+  br
+  = @brand.name
+p
+  strong= model_class.human_attribute_name(:brand_id) + ':'
+  br
+  = @brand.brand_id
+p
+  strong= model_class.human_attribute_name(:image) + ':'
+  br
+
+  div style="background: url(http://webucateus.com/desktop/wp-content/themes/desk-mess01/images/grid.png); width: 500px"
+    div style="border: 1px solid red; padding: 100px" id="original"
+      = image_tag @brand.image, :id => "original", :class => "img-crop"
+p
+  strong= model_class.human_attribute_name(:image_thumb) + ':'
+  br
+  div style="background: url(http://webucateus.com/desktop/wp-content/themes/desk-mess01/images/grid.png); width: 300px "
+    div style="border: 1px solid red; padding: 100px" id="thumb"
+      = image_tag @brand.image.thumb, :id => "thumb", :style => "border: 1px solid red", :class => "img-crop"
+p
+  strong= model_class.human_attribute_name(:rating) + ':'
+  br
+  = @brand.rating
+p
+  strong= model_class.human_attribute_name(:content) + ':'
+  br
+  = @brand.content
+
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), admin_brands_path, :class => 'btn'
+  '
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_brand_path(@brand), :class => 'btn'
+  '
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_brand_path(@brand), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

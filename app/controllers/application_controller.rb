@@ -87,4 +87,13 @@ class ApplicationController < ActionController::Base
   end
 
 
+  def commentable_helper obj
+    @comments = Comment.where(:commentable_id => obj.id, :commentable_type => obj.class).arrange(:order => :created_at)
+    @comment = Comment.new()
+    @comment.commentable = obj
+    @name = current_user.names.where(:creation_reason => Rails.configuration.user_name_creation_reason['self']).first.try(:to_label)
+    @email_address = current_user.email_addresses.first.try(:to_label)
+  end
+
+
 end

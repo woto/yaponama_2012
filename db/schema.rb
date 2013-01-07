@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130101182056) do
+ActiveRecord::Schema.define(:version => 20130106092934) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -65,6 +65,16 @@ ActiveRecord::Schema.define(:version => 20130101182056) do
   end
 
   add_index "attachments", ["email_id"], :name => "index_attachments_on_email_id"
+
+  create_table "brands", :force => true do |t|
+    t.string   "name"
+    t.integer  "brand_id"
+    t.string   "image"
+    t.integer  "rating"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "cars", :force => true do |t|
     t.string   "god"

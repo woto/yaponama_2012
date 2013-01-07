@@ -2,7 +2,7 @@ class Admin::MetroController < Admin::ApplicationController
   # GET /admin/metro
   # GET /admin/metro.json
   def index
-    @metro = Metro.all
+    @metro = Metro.page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb

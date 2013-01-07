@@ -59,3 +59,6 @@
 //=require toolbar-checkboxes
 
 //=require tests
+
+//= require chosen-jquery
+//= require chosen

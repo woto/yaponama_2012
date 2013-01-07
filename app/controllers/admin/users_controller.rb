@@ -8,7 +8,14 @@ class Admin::UsersController < Admin::ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.includes(:ping, :email_addresses, :phones, :names, :account).order("pings.updated_at DESC").page(params[:page])
+
+    users_scope = User.scoped
+
+    if params[:role].present? && params[:role] != 'all'
+      users_scope = users_scope.where(:role => params[:role])
+    end
+
+    @users = users_scope.includes(:ping, :email_addresses, :phones, :names, :account).order("pings.updated_at DESC").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

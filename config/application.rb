@@ -300,10 +300,31 @@ module Yaponama2012
     }
 
     config.user_roles = {
-      'admin' => 'Администратор',
-      'manager' => 'Менеджер',
-      'user' => 'Покупатель',
-      'guest' => 'Гость'
+      'all' => {
+        'real' => false,
+        'title' => 'Все',
+        'title_plural' => 'Все'
+      },
+      'admin' => {
+        'real' => true,
+        'title' => 'Администратор',
+        'title_plural' => 'Администраторы'
+      },
+      'manager' => {
+        'real' => true,
+        'title' => 'Менеджер',
+        'title_plural' => 'Менеджеры'
+      },
+      'user' => {
+        'real' => true,
+        'title' => 'Покупатель',
+        'title_plural' => 'Покупатели'
+      },
+      'guest' => {
+        'real' => true,
+         'title' => 'Гость',
+         'title_plural' => 'Гости'
+      }
     }
 
     config.avisosms = {
