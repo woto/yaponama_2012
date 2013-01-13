@@ -6,7 +6,7 @@ span Положить деньги на счет поставщику
   = text_field_tag :supplier_id
   | $
   = text_field_tag :money
-  = submit_tag("Пополнить баланс")
+  = submit_tag "Пополнить баланс", :class => "btn"
 
 span Поступление средств от клиента
 = form_tag(trash_help_make_payment_path) do
@@ -14,19 +14,22 @@ span Поступление средств от клиента
   = text_field_tag :user_id
   | $
   = text_field_tag :money
-  = submit_tag("Пополнить баланс")
+  = submit_tag "Пополнить баланс", :class => "btn"
 
 = form_tag(trash_help_merge_path) do
   | id_1
   = text_field_tag(:id_1)
   | id_2
   = text_field_tag(:id_2)
-  = submit_tag("Объединить")
+  = submit_tag "Объединить", :class => "btn"
+
 
 span Проверить статусы заказов (фактически запустить метод user.check_orders)
 = form_tag(trash_help_check_orders_inorder_path) do
   | user_id
   = text_field_tag :user_id
-  = submit_tag "Проверить"
+  = submit_tag "Проверить", :class => "btn"
 
-= link_to 'notify_sms', trash_help_notify_sms_path
+
+= link_to 'notify_sms', trash_help_notify_sms_path, :class => "btn"
+

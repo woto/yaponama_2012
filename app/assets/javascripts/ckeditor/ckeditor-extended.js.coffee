@@ -1,14 +1,17 @@
-$ ->
+$(document).on 'page:load', (e) ->
+  window.initExtendedCkeditor()
 
+$ ->
   window.initExtendedCkeditor()
 
 window.initExtendedCkeditor = ->
   for ckeditor, i in $('.ckeditor-extended')
+
     CKEDITOR.replace(ckeditor, {
       #removeButtons: 'Anchor,Underline,Strike,Subscript,Superscript';
       height: 300;
       #plugins: 'forms'
-      extraPlugins: 'timestamp,abbr';
+      extraPlugins: 'timestamp,abbr,divarea';
       plugins: 'about,a11yhelp,basicstyles,bidi,blockquote,clipboard,colorbutton,colordialog,contextmenu,div,elementspath,enterkey,entities,filebrowser,find,flash,floatingspace,font,format,horizontalrule,htmlwriter,image,iframe,indent,justify,link,list,liststyle,magicline,maximize,newpage,pagebreak,pastefromword,pastetext,preview,print,removeformat,resize,save,selectall,showblocks,showborders,smiley,sourcearea,specialchar,stylescombo,tab,table,tabletools,templates,toolbar,undo,wysiwygarea';
 
       toolbarGroups: [

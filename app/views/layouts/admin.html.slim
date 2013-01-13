@@ -2,6 +2,8 @@
 
 body
 
+  .cursor
+
   - if !@hide_toolbar && ( ['admin', 'manager'].include? current_user.role )
     = render :partial => "layouts/admin_navbar"
 

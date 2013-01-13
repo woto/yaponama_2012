@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106092934) do
+ActiveRecord::Schema.define(:version => 20130110155802) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -400,6 +400,37 @@ ActiveRecord::Schema.define(:version => 20130106092934) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "stats", :force => true do |t|
+    t.string   "geo_city"
+    t.string   "geo_country"
+    t.string   "geo_region"
+    t.string   "geo_district"
+    t.float    "geo_lat"
+    t.float    "geo_lng"
+    t.string   "req_remote_addr"
+    t.string   "req_ip"
+    t.string   "req_remote_ip"
+    t.string   "req_user_agent"
+    t.string   "req_referrer"
+    t.string   "req_referer"
+    t.string   "req_accepts"
+    t.string   "req_accept"
+    t.string   "req_path"
+    t.string   "req_base_url"
+    t.string   "req_scheme"
+    t.string   "req_request_method"
+    t.string   "req_original_fullpath"
+    t.string   "req_fullpath"
+    t.string   "req_original_url"
+    t.string   "req_url"
+    t.string   "brs_time"
+    t.integer  "user_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "stats", ["user_id"], :name => "index_stats_on_user_id"
 
   create_table "suppliers", :force => true do |t|
     t.string   "name"

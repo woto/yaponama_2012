@@ -1,5 +1,9 @@
 Yaponama2012::Application.routes.draw do
 
+  resources :stats do
+    get "iframe", :on => :member
+  end
+
 
   resources :comments
 

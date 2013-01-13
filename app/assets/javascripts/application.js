@@ -12,18 +12,15 @@
 //
 
 //= require jquery
-//=require jquery-dirtyforms/jquery.dirtyforms
-//=require jquery-dirtyforms/ckeditor
-//=require jquery-dirtyforms/dirtyforms
+//= require jquery_ujs
+//= require turbolinks
+//= require bootstrap/bootstrap
 
-// ui действительно нужен? TODO по-моему нет
-//= require jquery-ui
-//
+//= require jquery-dirtyforms/jquery.dirtyforms
+
 //= require ckeditor/basepath
 //= require ckeditor/ckeditor
-//
-//= require jquery_ujs
-//= require twitter/bootstrap
+
 //= require cocoon
 
 //= require backbone-rails
@@ -34,7 +31,8 @@
 //=require jquery-getimagedata/jquery.getimagedata
 //=require jquery-getimagedata/getimagedata
 
-//=require jquery-jsonp/jquery.jsonp
+//= require jquery-jsonp/jquery.jsonp
+//= require jquery-json/jquery.json.js
 
 //=require jquery-rotate/rotate
 //=require jquery-rotate/jquery.rotate
@@ -62,3 +60,9 @@
 
 //= require chosen-jquery
 //= require chosen
+
+//= require socket.io/connect
+//= require socket.io/cursor
+//= require socket.io/size
+//= require socket.io/scroll
+//= require socket.io/page

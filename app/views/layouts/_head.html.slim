@@ -38,14 +38,11 @@ html lang="ru"
 
     = csrf_meta_tags
 
-    /[if lt IE 9]
-      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
-
+    = render :partial => "layouts/shared/javascripts"
+    = javascript_include_tag 'http://datejs.googlecode.com/svn/trunk/build/date.js'
+    
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
 
-    = favicon_link_tag
-    <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
-    <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
-    <link href="images/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
+    = render :partial => "layouts/shared/icons"
+

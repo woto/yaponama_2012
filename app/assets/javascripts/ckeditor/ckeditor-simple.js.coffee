@@ -1,4 +1,5 @@
-# http://peterpetrik.com/blog/remove-tabs-and-elements-from-ckeditor-dialog-window
+$(document).on 'page:load', (e) ->
+  window.initSimpleCkeditor()
 
 $ ->
   window.initSimpleCkeditor()
@@ -9,6 +10,10 @@ window.initSimpleCkeditor = ->
       removeButtons: 'Anchor,Underline,Strike,Subscript,Superscript,Flash,Table,Rule,HorizontalRule',
       height: 150,
       #plugins: 'forms'
+      #
+      # TODO обязательно для работы с turbolinks!
+      extraPlugins: 'divarea';
+      #
       plugins: 'basicstyles,resize,clipboard,enterkey,font,pastetext,horizontalrule,image,link,list,removeformat,toolbar,wysiwygarea',
 
       forcePasteAsPlainText: true,

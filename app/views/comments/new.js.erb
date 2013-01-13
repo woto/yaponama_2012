@@ -1,7 +1,4 @@
 $('#new_comment').remove()
 $("#comment-<%= params[:parent_id] %>").append("<%= escape_javascript(render partial: "comments/form") %>");  
-$(function(){
-  window.initSimpleCkeditor();
-  window.initDirtyForms();
-  window.initCkeditorHelper();
-})
+window.initSimpleCkeditor();
+window.initCkeditorHelper();

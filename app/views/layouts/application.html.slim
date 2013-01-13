@@ -2,10 +2,12 @@
 
 body
 
+  .cursor
+
   .navbar.navbar-fixed-top
     .navbar-inner
       .container-fluid
-        a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
+        a.btn.btn-navbar.ignoredirty data-target=".nav-collapse" data-toggle="collapse"
           span.icon-bar
           span.icon-bar
           span.icon-bar
@@ -38,12 +40,7 @@ body
         li = link_to "Адреса доставки", "/path3"
         li = link_to "Электронная почта", "/path3"
         li = link_to "Телефоны", "/path3"
-        #div1 div1
-        #div2 div2
-        #div3 div3
-        #div4 div4
-        #div5 div5
-        #div6 div6
+
         div
           h3 Rotate
           = image_tag 'rails.png', :class => "img-rotate"
@@ -59,27 +56,26 @@ body
           h4 Подтвердите пожалуйста ваш номер телефона
           | Мы отправили вам письмо на email для подтверждения вашего адреса и SMS на телефон, чтобы убедиться, что это действительно Ваш номер.
 
-        .well.sidebar-nav
+        #channel.well.sidebar-nav
 
           img class="media-object" class="img-rounded" data-src="holder.js/96x96"
 
-          div style="overflow: auto; width: auto; height: 200px; background: #FFF"
-            .span10.offset1.alert.alert-info
-              | Вы
-            div
-              | asdasdfa sdf adsf f
-            .span10.offset1.alert.alert-info
-              | Вы
-          
-          br 
-          br
+          div#msgs style="overflow: auto; width: auto; height: 200px; background: #FFF"
+            ul
+              li.message style="display: none"
+                span.user  
+                span.message
+                span.time
+              li.control style="display: none"
+                span.user  
+                span.message
+                span.time
 
-            input type="text" placeholder="Номер телефона"
-            input type="text" placeholder="Адрес электронная почта"
+          br 
 
             form class="navbar-form pull-left"
-              textarea placeholder="фыва" rows="3"
-              button type="submit" class="btn" Submit
+              input#message type="text" placeholder="Текст сообщения"
+              button type="submit" class="btn" Отправить
 
           ul.nav.nav-list
             li class="nav-header" Sidebar
