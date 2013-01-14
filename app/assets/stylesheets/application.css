@@ -11,8 +11,9 @@
  *= require bootstrap/main
 
  *= require jquery-jcrop/jquery.Jcrop
- 
- *= require jquery.fileupload-ui
+ *
+ * TODO подключить стили jQuery-File-Upload
+ *
  *= require_self
  *= require_tree .
  *= require chosen

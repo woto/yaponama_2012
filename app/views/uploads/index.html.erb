@@ -139,9 +139,9 @@
       $.getJSON($('#fileupload').prop('action'), function (files) {
         var fu = $('#fileupload').data('fileupload'), 
           template;
-        fu._adjustMaxNumberOfFiles(-files.length);
+        fu._adjustMaxNumberOfFiles(-files.files.length);
         console.log(files);
-        template = fu._renderDownload(files)
+        template = fu._renderDownload(files.files)
           .appendTo($('#fileupload .files'));
         // Force reflow:
         fu._reflow = fu._transition && template.length &&

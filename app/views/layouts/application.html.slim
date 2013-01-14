@@ -32,22 +32,8 @@ body
     = yield :form_error
 
     .row-fluid
+
       .span8
-        li = link_to "Корзина", "/path1" 
-        li = link_to "Заказы", "/path2"
-        li = link_to "Избранное", "/path3"
-        li = link_to "Автомобили", "/path3"
-        li = link_to "Адреса доставки", "/path3"
-        li = link_to "Электронная почта", "/path3"
-        li = link_to "Телефоны", "/path3"
-
-        div
-          h3 Rotate
-          = image_tag 'rails.png', :class => "img-rotate"
-        div.jcrop-hack
-          h3 Crop
-          = image_tag 'rails.png', :class => "img-crop"
-
         = yield
 
       .span4
