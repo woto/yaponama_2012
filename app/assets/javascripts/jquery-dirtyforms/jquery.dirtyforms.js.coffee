@@ -32,7 +32,7 @@ class _DirtyForms
 
     # We need this tweak for correct working with turbolinks
     @custom_reset_dirty = ->
-      if CKEDITOR
+      if CKEDITOR?
         for own key of CKEDITOR.instances
           ckeditor = CKEDITOR.instances[key]
           ckeditor.resetDirty()
@@ -40,7 +40,7 @@ class _DirtyForms
 
     # Modify it's method for you needs. TinyMCE may be...
     @custom_check_dirty = ->
-      if CKEDITOR
+      if CKEDITOR?
         for own key of CKEDITOR.instances
           ckeditor = CKEDITOR.instances[key]
           if ckeditor.checkDirty()
@@ -54,7 +54,7 @@ class _DirtyForms
     $(document).on 'submit', @forms_selector, @submit
     $(document).on 'ajax:beforeSend', @rails
 
-    if CKEDITOR
+    if CKEDITOR?
       # Because CKEditor doesn't have change event
       CKEDITOR.on 'instanceReady', (e) =>
         e.editor.on 'blur', => 
