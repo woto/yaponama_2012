@@ -4,9 +4,6 @@ class EmailAddress < ActiveRecord::Base
   include BelongsToCreator
   include PingCallback
 
-  attr_accessible :notes, :notes_invisible, :as => [:admin, :manager, :user]
-  attr_accessible :confirmed_by_human, :email_address, :user_id, :human_confirmation_datetime, :visible, :as => [:admin, :manager, :user, :guest]
-
   #validates :user, :presence => true
 
   belongs_to :user#, :validate => true
@@ -23,9 +20,6 @@ class EmailAddress < ActiveRecord::Base
 end
 
 #class EmailAddress < ActiveRecord::Base
-#  attr_accessible :email_address
-#  attr_accessible :confirmed_by_human, :human_confirmation_datetime, :notes_invisible
-#
 #  belongs_to :user
 #  validates :email_address, :format => {:with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/}
 #end

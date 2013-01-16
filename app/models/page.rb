@@ -1,8 +1,6 @@
 #encoding: utf-8
 
 class Page < ActiveRecord::Base
-  attr_accessible :content, :description, :keywords, :path, :robots, :title
-
   before_save :cut_first_slash
 
   validates :path, :presence => true, :uniqueness => {case_sensitive: false}

@@ -1,4 +1,4 @@
 /[if lt IE 9]
   = javascript_include_tag 'html5shiv/html5shiv'
 
-= javascript_include_tag "//192.168.2.7:80/socket.io/socket.io.js"
+= javascript_include_tag "//#{Admin::SiteSetting.current_environment.socket_io_full_address}/socket.io/socket.io.js"

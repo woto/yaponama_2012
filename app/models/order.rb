@@ -4,15 +4,12 @@ class Order < ActiveRecord::Base
 
   #before_create :build_transaction
 
-  attr_accessible :phone_id, :notes, :notes_invisible
-  attr_accessible :delivery_id, :delivery_cost
   belongs_to :delivery
   belongs_to :name
   belongs_to :phone
   belongs_to :postal_address
 
   belongs_to :metro
-  attr_accessible :metro_id
   validates_associated :metro
 
   belongs_to :user#, :validate => true
@@ -24,7 +21,6 @@ class Order < ActiveRecord::Base
   validates_associated :phone
 
   has_many :products, :dependent => :destroy
-  attr_accessible :products_attributes
   accepts_nested_attributes_for :products, :allow_destroy => true
 
   has_many :products_inorder, :dependent => :destroy,
@@ -35,7 +31,6 @@ class Order < ActiveRecord::Base
     p.status = 'inorder'
   end
 
-  attr_accessible :products_inorder_attributes
   accepts_nested_attributes_for :products_inorder, :allow_destroy => true
 
   has_many :products_ordered, :dependent => :destroy,
@@ -46,17 +41,14 @@ class Order < ActiveRecord::Base
     p.status = 'ordered'
   end
 
-  attr_accessible :products_ordered_attributes
   accepts_nested_attributes_for :products_ordered, :allow_destroy => true
 
   #has_many :products_inwork, :dependent => :destroy,
   #  :conditions => {:products => {:status => 'inwork'}}, :class_name => "Product",
   #  # TODO если буду раскомментировать блок, то переделать как вверху
   #  :after_add => Proc.new{|i, p| p.status = 'inwork'}
-  #attr_accessible :products_inwork_attributes
   #accepts_nested_attributes_for :products_inwork, :allow_destroy => true
 
-  attr_accessible :name_id, :postal_address_id, :created_at, :updated_at, :status
   has_many :documents, :as => :documentable, :class_name => "Transaction"
 
   def to_label

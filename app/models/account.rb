@@ -1,5 +1,4 @@
 class Account < ActiveRecord::Base
-  attr_accessible :name, :debit, :credit, :accountable_id, :accountable_type, :as => [:admin, :manager, :user, :guest]
   belongs_to :accountable, :polymorphic => true
   has_many :left_transactions, :class_name => "MoneyTransaction", :foreign_key => "left_account_id", :dependent => :destroy
   has_many :right_transactions, :class_name => "MoneyTransaction", :foreign_key => "right_account_id", :dependent => :destroy

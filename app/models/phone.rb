@@ -9,8 +9,6 @@ class Phone < ActiveRecord::Base
   belongs_to :user#, :validate => true
   validates :user, :presence => true
 
-  attr_accessible :confirmed_by_human, :phone_type, :notes, :phone, :notes_invisible, :user_id, :human_confirmation_datetime, :as => [:admin, :manager, :user, :guest]
-
   validates :phone_type, :inclusion => { :in => Rails.configuration.phone_types.keys }
 
   validates :phone, :presence => true, :uniqueness => { case_sensitive: false } 

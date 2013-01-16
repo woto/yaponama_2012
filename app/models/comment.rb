@@ -1,5 +1,4 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :commentable_id, :commentable_type, :content, :parent_id, :as => [:admin, :manager, :user, :guest]
   has_ancestry
 
   belongs_to :user

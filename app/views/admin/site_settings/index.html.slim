@@ -1,0 +1,51 @@
+- model_class = Admin::SiteSetting
+div class="page-header"
+  h1=t '.title', :default => model_class.model_name.human.pluralize
+table class="table table-striped"
+  thead
+    tr
+      th= model_class.human_attribute_name(:id)
+      th= model_class.human_attribute_name(:environment)
+      th= model_class.human_attribute_name(:request_emex)
+      th= model_class.human_attribute_name(:emex_income_rate)
+      th= model_class.human_attribute_name(:avtorif_income_rate)
+      th= model_class.human_attribute_name(:retail_rate)
+      th= model_class.human_attribute_name(:robokassa_integration_mode)
+      th= model_class.human_attribute_name(:robokassa_pass_1)
+      th= model_class.human_attribute_name(:robokassa_pass_2)
+      th= model_class.human_attribute_name(:robokassa_user)
+      th= model_class.human_attribute_name(:send_request_from_search_page)
+      th= model_class.human_attribute_name(:site_full_address)
+      th= model_class.human_attribute_name(:redis_full_address)
+      th= model_class.human_attribute_name(:socket_io_full_address)
+      th= model_class.human_attribute_name(:juggernaut_full_address)
+      th= model_class.human_attribute_name(:price_full_address)
+      th= model_class.human_attribute_name(:created_at)
+      th=t '.actions', :default => t("helpers.actions")
+  tbody
+    - @admin_site_settings.each do |admin_site_setting|
+      tr
+        td= link_to admin_site_setting.id, admin_site_setting_path(admin_site_setting)
+        td= admin_site_setting.environment
+        td= admin_site_setting.request_emex
+        td= admin_site_setting.emex_income_rate
+        td= admin_site_setting.avtorif_income_rate
+        td= admin_site_setting.retail_rate
+        td= admin_site_setting.robokassa_integration_mode
+        td= admin_site_setting.robokassa_pass_1
+        td= admin_site_setting.robokassa_pass_2
+        td= admin_site_setting.robokassa_user
+        td= admin_site_setting.send_request_from_search_page
+        td= admin_site_setting.site_full_address
+        td= admin_site_setting.redis_full_address
+        td= admin_site_setting.socket_io_full_address
+        td= admin_site_setting.juggernaut_full_address
+        td= admin_site_setting.price_full_address
+        td=l admin_site_setting.created_at
+        td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_site_setting_path(admin_site_setting), :class => 'btn btn-mini'
+          '
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_site_setting_path(admin_site_setting), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_admin_site_setting_path, :class => 'btn btn-primary'
+

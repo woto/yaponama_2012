@@ -1,7 +1,5 @@
 class Metro < ActiveRecord::Base
 
-  attr_accessible :metro, :delivery_cost
-
   validates :metro, :presence => true
   validates :delivery_cost, :numericality => {:only_integer => true}
 

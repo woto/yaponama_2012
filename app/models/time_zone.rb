@@ -1,6 +1,4 @@
 class TimeZone < ActiveRecord::Base
-  attr_accessible :time_zone, :utc_offset_hours, :utc_offset_minutes, :human_confirmation_datetime
-
   has_one :user
   #validates :user, :presence => true
 

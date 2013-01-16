@@ -2,11 +2,9 @@ class Car < ActiveRecord::Base
   include BelongsToCreator
   include PingCallback
 
-  attr_accessible :requests_attributes
   has_many :requests, :dependent => :destroy
   accepts_nested_attributes_for :requests, :allow_destroy => true
 
-  attr_accessible :root_requests_with_car_attributes, :as => [:admin, :manager, :user]
   has_many :root_requests_with_car, :dependent => :destroy,
     :conditions => ["request_id IS NULL"], :class_name => "Request"
   accepts_nested_attributes_for :root_requests_with_car, :allow_destroy => true
@@ -14,8 +12,6 @@ class Car < ActiveRecord::Base
   # TODO когда был в Авторифе и демонстрировал Николаеву всплыл опять этот баг! Доколе блиа? 1/2
   belongs_to :user#, :validate => true
   validates :user, :presence => true
-
-  attr_accessible :car_number, :notes, :dvigatel, :frame, :god, :kod_dvigatelya, :kod_kuzova, :komplektaciya, :kpp, :marka, :model, :moschnost, :privod, :rinok, :tip, :tip_kuzova, :vin, :notes_invisible, :visible, :as => [:admin, :manager, :user]
 
   validates :vin, :uniqueness => { case_sensitive: false }, :allow_blank => true, :length => { :within => 17..17 }
   validates :frame, :uniqueness => { case_sensitive: false }, :allow_blank => true

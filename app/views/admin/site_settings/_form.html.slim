@@ -1,0 +1,25 @@
+= simple_form_for @admin_site_setting, :html => { :class => "form-horizontal" } do |f|
+  = f.input :environment
+  = f.input :request_emex
+  = f.input :emex_income_rate
+  = f.input :avtorif_income_rate
+  = f.input :retail_rate
+  = f.input :robokassa_integration_mode
+  = f.input :robokassa_pass_1
+  = f.input :robokassa_pass_2
+  = f.input :robokassa_user
+  = f.input :send_request_from_search_page
+  = f.input :site_address
+  = f.input :site_port
+  = f.input :redis_address
+  = f.input :redis_port
+  = f.input :socket_io_address
+  = f.input :socket_io_port
+  = f.input :juggernaut_address
+  = f.input :juggernaut_port
+  = f.input :price_address
+  = f.input :price_port
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    '
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_site_settings_path, :class => 'btn'

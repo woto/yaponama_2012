@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110155802) do
+ActiveRecord::Schema.define(:version => 20130116032450) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -47,6 +47,31 @@ ActiveRecord::Schema.define(:version => 20130110155802) do
     t.string   "bic"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+  end
+
+  create_table "admin_site_settings", :force => true do |t|
+    t.string   "environment"
+    t.boolean  "request_emex"
+    t.float    "emex_income_rate"
+    t.float    "avtorif_income_rate"
+    t.float    "retail_rate"
+    t.string   "robokassa_integration_mode"
+    t.string   "robokassa_pass_1"
+    t.string   "robokassa_pass_2"
+    t.string   "robokassa_user"
+    t.boolean  "send_request_from_search_page"
+    t.string   "site_address"
+    t.string   "site_port"
+    t.string   "redis_address"
+    t.string   "redis_port"
+    t.string   "socket_io_address"
+    t.string   "socket_io_port"
+    t.string   "juggernaut_address"
+    t.string   "juggernaut_port"
+    t.string   "price_address"
+    t.string   "price_port"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "admin_spare_infos", :force => true do |t|

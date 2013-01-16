@@ -9,16 +9,12 @@ class Product < ActiveRecord::Base
 
   # Виртуальные аттрибуты
   attr_accessor :delivery_id, :delivery_cost
-  attr_accessible :delivery_id, :delivery_cost
 
   # TODO remove later, when normalized situation around edit view product_fields
   attr_accessor :_destroy
-  attr_accessible :_destroy, :as => [:admin, :manager, :user]
 
-  attr_accessible :catalog_number, :manufacturer, :short_name, :long_name, :as => [:admin, :manager, :user]
   validates :catalog_number, :manufacturer, :presence => true
 
-  attr_accessible :buy_cost, :sell_cost, :as => [:admin, :manager, :user]
   validates :buy_cost, :numericality => { :greater_than => 0}
   validates :sell_cost, :numericality => { :greater_than => 0}
 
@@ -33,21 +29,15 @@ class Product < ActiveRecord::Base
 
   belongs_to :product
 
-  attr_accessible :products_attributes, :as => [:admin, :manager, :user]
   has_many :products, :dependent => :destroy
   accepts_nested_attributes_for :products, :allow_destroy => true
 
-  attr_accessible :status
   validates :status, :inclusion => {:in => Rails.configuration.products_status.select{|k, v| v['real'] == true}.keys}
 
   # Необходимо для подсчета суммы внесения предоплаты для запуска заказа в работу (при переводе в статус ordered)
   scope :inwork, where("STRPOS(?, products.status) > 0", "ordered,pre_supplier,post_supplier,stock")
 
   #scope :inorder, where(:status => "inorder")
-
-  attr_accessible :notes, :notes_invisible, :max_days, :min_days, :probability, :quantity_available, :quantity_ordered, :user_id, :order_id, :created_at, :updated_at, :as => [:admin, :manager, :user]
-
-  attr_accessible :supplier_id
 
   #before_save :set_relational_attributes_save
   #

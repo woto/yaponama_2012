@@ -2,6 +2,8 @@ Yaponama2012::Application.routes.draw do
 
   namespace :admin do
 
+    resources :site_settings
+
     resources :brands
 
     resources :uploads
