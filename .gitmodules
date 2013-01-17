@@ -1,3 +1,3 @@
-[submodule "vendor/assets/javascripts/ckeditor"]
-	path = vendor/assets/javascripts/ckeditor
-	url = https://github.com/ckeditor/ckeditor-dev
+[submodule "system/ckeditor-dev"]
+	path = system/ckeditor-dev
+	url = https://github.com/woto/ckeditor-dev.git
