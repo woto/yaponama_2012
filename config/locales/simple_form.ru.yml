@@ -12,6 +12,36 @@ ru:
       default_message: <button class="close" data-dismiss="alert">&times;</button>Невозможно продолжить, т.к. форма заполнена не корректно
     labels:
       defaults:
+        site_address: Адрес этого сайта
+        site_port: Порт этого сайта
+        redis_address: Адрес redis
+        redis_port: Порт redis
+        socket_io_address: Адрес socket.io
+        socket_io_port: Порт socket.io
+        price_address: Адрес сервера прайсов
+        price_port: Порт сервера прайсов
+        juggernaut_address: Адрес Juggernaut
+        juggernaut_port: Порт Juggernaut
+        sms_notify_method: Способ уведомления SMS
+        environment: Окружение
+        request_emex: Отправлять запросы к emex.ru
+        send_request_from_search_page: Делать запрос к каталогам с страницы поиска
+        emex_income_rate: Коэффициент прихода emex.ru
+        avtorif_income_rate: Коэффициент прихода avtorif.ru
+        retail_rate: Розничный коэффициент
+        robokassa_integration_mode: Режим работы robokassa.ru
+        robokassa_pass_1: Пароль №1 robokassa.ru 
+        robokassa_pass_2: Пароль №2 robokassa.ru
+        robokassa_user: Логин robokassa.ru
+        default_user_prepayment_percent: Процент предоплаты для новых пользователей
+        default_user_discount: Процент скидки для новых пользователей
+        default_user_order_rule: Правило предоплаты для новых пользователей
+        avisosms_username: Логин avisosms.ru
+        avisosms_password: Пароль avisosms.ru
+        avisosms_source_address: Отправитель avisosms.ru
+        avisosms_delivery_report: Отчет о доставке
+        avisosms_flash_message: Flash сообщение
+        avisosms_validity_period: Срок доставки
         description: Описание
         keywords: Ключевые слова
         robots: Запрещение индексации или следования
@@ -101,6 +131,11 @@ ru:
         
     hints:
       defaults:
+        avisosms_source_address: Прежде чем использовать новое имя, его необходимо зарегистрировать на сайте avisosms.ru
+        avisosms_delivery_report: Не проверялось
+        avisosms_flash_message: Не проверялось
+        avisosms_validity_period: Не проверялось 
+        environment: Скорее всего production, development или test
         title: Не допустимо использовать теги, крайне рекомендуется не использовать прописные ("заглавные) буквы, за исключением слов - акронимов (аббревиатур") типа ГУМ, СССР и т.д.&lt;title&gt;...&lt;/title&gt;
         description: 2-3 предложения максимально описывающих содержимое страницы. &lt;meta name="Description" content="..."/&gt;
         keywords: Список ключевых слов через запятую, используемые в тексте страницы. &lt;meta name="Keywords" content="..." /&gt;

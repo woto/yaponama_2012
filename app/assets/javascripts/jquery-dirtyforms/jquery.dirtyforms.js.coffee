@@ -1,11 +1,10 @@
+root = exports ? this # http://stackoverflow.com/questions/4214731/coffeescript-global-variables
 
 $(document).on 'page:load', (e) ->
   new root.DirtyForms.get
 
 $ ->
   new root.DirtyForms.get
-
-root = exports ? this # http://stackoverflow.com/questions/4214731/coffeescript-global-variables
 
 # The publicly accessible Singleton fetcher
 class root.DirtyForms
@@ -55,11 +54,20 @@ class _DirtyForms
     $(document).on 'ajax:beforeSend', @rails
 
     if CKEDITOR?
-      # Because CKEditor doesn't have change event
-      CKEDITOR.on 'instanceReady', (e) =>
-        e.editor.on 'blur', => 
-          if e.editor.checkDirty()
-            @highlight_dirty(e.editor.element.$)
+      add_instance_ready_handler CKEDITOR
+
+  lazy_added_ckeditor: (ckeditor) =>
+    @add_instance_ready_handler ckeditor
+    
+
+  add_instance_ready_handler: (ckeditor) =>
+    # Because CKEditor doesn't have change event
+    ckeditor.on 'instanceReady', (e) =>
+      e.editor.on 'blur', => 
+        if e.editor.checkDirty()
+          @highlight_dirty(e.editor.element.$)
+
+
 
   rails: (e) =>
     unless ( $(e.target).is(@forms_selector) )

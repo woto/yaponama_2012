@@ -1,27 +1,34 @@
 class Admin::SiteSetting < ActiveRecord::Base
+  include ConfigHelper
 
-  def self.current_environment
-    where(:environment => Rails.env).first
-  end
-
-  def socket_io_full_address
-    socket_io_address + ":" + socket_io_port
-  end
-
-  def juggernaut_full_address
-    juggernaut_address + ":" + juggernaut_port
-  end
-
-  def site_full_address
-    site_address + ":" + site_port
-  end
-
-  def redis_full_address
-    redis_address + ":" + redis_port
-  end
-
-  def price_full_address
-    price_address + ":" + price_port
-  end
-
+  validates :sms_notify_method, :inclusion => { :in => Rails.configuration.sms_notify_methods }
+  validates :robokassa_integration_mode, :inclusion => { :in => Rails.configuration.robokassa_integration_modes }
+  validates :default_user_order_rule, :inclusion => { :in => Rails.configuration.user_order_rules }
+  validates :environment, :presence => true
+  validates :emex_income_rate, :numericality => true
+  validates :avtorif_income_rate, :numericality => true
+  validates :retail_rate, :numericality => true
+  validates :price_request_cache_with_replacements_in_seconds, :numericality => { :only_integer => true }
+  validates :price_request_cache_without_replacements_in_seconds, :numericality => { :only_integer => true }
+  validates :robokassa_pass_1, :presence => true
+  validates :robokassa_pass_2, :presence => true
+  validates :robokassa_user, :presence => true
+  validates :default_user_prepayment_percent, :numericality => true
+  validates :default_user_discount, :numericality => true
+  validates :avisosms_username, :presence => true
+  validates :avisosms_password, :presence => true
+  validates :avisosms_source_address, :presence => true
+  validates :avisosms_delivery_report, :presence => true
+  validates :avisosms_flash_message, :presence => true
+  validates :avisosms_validity_period, :presence => true
+  validates :site_address, :presence => true
+  validates :site_port, :presence => true
+  validates :redis_address, :presence => true
+  validates :redis_port, :presence => true
+  validates :socket_io_address, :presence => true
+  validates :socket_io_port, :presence => true
+  validates :price_address, :presence => true
+  validates :price_port, :presence => true
+  validates :juggernaut_address, :presence => true
+  validates :juggernaut_port, :presence => true
 end

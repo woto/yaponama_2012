@@ -3,7 +3,7 @@
 user = User.new
 user.build_account
 user.account.assign_attributes( {:debit => 0, :credit => 0}, :without_protection => true )
-user.assign_attributes( Rails.configuration.default_user_attributes, :without_protection => true )
+user.assign_attributes( SiteConfig.default_user_attributes, :without_protection => true )
 user.role = "admin"
 user.password = '1111111111'
 phone = user.phones.build

@@ -51,6 +51,10 @@ ActiveRecord::Schema.define(:version => 20130116032450) do
 
   create_table "admin_site_settings", :force => true do |t|
     t.string   "environment"
+    t.string   "sms_notify_method"
+    t.boolean  "send_request_from_search_page"
+    t.integer  "price_request_cache_with_replacements_in_seconds"
+    t.integer  "price_request_cache_without_replacements_in_seconds"
     t.boolean  "request_emex"
     t.float    "emex_income_rate"
     t.float    "avtorif_income_rate"
@@ -59,7 +63,15 @@ ActiveRecord::Schema.define(:version => 20130116032450) do
     t.string   "robokassa_pass_1"
     t.string   "robokassa_pass_2"
     t.string   "robokassa_user"
-    t.boolean  "send_request_from_search_page"
+    t.float    "default_user_prepayment_percent"
+    t.float    "default_user_discount"
+    t.string   "default_user_order_rule"
+    t.string   "avisosms_username"
+    t.string   "avisosms_password"
+    t.string   "avisosms_source_address"
+    t.string   "avisosms_delivery_report"
+    t.string   "avisosms_flash_message"
+    t.string   "avisosms_validity_period"
     t.string   "site_address"
     t.string   "site_port"
     t.string   "redis_address"
@@ -70,8 +82,8 @@ ActiveRecord::Schema.define(:version => 20130116032450) do
     t.string   "juggernaut_port"
     t.string   "price_address"
     t.string   "price_port"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
   end
 
   create_table "admin_spare_infos", :force => true do |t|

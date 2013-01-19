@@ -1,17 +1,3 @@
-defaults: &defaults
-  price_request_cache_with_replacements_in_seconds: 7776000 # 3 мес.
-  price_request_cache_without_replacements_in_seconds: 3600 #  1 час.
-  redis_port: 6379
-  price_address: '192.168.2.9:3000'
-  request_emex: true
-  emex_income_rate: 1.05 # Наценка 5%
-  avtorif_income_rate: 0.8002 # Скидка 19.98%
-  retail_rate: 1.15
-  robokassa_integration_mode: 'production'
-  robokassa_pass_1: 'password1'
-  robokassa_pass_2: 'password2'
-  robokassa_user: 'login'
-  send_request_from_search_page: true
   cached_ip:
     - 127.0.0.1/32
     - 66.249.64.0/19
@@ -188,16 +174,3 @@ defaults: &defaults
     - 213.180.218.0/23
     - 213.180.220.0/23
     # - 37.110.44.140/32
-
-
-development:
-  <<: *defaults
-  site_address: '192.168.2.2:3000'
-  redis_address: '192.168.2.2'
-  juggernaut_address: '192.168.2.2'
-
-production:
-  <<: *defaults
-  site_address: 'www.yaponama.ru'
-  redis_address: 'www.yaponama.ru'
-  juggernaut_address: 'www.yaponama.ru'

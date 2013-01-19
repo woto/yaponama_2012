@@ -7,13 +7,20 @@ javascript:
 / TODO разобраться
 = render :partial => "pages/add_menu_elements"
 
+h1 = @page.path
+
 / TODO bro sanitize check?!
 #editable.editable 
   == @page.content
 
 = form_tag [:admin, @page], :method => :put, :remote => true do
   = hidden_field_tag 'page[content]', '', :id => :content
-  button#save.btn.btn-primary Сохранить
+  hr
+  button#edit.btn Редактировать
+  |  
+  button#save.btn.btn-primary Сохранить  
+  |  
+  button#cancel.btn Отмена  
 
 hr
 

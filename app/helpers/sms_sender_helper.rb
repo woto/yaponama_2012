@@ -11,7 +11,7 @@ module SmsSenderHelper
       raise 'Не указан текст сообщения message_data'
     end
 
-    case Rails.configuration.avisosms[:method]
+    case SiteConfig.sms_notify_method
     when 'sms'
       SmsSender.notify_by_sms data
     when 'growl'

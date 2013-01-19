@@ -1,23 +1,27 @@
-#_.delay (->
-#  console.log $(this).val(instance.getData());
-#), 1000, "logged later"
-
-$ ->
-  makeEditable()
-
-$(document).on 'page:load', (e) ->
-  makeEditable()
+##_.delay (->
+##  console.log $(this).val(instance.getData());
+##), 1000, "logged later"
 
 makeEditable = ->
   $('.editable').each ->
     $(this).attr('contenteditable', 'true')
-    CKEDITOR.inline(this);
+    CKEDITOR.inline(this, window.extended_options);
+    $(this).editableHighlight()
+    #this.focus()
+
+$(document).on 'click', '#edit', (e) ->
+  e.preventDefault()
+  CKEDITOR.disableAutoInline = true;
+  makeEditable()
 
 $(document).on 'click', '#save', -> 
   data = CKEDITOR.instances.editable.getData();
   #alert(data);
   $('#content').val(data)
-  CKEDITOR.instances.editable.resetDirty()
+  $(CKEDITOR.instances.editable.element.$).editableHighlight()
+  CKEDITOR.instances.editable.destroy()
+  $('.editable').removeAttr('contenteditable')
+  #CKEDITOR.instances.editable.resetDirty()
 
-
-CKEDITOR.disableAutoInline = true;
+# TODO из-за того, что ckeditor загружаю через jQuery getScript это перестало быть работоспособным
+#CKEDITOR.disableAutoInline = true;

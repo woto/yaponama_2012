@@ -1,24 +1,48 @@
-= simple_form_for @admin_site_setting, :html => { :class => "form-horizontal" } do |f|
+= simple_form_for @admin_site_setting, :html => { :class => "form-horizontal dirtyforms" } do |f|
+
+  - content_for :form_error do
+    = f.error_notification
+  end
+
   = f.input :environment
-  = f.input :request_emex
-  = f.input :emex_income_rate
-  = f.input :avtorif_income_rate
-  = f.input :retail_rate
-  = f.input :robokassa_integration_mode
-  = f.input :robokassa_pass_1
-  = f.input :robokassa_pass_2
-  = f.input :robokassa_user
-  = f.input :send_request_from_search_page
-  = f.input :site_address
-  = f.input :site_port
-  = f.input :redis_address
-  = f.input :redis_port
-  = f.input :socket_io_address
-  = f.input :socket_io_port
-  = f.input :juggernaut_address
-  = f.input :juggernaut_port
-  = f.input :price_address
-  = f.input :price_port
+  - if params[:filter] == 'other' || params[:filter].blank? 
+    = f.input :send_request_from_search_page
+    = f.input :sms_notify_method, :collection => Rails.configuration.sms_notify_methods, :required => true
+    = f.input :price_request_cache_with_replacements_in_seconds, :as => :string, :required => true
+    = f.input :price_request_cache_without_replacements_in_seconds, :as => :string, :required => true
+  - if params[:filter] == 'prices' || params[:filter].blank?
+    = f.input :request_emex
+    = f.input :emex_income_rate, :as => :string
+    = f.input :avtorif_income_rate, :as => :string
+    = f.input :retail_rate, :as => :string
+  - if params[:filter] == 'robokassa' || params[:filter].blank?
+    = f.input :robokassa_user
+    = f.input :robokassa_pass_1
+    = f.input :robokassa_pass_2
+    = f.input :robokassa_integration_mode, :collection => Rails.configuration.robokassa_integration_modes, :value_method => :first, :label_method => :last
+  - if params[:filter] == 'default_users' || params[:filter].blank?
+    = f.input :default_user_prepayment_percent, :as => :string
+    = f.input :default_user_discount, :as => :string
+    = f.input :default_user_order_rule, :collection => Rails.configuration.user_order_rules, :value_method => :first, :label_method => :last
+  - if params[:filter] == 'avisosms' || params[:filter].blank?
+    = f.input :avisosms_username
+    = f.input :avisosms_password, :as => :string
+    = f.input :avisosms_source_address
+    = f.input :avisosms_delivery_report
+    = f.input :avisosms_flash_message
+    = f.input :avisosms_validity_period
+  - if params[:filter] == 'resources' || params[:filter].blank?
+    = f.input :site_address
+    = f.input :site_port
+    = f.input :redis_address
+    = f.input :redis_port
+    = f.input :socket_io_address
+    = f.input :socket_io_port
+    = f.input :juggernaut_address
+    = f.input :juggernaut_port
+    = f.input :price_address
+    = f.input :price_port
+
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     '

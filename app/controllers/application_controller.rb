@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
         end
       else
         @current_user = User.new
-        @current_user.assign_attributes(Rails.configuration.default_user_attributes, :without_protection => true)
+        @current_user.assign_attributes(SiteConfig.default_user_attributes, :without_protection => true)
         @current_user.creation_reason = "session"
         @current_user.build_account
         @current_user.save!

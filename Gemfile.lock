@@ -20,6 +20,14 @@ GIT
       nokogiri
 
 GIT
+  remote: https://github.com/joliss/jquery-ui-rails.git
+  revision: 6b4e81b27858db3d3c434c5a70750be29d430a81
+  specs:
+    jquery-ui-rails (3.0.1)
+      jquery-rails
+      railties (>= 3.1.0)
+
+GIT
   remote: https://github.com/nathanvda/cocoon
   revision: b40e73734cccc09ea117bdf4adb1b456129fd5a4
   specs:
@@ -149,9 +157,6 @@ GEM
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (3.0.1)
-      jquery-rails
-      railties (>= 3.1.0)
     json (1.7.6)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
@@ -329,7 +334,7 @@ DEPENDENCIES
   hiredis (~> 0.3.1)
   ipgeobase
   jquery-rails
-  jquery-ui-rails
+  jquery-ui-rails!
   json
   juggernaut!
   kaminari

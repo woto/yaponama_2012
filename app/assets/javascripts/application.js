@@ -11,11 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 
-//= require jquery
-
-// TODO Нужен jquery.ui.widget для blueimp/jQuery-File-Upload.
-// Он не имеет зависимостей, но не понятно как выделить его из jquery-ui
-//= require jquery-ui 
+//= require jquery.min
 
 //= require jquery_ujs
 //= require turbolinks
@@ -23,42 +19,21 @@
 
 //= require jquery-dirtyforms/jquery.dirtyforms
 
-//= require ckeditor/basepath
-//= require ckeditor/ckeditor
+//= require ckeditor-helpers/extended_options
+//= require ckeditor-helpers/basepath
+//= require ckeditor-helpers/simple
+//= require ckeditor-helpers/extended
 
 //= require cocoon
 
 //= require backbone-rails
 
-//=require ckeditor/ckeditor-simple
-//=require ckeditor/ckeditor-extended
-
 //= require jquery-jsonp/jquery.jsonp
 //= require jquery-json/jquery.json.js
 
-//=require jquery-rotate/rotate
-//=require jquery-rotate/jquery.rotate
-
 //=require insert_images_dialog
 
-//=require jquery-jcrop/jquery.Jcrop
-//=require jquery-jcrop/jcrop
-
 //=require holder.js/holder
-
-
-//=require jquery-getimagedata/jquery.getimagedata
-//=require jquery-getimagedata/getimagedata
-
-//=require Javascript-Load-Image/load-image
-//=require Javascript-Canvas-To-Blob/canvas-to-blob
-//=require Javascript-Templates/tmpl
-//=require jQuery-File-Upload/jquery.iframe-transport
-//=require jQuery-File-Upload/jquery.fileupload
-//=require jQuery-File-Upload/jquery.fileupload-fp
-//=require jQuery-File-Upload/jquery.fileupload-ui
-//=require jQuery-Fileupload/locale
-
 
 //=require toolbar-checkboxes
 
@@ -72,3 +47,6 @@
 //= require socket.io/size
 //= require socket.io/scroll
 //= require socket.io/page
+//
+//= require jquery.cachedScript
+//= require jquery.editableHighlight

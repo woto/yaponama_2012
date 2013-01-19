@@ -14,8 +14,6 @@ end
 module Yaponama2012
   class Application < Rails::Application
 
-    ::APP_CONFIG = YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env]
-    
     # TODO Разобраться более тщательно, т.к. полагаю, что это могут делать подключаемые гемы автоматически
     # Generators
     config.generators do |g|
@@ -265,8 +263,6 @@ module Yaponama2012
       :password => 'password'
     }
 
-    config.action_mailer.default_url_options = { :host => APP_CONFIG['site_address'] }
-
     # Send Emails
     config.action_mailer.delivery_method = :smtp
 
@@ -281,9 +277,14 @@ module Yaponama2012
 
 
     # User Order Rule
-    config.user_order_rule = {
+    config.user_order_rules = {
       'all' => 'Автоматически уйдут в работу только если будет достаточно денег на все товары в заказе',
       'none' => 'Ни один заказ не будет оплачен',
+    }
+
+    config.robokassa_integration_modes = {
+      'production' => 'Рабочий режим',
+      'test' => 'Тестовый режим'
     }
 
     config.phone_types = {
@@ -291,13 +292,15 @@ module Yaponama2012
       'unknown' => 'Неизвестно'
     }
 
-    # Default settings for new users
-    config.default_user_attributes = {
-      'prepayment_percent' => 20,
-      'discount' => 0,
-      'order_rule' => 'all',
-      'role' => 'guest'
-    }
+    config.default_user_role = 'guest'
+
+    ## Default settings for new users
+    #config.default_user_attributes = {
+    #  'prepayment_percent' => 20,
+    #  'discount' => 0,
+    #  'order_rule' => 'all',
+    #  'role' => 'guest'
+    #}
 
     config.user_roles = {
       'all' => {
@@ -327,18 +330,20 @@ module Yaponama2012
       }
     }
 
-    config.avisosms = {
-      username: 'username',
-      password: 'password',
-      # Доступные варианты: flash sms growl
-      method: 'flash',
-      source_address: 'Yaponama',
-      delivery_report: '1',
-      flash_message: '0',
-      validity_period: '10'
-    }
+    #config.avisosms = {
+    #  username: 'username',
+    #  password: 'password',
+    #  # Доступные варианты: flash sms growl
+    #  method: 'flash',
+    #  source_address: 'Yaponama',
+    #  delivery_report: '1',
+    #  flash_message: '0',
+    #  validity_period: '10'
+    #}
 
     config.getimagedata = "http://192.168.2.7:8800"
+
+    config.sms_notify_methods = %w(flash sms growl)
 
   end
 end

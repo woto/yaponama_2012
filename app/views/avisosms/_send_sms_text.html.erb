@@ -4,14 +4,14 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
  <soap:Body>
   <SendTextMessage xmlns="http://sms.avisosms.ru/gate.php">
-  <smsUser><%= Rails.configuration.avisosms[:username] %></smsUser>
-    <password><%= Rails.configuration.avisosms[:password] %></password>
+  <smsUser><%= SiteConfig.avisosms_username %></smsUser>
+    <password><%= SiteConfig.avisosms_password %></password>
     <destinationAddress><%= data[:destination_address] %></destinationAddress>
     <messageData><%= data[:message_data] %></messageData>
-    <sourceAddress><%= Rails.configuration.avisosms[:source_address] %></sourceAddress>
-    <deliveryReport><%= Rails.configuration.avisosms[:delivery_report] %></deliveryReport>
-    <flashMessage><%= Rails.configuration.avisosms[:flash_message] %></flashMessage>
-    <validityPeriod><%= Rails.configuration.avisosms[:validity_period] %></validityPeriod>
+    <sourceAddress><%= SiteConfig.avisosms_source_address %></sourceAddress>
+    <deliveryReport><%= SiteConfig.avisosms_delivery_report %></deliveryReport>
+    <flashMessage><%= SiteConfig.avisosms_flash_message %></flashMessage>
+    <validityPeriod><%= SiteConfig.avisosms_validity_period %></validityPeriod>
   </SendTextMessage>
  </soap:Body>
 </soap:Envelope>

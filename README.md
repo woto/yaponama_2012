@@ -304,3 +304,6 @@ CKEDITOR
 
 http://peterpetrik.com/blog/remove-tabs-and-elements-from-ckeditor-dialog-window
 http://stackoverflow.com/questions/1794219/ckeditor-instance-already-exists
+
+SOCKET.IO
+chat https://github.com/liamks/Chatty

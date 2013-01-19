@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
   #has_many :documents, :as => :documentable, :class_name => "Transaction"
 
   validates :discount, :prepayment_percent, :numericality => true
-  validates :order_rule, :inclusion => { :in => Rails.configuration.user_order_rule.keys }
+  validates :order_rule, :inclusion => { :in => Rails.configuration.user_order_rules.keys }
   validates :role, :inclusion => Rails.configuration.user_roles.keys
 
   # Financial

@@ -5,7 +5,12 @@ join = (name) ->
   window.socket = io.connect("http://" + host + ":" + port)
 
 $(document).ready ->
+  connect()
+
+$(document).on 'page:load', ->
+  connect()
   
+connect = ->
     # send join message
     window.socket.emit "join", $.toJSON(user: name)
     container = $("div#msgs")
