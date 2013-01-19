@@ -1,0 +1,42 @@
+defaults: &defaults
+  price_request_cache_with_replacements_in_seconds: 7776000 # 3 мес.
+  price_request_cache_without_replacements_in_seconds: 3600 #  1 час.
+  sms_notify_method: flash
+  redis_port: '6379'
+  socket_io_address: '192.168.2.7'
+  socket_io_port: '80'
+  juggernaut_port: '8080'
+  price_address: '192.168.2.9'
+  price_port: '3000'
+  request_emex: true
+  emex_income_rate: 1.05 # Наценка 5%
+  avtorif_income_rate: 0.8002 # Скидка 19.98%
+  retail_rate: 1.15
+  robokassa_integration_mode: production
+  robokassa_pass_1: password
+  robokassa_pass_2: password
+  robokassa_user: login
+  avisosms_username: username
+  avisosms_password: password
+  avisosms_source_address: Yaponama
+  avisosms_delivery_report: 1
+  avisosms_flash_message: 0
+  avisosms_validity_period: 10
+  default_user_prepayment_percent: 20
+  default_user_discount: 0
+  default_user_order_rule: all
+  send_request_from_search_page: true
+
+development:
+  <<: *defaults
+  site_address: '192.168.2.7'
+  site_port: '3000'
+  redis_address: '192.168.2.7'
+  juggernaut_address: '192.168.2.7'
+
+production:
+  <<: *defaults
+  site_address: 'www.yaponama.ru'
+  site_port: '80'
+  redis_address: 'www.yaponama.ru'
+  juggernaut_address: 'www.yaponama.ru'
