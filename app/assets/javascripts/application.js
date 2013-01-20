@@ -50,3 +50,4 @@
 //
 //= require jquery.cachedScript
 //= require jquery.editableHighlight
+//= require jquery-cookie/jquery.cookie

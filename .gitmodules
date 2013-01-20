@@ -7,3 +7,6 @@
 [submodule "system/CKEditor-CodeMirror-Plugin"]
 	path = system/CKEditor-CodeMirror-Plugin
 	url = https://github.com/w8tcha/CKEditor-CodeMirror-Plugin.git
+[submodule "system/submodules/jquery-cookie"]
+	path = system/submodules/jquery-cookie
+	url = https://github.com/carhartl/jquery-cookie.git
