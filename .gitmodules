@@ -1,11 +1,11 @@
-[submodule "system/ckeditor-dev"]
-	path = system/ckeditor-dev
+[submodule "system/submodules/ckeditor-dev"]
+	path = system/submodules/ckeditor-dev
 	url = https://github.com/woto/ckeditor-dev.git
-[submodule "system/CKEditor-oEmbed-Plugin"]
-	path = system/CKEditor-oEmbed-Plugin
+[submodule "system/submodules/CKEditor-oEmbed-Plugin"]
+	path = system/submodules/CKEditor-oEmbed-Plugin
 	url = https://github.com/w8tcha/CKEditor-oEmbed-Plugin.git
-[submodule "system/CKEditor-CodeMirror-Plugin"]
-	path = system/CKEditor-CodeMirror-Plugin
+[submodule "system/submodules/CKEditor-CodeMirror-Plugin"]
+	path = system/submodules/CKEditor-CodeMirror-Plugin
 	url = https://github.com/w8tcha/CKEditor-CodeMirror-Plugin.git
 [submodule "system/submodules/jquery-cookie"]
 	path = system/submodules/jquery-cookie
