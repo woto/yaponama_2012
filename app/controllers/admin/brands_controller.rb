@@ -1,4 +1,15 @@
 class Admin::BrandsController < Admin::ApplicationController
+  respond_to :json
+
+  def search
+
+    brand_t = Brand.arel_table
+
+    @brands = Brand.where(brand_t[:name].matches("#{params[:name]}%")).order(:name).page params[:page]
+    #@brands = Brand.where(:name => params[:name]
+    respond_with @brands
+  end
+
   # GET /brands
   # GET /brands.json
   def index

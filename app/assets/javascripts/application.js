@@ -11,8 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 
-//= require jquery.min
-
+//= require jquery
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap/bootstrap
@@ -39,9 +38,6 @@
 
 //=require tests
 
-//= require chosen-jquery
-//= require chosen
-
 //= require socket.io/connect
 //= require socket.io/cursor
 //= require socket.io/size
@@ -51,3 +47,8 @@
 //= require jquery.cachedScript
 //= require jquery.editableHighlight
 //= require jquery-cookie/jquery.cookie
+
+//= require select2/select2
+//
+//= require brand_model
+//= require cars

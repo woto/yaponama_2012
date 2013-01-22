@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116032450) do
+ActiveRecord::Schema.define(:version => 20130120165741) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(:version => 20130116032450) do
     t.string   "bic"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+  end
+
+  create_table "admin_models", :force => true do |t|
+    t.integer  "brand_id"
+    t.string   "name"
+    t.integer  "creator_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "admin_site_settings", :force => true do |t|
@@ -248,6 +256,14 @@ ActiveRecord::Schema.define(:version => 20130116032450) do
     t.integer  "delivery_cost"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "models", :force => true do |t|
+    t.integer  "brand_id"
+    t.string   "name"
+    t.integer  "creator_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "money_transactions", :force => true do |t|

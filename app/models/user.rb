@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
 
   has_many :uploads
 
+  # TODO сделать.
+  #has_many :brands
+  #has_many :models
+
   has_many :stats, :dependent => :destroy
 
   #has_many :comments

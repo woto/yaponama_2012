@@ -24,9 +24,16 @@
       </div>
 
       <div class="tab-pane" id="tab2<%= counter %>">
+
+        <%= f.input :marka do %>
+          <%= f.hidden_field(:marka, :style => "width: 220px") %>
+        <% end %>
+
+        <%= f.input :model do %>
+          <%= f.hidden_field(:model, :style => "width: 220px") %>
+        <% end %>
+
         <%= f.input :god %>
-        <%= f.input :marka %>
-        <%= f.input :model %>
         <%= f.input :dvigatel %>
         <%= f.input :tip %>
         <%= f.input :moschnost %>

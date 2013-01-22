@@ -2,9 +2,18 @@ Yaponama2012::Application.routes.draw do
 
   namespace :admin do
 
+
+    resources :models do
+      get 'search', :on => :collection
+    end
+
+
+
     resources :site_settings
 
-    resources :brands
+    resources :brands do
+      get 'search', :on => :collection
+    end
 
     resources :uploads
 

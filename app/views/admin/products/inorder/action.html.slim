@@ -10,6 +10,7 @@ ul.breadcrumb : li Смена статуса на "#{Rails.configuration.product
   = f.association :name, :collection => @products.first.user.names
   = f.association :postal_address, :collection => @products.first.user.postal_addresses 
   = f.association :phone, :collection => @products.first.user.phones
+  / Заменить chzn на select2
   = f.association :metro, :collection => Metro.all.map{|metro| [metro.metro, metro.id]}, :input_html => {class: "chzn-select"}
   = f.input :delivery_cost, :as => :string
   = f.input :notes, :input_html => {:rows => 3}
