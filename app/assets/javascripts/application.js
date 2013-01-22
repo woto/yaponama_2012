@@ -48,7 +48,9 @@
 //= require jquery.editableHighlight
 //= require jquery-cookie/jquery.cookie
 
-//= require select2/select2
+//= require select2
 //
 //= require brand_model
 //= require cars
+//
+//= require jquery.transit

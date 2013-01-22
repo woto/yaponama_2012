@@ -19,3 +19,5 @@
 
 //=require jquery-rotate/rotate
 //=require jquery-rotate/jquery.rotate
+//
+//=require rotate-tests

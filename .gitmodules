@@ -25,3 +25,9 @@
 [submodule "system/submodules/JavaScript-Templates"]
 	path = system/submodules/JavaScript-Templates
 	url = https://github.com/blueimp/JavaScript-Templates.git
+[submodule "system/submodules/Modernizr"]
+	path = system/submodules/Modernizr
+	url = https://github.com/Modernizr/Modernizr.git
+[submodule "system/submodules/jquery.transit"]
+	path = system/submodules/jquery.transit
+	url = https://github.com/rstacruz/jquery.transit

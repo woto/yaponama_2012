@@ -1,1 +1,0 @@
-/Users/woto/rails/yaponama_2012/system/submodules/select2/select2.js
