@@ -13,3 +13,15 @@
 [submodule "system/submodules/select2"]
 	path = system/submodules/select2
 	url = https://github.com/ivaynberg/select2
+[submodule "system/submodules/JavaScript-Canvas-to-Blob"]
+	path = system/submodules/JavaScript-Canvas-to-Blob
+	url = https://github.com/blueimp/JavaScript-Canvas-to-Blob.git
+[submodule "system/submodules/jQuery-File-Upload"]
+	path = system/submodules/jQuery-File-Upload
+	url = https://github.com/blueimp/jQuery-File-Upload.git
+[submodule "system/submodules/JavaScript-Load-Image"]
+	path = system/submodules/JavaScript-Load-Image
+	url = https://github.com/blueimp/JavaScript-Load-Image.git
+[submodule "system/submodules/JavaScript-Templates"]
+	path = system/submodules/JavaScript-Templates
+	url = https://github.com/blueimp/JavaScript-Templates.git
