@@ -9,8 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require bootstrap/main
-
- *= require jquery-jcrop/jquery.Jcrop
  *
  * TODO подключить стили jQuery-File-Upload
  *
