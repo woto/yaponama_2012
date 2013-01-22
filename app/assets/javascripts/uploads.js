@@ -14,10 +14,8 @@
 //= require jQuery-File-Upload/jquery.fileupload-ui
 //= require jQuery-Fileupload/locale
 
-//=require jquery-jcrop/jquery.Jcrop
-//=require jquery-jcrop/jcrop
+//= require jquery.transit
+//= require rotate-tests
 
-//=require jquery-rotate/rotate
-//=require jquery-rotate/jquery.rotate
-//
-//=require rotate-tests
+//= require jquery.Jcrop
+//= require crop-tests

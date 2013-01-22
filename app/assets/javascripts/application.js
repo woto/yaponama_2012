@@ -52,5 +52,3 @@
 //
 //= require brand_model
 //= require cars
-//
-//= require jquery.transit

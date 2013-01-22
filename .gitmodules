@@ -31,3 +31,6 @@
 [submodule "system/submodules/jquery.transit"]
 	path = system/submodules/jquery.transit
 	url = https://github.com/rstacruz/jquery.transit
+[submodule "system/submodules/Jcrop"]
+	path = system/submodules/Jcrop
+	url = https://github.com/tapmodo/Jcrop.git
