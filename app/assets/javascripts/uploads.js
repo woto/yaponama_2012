@@ -5,9 +5,9 @@
 // Он не имеет зависимостей, но из jquery-ui его вычленить 
 // нельзя, поэтому подключен другой gem
 //= require jquery.ui.widget
-//= require Javascript-Load-Image/load-image
-//= require Javascript-Canvas-To-Blob/canvas-to-blob
-//= require Javascript-Templates/tmpl
+//= require JavaScript-Load-Image/load-image
+//= require JavaScript-Canvas-To-Blob/canvas-to-blob
+//= require JavaScript-Templates/tmpl
 //= require jQuery-File-Upload/jquery.iframe-transport
 //= require jQuery-File-Upload/jquery.fileupload
 //= require jQuery-File-Upload/jquery.fileupload-fp

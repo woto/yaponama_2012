@@ -65,7 +65,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'sanitize'
 gem 'slim-rails'
-gem 'thin'
+gem 'unicorn'
 gem "cancan"
 gem 'bcrypt-ruby'
 gem 'whenever'
