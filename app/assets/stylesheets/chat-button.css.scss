@@ -1,0 +1,11 @@
+@import "compass/css3";
+
+#chat-button {
+  top: 30%; 
+  width: 100px; 
+  height: 100px; 
+  left: -50px;
+  position: fixed;
+  background: #DDD;
+  cursor: pointer;
+}

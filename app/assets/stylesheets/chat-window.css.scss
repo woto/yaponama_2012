@@ -1,0 +1,20 @@
+@import "compass/css3";
+
+#channel {
+  position: fixed;
+  width: 300px;
+  @include single-box-shadow(rgba(black, 0.6));
+  @include border-radius(9px);
+  left: 10%;
+  top: 20%;
+  overflow: auto;
+  z-index: 10000;
+  background-image: url(http://subtlepatterns.com/patterns/white_carbon.png); 
+  display: none;
+  cursor: move;
+}
+
+#channel-head {
+  background: #DDD;
+  background-image: url(http://subtlepatterns.com/patterns/white_carbon.png);
+}

@@ -1,10 +1,6 @@
 //=require jquery-getimagedata/jquery.getimagedata
 //=require jquery-getimagedata/getimagedata
 
-// jquery.ui.widget нужен для blueimp/jQuery-File-Upload.
-// Он не имеет зависимостей, но из jquery-ui его вычленить 
-// нельзя, поэтому подключен другой gem
-//= require jquery.ui.widget
 //= require JavaScript-Load-Image/load-image
 //= require JavaScript-Canvas-To-Blob/canvas-to-blob
 //= require JavaScript-Templates/tmpl

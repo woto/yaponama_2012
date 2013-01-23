@@ -13,6 +13,8 @@
 
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
+
 //= require turbolinks
 //= require bootstrap/bootstrap
 
@@ -46,8 +48,12 @@
 //
 //= require jquery.cachedScript
 //= require jquery.editableHighlight
+//= require chat-window
+//= require chat-button
+//
 //= require jquery-cookie/jquery.cookie
-
+//= require jquery-cookie/init
+//
 //= require select2
 //
 //= require brand_model

@@ -2,72 +2,82 @@
 
 body
 
+  #chat-button
   .cursor
 
-  .navbar.navbar-fixed-top
-    .navbar-inner
-      .container-fluid
-        a.btn.btn-navbar.ignoredirty data-target=".nav-collapse" data-toggle="collapse"
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.brand href="/admin" Yaponama 2012
-        .container-fluid.nav-collapse
-          ul.nav
+  .container-fluid
+  
+    .row-fluid
+      .span4
 
-            li = link_to "Закачка", uploads_path
-            li = link_to "Регистрация", register_path
-            li = link_to "Вход", login_path
-            li = link_to "Выход", logout_path, :method => :delete
-            li = link_to "Администрирование", admin_path
-            li = link_to "Очистить сессию и печеньки", clear_session_path
-            / TODO пока просто перенес
-            - if content_for :pages_controler
-              = yield(:pages_controller)
-            li.divider
+        #channel.sidebar-nav
+          #channel-head.clearfix
+            .pull-right
+              a href="#" style="color: gray; margin-right: 10px"
+                i#close-chat.icon-remove
+
+          div style="padding: 0 10px"
+            #msgs
+              ul.dashboard-list.media-list style="font-size: 13px; font-family: Verdana; margin: 10px"
+                li.message.media style="display: none; border-top: 1px dashed #999; padding-top: 10px"
+                  a.pull-left href="#" 
+                    img.media-object alt="Lucas" data-src="/holder.js/64x64"
+                  .media-body
+                    span.user : strong Name: 
+                    a href="#" Корнев Руслан
+                    br
+                    span.message : strong Since: 
+                    
+                    br
+                    span.time : strong Status:  
+                    span class="label label-success"
+
+                li.control style="display: none"
+                  span.user  
+                  span.message
+                  span.time
+            br 
+
+            form class="form-inline" style="width:100%"
+              input#message.pull-left.span9  type="text" placeholder="Текст сообщения"
+              button.pull-right.span3.btn.btn-inverse type="submit" Ok  
+
+  .container-fluid
+    .navbar
+      .navbar-inner
+        .container-fluid
+          a.btn.btn-navbar.ignoredirty data-target=".nav-collapse" data-toggle="collapse"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          .container-fluid.nav-collapse
+            ul.nav
+
+              li = link_to "Закачка", uploads_path
+              li = link_to "Регистрация", register_path
+              li = link_to "Вход", login_path
+              li = link_to "Выход", logout_path, :method => :delete
+              li = link_to "Администрирование", admin_path
+              li = link_to "Очистить сессию и печеньки", clear_session_path
+              / TODO пока просто перенес
+              - if content_for :pages_controler
+                = yield(:pages_controller)
+              li.divider
 
   .container-fluid
 
     = bootstrap_flash
     = yield :form_error
 
-    .row-fluid
 
+    .row-fluid
+      .span2
+        | zzz3a
       .span8
         = yield
 
-      .span4
-        .alert.alert-block
-          button type="button" class="close" data-dismiss="alert" ×
-          h4 Подтвердите пожалуйста ваш номер телефона
-          | Мы отправили вам письмо на email для подтверждения вашего адреса и SMS на телефон, чтобы убедиться, что это действительно Ваш номер.
-
-        #channel.well.sidebar-nav
-
-          img class="media-object" class="img-rounded" data-src="holder.js/96x96"
-
-          div#msgs style="overflow: auto; width: auto; height: 200px; background: #FFF"
-            ul
-              li.message style="display: none"
-                span.user  
-                span.message
-                span.time
-              li.control style="display: none"
-                span.user  
-                span.message
-                span.time
-
-          br 
-
-            form class="navbar-form pull-left"
-              input#message type="text" placeholder="Текст сообщения"
-              button type="submit" class="btn" Отправить
-
-          ul.nav.nav-list
-            li class="nav-header" Sidebar
-            li = link_to "Link1", "/path1"
-            li = link_to "Link2", "/path2"
-            li = link_to "Link3", "/path3"
+      .span2
+        | adsf
 
     footer
       p &copy; Company 2012

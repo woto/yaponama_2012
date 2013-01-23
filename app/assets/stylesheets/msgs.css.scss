@@ -1,0 +1,11 @@
+@import "compass/css3";
+
+#msgs {
+  background: #FFF;
+  overflow: auto; 
+  width: auto; 
+  height: 250px;
+  @include box-shadow(rgba(black, 0.2) 0 0 1px 1px inset);
+  @include border-radius;
+  cursor: auto;
+}
