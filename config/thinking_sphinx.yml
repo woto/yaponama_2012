@@ -1,0 +1,4 @@
+development:
+  morphology: stem_ru, stem_en
+  enable_star: true
+  

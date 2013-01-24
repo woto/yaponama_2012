@@ -1,5 +1,6 @@
 Yaponama2012::Application.routes.draw do
 
+
   resources :stats do
     get "iframe", :on => :member
   end
@@ -47,6 +48,6 @@ Yaponama2012::Application.routes.draw do
   get 'robots.txt' => "robots_txt#index"
 
 
-  root :to => 'trash_help#index'
+  root :to => 'index#index'
 
 end

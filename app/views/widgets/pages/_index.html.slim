@@ -1,0 +1,8 @@
+h3 Новые страницы
+ul
+  - Page.limit(5).each do |page|
+    li
+      ul
+        li = l page.created_at, :format => :short
+        li = link_to page.title, page.path
+        li = page.description

@@ -1,4 +1,4 @@
-- model_class = Admin::Model
+- model_class = Model
 div class="page-header"
   h1=t '.title', :default => model_class.model_name.human.pluralize
 table class="table table-striped"
@@ -11,7 +11,7 @@ table class="table table-striped"
       th= model_class.human_attribute_name(:created_at)
       th=t '.actions', :default => t("helpers.actions")
   tbody
-    - @admin_models.each do |model|
+    - @models.each do |model|
       tr
         td= link_to model.id, admin_model_path(model)
         td= model.brand_id

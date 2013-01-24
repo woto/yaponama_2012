@@ -307,3 +307,9 @@ http://stackoverflow.com/questions/1794219/ckeditor-instance-already-exists
 
 SOCKET.IO
 chat https://github.com/liamks/Chatty
+
+AFFIX
+http://jsfiddle.net/s54va/
+http://stackoverflow.com/questions/12070970/how-to-use-the-new-affix-plugin-in-twitters-bootstrap-2-1-0
+http://jsfiddle.net/NRhv8/13/
+http://jsfiddle.net/namuol/Uaa3U/

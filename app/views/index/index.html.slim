@@ -1,0 +1,12 @@
+h1 Тут главная страница сайта - фронт
+.row-fluid
+  .span4
+    = render :partial => "widgets/pages/index"
+  .span4
+    = render :partial => "widgets/brands/index"
+  .span4
+    = render :partial => "widgets/cars/index"
+.row-fluid
+  h2 Частные объявления о продаже
+  .span6
+    = render :partial => "widgets/cars/selling"

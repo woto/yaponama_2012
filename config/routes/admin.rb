@@ -3,17 +3,28 @@ Yaponama2012::Application.routes.draw do
   namespace :admin do
 
 
+    # TODO refactor in Rails 4
+    #
     resources :models do
       get 'search', :on => :collection
     end
 
+    resources :generations do
+      get 'search', :on => :collection
+    end
 
-
-    resources :site_settings
+    resources :modifications do
+      get 'search', :on => :collection
+    end
 
     resources :brands do
       get 'search', :on => :collection
     end
+
+
+
+
+    resources :site_settings
 
     resources :uploads
 

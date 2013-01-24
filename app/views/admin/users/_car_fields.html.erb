@@ -15,22 +15,34 @@
     <ul class="nav nav-tabs">
       <li class="active"><a class="ignoredirty" id="tab1_toggle<%= counter %>" href="#tab1<%= counter %>" data-toggle="tab">Идентификатор</a></li>
       <li><a class="ignoredirty" id="tab2_toggle<%= counter %>" href="#tab2<%= counter %>" data-toggle="tab">Характеристики</a></li>
+      <li><a class="ignoredirty" id="tab3_toggle<%= counter %>" href="#tab3<%= counter %>" data-toggle="tab">Продажа</a></li>
     </ul>
 
     <div class="tab-content">
       <div class="tab-pane active" id="tab1<%= counter %>">
         <%= f.input :vin %>
         <%= f.input :frame %>
+        <%= f.input :car_number %>
       </div>
 
       <div class="tab-pane" id="tab2<%= counter %>">
 
-        <%= f.input :marka do %>
-          <%= f.hidden_field(:marka, :style => "width: 220px") %>
+        <%= f.input :brand do %>
+          <%= f.hidden_field(:brand, :style => "width: 220px") %>
         <% end %>
 
         <%= f.input :model do %>
           <%= f.hidden_field(:model, :style => "width: 220px") %>
+        <% end %>
+
+
+        <%= f.input :generation do %>
+          <%= f.hidden_field(:generation, :style => "width: 220px") %>
+        <% end %>
+
+
+        <%= f.input :modification do %>
+          <%= f.hidden_field(:modification, :style => "width: 220px") %>
         <% end %>
 
         <%= f.input :god %>
@@ -45,11 +57,18 @@
         <%= f.input :rinok %>
         <%= f.input :komplektaciya %>
       </div>
+
+
+      <div class="tab-pane" id="tab3<%= counter %>">
+        <%= f.input :selling %>
+        <%= f.input :cost %>
+        <%= f.input :advertisement, :input_html => { :rows => 3 } %>
+      </div>
+
     </div>
 
     <hr />
 
-    <%= f.input :car_number %>
     <%= f.input :created_at, :disabled => true %>
     <%= f.input :updated_at, :disabled => true %>
     <%= f.input :notes, :input_html => {:rows => 3} %>

@@ -87,3 +87,7 @@ gem 'ancestry'
 gem 'turbolinks'
 gem 'strong_parameters'
 gem 'compass-rails'
+
+# Mysql2 является обязательным требованием для SphinxQL
+gem 'mysql2',          '0.3.12b4'
+gem 'thinking-sphinx', '3.0.0'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130120165741) do
+ActiveRecord::Schema.define(:version => 20130124111243) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "debit",            :precision => 8, :scale => 2, :default => 0.0
@@ -47,14 +47,6 @@ ActiveRecord::Schema.define(:version => 20130120165741) do
     t.string   "bic"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
-  end
-
-  create_table "admin_models", :force => true do |t|
-    t.integer  "brand_id"
-    t.string   "name"
-    t.integer  "creator_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "admin_site_settings", :force => true do |t|
@@ -123,8 +115,10 @@ ActiveRecord::Schema.define(:version => 20130120165741) do
 
   create_table "cars", :force => true do |t|
     t.string   "god"
-    t.string   "marka"
+    t.string   "brand"
     t.string   "model"
+    t.string   "generation"
+    t.string   "modification"
     t.string   "dvigatel"
     t.string   "tip"
     t.string   "moschnost"
@@ -146,6 +140,10 @@ ActiveRecord::Schema.define(:version => 20130120165741) do
     t.integer  "request_id"
     t.string   "car_number"
     t.text     "notes"
+    t.boolean  "selling"
+    t.integer  "cost"
+    t.text     "advertisement"
+    t.string   "color"
   end
 
   add_index "cars", ["user_id"], :name => "index_cars_on_user_id"
@@ -251,6 +249,14 @@ ActiveRecord::Schema.define(:version => 20130120165741) do
     t.integer  "email_address_id"
   end
 
+  create_table "generations", :force => true do |t|
+    t.string   "name"
+    t.integer  "model_id"
+    t.integer  "creator_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "metro", :force => true do |t|
     t.string   "metro"
     t.integer  "delivery_cost"
@@ -264,6 +270,13 @@ ActiveRecord::Schema.define(:version => 20130120165741) do
     t.integer  "creator_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "modifications", :force => true do |t|
+    t.string   "name"
+    t.integer  "generation_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "money_transactions", :force => true do |t|
@@ -318,6 +331,8 @@ ActiveRecord::Schema.define(:version => 20130120165741) do
     t.string   "robots"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "brand"
+    t.string   "model"
   end
 
   create_table "pages_uploads", :id => false, :force => true do |t|

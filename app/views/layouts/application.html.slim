@@ -6,6 +6,23 @@ body
   .cursor
 
   .container-fluid
+    .row-fluid
+      .span9
+      .span3
+        form.form-search
+          input.input-medium type="text"
+          |  
+          div.btn-group
+            button.btn .row-fluid
+            button.btn.dropdown-toggle data-toggle="dropdown"
+              span.caret
+            ul.dropdown-menu.pull-right
+              li : a href="#" Автозапчасти
+              li : a href="#" Номера автомобилей
+              li : a href="#" Объявления о продаже авто
+              li : a href="#" Новости
+              li : a href="#" Материалы
+              li : a href="#" Инструкции по ремонту
   
     .row-fluid
       .span4
@@ -53,16 +70,23 @@ body
           .container-fluid.nav-collapse
             ul.nav
 
-              li = link_to "Закачка", uploads_path
               li = link_to "Регистрация", register_path
               li = link_to "Вход", login_path
               li = link_to "Выход", logout_path, :method => :delete
               li = link_to "Администрирование", admin_path
-              li = link_to "Очистить сессию и печеньки", clear_session_path
               / TODO пока просто перенес
               - if content_for :pages_controler
                 = yield(:pages_controller)
               li.divider
+            ul.nav.pull-right
+              li.dropdown
+                a.ignoredirty.dropdown-toggle href="#" data-toggle="dropdown"
+                  span.ignoredirty =' current_user.names.any? ? current_user.names.map(&:name).join(' ,') : "Без имени"
+                  b.ignoredirty.caret
+                ul.dropdown-menu
+                  li = link_to "ul.nav.pull-right Del", edit_admin_user_path(current_user)
+                  li = link_to "Выход", logout_path, :method => :delete
+
 
   .container-fluid
 
@@ -71,10 +95,31 @@ body
 
 
     .row-fluid
-      .span2
-        | zzz3a
-      .span8
+      .span3
+        ul.nav.nav-list
+          li.nav-header Заголовок
+          li.active
+            a href="#" Добавить объявление
+          li
+            a href="#" Чудаки на дорогах
+          li 
+            a href="#" Объявления об автомобилях
+          li 
+            a href="#" Объявления об автозапчастях
+          li 
+            a href="#" Календарь событий в Москве
+          li 
+            a href="#" ПДД
+          li 
+            a href="#" Законодательство
+          li 
+            a href="#" Ремонт
+
+      .span7
         = yield
+
+        ul
+          li = link_to "Очистить сессию и печеньки", clear_session_path
 
       .span2
         | adsf

@@ -2,8 +2,10 @@ class CreateCars < ActiveRecord::Migration
   def change
     create_table :cars do |t|
       t.string :god
-      t.string :marka
+      t.string :brand
       t.string :model
+      t.string :generation
+      t.string :modification
       t.string :dvigatel
       t.string :tip
       t.string :moschnost
