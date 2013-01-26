@@ -40,3 +40,6 @@
 [submodule "db/seeds/brands_big"]
 	path = db/seeds/brands_big
 	url = https://github.com/woto/brands_big.git
+[submodule "system/images"]
+	path = system/images
+	url = https://github.com/woto/system_images.git
