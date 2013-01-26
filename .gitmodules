@@ -34,3 +34,9 @@
 [submodule "system/submodules/Jcrop"]
 	path = system/submodules/Jcrop
 	url = https://github.com/tapmodo/Jcrop.git
+[submodule "db/seeds/brands"]
+	path = db/seeds/brands
+	url = https://github.com/woto/brands.git
+[submodule "db/seeds/brands_big"]
+	path = db/seeds/brands_big
+	url = https://github.com/woto/brands_big.git
