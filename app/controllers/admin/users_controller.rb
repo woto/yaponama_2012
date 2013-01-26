@@ -75,7 +75,7 @@ class Admin::UsersController < Admin::ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:user], :as => current_user.role.to_sym)
+      if @user.update_attributes(user_params)
         format.html { redirect_to edit_admin_user_path(@user, :tab => params[:tab]), :notice => 'Пользователь был успешно изменен.' }
         format.json { head :no_content }
       else
@@ -95,6 +95,12 @@ class Admin::UsersController < Admin::ApplicationController
       format.html { redirect_to admin_users_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit!
   end
 
 end

@@ -58,7 +58,7 @@ class Product < ActiveRecord::Base
       product_transaction = self.product_transactions.build
       h = {}
       self.changes.map{|k,v| h["log_#{k}"] = v[1]}
-      product_transaction.update_attributes(h, :without_protection => true)
+      product_transaction.update_attributes(h)
     end
   end
   #

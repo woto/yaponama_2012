@@ -42,7 +42,7 @@ class Admin::PagesController < Admin::ApplicationController
   # POST /pages
   # POST /pages.json
   def create
-    @page = Page.new(params[:page])
+    @page = Page.new(page_params)
 
     respond_to do |format|
       if @page.save
@@ -59,7 +59,7 @@ class Admin::PagesController < Admin::ApplicationController
     @page = Page.find(params[:id])
 
     respond_to do |format|
-      if @page.update_attributes(params[:page])
+      if @page.update_attributes(page_params)
         format.html { redirect_to admin_page_path(@page), notice: 'Страница успешно обновлена' }
       else
         format.html { render action: "edit" }
@@ -76,6 +76,12 @@ class Admin::PagesController < Admin::ApplicationController
     respond_to do |format|
       format.html { redirect_to admin_pages_url }
     end
+  end
+
+  private
+
+  def page_params
+    params.require(:page).permit!
   end
 
 end

@@ -1,6 +1,5 @@
 /log
 /tmp
-
 /.bundle
 /.bundler
 
@@ -18,7 +17,8 @@
 
 /public/sitemap*
 /vendor/cache
-
 /system/dump.rdb
 /system/node_modules
 /system/parts_info
+
+/db/sphinx

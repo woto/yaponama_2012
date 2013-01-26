@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.10'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'rails',     github: 'rails/rails'
+gem 'arel',      github: 'rails/arel'
+gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
 
 gem 'pg'
 
@@ -12,22 +11,22 @@ gem 'json'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sprockets-rails', github: 'rails/sprockets-rails'
+  gem 'sass-rails',   github: 'rails/sass-rails'
+  gem 'coffee-rails', github: 'rails/coffee-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', '0.10.2'
-  gem 'libv8', '3.3.10.4'
+  gem 'therubyracer', platforms: :ruby
+  
   gem 'uglifier', '>= 1.0.3'
 end
 
 group :development, :test do
-  gem "better_errors"
-  gem "binding_of_caller"
   gem 'debugger'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'capistrano'
 end
 
 group :test do
@@ -39,24 +38,24 @@ group :test do
 end
 
 gem 'jquery-rails'
-gem 'jquery-ui-rails', :git => 'https://github.com/joliss/jquery-ui-rails.git'
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.0.1'
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Deploy with Capistrano
-# gem 'capistrano'
 
-gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem "twitter-bootstrap-rails"
+gem 'less-rails'
+gem "twitter-bootstrap-rails", git: 'https://github.com/seyhunak/twitter-bootstrap-rails.git'
 
-gem 'simple_form'
+gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git', branch: 'rails_4'
 gem 'cocoon', :git => 'https://github.com/nathanvda/cocoon'
 gem 'russian'
 gem 'mailman'
@@ -67,16 +66,12 @@ gem 'sanitize'
 gem 'slim-rails'
 gem 'unicorn'
 gem "cancan"
-gem 'bcrypt-ruby'
 gem 'whenever'
 gem 'sitemap_generator'
 gem 'fastercsv'
 gem 'yandex_mystem'
 gem 'ipgeobase'
 gem 'activemerchant', :require => 'active_merchant', :git => 'https://github.com/Shopify/active_merchant', :ref => 'b14e285774e599697653325c471e1c85a7163d64'
-
-gem 'delayed_job'
-gem 'delayed_job_active_record'
 
 gem 'backbone-rails'
 gem "hiredis", "~> 0.3.1"
@@ -85,8 +80,6 @@ gem 'juggernaut', :git => 'git@github.com:woto/juggernaut.git'
 gem 'ruby-growl'
 gem 'ancestry'
 gem 'turbolinks'
-gem 'strong_parameters'
-gem 'compass-rails'
 
 # Mysql2 является обязательным требованием для SphinxQL
 gem 'mysql2',          '0.3.12b4'

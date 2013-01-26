@@ -2,7 +2,9 @@
 #
 # Install the pg driver:
 #   gem install pg
-# On Mac OS X with macports:
+# On OS X with Homebrew:
+#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+# On OS X with MacPorts:
 #   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
 # On Windows:
 #   gem install pg
@@ -18,14 +20,15 @@ development:
   database: yaponama_2012_development
   pool: 5
   username: yaponama_2012
-  password: yaponama_2012
-  host: localhost
-  pool: 5
+  password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
   #host: localhost
+
+  # The TCP port the server listens on. Defaults to 5432.
+  # If your server runs on a different port number, change accordingly.
   #port: 5432
 
   # Schema search path. The server defaults to $user,public
@@ -34,8 +37,8 @@ development:
   # Minimum log levels, in increasing order:
   #   debug5, debug4, debug3, debug2, debug1,
   #   log, notice, warning, error, fatal, and panic
-  # The server defaults to notice.
-  #min_messages: warning
+  # Defaults to warning.
+  #min_messages: notice
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -46,9 +49,7 @@ test:
   database: yaponama_2012_test
   pool: 5
   username: yaponama_2012
-  password: yaponama_2012
-  host: localhost
-  pool: 5
+  password:
 
 production:
   adapter: postgresql
@@ -56,6 +57,4 @@ production:
   database: yaponama_2012_production
   pool: 5
   username: yaponama_2012
-  password: yaponama_2012
-  host: localhost
-  pool: 5
+  password:

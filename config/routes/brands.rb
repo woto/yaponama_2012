@@ -13,6 +13,6 @@ end
 
 Yaponama2012::Application.routes.draw do
 
-  match "*brand" => "brands#index", :constraints => BrandConstraint.new
+  get "*brand" => "brands#index", :constraints => BrandConstraint.new
 
 end

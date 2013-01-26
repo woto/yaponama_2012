@@ -22,12 +22,7 @@ class User < ActiveRecord::Base
     Thread.current[:current_user]
   end
 
-  # override has_secure_password to customize validation until Rails 4. Railscasts 393
-  # has_secure_password(validation: false)
-  require 'bcrypt'
-  attr_reader :password
-  include ActiveModel::SecurePassword::InstanceMethodsOnActivation
-  # until this
+  has_secure_password validation: false
 
   validates :password_digest, :presence => true, unless: Proc.new {self.role == "guest"}
 

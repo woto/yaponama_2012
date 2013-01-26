@@ -2,33 +2,17 @@ Yaponama2012::Application.routes.draw do
 
   namespace :admin do
 
-
-    # TODO refactor in Rails 4
-    #
-    resources :models do
+    concern :searchable do
       get 'search', :on => :collection
     end
 
-    resources :generations do
-      get 'search', :on => :collection
-    end
-
-    resources :modifications do
-      get 'search', :on => :collection
-    end
-
-    resources :brands do
-      get 'search', :on => :collection
-    end
-
-
-
+    resources :models, :generations, :modifications, :brands, concerns: :searchable
 
     resources :site_settings
 
     resources :uploads
 
-    match 'pages/new/:path' => "pages#new", :as => 'new_predefined_page', :constraints => {:path => /.*/}
+    get 'pages/new/:path' => "pages#new", :as => 'new_predefined_page', :constraints => {:path => /.*/}
     resources :pages
 
     get 'users' => 'users#index', :as => 'root'
@@ -80,10 +64,11 @@ Yaponama2012::Application.routes.draw do
       resources :split
       resources :inorder do
         member do
-          match 'action'
+          get 'action'
+          post 'action'
         end
         collection do
-          match 'order_select'
+          post 'order_select'
         end
       end
     end
@@ -91,7 +76,7 @@ Yaponama2012::Application.routes.draw do
     resources :products do
       resources :product_transactions
       collection do
-        match 'remember'
+        post 'remember'
         delete 'multiple_destroy' => "products#multiple_destroy"
       end
       

@@ -64,7 +64,7 @@ class Admin::OrdersController < Admin::ApplicationController
   # POST /admin/orders
   # POST /admin/orders.json
   def create
-    @order = Order.new(params[:order])
+    @order = Order.new(order_params)
     @order.products_inorder << @products
     @order.user = @products.first.user
 
@@ -110,6 +110,12 @@ class Admin::OrdersController < Admin::ApplicationController
       format.html { redirect_to :back }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def order_params
+    params.require(:order).permit!
   end
 
 end
