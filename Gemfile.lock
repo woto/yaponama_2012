@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 474e7dd82af030fb22ab5a586976d21b3497882a
+  revision: 0c588480ac4d36bda9ce29c1e364b4bda416d469
   specs:
     actionmailer (4.0.0.beta)
       actionpack (= 4.0.0.beta)
@@ -137,6 +137,8 @@ GEM
     backbone-rails (0.9.9)
       rails (>= 3.0.0)
     bcrypt-ruby (3.0.1)
+    bourne (1.1.2)
+      mocha (= 0.10.5)
     builder (3.1.4)
     cancan (1.6.8)
     capistrano (2.14.1)
@@ -145,13 +147,13 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    capybara (1.1.4)
+    capybara (2.0.2)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
-      xpath (~> 0.1.4)
+      xpath (~> 1.0.0)
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -181,7 +183,7 @@ GEM
     debugger-linecache (1.1.2)
       debugger-ruby_core_source (>= 1.1.1)
     debugger-ruby_core_source (1.1.7)
-    diff-lcs (1.2.0)
+    diff-lcs (1.1.3)
     email_spec (1.4.0)
       launchy (~> 2.1)
       mail (~> 2.2)
@@ -224,7 +226,7 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.2.0)
     libv8 (3.11.8.13)
-    libxml-ruby (2.4.0)
+    libxml-ruby (2.5.0)
     listen (0.7.2)
     macaddr (1.6.1)
       systemu (~> 2.5.0)
@@ -239,11 +241,14 @@ GEM
       listen (>= 0.4.1)
       mail (>= 2.0.3)
       maildir (>= 0.5.0)
+    metaclass (0.0.1)
     middleware (0.1.0)
     mime-types (1.19)
     mini_magick (3.4)
       subexec (~> 0.2.1)
     minitest (4.5.0)
+    mocha (0.10.5)
+      metaclass (~> 0.0.1)
     money (5.1.0)
       i18n (~> 0.6.0)
     multi_json (1.5.0)
@@ -258,6 +263,8 @@ GEM
     nokogiri (1.5.6)
     pg (0.14.1)
     polyglot (0.3.3)
+    puma (1.6.3)
+      rack (~> 1.2)
     rack (1.5.0)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -268,18 +275,17 @@ GEM
     redis (2.2.2)
     ref (1.0.2)
     riddle (1.5.4)
-    rspec (2.0.1)
-      rspec-core (~> 2.0.1)
-      rspec-expectations (~> 2.0.1)
-      rspec-mocks (~> 2.0.1)
-    rspec-core (2.0.1)
-    rspec-expectations (2.0.1)
-      diff-lcs (>= 1.1.2)
-    rspec-mocks (2.0.1)
-      rspec-core (~> 2.0.1)
-      rspec-expectations (~> 2.0.1)
-    rspec-rails (2.0.1)
-      rspec (~> 2.0.0)
+    rspec-core (2.12.2)
+    rspec-expectations (2.12.1)
+      diff-lcs (~> 1.1.3)
+    rspec-mocks (2.12.1)
+    rspec-rails (2.12.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 2.12.0)
+      rspec-expectations (~> 2.12.0)
+      rspec-mocks (~> 2.12.0)
     ruby-growl (4.0)
       uuid (~> 2.3, >= 2.3.5)
     rubyzip (0.9.9)
@@ -293,6 +299,13 @@ GEM
       multi_json (~> 1.0)
       rubyzip
       websocket (~> 1.0.4)
+    shoulda (3.3.2)
+      shoulda-context (~> 1.0.1)
+      shoulda-matchers (~> 1.4.1)
+    shoulda-context (1.0.2)
+    shoulda-matchers (1.4.2)
+      activesupport (>= 3.0.0)
+      bourne (~> 1.1.2)
     sitemap_generator (3.4)
       builder
     slim (1.3.6)
@@ -340,11 +353,11 @@ GEM
       raindrops (~> 0.7)
     uuid (2.3.6)
       macaddr (~> 1.0)
-    websocket (1.0.6)
+    websocket (1.0.7)
     whenever (0.8.2)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
-    xpath (0.1.4)
+    xpath (1.0.0)
       nokogiri (~> 1.3)
     yandex_mystem (0.0.2)
 
@@ -360,7 +373,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   cancan
   capistrano
-  capybara (~> 1.1.4)
+  capybara
   carrierwave
   cocoon!
   coffee-rails!
@@ -383,13 +396,15 @@ DEPENDENCIES
   mini_magick
   mysql2 (= 0.3.12b4)
   pg
+  puma
   rails!
   redis (~> 2.2.0)
-  rspec-rails
+  rspec-rails (~> 2.12.2)
   ruby-growl
   russian
   sanitize
   sass-rails!
+  shoulda
   simple_form!
   sitemap_generator
   slim-rails

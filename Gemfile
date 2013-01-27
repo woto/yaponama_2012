@@ -23,7 +23,8 @@ end
 
 group :development, :test do
   gem 'debugger'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.12.2'
+  gem 'shoulda'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'capistrano'
@@ -31,7 +32,7 @@ end
 
 group :test do
   gem 'cucumber-rails', :require => false
-  gem 'capybara', '~> 1.1.4'
+  gem 'capybara'
   gem 'email_spec'
   gem 'timecop'
   gem 'launchy'
@@ -49,8 +50,8 @@ gem 'jbuilder', '~> 1.0.1'
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
-# gem 'unicorn'
-
+gem 'unicorn'
+gem 'puma'
 
 gem 'less-rails'
 gem "twitter-bootstrap-rails", git: 'https://github.com/seyhunak/twitter-bootstrap-rails.git'
@@ -64,7 +65,6 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'sanitize'
 gem 'slim-rails'
-gem 'unicorn'
 gem "cancan"
 gem 'whenever'
 gem 'sitemap_generator'
