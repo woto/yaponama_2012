@@ -1,6 +1,5 @@
 class TimeZone < ActiveRecord::Base
-  has_one :user
-  #validates :user, :presence => true
+  has_many :users
 
   validates :time_zone, :presence => true
   validates :utc_offset_hours, :numericality => { :only_integer => true }
@@ -9,4 +8,5 @@ class TimeZone < ActiveRecord::Base
   def to_label
     time_zone
   end
+
 end
