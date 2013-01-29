@@ -1,9 +1,9 @@
 module CurrentUserInModel
 
-  def self.included(base)
-    base.instance_eval{
-      around_filter :set_current_user_in_model
-    }
+  extend ActiveSupport::Concern
+
+  included do
+    around_action :set_current_user_in_model
   end
   
   def set_current_user_in_model
