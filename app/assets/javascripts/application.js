@@ -16,7 +16,9 @@
 
 //= require turbolinks
 //= require bootstrap/bootstrap
-
+//
+//= require jquery-cookie/jquery.cookie
+//
 //= require jquery-dirtyforms/jquery.dirtyforms
 
 //= require ckeditor-helpers/extended_options
@@ -49,9 +51,6 @@
 //= require jquery.editableHighlight
 //= require chat-window
 //= require chat-button
-//
-//= require jquery-cookie/jquery.cookie
-//= require jquery-cookie/init
 //
 //= require select2
 //
