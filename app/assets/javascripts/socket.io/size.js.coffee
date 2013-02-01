@@ -11,8 +11,9 @@ if self == top
     window.socket.emit "size", $.toJSON(
       action: 'size'
       user: 'a'
-      width: $(window).width() # TODO for more accuracy we need consider scrollbars
-      height: $(window).height()
+      width: $(window).width() + window.getScrollBarWidth() # TODO refactor usage of getScrollBarWidth
+      height: $(window).height() + window.getScrollBarWidth()
+      auth_token: $.cookie('auth_token') # TODO testing send auth_token param
     )
 
   window.socket.on "size", (msg) ->

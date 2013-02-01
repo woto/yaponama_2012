@@ -13,7 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-
+//
+// #DIRTY TESTS TODO REFACTOR
+//= require scrollbarWidth
+//
 //= require turbolinks
 //= require bootstrap/bootstrap
 //
