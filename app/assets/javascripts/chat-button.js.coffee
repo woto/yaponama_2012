@@ -12,7 +12,7 @@ makeAffix = ->
   $('#chat-button').affix()
 
 $(document).on 'click', '#chat-button', ->
-  chat_cookie = $.cookie('chat')
+  chat_cookie = JSON.parse($.cookie('chat'))
   try
     if chat_cookie.display == 'show'
       root.closeChat()
