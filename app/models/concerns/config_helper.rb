@@ -1,5 +1,7 @@
 module ConfigHelper
 
+  extend ActiveSupport::Concern
+
   def socket_io_full_address
     "#{socket_io_address}#{socket_io_port.present? ? ":" + socket_io_port : ''}"
   end
