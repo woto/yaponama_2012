@@ -51,7 +51,7 @@ class Admin::BrandsController < Admin::ApplicationController
   # POST /brands
   # POST /brands.json
   def create
-    @brand = Brand.new(params[:brand])
+    @brand = Brand.new(brand_params)
 
     respond_to do |format|
       if @brand.save
@@ -70,7 +70,7 @@ class Admin::BrandsController < Admin::ApplicationController
     @brand = Brand.find(params[:id])
 
     respond_to do |format|
-      if @brand.update_attributes(params[:brand])
+      if @brand.update_attributes(brand_params)
         format.html { redirect_to [:admin, @brand], notice: 'Brand was successfully updated.' }
         format.json { head :no_content }
       else
@@ -90,5 +90,11 @@ class Admin::BrandsController < Admin::ApplicationController
       format.html { redirect_to admin_brands_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def brand_params
+    params.require(:brand).permit!
   end
 end

@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
       @user = current_user
 
-      @user.assign_attributes params[:user], :as => :guest
+      @user.assign_attributes(user_params)
 
       @user.phones.first.save
       @user.email_addresses.first.save
@@ -47,6 +47,10 @@ class UsersController < ApplicationController
     if current_user.role != "guest"
       redirect_to root_path, :notice => "Вы уже зарегистририровались и вошли на сайт."
     end
+  end
+
+  def user_params
+    params.require(:user).permit!
   end
 
 end
