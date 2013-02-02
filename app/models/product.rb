@@ -5,7 +5,7 @@ class Product < ActiveRecord::Base
   include PingCallback
 
   # Продукты по которым ожидается движение
-  scope :active, where("STRPOS(?, status) > 0", "ordered,pre_supplier,post_supplier,stock")
+  scope :active, -> { where("STRPOS(?, status) > 0", "ordered,pre_supplier,post_supplier,stock") }
 
   # Виртуальные аттрибуты
   attr_accessor :delivery_id, :delivery_cost
@@ -35,7 +35,7 @@ class Product < ActiveRecord::Base
   validates :status, :inclusion => {:in => Rails.configuration.products_status.select{|k, v| v['real'] == true}.keys}
 
   # Необходимо для подсчета суммы внесения предоплаты для запуска заказа в работу (при переводе в статус ordered)
-  scope :inwork, where("STRPOS(?, products.status) > 0", "ordered,pre_supplier,post_supplier,stock")
+  scope :inwork, -> { where("STRPOS(?, products.status) > 0", "ordered,pre_supplier,post_supplier,stock") }
 
   #scope :inorder, where(:status => "inorder")
 

@@ -5,8 +5,7 @@ class Car < ActiveRecord::Base
   has_many :requests, :dependent => :destroy
   accepts_nested_attributes_for :requests, :allow_destroy => true
 
-  has_many :root_requests_with_car, :dependent => :destroy,
-    :conditions => ["request_id IS NULL"], :class_name => "Request"
+  has_many :root_requests_with_car, -> { where("request_id IS NULL") }, :class_name => "Request", :dependent => :destroy
   accepts_nested_attributes_for :root_requests_with_car, :allow_destroy => true
 
   # TODO когда был в Авторифе и демонстрировал Николаеву всплыл опять этот баг! Доколе блиа? 1/2

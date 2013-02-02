@@ -54,8 +54,7 @@ class User < ActiveRecord::Base
   has_many :requests, :dependent => :destroy
   accepts_nested_attributes_for :requests, :allow_destroy => true 
 
-  has_many :root_requests_without_car, :dependent => :destroy,
-    :conditions => ["request_id IS NULL AND car_id IS NULL"], :class_name => "Request"
+  has_many :root_requests_without_car, -> { where("request_id IS NULL AND car_id IS NULL") }, :class_name => "Request", :dependent => :destroy
   accepts_nested_attributes_for :root_requests_without_car, :allow_destroy => true
 
   def products_inwork
@@ -65,10 +64,8 @@ class User < ActiveRecord::Base
   has_many :products, :dependent => :destroy
   accepts_nested_attributes_for :products, :allow_destroy => true
 
-  has_many :root_products, :dependent => :destroy,
-    :conditions => ["product_id IS NULL"], :class_name => "Product"
+  has_many :root_products, -> { where("product_id IS NULL") }, :class_name => "Product", :dependent => :destroy
   accepts_nested_attributes_for :root_products, :allow_destroy => true
-  
 
 
 

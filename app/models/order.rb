@@ -23,9 +23,10 @@ class Order < ActiveRecord::Base
   has_many :products, :dependent => :destroy
   accepts_nested_attributes_for :products, :allow_destroy => true
 
-  has_many :products_inorder, :dependent => :destroy,
-    :conditions => {:products => {:status => 'inorder'}}, :class_name => "Product",
-    :before_add => :before_add_inorder
+  has_many :products_inorder, -> { where(products: {status: 'inorder'}) }, 
+    :class_name => "Product",
+    :before_add => :before_add_inorder,
+    :dependent => :destroy
   
   def before_add_inorder p
     p.status = 'inorder'
@@ -33,9 +34,10 @@ class Order < ActiveRecord::Base
 
   accepts_nested_attributes_for :products_inorder, :allow_destroy => true
 
-  has_many :products_ordered, :dependent => :destroy,
-    :conditions => {:products => {:status => 'ordered'}}, :class_name => "Product",
-    :before_add => :before_add_ordered
+  has_many :products_ordered, -> { where(products: {:status => 'ordered'}) },
+    :class_name => "Product",
+    :before_add => :before_add_ordered,
+    :dependent => :destroy
 
   def before_add_ordered
     p.status = 'ordered'
