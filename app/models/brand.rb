@@ -6,4 +6,9 @@ class Brand < ActiveRecord::Base
   has_many :brands
   has_many :models, :dependent => :destroy
   belongs_to :brand
+
+  def to_label
+    name
+  end
+
 end
