@@ -12,6 +12,9 @@ table.table.table-striped
       th Описание SEO
       th Заголовок
       th Запрет индексации и следования
+      th Создатель
+      th Создана
+      th Обновлена
       / TODO не забыть если управление где-то еще понадобится, то вынесу в css стиль
       th style="width: 170px" Управление
 
@@ -24,6 +27,9 @@ table.table.table-striped
         td = truncate page.description
         td = truncate page.title
         td = truncate page.robots
+        td = page.creator.to_label
+        td = l page.created_at, format: :short
+        td = l page.updated_at, format: :short
         td
           / TODO если где-то еще так буду делать, то вынести в css стиль
           ul style="list-style-type: none;"

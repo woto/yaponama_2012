@@ -1,13 +1,10 @@
 #encoding: utf-8
 
 class Phone < ActiveRecord::Base
-  include PingCallback
+  include BelongsToUser
   include BelongsToCreator
 
   has_many :orders
-
-  belongs_to :user#, :validate => true
-  validates :user, :presence => true
 
   validates :phone_type, :inclusion => { :in => Rails.configuration.phone_types.keys }
 

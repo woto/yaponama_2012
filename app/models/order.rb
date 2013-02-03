@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  include PingCallback
+  include BelongsToUser
   include BelongsToCreator
 
   #before_create :build_transaction
@@ -11,9 +11,6 @@ class Order < ActiveRecord::Base
 
   belongs_to :metro
   validates_associated :metro
-
-  belongs_to :user#, :validate => true
-  validates :user, :presence => true
 
   validates_associated :delivery
   validates_associated :postal_address

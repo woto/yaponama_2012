@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
+  include BelongsToCreator
   has_ancestry
 
-  belongs_to :user
   belongs_to :commentable, :polymorphic => true
 
   validates :content, presence: true

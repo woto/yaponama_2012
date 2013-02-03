@@ -42,7 +42,7 @@ ul#myTab.nav.nav-tabs
           th = model_class.human_attribute_name(:debit)
           th = model_class.human_attribute_name(:credit)
           th = model_class.human_attribute_name(:prepayment_percent)
-          th = model_class.human_attribute_name(:ping)
+          th = model_class.human_attribute_name(:activity_at)
           th = t '.actions', :default => t("helpers.actions")
 
       tbody
@@ -60,7 +60,7 @@ ul#myTab.nav.nav-tabs
             td = user.account.debit 
             td = user.account.credit 
             td = user.prepayment_percent 
-            td = l(user.ping.updated_at, :format => :short)
+            td = l user.activity_at, format: :short
             td
               .btn-group
                 button.btn.btn-primary.dropdown-toggle data-toggle="dropdown"

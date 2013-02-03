@@ -1,6 +1,8 @@
 #encoding: utf-8
 
 class Page < ActiveRecord::Base
+  include BelongsToCreator
+
   before_save :cut_first_slash
 
   validates :path, :presence => true, :uniqueness => {case_sensitive: false}

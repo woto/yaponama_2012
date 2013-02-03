@@ -6,16 +6,20 @@ table class="table table-striped"
     tr
       th= model_class.human_attribute_name(:id)
       th= model_class.human_attribute_name(:name)
-      th= model_class.human_attribute_name(:model_id)
+      th= model_class.human_attribute_name(:model)
+      th= model_class.human_attribute_name(:creator)
       th= model_class.human_attribute_name(:created_at)
+      th= model_class.human_attribute_name(:updated_at)
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @generations.each do |generation|
       tr
         td= link_to generation.id, admin_generation_path(generation)
         td= generation.name
-        td= generation.model_id
-        td=l generation.created_at
+        td= generation.model.to_label
+        td= generation.creator.to_label
+        td=l generation.created_at, format: :short
+        td=l generation.updated_at, format: :short
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_generation_path(generation), :class => 'btn btn-mini'
           '

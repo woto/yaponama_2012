@@ -9,13 +9,14 @@ class Admin::UsersController < Admin::ApplicationController
   # GET /users.json
   def index
 
+    # TODO тут избавиться от scoped и в includes наверно включить ping
     users_scope = User.scoped
 
     if params[:role].present? && params[:role] != 'all'
       users_scope = users_scope.where(:role => params[:role])
     end
 
-    @users = users_scope.includes(:ping, :email_addresses, :phones, :names, :account).order("pings.updated_at DESC").page(params[:page])
+    @users = users_scope.includes(:email_addresses, :phones, :names, :account).order("activity_at DESC").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -38,7 +39,7 @@ class Admin::UsersController < Admin::ApplicationController
     @user = User.where(:id => params[:id]).first
 
     unless @user
-      @user = User.new(Rails.configuration.default_user_attributes, :as => current_user.role.to_sym)
+      @user = User.new(SiteConfig.default_user_attributes)
       @user.creation_reason = :manager
 
       unless @user.account
@@ -53,7 +54,7 @@ class Admin::UsersController < Admin::ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(Rails.configuration.default_user_attributes.merge( params[:user] || {} ), :as => current_user.role.to_sym)
+    @user = User.new(SiteConfig.default_user_attributes.merge( user_params || {} ) )
 
     unless @user.persisted?
       @user.creation_reason = :manager

@@ -8,23 +8,27 @@ table class="table table-striped"
   thead
     tr
       th= model_class.human_attribute_name(:id)
+      th= model_class.human_attribute_name(:brand)
       th= model_class.human_attribute_name(:name)
-      th= model_class.human_attribute_name(:brand_id)
       th= model_class.human_attribute_name(:image)
       th= model_class.human_attribute_name(:rating)
       th= model_class.human_attribute_name(:content)
+      th= model_class.human_attribute_name(:creator)
       th= model_class.human_attribute_name(:created_at)
+      th= model_class.human_attribute_name(:updated_at)
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @brands.each do |brand|
       tr
         td= link_to brand.id, admin_brand_path(brand)
+        td= brand.brand.try(:to_label)
         td= brand.name
-        td= brand.brand_id
         td= image_tag brand.image.thumb
         td= brand.rating
         td= brand.content
-        td=l brand.created_at
+        td= brand.creator.try(:to_label)
+        td=l brand.created_at, format: :short
+        td=l brand.updated_at, format: :short
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_brand_path(brand), :class => 'btn btn-mini'
           '

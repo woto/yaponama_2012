@@ -5,19 +5,21 @@ table class="table table-striped"
   thead
     tr
       th= model_class.human_attribute_name(:id)
-      th= model_class.human_attribute_name(:brand_id)
+      th= model_class.human_attribute_name(:brand)
       th= model_class.human_attribute_name(:name)
-      th= model_class.human_attribute_name(:creator_id)
+      th= model_class.human_attribute_name(:creator)
       th= model_class.human_attribute_name(:created_at)
+      th= model_class.human_attribute_name(:updated_at)
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @models.each do |model|
       tr
         td= link_to model.id, admin_model_path(model)
-        td= model.brand_id
+        td= model.brand.to_label
         td= model.name
-        td= model.creator_id
-        td=l model.created_at
+        td= model.creator.to_label
+        td=l model.created_at, format: :short
+        td=l model.updated_at, format: :short
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_model_path(model), :class => 'btn btn-mini'
           '

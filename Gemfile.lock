@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: ecd004e6586cbd379739eb21015b22360287f057
+  revision: 633d953f027473463ff08399ce9b2f16acc6a419
   specs:
     actionmailer (4.0.0.beta)
       actionpack (= 4.0.0.beta)
@@ -117,7 +117,7 @@ GIT
 
 GIT
   remote: https://github.com/seyhunak/twitter-bootstrap-rails.git
-  revision: a114d4765d55a993d0dfa6ab89afa03691e25203
+  revision: 04deb1f4ac939bc8df1da606fbd037527a3648ad
   specs:
     twitter-bootstrap-rails (2.2.0)
       actionpack (>= 3.1)

@@ -1,15 +1,10 @@
 #encoding: utf-8
 
 class Request < ActiveRecord::Base
+  include BelongsToUser
+  include BelongsToCreator
 
   ANY_DATA = %w(name catalog_number manufacturer notes)
-
-  include BelongsToCreator
-  include PingCallback
-
-  # TODO когда был в Авторифе и демонстрировал Николаеву всплыл опять этот баг! Доколе блиа? 2/2
-  belongs_to :user#, :validate => true
-  validates :user, :presence => true
 
   belongs_to :car
   belongs_to :request

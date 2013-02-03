@@ -1,10 +1,12 @@
 # encoding: utf-8
 #
 class Product < ActiveRecord::Base
+  include BelongsToUser
+  include BelongsToSupplier
   include BelongsToCreator
-  include PingCallback
 
   # Продукты по которым ожидается движение
+  # TODO проверить почему так сильно совпадает с inwork и нужен ли этот scope:w
   scope :active, -> { where("STRPOS(?, status) > 0", "ordered,pre_supplier,post_supplier,stock") }
 
   # Виртуальные аттрибуты
@@ -20,12 +22,7 @@ class Product < ActiveRecord::Base
 
   validates :quantity_ordered, :numericality => { :greater_than_or_equal_to => 1, :only_integer => true }
 
-  belongs_to :user#, :validate => true
-  validates :user, :presence => true
-
   belongs_to :order
-
-  belongs_to :supplier
 
   belongs_to :product
 

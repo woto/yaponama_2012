@@ -10,6 +10,7 @@ class CreateUsers < ActiveRecord::Migration
       t.references :time_zone
       t.references :ping
       t.string :role
+      t.datetime :activity_at
 
       t.timestamps
     end

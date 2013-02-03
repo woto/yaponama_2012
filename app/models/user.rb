@@ -2,7 +2,6 @@
 
 class User < ActiveRecord::Base
   include BelongsToCreator
-  include PingCallback
 
   has_many :uploads
 

@@ -1,13 +1,8 @@
 #encoding: utf-8
 
 class EmailAddress < ActiveRecord::Base
+  include BelongsToUser
   include BelongsToCreator
-  include PingCallback
-
-  #validates :user, :presence => true
-
-  belongs_to :user#, :validate => true
-  validates :user, :presence => true
 
   has_many :emails
   VALID_EMAIL_REGEX = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/

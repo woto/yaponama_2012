@@ -1,4 +1,5 @@
 class Modification < ActiveRecord::Base
+  include BelongsToCreator
   belongs_to :generation
 
 

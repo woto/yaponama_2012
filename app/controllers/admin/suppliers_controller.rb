@@ -44,7 +44,7 @@ class Admin::SuppliersController < Admin::ApplicationController
   # POST /admin/suppliers
   # POST /admin/suppliers.json
   def create
-    @supplier = Supplier.new(params[:supplier])
+    @supplier = Supplier.new(supplier_params)
 
     respond_to do |format|
       if @supplier.save
@@ -63,7 +63,7 @@ class Admin::SuppliersController < Admin::ApplicationController
     @supplier = Supplier.find(params[:id])
 
     respond_to do |format|
-      if @supplier.update_attributes(params[:supplier])
+      if @supplier.update_attributes(supplier_params)
         format.html { redirect_to admin_supplier_path(@supplier), notice: 'Supplier was successfully updated.' }
         format.json { head :no_content }
       else
@@ -84,4 +84,9 @@ class Admin::SuppliersController < Admin::ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def supplier_params
+    params.require(:supplier).permit!
+  end
+
 end

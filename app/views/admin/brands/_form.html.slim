@@ -1,10 +1,11 @@
-= simple_form_for [:admin, @brand], :html => { :class => "form-horizontal" } do |f|
+= simple_form_for [:admin, @brand], :html => { :class => "form-horizontal dirtyforms" } do |f|
   = f.input :name
   / TODO заменить chzn на select2
   = f.association :brand, :input_html => { class: "chzn-select" }
   = f.input :image
   = f.input :rating
   = f.input :content, :input_html => {:class => "ckeditor-extended"}
+  = f.association :creator, :disabled => true
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     '

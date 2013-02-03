@@ -1,3 +1,3 @@
 class Stat < ActiveRecord::Base
-  belongs_to :user
+  include BelongsToUser
 end

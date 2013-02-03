@@ -1,6 +1,7 @@
-= simple_form_for [:admin, @generation], :html => { :class => "form-horizontal" } do |f|
+= simple_form_for [:admin, @generation], :html => { :class => "form-horizontal dirtyforms" } do |f|
   = f.association :model
   = f.input :name
+  = f.association :creator, :disabled => true
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     '

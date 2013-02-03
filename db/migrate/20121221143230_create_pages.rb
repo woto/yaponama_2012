@@ -7,6 +7,7 @@ class CreatePages < ActiveRecord::Migration
       t.text :description
       t.string :title
       t.string :robots
+      t.integer :creator_id
 
       t.timestamps
     end

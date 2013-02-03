@@ -6,6 +6,7 @@ class CreateBrands < ActiveRecord::Migration
       t.string :image
       t.integer :rating
       t.text :content
+      t.integer :creator_id
 
       t.timestamps
     end

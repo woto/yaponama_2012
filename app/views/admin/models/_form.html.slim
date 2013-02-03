@@ -1,4 +1,4 @@
-= simple_form_for [:admin, @model], :html => { :class => "form-horizontal" } do |f|
+= simple_form_for [:admin, @model], :html => { :class => "form-horizontal dirtyforms" } do |f|
 
   = f.association :brand, :collection => Brand.order(:name)
   = f.input :name
