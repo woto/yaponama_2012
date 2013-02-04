@@ -17,6 +17,8 @@
 // #DIRTY TESTS TODO REFACTOR
 //= require scrollbarWidth
 //
+//= require getCookieChat
+//
 //= require turbolinks
 //= require bootstrap/bootstrap
 //

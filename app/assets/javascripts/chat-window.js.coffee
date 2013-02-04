@@ -12,7 +12,7 @@ makeDraggable = ->
   $( "#channel" ).draggable
     cancel: "#msgs, .form-inline",
     stop: ->
-      cookie_chat = JSON.parse($.cookie('chat')) || {}
+      cookie_chat = window.getCookieChat()
       $.extend cookie_chat,
         position:
           top: $('#channel').css('top')
@@ -20,7 +20,7 @@ makeDraggable = ->
       $.cookie( 'chat', JSON.stringify(cookie_chat) )
 
 root.initChat = ->
-  cookie_chat = JSON.parse($.cookie('chat')) || {}
+  cookie_chat = window.getCookieChat()
   if cookie_chat.display? && cookie_chat.display == 'show'
       root.showChat()
 
@@ -30,7 +30,7 @@ $(document).on 'click', '#close-chat', (e) ->
 
 root.showChat = ->
   $('#channel').show();
-  cookie_chat = JSON.parse($.cookie('chat')) || {}
+  cookie_chat = window.getCookieChat()
   if cookie_chat.position?
     $('#channel').css('left', cookie_chat.position.left)
     $('#channel').css('top', cookie_chat.position.top)
@@ -38,7 +38,7 @@ root.showChat = ->
   $.cookie('chat', JSON.stringify(cookie_chat))
 
 root.closeChat = ->
-  cookie_chat = JSON.parse($.cookie('chat')) || {}
+  cookie_chat = window.getCookieChat()
   $.extend cookie_chat, display: 'hide'
   $.extend cookie_chat,
     position:
