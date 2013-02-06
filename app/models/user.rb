@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   #has_many :brands
   #has_many :models
 
-  has_many :stats, :dependent => :destroy
+  has_one :stat, :dependent => :destroy
 
   #has_many :comments
 
@@ -21,11 +21,15 @@ class User < ActiveRecord::Base
     Thread.current[:current_user]
   end
 
-  has_secure_password validation: false
+  has_secure_password validations: false
 
-  validates :password_digest, :presence => true, unless: Proc.new {self.role == "guest"}
+  attr_accessor :password_required
 
-  validates :password, :confirmation => true, :length => { :minimum => 6 }, :allow_nil => true, :allow_blank => true #, unless: Proc.new {["admin", "manager"].include? User.current_user.role}
+  validates :password, 
+    :presence => true, 
+    :confirmation => true, 
+    :length => { :minimum => 6 }, 
+    if: -> { password_required }
 
   # Railscasts 274
   #
@@ -38,14 +42,6 @@ class User < ActiveRecord::Base
   end
   #
   # /Railscasts 274
-  
-  validate :role do
-    if (["admin", "manager", "user"].include? role_was) && role == "guest"
-      errors.add(:role, 'Невозможно изменить роль пользователя с имеющейся на "Гость"')
-      return false
-    end
-  end
-
 
   has_many :cars, :dependent => :destroy
   accepts_nested_attributes_for :cars, :allow_destroy => true 
@@ -66,7 +62,7 @@ class User < ActiveRecord::Base
   has_many :root_products, -> { where("product_id IS NULL") }, :class_name => "Product", :dependent => :destroy
   accepts_nested_attributes_for :root_products, :allow_destroy => true
 
-
+  
 
   has_many :email_addresses, :dependent => :destroy
   has_many :phones, :dependent => :destroy
@@ -75,16 +71,14 @@ class User < ActiveRecord::Base
   has_many :orders, :dependent => :destroy
   accepts_nested_attributes_for :phones, :postal_addresses, :email_addresses, :names, :orders, :allow_destroy => true
 
-  belongs_to :time_zone#, :validate => true
-  #validates :time_zone, :presence => true
+  belongs_to :time_zone, validate: true
 
-  has_one :ping, :dependent => :destroy
   # TODO позже разобраться (обнаружил как неиспользуемую ассоциацию)
   #has_many :documents, :as => :documentable, :class_name => "Transaction"
 
   validates :discount, :prepayment_percent, :numericality => true
   validates :order_rule, :inclusion => { :in => Rails.configuration.user_order_rules.keys }
-  validates :role, :inclusion => Rails.configuration.user_roles.keys
+  validates :role, :inclusion => Rails.configuration.user_roles_keys
 
   # Financial
   has_one :account, :as => :accountable, :dependent => :destroy
@@ -93,7 +87,8 @@ class User < ActiveRecord::Base
 
 
   def send_password_reset
-    generate_token(:password_reset_token)
+    generate_token(:password_reset_email_token)
+    generate_token(:password_reset_sms_token)
     self.password_reset_sent_at = Time.zone.now
     save!
 
@@ -202,5 +197,14 @@ class User < ActiveRecord::Base
     end
 
   end
+
+
+  # TODO х.з. может откажусь от activity_at и заменю на стандартный updated_at
+  before_save do
+    if persisted?
+      touch :activity_at
+    end
+  end
+  
 
 end
