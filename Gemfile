@@ -23,19 +23,19 @@ end
 
 group :development, :test do
   gem 'debugger'
-  gem 'rspec-rails', '~> 2.12.2'
-  gem 'shoulda'
+  #gem 'rspec-rails', '~> 2.12.2'
+  #gem 'shoulda'
   gem 'factory_girl_rails'
-  gem 'database_cleaner'
-  gem 'capistrano'
+  #gem 'database_cleaner'
+  #gem 'capistrano'
 end
 
 group :test do
-  gem 'cucumber-rails', :require => false
-  gem 'capybara'
-  gem 'email_spec'
-  gem 'timecop'
-  gem 'launchy'
+  #gem 'cucumber-rails', :require => false
+  #gem 'capybara'
+  #gem 'email_spec'
+  #gem 'timecop'
+  #gem 'launchy'
 end
 
 gem 'jquery-rails'
