@@ -50,16 +50,6 @@ class ApplicationController < ActionController::Base
     namespace
   end
 
-
-
-  def password_present_validation
-    # В модели у нас у пароля allow_blank и allow_nil, валидация обязательного наличия пароля проходит тут.
-    if params[:user][:password].blank?
-      @user.errors.add(:password, "Пароль не может быть пустым")
-      raise ValidationError.new #"Пароль не может быть пустым"
-    end
-  end
-
   def current_user
     unless @current_user
       if cookies[:auth_token].present?
