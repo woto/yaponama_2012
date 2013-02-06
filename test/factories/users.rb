@@ -3,7 +3,11 @@
 FactoryGirl.define do
 
   sequence(:random_role) do |n|
-    Rails.configuration.user_roles.keys.sample
+    Rails.configuration.user_roles_keys.sample
+  end
+
+  sequence(:random_password) do |n|
+    rand(100000..999999)
   end
 
   sequence(:random_notes_invisible) do |n| 
@@ -16,15 +20,15 @@ FactoryGirl.define do
   end
 
   sequence(:random_prepayment_percent) do |n| 
-    Random.new.rand(0..20)
+    rand(0..20)
   end
 
   sequence(:random_discount) do |n| 
-    Random.new.rand(0..30)
+    rand(0..30)
   end
 
   sequence(:random_order_rule) do |n|
-    Rails.configuration.user_order_rule.keys.sample
+    Rails.configuration.user_order_rules.keys.sample
   end
 
   factory :user do
@@ -35,6 +39,7 @@ FactoryGirl.define do
       discount { generate(:random_discount) }
       order_rule{ generate(:random_order_rule) }
       role{ generate(:random_role) }
+      password { generate(:random_password) }
 
       after(:build) do |u, evaluator|
         u.account = FactoryGirl.build(:minimal_valid_account, accountable: u)
@@ -46,10 +51,10 @@ FactoryGirl.define do
         u.notes{ generate(:random_notes) }
 
         after(:build) do |u, evaluator|
-          u.names = Random.new.rand(5).times.map{|n| FactoryGirl.build(:name, user:  u)}
-          u.phones = Random.new.rand(5).times.map{|n| FactoryGirl.build(:phone, user: u)}
-          u.products = Random.new.rand(50..100).times.map{|n| FactoryGirl.build(:product, user: u)}
-          u.email_addresses = Random.new.rand(3).times.map{|n| FactoryGirl.build(:email_address, user: u)}
+          u.names = rand(5).times.map{|n| FactoryGirl.build(:name, user:  u)}
+          u.phones = rand(5).times.map{|n| FactoryGirl.build(:phone, user: u)}
+          u.products = rand(50..100).times.map{|n| FactoryGirl.build(:product, user: u)}
+          u.email_addresses = rand(3).times.map{|n| FactoryGirl.build(:email_address, user: u)}
           u.time_zone = TimeZone.order("RANDOM()").first
           #u.account.debit = 1
         end

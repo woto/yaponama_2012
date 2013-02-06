@@ -7,6 +7,7 @@ FactoryGirl.define do
   end
 
   factory :email_address do
+
     email_address{ generate(:random_email_address) }
 
     factory :email_address_with_user do
@@ -16,4 +17,3 @@ FactoryGirl.define do
   end
 
 end
-
