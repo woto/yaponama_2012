@@ -11,6 +11,7 @@ class CreateUsers < ActiveRecord::Migration
       t.references :ping
       t.string :role
       t.datetime :activity_at
+      t.string :password_digest
 
       t.timestamps
     end
