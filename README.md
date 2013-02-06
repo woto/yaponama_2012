@@ -336,3 +336,22 @@ https://github.com/liamks/Chatty-Node-Server/blob/master/chat-server.js
 https://www.google.ru/search?q=handlebars.js&oq=handlebars.js&aqs=chrome.0.57j59j0j60j61j0.4422&sourceid=chrome&ie=UTF-8
 http://addyosmani.github.com/backbone-fundamentals/#collections
 https://github.com/codebrew/backbone-rails/tree/master/lib
+
+# JUGGERNAUT REDIS ...
+https://github.com/maccman/juggernaut/issues/80
+https://github.com/maccman/juggernaut
+http://www.google.com/search?client=safari&rls=en&q=nodejs+juggernaut+lister&ie=UTF-8&oe=UTF-8#q=juggernaut+nodejs+listen&hl=en&client=safari&rls=en&prmd=imvns&ei=KMCBT_O8MNHoOZLNxO4G&start=10&sa=N&bav=on.2,or.r_gc.r_pw.r_cp.r_qf.,cf.osb&fp=f85e188e4be29462&biw=1280&bih=664
+https://github.com/maccman/holla/blob/original/app/javascripts/application.juggernaut.js
+https://github.com/mranney/node_redis
+http://www.google.com/search?client=safari&rls=en&q=redis+create+client+subscribe+message&ie=UTF-8&oe=UTF-8
+http://localhost:3000/info/1780103010/TOYOTA
+http://mrjaba.posterous.com/a-gentle-introduction-to-nodejs
+http://www.stoimen.com/blog/2010/11/16/diving-into-node-js-introduction-and-installation/
+http://stackoverflow.com/questions/5062614/how-to-decide-when-to-use-nodejs
+http://caolanmcmahon.com/posts/writing_for_node_and_the_browser
+http://stackoverflow.com/questions/3225251/how-can-i-share-code-between-node-js-and-the-browser
+http://stackoverflow.com/questions/5050265/javascript-nodejs-is-array-foreach-asynchronous
+http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting
+https://github.com/dannycoates/node-inspector
+http://127.0.0.1:8080/debug?port=5858
+
