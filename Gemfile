@@ -76,7 +76,8 @@ gem 'activemerchant', :require => 'active_merchant', :git => 'https://github.com
 gem 'backbone-rails'
 gem "hiredis", "~> 0.3.1"
 gem "redis", "~> 2.2.0", :require => ["redis/connection/hiredis", "redis"]
-gem 'juggernaut', :git => 'git@github.com:woto/juggernaut.git'
+gem 'juggernaut', :git => 'https://github.com/woto/juggernaut.git'
+'
 gem 'ruby-growl'
 gem 'ancestry'
 gem 'turbolinks'
