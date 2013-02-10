@@ -77,7 +77,7 @@ gem 'backbone-rails'
 gem "hiredis", "~> 0.3.1"
 gem "redis", "~> 2.2.0", :require => ["redis/connection/hiredis", "redis"]
 gem 'juggernaut', :git => 'https://github.com/woto/juggernaut.git'
-'
+
 gem 'ruby-growl'
 gem 'ancestry'
 gem 'turbolinks'
