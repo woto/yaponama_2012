@@ -2,7 +2,7 @@
 //=require jquery-getimagedata/getimagedata
 
 //= require JavaScript-Load-Image/load-image
-//= require JavaScript-Canvas-To-Blob/canvas-to-blob
+//= require JavaScript-Canvas-to-Blob/canvas-to-blob
 //= require JavaScript-Templates/tmpl
 //= require jQuery-File-Upload/jquery.iframe-transport
 //= require jQuery-File-Upload/jquery.fileupload
