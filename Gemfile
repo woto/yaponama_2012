@@ -59,7 +59,6 @@ gem "twitter-bootstrap-rails", git: 'https://github.com/seyhunak/twitter-bootstr
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git', branch: 'rails_4'
 gem 'cocoon', :git => 'https://github.com/nathanvda/cocoon'
 gem 'russian'
-gem 'mailman'
 gem 'kaminari'
 gem 'carrierwave'
 gem 'mini_magick'
@@ -85,3 +84,7 @@ gem 'turbolinks'
 # Mysql2 является обязательным требованием для SphinxQL
 gem 'mysql2',          '0.3.12b4'
 gem 'thinking-sphinx', '3.0.0'
+
+# TODO HACK не нашел лучшего способа обрабатывать почту.
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
