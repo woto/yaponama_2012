@@ -84,7 +84,3 @@ gem 'turbolinks'
 # Mysql2 является обязательным требованием для SphinxQL
 gem 'mysql2',          '0.3.12b4'
 gem 'thinking-sphinx', '3.0.0'
-
-# TODO HACK не нашел лучшего способа обрабатывать почту.
-Encoding.default_external = Encoding::UTF_8
-Encoding.default_internal = Encoding::UTF_8
