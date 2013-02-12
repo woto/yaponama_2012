@@ -3,7 +3,7 @@ defaults: &defaults
   price_request_cache_without_replacements_in_seconds: 3600 #  1 час.
   sms_notify_method: flash
   redis_port: '6379'
-  socket_io_address: '192.168.2.7'
+  socket_io_address: '192.168.2.2'
   socket_io_port: '80'
   juggernaut_port: '8080'
   price_address: '192.168.2.9'
@@ -27,12 +27,12 @@ defaults: &defaults
   default_user_order_rule: all
   send_request_from_search_page: true
 
-development:
+development: &development
   <<: *defaults
-  site_address: '192.168.2.7'
+  site_address: '192.168.2.2'
   site_port: '3000'
-  redis_address: '192.168.2.7'
-  juggernaut_address: '192.168.2.7'
+  redis_address: '192.168.2.2'
+  juggernaut_address: '192.168.2.2'
 
 production:
   <<: *defaults
@@ -40,3 +40,6 @@ production:
   site_port: '80'
   redis_address: 'www.yaponama.ru'
   juggernaut_address: 'www.yaponama.ru'
+
+test:
+  <<: *development
