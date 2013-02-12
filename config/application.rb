@@ -268,9 +268,11 @@ module Yaponama2012
     }
 
     config.phone_types = {
-      'mobile_russia' => 'Сотовый (Россия)',
-      'unknown' => 'Неизвестно'
+      'mobile_russia' => 'Мобильный (Россия)',
+      'unknown' => 'Городской/Или другие страны'
     }
+
+    config.phone_types_keys = config.phone_types.keys
 
     config.default_user_role = 'guest'
 
@@ -283,31 +285,53 @@ module Yaponama2012
     #}
     config.user_roles = {
       'all' => {
+        'password_required' => false,
         'real' => false,
         'title' => 'Все',
         'title_plural' => 'Все'
       },
       'admin' => {
+        'password_required' => true,
         'real' => true,
         'title' => 'Администратор',
         'title_plural' => 'Администраторы'
       },
       'manager' => {
+        'password_required' => true,
         'real' => true,
         'title' => 'Менеджер',
         'title_plural' => 'Менеджеры'
       },
       'user' => {
+        'password_required' => true,
         'real' => true,
         'title' => 'Покупатель',
         'title_plural' => 'Покупатели'
       },
       'guest' => {
+        'password_required' => false,
         'real' => true,
          'title' => 'Гость',
          'title_plural' => 'Гости'
       }
     }
+
+    # Все роли
+    config.user_roles_keys = config.user_roles
+      .select{ |k, v| v["real"] == true }
+      .keys
+
+    # Роли, где требуется пароль
+    config.user_roles_password_required_keys = config.user_roles
+      .select{ |k, v| v["real"] == true }
+      .select{ |k, v| v["password_required"] == true }
+      .keys
+
+    # Роли, где не требуется пароль
+    config.user_roles_password_not_required_keys = config.user_roles
+      .select{ |k, v| v["real"] == true }
+      .select{ |k, v| v["password_required"] == false }
+      .keys
 
     #config.avisosms = {
     #  username: 'username',
