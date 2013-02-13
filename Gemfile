@@ -84,3 +84,5 @@ gem 'turbolinks'
 # Mysql2 является обязательным требованием для SphinxQL
 gem 'mysql2',          '0.3.12b4'
 gem 'thinking-sphinx', '3.0.0'
+
+gem 'charlock_holmes'
