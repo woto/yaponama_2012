@@ -60,8 +60,6 @@ module Yaponama2012
     # Autoload ckeditor models folder
     # config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
 
-    config.paths['config/routes.rb'].concat Dir[Rails.root.join("config/routes/*.rb")]
-
     # User
     config.user_creation_reason = { 
       'email' => 'Прислал e-mail',
