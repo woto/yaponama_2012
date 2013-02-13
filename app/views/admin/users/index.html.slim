@@ -60,7 +60,7 @@ ul#myTab.nav.nav-tabs
             td = user.account.debit 
             td = user.account.credit 
             td = user.prepayment_percent 
-            td = l user.activity_at, format: :short
+            td = l user.activity_at, format: :short if user.activity_at
             td
               .btn-group
                 button.btn.btn-primary.dropdown-toggle data-toggle="dropdown"
