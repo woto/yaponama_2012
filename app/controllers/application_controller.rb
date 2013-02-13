@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     rescue_from Exception, :with => :render_500
     rescue_from ActionController::RoutingError, :with => :render_404
     rescue_from ActionController::UnknownController, :with => :render_404
-    rescue_from ActionController::UnknownAction, :with => :render_404
+    rescue_from AuthenticationError, with: -> { redirect_to root_path }
     rescue_from ActiveRecord::RecordNotFound, :with => :render_404
   end
   
@@ -53,12 +53,10 @@ class ApplicationController < ActionController::Base
   def current_user
     unless @current_user
       if cookies[:auth_token].present?
-        @current_user = User.find_by_auth_token(cookies[:auth_token])
+        @current_user = User.find_by(auth_token: cookies[:auth_token])
         unless @current_user.present?
-          #reset_session
           cookies.delete :auth_token
-          #redirect_to :back
-          #redirect_to root_path and return
+          raise AuthenticationError
         end
       else
         @current_user = User.new
@@ -68,6 +66,7 @@ class ApplicationController < ActionController::Base
         @current_user.save!
         cookies.permanent[:auth_token] = @current_user.auth_token
       end
+
     end
     @current_user
   end
