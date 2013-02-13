@@ -12,14 +12,14 @@ module Yaponama2012
     
     # TODO Разобраться более тщательно, т.к. полагаю, что это могут делать подключаемые гемы автоматически
     # Generators
-    config.generators do |g|
-      g.template_engine :slim
-      g.test_framework :rspec
-      g.view_specs false
-      g.helper_specs false
-      #g.form_builder :simple_form
-      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
-    end
+    #config.generators do |g|
+    #  g.template_engine :slim
+    #  g.test_framework :rspec
+    #  g.view_specs false
+    #  g.helper_specs false
+    #  #g.form_builder :simple_form
+    #  g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+    #end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -234,27 +234,15 @@ module Yaponama2012
       }
     }
 
-    # Mailman Config
-    Mailman.config.poll_interval = 5
-    Mailman.config.logger = Logger.new File.expand_path("../../log/mailman_#{Rails.env}.log", __FILE__)
-
-    Mailman.config.pop3 = {
-      :server => 'pop.gmail.com', :port => 995, :ssl => true,
-      :username => 'boss@yaponama.ru',
-      :password => 'password'
-    }
-
-    # Send Emails
     config.action_mailer.delivery_method = :smtp
 
     config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :domain               => 'yaponama.ru',
-      :user_name            => 'boss@yaponama.ru',
-      :password             => 'password',
-      :authentication       => 'plain',
-      :enable_starttls_auto => true  }
+      address:                 "127.0.0.1",
+      port:                    25,
+      enable_starttls_auto:    true
+    }
+
+
     # User Order Rule
     config.user_order_rules = {
       'all' => 'Автоматически уйдут в работу только если будет достаточно денег на все товары в заказе',
