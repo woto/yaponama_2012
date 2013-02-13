@@ -11,7 +11,7 @@ class CreateEmails < ActiveRecord::Migration
       t.text :text_part
       t.text :user_id
       t.text :to
-      t.text :body
+      t.binary :body
       t.text :cc_addrs
       t.text :bcc_addrs
       t.text :bcc
