@@ -55,6 +55,7 @@ class Admin::UsersController < Admin::ApplicationController
   # POST /users.json
   def create
     @user = User.new(SiteConfig.default_user_attributes.merge( user_params || {} ) )
+    # Наличие пароля не обязательно при создании, необходимо так же сделать кнопочки чтобы администратор мог инициировать смену пароля пользователем через email, sms
 
     unless @user.persisted?
       @user.creation_reason = :manager
