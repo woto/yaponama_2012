@@ -1,8 +1,9 @@
 # encoding: utf-8
 
 class SessionsController < ApplicationController
-  #skip_filter :only_admin_or_manager, :only => [:new, :create]
-  before_filter :only_authenticated_filter, :only => [:destroy]
+  # Это правильно, что только авторизованный пользователь может выйти с сайта,
+  # но как бы правильно это не было этого не надо
+  # before_filter :only_authenticated_filter, :only => [:destroy]
   skip_filter :only_authenticated_filter, :only => [:new, :create]
   before_filter :only_not_authenticated_filter, :only => [:new, :create]
 
