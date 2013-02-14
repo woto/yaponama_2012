@@ -4,15 +4,17 @@ class PasswordResetsController < ApplicationController
   skip_filter :only_authenticated_filter, :only => [:new, :create, :edit, :update]
   before_filter :only_not_authenticated_filter, :only => [:new, :create, :edit, :update]
 
+  # TODO проработать еще вопрос с сменой пароля через смс
+
   # Смена пароля - действие
   def update
     begin
-      @user = User.find_by_password_reset_token!(params[:id])
-      password_present_validation
+      @user = User.find_by!(password_reset_email_token: params[:id])
+      @user.password_required = true
 
       if @user.password_reset_sent_at < 2.hours.ago
         redirect_to new_admin_password_reset_path, :alert => "В целях безопасности ваша инструкция по восстановлению пароля была признана устаревшей, пожалуйста запросите новую." and return
-      elsif @user.update_attributes(params[:user], :as => :user)
+      elsif @user.update_attributes(user_params)
         redirect_to root_url, :notice => "Вы успешно сменили пароль, теперь можете войти на сайт." and return
       end
 
@@ -27,7 +29,7 @@ class PasswordResetsController < ApplicationController
 
   # Смена пароля по токену - форма
   def edit
-    @user = User.find_by_password_reset_token!(params[:id])
+    @user = User.find_by!(password_reset_email_token: params[:id])
   end
 
   #def index
@@ -58,6 +60,10 @@ class PasswordResetsController < ApplicationController
       flash[:alert] = "Мы не смогли найти среди зарегистрированных покупателей указанные вами данные, проверьте ввод и попробуйте еще раз."
       render 'new'
     end
+  end
+
+  def user_params
+    params.require(:user).permit!
   end
 
 end
