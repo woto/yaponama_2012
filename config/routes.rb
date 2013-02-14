@@ -8,12 +8,9 @@ Yaponama2012::Application.routes.draw do
 
   concerns :loginable
 
-
-
   resources :stats do
     get "iframe", :on => :member
   end
-
 
   resources :comments
 
