@@ -8,7 +8,7 @@ $(function(){
       var url = $(e.originalEvent.dataTransfer.getData('text/html')).filter('img').attr('src');
       if (url) {
           $.getImageData({
-              server: "<%= Rails.configuration.getimagedata %>",
+              server: "http://<%= SiteConfig.get_image_full_address %>",
               url: url,
               success: function (img) {
                   var canvas = document.createElement('canvas');

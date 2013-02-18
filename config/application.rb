@@ -330,8 +330,6 @@ module Yaponama2012
     #  validity_period: '10'
     #}
 
-    config.getimagedata = "http://192.168.2.7:8800"
-
     config.sms_notify_methods = %w(flash sms growl)
   end
 end

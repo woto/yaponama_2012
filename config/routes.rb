@@ -158,4 +158,6 @@ Yaponama2012::Application.routes.draw do
 
   end
 
+  get "*path" => "pages#index"
+
 end

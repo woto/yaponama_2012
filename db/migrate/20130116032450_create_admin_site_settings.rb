@@ -33,6 +33,8 @@ class CreateAdminSiteSettings < ActiveRecord::Migration
       t.string :juggernaut_port
       t.string :price_address
       t.string :price_port
+      t.string :get_image_data_address
+      t.string :get_image_data_port
 
       t.timestamps
     end

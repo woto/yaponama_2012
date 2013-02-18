@@ -37,6 +37,7 @@ table class="table table-striped"
         th= model_class.human_attribute_name(:socket_io_full_address)
         th= model_class.human_attribute_name(:juggernaut_full_address)
         th= model_class.human_attribute_name(:price_full_address)
+        th= model_class.human_attribute_name(:get_image_data_full_address)
       th= model_class.human_attribute_name(:updated_at)
       th=t '.actions', :default => t("helpers.actions")
   tbody
@@ -75,6 +76,7 @@ table class="table table-striped"
           td= admin_site_setting.socket_io_full_address
           td= admin_site_setting.juggernaut_full_address
           td= admin_site_setting.price_full_address
+          td= admin_site_setting.get_image_data_full_address
         td=l admin_site_setting.updated_at, :format => :short
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_site_setting_path(admin_site_setting, :filter => params[:filter]), :class => 'btn btn-mini'
