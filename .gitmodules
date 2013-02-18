@@ -43,3 +43,6 @@
 [submodule "system/images"]
 	path = system/images
 	url = https://github.com/woto/system_images.git
+[submodule "system/submodules/getImageData"]
+	path = system/submodules/getImageData
+	url = https://github.com/betamax/getImageData.git
