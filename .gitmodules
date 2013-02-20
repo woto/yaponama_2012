@@ -46,3 +46,6 @@
 [submodule "system/submodules/jquery-jsonp"]
 	path = system/submodules/jquery-jsonp
 	url = https://github.com/jaubourg/jquery-jsonp.git
+[submodule "system/submodules/getImageData"]
+	path = system/submodules/getImageData
+	url = https://github.com/woto/getImageData.git
