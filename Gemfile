@@ -56,7 +56,7 @@ gem 'puma'
 gem 'less-rails'
 gem "twitter-bootstrap-rails", git: 'https://github.com/seyhunak/twitter-bootstrap-rails.git'
 
-gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git', branch: 'rails_4'
+gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'cocoon', :git => 'https://github.com/nathanvda/cocoon'
 gem 'russian'
 gem 'kaminari'
@@ -86,3 +86,4 @@ gem 'mysql2',          '0.3.12b4'
 gem 'thinking-sphinx', '3.0.0'
 
 gem 'charlock_holmes'
+gem 'paper_trail', git: 'https://github.com/airblade/paper_trail.git', branch: 'rails4'

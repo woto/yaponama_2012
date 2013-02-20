@@ -7,13 +7,13 @@ if self == top
     send_data()
 
   send_data = ->
-    window.socket.emit 'page', $.toJSON(
+    window.socket.emit 'page', JSON.stringify(
       time: new Date(),
       html: '<!DOCTYPE html><html lang="ru">' +  $("html").html() + '</html>'
     )
 
   window.socket.on "page", (msg) ->
-    message = $.evalJSON(msg)
+    message = JSON.parse(msg)
     action = message.action
     switch action
       when "page"

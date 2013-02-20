@@ -13,9 +13,9 @@
   .nested-visualize style="border-left: 3px dashed #62C462"
 
     = f.association :delivery
-    = f.association :name, :collection => @user.names.select
-    = f.association :postal_address, :collection => @user.postal_addresses.select
-    = f.association :phone, :collection => @user.phones.select
+    = f.association :name, :collection => @user.names.all.select
+    = f.association :postal_address, :collection => @user.postal_addresses.all.select
+    = f.association :phone, :collection => @user.phones.all.select
     = f.input :delivery_cost, :as => :string
     = f.input :status, :collection => Rails.configuration.products_status.map {|k,v| [v[:title],k]}, :disabled => true
     = f.input :created_at

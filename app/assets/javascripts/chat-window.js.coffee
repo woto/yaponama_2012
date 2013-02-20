@@ -29,11 +29,17 @@ $(document).on 'click', '#close-chat', (e) ->
   root.closeChat()
 
 root.showChat = ->
-  $('#channel').show();
   cookie_chat = window.getCookieChat()
+
   if cookie_chat.position?
     $('#channel').css('left', cookie_chat.position.left)
     $('#channel').css('top', cookie_chat.position.top)
+    
+  if ( cookie_chat.display? && cookie_chat.display == 'hide' ) || ( !cookie_chat.display? )
+    $('#channel').effect('highlight')
+  else
+    $('#channel').show()
+
   $.extend(cookie_chat, display: 'show')
   $.cookie('chat', JSON.stringify(cookie_chat))
 
@@ -45,4 +51,4 @@ root.closeChat = ->
       top: $('#channel').css('top')
       left: $('#channel').css('left')
   $.cookie('chat', JSON.stringify(cookie_chat))
-  $('#channel').hide()
+  $('#channel').fadeOut()

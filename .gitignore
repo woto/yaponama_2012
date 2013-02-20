@@ -19,7 +19,8 @@
 /vendor/cache
 /vendor/bundle
 /system/dump.rdb
-/system/node_modules
+node_modules
 /system/parts_info
 
 /db/sphinx
+dump.rdb

@@ -25,9 +25,6 @@
 [submodule "system/submodules/JavaScript-Templates"]
 	path = system/submodules/JavaScript-Templates
 	url = https://github.com/blueimp/JavaScript-Templates.git
-[submodule "system/submodules/Modernizr"]
-	path = system/submodules/Modernizr
-	url = https://github.com/Modernizr/Modernizr.git
 [submodule "system/submodules/jquery.transit"]
 	path = system/submodules/jquery.transit
 	url = https://github.com/rstacruz/jquery.transit
@@ -43,6 +40,9 @@
 [submodule "system/images"]
 	path = system/images
 	url = https://github.com/woto/system_images.git
-[submodule "system/submodules/getImageData"]
-	path = system/submodules/getImageData
-	url = https://github.com/betamax/getImageData.git
+[submodule "system/submodules/moment"]
+	path = system/submodules/moment
+	url = https://github.com/timrwood/moment.git
+[submodule "system/submodules/jquery-jsonp"]
+	path = system/submodules/jquery-jsonp
+	url = https://github.com/jaubourg/jquery-jsonp.git

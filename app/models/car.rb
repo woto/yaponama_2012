@@ -1,6 +1,6 @@
 class Car < ActiveRecord::Base
+  has_paper_trail
   include BelongsToUser
-  include BelongsToCreator
 
   has_many :requests, :dependent => :destroy
   accepts_nested_attributes_for :requests, :allow_destroy => true

@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  belongs_to :accountable, :polymorphic => true
+  belongs_to :accountable, :polymorphic => true, touch: true
   has_many :left_transactions, :class_name => "MoneyTransaction", :foreign_key => "left_account_id", :dependent => :destroy
   has_many :right_transactions, :class_name => "MoneyTransaction", :foreign_key => "right_account_id", :dependent => :destroy
 

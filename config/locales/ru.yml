@@ -25,8 +25,16 @@ ru:
     models:
       order: Заказ
       product: Товар
+      model: Модель
 
     attributes:
+      model:
+        brand: Бренд
+        name: Модель
+        creator: Создатель
+        created_at: Создано
+        updated_at: Обновлено
+      
       metro:
         metro: Станция метро
         delivery_cost: Стоимость доставки

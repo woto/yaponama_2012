@@ -22,8 +22,9 @@ module ConfigHelper
     "#{price_address}#{price_port.present? ? ":" + price_port : ''}"
   end
 
-  def get_image_full_address
-    "#{get_image_address}#{get_image_port.present? ? ":" + get_image_port : ''}"
+  def get_image_data_full_address
+    "#{get_image_data_address}#{get_image_data_port.present? ? ":" + get_image_data_port : ''}"
+  end
 
   def default_user_attributes
     {

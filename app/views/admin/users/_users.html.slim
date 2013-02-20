@@ -2,8 +2,6 @@
   #users.top-space
     = f.association :time_zone, :include_blank => true
     = f.input :creation_reason, :collection => Rails.configuration.user_creation_reason.map {|k,v| [v,k]}, :disabled => true, :as => :radio_buttons
-    = f.simple_fields_for :ping do |ping| 
-      = ping.input :created_at, :as => :datetime, :disabled => true, :label => 'Пинг', :hint => 'Время последней активности (просмотр страницы пользователем или получение от него письма)', :required => false 
     = f.simple_fields_for :account do |account| 
       = account.input :debit, :as => :string, input_html: { autocomplete: 'off' }
       = account.input :credit, :as => :string, input_html: { autocomplete: 'off' }
@@ -14,8 +12,8 @@
     = f.input :password, input_html: { autocomplete: 'off' }
     = f.input :password_confirmation, input_html: { autocomplete: 'off' }
     = f.input :role, :collection => Rails.configuration.user_roles.select{|k, v| v["real"] == true}.map{|k, v| [k, v['title']] }, :value_method => :first, :label_method => :last, :include_blank => false
-    = f.input :created_at
-    = f.input :updated_at
+    = f.input :created_at, disabled: true
+    = f.input :updated_at, disabled: true
     = f.input :notes, :input_html => {:rows => 3} 
     = f.input :notes_invisible, :input_html => {:rows => 3} 
 
@@ -28,4 +26,3 @@
     = f.input :password_reset_sms_token do
       = f.text_field :password_reset_sms_token, :disabled => true
     = f.input :password_reset_sent_at, :disabled => true
-    = f.association :creator, :disabled => true

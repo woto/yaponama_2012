@@ -1,0 +1,59 @@
+Delivered-To: oganer@gmail.com
+Received: by 10.229.155.19 with SMTP id q19csp65970qcw;
+        Mon, 11 Feb 2013 01:38:02 -0800 (PST)
+X-Received: by 10.112.88.9 with SMTP id bc9mr5532178lbb.22.1360575481982;
+        Mon, 11 Feb 2013 01:38:01 -0800 (PST)
+Return-Path: <info@moikrug.ru>
+Received: from pamir.yandex.ru (pamir.yandex.ru. [2a02:6b8:0:229::a])
+        by mx.google.com with ESMTPS id k8si16874652lbl.36.2013.02.11.01.38.01
+        (version=TLSv1 cipher=RC4-SHA bits=128/128);
+        Mon, 11 Feb 2013 01:38:01 -0800 (PST)
+Received-SPF: softfail (google.com: domain of transitioning info@moikrug.ru does not designate 2a02:6b8:0:229::a as permitted sender) client-ip=2a02:6b8:0:229::a;
+Authentication-Results: mx.google.com;
+       spf=softfail (google.com: domain of transitioning info@moikrug.ru does not designate 2a02:6b8:0:229::a as permitted sender) smtp.mail=info@moikrug.ru;
+       dkim=pass header.i=@moikrug.ru
+Message-Id: <5118bbf9.282a700a.4ee9.fffff4adSMTPIN_ADDED_MISSING@mx.google.com>
+Received: from relay01g.mk.yandex.net (relay01g.mk.yandex.net [178.154.239.166])
+	by pamir.yandex.ru (Postfix) with ESMTP id 3Z4MNy2zDJz3jkfL
+	for <oganer@gmail.com>; Mon, 11 Feb 2013 13:37:54 +0400 (MSK)
+X-Yandex-Service: bW9pa3J1ZyA0ODA0NmQ1NjAwZjRjZGI5OGM3N2JjNmM5NzY2OGZlMQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=moikrug.ru; s=mk;
+	t=1360575474; bh=eJ/wvbUW00nP/4iTKUYPVr6CQkJdWWT7PHmFpPnt0KM=;
+	h=Date:To:From:Subject:MIME-Version:Content-Transfer-Encoding:
+	 Content-Type;
+	b=XOV8+gX/+4Mq/JJR2TDDmHhqd54x5B93ExUL+SJLulwEBYkOr8mF4hpoV9nFdcnwF
+	 7T6YZ8hnE07vFzM5SItOSebm1oSEhB6ZxOOU6Ex3BxAAuxKnCvn9boYwZihb+TfurN
+	 4rterdyo8ytBwMgNgvDxgWEOEo9hb7JtzuMZh/98=
+Date: Mon, 11 Feb 2013 13:37:54 +0400 (MSK)
+To: =?windows-1251?B?0PPx6+DtIMru8O3l4g==?= <oganer@gmail.com>
+From: =?windows-1251?B?zO7pIMrw8+M=?= <info@moikrug.ru>
+Subject: =?windows-1251?B?z/Dl5Ovu5uXt6OUg4uDq4O3x6Og=?=
+Precedence: list
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/html; charset="windows-1251"
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Мой Круг: предложение вакансии</title>
+<meta http-equiv="Content-type" content="text/html; charset=windows-1251" />
+</head>
+<body>
+<font face="Tahoma,Arial">
+<p><b>Здравствуйте, <font color="#C71717">Р</font>услан Корнев!</b></p>
+<p><a href="http://passport.yandex.ru/passport?mode=autologin&key=02-f170d0f65ca9757ff579187f104f6ab6&retpath=http%3A%2F%2FGerber-Mariya.moikrug.ru%2F%3Ffrom%3Dapply_for_resume" title="Профиль пользователя"><font color="#C71717">М</font>ария Б.</a> предлагает Вам рассмотреть вакансию «Веб-программист Ruby/Ruby on Rails».</p>
+<p><a href="http://passport.yandex.ru/passport?mode=autologin&key=02-f170d0f65ca9757ff579187f104f6ab6&retpath=http%3A%2F%2Fmoikrug.ru%2Fvacancies%2Fapplications%2Fa804a254e6d9bd7dec73521ec0b8c9ab%2F%3Ffrom%3Dapply_for_resume">Посмотреть подробности</a>.</p>
+<hr noshade size="1" />
+<p>
+<b>Внимание!</b> По ссылке в этом письме можно зайти в Ваш профиль без 
+ввода пароля, поэтому никому ее не передавайте. Перейти в ваш профиль 
+по этой ссылке можно только один раз.
+</p>
+<hr noshade size="1" />
+<p>Мой Круг. Сеть профессиональных контактов.</p>
+</font>
+</body>
+</html>
+
+

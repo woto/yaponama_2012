@@ -2,7 +2,6 @@
 
   = f.association :brand, :collection => Brand.order(:name)
   = f.input :name
-  = f.association :creator, :disabled => true
 
   .form-actions
     = f.button :submit, :class => 'btn-primary'

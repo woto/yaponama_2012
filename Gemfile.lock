@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: f36b80b3e8a1aae9e45af7c82be3917bc6277aa1
+  revision: 1fd78305b5812c186d9eed9475677f90946eba5f
   specs:
     actionmailer (4.0.0.beta)
       actionpack (= 4.0.0.beta)
@@ -94,6 +94,15 @@ GIT
       nokogiri
 
 GIT
+  remote: https://github.com/airblade/paper_trail.git
+  revision: 283f13139ac08ca35739645214608b7fbdd5be64
+  branch: rails4
+  specs:
+    paper_trail (2.7.0)
+      activerecord (~> 4.0.0.beta)
+      railties (~> 4.0.0.beta)
+
+GIT
   remote: https://github.com/nathanvda/cocoon
   revision: d4f59eb5eb0dce54c47935459e44b84f6bbcf2e1
   specs:
@@ -101,8 +110,7 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: f70d638f38459474609a452bf3df71a8dc969cff
-  branch: rails_4
+  revision: cdfc1a98004cac1d0aaec313192f79862aad43fd
   specs:
     simple_form (3.0.0.dev)
       actionpack (>= 4.0.0.beta, < 4.1)
@@ -198,7 +206,7 @@ GEM
       treetop (~> 1.4.8)
     middleware (0.1.0)
     mime-types (1.21)
-    mini_magick (3.4)
+    mini_magick (3.5.0)
       subexec (~> 0.2.1)
     minitest (4.6.0)
     money (5.1.0)
@@ -306,6 +314,7 @@ DEPENDENCIES
   less-rails
   mini_magick
   mysql2 (= 0.3.12b4)
+  paper_trail!
   pg
   puma
   rails!

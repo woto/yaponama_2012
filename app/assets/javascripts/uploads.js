@@ -1,5 +1,5 @@
-//=require jquery-getimagedata/jquery.getimagedata
-//=require jquery-getimagedata/getimagedata
+//=require getImageData/jquery.getimagedata
+//=require getImageData/getimagedata
 
 //= require JavaScript-Load-Image/load-image
 //= require JavaScript-Canvas-to-Blob/canvas-to-blob

@@ -14,7 +14,8 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
-    @upload = Upload.new(params[:upload])
+    @upload = Upload.new(upload: upload_params[:upload][0])
+    #@upload = Upload.new(upload_params)
     @upload.user = current_user
 
     respond_to do |format|
@@ -43,4 +44,11 @@ class UploadsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  
+  def upload_params
+    params.require(:upload).permit!
+  end
+
 end

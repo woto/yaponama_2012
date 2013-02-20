@@ -32,9 +32,11 @@ initButton = ->
   handlerIn = ->
     $('#chat-button').animate({
       backgroundColor: "#999",
+      left: "-40px"
     }, {duration: 100, queue: false})
 
   handlerOut = ->
     $('#chat-button').animate({
       backgroundColor: "#DDD",
+      left: "-50px"
     }, {duration: 100, queue: false})

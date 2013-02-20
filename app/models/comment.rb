@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  include BelongsToCreator
+  has_paper_trail
   has_ancestry
 
   belongs_to :commentable, :polymorphic => true

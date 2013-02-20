@@ -1,7 +1,7 @@
 #encoding: utf-8
 
 class User < ActiveRecord::Base
-  include BelongsToCreator
+  has_paper_trail
 
   has_many :uploads
 
@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   #has_many :brands
   #has_many :models
 
-  has_one :stat, :dependent => :destroy
+  has_many :stats, :dependent => :destroy
 
   #has_many :comments
 

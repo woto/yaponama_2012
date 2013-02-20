@@ -9,6 +9,7 @@ class CreateMoneyTransactions < ActiveRecord::Migration
       t.decimal :right_money, :precision => 8, :scale => 2
       t.text :notes
       t.references :documentable, :polymorphic => true
+      t.integer :creator_id
 
       t.timestamps
     end

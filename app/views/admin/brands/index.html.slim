@@ -13,7 +13,6 @@ table class="table table-striped"
       th= model_class.human_attribute_name(:image)
       th= model_class.human_attribute_name(:rating)
       th= model_class.human_attribute_name(:content)
-      th= model_class.human_attribute_name(:creator)
       th= model_class.human_attribute_name(:created_at)
       th= model_class.human_attribute_name(:updated_at)
       th=t '.actions', :default => t("helpers.actions")
@@ -26,7 +25,6 @@ table class="table table-striped"
         td= image_tag brand.image.thumb
         td= brand.rating
         td= brand.content
-        td= brand.creator.try(:to_label)
         td=l brand.created_at, format: :short
         td=l brand.updated_at, format: :short
         td

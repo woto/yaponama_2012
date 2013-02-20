@@ -2,7 +2,8 @@ module BelongsToSupplier
   extend ActiveSupport::Concern
 
   included do 
-    belongs_to :supplier, validate: true, touch: :activity_at
+    # TODO Почему-то закомментировал validate в процессе
+    belongs_to :supplier, touch: true, validate: true
     # TODO по идее можно заморочиться и прикрутить еще validates presence
   end
 

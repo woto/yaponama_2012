@@ -8,7 +8,7 @@ if self == top
     size()
 
   size = ->
-    window.socket.emit "size", $.toJSON(
+    window.socket.emit "size", JSON.stringify(
       action: 'size'
       user: 'a'
       width: $(window).width() + window.getScrollBarWidth() # TODO refactor usage of getScrollBarWidth
@@ -17,7 +17,7 @@ if self == top
     )
 
   window.socket.on "size", (msg) ->
-    message = $.evalJSON(msg)
+    message = JSON.parse(msg)
     #console.log message
     action = message.action
     switch action

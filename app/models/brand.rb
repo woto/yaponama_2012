@@ -1,5 +1,6 @@
 class Brand < ActiveRecord::Base
-  include BelongsToCreator
+  has_paper_trail
+
   mount_uploader :image, BrandUploader
 
   validates :name, :presence => true, uniqueness:  { case_sensitive: false }

@@ -7,6 +7,6 @@
       = f.error_notification
 
     h2.form-signin-heading Новый пароль
-    = f.input :password, :input_html => { :class => "input-block-level", :type => "password", :placeholder => "Новый пароль" }
-    = f.input :password_confirmation, :input_html => { :class => "input-block-level", :type => "password", :placeholder => "Введите новый пароль еще раз" }
+    = f.input :password, :input_html => { :class => "input-block-level", :type => "password", :placeholder => "Новый пароль" }, required: true
+    = f.input :password_confirmation, :input_html => { :class => "input-block-level", :type => "password", :placeholder => "Введите новый пароль еще раз" }, required: true
     = f.submit "Сменить пароль", :class => "button btn btn-primary actions"

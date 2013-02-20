@@ -1,7 +1,7 @@
 if self == top
 
   $(window).scroll (e) ->
-    window.socket.emit "scroll", $.toJSON(
+    window.socket.emit "scroll", JSON.stringify(
       action: "scroll"
       user: 'a'
       x: window.pageXOffset
@@ -9,7 +9,7 @@ if self == top
     )
 
 window.socket.on "scroll", (msg) ->
-  message = $.evalJSON(msg)
+  message = JSON.parse(msg)
   action = message.action
   switch action
     when "scroll"

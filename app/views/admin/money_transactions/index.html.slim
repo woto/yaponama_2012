@@ -16,6 +16,7 @@ table.table.table-striped
       th = model_class.human_attribute_name(:right_real)
       th = model_class.human_attribute_name(:left_money)
       th = model_class.human_attribute_name(:right_money)
+      th = model_class.human_attribute_name(:creator_id)
       th = model_class.human_attribute_name(:created_at)
   tbody
     - @money_transactions.each do |money_transaction|
@@ -39,6 +40,7 @@ table.table.table-striped
         td = money_transaction.right_real
         td = ((money_transaction.left_money && money_transaction.left_money > 0) ? "+" : "" ) + money_transaction.left_money.to_s
         td = ((money_transaction.right_money && money_transaction.right_money > 0) ? "+" : "" ) + money_transaction.right_money.to_s
+        td = money_transaction.creator_id
         td =l money_transaction.created_at
 
 = paginate @money_transactions

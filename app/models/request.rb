@@ -1,8 +1,8 @@
 #encoding: utf-8
 
 class Request < ActiveRecord::Base
+  has_paper_trail
   include BelongsToUser
-  include BelongsToCreator
 
   ANY_DATA = %w(name catalog_number manufacturer notes)
 

@@ -7,7 +7,6 @@ table class="table table-striped"
       th= model_class.human_attribute_name(:id)
       th= model_class.human_attribute_name(:name)
       th= model_class.human_attribute_name(:generation)
-      th= model_class.human_attribute_name(:creator)
       th= model_class.human_attribute_name(:created_at)
       th= model_class.human_attribute_name(:updated_at)
       th=t '.actions', :default => t("helpers.actions")
@@ -17,7 +16,6 @@ table class="table table-striped"
         td= link_to modification.id, admin_modification_path(modification)
         td= modification.name
         td= modification.generation.to_label
-        td= modification.creator.to_label
         td=l modification.created_at, format: :short
         td=l modification.updated_at, format: :short
         td

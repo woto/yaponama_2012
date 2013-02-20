@@ -15,21 +15,29 @@ class UsersController < ApplicationController
 
   def update
     begin
-      # TODO тут может быть так что мыло указано у другого, а регистрируем этого
-
       @user = current_user
 
       @user.assign_attributes(user_params)
 
+      if @user.phones.last.valid?
+        @user.phones = [@user.phones.last]
+      else
+        @user.phones = [@user.phones.first]
+      end
       @user.phones.first.save
+
+      if @user.email_addresses.last.valid?
+        @user.email_addresses = [@user.email_addresses.last]
+      else
+        @user.email_addresses = [@user.email_addresses.first]
+      end
       @user.email_addresses.first.save
 
-      password_present_validation
+      @user.password_required = true
+      @user.role = "user"
 
       respond_to do |format|
-        if @user.valid?
-          @user.role = "user"
-          @user.save!
+        if @user.save
           format.html { redirect_to root_path, :notice => "Регистрация завершена. Вы вошли на сайт под своим аккаунтом." }
         else
           format.html { render :action => "edit" }
@@ -50,7 +58,12 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit!
+    params.require(:user).permit(
+      { :email_addresses_attributes => [:email_address] },
+      { :phones_attributes => [:phone, :phone_type] },
+      :password,
+      :password_confirmation
+    )
   end
 
 end

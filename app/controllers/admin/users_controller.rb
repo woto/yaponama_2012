@@ -16,7 +16,7 @@ class Admin::UsersController < Admin::ApplicationController
       users_scope = users_scope.where(:role => params[:role])
     end
 
-    @users = users_scope.includes(:email_addresses, :phones, :names, :account).order("activity_at DESC").page(params[:page])
+    @users = users_scope.references(:stats).order('stats.updated_at DESC').includes(:stats, :email_addresses, :phones, :names, :account).page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

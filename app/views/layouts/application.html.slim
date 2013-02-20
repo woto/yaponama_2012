@@ -63,10 +63,14 @@ body
     .navbar
       .navbar-inner
         .container-fluid
+
           a.btn.btn-navbar.ignoredirty data-target=".nav-collapse" data-toggle="collapse"
             span.icon-bar
             span.icon-bar
             span.icon-bar
+
+          a.brand href="#" Yaponama 2012
+
           .container-fluid.nav-collapse
             ul.nav
 
@@ -97,9 +101,12 @@ body
     .row-fluid
       .span3
         ul.nav.nav-list
-          li.nav-header Заголовок
+          li.nav-header Частные объявления
           li.active
-            a href="#" Добавить объявление
+            a href="#" Продам авто
+          li
+            a href="#" Продам автозапчасти
+          li.nav-header Прочее
           li
             a href="#" Чудаки на дорогах
           li 
@@ -122,7 +129,7 @@ body
           li = link_to "Очистить сессию и печеньки", clear_session_path
 
       .span2
-        | adsf
+        = link_to 'Восстановление пароля', new_password_reset_path(:anchor => 'testing')
 
     footer
       p &copy; Company 2012

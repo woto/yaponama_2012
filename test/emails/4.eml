@@ -1,0 +1,560 @@
+Delivered-To: oganer@gmail.com
+Received: by 10.229.155.19 with SMTP id q19csp122914qcw;
+        Fri, 8 Feb 2013 12:28:57 -0800 (PST)
+X-Received: by 10.49.61.37 with SMTP id m5mr2845682qer.12.1360355335516;
+        Fri, 08 Feb 2013 12:28:55 -0800 (PST)
+DomainKey-Status: good
+Received-SPF: pass (google.com: domain of postman@usndr.com designates 85.17.95.170 as permitted sender) client-ip=85.17.95.170;
+Received: by 10.229.130.220 with POP3 id u28mf1650868qcs.39;
+        Fri, 08 Feb 2013 12:28:55 -0800 (PST)
+X-Gmail-Fetch-Info: woto@mail.ru 1 pop.mail.ru 110 woto
+Return-path: <postman@usndr.com>
+Authentication-Results: mxs.mail.ru; spf=pass (mx133.mail.ru: domain of usndr.com designates 85.17.95.170 as permitted sender) smtp.mailfrom=postman@usndr.com smtp.helo=smtp277.usndr.com;
+	 dkim=pass header.i=usndr.com;
+	 dkim=pass header.i=postman@usndr.com
+Received-SPF: pass (mx133.mail.ru: domain of usndr.com designates 85.17.95.170 as permitted sender) client-ip=85.17.95.170; envelope-from=postman@usndr.com; helo=smtp277.usndr.com;
+Received: from [85.17.95.170] (port=34273 helo=smtp277.usndr.com)
+	by mx133.mail.ru with esmtp (envelope-from <postman@usndr.com>)
+	id 1U3tqZ-0001DD-HP
+	for woto@mail.ru; Fri, 08 Feb 2013 23:42:55 +0400
+X-Mru-BL: 0:0:1096
+X-Mru-PTR: smtp277.usndr.com
+X-Mru-NR: 1
+X-Mru-OF: Linux (Ethernet or modem)
+X-Mru-RC: NL
+Date: Fri Feb  8 23:42:55 2013 (MSK)
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=jan2010; d=usndr.com;
+ h=Sender:From:Mime-Version:Content-Type:To:List-Unsubscribe:Subject:Message-Id; i=postman@usndr.com;
+ bh=ToiGuA9uaw+VzK8gSNjJaq7D5FA=;
+ b=MUfdCoxv4y407lLqp/YSxZ40HAmZ743lHXAGbPYuP8xJFjISAOlTUK/w72qKXmvVt9q6VVQwxGWB
+   XXUy3X5bPSp56gQar8bbKLglIbdEoEMl+7Yct6LDps4ttMLA1g3QrcyQiqlBC/E44IMpRsXN3CYt
+   biJnYdwxhYrCVmyY+sc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=jan2010; d=usndr.com;
+ b=GQ0ckIHhIBjmmaL/pwdtWKYr2TjW70NdTaWqrT6XRqJJnw5iyagA2lZNAGJtks7TzEsQutp912C7
+   Oy3jBP/MoUVTuld6yb4mHNcC2bT0T1spSbTt919lBcivyc+bk727gGo7UqhxQkdlFvZ/Wb+SIjkY
+   KqYcjnlTc6z12tzv+K4=;
+Received: from localhost (85.17.95.170) by smtp277.usndr.com id h2laju1d1v8r for <woto@mail.ru>; Fri, 8 Feb 2013 19:42:02 +0000 (envelope-from <postman@usndr.com>)
+Sender: =?UTF-8?B?0JrQvtC80LDQvdC00LAgUnV0dWJl?= <postman@usndr.com>
+From: =?UTF-8?B?0JrQvtC80LDQvdC00LAgUnV0dWJl?= <do-not-reply@rutube.ru>
+Mime-Version: 1.0
+Content-Type: multipart/mixed; boundary="e830f4397bc01dcffa0d1ec305ab3836"
+To: woto@mail.ru
+Precedence: bulk
+X-Complaints-To: abuse@usndr.com
+List-Unsubscribe: <http://usndr.com/ru/unsubscribe/do?hash=55p1zo36ssc5m1ek14rjht3gpdykx9z8k1rw4a3zffs5yqgtg8rjy>
+Subject: =?UTF-8?B?0J7RgNC40LPQuNC90LDQu9GLINC40LvQuCDRgNC10LzQtdC50LrQuD8=?=
+X-Mailru-Msgtype: b12449927
+Message-Id: <us-K/4AvfiHAAA8Z/eZ@smtp277.usndr.com>
+X-Spam: Not detected
+X-Mras: Ok
+
+--e830f4397bc01dcffa0d1ec305ab3836
+Content-Type: multipart/alternative; boundary="0c859bfda948dfa063c41c3428b8ce2b"
+
+--0c859bfda948dfa063c41c3428b8ce2b
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+=D0=9E=D1=80=D0=B8=D0=B3=D0=B8=D0=BD=D0=B0=D0=BB=D1=8B =D0=B8=D0=BB=D0=B8 =
+=D1=80=D0=B5=D0=BC=D0=B5=D0=B9=D0=BA=D0=B8?
+
+(http://usndr.com/ru/mail_link_tracker?hash=3D5bzy4z4cnzqp8yek14rjht3gpdykx=
+9z8k1rw4a3uu74jma73xy1o58bhrsxr5aa5p8f76ubut6dfhe&amp;url=3Dhttp%253A%252F%=
+252Frutube.ru%252F%253Futm_medium%253Dlink%2526utm_source%253De-mail%2526ut=
+m_campaign%253Dmail_promo)
+(http://usndr.com/ru/mail_link_tracker?hash=3D5iupdijfsbmeuhek14rjht3gpdykx=
+9z8k1rw4a3wjjifxg5okn6w7z5iq1jij9ig498jwmqb6rqjhs&amp;url=3Dhttp%253A%252F%=
+252Fwww.facebook.com%252Frutube%253Futm_medium%253Dlink%2526utm_source%253D=
+e-mail%2526utm_campaign%253Dmail_promo%2526ref%253Dts%2526fref%253Dts) (htt=
+p://usndr.com/ru/mail_link_tracker?hash=3D5tnwcqfpwpjmnnek14rjht3gpdykx9z8k=
+1rw4a3wgh8t64q7m8ycy55sc3erncx56qfeapqafjxywg&amp;url=3Dhttp%253A%252F%252F=
+vk.com%252Frutube%253Futm_medium%253Dlink%2526utm_source%253De-mail%2526utm=
+_campaign%253Dmail_promo) (http://usndr.com/ru/mail_link_tracker?hash=3D5k3=
+tkrti71ss94ek14rjht3gpdykx9z8k1rw4a31fceqoqqnac97s9pq9e1m46tmmfnxyinamhi8jh=
+&amp;url=3Dhttps%253A%252F%252Ftwitter.com%252Frutube_ru%253Futm_medium%253=
+Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo)
+
+=D0=97=D0=B4=D1=80=D0=B0=D0=B2=D1=81=D1=82=D0=B2=D1=83=D0=B9=D1=82=D0=B5, =
+=D0=A3=D0=B2=D0=B0=D0=B6=D0=B0=D0=B5=D0=BC=D1=8B=D0=B9 =D0=BF=D0=BE=D0=BB=
+=D1=8C=D0=B7=D0=BE=D0=B2=D0=B0=D1=82=D0=B5=D0=BB=D1=8C!=D0=A1 =D0=BD=D0=B5=
+=D1=82=D0=B5=D1=80=D0=BF=D0=B5=D0=BD=D0=B8=D0=B5=D0=BC =D0=BE=D0=B6=D0=B8=
+=D0=B4=D0=B0=D1=8F =D0=B3=D0=BE=D0=BB=D0=BB=D0=B8=D0=B2=D1=83=D0=B4=D1=81=
+=D0=BA=D0=BE=D0=B9 =D1=8D=D0=BA=D1=80=D0=B0=D0=BD=D0=B8=D0=B7=D0=B0=D1=86=
+=D0=B8=D0=B8 =D0=BF=D1=80=D0=BE=D0=B4=D0=BE=D0=BB=D0=B6=D0=B5=D0=BD=D0=B8=
+=D1=8F =D1=84=D0=B8=D0=BB=D1=8C=D0=BC=D0=B0 "=D0=94=D0=B5=D0=B2=D1=83=D1=88=
+=D0=BA=D0=B0 =D1=81 =D1=82=D0=B0=D1=82=D1=83=D0=B8=D1=80=D0=BE=D0=B2=D0=BA=
+=D0=BE=D0=B9 =D0=B4=D1=80=D0=B0=D0=BA=D0=BE=D0=BD=D0=B0", =D0=BA=D0=BE=D1=
+=82=D0=BE=D1=80=D0=B0=D1=8F =D0=B2=D1=8B=D0=B9=D0=B4=D0=B5=D1=82 =D0=B2 201=
+3 =D0=B3=D0=BE=D0=B4=D1=83, =D0=BF=D1=80=D0=B5=D0=B4=D0=BB=D0=B0=D0=B3=D0=
+=B0=D0=B5=D0=BC =D0=B4=D0=BB=D1=8F =D0=BF=D1=80=D0=BE=D1=81=D0=BC=D0=BE=D1=
+=82=D1=80=D0=B0 =D0=BE=D1=80=D0=B8=D0=B3=D0=B8=D0=BD=D0=B0=D0=BB=D1=8B. =D0=
+=9C=D1=8F=D1=82=D0=B5=D0=B6=D0=BD=D0=B0=D1=8F =D0=9B=D0=B8=D1=81=D0=B1=D0=
+=B5=D1=82 =D0=A1=D0=B0=D0=BB=D0=B0=D0=BD=D0=B4=D0=B5=D1=80 =D0=BD=D0=B0 Rut=
+ube.
+
+(http://usndr.com/ru/mail_link_tracker?hash=3D5efgkdak8thqmcek14rjht3gpdykx=
+9z8k1rw4a3wo7g3qdd9ynamf95qomjytt9sq6cjimpxqbxnz4&amp;url=3Dhttp%253A%252F%=
+252Frutube.ru%252Ftags%252Fvideo%252F939%252F%253Futm_medium%253Dlink%2526u=
+tm_source%253De-mail%2526utm_campaign%253Dmail_promo)
+
+=C2=AB=D0=94=D0=B5=D0=B2=D1=83=D1=88=D0=BA=D0=B0, =D0=BA=D0=BE=D1=82=D0=BE=
+=D1=80=D0=B0=D1=8F =D0=B8=D0=B3=D1=80=D0=B0=D0=BB=D0=B0 =D1=81 =D0=BE=D0=B3=
+=D0=BD=D0=B5=D0=BC=C2=BB. (http://usndr.com/ru/mail_link_tracker?hash=3D5ap=
+nq7ohf78jrqek14rjht3gpdykx9z8k1rw4a3os3hjdpk7c5xbf95qomjytt9sq6cjimpxqbxnz4=
+&amp;url=3Dhttp%253A%252F%252Frutube.ru%252Ftags%252Fvideo%252F939%252F%253=
+Futm_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_pr=
+omo)=C2=AB=D0=94=D0=B5=D0=B2=D1=83=D1=88=D0=BA=D0=B0, =D0=BA=D0=BE=D1=82=D0=
+=BE=D1=80=D0=B0=D1=8F =D0=B2=D0=B7=D1=80=D1=8B=D0=B2=D0=B0=D0=BB=D0=B0 =D0=
+=B2=D0=BE=D0=B7=D0=B4=D1=83=D1=88=D0=BD=D1=8B=D0=B5 =D0=B7=D0=B0=D0=BC=D0=
+=BA=D0=B8 (http://usndr.com/ru/mail_link_tracker?hash=3D5egt5j3wgaehusek14r=
+jht3gpdykx9z8k1rw4a3wzk5jh7bukt74f95qomjytt9sq6cjimpxqbxnz4&amp;url=3Dhttp%=
+253A%252F%252Frutube.ru%252Ftags%252Fvideo%252F939%252F%253Futm_medium%253D=
+link%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo)=C2=BB (http=
+://usndr.com/ru/mail_link_tracker?hash=3D5zf493siyq7j1kek14rjht3gpdykx9z8k1=
+rw4a3u8rxqnog1z9xui95qomjytt9sq6cjimpxqbxnz4&amp;url=3Dhttp%253A%252F%252Fr=
+utube.ru%252Ftags%252Fvideo%252F939%252F%253Futm_medium%253Dlink%2526utm_so=
+urce%253De-mail%2526utm_campaign%253Dmail_promo)
+
+=D0=94=D0=B2=D0=B0 =D0=B8=D0=B7 =D1=82=D1=80=D0=B5=D1=85 =D1=84=D0=B8=D0=BB=
+=D1=8C=D0=BC=D0=BE=D0=B2 =D0=B7=D0=BD=D0=B0=D0=BC=D0=B5=D0=BD=D0=B8=D1=82=
+=D0=BE=D0=B9 =D1=88=D0=B2=D0=B5=D0=B4=D1=81=D0=BA=D0=BE=D0=B9 =D1=82=D1=80=
+=D0=B8=D0=BB=D0=BE=D0=B3=D0=B8=D0=B8 =D0=BE =D0=B4=D0=B5=D0=B2=D1=83=D1=88=
+=D0=BA=D0=B5 =D1=81 =D1=82=D0=B0=D1=82=D1=83=D0=B8=D1=80=D0=BE=D0=B2=D0=BA=
+=D0=BE=D0=B9 =D0=B4=D1=80=D0=B0=D0=BA=D0=BE=D0=BD=D0=B0.
+
+=D0=95=D0=B2=D1=80=D0=BE=D0=BF=D0=B5=D0=B9=D1=81=D0=BA=D0=B8=D0=B5 =D0=BE=
+=D1=80=D0=B8=D0=B3=D0=B8=D0=BD=D0=B0=D0=BB=D1=8B
+
+=D0=A4=D1=80=D0=B0=D0=B3=D0=BC=D0=B5=D0=BD=D1=82=D1=8B =D0=B8=D0=B7 =D1=84=
+=D0=B8=D0=BB=D1=8C=D0=BC=D0=BE=D0=B2, =D0=BE=D0=B1=D0=BB=D0=B0=D1=81=D0=BA=
+=D0=B0=D0=BD=D0=BD=D1=8B=D1=85 =D1=84=D0=B5=D1=81=D1=82=D0=B8=D0=B2=D0=B0=
+=D0=BB=D1=8C=D0=BD=D1=8B=D0=BC=D0=B8 =D0=BA=D1=80=D0=B8=D1=82=D0=B8=D0=BA=
+=D0=B0=D0=BC=D0=B8.
+
+(http://usndr.com/ru/mail_link_tracker?hash=3D5msd4ohq4cy5tqek14rjht3gpdykx=
+9z8k1rw4a3szmdx4ou1uct13qhsj63z8uwdf5cgtdhrcs6kfs&amp;url=3Dhttp%253A%252F%=
+252Frutube.ru%252Fvideo%252Fd11f8e1c85414eaa8648c0c2124aab91%252F%253Futm_m=
+edium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo)
+
+(http://usndr.com/ru/mail_link_tracker?hash=3D5syqfnc3iga5unek14rjht3gpdykx=
+9z8k1rw4a3trik5q585rnziakqajwdx6j657mk1o1oqorzqdy&amp;url=3Dhttp%253A%252F%=
+252Frutube.ru%252Fvideo%252Faa495180c62ec10228d41d23eac2010a%252F%253Futm_m=
+edium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo)
+
+(http://usndr.com/ru/mail_link_tracker?hash=3D5r8ngfzqu1ybjyek14rjht3gpdykx=
+9z8k1rw4a3omhqz3s9pp5uyro4xqjbpzihkfmyfbsx7bs91rk&amp;url=3Dhttp%253A%252F%=
+252Frutube.ru%252Fvideo%252Fa1a02e09fbe14a834fa5c28cc6d3b615%252F%253Futm_m=
+edium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo)
+
+=C2=AB=D0=9D=D0=B0 =D1=8F=D1=80=D0=BA=D0=BE=D0=BC =D1=81=D0=BE=D0=BB=D0=BD=
+=D1=86=D0=B5=C2=BB 1959 (http://usndr.com/ru/mail_link_tracker?hash=3D5dtkf=
+su617ycpyek14rjht3gpdykx9z8k1rw4a3o4ucwizkhs7f5w9tbw4bw9k67cac9b9bqyxn31c&a=
+mp;url=3Dhttp%253A%252F%252Frutube.ru%252Fvideo%252Fd11f8e1c85414eaa8648c0c=
+2124aab91%252F%253Futm_medium%253Dlink%2526utm_source%253De-mail%2526utm_ca=
+mpaign%253Dmail_promo)
+
+=C2=AB=D0=9E=D1=82=D0=BA=D1=80=D0=BE=D0=B9 =D0=B3=D0=BB=D0=B0=D0=B7=D0=B0=
+=C2=BB 1997 (http://usndr.com/ru/mail_link_tracker?hash=3D5cci4wi4mwzsoqek1=
+4rjht3gpdykx9z8k1rw4a3zuenpmhyzy7kpakqajwdx6j657mk1o1oqorzqdy&amp;url=3Dhtt=
+p%253A%252F%252Frutube.ru%252Fvideo%252Faa495180c62ec10228d41d23eac2010a%25=
+2F%253Futm_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dm=
+ail_promo)
+
+=C2=AB=D0=97=D0=B0=D0=B1=D0=B0=D0=B2=D0=BD=D1=8B=D0=B5 =D0=B8=D0=B3=D1=80=
+=D1=8B=C2=BB 1997 (http://usndr.com/ru/mail_link_tracker?hash=3D5shhkw3qitz=
+5xcek14rjht3gpdykx9z8k1rw4a3t936xuo9hy54xwo4xqjbpzihkfmyfbsx7bs91rk&amp;url=
+=3Dhttp%253A%252F%252Frutube.ru%252Fvideo%252Fa1a02e09fbe14a834fa5c28cc6d3b=
+615%252F%253Futm_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign=
+%253Dmail_promo)
+
+=D0=93=D0=BE=D0=BB=D0=BB=D0=B8=D0=B2=D1=83=D0=B4=D1=81=D0=BA=D0=B8=D0=B5 =
+=D1=80=D0=B5=D0=BC=D0=B5=D0=B9=D0=BA=D0=B8
+
+=D0=A2=D0=B5 =D0=B6=D0=B5 =D1=81=D1=86=D0=B5=D0=BD=D1=8B... =D0=92=D1=8B =
+=D1=83=D0=BB=D0=B0=D0=B2=D0=BB=D0=B8=D0=B2=D0=B0=D0=B5=D1=82=D0=B5 =D1=81=
+=D1=82=D0=B8=D0=BB=D1=8C =D0=93=D0=BE=D0=BB=D0=BB=D0=B8=D0=B2=D1=83=D0=B4=
+=D0=B0, =D0=BD=D0=B5 =D1=82=D0=B0=D0=BA =D0=BB=D0=B8?
+
+(http://usndr.com/ru/mail_link_tracker?hash=3D5weywhst6y9weoek14rjht3gpdykx=
+9z8k1rw4a3u61j77k8s67hf7ygcy14hchgb1yxo3n8gn1bwr1&amp;url=3Dhttp%253A%252F%=
+252Frutube.ru%252Fvideo%252F183583acd267209b1b0e2c8892b89829%252F%253Futm_m=
+edium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo)
+
+(http://usndr.com/ru/mail_link_tracker?hash=3D5nf3py4dozcyqcek14rjht3gpdykx=
+9z8k1rw4a3saxbsw6679nogrzp8akeb8h5tdxpxh4ep1mh6jr&amp;url=3Dhttp%253A%252F%=
+252Frutube.ru%252Fvideo%252F601ede9a762b0e4f9cd4c2914842c702%252F%253Futm_m=
+edium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo)
+
+(http://usndr.com/ru/mail_link_tracker?hash=3D5q86g9nwxn6ebwek14rjht3gpdykx=
+9z8k1rw4a3szkkjzh4yxbk31x75ef5eqebrnhntuhiuxamxuo&amp;url=3Dhttp%253A%252F%=
+252Frutube.ru%252Fvideo%252F85da007b5e08a1679de5c611e5d40509%252F%253Futm_m=
+edium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo)
+
+=C2=AB=D0=A2=D0=B0=D0=BB=D0=B0=D0=BD=D0=BB=D0=B8=D0=B2=D1=8B=D0=B9 =D0=BC=
+=D0=B8=D1=81=D1=82=D0=B5=D1=80 =D0=A0=D0=B8=D0=BF=D0=BB=D0=B8=C2=BB 1999 (h=
+ttp://usndr.com/ru/mail_link_tracker?hash=3D5n8qpmm35d11c6ek14rjht3gpdykx9z=
+8k1rw4a3w7zq46zihcmwfpygcy14hchgb1yxo3n8gn1bwr1&amp;url=3Dhttp%253A%252F%25=
+2Frutube.ru%252Fvideo%252F183583acd267209b1b0e2c8892b89829%252F%253Futm_med=
+ium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo)
+
+=C2=AB=D0=92=D0=B0=D0=BD=D0=B8=D0=BB=D1=8C=D0=BD=D0=BE=D0=B5 =D0=BD=D0=B5=
+=D0=B1=D0=BE=C2=BB 2001 (http://usndr.com/ru/mail_link_tracker?hash=3D5fdso=
+5g49itgyhek14rjht3gpdykx9z8k1rw4a3wowopzrf39johrzp8akeb8h5tdxpxh4ep1mh6jr&a=
+mp;url=3Dhttp%253A%252F%252Frutube.ru%252Fvideo%252F601ede9a762b0e4f9cd4c29=
+14842c702%252F%253Futm_medium%253Dlink%2526utm_source%253De-mail%2526utm_ca=
+mpaign%253Dmail_promo)
+
+=C2=AB=D0=97=D0=B0=D0=B1=D0=B0=D0=B2=D0=BD=D1=8B=D0=B5 =D0=B8=D0=B3=D1=80=
+=D1=8B=C2=BB 2007 (http://usndr.com/ru/mail_link_tracker?hash=3D5q44ka9qgac=
+hhoek14rjht3gpdykx9z8k1rw4a31wrabba7asnp51x75ef5eqebrnhntuhiuxamxuo&amp;url=
+=3Dhttp%253A%252F%252Frutube.ru%252Fvideo%252F85da007b5e08a1679de5c611e5d40=
+509%252F%253Futm_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign=
+%253Dmail_promo)
+
+=D0=9A=D0=B0=D0=BD=D0=B0=D0=BB=D1=8B (http://usndr.com/ru/mail_link_tracker=
+?hash=3D5iju81zjhg96wyek14rjht3gpdykx9z8k1rw4a3z3de4gb84ex3oy9oyf9n58d6onr7=
+zy35ieau1ce&amp;url=3Dhttp%253A%252F%252Frutube.ru%252Ffeeds%252Fsubs%253Fu=
+tm_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_prom=
+o)
+=D0=9A=D0=B8=D0=BD=D0=BE (http://usndr.com/ru/mail_link_tracker?hash=3D5ini=
+zk1u7xsd51ek14rjht3gpdykx9z8k1rw4a3u844e3wre9p3wcfkqh1wz5azhbdadpp5i71ysdw&=
+amp;url=3Dhttp%253A%252F%252Frutube.ru%252Ffeeds%252Fmovies%252F%253Futm_me=
+dium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo)
+=C2=A9 2013 Rutube
+
+=D0=92=D1=8B =D0=BF=D0=BE=D0=BB=D1=83=D1=87=D0=B8=D0=BB=D0=B8 =D1=8D=D1=82=
+=D0=BE =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B5, =D1=82=D0=B0=
+=D0=BA =D0=BA=D0=B0=D0=BA =D1=8F=D0=B2=D0=BB=D1=8F=D0=B5=D1=82=D0=B5=D1=81=
+=D1=8C =D0=B7=D0=B0=D1=80=D0=B5=D0=B3=D0=B8=D1=81=D1=82=D1=80=D0=B8=D1=80=
+=D0=BE=D0=B2=D0=B0=D0=BD=D0=BD=D1=8B=D0=BC =D0=BF=D0=BE=D0=BB=D1=8C=D0=B7=
+=D0=BE=D0=B2=D0=B0=D1=82=D0=B5=D0=BB=D0=B5=D0=BC =D0=B8=D0=BD=D1=84=D0=BE=
+=D1=80=D0=BC=D0=B0=D1=86=D0=B8=D0=BE=D0=BD=D0=BD=D0=BE=D0=B3=D0=BE =D1=80=
+=D0=B5=D1=81=D1=83=D1=80=D1=81=D0=B0 www.rutube.ru (http://usndr.com/ru/mai=
+l_link_tracker?hash=3D5mehpxcwac6uicek14rjht3gpdykx9z8k1rw4a3o9t7wbk1xmo8tb=
+1qf6snhis15p5qwsop6j8gikr&amp;url=3Dhttp%253A%252F%252Fwww.rutube.ru%253Fut=
+m_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo=
+). =D0=9E=D1=82=D0=BF=D0=B8=D1=81=D0=B0=D1=82=D1=8C=D1=81=D1=8F =D0=BE=D1=
+=82 =D1=80=D0=B0=D1=81=D1=81=D1=8B=D0=BB=D0=BA=D0=B8 (http://usndr.com/ru/u=
+nsubscribe?hash=3D55p1zo36ssc5m1ek14rjht3gpdykx9z8k1rw4a3zffs5yqgtg8rjy)
+--0c859bfda948dfa063c41c3428b8ce2b
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">=0A<html>=0A=
+<head>=0A<title>=D0=9E=D1=80=D0=B8=D0=B3=D0=B8=D0=BD=D0=B0=D0=BB=D1=8B =D0=
+=B8=D0=BB=D0=B8 =D1=80=D0=B5=D0=BC=D0=B5=D0=B9=D0=BA=D0=B8?</title>=0A</hea=
+d>=0A<body>=0A<center>=0A<table border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" style=3D"font-size: 17px; color: #000001; font-family: Arial,Helveti=
+ca,sans-serif; width: 700px; background-color: #f1f1f1;">=0A<tbody>=0A<tr>=
+=0A<td align=3D"center" valign=3D"top">=0A<table border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" style=3D"font-size: 17px; color: #000001; font-fam=
+ily: Arial,Helvetica,sans-serif; width: 650px; background-color: #ffffff;">=
+=0A<tbody>=0A<tr>=0A<td bgcolor=3D"#F1F1F1" colspan=3D"3" height=3D"69" sty=
+le=3D"padding-left: 38px;">=0A<table border=3D"0" cellpadding=3D"0" cellspa=
+cing=3D"0" style=3D"font-family: Arial,Helvetica,sans-serif; width: 574px;"=
+>=0A<tbody>=0A<tr>=0A<td align=3D"left"><a href=3D"http://usndr.com/ru/mail=
+_link_tracker?hash=3D5bzy4z4cnzqp8yek14rjht3gpdykx9z8k1rw4a3uu74jma73xy1o58=
+bhrsxr5aa5p8f76ubut6dfhe&amp;url=3Dhttp%253A%252F%252Frutube.ru%252F%253Fut=
+m_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo=
+" target=3D"_blank"><img border=3D"0" height=3D"30" src=3D"http://img.usndr=
+.com/ru/user_file?resource=3Dhimg&name=3D5ucinbun6iqb5txxzokw5kgiqae4s99ogn=
+73o4f3gdawpmhz7eaiamqrfiwwkfk569nq9q9n757wpuqk8tfhw6ouaqw" style=3D"display=
+: block;" width=3D"126"></a></td>=0A<td align=3D"right" style=3D"padding-to=
+p: 7px;" valign=3D"top"><a href=3D"http://usndr.com/ru/mail_link_tracker?ha=
+sh=3D5iupdijfsbmeuhek14rjht3gpdykx9z8k1rw4a3wjjifxg5okn6w7z5iq1jij9ig498jwm=
+qb6rqjhs&amp;url=3Dhttp%253A%252F%252Fwww.facebook.com%252Frutube%253Futm_m=
+edium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo%25=
+26ref%253Dts%2526fref%253Dts" target=3D"_blank"><img border=3D"0" height=3D=
+"23" src=3D"http://img.usndr.com/ru/user_file?resource=3Dhimg&name=3D5881da=
+74qud9wpxxzokw5kgiqae4s99ogn73o4fhpdcfzfx4uk3w6s8rzoatqo1c6imzzz1bs4yiyu16t=
+7wqot1eixa" width=3D"33"></a><a href=3D"http://usndr.com/ru/mail_link_track=
+er?hash=3D5tnwcqfpwpjmnnek14rjht3gpdykx9z8k1rw4a3wgh8t64q7m8ycy55sc3erncx56=
+qfeapqafjxywg&amp;url=3Dhttp%253A%252F%252Fvk.com%252Frutube%253Futm_medium=
+%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo" target=
+=3D"_blank"><img border=3D"0" height=3D"23" src=3D"http://img.usndr.com/ru/=
+user_file?resource=3Dhimg&name=3D5e3xn9uhrphydxxxzokw5kgiqae4s99ogn73o4fhpd=
+cfzfx4uk3wia885ue96ay5p7r4rpmronx3rpj76i6h68bourr" width=3D"33"></a><a href=
+=3D"http://usndr.com/ru/mail_link_tracker?hash=3D5k3tkrti71ss94ek14rjht3gpd=
+ykx9z8k1rw4a31fceqoqqnac97s9pq9e1m46tmmfnxyinamhi8jh&amp;url=3Dhttps%253A%2=
+52F%252Ftwitter.com%252Frutube_ru%253Futm_medium%253Dlink%2526utm_source%25=
+3De-mail%2526utm_campaign%253Dmail_promo" target=3D"_blank"><img border=3D"=
+0" height=3D"23" src=3D"http://img.usndr.com/ru/user_file?resource=3Dhimg&n=
+ame=3D5soqcxfbzhud6mxxzokw5kgiqae4s99ogn73o4fhpdcfzfx4uk3wanqxaiiearc3h9nq9=
+q9n757wp1xgq7rj813i9jy" width=3D"23"></a></td>=0A</tr>=0A</tbody>=0A</table=
+>=0A</td>=0A</tr>=0A<tr>=0A<td bgcolor=3D"#F1F1F1" height=3D"7" valign=3D"t=
+op" width=3D"16"></td>=0A<td height=3D"7" style=3D"line-height: normal;" wi=
+dth=3D"618"><img border=3D"0" height=3D"7" src=3D"http://img.usndr.com/ru/u=
+ser_file?resource=3Dhimg&name=3D55wp8u66ipay4jxxzokw5kgiqae4s99ogn73o4f67g8=
+z9cwhgjxbhixcfibma9hs5z613o5z9xx6cw" style=3D"display: block;" width=3D"618=
+"></td>=0A<td bgcolor=3D"#F1F1F1" height=3D"7" valign=3D"top" width=3D"16">=
+</td>=0A</tr>=0A<tr>=0A<td bgcolor=3D"#F1F1F1" valign=3D"top" width=3D"16">=
+</td>=0A<td style=3D"padding-left: 22px; padding-right: 22px; padding-botto=
+m: 20px; padding-top: 0px; font-size: 13px; color: #4e4e4e; font-family: Ar=
+ial,Helvetica,sans-serif;" width=3D"574">=0A<p style=3D"font-size: 18px; co=
+lor: #000001; margin-bottom: 9px; margin-top: 5px;"><span>=D0=97=D0=B4=D1=
+=80=D0=B0=D0=B2=D1=81=D1=82=D0=B2=D1=83=D0=B9=D1=82=D0=B5,&nbsp;=D0=A3=D0=
+=B2=D0=B0=D0=B6=D0=B0=D0=B5=D0=BC=D1=8B=D0=B9 =D0=BF=D0=BE=D0=BB=D1=8C=D0=
+=B7=D0=BE=D0=B2=D0=B0=D1=82=D0=B5=D0=BB=D1=8C!</span></p>=0A=D0=A1 =D0=BD=
+=D0=B5=D1=82=D0=B5=D1=80=D0=BF=D0=B5=D0=BD=D0=B8=D0=B5=D0=BC =D0=BE=D0=B6=
+=D0=B8=D0=B4=D0=B0=D1=8F =D0=B3=D0=BE=D0=BB=D0=BB=D0=B8=D0=B2=D1=83=D0=B4=
+=D1=81=D0=BA=D0=BE=D0=B9 =D1=8D=D0=BA=D1=80=D0=B0=D0=BD=D0=B8=D0=B7=D0=B0=
+=D1=86=D0=B8=D0=B8 =D0=BF=D1=80=D0=BE=D0=B4=D0=BE=D0=BB=D0=B6=D0=B5=D0=BD=
+=D0=B8=D1=8F =D1=84=D0=B8=D0=BB=D1=8C=D0=BC=D0=B0 "=D0=94=D0=B5=D0=B2=D1=83=
+=D1=88=D0=BA=D0=B0 =D1=81 =D1=82=D0=B0=D1=82=D1=83=D0=B8=D1=80=D0=BE=D0=B2=
+=D0=BA=D0=BE=D0=B9 =D0=B4=D1=80=D0=B0=D0=BA=D0=BE=D0=BD=D0=B0", =D0=BA=D0=
+=BE=D1=82=D0=BE=D1=80=D0=B0=D1=8F =D0=B2=D1=8B=D0=B9=D0=B4=D0=B5=D1=82 =D0=
+=B2 2013 =D0=B3=D0=BE=D0=B4=D1=83, =D0=BF=D1=80=D0=B5=D0=B4=D0=BB=D0=B0=D0=
+=B3=D0=B0=D0=B5=D0=BC =D0=B4=D0=BB=D1=8F =D0=BF=D1=80=D0=BE=D1=81=D0=BC=D0=
+=BE=D1=82=D1=80=D0=B0 =D0=BE=D1=80=D0=B8=D0=B3=D0=B8=D0=BD=D0=B0=D0=BB=D1=
+=8B. =D0=9C=D1=8F=D1=82=D0=B5=D0=B6=D0=BD=D0=B0=D1=8F =D0=9B=D0=B8=D1=81=D0=
+=B1=D0=B5=D1=82 =D0=A1=D0=B0=D0=BB=D0=B0=D0=BD=D0=B4=D0=B5=D1=80 =D0=BD=D0=
+=B0 Rutube. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>=0A<td bgcolor=3D"#F1F1F=
+1" valign=3D"top" width=3D"16"></td>=0A</tr>=0A<tr>=0A<td colspan=3D"3" sty=
+le=3D"border-top: 1px solid #e6e6e6; border-left: 1px solid #e6e6e6; border=
+-right: 1px solid #e6e6e6; padding-left: 35px; padding-top: 27px; padding-r=
+ight: 35px; padding-bottom: 30px;"><!--video block1-->=0A<table border=3D"0=
+" cellpadding=3D"0" cellspacing=3D"0" style=3D"font-size: 15px; color: #4e4=
+e4e; font-family: Arial, Helvetica, sans-serif; width: 570px; height: 180px=
+;">=0A<tbody>=0A<tr>=0A<td><a href=3D"http://usndr.com/ru/mail_link_tracker=
+?hash=3D5efgkdak8thqmcek14rjht3gpdykx9z8k1rw4a3wo7g3qdd9ynamf95qomjytt9sq6c=
+jimpxqbxnz4&amp;url=3Dhttp%253A%252F%252Frutube.ru%252Ftags%252Fvideo%252F9=
+39%252F%253Futm_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%=
+253Dmail_promo" target=3D"_blank"><img src=3D"http://img.usndr.com/ru/user_=
+file?resource=3Dhimg&name=3D5yg5b6ut48xng3xxzokw5kgiqakry7814y7wuoib81cxio6=
+cigoenaf1jh338sfrcn6emide6d5bj5qpebqcorq5xcr"></a></td>=0A</tr>=0A<tr>=0A<t=
+d align=3D"left" height=3D"35" style=3D"color: #000001;">=0A<p><strong id=
+=3D"internal-source-marker_0.734199435915798" style=3D"color: #000000;"><st=
+rong id=3D"internal-source-marker_0.734199435915798"><span style=3D"text-de=
+coration: underline;">=C2=AB<span style=3D"color: #000000; text-decoration:=
+ underline;"><a href=3D"http://usndr.com/ru/mail_link_tracker?hash=3D5apnq7=
+ohf78jrqek14rjht3gpdykx9z8k1rw4a3os3hjdpk7c5xbf95qomjytt9sq6cjimpxqbxnz4&am=
+p;url=3Dhttp%253A%252F%252Frutube.ru%252Ftags%252Fvideo%252F939%252F%253Fut=
+m_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo=
+" target=3D"_blank"><span style=3D"color: #000000; text-decoration: underli=
+ne;">=D0=94=D0=B5=D0=B2=D1=83=D1=88=D0=BA=D0=B0, =D0=BA=D0=BE=D1=82=D0=BE=
+=D1=80=D0=B0=D1=8F =D0=B8=D0=B3=D1=80=D0=B0=D0=BB=D0=B0 =D1=81 =D0=BE=D0=B3=
+=D0=BD=D0=B5=D0=BC=C2=BB.&nbsp;</span></a>=C2=AB</span></span></strong></st=
+rong><strong id=3D"internal-source-marker_0.734199435915798" style=3D"color=
+: #000000;"><strong id=3D"internal-source-marker_0.734199435915798"><span s=
+tyle=3D"text-decoration: underline;"><span style=3D"color: #000000; text-de=
+coration: underline;"><span style=3D"text-decoration: underline;"><a href=
+=3D"http://usndr.com/ru/mail_link_tracker?hash=3D5egt5j3wgaehusek14rjht3gpd=
+ykx9z8k1rw4a3wzk5jh7bukt74f95qomjytt9sq6cjimpxqbxnz4&amp;url=3Dhttp%253A%25=
+2F%252Frutube.ru%252Ftags%252Fvideo%252F939%252F%253Futm_medium%253Dlink%25=
+26utm_source%253De-mail%2526utm_campaign%253Dmail_promo" target=3D"_blank">=
+<span style=3D"color: #000000; text-decoration: underline;">=D0=94=D0=B5=D0=
+=B2=D1=83=D1=88=D0=BA=D0=B0, =D0=BA=D0=BE=D1=82=D0=BE=D1=80=D0=B0=D1=8F =D0=
+=B2=D0=B7=D1=80=D1=8B=D0=B2=D0=B0=D0=BB=D0=B0 =D0=B2=D0=BE=D0=B7=D0=B4=D1=
+=83=D1=88=D0=BD=D1=8B=D0=B5 =D0=B7=D0=B0=D0=BC=D0=BA=D0=B8</span></a>=C2=BB=
+</span></span><a href=3D"http://usndr.com/ru/mail_link_tracker?hash=3D5zf49=
+3siyq7j1kek14rjht3gpdykx9z8k1rw4a3u8rxqnog1z9xui95qomjytt9sq6cjimpxqbxnz4&a=
+mp;url=3Dhttp%253A%252F%252Frutube.ru%252Ftags%252Fvideo%252F939%252F%253Fu=
+tm_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_prom=
+o" target=3D"_blank"></a></span></strong></strong></p>=0A</td>=0A</tr>=0A<t=
+r>=0A<td align=3D"left" style=3D"font-size: 12px;"><span style=3D"color: #0=
+00000;">=D0=94=D0=B2=D0=B0 =D0=B8=D0=B7 =D1=82=D1=80=D0=B5=D1=85 =D1=84=D0=
+=B8=D0=BB=D1=8C=D0=BC=D0=BE=D0=B2 =D0=B7=D0=BD=D0=B0=D0=BC=D0=B5=D0=BD=D0=
+=B8=D1=82=D0=BE=D0=B9 =D1=88=D0=B2=D0=B5=D0=B4=D1=81=D0=BA=D0=BE=D0=B9 =D1=
+=82=D1=80=D0=B8=D0=BB=D0=BE=D0=B3=D0=B8=D0=B8 =D0=BE =D0=B4=D0=B5=D0=B2=D1=
+=83=D1=88=D0=BA=D0=B5 =D1=81 =D1=82=D0=B0=D1=82=D1=83=D0=B8=D1=80=D0=BE=D0=
+=B2=D0=BA=D0=BE=D0=B9 =D0=B4=D1=80=D0=B0=D0=BA=D0=BE=D0=BD=D0=B0.</span></t=
+d>=0A</tr>=0A</tbody>=0A</table>=0A<!--/video block1--></td>=0A</tr>=0A<tr>=
+=0A<td colspan=3D"3" height=3D"36" width=3D"650"><img border=3D"0" height=
+=3D"36" src=3D"http://img.usndr.com/ru/user_file?resource=3Dhimg&name=3D5mr=
+66zpsia1i8txxzokw5kgiqae4s99ogn73o4f3yx8j88y9xw3pri11db365eez5bwotaiija8wfb=
+jqzgrf58aot4r" style=3D"display: block;" width=3D"650"></td>=0A</tr>=0A<tr>=
+=0A<td bgcolor=3D"#F1F1F1" valign=3D"top" width=3D"16"></td>=0A<td style=3D=
+"padding-left: 22px; padding-right: 22px; padding-bottom: 10px;" width=3D"5=
+74"><!--video block2-->=0A<table border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" style=3D"font-size: 13px; font-weight: bold; color: #000001; font-fa=
+mily: Arial,Helvetica,sans-serif; width: 574px;">=0A<tbody>=0A<tr>=0A<td al=
+ign=3D"left" colspan=3D"5" height=3D"30" style=3D"font-size: 18px;"><span>=
+=D0=95=D0=B2=D1=80=D0=BE=D0=BF=D0=B5=D0=B9=D1=81=D0=BA=D0=B8=D0=B5 =D0=BE=
+=D1=80=D0=B8=D0=B3=D0=B8=D0=BD=D0=B0=D0=BB=D1=8B</span></td>=0A</tr>=0A<tr>=
+=0A<td align=3D"left" colspan=3D"5" height=3D"33" style=3D"font-size: 12px;=
+ color: #8f8f8f; font-weight: normal;" valign=3D"top"><span>=D0=A4=D1=80=D0=
+=B0=D0=B3=D0=BC=D0=B5=D0=BD=D1=82=D1=8B =D0=B8=D0=B7 =D1=84=D0=B8=D0=BB=D1=
+=8C=D0=BC=D0=BE=D0=B2, =D0=BE=D0=B1=D0=BB=D0=B0=D1=81=D0=BA=D0=B0=D0=BD=D0=
+=BD=D1=8B=D1=85 =D1=84=D0=B5=D1=81=D1=82=D0=B8=D0=B2=D0=B0=D0=BB=D1=8C=D0=
+=BD=D1=8B=D0=BC=D0=B8 =D0=BA=D1=80=D0=B8=D1=82=D0=B8=D0=BA=D0=B0=D0=BC=D0=
+=B8.</span></td>=0A</tr>=0A<tr>=0A<td width=3D"180"><a href=3D"http://usndr=
+.com/ru/mail_link_tracker?hash=3D5msd4ohq4cy5tqek14rjht3gpdykx9z8k1rw4a3szm=
+dx4ou1uct13qhsj63z8uwdf5cgtdhrcs6kfs&amp;url=3Dhttp%253A%252F%252Frutube.ru=
+%252Fvideo%252Fd11f8e1c85414eaa8648c0c2124aab91%252F%253Futm_medium%253Dlin=
+k%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo" target=3D"_bla=
+nk"><img src=3D"http://img.usndr.com/ru/user_file?resource=3Dhimg&name=3D5y=
+4e7daybztjsxxxzokw5kgiqakry7814y7wuoi8a8cqaufcj6wczjuaxhr9x8mi6t77ug5m858ds=
+w"></a></td>=0A<td width=3D"17"></td>=0A<td width=3D"180"><a href=3D"http:/=
+/usndr.com/ru/mail_link_tracker?hash=3D5syqfnc3iga5unek14rjht3gpdykx9z8k1rw=
+4a3trik5q585rnziakqajwdx6j657mk1o1oqorzqdy&amp;url=3Dhttp%253A%252F%252Frut=
+ube.ru%252Fvideo%252Faa495180c62ec10228d41d23eac2010a%252F%253Futm_medium%2=
+53Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo" target=
+=3D"_blank"><img src=3D"http://img.usndr.com/ru/user_file?resource=3Dhimg&n=
+ame=3D59k6afazazgzndxxzokw5kgiqakry7814y7wuoinu9urziwcqpi58juaxhr9x8mi6bxos=
+ghcen1qzh"></a></td>=0A<td width=3D"17"></td>=0A<td width=3D"180"><a href=
+=3D"http://usndr.com/ru/mail_link_tracker?hash=3D5r8ngfzqu1ybjyek14rjht3gpd=
+ykx9z8k1rw4a3omhqz3s9pp5uyro4xqjbpzihkfmyfbsx7bs91rk&amp;url=3Dhttp%253A%25=
+2F%252Frutube.ru%252Fvideo%252Fa1a02e09fbe14a834fa5c28cc6d3b615%252F%253Fut=
+m_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo=
+" target=3D"_blank"><img src=3D"http://img.usndr.com/ru/user_file?resource=
+=3Dhimg&name=3D5ccntg59ddkaibxxzokw5kgiqakry7814y7wuoibyc5b5iryyochzjuaxhr9=
+x8mi6zmnwrw8xxwyzg"></a></td>=0A</tr>=0A<tr>=0A<td align=3D"left" style=3D"=
+padding-top: 7px; padding-bottom: 20px;" valign=3D"top" width=3D"180"><span=
+ style=3D"text-decoration: underline;"><span style=3D"color: #000001; text-=
+decoration: underline;">=C2=AB<span style=3D"color: #000000;"><a href=3D"ht=
+tp://usndr.com/ru/mail_link_tracker?hash=3D5dtkfsu617ycpyek14rjht3gpdykx9z8=
+k1rw4a3o4ucwizkhs7f5w9tbw4bw9k67cac9b9bqyxn31c&amp;url=3Dhttp%253A%252F%252=
+Frutube.ru%252Fvideo%252Fd11f8e1c85414eaa8648c0c2124aab91%252F%253Futm_medi=
+um%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo" targ=
+et=3D"_blank"><span style=3D"color: #000000; text-decoration: underline;">=
+=D0=9D=D0=B0 =D1=8F=D1=80=D0=BA=D0=BE=D0=BC =D1=81=D0=BE=D0=BB=D0=BD=D1=86=
+=D0=B5=C2=BB 1959&nbsp;</span></a></span></span></span></td>=0A<td width=3D=
+"17"></td>=0A<td align=3D"left" style=3D"padding-top: 7px; padding-bottom: =
+20px;" valign=3D"top" width=3D"180"><span style=3D"text-decoration: underli=
+ne;"><span style=3D"color: #000000; text-decoration: underline;">=C2=AB</sp=
+an><span style=3D"text-decoration: underline; color: #000000;"><a href=3D"h=
+ttp://usndr.com/ru/mail_link_tracker?hash=3D5cci4wi4mwzsoqek14rjht3gpdykx9z=
+8k1rw4a3zuenpmhyzy7kpakqajwdx6j657mk1o1oqorzqdy&amp;url=3Dhttp%253A%252F%25=
+2Frutube.ru%252Fvideo%252Faa495180c62ec10228d41d23eac2010a%252F%253Futm_med=
+ium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo" tar=
+get=3D"_blank"><span style=3D"color: #000000; text-decoration: underline;">=
+=D0=9E=D1=82=D0=BA=D1=80=D0=BE=D0=B9 =D0=B3=D0=BB=D0=B0=D0=B7=D0=B0=C2=BB 1=
+997</span></a></span></span></td>=0A<td width=3D"17"></td>=0A<td align=3D"l=
+eft" style=3D"padding-top: 7px; padding-bottom: 20px;" valign=3D"top" width=
+=3D"180"><span style=3D"text-decoration: underline;"><span style=3D"color: =
+#000000;"><span style=3D"color: #000000; text-decoration: underline;">=C2=
+=AB</span></span><span style=3D"background-color: #ffffff; color: #000000;"=
+><a href=3D"http://usndr.com/ru/mail_link_tracker?hash=3D5shhkw3qitz5xcek14=
+rjht3gpdykx9z8k1rw4a3t936xuo9hy54xwo4xqjbpzihkfmyfbsx7bs91rk&amp;url=3Dhttp=
+%253A%252F%252Frutube.ru%252Fvideo%252Fa1a02e09fbe14a834fa5c28cc6d3b615%252=
+F%253Futm_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dma=
+il_promo" target=3D"_blank"><span style=3D"text-decoration: underline; back=
+ground-color: #ffffff; color: #000000;">=D0=97=D0=B0=D0=B1=D0=B0=D0=B2=D0=
+=BD=D1=8B=D0=B5 =D0=B8=D0=B3=D1=80=D1=8B=C2=BB 1997</span></a></span></span=
+></td>=0A</tr>=0A</tbody>=0A</table>=0A<!--/video block2--></td>=0A<td bgco=
+lor=3D"#F1F1F1" valign=3D"top" width=3D"16"></td>=0A</tr>=0A<tr>=0A<td bgco=
+lor=3D"#F1F1F1" valign=3D"top" width=3D"16"></td>=0A<td style=3D"padding-le=
+ft: 22px; padding-right: 22px; padding-bottom: 10px;" width=3D"574"><!--vid=
+eo block4-->=0A<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" styl=
+e=3D"font-size: 13px; font-weight: bold; color: #000001; font-family: Arial=
+,Helvetica,sans-serif; width: 574px;">=0A<tbody>=0A<tr>=0A<td align=3D"left=
+" colspan=3D"5" height=3D"30" style=3D"font-size: 18px;"><span>=D0=93=D0=BE=
+=D0=BB=D0=BB=D0=B8=D0=B2=D1=83=D0=B4=D1=81=D0=BA=D0=B8=D0=B5 =D1=80=D0=B5=
+=D0=BC=D0=B5=D0=B9=D0=BA=D0=B8</span></td>=0A</tr>=0A<tr>=0A<td align=3D"le=
+ft" colspan=3D"5" height=3D"33" style=3D"font-size: 12px; color: #8f8f8f; f=
+ont-weight: normal;" valign=3D"top"><span>=D0=A2=D0=B5 =D0=B6=D0=B5 =D1=81=
+=D1=86=D0=B5=D0=BD=D1=8B... =D0=92=D1=8B =D1=83=D0=BB=D0=B0=D0=B2=D0=BB=D0=
+=B8=D0=B2=D0=B0=D0=B5=D1=82=D0=B5 =D1=81=D1=82=D0=B8=D0=BB=D1=8C =D0=93=D0=
+=BE=D0=BB=D0=BB=D0=B8=D0=B2=D1=83=D0=B4=D0=B0, =D0=BD=D0=B5 =D1=82=D0=B0=D0=
+=BA =D0=BB=D0=B8?</span></td>=0A</tr>=0A<tr>=0A<td width=3D"180"><a href=3D=
+"http://usndr.com/ru/mail_link_tracker?hash=3D5weywhst6y9weoek14rjht3gpdykx=
+9z8k1rw4a3u61j77k8s67hf7ygcy14hchgb1yxo3n8gn1bwr1&amp;url=3Dhttp%253A%252F%=
+252Frutube.ru%252Fvideo%252F183583acd267209b1b0e2c8892b89829%252F%253Futm_m=
+edium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo" t=
+arget=3D"_blank"><img src=3D"http://img.usndr.com/ru/user_file?resource=3Dh=
+img&name=3D5mahox3mgpx75mxxzokw5kgiqakry7814y7wuoinmfudiyws5hmy8h11zfcwrhbd=
+76p9y5t14p5uak"></a></td>=0A<td width=3D"17"></td>=0A<td width=3D"180"><a h=
+ref=3D"http://usndr.com/ru/mail_link_tracker?hash=3D5nf3py4dozcyqcek14rjht3=
+gpdykx9z8k1rw4a3saxbsw6679nogrzp8akeb8h5tdxpxh4ep1mh6jr&amp;url=3Dhttp%253A=
+%252F%252Frutube.ru%252Fvideo%252F601ede9a762b0e4f9cd4c2914842c702%252F%253=
+Futm_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_pr=
+omo" target=3D"_blank"><img src=3D"http://img.usndr.com/ru/user_file?resour=
+ce=3Dhimg&name=3D5iobdotqqxp7bzxxzokw5kgiqakry7814y7wuoidt7y9a6xom1rkzjuaxh=
+r9x8mi6mg5nehmkxohrq"></a></td>=0A<td width=3D"17"></td>=0A<td width=3D"180=
+"><a href=3D"http://usndr.com/ru/mail_link_tracker?hash=3D5q86g9nwxn6ebwek1=
+4rjht3gpdykx9z8k1rw4a3szkkjzh4yxbk31x75ef5eqebrnhntuhiuxamxuo&amp;url=3Dhtt=
+p%253A%252F%252Frutube.ru%252Fvideo%252F85da007b5e08a1679de5c611e5d40509%25=
+2F%253Futm_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dm=
+ail_promo" target=3D"_blank"><img src=3D"http://img.usndr.com/ru/user_file?=
+resource=3Dhimg&name=3D5ep3rzbm64n5e9xxzokw5kgiqakry7814y7wuoiy1wy13yho6kmr=
+4o43au6o539xszuzffbh5q4uaqqkpe9pr7jr8xc"></a></td>=0A</tr>=0A<tr>=0A<td ali=
+gn=3D"left" style=3D"padding-top: 7px; padding-bottom: 20px;" valign=3D"top=
+" width=3D"180"><span style=3D"text-decoration: underline;"><span style=3D"=
+text-decoration: underline;">=C2=AB<span style=3D"color: #000000;"><a href=
+=3D"http://usndr.com/ru/mail_link_tracker?hash=3D5n8qpmm35d11c6ek14rjht3gpd=
+ykx9z8k1rw4a3w7zq46zihcmwfpygcy14hchgb1yxo3n8gn1bwr1&amp;url=3Dhttp%253A%25=
+2F%252Frutube.ru%252Fvideo%252F183583acd267209b1b0e2c8892b89829%252F%253Fut=
+m_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_promo=
+" target=3D"_blank"><span style=3D"color: #000000; text-decoration: underli=
+ne;">=D0=A2=D0=B0=D0=BB=D0=B0=D0=BD=D0=BB=D0=B8=D0=B2=D1=8B=D0=B9 =D0=BC=D0=
+=B8=D1=81=D1=82=D0=B5=D1=80 =D0=A0=D0=B8=D0=BF=D0=BB=D0=B8=C2=BB 1999</span=
+></a></span></span></span></td>=0A<td width=3D"17"></td>=0A<td align=3D"lef=
+t" style=3D"padding-top: 7px; padding-bottom: 20px;" valign=3D"top" width=
+=3D"180"><span style=3D"text-decoration: underline; color: #000000;"><span =
+style=3D"text-decoration: underline;">=C2=AB<a href=3D"http://usndr.com/ru/=
+mail_link_tracker?hash=3D5fdso5g49itgyhek14rjht3gpdykx9z8k1rw4a3wowopzrf39j=
+ohrzp8akeb8h5tdxpxh4ep1mh6jr&amp;url=3Dhttp%253A%252F%252Frutube.ru%252Fvid=
+eo%252F601ede9a762b0e4f9cd4c2914842c702%252F%253Futm_medium%253Dlink%2526ut=
+m_source%253De-mail%2526utm_campaign%253Dmail_promo" target=3D"_blank"><spa=
+n style=3D"color: #000000; text-decoration: underline;">=D0=92=D0=B0=D0=BD=
+=D0=B8=D0=BB=D1=8C=D0=BD=D0=BE=D0=B5 =D0=BD=D0=B5=D0=B1=D0=BE=C2=BB 2001</s=
+pan></a></span></span></td>=0A<td width=3D"17"></td>=0A<td align=3D"left" s=
+tyle=3D"padding-top: 7px; padding-bottom: 20px;" valign=3D"top" width=3D"18=
+0"><span style=3D"text-decoration: underline;"><span style=3D"text-decorati=
+on: underline;">=C2=AB</span><span style=3D"text-decoration: underline; col=
+or: #000000;"><a href=3D"http://usndr.com/ru/mail_link_tracker?hash=3D5q44k=
+a9qgachhoek14rjht3gpdykx9z8k1rw4a31wrabba7asnp51x75ef5eqebrnhntuhiuxamxuo&a=
+mp;url=3Dhttp%253A%252F%252Frutube.ru%252Fvideo%252F85da007b5e08a1679de5c61=
+1e5d40509%252F%253Futm_medium%253Dlink%2526utm_source%253De-mail%2526utm_ca=
+mpaign%253Dmail_promo" target=3D"_blank"><span style=3D"color: #000000; tex=
+t-decoration: underline;">=D0=97=D0=B0=D0=B1=D0=B0=D0=B2=D0=BD=D1=8B=D0=B5 =
+=D0=B8=D0=B3=D1=80=D1=8B=C2=BB 2007</span></a></span></span></td>=0A</tr>=
+=0A</tbody>=0A</table>=0A<!--/video block4--></td>=0A<td bgcolor=3D"#F1F1F1=
+" valign=3D"top" width=3D"16"></td>=0A</tr>=0A<tr>=0A<td bgcolor=3D"#F1F1F1=
+" valign=3D"top" width=3D"16"></td>=0A<td style=3D"padding-left: 22px; padd=
+ing-right: 22px;" valign=3D"top" width=3D"574"><!--footer-->=0A<table borde=
+r=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"font-size: 11px; font-=
+weight: bold; color: #000001; font-family: Arial,Helvetica,sans-serif; padd=
+ing-top: 12px; padding-bottom: 6px; width: 100%;">=0A<tbody>=0A<tr align=3D=
+"left">=0A<td width=3D"75"><a href=3D"http://usndr.com/ru/mail_link_tracker=
+?hash=3D5iju81zjhg96wyek14rjht3gpdykx9z8k1rw4a3z3de4gb84ex3oy9oyf9n58d6onr7=
+zy35ieau1ce&amp;url=3Dhttp%253A%252F%252Frutube.ru%252Ffeeds%252Fsubs%253Fu=
+tm_medium%253Dlink%2526utm_source%253De-mail%2526utm_campaign%253Dmail_prom=
+o" target=3D"_blank"><span style=3D"text-decoration: underline;"><span styl=
+e=3D"color: #000000; text-decoration: underline;"><span style=3D"color: #00=
+0000; text-decoration: underline;">=D0=9A</span>=D0=B0=D0=BD=D0=B0=D0=BB=D1=
+=8B</span></span></a></td>=0A<td width=3D"90"><a href=3D"http://usndr.com/r=
+u/mail_link_tracker?hash=3D5inizk1u7xsd51ek14rjht3gpdykx9z8k1rw4a3u844e3wre=
+9p3wcfkqh1wz5azhbdadpp5i71ysdw&amp;url=3Dhttp%253A%252F%252Frutube.ru%252Ff=
+eeds%252Fmovies%252F%253Futm_medium%253Dlink%2526utm_source%253De-mail%2526=
+utm_campaign%253Dmail_promo" target=3D"_blank"><span style=3D"color: #00000=
+1;">=D0=9A=D0=B8=D0=BD=D0=BE</span></a></td>=0A<td align=3D"right" style=3D=
+"font-weight: normal; color: #b2b2b2; font-size: 12px;">=C2=A9&nbsp;2013 Ru=
+tube</td>=0A</tr>=0A</tbody>=0A</table>=0A<!--/footer--></td>=0A<td bgcolor=
+=3D"#F1F1F1" valign=3D"top" width=3D"16"></td>=0A</tr>=0A<tr>=0A<td bgcolor=
+=3D"#F1F1F1" height=3D"7" valign=3D"top" width=3D"16"></td>=0A<td height=3D=
+"7" style=3D"line-height: normal;" width=3D"618"><img border=3D"0" height=
+=3D"7" src=3D"http://img.usndr.com/ru/user_file?resource=3Dhimg&name=3D59nd=
+z9ztgg7ykdxxzokw5kgiqae4s99ogn73o4f7137og57fnn8ruqkwhaegnm5z6w563m76dqt7b17=
+tibxfq3xjzqy" style=3D"display: block;" width=3D"618"></td>=0A<td bgcolor=
+=3D"#F1F1F1" height=3D"7" valign=3D"top" width=3D"16"></td>=0A</tr>=0A<tr a=
+lign=3D"left">=0A<td bgcolor=3D"#F1F1F1" colspan=3D"3" style=3D"color: #6c6=
+c6c; font-size: 11px; height: 60px; font-family: Arial,Helvetica,sans-serif=
+; padding-left: 38px; padding-right: 38px;">=D0=92=D1=8B&nbsp;=D0=BF=D0=BE=
+=D0=BB=D1=83=D1=87=D0=B8=D0=BB=D0=B8 =D1=8D=D1=82=D0=BE =D1=81=D0=BE=D0=BE=
+=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B5, =D1=82=D0=B0=D0=BA =D0=BA=D0=B0=D0=BA=
+ =D1=8F=D0=B2=D0=BB=D1=8F=D0=B5=D1=82=D0=B5=D1=81=D1=8C =D0=B7=D0=B0=D1=80=
+=D0=B5=D0=B3=D0=B8=D1=81=D1=82=D1=80=D0=B8=D1=80=D0=BE=D0=B2=D0=B0=D0=BD=D0=
+=BD=D1=8B=D0=BC =D0=BF=D0=BE=D0=BB=D1=8C=D0=B7=D0=BE=D0=B2=D0=B0=D1=82=D0=
+=B5=D0=BB=D0=B5=D0=BC =D0=B8=D0=BD=D1=84=D0=BE=D1=80=D0=BC=D0=B0=D1=86=D0=
+=B8=D0=BE=D0=BD=D0=BD=D0=BE=D0=B3=D0=BE =D1=80=D0=B5=D1=81=D1=83=D1=80=D1=
+=81=D0=B0 <a href=3D"http://usndr.com/ru/mail_link_tracker?hash=3D5mehpxcwa=
+c6uicek14rjht3gpdykx9z8k1rw4a3o9t7wbk1xmo8tb1qf6snhis15p5qwsop6j8gikr&amp;u=
+rl=3Dhttp%253A%252F%252Fwww.rutube.ru%253Futm_medium%253Dlink%2526utm_sourc=
+e%253De-mail%2526utm_campaign%253Dmail_promo" style=3D"color: #000001;" tar=
+get=3D"_blank">www.rutube.ru</a>. <a href=3D"http://usndr.com/ru/unsubscrib=
+e?hash=3D55p1zo36ssc5m1ek14rjht3gpdykx9z8k1rw4a3zffs5yqgtg8rjy" style=3D"co=
+lor: #000001;" target=3D"_blank">=D0=9E=D1=82=D0=BF=D0=B8=D1=81=D0=B0=D1=82=
+=D1=8C=D1=81=D1=8F =D0=BE=D1=82&nbsp;=D1=80=D0=B0=D1=81=D1=81=D1=8B=D0=BB=
+=D0=BA=D0=B8</a></td>=0A</tr>=0A<tr>=0A<td bgcolor=3D"#F1F1F1" colspan=3D"3=
+" height=3D"69"></td>=0A</tr>=0A</tbody>=0A</table>=0A</td>=0A</tr>=0A</tbo=
+dy>=0A</table>=0A</center>=0A<center><table bgcolor=3D"white"><tr><td><font=
+ size=3D"-1" color=3D"black"><img src=3D"http://usndr.com/ru/mail_read_trac=
+ker?hash=3D599ippb6439zksek14rjht3gpdykx9z8k1rw4a3zffs5yqgtg8rjy" width=3D"=
+16" height=3D"16" alt=3D"" title=3D"" border=3D"0"></font></td></tr></table=
+></center></body>=0A</html>
+--0c859bfda948dfa063c41c3428b8ce2b--
+
+--e830f4397bc01dcffa0d1ec305ab3836--
+
+

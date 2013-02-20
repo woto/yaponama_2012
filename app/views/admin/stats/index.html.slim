@@ -1,0 +1,67 @@
+h1 Listing stats
+
+table.table.table-striped
+  tr
+    th Geo city
+    th Geo country
+    th Geo region
+    th Geo district
+    th Geo lat
+    th Geo lng
+    th Req remote addr
+    th Req ip
+    th Req remote ip
+    th Req user agent
+    th Req referrer
+    th Req referer
+    th Req accepts
+    th Req accept
+    th Req path
+    th Req base url
+    th Req scheme
+    th Req request method
+    th Req original fullpath
+    th Req fullpath
+    th Req original url
+    th Req url
+    th Brs time
+    th Brs html
+    th User
+    th
+    th
+    th
+
+  - @stats.each do |stat|
+    tr
+      td = stat.geo_city
+      td = stat.geo_country
+      td = stat.geo_region
+      td = stat.geo_district
+      td = stat.geo_lat
+      td = stat.geo_lng
+      td = stat.req_remote_addr
+      td = stat.req_ip
+      td = stat.req_remote_ip
+      td = stat.req_user_agent
+      td = stat.req_referrer
+      td = stat.req_referer
+      td = stat.req_accepts
+      td = stat.req_accept
+      td = stat.req_path
+      td = stat.req_base_url
+      td = stat.req_scheme
+      td = stat.req_request_method
+      td = stat.req_original_fullpath
+      td = stat.req_fullpath
+      td = stat.req_original_url
+      td = stat.req_url
+      td = stat.brs_time
+      td = stat.brs_html
+      td = stat.user
+      td = link_to 'Show', stat
+      td = link_to 'Edit', edit_stat_path(stat)
+      td = link_to 'Destroy', stat, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Stat', new_stat_path

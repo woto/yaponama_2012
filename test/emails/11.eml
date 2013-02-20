@@ -1,0 +1,52 @@
+Delivered-To: oganer@gmail.com
+Received: by 10.229.155.19 with SMTP id q19csp106524qcw;
+        Mon, 11 Feb 2013 21:55:10 -0800 (PST)
+X-Received: by 10.112.16.102 with SMTP id f6mr6789923lbd.3.1360648509455;
+        Mon, 11 Feb 2013 21:55:09 -0800 (PST)
+Return-Path: <2domains@d4506.agava.net>
+Received: from d4506.agava.net (d4506.agava.net. [89.108.120.52])
+        by mx.google.com with ESMTPS id np5si19986292lab.176.2013.02.11.21.55.08
+        (version=TLSv1 cipher=RC4-SHA bits=128/128);
+        Mon, 11 Feb 2013 21:55:09 -0800 (PST)
+Received-SPF: pass (google.com: best guess record for domain of 2domains@d4506.agava.net designates 89.108.120.52 as permitted sender) client-ip=89.108.120.52;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: best guess record for domain of 2domains@d4506.agava.net designates 89.108.120.52 as permitted sender) smtp.mail=2domains@d4506.agava.net;
+       dkim=pass header.i=@2domains.ru
+Received: from d4506.agava.net (d4506.agava.net [89.108.120.205])
+	by d4506.agava.net (8.14.3/8.14.5) with ESMTP id r1C5t88c043397
+	for <oganer@gmail.com>; Tue, 12 Feb 2013 09:55:08 +0400 (GMT-4)
+	(envelope-from 2domains@d4506.agava.net)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=2domains.ru;
+	s=jan2012; t=1360648508;
+	bh=28K4CYm/wPGMwK0Fm32Xf8AS8rYBhNsOhNXNlfoiZ8s=;
+	h=To:Subject:Date:From:Message-ID:MIME-Version:
+	 Content-Transfer-Encoding:Content-Type;
+	b=hJYLTRUn914IfHtFRjtY/s8Wt2EJsxXPiHEdQE6ADdu3YbXPBQ9d/ZiUJ+FPDF9Po
+	 sd7HnQ4f1x57fz07fmCJQ9Qy+LuYUGNJo816zj/mYn3bK8cW3G6Og8prpgfBYhiBK4
+	 zNVFeN7t67kMVX74VxXElwHsZ8vRm/C7A/2PwB7Y=
+Received: (from 2domains@localhost)
+	by d4506.agava.net (8.14.3/8.14.5/Submit) id r1C5t8hV043396;
+	Tue, 12 Feb 2013 09:55:08 +0400 (GMT-4)
+	(envelope-from 2domains)
+To: =?windows-1251?B?0PPx6+DtIMru8O3l4g==?= <oganer@gmail.com>
+Subject: =?windows-1251?B?wuD4IOHg6+Dt8SDz8e/l+O3uIO/u7+7r7eXt?=
+Date: Tue, 12 Feb 2013 09:55:08 +0400
+From: "2domains.ru" <noreply@2domains.ru>
+Message-ID: <12845ba10acdfbaaf8c0f9b35c08b460@2domains.ru>
+X-Priority: 3
+X-Mailer: PHPMailer 5.0.2 (phpmailer.codeworxtech.com)
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="windows-1251"
+
+Здравствуйте!
+
+На Ваш баланс на сайте 2domains.ru была зачислена сумма в размере 99 руб.
+
+
+C уважением,
+2domains.ru
+---------------------------
+Это письмо создано роботом и не требует ответа!
+Адрес службы технической поддержки - http://support.2domains.ru
+

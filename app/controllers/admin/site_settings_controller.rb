@@ -40,7 +40,7 @@ class Admin::SiteSettingsController < Admin::ApplicationController
   # POST /admin/site_settings
   # POST /admin/site_settings.json
   def create
-    @admin_site_setting = Admin::SiteSetting.new(params[:admin_site_setting])
+    @admin_site_setting = Admin::SiteSetting.new(admin_site_setting_params)
 
     respond_to do |format|
       if @admin_site_setting.save
@@ -59,7 +59,7 @@ class Admin::SiteSettingsController < Admin::ApplicationController
     @admin_site_setting = Admin::SiteSetting.find(params[:id])
 
     respond_to do |format|
-      if @admin_site_setting.update_attributes(params[:admin_site_setting])
+      if @admin_site_setting.update_attributes(admin_site_setting_params)
         format.html { redirect_to @admin_site_setting, notice: 'Site setting was successfully updated.' }
         format.json { head :no_content }
       else
@@ -80,4 +80,11 @@ class Admin::SiteSettingsController < Admin::ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def admin_site_setting_params
+    params.require(:admin_site_setting).permit!
+  end
+
 end

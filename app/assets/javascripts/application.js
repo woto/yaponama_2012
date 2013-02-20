@@ -16,6 +16,7 @@
 //
 // #DIRTY TESTS TODO REFACTOR
 //= require scrollbarWidth
+//= require stat
 //
 //= require getCookieChat
 //
@@ -35,8 +36,7 @@
 
 //= require backbone-rails
 
-//= require jquery-jsonp/jquery.jsonp
-//= require jquery-json/jquery.json.js
+//= require jquery-jsonp/src/jquery.jsonp
 
 //=require insert_images_dialog
 
@@ -61,3 +61,5 @@
 //
 //= require brand_model
 //= require cars
+//
+//= require moment/moment

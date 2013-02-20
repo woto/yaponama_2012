@@ -8,17 +8,7 @@ Yaponama2012::Application.routes.draw do
 
   concerns :loginable
 
-  resources :stats do
-    get "iframe", :on => :member
-  end
-
   resources :comments
-
-
-  namespace :admin do
-    resources :blocks
-  end
-
 
   resources :uploads
 
@@ -54,7 +44,16 @@ Yaponama2012::Application.routes.draw do
 
   root :to => 'index#index'
 
+  resources :stats
+
   namespace :admin do
+
+    resources :stats do
+      get "iframe", :on => :member
+    end
+
+
+    resources :blocks
 
     concern :searchable do
       get 'search', :on => :collection
@@ -86,6 +85,7 @@ Yaponama2012::Application.routes.draw do
     end
 
     resources :users do
+
 
       resources :products
 

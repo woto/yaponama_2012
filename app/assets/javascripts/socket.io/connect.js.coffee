@@ -12,12 +12,12 @@ $(document).on 'page:load', ->
   
 connect = ->
     # send join message
-    window.socket.emit "join", $.toJSON(user: name)
+    window.socket.emit "join", JSON.stringify(user: name)
     container = $("div#msgs")
     
     window.socket.on "chat", (msg) ->
       #console.log message
-      message = $.evalJSON(msg)
+      message = JSON.parse(msg)
       action = message.action
       struct = container.find("li." + action + ":first")
       if struct.length < 1
@@ -66,7 +66,7 @@ connect = ->
       event.preventDefault()
       input = $(this).find(":input")
       msg = input.val()
-      window.socket.emit "chat", $.toJSON(
+      window.socket.emit "chat", JSON.stringify(
         action: "message"
         user: name
         msg: msg

@@ -2,7 +2,8 @@ module BelongsToUser
   extend ActiveSupport::Concern
 
   included do 
-    belongs_to :user, validate: true, touch: :activity_at
+    # TODO validate?
+    belongs_to :user, touch: true, validate: true
     validates :user, :presence => true
   end
 

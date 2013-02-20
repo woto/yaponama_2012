@@ -10,7 +10,7 @@
  *
  *= require bootstrap/main
  *
- * TODO подключить стили jQuery-File-Upload
+ * TODO подключить стили jQuery-File-Upload там так же подключается через noscript тег, поэтому необходимо в другом месте видимо
  *
  *= require_self
  *= require_tree .
