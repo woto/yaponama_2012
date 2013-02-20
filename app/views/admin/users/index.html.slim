@@ -39,7 +39,6 @@ ul#myTab.nav.nav-tabs
               li : a debit
               li : a credit
               li : a prepayment_percent
-              li : a activity_at
               li : a city
               li : a country
               li : a region
@@ -74,7 +73,6 @@ ul#myTab.nav.nav-tabs
           th = model_class.human_attribute_name(:debit)
           th = model_class.human_attribute_name(:credit)
           th = model_class.human_attribute_name(:prepayment_percent)
-          th = model_class.human_attribute_name(:activity_at)
           th = model_class.human_attribute_name(:city)
           th = model_class.human_attribute_name(:country)
           th = model_class.human_attribute_name(:region)
@@ -105,7 +103,6 @@ ul#myTab.nav.nav-tabs
             td = user.account.debit 
             td = user.account.credit 
             td = user.prepayment_percent 
-            td = l user.activity_at, format: :short if user.activity_at
             td = user.stats.first.city if user.stats
             td = user.stats.first.country if user.stats
             td = user.stats.first.region if user.stats

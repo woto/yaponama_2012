@@ -9,7 +9,6 @@ class CreateUsers < ActiveRecord::Migration
       t.references :time_zone
       t.references :ping
       t.string :role
-      t.datetime :activity_at
       t.string :auth_token
       t.string :password_digest
       t.string :password_reset_email_token

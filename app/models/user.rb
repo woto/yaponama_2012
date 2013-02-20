@@ -198,13 +198,4 @@ class User < ActiveRecord::Base
 
   end
 
-
-  # TODO х.з. может откажусь от activity_at и заменю на стандартный updated_at
-  before_save do
-    if persisted?
-      touch :activity_at
-    end
-  end
-  
-
 end
