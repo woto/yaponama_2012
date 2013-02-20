@@ -103,18 +103,18 @@ ul#myTab.nav.nav-tabs
             td = user.account.debit 
             td = user.account.credit 
             td = user.prepayment_percent 
-            td = user.stats.first.city if user.stats
-            td = user.stats.first.country if user.stats
-            td = user.stats.first.region if user.stats
-            td = user.stats.first.district if user.stats
-            td = user.stats.first.lat if user.stats
-            td = user.stats.first.lng if user.stats
-            td = user.stats.first.remote_ip if user.stats
-            td = user.stats.first.accept_language if user.stats
-            td = user.stats.first.user_agent if user.stats
-            td = user.stats.first.datetime if user.stats
-            td = user.stats.first.location if user.stats
-            td = user.stats.first.title if user.stats
+            td = user.stats.first.try(:city)
+            td = user.stats.first.try(:country)
+            td = user.stats.first.try(:region)
+            td = user.stats.first.try(:district)
+            td = user.stats.first.try(:lat)
+            td = user.stats.first.try(:lng)
+            td = user.stats.first.try(:remote_ip)
+            td = user.stats.first.try(:accept_language)
+            td = user.stats.first.try(:user_agent)
+            td = user.stats.first.try(:datetime)
+            td = user.stats.first.try(:location)
+            td = user.stats.first.try(:title)
             td = link_to 'Show', admin_stat_path(user.stats)
 
 
