@@ -87,3 +87,7 @@ gem 'thinking-sphinx', '3.0.0'
 
 gem 'charlock_holmes'
 gem 'paper_trail', git: 'https://github.com/airblade/paper_trail.git', branch: 'rails4'
+
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-openid'
