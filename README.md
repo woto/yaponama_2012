@@ -486,3 +486,19 @@ http://stackoverflow.com/questions/166221/how-can-i-upload-files-asynchronously-
 http://h20000.www2.hp.com/bizsupport/TechSupport/Document.jsp?objectID=c02273848&lang=en&cc=us&taskId=&prodSeriesId=4023238&prodTypeId=18972
 http://h20000.www2.hp.com/bizsupport/TechSupport/Document.jsp?lang=en&cc=us&taskId=120&prodSeriesId=4023238&prodTypeId=18972&objectID=c02187393
 http://www.linepart.ru/?code=16620-28070&action=catalog_price_view&order=code&way=asc
+# Авторизация
+http://railscasts.com/episodes/304-omniauth-identity?view=asciicast
+http://railscasts.com/episodes/304-omniauth-identity?view=asciicast
+http://railscasts.com/episodes/241-simple-omniauth
+http://bernardi.me/2012/09/using-multiple-omniauth-providers-with-omniauth-identity-on-the-main-user-model/
+http://railscasts.com/episodes/236-omniauth-part-2
+http://railscasts.com/episodes/235-omniauth-part-1
+http://blog.railsrumble.com/2010/10/08/intridea-omniauth/
+http://blog.railsrumble.com/2010/10/08/intridea-omniauth/
+https://github.com/jamiew/omniauth-rails-app/issues
+http://habrahabr.ru/company/darudar/blog/143188/
+http://7vn.ru/blog/2012/09/09/vkontakte-async/
+http://habrahabr.ru/post/151585/
+http://rubysource.com/get-your-app-ready-for-rails-4/
+https://github.com/caolan/async
+http://nodejs.org/about/
