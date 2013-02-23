@@ -35,6 +35,20 @@ class CreateAdminSiteSettings < ActiveRecord::Migration
       t.string :price_port
       t.string :get_image_data_address
       t.string :get_image_data_port
+      t.string :google_oauth2_key
+      t.string :google_oauth2_secret
+      t.string :facebook_key
+      t.string :facebook_secret
+      t.string :yandex_key
+      t.string :yandex_secret
+      t.string :twitter_key
+      t.string :twitter_secret
+      t.string :vkontakte_key
+      t.string :vkontakte_secret
+      t.string :odnoklassniki_key
+      t.string :odnoklassniki_secret
+      t.string :mailru_key
+      t.string :mailru_secret
 
       t.timestamps
     end

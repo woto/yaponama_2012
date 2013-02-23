@@ -158,6 +158,15 @@ Yaponama2012::Application.routes.draw do
 
   end
 
+  #post '/oauth/request_token' => 'sessions#new'
+
+  get '/auth/:provider/callback' => 'sessions#create'
+  get '/auth/failure' => 'sessions#failure'
+
+  #match '/login' => 'sessions#new', :as => :login
+  #match '/logout' => 'sessions#destroy', :as => :logout
+
+
   get "*path" => "pages#index"
 
 end

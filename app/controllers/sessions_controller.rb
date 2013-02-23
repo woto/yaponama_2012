@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    debugger
 
     email_address = EmailAddress.find_by_email_address(params[:login])
     phone = Phone.find_by_phone(params[:login])

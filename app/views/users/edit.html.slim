@@ -12,3 +12,5 @@ h1 Sign Up
   = f.input :password, input_html: { autocomplete: "off" }
   = f.input :password_confirmation, input_html: { autocomplete: "off" }
   = f.button :submit, 'Зарегистрироваться', :class => "btn btn-primary"
+
+  = render 'shared/omniauth'
