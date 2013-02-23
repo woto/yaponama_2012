@@ -31,6 +31,21 @@
     = f.input :avisosms_delivery_report
     = f.input :avisosms_flash_message
     = f.input :avisosms_validity_period
+  - if params[:filter] == 'omniauth' || params[:filter].blank?
+    = f.input :google_oauth2_key
+    = f.input :google_oauth2_secret
+    = f.input :facebook_key
+    = f.input :facebook_secret
+    = f.input :yandex_key
+    = f.input :yandex_secret
+    = f.input :twitter_key
+    = f.input :twitter_secret
+    = f.input :vkontakte_key
+    = f.input :vkontakte_secret
+    = f.input :odnoklassniki_key
+    = f.input :odnoklassniki_secret
+    = f.input :mailru_key
+    = f.input :mailru_secret
   - if params[:filter] == 'resources' || params[:filter].blank?
     = f.input :site_address
     = f.input :site_port

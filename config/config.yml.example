@@ -44,11 +44,11 @@ defaults: &defaults
   yandex_key:
   yandex_secret:
   #
-  odnoklassniki_key: 
+  odnoklassniki_key:
   odnoklassniki_secret: 
-  #
-  mailru_key: 
-  mailru_secret: 
+  # http://api.mail.ru/sites/my/add
+  mailru_key:
+  mailru_secret:
 
 
 

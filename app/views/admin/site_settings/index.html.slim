@@ -31,6 +31,21 @@ table class="table table-striped"
         th= model_class.human_attribute_name(:avisosms_delivery_report)
         th= model_class.human_attribute_name(:avisosms_flash_message)
         th= model_class.human_attribute_name(:avisosms_validity_period)
+      - if params[:filter] == 'omniauth' || params[:filter].blank?
+        th= model_class.human_attribute_name(:google_oauth2_key)
+        th= model_class.human_attribute_name(:google_oauth2_secret)
+        th= model_class.human_attribute_name(:facebook_key)
+        th= model_class.human_attribute_name(:facebook_secret)
+        th= model_class.human_attribute_name(:yandex_key)
+        th= model_class.human_attribute_name(:yandex_secret)
+        th= model_class.human_attribute_name(:twitter_key)
+        th= model_class.human_attribute_name(:twitter_secret)
+        th= model_class.human_attribute_name(:vkontakte_key)
+        th= model_class.human_attribute_name(:vkontakte_secret)
+        th= model_class.human_attribute_name(:odnoklassniki_key)
+        th= model_class.human_attribute_name(:odnoklassniki_secret)
+        th= model_class.human_attribute_name(:mailru_key)
+        th= model_class.human_attribute_name(:mailru_secret)
       - if params[:filter] == 'resources' || params[:filter].blank?
         th= model_class.human_attribute_name(:site_full_address)
         th= model_class.human_attribute_name(:redis_full_address)
@@ -70,6 +85,21 @@ table class="table table-striped"
           td= admin_site_setting.avisosms_delivery_report
           td= admin_site_setting.avisosms_flash_message
           td= admin_site_setting.avisosms_validity_period
+        - if params[:filter] == 'omniauth' || params[:filter].blank?
+          td= admin_site_setting.google_oauth2_key
+          td= admin_site_setting.google_oauth2_secret
+          td= admin_site_setting.facebook_key
+          td= admin_site_setting.facebook_secret
+          td= admin_site_setting.yandex_key
+          td= admin_site_setting.yandex_secret
+          td= admin_site_setting.twitter_key
+          td= admin_site_setting.twitter_secret
+          td= admin_site_setting.vkontakte_key
+          td= admin_site_setting.vkontakte_secret
+          td= admin_site_setting.odnoklassniki_key
+          td= admin_site_setting.odnoklassniki_secret
+          td= admin_site_setting.mailru_key
+          td= admin_site_setting.mailru_secret
         - if params[:filter] == 'resources' || params[:filter].blank?
           td= admin_site_setting.site_full_address
           td= admin_site_setting.redis_full_address
