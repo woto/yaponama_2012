@@ -158,14 +158,9 @@ Yaponama2012::Application.routes.draw do
 
   end
 
-  #post '/oauth/request_token' => 'sessions#new'
-
-  get '/auth/:provider/callback' => 'omniauth#create'
-  get '/auth/failure' => 'sessions#failure'
-
-  #match '/login' => 'sessions#new', :as => :login
-  #match '/logout' => 'sessions#destroy', :as => :logout
-
+  # Omniauth
+  get '/auth/:provider/callback' => 'auth#create'
+  get '/auth/failure' => 'auth#failure'
 
   get "*path" => "pages#index"
 

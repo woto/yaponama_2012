@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130215104437) do
+ActiveRecord::Schema.define(version: 20130224071844) do
 
   create_table "accounts", force: true do |t|
     t.integer  "creator_id"
@@ -119,6 +119,17 @@ ActiveRecord::Schema.define(version: 20130215104437) do
   end
 
   add_index "attachments", ["email_id"], name: "index_attachments_on_email_id"
+
+  create_table "auths", force: true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "user_id"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "auths", ["user_id"], name: "index_auths_on_user_id"
 
   create_table "brands", force: true do |t|
     t.string   "name"

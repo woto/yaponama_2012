@@ -70,7 +70,7 @@
                   li = link_to 'Адреса ресурсов', admin_site_settings_path(:filter => 'resources')
                   li = link_to 'Настройки новых покупателей', admin_site_settings_path(:filter => 'default_users')
                   li = link_to 'Цены и поставщики', admin_site_settings_path(:filter => 'prices')
-                  li = link_to 'Сторонние сервисы авторизации', admin_site_settings_path(:filter => 'omniauth')
+                  li = link_to 'Внешняя авторизация', admin_site_settings_path(:filter => 'auths')
                   li = link_to 'Прочие настройки', admin_site_settings_path(:filter => 'other')
               li.dropdown-submenu
                 = link_to "Доставка", "#"

@@ -462,7 +462,7 @@ Brands::BRANDS.each do |name, opts|
   end
 
   begin
-    Brand.create(:name => name, :rating => opts[:rating], :image => File.open("/Users/woto/rails/yaponama_2012/db/seeds/brands/#{opts[:file]}.png"))
+    Brand.create(:name => name, :rating => opts[:rating], :image => File.open(File.join(Rails.root, 'db', 'seeds', 'brands', "#{opts[:file]}.png")))
   rescue Exception => e
     puts e.message
   end

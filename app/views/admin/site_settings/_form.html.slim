@@ -31,7 +31,7 @@
     = f.input :avisosms_delivery_report
     = f.input :avisosms_flash_message
     = f.input :avisosms_validity_period
-  - if params[:filter] == 'omniauth' || params[:filter].blank?
+  - if params[:filter] == 'auths' || params[:filter].blank?
     = f.input :google_oauth2_key
     = f.input :google_oauth2_secret
     = f.input :facebook_key

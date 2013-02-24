@@ -3,6 +3,8 @@
 class User < ActiveRecord::Base
   has_paper_trail
 
+  has_many :auths
+
   has_many :uploads
 
   # TODO сделать.
