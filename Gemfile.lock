@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: b5df957af122991360f273eca5d2a3bf710e40d6
+  revision: fb40358f4f3d0028bbcd1a8f1fc74b1453e2014a
   specs:
     actionmailer (4.0.0.beta)
       actionpack (= 4.0.0.beta)
@@ -157,13 +157,13 @@ GEM
     coffee-script-source (1.4.0)
     columnize (0.3.6)
     commonjs (0.2.6)
-    debugger (1.3.1)
+    debugger (1.3.2)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.1.1)
-      debugger-ruby_core_source (~> 1.1.8)
+      debugger-ruby_core_source (~> 1.1.9)
     debugger-linecache (1.1.2)
       debugger-ruby_core_source (>= 1.1.1)
-    debugger-ruby_core_source (1.1.8)
+    debugger-ruby_core_source (1.1.9)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -271,14 +271,14 @@ GEM
       json (~> 1.4)
     redis (2.2.2)
     ref (1.0.2)
-    riddle (1.5.4)
+    riddle (1.5.5)
     ruby-growl (4.0)
       uuid (~> 2.3, >= 2.3.5)
     russian (0.6.0)
       i18n (>= 0.5.0)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
-    sass (3.2.5)
+    sass (3.2.6)
     sitemap_generator (3.4)
       builder
     slim (1.3.6)
