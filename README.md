@@ -502,3 +502,15 @@ http://habrahabr.ru/post/151585/
 http://rubysource.com/get-your-app-ready-for-rails-4/
 https://github.com/caolan/async
 http://nodejs.org/about/
+# Связь
+http://www.rossvyaz.ru/activity/num_resurs/registerNum/
+http://adhearsion.com/community
+https://github.com/adhearsion/adhearsion
+ftp://ftp.university.kg/pub/sip/asterisk/Asterisk_RU_OReilly_DRAFT.pdf
+http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/
+https://wiki.asterisk.org/wiki/display/AST/Asterisk+11+Documentation
+http://astbook.asteriskdocs.org/en/3rd_Edition/asterisk-book-html/asterisk-book.html#Internationalization_id305831
+http://forums.asterisk.org/viewtopic.php?p=155594
+
+Отображение профиля пользователя (одна страница, а на ней телефон, имя и т.д.)
+http://gridster.net/
