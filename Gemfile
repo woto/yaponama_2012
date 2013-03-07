@@ -51,7 +51,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
 gem 'unicorn'
-gem 'puma'
+gem 'puma', github: 'puma/puma'
 
 gem 'less-rails'
 gem "twitter-bootstrap-rails", git: 'https://github.com/seyhunak/twitter-bootstrap-rails.git'
