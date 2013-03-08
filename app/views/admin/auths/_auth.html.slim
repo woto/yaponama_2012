@@ -1,0 +1,24 @@
+a data-toggle="modal" data-target="##{auth.provider}" role="button" href="#"
+  img src="#{image_url("auth/#{auth.provider}.png")}"
+
+div id="#{auth.provider}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="auth-label" aria-hidden="true"
+  div class="modal-header"
+    button type="button" class="close" data-dismiss="modal" aria-hidden="true" ×
+    h3 id="auth-label" = auth.provider
+  div class="modal-body"
+    pre=' auth.data
+    dl.dl-horizontal
+      dt id
+      dd=' auth.id
+      dt uid
+      dd=' auth.uid
+      dt user_id
+      dd=' auth.user_id
+      dt created_at
+      dd=' auth.created_at
+      dt updated_at
+      dd=' auth.updated_at
+  div class="modal-footer"
+    button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" Закрыть
+
+|  
