@@ -63,3 +63,6 @@
 //= require cars
 //
 //= require moment/moment
+//
+// TODO когда создам application.js в admin, тогда перенесу подключение туда
+//= require admin/users
