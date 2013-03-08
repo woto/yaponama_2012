@@ -10,7 +10,7 @@ class AuthController < ApplicationController
     # TODO позже разобраться как сделать правильно, пока так набросал чтобы разобраться с полями. Над чем надо подумать:
     # 1. Пользователь может входить на сайт и комментировать с помощью omniauth
     # 2. Пользователь может привязывать доп. аккаунты
-    record = Auth.where(uid:  @auth['uid'], provider: @auth['provider']).first_or_initialize
+    record = Auth.where(uid:  @auth['uid'].to_s, provider: @auth['provider'].to_s).first_or_initialize
 
     record.user = current_user
     record['data'] = @auth.to_yaml
