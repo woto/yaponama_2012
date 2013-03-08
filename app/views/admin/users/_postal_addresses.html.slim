@@ -1,8 +1,0 @@
-#postal_addresses-tab.tab-pane.active
-  #postal_addresses
-    = f.simple_fields_for :postal_addresses do |postal_address| 
-
-      = render 'postal_address_fields', :f => postal_address 
-
-    .links
-      = link_to_add_association 'Добавить адрес', f, :postal_addresses, :class => "btn btn-success ignoredirty"  

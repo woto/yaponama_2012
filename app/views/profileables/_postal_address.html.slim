@@ -1,0 +1,8 @@
+= f.input :company
+= f.input :postcode
+= f.input :region
+= f.input :city
+= f.input :street
+= f.input :house
+= f.input :room
+= f.input :creation_reason, :collection => Rails.configuration.user_postal_address_creation_reason.map {|k,v| [v,k]}.to_a, :disabled => true, :as => :radio_buttons
