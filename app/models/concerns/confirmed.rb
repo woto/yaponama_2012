@@ -3,21 +3,21 @@ module Confirmed
 
   included do
     scope :confirmed, -> { 
-      where(( arel_table[:confirmed_by_robot].eq(true) ).or( arel_table[:confirmed_by_human].eq(true) ))
+      where(( arel_table[:confirmed_by_user].eq(true) ).or( arel_table[:confirmed_by_manager].eq(true) ))
     }
   end
 
   def confirmed?
-    confirmed_by_robot || confirmed_by_human
+    confirmed_by_user || confirmed_by_manager
   end
 
   def confirmed_changed?
-    confirmed_by_robot_changed? || confirmed_by_human_changed?
+    confirmed_by_user_changed? || confirmed_by_manager_changed?
   end
 
   def reset_confirmed
-    self.confirmed_by_robot = false
-    self.confirmed_by_human = false
+    self.confirmed_by_user = false
+    self.confirmed_by_manager = false
   end
 
 end
