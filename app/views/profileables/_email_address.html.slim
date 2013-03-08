@@ -1,6 +1,3 @@
 = f.input :email_address, :required => true
 = f.input :creation_reason, :collection => Rails.configuration.user_email_address_creation_reason.map {|k,v| [v,k]}.to_a, :disabled => true, :as => :radio_buttons
-= f.input :confirmed_by_manager
-= f.input :manager_confirmation_datetime
-= f.input :confirmed_by_user, :disabled => true
-= f.input :user_confirmation_datetime, :disabled => true
+= render :partial => 'shared/profileable_confirmed', :locals => {:f => f}
