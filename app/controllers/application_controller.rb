@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   include SmsSenderHelper
   helper_method :current_user
   helper_method :namespace_helper
+  helper_method :complex_namespace_helper
 
   private
 
@@ -49,6 +50,11 @@ class ApplicationController < ActionController::Base
 
     namespace
   end
+
+  def complex_namespace_helper
+    [namespace_helper, namespace_helper == 'admin' ? @user : :user]
+  end
+
 
   def current_user
     unless @current_user
