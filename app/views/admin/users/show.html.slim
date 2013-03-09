@@ -11,7 +11,10 @@ div.page-header
     = link_to new_polymorphic_path([:admin, @user, item[:assoc]]), :class => "hide btn btn-small btn-primary plus-profileable" do
       i.icon-plus
   - @user.send(item[:assoc].pluralize).each do |partial|
-    = render partial
+    .profileable-item
+      = render :partial => partial
+      = render :partial => 'shared/profileable_item_controls', :locals => {:resource => partial}
+
 
 - @user.auths.each do |auth|
   = render auth

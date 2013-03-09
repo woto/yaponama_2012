@@ -1,0 +1,7 @@
+.profileable-item-control.hide
+  |  
+  a.btn.btn-warning.btn-mini href="#{edit_polymorphic_path([:admin, @user, resource])}" role="button" data-id="#{resource.id}" data-toggle="modal"
+    i.icon-edit
+  |  
+  = link_to polymorphic_path([:admin, @user, resource]), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => "btn btn-mini btn-danger" do
+    i.icon-remove
