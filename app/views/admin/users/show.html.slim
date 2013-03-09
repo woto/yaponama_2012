@@ -6,9 +6,9 @@ div.page-header
 - array = [ {title: 'Имя', assoc: 'name'}, {title: 'Телефон', assoc: 'phone'}, {title: 'E-mail', assoc: 'email_address'}, {title: 'Адрес', assoc: 'postal_address'}]
 
 - array.each do |item|
-  h3.hover-profileable.muted
+  h4.hover-profileable.muted
     span=' item[:title]
-    = link_to new_polymorphic_path([:admin, @user, item[:assoc]]), :class => "hide btn btn-small btn-primary plus-profileable" do
+    = link_to new_polymorphic_path([:admin, @user, item[:assoc]]), :style => "visibility: hidden", :class => "btn btn-mini btn-primary plus-profileable" do
       i.icon-plus
   - @user.send(item[:assoc].pluralize).each do |partial|
     .profileable-item

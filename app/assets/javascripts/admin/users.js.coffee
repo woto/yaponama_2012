@@ -6,11 +6,11 @@ $ ->
 
 profileables_buttons = ->
   $(".hover-profileable").hover ->
-    $(this).find(".plus-profileable").show()
+    $(this).find(".plus-profileable").css("visibility", "visible")
   , ->
-    $(this).find(".plus-profileable").hide()
+    $(this).find(".plus-profileable").css("visibility", "hidden")
 
   $('.profileable-item').hover ->
-    $(this).find('.profileable-item-control').show()
+    $(this).find('.profileable-item-control').css("visibility", "visible")
   , ->
-    $(this).find('.profileable-item-control').hide()
+    $(this).find('.profileable-item-control').css("visibility", "hidden")
