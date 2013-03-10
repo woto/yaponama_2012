@@ -1,12 +1,13 @@
 class Name < ActiveRecord::Base
-  has_paper_trail
   include BelongsToUser
+  include BelongsToCreator
 
   has_many :orders
 
   validates :name, :presence => true
 
-  #validates :name, :uniqueness => {:scope => :user_id}
+  # TODO убрать везде валидацию и запретить выставление в ..._params (т.к. меняться руками никем не будет)
+  validates :creation_reason, :presence => true, :inclusion => { :in => Rails.configuration.user_name_creation_reason.keys }
 
   def to_label
     name

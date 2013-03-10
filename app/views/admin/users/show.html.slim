@@ -3,21 +3,30 @@
 div.page-header
   h1= t '.title', :default => model_class.model_name.human
 
-- array = [ {title: 'Имя', assoc: 'name'}, {title: 'Телефон', assoc: 'phone'}, {title: 'E-mail', assoc: 'email_address'}, {title: 'Адрес', assoc: 'postal_address'}]
+.row-fluid
+  .span4
 
-- array.each do |item|
-  h4.hover-profileable.muted
-    span=' item[:title]
-    = link_to new_polymorphic_path([:admin, @user, item[:assoc]]), :style => "visibility: hidden", :class => "btn btn-mini btn-primary plus-profileable" do
-      i.icon-plus
-  - @user.send(item[:assoc].pluralize).each do |partial|
-    .profileable-item
-      = render :partial => partial
-      = render :partial => 'shared/profileable_item_controls', :locals => {:resource => partial}
+    - array = [ {title: 'Имя', assoc: 'name'}, {title: 'Телефон', assoc: 'phone'}, {title: 'E-mail', assoc: 'email_address'}, {title: 'Адрес', assoc: 'postal_address'}]
 
 
-- @user.auths.each do |auth|
-  = render auth
+    - array.each do |item|
+      h4.hover-profileable.muted
+        span=' item[:title]
+        = link_to new_polymorphic_path([:admin, @user, item[:assoc]]), :style => "visibility: hidden", :class => "btn btn-mini btn-primary plus-profileable" do
+          i.icon-plus
+      - @user.send(item[:assoc].pluralize).each do |partial|
+        .profileable-item
+          = render :partial => partial
+          = render :partial => 'shared/profileable_item_controls', :locals => {:resource => partial}
+
+
+    - @user.auths.each do |auth|
+      = render auth
+
+  .span8
+    div.well
+      #events
+
 
 hr
 

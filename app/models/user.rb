@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
   has_many :requests, :dependent => :destroy
   accepts_nested_attributes_for :requests, :allow_destroy => true 
 
+  # TODO Удалить следующие две строчки
   has_many :root_requests_without_car, -> { where("request_id IS NULL AND car_id IS NULL") }, :class_name => "Request", :dependent => :destroy
   accepts_nested_attributes_for :root_requests_without_car, :allow_destroy => true
 
@@ -61,6 +62,7 @@ class User < ActiveRecord::Base
   has_many :products, :dependent => :destroy
   accepts_nested_attributes_for :products, :allow_destroy => true
 
+  # TODO Удалить две следующие строчки
   has_many :root_products, -> { where("product_id IS NULL") }, :class_name => "Product", :dependent => :destroy
   accepts_nested_attributes_for :root_products, :allow_destroy => true
 
@@ -70,8 +72,9 @@ class User < ActiveRecord::Base
   has_many :phones, :dependent => :destroy
   has_many :postal_addresses, :dependent => :destroy
   has_many :names, :dependent => :destroy
+
   has_many :orders, :dependent => :destroy
-  accepts_nested_attributes_for :phones, :postal_addresses, :email_addresses, :names, :orders, :allow_destroy => true
+  accepts_nested_attributes_for :orders, :allow_destroy => true
 
   belongs_to :time_zone, validate: true
 
@@ -135,6 +138,7 @@ class User < ActiveRecord::Base
 
   end
 
+  # TODO удалить
   before_validation :set_relational_attributes
 
   def set_relational_attributes

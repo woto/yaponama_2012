@@ -72,6 +72,7 @@ ru:
         max_days: Максимальный срок 
         # cost: Стоимость 1 шт.
         catalog_number: Каталожный номер
+        hide_catalog_number: Не показывать каталожный номер
         manufacturer: Производитель
         creation_reason: Причина создания
         creator_id: Создатель

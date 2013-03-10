@@ -4,37 +4,23 @@ html lang="ru"
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    meta name="description" content=""
-    meta name="author" content=""
 
-    / TODO пересмотреть еще раз более детально
+    title = "#{@meta_title} - " if @meta_title.present? 
 
-    - if @meta_title.present?
-      title 
-        = "#{@meta_title} - " if @meta_title.present? 
-        / TODO разобраться
-        / = render(:partial => "blocks/show.erb", :locals => {:block_name => 'title'})
-
+    - if @meta_author.present?
+      meta name="author" content="#{@meta_author}"
 
     - if @meta_keywords.present?
-      meta name="Keywords" content="#{@meta_keywords}"/>
-
-    / Удалить ключ 'meta_keywords_default' %>
+      meta name="keywords" content="#{@meta_keywords}"
 
     - if @meta_description.present?
-      meta name="Description" content="#{@meta_description}"/>
-
-    / Удалить ключ 'meta_description_default
+      meta name="description" content="#{@meta_description}"
 
     - if @meta_robots.present?
-      meta name="robots" content="#{@meta_robots}" />
+      meta name="robots" content="#{@meta_robots}"
 
     - if @meta_canonical.present?
-      link rel="canonical" href="#{@meta_canonical}" />
-
-    / /TODO пересмотреть еще раз более детально.
-
-    title = content_for?(:title) ? yield(:title) : "Yaponama 2012"
+      link rel="canonical" href="#{@meta_canonical}"
 
     = csrf_meta_tags
 

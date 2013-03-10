@@ -7,7 +7,7 @@ user.assign_attributes( SiteConfig.default_user_attributes )
 user.role = "admin"
 user.password = '1111111111'
 phone = user.phones.build
-phone.assign_attributes({:phone => '1111111111', :phone_type => 'mobile_russia'} )
+phone.assign_attributes({:phone => '1111111111', :phone_type => 'mobile_russia', :creation_reason => 'manager'} )
 email_address = user.email_addresses.build
 email_address.assign_attributes( {:email_address => 'demo@example.com'} )
 user.save!

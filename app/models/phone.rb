@@ -1,14 +1,16 @@
 #encoding: utf-8
 
 class Phone < ActiveRecord::Base
-  has_paper_trail
   include BelongsToUser
+  include BelongsToCreator
   include Confirmed
   include NotSelf
 
   has_many :orders
 
   validates :phone_type, :inclusion => { :in => Rails.configuration.phone_types_keys }
+
+  validates :creation_reason, :presence => :true, :inclusion => { :in => Rails.configuration.user_phone_creation_reason.keys }
 
   validates :phone, presence: true
   validates :phone, :numericality => { :only_integer => true }, :length => { :within => 10..10 }, :if => Proc.new{ phone_type == 'mobile_russia' }

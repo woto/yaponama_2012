@@ -1,6 +1,7 @@
 class PostalAddress < ActiveRecord::Base
   has_paper_trail
   include BelongsToUser
+  include BelongsToCreator
   has_many :orders
 
   validates :city, :street, :house, :region, :postcode, :presence => true

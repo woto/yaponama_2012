@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130224071844) do
+ActiveRecord::Schema.define(version: 20130307205632) do
 
   create_table "accounts", force: true do |t|
     t.integer  "creator_id"
@@ -142,6 +142,15 @@ ActiveRecord::Schema.define(version: 20130224071844) do
     t.datetime "updated_at"
   end
 
+  create_table "calls", force: true do |t|
+    t.integer  "phone_id"
+    t.string   "file"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "calls", ["phone_id"], name: "index_calls_on_phone_id"
+
   create_table "cars", force: true do |t|
     t.string   "god"
     t.string   "brand"
@@ -233,18 +242,21 @@ ActiveRecord::Schema.define(version: 20130224071844) do
 
   create_table "email_addresses", force: true do |t|
     t.string   "email_address"
-    t.boolean  "confirmed_by_robot"
-    t.boolean  "confirmed_by_human"
-    t.datetime "robot_confirmation_datetime"
-    t.datetime "human_confirmation_datetime"
-    t.text     "notes_invisible"
-    t.integer  "user_id"
-    t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "creation_reason"
     t.text     "notes"
+    t.text     "notes_invisible"
+    t.boolean  "removed"
+    t.integer  "user_id"
+    t.integer  "creator_id"
+    t.boolean  "confirmed_by_user"
+    t.boolean  "confirmed_by_manager"
+    t.datetime "user_confirmation_datetime"
+    t.datetime "manager_confirmation_datetime"
   end
 
+  add_index "email_addresses", ["creator_id"], name: "index_email_addresses_on_creator_id"
   add_index "email_addresses", ["user_id"], name: "index_email_addresses_on_user_id"
 
   create_table "emails", force: true do |t|
@@ -325,15 +337,18 @@ ActiveRecord::Schema.define(version: 20130224071844) do
 
   create_table "names", force: true do |t|
     t.string   "name"
-    t.string   "creation_reason"
-    t.text     "notes_invisible"
-    t.integer  "user_id"
-    t.integer  "creator_id"
-    t.boolean  "visible",         default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "creation_reason"
     t.text     "notes"
+    t.text     "notes_invisible"
+    t.boolean  "removed"
+    t.integer  "user_id"
+    t.integer  "creator_id"
   end
+
+  add_index "names", ["creator_id"], name: "index_names_on_creator_id"
+  add_index "names", ["user_id"], name: "index_names_on_user_id"
 
   create_table "orders", force: true do |t|
     t.integer  "name_id"
@@ -369,21 +384,32 @@ ActiveRecord::Schema.define(version: 20130224071844) do
     t.integer "upload_id"
   end
 
-  create_table "phones", force: true do |t|
-    t.string   "phone"
-    t.text     "notes"
-    t.boolean  "confirmed_by_robot"
-    t.boolean  "confirmed_by_human"
-    t.datetime "robot_confirmation_datetime"
-    t.datetime "human_confirmation_datetime"
-    t.string   "phone_type"
-    t.text     "notes_invisible"
-    t.integer  "user_id"
-    t.integer  "creator_id"
+  create_table "part_names", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  create_table "phones", force: true do |t|
+    t.string   "phone"
+    t.string   "phone_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "creation_reason"
+    t.text     "notes"
+    t.text     "notes_invisible"
+    t.boolean  "removed"
+    t.integer  "user_id"
+    t.integer  "creator_id"
+    t.boolean  "confirmed_by_user"
+    t.boolean  "confirmed_by_manager"
+    t.datetime "user_confirmation_datetime"
+    t.datetime "manager_confirmation_datetime"
+  end
+
+  add_index "phones", ["creator_id"], name: "index_phones_on_creator_id"
   add_index "phones", ["user_id"], name: "index_phones_on_user_id"
 
   create_table "postal_addresses", force: true do |t|
@@ -394,18 +420,22 @@ ActiveRecord::Schema.define(version: 20130224071844) do
     t.string   "street"
     t.string   "house"
     t.string   "room"
-    t.text     "notes"
-    t.text     "notes_invisible"
-    t.integer  "user_id"
-    t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "creation_reason"
+    t.text     "notes"
+    t.text     "notes_invisible"
+    t.boolean  "removed"
+    t.integer  "user_id"
+    t.integer  "creator_id"
   end
 
+  add_index "postal_addresses", ["creator_id"], name: "index_postal_addresses_on_creator_id"
   add_index "postal_addresses", ["user_id"], name: "index_postal_addresses_on_user_id"
 
   create_table "product_transactions", force: true do |t|
     t.string   "log_catalog_number"
+    t.boolean  "log_hide_catalog_number"
     t.string   "log_manufacturer"
     t.string   "log_status"
     t.text     "log_notes"
@@ -421,8 +451,8 @@ ActiveRecord::Schema.define(version: 20130224071844) do
     t.integer  "log_probability"
     t.integer  "log_min_days"
     t.integer  "log_max_days"
-    t.decimal  "log_buy_cost",           precision: 8, scale: 2
-    t.decimal  "log_sell_cost",          precision: 8, scale: 2
+    t.decimal  "log_buy_cost",            precision: 8, scale: 2
+    t.decimal  "log_sell_cost",           precision: 8, scale: 2
     t.string   "log_short_name"
     t.text     "log_long_name"
     t.integer  "log_product_id"
@@ -433,10 +463,11 @@ ActiveRecord::Schema.define(version: 20130224071844) do
 
   create_table "products", force: true do |t|
     t.string   "catalog_number"
+    t.boolean  "hide_catalog_number"
     t.string   "manufacturer"
     t.string   "status"
-    t.text     "notes",                                      default: ""
-    t.text     "notes_invisible",                            default: ""
+    t.text     "notes"
+    t.text     "notes_invisible"
     t.integer  "user_id"
     t.integer  "creator_id"
     t.integer  "order_id"
@@ -448,10 +479,10 @@ ActiveRecord::Schema.define(version: 20130224071844) do
     t.integer  "probability"
     t.integer  "min_days"
     t.integer  "max_days"
-    t.decimal  "buy_cost",           precision: 8, scale: 2
-    t.decimal  "sell_cost",          precision: 8, scale: 2
-    t.string   "short_name",                                 default: ""
-    t.text     "long_name",                                  default: ""
+    t.decimal  "buy_cost",            precision: 8, scale: 2
+    t.decimal  "sell_cost",           precision: 8, scale: 2
+    t.string   "short_name"
+    t.text     "long_name"
     t.integer  "product_id"
   end
 

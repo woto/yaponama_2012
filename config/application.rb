@@ -65,15 +65,38 @@ module Yaponama2012
       'email' => 'Прислал e-mail',
       'session' => 'Посетил сайт',
       'merge' => 'Образовался в результате объединения',
-      'manager' => 'Создан менеджером'
+      'manager' => 'Создан менеджером',
+      'call' => 'Звонок'
     }
 
     # Names
     config.user_name_creation_reason = {
       'email' => 'Автоматически заполнено из e-mail',
       'addressee' => 'В процессе оформления заказа (получатель)',
-      'self' => 'Представился на сайте'
+      'self' => 'Представился на сайте',
+      'manager' => 'Заполнено менеджером',
+      'google_oauth2' => 'Google',
+      'facebook' => 'Facebook',
+      'twitter' => 'Twitter',
+      'yandex' => 'Yandex',
+      'vkontakte' => 'Вконтакте',
+      'odnoklassniki' => 'Одноклассники',
+      'mailru' => 'Mail.ru'
     }
+
+    # EmailAddresses
+    config.user_email_address_creation_reason = {
+      'email' => 'Получено письмо с этого адреса',
+      'manager' => 'Добавлено менеджером'
+    }
+
+    # PostalAddresses
+    config.user_postal_address_creation_reason = {
+      'order' => 'Заполнено клиентом в процессе оформления заказа',
+      'manager' => 'Добавлено менеджером'
+    }
+
+
     # Orders
     config.orders_status = {
       'all' => {
@@ -251,6 +274,16 @@ module Yaponama2012
     config.robokassa_integration_modes = {
       'production' => 'Рабочий режим',
       'test' => 'Тестовый режим'
+    }
+
+
+    # Phones
+    config.user_phone_creation_reason = {
+      'call' => 'Звонок',
+      'addressee' => 'В процессе оформления заказа (Контактный телефон)',
+      'self' => 'Указал самостоятельно в настройках профиля',
+      'manager' => 'Заполнено менеджером',
+      'callback' => 'Заказал обратный вызов'
     }
 
     config.phone_types = {

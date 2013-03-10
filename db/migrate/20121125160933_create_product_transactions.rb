@@ -2,6 +2,7 @@ class CreateProductTransactions < ActiveRecord::Migration
   def change
     create_table :product_transactions do |t|
       t.string :log_catalog_number
+      t.boolean :log_hide_catalog_number
       t.string :log_manufacturer
       t.string :log_status
       t.text :log_notes

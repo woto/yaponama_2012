@@ -3,6 +3,7 @@
 class EmailAddress < ActiveRecord::Base
   has_paper_trail
   include BelongsToUser
+  include BelongsToCreator
   include Confirmed
   include NotSelf
 

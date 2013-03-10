@@ -1,0 +1,13 @@
+= simple_form_for @resource, :url => polymorphic_path(complex_namespace_helper + [@resource]), :html => { :class => "form-horizontal" } do |f|
+  / TODO Пока оставил для отладки
+    div.well
+      - @resource.class.column_names.each do |column_name|
+        = f.input column_name.to_sym
+
+  = render :partial => @resource_class.name.underscore, :locals => {:f => f}
+
+  = render :partial => 'shared/profileable_inputs', :locals => {:f => f}
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    '
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), complex_namespace_helper, :class => 'btn'

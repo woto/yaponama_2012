@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: c6839277a9262ea87329c719443cf19e33038f3f
+  revision: dff4d4ad2b7b55283132eb6cf8ac27b13827624c
   specs:
     actionmailer (4.0.0.beta1)
       actionpack (= 4.0.0.beta1)
@@ -102,7 +102,7 @@ GIT
 
 GIT
   remote: https://github.com/airblade/paper_trail.git
-  revision: 5122d8daf73f7ca0bd2ead0adbd4a62a7f6aef9b
+  revision: b2f148b95539e692352b2bc76de0c0b99f41fde9
   branch: rails4
   specs:
     paper_trail (2.7.0)
@@ -117,7 +117,7 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: 67f812cabb47f3aeb5df6417dd774fdf4aee0a35
+  revision: d64d7ddd99b8158eb4cb1abb0a729a3921eb49c8
   specs:
     simple_form (3.0.0.beta1)
       actionpack (>= 4.0.0.beta, < 4.1)
@@ -283,7 +283,7 @@ GEM
       i18n (>= 0.5.0)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
-    sass (3.2.6)
+    sass (3.2.7)
     sitemap_generator (3.4)
       builder
     slim (1.3.6)
@@ -314,7 +314,7 @@ GEM
     thor (0.17.0)
     thread_safe (0.1.0)
       atomic
-    tilt (1.3.4)
+    tilt (1.3.5)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)

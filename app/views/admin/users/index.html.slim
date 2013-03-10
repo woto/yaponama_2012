@@ -85,6 +85,7 @@ ul#myTab.nav.nav-tabs
           th = model_class.human_attribute_name(:datetime)
           th = model_class.human_attribute_name(:location)
           th = model_class.human_attribute_name(:title)
+          th = model_class.human_attribute_name(:phone)
           th
           th = t '.actions', :default => t("helpers.actions")
 
@@ -115,6 +116,7 @@ ul#myTab.nav.nav-tabs
             td = user.stats.first.try(:datetime)
             td = user.stats.first.try(:location)
             td = user.stats.first.try(:title)
+            td = user.phones.first.try(:phone)
             td = link_to 'Show', admin_stat_path(user.stats)
 
 

@@ -1,9 +1,18 @@
 Yaponama2012::Application.routes.draw do
 
+  resources :calls
+
   concern :loginable do
     get 'login' => 'sessions#new', :as => 'login'
     post 'login' => 'sessions#create', :as => 'login'
     delete 'logout' => 'sessions#destroy', :as => 'logout'
+  end
+
+  concern :profileable do
+    resources :names, :controller => "profileables", :resource_class => 'Name'
+    resources :phones, :controller => "profileables", :resource_class => 'Phone'
+    resources :email_addresses, :controller => "profileables", :resource_class => 'EmailAddress'
+    resources :postal_addresses, :controller => "profileables", :resource_class => 'PostalAddress'
   end
 
   concerns :loginable
@@ -44,9 +53,21 @@ Yaponama2012::Application.routes.draw do
 
   root :to => 'index#index'
 
-  resources :stats
+  resources :stats do
+    collection do
+      get :events
+    end
+  end
+
+  resource :user  do
+    concerns :profileable
+  end
 
   namespace :admin do
+
+      resources :users do
+        concerns :profileable
+      end
 
     resources :stats do
       get "iframe", :on => :member
@@ -85,6 +106,7 @@ Yaponama2012::Application.routes.draw do
     end
 
     resources :users do
+
 
 
       resources :products
@@ -133,7 +155,6 @@ Yaponama2012::Application.routes.draw do
       
     end
 
-    resources :names
     resources :spare_infos
     resources :time_zones
     resources :email_addresses

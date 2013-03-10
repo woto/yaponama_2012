@@ -1,0 +1,25 @@
+- model_class = @resource_class
+div class="page-header"
+  h1=t '.title', :default => model_class.model_name.human.pluralize
+table class="table table-striped"
+  thead
+    tr
+      th= model_class.human_attribute_name(:id)
+      / TODO Добавить поля
+      th=t '.actions', :default => t("helpers.actions")
+  tbody
+    - @resources.each do |resource|
+      tr
+        / Странно почему следующая строчка не работает
+         Посмотреть в names еще раз
+         td= link_to resource.id, url_for(:controller => @resource_class.name.undrerscore.to_sym, :action => :show, :id => resource)
+        / TODO Добавить поля
+        - resource.class.column_names.each do |column_name|
+          td= resource[column_name]
+        td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_polymorphic_path([:user, resource]), :class => 'btn btn-mini'
+          '
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), [:user, resource], :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_polymorphic_path([namespace_helper, :user, @resource_class.name.underscore.to_sym]), :class => 'btn btn-primary'
+
