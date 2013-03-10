@@ -28,7 +28,7 @@ class StatsController < ApplicationController
 
     attributes.merge!(stat_params)
 
-    @current_user.stats.create(attributes)
+    @stat = @current_user.stats.create(attributes)
 
     Redis.new.publish('stats.create', @stat.to_json)
     render :nothing => true
@@ -45,10 +45,12 @@ class StatsController < ApplicationController
       end
     end
   rescue IOError
-    logger.info "Stream closed"
   ensure
     redis.quit
     response.stream.close
+    # TODO my tweak
+    ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
+    ActiveRecord::Base.establish_connection
   end
 
   private
