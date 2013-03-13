@@ -49,3 +49,6 @@
 [submodule "system/submodules/getImageData"]
 	path = system/submodules/getImageData
 	url = https://github.com/woto/getImageData.git
+[submodule "system/submodules/mustache"]
+	path = system/submodules/mustache
+	url = git://github.com/janl/mustache.js.git
