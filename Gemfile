@@ -17,8 +17,14 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', platforms: :ruby
-  
+
   gem 'uglifier', '>= 1.0.3'
+
+end
+
+group :production do
+  # Use unicorn as the app server
+  gem 'unicorn'
 end
 
 group :development, :test do
@@ -48,10 +54,6 @@ gem 'jbuilder', '~> 1.0.1'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the app server
-gem 'unicorn'
-gem 'puma', github: 'puma/puma'
 
 gem 'less-rails'
 gem "twitter-bootstrap-rails", git: 'https://github.com/seyhunak/twitter-bootstrap-rails.git'

@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/puma/puma.git
-  revision: 2e2440024623e91bc4f3eb9052b27164627a60f3
-  specs:
-    puma (2.0.0.b6)
-      rack (>= 1.1, < 2.0)
-
-GIT
   remote: git://github.com/rails/activerecord-deprecated_finders.git
   revision: c00788c2b7e01170f63bd9651f7efd8deb4bd4b0
   specs:
@@ -27,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: dff4d4ad2b7b55283132eb6cf8ac27b13827624c
+  revision: 7169e4c71572cb96fa01317edf7b6c8ba9565f8e
   specs:
     actionmailer (4.0.0.beta1)
       actionpack (= 4.0.0.beta1)
@@ -111,7 +104,7 @@ GIT
 
 GIT
   remote: https://github.com/nathanvda/cocoon
-  revision: d4f59eb5eb0dce54c47935459e44b84f6bbcf2e1
+  revision: 3ce9f48ddd8afccea8e72262fd7179d42bd64737
   specs:
     cocoon (1.1.2)
 
@@ -125,7 +118,7 @@ GIT
 
 GIT
   remote: https://github.com/seyhunak/twitter-bootstrap-rails.git
-  revision: 29b7081e2fd570416dfd82186f1ad853d7dc9ded
+  revision: 679fc6ee91b8e77e4f30625ca574c142ac3d5782
   specs:
     twitter-bootstrap-rails (2.2.6)
       actionpack (>= 3.1)
@@ -320,7 +313,7 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (1.0.0)
       coffee-rails
-    tzinfo (0.3.36)
+    tzinfo (0.3.37)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
@@ -373,7 +366,6 @@ DEPENDENCIES
   omniauth-yandex
   paper_trail!
   pg
-  puma!
   rails!
   redis (~> 2.2.0)
   ruby-growl
