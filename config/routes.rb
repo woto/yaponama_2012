@@ -156,7 +156,6 @@ Yaponama2012::Application.routes.draw do
     end
 
     resources :spare_infos
-    resources :time_zones
     resources :email_addresses
 
     resources :emails do
