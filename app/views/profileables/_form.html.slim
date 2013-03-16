@@ -1,13 +1,17 @@
-= simple_form_for @resource, :url => polymorphic_path(complex_namespace_helper + [@resource]), :html => { :class => "form-horizontal" } do |f|
-  / TODO Пока оставил для отладки
-    div.well
-      - @resource.class.column_names.each do |column_name|
-        = f.input column_name.to_sym
+.row-fluid
+  .span3
+    = render 'users/show' if @user
+  #workspace.span9
+    = simple_form_for @resource, :url => polymorphic_path(complex_namespace_helper + [@resource]), :html => { :class => "form-horizontal" } do |f|
+      / TODO Пока оставил для отладки
+        div.well
+          - @resource.class.column_names.each do |column_name|
+            = f.input column_name.to_sym
 
-  = render :partial => "profileables/forms/#{@resource_class.name.underscore}", :locals => {:f => f}
-  = render :partial => 'profileables/forms/inputs', :locals => {:f => f}
+      = render :partial => "profileables/forms/#{@resource_class.name.underscore}", :locals => {:f => f}
+      = render :partial => 'profileables/forms/inputs', :locals => {:f => f}
 
-  .form-actions
-    = f.button :submit, :class => 'btn-primary'
-    '
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), complex_namespace_helper, :class => 'btn'
+      .form-actions
+        = f.button :submit, :class => 'btn-primary'
+        '
+        = link_to t('.cancel', :default => t("helpers.links.cancel")), complex_namespace_helper, :class => 'btn'
