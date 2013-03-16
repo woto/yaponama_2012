@@ -2,7 +2,6 @@ class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
       t.integer :creator_id
-      t.string :invisible
       t.string :creation_reason
       t.decimal :discount, :precision => 8, :scale => 2
       t.decimal :prepayment_percent, :precision => 8, :scale => 2
@@ -28,6 +27,9 @@ class CreateUsers < ActiveRecord::Migration
       # ----------------------------------
       t.integer :russian_time_zone_manual_id
       t.inet :remote_ip
+
+      t.text :notes
+      t.text :notes_invisible
 
       t.timestamps
     end

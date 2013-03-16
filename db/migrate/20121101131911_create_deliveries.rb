@@ -3,8 +3,8 @@ class CreateDeliveries < ActiveRecord::Migration
     create_table :deliveries do |t|
       t.string :name
       t.text :notes
+      t.text :notes_invisible
       t.boolean :available
-      t.text :invisible
 
       t.timestamps
     end

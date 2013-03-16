@@ -1,7 +1,8 @@
 class CreateCars < ActiveRecord::Migration
   def change
     create_table :cars do |t|
-      t.string :god
+      t.integer :god
+      t.string :period
       t.string :brand
       t.string :model
       t.string :generation
@@ -18,14 +19,14 @@ class CreateCars < ActiveRecord::Migration
       t.string :vin
       t.string :frame
       t.string :komplektaciya
-      t.text :notes_invisible
-      t.integer :user_id
-      t.integer :creator_id
-      # TODO аналогично видимость (свертка/развертка)
-      t.boolean :visible
-
+      t.integer :dverey
+      t.string :rul
+      t.boolean :selling
+      t.integer :cost
+      t.boolean :torg
+      t.text :advertisement
       t.timestamps
     end
-    add_index :cars, :user_id
+
   end
 end

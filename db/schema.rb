@@ -152,7 +152,8 @@ ActiveRecord::Schema.define(version: 20130315205632) do
   add_index "calls", ["phone_id"], name: "index_calls_on_phone_id"
 
   create_table "cars", force: true do |t|
-    t.string   "god"
+    t.integer  "god"
+    t.string   "period"
     t.string   "brand"
     t.string   "model"
     t.string   "generation"
@@ -169,20 +170,24 @@ ActiveRecord::Schema.define(version: 20130315205632) do
     t.string   "vin"
     t.string   "frame"
     t.string   "komplektaciya"
-    t.text     "notes_invisible"
-    t.integer  "user_id"
-    t.integer  "creator_id"
-    t.boolean  "visible"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "request_id"
-    t.string   "car_number"
-    t.text     "notes"
+    t.integer  "dverey"
+    t.string   "rul"
     t.boolean  "selling"
     t.integer  "cost"
+    t.boolean  "torg"
     t.text     "advertisement"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "car_number"
+    t.string   "creation_reason"
+    t.text     "notes"
+    t.text     "notes_invisible"
+    t.boolean  "removed"
+    t.integer  "user_id"
+    t.integer  "creator_id"
   end
 
+  add_index "cars", ["creator_id"], name: "index_cars_on_creator_id"
   add_index "cars", ["user_id"], name: "index_cars_on_user_id"
 
   create_table "comments", force: true do |t|
@@ -216,8 +221,8 @@ ActiveRecord::Schema.define(version: 20130315205632) do
   create_table "deliveries", force: true do |t|
     t.string   "name"
     t.text     "notes"
-    t.boolean  "available"
     t.text     "notes_invisible"
+    t.boolean  "available"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "name_required"
@@ -254,6 +259,7 @@ ActiveRecord::Schema.define(version: 20130315205632) do
     t.boolean  "confirmed_by_manager"
     t.datetime "user_confirmation_datetime"
     t.datetime "manager_confirmation_datetime"
+    t.string   "confirmation_token"
   end
 
   add_index "email_addresses", ["creator_id"], name: "index_email_addresses_on_creator_id"
@@ -399,6 +405,7 @@ ActiveRecord::Schema.define(version: 20130315205632) do
     t.boolean  "confirmed_by_manager"
     t.datetime "user_confirmation_datetime"
     t.datetime "manager_confirmation_datetime"
+    t.string   "confirmation_token"
   end
 
   add_index "phones", ["creator_id"], name: "index_phones_on_creator_id"
@@ -458,10 +465,6 @@ ActiveRecord::Schema.define(version: 20130315205632) do
     t.boolean  "hide_catalog_number"
     t.string   "manufacturer"
     t.string   "status"
-    t.text     "notes"
-    t.text     "notes_invisible"
-    t.integer  "user_id"
-    t.integer  "creator_id"
     t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -476,32 +479,17 @@ ActiveRecord::Schema.define(version: 20130315205632) do
     t.string   "short_name"
     t.text     "long_name"
     t.integer  "product_id"
-  end
-
-  add_index "products", ["order_id"], name: "index_products_on_order_id"
-  add_index "products", ["user_id"], name: "index_products_on_user_id"
-
-  create_table "requests", force: true do |t|
-    t.integer  "car_id"
-    t.string   "catalog_number"
-    t.string   "manufacturer"
+    t.string   "creation_reason"
     t.text     "notes"
     t.text     "notes_invisible"
+    t.boolean  "removed"
     t.integer  "user_id"
     t.integer  "creator_id"
-    t.boolean  "visible",         default: true
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "parent_request"
-    t.string   "type"
-    t.integer  "request_id"
-    t.string   "creation_reason"
-    t.string   "check_needed"
-    t.string   "name"
   end
 
-  add_index "requests", ["car_id"], name: "index_requests_on_car_id"
-  add_index "requests", ["user_id"], name: "index_requests_on_user_id"
+  add_index "products", ["creator_id"], name: "index_products_on_creator_id"
+  add_index "products", ["order_id"], name: "index_products_on_order_id"
+  add_index "products", ["user_id"], name: "index_products_on_user_id"
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
@@ -555,12 +543,9 @@ ActiveRecord::Schema.define(version: 20130315205632) do
 
   create_table "users", force: true do |t|
     t.integer  "creator_id"
-    t.text     "notes_invisible"
     t.string   "creation_reason"
     t.decimal  "discount",                    precision: 8, scale: 2
     t.decimal  "prepayment_percent",          precision: 8, scale: 2
-    t.integer  "russian_time_zone_auto_id"
-    t.integer  "russian_time_zone_manual_id"
     t.string   "role"
     t.string   "auth_token"
     t.string   "password_digest"
@@ -575,11 +560,14 @@ ActiveRecord::Schema.define(version: 20130315205632) do
     t.float    "ipgeobase_lng"
     t.string   "accept_language"
     t.string   "user_agent"
+    t.integer  "russian_time_zone_auto_id"
+    t.integer  "russian_time_zone_manual_id"
     t.inet     "remote_ip"
+    t.text     "notes"
+    t.text     "notes_invisible"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "order_rule"
-    t.text     "notes"
   end
 
   create_table "versions", force: true do |t|
