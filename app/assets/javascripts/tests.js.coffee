@@ -25,3 +25,17 @@ $(document).on 'click', '#save', ->
 
 # TODO из-за того, что ckeditor загружаю через jQuery getScript это перестало быть работоспособным
 #CKEDITOR.disableAutoInline = true;
+#
+#
+
+
+$(document).on 'socket.joined', (e) ->
+
+  window.socket.on "rails.stats.create", (msg) ->
+    console.log $.parseJSON(msg)
+
+  window.socket.on "rails.calls.create", (msg) ->
+    console.log $.parseJSON(msg)
+
+  window.socket.on "rails.geo1.create", (msg) ->
+    console.log $.parseJSON(msg)

@@ -1,8 +1,6 @@
 #encoding: utf-8
 
 class User < ActiveRecord::Base
-  has_paper_trail
-
   has_many :auths
 
   has_many :uploads
@@ -31,6 +29,10 @@ class User < ActiveRecord::Base
     :presence => true, 
     :confirmation => true, 
     :length => { :minimum => 6 }, 
+    if: -> { password_required }
+
+  validates :password_confirmation, 
+    :presence => true,
     if: -> { password_required }
 
   # Railscasts 274
@@ -69,9 +71,16 @@ class User < ActiveRecord::Base
   
 
   has_many :email_addresses, :dependent => :destroy
+  accepts_nested_attributes_for :email_addresses, :allow_destroy => true
+
   has_many :phones, :dependent => :destroy
+  accepts_nested_attributes_for :phones, :allow_destroy => true
+
   has_many :postal_addresses, :dependent => :destroy
+  accepts_nested_attributes_for :postal_addresses, :allow_destroy => true
+
   has_many :names, :dependent => :destroy
+  accepts_nested_attributes_for :names, :allow_destroy => true
 
   has_many :orders, :dependent => :destroy
   accepts_nested_attributes_for :orders, :allow_destroy => true
@@ -89,6 +98,7 @@ class User < ActiveRecord::Base
   has_one :account, :as => :accountable, :dependent => :destroy
   accepts_nested_attributes_for :account
   validates :account, :presence => true
+
 
 
   def send_password_reset
@@ -203,5 +213,8 @@ class User < ActiveRecord::Base
     end
 
   end
+
+
+
 
 end

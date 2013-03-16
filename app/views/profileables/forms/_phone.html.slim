@@ -1,4 +1,4 @@
 = f.input :phone
 = f.input :phone_type, :collection => Rails.configuration.phone_types, :value_method => :first, :label_method => :last, :as => :radio_buttons, :required => true
 = f.input :creation_reason, :collection => Rails.configuration.user_phone_creation_reason.map {|k,v| [v,k]}.to_a, :disabled => true, :as => :radio_buttons
-= render :partial => 'shared/profileable_confirmed', :locals => {:f => f}
+= render :partial => 'profileables/forms/confirms', :locals => {:f => f}

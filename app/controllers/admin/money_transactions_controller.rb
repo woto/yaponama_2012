@@ -2,6 +2,8 @@ class Admin::MoneyTransactionsController < Admin::ApplicationController
   # GET /admin/transactions
   # GET /admin/transactions.json
   def index
+    @user = User.find(params[:user_id]) if params[:user_id]
+
     money_transactions = MoneyTransaction.order("id DESC").page params[:page]
 
     opts = ['user', 'supplier']

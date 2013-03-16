@@ -31,7 +31,21 @@ module Yaponama2012
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    config.time_zone = 'Moscow'
+    config.time_zone = 'UTC'
+
+
+    # Offset Russian Time Zones in UTC
+    config.russian_time_zones = {
+      "3"  => 'Калининградское время', 
+      "4"  => 'Московское время', 
+      "6"  => 'Екатеринбургское время', 
+      "7"  => 'Омское время', 
+      "8"  => 'Красноярское время',
+      "9"  => 'Иркутское время', 
+      "10" => 'Якутское время', 
+      "11" => 'Владивостокское время', 
+      "12" => 'Магаданское время',
+    }
     
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
@@ -62,6 +76,7 @@ module Yaponama2012
 
     # User
     config.user_creation_reason = { 
+      'register' => 'Регистрация',
       'email' => 'Прислал e-mail',
       'session' => 'Посетил сайт',
       'merge' => 'Образовался в результате объединения',
@@ -69,8 +84,21 @@ module Yaponama2012
       'call' => 'Звонок'
     }
 
+
+    # Phones
+    config.user_phone_creation_reason = {
+      'register' => 'Регистрация',
+      'call' => 'Звонок',
+      'addressee' => 'В процессе оформления заказа (Контактный телефон)',
+      'self' => 'Указал самостоятельно в настройках профиля',
+      'manager' => 'Заполнено менеджером',
+      'callback' => 'Заказал обратный вызов'
+    }
+
+
     # Names
     config.user_name_creation_reason = {
+      'register' => 'Регистрация',
       'email' => 'Автоматически заполнено из e-mail',
       'addressee' => 'В процессе оформления заказа (получатель)',
       'self' => 'Представился на сайте',
@@ -86,6 +114,7 @@ module Yaponama2012
 
     # EmailAddresses
     config.user_email_address_creation_reason = {
+      'register' => 'Регистрация',
       'email' => 'Получено письмо с этого адреса',
       'manager' => 'Добавлено менеджером'
     }
@@ -120,6 +149,35 @@ module Yaponama2012
         'hint' => 'Заказ выполнен, добавление в заказ товаров невозможно.'
       }
 
+    }
+
+    # Workspace
+    config.workspace = {
+      'products' => {
+        'real' => true,
+        'title' => 'Товары',
+        'hint' => ''
+      },
+      'orders' => {
+        'real' => true,
+        'title' => 'Заказы',
+        'hint' => ''
+      },
+      'cars' => {
+        'real' => true,
+        'title' => 'Авто',
+        'hint' => ''
+      },
+      'transactions' => {
+        'real' => true,
+        'title' => 'Транзакции',
+        'hint' => ''
+      },
+      'search' => {
+        'real' => true,
+        'title' => 'Поиск',
+        'hint' => ''
+      }
     }
 
     # Products
@@ -277,15 +335,6 @@ module Yaponama2012
     }
 
 
-    # Phones
-    config.user_phone_creation_reason = {
-      'call' => 'Звонок',
-      'addressee' => 'В процессе оформления заказа (Контактный телефон)',
-      'self' => 'Указал самостоятельно в настройках профиля',
-      'manager' => 'Заполнено менеджером',
-      'callback' => 'Заказал обратный вызов'
-    }
-
     config.phone_types = {
       'mobile_russia' => 'Мобильный (Россия)',
       'unknown' => 'Городской/Или другие страны'
@@ -364,5 +413,6 @@ module Yaponama2012
     #}
 
     config.sms_notify_methods = %w(flash sms growl)
+
   end
 end

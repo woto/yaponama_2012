@@ -10,5 +10,5 @@ $(document).on 'click', '#uncheck-items', (e) ->
   $('input.item[type=checkbox]').prop('checked', false).change()
 
 $(document).on 'change', 'input.item[type=checkbox]', ->
-  form = $('form')
+  form = $('#workspace form')
   $(form).submit()

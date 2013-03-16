@@ -73,20 +73,17 @@ ul#myTab.nav.nav-tabs
           th = model_class.human_attribute_name(:debit)
           th = model_class.human_attribute_name(:credit)
           th = model_class.human_attribute_name(:prepayment_percent)
-          th = model_class.human_attribute_name(:city)
-          th = model_class.human_attribute_name(:country)
-          th = model_class.human_attribute_name(:region)
-          th = model_class.human_attribute_name(:district)
-          th = model_class.human_attribute_name(:lat)
-          th = model_class.human_attribute_name(:lng)
-          th = model_class.human_attribute_name(:remote_ip)
-          th = model_class.human_attribute_name(:accept_language)
-          th = model_class.human_attribute_name(:usr_agent)
-          th = model_class.human_attribute_name(:datetime)
-          th = model_class.human_attribute_name(:location)
-          th = model_class.human_attribute_name(:title)
           th = model_class.human_attribute_name(:phone)
-          th
+          th = model_class.human_attribute_name(:ipgeobase_city)
+          th = model_class.human_attribute_name(:ipgeobase_country)
+          th = model_class.human_attribute_name(:ipgeobase_region)
+          th = model_class.human_attribute_name(:ipgeobase_district)
+          th = model_class.human_attribute_name(:ipgeobase_lat)
+          th = model_class.human_attribute_name(:ipgeobase_lng)
+          th = model_class.human_attribute_name(:remote_ip)
+          th = model_class.human_attribute_name(:language)
+          th = model_class.human_attribute_name(:user_agent)
+          th = model_class.human_attribute_name(:russian_time_zone_auto_id)
           th = t '.actions', :default => t("helpers.actions")
 
       tbody
@@ -104,19 +101,17 @@ ul#myTab.nav.nav-tabs
             td = user.account.debit 
             td = user.account.credit 
             td = user.prepayment_percent 
-            td = user.stats.first.try(:city)
-            td = user.stats.first.try(:country)
-            td = user.stats.first.try(:region)
-            td = user.stats.first.try(:district)
-            td = user.stats.first.try(:lat)
-            td = user.stats.first.try(:lng)
-            td = user.stats.first.try(:remote_ip)
-            td = user.stats.first.try(:accept_language)
-            td = user.stats.first.try(:user_agent)
-            td = user.stats.first.try(:datetime)
-            td = user.stats.first.try(:location)
-            td = user.stats.first.try(:title)
             td = user.phones.first.try(:phone)
+            td = user.ipgeobase_city
+            td = user.ipgeobase_country
+            td = user.ipgeobase_region
+            td = user.ipgeobase_district
+            td = user.ipgeobase_lat
+            td = user.ipgeobase_lng
+            td = user.remote_ip
+            td = user.accept_language
+            td = user.user_agent
+            td = Rails.configuration.russian_time_zones[user.russian_time_zone_auto_id.to_s]
             td = link_to 'Show', admin_stat_path(user.stats)
 
 
@@ -145,10 +140,6 @@ ul#myTab.nav.nav-tabs
                     = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_user_path(user)
                     ul.dropdown-menu
                       li = link_to("Главная", edit_admin_user_path(user, :tab => :users))
-                      li = link_to("Имя", edit_admin_user_path(user, :tab => :names))
-                      li = link_to("Телефон", edit_admin_user_path(user, :tab => :phones))
-                      li = link_to("E-mail", edit_admin_user_path(user, :tab => :email_addresses))
-                      li = link_to("Адрес", edit_admin_user_path(user, :tab => :postal_addresses))
                       li.divider
                       li = link_to("Авто", edit_admin_user_path(user, :tab => :cars))
                       li = link_to("Запросы", edit_admin_user_path(user, :tab => :requests))

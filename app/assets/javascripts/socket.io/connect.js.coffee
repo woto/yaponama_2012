@@ -3,6 +3,7 @@ join = (name) ->
   port = 80
   host = window.location.host.split(":")[0]
   window.socket = io.connect("http://" + host + ":" + port)
+  $(document).trigger('socket.joined', [1011]);
 
 $(document).ready ->
   connect()

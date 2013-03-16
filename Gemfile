@@ -28,6 +28,7 @@ group :production do
 end
 
 group :development, :test do
+
   gem 'debugger'
   #gem 'rspec-rails', '~> 2.12.2'
   #gem 'shoulda'
@@ -88,7 +89,6 @@ gem 'mysql2',          '0.3.12b4'
 gem 'thinking-sphinx', '3.0.0'
 
 gem 'charlock_holmes'
-gem 'paper_trail', git: 'https://github.com/airblade/paper_trail.git', branch: 'rails4'
 
 gem 'omniauth'
 gem 'omniauth-google-oauth2'

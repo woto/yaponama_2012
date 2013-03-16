@@ -1,8 +1,7 @@
 #encoding: utf-8
 
 class PasswordResetsController < ApplicationController
-  skip_filter :only_authenticated_filter, :only => [:new, :create, :edit, :update]
-  before_filter :only_not_authenticated_filter, :only => [:new, :create, :edit, :update]
+  before_action :only_not_authenticated, :only => [:new, :create, :edit, :update]
 
   # TODO проработать еще вопрос с сменой пароля через смс
 

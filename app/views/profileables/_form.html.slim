@@ -4,9 +4,9 @@
       - @resource.class.column_names.each do |column_name|
         = f.input column_name.to_sym
 
-  = render :partial => @resource_class.name.underscore, :locals => {:f => f}
+  = render :partial => "profileables/forms/#{@resource_class.name.underscore}", :locals => {:f => f}
+  = render :partial => 'profileables/forms/inputs', :locals => {:f => f}
 
-  = render :partial => 'shared/profileable_inputs', :locals => {:f => f}
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     '

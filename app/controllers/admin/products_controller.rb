@@ -3,6 +3,11 @@ class Admin::ProductsController < Admin::ApplicationController
   ORDER_STEPS = %w[order delivery postal_address phone name notes]
  
   def index
+
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+    end
+
     products = Product.order("updated_at DESC").page(params[:page])
     @products = products_user_order_tab_scope(products, params[:status])
     respond_to do |format|

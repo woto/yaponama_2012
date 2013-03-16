@@ -26,7 +26,7 @@ class Admin::Products::EditController < Admin::ApplicationController
     product = @products.first
 
     respond_to do |format|
-      if product.update_attributes(params[:product], :as => current_user.role.to_sym)
+      if product.update_attributes(product_params)
         format.html { redirect_to(params[:return_path], :notice => "Позиция успешно изменена.") }
         format.json { head :no_content }
       else
@@ -35,5 +35,10 @@ class Admin::Products::EditController < Admin::ApplicationController
       end
     end
   end
+
+  private
+    def product_params
+      params.require(:product).permit!
+    end
 
 end

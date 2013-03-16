@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :namespace_helper
   helper_method :complex_namespace_helper
+  before_action :set_user_time_zone
 
   private
 
@@ -77,13 +78,6 @@ class ApplicationController < ActionController::Base
     @current_user
   end
 
-  def only_not_authenticated_filter
-    if ["admin", "manager", "user"].include? current_user.role
-      redirect_to root_path, :notice => "Вы уже вошли на сайт." and return
-    end
-  end
-
-
   def commentable_helper obj
     @comments = Comment.where(:commentable_id => obj.id, :commentable_type => obj.class).arrange(:order => :created_at)
     @comment = Comment.new()
@@ -92,5 +86,26 @@ class ApplicationController < ActionController::Base
     @email_address = current_user.email_addresses.first.try(:to_label)
   end
 
+
+private
+
+  def set_user_time_zone
+    Time.zone = current_user.russian_time_zone_manual_id || current_user.russian_time_zone_auto_id
+  end
+
+
+  private
+
+  def only_not_authenticated
+    if ["admin", "manager", "user"].include? current_user.role
+      redirect_to root_path, :notice => "Вы уже вошли на сайт." and return
+    end
+  end
+
+  def only_authenticated
+    if ['guest'].include? current_user.role
+      redirect_to root_path, :notice => "Пожалуйста войдите на сайт." and return
+    end
+  end
 
 end

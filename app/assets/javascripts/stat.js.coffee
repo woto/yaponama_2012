@@ -7,10 +7,10 @@ $ ->
 send_stat = ->
 
   data = 
+    russian_time_zone_auto: moment().format('YYYY-MM-DDTHH:mm:ss')
     stat:
-      datetime : moment().format('YYYY-MM-DDTHH:mm:ss')
-      location : window.location.href
-      title    : document.title
-      referrer : document.referrer
+      location: window.location.href
+      title: document.title
+      referrer: document.referrer
 
   $.post '/stats', data, ->

@@ -18,6 +18,8 @@ class Admin::OrdersController < Admin::ApplicationController
   # GET /admin/orders
   # GET /admin/orders.json
   def index
+    @user = User.find(params[:user_id]) if params[:user_id]
+
     @orders = Order.order("id DESC").page(params[:page])
 
     if params[:user_id]
@@ -84,7 +86,7 @@ class Admin::OrdersController < Admin::ApplicationController
   # PUT /admin/orders/1.json
   def update
     @order = Order.find(params[:id])
-    @order.assign_attributes(params[:order])
+    @order.assign_attributes(order_params)
     @order.products_inorder << @products
     @order.user = @products.first.user
       

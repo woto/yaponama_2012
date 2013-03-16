@@ -1,79 +1,86 @@
-- model_class = Product
-.page-header
-  h1 =t '.title', :default => model_class.model_name.human.pluralize
+.row-fluid
+  .span3
+    = render 'users/show' if @user.present?
+  .span9
+    #workspace
+      - model_class = Product
 
-= paginate @product_transactions
+      .page-header
+        - if @user
+          = render :partial => "shared/client_button", :locals => {:user_id => @user, :user_label => @user.new_record? ? "Новый покупатель" :  @user.to_label}
 
-table.table.table-striped
-  thead
-    tr
-      th = model_class.human_attribute_name(:id)
-      th = model_class.human_attribute_name(:catalog_number)
-      th = model_class.human_attribute_name(:manufacturer)
-      th = model_class.human_attribute_name(:status)
-      th = model_class.human_attribute_name(:notes)
-      th = model_class.human_attribute_name(:notes_invisible)
-      th = model_class.human_attribute_name(:user)
-      th = model_class.human_attribute_name(:order)
-      th = model_class.human_attribute_name(:supplier)
-      th = model_class.human_attribute_name(:quantity_ordered)
-      th = model_class.human_attribute_name(:quantity_available)
-      th = model_class.human_attribute_name(:probability)
-      th = model_class.human_attribute_name(:min_days)
-      th = model_class.human_attribute_name(:max_days)
-      th = model_class.human_attribute_name(:buy_cost)
-      th = model_class.human_attribute_name(:sell_cost)
-      th = model_class.human_attribute_name(:short_name)
-      th = model_class.human_attribute_name(:long_name)
-      th = model_class.human_attribute_name(:log_product_id)
-      th = model_class.human_attribute_name(:log_creator_id)
-      th = model_class.human_attribute_name(:created_at)
-      th = model_class.human_attribute_name(:updated_at)
-      th = model_class.human_attribute_name(:product_id)
-      th = model_class.human_attribute_name(:created_at)
-      th = model_class.human_attribute_name(:updated_at)
-  tbody
-    - @product_transactions.each do |product_transaction|
-      tr
-        td = link_to product_transaction.id, admin_product_transaction_path(product_transaction)
-        td = product_transaction.log_catalog_number
-        td = product_transaction.log_manufacturer
-        td 
-          center
-            - if product_transaction.log_status
-              span class="label label-#{product_transaction.log_status}" =' Rails.configuration.products_status[product_transaction.log_status]['title']
-        td = product_transaction.log_notes
-        td = product_transaction.log_notes_invisible
+      = paginate @product_transactions
 
-        td 
-          - if product_transaction.log_user_id
-            = render :partial => "shared/client_button", :locals => {:user_id => product_transaction.log_user_id, :user_label => User.find(product_transaction.log_user_id).to_label}
+      table.table.table-striped
+        thead
+          tr
+            th = model_class.human_attribute_name(:id)
+            th = model_class.human_attribute_name(:catalog_number)
+            th = model_class.human_attribute_name(:manufacturer)
+            th = model_class.human_attribute_name(:status)
+            th = model_class.human_attribute_name(:notes)
+            th = model_class.human_attribute_name(:notes_invisible)
+            th = model_class.human_attribute_name(:user)
+            th = model_class.human_attribute_name(:order)
+            th = model_class.human_attribute_name(:supplier)
+            th = model_class.human_attribute_name(:quantity_ordered)
+            th = model_class.human_attribute_name(:quantity_available)
+            th = model_class.human_attribute_name(:probability)
+            th = model_class.human_attribute_name(:min_days)
+            th = model_class.human_attribute_name(:max_days)
+            th = model_class.human_attribute_name(:buy_cost)
+            th = model_class.human_attribute_name(:sell_cost)
+            th = model_class.human_attribute_name(:short_name)
+            th = model_class.human_attribute_name(:long_name)
+            th = model_class.human_attribute_name(:log_product_id)
+            th = model_class.human_attribute_name(:log_creator_id)
+            th = model_class.human_attribute_name(:created_at)
+            th = model_class.human_attribute_name(:updated_at)
+            th = model_class.human_attribute_name(:product_id)
+            th = model_class.human_attribute_name(:created_at)
+            th = model_class.human_attribute_name(:updated_at)
+        tbody
+          - @product_transactions.each do |product_transaction|
+            tr
+              td = link_to product_transaction.id, admin_product_transaction_path(product_transaction)
+              td = product_transaction.log_catalog_number
+              td = product_transaction.log_manufacturer
+              td 
+                center
+                  - if product_transaction.log_status
+                    span class="label label-#{product_transaction.log_status}" =' Rails.configuration.products_status[product_transaction.log_status]['title']
+              td = product_transaction.log_notes
+              td = product_transaction.log_notes_invisible
 
-        td 
-          - if product_transaction.log_order_id
-            = link_to admin_order_path(order = Order.find(product_transaction.log_order_id)) do 
-              =' order.to_label 
-              i.icon-shopping-cart
+              td 
+                - if product_transaction.log_user_id
+                  = render :partial => "shared/client_button", :locals => {:user_id => product_transaction.log_user_id, :user_label => User.find(product_transaction.log_user_id).to_label}
 
-        td 
-          - if product_transaction.log_supplier_id
-            = render :partial => "shared/supplier_button", :locals => {:supplier_id => product_transaction.log_supplier_id, :supplier_label => Supplier.find(product_transaction.log_supplier_id).to_label}
+              td 
+                - if product_transaction.log_order_id
+                  = link_to admin_order_path(order = Order.find(product_transaction.log_order_id)) do 
+                    =' order.to_label 
+                    i.icon-shopping-cart
 
-        td = product_transaction.log_quantity_ordered
-        td = product_transaction.log_quantity_available
-        td = product_transaction.log_probability
-        td = product_transaction.log_min_days
-        td = product_transaction.log_max_days
-        td = product_transaction.log_buy_cost
-        td = product_transaction.log_sell_cost
-        td = product_transaction.log_short_name
-        td = product_transaction.log_long_name
-        td = product_transaction.log_product_id
-        td = product_transaction.log_creator_id
-        td =l product_transaction.log_created_at, :format => :short if product_transaction.log_created_at
-        td =l product_transaction.log_updated_at, :format => :short if product_transaction.log_updated_at
-        td = product_transaction.product_id
-        td =l product_transaction.created_at, :format => :short if product_transaction.created_at
-        td =l product_transaction.updated_at, :format => :short if product_transaction.updated_at
+              td 
+                - if product_transaction.log_supplier_id
+                  = render :partial => "shared/supplier_button", :locals => {:supplier_id => product_transaction.log_supplier_id, :supplier_label => Supplier.find(product_transaction.log_supplier_id).to_label}
 
-= paginate @product_transactions
+              td = product_transaction.log_quantity_ordered
+              td = product_transaction.log_quantity_available
+              td = product_transaction.log_probability
+              td = product_transaction.log_min_days
+              td = product_transaction.log_max_days
+              td = product_transaction.log_buy_cost
+              td = product_transaction.log_sell_cost
+              td = product_transaction.log_short_name
+              td = product_transaction.log_long_name
+              td = product_transaction.log_product_id
+              td = product_transaction.log_creator_id
+              td =l product_transaction.log_created_at, :format => :short if product_transaction.log_created_at
+              td =l product_transaction.log_updated_at, :format => :short if product_transaction.log_updated_at
+              td = product_transaction.product_id
+              td =l product_transaction.created_at, :format => :short if product_transaction.created_at
+              td =l product_transaction.updated_at, :format => :short if product_transaction.updated_at
+
+      = paginate @product_transactions

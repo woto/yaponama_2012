@@ -2,6 +2,9 @@ class Admin::ProductTransactionsController < Admin::ApplicationController
   # GET /admin/product_transactions
   # GET /admin/product_transactions.json
   def index
+
+    @user = User.find(params[:user_id]) if params[:user_id]
+
     product_transaction = ProductTransaction.scoped.order("id DESC").page params[:page]
 
     if params[:product_id]

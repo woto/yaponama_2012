@@ -1,6 +1,6 @@
 class ProfileablesController < ApplicationController
   before_action :set_resource_class
-  before_action :set_resource, only: [:show, :edit, :update, :destroy]
+  before_action :set_resource, only: [:show, :edit, :update, :destroy, :toggle]
   before_action :initialize_on_create, only: [:create]
   before_action :set_user_and_creation_reason, only: [:create, :update]
   before_action :find_approriate_resources, only: [:index]
@@ -60,15 +60,34 @@ class ProfileablesController < ApplicationController
     end
   end
 
+  def toggle
+    @user = @resource.user
+
+    if @resource.removed == true
+      @resource.removed = false
+    else
+      @resource.removed = true
+    end
+
+    @resource.save!
+
+    respond_to do |format|
+      format.html { redirect_to polymorphic_path(complex_namespace_helper) }
+      format.json { head :no_content }
+    end
+  end
+
   # DELETE /names/1
   # DELETE /names/1.json
   def destroy
+
     @user = @resource.user
     @resource.destroy
     respond_to do |format|
       format.html { redirect_to polymorphic_path(complex_namespace_helper) }
       format.json { head :no_content }
     end
+
   end
 
   private

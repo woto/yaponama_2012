@@ -4,8 +4,8 @@ if self == top
   $ ->
     size()
 
-  $(window).resize ->
-    size()
+    $(window).resize ->
+      size()
 
   size = ->
     window.socket.emit "size", JSON.stringify(

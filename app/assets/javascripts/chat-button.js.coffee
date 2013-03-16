@@ -23,6 +23,15 @@ $(document).on 'click', '#chat-button', ->
 
 initButton = ->
 
+  $("#chat-button").css("right", "-200px")
+
+  func = ->
+    $("#chat-button").animate({
+      right: "-50px"
+    })
+  setTimeout func, 1000
+
+
   $('#chat-button').on 'mouseenter', ->
     handlerIn()
 
@@ -32,11 +41,11 @@ initButton = ->
   handlerIn = ->
     $('#chat-button').animate({
       backgroundColor: "#999",
-      left: "-40px"
+      right: "-40px"
     }, {duration: 100, queue: false})
 
   handlerOut = ->
     $('#chat-button').animate({
-      backgroundColor: "#DDD",
-      left: "-50px"
+      backgroundColor: "#555",
+      right: "-50px"
     }, {duration: 100, queue: false})

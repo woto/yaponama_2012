@@ -1,6 +1,8 @@
 # encoding: utf-8
 #
-class Admin::UsersController < Admin::ApplicationController
+class Admin::UsersController < UsersController
+  include Admin::AddAdminViewPathHelper
+  before_action :only_authenticated
 
   before_filter { @tab = params[:tab] || 'users' }
 
@@ -8,7 +10,6 @@ class Admin::UsersController < Admin::ApplicationController
   # GET /users
   # GET /users.json
   def index
-
     # TODO тут избавиться от scoped и в includes наверно включить ping
     users_scope = User.scoped
 
@@ -36,7 +37,7 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def edit
-    @user = User.where(:id => params[:id]).first
+    @user = User.find(params[:id])
 
     unless @user
       @user = User.new(SiteConfig.default_user_attributes)

@@ -1,0 +1,22 @@
+i.icon-globe
+'
+
+= geo1.remote_ip
+= ', ' if geo1.country.present?
+
+= geo1.country
+= ', ' if geo1.district.present?
+
+= geo1.district
+= ', ' if geo1.region.present?
+
+= geo1.region
+= ', ' if geo1.city.present?
+
+= geo1.city
+= ', ' if geo1.lat.present?
+
+= geo1.lat
+= ', ' if geo1.lng.present?
+
+= geo1.lng

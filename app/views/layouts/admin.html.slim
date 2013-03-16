@@ -2,10 +2,9 @@
 
 body
 
-  .cursor
+  = render :partial => 'shared/chat'
 
-  - if !@hide_toolbar && ( ['admin', 'manager'].include? current_user.role )
-    = render :partial => "layouts/admin_navbar"
+  = render :partial => "layouts/admin_navbar"
 
   .container-fluid
 
@@ -19,3 +18,4 @@ body
     hr
     footer
       p &copy; Company 2012
+

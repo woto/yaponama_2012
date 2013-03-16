@@ -1,5 +1,4 @@
 class Car < ActiveRecord::Base
-  has_paper_trail
   include BelongsToUser
 
   has_many :requests, :dependent => :destroy

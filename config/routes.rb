@@ -1,5 +1,12 @@
 Yaponama2012::Application.routes.draw do
 
+  resources :talks do
+    collection do
+      get 'item'
+    end
+  end
+
+
   resources :calls
 
   concern :loginable do
@@ -9,10 +16,18 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :profileable do
-    resources :names, :controller => "profileables", :resource_class => 'Name'
-    resources :phones, :controller => "profileables", :resource_class => 'Phone'
-    resources :email_addresses, :controller => "profileables", :resource_class => 'EmailAddress'
-    resources :postal_addresses, :controller => "profileables", :resource_class => 'PostalAddress'
+    resources :names, :controller => "profileables", :resource_class => 'Name' do
+      post :toggle, :on => :member
+    end
+    resources :phones, :controller => "profileables", :resource_class => 'Phone' do
+      post :toggle, :on => :member
+    end
+    resources :email_addresses, :controller => "profileables", :resource_class => 'EmailAddress' do
+      post :toggle, :on => :member
+    end
+    resources :postal_addresses, :controller => "profileables", :resource_class => 'PostalAddress' do
+      post :toggle, :on => :member
+    end
   end
 
   concerns :loginable
@@ -23,8 +38,29 @@ Yaponama2012::Application.routes.draw do
 
   resources :pages
 
-  get "register" => "users#edit", :as => "register"
-  patch "register" => "users#update"
+  resource :register do
+
+    collection do
+      get :email, :to => 'registers#edit', :with => 'email'
+      patch :email, :to => 'registers#update', :as => 'email', :with => 'email'
+    end
+
+    collection do
+      get :sms, :to => 'registers#edit', :with => 'sms'
+      patch :sms, :to => 'registers#update', :as => 'sms', :with => 'sms'
+    end
+
+    collection do
+      get :call, :to => 'registers#edit', :with => 'call'
+      patch :call, :to => 'registers#update', :as => 'call', :with => 'call'
+    end
+
+    collection do
+      get :social, :to => 'registers#edit', :with => 'social'
+      patch :social, :to => 'registers#update', :as => 'call', :with => 'social'
+    end
+
+  end
 
   resources :password_resets
   # resource :user
@@ -64,6 +100,7 @@ Yaponama2012::Application.routes.draw do
   end
 
   namespace :admin do
+      resources :calls
 
       resources :users do
         concerns :profileable

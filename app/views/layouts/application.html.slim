@@ -2,8 +2,7 @@
 
 body
 
-  #chat-button
-  .cursor
+  = render :partial => "shared/chat"
 
   .container-fluid
     .row-fluid
@@ -24,41 +23,6 @@ body
               li : a href="#" Материалы
               li : a href="#" Инструкции по ремонту
   
-    .row-fluid
-      .span4
-
-        #channel.sidebar-nav
-          #channel-head.clearfix
-            .pull-right
-              a href="#" style="color: gray; margin-right: 10px"
-                i#close-chat.icon-remove
-
-          div style="padding: 0 10px"
-            #msgs
-              ul.dashboard-list.media-list style="font-size: 13px; font-family: Verdana; margin: 10px"
-                li.message.media style="display: none; border-top: 1px dashed #999; padding-top: 10px"
-                  a.pull-left href="#" 
-                    img.media-object alt="Lucas" data-src="/holder.js/64x64"
-                  .media-body
-                    span.user : strong Name: 
-                    a href="#" Корнев Руслан
-                    br
-                    span.message : strong Since: 
-                    
-                    br
-                    span.time : strong Status:  
-                    span class="label label-success"
-
-                li.control style="display: none"
-                  span.user  
-                  span.message
-                  span.time
-            br 
-
-            form class="form-inline" style="width:100%"
-              input#message.pull-left.span9  type="text" placeholder="Текст сообщения"
-              button.pull-right.span3.btn.btn-inverse type="submit" Ok  
-
   .container-fluid
     .navbar
       .navbar-inner

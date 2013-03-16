@@ -1,6 +1,8 @@
 #encoding: utf-8
 
-class Admin::PagesController < Admin::ApplicationController
+class Admin::PagesController < PagesController
+  include Admin::AddAdminViewPathHelper
+
   # GET /pages
   # GET /pages.json
   def index

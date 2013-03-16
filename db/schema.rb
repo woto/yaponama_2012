@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130307205632) do
+ActiveRecord::Schema.define(version: 20130315205632) do
 
   create_table "accounts", force: true do |t|
     t.integer  "creator_id"
@@ -384,14 +384,6 @@ ActiveRecord::Schema.define(version: 20130307205632) do
     t.integer "upload_id"
   end
 
-  create_table "part_names", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.string   "image"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "phones", force: true do |t|
     t.string   "phone"
     t.string   "phone_type"
@@ -522,16 +514,6 @@ ActiveRecord::Schema.define(version: 20130307205632) do
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
 
   create_table "stats", force: true do |t|
-    t.string   "city"
-    t.string   "country"
-    t.string   "region"
-    t.string   "district"
-    t.float    "lat"
-    t.float    "lng"
-    t.string   "remote_ip"
-    t.string   "accept_language"
-    t.string   "user_agent"
-    t.string   "datetime"
     t.string   "location"
     t.string   "title"
     t.string   "referrer"
@@ -548,13 +530,19 @@ ActiveRecord::Schema.define(version: 20130307205632) do
     t.datetime "updated_at"
   end
 
-  create_table "time_zones", force: true do |t|
-    t.string   "time_zone"
-    t.integer  "utc_offset_hours"
-    t.integer  "utc_offset_minutes"
+  create_table "talks", force: true do |t|
+    t.integer  "talkable_id"
+    t.string   "talkable_type"
+    t.integer  "user_id"
+    t.integer  "creator_id"
+    t.boolean  "read"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "talks", ["creator_id"], name: "index_talks_on_creator_id"
+  add_index "talks", ["talkable_id", "talkable_type"], name: "index_talks_on_talkable_id_and_talkable_type"
+  add_index "talks", ["user_id"], name: "index_talks_on_user_id"
 
   create_table "uploads", force: true do |t|
     t.string   "upload"
@@ -569,16 +557,25 @@ ActiveRecord::Schema.define(version: 20130307205632) do
     t.integer  "creator_id"
     t.text     "notes_invisible"
     t.string   "creation_reason"
-    t.decimal  "discount",                   precision: 8, scale: 2
-    t.decimal  "prepayment_percent",         precision: 8, scale: 2
-    t.integer  "time_zone_id"
-    t.integer  "ping_id"
+    t.decimal  "discount",                    precision: 8, scale: 2
+    t.decimal  "prepayment_percent",          precision: 8, scale: 2
+    t.integer  "russian_time_zone_auto_id"
+    t.integer  "russian_time_zone_manual_id"
     t.string   "role"
     t.string   "auth_token"
     t.string   "password_digest"
     t.string   "password_reset_email_token"
     t.string   "password_reset_sms_token"
     t.datetime "password_reset_sent_at"
+    t.string   "ipgeobase_city"
+    t.string   "ipgeobase_country"
+    t.string   "ipgeobase_region"
+    t.string   "ipgeobase_district"
+    t.float    "ipgeobase_lat"
+    t.float    "ipgeobase_lng"
+    t.string   "accept_language"
+    t.string   "user_agent"
+    t.inet     "remote_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "order_rule"

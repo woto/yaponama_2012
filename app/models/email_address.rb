@@ -1,7 +1,6 @@
 #encoding: utf-8
 
 class EmailAddress < ActiveRecord::Base
-  has_paper_trail
   include BelongsToUser
   include BelongsToCreator
   include Confirmed

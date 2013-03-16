@@ -1,0 +1,22 @@
+i.icon-home
+'
+
+= postal_address.company
+= ', ' if postal_address.postcode.present?
+
+= postal_address.postcode
+= ', ' if postal_address.region.present?
+
+= postal_address.region
+= ', ' if postal_address.city.present?
+
+= postal_address.city
+= ', ' if postal_address.street.present?
+
+= postal_address.street
+= ', ' if postal_address.house.present?
+
+= postal_address.house
+= ', ' if postal_address.room.present?
+
+= postal_address.room
