@@ -18,8 +18,6 @@
 //= require scrollbarWidth
 //= require stat
 //
-//= require getCookieChat
-//
 //= require turbolinks
 //= require bootstrap/bootstrap
 //
@@ -54,7 +52,6 @@
 //
 //= require jquery.cachedScript
 //= require jquery.editableHighlight
-//= require chat-window
 //= require chat-button
 //
 //= require select2

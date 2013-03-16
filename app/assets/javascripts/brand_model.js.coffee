@@ -15,13 +15,8 @@ $ ->
 $(document).on 'page:load', ->
   initSelect2()
 
-$(document).on 'cocoon:after-insert', '#cars', ->
-  initSelect2()
-
 initSelect2 = ->
-  console
-
-  $("#cars > .nested-fields").each (idx, scope) -> 
+  $("#workspace").each (idx, scope) -> 
 
     brand = undefined
     $(scope).find("input[id$='brand']").each (idx, el) ->

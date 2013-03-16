@@ -28,6 +28,9 @@ Yaponama2012::Application.routes.draw do
     resources :postal_addresses, :controller => "profileables", :resource_class => 'PostalAddress' do
       post :toggle, :on => :member
     end
+    resources :cars, :controller => "profileables", :resource_class => 'Car' do
+      post :toggle, :on => :member
+    end
   end
 
   concerns :loginable

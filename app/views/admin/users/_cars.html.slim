@@ -1,9 +1,0 @@
-#cars-tab.tab-pane.active
-  #cars
-    - counter = 0 
-    = f.simple_fields_for :cars do |car| 
-      = render 'car_fields', :f => car, :counter => "_#{counter}", :stack => 0 
-      - counter += 1  
-    
-    .links
-      = link_to_add_association 'Добавить авто', f, :cars, :class => "btn btn-success ignoredirty", :render_options => {:locals => {:counter => "", :stack => 0}}

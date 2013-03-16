@@ -1,6 +1,11 @@
 - model_class = User
 
-- array = [ {title: 'Имя', assoc: 'name'}, {title: 'Телефон', assoc: 'phone'}, {title: 'E-mail', assoc: 'email_address'}, {title: 'Адрес', assoc: 'postal_address'} ]
+- array = [ \
+    {title: 'Имя', assoc: 'name'}, \
+    {title: 'Телефон', assoc: 'phone'}, \
+    {title: 'E-mail', assoc: 'email_address'}, \
+    {title: 'Адрес', assoc: 'postal_address'}, \
+    {title: 'Авто', assoc: 'car'} ]
 
 - array.each do |item|
   h4.hover-profileable.muted
@@ -13,6 +18,21 @@
       '
       = render :partial => 'profileables/shows/notes', :locals => {resource: partial}
       = render :partial => 'profileables/item_controls', :locals => {:resource => partial}
+
+h4
+  span.muted Шпион 
+
+div
+  = render :partial => 'users/ipgeobase'
+
+div
+  = render :partial => 'users/time_zone'
+
+div
+  = render :partial => 'users/stat'
+
+h4
+  span.muted Соц. сети
 
 - @user.auths.each do |auth|
   = render :partial => "shared/auth_logged_in", :locals => {:auth => auth}
