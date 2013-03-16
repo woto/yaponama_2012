@@ -204,7 +204,6 @@ Yaponama2012::Application.routes.draw do
       end
     end
 
-    resources :requests
     resources :accounts
     resources :money_transactions
     resources :product_transactions

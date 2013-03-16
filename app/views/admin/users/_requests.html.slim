@@ -1,7 +1,0 @@
-#requests-tab.tab-pane.active
-  #requests
-    = f.simple_fields_for :root_requests_without_car do |request|
-      = render 'request_fields', :f => request, :stack => 0
-
-    .links
-      = link_to_add_association 'Добавить запрос', f, :root_requests_without_car, :class => "btn btn-success ignoredirty", :render_options => {:locals => {:stack => 0}}, :partial => 'request_fields'

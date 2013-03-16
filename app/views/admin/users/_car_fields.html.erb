@@ -74,18 +74,6 @@
     <%= f.input :notes, :input_html => {:rows => 3} %>
     <%= f.input :notes_invisible, :input_html => {:rows => 3} %>
 
-    <div id="requests_with_auto" class="nested-fields">
-
-      <%= f.simple_fields_for :root_requests_with_car do |request| %>
-        <%= render 'request_fields', :f => request, :stack => stack %>
-      <% end %>
-
-      <div class="links">
-        <%= link_to_add_association 'Добавить запрос', f, :root_requests_with_car, :class => "btn btn-success btn-success ignoredirty", :render_options => {:locals => {:stack => stack}}, :partial => 'request_fields' %>
-      </div>
-
-    </div>
-
   </div>
 
   <hr />

@@ -258,23 +258,6 @@ module Yaponama2012
       }
     }
 
-    # Requests
-    config.request_creation_reason = {
-      'client_choose' => 'Выбор клиента',
-      'official' => 'Подобрана по официальному каталогу',
-      'replacement_official' => 'Замена по официальному каталогу',
-      'replacement_unofficial' => 'Не официальная замена (этот же производитель)',
-      'replacement_non_branded' => 'Не брендированная замена (брендовая компание кладет эту фирму)',
-      'analogue_expensive' => 'Качественный аналог', 
-      'analogue_cheap' => 'Не рекомендуем, но как вариант',
-      'needed_for_parent' => 'Деталь потребуется при установке родительской]'
-    }
-
-    config.request_check_needed = {
-      'check_needed' => 'Требуется',
-      'check_dont_needed' => 'Не требуется'
-    }
-
     config.sanitize_config = {
       :elements => %w[
         a abbr b bdo blockquote br caption cite code col colgroup dd del dfn dl

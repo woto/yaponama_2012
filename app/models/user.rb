@@ -50,13 +50,6 @@ class User < ActiveRecord::Base
   has_many :cars, :dependent => :destroy
   accepts_nested_attributes_for :cars, :allow_destroy => true 
 
-  has_many :requests, :dependent => :destroy
-  accepts_nested_attributes_for :requests, :allow_destroy => true 
-
-  # TODO Удалить следующие две строчки
-  has_many :root_requests_without_car, -> { where("request_id IS NULL AND car_id IS NULL") }, :class_name => "Request", :dependent => :destroy
-  accepts_nested_attributes_for :root_requests_without_car, :allow_destroy => true
-
   def products_inwork
     products.where("STRPOS(?, status) > 0", "ordered,pre_supplier,post_supplier,stock").sum("sell_cost * quantity_ordered").to_d
   end
@@ -179,18 +172,6 @@ class User < ActiveRecord::Base
     if cars
       cars.each do |car|
         car.user = self
-      end
-    end
-
-    if requests
-      requests.each do |request|
-        request.user = self
-      end
-    end
-
-    if root_requests_without_car
-      root_requests_without_car.each do |request|
-        request.user = self
       end
     end
 
