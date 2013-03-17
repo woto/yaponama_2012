@@ -163,11 +163,6 @@ module Yaponama2012
         'title' => 'Заказы',
         'hint' => ''
       },
-      'cars' => {
-        'real' => true,
-        'title' => 'Авто',
-        'hint' => ''
-      },
       'transactions' => {
         'real' => true,
         'title' => 'Транзакции',
