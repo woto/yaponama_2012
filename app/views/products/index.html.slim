@@ -1,0 +1,50 @@
+.row-fluid
+  .span3
+    = render :partial => 'users/show' if @user.present?
+  #workspace.span9
+    = user_tabs do
+      - if params[:user_id] || params[:order_id] 
+        .page-header
+          - if params[:user_id]
+            = render :partial => "shared/client_button", :locals => {:user_id => params[:user_id], :user_label => User.find(params[:user_id]).to_label}
+          - if params[:order_id]
+            =' "Заказ: #{Order.find(params[:order_id]).to_label}"
+
+      - tab_links "myTab", Rails.configuration.products_status  do |hint|
+
+        = form_tag remember_admin_products_path(:user_id => params[:user_id], :order_id => params[:order_id]), :remote => true
+
+        / = hidden_field_tag 'remembered_products'
+
+        #toolbar
+          #toolbar-affix data-spy="affix" data-offset-top="60"
+            #toolbar-affix-inner.clearfix
+              .margin-on-left
+                .pull-left.right-space
+                  = render :partial => "shared/check_uncheck"
+                .pull-left.right-space
+                  .btn-group
+                    button.btn.btn-primary.dropdown-toggle data-toggle="dropdown"
+                      =' t('.action', :default => t('helpers.actions')) 
+                      span.caret
+                    ul.dropdown-menu
+                      - Rails.configuration.products_status.select{|k, v| v['real'] == true}.each do |k, v|
+                        li 
+                          = link_to polymorphic_path([:admin, :products, k.to_sym, :index], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => request.fullpath), id: "form_#{k}_action" do
+                            =' v["action"]
+                            - if v['badge'].present?
+                              span class="badge badge-#{k}" = v['badge']
+                      li.divider
+                      li = link_to t('.destroy', :default => t("helpers.links.destroy")), multiple_destroy_admin_products_path, :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } 
+                      li = link_to 'Разбить', admin_products_split_index_path(:return_path => request.fullpath)
+                      li = link_to t('.edit', :default => t("helpers.links.edit")), admin_products_edit_index_path(:return_path => request.fullpath, :user_id => params[:user_id], :order_id => params[:order_id] )
+              .pull-left
+                div#toolbar-status = render :partial => "products/toolbar_status"
+              .margin-on-right
+                .pull-right
+                  = paginate @products, :theme => :toolbar, :window => 0
+
+        = render :partial => 'index'
+
+        .alert.alert-info
+          = hint 
