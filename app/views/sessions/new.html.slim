@@ -1,15 +1,12 @@
-= render 'shared/login_style'
+= form_tag polymorphic_path([namespace_helper, :login]), :method => :post, :class => 'form-signin' do
+  h2.form-signin-heading Вход на сайт
+  = text_field_tag :login, params[:login], :class => "input-block-level", :type => "text", :placeholder => "E-mail или телефон"
+  = text_field_tag :password, nil, :class => "input-block-level", :type => "password", :placeholder => "Пароль"
+  label.checkbox
+    = check_box_tag :remember_me, 1, params[:remember_me]
+    |  Запомнить до 4 утра след. дня
+  button.btn.btn-primary type="submit" Войти
+  |  или 
+  = link_to "забыли пароль?", new_password_reset_path
 
-.admin-sign-in
-  = form_tag polymorphic_path([namespace_helper, :login]), :method => :post, :class => 'form-signin' do
-    h2.form-signin-heading Вход на сайт
-    = text_field_tag :login, params[:login], :class => "input-block-level", :type => "text", :placeholder => "E-mail или телефон"
-    = text_field_tag :password, nil, :class => "input-block-level", :type => "password", :placeholder => "Пароль"
-    label.checkbox
-      = check_box_tag :remember_me, 1, params[:remember_me]
-      |  Запомнить до 4 утра след. дня
-    button.btn.btn-primary type="submit" Войти
-    |  или 
-    = link_to "забыли пароль?", new_password_reset_path
-
-    = render 'shared/auth_log_in'
+  = render 'shared/auth_log_in'
