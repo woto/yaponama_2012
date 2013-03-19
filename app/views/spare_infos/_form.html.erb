@@ -1,4 +1,4 @@
-<%= simple_form_for @admin_spare_info, :html => { :class => 'form-horizontal dirtyforms' } do |f| %>
+<%= simple_form_for @admin_spare_info, :url => polymorphic_path([namespace_helper, @admin_spare_info]), :html => { :class => 'form-horizontal dirtyforms' } do |f| %>
   <%= f.input :catalog_number %>
   <%= f.input :manufacturer %>
   <%= f.input :content, :as => :text, :input_html => {:class => 'ckeditor-extended'} %>

@@ -1,6 +1,6 @@
-class CreateAdminSpareInfos < ActiveRecord::Migration
+class CreateSpareInfos < ActiveRecord::Migration
   def change
-    create_table :admin_spare_infos do |t|
+    create_table :spare_infos do |t|
       t.string :catalog_number
       t.string :manufacturer
       t.text :content
