@@ -1,4 +1,4 @@
-class Admin::OrdersController < Admin::ApplicationController
+class OrdersController < ApplicationController 
 
   before_filter :only => [:create, :update] do
     begin
@@ -76,7 +76,7 @@ class Admin::OrdersController < Admin::ApplicationController
         format.html { redirect_to_relative_path('inorder') and return }
         format.json { render json: @order, status: :created, location: @order }
       else
-        format.html { render template: "/admin/products/inorder/action" }
+        format.html { render template: "/products/inorder/action" }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
@@ -95,7 +95,7 @@ class Admin::OrdersController < Admin::ApplicationController
         format.html { redirect_to_relative_path('inorder') and return }
         format.json { head :no_content }
       else
-        format.html { render template: "/admin/products/inorder/action" }
+        format.html { render template: "/products/inorder/action" }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
