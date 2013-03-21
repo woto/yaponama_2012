@@ -30,7 +30,7 @@ table.table.table-striped
       tr
         td 
           = product.catalog_number
-          - if params[:controller] == 'admin/products'
+          - if params[:controller].include? 'products'
             = hidden_field_tag "product_ids[#{product.id}]", "0"
             center = check_box_tag "product_ids[#{product.id}]", "1", (session[:products] ? session[:products][product.id.to_s] == '1' : false), :class => 'item'
         td = product.manufacturer

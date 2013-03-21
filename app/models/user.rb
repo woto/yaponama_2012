@@ -57,12 +57,6 @@ class User < ActiveRecord::Base
   has_many :products, :dependent => :destroy
   accepts_nested_attributes_for :products, :allow_destroy => true
 
-  # TODO Удалить две следующие строчки
-  has_many :root_products, -> { where("product_id IS NULL") }, :class_name => "Product", :dependent => :destroy
-  accepts_nested_attributes_for :root_products, :allow_destroy => true
-
-  
-
   has_many :email_addresses, :dependent => :destroy
   accepts_nested_attributes_for :email_addresses, :allow_destroy => true
 
@@ -172,12 +166,6 @@ class User < ActiveRecord::Base
     if cars
       cars.each do |car|
         car.user = self
-      end
-    end
-
-    if root_products
-      root_products.each do |product|
-        product.user = self
       end
     end
 

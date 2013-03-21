@@ -1,4 +1,6 @@
-class Admin::SiteSettingsController < Admin::ApplicationController
+class Admin::SiteSettingsController < ApplicationController
+  include Admined
+
   # GET /admin/site_settings
   # GET /admin/site_settings.json
   def index

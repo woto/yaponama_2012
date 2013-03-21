@@ -103,14 +103,6 @@ ActiveRecord::Schema.define(version: 20130315205632) do
     t.datetime "updated_at"
   end
 
-  create_table "admin_spare_infos", force: true do |t|
-    t.string   "catalog_number"
-    t.string   "manufacturer"
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "attachments", force: true do |t|
     t.integer  "email_id"
     t.string   "attachment"
@@ -500,6 +492,14 @@ ActiveRecord::Schema.define(version: 20130315205632) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+
+  create_table "spare_infos", force: true do |t|
+    t.string   "catalog_number"
+    t.string   "manufacturer"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "stats", force: true do |t|
     t.string   "location"

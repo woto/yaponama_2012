@@ -1,4 +1,6 @@
-class Admin::ModelsController < Admin::ApplicationController
+class Admin::ModelsController < ApplicationController
+  include Admined
+
   respond_to :json
 
   def search

@@ -1,5 +1,5 @@
 class Admin::ProfileablesController < ProfileablesController
-  include Admin::AddAdminViewPathHelper
+  include Admined
 
   def new
     @resource = @resource_class.new

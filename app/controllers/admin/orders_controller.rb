@@ -1,4 +1,4 @@
 class Admin::OrdersController < OrdersController
-  include Admin::AddAdminViewPathHelper
+  include Admined
   include ProductsHelper
 end

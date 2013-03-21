@@ -1,7 +1,7 @@
 #encoding: utf-8
 
 class Admin::PagesController < PagesController
-  include Admin::AddAdminViewPathHelper
+  include Admined
 
   # GET /pages
   # GET /pages.json

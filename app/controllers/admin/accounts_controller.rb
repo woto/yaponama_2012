@@ -1,4 +1,5 @@
-class Admin::AccountsController < Admin::ApplicationController
+class Admin::AccountsController < ApplicationController
+  include Admined
   # GET /admin/accounts
   # GET /admin/accounts.json
   def index

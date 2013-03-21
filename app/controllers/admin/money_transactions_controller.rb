@@ -1,3 +1,3 @@
 class Admin::MoneyTransactionsController < MoneyTransactionsController
-  include Admin::AddAdminViewPathHelper
+  include Admined
 end

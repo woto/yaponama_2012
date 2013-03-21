@@ -1,4 +1,6 @@
 class Admin::BlocksController < ApplicationController
+  include Admined
+
   # GET /admin/blocks
   # GET /admin/blocks.json
   def index

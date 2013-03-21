@@ -3,7 +3,7 @@
     = render :partial => 'users/show' if @user.present?
   #workspace.span9
     = user_tabs do
-      - if params[:user_id] || params[:order_id] 
+      - if params[:user_id] || params[:order_id]
         .page-header
           - if params[:user_id]
             = render :partial => "shared/client_button", :locals => {:user_id => params[:user_id], :user_label => User.find(params[:user_id]).to_label}
@@ -30,7 +30,7 @@
                     ul.dropdown-menu
                       - Rails.configuration.products_status.select{|k, v| v['real'] == true}.each do |k, v|
                         li 
-                          = link_to polymorphic_path([:admin, :products, k.to_sym, :index], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => request.fullpath), id: "form_#{k}_action" do
+                          = link_to polymorphic_path([namespace_helper, :products, k.to_sym, :index], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => request.fullpath), id: "form_#{k}_action" do
                             =' v["action"]
                             - if v['badge'].present?
                               span class="badge badge-#{k}" = v['badge']

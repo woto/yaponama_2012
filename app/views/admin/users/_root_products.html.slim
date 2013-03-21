@@ -1,7 +1,0 @@
-#root_products-tab.tab-pane.active
-  #root_products
-    
-    = f.simple_fields_for :root_products do |product| 
-      = render 'product_fields', :f => product, :stack => 0
-    .links
-      = link_to_add_association 'Добавить товар', f, :root_products, :class => "btn btn-success ignoredirty", :render_options => {:locals => {:stack => 0}}, :partial => 'product_fields' 

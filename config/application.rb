@@ -151,30 +151,6 @@ module Yaponama2012
 
     }
 
-    # Workspace
-    config.workspace = {
-      'products' => {
-        'real' => true,
-        'title' => 'Товары',
-        'hint' => ''
-      },
-      'orders' => {
-        'real' => true,
-        'title' => 'Заказы',
-        'hint' => ''
-      },
-      'transactions' => {
-        'real' => true,
-        'title' => 'Транзакции',
-        'hint' => ''
-      },
-      'search' => {
-        'real' => true,
-        'title' => 'Поиск',
-        'hint' => ''
-      }
-    }
-
     # Products
     config.products_status = {
       'all' => {
@@ -391,6 +367,7 @@ module Yaponama2012
     #}
 
     config.sms_notify_methods = %w(flash sms growl)
+
 
   end
 end

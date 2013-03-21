@@ -1,6 +1,7 @@
 #encoding: utf-8
 
 class ApplicationController < ActionController::Base
+  before_action :set_user
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -12,6 +13,57 @@ class ApplicationController < ActionController::Base
   before_action :set_user_time_zone
 
   private
+
+  def item_status(catalog_number, manufacturer)
+
+    status = {
+      :own => {:status => 'unavaliable', :data => nil},
+      :their => {:status => 'unavaliable', :data => nil}
+    }
+
+    # Наши данные
+    spare_info = SpareInfo.where(:catalog_number => catalog_number, :manufacturer => manufacturer)
+
+    if spare_info.present?
+      status[:own][:status] = 'avaliable'
+      status[:own][:data] = spare_info
+    end
+
+    key_part = "#{catalog_number}:#{manufacturer}".mb_chars.gsub(/[^а-яА-Яa-zA-z0-9]/,'_')
+
+    # Их данные
+    begin
+      File.open("#{Rails.root}/system/parts_info/f:#{key_part}", "r") do |file|
+        if (status[:their][:status] = file.read) == 'avaliable'
+          File.open("#{Rails.root}/system/parts_info/s:#{key_part}", "r") do |file|
+            status[:their][:data] = file.read
+          end
+        end
+      end
+    rescue Exception => exc
+      if exc.instance_of? Errno::ENOENT
+        status[:their][:status] = 'unknown'
+      end
+
+     if SiteConfig.send_request_from_search_page
+       require 'redis'
+       redis = Redis.new(:host => SiteConfig.redis_address, :port => SiteConfig.redis_port)
+
+       Juggernaut.publish(
+       nil, {
+         :command => 'info',
+         :catalog_number => catalog_number,
+         :manufacturer => manufacturer.presence || "WRONG_MANUFACTURER",
+         :channel => 'server'
+       }, {}, "custom")
+      end
+
+    end
+
+    return status
+
+  end
+
 
   unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, :with => :render_500
@@ -56,7 +108,6 @@ class ApplicationController < ActionController::Base
     [namespace_helper, namespace_helper == 'admin' ? @user : :user]
   end
 
-
   def current_user
     unless @current_user
       if cookies[:auth_token].present?
@@ -93,7 +144,6 @@ private
     Time.zone = current_user.russian_time_zone_manual_id || current_user.russian_time_zone_auto_id
   end
 
-
   private
 
   def only_not_authenticated
@@ -106,6 +156,10 @@ private
     if ['guest'].include? current_user.role
       redirect_to root_path, :notice => "Пожалуйста войдите на сайт." and return
     end
+  end
+
+  def set_user
+    @user = current_user
   end
 
 end

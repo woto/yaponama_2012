@@ -1,4 +1,6 @@
-class Admin::SuppliersController < Admin::ApplicationController
+class Admin::SuppliersController < ApplicationController
+  include Admined
+
   # GET /admin/suppliers
   # GET /admin/suppliers.json
   def index

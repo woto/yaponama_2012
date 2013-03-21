@@ -1,4 +1,6 @@
-class Admin::MetroController < Admin::ApplicationController
+class Admin::MetroController < ApplicationController
+  include Admined
+
   # GET /admin/metro
   # GET /admin/metro.json
   def index

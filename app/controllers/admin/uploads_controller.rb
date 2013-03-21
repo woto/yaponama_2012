@@ -1,4 +1,3 @@
 class Admin::UploadsController < UploadsController
-  include Admin::AddAdminViewPathHelper
-
+  include Admined
 end

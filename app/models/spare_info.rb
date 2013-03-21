@@ -1,4 +1,4 @@
-class Admin::SpareInfo < ActiveRecord::Base
+class SpareInfo < ActiveRecord::Base
   after_save :create_page_upload_associations
 
   def create_page_upload_associations

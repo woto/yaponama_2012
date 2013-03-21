@@ -1,11 +1,7 @@
 # encoding: utf-8
 #
 class Admin::UsersController < UsersController
-  include Admin::AddAdminViewPathHelper
-  before_action :only_authenticated
-
-  before_filter { @tab = params[:tab] || 'users' }
-
+  include Admined
 
   # GET /users
   # GET /users.json
@@ -28,8 +24,6 @@ class Admin::UsersController < UsersController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @user }
@@ -37,8 +31,6 @@ class Admin::UsersController < UsersController
   end
 
   def edit
-    @user = User.find(params[:id])
-
     unless @user
       @user = User.new(SiteConfig.default_user_attributes)
       @user.creation_reason = :manager
@@ -75,8 +67,6 @@ class Admin::UsersController < UsersController
   # PUT /users/1
   # PUT /users/1.json
   def update
-    @user = User.find(params[:id])
-
     respond_to do |format|
       if @user.update_attributes(user_params)
         format.html { redirect_to edit_admin_user_path(@user, :tab => params[:tab]), :notice => 'Пользователь был успешно изменен.' }
@@ -91,7 +81,6 @@ class Admin::UsersController < UsersController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
 
     respond_to do |format|

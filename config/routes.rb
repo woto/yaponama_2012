@@ -3,7 +3,7 @@ class BrandConstraint
     #@ips = Blacklist.retrieve_ips
     #@brand_names = Brand.pluck(:name)
   end
- 
+
   def matches?(request)
     #@ips.include?(request.remote_ip)
     @brand_names = Brand.pluck(:name)
@@ -13,22 +13,64 @@ end
 
 Yaponama2012::Application.routes.draw do
 
-  resources :talks do
-    collection do
-      get 'item'
+  concern :parts_searchable do
+    resources :searches do 
+      match '(/:catalog_number(/:manufacturer(/:replacements)))' => "searches#index", :on => :collection, :as => 'search', :via => :get
+      match '?skip' => "searches#index", :on => :collection, :as => :skip_search, :via => :get
     end
   end
 
+  namespace :admin do
 
-  resources :calls
+    resources :users do
+      get 'index'
+      get 'edit'
+      get '', action: 'show'
+      patch '', action: 'update'
+    end
 
-  concern :loginable do
-    get 'login' => 'sessions#new', :as => 'login'
-    post 'login' => 'sessions#create', :as => 'login'
-    delete 'logout' => 'sessions#destroy', :as => 'logout'
   end
 
-  concern :profileable do
+
+  # ОБЩИЕ МАРШРУТЫ ДЛЯ .../XXX И .../ADMIN/XXX 
+  concern :root_scope do
+
+    # PRODUCTS
+    namespace :products do
+      resources :edit
+      resources :incart
+      resources :ordered
+      resources :cancel
+      resources :pre_supplier
+      resources :post_supplier
+      resources :stock
+      resources :complete
+      resources :return
+      resources :split
+      resources :inorder do
+        member do
+          get 'action'
+          post 'action'
+        end
+        collection do
+          post 'order_select'
+        end
+      end
+
+    end
+
+    resources :products do
+      resources :product_transactions
+    end
+
+    resources :spare_infos
+
+  end
+
+  # ОБЩИЕ МАРШРУТЫ ДЛЯ .../USER/XXX И .../ADMIN/USERS/X/XXX
+  concern :user_scope do
+
+    # PROFILEABLE
     resources :names, :controller => "profileables", :resource_class => 'Name' do
       post :toggle, :on => :member
     end
@@ -44,9 +86,137 @@ Yaponama2012::Application.routes.draw do
     resources :cars, :controller => "profileables", :resource_class => 'Car' do
       post :toggle, :on => :member
     end
+
+    resources :product_transactions
+
   end
 
-  concerns :loginable
+  # ОБЩИЕ МАРШРУТЫ КАК В КОРНЕ АДМИНИСТРАТОРА .../ADMIN/XXX, ПУБЛИЧНОЙ ЧАСТИ .../XXX ТАК И ОТНОСИТЕЛЬНО ПОЛЬЗОВАТЕЛЯ
+  # У АДМИНИСТРАТОРА .../ADMIN/USERS/X/XXX И ПОЛЬЗОВАТЕЛЯ .../USER/XXX
+  concern :common_root_user do
+
+    # ORDERS
+    resources :orders do
+      resources :products
+    end
+
+    resources :products
+
+  end
+
+
+  # .../user/XXX
+  resource :user  do
+    concerns :user_scope
+  end
+
+  # .../admin/XXX
+  namespace :admin do
+    resources :product_transactions
+
+    resources :users do
+      concerns :parts_searchable
+    end
+
+    resources :calls
+
+    resources :stats do
+      get "iframe", :on => :member
+    end
+
+    resources :blocks
+
+    concern :searchable do
+      get 'search', :on => :collection
+    end
+
+    resources :models, :generations, :modifications, :brands, concerns: :searchable
+
+
+    resources :uploads
+
+    get 'pages/new/:path' => "pages#new", :as => 'new_predefined_page', :constraints => {:path => /.*/}
+    resources :pages
+
+    get 'users' => 'users#index', :as => 'root'
+
+    resources :password_resets
+    #resources :sessions
+
+    resources :companies
+
+    resources :users do
+
+      concerns :common_root_user
+
+      resources :money_transactions
+
+      collection do
+        post 'filter' => "users#index"
+      end
+
+    end
+
+    resources :products do
+      collection do
+        post 'remember'
+        delete 'multiple_destroy' => "products#multiple_destroy"
+      end
+      
+    end
+
+    resources :email_addresses
+
+    resources :emails do
+      member do
+        get 'show_body'
+        get 'show_text_part'
+        get 'show_html_part'
+        get 'show_html_part_sanitized'
+      end
+    end
+
+    resources :accounts
+    resources :money_transactions
+    resources :suppliers do
+      resources :product_transactions
+      resources :money_transactions
+    end
+
+    # ПОСЛЕ ЭТОЙ СТРОКИ ИДУТ НЕ ПОВТОРЯЮЩИЕСЯ МАРШРУТЫ ТОЛЬКО В АДМИНИСТРАТИВНОЙ ЧАСТИ САЙТА
+    resources :metro
+    resources :delivery_categories
+    resources :deliveries
+    resources :site_settings
+  end
+
+  namespace :admin do
+
+    resources :users do
+      concerns :user_scope
+    end
+
+
+    concerns :root_scope
+    concerns :common_root_user
+
+  end
+
+  concerns :root_scope
+  concerns :common_root_user
+
+  resources :money_transactions
+
+  resources :talks do
+    collection do
+      get 'item'
+    end
+  end
+
+
+  concerns :parts_searchable
+
+  resources :calls
 
   resources :comments
 
@@ -54,6 +224,36 @@ Yaponama2012::Application.routes.draw do
 
   resources :pages
 
+  resources :password_resets
+  # resource :user
+
+  #get "build/show"
+  #get "build/update"
+  #get "build/create"
+
+  get 'trash_help/notify_sms'
+  get 'trash_help/index'
+  post 'trash_help/merge'
+  post 'trash_help/make_payment'
+  namespace 'trash_help' do
+    post 'check_orders_inorder'
+  end
+  post 'trash_help/make_payment_to_supplier'
+
+  resources :attachments
+
+  get 'clear_session' => "trash_help#clear_session"
+
+  get 'admin' => 'admin/users#index'
+
+  root :to => 'welcome#index'
+
+  # STATS
+  resources :stats
+
+  # ПОСЛЕ ЭТОЙ СТРОКИ ИДУТ НЕ ПОВТОРЯЮЩИЕСЯ ТОЛЬКО В ПУБЛИЧНОЙ ВЕРСИИ САЙТА .../XXX
+
+  # REGISTER
   resource :register do
 
     collection do
@@ -78,161 +278,17 @@ Yaponama2012::Application.routes.draw do
 
   end
 
-  resources :password_resets
-  # resource :user
+  # LOGIN / LOGOUT
+  get 'login' => 'sessions#new', :as => 'login'
+  post 'login' => 'sessions#create', :as => 'login'
+  delete 'logout' => 'sessions#destroy', :as => 'logout'
 
-  #get "build/show"
-  #get "build/update"
-  #get "build/create"
-
-  get 'trash_help/notify_sms'
-  get 'trash_help/index'
-  post 'trash_help/merge'
-  post 'trash_help/make_payment'
-  namespace 'trash_help' do
-    post 'check_orders_inorder'
-  end
-  post 'trash_help/make_payment_to_supplier'
-
-  resources :attachments
-
-  get 'clear_session' => "trash_help#clear_session"
-
-  get 'admin' => 'admin/users#index'
-
-  get 'robots.txt' => "robots_txt#index"
-
-
-  root :to => 'index#index'
-
-  resources :stats do
-    collection do
-      get :events
-    end
-  end
-
-  resource :user  do
-    concerns :profileable
-  end
-
-  namespace :admin do
-      resources :calls
-
-      resources :users do
-        concerns :profileable
-      end
-
-    resources :stats do
-      get "iframe", :on => :member
-    end
-
-
-    resources :blocks
-
-    concern :searchable do
-      get 'search', :on => :collection
-    end
-
-    concerns :loginable
-
-    resources :models, :generations, :modifications, :brands, concerns: :searchable
-
-    resources :site_settings
-
-    resources :uploads
-
-    get 'pages/new/:path' => "pages#new", :as => 'new_predefined_page', :constraints => {:path => /.*/}
-    resources :pages
-
-    get 'users' => 'users#index', :as => 'root'
-
-    resources :password_resets
-    #resources :sessions
-
-    resources :metro
-    resources :delivery_categories
-    resources :deliveries
-    resources :companies
-
-    resources :orders do
-      resources :products
-    end
-
-    resources :users do
-
-
-
-      resources :products
-
-      resources :orders do
-        resources :products
-      end
-
-      resources :money_transactions
-      resources :product_transactions
-
-      collection do
-        post 'filter' => "users#index"
-      end
-
-    end
-
-    namespace :products do
-      resources :edit
-      resources :incart
-      resources :ordered
-      resources :cancel
-      resources :pre_supplier
-      resources :post_supplier
-      resources :stock
-      resources :complete
-      resources :return
-      resources :split
-      resources :inorder do
-        member do
-          get 'action'
-          post 'action'
-        end
-        collection do
-          post 'order_select'
-        end
-      end
-    end
-
-    resources :products do
-      resources :product_transactions
-      collection do
-        post 'remember'
-        delete 'multiple_destroy' => "products#multiple_destroy"
-      end
-      
-    end
-
-    resources :spare_infos
-    resources :email_addresses
-
-    resources :emails do
-      member do
-        get 'show_body'
-        get 'show_text_part'
-        get 'show_html_part'
-        get 'show_html_part_sanitized'
-      end
-    end
-
-    resources :accounts
-    resources :money_transactions
-    resources :product_transactions
-    resources :suppliers do
-      resources :money_transactions
-      resources :product_transactions
-    end
-
-  end
-
-  # Omniauth
+  # OMNIAUTH
   get '/auth/:provider/callback' => 'auth#create'
   get '/auth/failure' => 'auth#failure'
+
+  # ROBOTS.TXT
+  get 'robots.txt' => "robots_txt#index"
 
   get "*brand" => "brands#index", :constraints => BrandConstraint.new
   get "*path" => "pages#index"

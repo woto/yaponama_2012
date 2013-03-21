@@ -1,3 +1,3 @@
 class Admin::CallsController < CallsController
-  include Admin::AddAdminViewPathHelper
+  include Admined
 end

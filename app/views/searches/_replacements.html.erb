@@ -1,0 +1,65 @@
+<img src="/assets/order.png" style="float: right; height: 47px; width: 130px" />
+
+<table id="result-prices" class="zebra-striped">
+  <thead>
+    <tr>
+      <th style="width: 55px">  <a href="#">Рейт.</a> </th>
+      <th style="width: 80px">  <a href="#">Произв.</a> </th>
+      <th style="width: 80px"> <a href="#">Кат.&nbsp;ном.</a> </th>
+      <th style="width: 55px">  <a href="#">Инфо</a> </th>
+      <th> <a href="#">Название</a> </th>
+      <th style="width: 90px">  <a href="#">Дней</a> </th>
+      <th style="width: 120px">  <a href="#">Цена</a> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @formatted_data.each do |catalog_number, cn_scope| %>
+      <% cn_scope.each_with_index do |(manufacturer, mf_scope), i| %>
+        <tr> 
+          <td> <div class="stars-rating-"></div> </td>
+          <td> <%= manufacturer %> </td>
+          <td> <%= link_to catalog_number, search_searches_path(catalog_number, manufacturer.present? ? manufacturer : nil), :class => 'ajax-search' %> </td>
+          <td>
+
+            <% # Если есть хотя бы какая-то информация, то показываем, что есть информация %>
+            <% if mf_scope[:info].any?{|key, value| value[:status] == 'avaliable'} %>
+              <%= tag("img", :src => "/assets/information.png", :width => "35", :height => "32", :class => "info", :id => "info_#{i}", :data => {:catalog_number => catalog_number, :manufacturer => manufacturer}, :alt => "Информация", :title => "Информация", :rel => "nofollow") %>
+            <% end %>
+
+            <% # Если Их информация отсутсвует то показываем 1x1 %>
+            <% if mf_scope[:info][:their][:status] == 'unavaliable' %>
+              <%= tag("img", :src => "/assets/1x1.gif", :width => "35", :height => "32", :class => "info", :id => "info_#{i}", :data => {:catalog_number => catalog_number, :manufacturer => manufacturer}, :alt => "Информация", :title => "Информация") %>
+            <% end %>
+
+            <% # Если неизвестно об Их информации, то показываем init, который подхыватывается Javascript'ом %>
+            <% if mf_scope[:info][:their][:status] == 'unknown' %>
+              <%= tag("img", :src => "/assets/init.gif", :width => "35", :height => "32", :class => "info", :id => "info_#{i}", :data => {:catalog_number => catalog_number, :manufacturer => manufacturer}, :rel => "nofollow", :alt => "Информация", :title => "Информация") %>
+            <% end %>
+
+          </td>
+
+          <td> <%= mf_scope[:title] %> </td>
+          <td> <%= mf_scope[:min_days]%> - <%= mf_scope[:max_days] %> дн. </td>
+          <td> <%= mf_scope[:min_cost] %> - <%= mf_scope[:max_cost] %> руб. </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="pagination pager" id="pager">
+  <ul id="pager-list">
+    <li class="prev"><a href="#">← Пред. </a></li>
+    <li class="next"><a href="#">След. →</a></li>
+  </ul>
+
+  <select class="pagesize" style="display: none">
+    <!-- Не забыть, что это в 2-х местах -->
+    <option selected="selected"  value="15">15</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+    <option  value="40">40</option>
+  </select>
+
+  <input type="text" class="pagedisplay" style="display: none" />
+</div>

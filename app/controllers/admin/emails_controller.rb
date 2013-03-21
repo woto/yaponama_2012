@@ -1,4 +1,6 @@
-class Admin::EmailsController < Admin::ApplicationController
+class Admin::EmailsController < ApplicationController
+  include Admined
+
   def show_body
     @email = Email.find(params[:id])
 

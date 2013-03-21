@@ -3,7 +3,6 @@
 class Products::IncartController < ApplicationController
   before_action :set_user
   include ProductsHelper
-  include Admin::AddAdminViewPathHelper
 
   before_filter do 
     begin

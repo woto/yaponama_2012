@@ -64,10 +64,11 @@ class RegistersController < ApplicationController
       end
 
       @user.password_required = true
-      @user.role = "user"
 
       respond_to do |format|
-        if @user.save
+        if @user.valid?
+          @user.role = 'user'
+          @user.save
           format.html { redirect_to root_path, :notice => "Регистрация завершена. Вы вошли на сайт под своим аккаунтом." }
         else
           format.html { render :action => "edit" }

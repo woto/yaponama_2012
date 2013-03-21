@@ -1,4 +1,6 @@
-class Admin::DeliveriesController < Admin::ApplicationController
+class Admin::DeliveriesController < ApplicationController
+  include Admined
+
   # GET /admin/deliveries
   # GET /admin/deliveries.json
   def index

@@ -1,4 +1,5 @@
-class Admin::StatsController < Admin::ApplicationController
+class Admin::StatsController < ApplicationController
+  include Admined
 
   def iframe
     $redis = Redis.new(:host => 'localhost', :port => 6379)
@@ -15,7 +16,6 @@ class Admin::StatsController < Admin::ApplicationController
       format.json { render json: @stat }
     end
   end
-
 
   private
 

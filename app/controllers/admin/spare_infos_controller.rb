@@ -1,3 +1,3 @@
 class Admin::SpareInfosController < SpareInfosController
-  include Admin::AddAdminViewPathHelper
+  include Admined
 end

@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   include ProductsHelper
+  before_action :only_authenticated
 
   ORDER_STEPS = %w[order delivery postal_address phone name notes]
 
