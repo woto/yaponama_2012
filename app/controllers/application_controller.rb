@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :namespace_helper
   helper_method :complex_namespace_helper
+  helper_method :complex_namespace_helper2
   before_action :set_user_time_zone
 
   private
@@ -106,6 +107,10 @@ class ApplicationController < ActionController::Base
 
   def complex_namespace_helper
     [namespace_helper, namespace_helper == 'admin' ? @user : :user]
+  end
+
+  def complex_namespace_helper2
+    [namespace_helper, namespace_helper == 'admin' ? @user : nil]
   end
 
   def current_user

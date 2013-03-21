@@ -1,36 +1,29 @@
-<div class="row-fluid">
-  <div class="span3">
-    <%= render 'users/show' %>
-  </div>
-  <div id="workspace" class="span9">
-    <%= user_tabs do %>
+<%= user_tabs do %>
+  <!-- Google + -->
+  <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+    {lang: 'ru'}
+  </script>
+  <!-- /Google + -->
+
+  <div id="loading" style="display: none; position: absolute; background: #FFF; border: 1px solid #999; padding: 50px; z-index: 500">
+    <div style="margin: 0 auto; text-align: center">
+      <p style="text-align: center">Пожалуйста ожидайте, идет поиск по базе</p>
+      <p style="margin: 0 auto; text-align: center"><img src="/assets/loading-wide.gif" /></p>
+
+      <br />
+      <p>Нажимая на &nbsp;лайк&nbsp; вы помогаете делать<br />наши цены еще более привлекательными!</p>
+      <br />
+
       <!-- Google + -->
-      <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-        {lang: 'ru'}
-      </script>
+        <div class="g-plusone" data-annotation="inline" data-width="250"></div>
       <!-- /Google + -->
+    </div>
 
-      <div id="loading" style="display: none; position: absolute; background: #FFF; border: 1px solid #999; padding: 50px; z-index: 500">
-        <div style="margin: 0 auto; text-align: center">
-          <p style="text-align: center">Пожалуйста ожидайте, идет поиск по базе</p>
-          <p style="margin: 0 auto; text-align: center"><img src="/assets/loading-wide.gif" /></p>
-
-          <br />
-          <p>Нажимая на &nbsp;лайк&nbsp; вы помогаете делать<br />наши цены еще более привлекательными!</p>
-          <br />
-
-          <!-- Google + -->
-            <div class="g-plusone" data-annotation="inline" data-width="250"></div>
-          <!-- /Google + -->
-        </div>
-
-      </div>
-
-      <div id="search-area-parent">
-        <div id="search-area">
-          <%= render :partial => "index" %>
-        </div>
-      </div>
-    <% end %>
   </div>
-</div>
+
+  <div id="search-area-parent">
+    <div id="search-area">
+      <%= render :partial => "index" %>
+    </div>
+  </div>
+<% end %>

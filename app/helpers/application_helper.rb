@@ -13,49 +13,66 @@ module ApplicationHelper
 
   def user_tabs(&block)
 
-    content_tag(:ul, :class => 'nav nav-tabs') do
-      [ 
-        { :title => 'Главная', 
-          :catch => { :controller => 'users', :action => 'edit' }, 
-          :link => {:controller => 'users', :action => 'edit'} },
-        { :title => 'Заказы',  
-          :catch => { :controller => 'orders' }, 
-          :link => { :controller => 'orders', :action => 'index' } },
-        { :title => 'Товары',  
-          :catch => { :controller => 'products' },
-          :link => { :controller => 'products', :action => 'index' } }, 
-        { :title => 'Товарные транзакции',  
-          :catch => { :controller => 'product_transactions' },
-          :link => { :controller => 'product_transactions', :action => 'index' } },
-        { :title => 'Денежные транзакции',  
-          :catch => { :controller => 'money_transactions' },
-          :link => { :controller => 'money_transactions', :action => 'index' } },
-        { :title => 'Поиск', 
-          :catch => { :controller => 'searches' },
-          :link => { :controller => 'searches', :action => 'index' } }
-      ].collect do |item|
+    res = ''.html_safe
+    workspace_class = 'span12'
 
-
-        begin
-          if current_page?(item[:catch])
-            css_class = { :class => 'active' }
-          else
-            css_class = {}
-          end
-
-          link = url_for(item[:link])
-        rescue ActionController::UrlGenerationError
+    content_tag(:div, :class => 'row-fluid') do
+      if @user && namespace_helper == 'admin'
+        workspace_class = 'span9'
+        res = content_tag(:div, :class => 'span3') do
+          render 'users/show'
         end
+      end
+
+      res <<
+      content_tag(:div, :class => workspace_class, :id => 'workspace') do
+        content_tag(:ul, :class => 'nav nav-tabs') do
+          [ 
+            { :title => 'Главная', 
+              :catch => { :controller => 'users', :action => 'edit' }, 
+              :link => {:controller => 'users', :action => 'edit'} },
+            { :title => 'Заказы',  
+              :catch => { :controller => 'orders' }, 
+              :link => { :controller => 'orders', :action => 'index' } },
+            { :title => 'Товары',  
+              :catch => { :controller => 'products' },
+              :link => { :controller => 'products', :action => 'index' } }, 
+            { :title => 'Товарные транзакции',  
+              :catch => { :controller => 'product_transactions' },
+              :link => { :controller => 'product_transactions', :action => 'index' } },
+            { :title => 'Денежные транзакции',  
+              :catch => { :controller => 'money_transactions' },
+              :link => { :controller => 'money_transactions', :action => 'index' } },
+            { :title => 'Поиск', 
+              :catch => { :controller => 'searches' },
+              :link => { :controller => 'searches', :action => 'index' } }
+          ].collect do |item|
 
 
-        content_tag(:li, link_to(item[:title], link), css_class)
+            begin
+              if current_page?(item[:catch])
+                css_class = { :class => 'active' }
+              else
+                css_class = {}
+              end
 
-      end.join.html_safe
-    end <<
+              link = url_for(item[:link])
+            rescue ActionController::UrlGenerationError
+            end
 
-    content_tag(:div, :class => "tab-content") do
-      content_tag(:div, :class => 'tab-pane active', &block)
+
+            content_tag(:li, link_to(item[:title], link), css_class)
+
+          end.join.html_safe
+        end <<
+
+        content_tag(:div, :class => "tab-content") do
+          content_tag(:div, :class => 'tab-pane active', &block)
+        end
+      end
+
     end
+
   end
 
   def car_identity(request)

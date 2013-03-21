@@ -14,7 +14,6 @@ body
   .container-fluid
     .navbar
       .navbar-inner
-        .container-fluid
 
         a.btn.btn-navbar.ignoredirty data-target=".nav-collapse" data-toggle="collapse"
           span.icon-bar
@@ -23,8 +22,12 @@ body
 
         a.brand href="/" Yaponama 2012
 
-        .container-fluid.nav-collapse
+        .nav-collapse
           ul.nav
+            li
+              = link_to "Заказы", orders_path
+            li
+              = link_to "Корзина", products_path(:status => 'incart')
             / TODO пока просто перенес
             - if content_for :pages_controler
               = yield(:pages_controller)

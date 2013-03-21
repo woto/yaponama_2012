@@ -20,6 +20,25 @@ end
 
 Yaponama2012::Application.routes.draw do
 
+  concern :profileable do
+    resources :names, :controller => "profileables", :resource_class => 'Name' do
+      post :toggle, :on => :member
+    end
+    resources :phones, :controller => "profileables", :resource_class => 'Phone' do
+      post :toggle, :on => :member
+    end
+    resources :email_addresses, :controller => "profileables", :resource_class => 'EmailAddress' do
+      post :toggle, :on => :member
+    end
+    resources :postal_addresses, :controller => "profileables", :resource_class => 'PostalAddress' do
+      post :toggle, :on => :member
+    end
+    resources :cars, :controller => "profileables", :resource_class => 'Car' do
+      post :toggle, :on => :member
+    end
+  end
+
+
   concern :parts_searchable do
     resources :searches do 
       match '(/:catalog_number(/:manufacturer(/:replacements)))' => "searches#index", :on => :collection, :as => 'search', :via => :get
@@ -27,22 +46,7 @@ Yaponama2012::Application.routes.draw do
     end
   end
 
-  namespace :admin do
-
-    resources :users do
-      get 'index'
-      get 'edit'
-      get '', action: 'show'
-      patch '', action: 'update'
-    end
-
-  end
-
-
-  # ОБЩИЕ МАРШРУТЫ ДЛЯ .../XXX И .../ADMIN/XXX 
-  concern :root_scope do
-
-    # PRODUCTS
+  concern :productable do
     namespace :products do
       resources :edit
       resources :incart
@@ -63,63 +67,60 @@ Yaponama2012::Application.routes.draw do
           post 'order_select'
         end
       end
-
     end
+  end
+
+  namespace :admin do
+
+    resources :users do
+      get 'index'
+      get 'edit'
+      get '', action: 'show'
+      patch '', action: 'update'
+
+      concerns :profileable
+      resources :product_transactions
+      resources :products
+      resources :orders do
+        resources :products
+      end
+    end
+
+    concerns :productable
 
     resources :products do
       resources :product_transactions
     end
-
+    resources :product_transactions
     resources :spare_infos
 
-  end
-
-  # ОБЩИЕ МАРШРУТЫ ДЛЯ .../USER/XXX И .../ADMIN/USERS/X/XXX
-  concern :user_scope do
-
-    # PROFILEABLE
-    resources :names, :controller => "profileables", :resource_class => 'Name' do
-      post :toggle, :on => :member
-    end
-    resources :phones, :controller => "profileables", :resource_class => 'Phone' do
-      post :toggle, :on => :member
-    end
-    resources :email_addresses, :controller => "profileables", :resource_class => 'EmailAddress' do
-      post :toggle, :on => :member
-    end
-    resources :postal_addresses, :controller => "profileables", :resource_class => 'PostalAddress' do
-      post :toggle, :on => :member
-    end
-    resources :cars, :controller => "profileables", :resource_class => 'Car' do
-      post :toggle, :on => :member
-    end
-
-    resources :product_transactions
-
-  end
-
-  # ОБЩИЕ МАРШРУТЫ КАК В КОРНЕ АДМИНИСТРАТОРА .../ADMIN/XXX, ПУБЛИЧНОЙ ЧАСТИ .../XXX ТАК И ОТНОСИТЕЛЬНО ПОЛЬЗОВАТЕЛЯ
-  # У АДМИНИСТРАТОРА .../ADMIN/USERS/X/XXX И ПОЛЬЗОВАТЕЛЯ .../USER/XXX
-  concern :common_root_user do
-
-    # ORDERS
     resources :orders do
       resources :products
     end
 
-    resources :products
-
   end
 
+  concerns :productable
 
-  # .../user/XXX
+  resources :products do
+    resources :product_transactions
+  end
+
+  resources :product_transactions
+  resources :money_transactions
+  resources :spare_infos
+
   resource :user  do
-    concerns :user_scope
+    concerns :profileable
   end
+
+  resources :orders do
+    resources :products
+  end
+
 
   # .../admin/XXX
   namespace :admin do
-    resources :product_transactions
 
     resources :users do
       concerns :parts_searchable
@@ -147,14 +148,11 @@ Yaponama2012::Application.routes.draw do
 
     get 'users' => 'users#index', :as => 'root'
 
-    resources :password_resets
     #resources :sessions
 
     resources :companies
 
     resources :users do
-
-      concerns :common_root_user
 
       resources :money_transactions
 
@@ -196,21 +194,6 @@ Yaponama2012::Application.routes.draw do
     resources :deliveries
     resources :site_settings
   end
-
-  namespace :admin do
-
-    resources :users do
-      concerns :user_scope
-    end
-
-
-    concerns :root_scope
-    concerns :common_root_user
-
-  end
-
-  concerns :root_scope
-  concerns :common_root_user
 
   resources :money_transactions
 
@@ -259,6 +242,8 @@ Yaponama2012::Application.routes.draw do
   resources :stats
 
   # ПОСЛЕ ЭТОЙ СТРОКИ ИДУТ НЕ ПОВТОРЯЮЩИЕСЯ ТОЛЬКО В ПУБЛИЧНОЙ ВЕРСИИ САЙТА .../XXX
+
+  resources :password_resets
 
   # REGISTER
   resource :register do

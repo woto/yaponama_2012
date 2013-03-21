@@ -44,7 +44,7 @@ table.table.table-striped
         td = "#{product.max_days} дн."
         td
           center 
-            = link_to admin_product_product_transactions_path(product) do
+            = link_to [namespace_helper, product, :product_transactions] do
               span class="label label-#{product.status}" =' Rails.configuration.products_status[product.status]['title']
       tr
         td  
