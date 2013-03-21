@@ -11,6 +11,13 @@ class BrandConstraint
   end
 end
 
+class PageConstraint
+  def matches?(request)
+    @page = Page.where(:path => request.params[:path])
+    @page.present?
+  end
+end
+
 Yaponama2012::Application.routes.draw do
 
   concern :parts_searchable do
@@ -291,6 +298,6 @@ Yaponama2012::Application.routes.draw do
   get 'robots.txt' => "robots_txt#index"
 
   get "*brand" => "brands#index", :constraints => BrandConstraint.new
-  get "*path" => "pages#index"
+  get "*path" => "pages#index", :constraints => PageConstraint.new
 
 end
