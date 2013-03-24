@@ -43,15 +43,15 @@ class Products::OrderedController < ApplicationController
     client_debit = params[:client_debit].to_d
 
     ActiveRecord::Base.transaction do
+      account = @products.first.user.account
+      MoneyTransaction.create(:account => account, :debit => client_debit)
+
       @products.each do |product|
         product.status = 'ordered'
         unless product.save
           redirect_to :back, :alert => product.errors.full_messages and return
         end
       end
-
-      @products.first.user.account.debit += client_debit
-      @products.first.user.save
     end
 
     redirect_to_relative_path('ordered')
