@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class Products::EditController < ApplicationController
-  before_action :set_user
   include ProductsHelper
 
   before_filter do
@@ -39,13 +38,9 @@ class Products::EditController < ApplicationController
   end
 
   private
-    def product_params
-      params.require(:product).permit!
-    end
 
-
-  def set_user
-    @user = current_user
+  def product_params
+    params.require(:product).permit!
   end
 
 end

@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class Products::StockController < ApplicationController
-  before_action :set_user
   include ProductsHelper
 
   before_filter do 
@@ -37,12 +36,6 @@ class Products::StockController < ApplicationController
 
     redirect_to_relative_path('stock')
 
-  end
-
-  private
-
-  def set_user
-    @user = current_user
   end
 
 end

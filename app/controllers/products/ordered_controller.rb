@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class Products::OrderedController < ApplicationController
-  before_action :set_user
   include ProductsHelper
 
   before_filter do 
@@ -57,12 +56,6 @@ class Products::OrderedController < ApplicationController
 
     redirect_to_relative_path('ordered')
 
-  end
-
-  private
-
-  def set_user
-    @user = current_user
   end
 
 end

@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class Products::SplitController < ApplicationController
-  before_action :set_user
   include ProductsHelper
 
   before_filter do 
@@ -56,12 +55,5 @@ class Products::SplitController < ApplicationController
     redirect_to params[:return_path], :notice => "Товар успешно разбит на две партии. Первая - #{p1.quantity_ordered} шт., вторая - #{p2.quantity_ordered} шт."
 
   end
-
-  private
-
-  def set_user
-    @user = current_user
-  end
-
 
 end

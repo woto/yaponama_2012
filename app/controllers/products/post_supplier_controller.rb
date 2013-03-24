@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class Products::PostSupplierController < ApplicationController
-  before_action :set_user
   include ProductsHelper
 
   before_filter do 
@@ -48,14 +47,6 @@ class Products::PostSupplierController < ApplicationController
 
     redirect_to_relative_path('post_supplier')
 
-  end
-
-
-
-  private
-
-  def set_user
-    @user = current_user
   end
 
 end

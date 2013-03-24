@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class Products::InorderController < ApplicationController
-  before_action :set_user
   include ProductsHelper
 
   before_filter do
@@ -39,13 +38,6 @@ class Products::InorderController < ApplicationController
     unless @order
       @order = Order.new
     end
-  end
-
-
-  private
-
-  def set_user
-    @user = current_user
   end
 
 end
