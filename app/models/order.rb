@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Order < ActiveRecord::Base
   include BelongsToUser
   include BelongsToCreator
