@@ -9,7 +9,7 @@ class Product < ActiveRecord::Base
   scope :active, -> { where("STRPOS(?, products.status) > 0", "ordered,pre_supplier,post_supplier,stock") }
 
   def self.summa
-    active.sum("sell_cost * quantity_ordered").to_d
+    sum("sell_cost * quantity_ordered").to_d
   end
 
   # Виртуальные аттрибуты
