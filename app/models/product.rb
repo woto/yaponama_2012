@@ -6,8 +6,11 @@ class Product < ActiveRecord::Base
   include BelongsToCreator
 
   # Продукты по которым ожидается движение
-  # TODO проверить почему так сильно совпадает с inwork и нужен ли этот scope:w
-  scope :active, -> { where("STRPOS(?, status) > 0", "ordered,pre_supplier,post_supplier,stock") }
+  scope :active, -> { where("STRPOS(?, products.status) > 0", "ordered,pre_supplier,post_supplier,stock") }
+
+  def self.summa
+    active.sum("sell_cost * quantity_ordered").to_d
+  end
 
   # Виртуальные аттрибуты
   attr_accessor :delivery_id, :delivery_cost
@@ -31,8 +34,6 @@ class Product < ActiveRecord::Base
 
   validates :status, :inclusion => {:in => Rails.configuration.products_status.select{|k, v| v['real'] == true}.keys}
 
-  # Необходимо для подсчета суммы внесения предоплаты для запуска заказа в работу (при переводе в статус ordered)
-  scope :inwork, -> { where("STRPOS(?, products.status) > 0", "ordered,pre_supplier,post_supplier,stock") }
 
   #scope :inorder, where(:status => "inorder")
 

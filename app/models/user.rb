@@ -50,10 +50,6 @@ class User < ActiveRecord::Base
   has_many :cars, :dependent => :destroy
   accepts_nested_attributes_for :cars, :allow_destroy => true 
 
-  def products_inwork
-    products.where("STRPOS(?, status) > 0", "ordered,pre_supplier,post_supplier,stock").sum("sell_cost * quantity_ordered").to_d
-  end
-
   has_many :products, :dependent => :destroy
   accepts_nested_attributes_for :products, :allow_destroy => true
 
