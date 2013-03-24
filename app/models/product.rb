@@ -87,8 +87,7 @@ class Product < ActiveRecord::Base
             when 'inorder'
             when 'cancel'
             else
-              errors.add(:status, "Позиция не может изменить свой статус с #{old_status} на #{new_status}")
-              return false
+              raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
           end
 
 
@@ -101,8 +100,7 @@ class Product < ActiveRecord::Base
               user.account(true).credit += (sell_cost * quantity_ordered)
               user.save
             else
-              errors.add(:base, "Позиция не может изменить свой статус с #{old_status} на #{new_status}")
-              return false
+              raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
           end
 
 
@@ -119,8 +117,7 @@ class Product < ActiveRecord::Base
               user.account(true).credit -= (sell_cost * quantity_ordered)
               user.save
             else
-              errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
-              return false
+              raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
             end
 
 
@@ -141,8 +138,7 @@ class Product < ActiveRecord::Base
             user.account(true).credit -= (sell_cost * quantity_ordered)
             user.save
           else
-            errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
-            return false
+            raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
           end
 
 
@@ -162,8 +158,7 @@ class Product < ActiveRecord::Base
             supplier.account.debit -= buy_cost * quantity_ordered
             supplier.save
           else
-            errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
-            return false
+            raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
           end
 
         when 'stock'
@@ -181,8 +176,7 @@ class Product < ActiveRecord::Base
             user.account.debit -= sell_cost * quantity_ordered
             user.save
           else
-            errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
-            return false
+            raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
           end
 
         when 'complete'
@@ -196,8 +190,7 @@ class Product < ActiveRecord::Base
             user.account.debit += sell_cost * quantity_ordered
             user.save
           else
-            errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
-            return false
+            raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
           end
 
         when 'cancel'
@@ -210,8 +203,7 @@ class Product < ActiveRecord::Base
           when 'stock'
           when 'complete'
           else
-            errors.add(:base, "Product can not change status from #{old_status} to #{new_status}")
-            return false
+            raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
           end
       end
     # Если не происходила смена статуса
