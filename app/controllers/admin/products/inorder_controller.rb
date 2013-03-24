@@ -1,4 +1,4 @@
 class Admin::Products::InorderController < Products::InorderController
-  include ProductsHelper
   include Admined
+  include ProductsHelper
 end

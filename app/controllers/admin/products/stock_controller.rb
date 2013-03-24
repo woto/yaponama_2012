@@ -1,4 +1,4 @@
 class Admin::Products::StockController < Products::StockController
-  include ProductsHelper
   include Admined
+  include ProductsHelper
 end
