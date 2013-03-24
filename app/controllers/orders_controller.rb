@@ -18,8 +18,6 @@ class OrdersController < ApplicationController
   # GET /admin/orders
   # GET /admin/orders.json
   def index
-    @user = User.find(params[:user_id]) if params[:user_id]
-
     @orders = Order.order("id DESC").page(params[:page])
 
     if params[:user_id]
