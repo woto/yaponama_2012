@@ -11,9 +11,9 @@ body
           '
           button.btn type="submit" Искать
   
-  .container-fluid
-    .navbar
-      .navbar-inner
+  .navbar
+    .navbar-inner
+      .conteiner-fluid
 
         a.btn.btn-navbar.ignoredirty data-target=".nav-collapse" data-toggle="collapse"
           span.icon-bar
@@ -22,7 +22,7 @@ body
 
         a.brand href="/" Yaponama 2012
 
-        .nav-collapse
+        .collapse.nav-collapse
           ul.nav
             li
               = link_to "Заказы", orders_path
