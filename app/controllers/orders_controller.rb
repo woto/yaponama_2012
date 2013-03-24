@@ -67,37 +67,56 @@ class OrdersController < ApplicationController
   # POST /admin/orders.json
   def create
     @order = Order.new(order_params)
-    @order.products_inorder << @products
-    @order.user = @products.first.user
 
+    ActiveRecord::Base.transaction do
 
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to_relative_path('inorder') and return }
-        format.json { render json: @order, status: :created, location: @order }
-      else
-        format.html { render template: "/products/inorder/action" }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+      @products.each do |product|
+        product.order = @order
+        product.status = 'inorder'
+        product.save
       end
+
+      @order.user = @products.first.user
+
+      respond_to do |format|
+        if @order.save
+          format.html { redirect_to_relative_path('inorder') and return }
+          format.json { render json: @order, status: :created, location: @order }
+        else
+          format.html { render template: "/products/inorder/action" }
+          format.json { render json: @order.errors, status: :unprocessable_entity }
+        end
+      end
+
     end
   end
 
   # PUT /admin/orders/1
   # PUT /admin/orders/1.json
   def update
+
     @order = Order.find(params[:id])
-    @order.assign_attributes(order_params)
-    @order.products_inorder << @products
-    @order.user = @products.first.user
-      
-    respond_to do |format|
-    if @order.save
-        format.html { redirect_to_relative_path('inorder') and return }
-        format.json { head :no_content }
-      else
-        format.html { render template: "/products/inorder/action" }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+
+    ActiveRecord::Base.transaction do
+
+      @products.each do |product|
+        product.order = @order
+        product.status = 'inorder'
+        product.save
       end
+
+      @order.assign_attributes(order_params)
+      
+      respond_to do |format|
+      if @order.save
+          format.html { redirect_to_relative_path('inorder') and return }
+          format.json { head :no_content }
+        else
+          format.html { render template: "/products/inorder/action" }
+          format.json { render json: @order.errors, status: :unprocessable_entity }
+        end
+      end
+
     end
   end
 

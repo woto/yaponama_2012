@@ -24,8 +24,6 @@
               th = model_class.human_attribute_name(:postal_address)
               th = model_class.human_attribute_name(:phone)
               th = model_class.human_attribute_name(:user)
-              th = model_class.human_attribute_name(:inorder_order_cost)
-              th = model_class.human_attribute_name(:ordered_order_cost)
               th = model_class.human_attribute_name(:delivery_cost)
               th = model_class.human_attribute_name(:products)
               th = model_class.human_attribute_name(:created_at)
@@ -39,8 +37,6 @@
                 td = order.postal_address.try(:to_label)
                 td = order.phone.try(:to_label)
                 td = link_to order.user.try(:to_label), edit_admin_user_path(order.user)
-                td = order.inorder_order_cost
-                td = order.ordered_order_cost
                 td = order.delivery_cost
                 td = link_to 'products', complex_namespace_helper2 + [order, :products]
                 td = l order.created_at, :format => :short
