@@ -1,9 +1,10 @@
-ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['pre_supplier']['title']}"
+= user_tabs do
+  ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['pre_supplier']['title']}"
 
-= form_tag admin_products_pre_supplier_index_path(:user_id => params[:user_id], :order_id => params[:order_id]), :class => "dirtyforms" do |f|
+  = form_tag admin_products_pre_supplier_index_path(:user_id => params[:user_id], :order_id => params[:order_id]), :class => "dirtyforms" do |f|
 
-  = render :partial => 'products/index'
+    = render :partial => 'products/index'
 
-  .form-actions
-    =' link_to "Назад", params[:return_path], :class => "btn"
-    = submit_tag "Ок", :class => "btn btn-primary"
+    .form-actions
+      =' link_to "Назад", params[:return_path], :class => "btn"
+      = submit_tag "Ок", :class => "btn btn-primary"
