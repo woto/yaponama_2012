@@ -1,29 +1,22 @@
 class MoneyTransactionsController < ApplicationController
+
   # GET /admin/transactions
   # GET /admin/transactions.json
   def index
-    @user = User.find(params[:user_id]) if params[:user_id]
 
-    money_transactions = MoneyTransaction.order("id DESC").page params[:page]
+    @money_transactions = MoneyTransaction.all
 
-    opts = ['user', 'supplier']
-
-    opts.each do |opt|
-      if params["#{opt}_id"].present?
-        t = MoneyTransaction.arel_table
-
-        klass = eval(opt.capitalize)
-        account_id = klass.find(params["#{opt}_id"]).account.id
-
-        money_transactions = money_transactions.where(
-          t[:left_account_id].eq(account_id).
-          or(t[:right_account_id].eq(account_id))
-        )
-      end
+    if @user
+      @money_transactions = @user.account.money_transactions
+      klass = @user.class
     end
 
-    @money_transactions = money_transactions
+    if @supplier
+      @money_transactions = @supplier.account.money_transactions
+      klass = @supplier.class
+    end
 
+    @money_transactions = @money_transactions.order("id DESC").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
