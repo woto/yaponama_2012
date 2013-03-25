@@ -8,6 +8,7 @@ module Admined
 
     before_action :prepend_view_paths
     before_action :only_authenticated
+    before_action :set_supplier
 
     layout 'admin'
 
@@ -27,6 +28,10 @@ module Admined
 
     def set_order
       @order = Order.find(params[:order_id]) if params[:order_id]
+    end
+
+    def set_supplier
+      @supplier = Supplier.find(params[:supplier_id]) if params[:supplier_id]
     end
 
   end
