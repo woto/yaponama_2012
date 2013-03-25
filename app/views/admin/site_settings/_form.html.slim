@@ -20,6 +20,13 @@
     = f.input :robokassa_pass_1
     = f.input :robokassa_pass_2
     = f.input :robokassa_integration_mode, :collection => Rails.configuration.robokassa_integration_modes, :value_method => :first, :label_method => :last
+  - if params[:filter] == 'checkout' || params[:filter].blank?
+    = f.input :checkout_account
+    = f.input :checkout_bank
+    = f.input :checkout_bik
+    = f.input :checkout_correspondent
+    = f.input :checkout_inn
+    = f.input :checkout_recipient
   - if params[:filter] == 'default_users' || params[:filter].blank?
     = f.input :default_user_prepayment_percent, :as => :string
     = f.input :default_user_discount, :as => :string

@@ -20,6 +20,13 @@ table class="table table-striped"
         th= model_class.human_attribute_name(:robokassa_pass_1)
         th= model_class.human_attribute_name(:robokassa_pass_2)
         th= model_class.human_attribute_name(:robokassa_integration_mode)
+      - if params[:filter] == 'checkout' || params[:filter].blank?
+        th= model_class.human_attribute_name(:checkout_account)
+        th= model_class.human_attribute_name(:checkout_bank)
+        th= model_class.human_attribute_name(:checkout_bik)
+        th= model_class.human_attribute_name(:checkout_correspondent)
+        th= model_class.human_attribute_name(:checkout_inn)
+        th= model_class.human_attribute_name(:checkout_recipient)
       - if params[:filter] == 'default_users' || params[:filter].blank?
         th= model_class.human_attribute_name(:default_user_prepayment_percent)
         th= model_class.human_attribute_name(:default_user_discount)
@@ -74,6 +81,13 @@ table class="table table-striped"
           td= admin_site_setting.robokassa_pass_1
           td= admin_site_setting.robokassa_pass_2
           td= admin_site_setting.robokassa_user
+        - if params[:filter] == 'checkout' || params[:filter].blank?
+          td= admin_site_setting.checkout_account
+          td= admin_site_setting.checkout_bank
+          td= admin_site_setting.checkout_bik
+          td= admin_site_setting.checkout_correspondent
+          td= admin_site_setting.checkout_inn
+          td= admin_site_setting.checkout_recipient
         - if params[:filter] == 'default_users' || params[:filter].blank?
           td= admin_site_setting.default_user_prepayment_percent
           td= admin_site_setting.default_user_discount

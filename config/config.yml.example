@@ -16,6 +16,14 @@ defaults: &defaults
   robokassa_pass_1: password
   robokassa_pass_2: password
   robokassa_user: login
+
+  checkout_account: Номер счета получателя платежа
+  checkout_bank: Наименование банка получателя платежа
+  checkout_bik: БИК
+  checkout_correspondent: Номер кор./сч. банка получателя платежа
+  checkout_inn: ИНН получателя платежа (не банка)
+  checkout_recipient: Наименования получателя платежа
+
   avisosms_username: username
   avisosms_password: password
   avisosms_source_address: Yaponama

@@ -14,6 +14,14 @@ class CreateAdminSiteSettings < ActiveRecord::Migration
       t.string :robokassa_pass_1
       t.string :robokassa_pass_2
       t.string :robokassa_user
+
+      t.string :checkout_account
+      t.string :checkout_bank
+      t.string :checkout_bik
+      t.string :checkout_correspondent
+      t.string :checkout_inn
+      t.string :checkout_recipient
+
       t.float :default_user_prepayment_percent
       t.float :default_user_discount
       t.string :default_user_order_rule
