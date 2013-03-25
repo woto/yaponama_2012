@@ -13,7 +13,8 @@ class Admin::UsersController < UsersController
       users_scope = users_scope.where(:role => params[:role])
     end
 
-    @users = users_scope.references(:stats).order('stats.updated_at DESC').includes(:stats, :email_addresses, :phones, :names, :account).page(params[:page])
+    # TODO Тут должна быть сортировка
+    @users = users_scope.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
