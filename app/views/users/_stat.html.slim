@@ -1,8 +1,8 @@
 i.icon-eye-open
 '
   
-a href="#" data-toggle="tooltip" title="#{current_user.stats.last.title}"= truncate(current_user.stats.last.title, :length => 40)
+a href="#" data-toggle="tooltip" title="#{current_user.stats.last.try(:title)}"= truncate(current_user.stats.last.try(:title), :length => 40)
 '
-a href="#" data-toggle="tooltip" title="#{current_user.stats.last.location}"= truncate(current_user.stats.last.location, :length => 40)
+a href="#" data-toggle="tooltip" title="#{current_user.stats.last.try(:location)}"= truncate(current_user.stats.last.try(:location), :length => 40)
 '
-a href="#" data-toggle="tooltip" title="#{current_user.stats.last.referrer}"= truncate(current_user.stats.last.referrer, :length => 40)
+a href="#" data-toggle="tooltip" title="#{current_user.stats.last.try(:referrer)}"= truncate(current_user.stats.last.try(:referrer), :length => 40)

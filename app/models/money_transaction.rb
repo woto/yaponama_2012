@@ -1,44 +1,38 @@
+#encoding: utf-8
+
 class MoneyTransaction < ActiveRecord::Base
-  belongs_to :left_account, :class_name => "Account"
-  belongs_to :right_account, :class_name => "Account"
-  belongs_to :documentable, :polymorphic => true
+  belongs_to :product_transaction
+  belongs_to :account
 
-  #before_save :update_money
-  #after_save :check_orders
+  before_save :update_account
 
-  #def check_orders
-  #  debugger
-  #  puts '1'
-  #  #left_account.user.orders:where
-  #  #if left_account.user.money_locked - (left_account.user.money_locked / 100 * left_account.user.prepayment_percent) > left_account.user.money_available
+  def update_account
 
-  #end
+    # TODO Если внести 0, то транзация запишется, чего не хочется
+    # ps. еще столкнусь на странице внесения средств.
 
-  #def update_money
-  #  debugger
-  #  puts '1'
-  #  return
+    if self.changes[:credit]
+      self.account.credit += credit
+    end
 
-  #  if left_account
-  #    if left_real
-  #      left_account.money_available = left_account.money_available + left_money
-  #    else
-  #      left_account.money_locked = left_account.money_locked + left_money
-  #    end
+    if self.changes[:debit]
+      self.account.debit += debit
+    end
 
-  #    left_account.save
-  #  end
+    if credit
+      self.credit_log = "#{self.account.credit_was} #{credit>0 ? "+" : "-"} #{credit.abs} = #{self.account.credit} р."
+    else
+      self.credit_log = "#{self.account.credit} р."
+    end
 
+    if debit
+      self.debit_log = "#{self.account.debit_was} #{debit>0 ? "+" : "-" } #{debit.abs}  = #{self.account.debit} р."
+    else
+      self.debit_log = "#{self.account.debit} р."
+    end
 
-  #  if right_account
-  #    if right_real
-  #      right_account.money_available = right_account.money_available + right_money
-  #    else
-  #      right_account.money_locked = right_account.money_locked + right_money
-  #    end
+    self.account.save
 
-  #    right_account.save
-  #  end
+  end
 
-  #end
 end

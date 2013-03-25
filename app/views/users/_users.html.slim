@@ -6,7 +6,6 @@
     = f.simple_fields_for :account do |account| 
       = account.input :debit, :as => :string, input_html: { autocomplete: 'off' }
       = account.input :credit, :as => :string, input_html: { autocomplete: 'off' }
-    = f.input :products_inwork, :as => :string, :disabled => true
     = f.input :order_rule, :collection => Rails.configuration.user_order_rules, :value_method => :first, :label_method => :last
     = f.input :prepayment_percent, :as => :string, input_html: { autocomplete: 'off' }
     = f.input :discount, :as => :string, input_html: { autocomplete: 'off' }

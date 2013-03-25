@@ -11,28 +11,29 @@
     thead
       tr
         th = model_class.human_attribute_name(:id)
-        th = model_class.human_attribute_name(:catalog_number)
-        th = model_class.human_attribute_name(:manufacturer)
-        th = model_class.human_attribute_name(:status)
-        th = model_class.human_attribute_name(:notes)
-        th = model_class.human_attribute_name(:notes_invisible)
-        th = model_class.human_attribute_name(:user)
-        th = model_class.human_attribute_name(:order)
-        th = model_class.human_attribute_name(:supplier)
-        th = model_class.human_attribute_name(:quantity_ordered)
-        th = model_class.human_attribute_name(:quantity_available)
-        th = model_class.human_attribute_name(:probability)
-        th = model_class.human_attribute_name(:min_days)
-        th = model_class.human_attribute_name(:max_days)
-        th = model_class.human_attribute_name(:buy_cost)
-        th = model_class.human_attribute_name(:sell_cost)
-        th = model_class.human_attribute_name(:short_name)
-        th = model_class.human_attribute_name(:long_name)
+        th = model_class.human_attribute_name(:log_catalog_number)
+        th = model_class.human_attribute_name(:log_manufacturer)
+        th = model_class.human_attribute_name(:log_status)
+        th = model_class.human_attribute_name(:log_notes)
+        th = model_class.human_attribute_name(:log_notes_invisible)
+        th = model_class.human_attribute_name(:log_user)
+        th = model_class.human_attribute_name(:log_order)
+        th = model_class.human_attribute_name(:log_supplier)
+        th = model_class.human_attribute_name(:log_quantity_ordered)
+        th = model_class.human_attribute_name(:log_quantity_available)
+        th = model_class.human_attribute_name(:log_probability)
+        th = model_class.human_attribute_name(:log_min_days)
+        th = model_class.human_attribute_name(:log_max_days)
+        th = model_class.human_attribute_name(:log_buy_cost)
+        th = model_class.human_attribute_name(:log_sell_cost)
+        th = model_class.human_attribute_name(:log_short_name)
+        th = model_class.human_attribute_name(:log_long_name)
         th = model_class.human_attribute_name(:log_product_id)
         th = model_class.human_attribute_name(:log_creator_id)
-        th = model_class.human_attribute_name(:created_at)
-        th = model_class.human_attribute_name(:updated_at)
-        th = model_class.human_attribute_name(:product_id)
+        th = model_class.human_attribute_name(:log_created_at)
+        th = model_class.human_attribute_name(:log_updated_at)
+        th Товар
+        th Денежные транзакции 
         th = model_class.human_attribute_name(:created_at)
         th = model_class.human_attribute_name(:updated_at)
     tbody
@@ -76,6 +77,7 @@
           td =l product_transaction.log_created_at, :format => :short if product_transaction.log_created_at
           td =l product_transaction.log_updated_at, :format => :short if product_transaction.log_updated_at
           td = product_transaction.product_id
+          td = product_transaction.money_transactions.map(&:id).join(', ')
           td =l product_transaction.created_at, :format => :short if product_transaction.created_at
           td =l product_transaction.updated_at, :format => :short if product_transaction.updated_at
 

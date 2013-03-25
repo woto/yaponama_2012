@@ -1,8 +1,8 @@
 class Account < ActiveRecord::Base
   belongs_to :accountable, :polymorphic => true, touch: true
-  has_many :left_transactions, :class_name => "MoneyTransaction", :foreign_key => "left_account_id", :dependent => :destroy
-  has_many :right_transactions, :class_name => "MoneyTransaction", :foreign_key => "right_account_id", :dependent => :destroy
+  has_many :money_transactions
 
+  # TODO Хотелось бы это переделать в виртуальные методы (вопрос с dirty)
   validates :credit, :numericality => true
   validates :debit, :numericality => true
 
@@ -10,28 +10,7 @@ class Account < ActiveRecord::Base
     accountable.to_label
   end
 
-  before_save :create_transaction
-
-  def create_transaction
-    #if changes[:money_available] && changes[:money_locked]
-    #  raise 'Unable to make both changes in account'
-    #end
-
-
-    # TODO FIXME WARNING при создании юзера (и по-видимому поставщика) не фиксируется начальные значения!!!
-
-    if changes.present?
-
-      # TODO Why we need additional compare changes ???
-      if changes[:credit] && changes[:credit][0] != changes[:credit][1]
-        left_transactions.build(:left_account => self, :left_money => changes[:credit][1] - changes[:credit][0] )
-      end
-
-      if changes[:debit] && changes[:debit][0] != changes[:debit][1]
-        right_transactions.build(:right_account => self, :right_money => changes[:debit][1] - changes[:debit][0])
-      end
-
-    end
-  end
+  # TODO FIXME WARNING при создании юзера (и по-видимому поставщика) не фиксируется начальные значения!!!
+  # ps Это было еще до того как я отказался от прямого изменения account и переделал через ....money_transactions.create...
 
 end

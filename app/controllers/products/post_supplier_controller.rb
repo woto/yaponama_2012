@@ -26,7 +26,7 @@ class Products::PostSupplierController < ApplicationController
     supplier = Supplier.where(:id => params[:supplier_id]).first
 
     @products.each do |product|
-      if product.status == 'stock'
+      if ['stock', 'cancel'].include? product.status
         unless product.supplier == supplier
           redirect_to :back, :alert => "Отменить операцию можно только выбрав именно того же самого поставщика у которого был осуществлен заказ." and return
         end

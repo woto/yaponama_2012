@@ -11,12 +11,10 @@
     thead
       tr
         th = model_class.human_attribute_name(:id)
-        th = model_class.human_attribute_name(:left_account_id)
-        th = model_class.human_attribute_name(:right_account_id)
-        th = model_class.human_attribute_name(:left_real)
-        th = model_class.human_attribute_name(:right_real)
-        th = model_class.human_attribute_name(:left_money)
-        th = model_class.human_attribute_name(:right_money)
+        th = model_class.human_attribute_name(:account_id)
+        th В работе
+        th Счёт
+        th Товарная транзакция
         th = model_class.human_attribute_name(:creator_id)
         th = model_class.human_attribute_name(:created_at)
     tbody
@@ -24,24 +22,15 @@
         tr
           td = link_to money_transaction.id, admin_money_transaction_path(money_transaction)
           td 
-            - if money_transaction.left_account_id
-              = link_to polymorphic_path([:admin, money_transaction.left_account]) do
-                - if money_transaction.left_account.accountable_type == 'User'
-                  = render :partial => "shared/client_button", :locals => {:user_id => money_transaction.left_account.accountable_id, :user_label => money_transaction.left_account.to_label}
-                - elsif money_transaction.left_account.accountable_type == 'Supplier'
-                  = render :partial => "shared/supplier_button", :locals => {:supplier_id => money_transaction.left_account.accountable_id, :supplier_label => money_transaction.left_account.to_label}
-          td 
-            - if money_transaction.right_account_id
-              = link_to polymorphic_path([:admin, money_transaction.right_account]) do
-                - if money_transaction.right_account.accountable_type == 'User'
-                  = render :partial => "shared/client_button", :locals => {:user_id => money_transaction.right_account.accountable_id, :user_label => money_transaction.right_account.to_label}
-                - elsif money_transaction.right_account.accountable_type == 'Supplier'
-                  = render :partial => "shared/supplier_button", :locals => {:supplier_id => money_transaction.right_account.accountable_id, :supplier_label => money_transaction.right_account.to_label}
-          td = money_transaction.left_real
-          td = money_transaction.right_real
-          td = ((money_transaction.left_money && money_transaction.left_money > 0) ? "+" : "" ) + money_transaction.left_money.to_s
-          td = ((money_transaction.right_money && money_transaction.right_money > 0) ? "+" : "" ) + money_transaction.right_money.to_s
+            = link_to polymorphic_path([:admin, money_transaction.account]) do
+              - if money_transaction.account.accountable_type == 'User'
+                = render :partial => "shared/client_button", :locals => {:user_id => money_transaction.account.accountable_id, :user_label => money_transaction.account.to_label}
+              - elsif money_transaction.account.accountable_type == 'Supplier'
+                = render :partial => "shared/supplier_button", :locals => {:supplier_id => money_transaction.account.accountable_id, :supplier_label => money_transaction.account.to_label}
+          td = money_transaction.credit_log
+          td = money_transaction.debit_log
+          td = money_transaction.product_transaction.try(:id)
           td = money_transaction.creator_id
-          td =l money_transaction.created_at
+          td =l(money_transaction.created_at, :format => :short)
 
   = paginate @money_transactions

@@ -4,22 +4,10 @@
   .alert.alert-block
     button.close type="button" data-dismiss="alert" ×
     h3 Внимание!
-    p На данный момент:
-    ul
-      li На счету покупателя: #{@current_debit} р.
-      li В работе товаров на сумму: #{@current_credit} р.
-    hr
-    p Для запуска в работу нижеперечисленных товаров должен иметь на счету:
-    ul
-      li Как минимум (для отправки в автоматическом режиме в заказ по правилу предоплаты): #{@after_debit} р.
-      li С учетом сопособов доставки (чтобы не отправлять деньги несколько раз): #{@after_debit_magic} р.
-    hr
-    p Итого необходимо внести предоплаты: 
+    p Для запуска товаров в работу необходимо внести предоплату (с учетом долга, если таковой имеется): 
     ul
       li Как минимум: #{@after_debit - @current_debit} р.
       li С учетом сопособов доставки: #{@after_debit_magic - @current_debit} р.
-    hr
-    p После отправки этих товаров в заказ, в работе будет товаров на сумму: #{@after_credit} р.
     
   = form_tag admin_products_ordered_index_path(:user_id => params[:user_id], :order_id => params[:order_id]), :class => "dirtyforms" do |f|
     br

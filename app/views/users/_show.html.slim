@@ -34,5 +34,11 @@ div
 h4
   span.muted Соц. сети
 
+h4
+  span.muted Баланс
+span В работе: #{number_to_currency @user.account.credit}
+br
+span На счету: #{number_to_currency @user.account.debit}
+
 - @user.auths.each do |auth|
   = render :partial => "shared/auth_logged_in", :locals => {:auth => auth}

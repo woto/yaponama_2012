@@ -1,6 +1,11 @@
 #encoding: utf-8
 
 class User < ActiveRecord::Base
+
+  # TODO Удалить две следующие строчки
+  has_many :root_products, -> { where("product_id IS NULL") }, :class_name => "Product", :dependent => :destroy
+  accepts_nested_attributes_for :root_products, :allow_destroy => true
+
   has_many :auths
 
   has_many :uploads

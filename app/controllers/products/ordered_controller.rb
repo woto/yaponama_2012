@@ -21,10 +21,10 @@ class Products::OrderedController < ApplicationController
   def index
     @user = @products.first.user
     @current_debit = @user.account.debit
-    @current_credit = @user.account.credit
+    current_credit = @user.account.credit
 
-    @after_credit = (@current_credit + @products.inject(0){|sum, product| sum += product.sell_cost * product.quantity_ordered}).round(2)
-    @after_debit = (@current_credit * @user.prepayment_percent / 100 + @products.inject(0){|sum, product| sum += product.sell_cost * product.quantity_ordered} * @user.prepayment_percent / 100).round(2)
+    after_credit = (current_credit + @products.inject(0){|sum, product| sum += product.sell_cost * product.quantity_ordered}).round(2)
+    @after_debit = (current_credit * @user.prepayment_percent / 100 + @products.inject(0){|sum, product| sum += product.sell_cost * product.quantity_ordered} * @user.prepayment_percent / 100).round(2)
 
     # TODO Это вакханалия. Переделать с использованием кеширования на уровне заказа(?)
     @after_debit_magic = 

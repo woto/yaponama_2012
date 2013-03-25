@@ -13,7 +13,7 @@ class Order < ActiveRecord::Base
   has_many :products, :dependent => :destroy
 
   def to_label
-    "#{id}"
+    "Заказ #{id}"
   end
 
   validate :multistep_order

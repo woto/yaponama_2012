@@ -26,14 +26,12 @@
     = f.input :probability, :as => :string
     = f.input :min_days, :as => :string
     = f.input :max_days, :as => :string
-    = f.input :created_at, :include_seconds => true
-    = f.input :updated_at, :include_seconds => true
     = f.input :notes, :input_html => {:rows => 3}
     = f.input :notes_invisible, :input_html => {:rows => 3}
     hr
-    = f.association :creator, :disabled => true
+    = render :partial => 'profileables/forms/inputs', :locals => {:f => f}
+    hr
     = f.input :status, :collection => Rails.configuration.products_status.map {|k,v| [v['title'],k]}, :disabled => true
-    = f.association :user, :disabled => true
     = f.association :order, :disabled => true
     = f.association :supplier, :disabled => true
 
