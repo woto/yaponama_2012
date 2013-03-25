@@ -319,15 +319,13 @@ ActiveRecord::Schema.define(version: 20130315205632) do
   end
 
   create_table "money_transactions", force: true do |t|
-    t.integer  "left_account_id"
-    t.integer  "right_account_id"
-    t.boolean  "left_real"
-    t.boolean  "right_real"
-    t.decimal  "left_money",        precision: 8, scale: 2
-    t.decimal  "right_money",       precision: 8, scale: 2
+    t.integer  "account_id"
+    t.integer  "product_transaction_id"
+    t.decimal  "credit",                 precision: 8, scale: 2
+    t.decimal  "debit",                  precision: 8, scale: 2
+    t.string   "credit_log"
+    t.string   "debit_log"
     t.text     "notes"
-    t.integer  "documentable_id"
-    t.string   "documentable_type"
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
