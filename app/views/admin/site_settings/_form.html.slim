@@ -27,6 +27,13 @@
     = f.input :checkout_correspondent
     = f.input :checkout_inn
     = f.input :checkout_recipient
+  - if params[:filter] == 'counter' || params[:filter].blank?
+    = f.input :counter_yandex
+    = f.input :counter_mail
+    = f.input :counter_rambler
+    = f.input :counter_google
+    = f.input :counter_openstat
+    = f.input :counter_liveinternet
   - if params[:filter] == 'default_users' || params[:filter].blank?
     = f.input :default_user_prepayment_percent, :as => :string
     = f.input :default_user_discount, :as => :string

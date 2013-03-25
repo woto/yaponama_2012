@@ -27,6 +27,13 @@ table class="table table-striped"
         th= model_class.human_attribute_name(:checkout_correspondent)
         th= model_class.human_attribute_name(:checkout_inn)
         th= model_class.human_attribute_name(:checkout_recipient)
+      - if params[:filter] == 'counter' || params[:filter].blank?
+        th= model_class.human_attribute_name(:counter_yandex)
+        th= model_class.human_attribute_name(:counter_mail)
+        th= model_class.human_attribute_name(:counter_rambler)
+        th= model_class.human_attribute_name(:counter_google)
+        th= model_class.human_attribute_name(:counter_openstat)
+        th= model_class.human_attribute_name(:counter_liveinternet)
       - if params[:filter] == 'default_users' || params[:filter].blank?
         th= model_class.human_attribute_name(:default_user_prepayment_percent)
         th= model_class.human_attribute_name(:default_user_discount)
@@ -88,6 +95,13 @@ table class="table table-striped"
           td= admin_site_setting.checkout_correspondent
           td= admin_site_setting.checkout_inn
           td= admin_site_setting.checkout_recipient
+        - if params[:filter] == 'counter' || params[:filter].blank?
+          td= admin_site_setting.counter_yandex
+          td= admin_site_setting.counter_mail
+          td= admin_site_setting.counter_rambler
+          td= admin_site_setting.counter_google
+          td= admin_site_setting.counter_openstat
+          td= admin_site_setting.counter_liveinternet
         - if params[:filter] == 'default_users' || params[:filter].blank?
           td= admin_site_setting.default_user_prepayment_percent
           td= admin_site_setting.default_user_discount

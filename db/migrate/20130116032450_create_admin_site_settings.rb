@@ -22,6 +22,13 @@ class CreateAdminSiteSettings < ActiveRecord::Migration
       t.string :checkout_inn
       t.string :checkout_recipient
 
+      t.string :counter_yandex
+      t.string :counter_mail
+      t.string :counter_rambler
+      t.string :counter_google
+      t.string :counter_openstat
+      t.string :counter_liveinternet
+
       t.float :default_user_prepayment_percent
       t.float :default_user_discount
       t.string :default_user_order_rule

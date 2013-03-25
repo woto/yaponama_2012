@@ -24,6 +24,13 @@ defaults: &defaults
   checkout_inn: ИНН получателя платежа (не банка)
   checkout_recipient: Наименования получателя платежа
 
+  counter_yandex: <!-- yandex counter -->
+  counter_mail: <!-- mail counter -->
+  counter_rambler: <!-- rambler counter -->
+  counter_google: <!-- google counter -->
+  counter_openstat: <!-- openstat counter -->
+  counter_liveinternet: <!-- liveinternet counter -->
+
   avisosms_username: username
   avisosms_password: password
   avisosms_source_address: Yaponama
