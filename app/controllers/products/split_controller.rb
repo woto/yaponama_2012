@@ -45,11 +45,11 @@ class Products::SplitController < ApplicationController
     p2.quantity_ordered = product.quantity_ordered - quantity
 
     ActiveRecord::Base.transaction do
-      p1.save
-      p2.save
-
       # Run callbacks, but don't validate
       product.update_attribute(:status, "cancel")
+
+      p1.save
+      p2.save
     end
 
     redirect_to params[:return_path], :notice => "Товар успешно разбит на две партии. Первая - #{p1.quantity_ordered} шт., вторая - #{p2.quantity_ordered} шт."
