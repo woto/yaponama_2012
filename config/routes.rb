@@ -107,7 +107,6 @@ Yaponama2012::Application.routes.draw do
   end
 
   resources :product_transactions
-  resources :money_transactions
   resources :spare_infos
 
   resource :user  do
@@ -154,7 +153,7 @@ Yaponama2012::Application.routes.draw do
 
     resources :users do
 
-      resources :money_transactions
+      resources :money_transactions # admin/users/X/money_trasactions
 
       collection do
         post 'filter' => "users#index"
@@ -182,10 +181,11 @@ Yaponama2012::Application.routes.draw do
     end
 
     resources :accounts
-    resources :money_transactions
+    resources :money_transactions # admin/money_transactions
+
     resources :suppliers do
       resources :product_transactions
-      resources :money_transactions
+      resources :money_transactions # admin/suppliers/X/money_transactions
     end
 
     # ПОСЛЕ ЭТОЙ СТРОКИ ИДУТ НЕ ПОВТОРЯЮЩИЕСЯ МАРШРУТЫ ТОЛЬКО В АДМИНИСТРАТИВНОЙ ЧАСТИ САЙТА
@@ -195,7 +195,7 @@ Yaponama2012::Application.routes.draw do
     resources :site_settings
   end
 
-  resources :money_transactions
+  resources :money_transactions # /money_transactions
 
   resources :talks do
     collection do
