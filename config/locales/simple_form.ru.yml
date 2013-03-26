@@ -112,11 +112,12 @@ ru:
         moschnost: Мощность двигателя (лошадинных сил)
         privod: Привод
         tip_kuzova: Тип кузова
-        kpp: Тип коробки переключения передач (КПП)
         kod_kuzova: Код кузова
         kod_dvigatelya: Код двигателя
         rinok: Рынок
         komplektaciya: Комплектация
+      car:
+        kpp: Тип коробки переключения передач (КПП)
       metro:
         metro: Станция метро
         delivery_cost: Стоимость доставки
@@ -128,7 +129,7 @@ ru:
         #money: *products_money
       user:
         time_zone: *time_zone
-      names:
+      name:
         name: Имя
       root_requests_without_car:
         name: &request_name Название
@@ -183,13 +184,14 @@ ru:
         moschnost: 61, 84, 150, 218, 485 и т.д.
         privod: Передний, Задний, Полный и т.д.
         tip_kuzova: Купе, Внедорожник, Хэтчбэк, Седан и т.д.
-        kpp: Механика, Автомат, Вариатор и т.д.
         kod_kuzova: Код кузова
         kod_dvigatelya: Код двигателя
         rinok: США, Япония, Европа, Великобритания и т.д.
         komplektaciya: Комплектация
         company: Компания
         invisible: Отображается только менеджеру
+      car:
+        kpp: Механика, Автомат, Вариатор и т.д.
       postal_address:
         notes: &postal_address_notes Подъезд, этаж, код домофона, желаемые часы доставки, предупредить перед доставкой, каким способом лучше добраться, ориентиры, контрольно - пропускной пункт, внутренний телефон и т.д.
       postal_addresses:
@@ -198,7 +200,7 @@ ru:
         notes: &phone_notes Дополнительный внутренний номер, часы в которые можно/нельзя беспокоить, основной номер или дополнительный и т.д.
       phones:
         notes: *phone_notes
-      names:
+      name:
         name: Фамилия, Имя, Отчество
       root_requests_without_car:
         name: &request_name товара, детали, запчасти...
