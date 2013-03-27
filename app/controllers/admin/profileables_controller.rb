@@ -1,11 +1,6 @@
 class Admin::ProfileablesController < ProfileablesController
   include Admined
 
-  def new
-    @resource = @resource_class.new
-    @user = User.find(params[:user_id])
-  end
-
   private
 
   def set_user_and_creation_reason
@@ -19,10 +14,6 @@ class Admin::ProfileablesController < ProfileablesController
 
   def find_approrirate_resources
     @resources = @resource_class.where(:user_id => params[:user_id])
-  end
-
-  def set_user
-    @user = User.find(params[:user_id])
   end
 
 end
