@@ -4,7 +4,6 @@ class ProfileablesController < ApplicationController
   before_action :initialize_on_create, only: [:create]
   before_action :set_user_and_creation_reason, only: [:create, :update]
   before_action :find_approriate_resources, only: [:index]
-  before_action :set_user, only: [:show, :update, :create]
 
   def set_resource_class
     @resource_class = params[:resource_class].singularize.constantize
@@ -23,12 +22,30 @@ class ProfileablesController < ApplicationController
   # GET /names/new
   def new
     @resource = @resource_class.new
-    @user = User.find(current_user)
+
+    if @resource.class == Company
+      @resource.build_legal_address
+      @resource.build_actual_address
+
+      if @user.postal_addresses.present?
+        @resource.legal_address_type = 'old'
+        @resource.actual_address_type = 'old'
+      else
+        @resource.legal_address_type = 'new'
+        @resource.actual_address_type = 'old'
+      end
+    end
   end
+
 
   # GET /names/1/edit
   def edit
     @user = @resource.user
+
+    if @resource.class == Company
+      @resource.legal_address_type = 'old'
+      @resource.actual_address_type = 'old'
+    end
   end
 
   # POST /names
@@ -40,6 +57,12 @@ class ProfileablesController < ApplicationController
         format.html { redirect_to polymorphic_path(complex_namespace_helper + [@resource]), notice: "#{@resource_class} was successfully created." }
         format.json { render action: 'show', status: :created, location: @resource }
       else
+
+        if @resource.class == Company
+          @resource.build_legal_address unless @resource.legal_address
+          @resource.build_actual_address unless @resource.actual_address
+        end
+
         format.html { render action: 'new' }
         format.json { render json: @resource.errors, status: :unprocessable_entity }
       end

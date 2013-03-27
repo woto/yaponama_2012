@@ -67,6 +67,9 @@ class User < ActiveRecord::Base
   has_many :postal_addresses, :dependent => :destroy
   accepts_nested_attributes_for :postal_addresses, :allow_destroy => true
 
+  has_many :companies, :dependent => :destroy
+  accepts_nested_attributes_for :companies, :allow_destroy => true
+
   has_many :names, :dependent => :destroy
   accepts_nested_attributes_for :names, :allow_destroy => true
 

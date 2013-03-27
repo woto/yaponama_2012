@@ -15,15 +15,17 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(params[:comment], :as => current_user.role.to_sym)
+    @comment = Comment.new(comment_params)
     name = current_user.names.where(:name => params[:name], :creation_reason => Rails.configuration.user_name_creation_reason['self']).first
     unless name
       name = current_user.names.build
       name.name = params[:name]
+      name.creation_reason = 'comment'
     end
-    @comment.user = current_user
+    @comment.creator = current_user
 
     respond_to do |format|
+      debugger
       if @comment.save && name.save
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
@@ -64,4 +66,9 @@ class CommentsController < ApplicationController
       format.js
     end
   end
+
+  def comment_params
+    params.require(:comment).permit!
+  end
+
 end

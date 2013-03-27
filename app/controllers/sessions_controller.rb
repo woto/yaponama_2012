@@ -31,6 +31,9 @@ class SessionsController < ApplicationController
 
       #reset_session
       #session[:user_id] = authenticated.id
+      # TODO Сделал так чтобы если пользователь зарегистрирован в системе, значит он имеет какие-то привилении
+      # соответственно старный гостевой аккаунт не нужен и 'он не хотел под ним работать на сайте'
+      @user.destroy
 
       redirect_to polymorphic_path([namespace_helper, :root]), :notice => "Вы успешно вошли."
     else

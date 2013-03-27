@@ -1,0 +1,45 @@
+h4.bottom-space Реквизиты компании
+= f.input :ownership
+= f.input :name
+= f.input :inn
+= f.input :kpp
+= f.input :ogrn
+= f.input :account
+= f.input :bank
+= f.input :bik
+= f.input :correspondent
+= f.input :okpo
+= f.input :okved
+= f.input :okato
+
+- array = [ \
+  {label: 'Юридический адрес', assoc: 'legal_address' }, \
+  {label: 'Фактический адрес', assoc: 'actual_address' }, \ 
+]
+
+- array.each do |item|
+
+  h4.bottom-space= item[:label]
+
+  - type = eval("f.object." + item[:assoc] + "_type")
+
+  .type-store
+    .hide
+      = f.collection_radio_buttons "#{item[:assoc]}_type".to_sym, [['new', 'new'] ,['old', 'old']], :first, :last, {}, :class => "type-radio-buttons"
+
+    / НОВЫЙ
+    div class="new"
+      .controls
+        p.top-space
+          | Добавьте адрес 
+          span.dashed class="rotate-type" или выберите имеющийся
+      = f.simple_fields_for item[:assoc].to_sym do |la|
+        = render 'profileables/forms/postal_address', :f => la
+
+    / ИМЕЮЩИЙСЯ
+    div class="old"
+      .controls
+        p.top-space
+          | Выберите адрес из списка 
+          span.dashed class="rotate-type" или добавьте новый
+        = f.association item[:assoc].to_sym, :label => false, :wrapper_html => {:class => 'margin-hack'}

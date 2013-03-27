@@ -1,10 +1,10 @@
 class Comment < ActiveRecord::Base
+  include BelongsToCreator
   has_ancestry
 
   belongs_to :commentable, :polymorphic => true
 
   validates :content, presence: true
-  validates :user, presence: true
 
   before_save :set_relation_object
 

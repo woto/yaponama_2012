@@ -36,6 +36,9 @@ Yaponama2012::Application.routes.draw do
     resources :cars, :controller => "profileables", :resource_class => 'Car' do
       post :toggle, :on => :member
     end
+    resources :companies, :controller => "profileables", :resource_class => 'Company' do
+      post :toggle, :on => :member
+    end
   end
 
 

@@ -12,6 +12,8 @@ ru:
       default_message: <button class="close" data-dismiss="alert">&times;</button>Невозможно продолжить, т.к. форма заполнена не корректно
     labels:
       defaults:
+        legal_address: Юридический адрес
+        actual_address: Фактический адрес
         hide_catalog_number: Скрыть каталожный номер
         generation: Поколение
         modification: Модификация
@@ -116,6 +118,19 @@ ru:
         kod_dvigatelya: Код двигателя
         rinok: Рынок
         komplektaciya: Комплектация
+        ownership: Форма собственности
+        inn: ИНН
+        kpp: КПП
+        ogrn: ОГРН
+        account: Расчетный счёт
+        bank: Наименование банка
+        correspondent: Корреспондентский счет
+        bik: БИК
+        okpo: ОКПО
+        okved: ОКВЭД
+        okato: ОКАТО
+      company:
+        name: Наименование организации
       car:
         kpp: Тип коробки переключения передач (КПП)
       metro:
@@ -208,6 +223,7 @@ ru:
         name: *request_name
       requests:
         name: *request_name
+
         
     # Labels and hints examples
     # labels:

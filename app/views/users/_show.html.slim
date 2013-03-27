@@ -1,44 +1,46 @@
-- model_class = User
+.well
+  - model_class = User
 
-- array = [ \
-    {title: 'Имя', assoc: 'name'}, \
-    {title: 'Телефон', assoc: 'phone'}, \
-    {title: 'E-mail', assoc: 'email_address'}, \
-    {title: 'Адрес', assoc: 'postal_address'}, \
-    {title: 'Авто', assoc: 'car'} ]
+  - array = [ \
+      {title: 'Имя', assoc: 'name'}, \
+      {title: 'Телефон', assoc: 'phone'}, \
+      {title: 'E-mail', assoc: 'email_address'}, \
+      {title: 'Адрес', assoc: 'postal_address'}, \
+      {title: 'Авто', assoc: 'car'}, \
+      {title: 'Компания', assoc: 'company'} ]
 
-- array.each do |item|
-  h4.hover-profileable.muted
-    span=' item[:title]
-    = link_to new_polymorphic_path(complex_namespace_helper + [item[:assoc]]), :style => "visibility: hidden", :class => "btn btn-mini btn-primary plus-profileable" do
-      i.icon-plus
-  - @user.send(item[:assoc].pluralize).each do |partial|
-    .profileable-item.left-space class="#{partial.removed ? 'profileable-removed' : ''}"
-      = render :partial => "profileables/shows/#{partial.class.name.underscore}", :locals => {partial.class.name.underscore.to_sym => partial}
-      '
-      = render :partial => 'profileables/shows/notes', :locals => {resource: partial}
-      = render :partial => 'profileables/item_controls', :locals => {:resource => partial}
+  - array.each do |item|
+    h4.hover-profileable.muted
+      span=' item[:title]
+      = link_to new_polymorphic_path(complex_namespace_helper + [item[:assoc]]), :style => "visibility: hidden", :class => "btn btn-mini btn-primary plus-profileable" do
+        i.icon-plus
+    - @user.send(item[:assoc].pluralize).each do |partial|
+      .profileable-item.left-space class="#{partial.removed ? 'profileable-removed' : ''}"
+        = render :partial => "profileables/shows/#{partial.class.name.underscore}", :locals => {partial.class.name.underscore.to_sym => partial}
+        '
+        = render :partial => 'profileables/shows/notes', :locals => {resource: partial}
+        = render :partial => 'profileables/item_controls', :locals => {:resource => partial}
 
-h4
-  span.muted Шпион 
+  h4
+    span.muted Шпион 
 
-div
-  = render :partial => 'users/ipgeobase'
+  div
+    = render :partial => 'users/ipgeobase'
 
-div
-  = render :partial => 'users/time_zone'
+  div
+    = render :partial => 'users/time_zone'
 
-div
-  = render :partial => 'users/stat'
+  div
+    = render :partial => 'users/stat'
 
-h4
-  span.muted Соц. сети
+  h4
+    span.muted Соц. сети
+  - @user.auths.each do |auth|
+    = render :partial => "shared/auth_logged_in", :locals => {:auth => auth}
 
-h4
-  span.muted Баланс
-span В работе: #{number_to_currency @user.account.credit}
-br
-span На счету: #{number_to_currency @user.account.debit}
+  h4
+    span.muted Баланс
+  span В работе: #{number_to_currency @user.account.credit}
+  br
+  span На счету: #{number_to_currency @user.account.debit}
 
-- @user.auths.each do |auth|
-  = render :partial => "shared/auth_logged_in", :locals => {:auth => auth}

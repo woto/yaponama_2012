@@ -64,3 +64,5 @@
 // TODO когда создам application.js в admin, тогда перенесу подключение туда
 //= require admin/users
 //=require mustache/mustache.js
+//
+//= require companies

@@ -90,14 +90,14 @@ module Yaponama2012
       'register' => 'Регистрация',
       'call' => 'Звонок',
       'addressee' => 'В процессе оформления заказа (Контактный телефон)',
-      'self' => 'Указал самостоятельно в настройках профиля',
+      'self' => 'Заполнено самостоятельно',
       'manager' => 'Заполнено менеджером',
       'callback' => 'Заказал обратный вызов'
     }
 
-
     # Names
     config.user_name_creation_reason = {
+      'comment' => 'Комментарий',
       'register' => 'Регистрация',
       'email' => 'Автоматически заполнено из e-mail',
       'addressee' => 'В процессе оформления заказа (получатель)',
@@ -118,13 +118,6 @@ module Yaponama2012
       'email' => 'Получено письмо с этого адреса',
       'manager' => 'Добавлено менеджером'
     }
-
-    # PostalAddresses
-    config.user_postal_address_creation_reason = {
-      'order' => 'Заполнено клиентом в процессе оформления заказа',
-      'manager' => 'Добавлено менеджером'
-    }
-
 
     # Orders
     config.orders_status = {

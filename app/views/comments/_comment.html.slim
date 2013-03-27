@@ -2,7 +2,7 @@ div id="comment-#{comment.id}"
   div.date
     = l comment.created_at, format: :short
   div.author 
-    strong = comment.user.to_label
+    strong = comment.creator.to_label
   div.content == comment.content
   =' link_to 'Редактировать', edit_comment_path(comment)
   =' link_to 'Удалить', comment, :confirm => 'Are you sure?', :method => :delete, :remote => true
