@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130315205632) do
+ActiveRecord::Schema.define(version: 20130415060158) do
 
   create_table "accounts", force: true do |t|
     t.integer  "creator_id"
@@ -38,18 +38,6 @@ ActiveRecord::Schema.define(version: 20130315205632) do
     t.datetime "updated_at"
   end
 
-  create_table "admin_companies", force: true do |t|
-    t.string   "inn"
-    t.string   "kpp"
-    t.string   "name"
-    t.string   "bank_account"
-    t.string   "account"
-    t.string   "correspondent_account"
-    t.string   "bic"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "admin_site_settings", force: true do |t|
     t.string   "environment"
     t.string   "sms_notify_method"
@@ -64,6 +52,18 @@ ActiveRecord::Schema.define(version: 20130315205632) do
     t.string   "robokassa_pass_1"
     t.string   "robokassa_pass_2"
     t.string   "robokassa_user"
+    t.string   "checkout_account"
+    t.string   "checkout_bank"
+    t.string   "checkout_bik"
+    t.string   "checkout_correspondent"
+    t.string   "checkout_inn"
+    t.string   "checkout_recipient"
+    t.text     "counter_yandex"
+    t.text     "counter_mail"
+    t.text     "counter_rambler"
+    t.text     "counter_google"
+    t.text     "counter_openstat"
+    t.text     "counter_liveinternet"
     t.float    "default_user_prepayment_percent"
     t.float    "default_user_discount"
     t.string   "default_user_order_rule"
@@ -194,6 +194,34 @@ ActiveRecord::Schema.define(version: 20130315205632) do
 
   add_index "comments", ["ancestry"], name: "index_comments_on_ancestry"
 
+  create_table "companies", force: true do |t|
+    t.string   "ownership"
+    t.string   "name"
+    t.string   "inn"
+    t.string   "kpp"
+    t.string   "ogrn"
+    t.string   "account"
+    t.string   "bank"
+    t.string   "bik"
+    t.string   "correspondent"
+    t.string   "okpo"
+    t.string   "okved"
+    t.string   "okato"
+    t.integer  "legal_address_id"
+    t.integer  "actual_address_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "creation_reason"
+    t.text     "notes"
+    t.text     "notes_invisible"
+    t.boolean  "removed"
+    t.integer  "user_id"
+    t.integer  "creator_id"
+  end
+
+  add_index "companies", ["creator_id"], name: "index_companies_on_creator_id"
+  add_index "companies", ["user_id"], name: "index_companies_on_user_id"
+
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0
     t.integer  "attempts",   default: 0
@@ -241,17 +269,17 @@ ActiveRecord::Schema.define(version: 20130315205632) do
     t.string   "email_address"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "confirmed_by_user"
+    t.boolean  "confirmed_by_manager"
+    t.datetime "user_confirmation_datetime"
+    t.datetime "manager_confirmation_datetime"
+    t.string   "confirmation_token"
     t.string   "creation_reason"
     t.text     "notes"
     t.text     "notes_invisible"
     t.boolean  "removed"
     t.integer  "user_id"
     t.integer  "creator_id"
-    t.boolean  "confirmed_by_user"
-    t.boolean  "confirmed_by_manager"
-    t.datetime "user_confirmation_datetime"
-    t.datetime "manager_confirmation_datetime"
-    t.string   "confirmation_token"
   end
 
   add_index "email_addresses", ["creator_id"], name: "index_email_addresses_on_creator_id"
@@ -385,17 +413,17 @@ ActiveRecord::Schema.define(version: 20130315205632) do
     t.string   "phone_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "confirmed_by_user"
+    t.boolean  "confirmed_by_manager"
+    t.datetime "user_confirmation_datetime"
+    t.datetime "manager_confirmation_datetime"
+    t.string   "confirmation_token"
     t.string   "creation_reason"
     t.text     "notes"
     t.text     "notes_invisible"
     t.boolean  "removed"
     t.integer  "user_id"
     t.integer  "creator_id"
-    t.boolean  "confirmed_by_user"
-    t.boolean  "confirmed_by_manager"
-    t.datetime "user_confirmation_datetime"
-    t.datetime "manager_confirmation_datetime"
-    t.string   "confirmation_token"
   end
 
   add_index "phones", ["creator_id"], name: "index_phones_on_creator_id"
