@@ -3,14 +3,6 @@
 module ApplicationHelper
   
 
-  #<li class="dropdown">
-  #  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-  #  <ul class="dropdown-menu">
-  #    <li><a href="#dropdown1" data-toggle="tab">@fat</a></li>
-  #    <li><a href="#dropdown2" data-toggle="tab">@mdo</a></li>
-  #  </ul>
-  #</li>
-
   def user_tabs(&block)
 
     res = ''.html_safe
@@ -29,40 +21,79 @@ module ApplicationHelper
         content_tag(:ul, :class => 'nav nav-tabs') do
           [ 
             { :title => 'Главная', 
-              :catch => { :controller => 'users', :action => 'edit' }, 
-              :link => {:controller => 'users', :action => 'edit'} },
+              :catch => [ { :controller => 'users', :action => 'edit' } ], 
+              :link => {:controller => 'users', :action => 'edit'},
+              :class => '',
+              :dropdown => []
+            },
+
             { :title => 'Заказы',  
-              :catch => { :controller => 'orders' }, 
-              :link => { :controller => 'orders', :action => 'index' } },
+              :catch => [ { :controller => 'orders' } ], 
+              :link => { :controller => 'orders', :action => 'index' },
+              :class => '',
+              :dropdown => []
+            },
+
             { :title => 'Товары',  
-              :catch => { :controller => 'products' },
-              :link => { :controller => 'products', :action => 'index' } }, 
-            { :title => 'Товарные транзакции',  
-              :catch => { :controller => 'product_transactions' },
-              :link => { :controller => 'product_transactions', :action => 'index' } },
-            { :title => 'Денежные транзакции',  
-              :catch => { :controller => 'money_transactions' },
-              :link => { :controller => 'money_transactions', :action => 'index' } },
+              :catch => [ { :controller => 'products' } ],
+              :link => { :controller => 'products', :action => 'index' },
+              :class => '',
+              :dropdown => []
+            },
+
+            { :title => 'Транзакции',  
+              :catch => [ 
+                { :controller => 'product_transactions' }, { :controller => 'money_transactions' } ],
+              :link => '#', 
+              :class => 'dropdown',
+              :dropdown => [
+                { :title => 'Товар',  
+                  :catch => [ { :controller => 'product_transactions' } ],
+                  :link => { :controller => 'product_transactions', :action => 'index' },
+                  :class => '',
+                  :dropdown => []
+                },
+                { :title => 'Деньги',  
+                  :catch => [ { :controller => 'money_transactions' } ],
+                  :link => { :controller => 'money_transactions', :action => 'index' },
+                  :class => '',
+                  :dropdown => []
+                }
+              ]
+            },
+
+
             { :title => 'Поиск', 
-              :catch => { :controller => 'searches' },
-              :link => { :controller => 'searches', :action => 'index' } }
+              :catch => [ { :controller => 'searches' } ],
+              :link => { :controller => 'searches', :action => 'index' },
+              :class => '',
+              :dropdown => []
+            },
+
           ].collect do |item|
 
+            link = url_for(item[:link])
 
-            begin
-              if current_page?(item[:catch])
-                css_class = { :class => 'active' }
-              else
-                css_class = {}
+            if item[:dropdown].blank? 
+              content_tag :li, link_to(item[:title], link), :class => highlight_active(item[:catch])
+            else
+              content_tag :li, :class => "#{highlight_active(item[:catch])} #{item[:class]}" do
+                [ 
+                  ( link_to(item[:title], link, "data-toggle" => item[:class]).to_s ), 
+
+                  ( content_tag :ul, :class => 'dropdown-menu' do |ul|
+                    item[:dropdown].collect do |dropdown|
+
+                        link = url_for(dropdown[:link])
+                        content_tag :li, :class => highlight_active(dropdown[:catch]) do
+                          link_to(dropdown[:title], link)
+
+                      end
+                    end.join.html_safe
+                  end.to_s ) 
+                ].join.html_safe
               end
-
-              link = url_for(item[:link])
-            rescue ActionController::UrlGenerationError
             end
-
-
-            content_tag(:li, link_to(item[:title], link), css_class)
-
           end.join.html_safe
         end <<
 
@@ -102,6 +133,16 @@ module ApplicationHelper
 
   def hint_decorator value, add_class=''
     raw "<p><span class=\"label #{add_class}\">К сведению</span> #{value}</p>"
+  end
+
+  private
+
+  def highlight_active(routes)
+    if routes.map{|route| current_page?(route)}.any?
+      'active'
+    else
+      ''
+    end
   end
 
 
