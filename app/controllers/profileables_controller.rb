@@ -104,10 +104,6 @@ class ProfileablesController < ApplicationController
       @resource = @resource_class.new(resource_params)
     end
 
-    def set_user
-      @user = current_user
-    end
-
     def set_user_and_creation_reason
 
       @resource.user = current_user
