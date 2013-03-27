@@ -72,7 +72,10 @@ module ApplicationHelper
 
           ].collect do |item|
 
-            link = url_for(item[:link])
+            begin
+              link = url_for(item[:link])
+            rescue ActionController::UrlGenerationError
+            end
 
             if item[:dropdown].blank? 
               content_tag :li, link_to(item[:title], link), :class => highlight_active(item[:catch])
@@ -84,7 +87,10 @@ module ApplicationHelper
                   ( content_tag :ul, :class => 'dropdown-menu' do |ul|
                     item[:dropdown].collect do |dropdown|
 
-                        link = url_for(dropdown[:link])
+                        begin
+                          link = url_for(dropdown[:link])
+                        rescue ActionController::UrlGenerationError
+                        end
                         content_tag :li, :class => highlight_active(dropdown[:catch]) do
                           link_to(dropdown[:title], link)
 
@@ -138,10 +144,13 @@ module ApplicationHelper
   private
 
   def highlight_active(routes)
-    if routes.map{|route| current_page?(route)}.any?
-      'active'
-    else
-      ''
+    begin
+      if routes.map{|route| current_page?(route)}.any?
+        'active'
+      else
+        ''
+      end
+    rescue ActionController::UrlGenerationError
     end
   end
 

@@ -51,18 +51,11 @@ class ProfileablesController < ApplicationController
   # POST /names
   # POST /names.json
   def create
-
     respond_to do |format|
       if @resource.save
         format.html { redirect_to polymorphic_path(complex_namespace_helper + [@resource]), notice: "#{@resource_class} was successfully created." }
         format.json { render action: 'show', status: :created, location: @resource }
       else
-
-        if @resource.class == Company
-          @resource.build_legal_address unless @resource.legal_address
-          @resource.build_actual_address unless @resource.actual_address
-        end
-
         format.html { render action: 'new' }
         format.json { render json: @resource.errors, status: :unprocessable_entity }
       end

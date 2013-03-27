@@ -5,7 +5,7 @@ ru:
   helpers:
     actions: Действия
     links:
-      new: Создать
+      new: Новый
       destroy: Удалить
       edit: Редактировать
   admin:

@@ -27,19 +27,25 @@ h4.bottom-space Реквизиты компании
     .hide
       = f.collection_radio_buttons "#{item[:assoc]}_type".to_sym, [['new', 'new'] ,['old', 'old']], :first, :last, {}, :class => "type-radio-buttons"
 
-    / НОВЫЙ
-    div class="new"
-      .controls
-        p.top-space
-          | Добавьте адрес 
-          span.dashed class="rotate-type" или выберите имеющийся
-      = f.simple_fields_for item[:assoc].to_sym do |la|
-        = render 'profileables/forms/postal_address', :f => la
-
     / ИМЕЮЩИЙСЯ
-    div class="old"
+    .old
       .controls
         p.top-space
           | Выберите адрес из списка 
           span.dashed class="rotate-type" или добавьте новый
-        = f.association item[:assoc].to_sym, :label => false, :wrapper_html => {:class => 'margin-hack'}
+      .control-group class="#{f.object.errors[item[:assoc].to_sym].present? ? 'error' : ''}"
+        .controls
+          = f.collection_select("#{item[:assoc]}_id".to_sym, @user.postal_addresses, :id, :to_label, {:include_blank => true})
+          - if f.object.errors[item[:assoc].to_sym].present?
+            span.help-inline= f.object.errors[item[:assoc].to_sym].join
+
+          / = f.association , :label => false, :wrapper_html => {:class => 'margin-hack'}
+
+    / НОВЫЙ
+    .new
+      .controls
+        p.top-space
+          | Добавьте адрес 
+          span.dashed class="rotate-type" или выберите имеющийся
+      = f.simple_fields_for item[:assoc].to_sym, eval("f.object.#{item[:assoc]}_type") == 'new' ? eval("f.object.#{item[:assoc]}") : eval("f.object.build_#{item[:assoc]}") do |la|
+        = render 'profileables/forms/postal_address', :f => la
