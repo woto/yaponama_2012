@@ -3,7 +3,8 @@ class PostalAddress < ActiveRecord::Base
   include BelongsToCreator
   has_many :orders
 
-  validates :city, :street, :house, :region, :postcode, :presence => true
+  validates :city, :street, :house, :region, :presence => true
+  validates :postcode, :presence => true, length: {is: 6}
 
   def to_label
     "#{postcode} - #{region} - #{city} - #{street} - #{house} - #{room} - #{notes} - #{notes_invisible}"
