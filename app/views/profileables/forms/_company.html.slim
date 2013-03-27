@@ -13,8 +13,8 @@ h4.bottom-space Реквизиты компании
 = f.input :okato
 
 - array = [ \
-  {label: 'Юридический адрес', assoc: 'legal_address' }, \
-  {label: 'Фактический адрес', assoc: 'actual_address' }, \ 
+  {label: 'Юридический адрес', assoc: 'legal_address', opposite: 'Такой же как и фактический' }, \
+  {label: 'Фактический адрес', assoc: 'actual_address', opposite: 'Такой же как и юридический' }, \ 
 ]
 
 - array.each do |item|
@@ -35,7 +35,7 @@ h4.bottom-space Реквизиты компании
           span.dashed class="rotate-type" или добавьте новый
       .control-group class="#{f.object.errors[item[:assoc].to_sym].present? ? 'error' : ''}"
         .controls
-          = f.collection_select("#{item[:assoc]}_id".to_sym, @user.postal_addresses, :id, :to_label, {:include_blank => true})
+          = f.select("#{item[:assoc]}_id".to_sym, @user.postal_addresses.map{|pa| [pa.to_label, pa.id]} + [[item[:opposite], '-1']], {:include_blank => true})
           - if f.object.errors[item[:assoc].to_sym].present?
             span.help-inline= f.object.errors[item[:assoc].to_sym].join
 
