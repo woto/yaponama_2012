@@ -4,18 +4,17 @@ div class="page-header"
 table class="table table-striped"
   thead
     tr
-      th= model_class.human_attribute_name(:id)
-      / TODO Добавить поля
+      - @resource_class.column_names.each do |column_name|
+        th= model_class.human_attribute_name(column_name.to_sym)
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @resources.each do |resource|
       tr
-        / Странно почему следующая строчка не работает
-         Посмотреть в names еще раз
-         td= link_to resource.id, url_for(:controller => @resource_class.name.undrerscore.to_sym, :action => :show, :id => resource)
-        / TODO Добавить поля
         - resource.class.column_names.each do |column_name|
-          td= resource[column_name]
+          - if column_name == 'id'
+            td= link_to resource.id, url_for(:controller => 'profileables', :action => :show, :id => resource)
+          - else
+            td= resource[column_name]
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_polymorphic_path([:user, resource]), :class => 'btn btn-mini'
           '
