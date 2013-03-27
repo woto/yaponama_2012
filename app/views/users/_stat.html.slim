@@ -1,6 +1,3 @@
-i.icon-eye-open
-'
-  
 a href="#" data-toggle="tooltip" title="#{current_user.stats.last.try(:title)}"= truncate(current_user.stats.last.try(:title), :length => 40)
 '
 a href="#" data-toggle="tooltip" title="#{current_user.stats.last.try(:location)}"= truncate(current_user.stats.last.try(:location), :length => 40)
