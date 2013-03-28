@@ -40,6 +40,7 @@ class Products::OrderedController < ApplicationController
     #  redirect_to :back, :alert => "Введено неправильное значение в качестве суммы." and return
     #end
 
+    # Тут через Cash сделать
     client_debit = params[:client_debit].to_d
 
     ActiveRecord::Base.transaction do

@@ -24,10 +24,12 @@
         = render :partial => 'profileables/item_controls', :locals => {:resource => partial}
 
 
-  h4
+  h4.hover-profileable
     i.icon.icon-money
     '
-    span Деньги
+    span Деньги 
+    = link_to new_admin_user_cashes_path, :style => "visibility: hidden", :class => "btn btn-mini btn-primary plus-profileable" do
+      i.icon-plus
 
   span В работе: #{number_to_currency @user.account.credit}
   br

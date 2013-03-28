@@ -87,6 +87,8 @@ Yaponama2012::Application.routes.draw do
       resources :orders do
         resources :products
       end
+
+      resource :cashes # /admin/users/X/cashes
     end
 
     concerns :productable
