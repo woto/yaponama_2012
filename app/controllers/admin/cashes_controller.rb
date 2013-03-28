@@ -10,7 +10,7 @@ class Admin::CashesController < ApplicationController
 
     respond_to do |format|
       if @cash.valid?
-        @user.account.money_transactions.create(:debit => @cash.value)
+        @user.account.money_transactions.create(:debit => @cash.debit)
         format.html { redirect_to [:admin, @user], notice: 'Cash was successfully created.' }
         format.json { render json: @cash, status: :created, location: @cash }
       else

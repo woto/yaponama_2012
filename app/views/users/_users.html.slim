@@ -3,9 +3,6 @@
     = f.input :russian_time_zone_manual_id, :collection => Rails.configuration.russian_time_zones.map {|k,v| [v,k]}
     = f.input :russian_time_zone_auto_id, :collection => Rails.configuration.russian_time_zones.map {|k,v| [v,k]}, :disabled => true
     = f.input :creation_reason, :collection => Rails.configuration.user_creation_reason.map {|k,v| [v,k]}, :disabled => true, :as => :radio_buttons
-    = f.simple_fields_for :account do |account| 
-      = account.input :debit, :as => :string, input_html: { autocomplete: 'off' }
-      = account.input :credit, :as => :string, input_html: { autocomplete: 'off' }
     = f.input :order_rule, :collection => Rails.configuration.user_order_rules, :value_method => :first, :label_method => :last
     = f.input :prepayment_percent, :as => :string, input_html: { autocomplete: 'off' }
     = f.input :discount, :as => :string, input_html: { autocomplete: 'off' }

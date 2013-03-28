@@ -1,5 +1,5 @@
 class Cash
   include ActiveModel::Model
-  attr_accessor :value
-  validates :value, :numericality => true
+  attr_accessor :debit, :notes
+  validates :debit, :presence => true, :numericality => true
 end

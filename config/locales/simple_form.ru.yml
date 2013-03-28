@@ -223,6 +223,8 @@ ru:
         name: *request_name
       requests:
         name: *request_name
+      cashes:
+        debit: Сумма
 
         
     # Labels and hints examples

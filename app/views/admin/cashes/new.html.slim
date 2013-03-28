@@ -7,6 +7,9 @@
     div class="page-header"
       h3=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human
     = simple_form_for [:admin, @user, @cash], :html => { :class => "form-horizontal dirtyforms" } do |f|
-      = f.input :value
+      = f.input :debit
+      = f.input :notes, :as => :text
       .form-actions
         = f.button :submit, :class => "btn btn-primary"
+        '
+        = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_user_path(@user), :class => 'btn'

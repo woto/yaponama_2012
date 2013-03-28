@@ -87,7 +87,6 @@ class User < ActiveRecord::Base
 
   # Financial
   has_one :account, :as => :accountable, :dependent => :destroy
-  accepts_nested_attributes_for :account
   validates :account, :presence => true
 
 
