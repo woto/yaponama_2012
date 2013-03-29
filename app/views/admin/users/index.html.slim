@@ -38,7 +38,7 @@ ul#myTab.nav.nav-tabs
               li : a postal_addresses
               li : a debit
               li : a credit
-              li : a prepayment_percent
+              li : a prepayment
               li : a city
               li : a country
               li : a region
@@ -72,7 +72,7 @@ ul#myTab.nav.nav-tabs
           th = model_class.human_attribute_name(:phone)
           th = model_class.human_attribute_name(:debit)
           th = model_class.human_attribute_name(:credit)
-          th = model_class.human_attribute_name(:prepayment_percent)
+          th = model_class.human_attribute_name(:prepayment)
           th = model_class.human_attribute_name(:phone)
           th = model_class.human_attribute_name(:ipgeobase_city)
           th = model_class.human_attribute_name(:ipgeobase_country)
@@ -100,7 +100,7 @@ ul#myTab.nav.nav-tabs
             td = link_to(user.phones.collect{|phone| phone.to_label}.join(', '), edit_admin_user_path(user, :tab => :phones))
             td = user.account.debit 
             td = user.account.credit 
-            td = user.prepayment_percent 
+            td = user.prepayment
             td = user.phones.first.try(:phone)
             td = user.ipgeobase_city
             td = user.ipgeobase_country

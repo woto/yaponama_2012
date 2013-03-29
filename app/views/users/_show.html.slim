@@ -28,12 +28,28 @@
     i.icon.icon-money
     '
     span Деньги 
-    = link_to new_admin_user_cashes_path, :style => "visibility: hidden", :class => "btn btn-mini btn-primary plus-profileable" do
-      i.icon-plus
 
-  span В работе: #{number_to_currency @user.account.credit}
-  br
-  span На счету: #{number_to_currency @user.account.debit}
+  .profileable-item.left-space 
+    span В работе: #{number_to_currency @user.account.credit}
+  .profileable-item.left-space 
+    span На счету: #{number_to_currency @user.account.debit}
+    .profileable-item-control style="visibility: hidden; display: inline"
+      |
+      a.btn.btn-warning.btn-mini href="#{url_for([:new, :admin, @user, :cashes])}"
+        i.icon-edit
+  .profileable-item.left-space 
+    span Скидка: #{@user.discount_was} %
+    .profileable-item-control style="visibility: hidden; display: inline"
+      |
+      a.btn.btn-warning.btn-mini href="#{edit_admin_user_discount_path(@user)}"
+        i.icon-edit
+  .profileable-item.left-space 
+    span Предоплата: #{@user.prepayment_was} %
+    .profileable-item-control style="visibility: hidden; display: inline"
+      |
+      a.btn.btn-warning.btn-mini href="#{edit_admin_user_prepayment_path(@user)}"
+        i.icon-edit
+
 
 
   h4

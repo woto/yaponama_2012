@@ -16,6 +16,8 @@
     br
     p И принять от клиента сумму в размере:
     = text_field_tag :client_debit, @after_debit_magic - @current_debit
+    p Служебный комментарий
+    = text_area_tag :notes_invisible
     br
 
     .form-actions

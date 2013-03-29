@@ -35,7 +35,7 @@ table class="table table-striped"
         th= model_class.human_attribute_name(:counter_openstat)
         th= model_class.human_attribute_name(:counter_liveinternet)
       - if params[:filter] == 'default_users' || params[:filter].blank?
-        th= model_class.human_attribute_name(:default_user_prepayment_percent)
+        th= model_class.human_attribute_name(:default_user_prepayment)
         th= model_class.human_attribute_name(:default_user_discount)
         th= model_class.human_attribute_name(:default_user_order_rule)
       - if params[:filter] == 'avisosms' || params[:filter].blank?
@@ -103,7 +103,7 @@ table class="table table-striped"
           td= admin_site_setting.counter_openstat
           td= admin_site_setting.counter_liveinternet
         - if params[:filter] == 'default_users' || params[:filter].blank?
-          td= admin_site_setting.default_user_prepayment_percent
+          td= admin_site_setting.default_user_prepayment
           td= admin_site_setting.default_user_discount
           td= admin_site_setting.default_user_order_rule
         - if params[:filter] == 'avisosms' || params[:filter].blank?

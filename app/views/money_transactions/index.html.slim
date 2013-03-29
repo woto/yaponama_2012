@@ -15,6 +15,7 @@
         th В работе
         th Счёт
         th Товарная транзакция
+        th Служебный Комментарий
         th = model_class.human_attribute_name(:creator_id)
         th = model_class.human_attribute_name(:created_at)
     tbody
@@ -30,6 +31,7 @@
           td = money_transaction.credit_log
           td = money_transaction.debit_log
           td = money_transaction.product_transaction.try(:id)
+          td = money_transaction.notes_invisible
           td = money_transaction.creator_id
           td =l(money_transaction.created_at, :format => :short)
 

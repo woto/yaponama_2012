@@ -89,6 +89,8 @@ Yaponama2012::Application.routes.draw do
       end
 
       resource :cashes # /admin/users/X/cashes
+      resource :discount # /admin/users/X/discount/edit
+      resource :prepayment # /uadmin/users/X/prepayment/edit
     end
 
     concerns :productable

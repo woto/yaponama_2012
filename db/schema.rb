@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20130415060158) do
     t.text     "counter_google"
     t.text     "counter_openstat"
     t.text     "counter_liveinternet"
-    t.float    "default_user_prepayment_percent"
+    t.float    "default_user_prepayment"
     t.float    "default_user_discount"
     t.string   "default_user_order_rule"
     t.string   "avisosms_username"
@@ -353,7 +353,7 @@ ActiveRecord::Schema.define(version: 20130415060158) do
     t.decimal  "debit",                  precision: 8, scale: 2
     t.string   "credit_log"
     t.string   "debit_log"
-    t.text     "notes"
+    t.text     "notes_invisible"
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -430,8 +430,7 @@ ActiveRecord::Schema.define(version: 20130415060158) do
   add_index "phones", ["user_id"], name: "index_phones_on_user_id"
 
   create_table "postal_addresses", force: true do |t|
-    t.string   "company"
-    t.string   "postcode"
+    t.integer  "postcode"
     t.string   "region"
     t.string   "city"
     t.string   "street"
@@ -571,7 +570,7 @@ ActiveRecord::Schema.define(version: 20130415060158) do
     t.integer  "creator_id"
     t.string   "creation_reason"
     t.decimal  "discount",                    precision: 8, scale: 2
-    t.decimal  "prepayment_percent",          precision: 8, scale: 2
+    t.decimal  "prepayment",                  precision: 8, scale: 2
     t.string   "role"
     t.string   "auth_token"
     t.string   "password_digest"

@@ -28,7 +28,7 @@ module ConfigHelper
 
   def default_user_attributes
     {
-      'prepayment_percent' => default_user_prepayment_percent,
+      'prepayment' => default_user_prepayment,
       'discount' => default_user_discount,
       'order_rule' => default_user_order_rule,
       'role' => Rails.configuration.default_user_role

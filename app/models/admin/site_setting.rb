@@ -13,7 +13,7 @@ class Admin::SiteSetting < ActiveRecord::Base
   validates :robokassa_pass_1, :presence => true
   validates :robokassa_pass_2, :presence => true
   validates :robokassa_user, :presence => true
-  validates :default_user_prepayment_percent, :numericality => true
+  validates :default_user_prepayment, :numericality => true
   validates :default_user_discount, :numericality => true
   validates :avisosms_username, :presence => true
   validates :avisosms_password, :presence => true

@@ -1,0 +1,13 @@
+- model_class = User
+
+.row-fluid
+  .span3
+    = render 'users/show' if @user
+  #workspace.span9
+    div class="page-header"
+      h3= @meta_title = t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human
+    = simple_form_for @user, :url => admin_user_discount_path(@user) do |f|
+      = f.input :discount, :as => :string, input_html: { autocomplete: 'off' }
+      = f.button :submit, :class => 'btn-primary'
+      '
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), complex_namespace_helper, :class => 'btn'

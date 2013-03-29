@@ -24,14 +24,14 @@ class Products::OrderedController < ApplicationController
     current_credit = @user.account.credit
 
     after_credit = (current_credit + @products.inject(0){|sum, product| sum += product.sell_cost * product.quantity_ordered}).round(2)
-    @after_debit = (current_credit * @user.prepayment_percent / 100 + @products.inject(0){|sum, product| sum += product.sell_cost * product.quantity_ordered} * @user.prepayment_percent / 100).round(2)
+    @after_debit = (current_credit * @user.prepayment / 100 + @products.inject(0){|sum, product| sum += product.sell_cost * product.quantity_ordered} * @user.prepayment / 100).round(2)
 
     # TODO Это вакханалия. Переделать с использованием кеширования на уровне заказа(?)
     @after_debit_magic = 
       ( (@user.products.active.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => true}).summa) + 
-      (@user.products.active.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => false}).summa * @user.prepayment_percent / 100) +
+      (@user.products.active.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => false}).summa * @user.prepayment / 100) +
       (Product.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => true}).where("products.id IN (#{@products.map{|product| product.id}.join(',')})").summa) +
-      (Product.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => false}).where("products.id IN (#{@products.map{|product| product.id}.join(',')})").summa * @user.prepayment_percent / 100)).round(2)
+      (Product.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => false}).where("products.id IN (#{@products.map{|product| product.id}.join(',')})").summa * @user.prepayment / 100)).round(2)
   end
 
   def create
@@ -42,10 +42,11 @@ class Products::OrderedController < ApplicationController
 
     # Тут через Cash сделать
     client_debit = params[:client_debit].to_d
+    notes_invisible = params[:notes_invisible].to_s
 
     ActiveRecord::Base.transaction do
       account = @products.first.user.account
-      MoneyTransaction.create(:account => account, :debit => client_debit)
+      MoneyTransaction.create(:account => account, :debit => client_debit, :notes_invisible => notes_invisible)
 
       @products.each do |product|
         product.status = 'ordered'

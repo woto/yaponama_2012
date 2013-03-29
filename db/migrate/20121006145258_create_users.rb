@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :creator_id
       t.string :creation_reason
       t.decimal :discount, :precision => 8, :scale => 2
-      t.decimal :prepayment_percent, :precision => 8, :scale => 2
+      t.decimal :prepayment, :precision => 8, :scale => 2
       t.string :role
       t.string :auth_token
       t.string :password_digest

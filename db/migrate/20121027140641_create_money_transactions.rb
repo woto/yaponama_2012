@@ -11,7 +11,7 @@ class CreateMoneyTransactions < ActiveRecord::Migration
       # Переименовать в log_... (Как например в ProductTransaction. Выдерживать общий стиль)
       t.string :credit_log
       t.string :debit_log
-      t.text :notes
+      t.text :notes_invisible
       t.integer :creator_id
 
       t.timestamps

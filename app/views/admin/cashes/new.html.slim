@@ -7,8 +7,8 @@
     div class="page-header"
       h3=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human
     = simple_form_for [:admin, @user, @cash], :html => { :class => "form-horizontal dirtyforms" } do |f|
-      = f.input :debit
-      = f.input :notes, :as => :text
+      = f.input :debit, :as => :string, input_html: { autocomplete: 'off' }
+      = f.input :notes_invisible, :as => :text
       .form-actions
         = f.button :submit, :class => "btn btn-primary"
         '

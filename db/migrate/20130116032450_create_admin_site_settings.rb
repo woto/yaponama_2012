@@ -29,7 +29,7 @@ class CreateAdminSiteSettings < ActiveRecord::Migration
       t.text :counter_openstat
       t.text :counter_liveinternet
 
-      t.float :default_user_prepayment_percent
+      t.float :default_user_prepayment
       t.float :default_user_discount
       t.string :default_user_order_rule
       t.string :avisosms_username

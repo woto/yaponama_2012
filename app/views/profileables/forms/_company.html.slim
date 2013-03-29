@@ -46,6 +46,6 @@ h4.bottom-space Реквизиты компании
       .controls
         p.top-space
           | Добавьте адрес 
-          span.dashed class="rotate-type" или выберите имеющийся
+          span.dashed class="rotate-type" или выберите из списка
       = f.simple_fields_for item[:assoc].to_sym, eval("f.object.#{item[:assoc]}_type") == 'new' ? eval("f.object.#{item[:assoc]}") : eval("f.object.build_#{item[:assoc]}") do |la|
         = render 'profileables/forms/postal_address', :f => la

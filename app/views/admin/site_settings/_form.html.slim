@@ -35,7 +35,7 @@
     = f.input :counter_openstat
     = f.input :counter_liveinternet
   - if params[:filter] == 'default_users' || params[:filter].blank?
-    = f.input :default_user_prepayment_percent, :as => :string
+    = f.input :default_user_prepayment, :as => :string
     = f.input :default_user_discount, :as => :string
     = f.input :default_user_order_rule, :collection => Rails.configuration.user_order_rules, :value_method => :first, :label_method => :last
   - if params[:filter] == 'avisosms' || params[:filter].blank?

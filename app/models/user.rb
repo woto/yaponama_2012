@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
   # TODO позже разобраться (обнаружил как неиспользуемую ассоциацию)
   #has_many :documents, :as => :documentable, :class_name => "Transaction"
 
-  validates :discount, :prepayment_percent, :numericality => true
+  validates :discount, :prepayment, :numericality => true
   validates :order_rule, :inclusion => { :in => Rails.configuration.user_order_rules.keys }
   validates :role, :inclusion => Rails.configuration.user_roles_keys
 
@@ -118,12 +118,12 @@ class User < ActiveRecord::Base
       return
     elsif order_rule.to_sym == :all 
       inorder_orders = orders.where(:status => :inorder)
-      unless (account.debit + inorder_orders.inject(0){|summ, order| summ += order.order_cost}) * prepayment_percent / 100.00 <= account.credit
+      unless (account.debit + inorder_orders.inject(0){|summ, order| summ += order.order_cost}) * prepayment / 100.00 <= account.credit
         return
       end
 
       inorder_orders.each do |order|
-        if (account.debit + order.order_cost) * prepayment_percent / 100.00 <= account.credit
+        if (account.debit + order.order_cost) * prepayment / 100.00 <= account.credit
           order.status = :ordered
           order.products.each do |product|
             product.update_attributes(:status => :ordered)

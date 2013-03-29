@@ -37,7 +37,7 @@ defaults: &defaults
   avisosms_delivery_report: 1
   avisosms_flash_message: 0
   avisosms_validity_period: 10
-  default_user_prepayment_percent: 20
+  default_user_prepayment: 20
   default_user_discount: 0
   default_user_order_rule: all
   send_request_from_search_page: true
