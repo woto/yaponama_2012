@@ -21,24 +21,12 @@ end
 Yaponama2012::Application.routes.draw do
 
   concern :profileable do
-    resources :names, :controller => "profileables", :resource_class => 'Name' do
-      post :toggle, :on => :member
-    end
-    resources :phones, :controller => "profileables", :resource_class => 'Phone' do
-      post :toggle, :on => :member
-    end
-    resources :email_addresses, :controller => "profileables", :resource_class => 'EmailAddress' do
-      post :toggle, :on => :member
-    end
-    resources :postal_addresses, :controller => "profileables", :resource_class => 'PostalAddress' do
-      post :toggle, :on => :member
-    end
-    resources :cars, :controller => "profileables", :resource_class => 'Car' do
-      post :toggle, :on => :member
-    end
-    resources :companies, :controller => "profileables", :resource_class => 'Company' do
-      post :toggle, :on => :member
-    end
+    resources :names, :controller => "profileables", :resource_class => 'Name'
+    resources :phones, :controller => "profileables", :resource_class => 'Phone'
+    resources :email_addresses, :controller => "profileables", :resource_class => 'EmailAddress'
+    resources :postal_addresses, :controller => "profileables", :resource_class => 'PostalAddress'
+    resources :cars, :controller => "profileables", :resource_class => 'Car'
+    resources :companies, :controller => "profileables", :resource_class => 'Company'
   end
 
 
@@ -74,6 +62,8 @@ Yaponama2012::Application.routes.draw do
   end
 
   namespace :admin do
+
+    concerns :profileable
 
     resources :users do
       get 'index'

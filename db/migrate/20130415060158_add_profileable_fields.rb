@@ -4,7 +4,6 @@ class AddProfileableFields < ActiveRecord::Migration
       add_column table, :creation_reason, :string
       add_column table, :notes, :text
       add_column table, :notes_invisible, :text
-      add_column table, :removed, :boolean
 
       add_column table, :user_id, :integer
       add_column table, :creator_id, :integer

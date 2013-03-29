@@ -1,3 +1,6 @@
+= f.input :notes, :input_html => {:rows => 3}
+= f.input :notes_invisible, :input_html => {:rows => 3}
+
 .controls
   button.btn.btn-success.bottom-space type="button" data-toggle="collapse" data-target="#profileable-inputs"
     span Ещё
@@ -5,8 +8,5 @@
 div id="profileable-inputs" class="collapse out" 
   = f.input :created_at, :disabled => true
   = f.input :updated_at, :disabled => true
-  = f.input :notes, :input_html => {:rows => 3}
-  = f.input :notes_invisible, :input_html => {:rows => 3}
-  = f.input :removed, :disabled => true
   = f.association :creator, :disabled => true
   = f.association :user, :disabled => true

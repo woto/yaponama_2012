@@ -27,17 +27,48 @@
 
               li.divider
 
+              li = link_to admin_names_path do
+                i.icon.icon-user
+                '
+                | Имена 
+
+              li = link_to admin_phones_path do
+                i.icon.icon-phone
+                '
+                | Телефоны
+
+              li = link_to admin_email_addresses_path do
+                i.icon.icon-envelope
+                '
+                | E-mail
+              li = link_to admin_postal_addresses_path do
+                i.icon.icon-home
+                '
+                | Адреса
+              li = link_to admin_cars_path do
+                i.icon.icon-truck
+                '
+                | Автомобили
+              li = link_to admin_companies_path do
+                i.icon.icon-briefcase
+                '
+                | Компании
+
+              li.divider
+
               li.dropdown-submenu
                = link_to "Покупатели", admin_users_path
                ul.dropdown-menu
                  li = link_to "Новый", admin_users_path(:user => {:id => ''}), :method => :post
 
               li = link_to "Поставщики", admin_suppliers_path
+
               li.dropdown-submenu
                 a href="#" Транзакции 
                 ul.dropdown-menu
                   li = link_to "Товар", admin_product_transactions_path
                   li = link_to "Деньги", admin_money_transactions_path
+
           li.dropdown
             a.ignoredirty.dropdown-toggle href="#" data-toggle="dropdown"
               span.ignoredirty Материал 

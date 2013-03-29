@@ -6,14 +6,18 @@
       {title: 'Телефон', icon: 'phone', assoc: 'phone'}, \
       {title: 'E-mail', icon: 'envelope', assoc: 'email_address'}, \
       {title: 'Адрес', icon: 'home', assoc: 'postal_address'}, \
-      {title: 'Авто', icon: 'truck', assoc: 'car'}, \
+      {title: 'Автомобиль', icon: 'truck', assoc: 'car'}, \
       {title: 'Компания', icon: 'briefcase', assoc: 'company'} ]
 
   - array.each do |item|
     h4.hover-profileable
-      i.icon class="icon-#{item[:icon]}" 
-      '
-      span=' item[:title]
+      
+      = link_to polymorphic_path(complex_namespace_helper + [item[:assoc].pluralize]) do
+        span
+          i.icon class="icon-#{item[:icon]}" 
+          '
+          = item[:title]
+      ' 
       = link_to new_polymorphic_path(complex_namespace_helper + [item[:assoc]]), :style => "visibility: hidden", :class => "btn btn-mini btn-primary plus-profileable" do
         i.icon-plus
     - @user.send(item[:assoc].pluralize).each do |partial|
@@ -25,9 +29,10 @@
 
 
   h4.hover-profileable
-    i.icon.icon-money
-    '
-    span Деньги 
+    span
+      i.icon.icon-money
+      '
+      | Деньги 
 
   .profileable-item.left-space 
     span В работе: #{number_to_currency @user.account.credit}
@@ -52,10 +57,11 @@
 
 
 
-  h4
-    i.icon.icon-eye-open
-    '
-    span Шпион 
+  h4.hover-profileable
+    span
+      i.icon.icon-eye-open
+      '
+      | Шпион 
 
   div
     = render :partial => 'users/ipgeobase'
@@ -67,11 +73,11 @@
     = render :partial => 'users/stat'
 
 
-  h4 
-    i.icon.icon-group
-    '
-    span Соц. сети
+  h4.hover-profileable
+    span
+      i.icon.icon-group
+      '
+      | Соц. сети
 
   - @user.auths.each do |auth|
     = render :partial => "shared/auth_logged_in", :locals => {:auth => auth}
-

@@ -76,23 +76,6 @@ class ProfileablesController < ApplicationController
     end
   end
 
-  def toggle
-    @user = @resource.user
-
-    if @resource.removed == true
-      @resource.removed = false
-    else
-      @resource.removed = true
-    end
-
-    @resource.save!
-
-    respond_to do |format|
-      format.html { redirect_to polymorphic_path(complex_namespace_helper) }
-      format.json { head :no_content }
-    end
-  end
-
   # DELETE /names/1
   # DELETE /names/1.json
   def destroy
@@ -113,7 +96,7 @@ class ProfileablesController < ApplicationController
     end
 
     def find_approriate_resources
-      @resources = @resource_class.where(:user_id => current_user)
+      @resources = @resource_class.where(:user_id => @user)
     end
 
     def initialize_on_create
