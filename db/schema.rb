@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.datetime "updated_at"
   end
 
-  add_index "add_requst_id_to_cars", ["request_id"], name: "index_add_requst_id_to_cars_on_request_id"
+  add_index "add_requst_id_to_cars", ["request_id"], name: "index_add_requst_id_to_cars_on_request_id", using: :btree
 
   create_table "admin_blocks", force: true do |t|
     t.text     "content"
@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.datetime "updated_at"
   end
 
-  add_index "attachments", ["email_id"], name: "index_attachments_on_email_id"
+  add_index "attachments", ["email_id"], name: "index_attachments_on_email_id", using: :btree
 
   create_table "auths", force: true do |t|
     t.string   "provider"
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.datetime "updated_at"
   end
 
-  add_index "auths", ["user_id"], name: "index_auths_on_user_id"
+  add_index "auths", ["user_id"], name: "index_auths_on_user_id", using: :btree
 
   create_table "brands", force: true do |t|
     t.string   "name"
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.datetime "updated_at"
   end
 
-  add_index "calls", ["phone_id"], name: "index_calls_on_phone_id"
+  add_index "calls", ["phone_id"], name: "index_calls_on_phone_id", using: :btree
 
   create_table "car_transactions", force: true do |t|
     t.integer  "car_id"
@@ -275,8 +275,8 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.integer  "creator_id"
   end
 
-  add_index "cars", ["creator_id"], name: "index_cars_on_creator_id"
-  add_index "cars", ["user_id"], name: "index_cars_on_user_id"
+  add_index "cars", ["creator_id"], name: "index_cars_on_creator_id", using: :btree
+  add_index "cars", ["user_id"], name: "index_cars_on_user_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.integer  "creator_id"
@@ -288,7 +288,7 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.string   "ancestry"
   end
 
-  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry"
+  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
 
   create_table "companies", force: true do |t|
     t.string   "ownership"
@@ -314,8 +314,8 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.integer  "creator_id"
   end
 
-  add_index "companies", ["creator_id"], name: "index_companies_on_creator_id"
-  add_index "companies", ["user_id"], name: "index_companies_on_user_id"
+  add_index "companies", ["creator_id"], name: "index_companies_on_creator_id", using: :btree
+  add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
 
   create_table "company_transactions", force: true do |t|
     t.integer  "company_id"
@@ -383,7 +383,7 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "deliveries", force: true do |t|
     t.string   "name"
@@ -464,8 +464,8 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.integer  "creator_id"
   end
 
-  add_index "email_addresses", ["creator_id"], name: "index_email_addresses_on_creator_id"
-  add_index "email_addresses", ["user_id"], name: "index_email_addresses_on_user_id"
+  add_index "email_addresses", ["creator_id"], name: "index_email_addresses_on_creator_id", using: :btree
+  add_index "email_addresses", ["user_id"], name: "index_email_addresses_on_user_id", using: :btree
 
   create_table "emails", force: true do |t|
     t.text     "from_addrs"
@@ -511,8 +511,8 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.integer "region_id"
   end
 
-  add_index "ipgeobase_ips", ["region_id"], name: "index_ipgeobase_ips_on_region_id"
-  add_index "ipgeobase_ips", ["start_ip"], name: "index_ipgeobase_ips_on_start_ip"
+  add_index "ipgeobase_ips", ["region_id"], name: "index_ipgeobase_ips_on_region_id", using: :btree
+  add_index "ipgeobase_ips", ["start_ip"], name: "index_ipgeobase_ips_on_start_ip", using: :btree
 
   create_table "ipgeobase_regions", force: true do |t|
     t.string   "name"
@@ -523,7 +523,7 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.datetime "updated_at"
   end
 
-  add_index "ipgeobase_regions", ["ancestry"], name: "index_ipgeobase_regions_on_ancestry"
+  add_index "ipgeobase_regions", ["ancestry"], name: "index_ipgeobase_regions_on_ancestry", using: :btree
 
   create_table "metro", force: true do |t|
     t.string   "metro"
@@ -585,8 +585,8 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.integer  "creator_id"
   end
 
-  add_index "names", ["creator_id"], name: "index_names_on_creator_id"
-  add_index "names", ["user_id"], name: "index_names_on_user_id"
+  add_index "names", ["creator_id"], name: "index_names_on_creator_id", using: :btree
+  add_index "names", ["user_id"], name: "index_names_on_user_id", using: :btree
 
   create_table "orders", force: true do |t|
     t.integer  "name_id"
@@ -677,8 +677,8 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.integer  "creator_id"
   end
 
-  add_index "phones", ["creator_id"], name: "index_phones_on_creator_id"
-  add_index "phones", ["user_id"], name: "index_phones_on_user_id"
+  add_index "phones", ["creator_id"], name: "index_phones_on_creator_id", using: :btree
+  add_index "phones", ["user_id"], name: "index_phones_on_user_id", using: :btree
 
   create_table "postal_address_transactions", force: true do |t|
     t.integer  "postal_address_id"
@@ -732,8 +732,8 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.integer  "creator_id"
   end
 
-  add_index "postal_addresses", ["creator_id"], name: "index_postal_addresses_on_creator_id"
-  add_index "postal_addresses", ["user_id"], name: "index_postal_addresses_on_user_id"
+  add_index "postal_addresses", ["creator_id"], name: "index_postal_addresses_on_creator_id", using: :btree
+  add_index "postal_addresses", ["user_id"], name: "index_postal_addresses_on_user_id", using: :btree
 
   create_table "product_transactions", force: true do |t|
     t.integer  "product_id"
@@ -817,11 +817,11 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.integer  "creator_id"
   end
 
-  add_index "products", ["creator_id"], name: "index_products_on_creator_id"
-  add_index "products", ["order_id"], name: "index_products_on_order_id"
-  add_index "products", ["product_id"], name: "index_products_on_product_id"
-  add_index "products", ["supplier_id"], name: "index_products_on_supplier_id"
-  add_index "products", ["user_id"], name: "index_products_on_user_id"
+  add_index "products", ["creator_id"], name: "index_products_on_creator_id", using: :btree
+  add_index "products", ["order_id"], name: "index_products_on_order_id", using: :btree
+  add_index "products", ["product_id"], name: "index_products_on_product_id", using: :btree
+  add_index "products", ["supplier_id"], name: "index_products_on_supplier_id", using: :btree
+  add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
@@ -830,8 +830,8 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id"
-  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "spare_infos", force: true do |t|
     t.string   "catalog_number"
@@ -850,7 +850,7 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.datetime "updated_at"
   end
 
-  add_index "stats", ["user_id"], name: "index_stats_on_user_id"
+  add_index "stats", ["user_id"], name: "index_stats_on_user_id", using: :btree
 
   create_table "suppliers", force: true do |t|
     t.string   "name"
@@ -868,9 +868,9 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.datetime "updated_at"
   end
 
-  add_index "talks", ["creator_id"], name: "index_talks_on_creator_id"
-  add_index "talks", ["talkable_id", "talkable_type"], name: "index_talks_on_talkable_id_and_talkable_type"
-  add_index "talks", ["user_id"], name: "index_talks_on_user_id"
+  add_index "talks", ["creator_id"], name: "index_talks_on_creator_id", using: :btree
+  add_index "talks", ["talkable_id", "talkable_type"], name: "index_talks_on_talkable_id_and_talkable_type", using: :btree
+  add_index "talks", ["user_id"], name: "index_talks_on_user_id", using: :btree
 
   create_table "uploads", force: true do |t|
     t.string   "upload"
@@ -892,12 +892,8 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.string   "password_reset_email_token"
     t.string   "password_reset_sms_token"
     t.datetime "password_reset_sent_at"
-    t.string   "ipgeobase_city"
-    t.string   "ipgeobase_country"
-    t.string   "ipgeobase_region"
-    t.string   "ipgeobase_district"
-    t.float    "ipgeobase_lat"
-    t.float    "ipgeobase_lng"
+    t.string   "ipgeobase_name"
+    t.string   "ipgeobase_names_depth_cache"
     t.string   "accept_language"
     t.string   "user_agent"
     t.integer  "russian_time_zone_auto_id"
@@ -919,6 +915,6 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.datetime "created_at"
   end
 
-  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
 end

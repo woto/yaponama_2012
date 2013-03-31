@@ -13,12 +13,8 @@ class CreateUsers < ActiveRecord::Migration
       t.datetime :password_reset_sent_at
 
       # GEO
-      t.string :ipgeobase_city
-      t.string :ipgeobase_country
-      t.string :ipgeobase_region
-      t.string :ipgeobase_district
-      t.float :ipgeobase_lat
-      t.float :ipgeobase_lng
+      t.string :ipgeobase_name
+      t.string :ipgeobase_names_depth_cache
 
       # REQUEST
       t.string :accept_language
