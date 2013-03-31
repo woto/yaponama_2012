@@ -66,6 +66,8 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
+    @order.user = @products.first.user
+
     ActiveRecord::Base.transaction do
 
       respond_to do |format|
@@ -77,8 +79,6 @@ class OrdersController < ApplicationController
             product.status = 'inorder'
             product.save
           end
-
-          @order.user = @products.first.user
 
           format.html { redirect_to_relative_path('inorder') and return }
           format.json { render json: @order, status: :created, location: @order }
