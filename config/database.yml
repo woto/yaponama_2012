@@ -18,7 +18,7 @@ development:
   adapter: postgresql
   encoding: unicode
   database: yaponama_2012_development
-  pool: 24
+  pool: 5
   username: yaponama_2012
   password:
 
@@ -47,7 +47,7 @@ test:
   adapter: postgresql
   encoding: unicode
   database: yaponama_2012_test
-  pool: 24
+  pool: 5
   username: yaponama_2012
   password:
 
@@ -55,6 +55,6 @@ production:
   adapter: postgresql
   encoding: unicode
   database: yaponama_2012_production
-  pool: 24
+  pool: 5
   username: yaponama_2012
   password:
