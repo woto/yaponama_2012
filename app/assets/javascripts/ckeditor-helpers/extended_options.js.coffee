@@ -1,6 +1,5 @@
 root = exports ? window # http://stackoverflow.com/questions/4214731/coffeescript-global-variables
 
-console.log 's'
 window.extended_options =
   #removeButtons: 'Anchor,Underline,Strike,Subscript,Superscript';
   height: 300
