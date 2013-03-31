@@ -72,7 +72,9 @@ gem 'whenever'
 gem 'sitemap_generator'
 gem 'fastercsv'
 gem 'yandex_mystem'
-gem 'ipgeobase'
+gem 'ipgeobase', :git => 'git://github.com/woto/ipgeobase.git'
+
+
 gem 'activemerchant', :require => 'active_merchant', :git => 'https://github.com/Shopify/active_merchant', :ref => 'b14e285774e599697653325c471e1c85a7163d64'
 
 gem 'backbone-rails'

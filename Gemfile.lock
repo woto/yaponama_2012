@@ -80,6 +80,13 @@ GIT
       sprockets (~> 2.8)
 
 GIT
+  remote: git://github.com/woto/ipgeobase.git
+  revision: 07dc8b283d6f932443dd918182ca5ec1273b3cba
+  specs:
+    ipgeobase (0.0.1)
+      ancestry
+
+GIT
   remote: https://github.com/Shopify/active_merchant
   revision: b14e285774e599697653325c471e1c85a7163d64
   ref: b14e285774e599697653325c471e1c85a7163d64
@@ -165,16 +172,12 @@ GEM
     faraday (0.8.6)
       multipart-post (~> 1.1)
     fastercsv (1.5.5)
-    happymapper (0.4.0)
-      libxml-ruby (~> 2.0)
     hashie (1.2.0)
     hike (1.2.1)
     hiredis (0.3.2)
     httpauth (0.2.0)
     i18n (0.6.4)
     innertube (1.0.2)
-    ipgeobase (0.0.1)
-      happymapper
     jbuilder (1.0.2)
       activesupport (>= 3.0.0)
     jquery-rails (2.2.1)
@@ -193,7 +196,6 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.3.1)
     libv8 (3.11.8.13)
-    libxml-ruby (2.6.0)
     macaddr (1.6.1)
       systemu (~> 2.5.0)
     mail (2.5.3)
@@ -337,7 +339,7 @@ DEPENDENCIES
   factory_girl_rails
   fastercsv
   hiredis (~> 0.3.1)
-  ipgeobase
+  ipgeobase!
   jbuilder (~> 1.0.1)
   jquery-rails
   json

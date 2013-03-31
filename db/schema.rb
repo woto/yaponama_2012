@@ -505,6 +505,26 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.datetime "updated_at"
   end
 
+  create_table "ipgeobase_ips", id: false, force: true do |t|
+    t.integer "start_ip",  limit: 8
+    t.integer "end_ip",    limit: 8
+    t.integer "region_id"
+  end
+
+  add_index "ipgeobase_ips", ["region_id"], name: "index_ipgeobase_ips_on_region_id"
+  add_index "ipgeobase_ips", ["start_ip"], name: "index_ipgeobase_ips_on_start_ip"
+
+  create_table "ipgeobase_regions", force: true do |t|
+    t.string   "name"
+    t.string   "ancestry"
+    t.text     "names_depth_cache"
+    t.integer  "region_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ipgeobase_regions", ["ancestry"], name: "index_ipgeobase_regions_on_ancestry"
+
   create_table "metro", force: true do |t|
     t.string   "metro"
     t.integer  "delivery_cost"
