@@ -68,16 +68,18 @@ class OrdersController < ApplicationController
 
     ActiveRecord::Base.transaction do
 
-      @products.each do |product|
-        product.order = @order
-        product.status = 'inorder'
-        product.save
-      end
-
-      @order.user = @products.first.user
-
       respond_to do |format|
+
         if @order.save
+
+          @products.each do |product|
+            product.order = @order
+            product.status = 'inorder'
+            product.save
+          end
+
+          @order.user = @products.first.user
+
           format.html { redirect_to_relative_path('inorder') and return }
           format.json { render json: @order, status: :created, location: @order }
         else
@@ -97,23 +99,25 @@ class OrdersController < ApplicationController
 
     ActiveRecord::Base.transaction do
 
-      @products.each do |product|
-        product.order = @order
-        product.status = 'inorder'
-        product.save
-      end
-
       @order.assign_attributes(order_params)
       
       respond_to do |format|
-      if @order.save
-          format.html { redirect_to_relative_path('inorder') and return }
-          format.json { head :no_content }
-        else
-          format.html { render template: "/products/inorder/action" }
-          format.json { render json: @order.errors, status: :unprocessable_entity }
+
+        if @order.save
+
+            @products.each do |product|
+              product.order = @order
+              product.status = 'inorder'
+              product.save
+            end
+
+            format.html { redirect_to_relative_path('inorder') and return }
+            format.json { head :no_content }
+          else
+            format.html { render template: "/products/inorder/action" }
+            format.json { render json: @order.errors, status: :unprocessable_entity }
+          end
         end
-      end
 
     end
   end
