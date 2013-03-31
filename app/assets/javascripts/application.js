@@ -32,7 +32,7 @@
 
 //= require cocoon
 
-//= require backbone-rails
+//= require underscore/underscore
 
 //= require jquery-jsonp/src/jquery.jsonp
 

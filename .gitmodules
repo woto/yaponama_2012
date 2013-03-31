@@ -52,3 +52,6 @@
 [submodule "system/submodules/mustache"]
 	path = system/submodules/mustache
 	url = git://github.com/janl/mustache.js.git
+[submodule "system/submodules/underscore"]
+	path = system/submodules/underscore
+	url = git://github.com/documentcloud/underscore.git
