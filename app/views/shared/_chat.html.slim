@@ -67,11 +67,10 @@
     p Здраствуйте. Мой заказ с 15 числа этого месяца висит с пометкой "ожидает обработки" и мне не кто незвонил, почему?
 
 
-#reply
+#reply style="display: inline-block; width: 100%"
 
   = text_area_tag :talk, nil, class: "ckeditor-simple"
 
-  form class="form-inline top-space"
-    .pull-right
+  form class="form-inline"
+    .pull-right.top-space
       = submit_tag "Отправить", class: "btn btn-primary"
-      button class="btn" data-dismiss="modal" aria-hidden="true" Закрыть
