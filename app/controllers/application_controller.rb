@@ -12,8 +12,28 @@ class ApplicationController < ActionController::Base
   helper_method :complex_namespace_helper
   helper_method :complex_namespace_helper2
   before_action :set_user_time_zone
+  before_action :ipgeobase
 
   private
+
+  def ipgeobase
+
+    # GEO
+    remote_ip = request.remote_ip
+
+    if current_user.remote_ip != remote_ip
+      res = Ipgeobase::find_region_by_ip(remote_ip)
+      if res
+        current_user.ipgeobase_name = res.name
+        current_user.ipgeobase_names_depth_cache = res.names_depth_cache
+      end
+    end
+
+    current_user.remote_ip                 = remote_ip
+    current_user.user_agent                = request.user_agent.to_s
+    current_user.accept_language           = request.accept_language.to_s
+
+  end
 
   def item_status(catalog_number, manufacturer)
 
