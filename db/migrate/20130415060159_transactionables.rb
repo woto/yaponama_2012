@@ -8,8 +8,9 @@ class Transactionables < ActiveRecord::Migration
         # id привязанного объекта
         eval "t.references :#{table_name.to_s.singularize}"
 
-        # id пользователя, чтобы можно было получать и элементы, которые были удалены
+        # Используется для profileable. Не для ProductTransaction
         t.references :user
+
         # Ну и контроллировать кто это сделал
         t.references :creator
 
