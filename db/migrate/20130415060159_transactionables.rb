@@ -22,7 +22,7 @@ class Transactionables < ActiveRecord::Migration
         end
 
         table_model.columns.each do |column|
-          if column != "id"
+          if column.name != "id"
             eval "t.#{column.type.to_s} :#{column.name}_before"
             eval "t.#{column.type.to_s} :#{column.name}_after"
           end
