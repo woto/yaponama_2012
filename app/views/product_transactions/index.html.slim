@@ -123,8 +123,14 @@
           td = product_transaction.long_name_after
           td = product_transaction.product_id_before
           td = product_transaction.product_id_after
-          td = product_transaction.creator_id_before
-          td = product_transaction.creator_id_after
+
+          td 
+            - if product_transaction.creator_id_before
+              = render :partial => "shared/client_button", :locals => {:user_id => product_transaction.creator_id_before, :user_label => User.find(product_transaction.creator_id_before).to_label}
+          td 
+            - if product_transaction.creator_id_after
+              = render :partial => "shared/client_button", :locals => {:user_id => product_transaction.creator_id_after, :user_label => User.find(product_transaction.creator_id_after).to_label}
+
           td =l product_transaction.created_at_before, :format => :short if product_transaction.created_at_before
           td =l product_transaction.created_at_after, :format => :short if product_transaction.created_at_after
           td =l product_transaction.updated_at_before, :format => :short if product_transaction.updated_at_before

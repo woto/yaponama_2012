@@ -3,15 +3,23 @@ class ProductTransactionsController < ApplicationController
   # GET /admin/product_transactions.json
   def index
 
-    @user = User.find(params[:user_id]) if params[:user_id]
-
-    product_transaction = ProductTransaction.scoped.order("id DESC").page params[:page]
-
-    if params[:product_id]
-      product_transaction = product_transaction.where(:product_id => params[:product_id])
+    @product_transactions = ProductTransaction.all
+    
+    if @user
+      @product_transactions = @user.product_transactions
+      klass = @user.class
     end
 
-    @product_transactions = product_transaction
+    if @supplier
+      @product_transactions = @supplier.product_transactions
+      klass = @supplier.klass
+    end
+
+    if params[:product_id]
+      @product_transaction = @product_transactions.where(:product_id => params[:product_id])
+    end
+
+    @product_transactions = @product_transactions.order("id DESC").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

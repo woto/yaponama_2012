@@ -118,6 +118,9 @@ Yaponama2012::Application.routes.draw do
   concerns :productable
 
   resources :products do
+    collection do
+      post 'remember'
+    end
     resources :product_transactions
   end
 

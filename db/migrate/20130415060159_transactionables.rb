@@ -22,8 +22,10 @@ class Transactionables < ActiveRecord::Migration
         end
 
         table_model.columns.each do |column|
-          eval "t.#{column.type.to_s} :#{column.name}_before"
-          eval "t.#{column.type.to_s} :#{column.name}_after"
+          if column != "id"
+            eval "t.#{column.type.to_s} :#{column.name}_before"
+            eval "t.#{column.type.to_s} :#{column.name}_after"
+          end
         end
 
         t.timestamps
