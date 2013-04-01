@@ -39,8 +39,10 @@ module Transactionable
       @transaction.creator = User.current_user
 
       self.class.column_names.each do |column_name|
-        eval "@transaction.#{column_name}_before = #{column_name}_was"
-        eval "@transaction.#{column_name}_after = #{column_name}"
+        if column_name != 'id'
+          eval "@transaction.#{column_name}_before = #{column_name}_was"
+          eval "@transaction.#{column_name}_after = #{column_name}"
+        end
       end
     end
   end
