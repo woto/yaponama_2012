@@ -15,13 +15,14 @@ class ProductsController < ApplicationController
     end
   end
 
-  def multiple_destroy
+  def destroy
 
     begin
 
       @products = products_user_order_tab_scope( Product.order("updated_at DESC"), 'checked' )
 
       products_any_checked_validation
+      products_all_statuses_validation ['cancel']
 
       result = {}
 

@@ -31,9 +31,9 @@
                         - if v['badge'].present?
                           span class="badge badge-#{k}" = v['badge']
                   li.divider
+                  li = link_to 'Разбить на партии', admin_products_split_index_path(:return_path => request.fullpath, :user_id => params[:user_id], :order_id => params[:order_id])
+                  li = link_to 'Редактировать или перезаказать', admin_products_edit_index_path(:return_path => request.fullpath, :user_id => params[:user_id], :order_id => params[:order_id] )
                   li = link_to t('.destroy', :default => t("helpers.links.destroy")), multiple_destroy_admin_products_path, :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } 
-                  li = link_to 'Разбить', admin_products_split_index_path(:return_path => request.fullpath, :user_id => params[:user_id], :order_id => params[:order_id])
-                  li = link_to t('.edit', :default => t("helpers.links.edit")), admin_products_edit_index_path(:return_path => request.fullpath, :user_id => params[:user_id], :order_id => params[:order_id] )
           .pull-left
             div#toolbar-status = render :partial => "products/toolbar_status"
           .margin-on-right
