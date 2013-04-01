@@ -10,4 +10,10 @@
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     '
+    - if f.object.persisted?
+      = link_to polymorphic_path(complex_namespace_helper + [@resource, :transactions]), :class => 'btn' do
+        i.icon-time
+        '
+        = t('.transactions', :default => t("helpers.links.transactions")) 
+    '
     = link_to t('.cancel', :default => t("helpers.links.cancel")), complex_namespace_helper, :class => 'btn'

@@ -11,17 +11,16 @@
 
   - array.each do |item|
     h4.hover-profileable
-      
       = link_to polymorphic_path(complex_namespace_helper + [item[:assoc].pluralize]) do
         span
           i.icon class="icon-#{item[:icon]}" 
           '
           = item[:title]
-      ' 
+      '
       = link_to new_polymorphic_path(complex_namespace_helper + [item[:assoc]]), :style => "visibility: hidden", :class => "btn btn-mini btn-primary plus-profileable" do
         i.icon-plus
     - @user.send(item[:assoc].pluralize).each do |partial|
-      .profileable-item.left-space class="#{partial.removed ? 'profileable-removed' : ''}"
+      .profileable-item.left-space
         = render :partial => "profileables/shows/#{partial.class.name.underscore}", :locals => {partial.class.name.underscore.to_sym => partial}
         '
         = render :partial => 'profileables/shows/notes', :locals => {resource: partial}

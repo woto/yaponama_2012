@@ -1,30 +1,42 @@
 - model_class = @resource_class
 
-.row-fluid
-  .span3
-    = render 'users/show' if @user
-  #workspace.span9
-    div class="page-header"
-      h3= @meta_title = t '.title', :default => model_class.model_name.human.pluralize
-    table class="table table-striped"
-      thead
-        tr
-          - @resource_class.column_names.each do |column_name|
-            th= model_class.human_attribute_name(column_name.to_sym)
-          th=t '.actions', :default => t("helpers.actions")
-      tbody
-        - @resources.each do |resource|
-          tr
-            - resource.class.column_names.each do |column_name|
-              - if column_name == 'id'
-                td= link_to resource.id, url_for(:controller => 'profileables', :action => :show, :id => resource)
-              - else
-                td= resource[column_name]
-            td
-              = link_to t('.edit', :default => t("helpers.links.edit")), edit_polymorphic_path([:user, resource]), :class => 'btn'
-              '
-              = link_to t('.destroy', :default => t("helpers.links.destroy")), [:user, resource], :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn btn-danger'
+= user_tabs do
+  div class="page-header"
+    h3 
+      = @meta_title = t '.title', :default => model_class.model_name.human.pluralize
+      ' 
+      = link_to polymorphic_path([:transactions] + complex_namespace_helper + [@resource_class.to_s.underscore.pluralize]), :class => "btn" do
+        i.icon-time
+        '
+        = t('.transactions', :default => t("helpers.links.transactions"))
 
-    = link_to t('.new', :default => t("helpers.links.new")), new_polymorphic_path([namespace_helper, :user, @resource_class.name.underscore.to_sym]), :class => 'btn btn-primary'
-    '
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), complex_namespace_helper, :class => 'btn'
+  table class="table table-striped"
+    thead
+      tr
+        - @resource_class.column_names.each do |column_name|
+          th= model_class.human_attribute_name(column_name.to_sym)
+        th=t '.actions', :default => t("helpers.actions")
+    tbody
+      - @resources.each do |resource|
+        tr
+          - resource.class.column_names.each do |column_name|
+            - if column_name == 'id'
+              td= link_to resource.id, url_for(:controller => 'profileables', :action => :show, :id => resource)
+            - else
+              td= resource[column_name]
+          td
+            = link_to polymorphic_path(complex_namespace_helper + [resource, :transactions]), :class => 'btn' do
+              i.icon-time
+              '
+              = t('.transactions', :default => t("helpers.links.transactions")) 
+            '
+            = link_to edit_polymorphic_path(complex_namespace_helper + [resource]), :class => 'btn btn-warning' do
+              i.icon-edit
+              '
+              = t('.edit', :default => t("helpers.links.edit"))
+            '
+            = link_to t('.destroy', :default => t("helpers.links.destroy")), complex_namespace_helper + [resource], :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn btn-danger'
+
+  = link_to t('.new', :default => t("helpers.links.new")), new_polymorphic_path([namespace_helper, :user, @resource_class.name.underscore.to_sym]), :class => 'btn btn-primary'
+  '
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), complex_namespace_helper, :class => 'btn'

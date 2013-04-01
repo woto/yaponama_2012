@@ -1,6 +1,7 @@
 class Company < ActiveRecord::Base
   include BelongsToCreator
   include BelongsToUser
+  include Transactionable
 
   attr_accessor :legal_address_type, :actual_address_type
 

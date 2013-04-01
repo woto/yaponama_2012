@@ -11,27 +11,48 @@
     thead
       tr
         th = model_class.human_attribute_name(:id)
-        th = model_class.human_attribute_name(:log_catalog_number)
-        th = model_class.human_attribute_name(:log_manufacturer)
-        th = model_class.human_attribute_name(:log_status)
-        th = model_class.human_attribute_name(:log_notes)
-        th = model_class.human_attribute_name(:log_notes_invisible)
-        th = model_class.human_attribute_name(:log_user)
-        th = model_class.human_attribute_name(:log_order)
-        th = model_class.human_attribute_name(:log_supplier)
-        th = model_class.human_attribute_name(:log_quantity_ordered)
-        th = model_class.human_attribute_name(:log_quantity_available)
-        th = model_class.human_attribute_name(:log_probability)
-        th = model_class.human_attribute_name(:log_min_days)
-        th = model_class.human_attribute_name(:log_max_days)
-        th = model_class.human_attribute_name(:log_buy_cost)
-        th = model_class.human_attribute_name(:log_sell_cost)
-        th = model_class.human_attribute_name(:log_short_name)
-        th = model_class.human_attribute_name(:log_long_name)
-        th = model_class.human_attribute_name(:log_product_id)
-        th = model_class.human_attribute_name(:log_creator_id)
-        th = model_class.human_attribute_name(:log_created_at)
-        th = model_class.human_attribute_name(:log_updated_at)
+        th = model_class.human_attribute_name(:catalog_number_before)
+        th = model_class.human_attribute_name(:catalog_number_after)
+        th = model_class.human_attribute_name(:manufacturer_before)
+        th = model_class.human_attribute_name(:manufacturer_after)
+        th = model_class.human_attribute_name(:status_before)
+        th = model_class.human_attribute_name(:status_after)
+        th = model_class.human_attribute_name(:notes_before)
+        th = model_class.human_attribute_name(:notes_after)
+        th = model_class.human_attribute_name(:notes_invisible_before)
+        th = model_class.human_attribute_name(:notes_invisible_after)
+        th = model_class.human_attribute_name(:user_before)
+        th = model_class.human_attribute_name(:user_after)
+        th = model_class.human_attribute_name(:order_before)
+        th = model_class.human_attribute_name(:order_after)
+        th = model_class.human_attribute_name(:supplier_before)
+        th = model_class.human_attribute_name(:supplier_after)
+        th = model_class.human_attribute_name(:quantity_ordered_before)
+        th = model_class.human_attribute_name(:quantity_ordered_after)
+        th = model_class.human_attribute_name(:quantity_available_before)
+        th = model_class.human_attribute_name(:quantity_available_after)
+        th = model_class.human_attribute_name(:probability_before)
+        th = model_class.human_attribute_name(:probability_after)
+        th = model_class.human_attribute_name(:min_days_before)
+        th = model_class.human_attribute_name(:min_days_after)
+        th = model_class.human_attribute_name(:max_days_before)
+        th = model_class.human_attribute_name(:max_days_after)
+        th = model_class.human_attribute_name(:buy_cost_before)
+        th = model_class.human_attribute_name(:buy_cost_after)
+        th = model_class.human_attribute_name(:sell_cost_before)
+        th = model_class.human_attribute_name(:sell_cost_after)
+        th = model_class.human_attribute_name(:short_name_before)
+        th = model_class.human_attribute_name(:short_name_after)
+        th = model_class.human_attribute_name(:long_name_before)
+        th = model_class.human_attribute_name(:long_name_after)
+        th = model_class.human_attribute_name(:product_id_before)
+        th = model_class.human_attribute_name(:product_id_after)
+        th = model_class.human_attribute_name(:creator_id_before)
+        th = model_class.human_attribute_name(:creator_id_after)
+        th = model_class.human_attribute_name(:created_at_before)
+        th = model_class.human_attribute_name(:created_at_after)
+        th = model_class.human_attribute_name(:updated_at_before)
+        th = model_class.human_attribute_name(:updated_at_after)
         th Товар
         th Денежные транзакции 
         th = model_class.human_attribute_name(:created_at)
@@ -40,44 +61,76 @@
       - @product_transactions.each do |product_transaction|
         tr
           td = link_to product_transaction.id, admin_product_transaction_path(product_transaction)
-          td = product_transaction.log_catalog_number
-          td = product_transaction.log_manufacturer
+          td = product_transaction.catalog_number_before
+          td = product_transaction.catalog_number_after
+          td = product_transaction.manufacturer_before
+          td = product_transaction.manufacturer_after
           td 
             center
-              - if product_transaction.log_status
-                span class="label label-#{product_transaction.log_status}" =' Rails.configuration.products_status[product_transaction.log_status]['title']
-          td = product_transaction.log_notes
-          td = product_transaction.log_notes_invisible
+              - if product_transaction.status_before
+                span class="label label-#{product_transaction.status_before}" =' Rails.configuration.products_status[product_transaction.status_before]['title']
+          td 
+            center
+              - if product_transaction.status_after
+                span class="label label-#{product_transaction.status_after}" =' Rails.configuration.products_status[product_transaction.status_after]['title']
+          td = product_transaction.notes_before
+          td = product_transaction.notes_after
+          td = product_transaction.notes_invisible_before
+          td = product_transaction.notes_invisible_after
 
           td 
-            - if product_transaction.log_user_id
-              = render :partial => "shared/client_button", :locals => {:user_id => product_transaction.log_user_id, :user_label => User.find(product_transaction.log_user_id).to_label}
+            - if product_transaction.user_id_before
+              = render :partial => "shared/client_button", :locals => {:user_id => product_transaction.user_id_before, :user_label => User.find(product_transaction.user_id_before).to_label}
+          td 
+            - if product_transaction.user_id_after
+              = render :partial => "shared/client_button", :locals => {:user_id => product_transaction.user_id_after, :user_label => User.find(product_transaction.user_id_after).to_label}
 
           td 
-            - if product_transaction.log_order_id
-              = link_to admin_order_path(order = Order.find(product_transaction.log_order_id)) do 
+            - if product_transaction.order_id_before
+              = link_to admin_order_path(order = Order.find(product_transaction.order_id_before)) do 
+                =' order.to_label 
+                i.icon-shopping-cart
+          td 
+            - if product_transaction.order_id_after
+              = link_to admin_order_path(order = Order.find(product_transaction.order_id_after)) do 
                 =' order.to_label 
                 i.icon-shopping-cart
 
           td 
-            - if product_transaction.log_supplier_id
-              = render :partial => "shared/supplier_button", :locals => {:supplier_id => product_transaction.log_supplier_id, :supplier_label => Supplier.find(product_transaction.log_supplier_id).to_label}
+            - if product_transaction.supplier_id_before
+              = render :partial => "shared/supplier_button", :locals => {:supplier_id => product_transaction.supplier_id_before, :supplier_label => Supplier.find(product_transaction.supplier_id_before).to_label}
+          td 
+            - if product_transaction.supplier_id_after
+              = render :partial => "shared/supplier_button", :locals => {:supplier_id => product_transaction.supplier_id_after, :supplier_label => Supplier.find(product_transaction.supplier_id_after).to_label}
 
-          td = product_transaction.log_quantity_ordered
-          td = product_transaction.log_quantity_available
-          td = product_transaction.log_probability
-          td = product_transaction.log_min_days
-          td = product_transaction.log_max_days
-          td = product_transaction.log_buy_cost
-          td = product_transaction.log_sell_cost
-          td = product_transaction.log_short_name
-          td = product_transaction.log_long_name
-          td = product_transaction.log_product_id
-          td = product_transaction.log_creator_id
-          td =l product_transaction.log_created_at, :format => :short if product_transaction.log_created_at
-          td =l product_transaction.log_updated_at, :format => :short if product_transaction.log_updated_at
+          td = product_transaction.quantity_ordered_before
+          td = product_transaction.quantity_ordered_after
+          td = product_transaction.quantity_available_before
+          td = product_transaction.quantity_available_after
+          td = product_transaction.probability_before
+          td = product_transaction.probability_after
+          td = product_transaction.min_days_before
+          td = product_transaction.min_days_after
+          td = product_transaction.max_days_before
+          td = product_transaction.max_days_after
+          td = number_to_currency product_transaction.buy_cost_before
+          td = number_to_currency product_transaction.buy_cost_after
+          td = number_to_currency product_transaction.sell_cost_before
+          td = number_to_currency product_transaction.sell_cost_after
+          td = product_transaction.short_name_before
+          td = product_transaction.short_name_after
+          td = product_transaction.long_name_before
+          td = product_transaction.long_name_after
+          td = product_transaction.product_id_before
+          td = product_transaction.product_id_after
+          td = product_transaction.creator_id_before
+          td = product_transaction.creator_id_after
+          td =l product_transaction.created_at_before, :format => :short if product_transaction.created_at_before
+          td =l product_transaction.created_at_after, :format => :short if product_transaction.created_at_after
+          td =l product_transaction.updated_at_before, :format => :short if product_transaction.updated_at_before
+          td =l product_transaction.updated_at_after, :format => :short if product_transaction.updated_at_after
           td = product_transaction.product_id
-          td = product_transaction.money_transactions.map(&:id).join(', ')
+          td = product_transaction.account_transactions.map(&:id).join(', ')
           td =l product_transaction.created_at, :format => :short if product_transaction.created_at
           td =l product_transaction.updated_at, :format => :short if product_transaction.updated_at
 

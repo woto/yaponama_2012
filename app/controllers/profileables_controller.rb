@@ -1,6 +1,6 @@
 class ProfileablesController < ApplicationController
   before_action :set_resource_class
-  before_action :set_resource, only: [:show, :edit, :update, :destroy, :toggle]
+  before_action :set_resource, only: [:show, :edit, :update, :destroy]
   before_action :initialize_on_create, only: [:create]
   before_action :set_user_and_creation_reason, only: [:create, :update]
   before_action :find_approriate_resources, only: [:index]
@@ -12,6 +12,17 @@ class ProfileablesController < ApplicationController
   # GET /names
   # GET /names.json
   def index
+  end
+
+  def transactions
+    if params[:id]
+      @resource = @resource_class.find(params[:id])
+      @transactions = eval "@resource.#{@resource_class.to_s.underscore}_transactions"
+    else
+      @transactions = eval "@user.#{@resource_class.to_s.underscore}_transactions"
+    end
+
+    @transactions = @transactions.order(:id => :desc)
   end
 
   # GET /names/1

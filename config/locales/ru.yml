@@ -5,9 +5,11 @@ ru:
   helpers:
     actions: Действия
     links:
+      transactions: История
       new: Новый
       destroy: Удалить
       edit: Редактировать
+      cancel: Назад
   admin:
     products:
       index:

@@ -1,6 +1,7 @@
 class PostalAddress < ActiveRecord::Base
   include BelongsToUser
   include BelongsToCreator
+  include Transactionable
   has_many :orders
 
   validates :city, :street, :house, :region, :presence => true

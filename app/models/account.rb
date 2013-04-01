@@ -1,6 +1,6 @@
 class Account < ActiveRecord::Base
   belongs_to :accountable, :polymorphic => true, touch: true
-  has_many :money_transactions
+  has_many :account_transactions
 
   # TODO Хотелось бы это переделать в виртуальные методы (вопрос с dirty)
   validates :credit, :numericality => true

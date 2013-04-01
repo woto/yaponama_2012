@@ -1,0 +1,42 @@
+= user_tabs do
+  - model_class = AccountTransaction
+
+  .page-header
+    - if @user
+      = render :partial => "shared/client_button", :locals => {:user_id => @user, :user_label => @user.new_record? ? "Новый покупатель" :  @user.to_label}
+
+  = paginate @account_transactions
+
+  table.table.table-striped
+    thead
+      tr
+        th = model_class.human_attribute_name(:id)
+        th = model_class.human_attribute_name(:account_id)
+        th = model_class.human_attribute_name(:credit_before)
+        th = model_class.human_attribute_name(:credit_after)
+        th = model_class.human_attribute_name(:debit_before)
+        th = model_class.human_attribute_name(:debit_after)
+        th Товарная транзакция
+        th Служебный Комментарий
+        th = model_class.human_attribute_name(:creator_id)
+        th = model_class.human_attribute_name(:created_at)
+    tbody
+      - @account_transactions.each do |account_transaction|
+        tr
+          td = link_to account_transaction.id, admin_account_transaction_path(account_transaction)
+          td 
+            = link_to polymorphic_path([:admin, account_transaction.account]) do
+              - if account_transaction.account.accountable_type == 'User'
+                = render :partial => "shared/client_button", :locals => {:user_id => account_transaction.account.accountable_id, :user_label => account_transaction.account.to_label}
+              - elsif account_transaction.account.accountable_type == 'Supplier'
+                = render :partial => "shared/supplier_button", :locals => {:supplier_id => account_transaction.account.accountable_id, :supplier_label => account_transaction.account.to_label}
+          td = number_to_currency account_transaction.credit_before
+          td = number_to_currency account_transaction.credit_after
+          td = number_to_currency account_transaction.debit_before
+          td = number_to_currency account_transaction.debit_after
+          td = account_transaction.product_transaction.try(:id)
+          td = account_transaction.comment
+          td = account_transaction.creator_id
+          td =l(account_transaction.created_at, :format => :short)
+
+  = paginate @account_transactions

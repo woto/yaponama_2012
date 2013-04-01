@@ -19,8 +19,8 @@
       li.dropdown-submenu
         = link_to "Транзакции", "#"
         ul.dropdown-menu
-          li = link_to "Деньги", admin_user_money_transactions_path(user_id)
           li = link_to "Товары", admin_user_product_transactions_path(user_id)
+          li = link_to "Деньги", admin_user_account_transactions_path(user_id)
       li.dropdown-submenu
         = link_to "Заказы", admin_user_orders_path(user_id)
         ul.dropdown-menu

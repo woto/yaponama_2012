@@ -5,6 +5,7 @@ class Phone < ActiveRecord::Base
   include BelongsToCreator
   include Confirmed
   include NotSelf
+  include Transactionable
 
   has_many :orders
 

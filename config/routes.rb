@@ -20,13 +20,31 @@ end
 
 Yaponama2012::Application.routes.draw do
 
+  concern :transactionable do
+    get 'transactions', :on => :collection
+    get 'transactions', :on => :member
+    get 'transactions'
+  end
+
   concern :profileable do
-    resources :names, :controller => "profileables", :resource_class => 'Name'
-    resources :phones, :controller => "profileables", :resource_class => 'Phone'
-    resources :email_addresses, :controller => "profileables", :resource_class => 'EmailAddress'
-    resources :postal_addresses, :controller => "profileables", :resource_class => 'PostalAddress'
-    resources :cars, :controller => "profileables", :resource_class => 'Car'
-    resources :companies, :controller => "profileables", :resource_class => 'Company'
+    resources :names, :controller => "profileables", :resource_class => 'Name' do
+      concerns :transactionable
+    end
+    resources :phones, :controller => "profileables", :resource_class => 'Phone' do
+      concerns :transactionable
+    end
+    resources :email_addresses, :controller => "profileables", :resource_class => 'EmailAddress' do
+      concerns :transactionable
+    end
+    resources :postal_addresses, :controller => "profileables", :resource_class => 'PostalAddress' do
+      concerns :transactionable
+    end
+    resources :cars, :controller => "profileables", :resource_class => 'Car' do
+      concerns :transactionable
+    end
+    resources :companies, :controller => "profileables", :resource_class => 'Company' do
+      concerns :transactionable
+    end
   end
 
 
@@ -150,7 +168,7 @@ Yaponama2012::Application.routes.draw do
 
     resources :users do
 
-      resources :money_transactions # admin/users/X/money_trasactions
+      resources :account_transactions # admin/users/X/money_trasactions
 
       collection do
         post 'filter' => "users#index"
@@ -178,11 +196,11 @@ Yaponama2012::Application.routes.draw do
     end
 
     resources :accounts
-    resources :money_transactions # admin/money_transactions
+    resources :account_transactions # admin/money_transactions
 
     resources :suppliers do
       resources :product_transactions
-      resources :money_transactions # admin/suppliers/X/money_transactions
+      resources :account_transactions # admin/suppliers/X/money_transactions
     end
 
     # ПОСЛЕ ЭТОЙ СТРОКИ ИДУТ НЕ ПОВТОРЯЮЩИЕСЯ МАРШРУТЫ ТОЛЬКО В АДМИНИСТРАТИВНОЙ ЧАСТИ САЙТА
@@ -192,7 +210,7 @@ Yaponama2012::Application.routes.draw do
     resources :site_settings
   end
 
-  resources :money_transactions # /money_transactions
+  resources :account_transactions # /money_transactions
 
   resources :talks do
     collection do
@@ -247,29 +265,29 @@ Yaponama2012::Application.routes.draw do
 
     collection do
       get :email, :to => 'registers#edit', :with => 'email'
-      patch :email, :to => 'registers#update', :as => 'email', :with => 'email'
+      patch :email, :to => 'registers#update', :with => 'email'
     end
 
     collection do
       get :sms, :to => 'registers#edit', :with => 'sms'
-      patch :sms, :to => 'registers#update', :as => 'sms', :with => 'sms'
+      patch :sms, :to => 'registers#update', :with => 'sms'
     end
 
     collection do
       get :call, :to => 'registers#edit', :with => 'call'
-      patch :call, :to => 'registers#update', :as => 'call', :with => 'call'
+      patch :call, :to => 'registers#update', :with => 'call'
     end
 
     collection do
       get :social, :to => 'registers#edit', :with => 'social'
-      patch :social, :to => 'registers#update', :as => 'call', :with => 'social'
+      patch :social, :to => 'registers#update', :with => 'social'
     end
 
   end
 
   # LOGIN / LOGOUT
-  get 'login' => 'sessions#new', :as => 'login'
-  post 'login' => 'sessions#create', :as => 'login'
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy', :as => 'logout'
 
   # OMNIAUTH

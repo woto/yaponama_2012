@@ -5,6 +5,7 @@ class EmailAddress < ActiveRecord::Base
   include BelongsToCreator
   include Confirmed
   include NotSelf
+  include Transactionable
 
   has_many :emails
   VALID_EMAIL_REGEX = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/

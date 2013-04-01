@@ -12,6 +12,7 @@ ru:
       default_message: <button class="close" data-dismiss="alert">&times;</button>Невозможно продолжить, т.к. форма заполнена не корректно
     labels:
       defaults:
+        comment: Комментарий
         legal_address: Юридический адрес
         actual_address: Фактический адрес
         hide_catalog_number: Скрыть каталожный номер
@@ -158,6 +159,7 @@ ru:
         
     hints:
       defaults:
+        comment: Номер чека, транзакции на персональный кошелек и т.д.
         hide_catalog_number: Скрыть каталожный номер от покупателя
         avisosms_source_address: Прежде чем использовать новое имя, его необходимо зарегистрировать на сайте avisosms.ru
         avisosms_delivery_report: Не проверялось

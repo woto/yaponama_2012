@@ -1,22 +1,22 @@
-class MoneyTransactionsController < ApplicationController
+class AccountTransactionsController < ApplicationController
 
   # GET /admin/transactions
   # GET /admin/transactions.json
   def index
 
-    @money_transactions = MoneyTransaction.all
+    @account_transactions = AccountTransaction.all
 
     if @user
-      @money_transactions = @user.account.money_transactions
+      @account_transactions = @user.account.account_transactions
       klass = @user.class
     end
 
     if @supplier
-      @money_transactions = @supplier.account.money_transactions
+      @account_transactions = @supplier.account.account_transactions
       klass = @supplier.class
     end
 
-    @money_transactions = @money_transactions.order("id DESC").page(params[:page])
+    @account_transactions = @account_transactions.order("id DESC").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,7 +27,7 @@ class MoneyTransactionsController < ApplicationController
   # GET /admin/transactions/1
   # GET /admin/transactions/1.json
   def show
-    @transaction = MoneyTransaction.find(params[:id])
+    @transaction = AccountTransaction.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -38,7 +38,7 @@ class MoneyTransactionsController < ApplicationController
   # GET /admin/transactions/new
   # GET /admin/transactions/new.json
   def new
-    @transaction = MoneyTransaction.new
+    @transaction = AccountTransaction.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -48,17 +48,17 @@ class MoneyTransactionsController < ApplicationController
 
   # GET /admin/transactions/1/edit
   def edit
-    @transaction = MoneyTransaction.find(params[:id])
+    @transaction = AccountTransaction.find(params[:id])
   end
 
   # POST /admin/transactions
   # POST /admin/transactions.json
   def create
-    @transaction = MoneyTransaction.new(params[:transaction])
+    @transaction = AccountTransaction.new(params[:transaction])
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to admin_transaction_path(@transaction), notice: 'MoneyTransaction was successfully created.' }
+        format.html { redirect_to admin_transaction_path(@transaction), notice: 'AccountTransaction was successfully created.' }
         format.json { render json: @transaction, status: :created, location: @transaction }
       else
         format.html { render action: "new" }
@@ -70,11 +70,11 @@ class MoneyTransactionsController < ApplicationController
   # PUT /admin/transactions/1
   # PUT /admin/transactions/1.json
   def update
-    @transaction = MoneyTransaction.find(params[:id])
+    @transaction = AccountTransaction.find(params[:id])
 
     respond_to do |format|
       if @transaction.update_attributes(params[:transaction])
-        format.html { redirect_to admin_transaction_path(@transaction), notice: 'MoneyTransaction was successfully updated.' }
+        format.html { redirect_to admin_transaction_path(@transaction), notice: 'AccountTransaction was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -86,7 +86,7 @@ class MoneyTransactionsController < ApplicationController
   # DELETE /admin/transactions/1
   # DELETE /admin/transactions/1.json
   def destroy
-    @transaction = MoneyTransaction.find(params[:id])
+    @transaction = AccountTransaction.find(params[:id])
     @transaction.destroy
 
     respond_to do |format|

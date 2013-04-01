@@ -1,4 +1,6 @@
 class ProductTransaction < ActiveRecord::Base
+  include BelongsToCreator
+  include BelongsToUser
   belongs_to :product
-  has_many :money_transactions
+  has_many :account_transactions
 end

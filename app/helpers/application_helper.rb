@@ -43,7 +43,7 @@ module ApplicationHelper
 
             { :title => 'Транзакции',  
               :catch => [ 
-                { :controller => 'product_transactions' }, { :controller => 'money_transactions' } ],
+                { :controller => 'product_transactions' }, { :controller => 'account_transactions' } ],
               :link => '#', 
               :class => 'dropdown',
               :dropdown => [
@@ -54,8 +54,8 @@ module ApplicationHelper
                   :dropdown => []
                 },
                 { :title => 'Деньги',  
-                  :catch => [ { :controller => 'money_transactions' } ],
-                  :link => { :controller => 'money_transactions', :action => 'index' },
+                  :catch => [ { :controller => 'account_transactions' } ],
+                  :link => { :controller => 'account_transactions', :action => 'index' },
                   :class => '',
                   :dropdown => []
                 }
