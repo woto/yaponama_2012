@@ -12,6 +12,7 @@ class ProfileablesController < ApplicationController
   # GET /names
   # GET /names.json
   def index
+
   end
 
   def transactions
@@ -117,6 +118,7 @@ class ProfileablesController < ApplicationController
       if @user
         @resources = @resource_class.where(:user_id => @user)
       end
+
     end
 
     def initialize_on_create
