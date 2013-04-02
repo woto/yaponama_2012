@@ -19,7 +19,11 @@ class ProfileablesController < ApplicationController
       @resource = @resource_class.find(params[:id])
       @transactions = eval "@resource.#{@resource_class.to_s.underscore}_transactions"
     else
-      @transactions = eval "@user.#{@resource_class.to_s.underscore}_transactions"
+      if @user
+        @transactions = eval "@user.#{@resource_class.to_s.underscore}_transactions"
+      else
+        @transactions = @resource_class.all
+      end
     end
 
     @transactions = @transactions.order(:id => :desc)
@@ -107,7 +111,12 @@ class ProfileablesController < ApplicationController
     end
 
     def find_approriate_resources
-      @resources = @resource_class.where(:user_id => @user)
+
+      @resources = @resource_class.all
+
+      if @user
+        @resources = @resource_class.where(:user_id => @user)
+      end
     end
 
     def initialize_on_create

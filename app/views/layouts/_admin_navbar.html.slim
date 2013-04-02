@@ -27,6 +27,11 @@
 
               li.divider
 
+              li.dropdown-submenu
+               = link_to "Покупатели", admin_users_path
+               ul.dropdown-menu
+                 li = link_to "Новый", admin_users_path(:user => {:id => ''}), :method => :post
+
               li = link_to admin_names_path do
                 i.icon.icon-user
                 '
@@ -55,11 +60,6 @@
                 | Компании
 
               li.divider
-
-              li.dropdown-submenu
-               = link_to "Покупатели", admin_users_path
-               ul.dropdown-menu
-                 li = link_to "Новый", admin_users_path(:user => {:id => ''}), :method => :post
 
               li = link_to "Поставщики", admin_suppliers_path
 

@@ -36,7 +36,7 @@
           td = number_to_currency account_transaction.debit_after
           td = account_transaction.product_transaction.try(:id)
           td = account_transaction.comment
-          td = account_transaction.creator_id
+          td = render :partial => "shared/client_button", :locals => {:user_id => account_transaction.creator_id, :user_label => User.find(account_transaction.creator_id).to_label}
           td =l(account_transaction.created_at, :format => :short)
 
   = paginate @account_transactions
