@@ -8,6 +8,8 @@ class Product < ActiveRecord::Base
 
   # Продукты по которым ожидается движение
   scope :active, -> { where("STRPOS(?, products.status) > 0", "ordered,pre_supplier,post_supplier,stock") }
+  # TODO позже пригодится для расчета суммы для внесения пользователем для оформления заказа
+  # scope :intersect_statuses, ->(statuses) { where("STRPOS(?, products.status) > 0", statuses) }
 
   def self.summa
     sum("sell_cost * quantity_ordered").to_d
