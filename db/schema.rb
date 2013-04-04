@@ -582,18 +582,22 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.integer  "name_id"
     t.integer  "postal_address_id"
     t.integer  "metro_id"
-    t.integer  "user_id"
-    t.integer  "creator_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "status"
     t.decimal  "delivery_cost",     precision: 8, scale: 2
+    t.string   "status"
     t.integer  "delivery_id"
     t.string   "active"
     t.integer  "phone_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "creation_reason"
     t.text     "notes"
     t.text     "notes_invisible"
+    t.integer  "user_id"
+    t.integer  "creator_id"
   end
+
+  add_index "orders", ["creator_id"], name: "index_orders_on_creator_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "pages", force: true do |t|
     t.string   "path"

@@ -1,6 +1,6 @@
 class AddProfileableFields < ActiveRecord::Migration
   def change
-    [:phones, :names, :email_addresses, :postal_addresses, :cars, :products, :companies].each do |table|
+    [:phones, :names, :email_addresses, :postal_addresses, :cars, :products, :companies, :orders].each do |table|
       add_column table, :creation_reason, :string
       add_column table, :notes, :text
       add_column table, :notes_invisible, :text
