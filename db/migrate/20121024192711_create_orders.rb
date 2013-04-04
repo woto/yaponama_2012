@@ -6,6 +6,13 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :metro_id
       t.integer :user_id
       t.integer :creator_id
+      t.decimal :delivery_cost, :precision => 8, :scale => 2
+      t.string  :status
+      t.references :delivery
+      t.string  :active
+      t.references  :phone
+      t.text :notes
+      t.text :notes_invisible
       t.timestamps
     end
   end
