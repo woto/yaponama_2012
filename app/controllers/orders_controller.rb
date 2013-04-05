@@ -135,6 +135,22 @@ class OrdersController < ApplicationController
     end
   end
 
+  def transactions
+
+    if params[:id]
+      @order = Order.find(params[:id])
+      @transactions = @order.order_transactions
+    else
+      if @user
+        @transactions = @user.order_transactions
+      else
+        @transactions = OrderTransaction.all
+      end
+    end
+
+    @transactions = @transactions.order(:id => :desc)
+  end
+
   private
 
   def order_params

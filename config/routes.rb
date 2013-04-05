@@ -92,8 +92,10 @@ Yaponama2012::Application.routes.draw do
       concerns :profileable
       resources :product_transactions
       resources :products
+
       resources :orders do
         resources :products
+        concerns :transactionable
       end
 
       resource :cashes # /admin/users/X/cashes
@@ -110,6 +112,7 @@ Yaponama2012::Application.routes.draw do
     resources :spare_infos
 
     resources :orders do
+      concerns :transactionable
       resources :products
     end
 
@@ -132,6 +135,7 @@ Yaponama2012::Application.routes.draw do
   end
 
   resources :orders do
+    concerns :transactionable
     resources :products
   end
 
