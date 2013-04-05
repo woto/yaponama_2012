@@ -112,8 +112,8 @@ Yaponama2012::Application.routes.draw do
     resources :spare_infos
 
     resources :orders do
-      concerns :transactionable
       resources :products
+      concerns :transactionable
     end
 
   end
@@ -135,8 +135,8 @@ Yaponama2012::Application.routes.draw do
   end
 
   resources :orders do
-    concerns :transactionable
     resources :products
+    concerns :transactionable
   end
 
 
