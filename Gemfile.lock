@@ -130,13 +130,6 @@ GIT
       execjs
       railties (>= 3.1)
 
-GIT
-  remote: https://github.com/woto/juggernaut.git
-  revision: 4c0e04537f471131adf9ce7e007c6be436569a7a
-  specs:
-    juggernaut (2.1.1)
-      redis
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -179,7 +172,7 @@ GEM
     fastercsv (1.5.5)
     hashie (1.2.0)
     hike (1.2.1)
-    hiredis (0.3.2)
+    hiredis (0.4.5)
     httpauth (0.2.0)
     i18n (0.6.4)
     innertube (1.0.2)
@@ -259,7 +252,7 @@ GEM
       rack (>= 1.0)
     raindrops (0.10.0)
     rake (10.0.4)
-    redis (2.2.2)
+    redis (3.0.3)
     ref (1.0.4)
     riddle (1.5.5)
     ruby-growl (4.0)
@@ -337,12 +330,11 @@ DEPENDENCIES
   debugger
   factory_girl_rails
   fastercsv
-  hiredis (~> 0.3.1)
+  hiredis (~> 0.4.5)
   ipgeobase!
   jbuilder (~> 1.0.1)
   jquery-rails!
   json
-  juggernaut!
   kaminari
   less-rails
   mini_magick
@@ -357,7 +349,7 @@ DEPENDENCIES
   omniauth-yandex
   pg
   rails!
-  redis (~> 2.2.0)
+  redis (~> 3.0.1)
   ruby-growl
   russian
   sanitize

@@ -75,9 +75,12 @@ gem 'yandex_mystem'
 gem 'ipgeobase', :git => 'git://github.com/woto/ipgeobase.git'
 gem 'activemerchant', :require => 'active_merchant', :git => 'https://github.com/Shopify/active_merchant', :ref => 'b14e285774e599697653325c471e1c85a7163d64'
 
-gem "hiredis", "~> 0.3.1"
-gem "redis", "~> 2.2.0", :require => ["redis/connection/hiredis", "redis"]
-gem 'juggernaut', :git => 'https://github.com/woto/juggernaut.git'
+#gem "hiredis", "~> 0.3.1"
+#gem "redis", "~> 2.2.0", :require => ["redis/connection/hiredis", "redis"]
+#gem 'juggernaut', :git => 'https://github.com/woto/juggernaut.git'
+
+gem "redis", "~> 3.0.1"
+gem "hiredis", "~> 0.4.5"
 
 gem 'ruby-growl'
 gem 'ancestry'
@@ -93,6 +96,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+
 gem 'omniauth-yandex'
 gem 'omniauth-vkontakte'
 gem 'omniauth-odnoklassniki'
