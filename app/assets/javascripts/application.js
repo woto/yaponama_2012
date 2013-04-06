@@ -66,3 +66,4 @@
 //=require mustache/mustache.js
 //
 //= require companies
+//= require turbolinks_events
