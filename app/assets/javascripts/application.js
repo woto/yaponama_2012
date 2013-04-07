@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require fake_console
 //
 // #DIRTY TESTS TODO REFACTOR
 //= require scrollbarWidth
