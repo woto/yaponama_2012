@@ -68,3 +68,7 @@
 //
 //= require companies
 //= require turbolinks_events
+//= require history.js/scripts/compressed/history.js
+//= require history.js/scripts/compressed/history.html4.js
+//= require history.js/scripts/compressed/history.adapter.jquery.js 
+//
