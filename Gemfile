@@ -57,7 +57,7 @@ gem 'jbuilder', '~> 1.0.1'
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'less-rails'
-gem "twitter-bootstrap-rails", git: 'https://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem "twitter-bootstrap-rails", github: 'seyhunak/twitter-bootstrap-rails'
 
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'cocoon', :git => 'https://github.com/nathanvda/cocoon'

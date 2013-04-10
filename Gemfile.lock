@@ -87,6 +87,15 @@ GIT
       sprockets (~> 2.8)
 
 GIT
+  remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
+  revision: 98366d05f29e3a920db62540512fb586fc144fa5
+  specs:
+    twitter-bootstrap-rails (2.2.6)
+      actionpack (>= 3.1)
+      execjs
+      railties (>= 3.1)
+
+GIT
   remote: git://github.com/woto/ipgeobase.git
   revision: 07dc8b283d6f932443dd918182ca5ec1273b3cba
   specs:
@@ -120,15 +129,6 @@ GIT
     simple_form (3.0.0.beta1)
       actionpack (>= 4.0.0.beta, < 4.1)
       activemodel (>= 4.0.0.beta, < 4.1)
-
-GIT
-  remote: https://github.com/seyhunak/twitter-bootstrap-rails.git
-  revision: 679fc6ee91b8e77e4f30625ca574c142ac3d5782
-  specs:
-    twitter-bootstrap-rails (2.2.6)
-      actionpack (>= 3.1)
-      execjs
-      railties (>= 3.1)
 
 GEM
   remote: https://rubygems.org/
