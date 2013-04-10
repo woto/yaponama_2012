@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController 
+  include ProductsHlp
 
   before_filter :only => [:create, :update] do
     begin

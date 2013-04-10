@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Products::IncartController < ApplicationController
-  include ProductsHelper
+  include ProductsHlp
 
   before_filter do 
     begin
