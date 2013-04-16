@@ -9,6 +9,7 @@ class Order < ActiveRecord::Base
   belongs_to :phone
   belongs_to :postal_address
   belongs_to :metro
+  belongs_to :shop
 
   has_many :products, :dependent => :destroy
 
@@ -33,6 +34,9 @@ class Order < ActiveRecord::Base
       end
       if delivery.metro_required && metro.blank?
         errors.add(:metro, "Пожалуйста укажите станцию метро")
+      end
+      if delivery.shop_required && shop.blank?
+        errors.add(:shop, "Пожалуйста выберите магазин")
       end
       if delivery.delivery_cost_required && delivery_cost.blank?
         errors.add(:delivery_cost, "Пожалуйста укажите предполагаемую сумму доставки")
