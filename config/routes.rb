@@ -212,6 +212,7 @@ Yaponama2012::Application.routes.draw do
 
     # ПОСЛЕ ЭТОЙ СТРОКИ ИДУТ НЕ ПОВТОРЯЮЩИЕСЯ МАРШРУТЫ ТОЛЬКО В АДМИНИСТРАТИВНОЙ ЧАСТИ САЙТА
     resources :metro
+    resources :shops
     resources :delivery_categories
     resources :deliveries
     resources :site_settings

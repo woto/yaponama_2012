@@ -4,6 +4,7 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :name_id
       t.integer :postal_address_id
       t.integer :metro_id
+      t.integer :shop_id
       t.decimal :delivery_cost, :precision => 8, :scale => 2
       t.string  :status
       t.references :delivery

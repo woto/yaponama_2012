@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130415060159) do
+ActiveRecord::Schema.define(version: 20130416140308) do
 
   create_table "account_transactions", force: true do |t|
     t.integer  "account_id"
@@ -383,18 +383,19 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.string   "name"
     t.text     "notes"
     t.text     "notes_invisible"
-    t.boolean  "available"
+    t.boolean  "available",                default: true
+    t.integer  "delivery_category_id"
+    t.boolean  "name_required",            default: false
+    t.boolean  "postal_address_required",  default: false
+    t.boolean  "full_prepayment_required", default: false
+    t.boolean  "delivery_cost_required",   default: false
+    t.boolean  "phone_required",           default: false
+    t.boolean  "metro_required",           default: false
+    t.boolean  "shop_required",            default: false
+    t.integer  "sequence"
+    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "name_required"
-    t.boolean  "postal_address_required"
-    t.boolean  "full_prepayment_required"
-    t.boolean  "delivery_cost_required"
-    t.boolean  "phone_required"
-    t.boolean  "metro_required"
-    t.integer  "sequence"
-    t.integer  "delivery_category_id"
-    t.string   "image"
   end
 
   create_table "delivery_categories", force: true do |t|
@@ -620,6 +621,7 @@ ActiveRecord::Schema.define(version: 20130415060159) do
     t.integer  "name_id"
     t.integer  "postal_address_id"
     t.integer  "metro_id"
+    t.integer  "shop_id"
     t.decimal  "delivery_cost",     precision: 8, scale: 2
     t.string   "status"
     t.integer  "delivery_id"
@@ -858,6 +860,13 @@ ActiveRecord::Schema.define(version: 20130415060159) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
+  create_table "shops", force: true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "spare_infos", force: true do |t|
     t.string   "catalog_number"
