@@ -29,6 +29,9 @@ end
 
 group :development, :test do
 
+  gem 'traceroute', github: 'amatsuda/traceroute'
+  gem 'rails_best_practices', github: 'railsbp/rails_best_practices'
+
   gem 'debugger'
   #gem 'rspec-rails', '~> 2.12.2'
   #gem 'shoulda'
