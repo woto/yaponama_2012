@@ -15,14 +15,11 @@ class CreateProducts < ActiveRecord::Migration
       t.string :status
       t.integer :probability
 
-      t.references :product
-      t.references :order
-      t.references :supplier
+      t.references :product, index: true
+      t.references :order, index: true
+      t.references :supplier, index: true
 
       t.timestamps
     end
-    add_index :products, :order_id
-    add_index :products, :product_id
-    add_index :products, :supplier_id
   end
 end

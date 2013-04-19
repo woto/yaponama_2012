@@ -1,15 +1,14 @@
 class CreateOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
-      t.integer :name_id
-      t.integer :postal_address_id
-      t.integer :metro_id
-      t.integer :shop_id
+      t.references :name_id, index: true
+      t.references :postal_address_id, index: true
+      t.references :metro_id, index: true
+      t.references :shop_id, index: true
       t.decimal :delivery_cost, :precision => 8, :scale => 2
       t.string  :status
-      t.references :delivery
-      t.string  :active
-      t.references  :phone
+      t.references :delivery, index: true
+      t.references  :phone, index: true
       t.timestamps
     end
   end

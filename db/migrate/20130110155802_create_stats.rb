@@ -7,10 +7,9 @@ class CreateStats < ActiveRecord::Migration
       t.string :title
       t.string :referrer
 
-      t.references :user
+      t.references :user, index: true
 
       t.timestamps
     end
-    add_index :stats, :user_id
   end
 end

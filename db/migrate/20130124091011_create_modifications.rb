@@ -2,8 +2,8 @@ class CreateModifications < ActiveRecord::Migration
   def change
     create_table :modifications do |t|
       t.string :name
-      t.integer :generation_id
-      t.integer :creator_id
+      t.references :generation, index: true
+      t.references :creator, index: true
 
       t.timestamps
     end

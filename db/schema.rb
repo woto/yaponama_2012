@@ -35,6 +35,11 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "updated_at"
   end
 
+  add_index "account_transactions", ["account_id"], name: "index_account_transactions_on_account_id", using: :btree
+  add_index "account_transactions", ["creator_id"], name: "index_account_transactions_on_creator_id", using: :btree
+  add_index "account_transactions", ["product_transaction_id"], name: "index_account_transactions_on_product_transaction_id", using: :btree
+  add_index "account_transactions", ["user_id"], name: "index_account_transactions_on_user_id", using: :btree
+
   create_table "accounts", force: true do |t|
     t.decimal  "debit",            precision: 8, scale: 2, default: 0.0
     t.decimal  "credit",           precision: 8, scale: 2, default: 0.0
@@ -44,13 +49,7 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "updated_at"
   end
 
-  create_table "add_requst_id_to_cars", force: true do |t|
-    t.integer  "request_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "add_requst_id_to_cars", ["request_id"], name: "index_add_requst_id_to_cars_on_request_id", using: :btree
+  add_index "accounts", ["accountable_id", "accountable_type"], name: "index_accounts_on_accountable_id_and_accountable_type", using: :btree
 
   create_table "admin_blocks", force: true do |t|
     t.text     "content"
@@ -155,6 +154,9 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "updated_at"
   end
 
+  add_index "brands", ["brand_id"], name: "index_brands_on_brand_id", using: :btree
+  add_index "brands", ["creator_id"], name: "index_brands_on_creator_id", using: :btree
+
   create_table "calls", force: true do |t|
     t.integer  "phone_id"
     t.string   "file"
@@ -236,6 +238,10 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "updated_at"
   end
 
+  add_index "car_transactions", ["car_id"], name: "index_car_transactions_on_car_id", using: :btree
+  add_index "car_transactions", ["creator_id"], name: "index_car_transactions_on_creator_id", using: :btree
+  add_index "car_transactions", ["user_id"], name: "index_car_transactions_on_user_id", using: :btree
+
   create_table "cars", force: true do |t|
     t.integer  "god"
     t.string   "period"
@@ -310,7 +316,9 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.integer  "creator_id"
   end
 
+  add_index "companies", ["actual_address_id"], name: "index_companies_on_actual_address_id", using: :btree
   add_index "companies", ["creator_id"], name: "index_companies_on_creator_id", using: :btree
+  add_index "companies", ["legal_address_id"], name: "index_companies_on_legal_address_id", using: :btree
   add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
 
   create_table "company_transactions", force: true do |t|
@@ -363,6 +371,10 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "updated_at"
   end
 
+  add_index "company_transactions", ["company_id"], name: "index_company_transactions_on_company_id", using: :btree
+  add_index "company_transactions", ["creator_id"], name: "index_company_transactions_on_creator_id", using: :btree
+  add_index "company_transactions", ["user_id"], name: "index_company_transactions_on_user_id", using: :btree
+
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0
     t.integer  "attempts",   default: 0
@@ -397,6 +409,8 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "deliveries", ["delivery_category_id"], name: "index_deliveries_on_delivery_category_id", using: :btree
 
   create_table "delivery_categories", force: true do |t|
     t.string   "name"
@@ -440,6 +454,10 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "email_address_transactions", ["creator_id"], name: "index_email_address_transactions_on_creator_id", using: :btree
+  add_index "email_address_transactions", ["email_address_id"], name: "index_email_address_transactions_on_email_address_id", using: :btree
+  add_index "email_address_transactions", ["user_id"], name: "index_email_address_transactions_on_user_id", using: :btree
 
   create_table "email_addresses", force: true do |t|
     t.string   "email_address"
@@ -498,6 +516,9 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "updated_at"
   end
 
+  add_index "generations", ["creator_id"], name: "index_generations_on_creator_id", using: :btree
+  add_index "generations", ["model_id"], name: "index_generations_on_model_id", using: :btree
+
   create_table "ipgeobase_ips", id: false, force: true do |t|
     t.integer "start_ip",  limit: 8
     t.integer "end_ip",    limit: 8
@@ -533,6 +554,9 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "updated_at"
   end
 
+  add_index "models", ["brand_id"], name: "index_models_on_brand_id", using: :btree
+  add_index "models", ["creator_id"], name: "index_models_on_creator_id", using: :btree
+
   create_table "modifications", force: true do |t|
     t.string   "name"
     t.integer  "generation_id"
@@ -540,6 +564,9 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "modifications", ["creator_id"], name: "index_modifications_on_creator_id", using: :btree
+  add_index "modifications", ["generation_id"], name: "index_modifications_on_generation_id", using: :btree
 
   create_table "name_transactions", force: true do |t|
     t.integer  "name_id"
@@ -565,6 +592,10 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "updated_at"
   end
 
+  add_index "name_transactions", ["creator_id"], name: "index_name_transactions_on_creator_id", using: :btree
+  add_index "name_transactions", ["name_id"], name: "index_name_transactions_on_name_id", using: :btree
+  add_index "name_transactions", ["user_id"], name: "index_name_transactions_on_user_id", using: :btree
+
   create_table "names", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -583,22 +614,20 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.integer  "order_id"
     t.integer  "user_id"
     t.integer  "creator_id"
-    t.integer  "name_id_before"
-    t.integer  "name_id_after"
-    t.integer  "postal_address_id_before"
-    t.integer  "postal_address_id_after"
-    t.integer  "metro_id_before"
-    t.integer  "metro_id_after"
-    t.integer  "shop_id_before"
-    t.integer  "shop_id_after"
+    t.integer  "name_id_id_before"
+    t.integer  "name_id_id_after"
+    t.integer  "postal_address_id_id_before"
+    t.integer  "postal_address_id_id_after"
+    t.integer  "metro_id_id_before"
+    t.integer  "metro_id_id_after"
+    t.integer  "shop_id_id_before"
+    t.integer  "shop_id_id_after"
     t.decimal  "delivery_cost_before"
     t.decimal  "delivery_cost_after"
     t.string   "status_before"
     t.string   "status_after"
     t.integer  "delivery_id_before"
     t.integer  "delivery_id_after"
-    t.string   "active_before"
-    t.string   "active_after"
     t.integer  "phone_id_before"
     t.integer  "phone_id_after"
     t.datetime "created_at_before"
@@ -619,15 +648,18 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "updated_at"
   end
 
+  add_index "order_transactions", ["creator_id"], name: "index_order_transactions_on_creator_id", using: :btree
+  add_index "order_transactions", ["order_id"], name: "index_order_transactions_on_order_id", using: :btree
+  add_index "order_transactions", ["user_id"], name: "index_order_transactions_on_user_id", using: :btree
+
   create_table "orders", force: true do |t|
-    t.integer  "name_id"
-    t.integer  "postal_address_id"
-    t.integer  "metro_id"
-    t.integer  "shop_id"
-    t.decimal  "delivery_cost",     precision: 8, scale: 2
+    t.integer  "name_id_id"
+    t.integer  "postal_address_id_id"
+    t.integer  "metro_id_id"
+    t.integer  "shop_id_id"
+    t.decimal  "delivery_cost",        precision: 8, scale: 2
     t.string   "status"
     t.integer  "delivery_id"
-    t.string   "active"
     t.integer  "phone_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -639,6 +671,12 @@ ActiveRecord::Schema.define(version: 20130416140308) do
   end
 
   add_index "orders", ["creator_id"], name: "index_orders_on_creator_id", using: :btree
+  add_index "orders", ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
+  add_index "orders", ["metro_id_id"], name: "index_orders_on_metro_id_id", using: :btree
+  add_index "orders", ["name_id_id"], name: "index_orders_on_name_id_id", using: :btree
+  add_index "orders", ["phone_id"], name: "index_orders_on_phone_id", using: :btree
+  add_index "orders", ["postal_address_id_id"], name: "index_orders_on_postal_address_id_id", using: :btree
+  add_index "orders", ["shop_id_id"], name: "index_orders_on_shop_id_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "pages", force: true do |t|
@@ -694,6 +732,10 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "updated_at"
   end
 
+  add_index "phone_transactions", ["creator_id"], name: "index_phone_transactions_on_creator_id", using: :btree
+  add_index "phone_transactions", ["phone_id"], name: "index_phone_transactions_on_phone_id", using: :btree
+  add_index "phone_transactions", ["user_id"], name: "index_phone_transactions_on_user_id", using: :btree
+
   create_table "phones", force: true do |t|
     t.string   "phone"
     t.string   "phone_type"
@@ -747,6 +789,10 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "postal_address_transactions", ["creator_id"], name: "index_postal_address_transactions_on_creator_id", using: :btree
+  add_index "postal_address_transactions", ["postal_address_id"], name: "index_postal_address_transactions_on_postal_address_id", using: :btree
+  add_index "postal_address_transactions", ["user_id"], name: "index_postal_address_transactions_on_user_id", using: :btree
 
   create_table "postal_addresses", force: true do |t|
     t.string   "postcode"
@@ -820,6 +866,10 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "product_transactions", ["creator_id"], name: "index_product_transactions_on_creator_id", using: :btree
+  add_index "product_transactions", ["product_id"], name: "index_product_transactions_on_product_id", using: :btree
+  add_index "product_transactions", ["user_id"], name: "index_product_transactions_on_user_id", using: :btree
 
   create_table "products", force: true do |t|
     t.string   "catalog_number"
@@ -917,6 +967,8 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "uploads", ["user_id"], name: "index_uploads_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.integer  "creator_id"

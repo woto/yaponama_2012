@@ -6,19 +6,19 @@ class Transactionables < ActiveRecord::Migration
         table_model = table_name.to_s.singularize.camelize.constantize
 
         # id привязанного объекта
-        eval "t.references :#{table_name.to_s.singularize}"
+        eval "t.references :#{table_name.to_s.singularize}, index: true"
 
         # Используется для profileable. Не для ProductTransaction
-        t.references :user
+        t.references :user, index: true
 
         # Ну и контроллировать кто это сделал
-        t.references :creator
+        t.references :creator, index: true
 
         # TODO позже разобраться (в Account нету notes_invisible)
         # Выделяется из общей картины, т.к. действует так же, за исключением, что не фикируется автоматически
         # а управляется вручную и плюс ко всему этому имеет дополнительное поле - id товарной транзакции
         if table_model == Account
-          t.references :product_transaction
+          t.references :product_transaction, index: true
           t.text :comment
         end
 
