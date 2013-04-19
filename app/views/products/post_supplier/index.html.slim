@@ -1,9 +1,9 @@
 = user_tabs do
   ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['post_supplier']['title']}"
 
-  = form_tag admin_products_post_supplier_index_path(:user_id => params[:user_id], :order_id => params[:order_id]), :class => "dirtyforms" do |f|
+  = form_tag smart_route({:postfix => [:products, :post_supplier_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path]), :class => "dirtyforms" do |f|
 
-    = render :partial => 'products/index'
+    = render :partial => 'profileables/index'
 
     - options = options_for_select [['Выберите...', nil]] + Supplier.all.collect {|p| [ p.to_label, p.id ]}
 

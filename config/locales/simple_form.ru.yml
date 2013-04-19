@@ -13,14 +13,9 @@ ru:
     labels:
       defaults:
         comment: Комментарий
-        legal_address: Юридический адрес
-        actual_address: Фактический адрес
         hide_catalog_number: Скрыть каталожный номер
-        generation: Поколение
-        modification: Модификация
-        selling: Продается
-        cost: Цена
-        advertisement: Текст объявления
+        short_name: Название
+        long_name: Прочие названия
         site_address: Адрес этого сайта
         site_port: Порт этого сайта
         redis_address: Адрес redis
@@ -61,7 +56,6 @@ ru:
         password_confirmation: Подтверждение пароля
         role: Права
         split_quantity_ordered: Количество первой партии
-        car_number: Автомобильный номер
         buy_cost: Закупочная цена 1 шт.
         sell_cost:  Продажная цена 1 шт.
         order_rule: Правило оплаты
@@ -103,6 +97,12 @@ ru:
         confirmed_by_manager: Подтв.  менеджером
         vin: VIN код
         frame: FRAME код
+        generation: Поколение
+        modification: Модификация
+        car_number: Автомобильный номер
+        selling: Продается
+        cost: Цена
+        advertisement: Текст объявления
         god: Год выпуска
         period: Период выпуска
         dverey: Количество дверей
@@ -130,6 +130,8 @@ ru:
         okpo: ОКПО
         okved: ОКВЭД
         okato: ОКАТО
+        legal_address: Юридический адрес
+        actual_address: Фактический адрес
       company:
         name: Наименование организации
       car:

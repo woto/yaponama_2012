@@ -1,13 +1,16 @@
 # encoding: utf-8
 
 class Products::StockController < ApplicationController
-  include ProductsHlp
+  include ProductsConcern
+  include GridConcern
+
+  before_action :set_grid
 
   before_filter do 
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
-      @products = products_user_order_tab_scope( Product.order("updated_at DESC"), 'checked' )
+      @items = products_user_order_tab_scope( @items, 'checked' )
       products_any_checked_validation
       products_all_statuses_validation ['post_supplier', 'complete', 'cancel']
 
@@ -25,10 +28,10 @@ class Products::StockController < ApplicationController
   def create
 
     ActiveRecord::Base.transaction do
-      @products.each do |product|
-        product.status = 'stock'
-        unless product.save
-          redirect_to :back, :alert => product.errors.full_messages and return
+      @items.each do |item|
+        item.status = 'stock'
+        unless item.save
+          redirect_to :back, :alert => item.errors.full_messages and return
         end
       end
 

@@ -1,37 +1,11 @@
 #toolbar {
-  height: 50px;
+  padding: 10px 0;
 }
 
-#toolbar .affix {
-  background: #eee;
-  right: 0;
-  z-index: 100;
-}
-
-#toolbar .affix .margin-on-left {
-  margin-left: 20px;
+#toolbar-selected {
   margin-top: 5px;
 }
 
-#toolbar .affix .margin-on-right {
-  margin-right: 20px;
-  margin-top: 5px;
-}
-
-#toolbar-affix {
-  top: 50px;
-  width: 100%;
-  height: 40px
-}
-
-#toolbar-affix .pagination {
-  margin: 0px;
-}
-
-#toolbar-affix-inner {
-  margin-left: 0
-}
-
-#toolbar-status {
+#toolbar-per-page {
   margin-top: 5px;
 }

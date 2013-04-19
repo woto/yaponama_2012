@@ -1,11 +1,16 @@
 class OrdersController < ApplicationController 
-  include ProductsHlp
+  include ProductsConcern
+  include GridConcern
+
+  before_filter :set_grid
+
+  #before_action :set_user
 
   before_filter :only => [:create, :update] do
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
-      @products = products_user_order_tab_scope( Product.order("updated_at DESC"), 'checked' ) 
+      @items = products_user_order_tab_scope( @items, 'checked' ) 
       products_any_checked_validation
       products_belongs_to_one_user_validation!
       products_all_statuses_validation ["incart", "inorder", "ordered", "pre_supplier", "cancel"]
@@ -67,7 +72,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-    @order.user = @products.first.user
+    @order.user = @items.first.user
 
     ActiveRecord::Base.transaction do
 
@@ -75,10 +80,10 @@ class OrdersController < ApplicationController
 
         if @order.save
 
-          @products.each do |product|
-            product.order = @order
-            product.status = 'inorder'
-            product.save
+          @items.each do |item|
+            item.order = @order
+            item.status = 'inorder'
+            item.save
           end
 
           format.html { redirect_to_relative_path('inorder') and return }
@@ -106,10 +111,10 @@ class OrdersController < ApplicationController
 
         if @order.save
 
-            @products.each do |product|
-              product.order = @order
-              product.status = 'inorder'
-              product.save
+            @items.each do |item|
+              item.order = @order
+              item.status = 'inorder'
+              item.save
             end
 
             format.html { redirect_to_relative_path('inorder') and return }

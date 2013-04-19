@@ -23,15 +23,21 @@ module Admined
     end
 
     def set_user
-      @user = User.find(params[:user_id]) if params[:user_id]
+      if params[:user_id].present?
+        @user = User.find(params[:user_id]) 
+      end
     end
 
     def set_order
-      @order = Order.find(params[:order_id]) if params[:order_id]
+      if params[:order_id].present?
+        @order = Order.find(params[:order_id])
+      end
     end
 
     def set_supplier
-      @supplier = Supplier.find(params[:supplier_id]) if params[:supplier_id]
+      if params[:supplier_id].present?
+        @supplier = Supplier.find(params[:supplier_id])
+      end
     end
 
   end

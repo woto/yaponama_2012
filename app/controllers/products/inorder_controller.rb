@@ -1,19 +1,23 @@
 # encoding: utf-8
 
 class Products::InorderController < ApplicationController
-  include ProductsHelper
+  include ProductsConcern
+  include GridConcern
+
+  before_action :set_grid
 
   before_filter do
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
-      @products = products_user_order_tab_scope( Product.order("updated_at DESC"), 'checked' ) 
+      @items = products_user_order_tab_scope( @items, 'checked' ) 
       products_any_checked_validation
       products_belongs_to_one_user_validation!
       products_all_statuses_validation ["incart", "inorder", "ordered", "pre_supplier", 'cancel']
 
+
     rescue ValidationError => e
-      redirect_to :back, :alert => e.message
+      redirect_to :back, :alert => e.message and return
     end
 
   end
@@ -26,9 +30,9 @@ class Products::InorderController < ApplicationController
   def order_select
     @order = Order.where(:id => params[:new_order_id]).first
     if @order.present? || params[:new_order_id] == 'new'
-      redirect_to action_admin_products_inorder_path((@order.present? && @order.persisted?) ? @order : 'new', :user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]) and return
+      redirect_to smart_route({:prefix => [:action], :postfix => [:products, :inorder]}, :id => ( (@order.present? && @order.persisted?) ? @order : 'new'), :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path]) and return
     else
-      redirect_to polymorphic_path([:admin, :products, :inorder, :index ], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]), :alert => 'Пожалуйста выберите имеющийся заказ или создайте новый' and return
+      redirect_to smart_route({:postfix => [:products, :inorder, :index ]}, :user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path], :primary_key => params[:primary_key]), :alert => 'Пожалуйста выберите имеющийся заказ или создайте новый' and return
     end
   end
 

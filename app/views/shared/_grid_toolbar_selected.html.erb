@@ -1,0 +1,5 @@
+<div id="toolbar-selected">
+  <% if @resource_class == Product # TODO %>
+    Выделено: <%= products_user_order_tab_scope(@items, 'checked').size %>
+  <% end %>
+</div>

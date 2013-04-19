@@ -1,18 +1,21 @@
 # encoding: utf-8
 
 class Products::SplitController < ApplicationController
-  include ProductsHlp
+  include ProductsConcern
+  include GridConcern
+
+  before_action :set_grid
 
   before_filter do 
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
-      @products = products_user_order_tab_scope( Product.order("updated_at DESC"), 'checked' )
+      @items = products_user_order_tab_scope( @items, 'checked' )
       products_any_checked_validation
       products_all_statuses_validation ['incart', 'inorder', 'ordered', 'pre_supplier', 'post_supplier', 'stock', 'complete']
       products_only_one_validation
 
-      if @products.first.quantity_ordered <= 1
+      if @items.first.quantity_ordered <= 1
         raise ValidationError.new "Невозможно разбить позицию состоящую из одного товара."
       end
 
@@ -29,24 +32,24 @@ class Products::SplitController < ApplicationController
 
 
   def create
-    product = @products.first
+    item = @items.first
     quantity = params[:quantity].to_i
 
-    if quantity.to_i < 1 || quantity.to_i >= product.quantity_ordered
-      redirect_to :back, :alert => "Разбитие позиции не удалось, т.к. введено не корректное значение для первой партии. Число первой партии не может быть более #{product.quantity_ordered.to_i - 1}." and return
+    if quantity.to_i < 1 || quantity.to_i >= item.quantity_ordered
+      redirect_to :back, :alert => "Разбитие позиции не удалось, т.к. введено не корректное значение для первой партии. Число первой партии не может быть более #{item.quantity_ordered.to_i - 1}." and return
     end
 
-    p1 = @products.first.dup
-    p2 = @products.first.dup
+    p1 = @items.first.dup
+    p2 = @items.first.dup
 
-    p1.product = p2.product = product
+    p1.product = p2.product = item 
 
     p1.quantity_ordered = quantity
-    p2.quantity_ordered = product.quantity_ordered - quantity
+    p2.quantity_ordered = item.quantity_ordered - quantity
 
     ActiveRecord::Base.transaction do
       # Run callbacks, but don't validate
-      product.update_attribute(:status, "cancel")
+      item.update_attribute(:status, "cancel")
 
       p1.save
       p2.save

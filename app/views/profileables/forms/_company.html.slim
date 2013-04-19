@@ -1,5 +1,5 @@
 h4.bottom-space Реквизиты компании
-= f.input :ownership
+= f.input :ownership, :collection => Rails.configuration.company_ownerships.map {|k,v| [v,k]}.to_a, :as => :radio_buttons
 = f.input :name
 = f.input :inn
 = f.input :kpp

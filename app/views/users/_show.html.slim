@@ -11,13 +11,13 @@
 
   - array.each do |item|
     h4.hover-profileable
-      = link_to polymorphic_path(complex_namespace_helper + [item[:assoc].pluralize]) do
+      = link_to smart_route({:postfix => [item[:assoc].pluralize]}, :user_id => params[:user_id]) do
         span
           i.icon class="icon-#{item[:icon]}" 
           '
           = item[:title]
       '
-      = link_to new_polymorphic_path(complex_namespace_helper + [item[:assoc]]), :style => "visibility: hidden", :class => "btn btn-mini btn-primary plus-profileable" do
+      = link_to smart_route({:prefix => [:new], :postfix => [item[:assoc]]}, :user_id => params[:user_id]), :style => "visibility: hidden", :class => "btn btn-mini btn-primary plus-profileable" do
         i.icon-plus
     - @user.send(item[:assoc].pluralize).each do |partial|
       .profileable-item.left-space

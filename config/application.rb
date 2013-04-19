@@ -119,12 +119,21 @@ module Yaponama2012
       'manager' => 'Добавлено менеджером'
     }
 
+    config.user_postal_address_creation_reason = {
+    }
+
+    config.user_car_creation_reason = {
+    }
+
+    config.user_company_creation_reason = {
+    }
+
     # Orders
     config.orders_status = {
       'all' => {
         'real' => false,
-        'title' => 'Все',
-        'hint' => 'Все заказы, находящиеся в разных статусах.'
+        'title' => "Все",
+        'hint' => "Все заказы, находящиеся в разных статусах."
       },
       'open' => {
         'real' => true,
@@ -282,6 +291,11 @@ module Yaponama2012
       'unknown' => 'Городской/Или другие страны'
     }
 
+    config.company_ownerships = {
+      'individual' => 'Индивидуальный предприниматель',
+      'legal' => 'Юридическое лицо'
+    }
+
     config.phone_types_keys = config.phone_types.keys
 
     config.default_user_role = 'guest'
@@ -298,31 +312,36 @@ module Yaponama2012
         'password_required' => false,
         'real' => false,
         'title' => 'Все',
-        'title_plural' => 'Все'
+        'title_plural' => 'Все',
+        'privileged' => false
       },
       'admin' => {
         'password_required' => true,
         'real' => true,
         'title' => 'Администратор',
-        'title_plural' => 'Администраторы'
+        'title_plural' => 'Администраторы',
+        'privileged' => true
       },
       'manager' => {
         'password_required' => true,
         'real' => true,
         'title' => 'Менеджер',
-        'title_plural' => 'Менеджеры'
+        'title_plural' => 'Менеджеры',
+        'privileged' => true
       },
       'user' => {
         'password_required' => true,
         'real' => true,
         'title' => 'Покупатель',
-        'title_plural' => 'Покупатели'
+        'title_plural' => 'Покупатели',
+        'privileged' => false
       },
       'guest' => {
         'password_required' => false,
         'real' => true,
-         'title' => 'Гость',
-         'title_plural' => 'Гости'
+        'title' => 'Гость',
+        'title_plural' => 'Гости',
+        'privileged' => false
       }
     }
 
@@ -342,6 +361,21 @@ module Yaponama2012
       .select{ |k, v| v["real"] == true }
       .select{ |k, v| v["password_required"] == false }
       .keys
+
+
+    # Привилeгированные 
+    config.user_roles_privileged_keys = config.user_roles
+      .select{ |k, v| v["real"] == true }
+      .select{ |k, v| v["privileged"] == true }
+      .keys
+
+    # Не привилeгированные 
+    config.user_roles_not_privileged_keys = config.user_roles
+      .select{ |k, v| v["real"] == true }
+      .select{ |k, v| v["privileged"] == false }
+      .keys
+
+
 
     #config.avisosms = {
     #  username: 'username',

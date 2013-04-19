@@ -58,25 +58,86 @@ ru:
         notes: Комментарий
         notes_invisible: Служ. зам.
         creator_id: Создатель
-        created_at: Создан
-        updated_at: Изменен
-      product:
-        short_name: Название
-        long_name: Всевозможные названия
-        catalog_number: Артикул
-        manufacturer: Производитель
-        quantity_available: Дост. шт.
-        quantity_ordered: Заказ. шт.
-        probability: Вероятность
-        min_days: Мин. срок
-        max_days: Макс. срок
-        buy_cost: Сумма закупки
-        sell_cost: Сумма продажи
-        status: Статус
-        notes: Заметки
-        notes_invisible: Служ. заметки
-        user: Клиент
-        order: Заказ
-        supplier: Поставщик
-        created_at: Создан
-        updated_at: Изменен
+      name:
+        name: ФИО
+      car:
+        kpp: Тип коробки переключения передач (КПП)
+      company:
+        ownership: Орг.-прав. форма
+        inn: ИНН
+        kpp: КПП
+        ogrn: ОГРН
+        account: Расчетный счёт
+        bank: Наименование банка
+        correspondent: Корреспондентский счет
+        bik: БИК
+        okpo: ОКПО
+        okved: ОКВЭД
+        okato: ОКАТО
+        legal_address_id: Юрид. адрес
+        actual_address_id: Факт. адрес
+        name: Наим. организации
+
+  created_at: Дата создания
+  updated_at: Дата изменения
+  creation_reason: Причина создания
+  notes: Заметки
+  notes_invisible: Служ. заметки
+  user_id: Покупатель
+  creator_id: Кто изм. или созд.
+  id: ID
+  confirmed_by_user: Подтв. покупателем
+  confirmed_by_manager: Подтв. менеджером
+  manager_confirmation_datetime: Дата подтв. менеджером
+  user_confirmation_datetime: Дата подтв. покупателем
+  order_id: № заказа
+  supplier_id: Поставщик
+  catalog_number: Артикул
+  manufacturer: Производитель
+  quantity_available: Доступно шт.
+  quantity_ordered: Заказано шт.
+  buy_cost: Сумма закупки
+  sell_cost: Сумма продажи
+  phone: Номер телефона
+  phone_type: Тип номера
+  short_name: Название
+  long_name: Всевозможные названия
+  probability: Вероятность
+  min_days: Мин. срок
+  max_days: Макс. срок
+  status: Статус
+  order: Заказ
+  supplier: Поставщик
+  hide_catalog_number: Артикул скрыт
+  product_id: Род-ий товар
+  email_address: E-mail адрес
+  postcode: Почтовый индекс
+  region: Регион
+  city: Город
+  street: Улица
+  house: Дом
+  room: Квартира
+  vin: VIN код
+  frame: FRAME код
+  generation: Поколение
+  modification: Модификация
+  car_number: Автомобильный номер
+  selling: Продается
+  cost: Цена
+  advertisement: Текст объявления
+  god: Год выпуска
+  period: Период выпуска
+  dverey: Количество дверей
+  rul:  Расположение руля
+  torg: Торг
+  brand: Марка
+  model: Модель
+  dvigatel: Объем двигателя (литров)
+  tip: Тип двигателя
+  moschnost: Мощность двигателя (лошадинных сил)
+  privod: Привод
+  tip_kuzova: Тип кузова
+  kod_kuzova: Код кузова
+  kod_dvigatelya: Код двигателя
+  rinok: Рынок
+  komplektaciya: Комплектация

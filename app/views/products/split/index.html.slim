@@ -2,9 +2,9 @@
   ul.breadcrumb : li Разбитие позиции на партии
 
 
-  = form_tag admin_products_split_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]), :class => "dirtyforms" do |f|
+  = form_tag smart_route({:postfix => [:products, :split_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path]), :class => "dirtyforms" do |f|
 
-    = render :partial => 'products/index'
+    = render :partial => 'profileables/index'
 
     = text_field_tag :quantity
 

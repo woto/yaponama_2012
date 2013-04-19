@@ -1,13 +1,16 @@
 # encoding: utf-8
 
 class Products::PostSupplierController < ApplicationController
-  include ProductsHlp
+  include ProductsConcern
+  include GridConcern
+
+  before_action :set_grid
 
   before_filter do 
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
-      @products = products_user_order_tab_scope( Product.order("updated_at DESC"), 'checked' )
+      @items = products_user_order_tab_scope( @items, 'checked' )
       products_any_checked_validation
       products_all_statuses_validation ['pre_supplier', 'post_supplier', 'stock', 'cancel']
 
@@ -25,9 +28,9 @@ class Products::PostSupplierController < ApplicationController
   def create
     supplier = Supplier.where(:id => params[:supplier_id]).first
 
-    @products.each do |product|
-      if ['stock', 'cancel'].include? product.status
-        unless product.supplier == supplier
+    @items.each do |item|
+      if ['stock', 'cancel'].include? item.status
+        unless item.supplier == supplier
           redirect_to :back, :alert => "Отменить операцию можно только выбрав именно того же самого поставщика у которого был осуществлен заказ." and return
         end
       end
@@ -37,11 +40,11 @@ class Products::PostSupplierController < ApplicationController
       redirect_to :back, :alert => "Пожалуйста выберите поставщика." and return
     end
 
-    @products.each do |product|
-      product.supplier = supplier
-      product.status = 'post_supplier'
-      unless product.save
-        redirect_to :back, :alert => product.errors.full_messages and return
+    @items.each do |item|
+      item.supplier = supplier
+      item.status = 'post_supplier'
+      unless item.save
+        redirect_to :back, :alert => item.errors.full_messages and return
       end
     end
 

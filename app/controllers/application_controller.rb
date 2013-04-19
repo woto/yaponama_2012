@@ -8,13 +8,27 @@ class ApplicationController < ActionController::Base
   include CurrentUserInModel
   include SmsSenderHelper
   helper_method :current_user
-  helper_method :namespace_helper
-  helper_method :complex_namespace_helper
-  helper_method :complex_namespace_helper2
+  #helper_method :namespace_helper
+  #helper_method :complex_namespace_helper
+  helper_method :smart_route
   before_action :set_user_time_zone
   before_action :ipgeobase
+  helper_method :visible_columns
+
+  helper_method :sort_column
+  helper_method :sort_direction
+
+  before_filter :set_cache_buster
+
+
 
   private
+
+  def set_cache_buster
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  end
 
   def ipgeobase
 
@@ -115,22 +129,45 @@ class ApplicationController < ActionController::Base
   end
 
 
-  def namespace_helper
-    namespace = nil
+  #def namespace_helper
+  #  namespace = nil
 
-    if slash_index = params[:controller].index('/')
-      namespace = params[:controller][0...slash_index]
+  #  if slash_index = params[:controller].index('/')
+  #    namespace = params[:controller][0...slash_index]
+  #  end
+
+  #  namespace
+  #end
+
+  #def complex_namespace_helper
+  #  #(namespace_helper == 'admin') ? [namespace_helper, @user] : ( namespace_helper == 'products' ? [:user] : [:user])
+  #  namespace_helper == 'admin' ? [namespace_helper, @user] : [:user]
+  #end
+
+  def smart_route(first, second = {})
+
+    res = []
+
+    res += first[:prefix] if first[:prefix]
+
+    if params[:controller].include? 'admin'
+      res += [:admin]
+      if second[:user_id]
+        res += [:user]
+      end
+    else
+      res += [:user]
+      second.delete :user_id if second[:user_id]
     end
 
-    namespace
-  end
+    if second[:order_id]
+      res += [:order]
+    end
 
-  def complex_namespace_helper
-    [namespace_helper, namespace_helper == 'admin' ? @user : :user]
-  end
+    res += first[:postfix] if first[:postfix]
 
-  def complex_namespace_helper2
-    [namespace_helper, namespace_helper == 'admin' ? @user : nil]
+    polymorphic_path(res, second)
+
   end
 
   def current_user
@@ -185,6 +222,18 @@ private
 
   def set_user
     @user = current_user
+  end
+
+  def visible_columns
+    @visible_columns = []
+
+    @grid_class::COLUMNS.each do |column_name, column_settings| 
+      if eval("@grid.#{column_name}_visible") == '1'
+        @visible_columns << column_name
+      end
+    end
+
+    @visible_columns
   end
 
 end

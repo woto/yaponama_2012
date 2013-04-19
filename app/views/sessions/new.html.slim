@@ -1,4 +1,4 @@
-= form_tag polymorphic_path([namespace_helper, :login]), :method => :post, :class => 'form-signin' do
+= form_tag login_path, :method => :post, :class => 'form-signin' do
   h2.form-signin-heading Вход на сайт
   = text_field_tag :login, params[:login], :class => "input-block-level", :type => "text", :placeholder => "E-mail или телефон"
   = text_field_tag :password, nil, :class => "input-block-level", :type => "password", :placeholder => "Пароль"

@@ -5,7 +5,7 @@ class PostalAddress < ActiveRecord::Base
   has_many :orders
 
   validates :city, :street, :house, :region, :presence => true
-  validates :postcode, :presence => true, length: {is: 6}
+  validates :postcode, :presence => true, length: {is: 6}, :numericality => { :only_integer => true }
 
   def to_label
     "#{postcode} - #{region} - #{city} - #{street} - #{house} - #{room} - #{notes} - #{notes_invisible}"

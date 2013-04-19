@@ -20,17 +20,20 @@
                 ul.dropdown-menu
                   - Rails.configuration.products_status.each do |k, v|
                     li 
-                      = link_to admin_products_path(:status => k) do
-                        =' v["title"]
+                      /= link_to polymorphic_url( [namespace_helper, :products, {:status => k}] ) do
+                      = link_to url_for(:user_id => nil, :controller => '/admin/products', :action => :index, :status => k) do
                         - if v['badge'].present?
                           span class="badge badge-#{k}" = v['badge']
-
-              li.divider
+                        '
+                        = v["title"]
 
               li.dropdown-submenu
-               = link_to "Покупатели", admin_users_path
-               ul.dropdown-menu
-                 li = link_to "Новый", admin_users_path(:user => {:id => ''}), :method => :post
+                a href="#" Транзакции 
+                ul.dropdown-menu
+                  li = link_to "Товар", admin_products_transactions_path
+                  li = link_to "Деньги", admin_account_transactions_path
+
+              li.divider
 
               li = link_to admin_names_path do
                 i.icon.icon-user
@@ -61,13 +64,12 @@
 
               li.divider
 
-              li = link_to "Поставщики", admin_suppliers_path
-
               li.dropdown-submenu
-                a href="#" Транзакции 
-                ul.dropdown-menu
-                  li = link_to "Товар", admin_product_transactions_path
-                  li = link_to "Деньги", admin_account_transactions_path
+               = link_to "Покупатели", admin_users_path
+               ul.dropdown-menu
+                 li = link_to "Новый", admin_users_path(:user => {:id => ''}), :method => :post
+
+              li = link_to "Поставщики", admin_suppliers_path
 
           li.dropdown
             a.ignoredirty.dropdown-toggle href="#" data-toggle="dropdown"

@@ -1,13 +1,17 @@
 # encoding: utf-8
 
 class Products::IncartController < ApplicationController
-  include ProductsHlp
+  include ProductsConcern
+  include GridConcern
+
+  before_action :set_grid
+
 
   before_filter do 
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
-      @products = products_user_order_tab_scope( Product.order("updated_at DESC"), 'checked' ) 
+      @items = products_user_order_tab_scope( @items, 'checked' ) 
       products_any_checked_validation
       products_all_statuses_validation ['incart', 'inorder', 'ordered', 'pre_supplier', 'cancel']
 
@@ -23,12 +27,12 @@ class Products::IncartController < ApplicationController
 
   def create
 
-    @products.each do |product|
-      product.status = 'incart'
+    @items.each do |item|
+      item.status = 'incart'
       # TODO надо/не надо?
-      #product.order = nil
-      unless product.save
-        redirect_to :back, :alert => product.errors.full_messages and return
+      #item.order = nil
+      unless item.save
+        redirect_to :back, :alert => item.errors.full_messages and return
       end
     end
 

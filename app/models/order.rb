@@ -1,9 +1,9 @@
 #encoding: utf-8
 
 class Order < ActiveRecord::Base
-  include Transactionable
   include BelongsToUser
   include BelongsToCreator
+  include Transactionable
 
   belongs_to :delivery
   belongs_to :name

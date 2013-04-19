@@ -1,11 +1,11 @@
-=user_tabs do
+= user_tabs do
   ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['inorder']['title']}"
 
-  = form_tag order_select_admin_products_inorder_index_path(:user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path]), :class => "dirtyforms" do |f|
+  = form_tag smart_route({:prefix => [:order_select], :postfix => [:products, :inorder_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path] ), :class => "dirtyforms" do |f|
 
-    = render :partial => 'products/index'
+    = render :partial => 'profileables/index'
     br  
-    - options = options_for_select [['Выберите...', nil], ['Новый заказ', 'new']] + @products.first.user.orders.all.map{|order| [order.to_label, order.id]}
+    - options = options_for_select [['Выберите...', nil], ['Новый заказ', 'new']] + @items.first.user.orders.all.map{|order| [order.to_label, order.id]}
     = select_tag(:new_order_id, options)
     / - step = session['orders'][session['orders']['current_order_id']]['step']
     /- step = 'order'
@@ -18,9 +18,9 @@
       = submit_tag "Далее", :class => "btn btn-primary"
 
 
-  //////////- options = options_for_select [['Please select ...', nil], ['New order', 'new']] + @products.first.user.orders.all.map{|order| [order.to_label, order.id]}
+  //////////- options = options_for_select [['Please select ...', nil], ['New order', 'new']] + @items.first.user.orders.all.map{|order| [order.to_label, order.id]}
   //////////= select_tag(:new_order_id, options)
-  ///////////- @products.each do |product|
+  ///////////- @items.each do |product|
   ///////////  = hidden_field_tag 'product_ids[]', product.id
   ///////////= select_tag(:order_id, op)
   /////////// = f.association :delivery, :collection => Delivery.where(:available => true).order(:sequence), :prompt => "Choose a Company", :prompt => "Choose...", :include_blank => 'New'

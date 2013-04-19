@@ -25,9 +25,13 @@ body
         .collapse.nav-collapse
           ul.nav
             li
-              = link_to "Заказы", orders_path
+              = link_to "Заказы", user_orders_path
             li
-              = link_to "Корзина", products_path(:status => 'incart')
+              = link_to "Корзина", user_products_path(:status => 'incart')
+            li
+              = link_to "Оплата", "#"
+            li
+              = link_to "Доставка", "#"
             / TODO пока просто перенес
             - if content_for :pages_controler
               = yield(:pages_controller)
@@ -55,11 +59,10 @@ body
     = yield :form_error
 
     .row-fluid
-      .span7
+      .span8.bottom-space
         = yield
-      .span5.well
+      .span4.bottom-space
         = render :partial => "shared/chat"
-
 
     footer
       p &copy; Company 2012

@@ -20,6 +20,11 @@ end
 
 Yaponama2012::Application.routes.draw do
 
+  concern :filterable do
+    match 'filter', :via => [:get, :post], :on => :collection
+    match 'filter', :via => [:get, :post]
+  end
+
   concern :transactionable do
     get 'transactions', :on => :collection
     get 'transactions', :on => :member
@@ -29,21 +34,27 @@ Yaponama2012::Application.routes.draw do
   concern :profileable do
     resources :names, :controller => "profileables", :resource_class => 'Name' do
       concerns :transactionable
+      concerns :filterable
     end
     resources :phones, :controller => "profileables", :resource_class => 'Phone' do
       concerns :transactionable
+      concerns :filterable
     end
     resources :email_addresses, :controller => "profileables", :resource_class => 'EmailAddress' do
       concerns :transactionable
+      concerns :filterable
     end
     resources :postal_addresses, :controller => "profileables", :resource_class => 'PostalAddress' do
       concerns :transactionable
+      concerns :filterable
     end
     resources :cars, :controller => "profileables", :resource_class => 'Car' do
       concerns :transactionable
+      concerns :filterable
     end
     resources :companies, :controller => "profileables", :resource_class => 'Company' do
       concerns :transactionable
+      concerns :filterable
     end
   end
 
@@ -84,17 +95,37 @@ Yaponama2012::Application.routes.draw do
     concerns :profileable
 
     resources :users do
+
+      concerns :productable
+
       get 'index'
       get 'edit'
-      get '', action: 'show'
+      get '', action: 'show', :as => 'show'
       patch '', action: 'update'
 
       concerns :profileable
-      resources :product_transactions
-      resources :products
+
+      resources :products do
+        concerns :transactionable
+        concerns :filterable
+        collection do
+          get 'status/:status' => "products#index"
+          delete 'multiple_destroy' => "products#multiple_destroy"
+        end
+      end
 
       resources :orders do
-        resources :products
+        concerns :productable
+
+        resources :products do
+          concerns :transactionable
+          concerns :filterable
+          collection do 
+            get 'status/:status' => "products#index"
+            delete 'multiple_destroy' => "products#multiple_destroy"
+          end
+        end
+        concerns :filterable
         concerns :transactionable
       end
 
@@ -105,40 +136,59 @@ Yaponama2012::Application.routes.draw do
 
     concerns :productable
 
-    resources :products do
-      resources :product_transactions
+    namespace 'products' do
+      get 'transactions'
     end
-    resources :product_transactions
+
+    resources :products do
+      concerns :transactionable
+      concerns :filterable
+      collection do
+        get 'status/:status' => "products#index"
+        delete 'multiple_destroy' => "products#multiple_destroy"
+      end
+
+    end
     resources :spare_infos
 
     resources :orders do
-      resources :products
-      concerns :transactionable
+      resources :products do
+        concerns :transactionable
+        concerns :filterable
+      end
     end
 
   end
 
-  concerns :productable
-
-  resources :products do
-    collection do
-      post 'remember'
-    end
-    resources :product_transactions
-  end
-
-  resources :product_transactions
   resources :spare_infos
 
   resource :user  do
+    concerns :productable
+
+    resources :products do
+      collection do
+        get 'status/:status' => "products#index"
+        delete 'multiple_destroy' => "products#multiple_destroy"
+      end
+      concerns :filterable
+      concerns :transactionable
+    end
+
+    resources :orders do
+      concerns :productable
+      resources :products do
+        concerns :filterable
+        concerns :transactionable
+        collection do
+          get 'status/:status' => "products#index"
+          delete 'multiple_destroy' => "products#multiple_destroy"
+        end
+      end
+      concerns :transactionable
+    end
+
     concerns :profileable
   end
-
-  resources :orders do
-    resources :products
-    concerns :transactionable
-  end
-
 
   # .../admin/XXX
   namespace :admin do
@@ -184,8 +234,8 @@ Yaponama2012::Application.routes.draw do
     end
 
     resources :products do
+      concerns :transactionable
       collection do
-        post 'remember'
         delete 'multiple_destroy' => "products#multiple_destroy"
       end
       
@@ -206,8 +256,10 @@ Yaponama2012::Application.routes.draw do
     resources :account_transactions # admin/money_transactions
 
     resources :suppliers do
-      resources :product_transactions
       resources :account_transactions # admin/suppliers/X/money_transactions
+      resources :products do
+        concerns :transactionable
+      end
     end
 
     # ПОСЛЕ ЭТОЙ СТРОКИ ИДУТ НЕ ПОВТОРЯЮЩИЕСЯ МАРШРУТЫ ТОЛЬКО В АДМИНИСТРАТИВНОЙ ЧАСТИ САЙТА

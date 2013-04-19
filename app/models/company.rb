@@ -18,6 +18,8 @@ class Company < ActiveRecord::Base
   before_validation :before
   after_validation :after
 
+  validates :ownership, :presence => true, :inclusion => { :in => Rails.configuration.company_ownerships.keys }
+
   def before
 
     # Выставляем пользователя и обратаываем ситуацию, когда только ввели один адрес
@@ -81,6 +83,10 @@ class Company < ActiveRecord::Base
   #
   #
   #end
+
+  def to_label
+    'TODO'
+  end
 
 
 end

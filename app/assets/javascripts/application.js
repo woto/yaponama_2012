@@ -72,3 +72,4 @@
 //= require history.js/scripts/compressed/history.html4.js
 //= require history.js/scripts/compressed/history.adapter.jquery.js 
 //
+//= require tooltip_popover_rel

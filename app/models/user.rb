@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   #has_many :comments
   
-  [:phone, :name, :email_address, :postal_address, :car, :company].each do |table_name|
+  [:phone, :name, :email_address, :postal_address, :car, :company, :order].each do |table_name|
     has_many "#{table_name}_transactions".to_sym
   end
 
@@ -146,47 +146,47 @@ class User < ActiveRecord::Base
   before_validation :set_relational_attributes
 
   def set_relational_attributes
-    if names
-      names.each do |name|
-        name.user = self
-      end
-    end
+    #if names
+    #  names.each do |name|
+    #    name.user = self
+    #  end
+    #end
 
-    if phones
-      phones.each do |phone|
-        phone.user = self
-      end
-    end
+    #if phones
+    #  phones.each do |phone|
+    #    phone.user = self
+    #  end
+    #end
 
-    if email_addresses
-      email_addresses.each do |email_address|
-        email_address.user = self
-      end
-    end
+    #if email_addresses
+    #  email_addresses.each do |email_address|
+    #    email_address.user = self
+    #  end
+    #end
 
-    if postal_addresses
-      postal_addresses.each do |postal_address|
-        postal_address.user = self
-      end
-    end
+    #if postal_addresses
+    #  postal_addresses.each do |postal_address|
+    #    postal_address.user = self
+    #  end
+    #end
 
-    if cars
-      cars.each do |car|
-        car.user = self
-      end
-    end
+    #if cars
+    #  cars.each do |car|
+    #    car.user = self
+    #  end
+    #end
 
-    if products
-      products.each do |product|
-        product.user = self
-      end
-    end
+    #if products
+    #  products.each do |product|
+    #    product.user = self
+    #  end
+    #end
 
-    if orders
-      orders.each do |order|
-        order.user = self
-      end
-    end
+    #if orders
+    #  orders.each do |order|
+    #    order.user = self
+    #  end
+    #end
 
   end
 

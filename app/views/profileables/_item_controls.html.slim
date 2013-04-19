@@ -1,7 +1,6 @@
 .profileable-item-control style="visibility: hidden; display: inline"
-  |  
-  a.btn.btn-warning.btn-mini href="#{edit_polymorphic_path(complex_namespace_helper + [resource])}" role="button" data-id="#{resource.id}" data-toggle="modal"
-    i.icon-edit
-  |  
-  = link_to polymorphic_path(complex_namespace_helper + [resource]), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => "btn btn-danger btn-mini" do
-    i.icon-remove
+  = link_to smart_route({:prefix => [:edit], :postfix => [resource]}, :id => resource.id, :user_id => params[:user_id]), data: {toggle: "modal"}, class: "btn btn-warning btn-mini" do
+    i.icon-edit 
+  '
+  = link_to smart_route({:postfix => [resource]}, :id => resource.id, :user_id => params[:user_id]), method: 'delete', data: {toggle: "modal", :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))}, class: "btn btn-danger btn-mini" do
+    i.icon-trash

@@ -445,8 +445,8 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.string   "email_address"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "confirmed_by_user"
-    t.boolean  "confirmed_by_manager"
+    t.boolean  "confirmed_by_user",             default: false
+    t.boolean  "confirmed_by_manager",          default: false
     t.datetime "user_confirmation_datetime"
     t.datetime "manager_confirmation_datetime"
     t.string   "confirmation_token"
@@ -589,6 +589,8 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.integer  "postal_address_id_after"
     t.integer  "metro_id_before"
     t.integer  "metro_id_after"
+    t.integer  "shop_id_before"
+    t.integer  "shop_id_after"
     t.decimal  "delivery_cost_before"
     t.decimal  "delivery_cost_after"
     t.string   "status_before"
@@ -697,8 +699,8 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.string   "phone_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "confirmed_by_user"
-    t.boolean  "confirmed_by_manager"
+    t.boolean  "confirmed_by_user",             default: false
+    t.boolean  "confirmed_by_manager",          default: false
     t.datetime "user_confirmation_datetime"
     t.datetime "manager_confirmation_datetime"
     t.string   "confirmation_token"
@@ -716,8 +718,8 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.integer  "postal_address_id"
     t.integer  "user_id"
     t.integer  "creator_id"
-    t.integer  "postcode_before"
-    t.integer  "postcode_after"
+    t.string   "postcode_before"
+    t.string   "postcode_after"
     t.string   "region_before"
     t.string   "region_after"
     t.string   "city_before"
@@ -747,7 +749,7 @@ ActiveRecord::Schema.define(version: 20130416140308) do
   end
 
   create_table "postal_addresses", force: true do |t|
-    t.integer  "postcode"
+    t.string   "postcode"
     t.string   "region"
     t.string   "city"
     t.string   "street"
@@ -830,7 +832,7 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.integer  "max_days"
     t.decimal  "buy_cost",            precision: 8, scale: 2
     t.decimal  "sell_cost",           precision: 8, scale: 2
-    t.boolean  "hide_catalog_number"
+    t.boolean  "hide_catalog_number",                         default: false
     t.string   "status"
     t.integer  "probability"
     t.integer  "product_id"

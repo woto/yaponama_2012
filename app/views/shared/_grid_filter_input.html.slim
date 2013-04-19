@@ -1,0 +1,38 @@
+.form-horizontal
+  - case type
+  - when :string
+    .control-group
+      label.control-label Содержит
+      .controls = text_field_tag "grid[#{column_name}_like]".to_sym, eval("@grid.#{column_name}_like")
+  - when :number
+    .control-group
+      label.control-label От
+      .controls = text_field_tag "grid[#{column_name}_from]".to_sym, eval("@grid.#{column_name}_from")
+    .control-group
+      label.control-label До
+      .controls = text_field_tag "grid[#{column_name}_to]".to_sym, eval("@grid.#{column_name}_to")
+  - when :boolean
+    .control-group
+      label.control-label Да или Нет?
+      .controls = check_box_tag "grid[#{column_name}_boolean]".to_sym, '1', eval("@grid.#{column_name}_boolean")
+  - when :set
+    .control-group
+      label.control-label Выберите
+      .controls 
+        = select_tag "grid[#{column_name}_set]".to_sym, options_for_select(grid::COLUMNS[column_name][:set], eval("@grid.#{column_name}_set")), :multiple => true
+        span.help-block Зажмите Ctrl чтобы выбрать несколько одновременно
+  - when :belongs_to
+    .control-group
+      label.control-label Выберите
+      .controls 
+        = select_tag "grid[#{column_name}_belongs_to]".to_sym, options_for_select(grid::COLUMNS[column_name][:belongs_to].all.map{|i| [i.to_label, i.id]}, eval("@grid.#{column_name}_belongs_to")), { :multiple => true }
+        span.help-block Зажмите Ctrl чтобы выбрать несколько одновременно
+  - when :date
+    .control-group
+      label.control-label С
+      .controls
+        = date_field_tag "grid[#{column_name}_from]".to_sym, eval("@grid.#{column_name}_from")
+    .control-group
+      label.control-label По
+      .controls
+        = date_field_tag "grid[#{column_name}_to]".to_sym, eval("@grid.#{column_name}_to")

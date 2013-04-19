@@ -1,15 +1,53 @@
 #encoding: utf-8
 
 module ApplicationHelper
-  
+
+  def sortable(column_name, title, options )
+    title ||= column_name.titleize
+    direction = column_name.to_s == @grid.sort_column && @grid.sort_direction == 'asc' ? 'desc' : 'asc'
+    css_class = (column_name == @grid.sort_column) ? "#{@grid.sort_direction}" : nil
+    link_to url_for(params.merge(:sort_column => column_name, :sort_direction => direction)), options.merge({:class => css_class, :remote => true}) do
+      if column_name.to_s == @grid.sort_column
+        if @grid.sort_direction == 'asc'
+          content_tag(:i, '', :class => 'icon icon-sort-up') + '&nbsp;'.html_safe
+        else
+          content_tag(:i, '', :class => 'icon icon-sort-down') + '&nbsp;'.html_safe
+        end
+      else
+        ''.html_safe
+      end +
+      title
+    end
+  end
 
   def user_tabs(&block)
+
+    products_dropdown = []
+
+     Rails.configuration.products_status.each do |k, v|
+       title = ''
+       if v['badge'].present?
+         title << content_tag(:span, v['badge'], :class => "badge badge-#{k}")
+         title << ' '
+       end
+       title  << v['title']
+
+       products_dropdown <<
+      {
+        :title => title.html_safe,
+        :catch => [ { :controller => 'products', :action => 'index', :status => k.to_sym } ],
+        :link => { :controller => 'products', :action => 'index', :status => k.to_sym },
+        :class => '',
+        :dropdown => []
+      }
+    end
+
 
     res = ''.html_safe
     workspace_class = 'span12'
 
     content_tag(:div, :class => 'row-fluid') do
-      if @user && namespace_helper == 'admin'
+      if @user && params[:controller].include?('admin')
         workspace_class = 'span9'
         res = content_tag(:div, :class => 'span3') do
           render 'users/show'
@@ -36,20 +74,20 @@ module ApplicationHelper
 
             { :title => 'Товары',  
               :catch => [ { :controller => 'products' } ],
-              :link => { :controller => 'products', :action => 'index' },
-              :class => '',
-              :dropdown => []
+              :link => '#',
+              :class => 'dropdown',
+              :dropdown => products_dropdown
             },
 
             { :title => 'Транзакции',  
               :catch => [ 
-                { :controller => 'product_transactions' }, { :controller => 'account_transactions' } ],
+                { :controller => 'products', :action => 'transactions' }, { :controller => 'account_transactions' } ],
               :link => '#', 
               :class => 'dropdown',
               :dropdown => [
                 { :title => 'Товар',  
-                  :catch => [ { :controller => 'product_transactions' } ],
-                  :link => { :controller => 'product_transactions', :action => 'index' },
+                  :catch => [ { :controller => 'products', :action => 'transactions' } ],
+                  :link => { :controller => 'products', :action => 'transactions' },
                   :class => '',
                   :dropdown => []
                 },

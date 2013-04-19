@@ -1,0 +1,137 @@
+#items data-no-turbolink=""
+
+  - if @items.num_pages == 0
+    .alert.alert-info
+      | Не найдено ни одной строки соответствующей данному условию.
+  - elsif @items.num_pages > 0 && @page.to_i > @items.num_pages
+    .alert.alert-warn
+      | Вы находитесь на странице, которая больше доступных, хотите перейти на первую страницу чтобы посмотреть найденные результаты?
+      '
+      b= link_to "Перейти", polymorphic_path([namespace_helper, @resource_class.name.pluralize.underscore.to_sym], :page => 1, :primary_key => params[:primary_key])
+
+  = hidden_field_tag 'grid[sort_column]', @grid.sort_column
+  = hidden_field_tag 'grid[sort_direction]', @grid.sort_direction
+  = hidden_field_tag 'grid[page]', @grid.page
+
+  / МОДАЛЬНОЕ ОКНО С ВЫБОРОМ ОТОБРАЖАЕМЫХ КОЛОНОК
+  div#columns.modal.hide.fade tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    div.modal-header
+      button.close type="button" data-dismiss="modal" aria-hidden="true" ×
+      h3#myModalLabel Отображаемые столбцы
+
+    div.modal-body
+      .control-group
+        / WTF IS THIS?! HOW TO SPLIT IT IN ONE LINE?!!! TODO
+        - available_columns =  @grid_class::COLUMNS.to_a
+        - grid_size = available_columns
+        - left_grid = available_columns[ 0, ( grid_size.size / 2.0 ).round ]
+        - right_grid = available_columns - left_grid
+        - full_grid = [left_grid, right_grid]
+
+        -  full_grid.each do |chunks|
+          .span6
+            - chunks.each do |column_name, column_settings|
+              .controls
+                label.checkbox.inline
+                  = check_box_tag "grid[#{column_name}_visible]".to_sym, '1', eval("@grid.#{column_name}_visible") == '1'
+                  = t column_name, :scope => "activerecord.attributes.#{@resource_class.name.underscore}", :default => t(column_name)
+
+    div.modal-footer
+      input.btn.btn-primary name="columns" type="submit" value="Обновить столбцы"
+      button.btn data-dismiss="modal" aria-hidden="true" Закрыть
+
+  / TABLE
+  table.table.table-striped
+    thead
+      tr
+        th style="white-space: nowrap" 
+          a href="#"
+            i.icon.icon-filter type="button" role="button" data-toggle="modal"
+          '
+        - visible_columns.each do |column_name|
+
+          th style="white-space: nowrap" 
+
+            = sortable(column_name, @resource_class.human_attribute_name(column_name, :default => truncate(t(column_name), :length => 5, :omission => '.')), data: { toggle: "tooltip" }, title: t(column_name, :scope => "activerecord.attributes.#{@resource_class.name.underscore}", :default => t(column_name)), rel: 'tooltip')
+            '
+            a href="#"
+              i.icon.icon-filter type="button" role="button" data-toggle="modal" data-target="##{column_name}_filter"
+        th Спросить
+        th Редакт.
+        th Удалить
+        th История
+
+
+    / TABLE BODY
+    tbody
+
+      - @items.each do |item|
+        tr
+
+          td
+            = hidden_field_tag "grid[item_ids[#{item.id}]", '0'
+            = check_box_tag "grid[item_ids[#{item.id}]]", '1', @grid.item_ids.present? && @grid.item_ids[item.id.to_s] == '1', :class => 'item'
+
+          - content = capture do
+            ul
+              = item.attributes.reject{|attribute| visible_columns.include? attribute}.select{|attribute| item[attribute].present?}.map{ |k, v| "<li>#{k}: <i>#{v}</i></li>" }.join
+
+          - visible_columns.each do |column_name|
+            - if column_name == 'id'
+              td = link_to item.id, url_for(:action => :show, :id => item, :user_id => item.user_id), :rel => 'popover', data: { trigger: 'hover', html: true, content: content, title: 'Дополнительная информация'}
+            - elsif column_name == 'user_id'
+              td = render :partial => "shared/client_button", :locals => {:user_id => item.user_id, :user_label => item.user.try(:to_label)}
+            - elsif column_name == 'creator_id'
+              td = render :partial => "shared/client_button", :locals => {:user_id => item.creator_id, :user_label => item.creator.try(:to_label)}
+            - elsif visible_columns.include? 'product_id'
+              td = item.product.to_label if item.product
+            /td = item.products.map(&:to_label).join(', ') if item.products
+            - elsif column_name == 'created_at'
+              td = l item.created_at, :format => :short
+            - elsif column_name == 'updated_at'
+              td = l item.updated_at, :format => :short
+            - elsif column_name == 'order_id'
+              td 
+                - if item.order
+                  = link_to admin_order_path(item.order) do 
+                    =' item.order.to_label 
+                    i.icon-shopping-cart
+            - elsif column_name == 'supplier_id'
+              td 
+                - if item.supplier
+                  = render :partial => "shared/supplier_button", :locals => {:supplier_id => item.supplier_id, :supplier_label => item.supplier.try(:to_label)}
+            - elsif column_name == 'status'
+              td
+                span class="label label-#{item.status}" =' Rails.configuration.products_status[item.status]['title']
+            - else
+              td = item[column_name]
+
+          td
+            a href="" class="btn"
+              i.icon-bullhorn
+
+          td
+            = link_to smart_route({:prefix => [:edit], :postfix => [item]}, :id => item.id, :user_id => item.user_id), data: { toggle: "tooltip" }, title: "#{ t('.edit', :default => t("helpers.links.edit")) }", :class => 'btn btn-warning', :rel => "tooltip" do
+              i.icon-edit
+
+          td
+            = link_to smart_route({:postfix => [item]}, :id => item.id, :user_id => item.user_id), :method => :delete, data: { toggle: "tooltip" }, title: "#{ t('.destroy', :default => t("helpers.links.destroy")) }", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :rel => "tooltip", :class => 'btn btn btn-danger' do
+              i.icon-trash
+
+          td
+            = link_to smart_route({:prefix => [:transactions], :postfix => [item]}, :id => item.id, :user_id => item.user_id), data: { toggle: "tooltip" }, title: "#{ t('.transactions', :default => t("helpers.links.transactions")) }", :class => 'btn', :rel => "tooltip" do
+              i.icon-time
+
+  / МОДАЛЬНЫЕ ОКНА ДЛЯ НАСТРОЕК ФИЛЬТРАЦИИ
+  - visible_columns.each do |column_name|
+    .modal.hide.fade id="#{column_name}_filter" tabindex="-1"
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true" &times;
+        h3 Фильтр для: #{t(column_name, :scope => "activerecord.attributes.#{@resource_class.name.underscore}", :default => t(column_name))}
+      .modal-body
+        = render 'shared/grid_filter_input', :column_name => column_name, :type => @grid_class::COLUMNS[column_name][:type], :grid => @grid_class
+      .modal-footer
+        input.btn.btn-primary name="filters" type="submit" value="Применить фильтр"
+        button.btn data-dismiss="modal" aria-hidden="true" Закрыть
+
+  = paginate @items, :theme => :toolbar, :window => 2, :remote => true
