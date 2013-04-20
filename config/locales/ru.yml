@@ -44,6 +44,7 @@ ru:
         updated_at: Изменен
       order:
         metro_id: Станция метро
+        shop_id: Магазин
         postal_address_id: Почтовый адрес
         phone_id: Телефон
         delivery_id: Способ доставки
@@ -101,7 +102,7 @@ ru:
   phone: Номер телефона
   phone_type: Тип номера
   short_name: Название
-  long_name: Всевозможные названия
+  long_name: Прочие названия
   probability: Вероятность
   min_days: Мин. срок
   max_days: Макс. срок
