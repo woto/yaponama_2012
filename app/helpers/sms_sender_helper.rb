@@ -2,6 +2,8 @@
 
 module SmsSenderHelper       
 
+  private
+
   def notify(data)
     unless data[:destination_address]
       raise 'Не указан телефон получателя SMS destination_address. Для Российских сотовых например "+71112223344"'

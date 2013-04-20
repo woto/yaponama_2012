@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
       # соответственно старный гостевой аккаунт не нужен и 'он не хотел под ним работать на сайте'
       @user.destroy
 
-      redirect_to polymorphic_path([namespace_helper, :root]), :notice => "Вы успешно вошли."
+      redirect_to url_for(:root), :notice => "Вы успешно вошли."
     else
       flash.now[:alert] = 'Пара e-mail/телефон и пароль не найдены.'
       render 'new'

@@ -3,7 +3,7 @@
 
   = form_tag smart_route({:postfix => [:products, :stock_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path]), :class => "dirtyforms" do |f|
 
-    = render :partial => 'profileables/index'
+    = render :partial => 'shared/grid'
 
     .form-actions
       =' link_to "Назад", params[:return_path], :class => "btn"

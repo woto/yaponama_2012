@@ -32,7 +32,7 @@ module GridConcern
 
         if [:filters, :per_page].any?{ |p| params[p] }
 
-          redirect_to( smart_route({:prefix => [:filter], :postfix => [@resource_class.to_s.pluralize.underscore]}, :page => 1, :primary_key => params[:primary_key]))
+          redirect_to( smart_route({:prefix => [:filter], :postfix => [@resource_class.to_s.pluralize.underscore]}, :user_id => params[:user_id], :order_id => params[:order_id], :page => 1, :status => params[:status], :primary_key => params[:primary_key]))
         elsif params[:items]
           # Дописываем к ранее сохраненному grid
           if params[:grid][:item_ids]
@@ -52,6 +52,8 @@ module GridConcern
           params[:primary_key] = $redis.incr('grid')
 
           @grid = @grid_class.new(params[:grid])
+
+          set_preferable_columns
 
           @grid.per_page = Kaminari.config.default_per_page
 
@@ -156,6 +158,8 @@ module GridConcern
         end
 
       end
+
+      additional_conditions
 
       $redis.set("grid:#{params[:primary_key]}", @grid.to_json)
 

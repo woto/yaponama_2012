@@ -5,6 +5,8 @@ module CurrentUserInModel
   included do
     around_action :set_current_user_in_model
   end
+
+  private
   
   def set_current_user_in_model
     User.current_user = current_user

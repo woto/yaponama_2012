@@ -12,8 +12,10 @@ module ProductsConcern
 
     helper_method :products_user_order_tab_scope
 
-    def redirect_to_relative_path status
-      redirect_to smart_route({:postfix => [:products]}, :order_id => params[:order_id], :user_id => params[:user_id], :status => status, :primary_key => params[:primary_key])
+    private
+
+    def redirect_to_relative_path status, order = nil
+      redirect_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => status, :order_id => (@order && @order.id || params[:order_id]), :user_id => params[:user_id])
     end
 
 
@@ -151,12 +153,10 @@ module ProductsConcern
         :type => :number,
       }
 
-      if ["admin", "manager"].include?(current_user.role)
-
+      if admin_zone?
         columns_hash['buy_cost'] = {
           :type => :number,
         }
-
       end
 
       columns_hash['sell_cost'] = {
@@ -167,10 +167,12 @@ module ProductsConcern
         :type => :boolean,
       }
 
-      columns_hash['status'] = {
-        :type => :set,
-        :set => Hash[*Rails.configuration.products_status.map{|k, v| [v['title'], k]}.flatten],
-      }
+      if params[:status].blank? || params[:status] == 'all'
+        columns_hash['status'] = {
+          :type => :set,
+          :set => Hash[*Rails.configuration.products_status.map{|k, v| [v['title'], k]}.flatten],
+        }
+      end
 
       columns_hash['probability'] = {
         :type => :number,
@@ -193,22 +195,20 @@ module ProductsConcern
         :type => :string,
       }
 
-      if ["admin", "manager"].include?(current_user.role)
-
+      if admin_zone?
         columns_hash['notes_invisible'] = {
           :type => :string,
         }
-
       end
 
 
-      if ["admin", "manager"].include?(current_user.role)
-
-        columns_hash['user_id'] = {
-          :type => :belongs_to,
-          :belongs_to => User,
-        }
-
+      if admin_zone?
+        unless @user
+          columns_hash['user_id'] = {
+            :type => :belongs_to,
+            :belongs_to => User,
+          }
+        end
       end
 
       columns_hash['creator_id'] = {
@@ -216,16 +216,16 @@ module ProductsConcern
         :belongs_to => User,
       }
 
-      if ["admin", "manager"].include?(current_user.role)
-
-        columns_hash['order_id'] = {
-          :type => :belongs_to,
-          :belongs_to => Order,
-        }
-
+      if admin_zone?
+        unless params[:order_id]
+          columns_hash['order_id'] = {
+            :type => :belongs_to,
+            :belongs_to => Order,
+          }
+        end
       end
 
-      if ["admin", "manager"].include?(current_user.role)
+      if admin_zone?
 
         columns_hash['supplier_id'] = {
           :type => :belongs_to,

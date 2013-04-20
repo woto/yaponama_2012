@@ -84,7 +84,7 @@
               td = render :partial => "shared/client_button", :locals => {:user_id => item.user_id, :user_label => item.user.try(:to_label)}
             - elsif column_name == 'creator_id'
               td = render :partial => "shared/client_button", :locals => {:user_id => item.creator_id, :user_label => item.creator.try(:to_label)}
-            - elsif visible_columns.include? 'product_id'
+            - elsif column_name == 'product_id'
               td = item.product.to_label if item.product
             /td = item.products.map(&:to_label).join(', ') if item.products
             - elsif column_name == 'created_at'
@@ -92,18 +92,30 @@
             - elsif column_name == 'updated_at'
               td = l item.updated_at, :format => :short
             - elsif column_name == 'order_id'
-              td 
-                - if item.order
-                  = link_to admin_order_path(item.order) do 
-                    =' item.order.to_label 
-                    i.icon-shopping-cart
+              td =order_decorator(item.order)
             - elsif column_name == 'supplier_id'
               td 
                 - if item.supplier
                   = render :partial => "shared/supplier_button", :locals => {:supplier_id => item.supplier_id, :supplier_label => item.supplier.try(:to_label)}
             - elsif column_name == 'status'
-              td
-                span class="label label-#{item.status}" =' Rails.configuration.products_status[item.status]['title']
+              - if @resource_class == Product
+                td =product_status_decorator(item.status)
+              - elsif @resource_class == Order
+                td
+                  span class="label label-#{item.status}" =' Rails.configuration.orders_status[item.status]['title']
+                  
+            - elsif column_name == 'name_id'
+              td = item.name.try(:to_label)
+            - elsif column_name == 'postal_address_id'
+              td = item.postal_address.try(:to_label)
+            - elsif column_name == 'metro_id'
+              td = item.metro.try(:to_label)
+            - elsif column_name == 'shop_id'
+              td = item.shop.try(:to_label)
+            - elsif column_name == 'delivery_id'
+              td = item.delivery.try(:to_label)
+            - elsif column_name == 'phone_id'
+              td = item.phone.try(:to_label)
             - else
               td = item[column_name]
 

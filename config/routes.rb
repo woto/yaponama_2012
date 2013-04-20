@@ -20,6 +20,8 @@ end
 
 Yaponama2012::Application.routes.draw do
 
+  resources :calls
+
   concern :filterable do
     match 'filter', :via => [:get, :post], :on => :collection
     match 'filter', :via => [:get, :post]
@@ -60,7 +62,7 @@ Yaponama2012::Application.routes.draw do
 
 
   concern :parts_searchable do
-    resources :searches do 
+    resources :searches do
       match '(/:catalog_number(/:manufacturer(/:replacements)))' => "searches#index", :on => :collection, :as => 'search', :via => :get
       match '?skip' => "searches#index", :on => :collection, :as => :skip_search, :via => :get
     end
@@ -90,112 +92,31 @@ Yaponama2012::Application.routes.draw do
     end
   end
 
-  namespace :admin do
-
-    concerns :profileable
-
-    resources :users do
-
-      concerns :productable
-
-      get 'index'
-      get 'edit'
-      get '', action: 'show', :as => 'show'
-      patch '', action: 'update'
-
-      concerns :profileable
-
-      resources :products do
-        concerns :transactionable
-        concerns :filterable
-        collection do
-          get 'status/:status' => "products#index"
-          delete 'multiple_destroy' => "products#multiple_destroy"
-        end
-      end
-
-      resources :orders do
-        concerns :productable
-
-        resources :products do
-          concerns :transactionable
-          concerns :filterable
-          collection do 
-            get 'status/:status' => "products#index"
-            delete 'multiple_destroy' => "products#multiple_destroy"
-          end
-        end
-        concerns :filterable
-        concerns :transactionable
-      end
-
-      resource :cashes # /admin/users/X/cashes
-      resource :discount # /admin/users/X/discount/edit
-      resource :prepayment # /uadmin/users/X/prepayment/edit
-    end
-
-    concerns :productable
-
-    namespace 'products' do
-      get 'transactions'
-    end
-
+  concern :complex_products do
     resources :products do
       concerns :transactionable
       concerns :filterable
       collection do
-        get 'status/:status' => "products#index"
+        get 'status/:status' => "products#index", :as => :status
         delete 'multiple_destroy' => "products#multiple_destroy"
       end
-
     end
-    resources :spare_infos
-
-    resources :orders do
-      resources :products do
-        concerns :transactionable
-        concerns :filterable
-      end
-    end
-
   end
 
-  resources :spare_infos
-
-  resource :user  do
-    concerns :productable
-
-    resources :products do
+  concern :complex_orders do
+    resources :orders do
       collection do
-        get 'status/:status' => "products#index"
-        delete 'multiple_destroy' => "products#multiple_destroy"
+        get 'status/:status' => "orders#index", :as => :status
       end
       concerns :filterable
       concerns :transactionable
-    end
-
-    resources :orders do
       concerns :productable
-      resources :products do
-        concerns :filterable
-        concerns :transactionable
-        collection do
-          get 'status/:status' => "products#index"
-          delete 'multiple_destroy' => "products#multiple_destroy"
-        end
-      end
-      concerns :transactionable
-    end
 
-    concerns :profileable
+      concerns :complex_products
+    end
   end
 
-  # .../admin/XXX
   namespace :admin do
-
-    resources :users do
-      concerns :parts_searchable
-    end
 
     resources :calls
 
@@ -217,32 +138,55 @@ Yaponama2012::Application.routes.draw do
     get 'pages/new/:path' => "pages#new", :as => 'new_predefined_page', :constraints => {:path => /.*/}
     resources :pages
 
-    get 'users' => 'users#index', :as => 'root'
+    resources :accounts
 
-    #resources :sessions
+    # ПОСЛЕ ЭТОЙ СТРОКИ ИДУТ НЕ ПОВТОРЯЮЩИЕСЯ МАРШРУТЫ ТОЛЬКО В АДМИНИСТРАТИВНОЙ ЧАСТИ САЙТА
+    resources :metro
+    resources :shops
+    resources :delivery_categories
+    resources :deliveries
+    resources :site_settings
 
-    resources :companies
+    resources :suppliers do
+      resources :account_transactions # admin/suppliers/X/money_transactions
+      resources :products do
+        concerns :transactionable
+      end
+    end
+
+    resources :account_transactions # admin/money_transactions
+
+    concerns :profileable
+    concerns :productable
+    concerns :complex_products
+    concerns :complex_orders
+
+    resources :spare_infos
+
 
     resources :users do
 
+      get 'index'
+      get 'edit'
+      get '', action: 'show', :as => 'show'
+      patch '', action: 'update'
+
+
+      concerns :parts_searchable
       resources :account_transactions # admin/users/X/money_trasactions
 
-      collection do
-        post 'filter' => "users#index"
-      end
+      concerns :profileable
+      concerns :productable
+      concerns :complex_products
+      concerns :complex_orders
 
+      resource :cashes, :only => [:new, :create]
+      resource :discount, :only => [:edit, :update]
+      resource :prepayment, :only => [:edit, :update]
     end
 
-    resources :products do
-      concerns :transactionable
-      collection do
-        delete 'multiple_destroy' => "products#multiple_destroy"
-      end
-      
-    end
 
-    resources :email_addresses
-
+    # СОМНИТЕЛЬНЫЕ МАРШРУТЫ
     resources :emails do
       member do
         get 'show_body'
@@ -252,25 +196,17 @@ Yaponama2012::Application.routes.draw do
       end
     end
 
-    resources :accounts
-    resources :account_transactions # admin/money_transactions
 
-    resources :suppliers do
-      resources :account_transactions # admin/suppliers/X/money_transactions
-      resources :products do
-        concerns :transactionable
-      end
-    end
-
-    # ПОСЛЕ ЭТОЙ СТРОКИ ИДУТ НЕ ПОВТОРЯЮЩИЕСЯ МАРШРУТЫ ТОЛЬКО В АДМИНИСТРАТИВНОЙ ЧАСТИ САЙТА
-    resources :metro
-    resources :shops
-    resources :delivery_categories
-    resources :deliveries
-    resources :site_settings
   end
 
-  resources :account_transactions # /money_transactions
+  resources :spare_infos
+
+  resource :user  do
+    concerns :profileable
+    concerns :productable
+    concerns :complex_products
+    concerns :complex_orders
+  end
 
   resources :talks do
     collection do
@@ -280,48 +216,24 @@ Yaponama2012::Application.routes.draw do
 
 
   concerns :parts_searchable
-
-  resources :calls
+  resources :account_transactions
 
   resources :comments
-
   resources :uploads
 
-  resources :pages
 
-  resources :password_resets
-  # resource :user
-
-  #get "build/show"
-  #get "build/update"
-  #get "build/create"
-
-  get 'trash_help/notify_sms'
-  get 'trash_help/index'
-  post 'trash_help/merge'
-  post 'trash_help/make_payment'
-  namespace 'trash_help' do
-    post 'check_orders_inorder'
-  end
-  post 'trash_help/make_payment_to_supplier'
+  resources :password_resets, :only => [:new, :create, :edit, :update]
 
   resources :attachments
 
-  get 'clear_session' => "trash_help#clear_session"
 
   get 'admin' => 'admin/users#index'
 
   root :to => 'welcome#index'
 
-  # STATS
-  resources :stats
-
-  # ПОСЛЕ ЭТОЙ СТРОКИ ИДУТ НЕ ПОВТОРЯЮЩИЕСЯ ТОЛЬКО В ПУБЛИЧНОЙ ВЕРСИИ САЙТА .../XXX
-
-  resources :password_resets
 
   # REGISTER
-  resource :register do
+  resource :register, :only => [:show, :edit, :update] do
 
     collection do
       get :email, :to => 'registers#edit', :with => 'email'
@@ -357,7 +269,23 @@ Yaponama2012::Application.routes.draw do
   # ROBOTS.TXT
   get 'robots.txt' => "robots_txt#index"
 
+  # STATS
+  resources :stats, :only => [:create]
+
+
+  # СОМНИТЕЛЬНЫЕ МАРШРУТЫ
+  get 'trash_help/notify_sms'
+  get 'trash_help/index'
+  post 'trash_help/merge'
+  post 'trash_help/make_payment'
+  namespace 'trash_help' do
+    post 'check_orders_inorder'
+  end
+  post 'trash_help/make_payment_to_supplier'
+  get 'clear_session' => "trash_help#clear_session"
+
+
   get "*brand" => "brands#index", :constraints => BrandConstraint.new
-  get "*path" => "pages#index", :constraints => PageConstraint.new
+  get "*path" => "pages#show", :constraints => PageConstraint.new
 
 end

@@ -1,4 +1,31 @@
 = user_tabs do
+  = form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [@resource_class.name.pluralize.underscore.to_sym]}, :primary_key => params[:primary_key], :user_id => params[:user_id]), :remote => true do |f|
+
+    #toolbar.clearfix
+
+      .pull-right.right-space
+
+        a href="#columns" role="button" class="btn btn-success" data-toggle="modal" title="Настроить отображаемые столбцы" rel="tooltip"
+          i.icon.icon-columns
+
+
+      .pull-right.right-space
+
+        = link_to smart_route({:prefix => [:transactions], :postfix => [@resource_class.to_s.underscore.pluralize]}, :user_id => params[:user_id] ), data: {toggle: "tooltip"}, title: "#{ t('.transactions', :default => t("helpers.links.transactions")) }",  :class => "btn", rel: 'tooltip' do
+          i.icon-time
+
+      .pull-right.right-space
+        = render :partial => 'shared/grid_per_page'
+
+      .pull-left
+        = render :partial => "shared/grid_toolbar_selected"
+
+    = render :partial => 'shared/grid'
+
+    - if @user
+      = link_to "#{t('.new', :default => t("helpers.links.new"))} #{@resource_class.name}", smart_route({:prefix => [:new], :postfix => [@resource_class.name.underscore.to_sym]}, :user_id => params[:user_id]), :class => 'btn btn-primary'
+
+= user_tabs do
   - model_class = Order
 
   - if params[:user_id] || params[:order_id] 
@@ -21,7 +48,6 @@
             th = model_class.human_attribute_name(:delivery_cost)
             th = model_class.human_attribute_name(:status)
             th = model_class.human_attribute_name(:delivery_id)
-            th = model_class.human_attribute_name(:active)
             th = model_class.human_attribute_name(:phone_id)
             th = model_class.human_attribute_name(:created_at)
             th = model_class.human_attribute_name(:updated_at)
@@ -42,7 +68,6 @@
               td = order.delivery_cost
               td = order.status
               td = order.delivery_id
-              td = order.active
               td = order.phone.try(:to_label)
               td = l order.created_at, :format => :short
               td = l order.updated_at, :format => :short

@@ -128,6 +128,10 @@ module Yaponama2012
     config.user_company_creation_reason = {
     }
 
+
+    config.user_order_creation_reason = {
+    }
+
     # Orders
     config.orders_status = {
       'all' => {

@@ -2,6 +2,8 @@
 
 body
 
+  = render :partial => 'layouts/shared/body_head'
+
   .container-fluid
     .row-fluid
       .span8
@@ -27,7 +29,7 @@ body
             li
               = link_to "Заказы", user_orders_path
             li
-              = link_to "Корзина", user_products_path(:status => 'incart')
+              = link_to "Корзина", smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart')
             li
               = link_to "Оплата", "#"
             li

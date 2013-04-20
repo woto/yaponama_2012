@@ -12,7 +12,7 @@
   = simple_form_for @cash, :url => smart_route({:postfix =>  [:products, :ordered_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path] ), :class => "dirtyforms" do |f|
     br
 
-    = render :partial => 'profileables/index'
+    = render :partial => 'shared/grid'
     hr
     h4 И принять от клиента сумму в размере:
     = f.input :debit

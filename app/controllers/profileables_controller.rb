@@ -1,4 +1,5 @@
 class ProfileablesController < ApplicationController
+  #before_action :set_user
   before_action :set_resource_class
   before_action :set_grid_class
   before_action :set_grid, :only => [:index, :filter]
@@ -16,38 +17,9 @@ class ProfileablesController < ApplicationController
   # GET /names.json
   def index
 
-    case @resource_class.to_s
-    when 'Name'
-      @grid.name_visible = '1'
-    when 'Phone'
-      @grid.phone_visible = '1'
-    when 'EmailAddress'
-      @grid.email_address_visible = '1'
-    when 'PostalAddress'
-      @grid.city_visible = '1'
-      @grid.house_visible = '1'
-      @grid.postcode_visible = '1'
-      @grid.region_visible = '1'
-      @grid.room_visible = '1'
-      @grid.street_visible = '1'
-    when 'Car'
-      @grid.brand_visible = '1'
-      @grid.frame_visible = '1'
-      @grid.god_visible = '1'
-      @grid.model_visible = '1'
-      @grid.vin_visible = '1'
-    when 'Company'
-      @grid.inn_visible = '1'
-      @grid.name_visible = '1'
-      @grid.ogrn_visible = '1'
-      @grid.ownership_visible = '1'
-    end
-
-    @grid.notes_visible = '1'
-
     respond_to do |format|
       format.html
-      format.js { render :filter }
+      format.js { render 'shared/filter' }
     end
   end
 
@@ -55,8 +27,8 @@ class ProfileablesController < ApplicationController
   def filter
 
     respond_to do |format|
-      format.html { render :index }
-      format.js
+      format.html
+      format.js { render 'shared/filter' }
     end
 
   end
@@ -190,10 +162,19 @@ class ProfileablesController < ApplicationController
           :set => eval("Hash[*Rails.configuration.user_#{@resource_class.name.underscore}_creation_reason.map{|k, v| [v, k]}.flatten]"),
         }
       when 'notes_invisible'
-        if ["admin", "manager"].include?(current_user.role)
+        if admin_zone?
           columns_hash[column_name] = {
             :type => :string,
           }
+        end
+      when 'user_id'
+        if admin_zone?
+          unless @user
+            columns_hash['user_id'] = {
+              :type => :belongs_to,
+              :belongs_to => User,
+            }
+          end
         end
       else
         columns_hash[column_name] = {
@@ -228,5 +209,47 @@ class ProfileablesController < ApplicationController
     # TODO DANGER!
     params.require(@resource_class.name.underscore.to_sym).permit!
   end
+
+  def set_preferable_columns
+    case @resource_class.to_s
+    when 'Name'
+      @grid.name_visible = '1'
+    when 'Phone'
+      @grid.phone_visible = '1'
+    when 'EmailAddress'
+      @grid.email_address_visible = '1'
+    when 'PostalAddress'
+      @grid.city_visible = '1'
+      @grid.house_visible = '1'
+      @grid.postcode_visible = '1'
+      @grid.region_visible = '1'
+      @grid.room_visible = '1'
+      @grid.street_visible = '1'
+    when 'Car'
+      @grid.brand_visible = '1'
+      @grid.frame_visible = '1'
+      @grid.god_visible = '1'
+      @grid.model_visible = '1'
+      @grid.vin_visible = '1'
+    when 'Company'
+      @grid.inn_visible = '1'
+      @grid.name_visible = '1'
+      @grid.ogrn_visible = '1'
+      @grid.ownership_visible = '1'
+    end
+
+    @grid.id_visible = '1'
+    @grid.notes_visible = '1'
+
+  end
+
+  def additional_conditions
+
+    if @user
+      @items = @items.where(:user_id => @user.id)
+    end
+    
+  end
+
 
 end

@@ -3,8 +3,9 @@
 
   = form_tag smart_route({:prefix => [:order_select], :postfix => [:products, :inorder_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path] ), :class => "dirtyforms" do |f|
 
-    = render :partial => 'profileables/index'
-    br  
+    = render :partial => 'shared/grid'
+    h4 Отлично, вы на пол пути оформления заказа! 
+    h5 Проверьте пожалуйста еще раз выбранные Вами товары и Создайте новый заказ или Выберите уже сделанный ранее (В нашем магазине вы можете добавлять товары в заказ, пока заказ имеет статус Открыт и не отправлен или выдан Вам)
     - options = options_for_select [['Выберите...', nil], ['Новый заказ', 'new']] + @items.first.user.orders.all.map{|order| [order.to_label, order.id]}
     = select_tag(:new_order_id, options)
     / - step = session['orders'][session['orders']['current_order_id']]['step']

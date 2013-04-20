@@ -1,12 +1,11 @@
 class ProductsController < ApplicationController
+  before_action :set_user
   include ProductsConcern
   include GridConcern
 
   ORDER_STEPS = %w[order delivery postal_address phone name notes]
 
   before_action :set_grid, :only => [:index, :filter, :multiple_destroy]
-
-  before_action :set_user
 
   def transactions
 
@@ -38,8 +37,8 @@ class ProductsController < ApplicationController
   def index
 
     respond_to do |format|
-      format.html {render 'products/index'}
-      format.js { render 'profileables/filter' }
+      format.html
+      format.js { render 'shared/filter' }
     end
 
   end
@@ -91,8 +90,8 @@ class ProductsController < ApplicationController
   def filter
 
     respond_to do |format|
-      format.html { render 'products/index' }
-      format.js { render 'profileables/filter' }
+      format.html
+      format.js { render 'shared/filter' }
     end
 
   end
@@ -115,6 +114,51 @@ class ProductsController < ApplicationController
 
   def set_resource_class
     @resource_class = Product
+  end
+
+  def set_preferable_columns
+
+    @grid.id_visible = '1'
+    @grid.short_name_visible = '1'
+    @grid.sell_cost_visible = '1'
+    @grid.quantity_ordered_visible = '1'
+    @grid.manufacturer_visible = '1'
+    @grid.catalog_number_visible = '1'
+    @grid.updated_at_visible = '1'
+
+
+    unless @user
+      @grid.user_id_visible = "1"
+    end
+
+    if ['inorder', 'ordered', 'pre_supplier', 'post_supplier', 'stock', 'complete'].include?(params[:status]) && params[:order_id].blank?
+      @grid.order_id_visible = '1'
+    end
+
+    if ['post_supplier'].include? params[:status]
+      @grid.supplier_id_visible = '1'
+    end
+
+    if params[:status].blank? || ['all'].include?(params[:status])
+      @grid.status_visible = '1'
+    end
+
+  end
+
+  def additional_conditions
+
+    if @user
+      @items = @items.where(:user_id => @user.id)
+    end
+
+    if params[:status] != 'all' && params[:status].present?
+      @items = @items.where(:status => params[:status]) 
+    end
+
+    if params[:order_id]
+      @items = @items.where(:order_id => params[:order_id])
+    end
+
   end
 
 end

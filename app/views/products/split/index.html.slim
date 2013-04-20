@@ -4,7 +4,7 @@
 
   = form_tag smart_route({:postfix => [:products, :split_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path]), :class => "dirtyforms" do |f|
 
-    = render :partial => 'profileables/index'
+    = render :partial => 'shared/grid'
 
     = text_field_tag :quantity
 

@@ -3,8 +3,9 @@
 - if user.present?
   .dropdown
     a.dropdown-toggle role="button" data-toggle="dropdown" data-target="#" href="#"
-      =' user_label
       i.icon-user style="display: inline-block"
+      '
+      = user_label
     ul.dropdown-menu
       li.dropdown-submenu
         = link_to "Товары", admin_user_products_path(user_id)

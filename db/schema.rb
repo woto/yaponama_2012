@@ -614,14 +614,14 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.integer  "order_id"
     t.integer  "user_id"
     t.integer  "creator_id"
-    t.integer  "name_id_id_before"
-    t.integer  "name_id_id_after"
-    t.integer  "postal_address_id_id_before"
-    t.integer  "postal_address_id_id_after"
-    t.integer  "metro_id_id_before"
-    t.integer  "metro_id_id_after"
-    t.integer  "shop_id_id_before"
-    t.integer  "shop_id_id_after"
+    t.integer  "name_id_before"
+    t.integer  "name_id_after"
+    t.integer  "postal_address_id_before"
+    t.integer  "postal_address_id_after"
+    t.integer  "metro_id_before"
+    t.integer  "metro_id_after"
+    t.integer  "shop_id_before"
+    t.integer  "shop_id_after"
     t.decimal  "delivery_cost_before"
     t.decimal  "delivery_cost_after"
     t.string   "status_before"
@@ -653,11 +653,11 @@ ActiveRecord::Schema.define(version: 20130416140308) do
   add_index "order_transactions", ["user_id"], name: "index_order_transactions_on_user_id", using: :btree
 
   create_table "orders", force: true do |t|
-    t.integer  "name_id_id"
-    t.integer  "postal_address_id_id"
-    t.integer  "metro_id_id"
-    t.integer  "shop_id_id"
-    t.decimal  "delivery_cost",        precision: 8, scale: 2
+    t.integer  "name_id"
+    t.integer  "postal_address_id"
+    t.integer  "metro_id"
+    t.integer  "shop_id"
+    t.decimal  "delivery_cost",     precision: 8, scale: 2
     t.string   "status"
     t.integer  "delivery_id"
     t.integer  "phone_id"
@@ -672,11 +672,11 @@ ActiveRecord::Schema.define(version: 20130416140308) do
 
   add_index "orders", ["creator_id"], name: "index_orders_on_creator_id", using: :btree
   add_index "orders", ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
-  add_index "orders", ["metro_id_id"], name: "index_orders_on_metro_id_id", using: :btree
-  add_index "orders", ["name_id_id"], name: "index_orders_on_name_id_id", using: :btree
+  add_index "orders", ["metro_id"], name: "index_orders_on_metro_id", using: :btree
+  add_index "orders", ["name_id"], name: "index_orders_on_name_id", using: :btree
   add_index "orders", ["phone_id"], name: "index_orders_on_phone_id", using: :btree
-  add_index "orders", ["postal_address_id_id"], name: "index_orders_on_postal_address_id_id", using: :btree
-  add_index "orders", ["shop_id_id"], name: "index_orders_on_shop_id_id", using: :btree
+  add_index "orders", ["postal_address_id"], name: "index_orders_on_postal_address_id", using: :btree
+  add_index "orders", ["shop_id"], name: "index_orders_on_shop_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "pages", force: true do |t|

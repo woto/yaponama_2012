@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class PagesController < ApplicationController
-  def index
+  def show
     @page = Page.where(:path => params[:path]).first
     if @page
       @meta_canonical = '/' + params[:path]
@@ -16,4 +16,5 @@ class PagesController < ApplicationController
       raise ActionController::RoutingError, "Страница #{params[:path]} не существует"
     end
   end
+
 end

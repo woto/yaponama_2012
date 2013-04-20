@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   include CurrentUserInModel
   include SmsSenderHelper
   helper_method :current_user
-  #helper_method :namespace_helper
+  helper_method :admin_zone?
   #helper_method :complex_namespace_helper
   helper_method :smart_route
   before_action :set_user_time_zone
@@ -129,15 +129,9 @@ class ApplicationController < ActionController::Base
   end
 
 
-  #def namespace_helper
-  #  namespace = nil
-
-  #  if slash_index = params[:controller].index('/')
-  #    namespace = params[:controller][0...slash_index]
-  #  end
-
-  #  namespace
-  #end
+  def admin_zone?
+    params[:controller].partition('/').first == 'admin'
+  end
 
   #def complex_namespace_helper
   #  #(namespace_helper == 'admin') ? [namespace_helper, @user] : ( namespace_helper == 'products' ? [:user] : [:user])

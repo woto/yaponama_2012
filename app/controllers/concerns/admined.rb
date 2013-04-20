@@ -12,6 +12,8 @@ module Admined
 
     layout 'admin'
 
+    private
+
     def prepend_view_paths
       prepend_view_path "app/views/admin"
     end

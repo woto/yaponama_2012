@@ -9,5 +9,3 @@
     = simple_form_for @user, :url => admin_user_discount_path(@user) do |f|
       = f.input :discount, :as => :string, input_html: { autocomplete: 'off' }
       = f.button :submit, :class => 'btn-primary'
-      '
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), complex_namespace_helper, :class => 'btn'

@@ -1,5 +1,14 @@
 = user_tabs do
-  = form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [@resource_class.name.pluralize.underscore.to_sym]}, :primary_key => params[:primary_key]), :remote => true do |f|
+
+  = form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [@resource_class.name.pluralize.underscore.to_sym]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :status => params[:status]), :remote => true do |f|
+
+    h4
+      - if params[:order_id]
+        =' "Заказ ##{params[:order_id]}. "
+      '
+      - if params[:status]
+        = "Статус просматриваемых товаров: "
+        = product_status_decorator(params[:status])
 
     #toolbar.clearfix
       .margin-on-left
@@ -15,14 +24,14 @@
             ul.dropdown-menu
               - Rails.configuration.products_status.select{|k, v| v['real'] == true}.each do |k, v|
                 li 
-                  = link_to smart_route({:postfix => [:products, k.to_sym, :index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :page => @page, :sort => params[:sort_column], :direction => params[:sort_direction]), id: "form_#{k}_action" do
+                  = link_to smart_route({:postfix => [:products, k.to_sym, :index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :page => @page, :sort => params[:sort_column], :direction => params[:sort_direction], :return_path => request.fullpath), id: "form_#{k}_action" do
                     =' v["action"]
                     - if v['badge'].present?
                       span class="badge badge-#{k}" = v['badge']
               li.divider
-              li = link_to 'Разбить на партии', smart_route({:postfix => [:products, :split_index]}, :primary_key => params[:primary_key], :user_id => params[:user_id], :order_id => params[:order_id])
-              li = link_to 'Редактировать или перезаказать', smart_route({:postfix => [:products, :edit_index]}, :primary_key => params[:primary_key], :user_id => params[:user_id], :order_id => params[:order_id] )
-              li = link_to t('.destroy', :default => t("helpers.links.destroy")), smart_route({:prefix => [:multiple_destroy], :postfix => [:products]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key]), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } 
+              li = link_to 'Разбить на партии', smart_route({:postfix => [:products, :split_index]}, :primary_key => params[:primary_key], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => request.fullpath)
+              li = link_to 'Редактировать или перезаказать', smart_route({:postfix => [:products, :edit_index]}, :primary_key => params[:primary_key], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => request.fullpath)
+              li = link_to t('.destroy', :default => t("helpers.links.destroy")), smart_route({:prefix => [:multiple_destroy], :postfix => [:products]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => request.fullpath), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } 
 
 
       .pull-right
@@ -42,11 +51,3 @@
 
 
     = render :partial => 'shared/grid'
-
-  .page-header
-    - if params[:user_id]
-      = render :partial => "shared/client_button", :locals => {:user_id => params[:user_id], :user_label => User.find(params[:user_id]).to_label}
-    - if params[:order_id]
-      =' "Заказ: #{Order.find(params[:order_id]).to_label}"
-
-

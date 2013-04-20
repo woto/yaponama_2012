@@ -22,32 +22,11 @@ module ApplicationHelper
 
   def user_tabs(&block)
 
-    products_dropdown = []
-
-     Rails.configuration.products_status.each do |k, v|
-       title = ''
-       if v['badge'].present?
-         title << content_tag(:span, v['badge'], :class => "badge badge-#{k}")
-         title << ' '
-       end
-       title  << v['title']
-
-       products_dropdown <<
-      {
-        :title => title.html_safe,
-        :catch => [ { :controller => 'products', :action => 'index', :status => k.to_sym } ],
-        :link => { :controller => 'products', :action => 'index', :status => k.to_sym },
-        :class => '',
-        :dropdown => []
-      }
-    end
-
-
     res = ''.html_safe
     workspace_class = 'span12'
 
     content_tag(:div, :class => 'row-fluid') do
-      if @user && params[:controller].include?('admin')
+      if @user && admin_zone?
         workspace_class = 'span9'
         res = content_tag(:div, :class => 'span3') do
           render 'users/show'
@@ -56,92 +35,94 @@ module ApplicationHelper
 
       res <<
       content_tag(:div, :class => workspace_class, :id => 'workspace') do
-        content_tag(:ul, :class => 'nav nav-tabs') do
-          [ 
-            { :title => 'Главная', 
-              :catch => [ { :controller => 'users', :action => 'edit' } ], 
-              :link => {:controller => 'users', :action => 'edit'},
-              :class => '',
-              :dropdown => []
-            },
+        if @user && admin_zone?
+          content_tag(:ul, :class => 'nav nav-tabs', style: "margin-bottom: 10px") do
+            [ 
+              { :title => 'Настройки', 
+                :catch => [ { :controller => 'users', :action => 'edit' } ], 
+                :link => {:controller => 'users', :action => 'edit'},
+                :class => '',
+                :dropdown => []
+              },
 
-            { :title => 'Заказы',  
-              :catch => [ { :controller => 'orders' } ], 
-              :link => { :controller => 'orders', :action => 'index' },
-              :class => '',
-              :dropdown => []
-            },
+              { :title => 'Заказы',  
+                :catch => [ { :controller => 'orders' } ], 
+                :link => '#',
+                :class => 'dropdown',
+                :dropdown => _build_dropdowns('order')
+              },
 
-            { :title => 'Товары',  
-              :catch => [ { :controller => 'products' } ],
-              :link => '#',
-              :class => 'dropdown',
-              :dropdown => products_dropdown
-            },
+              { :title => 'Товары',  
+                :catch => [ { :controller => 'products' } ],
+                :link => '#',
+                :class => 'dropdown',
+                :dropdown => _build_dropdowns('product')
+              },
 
-            { :title => 'Транзакции',  
-              :catch => [ 
-                { :controller => 'products', :action => 'transactions' }, { :controller => 'account_transactions' } ],
-              :link => '#', 
-              :class => 'dropdown',
-              :dropdown => [
-                { :title => 'Товар',  
-                  :catch => [ { :controller => 'products', :action => 'transactions' } ],
-                  :link => { :controller => 'products', :action => 'transactions' },
-                  :class => '',
-                  :dropdown => []
-                },
-                { :title => 'Деньги',  
-                  :catch => [ { :controller => 'account_transactions' } ],
-                  :link => { :controller => 'account_transactions', :action => 'index' },
-                  :class => '',
-                  :dropdown => []
-                }
-              ]
-            },
+              { :title => 'Транзакции',
+                :catch => [ 
+                  { :controller => 'products', :action => 'transactions' }, { :controller => 'account_transactions' } ],
+                :link => '#', 
+                :class => 'dropdown',
+                :dropdown => [
+                  { :title => 'Товар',
+                    :catch => [ { :controller => 'products', :action => 'transactions' } ],
+                    :link => { :controller => 'products', :action => 'transactions' },
+                    :class => '',
+                    :dropdown => []
+                  },
+                  { :title => 'Деньги',
+                    :catch => [ { :controller => 'account_transactions' } ],
+                    :link => { :controller => 'account_transactions', :action => 'index' },
+                    :class => '',
+                    :dropdown => []
+                  }
+                ]
+              },
 
 
-            { :title => 'Поиск', 
-              :catch => [ { :controller => 'searches' } ],
-              :link => { :controller => 'searches', :action => 'index' },
-              :class => '',
-              :dropdown => []
-            },
+              { :title => 'Поиск', 
+                :catch => [ { :controller => 'searches' } ],
+                :link => { :controller => 'searches', :action => 'index' },
+                :class => '',
+                :dropdown => []
+              },
 
-          ].collect do |item|
+            ].collect do |item|
 
-            begin
-              link = url_for(item[:link])
-            rescue ActionController::UrlGenerationError
-            end
-
-            if item[:dropdown].blank? 
-              content_tag :li, link_to(item[:title], link), :class => highlight_active(item[:catch])
-            else
-              content_tag :li, :class => "#{highlight_active(item[:catch])} #{item[:class]}" do
-                [ 
-                  ( link_to(item[:title], link, "data-toggle" => item[:class]).to_s ), 
-
-                  ( content_tag :ul, :class => 'dropdown-menu' do |ul|
-                    item[:dropdown].collect do |dropdown|
-
-                        begin
-                          link = url_for(dropdown[:link])
-                        rescue ActionController::UrlGenerationError
-                        end
-                        content_tag :li, :class => highlight_active(dropdown[:catch]) do
-                          link_to(dropdown[:title], link)
-
-                      end
-                    end.join.html_safe
-                  end.to_s ) 
-                ].join.html_safe
+              begin
+                link = url_for(item[:link])
+              rescue ActionController::UrlGenerationError
               end
-            end
-          end.join.html_safe
-        end <<
 
-        content_tag(:div, :class => "tab-content") do
+              if item[:dropdown].blank? 
+                content_tag :li, link_to(item[:title], link), :class => highlight_active(item[:catch])
+              else
+                content_tag :li, :class => "#{highlight_active(item[:catch])} #{item[:class]}" do
+                  [ 
+                    ( link_to(item[:title], link, "data-toggle" => item[:class]).to_s ), 
+
+                    ( content_tag :ul, :class => 'dropdown-menu' do |ul|
+                      item[:dropdown].collect do |dropdown|
+
+                          begin
+                            link = url_for(dropdown[:link])
+                          rescue ActionController::UrlGenerationError
+                          end
+                          content_tag :li, :class => highlight_active(dropdown[:catch]) do
+                            link_to(dropdown[:title], link)
+
+                        end
+                      end.join.html_safe
+                    end.to_s ) 
+                  ].join.html_safe
+                end
+              end
+            end.join.html_safe
+          end
+        end.to_s.html_safe <<
+
+        content_tag(:div, :class => "tab-content", style: "min-height: 400px") do
           content_tag(:div, :class => 'tab-pane active', &block)
         end
       end
@@ -215,5 +196,50 @@ module ApplicationHelper
   #    end
   #  end
   #end
+  
+  def _build_dropdowns(singular)
+
+    plural = singular.pluralize
+
+    dropdowns = []
+
+    tmp = eval("Rails.configuration.#{plural}_status")
+
+    tmp.each do |k, v|
+      title = ''
+      if v['badge'].present?
+        title << content_tag(:span, v['badge'], :class => "badge badge-#{k}")
+        title << ' '
+      end
+      title  << v['title']
+
+      dropdowns <<
+      {
+       :title => title.html_safe,
+       :catch => [ { :controller => plural, :action => 'index', :status => k.to_sym, :order_id => nil } ],
+       :link => smart_route({:prefix => [:status], :postfix => [plural]}, :status => k.to_sym, :user_id => @user),
+       :class => '',
+       :dropdown => []
+      }
+    end
+
+    return dropdowns
+  end
+
+  def product_status_decorator(status)
+    content_tag(:span, class: "label label-#{status}") do
+      Rails.configuration.products_status[status]['title']
+    end
+  end
+
+  def order_decorator(order)
+    if order
+      link_to smart_route({:postfix => [:order]}, :user_id => order.user_id, :id => order.id, :status => nil) do 
+        content_tag(:i, '', class: "icon-shopping-cart").html_safe +
+        " " +
+        order.to_label 
+      end
+    end
+  end
 
 end
