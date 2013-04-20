@@ -73,3 +73,4 @@
 //= require history.js/scripts/compressed/history.adapter.jquery.js 
 //
 //= require tooltip_popover_rel
+//= require items_progress
