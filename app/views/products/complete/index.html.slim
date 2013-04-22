@@ -1,7 +1,7 @@
 = user_tabs do
   ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['complete']['title']}"
 
-  = form_tag smart_route({:postfix => [:products, :complete_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path], :primary_key => params[:primary_key]), :class => "dirtyforms" do |f|
+  = form_tag smart_route({:postfix => [:products, :complete_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path], :primary_key => params[:primary_key], :status => params[:status]), :class => "dirtyforms" do |f|
 
     = render :partial => 'shared/grid'
 

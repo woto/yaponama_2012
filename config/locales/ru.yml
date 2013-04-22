@@ -43,11 +43,18 @@ ru:
         created_at: Создан
         updated_at: Изменен
       order:
+        status: Статус заказа
+        metro: Станция метро
         metro_id: Станция метро
+        shop: Магазин
         shop_id: Магазин
+        postal_address: Почтовый адрес
         postal_address_id: Почтовый адрес
+        phone: Телефон
         phone_id: Телефон
+        delivery: Способ доставки
         delivery_id: Способ доставки
+        name: Получатель
         name_id: Получатель
         user: Покупатель
         inorder_order_cost: Сформировано

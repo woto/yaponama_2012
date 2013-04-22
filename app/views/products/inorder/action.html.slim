@@ -1,7 +1,7 @@
 = user_tabs do
   ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['inorder']['title']}"
 
-  = simple_form_for(@order, :url => smart_route({:postfix => [@order]}, :user_id => params[:user_id], :id => @order.id, :primary_key => params[:primary_key], :return_path => params[:return_path]), :html => {:class => "dirtyforms"})  do |f|
+  = simple_form_for(@order, :url => smart_route({:postfix => [@order]}, :user_id => params[:user_id], :id => @order.id, :primary_key => params[:primary_key], :return_path => params[:return_path], :status => params[:status]), :html => {:class => "dirtyforms"})  do |f|
 
     = f.error_notification
     - f.object.errors.full_messages do |error|
@@ -9,6 +9,7 @@
 
     = f.association :delivery
     = f.association :name, :collection => @items.first.user.names
+    = f.association :company, :collection => @items.first.user.companies
     = f.association :postal_address, :collection => @items.first.user.postal_addresses 
     = f.association :phone, :collection => @items.first.user.phones
     / TODO Заменить chzn на select2

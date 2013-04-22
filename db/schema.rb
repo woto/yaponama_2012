@@ -403,6 +403,7 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.boolean  "delivery_cost_required",   default: false
     t.boolean  "phone_required",           default: false
     t.boolean  "metro_required",           default: false
+    t.boolean  "company_required",         default: false
     t.boolean  "shop_required",            default: false
     t.integer  "sequence"
     t.string   "image"
@@ -622,6 +623,8 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.integer  "metro_id_after"
     t.integer  "shop_id_before"
     t.integer  "shop_id_after"
+    t.integer  "company_id_before"
+    t.integer  "company_id_after"
     t.decimal  "delivery_cost_before"
     t.decimal  "delivery_cost_after"
     t.string   "status_before"
@@ -657,8 +660,9 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.integer  "postal_address_id"
     t.integer  "metro_id"
     t.integer  "shop_id"
-    t.decimal  "delivery_cost",     precision: 8, scale: 2
-    t.string   "status"
+    t.integer  "company_id"
+    t.decimal  "delivery_cost",     precision: 8, scale: 2, default: 0.0
+    t.string   "status",                                    default: "open"
     t.integer  "delivery_id"
     t.integer  "phone_id"
     t.datetime "created_at"
@@ -670,6 +674,7 @@ ActiveRecord::Schema.define(version: 20130416140308) do
     t.integer  "creator_id"
   end
 
+  add_index "orders", ["company_id"], name: "index_orders_on_company_id", using: :btree
   add_index "orders", ["creator_id"], name: "index_orders_on_creator_id", using: :btree
   add_index "orders", ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
   add_index "orders", ["metro_id"], name: "index_orders_on_metro_id", using: :btree

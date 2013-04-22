@@ -17,7 +17,7 @@ class Products::InorderController < ApplicationController
 
 
     rescue ValidationError => e
-      redirect_to :back, :alert => e.message and return
+      redirect_to params[:return_path], :alert => e.message and return
     end
 
   end

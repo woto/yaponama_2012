@@ -14,6 +14,7 @@ class CreateDeliveries < ActiveRecord::Migration
       t.boolean :delivery_cost_required, :default => false
       t.boolean :phone_required, :default => false
       t.boolean :metro_required, :default => false
+      t.boolean :company_required, :default => false
       t.boolean :shop_required, :default => false
       t.integer :sequence
 

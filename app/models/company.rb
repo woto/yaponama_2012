@@ -85,7 +85,8 @@ class Company < ActiveRecord::Base
   #end
 
   def to_label
-    'TODO'
+    inn + " - " + name
+
   end
 
 

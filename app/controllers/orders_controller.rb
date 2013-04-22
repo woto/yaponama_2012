@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   before_action :set_resource_class_2, :except => [:create, :update]
   before_action :set_grid_class_2, :except => [:create, :update]
-  before_action :set_grid
+  before_action :set_grid, :except => [:show]
   #before_action :set_user
 
   before_filter :only => [:create, :update] do
@@ -255,14 +255,20 @@ class OrdersController < ApplicationController
       :type => :string,
     }
 
-    columns_hash['notes_invisible'] = {
-      :type => :string,
-    }
-
-    columns_hash['user_id'] = {
-      :type => :belongs_to,
-      :belongs_to => User,
-    }
+    if admin_zone?
+      columns_hash['notes_invisible'] = {
+        :type => :string,
+      }
+    end
+ 
+    if admin_zone?
+      unless @user
+        columns_hash['user_id'] = {
+          :type => :belongs_to,
+          :belongs_to => User,
+        }
+      end
+    end
 
     columns_hash['creator_id'] = {
       :type => :belongs_to,
@@ -274,6 +280,7 @@ class OrdersController < ApplicationController
   end
 
   def set_preferable_columns
+
     @grid.id_visible = '1'
     @grid.name_id_visible = '1'
     @grid.postal_address_id_visible = '1'
@@ -283,12 +290,22 @@ class OrdersController < ApplicationController
     @grid.phone_id_visible = '1'
     @grid.notes_visible = '1'
     @grid.updated_at_visible = '1'
+
+    if params[:status].blank? || ['all'].include?(params[:status])
+      @grid.status_visible = '1'
+    end
+
   end
 
   def additional_conditions
     if @user
       @items = @items.where(:user_id => @user.id)
     end
+
+    if params[:status] != 'all' && params[:status].present?
+      @items = @items.where(:status => params[:status]) 
+    end
+
   end
 
 

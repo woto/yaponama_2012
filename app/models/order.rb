@@ -10,12 +10,13 @@ class Order < ActiveRecord::Base
   belongs_to :phone
   belongs_to :postal_address
   belongs_to :metro
+  belongs_to :company
   belongs_to :shop
 
   has_many :products, :dependent => :destroy
 
   def to_label
-    "Заказ #{id}"
+    "#{id} - #{delivery.try(:to_label)} - #{name.try(:to_label)} - #{postal_address.try(:to_label)} - #{metro.try(:to_label)} - #{shop.try(:to_label)} - #{company.try(:to_label)} - #{phone.try(:to_label)}"
   end
 
   validate :multistep_order
@@ -38,6 +39,9 @@ class Order < ActiveRecord::Base
       end
       if delivery.shop_required && shop.blank?
         errors.add(:shop, "Пожалуйста выберите магазин")
+      end
+      if delivery.company_required && company.blank?
+        errors.add(:company, "Пожалуйста выберите компанию")
       end
       if delivery.delivery_cost_required && delivery_cost.blank?
         errors.add(:delivery_cost, "Пожалуйста укажите предполагаемую сумму доставки")

@@ -20,7 +20,7 @@ class Products::SplitController < ApplicationController
       end
 
     rescue ValidationError => e
-      redirect_to :back, :alert => e.message
+      redirect_to params[:return_path], :alert => e.message
     end
 
   end

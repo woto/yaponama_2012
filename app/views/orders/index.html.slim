@@ -1,6 +1,12 @@
 = user_tabs do
   = form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [@resource_class.name.pluralize.underscore.to_sym]}, :primary_key => params[:primary_key], :user_id => params[:user_id]), :remote => true do |f|
 
+    h4
+      - if params[:status]
+        | Статус просматриваемых заказов:  
+        = order_status_decorator(params[:status])
+
+
     #toolbar.clearfix
 
       .pull-right.right-space

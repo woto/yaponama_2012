@@ -1,18 +1,23 @@
 #items data-no-turbolink="" style="position: relative"
   #items-progress
-
-  - if @items.num_pages == 0
-    .alert.alert-info
-      | Не найдено ни одной строки соответствующей данному условию.
-  - elsif @items.num_pages > 0 && @page.to_i > @items.num_pages
-    .alert.alert-warn
-      | Вы находитесь на странице, которая больше доступных, хотите перейти на первую страницу чтобы посмотреть найденные результаты?
+    #items-progress-center
+      i.icon-spinner
       '
-      b= link_to "Перейти", polymorphic_path([namespace_helper, @resource_class.name.pluralize.underscore.to_sym], :page => 1, :primary_key => params[:primary_key])
+      | Ожидайте...
+
+  - if params[:controller] =~ /(admin\/)*products$/
+    - if @items.num_pages == 0
+      .alert.alert-block.alert-info
+        | Не найдено ни одной строки соответствующей данному условию.
+    - elsif @items.num_pages > 0 && @grid.page.to_i > @items.num_pages
+      .alert.alert-block.alert-warn
+        | Вы находитесь на странице, которая больше доступных,  
+        b= link_to "хотите перейти на первую страницу?", smart_route({:postfix => [@resource_class.name.pluralize.underscore.to_sym]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :status => params[:status], :page => 1)
 
   = hidden_field_tag 'grid[sort_column]', @grid.sort_column
   = hidden_field_tag 'grid[sort_direction]', @grid.sort_direction
   = hidden_field_tag 'grid[page]', @grid.page
+  /= hidden_field_tag 'grid[per_page]', @grid.per_page
 
   / МОДАЛЬНОЕ ОКНО С ВЫБОРОМ ОТОБРАЖАЕМЫХ КОЛОНОК
   div#columns.modal.hide.fade tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
@@ -57,10 +62,10 @@
             '
             a href="#"
               i.icon.icon-filter type="button" role="button" data-toggle="modal" data-target="##{column_name}_filter"
-        th Спросить
-        th Редакт.
-        th Удалить
-        th История
+        /th Спросить
+        /th Редакт.
+        /th Удалить
+        /th История
 
 
     / TABLE BODY
@@ -119,19 +124,19 @@
             - else
               td = item[column_name]
 
-          td
+          /td
             a href="" class="btn"
               i.icon-bullhorn
 
-          td
+          /td
             = link_to smart_route({:prefix => [:edit], :postfix => [item]}, :id => item.id, :user_id => item.user_id), data: { toggle: "tooltip" }, title: "#{ t('.edit', :default => t("helpers.links.edit")) }", :class => 'btn btn-warning', :rel => "tooltip" do
               i.icon-edit
 
-          td
+          /td
             = link_to smart_route({:postfix => [item]}, :id => item.id, :user_id => item.user_id), :method => :delete, data: { toggle: "tooltip" }, title: "#{ t('.destroy', :default => t("helpers.links.destroy")) }", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :rel => "tooltip", :class => 'btn btn btn-danger' do
               i.icon-trash
 
-          td
+          /td
             = link_to smart_route({:prefix => [:transactions], :postfix => [item]}, :id => item.id, :user_id => item.user_id), data: { toggle: "tooltip" }, title: "#{ t('.transactions', :default => t("helpers.links.transactions")) }", :class => 'btn', :rel => "tooltip" do
               i.icon-time
 

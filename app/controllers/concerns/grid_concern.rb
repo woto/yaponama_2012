@@ -18,14 +18,15 @@ module GridConcern
         # Создаем новый из params
         @grid = @grid_class.new(params[:grid])
 
-        if [:filters, :columns, :per_page].any?{ |p| params[p] }
 
-          # Замещаем item_ids на старые, т.к. их не меняем
+        # filters columns per_page items
+
+        unless params[:items]
+          # Восстанавливаем item_ids на старые, т.к. их не меняем
           @grid.item_ids = old_grid.item_ids
-
         end
 
-        if [:filters, :columns, :items].any?{ |p| params[p] }
+        unless params[:per_page]
           # Восстанавливаем per_page, т.к. его не меняем
           @grid.per_page = old_grid.per_page
         end
@@ -73,7 +74,7 @@ module GridConcern
       elsif old_grid && old_grid.sort_column
         @grid.sort_column = old_grid.sort_column
       else
-        @grid.sort_column = "updated_at"
+        @grid.sort_column = "id"
       end
 
       if params[:sort_direction]
@@ -159,7 +160,11 @@ module GridConcern
 
       end
 
-      additional_conditions
+      begin
+        method(:additional_conditions)
+        additional_conditions
+      rescue StandardError
+      end
 
       $redis.set("grid:#{params[:primary_key]}", @grid.to_json)
 

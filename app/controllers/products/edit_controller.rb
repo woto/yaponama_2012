@@ -16,7 +16,7 @@ class Products::EditController < ApplicationController
       products_all_statuses_validation ['incart', 'inorder', 'ordered', 'pre_supplier', 'post_supplier', 'stock', 'complete', 'cancel']
 
     rescue ValidationError => e
-      redirect_to :back, :alert => e.message
+      redirect_to params[:return_path], :alert => e.message
     end
 
   end

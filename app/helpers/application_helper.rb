@@ -232,6 +232,12 @@ module ApplicationHelper
     end
   end
 
+  def order_status_decorator(status)
+    content_tag(:span, class: "label label-#{status}") do
+      Rails.configuration.orders_status[status]['title']
+    end
+  end
+
   def order_decorator(order)
     if order
       link_to smart_route({:postfix => [:order]}, :user_id => order.user_id, :id => order.id, :status => nil) do 

@@ -15,7 +15,7 @@ class Products::PreSupplierController < ApplicationController
       products_all_statuses_validation ['ordered', 'pre_supplier', 'post_supplier', 'cancel']
 
     rescue ValidationError => e
-      redirect_to :back, :alert => e.message
+      redirect_to params[:return_path], :alert => e.message
     end
 
   end
@@ -29,7 +29,7 @@ class Products::PreSupplierController < ApplicationController
     @items.each do |item|
       item.status = 'pre_supplier'
       unless item.save
-        redirect_to :back, :alert => item.errors.full_messages and return
+        redirect_to params[:return_path], :alert => item.errors.full_messages and return
       end
     end
     redirect_to_relative_path('pre_supplier')

@@ -5,6 +5,22 @@
 
 dl.dl-horizontal
   dt 
+    strong
+      = model_class.human_attribute_name(:delivery) 
+      | :
+  dd.clearfix
+    - if @order.delivery_id
+      = @order.delivery.to_label
+
+  - if @order.metro_id
+    dt 
+      strong 
+        = model_class.human_attribute_name(:metro_id) 
+        | :
+    dd.clearfix 
+      = @order.metro.to_label
+
+  dt 
     strong 
       = model_class.human_attribute_name(:name_id) 
       | :
@@ -44,20 +60,13 @@ dl.dl-horizontal
     = @order.delivery_cost
 
 
-  dt 
-    strong
-      = model_class.human_attribute_name(:delivery) 
-      | :
-  dd.clearfix
-    - if @order.delivery_id
-      = @order.delivery.to_label
-
-  dt 
-    strong
-      = model_class.human_attribute_name(:phone_id) 
-      | :
-  dd.clearfix
-    = @order.phone_id
+  - if @order.phone_id
+    dt 
+      strong
+        = model_class.human_attribute_name(:phone_id) 
+        | :
+    dd.clearfix
+      = @order.phone_id
     
 
   dt 

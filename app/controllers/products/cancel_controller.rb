@@ -14,7 +14,7 @@ class Products::CancelController < ApplicationController
       products_any_checked_validation
 
     rescue ValidationError => e
-      redirect_to :back, :alert => e.message
+      redirect_to params[:return_path], :alert => e.message
     end
 
   end
@@ -30,7 +30,7 @@ class Products::CancelController < ApplicationController
       @items.each do |item|
         item.status = 'cancel'
         unless item.save
-          redirect_to :back, :alert => item.errors.full_messages and return
+          redirect_to params[:return_path], :alert => item.errors.full_messages and return
         end
       end
 

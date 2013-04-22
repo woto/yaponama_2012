@@ -30,7 +30,7 @@ class Products::OrderedController < ApplicationController
         (Product.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => false}).where("products.id IN (#{@items.map{|item| item.id}.join(',')})").summa * @user.prepayment / 100)).round(2)
 
     rescue ValidationError => e
-      redirect_to :back, :alert => e.message
+      redirect_to params[:return_path], :alert => e.message
     end
 
   end
@@ -42,7 +42,7 @@ class Products::OrderedController < ApplicationController
   def create
     # TODO необходима проверка значения
     #unless params[:client_debit].to_f.to_s == params[:client_debit]
-    #  redirect_to :back, :alert => "Введено неправильное значение в качестве суммы." and return
+    #  redirect_to params[:return_path], :alert => "Введено неправильное значение в качестве суммы." and return
     #end
 
     @cash = Cash.new(cash_params)
@@ -58,7 +58,7 @@ class Products::OrderedController < ApplicationController
         @items.each do |item|
           item.status = 'ordered'
           unless item.save
-            redirect_to :back, :alert => item.errors.full_messages and return
+            redirect_to params[:return_path], :alert => item.errors.full_messages and return
           end
         end
       end

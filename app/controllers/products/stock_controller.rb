@@ -15,7 +15,7 @@ class Products::StockController < ApplicationController
       products_all_statuses_validation ['post_supplier', 'complete', 'cancel']
 
     rescue ValidationError => e
-      redirect_to :back, :alert => e.message
+      redirect_to params[:return_path], :alert => e.message
     end
 
   end
@@ -31,7 +31,7 @@ class Products::StockController < ApplicationController
       @items.each do |item|
         item.status = 'stock'
         unless item.save
-          redirect_to :back, :alert => item.errors.full_messages and return
+          redirect_to params[:return_path], :alert => item.errors.full_messages and return
         end
       end
 
