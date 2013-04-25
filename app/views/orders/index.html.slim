@@ -31,61 +31,12 @@
     - if @user
       = link_to "#{t('.new', :default => t("helpers.links.new"))} #{@resource_class.name}", smart_route({:prefix => [:new], :postfix => [@resource_class.name.underscore.to_sym]}, :user_id => params[:user_id]), :class => 'btn btn-primary'
 
-= user_tabs do
-  - model_class = Order
+  div style="background: #999"
+    - model_class = Order
 
-  - if params[:user_id] || params[:order_id] 
-    .page-header
-        - if params[:user_id]
-          = render :partial => "shared/client_button", :locals => {:user_id => params[:user_id], :user_label => User.find(params[:user_id]).to_label}
-        - if params[:order_id]
-          = "Заказ: #{Order.find(params[:order_id]).to_label}"
-
-  div.tab-content
-    .tab-pane.active
-
-      table.table.table-striped
-        thead
-          tr
-            th = model_class.human_attribute_name(:id)
-            th = model_class.human_attribute_name(:name_id)
-            th = model_class.human_attribute_name(:postal_address_id)
-            th = model_class.human_attribute_name(:metro_id)
-            th = model_class.human_attribute_name(:delivery_cost)
-            th = model_class.human_attribute_name(:status)
-            th = model_class.human_attribute_name(:delivery_id)
-            th = model_class.human_attribute_name(:phone_id)
-            th = model_class.human_attribute_name(:created_at)
-            th = model_class.human_attribute_name(:updated_at)
-            th = model_class.human_attribute_name(:creation_reason)
-            th = model_class.human_attribute_name(:notes)
-            th = model_class.human_attribute_name(:notes_invisible)
-            th = model_class.human_attribute_name(:user_id)
-            th = model_class.human_attribute_name(:creator_id)
-            th   Товары
-            th =t '.actions', :default => t("helpers.actions")
-        tbody
-          - @orders.each do |order|
-            tr
-              td = link_to order.id, smart_route({:postfix => [:order]}, :user_id => order.user, :id => order.id)
-              td = order.name.try(:to_label)
-              td = order.postal_address.try(:to_label)
-              td = order.metro.try(:to_label)
-              td = order.delivery_cost
-              td = order.status
-              td = order.delivery_id
-              td = order.phone.try(:to_label)
-              td = l order.created_at, :format => :short
-              td = l order.updated_at, :format => :short
-              td = order.creation_reason
-              td = order.notes
-              td = order.notes_invisible
-              td = link_to order.user.try(:to_label), edit_admin_user_path(order.user)
-              td = link_to order.creator.try(:to_label), edit_admin_user_path(order.creator)
-              td = link_to 'products', smart_route({:postfix => [:products]}, :user_id => order.user_id, :order_id => order.id)
-              td
-                = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_user_order_path(order.user, order), :class => 'btn btn-mini'
-                = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_user_order_path(order.user, order), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
-
-  / = link_to t('.new', :default => t("helpers.links.new")), new_admin_user_order_path, :class => 'btn btn-primary'
-
+    - if params[:user_id] || params[:order_id] 
+      .page-header
+          - if params[:user_id]
+            = render :partial => "shared/client_button", :locals => {:user_id => params[:user_id], :user_label => User.find(params[:user_id]).to_label}
+          - if params[:order_id]
+            = "Заказ: #{Order.find(params[:order_id]).to_label}"

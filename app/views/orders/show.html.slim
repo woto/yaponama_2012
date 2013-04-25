@@ -101,6 +101,11 @@ dl.dl-horizontal
   dd.clearfix
     = @order.updated_at
 
+  dt
+    strong
+      | Товары заказа:
+  dd.clearfix
+    = link_to 'Просмотреть', smart_route({:postfix => [:products]}, :user_id => @order.user_id, :order_id => @order.id)
 
 
 .form-actions

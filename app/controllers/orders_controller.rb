@@ -1,11 +1,23 @@
 class OrdersController < ApplicationController 
-  include ProductsConcern
   include GridConcern
 
-  before_action :set_resource_class_2, :except => [:create, :update]
-  before_action :set_grid_class_2, :except => [:create, :update]
-  before_action :set_grid, :except => [:show]
-  #before_action :set_user
+  before_action do
+    class_eval do
+      include OrdersConcern
+    end
+  end
+
+  before_action :except => [:index, :filter] do
+    class_eval do
+      include ProductsConcern
+    end
+  end
+
+  before_action :except => [:show] do
+    set_resource_class
+    set_grid_class
+    set_grid
+  end
 
   before_filter :only => [:create, :update] do
     begin
@@ -174,138 +186,6 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit!
-  end
-
-
-  private
-
-  def set_resource_class_2
-    @resource_class = Order
-  end
-
-
-  def set_grid_class_2
-
-    @grid_class = Class.new(AbstractGrid)
-
-    columns_hash = {}
-
-
-    columns_hash['id'] = {
-      :type => :belongs_to,
-      :belongs_to => Product,
-    }
-
-
-    columns_hash['name_id'] = {
-      :type => :belongs_to,
-      :belongs_to => Name,
-    }
-
-    columns_hash['postal_address_id'] = {
-      :type => :belongs_to,
-      :belongs_to => PostalAddress,
-    }
-
-    columns_hash['metro_id'] = {
-      :type => :belongs_to,
-      :belongs_to => Metro,
-    }
-
-
-    columns_hash['shop_id'] = {
-      :type => :belongs_to,
-      :belongs_to => Shop,
-    }
-
-    columns_hash['delivery_cost'] = {
-      :type => :number,
-    }
-
-
-    columns_hash['status'] = {
-      :type => :set,
-      :set => Hash[*Rails.configuration.orders_status.map{|k, v| [v['title'], k]}.flatten],
-    }
-
-    columns_hash['delivery_id'] = {
-      :type => :belongs_to,
-      :belongs_to => Delivery,
-    }
-
-    columns_hash['phone_id'] = {
-      :type => :belongs_to,
-      :belongs_to => Phone,
-    }
-
-    columns_hash['created_at'] = {
-      :type => :date,
-    }
-
-    columns_hash['updated_at'] = {
-      :type => :date,
-    }
-
-    columns_hash['creation_reason'] = {
-      :type => :set,
-      :set => eval("Hash[*Rails.configuration.user_#{@resource_class.name.underscore}_creation_reason.map{|k, v| [v, k]}.flatten]"),
-    }
-
-    columns_hash['notes'] = {
-      :type => :string,
-    }
-
-    if admin_zone?
-      columns_hash['notes_invisible'] = {
-        :type => :string,
-      }
-    end
- 
-    if admin_zone?
-      unless @user
-        columns_hash['user_id'] = {
-          :type => :belongs_to,
-          :belongs_to => User,
-        }
-      end
-    end
-
-    columns_hash['creator_id'] = {
-      :type => :belongs_to,
-      :belongs_to => User,
-    }
-
-    @grid_class.const_set("COLUMNS", columns_hash)
-
-  end
-
-  def set_preferable_columns
-
-    @grid.id_visible = '1'
-    @grid.name_id_visible = '1'
-    @grid.postal_address_id_visible = '1'
-    @grid.metro_id_visible = '1'
-    @grid.shop_id_visible = '1'
-    @grid.delivery_id_visible = '1'
-    @grid.phone_id_visible = '1'
-    @grid.notes_visible = '1'
-    @grid.updated_at_visible = '1'
-
-    if params[:status].blank? || ['all'].include?(params[:status])
-      @grid.status_visible = '1'
-    end
-
-  end
-
-  def additional_conditions
-    if @user
-      @items = @items.where(:user_id => @user.id)
-    end
-
-    if params[:status] != 'all' && params[:status].present?
-      @items = @items.where(:status => params[:status]) 
-    end
-
   end
 
 

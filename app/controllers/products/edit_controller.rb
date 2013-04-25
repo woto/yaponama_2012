@@ -4,6 +4,8 @@ class Products::EditController < ApplicationController
   include ProductsConcern
   include GridConcern
 
+  before_action :set_resource_class
+  before_action :set_grid_class
   before_action :set_grid
 
   before_filter do

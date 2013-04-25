@@ -5,11 +5,6 @@ module ProductsConcern
 
   included do
 
-    before_action :set_resource_class
-    before_action :set_grid_class
-
-    #before_filter :set_item_ids
-
     helper_method :products_user_order_tab_scope
 
     private
@@ -24,14 +19,6 @@ module ProductsConcern
     def products_user_order_tab_scope products, status
 
       products = products.limit(100).offset(0)
-
-      if params[:user_id]
-        products = products.where(:user_id => params[:user_id])
-      end
-
-      if params[:order_id]
-        products = products.where(:order_id => params[:order_id]) 
-      end
 
       case status
         when *Rails.configuration.products_status.select{|k, v| v['real']}.keys
@@ -103,12 +90,6 @@ module ProductsConcern
         raise ValidationError.new "Для данной операции необходимо чтобы был выделена только 1 позиция."
       end
     end
-
-
-    def set_resource_class
-      @resource_class = Product
-    end
-
 
     def set_grid_class
 
@@ -254,7 +235,6 @@ module ProductsConcern
 
     end
 
-
     def set_preferable_columns
 
       @grid.id_visible = '1'
@@ -282,6 +262,10 @@ module ProductsConcern
         @grid.status_visible = '1'
       end
 
+    end
+
+    def set_resource_class
+      @resource_class = Product
     end
 
   end

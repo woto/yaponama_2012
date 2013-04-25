@@ -1,11 +1,17 @@
 class ProductsController < ApplicationController
-  before_action :set_user
   include ProductsConcern
   include GridConcern
 
   ORDER_STEPS = %w[order delivery postal_address phone name notes]
 
-  before_action :set_grid, :only => [:index, :filter, :multiple_destroy]
+  before_action :only => [:index, :filter, :multiple_destroy] do
+    class_eval do
+      include ProductsConcern
+    end
+    set_resource_class
+    set_grid_class
+    set_grid
+  end
 
   def transactions
 
@@ -104,16 +110,6 @@ class ProductsController < ApplicationController
     params.delete :filters
     params.delete :per_page
     super
-  end
-
-  def set_user
-    @user = current_user
-  end
-
-  private
-
-  def set_resource_class
-    @resource_class = Product
   end
 
 end
