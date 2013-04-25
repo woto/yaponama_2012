@@ -1,0 +1,109 @@
+- model_class = Order
+
+h3 
+  =t '.title', :default => model_class.model_name.human
+  '  №
+  = order.id
+
+div style="border: 1px solid #e5e5e5"
+  dl.dl-horizontal
+    dt 
+      strong
+        = model_class.human_attribute_name(:delivery) 
+        | :
+    dd.clearfix
+      - if order.delivery_id
+        = order.delivery.to_label
+
+    - if order.metro_id
+      dt 
+        strong 
+          = model_class.human_attribute_name(:metro_id) 
+          | :
+      dd.clearfix 
+        = order.metro.to_label
+
+    dt 
+      strong 
+        = model_class.human_attribute_name(:name_id) 
+        | :
+    dd.clearfix 
+      = order.name_id    
+
+    dt 
+      strong
+        = model_class.human_attribute_name(:postal_address)
+        | :
+    dd.clearfix 
+      - if order.postal_address_id
+        = order.postal_address.to_label
+
+    dt 
+      strong
+        = model_class.human_attribute_name(:user) 
+        | :
+    dd.clearfix
+      - if order.user_id
+        = order.user.to_label
+
+
+    dt 
+      strong
+        = model_class.human_attribute_name(:status) 
+        | :
+    dd.clearfix
+      = order.status
+      
+
+    dt 
+      strong
+        = model_class.human_attribute_name(:delivery_cost) 
+        | :
+    dd.clearfix
+      = order.delivery_cost
+
+
+    - if order.phone_id
+      dt 
+        strong
+          = model_class.human_attribute_name(:phone_id) 
+          | :
+      dd.clearfix
+        = order.phone_id
+      
+
+    dt 
+      strong
+        = model_class.human_attribute_name(:notes) 
+        | :
+    dd.clearfix
+      = order.notes
+      
+
+    dt 
+      strong
+        = model_class.human_attribute_name(:notes_invisible) 
+        | :
+    dd.clearfix
+      = order.notes_invisible
+
+
+
+    dt 
+      strong
+        = model_class.human_attribute_name(:created_at) 
+        | :
+    dd.clearfix
+      = order.created_at
+
+
+    dt 
+      strong
+        = model_class.human_attribute_name(:updated_at) 
+        | :
+    dd.clearfix
+      = order.updated_at
+
+  .form-actions style="margin-bottom: 0"
+    =' link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_order_path(order), :class => 'btn' 
+    =' link_to t('.destroy', :default => t("helpers.links.destroy")), admin_order_path(order), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

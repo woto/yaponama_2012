@@ -1,7 +1,7 @@
 = user_tabs do
   ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['inorder']['title']}"
 
-  = simple_form_for(@order, :url => smart_route({}, :user_id => params[:user_id], :id => @order.id, :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path], :status => params[:status]), :html => {:class => "dirtyforms"})  do |f|
+  = simple_form_for(@order, :url => smart_route({:postfix => [@order.persisted? ? (params[:order_id].present? ? nil : :order) : @order]}, :user_id => params[:user_id], :id => @order.id, :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path], :status => params[:status]), :html => {:class => "dirtyforms"})  do |f|
 
     = f.error_notification
     - f.object.errors.full_messages do |error|

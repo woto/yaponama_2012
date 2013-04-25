@@ -1,4 +1,4 @@
-#items data-no-turbolink="" style="position: relative"
+#items data-no-turbolink="" style="position: relative; padding: 5px"
   #items-progress
     #items-progress-center
       i.icon-spinner
@@ -84,7 +84,7 @@
 
           - visible_columns.each do |column_name|
             - if column_name == 'id'
-              td = link_to item.id, smart_route({:postfix => [@resource_class.name.underscore]}, :id => item, :user_id => item.user_id), :rel => 'popover', data: { trigger: 'hover', html: true, content: content, title: 'Дополнительная информация'}, class: "btn btn-inverse btn-mini", style: "width: 25px"
+              td = link_to item.id, smart_route({:postfix => [@resource_class.name.underscore]}, :id => item, :user_id => item.user_id), :rel => 'popover', data: { trigger: 'hover', html: true, content: content, title: 'Дополнительная информация'}, class: "btn btn-info btn-mini", style: "width: 25px"
             - elsif column_name == 'user_id'
               td = render :partial => "shared/client_button", :locals => {:user_id => item.user_id, :user_label => item.user.try(:to_label)}
             - elsif column_name == 'creator_id'

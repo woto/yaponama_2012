@@ -68,12 +68,7 @@ class OrdersController < ApplicationController
   # GET /admin/orders/1
   # GET /admin/orders/1.json
   def show
-    @order = Order.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @order }
-    end
+    redirect_to smart_route({:postfix => [:products]}, :user_id => params[:user_id], :order_id => params[:id]) and return
   end
 
   # GET /admin/orders/new

@@ -31,6 +31,7 @@ class Products::OrderedController < ApplicationController
         (Product.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => true}).where("products.id IN (#{@items.map{|item| item.id}.join(',')})").summa) +
         (Product.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => false}).where("products.id IN (#{@items.map{|item| item.id}.join(',')})").summa * @user.prepayment / 100)).round(2)
 
+
     rescue ValidationError => e
       redirect_to params[:return_path], :alert => e.message
     end

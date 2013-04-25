@@ -110,6 +110,10 @@ module OrdersConcern
       @grid.notes_visible = '1'
       @grid.updated_at_visible = '1'
 
+      unless @user
+        @grid.user_id_visible = '1'
+      end
+
       if params[:status].blank? || ['all'].include?(params[:status])
         @grid.status_visible = '1'
       end

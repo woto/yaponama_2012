@@ -227,12 +227,14 @@ module ApplicationHelper
   end
 
   def product_status_decorator(status)
+    status = status || 'all'
     content_tag(:span, class: "label label-#{status}") do
       Rails.configuration.products_status[status]['title']
     end
   end
 
   def order_status_decorator(status)
+    status = status || 'all'
     content_tag(:span, class: "label label-#{status}") do
       Rails.configuration.orders_status[status]['title']
     end

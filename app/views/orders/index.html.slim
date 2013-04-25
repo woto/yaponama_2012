@@ -1,42 +1,38 @@
 = user_tabs do
   = form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [@resource_class.name.pluralize.underscore.to_sym]}, :primary_key => params[:primary_key], :user_id => params[:user_id]), :remote => true do |f|
 
-    h4
-      - if params[:status]
-        | Статус просматриваемых заказов:  
-        = order_status_decorator(params[:status])
+    h3 
+      ' Заказы
+      = order_status_decorator(params[:status])
+
+    div style="border: 1px solid #ddd"
+      #toolbar.form-actions.clearfix style="margin-top: 0; border-top: 0"
+
+        .pull-right.right-space
+
+          a href="#columns" role="button" class="btn" data-toggle="modal" title="Настроить отображаемые столбцы" rel="tooltip"
+            i.icon.icon-columns
 
 
-    #toolbar.clearfix
+        .pull-right.right-space
 
-      .pull-right.right-space
+          = link_to smart_route({:prefix => [:transactions], :postfix => [@resource_class.to_s.underscore.pluralize]}, :user_id => params[:user_id] ), data: {toggle: "tooltip"}, title: "#{ t('.transactions', :default => t("helpers.links.transactions")) }",  :class => "btn", rel: 'tooltip' do
+            i.icon-time
 
-        a href="#columns" role="button" class="btn btn-success" data-toggle="modal" title="Настроить отображаемые столбцы" rel="tooltip"
-          i.icon.icon-columns
+        .pull-right.right-space
+          = render :partial => 'shared/grid_per_page'
 
+        .pull-left
+          = render :partial => "shared/grid_toolbar_selected"
 
-      .pull-right.right-space
+      = render :partial => 'shared/grid'
 
-        = link_to smart_route({:prefix => [:transactions], :postfix => [@resource_class.to_s.underscore.pluralize]}, :user_id => params[:user_id] ), data: {toggle: "tooltip"}, title: "#{ t('.transactions', :default => t("helpers.links.transactions")) }",  :class => "btn", rel: 'tooltip' do
-          i.icon-time
+    div style="background: #999"
+      - model_class = Order
 
-      .pull-right.right-space
-        = render :partial => 'shared/grid_per_page'
-
-      .pull-left
-        = render :partial => "shared/grid_toolbar_selected"
-
-    = render :partial => 'shared/grid'
-
-    - if @user
-      = link_to "#{t('.new', :default => t("helpers.links.new"))} #{@resource_class.name}", smart_route({:prefix => [:new], :postfix => [@resource_class.name.underscore.to_sym]}, :user_id => params[:user_id]), :class => 'btn btn-primary'
-
-  div style="background: #999"
-    - model_class = Order
-
-    - if params[:user_id] || params[:order_id] 
-      .page-header
-          - if params[:user_id]
-            = render :partial => "shared/client_button", :locals => {:user_id => params[:user_id], :user_label => User.find(params[:user_id]).to_label}
-          - if params[:order_id]
-            = "Заказ: #{Order.find(params[:order_id]).to_label}"
+      - if params[:user_id] || params[:order_id] 
+        .page-header
+            - if params[:user_id]
+              = render :partial => "shared/client_button", :locals => {:user_id => params[:user_id], :user_label => User.find(params[:user_id]).to_label}
+            - if params[:order_id]
+              = "Заказ: #{Order.find(params[:order_id]).to_label}"

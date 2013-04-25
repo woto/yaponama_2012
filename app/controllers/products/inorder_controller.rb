@@ -17,9 +17,8 @@ class Products::InorderController < ApplicationController
       products_belongs_to_one_user_validation!
       products_all_statuses_validation ["incart", "inorder", "ordered", "pre_supplier", 'cancel']
 
-
     rescue ValidationError => e
-      redirect_to params[:return_path], :alert => e.message and return
+      redirect_to params[:return_path], :alert => e.message
     end
 
   end

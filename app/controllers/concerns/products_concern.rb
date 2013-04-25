@@ -65,6 +65,7 @@ module ProductsConcern
 
       @user = @items.first.user
 
+
     end
 
     # Проверка наличия у всех позиций поставщиков и принадлежности позиций одному поставщику
@@ -184,12 +185,14 @@ module ProductsConcern
 
 
       if admin_zone?
-        unless @user
+        # Мы не можем здесь не добавлять user'а, т.к. может возникнуть ситуация когда мы переходим по многостраничным 
+        # редактированиям, где рано или поздно возникают user_id. Например при просмотре всех товаров и оформлении заказа.
+        # unless @user
           columns_hash['user_id'] = {
             :type => :belongs_to,
             :belongs_to => User,
           }
-        end
+        # end
       end
 
       columns_hash['creator_id'] = {
