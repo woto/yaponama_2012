@@ -112,6 +112,12 @@ module GridConcern
               @items = @items.where(arel[column_name.to_sym].matches("%#{like}%"))
             end
 
+          when :single_integer
+            single_integer = eval("@grid.#{column_name}_single_integer")
+            if single_integer.present?
+              @items = @items.where(arel[column_name.to_sym].eq(single_integer))
+            end
+
           when :number
 
             from = eval("@grid.#{column_name}_from")

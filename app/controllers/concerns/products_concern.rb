@@ -99,8 +99,7 @@ module ProductsConcern
       columns_hash = {}
 
       columns_hash['id'] = {
-        :type => :belongs_to,
-        :belongs_to => Product,
+        :type => :single_integer
       }
 
       columns_hash['catalog_number'] = {

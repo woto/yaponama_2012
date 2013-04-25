@@ -4,6 +4,10 @@
     .control-group
       label.control-label Содержит
       .controls = text_field_tag "grid[#{column_name}_like]".to_sym, eval("@grid.#{column_name}_like")
+  - when :single_integer
+    .control-group
+      label.control-label Равно числу
+      .controls = text_field_tag "grid[#{column_name}_single_integer]".to_sym, eval("@grid.#{column_name}_single_integer")
   - when :number
     .control-group
       label.control-label От

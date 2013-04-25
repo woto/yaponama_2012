@@ -16,8 +16,7 @@ module OrdersConcern
       columns_hash = {}
 
       columns_hash['id'] = {
-        :type => :belongs_to,
-        :belongs_to => Product,
+        :type => :single_integer
       }
 
 

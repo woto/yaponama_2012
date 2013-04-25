@@ -38,8 +38,7 @@ module ProfileablesConcern
           }
         when 'id'
           columns_hash[column_name] = {
-            :type => :belongs_to,
-            :belongs_to => @resource_class,
+            :type => :single_integer,
           }
         when 'creation_reason'
           columns_hash[column_name] = {

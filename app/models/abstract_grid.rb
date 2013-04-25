@@ -17,6 +17,9 @@ class AbstractGrid
           when :string
             attr_accessor "#{column_name}_like"
 
+          when :single_integer
+            attr_accessor "#{column_name}_single_integer"
+
           when :number
             attr_accessor "#{column_name}_from"
             attr_accessor "#{column_name}_to"
