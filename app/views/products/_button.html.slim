@@ -1,0 +1,45 @@
+#toolbar.form-actions.clearfix style="margin-top: 0; border-top: 0"
+  .margin-on-left
+    .pull-left.right-space
+      = render :partial => "shared/check_uncheck"
+    .pull-left.right-space
+      .btn-group
+        button.btn.btn-primary.dropdown-toggle data-toggle="dropdown"
+          i.icon.icon-bolt
+          '
+          =' t('.action', :default => t('helpers.actions')) 
+          span.caret
+        ul.dropdown-menu
+          - Rails.configuration.products_status.select{|k, v| v['real'] == true}.each do |k, v|
+            li 
+              = link_to smart_route({:postfix => [:products, k.to_sym, :index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :page => @page, :sort => params[:sort_column], :direction => params[:sort_direction], :return_path => request.fullpath, :status => params[:status]), id: "form_#{k}_action" do
+                =' v["action"]
+                - if v['badge'].present?
+                  span class="badge badge-#{k}" = v['badge']
+          li.divider
+          li = link_to 'Разбить на партии', smart_route({:postfix => [:products, :split_index]}, :primary_key => params[:primary_key], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => request.fullpath, :status => params[:status])
+          li = link_to 'Редактировать или перезаказать', smart_route({:postfix => [:products, :edit_index]}, :primary_key => params[:primary_key], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => request.fullpath, :status => params[:status])
+          li = link_to t('.destroy', :default => t("helpers.links.destroy")), smart_route({:postfix => [:products, :multiple_destroy_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status]), :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } 
+
+
+  .pull-right
+    a href="#columns" role="button" class="btn" data-toggle="modal" title="Настроить отображаемые столбцы" rel='tooltip'
+      i.icon.icon-columns
+
+  .pull-right.right-space
+    = link_to smart_route({:prefix => [:transactions], :postfix => [@resource_class.to_s.underscore.pluralize]}, :user_id => params[:user_id], :order_id => params[:order_id]), data: {toggle: "tooltip"}, title: "#{ t('.transactions', :default => t("helpers.links.transactions")) }",  :class => "btn", rel: 'tooltip' do
+      i.icon-time
+
+  .pull-right.right-space
+    = render :partial => 'shared/grid_per_page'
+
+
+  .pull-left
+    = render :partial => "shared/grid_toolbar_selected"
+
+/h4
+  - if params[:status]
+    | Статус просматриваемых товаров:  
+    = product_status_decorator(params[:status])
+
+
