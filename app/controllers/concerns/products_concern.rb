@@ -2,8 +2,14 @@
 
 module ProductsConcern
   extend ActiveSupport::Concern
+  include GridConcern
 
   included do
+
+    before_action :set_resource_class
+    before_action :set_grid_class
+    # TODO потом может multiple_destroy вынесу в отдельный контроллер
+    before_action :set_grid, :only => [:index, :filter, :multiple_destroy]
 
     helper_method :products_user_order_tab_scope
 

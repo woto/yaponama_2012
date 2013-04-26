@@ -9,8 +9,8 @@
   = form_tag smart_route({:prefix => [:order_select], :postfix => [:products, :inorder_index]}, :user_id => @items.first.user, :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path], :status => params[:status] ), :class => "dirtyforms" do |f|
 
     = render :partial => 'shared/grid'
-    - options = options_for_select [['Выберите...', nil], ['Новый заказ', 'new']] + @items.first.user.orders.all.map{|order| [order.to_label, order.id]}
-    = select_tag(:new_order_id, options)
+    - options = options_for_select [['Выберите...', nil], ['Новый заказ', '-1']] + @items.first.user.orders.all.map{|order| [order.to_label, order.id]}
+    = select_tag(:id, options)
     / - step = session['orders'][session['orders']['current_order_id']]['step']
     /- step = 'order'
     /= render "#{step}_step", :f => f

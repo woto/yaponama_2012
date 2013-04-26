@@ -105,5 +105,5 @@ div style="border: 1px solid #e5e5e5"
       = order.updated_at
 
   .form-actions style="margin-bottom: 0"
-    =' link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_order_path(order), :class => 'btn' 
-    =' link_to t('.destroy', :default => t("helpers.links.destroy")), admin_order_path(order), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+    =' link_to t('.edit', :default => t("helpers.links.edit")), smart_route({:prefix => [:edit], :postfix => [:order]}, :user_id => order.user_id, :id => order.id), :class => 'btn' 
+    =' link_to t('.destroy', :default => t("helpers.links.destroy")), smart_route({:postfix => [:order]}, :user_id => order.user_id, :id => order.id), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

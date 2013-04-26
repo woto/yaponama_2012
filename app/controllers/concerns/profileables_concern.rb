@@ -1,13 +1,18 @@
 module ProfileablesConcern
   extend ActiveSupport::Concern
+  include GridConcern
 
   included do
 
     private
 
-      def set_resource_class
-        @resource_class = params[:resource_class].singularize.constantize
-      end
+    before_action :set_resource_class
+    before_action :set_grid_class
+    before_action :set_grid, :only => [:index, :filter]
+
+    def set_resource_class
+      @resource_class = params[:resource_class].singularize.constantize
+    end
 
     def set_grid_class
 

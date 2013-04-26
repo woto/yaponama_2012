@@ -86,7 +86,12 @@ Yaponama2012::Application.routes.draw do
           post 'action'
         end
         collection do
+          get 'action'
+          post 'action'
+        end
+        collection do
           post 'order_select'
+          get 'order_select'
         end
       end
     end

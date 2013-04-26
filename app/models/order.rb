@@ -19,6 +19,14 @@ class Order < ActiveRecord::Base
     "#{id} - #{delivery.try(:to_label)} - #{name.try(:to_label)} - #{postal_address.try(:to_label)} - #{metro.try(:to_label)} - #{shop.try(:to_label)} - #{company.try(:to_label)} - #{phone.try(:to_label)}"
   end
 
+  def update_order_on_products(products)
+    products.each do |product|
+      product.order = self
+      product.status = 'inorder'
+      product.save
+    end
+  end
+
   validate :multistep_order
 
   def multistep_order

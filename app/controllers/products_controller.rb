@@ -1,17 +1,7 @@
 class ProductsController < ApplicationController
   include ProductsConcern
-  include GridConcern
 
   ORDER_STEPS = %w[order delivery postal_address phone name notes]
-
-  before_action :only => [:index, :filter, :multiple_destroy] do
-    class_eval do
-      include ProductsConcern
-    end
-    set_resource_class
-    set_grid_class
-    set_grid
-  end
 
   def transactions
 

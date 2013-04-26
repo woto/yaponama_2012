@@ -1,6 +1,7 @@
 module GridConcern
   extend ActiveSupport::Concern
 
+
   included do
 
     private

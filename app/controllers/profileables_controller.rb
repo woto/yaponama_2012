@@ -1,10 +1,5 @@
 class ProfileablesController < ApplicationController
-  #before_action :set_user
-  before_action :set_resource_class
-  before_action :set_grid_class
-  before_action :set_grid, :only => [:index, :filter]
   include ProfileablesConcern
-  include GridConcern
 
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
   before_action :initialize_on_create, only: [:create]

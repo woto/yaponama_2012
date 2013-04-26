@@ -2,10 +2,7 @@
 
 class Products::InorderController < ApplicationController
   include ProductsConcern
-  include GridConcern
 
-  before_action :set_resource_class
-  before_action :set_grid_class
   before_action :set_grid
 
   before_filter do
@@ -27,22 +24,53 @@ class Products::InorderController < ApplicationController
   def index
   end
 
-
   def order_select
-    @order = Order.where(:id => params[:new_order_id]).first
-    if @order.present? || params[:new_order_id] == 'new'
-      redirect_to smart_route({:prefix => [:action], :postfix => [:products, :inorder]}, :id => ( (@order.present? && @order.persisted?) ? @order : 'new'), :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path]) and return
+
+    # Если выбрали новый заказ
+    if params[:id] == '-1'
+
+      @order = Order.where(:id => params[:id]).first
+
+      redirect_to smart_route({:prefix => [:action], :postfix => [:products, :inorder_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path]) and return
+
+    # Если не выбрали ничего из списка
+    elsif params[:id].blank?
+
+      redirect_to smart_route({:postfix => [:products, :inorder_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path]), :alert => 'Пожалуйста выберите имеющийся заказ или создайте новый' and return
+
+    # В существующий заказ
     else
-      redirect_to smart_route({:postfix => [:products, :inorder, :index ]}, :user_id => params[:user_id], :order_id => params[:order_id], :return_path => params[:return_path], :primary_key => params[:primary_key]), :alert => 'Пожалуйста выберите имеющийся заказ или создайте новый' and return
+
+      ActiveRecord::Base.transaction do
+        @order = Order.find(params[:id])
+        @order.update_order_on_products(@items)
+      end
+
+      redirect_to smart_route({:postfix => [:products]}, :user_id => @order.user_id, :order_id => @order.id), :notice => "Товар(ы) были успешно добавлены в существующий заказ."
+
     end
   end
 
-
   def action
-    @order = Order.where(:id => params[:id]).first
-    unless @order
-      @order = Order.new
+    if request.post?
+      ActiveRecord::Base.transaction do
+        @order = Order.new(order_params)
+        @order.user = @items.first.user
+        if @order.save
+          @order.update_order_on_products(@items)
+          redirect_to smart_route({:postfix => [:products]}, :user_id => @order.user_id, :order_id => @order.id), :notice => "Заказ успешно создан."
+        end
+      end
+    else
+      @order = Order.where(:id => params[:id]).first
+      unless @order
+        @order = Order.new
+      end
     end
+  end
+
+  def order_params
+    params[:order].permit!
   end
 
 end

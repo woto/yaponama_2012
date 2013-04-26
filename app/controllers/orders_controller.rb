@@ -1,38 +1,5 @@
 class OrdersController < ApplicationController 
-  include GridConcern
-
-  before_action do
-    class_eval do
-      include OrdersConcern
-    end
-  end
-
-  before_action :except => [:index, :filter] do
-    class_eval do
-      include ProductsConcern
-    end
-  end
-
-  before_action :except => [:show] do
-    set_resource_class
-    set_grid_class
-    set_grid
-  end
-
-  before_filter :only => [:create, :update] do
-    begin
-
-      Rails.application.routes.recognize_path params[:return_path]
-      @items = products_user_order_tab_scope( @items, 'checked' ) 
-      products_any_checked_validation
-      products_belongs_to_one_user_validation!
-      products_all_statuses_validation ["incart", "inorder", "ordered", "pre_supplier", "cancel"]
-
-    rescue ValidationError => e
-      redirect_to :back, :alert => e.message
-    end
-
-  end
+  include OrdersConcern
 
   # GET /admin/orders
   # GET /admin/orders.json
@@ -87,65 +54,24 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  # POST /admin/orders
-  # POST /admin/orders.json
-  def create
-    @order = Order.new(order_params)
-
-    @order.user = @items.first.user
-
-    ActiveRecord::Base.transaction do
-
-      respond_to do |format|
-
-        if @order.save
-
-          @items.each do |item|
-            item.order = @order
-            item.status = 'inorder'
-            item.save
-          end
-
-          format.html { redirect_to_relative_path('inorder') and return }
-          format.json { render json: @order, status: :created, location: @order }
-        else
-          format.html { render template: "/products/inorder/action" }
-          format.json { render json: @order.errors, status: :unprocessable_entity }
-        end
-      end
-
-    end
-  end
-
   # PUT /admin/orders/1
   # PUT /admin/orders/1.json
   def update
 
     @order = Order.find(params[:id])
 
-    ActiveRecord::Base.transaction do
+    respond_to do |format|
 
-      @order.assign_attributes(order_params)
-      
-      respond_to do |format|
+      if @order.update_attributes(order_params)
 
-        if @order.save
-
-            @items.each do |item|
-              item.order = @order
-              item.status = 'inorder'
-              item.save
-            end
-
-            format.html { redirect_to_relative_path('inorder') and return }
-            format.json { head :no_content }
-          else
-            format.html { render template: "/products/inorder/action" }
-            format.json { render json: @order.errors, status: :unprocessable_entity }
-          end
+        format.html { redirect_to smart_route({:postfix => [@order]}) and return }
+        format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @order.errors, status: :unprocessable_entity }
         end
+      end
 
-    end
   end
 
 
