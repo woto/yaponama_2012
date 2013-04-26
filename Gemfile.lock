@@ -7,27 +7,27 @@ GIT
 
 GIT
   remote: git://github.com/rails/activerecord-deprecated_finders.git
-  revision: c00788c2b7e01170f63bd9651f7efd8deb4bd4b0
+  revision: 5ed930cfb6bbfa71284d3e81b3bde8dbf78d8093
   specs:
-    activerecord-deprecated_finders (0.0.3)
+    activerecord-deprecated_finders (1.0.1)
 
 GIT
   remote: git://github.com/rails/arel.git
-  revision: 933ea218116645eafaf3b7ea5695520db0f9d9ba
+  revision: 3ef63ac5366000b232ca5fe0848de9db9a3c1f9a
   specs:
-    arel (4.0.0.beta2.20130314230643)
+    arel (4.0.0.20130418133826)
 
 GIT
   remote: git://github.com/rails/coffee-rails.git
-  revision: 948fef30464235e7588e34faa513b448a00c0e6b
+  revision: 78d4d7ac5baf4e76a6717f303f51b505c40b9770
   specs:
-    coffee-rails (4.0.0.beta1)
+    coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0.beta, < 5.0)
 
 GIT
   remote: git://github.com/rails/jquery-rails.git
-  revision: e51fc324e635efb4d2418acb5aabe3101c8bfb59
+  revision: 28ee0ef4c8486c1e331bbc7f7d0ccbf1b0631af5
   specs:
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
@@ -35,7 +35,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 3b0b573ac3ecbec5b1fa021abbe86b267bbefb8c
+  revision: 051d289030a6cb86590cd1b619eae1879b48458a
   specs:
     actionmailer (4.0.0.beta1)
       actionpack (= 4.0.0.beta1)
@@ -51,9 +51,9 @@ GIT
       builder (~> 3.1.0)
     activerecord (4.0.0.beta1)
       activemodel (= 4.0.0.beta1)
-      activerecord-deprecated_finders (~> 0.0.3)
+      activerecord-deprecated_finders (~> 1.0.1)
       activesupport (= 4.0.0.beta1)
-      arel (~> 4.0.0.beta2)
+      arel (~> 4.0.0)
     activesupport (4.0.0.beta1)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
@@ -67,7 +67,7 @@ GIT
       activesupport (= 4.0.0.beta1)
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.0.beta1)
-      sprockets-rails (~> 2.0.0.rc3)
+      sprockets-rails (~> 2.0.0.rc4)
     railties (4.0.0.beta1)
       actionpack (= 4.0.0.beta1)
       activesupport (= 4.0.0.beta1)
@@ -76,19 +76,18 @@ GIT
 
 GIT
   remote: git://github.com/rails/sass-rails.git
-  revision: d435679b0fe528b954a9abd0059f975d94707574
+  revision: aeae25d22c8392a8ac0a07c86664d37d6acd9e25
   specs:
-    sass-rails (4.0.0.beta1)
+    sass-rails (4.0.0.rc1)
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
-      sprockets-rails (~> 2.0.0.rc0)
-      tilt (~> 1.3)
+      sprockets-rails (~> 2.0.0.rc4)
 
 GIT
   remote: git://github.com/rails/sprockets-rails.git
-  revision: 59922ecd19a81bf504be8e10ed624ae011a8360d
+  revision: bbf755e8b3aaea4105d05a01d2e115ef30ccc6c7
   specs:
-    sprockets-rails (2.0.0.rc3)
+    sprockets-rails (2.0.0.rc4)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
@@ -108,7 +107,7 @@ GIT
 
 GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
-  revision: 98366d05f29e3a920db62540512fb586fc144fa5
+  revision: 1f3d04093b77b2c0609515b74b121a32cf0b3ba4
   specs:
     twitter-bootstrap-rails (2.2.6)
       actionpack (>= 3.1)
@@ -144,7 +143,7 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: 7d0eeea917f4508e2df8f70b2b4b58ee808b4541
+  revision: 392ca0c6b704ea96d53abf463a14f921f6139b57
   specs:
     simple_form (3.0.0.beta1)
       actionpack (>= 4.0.0.beta, < 4.1)
@@ -158,7 +157,7 @@ GEM
       i18n
     ancestry (1.3.0)
       activerecord (>= 2.3.14)
-    atomic (1.0.2)
+    atomic (1.1.8)
     awesome_print (1.1.0)
     bcrypt-ruby (3.0.1)
     builder (3.1.4)
@@ -166,7 +165,7 @@ GEM
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
-    charlock_holmes (0.6.9.2)
+    charlock_holmes (0.6.9.4)
     chronic (0.9.1)
     code_analyzer (0.3.1)
       sexp_processor
@@ -194,8 +193,8 @@ GEM
     faraday (0.8.7)
       multipart-post (~> 1.1)
     fastercsv (1.5.5)
-    hashie (1.2.0)
-    hike (1.2.1)
+    hashie (2.0.4)
+    hike (1.2.2)
     hiredis (0.4.5)
     httpauth (0.2.0)
     i18n (0.6.4)
@@ -209,9 +208,9 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.8.0)
-    less (2.3.1)
+    less (2.3.2)
       commonjs (~> 0.2.6)
-    less-rails (2.3.2)
+    less-rails (2.3.3)
       actionpack (>= 3.1)
       less (~> 2.3.1)
     libv8 (3.11.8.17)
@@ -222,10 +221,10 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     middleware (0.1.0)
-    mime-types (1.22)
+    mime-types (1.23)
     mini_magick (3.5.0)
       subexec (~> 0.2.1)
-    minitest (4.7.0)
+    minitest (4.7.3)
     money (5.1.1)
       i18n (~> 0.6.0)
     multi_json (1.7.2)
@@ -239,12 +238,12 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    omniauth (1.1.3)
-      hashie (~> 1.2)
+    omniauth (1.1.4)
+      hashie (>= 1.2, < 3)
       rack
     omniauth-facebook (1.4.1)
       omniauth-oauth2 (~> 1.1.0)
-    omniauth-google-oauth2 (0.1.13)
+    omniauth-google-oauth2 (0.1.17)
       omniauth (~> 1.0)
       omniauth-oauth2
     omniauth-mailru (1.0.0)
@@ -256,10 +255,10 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    omniauth-odnoklassniki (0.0.1)
+    omniauth-odnoklassniki (0.0.3)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
-    omniauth-twitter (0.0.15)
+    omniauth-twitter (0.0.16)
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
     omniauth-vkontakte (1.2.0)
@@ -269,14 +268,14 @@ GEM
     omniauth-yandex (0.0.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
-    pg (0.15.0)
+    pg (0.15.1)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
-    raindrops (0.10.0)
+    raindrops (0.11.0)
     rake (10.0.4)
-    redis (3.0.3)
+    redis (3.0.4)
     ref (1.0.4)
     riddle (1.5.5)
     ruby-growl (4.0)
@@ -286,26 +285,26 @@ GEM
       i18n (>= 0.5.0)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
-    sass (3.2.7)
+    sass (3.2.8)
     sexp_processor (4.2.1)
     sitemap_generator (3.4)
       builder
-    slim (1.3.6)
-      temple (~> 0.5.5)
+    slim (1.3.8)
+      temple (~> 0.6.3)
       tilt (~> 1.3.3)
     slim-rails (1.1.1)
       actionpack (>= 3.0, < 4.1)
       activesupport (>= 3.0, < 4.1)
       railties (>= 3.0, < 4.1)
       slim (~> 1.3)
-    sprockets (2.9.0)
+    sprockets (2.9.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    subexec (0.2.2)
+    subexec (0.2.3)
     systemu (2.5.2)
-    temple (0.5.5)
+    temple (0.6.4)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -318,14 +317,14 @@ GEM
     thor (0.18.1)
     thread_safe (0.1.0)
       atomic
-    tilt (1.3.6)
+    tilt (1.3.7)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (1.1.0)
+    turbolinks (1.1.1)
       coffee-rails
     tzinfo (0.3.37)
-    uglifier (1.3.0)
+    uglifier (2.0.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     unicorn (4.6.2)
