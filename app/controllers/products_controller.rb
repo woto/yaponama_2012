@@ -39,37 +39,6 @@ class ProductsController < ApplicationController
 
   end
 
-  def multiple_destroy
-
-    begin
-
-      @items = products_user_order_tab_scope( @items, 'checked' )
-
-      products_any_checked_validation
-      products_all_statuses_validation ['cancel']
-
-      result = {}
-
-      @items.each do |item|
-        if item.destroy
-          result = { :notice => "Product Successfully deleted" }
-        else
-          result = { :alert => "Product can't be deleted: #{item.errors[:base].to_s}" }
-          break
-        end
-      end
-
-      respond_to do |format|
-        format.html { redirect_to :back, result }
-        format.json { head :no_content }
-      end
-
-    rescue ValidationError => e
-      redirect_to :back, :alert => e.message
-    end
-
-  end
-
   #def destroy
   #  @product = Product.find(params[:id])
   #  if @product.destroy

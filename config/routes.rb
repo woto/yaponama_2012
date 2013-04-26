@@ -80,6 +80,7 @@ Yaponama2012::Application.routes.draw do
       resources :complete
       resources :return
       resources :split
+      resources :multiple_destroy
       resources :inorder do
         member do
           get 'action'
@@ -103,7 +104,6 @@ Yaponama2012::Application.routes.draw do
       concerns :filterable
       collection do
         get 'status/:status' => "products#index", :as => :status
-        delete 'multiple_destroy' => "products#multiple_destroy"
       end
     end
   end

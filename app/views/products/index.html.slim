@@ -31,7 +31,7 @@
                 li.divider
                 li = link_to 'Разбить на партии', smart_route({:postfix => [:products, :split_index]}, :primary_key => params[:primary_key], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => request.fullpath, :status => params[:status])
                 li = link_to 'Редактировать или перезаказать', smart_route({:postfix => [:products, :edit_index]}, :primary_key => params[:primary_key], :user_id => params[:user_id], :order_id => params[:order_id], :return_path => request.fullpath, :status => params[:status])
-                li = link_to t('.destroy', :default => t("helpers.links.destroy")), smart_route({:prefix => [:multiple_destroy], :postfix => [:products]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status]), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } 
+                li = link_to t('.destroy', :default => t("helpers.links.destroy")), smart_route({:postfix => [:products, :multiple_destroy_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status]), :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } 
 
 
         .pull-right
