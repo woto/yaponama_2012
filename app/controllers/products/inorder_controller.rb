@@ -3,8 +3,6 @@
 class Products::InorderController < ApplicationController
   include ProductsConcern
 
-  before_action :set_grid
-
   before_filter do
     begin
 

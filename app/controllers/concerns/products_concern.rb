@@ -8,8 +8,7 @@ module ProductsConcern
 
     before_action :set_resource_class
     before_action :set_grid_class
-    # TODO потом может multiple_destroy вынесу в отдельный контроллер
-    before_action :set_grid, :only => [:index, :filter, :multiple_destroy]
+    before_action :set_grid
 
     helper_method :products_user_order_tab_scope
 
@@ -190,14 +189,12 @@ module ProductsConcern
 
 
       if admin_zone?
-        # Мы не можем здесь не добавлять user'а, т.к. может возникнуть ситуация когда мы переходим по многостраничным 
-        # редактированиям, где рано или поздно возникают user_id. Например при просмотре всех товаров и оформлении заказа.
-        # unless @user
+        unless @user
           columns_hash['user_id'] = {
             :type => :belongs_to,
             :belongs_to => User,
           }
-        # end
+        end
       end
 
       columns_hash['creator_id'] = {
