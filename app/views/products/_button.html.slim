@@ -36,10 +36,3 @@
 
   .pull-left
     = render :partial => "shared/grid_toolbar_selected"
-
-/h4
-  - if params[:status]
-    | Статус просматриваемых товаров:  
-    = product_status_decorator(params[:status])
-
-

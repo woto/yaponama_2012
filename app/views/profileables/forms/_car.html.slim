@@ -3,8 +3,6 @@ ul.nav.nav-tabs
     a#tab1_toggle.ignoredirty href="#tab1" data-toggle="tab" Идентификатор
   li
     a#tab2_toggle.ignoredirty href="#tab2" data-toggle="tab" Характеристики
-  li
-    a#tab3_toggle.ignoredirty href="#tab3" data-toggle="tab" Продажа
 
 .tab-content
 
@@ -41,10 +39,3 @@ ul.nav.nav-tabs
     = f.input :komplektaciya
     = f.input :dverey
     = f.input :rul
-
-
-  #tab3.tab-pane
-    = f.input :selling
-    = f.input :cost
-    = f.input :advertisement, :input_html => { :rows => 3 }
-    = f.input :torg

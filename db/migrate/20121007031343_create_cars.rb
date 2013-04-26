@@ -21,10 +21,6 @@ class CreateCars < ActiveRecord::Migration
       t.string :komplektaciya
       t.integer :dverey
       t.string :rul
-      t.boolean :selling
-      t.integer :cost
-      t.boolean :torg
-      t.text :advertisement
       t.timestamps
     end
 

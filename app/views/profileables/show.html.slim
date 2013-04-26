@@ -1,5 +1,7 @@
 =user_tabs do
+
   - model_class = @resource_class
+
   div class="page-header"
     h1=t '.title', :default => model_class.model_name.human
 
@@ -13,3 +15,8 @@
     = link_to t('.edit', :default => t("helpers.links.edit")), url_for(:action => :edit), :class => 'btn btn-warning'
     '
     = link_to t('.destroy', :default => t("helpers.links.destroy")), url_for(:action => :destroy), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+    '
+    = link_to smart_route({:postfix => [@resource, :transactions]}), :class => 'btn' do
+      i.icon-time
+      '
+      = t('.transactions', :default => t("helpers.links.transactions")) 

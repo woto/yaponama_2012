@@ -1,9 +1,7 @@
 - model_class = @resource_class
 
-.row-fluid
-  .span3
-    = render 'users/show' if @user
-  #workspace.span9
-    div class="page-header"
-      h3=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human
-    = render :partial => "form"
+= user_tabs do
+
+  div class="page-header"
+    h3=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human
+  = render :partial => "form"

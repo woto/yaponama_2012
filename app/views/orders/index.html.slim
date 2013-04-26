@@ -26,13 +26,3 @@
           = render :partial => "shared/grid_toolbar_selected"
 
       = render :partial => 'shared/grid'
-
-    div style="background: #999"
-      - model_class = Order
-
-      - if params[:user_id] || params[:order_id] 
-        .page-header
-            - if params[:user_id]
-              = render :partial => "shared/client_button", :locals => {:user_id => params[:user_id], :user_label => User.find(params[:user_id]).to_label}
-            - if params[:order_id]
-              = "Заказ: #{Order.find(params[:order_id]).to_label}"

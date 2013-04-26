@@ -24,4 +24,5 @@
       = render :partial => 'shared/grid'
 
       - if @user
-        = link_to "#{t('.new', :default => t("helpers.links.new"))} #{@resource_class.name}", smart_route({:prefix => [:new], :postfix => [@resource_class.name.underscore.to_sym]}, :user_id => params[:user_id]), :class => 'btn btn-primary'
+        .form-actions style="margin-bottom: 0"
+          = link_to "#{t('.new', :default => t("helpers.links.new"))} #{@resource_class.name}", smart_route({:prefix => [:new], :postfix => [@resource_class.name.underscore.to_sym]}, :user_id => params[:user_id]), :class => 'btn btn-primary'

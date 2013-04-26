@@ -9,9 +9,3 @@
 
   .form-actions
     = f.button :submit, :class => 'btn-primary'
-    '
-    - if f.object.persisted?
-      = link_to smart_route({:postfix => [@resource, :transactions]}), :class => 'btn' do
-        i.icon-time
-        '
-        = t('.transactions', :default => t("helpers.links.transactions")) 

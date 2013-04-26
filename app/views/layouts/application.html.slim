@@ -27,6 +27,8 @@ body
         .collapse.nav-collapse
           ul.nav
             li
+              = link_to "Гараж", user_cars_path
+            li
               = link_to "Заказы", user_orders_path
             li
               = link_to "Корзина", smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart')
