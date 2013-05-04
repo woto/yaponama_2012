@@ -11,6 +11,7 @@ class AbstractGrid
 
         attr_accessor "#{column_name}_visible"
         attr_accessor "#{column_name}_filterable"
+        attr_accessor "#{column_name}_filter_enabled"
 
         case column_settings[:type]
 

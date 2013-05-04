@@ -111,12 +111,14 @@ module GridConcern
             like = eval("@grid.#{column_name}_like")
             if like.present?
               @items = @items.where(arel[column_name.to_sym].matches("%#{like}%"))
+              mark_as_filter_enabled(column_name)
             end
 
           when :single_integer
             single_integer = eval("@grid.#{column_name}_single_integer")
             if single_integer.present?
               @items = @items.where(arel[column_name.to_sym].eq(single_integer))
+              mark_as_filter_enabled(column_name)
             end
 
           when :number
@@ -124,30 +126,34 @@ module GridConcern
             from = eval("@grid.#{column_name}_from")
             if from.present?
               @items = @items.where(arel[column_name.to_sym].gteq(from))
+              mark_as_filter_enabled(column_name)
             end
 
             to = eval("@grid.#{column_name}_to")
             if to.present?
               @items = @items.where(arel[column_name.to_sym].lteq(to))
+              mark_as_filter_enabled(column_name)
             end
 
           when :boolean
-
             boolean = eval("@grid.#{column_name}_boolean")
             if boolean.present?
               @items = @items.where(arel[column_name.to_sym].eq(boolean))
+              mark_as_filter_enabled(column_name)
             end
 
           when :set
             set = eval("@grid.#{column_name}_set")
             if set.respond_to?(:reject) && set.map(&:to_s).reject(&:empty?).present?
               @items = @items.where(arel[column_name.to_sym].in(set))
+              mark_as_filter_enabled(column_name)
             end
 
           when :belongs_to
             belongs_to = eval("@grid.#{column_name}_belongs_to")
             if belongs_to.respond_to?(:reject) && belongs_to.map(&:to_s).reject(&:empty?).present?
               @items = @items.where(arel[column_name.to_sym].in(belongs_to))
+              mark_as_filter_enabled(column_name)
             end
 
           when :date
@@ -157,10 +163,12 @@ module GridConcern
 
             if from.present?
               @items = @items.where(arel[column_name.to_sym].gteq(from))
+              mark_as_filter_enabled(column_name)
             end
 
             if to.present?
               @items = @items.where(arel[column_name.to_sym].lteq(to))
+              mark_as_filter_enabled(column_name)
             end
 
         end
@@ -177,6 +185,12 @@ module GridConcern
 
     end
 
+  end
+
+
+
+  def mark_as_filter_enabled(column_name)
+    @grid.instance_variable_set("@#{column_name}_filter_enabled", true)
   end
 
 end

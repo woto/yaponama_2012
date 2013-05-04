@@ -60,7 +60,8 @@
 
             = sortable(column_name, @resource_class.human_attribute_name(column_name, :default => truncate(t(column_name), :length => 5, :omission => '.')), data: { toggle: "tooltip" }, title: t(column_name, :scope => "activerecord.attributes.#{@resource_class.name.underscore}", :default => t(column_name)), rel: 'tooltip')
             '
-            a href="#"
+            - filter_enabled = @grid.instance_variable_get("@#{column_name}_filter_enabled") ? "filter-enabled" : ""
+            a href="#" class="#{filter_enabled}" 
               i.icon.icon-filter type="button" role="button" data-toggle="modal" data-target="##{column_name}_filter"
         /th Спросить
         /th Редакт.
