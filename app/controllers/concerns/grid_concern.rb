@@ -187,6 +187,15 @@ module GridConcern
 
   end
 
+  def url_options
+    params.delete :grid
+    params.delete :utf8
+    params.delete :columns
+    params.delete :items
+    params.delete :filters
+    params.delete :per_page
+    super
+  end
 
 
   def mark_as_filter_enabled(column_name)
