@@ -1,6 +1,6 @@
-$(document).on 'click', '#check-uncheck-items', ->
-  $('input.item[type=checkbox]').prop('checked', $(this).prop('checked') )
-  update()
+#$(document).on 'click', '#check-uncheck-items', ->
+#  $('input.item[type=checkbox]').prop('checked', $(this).prop('checked') )
+#  update()
 
 $(document).on 'click', '#check-items', (e) ->
   e.preventDefault()

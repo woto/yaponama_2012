@@ -1,8 +1,9 @@
 .btn-group
-  a.btn =' check_box_tag '', '', false, :id => 'check-uncheck-items', :style => "margin: 0; padding: 0"
-  button.btn.dropdown-toggle data-toggle="dropdown"
-    span.caret
+  /a.btn =' check_box_tag '', '', false, :id => 'check-uncheck-items', :style => "margin: 0; padding: 0"
+  a.btn.dropdown-toggle data-toggle="dropdown" href="#"
+    i.icon-check
+    '
+    ' Выделить
   ul.dropdown-menu
-    li : a#check-items href="#" Все
-    li : a#uncheck-items href="#" Ни одного
-
+    li : a#check-items href="#" Выделить все на странице
+    li : a#uncheck-items href="#" Снять выделение со всех на странице
