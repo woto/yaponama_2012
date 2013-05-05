@@ -81,6 +81,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :orders, :allow_destroy => true
 
   belongs_to :time_zone, validate: true
+  validates :russian_time_zone_manual_id, :inclusion => { :in => Rails.configuration.russian_time_zones.keys.map(&:to_i) }, unless: Proc.new { |u| u.use_auto_russian_time_zone }
 
   # TODO позже разобраться (обнаружил как неиспользуемую ассоциацию)
   #has_many :documents, :as => :documentable, :class_name => "Transaction"

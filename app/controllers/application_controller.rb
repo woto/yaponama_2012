@@ -197,7 +197,12 @@ class ApplicationController < ActionController::Base
 private
 
   def set_user_time_zone
-    Time.zone = current_user.russian_time_zone_manual_id || current_user.russian_time_zone_auto_id
+    Time.zone = case current_user.use_auto_russian_time_zone
+    when true
+      current_user.russian_time_zone_auto_id
+    else
+      current_user.russian_time_zone_manual_id
+    end
   end
 
   private

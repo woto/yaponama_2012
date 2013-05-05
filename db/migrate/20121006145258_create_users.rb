@@ -22,6 +22,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :russian_time_zone_auto_id
       # ----------------------------------
       t.integer :russian_time_zone_manual_id
+      t.boolean :use_auto_russian_time_zone, :default => true
       t.inet :remote_ip
 
       t.text :notes

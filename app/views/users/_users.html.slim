@@ -1,7 +1,18 @@
 #users-tab.tab-pane.active
   #users.top-space
-    = f.input :russian_time_zone_manual_id, :collection => Rails.configuration.russian_time_zones.map {|k,v| [v,k]}
-    = f.input :russian_time_zone_auto_id, :collection => Rails.configuration.russian_time_zones.map {|k,v| [v,k]}, :disabled => true
+
+    .control-group
+      .controls
+        h4 Время
+
+        div#use_auto_russian_time_zone.btn-group data-toggle="buttons-radio"
+          button type="button" class="btn btn-primary" data-checkbox-value='1' class="#{f.object.use_auto_russian_time_zone ? 'active' : ''}" Автоматически
+          button type="button" class="btn btn-primary" data-checkbox-value='0' class="#{f.object.use_auto_russian_time_zone ? '' : 'active'}" Вручную
+
+    = f.input :use_auto_russian_time_zone, :wrapper_html => {style: "display: none"}
+    = f.input :russian_time_zone_manual_id, :wrapper_html => {id: 'russian_time_zone_manual'}, :collection => Rails.configuration.russian_time_zones.map {|k,v| [v,k]}
+    = f.input :russian_time_zone_auto_id, :wrapper_html => {id: 'russian_time_zone_auto'}, :collection => Rails.configuration.russian_time_zones.map {|k,v| [v,k]}, :disabled => true
+
     = f.input :creation_reason, :collection => Rails.configuration.user_creation_reason.map {|k,v| [v,k]}, :disabled => true, :as => :radio_buttons
     = f.input :order_rule, :collection => Rails.configuration.user_order_rules, :value_method => :first, :label_method => :last
     
