@@ -12,6 +12,16 @@ ru:
       default_message: <button class="close" data-dismiss="alert">&times;</button>Невозможно продолжить, т.к. форма заполнена не корректно
     labels:
       defaults:
+
+        seriya: Серия
+        nomer: Номер
+        passport_vidan: Паспорт выдан
+        data_vidachi: Дата выдачи
+        kod_podrazdeleniya: Код подразделения
+        female: Пол
+        data_rozhdeniya: Дата рождения
+        mesto_rozhdeniya: Место рождения
+
         comment: Комментарий
         hide_catalog_number: Скрыть каталожный номер
         short_name: Название
