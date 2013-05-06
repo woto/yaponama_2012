@@ -9,6 +9,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string  :status, default: 'open'
       t.references :delivery, index: true
       t.references :profile, index: true
+      t.string :token, index: true
       t.timestamps
     end
   end
