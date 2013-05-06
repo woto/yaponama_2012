@@ -75,7 +75,7 @@ module GridConcern
       elsif old_grid && old_grid.sort_column
         @grid.sort_column = old_grid.sort_column
       else
-        @grid.sort_column = "id"
+        @grid.sort_column = "updated_at"
       end
 
       if params[:sort_direction]
