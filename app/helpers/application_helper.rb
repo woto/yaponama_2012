@@ -250,4 +250,10 @@ module ApplicationHelper
     end
   end
 
+  def account_link_helper(first, second)
+    content_tag :span, class: "help-block top-space" do
+      "#{first} #{link_to(second, edit_polymorphic_path([ params[:controller].include?('admin') ? [:admin, @user] : [:user]]))}".html_safe
+    end
+  end
+
 end
