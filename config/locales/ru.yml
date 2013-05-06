@@ -94,6 +94,7 @@ ru:
   user_id: Покупатель
   creator_id: Кто изм. или созд.
   id: ID
+  token: ID 
   confirmed_by_user: Подтв. покупателем
   confirmed_by_manager: Подтв. менеджером
   manager_confirmation_datetime: Дата подтв. менеджером
