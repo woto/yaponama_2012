@@ -6,8 +6,8 @@
         h4 Время
 
         div#use_auto_russian_time_zone.btn-group data-toggle="buttons-radio"
-          button type="button" class="btn btn-primary" data-checkbox-value='1' class="#{f.object.use_auto_russian_time_zone ? 'active' : ''}" Автоматически
-          button type="button" class="btn btn-primary" data-checkbox-value='0' class="#{f.object.use_auto_russian_time_zone ? '' : 'active'}" Вручную
+          button type="button" class="btn" data-checkbox-value='1' class="#{f.object.use_auto_russian_time_zone ? 'active' : ''}" Автоматически
+          button type="button" class="btn" data-checkbox-value='0' class="#{f.object.use_auto_russian_time_zone ? '' : 'active'}" Вручную
 
     = f.input :use_auto_russian_time_zone, :wrapper_html => {style: "display: none"}
     = f.input :russian_time_zone_manual_id, :wrapper_html => {id: 'russian_time_zone_manual'}, :collection => Rails.configuration.russian_time_zones.map {|k,v| [v,k]}
