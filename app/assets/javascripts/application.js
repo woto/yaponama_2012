@@ -74,3 +74,4 @@
 //
 //= require tooltip_popover_rel
 //= require items_progress
+//= require 'time_zone_checkbox'
