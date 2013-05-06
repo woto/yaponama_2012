@@ -59,6 +59,15 @@ class Order < ActiveRecord::Base
 
   before_create :generate_token
 
+  def to_param
+    token
+  end
+
+  def self.find(token)
+    Order.where(:token => token).first
+  end
+
+
   protected
 
   def generate_token
