@@ -8,6 +8,6 @@ class Delivery < ActiveRecord::Base
   validates :name, :presence => true
 
   def to_label
-    delivery_category.to_label + " -> " + name
+    name
   end
 end
