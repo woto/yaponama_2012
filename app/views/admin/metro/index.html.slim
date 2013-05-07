@@ -8,6 +8,7 @@ table class="table table-striped"
   thead
     tr
       th= model_class.human_attribute_name(:id)
+      th= model_class.human_attribute_name(:delivery)
       th= model_class.human_attribute_name(:metro)
       th= model_class.human_attribute_name(:delivery_cost)
       th= model_class.human_attribute_name(:created_at)
@@ -16,6 +17,7 @@ table class="table table-striped"
     - @metro.each do |metro|
       tr
         td= link_to metro.id, admin_metro_path(metro)
+        td= metro.delivery
         td= metro.metro
         td= metro.delivery_cost
         td=l metro.created_at

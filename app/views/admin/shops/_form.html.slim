@@ -1,5 +1,6 @@
 = simple_form_for [:admin, @shop], :html => { :class => "form-horizontal" } do |f|
   = f.input :name
+  = f.association :delivery
   = f.input :content, :input_html => {:class => "ckeditor-extended"}
   .form-actions
     = f.button :submit, :class => 'btn-primary'

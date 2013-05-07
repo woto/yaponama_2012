@@ -5,6 +5,7 @@ table class="table table-striped"
   thead
     tr
       th= model_class.human_attribute_name(:id)
+      th= model_class.human_attribute_name(:delivery)
       th= model_class.human_attribute_name(:name)
       th= model_class.human_attribute_name(:content)
       th= model_class.human_attribute_name(:created_at)
@@ -13,6 +14,7 @@ table class="table table-striped"
     - @shops.each do |shop|
       tr
         td= link_to shop.id, admin_shop_path(shop)
+        td= shop.delivery
         td= shop.name
         td= shop.content
         td=l shop.created_at
