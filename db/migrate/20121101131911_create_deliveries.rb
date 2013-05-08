@@ -5,9 +5,6 @@ class CreateDeliveries < ActiveRecord::Migration
       t.text :notes
       t.text :notes_invisible
       t.boolean :available, :default => true
-
-      t.references :delivery_category, index: true
-
       t.boolean :name_required, :default => false
       t.boolean :postal_address_required, :default => false
       t.boolean :full_prepayment_required, :default => false
