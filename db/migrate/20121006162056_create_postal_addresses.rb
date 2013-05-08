@@ -6,8 +6,8 @@ class CreatePostalAddresses < ActiveRecord::Migration
       t.string :city
       t.string :street
       t.string :house
+      t.boolean :stand_alone_house
       t.string :room
-
       t.timestamps
     end
 
