@@ -28,13 +28,14 @@ module ApplicationHelper
     content_tag(:div, :class => 'row-fluid') do
       if @user && admin_zone?
         workspace_class = 'span9'
-        res = content_tag(:div, :class => 'span3') do
-          render 'users/show'
+        res = content_tag(:div, :class => 'span3', :id => 'profile') do
+          [(render 'users/show')].join.html_safe
         end
       end
 
       res <<
       content_tag(:div, :class => workspace_class, :id => 'workspace') do
+
         if @user && admin_zone?
 
           content_tag(:div, :id => 'profile-button-show', :class => 'profile-button') do
