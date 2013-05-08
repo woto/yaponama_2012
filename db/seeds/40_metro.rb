@@ -171,4 +171,4 @@
   #'Юго-западная',
   #'Южная',
   #'Ясенево'
-].each { |metro| Metro.create!(metro: metro, delivery_cost: 200) }
+].each { |metro| Metro.create!(name: metro, delivery_cost: 250, delivery: Delivery::Metro.first) }
