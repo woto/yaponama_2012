@@ -1,12 +1,30 @@
 @import 'twitter/bootstrap_base';
 
-#chat-button {
-  top: 30%; 
-  width: 30px; 
-  height: 151px; 
-  right: -30px;
+.chat-button, .profile-button{
+  top: 50%; 
+  margin-top: -20px;
+  padding: 5px; 
+  width: 6px;
+  background: #eee;
   position: fixed;
   cursor: pointer;
   z-index: 100;
-  background: asset-url('talk.png')
+  border: 1px solid #dcdcdc;
+}
+
+#chat-button-hide {
+  margin-left: -20px;
+}
+
+#chat-button-show {
+  right: 0px;
+}
+
+
+#profile-button-hide {
+  margin-left: -20px;
+}
+
+#profile-button-show {
+  left: 0;
 }

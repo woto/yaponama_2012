@@ -36,6 +36,15 @@ module ApplicationHelper
       res <<
       content_tag(:div, :class => workspace_class, :id => 'workspace') do
         if @user && admin_zone?
+
+          content_tag(:div, :id => 'profile-button-show', :class => 'profile-button') do
+            content_tag(:i, '', :class => "icon icon-double-angle-right")
+          end <<
+
+          content_tag(:div, :id => 'profile-button-hide', :class => 'profile-button') do
+            content_tag(:i, '', :class => "icon icon-double-angle-left")
+          end <<
+
           content_tag(:ul, :class => 'nav nav-tabs', style: "margin-bottom: 10px") do
             [ 
               { :title => 'Настройки', 

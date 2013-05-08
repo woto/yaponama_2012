@@ -53,7 +53,6 @@
 //
 //= require jquery.cachedScript
 //= require jquery.editableHighlight
-//= require chat-button
 //
 //= require select2
 //
