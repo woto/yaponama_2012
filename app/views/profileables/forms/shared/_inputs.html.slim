@@ -1,0 +1,13 @@
+= f.input :notes, :input_html => {:rows => 3}
+= f.input :notes_invisible, :input_html => {:rows => 3}
+
+.controls
+  button.btn.btn-small.bottom-space class="collapse-buttons" type="button" data-toggle="collapse"
+    span Прочие поля
+
+div class="collapse-fields" class="collapse out" 
+  = f.input :created_at, :disabled => true
+  = f.input :updated_at, :disabled => true
+  = f.association :creator, :disabled => true
+  - if f.object.class.reflect_on_association(:user)
+    = f.association :user, :disabled => true

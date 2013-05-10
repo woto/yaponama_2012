@@ -1,8 +1,8 @@
 .controls
-  button.btn.btn-success.bottom-space type="button" data-toggle="collapse" data-target="#profileable-confirmed"
+  button.btn.btn-small.bottom-space class="collapse-buttons" type="button" data-toggle="collapse"
     span Подтверждение
 
-div id="profileable-confirmed" class="collapse out" 
+div class="collapse-fields" class="collapse out" 
   = f.input :confirmed_by_manager
   = f.input :manager_confirmation_datetime
   = f.input :confirmed_by_user, :disabled => true
