@@ -15,6 +15,8 @@ class CreateAdminSiteSettings < ActiveRecord::Migration
       t.string :robokassa_pass_2
       t.string :robokassa_user
 
+      t.string :warehouse_address
+
       t.string :checkout_account
       t.string :checkout_bank
       t.string :checkout_bik

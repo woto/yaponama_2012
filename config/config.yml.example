@@ -17,6 +17,8 @@ defaults: &defaults
   robokassa_pass_2: password
   robokassa_user: login
 
+  warehouse_address: "Москва, ул. Норильская, д. 1"
+
   checkout_account: Номер счета получателя платежа
   checkout_bank: Наименование банка получателя платежа
   checkout_bik: БИК

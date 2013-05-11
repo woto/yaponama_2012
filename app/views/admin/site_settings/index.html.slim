@@ -6,6 +6,7 @@ table class="table table-striped"
     tr
       th= model_class.human_attribute_name(:environment)
       - if params[:filter] == 'other' || params[:filter].blank?
+        th= model_class.human_attribute_name(:warehouse_address)
         th= model_class.human_attribute_name(:send_request_from_search_page)
         th= model_class.human_attribute_name(:sms_notify_method)
         th= model_class.human_attribute_name(:price_request_cache_with_replacements_in_seconds)
@@ -74,6 +75,7 @@ table class="table table-striped"
       tr
         td= admin_site_setting.environment
         - if params[:filter] == 'other' || params[:filter].blank?
+          td= admin_site_setting.warehouse_address
           td= admin_site_setting.send_request_from_search_page
           td= admin_site_setting.sms_notify_method
           td= admin_site_setting.price_request_cache_with_replacements_in_seconds
