@@ -20,6 +20,8 @@ end
 
 Yaponama2012::Application.routes.draw do
 
+  resources :delivery_zones
+
   resources :calls
 
   concern :filterable do
@@ -122,6 +124,8 @@ Yaponama2012::Application.routes.draw do
   end
 
   namespace :admin do
+
+    resources :delivery_zones
 
     resources :calls
 

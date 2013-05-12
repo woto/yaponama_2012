@@ -1,0 +1,12 @@
+= simple_form_for @delivery_zone do |f|
+  = f.input :name
+  = f.input :vertices, :as => :hidden
+
+  .inputs
+    #map
+    #warehouse-address data-value="#{SiteConfig.warehouse_address}"
+
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    '
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), delivery_zones_path, :class => 'btn'

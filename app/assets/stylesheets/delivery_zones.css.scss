@@ -1,0 +1,11 @@
+#map {
+  padding: 0;
+  margin: 0;
+  height: 600px;
+  width: 600px;
+}
+
+// Bootstrap 2 hack for map
+#map img {
+  max-width: none;
+}
