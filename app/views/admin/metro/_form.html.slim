@@ -1,8 +1,0 @@
-= simple_form_for [:admin, @metro], :html => { :class => "form-horizontal dirtyforms" } do |f|
-  = f.association :delivery
-  = f.input :metro
-  = f.input :delivery_cost, :as => :string, :required => true
-  .form-actions
-    = f.button :submit, :class => 'btn-primary'
-    '
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_metro_index_path, :class => 'btn'

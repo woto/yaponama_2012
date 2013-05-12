@@ -1,6 +1,6 @@
 class AddCommonAttributesToDeliveries < ActiveRecord::Migration
   def change
-    [:metro, :shops, :mails].each do |table|
+    [:mails].each do |table|
       add_column table, :available, :boolean, :default => true
       add_column table, :sequence, :integer
       add_column table, :name, :string
