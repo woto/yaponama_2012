@@ -140,7 +140,7 @@ window.initClientMap = ->
 
     poly.inactivate()
 
-    poly.setMap(map)
+    poly.setMap(window.map)
 
     poly.setPath path
 
