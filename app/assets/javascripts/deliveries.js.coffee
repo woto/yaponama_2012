@@ -1,5 +1,4 @@
 window.initClientMap = ->
-  $.cachedScript('/assets/Google-Maps-Point-in-Polygon/maps.google.polygon.containsLatLng.js')
 
   zoom_and_move_to_common_style = (polygon) ->
     lat = polygon.common_style.lat
@@ -62,9 +61,8 @@ window.initClientMap = ->
 
               $('.delivery_zone').each ->
                 poly = $(this).data('polygon')
-                if poly.containsLatLng(coords)
-                  debugger
-                  if !found? || poly.zIndex > found.data('polygon').zIndex
+                if google.maps.geometry.poly.containsLocation(coords, poly)
+                  if !found? || parseInt(poly.zIndex) > parseInt(found.data('polygon').zIndex)
                     found = $(this)
 
               if found?

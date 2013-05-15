@@ -64,6 +64,3 @@
 [submodule "system/submodules/Respond"]
 	path = system/submodules/Respond
 	url = https://github.com/scottjehl/Respond.git
-[submodule "system/submodules/Google-Maps-Point-in-Polygon"]
-	path = system/submodules/Google-Maps-Point-in-Polygon
-	url = https://github.com/tparkin/Google-Maps-Point-in-Polygon
