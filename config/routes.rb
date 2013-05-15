@@ -292,6 +292,7 @@ Yaponama2012::Application.routes.draw do
   post 'trash_help/make_payment_to_supplier'
   get 'clear_session' => "trash_help#clear_session"
 
+  resources :deliveries
 
   get "*brand" => "brands#index", :constraints => BrandConstraint.new
   get "*path" => "pages#show", :constraints => PageConstraint.new
