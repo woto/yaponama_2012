@@ -110,11 +110,7 @@ window.initClientMap = ->
 
   $('.delivery_zone').each ->
 
-    #path = new google.maps.MVCArray;
-    path = []
-
-    $.each JSON.parse($(this).find('.vertices').text()), (key, val) ->
-      path.push(new google.maps.LatLng(val.kb, val.lb));
+    path = google.maps.geometry.encoding.decodePath($(this).find('.vertices').text())
 
     poly = new google.maps.Polygon
       zIndex: $(this).find('.z_index').text()
@@ -168,7 +164,7 @@ window.initClientMap = ->
 
 $ ->
   if $('#clientMap').length != 0
-    $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&callback=initClientMap')
+    $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&callback=initClientMap')
 $(document).on 'page:change', ->
   if $('#clientMap').length != 0
-    $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&callback=initClientMap')
+    $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&callback=initClientMap')

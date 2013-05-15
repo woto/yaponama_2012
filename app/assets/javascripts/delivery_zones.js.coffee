@@ -32,7 +32,7 @@ window.initMap = ->
     shape.setEditable true
     
   update_vertices = (shape) ->
-    $('#delivery_zone_vertices').val(JSON.stringify(shape.getPath().getArray()));
+    $('#delivery_zone_vertices').val(google.maps.geometry.encoding.encodePath(shape.getPath()))
 
   add_events_handler_to_shape = (shape) ->
     google.maps.event.addListener shape.getPath(), 'set_at', (index) ->
@@ -118,10 +118,7 @@ window.initMap = ->
       poly = new google.maps.Polygon(polyOptions)
       poly.setMap(map)
 
-      path = new google.maps.MVCArray;
-
-      $.each JSON.parse($('#delivery_zone_vertices').val()), (key, val) ->
-        path.push(new google.maps.LatLng(val.kb, val.lb));
+      path = google.maps.geometry.encoding.decodePath($('#delivery_zone_vertices').val())
 
       poly.setPath path
       setSelection poly
@@ -144,8 +141,8 @@ window.initMap = ->
 
 $ ->
   if $('#map').length != 0
-    $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=drawing&callback=initMap')
+    $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry&callback=initMap')
 
 $(document).on 'page:change', ->
   if $('#map').length != 0
-    $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=drawing&callback=initMap')
+    $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry&callback=initMap')
