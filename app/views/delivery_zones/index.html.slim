@@ -6,7 +6,6 @@ table class="table table-striped"
     tr
       th= model_class.human_attribute_name(:id)
       th= model_class.human_attribute_name(:name)
-      th= model_class.human_attribute_name(:vertices)
       th= model_class.human_attribute_name(:created_at)
       th=t '.actions', :default => t("helpers.actions")
   tbody
@@ -14,7 +13,6 @@ table class="table table-striped"
       tr
         td= link_to delivery_zone.id, delivery_zone_path(delivery_zone)
         td= delivery_zone.name
-        td= delivery_zone.vertices
         td=l delivery_zone.created_at
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_delivery_zone_path(delivery_zone), :class => 'btn btn-mini'

@@ -15,6 +15,12 @@ class CreateAdminSiteSettings < ActiveRecord::Migration
       t.string :robokassa_pass_2
       t.string :robokassa_user
 
+      t.string :google_maps_key
+      t.string :travel_mode
+      t.float :initial_map_lat
+      t.float :initial_map_lng
+      t.integer :initial_map_zoom
+      t.float :delivery_minute_cost
       t.string :warehouse_address
 
       t.string :checkout_account

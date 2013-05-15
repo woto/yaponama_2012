@@ -6,11 +6,18 @@
 
   = f.input :environment
   - if params[:filter] == 'other' || params[:filter].blank? 
-    = f.input :warehouse_address
     = f.input :send_request_from_search_page
     = f.input :sms_notify_method, :collection => Rails.configuration.sms_notify_methods, :required => true
     = f.input :price_request_cache_with_replacements_in_seconds, :as => :string, :required => true
     = f.input :price_request_cache_without_replacements_in_seconds, :as => :string, :required => true
+  - if params[:filter] == 'map' || params[:filter].blank?
+    = f.input :warehouse_address
+    = f.input :delivery_minute_cost
+    = f.input :initial_map_zoom
+    = f.input :initial_map_lat
+    = f.input :initial_map_lng
+    = f.input :google_maps_key
+    = f.input :travel_mode
   - if params[:filter] == 'prices' || params[:filter].blank?
     = f.input :request_emex
     = f.input :emex_income_rate, :as => :string

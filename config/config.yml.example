@@ -17,7 +17,13 @@ defaults: &defaults
   robokassa_pass_2: password
   robokassa_user: login
 
-  warehouse_address: "Москва, ул. Норильская, д. 1"
+  initial_map_zoom: 5
+  initial_map_lat: 55.7304426143438
+  initial_map_lng: 37.63272449798592
+  warehouse_address: Россия, Москва, Красная площадь, 3
+  delivery_minute_cost: 16
+  google_maps_key: Ключ google maps
+  travel_mode: TRANSIT
 
   checkout_account: Номер счета получателя платежа
   checkout_bank: Наименование банка получателя платежа

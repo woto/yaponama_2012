@@ -1,0 +1,62 @@
+.bottom-space
+  h3 Доставка и Самовывоз
+
+ul.nav.nav-tabs id="myTab"
+
+  li.active
+    a href="#home" data-toggle="tab"
+      strong Москва
+  li
+    a href="#profile" data-toggle="tab"
+      strong Другие города
+ 
+div.tab-content
+
+  div.tab-pane.active id="home"
+
+    form.form-search
+      .inputs
+        .bottom-space
+          .input-append
+            input#geocode-address-text.span12.search-query type="text" placeholder="Укажите адрес доставки"
+            a#geocode-address-button class="btn" Найти адрес
+
+    .row-fluid
+      .span6
+
+        #deliveries-accordion.accordion
+          - DeliveryZone.all.each do |delivery_zone|
+            .accordion-group
+              .accordion-heading.delivery_zone
+                / Картографические данные области
+                div style="display: none"
+                  .vertices= delivery_zone.vertices
+                  .lat = delivery_zone.lat
+                  .lng = delivery_zone.lng
+                  .zoom = delivery_zone.zoom
+                  .display_marker = delivery_zone.display_marker
+                  .z_index = delivery_zone.z_index
+                  - ['active', 'inactive'].each do |style|
+                    div class="#{style}"
+                      .fill_color= delivery_zone["#{style}_fill_color"]
+                      .fill_opacity= delivery_zone["#{style}_fill_opacity"]
+                      .stroke_color= delivery_zone["#{style}_stroke_color"]
+                      .stroke_opacity= delivery_zone["#{style}_stroke_opacity"]
+                      .stroke_weight= delivery_zone["#{style}_stroke_weight"]
+                - rand_id = (0...25).map{ ('a'..'z').to_a[rand(26)] }.join
+                a.accordion-toggle data-toggle="collapse" data-parent="#deliveries-accordion" href="##{rand_id}"
+                  strong= delivery_zone.name
+              .accordion-body.collapse id="#{rand_id}"
+                .accordion-inner
+                  =delivery_zone.content
+      .span6
+        #clientMap
+
+    /- @deliveries.each do |delivery|
+      h3 style="margin-bottom: 30px"= delivery.name
+
+    /- klass = delivery.class.reflect_on_all_associations.select{|ref| ref.active_record.to_s.deconstantize == 'Delivery'}.first.name.to_s.singularize.camelcase.constantize.all.each do |sub|
+  div.tab-pane id="profile"
+    ' asdf
+ 
+

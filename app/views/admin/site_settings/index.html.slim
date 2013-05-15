@@ -6,11 +6,18 @@ table class="table table-striped"
     tr
       th= model_class.human_attribute_name(:environment)
       - if params[:filter] == 'other' || params[:filter].blank?
-        th= model_class.human_attribute_name(:warehouse_address)
         th= model_class.human_attribute_name(:send_request_from_search_page)
         th= model_class.human_attribute_name(:sms_notify_method)
         th= model_class.human_attribute_name(:price_request_cache_with_replacements_in_seconds)
         th= model_class.human_attribute_name(:price_request_cache_without_replacements_in_seconds)
+      - if params[:filter] == 'map' || params[:filter].blank?
+        th= model_class.human_attribute_name(:google_maps_key)
+        th= model_class.human_attribute_name(:travel_mode)
+        th= model_class.human_attribute_name(:warehouse_address)
+        th= model_class.human_attribute_name(:delivery_minute_cost)
+        th= model_class.human_attribute_name(:initial_map_zoom)
+        th= model_class.human_attribute_name(:initial_map_lat)
+        th= model_class.human_attribute_name(:initial_map_lng)
       - if params[:filter] == 'prices' || params[:filter].blank?
         th= model_class.human_attribute_name(:request_emex)
         th= model_class.human_attribute_name(:emex_income_rate)
@@ -75,11 +82,18 @@ table class="table table-striped"
       tr
         td= admin_site_setting.environment
         - if params[:filter] == 'other' || params[:filter].blank?
-          td= admin_site_setting.warehouse_address
           td= admin_site_setting.send_request_from_search_page
           td= admin_site_setting.sms_notify_method
           td= admin_site_setting.price_request_cache_with_replacements_in_seconds
           td= admin_site_setting.price_request_cache_without_replacements_in_seconds
+        - if params[:filter] == 'map' || params[:filter].blank?
+          td= admin_site_setting.google_maps_key
+          td= admin_site_setting.travel_mode
+          td= admin_site_setting.warehouse_address
+          td= admin_site_setting.delivery_minute_cost
+          td= admin_site_setting.initial_map_zoom
+          td= admin_site_setting.initial_map_lat
+          td= admin_site_setting.initial_map_lng
         - if params[:filter] == 'prices' || params[:filter].blank?
           td= admin_site_setting.request_emex
           td= admin_site_setting.emex_income_rate

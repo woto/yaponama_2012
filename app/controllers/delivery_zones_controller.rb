@@ -15,6 +15,7 @@ class DeliveryZonesController < ApplicationController
   # GET /delivery_zones/new
   def new
     @delivery_zone = DeliveryZone.new
+    @delivery_zone.prepare
   end
 
   # GET /delivery_zones/1/edit
@@ -28,7 +29,7 @@ class DeliveryZonesController < ApplicationController
 
     respond_to do |format|
       if @delivery_zone.save
-        format.html { redirect_to @delivery_zone, notice: 'Delivery zone was successfully created.' }
+        format.html { redirect_to delivery_zones_path, notice: 'Delivery zone was successfully created.' }
         format.json { render action: 'show', status: :created, location: @delivery_zone }
       else
         format.html { render action: 'new' }
@@ -42,7 +43,7 @@ class DeliveryZonesController < ApplicationController
   def update
     respond_to do |format|
       if @delivery_zone.update(delivery_zone_params)
-        format.html { redirect_to @delivery_zone, notice: 'Delivery zone was successfully updated.' }
+        format.html { redirect_to delivery_zones_path, notice: 'Delivery zone was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

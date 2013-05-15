@@ -1,10 +1,36 @@
-= simple_form_for @delivery_zone do |f|
+= simple_form_for @delivery_zone, :html => { class: "form-search" } do |f|
   = f.input :name
+  = f.input :content
+  = f.input :z_index
+  = f.input :display_marker
+
   = f.input :vertices, :as => :hidden
 
+  ul.nav.nav-tabs
+    - ['active', 'inactive'].each do |style|
+      li class="#{style == 'active' ? 'active' : ''}"
+        a href="##{style}" data-toggle="tab" #{style}
+
+  div.tab-content
+    - ['active', 'inactive'].each do |style|
+      div.tab-pane id="#{style}" class="#{style == 'active' ? 'active' : ''}"
+        = f.input "#{style}_fill_color"
+        = f.input "#{style}_fill_opacity"
+        = f.input "#{style}_stroke_color"
+        = f.input "#{style}_stroke_opacity"
+        = f.input "#{style}_stroke_weight"
+
+  = f.input :lat, :as => :hidden
+  = f.input :lng, :as => :hidden
+  = f.input :zoom, :as => :hidden
+
   .inputs
+    .bottom-space
+      .input-append
+        input#geocode-address-text.input-xxlarge.search-query type="text"
+        a#geocode-address-button class="btn" Найти адрес
+
     #map
-    #warehouse-address data-value="#{SiteConfig.warehouse_address}"
 
   .form-actions
     = f.button :submit, :class => 'btn-primary'

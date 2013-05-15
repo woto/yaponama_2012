@@ -4,10 +4,11 @@
 
 window.initMap = ->
 
+  $(document).on 'click', '#geocode-address-button', ->
+    window.geocoder = new google.maps.Geocoder();
+    window.codeAddress($('#geocode-address-text').val())
 
-  window.codeAddress = ->
-
-    address = $('#warehouse-address').data('value')
+  window.codeAddress = (address) ->
 
     window.geocoder.geocode
       address: address
@@ -19,7 +20,7 @@ window.initMap = ->
           position: results[0].geometry.location
         )
       else
-        alert "Geocode was not successful for the following reason: " + status
+        alert "Не удалось определить местоположение, попробуйте уточнить запрос. " + status
 
   clearSelection = ->
     if selectedShape
@@ -44,17 +45,22 @@ window.initMap = ->
     google.maps.event.addListener shape, "rightclick", (mev) ->
       shape.getPath().removeAt mev.vertex  if mev.vertex?
 
-
-
-
   initialize = ->
     window.map = new google.maps.Map(document.getElementById("map"),
-      zoom: 15
-      center: new google.maps.LatLng(55.75, 37.60)
+      zoom: parseInt($('#delivery_zone_zoom').val())
+      center: new google.maps.LatLng(parseFloat($('#delivery_zone_lat').val()), parseFloat($('#delivery_zone_lng').val()))
       mapTypeId: google.maps.MapTypeId.ROADMAP
       disableDefaultUI: true
       zoomControl: true
     )
+
+    # Вешаем обработчики событий изменения позиции на карте и зума
+
+    google.maps.event.addListener window.map, 'zoom_changed', ->
+      $('#delivery_zone_zoom').val(window.map.getZoom())
+    google.maps.event.addListener window.map, 'bounds_changed', ->
+      $('#delivery_zone_lat').val(window.map.getCenter().lat())
+      $('#delivery_zone_lng').val(window.map.getCenter().lng())
 
 
     polyOptions =
@@ -82,6 +88,12 @@ window.initMap = ->
       drawingManager.setOptions
         drawingControl: false
 
+    zoom_and_center_to_polygon = ->
+      window.map.setZoom(parseInt($('#delivery_zone_zoom').val()))
+      lat = parseFloat($('#delivery_zone_lat').val())
+      lng = parseFloat($('#delivery_zone_lng').val())
+      coords = new google.maps.LatLng(lat, lng)
+      window.map.setCenter(coords)
 
 
     google.maps.event.addListener window.drawingManager, "overlaycomplete", (e) ->
@@ -101,6 +113,7 @@ window.initMap = ->
       add_events_handler_to_shape(newShape)
 
 
+    # Инициализация карты
     if $('#delivery_zone_vertices').val() != ''
       poly = new google.maps.Polygon(polyOptions)
       poly.setMap(map)
@@ -114,10 +127,8 @@ window.initMap = ->
       setSelection poly
       add_events_handler_to_shape(poly)
       dont_allow_further_adding()
+      zoom_and_center_to_polygon()
 
-
-    window.geocoder = new google.maps.Geocoder();
-    window.codeAddress()
     
     # Clear the current selection when the drawing mode is changed, or when the
     # map is clicked.
