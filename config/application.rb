@@ -81,7 +81,8 @@ module Yaponama2012
       'session' => 'Посетил сайт',
       'merge' => 'Образовался в результате объединения',
       'manager' => 'Создан менеджером',
-      'call' => 'Звонок'
+      'call' => 'Звонок',
+      'order' => 'В процессе оформления заказа'
     }
 
 
@@ -92,7 +93,8 @@ module Yaponama2012
       'addressee' => 'В процессе оформления заказа (Контактный телефон)',
       'self' => 'Заполнено самостоятельно',
       'manager' => 'Заполнено менеджером',
-      'callback' => 'Заказал обратный вызов'
+      'callback' => 'Заказал обратный вызов',
+      'order' => 'В процессе оформления заказа'
     }
 
     # Names
@@ -109,32 +111,41 @@ module Yaponama2012
       'yandex' => 'Yandex',
       'vkontakte' => 'Вконтакте',
       'odnoklassniki' => 'Одноклассники',
-      'mailru' => 'Mail.ru'
+      'mailru' => 'Mail.ru',
+      'order' => 'В процессе оформления заказа'
     }
 
     # EmailAddresses
     config.user_email_address_creation_reason = {
       'register' => 'Регистрация',
       'email' => 'Получено письмо с этого адреса',
-      'manager' => 'Добавлено менеджером'
+      'manager' => 'Добавлено менеджером',
+      'order' => 'В процессе оформления заказа'
     }
 
     config.user_postal_address_creation_reason = {
+      'order' => 'В процессе оформления заказа'
     }
 
     config.user_car_creation_reason = {
+      'order' => 'В процессе оформления заказа'
     }
 
     config.user_company_creation_reason = {
+      'order' => 'В процессе оформления заказа'
     }
 
 
     config.user_order_creation_reason = {
+      'order' => 'В процессе оформления заказа'
+    }
 
     config.user_profile_creation_reason = {
       'order' => 'В процессе оформления заказа'
     }
 
+    config.user_passport_creation_reason = {
+      'order' => 'В процессе оформления заказа'
     }
 
     # Orders
