@@ -1,4 +1,0 @@
-= f.input :email_address, :required => true
-= f.input :creation_reason, :collection => Rails.configuration.user_email_address_creation_reason.map {|k,v| [v,k]}.to_a, :disabled => true, :as => :radio_buttons
-
-= render :partial => 'profileables/forms/confirms', :locals => {:f => f}
