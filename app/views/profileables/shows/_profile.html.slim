@@ -1,0 +1,27 @@
+ul.unstyled
+
+  - profile.names.each do |name|
+    li 
+      = name.to_label
+
+  - profile.phones.each do |phone|
+    li.dropdown
+      a.dropdown-toggle data-toggle="dropdown" href="#"
+        = phone.to_label
+      ul.dropdown-menu
+        li
+          a href="#" SMS
+          a href="#" Звонок
+
+  - profile.email_addresses.each do |email_address|
+    li
+      a href="#"
+        = email_address.to_label
+
+  - profile.passports.each do |passport|
+    li
+      = passport.seriya
+      '
+      '-
+      '
+      = passport.nomer
