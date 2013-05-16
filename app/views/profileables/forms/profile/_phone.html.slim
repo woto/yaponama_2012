@@ -1,0 +1,15 @@
+.nested-fields
+  - if f.object._destroy
+    = hidden_field_tag("#{f.object_name}[_destroy]", '1')
+  - else
+    = link_to_remove_association '<i class="icon-trash ignoredirty"></i>'.html_safe, f, :class => "btn btn-danger pull-right ignoredirty", :confirm => 'Are you sure?'
+
+    .clearfix.bottom-space
+
+    .nested-visualize style="border-left: 3px dashed #5BC0DE"
+      = f.input :phone
+      = f.input :phone_type, :collection => Rails.configuration.phone_types, :value_method => :first, :label_method => :last, :as => :radio_buttons, :required => true
+      = f.input :creation_reason, :collection => Rails.configuration.user_phone_creation_reason.map {|k,v| [v,k]}.to_a, :disabled => true, :as => :radio_buttons
+
+      = render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f}
+      = render :partial => 'profileables/forms/shared/confirms', :locals => {:f => f}
