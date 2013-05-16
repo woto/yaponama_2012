@@ -130,6 +130,11 @@ module Yaponama2012
 
 
     config.user_order_creation_reason = {
+
+    config.user_profile_creation_reason = {
+      'order' => 'В процессе оформления заказа'
+    }
+
     }
 
     # Orders
