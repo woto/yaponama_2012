@@ -2,22 +2,20 @@
   - model_class = User
 
   - array = [ \
-      {title: 'Имя', icon: 'user', assoc: 'name'}, \
-      {title: 'Телефон', icon: 'phone', assoc: 'phone'}, \
-      {title: 'E-mail', icon: 'envelope', assoc: 'email_address'}, \
+      {title: 'Профиль', icon: 'user', assoc: 'profile'}, \
       {title: 'Адрес', icon: 'home', assoc: 'postal_address'}, \
       {title: 'Автомобиль', icon: 'truck', assoc: 'car'}, \
       {title: 'Компания', icon: 'briefcase', assoc: 'company'} ]
 
   - array.each do |item|
     h4.hover-profileable
-      = link_to smart_route({:postfix => [item[:assoc].pluralize]}, :user_id => params[:user_id]) do
+      = link_to smart_route({:postfix => [item[:assoc].pluralize]}, :user_id => @user.id) do
         span
           i.icon class="icon-#{item[:icon]}" 
           '
           = item[:title]
       '
-      = link_to smart_route({:prefix => [:new], :postfix => [item[:assoc]]}, :user_id => params[:user_id]), :style => "visibility: hidden", :class => "btn btn-mini btn-primary plus-profileable" do
+      = link_to smart_route({:prefix => [:new], :postfix => [item[:assoc]]}, :user_id => @user.id), :style => "visibility: hidden", :class => "btn btn-mini btn-primary plus-profileable" do
         i.icon-plus
     - @user.send(item[:assoc].pluralize).each do |partial|
       .profileable-item.left-space
