@@ -76,6 +76,8 @@ class User < ActiveRecord::Base
 
   has_many :names, :dependent => :destroy
   accepts_nested_attributes_for :names, :allow_destroy => true
+  has_many :profiles, :dependent => :destroy, inverse_of: :user
+  accepts_nested_attributes_for :profiles, :allow_destroy => true
 
   has_many :orders, :dependent => :destroy
   accepts_nested_attributes_for :orders, :allow_destroy => true
