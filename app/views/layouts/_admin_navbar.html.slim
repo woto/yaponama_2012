@@ -44,20 +44,34 @@
 
               li.divider
 
-              li = link_to admin_names_path do
-                i.icon.icon-user
-                '
-                | Имена 
+              li.dropdown-submenu
+                = link_to admin_profiles_path do
+                  i.icon.icon-user
+                  '
+                  | Профили
+                ul.dropdown-menu
+                  li = link_to admin_names_path do
+                    i.icon.icon-user
+                    '
+                    | Имена 
 
-              li = link_to admin_phones_path do
-                i.icon.icon-phone
-                '
-                | Телефоны
+                  li = link_to admin_phones_path do
+                    i.icon.icon-phone
+                    '
+                    | Телефоны
 
-              li = link_to admin_email_addresses_path do
-                i.icon.icon-envelope
-                '
-                | E-mail
+                  li = link_to admin_email_addresses_path do
+                    i.icon.icon-envelope
+                    '
+                    | E-mail
+
+                  li = link_to admin_passports_path do
+                    i.icon.icon-book
+                    '
+                    | Паспорта
+
+                  
+
               li = link_to admin_postal_addresses_path do
                 i.icon.icon-home
                 '
