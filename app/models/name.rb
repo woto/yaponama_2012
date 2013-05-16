@@ -5,6 +5,7 @@ class Name < ActiveRecord::Base
 
   has_many :orders
 
+  belongs_to :profile, :inverse_of => :names
   validates :name, :presence => true
 
   # TODO убрать везде валидацию и запретить выставление в ..._params (т.к. меняться руками никем не будет)
