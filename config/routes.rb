@@ -36,29 +36,13 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :profileable do
-    resources :names, :controller => "profileables", :resource_class => 'Name' do
-      concerns :transactionable
-      concerns :filterable
-    end
-    resources :phones, :controller => "profileables", :resource_class => 'Phone' do
-      concerns :transactionable
-      concerns :filterable
-    end
-    resources :email_addresses, :controller => "profileables", :resource_class => 'EmailAddress' do
-      concerns :transactionable
-      concerns :filterable
-    end
-    resources :postal_addresses, :controller => "profileables", :resource_class => 'PostalAddress' do
-      concerns :transactionable
-      concerns :filterable
-    end
-    resources :cars, :controller => "profileables", :resource_class => 'Car' do
-      concerns :transactionable
-      concerns :filterable
-    end
-    resources :companies, :controller => "profileables", :resource_class => 'Company' do
-      concerns :transactionable
-      concerns :filterable
+    ['name', 'phone', 'email_address', 'passport', 'profile', 'postal_address', 'car', 'company'].each do |item|
+      instance_eval <<-CODE, __FILE__, __LINE__ + 1
+        resources :#{item.pluralize}, :controller => "profileables", :resource_class => '#{item.camelcase}' do
+          concerns :transactionable
+          concerns :filterable
+        end
+      CODE
     end
   end
 
