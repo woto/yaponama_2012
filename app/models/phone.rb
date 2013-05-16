@@ -7,6 +7,7 @@ class Phone < ActiveRecord::Base
   include NotSelf
   include Transactionable
 
+  belongs_to :profile, :inverse_of => :phones
   has_many :orders
 
   validates :phone_type, :inclusion => { :in => Rails.configuration.phone_types_keys }
