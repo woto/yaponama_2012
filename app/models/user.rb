@@ -1,6 +1,7 @@
 #encoding: utf-8
 
 class User < ActiveRecord::Base
+  include BelongsToCreator
 
   # TODO Удалить две следующие строчки
   has_many :root_products, -> { where("product_id IS NULL") }, :class_name => "Product", :dependent => :destroy
@@ -18,7 +19,7 @@ class User < ActiveRecord::Base
 
   #has_many :comments
   
-  [:phone, :name, :email_address, :postal_address, :car, :company, :order].each do |table_name|
+  [:phone, :name, :email_address, :passport, :postal_address, :car, :company, :order]
     has_many "#{table_name}_transactions".to_sym
   end
 
@@ -63,10 +64,16 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :products, :allow_destroy => true
 
   has_many :email_addresses, :dependent => :destroy
-  accepts_nested_attributes_for :email_addresses, :allow_destroy => true
+  #accepts_nested_attributes_for :email_addresses, :allow_destroy => true
 
   has_many :phones, :dependent => :destroy
-  accepts_nested_attributes_for :phones, :allow_destroy => true
+  #accepts_nested_attributes_for :phones, :allow_destroy => true
+
+  has_many :passports, :dependent => :destroy
+  #accepts_nested_attributes_for :passports, :allow_destroy => true
+
+  has_many :names, :dependent => :destroy
+  #accepts_nested_attributes_for :names, :allow_destroy => true
 
   has_many :postal_addresses, :dependent => :destroy
   accepts_nested_attributes_for :postal_addresses, :allow_destroy => true
@@ -74,15 +81,13 @@ class User < ActiveRecord::Base
   has_many :companies, :dependent => :destroy
   accepts_nested_attributes_for :companies, :allow_destroy => true
 
-  has_many :names, :dependent => :destroy
-  accepts_nested_attributes_for :names, :allow_destroy => true
   has_many :profiles, :dependent => :destroy, inverse_of: :user
   accepts_nested_attributes_for :profiles, :allow_destroy => true
 
   has_many :orders, :dependent => :destroy
   accepts_nested_attributes_for :orders, :allow_destroy => true
 
-  belongs_to :time_zone, validate: true
+  #belongs_to :time_zone, validate: true
   validates :russian_time_zone_manual_id, :inclusion => { :in => Rails.configuration.russian_time_zones.keys.map(&:to_i) }, unless: Proc.new { |u| u.use_auto_russian_time_zone }
 
   # TODO позже разобраться (обнаружил как неиспользуемую ассоциацию)
