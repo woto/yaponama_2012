@@ -170,7 +170,7 @@ class ApplicationController < ActionController::Base
         @current_user = User.find_by(auth_token: cookies[:auth_token])
         unless @current_user.present?
           cookies.delete :auth_token
-          raise AuthenticationError
+          raise AuthenticationError #TODO не забыть вернуть
         end
       else
         @current_user = User.new
@@ -197,12 +197,19 @@ class ApplicationController < ActionController::Base
 private
 
   def set_user_time_zone
-    Time.zone = case current_user.use_auto_russian_time_zone
-    when true
-      current_user.russian_time_zone_auto_id
-    else
-      current_user.russian_time_zone_manual_id
+    begin
+      Time.zone = case current_user.use_auto_russian_time_zone
+      when true
+        current_user.russian_time_zone_auto_id
+      else
+        current_user.russian_time_zone_manual_id
+      end
+    rescue ArgumentError
+      Time.zone = 4
+      # TODO Вынести в конф. настройки, как часовой пояс по-умолчаню, для 
+      # клиентов, у которых неправильно выставлено время
     end
+
   end
 
   private
