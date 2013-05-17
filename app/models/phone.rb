@@ -7,9 +7,15 @@ class Phone < ActiveRecord::Base
   include Confirmed
   include NotSelf
   include BelongsToUser
-  include Transactionable
 
   belongs_to :profile, :inverse_of => :phones
+
+  attr_accessor :hide_remove_button_on_first_on_new
+
+  def hide_remove_button_on_first_on_new
+    @hide_remove_button_on_first_on_new || 'false'
+  end
+
   has_many :orders
 
   validates :phone_type, :inclusion => { :in => Rails.configuration.phone_types_keys }

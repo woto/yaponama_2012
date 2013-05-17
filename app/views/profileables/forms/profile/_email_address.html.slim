@@ -6,7 +6,7 @@
 
     .clearfix.bottom-space
 
-    .nested-visualize style="border-left: 3px dashed #5BC0DE"
+    .nested-visualize
       = f.input :email_address, :required => true
       = f.input :creation_reason, :collection => Rails.configuration.user_email_address_creation_reason.map {|k,v| [v,k]}.to_a, :disabled => true, :as => :radio_buttons
       = f.input :hidden_recreate, as: :hidden

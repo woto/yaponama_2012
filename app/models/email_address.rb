@@ -7,7 +7,6 @@ class EmailAddress < ActiveRecord::Base
   include Confirmed
   include NotSelf
   include BelongsToUser
-  include Transactionable
 
   belongs_to :profile, :inverse_of => :email_addresses
 

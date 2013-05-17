@@ -5,7 +5,6 @@ class Passport < ActiveRecord::Base
   include BelongsToProfile
   include BelongsToCreator
   include BelongsToUser
-  include Transactionable
 
   belongs_to :profile, :inverse_of => :passports
 

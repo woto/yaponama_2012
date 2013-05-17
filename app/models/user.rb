@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   #has_many :comments
   
-  [:phone, :name, :email_address, :passport, :postal_address, :car, :company, :order].each do |table_name|
+  [:postal_address, :car, :company, :order, :profile].each do |table_name|
     has_many "#{table_name}_transactions".to_sym
   end
 

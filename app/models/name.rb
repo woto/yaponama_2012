@@ -5,7 +5,6 @@ class Name < ActiveRecord::Base
   include BelongsToProfile
   include BelongsToCreator
   include BelongsToUser
-  include Transactionable
 
   has_many :orders
 

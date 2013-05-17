@@ -1,23 +1,26 @@
-
 - content_for :form_error do
   = f.error_notification :message => f.error(:base)
+  / TODO сделать нормальную описалку для менеджеров, валидация нормальная.
 
 = f.simple_fields_for :names do |name|
   = render '/profileables/forms/profile/name', :f => name
-
-= f.simple_fields_for :passports do |passport|
-  = render '/profileables/forms/profile/passport', :f => passport
 
 = f.simple_fields_for :phones do |phone|
   = render '/profileables/forms/profile/phone', :f => phone
 
 .controls.links.top-space.bottom-space
-  = link_to_add_association 'Добавить еще номер', f, :phones, :class => "btn btn-success btn-small", :partial => '/profileables/forms/profile/phone'
+  = link_to_add_association 'Добавить телефон', f, :phones, :class => "btn btn-success btn-small", :partial => '/profileables/forms/profile/phone'
 
 = f.simple_fields_for :email_addresses do |email_address|
   = render '/profileables/forms/profile/email_address', :f => email_address 
 
 .controls.links.top-space.bottom-space
-  = link_to_add_association 'Добавить еще e-mail', f, :email_addresses, :class => "btn btn-success btn-small", :partial => '/profileables/forms/profile/email_address'
+  = link_to_add_association 'Добавить e-mail', f, :email_addresses, :class => "btn btn-success btn-small", :partial => '/profileables/forms/profile/email_address'
+
+= f.simple_fields_for :passports do |passport|
+  = render '/profileables/forms/profile/passport', :f => passport
+
+.controls.links.top-space.bottom-space
+  = link_to_add_association 'Добавить паспорт', f, :passports, :class => "btn btn-success btn-small", :partial => '/profileables/forms/profile/passport'
 
 hr
