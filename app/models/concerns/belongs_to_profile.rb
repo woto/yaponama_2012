@@ -2,7 +2,7 @@ module BelongsToProfile
   extend ActiveSupport::Concern
 
   included do
-    validates :profile, :presence => true
+    validates :profile, presence: true, associated: true
     
     before_save :copy_user_id_from_profile_to_self
 
