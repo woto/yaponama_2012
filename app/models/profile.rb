@@ -3,10 +3,14 @@ class Profile < ActiveRecord::Base
   include Transactionable
 
   belongs_to :user, inverse_of: :profiles
+  validates :user, presence: true, associated: true
 
   #has_many :orders
   #has_many :order_profiles
   #has_many :orders, :through => :order_profiles
+
+  validates :names, :phones, presence: true
+  validates :passports, :names, length: { maximum: 1}
 
   FIELDS =  ['names', 'phones', 'email_addresses', 'passports']
 

@@ -3,34 +3,37 @@
 class UserTest < ActiveSupport::TestCase
   
   test 'Только что инициализированный пользователь должен содержать предопределенный набор ошибок' do
-    u = FactoryGirl.build(:user)
+    u = User.new
     u.valid?
 
-    assert u.errors.include?(:discount)
-    assert u.errors.include?(:prepayment_percent)
-    assert u.errors.include?(:order_rule)
-    assert u.errors.include?(:role)
-    assert u.errors.include?(:account)
+    assert u.errors[:discount]
+    assert u.errors[:prepayment]
+    assert u.errors[:order_rule]
+    assert u.errors[:role]
+    assert u.errors[:account]
   end
 
-
-  test 'Минимально заполненный пользователь должен быть валиден' do
-    u = FactoryGirl.build(:minimal_valid_user)
-    assert u.valid?
-  end
 
   test 'Если выставлен флаг password_required, то наличие пароля обязательно' do
-    u = FactoryGirl.build(:user)
+    u = User.new
+
     u.password_required = true
     u.valid?
-    assert u.errors.include?(:password)
+    assert u.errors[:password]
+
+    u.password_required = false
+    u.valid?
+    assert u.errors[:password].blank?
+
   end
 
 
-  test 'Ошибка в ассоциации time_zone должна вызвать ошибку в модели пользователя' do
-    u = FactoryGirl.build(:minimal_valid_user) 
-    u.time_zone = FactoryGirl.build(:minimal_valid_time_zone, time_zone: '')
-    assert !u.valid?
-  end
+  # TODO Это необходимо вынести в контроллер
+  #test 'В случае невозможности выставления TimeОшибка в ассоциации time_zone должна вызвать ошибку в модели пользователя' do
+  #  u = User.new
+  #  tz = TimeZone.new
+  #  u.time_zone = tz
+  #  assert !u.valid?
+  #end
 
 end

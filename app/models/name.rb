@@ -1,6 +1,7 @@
 #encoding: utf-8
 
 class Name < ActiveRecord::Base
+  include HiddenRecreate
   include BelongsToProfile
   include BelongsToCreator
   include BelongsToUser

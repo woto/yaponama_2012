@@ -1,6 +1,7 @@
 #encoding: utf-8
 
 class EmailAddress < ActiveRecord::Base
+  include HiddenRecreate
   include BelongsToProfile
   include BelongsToCreator
   include Confirmed
@@ -9,6 +10,7 @@ class EmailAddress < ActiveRecord::Base
   include Transactionable
 
   belongs_to :profile, :inverse_of => :email_addresses
+
   has_many :emails
   VALID_EMAIL_REGEX = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
   # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

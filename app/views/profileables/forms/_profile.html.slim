@@ -1,6 +1,6 @@
 
-/ TODO надо?
-/= f.error_notification :message => f.error(:base)
+- content_for :form_error do
+  = f.error_notification :message => f.error(:base)
 
 = f.simple_fields_for :names do |name|
   = render '/profileables/forms/profile/name', :f => name

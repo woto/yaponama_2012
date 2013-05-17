@@ -1,0 +1,4 @@
+first_email_address:
+  email_address: foo@example.com
+  profile: first_profile
+  creation_reason: 'manager'

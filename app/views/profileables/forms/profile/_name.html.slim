@@ -1,0 +1,9 @@
+.nested-fields
+  .clearfix.bottom-space
+
+  .nested-visualize style="border-left: 3px dashed #5BC0DE"
+    = f.input :name
+    = f.input :creation_reason, :collection => Rails.configuration.user_name_creation_reason.map {|k,v| [v,k]}.to_a, :disabled => true, :as => :radio_buttons
+    = f.input :hidden_recreate, as: :hidden
+
+    = render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f}
