@@ -1,6 +1,9 @@
+#encoding: utf-8
+
 class Name < ActiveRecord::Base
-  include BelongsToUser
+  include BelongsToProfile
   include BelongsToCreator
+  include BelongsToUser
   include Transactionable
 
   has_many :orders

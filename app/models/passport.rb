@@ -1,10 +1,10 @@
 # encoding: utf-8
 
 class Passport < ActiveRecord::Base
-  include BelongsToUser
-  include BelongsToCreator
-  include Transactionable
   include BelongsToProfile
+  include BelongsToCreator
+  include BelongsToUser
+  include Transactionable
 
   belongs_to :profile, :inverse_of => :passports
 

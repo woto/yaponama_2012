@@ -1,10 +1,11 @@
 #encoding: utf-8
 
 class Phone < ActiveRecord::Base
-  include BelongsToUser
+  include BelongsToProfile
   include BelongsToCreator
   include Confirmed
   include NotSelf
+  include BelongsToUser
   include Transactionable
 
   belongs_to :profile, :inverse_of => :phones
