@@ -1,0 +1,22 @@
+first_user:
+  creator_id:
+  creation_reason: 
+  discount: 0.0
+  prepayment: 20.0
+  role: user
+  auth_token: PaV6t6OZxzRIWbl0nM9NGQ
+  password_digest: $2a$10$LKN4LPiQS3RYAXOwCENv2eQGzjPvYugdMnc6Ty/k.CZZ3pGWfa9Zq
+  password_reset_email_token: 
+  password_reset_sms_token: 
+  password_reset_sent_at: 
+  ipgeobase_name: 
+  ipgeobase_names_depth_cache: 
+  accept_language: 
+  user_agent: 
+  russian_time_zone_auto_id: 
+  russian_time_zone_manual_id: 
+  use_auto_russian_time_zone: true
+  remote_ip: 
+  notes: 
+  notes_invisible: 
+  order_rule: all

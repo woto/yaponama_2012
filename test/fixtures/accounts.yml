@@ -1,0 +1,4 @@
+first_account:
+  debit: 0.0
+  credit: 0.0
+  accountable: first_user (User)
