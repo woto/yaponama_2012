@@ -1,8 +1,6 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
-      t.integer :creator_id
-      t.string :creation_reason
       t.decimal :discount, :precision => 8, :scale => 2
       t.decimal :prepayment, :precision => 8, :scale => 2
       t.string :role
@@ -25,8 +23,14 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :use_auto_russian_time_zone, :default => true
       t.inet :remote_ip
 
-      t.text :notes
-      t.text :notes_invisible
+      t.string :creation_reason
+      t.string :notes
+      t.string :notes_invisible
+      t.references :creator, index: true
+
+      t.text :cached_profile # TODO пока text, позже переделать в string
+
+      t.boolean :phantom # TODO Позже задействовать
 
       t.timestamps
     end
