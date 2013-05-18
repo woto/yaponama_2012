@@ -31,22 +31,19 @@ class ApplicationController < ActionController::Base
   end
 
   def ipgeobase
-
     # GEO
     remote_ip = request.remote_ip
 
     if current_user.remote_ip != remote_ip
       res = Ipgeobase::find_region_by_ip(remote_ip)
-      if res
-        current_user.ipgeobase_name = res.name
-        current_user.ipgeobase_names_depth_cache = res.names_depth_cache
-      end
+      current_user.remote_ip = remote_ip
+      current_user.ipgeobase_name = res && res.name || ''
+      current_user.ipgeobase_names_depth_cache = res && res.names_depth_cache || ''
     end
 
-    current_user.remote_ip                 = remote_ip
     current_user.user_agent                = request.user_agent.to_s
     current_user.accept_language           = request.accept_language.to_s
-
+    current_user.save
   end
 
   def item_status(catalog_number, manufacturer)
@@ -197,19 +194,12 @@ class ApplicationController < ActionController::Base
 private
 
   def set_user_time_zone
-    begin
-      Time.zone = case current_user.use_auto_russian_time_zone
-      when true
-        current_user.russian_time_zone_auto_id
-      else
-        current_user.russian_time_zone_manual_id
-      end
-    rescue ArgumentError
-      Time.zone = 4
-      # TODO Вынести в конф. настройки, как часовой пояс по-умолчаню, для 
-      # клиентов, у которых неправильно выставлено время
+    Time.zone = case current_user.use_auto_russian_time_zone
+    when true
+      current_user.russian_time_zone_auto_id
+    else
+      current_user.russian_time_zone_manual_id
     end
-
   end
 
   private
