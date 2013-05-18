@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Admin::DiscountsController < ApplicationController
   include Admined
 
@@ -7,7 +9,7 @@ class Admin::DiscountsController < ApplicationController
   def update
     respond_to do |format|
       if @user.update_attributes(user_params)
-        format.html { redirect_to edit_admin_user_path(@user, :tab => params[:tab]), :notice => 'Discount was successfully updated.' }
+        format.html { redirect_to edit_admin_user_path(@user, :tab => params[:tab]), :notice => 'Скидка была успешно изменена.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
