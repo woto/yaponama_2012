@@ -5,16 +5,5 @@ class RoutingConcernsTest < ActionDispatch::IntegrationTest
     get '/'
     assert_equal '200', @response.code
   end
-
- test 'register' do
-   get '/register'
-   assert_equal '200', @response.code
- end
-
- test 'login' do
-   get '/login'
-   assert_equal '200', @response.code
- end
-
 end
 

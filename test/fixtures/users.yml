@@ -5,7 +5,7 @@ first_user:
   prepayment: 20.0
   role: user
   auth_token: PaV6t6OZxzRIWbl0nM9NGQ
-  password_digest: $2a$10$LKN4LPiQS3RYAXOwCENv2eQGzjPvYugdMnc6Ty/k.CZZ3pGWfa9Zq
+  password_digest: $2a$04$rHSdT0UwnhP1CASNXzcYL.51uIkeSYdV.fw8wgAbMOlIYhxn9krha
   password_reset_email_token: 
   password_reset_sms_token: 
   password_reset_sent_at: 
