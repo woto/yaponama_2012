@@ -3,6 +3,10 @@
 require 'test_helper'
 
 class ProfileablesControllerTest < ActionController::TestCase
+  #setup do
+  #  @profile = profiles(:first_profile)
+  #end
+
 
   PROFILE_ATTRIBUTES = {
     'profile' => {
@@ -49,6 +53,17 @@ class ProfileablesControllerTest < ActionController::TestCase
     assert_select '#profile_email_addresses_attributes_0_email_address', false
   end
 
+  test 'Если покупатель добавляет новый профиль, то кнопка удаления телефона должна отсутствовать' do
+    get 'new', { user_id: 1, resource_class: 'Profile' }
+    assert_select '#profile_phones_attributes_0__destroy', false
+  end
+
+  test 'А вот при редактировании удалить первый номер телефона уже можно (т.е. например был добавлено два, а первый больше не рабочий. Иначе пришлось бы копировать второй телефон, его удалять и вставлять в первый)' do
+    @profile = profiles(:first_profile)
+    get 'edit', { user_id: @profile.user.id, resource_class: 'Profile', id: @profile.id }
+    assert_select '#profile_phones_attributes_0__destroy'
+  end
+
   test 'Если покупатель создает новый профиль, то creation_reason полей должен быть profile' do
     post 'create', { user_id: 1, resource_class: 'Profile'}.merge(PROFILE_ATTRIBUTES)
 
@@ -57,7 +72,7 @@ class ProfileablesControllerTest < ActionController::TestCase
     assert assigns(:resource).names.first.creation_reason == 'profile'
     assert assigns(:resource).email_addresses.first.creation_reason == 'profile'
     assert assigns(:resource).passports.first.creation_reason == 'profile'
- 
+
   end
 
 end
