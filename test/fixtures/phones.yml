@@ -1,5 +1,5 @@
 first_phone:
   phone: 1112223344
-  phone_type: 'unknown'
+  phone_type: unknown
   profile: first_profile
-  creation_reason: 'manager'
+  creation_reason: profile
