@@ -16,10 +16,5 @@ class RoutingConcernsTest < ActionDispatch::IntegrationTest
    assert_equal '200', @response.code
  end
 
- test 'admin-login' do
-   get '/admin/login'
-   assert_equal '200', @response.code
- end
-
 end
 
