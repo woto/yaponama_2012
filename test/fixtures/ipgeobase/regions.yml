@@ -1,0 +1,19 @@
+country:
+  id: 1
+  name: Россия
+okrug:
+  id: 339
+  name: Сибирский федеральный округ
+  ancestry: 1
+  names_depth_cache: Россия/Сибирский федеральный округ
+kray:
+  id: 534
+  name: Красноярский край
+  ancestry: 1/339
+  names_depth_cache: Россия/Сибирский федеральный округ/Красноярский край
+city:
+  id: 820
+  name: Норильск
+  ancestry: 1/339/534
+  names_depth_cache: Россия/Сибирский федеральный округ/Красноярский край
+  region_id: 2050

@@ -4,9 +4,11 @@
   = text_field_tag :password, nil, :class => "input-block-level", :type => "password", :placeholder => "Пароль"
   label.checkbox
     = check_box_tag :remember_me, 1, params[:remember_me]
-    |  Запомнить до 4 утра след. дня
+    |  Запомнить меня на этом компьютере
   button.btn.btn-primary type="submit" Войти
   |  или 
   = link_to "забыли пароль?", new_password_reset_path
 
   = render 'shared/auth_log_in'
+
+  / TODO Добавить в способ входа идентификационный номер покупателя

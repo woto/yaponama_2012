@@ -30,11 +30,8 @@ end
 group :development, :test do
 
   gem 'debugger'
-  #gem 'capistrano'
-end
-
-group :test do
-  #gem 'capybara'
+  gem 'capistrano'
+  gem 'capybara'
 end
 
 gem 'jquery-rails', github: 'rails/jquery-rails'
