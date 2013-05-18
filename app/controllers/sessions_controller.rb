@@ -15,16 +15,16 @@ class SessionsController < ApplicationController
     authenticated_user = nil
 
     email_addresses.each do |email_address|
-      break if authenticated_user = email_address.user.authenticate(params[:password])
+      break if authenticated_user = email_address.profile.user.authenticate(params[:password])
     end
 
     phones.each do |phone|
-      break if authenticated_user = phone.user.authenticate(params[:password])
+      break if authenticated_user = phone.profile.user.authenticate(params[:password])
     end
 
     if authenticated_user
       if params[:remember_me]
-        cookies.permanent[:auth_token] = { :value => authenticated_user.auth_token, :expires => 1.hour.from_now }
+        cookies.permanent[:auth_token] = { :value => authenticated_user.auth_token}
       else
         cookies[:auth_token] = { :expire => nil, :value => authenticated_user.auth_token } 
       end
