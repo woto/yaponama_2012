@@ -91,10 +91,9 @@ module Yaponama2012
       'register' => 'Регистрация',
       'call' => 'Звонок',
       'addressee' => 'В процессе оформления заказа (Контактный телефон)',
-      'self' => 'Заполнено самостоятельно',
-      'manager' => 'Заполнено менеджером',
       'callback' => 'Заказал обратный вызов',
-      'order' => 'В процессе оформления заказа'
+      'order' => 'В процессе оформления заказа',
+      'profile' => 'Заполнение профиля'
     }
 
     # Names
@@ -104,7 +103,6 @@ module Yaponama2012
       'email' => 'Автоматически заполнено из e-mail',
       'addressee' => 'В процессе оформления заказа (получатель)',
       'self' => 'Представился на сайте',
-      'manager' => 'Заполнено менеджером',
       'google_oauth2' => 'Google',
       'facebook' => 'Facebook',
       'twitter' => 'Twitter',
@@ -112,27 +110,31 @@ module Yaponama2012
       'vkontakte' => 'Вконтакте',
       'odnoklassniki' => 'Одноклассники',
       'mailru' => 'Mail.ru',
-      'order' => 'В процессе оформления заказа'
+      'order' => 'В процессе оформления заказа',
+      'profile' => 'Заполнение профиля'
     }
 
     # EmailAddresses
     config.user_email_address_creation_reason = {
       'register' => 'Регистрация',
       'email' => 'Получено письмо с этого адреса',
-      'manager' => 'Добавлено менеджером',
-      'order' => 'В процессе оформления заказа'
+      'order' => 'В процессе оформления заказа',
+      'profile' => 'Заполнение профиля'
     }
 
     config.user_postal_address_creation_reason = {
-      'order' => 'В процессе оформления заказа'
+      'order' => 'В процессе оформления заказа',
+      'profile' => 'Заполнение профиля'
     }
 
     config.user_car_creation_reason = {
-      'order' => 'В процессе оформления заказа'
+      'order' => 'В процессе оформления заказа',
+      'profile' => 'Заполнение профиля'
     }
 
     config.user_company_creation_reason = {
-      'order' => 'В процессе оформления заказа'
+      'order' => 'В процессе оформления заказа',
+      'profile' => 'Заполнение профиля'
     }
 
 
@@ -141,11 +143,13 @@ module Yaponama2012
     }
 
     config.user_profile_creation_reason = {
-      'order' => 'В процессе оформления заказа'
+      'order' => 'В процессе оформления заказа',
+      'profile' => 'Заполнение профиля'
     }
 
     config.user_passport_creation_reason = {
-      'order' => 'В процессе оформления заказа'
+      'order' => 'В процессе оформления заказа',
+      'profile' => 'Заполнение профиля'
     }
 
     # Orders
