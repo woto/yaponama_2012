@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/amatsuda/traceroute.git
-  revision: 156f1482cd2db3eb4b43c614e02434328314cae3
-  specs:
-    traceroute (0.3.0)
-      rails (>= 3.0.0)
-
-GIT
   remote: git://github.com/rails/activerecord-deprecated_finders.git
   revision: 5ed930cfb6bbfa71284d3e81b3bde8dbf78d8093
   specs:
@@ -93,19 +86,6 @@ GIT
       sprockets (~> 2.8)
 
 GIT
-  remote: git://github.com/railsbp/rails_best_practices.git
-  revision: c6c4bc30daf157d199cf78bbf817acf512acc1bb
-  specs:
-    rails_best_practices (1.13.4)
-      activesupport
-      awesome_print
-      code_analyzer
-      colored
-      erubis
-      i18n
-      ruby-progressbar
-
-GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: 1f3d04093b77b2c0609515b74b121a32cf0b3ba4
   specs:
@@ -158,7 +138,6 @@ GEM
     ancestry (1.3.0)
       activerecord (>= 2.3.14)
     atomic (1.1.8)
-    awesome_print (1.1.0)
     bcrypt-ruby (3.0.1)
     builder (3.1.4)
     cancan (1.6.9)
@@ -167,13 +146,10 @@ GEM
       activesupport (>= 3.2.0)
     charlock_holmes (0.6.9.4)
     chronic (0.9.1)
-    code_analyzer (0.3.1)
-      sexp_processor
     coffee-script (2.2.0)
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
-    colored (1.2)
     columnize (0.3.6)
     commonjs (0.2.6)
     debugger (1.5.0)
@@ -185,11 +161,6 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    factory_girl (4.2.0)
-      activesupport (>= 3.0.0)
-    factory_girl_rails (4.2.1)
-      factory_girl (~> 4.2.0)
-      railties (>= 3.0.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
     fastercsv (1.5.5)
@@ -280,13 +251,11 @@ GEM
     riddle (1.5.5)
     ruby-growl (4.0)
       uuid (~> 2.3, >= 2.3.5)
-    ruby-progressbar (1.0.2)
     russian (0.6.0)
       i18n (>= 0.5.0)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
     sass (3.2.8)
-    sexp_processor (4.2.1)
     sitemap_generator (3.4)
       builder
     slim (1.3.8)
@@ -353,7 +322,6 @@ DEPENDENCIES
   cocoon!
   coffee-rails!
   debugger
-  factory_girl_rails
   fastercsv
   hiredis (~> 0.4.5)
   ipgeobase!
@@ -374,7 +342,6 @@ DEPENDENCIES
   omniauth-yandex
   pg
   rails!
-  rails_best_practices!
   redis (~> 3.0.1)
   ruby-growl
   russian
@@ -386,7 +353,6 @@ DEPENDENCIES
   sprockets-rails!
   therubyracer
   thinking-sphinx (= 3.0.0)
-  traceroute!
   turbolinks
   twitter-bootstrap-rails!
   uglifier (>= 1.0.3)
