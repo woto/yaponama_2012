@@ -176,7 +176,7 @@ GEM
     faraday (0.8.7)
       multipart-post (~> 1.1)
     fastercsv (1.5.5)
-    hashie (2.0.4)
+    hashie (2.0.5)
     highline (1.6.19)
     hike (1.2.2)
     hiredis (0.4.5)
@@ -211,7 +211,7 @@ GEM
     minitest (4.7.3)
     money (5.1.1)
       i18n (~> 0.6.0)
-    multi_json (1.7.2)
+    multi_json (1.7.3)
     multipart-post (1.2.0)
     mysql2 (0.3.12b4)
     net-scp (1.1.1)
@@ -261,6 +261,8 @@ GEM
       omniauth-oauth2 (~> 1.0)
     pg (0.15.1)
     polyglot (0.3.3)
+    puma (2.0.1)
+      rack (>= 1.1, < 2.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -365,6 +367,7 @@ DEPENDENCIES
   omniauth-vkontakte
   omniauth-yandex
   pg
+  puma
   rails!
   redis (~> 3.0.1)
   ruby-growl

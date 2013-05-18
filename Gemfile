@@ -22,6 +22,8 @@ group :assets do
 
 end
 
+gem 'puma'
+
 group :production do
   # Use unicorn as the app server
   gem 'unicorn'
