@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :root_products, -> { where("product_id IS NULL") }, :class_name => "Product", :dependent => :destroy
   accepts_nested_attributes_for :root_products, :allow_destroy => true
 
-  has_many :auths
+  has_many :auths, :inverse_of => :user
 
   has_many :uploads
 
@@ -89,6 +89,17 @@ class User < ActiveRecord::Base
 
   #belongs_to :time_zone, validate: true
   validates :russian_time_zone_manual_id, :inclusion => { :in => Rails.configuration.russian_time_zones.keys.map(&:to_i) }, unless: Proc.new { |u| u.use_auto_russian_time_zone }
+
+  validate :write_default_russian_time_zone_auto_id_if_wrong
+
+  def write_default_russian_time_zone_auto_id_if_wrong
+    unless Rails.configuration.russian_time_zones.keys.map(&:to_i).include? russian_time_zone_auto_id
+      self.russian_time_zone_auto_id = 4
+      # TODO вынести дефолтное значение в конфиг
+    end
+  end
+
+
 
   # TODO позже разобраться (обнаружил как неиспользуемую ассоциацию)
   #has_many :documents, :as => :documentable, :class_name => "Transaction"
