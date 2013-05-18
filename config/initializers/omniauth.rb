@@ -14,3 +14,14 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :mailru, SiteConfig.mailru_key, SiteConfig.mailru_secret
 end
 
+if Rails.env.test?
+  OmniAuth.config.test_mode = true
+
+  # Потом подставить тестируемые данные
+  #OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+  #  :provider => 'google_oauth2',
+  #  :uid => '123545'
+  #  # etc.
+  #})
+
+end
