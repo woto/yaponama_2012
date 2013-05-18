@@ -1,8 +1,0 @@
-p
-  a href="#" data-toggle="tooltip" title="#{@user.stats.last.try(:title)}"= truncate(@user.stats.last.try(:title), :length => 40)
-'
-p
-  a href="#" data-toggle="tooltip" title="#{@user.stats.last.try(:location)}"= truncate(@user.stats.last.try(:location), :length => 40)
-'
-p
-  a href="#" data-toggle="tooltip" title="#{@user.stats.last.try(:referrer)}"= truncate(@user.stats.last.try(:referrer), :length => 40)
