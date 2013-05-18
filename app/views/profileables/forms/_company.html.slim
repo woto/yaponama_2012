@@ -1,4 +1,3 @@
-h4.bottom-space Реквизиты компании
 = f.input :ownership, :collection => Rails.configuration.company_ownerships.map {|k,v| [v,k]}.to_a, :as => :radio_buttons
 = f.input :name
 = f.input :inn
@@ -19,7 +18,8 @@ h4.bottom-space Реквизиты компании
 
 - array.each do |item|
 
-  h4.bottom-space= item[:label]
+  .controls
+    h4.bottom-space= item[:label]
 
   - type = eval("f.object." + item[:assoc] + "_type")
 
@@ -29,8 +29,8 @@ h4.bottom-space Реквизиты компании
 
     / ИМЕЮЩИЙСЯ
     .old
-      .controls
-        p.top-space
+      .controls.top-space.bottom-space
+        strong
           | Выберите адрес из списка 
           span.dashed class="rotate-type" или добавьте новый
       .control-group class="#{f.object.errors[item[:assoc].to_sym].present? ? 'error' : ''}"
@@ -45,8 +45,8 @@ h4.bottom-space Реквизиты компании
 
     / НОВЫЙ
     .new
-      .controls
-        p.top-space
+      .controls.top-space.bottom-space
+        strong
           | Добавьте адрес 
           span.dashed class="rotate-type" или выберите из списка
       = f.simple_fields_for item[:assoc].to_sym, eval("f.object.#{item[:assoc]}_type") == 'new' ? eval("f.object.#{item[:assoc]}") : eval("f.object.build_#{item[:assoc]}") do |la|

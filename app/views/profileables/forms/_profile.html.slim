@@ -17,6 +17,7 @@
 .controls.links.top-space.bottom-space
   = link_to_add_association 'Добавить e-mail', f, :email_addresses, :class => "btn btn-success btn-small", :partial => '/profileables/forms/profile/email_address'
 
+/TODO паспорт может быть только один!
 = f.simple_fields_for :passports do |passport|
   = render '/profileables/forms/profile/passport', :f => passport
 

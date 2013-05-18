@@ -1,4 +1,10 @@
+- model_class = @resource_class
+
 = user_tabs do
+
+  div class="page-header"
+    h2=t '.title', :default => [:'helpers.titles.new', 'Список %{model}'], :model => model_class.model_name.human
+
   = form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [@resource_class.name.pluralize.underscore.to_sym]}, :primary_key => params[:primary_key], :user_id => params[:user_id]), :remote => true do |f|
 
     div style="border: 1px solid #ddd"
