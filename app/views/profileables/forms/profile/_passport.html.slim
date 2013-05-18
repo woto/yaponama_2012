@@ -32,4 +32,7 @@
 
     = f.input :data_rozhdeniya, input_html: { class: 'datetime' }
     = f.input :mesto_rozhdeniya
+    = f.input :creation_reason, :collection => Rails.configuration.user_passport_creation_reason.map {|k,v| [v,k]}.to_a, :disabled => true, :as => :radio_buttons
     = f.input :hidden_recreate, as: :hidden
+
+    = render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f}
