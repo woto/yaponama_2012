@@ -45,7 +45,7 @@ class ProfileablesControllerTest < ActionController::TestCase
     }
   }
 
-  test 'Если покупатель хочет добавить новый профиль пользователю, то на странице нового профиля должны быть сразу добавлены для ввода имя и телефон.' do
+  test 'Если покупатель хочет добавить новый профиль, то на странице нового профиля должны быть сразу добавлены для ввода имя и телефон.' do
     get 'new', { user_id: 1, resource_class: 'Profile' }
     assert_select '#profile_names_attributes_0_name'
     assert_select '#profile_phones_attributes_0_phone'
@@ -72,7 +72,6 @@ class ProfileablesControllerTest < ActionController::TestCase
     assert assigns(:resource).names.first.creation_reason == 'profile'
     assert assigns(:resource).email_addresses.first.creation_reason == 'profile'
     assert assigns(:resource).passports.first.creation_reason == 'profile'
-
   end
 
 end
