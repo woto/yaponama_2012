@@ -1,7 +1,3 @@
-- content_for :form_error do
-  = f.error_notification :message => f.error(:base)
-  / TODO сделать нормальную описалку для менеджеров, валидация нормальная.
-
 = f.simple_fields_for :names do |name|
   = render '/profileables/forms/profile/name', :f => name
 

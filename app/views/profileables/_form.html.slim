@@ -1,4 +1,9 @@
 = simple_form_for @resource, :url => smart_route({:postfix => [@resource]}, :id => @resource.id, :user_id => params[:user_id]), :html => { :class => "form-horizontal dirtyforms" } do |f|
+
+  - content_for :form_error do
+   = f.error_notification :message => f.error(:base)
+   / TODO сделать нормальную описалку для менеджеров, валидация нормальная.
+
   / TODO Пока оставил для отладки
     div.well
       - @resource.class.column_names.each do |column_name|
