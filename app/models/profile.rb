@@ -1,6 +1,5 @@
 class Profile < ActiveRecord::Base
   include BelongsToCreator
-  include Transactionable
 
   belongs_to :user, inverse_of: :profiles
   validates :user, presence: true, associated: true
@@ -16,7 +15,7 @@ class Profile < ActiveRecord::Base
 
   FIELDS.each do |field|
     instance_eval <<-CODE, __FILE__, __LINE__ + 1
-      has_many :#{field}, :inverse_of => :profile
+      has_many :#{field}, :inverse_of => :profile, :dependent => :destroy
       accepts_nested_attributes_for :#{field},
         :allow_destroy => true,
         :reject_if => :all_blank
@@ -49,5 +48,9 @@ class Profile < ActiveRecord::Base
     end
 
   end
+  # Транзакции необходимо подключать в конце, т.к. очередность callback'ов важна.
+  # В частности сначала мы должны сгенерировать cached_names, ..., а потом записывать
+  # транзакцию, а не наоборот
+  include Transactionable
 
 end
