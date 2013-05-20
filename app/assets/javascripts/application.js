@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require jquery-ui
 //= require fake_console
 //
@@ -20,7 +21,6 @@
 //= require stat
 //
 //= require turbolinks
-//= require bootstrap/bootstrap
 //
 //= require jquery-cookie/jquery.cookie
 //
