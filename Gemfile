@@ -22,18 +22,17 @@ group :assets do
 
 end
 
-gem 'puma'
-
 group :production do
   # Use unicorn as the app server
   gem 'unicorn'
 end
 
 group :development, :test do
-
   gem 'debugger'
   gem 'capistrano'
   gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'rspec-rails'
 end
 
 gem 'jquery-rails', github: 'rails/jquery-rails'
