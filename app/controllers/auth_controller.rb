@@ -19,7 +19,8 @@ class AuthController < ApplicationController
       record.save!
     end
 
-    render :text => "<pre> #{@auth.to_yaml} </pre>"
+    render :layout => false
+    
   end
 
   def failure
