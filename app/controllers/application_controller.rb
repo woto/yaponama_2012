@@ -101,9 +101,10 @@ class ApplicationController < ActionController::Base
     rescue_from Exception, :with => :render_500
     rescue_from ActionController::RoutingError, :with => :render_404
     rescue_from ActionController::UnknownController, :with => :render_404
-    rescue_from AuthenticationError, with: -> { redirect_to root_path }
     rescue_from ActiveRecord::RecordNotFound, :with => :render_404
   end
+
+  rescue_from AuthenticationError, with: -> { redirect_to root_path }
   
   # TODO потом детальнее посмотреть где и как используются @show_sidebar и @exception
   def render_404(exception)
@@ -167,7 +168,7 @@ class ApplicationController < ActionController::Base
         @current_user = User.find_by(auth_token: cookies[:auth_token])
         unless @current_user.present?
           cookies.delete :auth_token
-          raise AuthenticationError #TODO не забыть вернуть
+          raise AuthenticationError
         end
       else
         @current_user = User.new
