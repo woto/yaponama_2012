@@ -5,11 +5,12 @@ class PhoneTest < ActiveSupport::TestCase
 
   test 'Если сменили номер подтвержденного телефона, то его статус должен стать не подтвержденный' do
 
-    p = phones(:first_phone)
+    p = phones(:first_admin_phone)
     assert !p.confirmed?
 
     p.assign_attributes(phone: '123')
     p.save!
+    p.confirmed_by_user = true
     p.confirmed_by_manager = true
     assert p.confirmed?
 
@@ -19,27 +20,33 @@ class PhoneTest < ActiveSupport::TestCase
     assert !p.confirmed?
   end
 
-
-  test 'Если сменился просто формат записи и телефон подтвержден, то он не должен стать не подтвержденным' do
-    p = phones(:first_phone)
-    p.assign_attributes(phone: '(111) 222-33-44', confirmed_by_manager: true)
+  test 'Если сменился просто формат записи и телефон подтвержден, то он должен остаться подтвержденным' do
+    p = phones(:first_admin_phone)
+    p.phone = '(111) 222-33-44'
     p.save!
-    assert p.confirmed?
+    p.confirmed_by_manager = true
+    p.confirmed_by_user = true
+    p.save!
+    assert p.confirmed_by_manager
+    assert p.confirmed_by_user
 
     p.phone = '111 222 33 44'
     p.save!
-    assert p.confirmed?
+    assert p.confirmed_by_manager
+    assert p.confirmed_by_user
   end
 
   test 'При проверке на возможность существования нескольких подтвержденных одинаковых телефонных номеров; телефон считается таким же если совпадают только цифры номера (прочие символы откидываются)' do
-    p1 = phones(:first_phone)
+    p1 = phones(:first_admin_phone)
 
-    p1.assign_attributes(phone: '1112223344', phone_type: 'mobile_russia', confirmed_by_manager: true)
+    p1.phone = '1112223344'
+    p1.save!
+    p1.assign_attributes(phone_type: 'mobile_russia', confirmed_by_manager: true)
     p1.save!
     assert p1.errors[:phone].blank?
 
     p2 = p1.dup
-    p1.assign_attributes(phone: '(111) 222-33-44', phone_type: 'unknown', confirmed_by_manager: true)
+    p2.assign_attributes(phone: '(111) 222-33-44', phone_type: 'unknown')
     p2.valid?
     assert p2.errors[:phone].present?
   end
@@ -56,7 +63,7 @@ class PhoneTest < ActiveSupport::TestCase
   end
 
   test 'Нельзя использовать номер телефона, если существует такой же подтвержденный' do
-    p1 = phones(:first_phone)
+    p1 = phones(:first_admin_phone)
     p1.confirmed_by_manager = true
     p1.save
     assert p1.confirmed?
@@ -67,7 +74,7 @@ class PhoneTest < ActiveSupport::TestCase
   end
 
   test 'Если имеются несколько одинаковых номеров телефонов, то после подтверждения остальные должны быть удалены' do
-    p1 = phones(:first_phone)
+    p1 = phones(:first_admin_phone)
     assert p1.valid?
 
     p2 = p1.dup
