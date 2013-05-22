@@ -58,4 +58,30 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
 
   end
 
+  test "Тестируем правильно отображение постраничной навигации если кол-во элементов превышает одну страницу" do
+    # Логинимся
+    auth('1231231231', '1231231231')
+
+    # Получаем список товаров в корзине
+    visit '/user/products/status/incart'
+
+    # Убеждаемся, что есть три товара
+    page.assert_selector("tr", count: 3)
+
+    # Щелкаем на ссылке для ввода нового кол-ва товаров на странице
+    find('.dashed').click
+
+    # Дожидаемся появления окна для ввода нового кол-ва
+    assert page.has_css?('.in')
+
+    # Укаываем - 1 на страницу
+    find('input#grid_per_page').set('1')
+
+    # Отправляем на сервер
+    find('[name=per_page]').click
+
+    # Убеждаемся, что на странице остался 1 товар
+    page.assert_selector("tr", count: 2)
+
+  end
 end

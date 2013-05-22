@@ -21,6 +21,7 @@ class ActionDispatch::IntegrationTest
   def auth(login, password)
 
     visit '/login'
+    assert page.has_css?('#login')
     fill_in 'login', with: login
     fill_in 'password', with: password
     find('#submit').click
