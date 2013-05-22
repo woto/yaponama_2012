@@ -103,6 +103,10 @@ module ProductsConcern
 
       columns_hash = {}
 
+      columns_hash['checkbox'] = {
+        :type => :checkbox,
+      }
+
       columns_hash['id'] = {
         :type => :single_integer
       }
@@ -242,6 +246,7 @@ module ProductsConcern
 
     def set_preferable_columns
 
+      @grid.checkbox_visible = '1'
       @grid.id_visible = '1'
       @grid.short_name_visible = '1'
       @grid.sell_cost_visible = '1'

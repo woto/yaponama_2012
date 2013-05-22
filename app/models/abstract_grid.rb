@@ -28,6 +28,9 @@ class AbstractGrid
           when  :boolean
             attr_accessor "#{column_name}_boolean"
 
+          when  :checkbox
+            attr_accessor "#{column_name}_checkbox"
+
           when :set
             attr_accessor "#{column_name}_set"
 

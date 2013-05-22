@@ -19,16 +19,29 @@
     .control-group
       label.control-label Да или Нет?
       .controls = check_box_tag "grid[#{column_name}_boolean]".to_sym, '1', eval("@grid.#{column_name}_boolean")
+  - when :checkbox
+    .control-group
+      label.control-label Да, нет или все?
+      .controls
+        label.radio
+          = radio_button_tag "grid[#{column_name}_checkbox]".to_sym, '1', '1' == eval("@grid.#{column_name}_checkbox")
+          'Да
+        label.radio
+          = radio_button_tag "grid[#{column_name}_checkbox]".to_sym, '0', '0' == eval("@grid.#{column_name}_checkbox")
+          'Нет
+        label.radio
+          = radio_button_tag "grid[#{column_name}_checkbox]".to_sym, '', '' == eval("@grid.#{column_name}_checkbox")
+          'Все
   - when :set
     .control-group
       label.control-label Выберите
-      .controls 
+      .controls
         = select_tag "grid[#{column_name}_set]".to_sym, options_for_select(grid::COLUMNS[column_name][:set], eval("@grid.#{column_name}_set")), :multiple => true
         span.help-block Зажмите Ctrl чтобы выбрать несколько одновременно
   - when :belongs_to
     .control-group
       label.control-label Выберите
-      .controls 
+      .controls
         = select_tag "grid[#{column_name}_belongs_to]".to_sym, options_for_select(grid::COLUMNS[column_name][:belongs_to].all.map{|i| [i.to_label, i.id]}, eval("@grid.#{column_name}_belongs_to")), { :multiple => true }
         span.help-block Зажмите Ctrl чтобы выбрать несколько одновременно
   - when :date

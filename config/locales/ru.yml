@@ -93,6 +93,7 @@ ru:
   notes_invisible: Служ. заметки
   user_id: Покупатель
   creator_id: Кто изм. или созд.
+  checkbox: ''
   id: ID
   token: ID 
   confirmed_by_user: Подтв. покупателем

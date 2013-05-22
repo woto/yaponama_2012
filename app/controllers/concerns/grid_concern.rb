@@ -142,6 +142,19 @@ module GridConcern
               mark_as_filter_enabled(column_name)
             end
 
+          when :checkbox
+
+            checkbox = eval("@grid.#{column_name}_checkbox")
+            if checkbox.present?
+              case checkbox
+              when '1'
+                @items = @items.where('id IN (?)', @grid.item_ids && @grid.item_ids.select{ |k, v| v == '1' }.keys )
+              when '0'
+                @items = @items.where('id NOT IN (?)', @grid.item_ids && @grid.item_ids.select{ |k, v| v == '1' }.keys )
+              end
+              mark_as_filter_enabled(column_name)
+            end
+
           when :set
             set = eval("@grid.#{column_name}_set")
             if set.respond_to?(:reject) && set.map(&:to_s).reject(&:empty?).present?
