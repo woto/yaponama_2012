@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class GridChecboxTest < ActionDispatch::IntegrationTest
-  test "Попытка написать тест для чекбоксов, используемых в Grid" do
+  test "Если мы чекбоксим товар и вкючаем фильтр отображения только выделенных элементов, то должен остаться только выделенный элемент" do
 
     # Логинимся
     auth('1231231231', '1231231231')
@@ -31,5 +31,31 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
     # Убеждаемся, что в результате остался один товар
     page.assert_selector("tr", count: 2)
 
+    Capybara.reset_session!
+
   end
+
+  test "Если мы выделяем элемент, то после обновления страницы браузера элемент должен остаться выделенным" do
+    # Логинимся
+    auth('1231231231', '1231231231')
+
+    visit '/user/products/status/incart'
+
+    # Убеждаемся, что есть три товара
+    page.assert_selector("tr", count: 3)
+
+    # Выбираем первый
+    first('input[type="checkbox"]').click
+    assert page.has_css?('input[type="checkbox"][checked]')
+
+    # Обновляем страницу браузера
+    visit(page.driver.browser.current_url)
+
+    # Убеждаемся, что товар по-прежнему выделен
+    assert page.has_css?('input[type="checkbox"][checked]')
+
+    Capybara.reset_session!
+
+  end
+
 end

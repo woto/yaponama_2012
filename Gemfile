@@ -32,6 +32,7 @@ group :development, :test do
   gem 'capistrano'
   gem 'capybara'
   gem 'selenium-webdriver'
+  #gem 'poltergeist'
 end
 
 gem 'jquery-rails', github: 'rails/jquery-rails'

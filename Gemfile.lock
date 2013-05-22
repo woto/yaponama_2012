@@ -1,18 +1,18 @@
 GIT
   remote: git://github.com/rails/activerecord-deprecated_finders.git
-  revision: 5ed930cfb6bbfa71284d3e81b3bde8dbf78d8093
+  revision: a92945732a9df76354dab93b9f9b395d71bd2f7c
   specs:
-    activerecord-deprecated_finders (1.0.1)
+    activerecord-deprecated_finders (1.0.2)
 
 GIT
   remote: git://github.com/rails/arel.git
-  revision: 3ef63ac5366000b232ca5fe0848de9db9a3c1f9a
+  revision: a1b72178714fbf0033fe076b7e51f57eff152bdd
   specs:
     arel (4.0.0.20130418133826)
 
 GIT
   remote: git://github.com/rails/coffee-rails.git
-  revision: 78d4d7ac5baf4e76a6717f303f51b505c40b9770
+  revision: cbc4a6f571e87f68d272b9a377db3fb3307464ab
   specs:
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -28,48 +28,48 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 051d289030a6cb86590cd1b619eae1879b48458a
+  revision: 30d28b19584783218e842ce2fd7bfe2bc1dccf66
   specs:
-    actionmailer (4.0.0.beta1)
-      actionpack (= 4.0.0.beta1)
-      mail (~> 2.5.3)
-    actionpack (4.0.0.beta1)
-      activesupport (= 4.0.0.beta1)
+    actionmailer (4.1.0.beta)
+      actionpack (= 4.1.0.beta)
+      mail (~> 2.5.4)
+    actionpack (4.1.0.beta)
+      activesupport (= 4.1.0.beta)
       builder (~> 3.1.0)
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    activemodel (4.0.0.beta1)
-      activesupport (= 4.0.0.beta1)
+    activemodel (4.1.0.beta)
+      activesupport (= 4.1.0.beta)
       builder (~> 3.1.0)
-    activerecord (4.0.0.beta1)
-      activemodel (= 4.0.0.beta1)
-      activerecord-deprecated_finders (~> 1.0.1)
-      activesupport (= 4.0.0.beta1)
+    activerecord (4.1.0.beta)
+      activemodel (= 4.1.0.beta)
+      activerecord-deprecated_finders (~> 1.0.2)
+      activesupport (= 4.1.0.beta)
       arel (~> 4.0.0)
-    activesupport (4.0.0.beta1)
+    activesupport (4.1.0.beta)
       i18n (~> 0.6, >= 0.6.4)
-      minitest (~> 4.2)
-      multi_json (~> 1.3)
+      json (~> 1.7)
+      minitest (~> 5.0)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
-    rails (4.0.0.beta1)
-      actionmailer (= 4.0.0.beta1)
-      actionpack (= 4.0.0.beta1)
-      activerecord (= 4.0.0.beta1)
-      activesupport (= 4.0.0.beta1)
+    rails (4.1.0.beta)
+      actionmailer (= 4.1.0.beta)
+      actionpack (= 4.1.0.beta)
+      activerecord (= 4.1.0.beta)
+      activesupport (= 4.1.0.beta)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.0.0.beta1)
+      railties (= 4.1.0.beta)
       sprockets-rails (~> 2.0.0.rc4)
-    railties (4.0.0.beta1)
-      actionpack (= 4.0.0.beta1)
-      activesupport (= 4.0.0.beta1)
+    railties (4.1.0.beta)
+      actionpack (= 4.1.0.beta)
+      activesupport (= 4.1.0.beta)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
 
 GIT
   remote: git://github.com/rails/sass-rails.git
-  revision: aeae25d22c8392a8ac0a07c86664d37d6acd9e25
+  revision: 33799418f104c961b1ce41452e77cf1e04930755
   specs:
     sass-rails (4.0.0.rc1)
       railties (>= 4.0.0.beta, < 5.0)
@@ -78,7 +78,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sprockets-rails.git
-  revision: bbf755e8b3aaea4105d05a01d2e115ef30ccc6c7
+  revision: 733fedff9da3997f1b98760b948114255f53860b
   specs:
     sprockets-rails (2.0.0.rc4)
       actionpack (>= 3.0)
@@ -87,11 +87,12 @@ GIT
 
 GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
-  revision: 1f3d04093b77b2c0609515b74b121a32cf0b3ba4
+  revision: 4aa0f0e661bc4664f59fd3e4287f7acf4d1330e8
   specs:
     twitter-bootstrap-rails (2.2.6)
       actionpack (>= 3.1)
       execjs
+      rails (>= 3.1)
       railties (>= 3.1)
 
 GIT
@@ -123,11 +124,11 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: 392ca0c6b704ea96d53abf463a14f921f6139b57
+  revision: 1da255ee39f7b03a6117c7d6b29a4530f34f57df
   specs:
-    simple_form (3.0.0.beta1)
-      actionpack (>= 4.0.0.beta, < 4.1)
-      activemodel (>= 4.0.0.beta, < 4.1)
+    simple_form (3.0.0.rc)
+      actionpack (>= 4.0.0.rc1, < 4.1)
+      activemodel (>= 4.0.0.rc1, < 4.1)
 
 GEM
   remote: https://rubygems.org/
@@ -135,12 +136,12 @@ GEM
     active_utils (1.0.5)
       activesupport (>= 2.3.11)
       i18n
-    ancestry (1.3.0)
-      activerecord (>= 2.3.14)
-    atomic (1.1.8)
+    ancestry (2.0.0)
+      activerecord (>= 3.0.0)
+    atomic (1.1.9)
     bcrypt-ruby (3.0.1)
     builder (3.1.4)
-    cancan (1.6.9)
+    cancan (1.6.10)
     capistrano (2.15.4)
       highline
       net-scp (>= 1.0.0)
@@ -166,12 +167,12 @@ GEM
     coffee-script-source (1.6.2)
     columnize (0.3.6)
     commonjs (0.2.6)
-    debugger (1.5.0)
+    debugger (1.6.0)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.1)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.0)
+    debugger-ruby_core_source (1.2.2)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -188,7 +189,7 @@ GEM
     innertube (1.0.2)
     jbuilder (1.0.2)
       activesupport (>= 3.0.0)
-    json (1.7.7)
+    json (1.8.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
     kaminari (0.14.1)
@@ -203,15 +204,14 @@ GEM
     libv8 (3.11.8.17)
     macaddr (1.6.1)
       systemu (~> 2.5.0)
-    mail (2.5.3)
-      i18n (>= 0.4.0)
+    mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     middleware (0.1.0)
     mime-types (1.23)
-    mini_magick (3.5.0)
+    mini_magick (3.6.0)
       subexec (~> 0.2.1)
-    minitest (4.7.3)
+    minitest (5.0.2)
     money (5.1.1)
       i18n (~> 0.6.0)
     multi_json (1.7.3)
@@ -249,7 +249,7 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    omniauth-odnoklassniki (0.0.3)
+    omniauth-odnoklassniki (0.0.4)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
     omniauth-twitter (0.0.16)
@@ -270,8 +270,8 @@ GEM
     raindrops (0.11.0)
     rake (10.0.4)
     redis (3.0.4)
-    ref (1.0.4)
-    riddle (1.5.5)
+    ref (1.0.5)
+    riddle (1.5.6)
     ruby-growl (4.0)
       uuid (~> 2.3, >= 2.3.5)
     rubyzip (0.9.9)
@@ -279,17 +279,17 @@ GEM
       i18n (>= 0.5.0)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
-    sass (3.2.8)
+    sass (3.2.9)
     selenium-webdriver (2.32.1)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
       rubyzip
       websocket (~> 1.0.4)
-    sitemap_generator (3.4)
+    sitemap_generator (4.0.1)
       builder
-    slim (1.3.8)
+    slim (1.3.9)
       temple (~> 0.6.3)
-      tilt (~> 1.3.3)
+      tilt (~> 1.3, >= 1.3.3)
     slim-rails (1.1.1)
       actionpack (>= 3.0, < 4.1)
       activesupport (>= 3.0, < 4.1)
@@ -302,7 +302,7 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     subexec (0.2.3)
     systemu (2.5.2)
-    temple (0.6.4)
+    temple (0.6.5)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -315,14 +315,14 @@ GEM
     thor (0.18.1)
     thread_safe (0.1.0)
       atomic
-    tilt (1.3.7)
+    tilt (1.4.1)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
     turbolinks (1.1.1)
       coffee-rails
     tzinfo (0.3.37)
-    uglifier (2.0.1)
+    uglifier (2.1.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     unicorn (4.6.2)
