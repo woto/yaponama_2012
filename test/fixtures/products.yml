@@ -1,4 +1,4 @@
-first_product:
+first_user_first_product:
   catalog_number: MR508329
   manufacturer: LOBRO
   short_name: Цилиндр сцепления рабочий
@@ -12,13 +12,24 @@ first_product:
   hide_catalog_number: false
   status: incart
   probability: 80
-  product_id: 
-  order_id: 
-  supplier_id: 
   created_at: 2013-05-21 03:45:38.527055000 Z
   updated_at: 2013-05-21 03:45:38.527055000 Z
   creation_reason: fixtures
   notes: Комментарии
   notes_invisible: Служебные комментарии
-  user_id: first_user
-  creator_id: first_user
+  user: first_user
+  creator: first_user
+
+
+first_user_second_product:
+  catalog_number: 13401−20030
+  manufacturer: NISSENS
+  short_name: Выключатель обогрева заднего стекла
+  quantity_ordered: 1
+  buy_cost: 1425.0
+  sell_cost: 3236.0
+  hide_catalog_number: false
+  status: incart
+  creation_reason: fixtures
+  user: first_user
+  creator: first_user
