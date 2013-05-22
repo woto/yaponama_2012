@@ -16,14 +16,10 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
 
     # Выбираем первый
     first('input[type="checkbox"]').click
-    #sleep(1)
     assert page.has_css?('input[type="checkbox"][checked]')
 
     # Открываем окно фильтрации по чекбоксу
     first('.icon-filter').click
-    #sleep(1)
-    #assert page.has_css?('#items-progress', :visible => false)
-    #assert page.has_css?('.icon-filter')
     assert page.has_css?('#grid_checkbox_checkbox_1')
 
     # Щелкаем в окне на выделенных - Да
