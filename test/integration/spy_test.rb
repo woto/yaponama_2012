@@ -4,12 +4,6 @@ require 'test_helper'
 
 class SpyTest < ActionDispatch::IntegrationTest
 
-  test 'При первом посещении должно вырасти количество пользователей в системе.' do
-    assert_difference('User.count') do
-      get '/'
-    end
-  end
-
   test 'Сначала мы сэмулируем заход пользователя с ip адресом 85.117.95.1 и обнаружим, что пользователь с Норильска, запишем ip, город и регион, а потом зайдем с 127.0.0.1 запишем новый ip, а город и регион обнулятся' do
     get '/', {}, { 'REMOTE_ADDR' => '85.117.95.1' }
     assert_equal User.last.remote_ip, '85.117.95.1'

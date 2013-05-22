@@ -1,9 +1,9 @@
-first_user:
+first_admin:
   creator_id:
-  creation_reason: 
+  creation_reason: fixtures
   discount: 0.0
   prepayment: 20.0
-  role: user
+  role: manager
   auth_token: PaV6t6OZxzRIWbl0nM9NGQ
   password_digest: $2a$04$rHSdT0UwnhP1CASNXzcYL.51uIkeSYdV.fw8wgAbMOlIYhxn9krha
   password_reset_email_token: 
@@ -20,3 +20,12 @@ first_user:
   notes: 
   notes_invisible: 
   order_rule: all
+
+first_user:
+  auth_token: YbFORw8BE0qmF8eWHS29oa
+  creation_reason: fixtures
+  role: user
+  discount: 0
+  prepayment: 100
+  order_rule: all
+  password_digest: $2a$10$90bFORwosYEHSW28BqmF8eacXIBXwLuZ1P9pp0.bEpVp5c2FrgLI.

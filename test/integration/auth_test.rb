@@ -4,35 +4,23 @@ require 'test_helper'
 
 class AuthTest < ActionDispatch::IntegrationTest
 
-  test 'Тестирование google_oauth2' do
-    get_via_redirect '/auth/google_oauth2'
-    assert User.last.auths.first.present?
-    # TODO Потом допишу
-  end
+  test "Входим используя google_oauth2" do
+    Capybara.current_driver = :selenium
 
-  test 'Тестирование facebook' do
-    get_via_redirect '/auth/facebook'
-  end
+    visit '/login'
+    click_link 'google_oauth2'
 
-  test 'Тестирование vkontakte' do
-    get_via_redirect '/auth/vkontakte'
-  end
+    window = page.driver.browser.window_handles.last
 
-  test 'Тестирование twitter' do
-    get_via_redirect '/auth/twitter'
-  end
+    page.within_window window do
+      fill_in 'Email', :with => 'yaponama.2012@gmail.com'
+      fill_in 'Passwd', :with => '2012.yaponama'
+      find('#signIn').click
+      find("#submit_approve_access:not([disabled])").click
+    end
 
-  test 'Тестирование yandex' do
-    get_via_redirect '/auth/yandex'
-  end
+    assert page.has_css?('.hide', visible: false, text: /yaponama/)
 
-  test 'Тестирование odnoklassniki' do
-    get_via_redirect '/auth/odnoklassniki'
+    Capybara.reset_session!
   end
-
-  test 'Тестирование mailru' do
-    get_via_redirect '/auth/mailru'
-  end
-
 end
-

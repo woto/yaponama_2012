@@ -1,4 +1,11 @@
-first_name:
+first_admin_name:
   name: Корнев Руслан Михайлович
+  profile: first_admin_profile
+  user: first_admin
+  creation_reason: fixtures
+
+first_user_name:
+  name: Пользователь
   profile: first_profile
-  creation_reason: profile
+  user: first_user
+  creation_reason: fixtures

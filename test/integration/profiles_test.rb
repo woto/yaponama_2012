@@ -1,0 +1,95 @@
+# encoding: utf-8
+
+require 'test_helper'
+require 'integration/attributes/user_profile_attributes'
+require 'integration/attributes/changed_user_profile_attributes'
+
+class TransactionsTest < ActionDispatch::IntegrationTest
+  include UserProfileAttributes
+  include ChangedUserProfileAttributes
+
+  test 'Если покупатель создает новый профиль из имени, телефона, эл. почты и паспорта, то в созданных транзакциях мы убеждаемся, что: У всех выставляется операция create, у всех выставляется правильно создатель и владелец причина создания profile. И дополнительно у всех дочерних правильно указан родительский профиль. Аналогично далее делаем проверку от лица администратора, изменяя все данные. И в конце удаляем от пользователя' do
+    
+    authenticated_as '1231231231', '1231231231' do |sess|
+
+      post user_profiles_path, { resource_class: 'Profile' }.merge(user_profile_attributes)
+
+      ['name', 'phone', 'email_address', 'passport', 'profile'].each do |profileable|
+        instance_eval <<-CODE, __FILE__, __LINE__ + 1
+
+          assert_equal 'create', #{profileable.camelize}Transaction.last.operation
+          assert_equal #{profileable.camelize}Transaction.last.creator_id, users(:first_user).id
+          assert_equal #{profileable.camelize}Transaction.last.user_id, users(:first_user).id
+
+          if profileable != 'profile'
+            assert_equal #{profileable.camelize}Transaction.last.profile_id_after, Profile.last.id
+            assert_equal assigns(:resource).#{profileable.pluralize}.first.creation_reason, 'profile'
+          else
+            assert_equal assigns(:resource).creation_reason, 'profile'
+          end
+
+        CODE
+      end
+    end
+
+    authenticated_as '1111111111', '1111111111' do |sess|
+      request = { resource_class: 'Profile' }.merge(changed_user_profile_attributes)
+
+      patch admin_user_profile_path(users(:first_user), Profile.last), request
+
+      ['name', 'phone', 'email_address', 'passport', 'profile'].each do |profileable|
+
+        instance_eval <<-CODE, __FILE__, __LINE__ + 1
+
+          assert_equal 'update', #{profileable.camelize}Transaction.last.operation, "#{profileable}"
+          assert_equal #{profileable.camelize}Transaction.last.creator_id, users(:first_admin).id
+          assert_equal #{profileable.camelize}Transaction.last.user_id, users(:first_user).id
+
+          if profileable != 'profile'
+            assert_equal #{profileable.camelize}Transaction.last.profile_id_after, Profile.last.id
+            assert_equal assigns(:resource).#{profileable.pluralize}.first.creation_reason, 'profile'
+          else
+            assert_equal assigns(:resource).creation_reason, 'profile'
+          end
+
+        CODE
+      end
+    end
+
+    # Проверяем доступность транзакции имен по нижеуказанным адресам
+    #
+    # ПОЛЬЗОВАТЕЛЬ собственные
+    # Транзакции собственного имени от пользователя
+    get user_name_transactions_path Name.last
+    #
+    # Транзакции всех собственных имен от пользователя
+    get transactions_user_names_path
+
+    #
+    # Транзакции имени пользователя от администратора
+    get admin_user_name_transactions_path users(:first_user), Name.last
+
+    # Транзакции всех имен пользователя от администратора
+    get transactions_admin_user_names_path users(:first_user)
+
+    # Транзакции имен всех пользователей от администратора
+    get transactions_admin_names_path
+
+
+    authenticated_as '1231231231', '1231231231' do |sess|
+
+      delete user_profile_path(Profile.last), { resource_class: 'Profile' }
+
+      ['name', 'phone', 'email_address', 'passport', 'profile'].each do |profileable|
+        instance_eval <<-CODE, __FILE__, __LINE__ + 1
+
+          assert_equal 'destroy', #{profileable.camelize}Transaction.last.operation
+          assert_equal #{profileable.camelize}Transaction.last.creator_id, users(:first_user).id
+          assert_equal #{profileable.camelize}Transaction.last.user_id, users(:first_user).id
+
+        CODE
+      end
+    end
+  end
+
+end

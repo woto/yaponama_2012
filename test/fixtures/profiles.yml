@@ -1,2 +1,7 @@
-first_profile:
+first_admin_profile:
+  user: first_admin
+  creation_reason: fixtures
+
+first_user_profile:
   user: first_user
+  creation_reason: fixtures

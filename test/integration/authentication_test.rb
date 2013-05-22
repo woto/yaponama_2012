@@ -5,10 +5,10 @@ require 'test_helper'
 class AuthenticationTest < ActionDispatch::IntegrationTest
 
   test 'Аутентифицированный пользователь может выйти' do
-    post '/login', { :login => email_addresses(:first_email_address).email_address, :password => '1111111111' }
-    assert flash[:notice]
-
-    delete '/logout'
-    assert flash[:notice]
+    authenticated_as('1111111111', '1111111111') do |administrator|
+      get '/admin/users'
+      assert_response 200
+    end
   end
+
 end

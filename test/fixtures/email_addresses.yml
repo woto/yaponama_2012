@@ -1,4 +1,9 @@
-first_email_address:
+first_admin_email_address:
   email_address: foo@example.com
-  profile: first_profile
-  creation_reason: profile
+  profile: first_admin_profile
+  user: first_admin
+  creation_reason: fixtures
+
+first_user_email:
+  email_address: first_user_email@example.com
+  profile: first_user_profile

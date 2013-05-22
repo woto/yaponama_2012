@@ -1,5 +1,12 @@
-first_phone:
-  phone: 1112223344
+first_admin_phone:
+  phone: 1111111111
   phone_type: unknown
-  profile: first_profile
-  creation_reason: profile
+  profile: first_admin_profile
+  user: first_admin
+  creation_reason: fixtures
+
+first_user_phone:
+  phone: 1231231231
+  profile: first_user_profile
+  user: first_user
+  creation_reason: fixtures
