@@ -101,6 +101,9 @@ module ProfileablesConcern
         @grid.name_visible = '1'
         @grid.ogrn_visible = '1'
         @grid.ownership_visible = '1'
+      when 'Profile'
+        @grid.cached_names_visible = '1'
+        @grid.cached_phones_visible = '1'
       end
 
       @grid.id_visible = '1'
