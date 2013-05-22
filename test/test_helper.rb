@@ -4,12 +4,28 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
+#require 'capybara/poltergeist'
 
 Capybara.server_port = 3000
 Capybara.server_host = 'localhost'
+Capybara.default_driver = :selenium
+#Capybara.default_driver = :poltergeist
+#Capybara.javascript_driver = :poltergeist
+Capybara.default_wait_time = 10
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
+
+  private
+
+  def auth(login, password)
+
+    visit '/login'
+    fill_in 'login', with: login
+    fill_in 'password', with: password
+    find('#submit').click
+  end
+
 end
 
 class ActiveSupport::TestCase
@@ -34,15 +50,6 @@ class ActiveSupport::TestCase
       delete '/logout'
       follow_redirect!
     end
-  end
-
-  def auth(login, password)
-    Capybara.current_driver = :selenium
-
-    visit '/login'
-    fill_in 'login', with: login
-    fill_in 'password', with: password
-    find('#submit').click
   end
 
 end

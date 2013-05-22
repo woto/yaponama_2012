@@ -5,7 +5,6 @@ require 'test_helper'
 class AuthTest < ActionDispatch::IntegrationTest
 
   test "Входим используя google_oauth2" do
-    Capybara.current_driver = :selenium
 
     visit '/login'
     click_link 'google_oauth2'
