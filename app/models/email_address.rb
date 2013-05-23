@@ -7,6 +7,7 @@ class EmailAddress < ActiveRecord::Base
   include Confirmed
   include NotSelf
   include BelongsToUser
+  include Transactionable
 
   belongs_to :profile, :inverse_of => :email_addresses
 
@@ -26,7 +27,7 @@ class EmailAddress < ActiveRecord::Base
 
   after_validation do
     # Если изменился email адрес, то он становится не подтвержденным.
-    if persisted? && email_address_changed? && ( email_address_was.downcase != email_address.downcase )
+    if ( persisted? && email_address_changed? && ( email_address_was.downcase != email_address.downcase ) ) || !persisted?
       reset_confirmed
     end
 

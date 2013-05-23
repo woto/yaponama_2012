@@ -18,6 +18,7 @@ module Confirmed
   def reset_confirmed
     self.confirmed_by_user = false
     self.confirmed_by_manager = false
+    self.confirmation_token = SecureRandom.hex[0...4]
   end
 
 end

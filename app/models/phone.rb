@@ -7,6 +7,7 @@ class Phone < ActiveRecord::Base
   include Confirmed
   include NotSelf
   include BelongsToUser
+  include Transactionable
 
   belongs_to :profile, :inverse_of => :phones
 
@@ -35,7 +36,7 @@ class Phone < ActiveRecord::Base
 
   after_validation do
     # Если изменился номер телефона, то он становится не подтвержденным.
-    if  persisted? && phone_changed? && ( phone_was.gsub(/[^0-9]/, '') != phone.gsub(/[^0-9]/, '') )
+    if  ( persisted? && phone_changed? && ( phone_was.gsub(/[^0-9]/, '') != phone.gsub(/[^0-9]/, '') ) ) || !persisted?
       reset_confirmed
     end
 

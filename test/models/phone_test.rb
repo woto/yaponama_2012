@@ -78,10 +78,37 @@ class PhoneTest < ActiveSupport::TestCase
     assert p1.valid?
 
     p2 = p1.dup
+    p2.save!
     p2.confirmed_by_user = true
     p2.save!
 
     assert !Phone.exists?(p1)
   end
+
+  test 'При создании нового номера телефона должен генерироваться confirmation_token' do
+    p = Phone.new
+    p.valid?
+    assert_not_nil p.confirmation_token
+  end
+
+  test 'При изменении номера телефона (реальном) происходит перегенерация confirmation_token, а при изменении формата не перегенерируется' do
+    p = phones(:first_admin_phone)
+    p.confirmed_by_manager = true
+    p.save!
+
+    assert p.confirmation_token.present?
+    assert p.confirmed?
+
+    p.phone = "+#{p.phone}"
+    p.save!
+
+    assert p.confirmed?
+
+    p.phone = "2#{p.phone}"
+    p.save!
+
+    assert !p.confirmed?
+  end
+
 
 end
