@@ -1,6 +1,6 @@
 .profileable-item-control style="visibility: hidden; display: inline"
-  = link_to smart_route({:prefix => [:edit], :postfix => [resource]}, :id => resource.id, :user_id => @user), class: "btn btn-warning btn-mini" do
+  = link_to smart_route({:prefix => [:edit], :postfix => [resource]}, :user_id => @user), class: "btn btn-warning btn-mini" do
     i.icon-edit 
   '
-  = link_to smart_route({:postfix => [resource]}, :id => resource.id, :user_id => @user), method: 'delete', data: {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))}, class: "btn btn-danger btn-mini" do
+  = link_to smart_route({:postfix => [resource]}, :user_id => @user), method: 'delete', data: {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))}, class: "btn btn-danger btn-mini" do
     i.icon-trash
