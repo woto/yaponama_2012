@@ -15,11 +15,11 @@ class SessionsController < ApplicationController
     authenticated_user = nil
 
     email_addresses.each do |email_address|
-      break if authenticated_user = email_address.profile.user.authenticate(params[:password])
+      break if authenticated_user = email_address.user.authenticate(params[:password])
     end
 
     phones.each do |phone|
-      break if authenticated_user = phone.profile.user.authenticate(params[:password])
+      break if authenticated_user = phone.user.authenticate(params[:password])
     end
 
     if authenticated_user
@@ -34,6 +34,7 @@ class SessionsController < ApplicationController
       # TODO Сделал так чтобы если пользователь зарегистрирован в системе, значит он имеет какие-то привилении
       # соответственно старный гостевой аккаунт не нужен и 'он не хотел под ним работать на сайте'
       @user.destroy
+      # TODO наверное круто было бы, если бы я делал merge пользователей
 
       redirect_to url_for(:root), :notice => "Вы успешно вошли."
     else
