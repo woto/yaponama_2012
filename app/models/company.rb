@@ -61,33 +61,25 @@ class Company < ActiveRecord::Base
 
   end
 
-  #def manage_virtuals
-  #  if legal_address.blank?
-  #    build_legal_address
-  #    self.valid?
-  #    legal_address.errors.clear
-  #  end
-
-  #  if actual_address.blank?
-  #    if legal_address.valid?
-  #      legal_address.save!
-  #      actual_address = legal_address
-  #      save!
-  #    else
-  #      build_actual_address
-  #      self.valid?
-  #      actual_address.errors.clear
-  #    end
-  #  end
-  #
-  #
-  #
-  #end
-
   def to_label
-    inn + " - " + name
+    "#{inn} - #{name}"
 
   end
 
+
+  def prepare_company(u)
+
+      build_legal_address
+      build_actual_address
+
+      if u.postal_addresses.present?
+        self.legal_address_type = 'old'
+        self.actual_address_type = 'old'
+      else
+        self.legal_address_type = 'new'
+        self.actual_address_type = 'old'
+      end
+
+  end
 
 end

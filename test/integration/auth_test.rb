@@ -5,6 +5,7 @@ require 'test_helper'
 class AuthTest < ActionDispatch::IntegrationTest
 
   test "Входим используя google_oauth2" do
+    Capybara.reset_session!
 
     visit '/login'
     click_link 'google_oauth2'
@@ -19,7 +20,5 @@ class AuthTest < ActionDispatch::IntegrationTest
     end
 
     assert page.has_css?('.hide', visible: false, text: /yaponama/)
-
-    Capybara.reset_session!
   end
 end
