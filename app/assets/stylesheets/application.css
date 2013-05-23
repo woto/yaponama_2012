@@ -8,8 +8,6 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require bootstrap/main
- *
  * TODO подключить стили jQuery-File-Upload там так же подключается через noscript тег, поэтому необходимо в другом месте видимо
  *
  *= require_self
@@ -25,16 +23,4 @@
 .nested-visualize {
   margin: 0px 0 20px 0px; 
   padding: 0 0 0 20px; 
-}
-
-@media (min-width: 768px) and (max-width: 979px) {
-  body {
-    paddint-top: 0px;
-  }
-}
-
-@media (min-width: 980px) {
-  body { 
-    padding-top: 60px;
-  }
 }
