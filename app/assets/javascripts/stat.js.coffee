@@ -17,4 +17,6 @@ send_stat = ->
 
   window.referrer = window.location.href 
 
-  $.post '/stats', data, ->
+  $.post '/stats', data,
+    # Сохраняем в элементе, чтобы поймать в Capybara
+    $('#stat-result').text(JSON.stringify(data))

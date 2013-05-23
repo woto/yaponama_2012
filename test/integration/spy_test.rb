@@ -51,4 +51,27 @@ class SpyTest < ActionDispatch::IntegrationTest
     assert_equal User.last.accept_language, 'Language 2'
   end
 
+  test "Проверяем правильность отправки и сохранения статистики посещенной страницы" do
+    # Посещаем страницу товаров
+    visit '/user/products'
+
+    # Ждем пока в #stat-result появятся данные
+    page.has_css? '#stat-result', text: '/user/products/'
+
+    # Проверяем, что запись принадлежит пользователю, который посетил
+    assert User.last == Stat.last.user
+
+    # Проверяем, что местонахождения пользователя в статистике записалось правильно
+    assert Stat.last.location.include? "/user/products"
+
+    # Находим 
+    page.find('.brand').click
+
+    # Ждем пока в #stat-result появятся данные
+    page.has_css? '#stat-result', text: '/user/products/'
+
+    # Проверяем, что предыдущая страница (referrer) записалась правильно
+    assert Stat.last.referrer.include? "/user/products"
+  end
+
 end
