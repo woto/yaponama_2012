@@ -1,0 +1,10 @@
+first_user_postal_address:
+  postcode: '123456'
+  region: '1'
+  city: '1'
+  street: '1'
+  house: '1'
+  stand_alone_house: true
+  room: ''
+  creation_reason: fixtures
+  user: first_user

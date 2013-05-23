@@ -23,7 +23,7 @@
 
   - type = eval("f.object." + item[:assoc] + "_type")
 
-  .type-store
+  .type-store id="#{item[:assoc]}"
     .hide
       = f.collection_radio_buttons "#{item[:assoc]}_type".to_sym, [['new', 'new'] ,['old', 'old']], :first, :last, {}, :class => "type-radio-buttons"
 
@@ -33,7 +33,7 @@
         strong
           | Выберите адрес из списка 
           span.dashed class="rotate-type" или добавьте новый
-      .control-group class="#{f.object.errors[item[:assoc].to_sym].present? ? 'error' : ''}"
+      .control-group class="company_#{item[:assoc]} #{f.object.errors[item[:assoc].to_sym].present? ? 'error' : ''}"
         .controls
           = f.select("#{item[:assoc]}_id".to_sym, @user.postal_addresses.map{|pa| [pa.to_label, pa.id]} + [[item[:opposite], '-1']], {:include_blank => true})
           - if f.object.errors[item[:assoc].to_sym].present?

@@ -5,6 +5,7 @@ require 'test_helper'
 class PostallAddressesTest < ActionDispatch::IntegrationTest
 
   test "Использовал чтобы разобраться в IntegrationTest и fixtures" do
+    skip "Позже"
     Capybara.reset_session!
     visit '/user/postal_addresses/new'
 

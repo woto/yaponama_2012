@@ -50,18 +50,14 @@ class ProfileablesController < ApplicationController
   def new
     @resource = @resource_class.new
 
-    if @resource.class == Company
-      @resource.build_legal_address
-      @resource.build_actual_address
-
-      if @user.postal_addresses.present?
-        @resource.legal_address_type = 'old'
-        @resource.actual_address_type = 'old'
-      else
-        @resource.legal_address_type = 'new'
-        @resource.actual_address_type = 'old'
-      end
+    case @resource.class.to_s
+      when 'Company'
+        @resource.prepare_company(@user)
+      when 'Profile'
+        @resource.names.new
+        @resource.phones.new(hide_remove_button_on_first_on_new: true)
     end
+
   end
 
 
@@ -69,10 +65,12 @@ class ProfileablesController < ApplicationController
   def edit
     @user = @resource.user
 
-    if @resource.class == Company
-      @resource.legal_address_type = 'old'
-      @resource.actual_address_type = 'old'
+    case @resource.class.to_s
+      when 'Company'
+        @resource.legal_address_type = 'old'
+        @resource.actual_address_type = 'old'
     end
+
   end
 
   # POST /names

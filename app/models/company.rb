@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Company < ActiveRecord::Base
   include BelongsToCreator
   include BelongsToUser
@@ -48,15 +50,17 @@ class Company < ActiveRecord::Base
   # чтобы не акцентрировать внимание пользователя на том поле, которое не содержит ошибки, 
   # а на самом деле ошибка содержится в другом и исправлять нужно там
   def after
-    # TODO Хочется спать, потом буду тесты делать, вот и сделаю как нужно, а пока и так сойдет
-    if (legal_address_type == 'new' && actual_address_type == 'old' && legal_address.id == actual_address_id && actual_address_id == -1) || actual_address_id == -1
-      errors[:actual_address].clear
-      self.actual_address_id = "-1"
-    end
+    # TODO тестами покрыл и доделал до желаемого состояния. Позже зарефакторю
+    unless (legal_address_type == 'old' && actual_address_type == "old" && legal_address_id == -1 && actual_address_id == -1)
+      if (legal_address_type == 'new' && actual_address_type == 'old' && legal_address.id == actual_address_id && actual_address_id == -1) || actual_address_id == -1
+        errors[:actual_address].clear
+        self.actual_address_id = "-1"
+      end
 
-    if (actual_address_type == 'new' && legal_address_type == 'old' && actual_address.id == legal_address_id && actual_address_id == -1) || legal_address_id == -1
-      errors[:legal_address].clear
-      self.legal_address_id = "-1"
+      if (actual_address_type == 'new' && legal_address_type == 'old' && actual_address.id == legal_address_id && actual_address_id == -1) || legal_address_id == -1
+        errors[:legal_address].clear
+        self.legal_address_id = "-1"
+      end
     end
 
   end
