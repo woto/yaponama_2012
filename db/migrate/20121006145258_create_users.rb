@@ -24,8 +24,8 @@ class CreateUsers < ActiveRecord::Migration
       t.inet :remote_ip
 
       t.string :creation_reason
-      t.string :notes
-      t.string :notes_invisible
+      t.text :notes
+      t.text :notes_invisible
       t.references :creator, index: true
 
       t.text :cached_profile # TODO пока text, позже переделать в string
