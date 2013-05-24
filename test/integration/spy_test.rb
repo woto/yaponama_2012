@@ -56,7 +56,7 @@ class SpyTest < ActionDispatch::IntegrationTest
     visit '/user/products'
 
     # Ждем пока в #stat-result появятся данные
-    page.assert_selector '#stat-result.complete'
+    page.assert_selector '#stat-result.complete', visible: false
 
     # Проверяем, что запись принадлежит пользователю, который посетил
     assert User.last == Stat.last.user
@@ -68,10 +68,10 @@ class SpyTest < ActionDispatch::IntegrationTest
     page.find('.brand').click
 
     # Убеждаемся, что мы действительно посетили другую страницу
-    page.assert_selector '#stat-result.incomplete'
+    page.assert_selector '#stat-result.incomplete', visible: false
 
     # Ждем пока в #stat-result появятся данные
-    page.assert_selector '#stat-result.complete'
+    page.assert_selector '#stat-result.complete', visible: false
 
     # Проверяем, что предыдущая страница (referrer) записалась правильно
     assert Stat.last.referrer.include? "products"
