@@ -1,6 +1,7 @@
 first_admin_phone:
   phone: 1111111111
   phone_type: unknown
+  confirmation_token: 1111
   profile: first_admin_profile
   user: first_admin
   creation_reason: fixtures

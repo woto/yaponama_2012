@@ -57,6 +57,7 @@ class EmailAddressTest < ActiveSupport::TestCase
     ea1 = email_addresses(:first_admin_email_address)
 
     ea2 = ea1.dup
+    ea2.save!
     ea2.confirmed_by_manager = true
     ea2.save!
     assert !EmailAddress.exists?(ea1)
