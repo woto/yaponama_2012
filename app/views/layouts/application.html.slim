@@ -12,31 +12,31 @@ body
         span.icon-bar
 
       a.brand href="/" style="margin: 0; padding: 5px 0"
-        = image_tag "logo.png", style: "height: 30px";
+        = image_tag "logo.png", style: "height: 40px";
 
       .collapse.nav-collapse
 
-
         ul.nav
-          li.divider-vertical
+          li.divider-vertical.invisible
           li
-            = form_tag user_searches_path, :class => "navbar-form form-search", :method => :get do
-              div.input-append
-                input.search-query type="text" style="width: 120px" placeholder="Артикул детали"
-                button type="submit" class="btn" Искать
-          li.divider-vertical
-          li class="#{current_page?(:controller => '/products', :status => 'incart') ? 'active' : ''}"
+            div style="margin-top: 5px"
+              = form_tag user_searches_path, :class => "navbar-form form-search", :method => :get do
+                div.input-append
+                  input.search-query type="text" style="width: 120px" placeholder="Артикул детали"
+                  button type="submit" class="btn" Искать
+          li.divider-vertical.invisible
+          li class="#{highlight_active([:controller => '/products', :status => 'incart'])}"
             = link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do
               |Корзина
           li.dropdown
             a.ignoredirty.dropdown-toggle data-toggle="dropdown" href="#" 
               |Личный кабинет
             ul.dropdown-menu
-              li class="#{current_page?(:controller => "/profileables", :resource_class => 'Car') ? 'active' : ''}"
+              li class="#{highlight_active([:controller => "/profileables", :resource_class => 'Car'])}"
                 = link_to user_cars_path do
                   i.icon.icon-truck
                   |  Гараж
-              li class="#{current_page?(:controller => '/orders') ? 'active' : ''}"
+              li class="#{highlight_active([:controller => '/orders'])}"
                 = link_to user_orders_path do
                   i.icon.icon-list-alt
                   |  Заказы
@@ -55,7 +55,7 @@ body
                   |  Настройки
                 li.divider
                 li = link_to "Выход", logout_path, :method => :delete
-          li.divider-vertical
+          li.divider-vertical.invisible
           / TODO пока просто перенес
           - if content_for :pages_controler
             = yield(:pages_controller)
@@ -73,7 +73,7 @@ body
               li = link_to "Новости компании", "#"
               li = link_to "Акции и бонусы", "#"
               li = link_to "Способы оплаты", "#"
-              li class="#{current_page?(:controller => "/deliveries") ? 'active' : ''}"
+              li class="#{highlight_active([:controller => "/deliveries"])}"
                 = link_to "Доставка и самовывоз", deliveries_path
               li = link_to "Частые вопросы", "#"
               /li style="float: left"
