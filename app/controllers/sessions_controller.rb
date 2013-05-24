@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
       @user.destroy
       # TODO наверное круто было бы, если бы я делал merge пользователей
 
-      redirect_to url_for(:root), :notice => "Вы успешно вошли."
+      redirect_to user_path, :notice => "Вы успешно вошли."
     else
       flash.now[:alert] = 'Пара e-mail/телефон и пароль не найдены.'
       render 'new'
