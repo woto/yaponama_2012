@@ -27,32 +27,23 @@ body
           li.divider-vertical
           li class="#{current_page?(:controller => '/products', :status => 'incart') ? 'active' : ''}"
             = link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do
-              /i.icon.icon-shopping-cart
-              /'
-              'Корзина
+              |Корзина
           li.dropdown
             a.ignoredirty.dropdown-toggle data-toggle="dropdown" href="#" 
-              /i.icon.icon-user
-              /'
-              'Личный кабинет
-              /'
-              /b.caret
+              |Личный кабинет
             ul.dropdown-menu
               li class="#{current_page?(:controller => "/profileables", :resource_class => 'Car') ? 'active' : ''}"
                 = link_to user_cars_path do
                   i.icon.icon-truck
-                  '
-                  'Гараж
+                  |  Гараж
               li class="#{current_page?(:controller => '/orders') ? 'active' : ''}"
                 = link_to user_orders_path do
                   i.icon.icon-list-alt
-                  '
-                  'Заказы
+                  |  Заказы
               li
                 = link_to do
                   i.icon.icon-money
-                  '
-                  'Счет
+                  |  Счет
               - if current_user.role == 'guest'
                 li = link_to "Вход на сайт", login_path
                 li = link_to "Регистрация", register_path
@@ -61,8 +52,7 @@ body
               - else
                 li = link_to user_path do
                   i.icon.icon-wrench
-                  '
-                  'Настройки
+                  |  Настройки
                 li.divider
                 li = link_to "Выход", logout_path, :method => :delete
           li.divider-vertical
