@@ -99,15 +99,17 @@ body
     hr
     footer
       .row-fluid
-        .span3
+        .span2
           p &copy; Company 2012
-        .span3
+        .span2
           small
             ul.unstyled
-              li : a href="#" Контакты
-              li : a href="#" 
-              li : a href="#" 
-        .span3
+              li : a href="#" Новости компании
+              li : a href="#" Акции и бонусы
+              li : a href="#" Способы оплаты
+              li : a href="#" Доставка и самовывоз
+              li : a href="#" Частые вопросы
+        .span2
           small
             ul.unstyled
               li : a href="#" Поставщикам
@@ -116,6 +118,8 @@ body
         .span3
           small
             ul.unstyled
+              li : a href="#" Связь с руководством
               - if ["admin", "manager"].include? current_user.role
                 li = link_to "Администрирование", admin_path
+        .span3
       = render "layouts/shared/footer"

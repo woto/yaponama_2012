@@ -1,17 +1,21 @@
 = render :partial => "layouts/head"
 
+/body#admin
 body
 
   = render :partial => 'layouts/shared/body_head'
   = render :partial => "layouts/admin_navbar"
 
-  .container-fluid
+  .container-fluid style="margin-top: 20px"
 
     = bootstrap_flash
     = yield :form_error
 
     .row-fluid
       .span12
+        - if @user
+          #chat-button-show.chat-button
+            i.icon.icon-double-angle-left
         = yield
 
     hr

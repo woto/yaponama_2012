@@ -26,116 +26,139 @@ module ApplicationHelper
     workspace_class = 'span12'
 
     content_tag(:div, :class => 'row-fluid') do
-      if @user && admin_zone?
-        workspace_class = 'span9'
-        res = content_tag(:div, :class => 'span3', :id => 'profile') do
-          [(render 'users/show')].join.html_safe
-        end
+      if admin_zone?
+        c = 'span8'
+        z = 'workspace'
+      else
+        c = 'span12'
       end
+      [(content_tag :div, :id => 'main', :class => c do
+        content_tag(:div, :class => 'row-fluid') do
+          if @user && admin_zone?
+            workspace_class = 'span8'
+            res = content_tag(:div, :class => 'span4', :id => 'profile') do
+              [(render 'users/show')].join.html_safe
+            end
+          end
 
-      res <<
-      content_tag(:div, :class => workspace_class, :id => 'workspace') do
+          res <<
+          content_tag(:div, :class => workspace_class, :id => z) do
 
-        if @user && admin_zone?
+          if @user && admin_zone?
 
-          content_tag(:div, :id => 'profile-button-show', :class => 'profile-button') do
+            content_tag(:div, :id => 'profile-button-show', :class => 'profile-button') do
+              content_tag(:i, '', :class => "icon icon-double-angle-right")
+            end <<
+
+            content_tag(:div, :id => 'profile-button-hide', :class => 'profile-button') do
+              content_tag(:i, '', :class => "icon icon-double-angle-left")
+            end <<
+
+            content_tag(:ul, :class => 'nav nav-tabs', style: "margin-bottom: 10px") do
+              [ 
+                { :title => 'Настройки', 
+                  :catch => [ { :controller => 'users', :action => 'edit' } ], 
+                  :link => {:controller => '/admin/users', :action => 'edit', :id => @user.id},
+                  :class => '',
+                  :dropdown => []
+                },
+
+                { :title => 'Заказы',  
+                  :catch => [ { :controller => 'orders' } ], 
+                  :link => '#',
+                  :class => 'dropdown',
+                  :dropdown => _build_dropdowns('order')
+                },
+
+                { :title => 'Товары',  
+                  :catch => [ { :controller => 'products' } ],
+                  :link => '#',
+                  :class => 'dropdown',
+                  :dropdown => _build_dropdowns('product')
+                },
+
+                { :title => 'Транзакции',
+                  :catch => [ 
+                    { :controller => 'products', :action => 'transactions' }, { :controller => 'accounts', :action => 'transactions' } ],
+                  :link => '#', 
+                  :class => 'dropdown',
+                  :dropdown => [
+                    { :title => 'Товар',
+                      :catch => [ { :controller => 'products', :action => 'transactions' } ],
+                      :link => { :controller => '/admin/products', :action => 'transactions' },
+                      :class => '',
+                      :dropdown => []
+                    },
+                    { :title => 'Деньги',
+                      :catch => [ { :controller => 'accounts', :action => 'transactions' } ],
+                      :link => { :controller => '/admin/accounts', :action => 'transactions' },
+                      :class => '',
+                      :dropdown => []
+                    }
+                  ]
+                },
+
+
+                { :title => 'Поиск', 
+                  :catch => [ { :controller => 'searches' } ],
+                  :link => { :controller => '/searches', :action => 'index' },
+                  :class => '',
+                  :dropdown => []
+                },
+
+              ].collect do |item|
+
+                #begin
+                  link = url_for(item[:link])
+                #rescue ActionController::UrlGenerationError
+                #end
+
+                if item[:dropdown].blank? 
+                  content_tag :li, link_to(item[:title], link), :class => highlight_active(item[:catch])
+                else
+                  content_tag :li, :class => "#{highlight_active(item[:catch])} #{item[:class]}" do
+                    [ 
+                      ( link_to(item[:title], link, "data-toggle" => item[:class]).to_s ), 
+
+                      ( content_tag :ul, :class => 'dropdown-menu' do |ul|
+                        item[:dropdown].collect do |dropdown|
+
+                            begin
+                              link = url_for(dropdown[:link])
+                            rescue ActionController::UrlGenerationError
+                            end
+                            content_tag :li, :class => highlight_active(dropdown[:catch]) do
+                              link_to(dropdown[:title], link)
+
+                          end
+                        end.join.html_safe
+                      end.to_s ) 
+                    ].join.html_safe
+                  end
+                end
+              end.join.html_safe
+            end
+          end.to_s.html_safe <<
+
+          content_tag(:div, :class => "tab-content", style: "min-height: 400px") do
+            content_tag(:div, :class => 'tab-pane active', &block)
+          end
+
+          
+        end
+      end.to_s
+
+    end),(
+
+      if @user && admin_zone?
+        content_tag(:div, :class => "span4 bottom-space", :id => "sidebar") do
+          content_tag(:div, :id => "chat-button-hide", :class => "chat-button") do
             content_tag(:i, '', :class => "icon icon-double-angle-right")
           end <<
-
-          content_tag(:div, :id => 'profile-button-hide', :class => 'profile-button') do
-            content_tag(:i, '', :class => "icon icon-double-angle-left")
-          end <<
-
-          content_tag(:ul, :class => 'nav nav-tabs', style: "margin-bottom: 10px") do
-            [ 
-              { :title => 'Настройки', 
-                :catch => [ { :controller => 'users', :action => 'edit' } ], 
-                :link => {:controller => 'users', :action => 'edit'},
-                :class => '',
-                :dropdown => []
-              },
-
-              { :title => 'Заказы',  
-                :catch => [ { :controller => 'orders' } ], 
-                :link => '#',
-                :class => 'dropdown',
-                :dropdown => _build_dropdowns('order')
-              },
-
-              { :title => 'Товары',  
-                :catch => [ { :controller => 'products' } ],
-                :link => '#',
-                :class => 'dropdown',
-                :dropdown => _build_dropdowns('product')
-              },
-
-              { :title => 'Транзакции',
-                :catch => [ 
-                  { :controller => 'products', :action => 'transactions' }, { :controller => 'account_transactions' } ],
-                :link => '#', 
-                :class => 'dropdown',
-                :dropdown => [
-                  { :title => 'Товар',
-                    :catch => [ { :controller => 'products', :action => 'transactions' } ],
-                    :link => { :controller => 'products', :action => 'transactions' },
-                    :class => '',
-                    :dropdown => []
-                  },
-                  { :title => 'Деньги',
-                    :catch => [ { :controller => 'account_transactions' } ],
-                    :link => { :controller => 'account_transactions', :action => 'index' },
-                    :class => '',
-                    :dropdown => []
-                  }
-                ]
-              },
-
-
-              { :title => 'Поиск', 
-                :catch => [ { :controller => 'searches' } ],
-                :link => { :controller => 'searches', :action => 'index' },
-                :class => '',
-                :dropdown => []
-              },
-
-            ].collect do |item|
-
-              begin
-                link = url_for(item[:link])
-              rescue ActionController::UrlGenerationError
-              end
-
-              if item[:dropdown].blank? 
-                content_tag :li, link_to(item[:title], link), :class => highlight_active(item[:catch])
-              else
-                content_tag :li, :class => "#{highlight_active(item[:catch])} #{item[:class]}" do
-                  [ 
-                    ( link_to(item[:title], link, "data-toggle" => item[:class]).to_s ), 
-
-                    ( content_tag :ul, :class => 'dropdown-menu' do |ul|
-                      item[:dropdown].collect do |dropdown|
-
-                          begin
-                            link = url_for(dropdown[:link])
-                          rescue ActionController::UrlGenerationError
-                          end
-                          content_tag :li, :class => highlight_active(dropdown[:catch]) do
-                            link_to(dropdown[:title], link)
-
-                        end
-                      end.join.html_safe
-                    end.to_s ) 
-                  ].join.html_safe
-                end
-              end
-            end.join.html_safe
-          end
-        end.to_s.html_safe <<
-
-        content_tag(:div, :class => "tab-content", style: "min-height: 400px") do
-          content_tag(:div, :class => 'tab-pane active', &block)
+          render(:partial => "shared/chat")
         end
       end
+    )].join.html_safe
 
     end
 
@@ -173,14 +196,14 @@ module ApplicationHelper
   private
 
   def highlight_active(routes)
-    begin
+    #begin
       if routes.map{|route| current_page?(route)}.any?
         'active'
       else
         ''
       end
-    rescue ActionController::UrlGenerationError
-    end
+    #rescue ActionController::UrlGenerationError
+    #end
   end
 
 
