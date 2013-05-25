@@ -19,10 +19,7 @@
     = f.input :password, input_html: { autocomplete: 'off' }
     = f.input :password_confirmation, input_html: { autocomplete: 'off' }
     = f.input :role, :collection => Rails.configuration.user_roles.select{|k, v| v["real"] == true}.map{|k, v| [k, v['title']] }, :value_method => :first, :label_method => :last, :include_blank => false
-    = f.input :created_at, disabled: true
-    = f.input :updated_at, disabled: true
-    = f.input :notes, :input_html => {:rows => 3} 
-    = f.input :notes_invisible, :input_html => {:rows => 3} 
+    = render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f}
 
     hr
     = f.input :auth_token, :disabled => true 
