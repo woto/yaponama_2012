@@ -10,6 +10,7 @@ class AddCommonAttributesToDeliveries < ActiveRecord::Migration
       add_column table, :postal_address_required, :boolean, :default => false
       add_column table, :full_prepayment_required, :boolean, :default => false
       add_column table, :passport_required, :boolean, :default => false
+      add_column table, :track_number_required, :boolean, :default => false
 
 
       add_index table, :delivery_id, name: "index_#{table}_on_delivery_id"
