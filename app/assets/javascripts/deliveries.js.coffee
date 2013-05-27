@@ -70,12 +70,19 @@ window.initClientMap = ->
                 found.closest('.accordion-group').find('.collapse').collapse('show');
                 found.parent().effect('highlight')
               else
-                window.map.setZoom(16)
-                window.map.setCenter(coords)
-                marker = new google.maps.Marker
-                  map: window.map
-                  position: coords
-                alert "Стоимость доставки: " + Math.round(leg.duration.value/60 * parseFloat($('#delivery_minute_cost').text()))
+                if $('#automatic_calculate_active').text() == 'true'
+                  window.map.setZoom(16)
+                  window.map.setCenter(coords)
+                  marker = new google.maps.Marker
+                    map: window.map
+                    position: coords
+                  delivery_cost = Math.round(leg.duration.value/60 * parseFloat($('#delivery_minute_cost').text()))
+                  if delivery_cost > parseFloat($('#max_automatic_calculated_cost').text())
+                    alert "Сожалеем, доставка по Вашему адресу не может быть осуществлена. TODO дописать"
+                  else
+                    alert "Стоимость доставки: TODO дописать" + delivery_cost
+                else
+                  alert('Автоматический расчет стоимости доставки выключен. TODO дописать')
 
         else
           alert status
