@@ -18,6 +18,8 @@ table class="table table-striped"
         th= model_class.human_attribute_name(:initial_map_zoom)
         th= model_class.human_attribute_name(:initial_map_lat)
         th= model_class.human_attribute_name(:initial_map_lng)
+        th= model_class.human_attribute_name(:automatic_calculate_active)
+        th= model_class.human_attribute_name(:max_automatic_calculated_cost)
       - if params[:filter] == 'prices' || params[:filter].blank?
         th= model_class.human_attribute_name(:request_emex)
         th= model_class.human_attribute_name(:emex_income_rate)
@@ -94,6 +96,8 @@ table class="table table-striped"
           td= admin_site_setting.initial_map_zoom
           td= admin_site_setting.initial_map_lat
           td= admin_site_setting.initial_map_lng
+          td= admin_site_setting.automatic_calculate_active
+          td= admin_site_setting.max_automatic_calculated_cost
         - if params[:filter] == 'prices' || params[:filter].blank?
           td= admin_site_setting.request_emex
           td= admin_site_setting.emex_income_rate

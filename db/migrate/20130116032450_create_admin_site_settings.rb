@@ -22,6 +22,8 @@ class CreateAdminSiteSettings < ActiveRecord::Migration
       t.integer :initial_map_zoom
       t.float :delivery_minute_cost
       t.string :warehouse_address
+      t.boolean :automatic_calculate_active
+      t.float :max_automatic_calculated_cost
 
       t.string :checkout_account
       t.string :checkout_bank

@@ -24,6 +24,8 @@ defaults: &defaults
   delivery_minute_cost: 16
   google_maps_key: Ключ google maps
   travel_mode: TRANSIT
+  automatic_calculate_active: true
+  max_automatic_calculated_cost: 600
 
   checkout_account: Номер счета получателя платежа
   checkout_bank: Наименование банка получателя платежа
