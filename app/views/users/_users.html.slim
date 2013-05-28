@@ -1,5 +1,13 @@
 #users-tab.tab-pane.active
   #users.top-space
+    .control-group
+      .controls
+        h4 Безопасность
+
+        button.stand_alone_house type="button" class="btn" data-toggle="button" Автоматический выход
+        = f.check_box :logout_from_other_places, class: "checkbox_button_swap hide"
+
+    .hide
 
     .control-group
       .controls
