@@ -1,3 +1,4 @@
+
 #users-tab.tab-pane.active
   #users.top-space
     .control-group
@@ -21,8 +22,10 @@
     = f.input :russian_time_zone_manual_id, :wrapper_html => {id: 'russian_time_zone_manual'}, :collection => Rails.configuration.russian_time_zones.map {|k,v| [v,k]}
     = f.input :russian_time_zone_auto_id, :wrapper_html => {id: 'russian_time_zone_auto'}, :collection => Rails.configuration.russian_time_zones.map {|k,v| [v,k]}, :disabled => true
 
+    = f.input :creation_reason, :collection => Rails.configuration.user_creation_reason.map {|k,v| [v,k]}, :disabled => true, :as => :radio_buttons
     = f.input :order_rule, :collection => Rails.configuration.user_order_rules, :value_method => :first, :label_method => :last
     
+    = f.input :role, :collection => Rails.configuration.user_roles.select{|k, v| v["real"] == true}.map{|k, v| [k, v['title']] }, :value_method => :first, :label_method => :last, :include_blank => false
     = render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f}
 
     hr

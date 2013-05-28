@@ -75,7 +75,7 @@
 //= require items_progress
 //= require 'sidebar'
 //= require 'time_zone_checkbox'
-//= require 'postal_address'
+//= require 'button_swap'
 //= require 'collapse_buttons_in_profile'
 //= require 'deliveries/places/places'
 //= require 'deliveries'

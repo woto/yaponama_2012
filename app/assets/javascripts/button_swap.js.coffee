@@ -10,13 +10,13 @@ show_or_hide = (item, checked, direction) ->
     else
       item.parent().parent().next().show()
 
-$(document).on 'click', '.stand_alone_house', ->
+$(document).on 'click', '.button_swap', ->
   checked = $(this).hasClass('active')
   $(this).next().next().prop('checked', checked)
   show_or_hide( $(this), checked, $(this).data('direction') )
 
 init = ->
-  $('.checkbox_button_swap').each ->
+  $('.button_swap_checkbox').each ->
     checked = $(this).prop('checked')
     if checked
       $(this).prev().prev().addClass('active')
