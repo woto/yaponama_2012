@@ -1,6 +1,7 @@
-class DeliveryZone < ActiveRecord::Base
+class Deliveries::Places::Place < ActiveRecord::Base
+  has_and_belongs_to_many :variants
 
-  validates :name, :presence => true
+  validates :name, :vertices, :presence => true
 
   def prepare
 
