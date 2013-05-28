@@ -6,7 +6,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
   fixtures :postal_addresses, :companies
 
   def setup
-    Capybara.reset_sessions!
+    Capybara.reset!
   end
 
   def submit

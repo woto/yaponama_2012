@@ -6,7 +6,7 @@ class PostallAddressesTest < ActionDispatch::IntegrationTest
 
   test "Использовал чтобы разобраться в IntegrationTest и fixtures" do
     skip "Позже"
-    Capybara.reset_session!
+    Capybara.reset!
     visit '/user/postal_addresses/new'
 
     find("#postal_address_postcode").set('123456')

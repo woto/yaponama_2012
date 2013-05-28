@@ -5,7 +5,7 @@ require 'test_helper'
 class GridChecboxTest < ActionDispatch::IntegrationTest
   test "Если мы чекбоксим товар и вкючаем фильтр отображения только выделенных элементов, то должен остаться только выделенный элемент" do
 
-    Capybara.reset_session!
+    Capybara.reset!
 
     # Логинимся
     auth('1231231231', '1231231231')
@@ -37,7 +37,7 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
 
   test "Если мы выделяем элемент, то после обновления страницы браузера элемент должен остаться выделенным" do
 
-    Capybara.reset_session!
+    Capybara.reset!
 
     # Логинимся
     auth('1231231231', '1231231231')
@@ -57,13 +57,11 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
     # Убеждаемся, что товар по-прежнему выделен
     assert page.has_css?('input[type="checkbox"][checked]')
 
-    Capybara.reset_session!
-
   end
 
   test "Тестируем правильно отображение постраничной навигации если кол-во элементов превышает одну страницу" do
 
-    Capybara.reset_session!
+    Capybara.reset!
 
     # Логинимся
     auth('1231231231', '1231231231')

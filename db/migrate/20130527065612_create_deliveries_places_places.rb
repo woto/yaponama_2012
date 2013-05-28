@@ -1,9 +1,10 @@
-class CreateDeliveryZones < ActiveRecord::Migration
+class CreateDeliveriesPlacesPlaces < ActiveRecord::Migration
   def change
-    create_table :delivery_zones do |t|
+    create_table :deliveries_places_places do |t|
       t.string :name
       t.text :content
       t.text :vertices
+      t.boolean :postal_address_required
 
       ['active', 'inactive'].each do |style|
         t.string "#{style}_fill_color".to_sym
@@ -13,6 +14,8 @@ class CreateDeliveryZones < ActiveRecord::Migration
         t.string "#{style}_stroke_weight".to_sym
       end
 
+      t.boolean :realize
+      t.boolean :active
       t.float :lat
       t.float :lng
       t.integer :zoom

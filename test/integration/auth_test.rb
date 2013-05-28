@@ -5,7 +5,7 @@ require 'test_helper'
 class AuthTest < ActionDispatch::IntegrationTest
 
   test "Входим используя google_oauth2" do
-    Capybara.reset_session!
+    Capybara.reset!
 
     visit '/login'
     click_link 'google_oauth2'

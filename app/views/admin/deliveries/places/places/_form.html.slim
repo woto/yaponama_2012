@@ -1,4 +1,12 @@
-= simple_form_for @delivery_zone, :html => { class: "form-search" } do |f|
+= simple_form_for @deliveries_places_place, url: admin_deliveries_places_place_path(@deliveries_places_place), html: { class: "form-search" } do |f|
+  - content_for :form_error do
+    = f.error_notification
+
+  = f.input :active
+  = f.input :realize
+  = f.association :variants
+  = f.input :postal_address_required
+
   = f.input :name
   = f.input :content
   = f.input :z_index
@@ -35,4 +43,4 @@
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     '
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), delivery_zones_path, :class => 'btn'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_deliveries_places_places_path, :class => 'btn'
