@@ -66,9 +66,13 @@ window.initClientMap = ->
                     found = $(this)
 
               if found?
-                found.data('polygon').activate()
-                found.closest('.accordion-group').find('.collapse').collapse('show');
-                found.parent().effect('highlight')
+                if found.find('.realize').text() == 'true'
+                  found.data('polygon').activate()
+                  found.closest('.accordion-group').find('.collapse').collapse('show');
+                  found.parent().effect('highlight')
+                else
+                  alert "Сожалеем, доставка по Вашему адресу не может быть осуществлена. Данная область не обслуживается. TODO дописать"
+
               else
                 if $('#automatic_calculate_active').text() == 'true'
                   window.map.setZoom(16)
@@ -147,7 +151,15 @@ window.initClientMap = ->
 
     $(this).data('polygon', poly)
 
-    add_event_listener_to_object(poly, $(this))
+    # Если доставка в зону осуществляется, то вешаем обрабочик
+    if $(this).find('.realize').text() == 'true'
+      add_event_listener_to_object(poly, $(this))
+    # Иначе прячем и курсор по-умолчанию
+    else
+      poly.setOptions
+        fillOpacity: 0
+        strokeOpacity: 0
+        clickable: false
 
     # Показываем маркер, если надо
     if $(this).find('.display_marker').text() == 'true'

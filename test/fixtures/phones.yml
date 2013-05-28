@@ -11,3 +11,15 @@ first_user_phone:
   profile: first_user_profile
   user: first_user
   creation_reason: fixtures
+
+otto_phone:
+  phone: 5555555555
+  profile: otto_profile
+  user: otto_user
+  creation_reason: fixtures
+
+mark_phone:
+  phone: 4444444444
+  profile: mark_profile
+  user: mark_user
+  creation_reason: fixtures

@@ -29,3 +29,23 @@ first_user:
   prepayment: 100
   order_rule: all
   password_digest: $2a$10$90bFORwosYEHSW28BqmF8eacXIBXwLuZ1P9pp0.bEpVp5c2FrgLI.
+
+otto_user:
+  auth_token: 28eoqmbORBE0YW9HSw8FFa
+  creation_reason: fixtures
+  role: user
+  discount: 0
+  prepayment: 100
+  order_rule: all
+  logout_from_other_places: true
+  password_digest: $2a$10$wQ1IG8ZsZX0PbzpDxWSgJ.qyB9XOvKceIckyzwEESavUNWGQZapvW
+
+mark_user:
+  auth_token: 9XOvKceIckyzwEE8ZsZX0P
+  creation_reason: fixtures
+  role: user
+  discount: 0
+  prepayment: 100
+  order_rule: all
+  logout_from_other_places: false
+  password_digest: $2a$10$3.PKll4wcX7cf2oDKkRZBOCdDDvHeO3XwTCwHBgHxQifFery8Fo5W

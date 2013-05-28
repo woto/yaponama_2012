@@ -4,35 +4,12 @@
   - else
     = link_to_remove_association '<i class="icon-trash ignoredirty"></i>'.html_safe, f, :class => "btn btn-danger pull-right ignoredirty", :confirm => 'Are you sure?'
 
-  .clearfix.bottom-space
-
-  .nested-visualize
-    = f.input :seriya
-    = f.input :nomer
-    = f.input :passport_vidan
-    = f.input :data_vidachi, input_html: { class: 'datetime' }
-    = f.input :kod_podrazdeleniya
-
-    .control-group class="#{f.object.errors[:female].present? ? 'error' : ''}"
-      label.control-label.required
-        abbr title="Обязательно к заполнению" *
-        '
-        'Пол
-      .controls
-        label.radio.inline
-          = f.radio_button(:female, false)
-          'Мужской
-        label.radio.inline
-          = f.radio_button(:female, true)
-          'Женский
-        .radio.inline
-          - if f.object.errors[:female].present?
-            span.inline.help-inline= f.object.errors[:female].join
-
-
-    = f.input :data_rozhdeniya, input_html: { class: 'datetime' }
-    = f.input :mesto_rozhdeniya
-    = f.input :creation_reason, :collection => Rails.configuration.user_passport_creation_reason.map {|k,v| [v,k]}.to_a, :disabled => true, :as => :radio_buttons
-    = f.input :hidden_recreate, as: :hidden
-
-    = render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f}
+  = f.input :seriya
+  = f.input :nomer
+  = f.input :passport_vidan
+  = f.input :data_vidachi, input_html: { class: 'datetime' }
+  = f.input :kod_podrazdeleniya
+  = f.input :gender, collection: [:male, :female], as: :radio_buttons, inline_label: true, item_wrapper_class: 'inline'
+  = f.input :data_rozhdeniya, input_html: { class: 'datetime' }
+  = f.input :mesto_rozhdeniya
+  = f.input :hidden_recreate, as: :hidden

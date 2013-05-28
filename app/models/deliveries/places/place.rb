@@ -1,7 +1,19 @@
 class Deliveries::Places::Place < ActiveRecord::Base
   has_and_belongs_to_many :variants
 
-  validates :name, :vertices, :presence => true
+  validates :vertices, :presence => true
+  validates :z_index, numericality: { only_integer: true }
+  validates :name, :variants, :presence => true, if: -> { realize }
+  ['active', 'inactive'].each do |style|
+    instance_eval do
+      ['fill_opacity', 'stroke_opacity', 'stroke_weight'].each do |prop|
+        validates "#{style}_#{prop}".to_sym, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1 }, if: -> { realize }
+      end
+      ['fill_color', 'stroke_color'].each do |prop|
+        validates "#{style}_#{prop}".to_sym, css_hex_color: true, if: -> { realize }
+      end
+    end
+  end
 
   def prepare
 
@@ -11,9 +23,9 @@ class Deliveries::Places::Place < ActiveRecord::Base
     self.z_index = 100
 
     ['active', 'inactive'].each do |style|
-      self["#{style}_fill_color"] = 'black'
+      self["#{style}_fill_color"] = '#000000'
       self["#{style}_fill_opacity"] = '0.5'
-      self["#{style}_stroke_color"] = 'black'
+      self["#{style}_stroke_color"] = '#000000'
       self["#{style}_stroke_opacity"] = '0.5'
       self["#{style}_stroke_weight"] = '0.5'
     end

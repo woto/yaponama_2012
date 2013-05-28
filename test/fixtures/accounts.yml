@@ -7,3 +7,13 @@ user_account:
   debit: 0.0
   credit: 0.0
   accountable: first_user (User)
+
+otto_account:
+  debit: 0.0
+  credit: 0.0
+  accountable: otto_user (User)
+
+mark_account:
+  debit: 0.0
+  credit: 0.0
+  accountable: mark_user (User)

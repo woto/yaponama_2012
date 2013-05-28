@@ -6,7 +6,7 @@ class CreatePassports < ActiveRecord::Migration
       t.string :passport_vidan
       t.date :data_vidachi
       t.string :kod_podrazdeleniya
-      t.boolean :female
+      t.string :gender
       t.date :data_rozhdeniya
       t.string :mesto_rozhdeniya
       t.references :profile, index: true

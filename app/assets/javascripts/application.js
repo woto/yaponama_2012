@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require jquery-ui
+//= require bootstrap/bootstrap
 //= require fake_console
 //
 // #DIRTY TESTS TODO REFACTOR

@@ -2,43 +2,53 @@
   - content_for :form_error do
     = f.error_notification
 
-  = f.input :active
-  = f.input :realize
-  = f.association :variants
-  = f.input :postal_address_required
+  .row-fluid
+    .span6
+      = f.input :active, label: false, inline_label: true
+      = f.input :z_index
 
-  = f.input :name
-  = f.input :content
-  = f.input :z_index
-  = f.input :display_marker
+      .inputs
+        .bottom-space
+          .input-append
+            input#geocode-address-text.input-xlarge.search-query type="text"
+            a#geocode-address-button class="btn" Найти адрес
+
+        #map
+
+    .span6
+
+      .control-group
+        .controls
+          button.stand_alone_house type="button" class="btn" data-toggle="button" data-direction="reverse" Доставка в данную область осуществляется
+          = f.check_box :realize, class: "checkbox_button_swap hide", data: { direction: "reverse" }
+
+      .block
+        = f.association :variants
+        = f.input :postal_address_required, label: false, inline_label: true
+
+        = f.input :name
+        = f.input :content
+        = f.input :display_marker, label: false, inline_label: true
+
+        ul.nav.nav-tabs
+          - ['active', 'inactive'].each do |style|
+            li class="#{style == 'active' ? 'active' : ''}"
+              a href="##{style}" data-toggle="tab" #{style}
+
+        div.tab-content
+          - ['active', 'inactive'].each do |style|
+            div.tab-pane id="#{style}" class="#{style == 'active' ? 'active' : ''}"
+              = f.input "#{style}_fill_color"
+              = f.input "#{style}_fill_opacity"
+              = f.input "#{style}_stroke_color"
+              = f.input "#{style}_stroke_opacity"
+              = f.input "#{style}_stroke_weight"
+
 
   = f.input :vertices, :as => :hidden
-
-  ul.nav.nav-tabs
-    - ['active', 'inactive'].each do |style|
-      li class="#{style == 'active' ? 'active' : ''}"
-        a href="##{style}" data-toggle="tab" #{style}
-
-  div.tab-content
-    - ['active', 'inactive'].each do |style|
-      div.tab-pane id="#{style}" class="#{style == 'active' ? 'active' : ''}"
-        = f.input "#{style}_fill_color"
-        = f.input "#{style}_fill_opacity"
-        = f.input "#{style}_stroke_color"
-        = f.input "#{style}_stroke_opacity"
-        = f.input "#{style}_stroke_weight"
-
   = f.input :lat, :as => :hidden
   = f.input :lng, :as => :hidden
   = f.input :zoom, :as => :hidden
-
-  .inputs
-    .bottom-space
-      .input-append
-        input#geocode-address-text.input-xxlarge.search-query type="text"
-        a#geocode-address-button class="btn" Найти адрес
-
-    #map
 
   .form-actions
     = f.button :submit, :class => 'btn-primary'
