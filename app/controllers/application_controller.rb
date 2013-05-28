@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
 
     current_user.user_agent                = request.user_agent.to_s
     current_user.accept_language           = request.accept_language.to_s
-    current_user.save
+    current_user.save!
   end
 
   def item_status(catalog_number, manufacturer)
