@@ -77,6 +77,6 @@
 //= require 'time_zone_checkbox'
 //= require 'postal_address'
 //= require 'collapse_buttons_in_profile'
-//= require 'delivery_zones'
+//= require 'deliveries/places/places'
 //= require 'deliveries'
 //= require 'auth'

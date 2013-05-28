@@ -32,7 +32,7 @@ window.initMap = ->
     shape.setEditable true
     
   update_vertices = (shape) ->
-    $('#delivery_zone_vertices').val(google.maps.geometry.encoding.encodePath(shape.getPath()))
+    $('#deliveries_places_place_vertices').val(google.maps.geometry.encoding.encodePath(shape.getPath()))
 
   add_events_handler_to_shape = (shape) ->
     google.maps.event.addListener shape.getPath(), 'set_at', (index) ->
@@ -44,11 +44,12 @@ window.initMap = ->
 
     google.maps.event.addListener shape, "rightclick", (mev) ->
       shape.getPath().removeAt mev.vertex  if mev.vertex?
+      # TODO включать режим редактирования если удалили последнюю точку
 
   initialize = ->
     window.map = new google.maps.Map(document.getElementById("map"),
-      zoom: parseInt($('#delivery_zone_zoom').val())
-      center: new google.maps.LatLng(parseFloat($('#delivery_zone_lat').val()), parseFloat($('#delivery_zone_lng').val()))
+      zoom: parseInt($('#deliveries_places_place_zoom').val())
+      center: new google.maps.LatLng(parseFloat($('#deliveries_places_place_lat').val()), parseFloat($('#deliveries_places_place_lng').val()))
       mapTypeId: google.maps.MapTypeId.ROADMAP
       disableDefaultUI: true
       zoomControl: true
@@ -57,10 +58,10 @@ window.initMap = ->
     # Вешаем обработчики событий изменения позиции на карте и зума
 
     google.maps.event.addListener window.map, 'zoom_changed', ->
-      $('#delivery_zone_zoom').val(window.map.getZoom())
+      $('#deliveries_places_place_zoom').val(window.map.getZoom())
     google.maps.event.addListener window.map, 'bounds_changed', ->
-      $('#delivery_zone_lat').val(window.map.getCenter().lat())
-      $('#delivery_zone_lng').val(window.map.getCenter().lng())
+      $('#deliveries_places_place_lat').val(window.map.getCenter().lat())
+      $('#deliveries_places_place_lng').val(window.map.getCenter().lng())
 
 
     polyOptions =
@@ -80,6 +81,7 @@ window.initMap = ->
       map: window.map
     )
 
+    # TODO дописать код чтобы можно было добавлять точки, в случае если удалили последнюю
 
     dont_allow_further_adding = ->
       # Switch back to non-drawing mode after drawing a shape.
@@ -89,9 +91,9 @@ window.initMap = ->
         drawingControl: false
 
     zoom_and_center_to_polygon = ->
-      window.map.setZoom(parseInt($('#delivery_zone_zoom').val()))
-      lat = parseFloat($('#delivery_zone_lat').val())
-      lng = parseFloat($('#delivery_zone_lng').val())
+      window.map.setZoom(parseInt($('#deliveries_places_place_zoom').val()))
+      lat = parseFloat($('#deliveries_places_place_lat').val())
+      lng = parseFloat($('#deliveries_places_place_lng').val())
       coords = new google.maps.LatLng(lat, lng)
       window.map.setCenter(coords)
 
@@ -114,11 +116,11 @@ window.initMap = ->
 
 
     # Инициализация карты
-    if $('#delivery_zone_vertices').val() != ''
+    if $('#deliveries_places_place_vertices').val() != ''
       poly = new google.maps.Polygon(polyOptions)
       poly.setMap(map)
 
-      path = google.maps.geometry.encoding.decodePath($('#delivery_zone_vertices').val())
+      path = google.maps.geometry.encoding.decodePath($('#deliveries_places_place_vertices').val())
 
       poly.setPath path
       setSelection poly
