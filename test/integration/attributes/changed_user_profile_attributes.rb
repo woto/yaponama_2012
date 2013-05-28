@@ -30,7 +30,7 @@ module ChangedUserProfileAttributes
             'data_vidachi(1i)' => '2002',
             'data_vidachi(2i)' => '2',
             'data_vidachi(3i)' => '2',
-            'female' => 'true',
+            'gender' => 'female',
             'kod_podrazdeleniya' => '2',
             'mesto_rozhdeniya' => '2',
             'nomer' => '2',

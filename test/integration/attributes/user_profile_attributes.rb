@@ -27,7 +27,7 @@ module UserProfileAttributes
             'data_vidachi(1i)' => '2001',
             'data_vidachi(2i)' => '1',
             'data_vidachi(3i)' => '1',
-            'female' => 'false',
+            'gender' => 'male',
             'kod_podrazdeleniya' => '1',
             'mesto_rozhdeniya' => '1',
             'nomer' => '1',
