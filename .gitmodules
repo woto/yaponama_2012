@@ -64,3 +64,6 @@
 [submodule "system/submodules/Respond"]
 	path = system/submodules/Respond
 	url = https://github.com/scottjehl/Respond.git
+[submodule "system/submodules/iCheck"]
+	path = system/submodules/iCheck
+	url = https://github.com/damirfoy/iCheck.git
