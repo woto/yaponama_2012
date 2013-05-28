@@ -14,8 +14,8 @@ class CreateDeliveriesPlacesPlaces < ActiveRecord::Migration
         t.string "#{style}_stroke_weight".to_sym
       end
 
-      t.boolean :realize
-      t.boolean :active
+      t.boolean :realize, default: true
+      t.boolean :active, default: true
       t.float :lat
       t.float :lng
       t.integer :zoom

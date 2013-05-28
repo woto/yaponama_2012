@@ -1,0 +1,14 @@
+.nested-fields
+  - if f.object._destroy
+    = hidden_field_tag("#{f.object_name}[_destroy]", '1')
+  - else
+    = link_to_remove_association '<i class="icon-trash ignoredirty"></i>'.html_safe, f, :class => "btn btn-danger pull-right ignoredirty", :confirm => 'Are you sure?'
+
+    .clearfix.bottom-space
+
+    .nested-visualize
+      = f.input :name
+      = f.input :available, label: false, inline_label: true
+      = f.input :sequence
+      = f.input :delivery_cost
+      = f.input :content

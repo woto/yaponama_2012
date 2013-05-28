@@ -1,5 +1,7 @@
 class Deliveries::Places::Place < ActiveRecord::Base
-  has_and_belongs_to_many :variants
+  has_many :variants, dependent: :destroy
+  accepts_nested_attributes_for :variants, :reject_if => :all_blank, :allow_destroy => true
+  validates :variants, :length => { :minimum => 1 }
 
   validates :vertices, :presence => true
   validates :z_index, numericality: { only_integer: true }
