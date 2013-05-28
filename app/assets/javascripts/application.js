@@ -80,3 +80,4 @@
 //= require 'deliveries/places/places'
 //= require 'deliveries'
 //= require 'auth'
+//= require 'catch_enter'

@@ -18,15 +18,15 @@ div.tab-content
       .inputs
         .bottom-space
           .input-append
-            input#geocode-address-text.span12.search-query type="text" placeholder="Укажите адрес доставки"
-            a#geocode-address-button class="btn" Найти адрес
+            input#geocode-address-text.span12.search-query.catch-enter type="text" placeholder="Укажите адрес доставки"
+            a#geocode-address-button.press-enter class="btn" Найти адрес
 
     .row-fluid
       .span6
 
         #deliveries-accordion.accordion
-          - DeliveryZone.all.each do |delivery_zone|
-            .accordion-group
+          - Deliveries::Places::Place.where(active: true).each do |delivery_zone|
+            .accordion-group class="#{delivery_zone.realize? ? '' : 'hide'}"
               .accordion-heading.delivery_zone
                 / Картографические данные области
                 div style="display: none"
@@ -36,6 +36,7 @@ div.tab-content
                   .zoom = delivery_zone.zoom
                   .display_marker = delivery_zone.display_marker
                   .z_index = delivery_zone.z_index
+                  .realize = delivery_zone.realize
                   - ['active', 'inactive'].each do |style|
                     div class="#{style}"
                       .fill_color= delivery_zone["#{style}_fill_color"]
@@ -48,7 +49,11 @@ div.tab-content
                   strong= delivery_zone.name
               .accordion-body.collapse id="#{rand_id}"
                 .accordion-inner
-                  =delivery_zone.content
+                  p= delivery_zone.content
+                  - delivery_zone.variants.each do |variant|
+                    strong = variant.name
+                    p== variant.content
+                    p= number_to_currency variant.delivery_cost
       .span6
         #clientMap
 
