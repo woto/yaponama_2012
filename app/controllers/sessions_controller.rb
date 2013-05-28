@@ -23,6 +23,12 @@ class SessionsController < ApplicationController
     end
 
     if authenticated_user
+
+      if authenticated_user.logout_from_other_places?
+        authenticated_user.generate_token :auth_token
+        authenticated_user.save!
+      end
+
       if params[:remember_me]
         cookies.permanent[:auth_token] = { :value => authenticated_user.auth_token}
       else
