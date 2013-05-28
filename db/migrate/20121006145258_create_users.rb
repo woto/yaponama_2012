@@ -32,6 +32,8 @@ class CreateUsers < ActiveRecord::Migration
 
       t.boolean :phantom # TODO Позже задействовать
 
+      t.boolean :logout_from_other_places, default: true
+
       t.timestamps
     end
   end
