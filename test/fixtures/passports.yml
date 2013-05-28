@@ -4,7 +4,7 @@ first_admin_passport:
   passport_vidan: '1'
   data_vidachi: 2013-05-22
   kod_podrazdeleniya: '1'
-  female: false
+  gender: male
   data_rozhdeniya: 2013-05-22
   mesto_rozhdeniya: '1'
   profile: first_admin_profile
