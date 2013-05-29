@@ -91,3 +91,5 @@ gem 'omniauth-yandex'
 gem 'omniauth-vkontakte'
 gem 'omniauth-odnoklassniki'
 gem 'omniauth-mailru'
+
+gem 'faye-websocket'
