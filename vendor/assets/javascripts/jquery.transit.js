@@ -1,1 +1,0 @@
-../../../system/submodules/jquery.transit/jquery.transit.js

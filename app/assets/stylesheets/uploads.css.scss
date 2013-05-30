@@ -1,6 +1,8 @@
 /*
- *= require jquery.Jcrop
- * TODO разобраться со стилями, обр. внимание на noscript
- * require jQuery-File-Upload/jquery.fileupload-ui-noscript.css
- * require jQuery-File-Upload/jquery.fileupload-ui.css
+ *= require jQuery-File-Upload/css/jquery.fileupload-ui
+ *= require Jcrop/css/jquery.Jcrop
 */
+
+.jcrop-hack img {
+  max-width: none;
+}

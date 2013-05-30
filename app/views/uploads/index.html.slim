@@ -1,0 +1,37 @@
+.page-header
+  h2 Закачка файлов
+
+.alert.alert-notice
+  |Вы можете выбрать сразу несколько файлов за раз, а так же можете просто перетащить их курсором с компьютера в это окно.
+
+span.btn.btn-primary.fileinput-button
+  i.icon-plus.icon-white
+  span  Выберите файлы...
+  input#fileupload type="file" name="upload[upload]" multiple=""
+
+br
+br
+
+#progress.progress.progress-success.progress-striped
+  .bar
+
+#uploads
+
+a href="javascript:select_image();" Insert this image
+
+javascript:
+  window.CKEditorFuncNum = #{params['CKEditorFuncNum']}
+
+
+div
+
+  h3 Rotate
+  = image_tag 'rails.png', :class => 'img-rotate'
+
+  div.jcrop-hack
+    h3 Crop
+    = image_tag 'rails.png', :class => "img-crop"
+
+
+= javascript_include_tag :uploads
+= stylesheet_link_tag :uploads
