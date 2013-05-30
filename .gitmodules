@@ -13,18 +13,9 @@
 [submodule "system/submodules/select2"]
 	path = system/submodules/select2
 	url = https://github.com/ivaynberg/select2
-[submodule "system/submodules/JavaScript-Canvas-to-Blob"]
-	path = system/submodules/JavaScript-Canvas-to-Blob
-	url = https://github.com/blueimp/JavaScript-Canvas-to-Blob.git
 [submodule "system/submodules/jQuery-File-Upload"]
 	path = system/submodules/jQuery-File-Upload
 	url = https://github.com/blueimp/jQuery-File-Upload.git
-[submodule "system/submodules/JavaScript-Load-Image"]
-	path = system/submodules/JavaScript-Load-Image
-	url = https://github.com/blueimp/JavaScript-Load-Image.git
-[submodule "system/submodules/JavaScript-Templates"]
-	path = system/submodules/JavaScript-Templates
-	url = https://github.com/blueimp/JavaScript-Templates.git
 [submodule "system/submodules/jquery.transit"]
 	path = system/submodules/jquery.transit
 	url = https://github.com/rstacruz/jquery.transit
@@ -46,9 +37,6 @@
 [submodule "system/submodules/jquery-jsonp"]
 	path = system/submodules/jquery-jsonp
 	url = https://github.com/jaubourg/jquery-jsonp.git
-[submodule "system/submodules/getImageData"]
-	path = system/submodules/getImageData
-	url = https://github.com/woto/getImageData.git
 [submodule "system/submodules/mustache"]
 	path = system/submodules/mustache
 	url = git://github.com/janl/mustache.js.git
