@@ -136,6 +136,7 @@ GEM
     active_utils (1.0.5)
       activesupport (>= 2.3.11)
       i18n
+    addressable (2.3.4)
     ancestry (2.0.0)
       activerecord (>= 3.0.0)
     atomic (1.1.9)
@@ -167,23 +168,45 @@ GEM
     coffee-script-source (1.6.2)
     columnize (0.3.6)
     commonjs (0.2.6)
+    cookiejar (0.3.0)
+    daemons (1.1.9)
     debugger (1.6.0)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
       debugger-ruby_core_source (~> 1.2.1)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.2)
+    em-http-request (1.0.3)
+      addressable (>= 2.2.3)
+      cookiejar
+      em-socksify
+      eventmachine (>= 1.0.0.beta.4)
+      http_parser.rb (>= 0.5.3)
+    em-socksify (0.2.1)
+      eventmachine (>= 1.0.0.beta.4)
     erubis (2.7.0)
+    eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
     fastercsv (1.5.5)
+    faye (0.8.9)
+      cookiejar (>= 0.3.0)
+      em-http-request (>= 0.3.0)
+      eventmachine (>= 0.12.0)
+      faye-websocket (>= 0.4.0)
+      rack (>= 1.0.0)
+      yajl-ruby (>= 1.0.0)
+    faye-websocket (0.6.1)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.2.0)
     ffi (1.8.1)
     hashie (2.0.5)
     highline (1.6.19)
     hike (1.2.2)
     hiredis (0.4.5)
+    http_parser.rb (0.5.3)
     httpauth (0.2.0)
     i18n (0.6.4)
     innertube (1.0.2)
@@ -209,8 +232,6 @@ GEM
       treetop (~> 1.4.8)
     middleware (0.1.0)
     mime-types (1.23)
-    mini_magick (3.6.0)
-      subexec (~> 0.2.1)
     minitest (5.0.2)
     money (5.1.1)
       i18n (~> 0.6.0)
@@ -272,6 +293,7 @@ GEM
     redis (3.0.4)
     ref (1.0.5)
     riddle (1.5.6)
+    rmagick (2.13.1)
     ruby-growl (4.0)
       uuid (~> 2.3, >= 2.3.5)
     rubyzip (0.9.9)
@@ -300,12 +322,15 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    subexec (0.2.3)
     systemu (2.5.2)
     temple (0.6.5)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
+    thin (1.5.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thinking-sphinx (3.0.0)
       activerecord (>= 3.1.0)
       builder (>= 2.1.2)
@@ -332,11 +357,13 @@ GEM
     uuid (2.3.7)
       macaddr (~> 1.0)
     websocket (1.0.7)
+    websocket-driver (0.2.0)
     whenever (0.8.2)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
+    yajl-ruby (1.1.0)
     yandex_mystem (0.0.2)
 
 PLATFORMS
@@ -357,6 +384,7 @@ DEPENDENCIES
   coffee-rails!
   debugger
   fastercsv
+  faye
   hiredis (~> 0.4.5)
   ipgeobase!
   jbuilder (~> 1.0.1)
@@ -364,7 +392,6 @@ DEPENDENCIES
   json
   kaminari
   less-rails
-  mini_magick
   mysql2 (= 0.3.12b4)
   omniauth
   omniauth-facebook
@@ -377,6 +404,7 @@ DEPENDENCIES
   pg
   rails!
   redis (~> 3.0.1)
+  rmagick
   ruby-growl
   russian
   sanitize
@@ -387,6 +415,7 @@ DEPENDENCIES
   slim-rails
   sprockets-rails!
   therubyracer
+  thin
   thinking-sphinx (= 3.0.0)
   turbolinks
   twitter-bootstrap-rails!

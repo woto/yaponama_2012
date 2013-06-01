@@ -1,37 +1,39 @@
-.page-header
-  h2 Закачка файлов
+.container
+  .page-header
+    h2 Закачка файлов
 
-.alert.alert-notice
-  |Вы можете выбрать сразу несколько файлов за раз, а так же можете просто перетащить их курсором с компьютера в это окно.
+  button.btn.btn-primary.btn-large.fileinput-button
+    i.icon-plus.icon-white
+    span  Выберите файлы...
+    input#fileupload type="file" name="upload[upload]" multiple=""
+  '
+  a#insert_files_into_ckeditor.btn.btn-success.btn-large.hide Вставить файлы
 
-span.btn.btn-primary.fileinput-button
-  i.icon-plus.icon-white
-  span  Выберите файлы...
-  input#fileupload type="file" name="upload[upload]" multiple=""
+  br
+  br
 
-br
-br
+  #progress.progress.progress-success.progress-striped.hide
+    .bar
 
-#progress.progress.progress-success.progress-striped
-  .bar
+  #uploads
 
-#uploads
+  .alert.alert-notice
+    h5 Подсказка
+    |Вы можете выбрать сразу несколько файлов за раз, а так же можете просто перетащить их курсором с компьютера на кнопку загрузки.
 
-a href="javascript:select_image();" Insert this image
-
-javascript:
-  window.CKEditorFuncNum = #{params['CKEditorFuncNum']}
-
-
-div
-
-  h3 Rotate
-  = image_tag 'rails.png', :class => 'img-rotate'
-
-  div.jcrop-hack
-    h3 Crop
-    = image_tag 'rails.png', :class => "img-crop"
-
+#ckeditor-name.hide #{params['CKEditor']}
 
 = javascript_include_tag :uploads
 = stylesheet_link_tag :uploads
+
+
+/javascript:
+
+  select_image = (function() {
+    window.parent.opener.CKEDITOR.tools.callFunction( window.CKEditorFuncNum, 'http://localhost:3000/uploads/upload/upload/96/thumb_6a1bd8ad7ee7fd44f63849371cc07862.jpg', '' );
+    //window.parent.opener.CKEDITOR.dialog.getCurrent().hide();
+    self.close();
+  })
+
+  window.CKEditorFuncNum = #{params['CKEditorFuncNum']}
+

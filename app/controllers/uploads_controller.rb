@@ -1,4 +1,6 @@
 class UploadsController < ApplicationController
+  # TODO убрать hide_toolbar, т.к. стал использовать lightwaight layout
+  #
   before_filter {@hide_toolbar = true}
   # GET /uploads
   # GET /uploads.json
@@ -6,7 +8,7 @@ class UploadsController < ApplicationController
     @uploads = Upload.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render layout: "lightweight" }
       format.json { render json: { files: @uploads.map{|upload| upload.to_jq_upload } } }
     end
   end
@@ -14,8 +16,7 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
-    @upload = Upload.new(upload: upload_params[:upload][0])
-    #@upload = Upload.new(upload_params)
+    @upload = Upload.new(upload_params)
     @upload.user = current_user
 
     respond_to do |format|
@@ -33,15 +34,22 @@ class UploadsController < ApplicationController
     end
   end
 
-  # DELETE /uploads/1
-  # DELETE /uploads/1.json
-  def destroy
-    @upload = Upload.find(params[:id])
-    @upload.destroy
+  def crop
+    @upload = Upload.find params[:id]
+    @upload.operation = 'crop'
+    render layout: 'lightweight'
+  end
 
-    respond_to do |format|
-      format.html { redirect_to uploads_url }
-      format.json { head :no_content }
+  def rotate
+    @upload = Upload.find params[:id]
+    @upload.operation = 'rotate'
+    render layout: 'lightweight'
+  end
+
+  def update
+    @upload = Upload.find(params[:id])
+    if @upload.update_attributes(upload_params)
+      render 'close_and_update_image'
     end
   end
 

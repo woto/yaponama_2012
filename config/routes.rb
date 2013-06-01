@@ -211,7 +211,12 @@ Yaponama2012::Application.routes.draw do
   resources :account_transactions
 
   resources :comments
-  resources :uploads
+  resources :uploads do
+    member do
+      get 'crop'
+      get 'rotate'
+    end
+  end
 
 
   resources :password_resets, :only => [:new, :create, :edit, :update]

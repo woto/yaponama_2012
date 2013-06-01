@@ -1,0 +1,23 @@
+.container.top-space.bottom-space
+  .page-header
+    h2 Поворот изображения
+
+  = simple_form_for @upload, remote: true do |f|
+    .hide
+      = f.input :angle
+      = f.input :operation
+
+    div style="position: relative; z-index: 100"
+      a.rotate-button class="btn" href="#" data-angle="90"
+        i.icon-rotate-left
+      '
+      a.rotate-button class="btn" href="#" data-angle="-90"
+        i.icon-rotate-right
+      '
+      = f.submit 'Сохранить', class: "btn btn-primary"
+
+  div style="position: relative; z-index: 90"
+    = image_tag @upload.upload.url, id: 'img-rotate'
+
+= javascript_include_tag 'uploads/rotate'
+= stylesheet_link_tag 'uploads/rotate'

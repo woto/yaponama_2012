@@ -37,8 +37,6 @@
 
 //= require jquery-jsonp/src/jquery.jsonp
 
-//=require insert_images_dialog
-
 //=require holder.js/holder
 
 //=require toolbar-checkboxes
