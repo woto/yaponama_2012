@@ -55,3 +55,6 @@
 [submodule "system/submodules/iCheck"]
 	path = system/submodules/iCheck
 	url = https://github.com/damirfoy/iCheck.git
+[submodule "system/submodules/console.log-wrapper"]
+	path = system/submodules/console.log-wrapper
+	url = https://github.com/cpatik/console.log-wrapper.git

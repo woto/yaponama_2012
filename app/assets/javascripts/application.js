@@ -14,7 +14,15 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap/bootstrap
-//= require fake_console
+//
+//
+//
+// console.log-wrapper
+//
+//= require console.log-wrapper/consolelog.min.js
+//= require console.log-wrapper/consolelog.detailprint.min.js
+//
+//
 //
 // #DIRTY TESTS TODO REFACTOR
 //= require scrollbarWidth
