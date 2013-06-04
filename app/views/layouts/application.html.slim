@@ -87,14 +87,15 @@ body
 
     .row-fluid
       #main.span8
-        #chat-button-show.chat-button
+        #talk-button-show.talk-button
+          #talk-notify style="height: 20px; position: absolute;" data-toggle="popover" data-html="true" data-placement="left" data-animate="true"
           i.icon.icon-double-angle-left
         = yield
-      #sidebar.span4
-        #chat-button-hide.chat-button
+      #talk.span4
+        #talk-button-hide.talk-button
           i.icon.icon-double-angle-right
 
-        = render :partial => "shared/chat"
+        = render :partial => "talks/talk"
 
     hr
     footer
