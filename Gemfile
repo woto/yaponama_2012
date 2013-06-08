@@ -94,3 +94,5 @@ gem 'omniauth-mailru'
 
 gem 'faye'
 gem 'thin'
+
+gem 'sht_rails'
