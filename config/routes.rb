@@ -113,10 +113,6 @@ Yaponama2012::Application.routes.draw do
 
     resources :calls
 
-    resources :stats do
-      get "iframe", :on => :member
-    end
-
     resources :blocks
 
     concern :searchable do

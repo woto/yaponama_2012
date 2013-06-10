@@ -25,7 +25,6 @@
 //
 //
 // #DIRTY TESTS TODO REFACTOR
-//= require scrollbarWidth
 //= require stat
 //
 //= require turbolinks
@@ -51,12 +50,6 @@
 
 //=require tests
 
-//= require socket.io/connect
-//= require socket.io/cursor
-//= require socket.io/size
-//= require socket.io/scroll
-//= require socket.io/page
-//
 //= require jquery.cachedScript
 //= require jquery.editableHighlight
 //
