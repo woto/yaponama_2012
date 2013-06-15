@@ -12,7 +12,7 @@ window.initSimpleCkeditor = ->
       for ckeditor, i in placeholders
         tmp_ckeditor = CKEDITOR.replace(ckeditor, {
           # Без указания plugins к нему так же цепляется inline
-          plugins: 'basicstyles,list,link,pastetext,toolbar,undo,upload,resize',
+          plugins: 'basicstyles,list,link,pastetext,toolbar,undo,upload',
           toolbar: [
               { name: 'basicstyles', items: [ 'Bold', 'Italic' ] },
               { name: 'links', items: [ 'Link', 'Unlink' ] },
@@ -20,8 +20,9 @@ window.initSimpleCkeditor = ->
               ['Upload']
             ],
           forcePasteAsPlainText: true,
-          height: 75,
-          extraPlugins: 'divarea',
+          height: 'auto',
+          extraPlugins: 'divarea,autogrow',
+          removePlugins: 'resize'
         })
 
         root = exports ? window # http://stackoverflow.com/questions/4214731/coffeescript-global-variables
