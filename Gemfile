@@ -92,7 +92,4 @@ gem 'omniauth-vkontakte'
 gem 'omniauth-odnoklassniki'
 gem 'omniauth-mailru'
 
-gem 'faye'
-gem 'thin'
-
 gem 'sht_rails'
