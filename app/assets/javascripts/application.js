@@ -57,9 +57,6 @@
 //
 //= require companies
 //= require turbolinks_events
-//= require history.js/scripts/compressed/history.js
-//= require history.js/scripts/compressed/history.html4.js
-//= require history.js/scripts/compressed/history.adapter.jquery.js 
 //
 //= require tooltip_popover_rel
 //= require items_progress
@@ -71,6 +68,13 @@
 //= require 'deliveries'
 //= require 'auth'
 //= require 'catch_enter'
+//
+//
+// == nanoscroller
+//
+//= require 'nanoScrollerJS/coffeescripts/jquery.nanoscroller'
+//
+//
 // == holderjs
 //
 //= require holder.js/holder

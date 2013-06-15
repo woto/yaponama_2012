@@ -46,9 +46,6 @@
 [submodule "system/submodules/bootstrap-datepicker"]
 	path = system/submodules/bootstrap-datepicker
 	url = git://github.com/eternicode/bootstrap-datepicker.git
-[submodule "system/submodules/history.js"]
-	path = system/submodules/history.js
-	url = git://github.com/browserstate/history.js.git
 [submodule "system/submodules/Respond"]
 	path = system/submodules/Respond
 	url = https://github.com/scottjehl/Respond.git
