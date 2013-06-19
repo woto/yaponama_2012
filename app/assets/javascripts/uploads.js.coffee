@@ -1,5 +1,6 @@
 #= require jQuery-File-Upload/js/jquery.iframe-transport
 #= require jQuery-File-Upload/js/jquery.fileupload
+#  require jQuery-File-Upload/js/vendor/jquery.ui.widget.js
 
 # Обработка изображений (crop, rotate)
 $(document).on 'click', '.image-process', ->

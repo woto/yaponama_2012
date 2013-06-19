@@ -1,7 +1,7 @@
 //= require jquery
+//= require jquery.ui.all
 //
 //= require jquery_ujs
-//= require jquery-ui
 //= require bootstrap/bootstrap
 //
 // == sht_rails
@@ -79,4 +79,5 @@
 //
 //= require holder.js/holder
 //= require holder
-
+//
+//= require common 
