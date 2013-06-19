@@ -128,13 +128,12 @@ db.connect (err) ->
             ]
 
       debug_globals = ->
-        console.log "----".green
-        console.log "users"
-        console.log users
-        console.log "rooms"
-        console.log rooms
-        console.log "connections"
-        console.log _.keys(connections)
+        for connection in _.values(connections)
+          data = 
+            users: users
+            rooms: rooms
+            connections: _.keys(connections)
+          connection.write JSON.stringify(data)
 
       update_residents = (room, debug) ->
         for user in rooms[room]['users']

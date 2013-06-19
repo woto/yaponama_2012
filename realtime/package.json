@@ -11,7 +11,6 @@
       "debugger": "*",
       "underscore": "*",
       "async": "*",
-      "express": "*",
       "sockjs": "*",
       "colors": "*"
     },
