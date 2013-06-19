@@ -1,0 +1,22 @@
+{
+    "name": "yaponama_2012",
+    "description": "",
+    "version": "0.0.1",
+    "dependencies": {
+      "socket.io": "*",
+      "redis": "*",
+      "pg": "*",
+      "js-yaml": "*",
+      "nodemon": "*",
+      "debugger": "*",
+      "underscore": "*",
+      "async": "*",
+      "express": "*",
+      "sockjs": "*",
+      "colors": "*"
+    },
+    "engines": {
+      "node": "*",
+      "npm": "*"
+    }
+}
