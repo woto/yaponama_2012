@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/joliss/jquery-ui-rails.git
+  revision: 4ca6d65d8f9e7f2b77fab743fd624dfbcaed633d
+  specs:
+    jquery-ui-rails (4.0.3)
+      jquery-rails
+      railties (>= 3.1.0)
+
+GIT
   remote: git://github.com/rails/activerecord-deprecated_finders.git
   revision: f6ed71d62d47f0f6397b5b3e801271567f30f960
   specs:
@@ -28,7 +36,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: b8f6fccae3af30fa2ee612e8cff4c2243e95e24f
+  revision: bfc8ffa2327ac6e3949507e71dba04dd3a6c9131
   specs:
     actionmailer (4.1.0.beta)
       actionpack (= 4.1.0.beta)
@@ -370,6 +378,7 @@ DEPENDENCIES
   ipgeobase!
   jbuilder (~> 1.0.1)
   jquery-rails!
+  jquery-ui-rails!
   json
   kaminari
   less-rails

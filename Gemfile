@@ -36,6 +36,7 @@ group :development, :test do
 end
 
 gem 'jquery-rails', github: 'rails/jquery-rails'
+gem 'jquery-ui-rails', github: 'joliss/jquery-ui-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
