@@ -1,8 +1,8 @@
 //= require jquery
 //= require jquery.ui.all
-//
 //= require jquery_ujs
 //= require bootstrap/bootstrap
+//= require sockjs-client/sockjs
 //
 // == sht_rails
 //

@@ -58,3 +58,6 @@
 [submodule "system/submodules/nanoScrollerJS"]
 	path = system/submodules/nanoScrollerJS
 	url = https://github.com/jamesflorentino/nanoScrollerJS
+[submodule "system/submodules/sockjs-client"]
+	path = system/submodules/sockjs-client
+	url = https://github.com/sockjs/sockjs-client
