@@ -11,6 +11,10 @@ window.initExtendedCkeditor = ->
   if placeholders.length > 0
     url = "/assets/ckeditor/ckeditor.js"
     $.cachedScript(url).done (script, textStatus) ->
+      CKEDITOR.plugins.addExternal('oembed', '/assets/oembed/', 'plugin.js');
+      CKEDITOR.plugins.addExternal('codemirror', '/assets/codemirror/', 'plugin.js');
+      CKEDITOR.plugins.addExternal('timestamp', '/assets/timestamp/', 'plugin.js');
+      CKEDITOR.plugins.addExternal('abbr', '/assets/abbr/', 'plugin.js');
       for ckeditor, i in placeholders
         tmp_ckeditor = CKEDITOR.replace(ckeditor, window.extended_options)
         root = exports ? window # http://stackoverflow.com/questions/4214731/coffeescript-global-variables

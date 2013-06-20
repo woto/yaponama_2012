@@ -9,6 +9,7 @@ window.initSimpleCkeditor = ->
   if placeholders.length > 0
     url = "/assets/ckeditor/ckeditor.js"
     $.cachedScript(url).done (script, textStatus) ->
+      CKEDITOR.plugins.addExternal('upload', '/assets/upload/', 'plugin.js');
       for ckeditor, i in placeholders
         tmp_ckeditor = CKEDITOR.replace(ckeditor, {
           # Без указания plugins к нему так же цепляется inline
