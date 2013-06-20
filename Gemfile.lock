@@ -36,7 +36,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: acd987eca93350454574fc3acb4cf389c81bff3a
+  revision: 7c69a829a311a31109939cff19b700b36b97d5c4
   specs:
     actionmailer (4.1.0.beta)
       actionpack (= 4.1.0.beta)
@@ -279,7 +279,7 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     raindrops (0.11.0)
-    rake (10.0.4)
+    rake (10.1.0)
     redis (3.0.4)
     ref (1.0.5)
     riddle (1.5.6)
