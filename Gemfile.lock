@@ -36,17 +36,21 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 7c69a829a311a31109939cff19b700b36b97d5c4
+  revision: a29f746398e7b0647885343e7f26d977dd251999
   specs:
     actionmailer (4.1.0.beta)
       actionpack (= 4.1.0.beta)
       mail (~> 2.5.4)
     actionpack (4.1.0.beta)
+      actionview (= 4.1.0.beta)
+      activesupport (= 4.1.0.beta)
+      rack (~> 1.5.2)
+      rack-test (~> 0.6.2)
+    actionview (4.1.0.beta)
+      activemodel (= 4.1.0.beta)
       activesupport (= 4.1.0.beta)
       builder (~> 3.1.0)
       erubis (~> 2.7.0)
-      rack (~> 1.5.2)
-      rack-test (~> 0.6.2)
     activemodel (4.1.0.beta)
       activesupport (= 4.1.0.beta)
       builder (~> 3.1.0)
@@ -64,6 +68,7 @@ GIT
     rails (4.1.0.beta)
       actionmailer (= 4.1.0.beta)
       actionpack (= 4.1.0.beta)
+      actionview (= 4.1.0.beta)
       activerecord (= 4.1.0.beta)
       activesupport (= 4.1.0.beta)
       bundler (>= 1.3.0, < 2.0)
@@ -132,7 +137,7 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: 3df45ebff856c4a0d7653fa3b24442a3fe8f6c17
+  revision: 782db58e27e152a4246fdb2cbc3a1bc7e43b492b
   specs:
     simple_form (3.0.0.rc)
       actionpack (>= 4.0.0.rc1, < 4.1)
@@ -166,8 +171,6 @@ GEM
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
     charlock_holmes (0.6.9.4)
-    childprocess (0.3.9)
-      ffi (~> 1.0, >= 1.0.11)
     chronic (0.9.1)
     coffee-script (2.2.0)
       coffee-script-source
@@ -182,12 +185,14 @@ GEM
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.2)
     erubis (2.7.0)
+    eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
     fastercsv (1.5.5)
-    ffi (1.9.0)
+    faye-websocket (0.4.7)
+      eventmachine (>= 0.12.0)
     handlebars (0.4.0)
       commonjs (~> 0.2.3)
       therubyracer (~> 0.11.1)
@@ -195,6 +200,7 @@ GEM
     highline (1.6.19)
     hike (1.2.3)
     hiredis (0.4.5)
+    http_parser.rb (0.5.3)
     httpauth (0.2.0)
     i18n (0.6.4)
     innertube (1.0.2)
@@ -221,7 +227,7 @@ GEM
     middleware (0.1.0)
     mime-types (1.23)
     mini_portile (0.5.0)
-    minitest (5.0.4)
+    minitest (5.0.5)
     money (5.1.1)
       i18n (~> 0.6.0)
     multi_json (1.7.7)
@@ -248,7 +254,7 @@ GEM
       rack
     omniauth-facebook (1.4.1)
       omniauth-oauth2 (~> 1.1.0)
-    omniauth-google-oauth2 (0.1.18)
+    omniauth-google-oauth2 (0.1.19)
       omniauth (~> 1.0)
       omniauth-oauth2
     omniauth-mailru (1.0.0)
@@ -274,6 +280,10 @@ GEM
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
     pg (0.15.1)
+    poltergeist (1.3.0)
+      capybara (~> 2.1.0)
+      faye-websocket (>= 0.4.4, < 0.5.0)
+      http_parser.rb (~> 0.5.3)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -286,17 +296,11 @@ GEM
     rmagick (2.13.2)
     ruby-growl (4.0)
       uuid (~> 2.3, >= 2.3.5)
-    rubyzip (0.9.9)
     russian (0.6.0)
       i18n (>= 0.5.0)
     sanitize (2.0.4)
       nokogiri (~> 1.6.0)
     sass (3.2.9)
-    selenium-webdriver (2.33.0)
-      childprocess (>= 0.2.5)
-      multi_json (~> 1.0)
-      rubyzip
-      websocket (~> 1.0.4)
     sht_rails (0.2.0)
       execjs (>= 0.3.0)
       handlebars (>= 0.4.0)
@@ -348,7 +352,6 @@ GEM
       raindrops (~> 0.7)
     uuid (2.3.7)
       macaddr (~> 1.0)
-    websocket (1.0.7)
     whenever (0.8.2)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
@@ -392,6 +395,7 @@ DEPENDENCIES
   omniauth-vkontakte
   omniauth-yandex
   pg
+  poltergeist
   rails!
   redis (~> 3.0.1)
   rmagick
@@ -399,7 +403,6 @@ DEPENDENCIES
   russian
   sanitize
   sass-rails!
-  selenium-webdriver
   sht_rails
   simple_form!
   sitemap_generator

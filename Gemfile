@@ -31,8 +31,8 @@ group :development, :test do
   gem 'debugger'
   gem 'capistrano'
   gem 'capybara'
-  gem 'selenium-webdriver'
-  #gem 'poltergeist'
+  #gem 'selenium-webdriver'
+  gem 'poltergeist'
 end
 
 gem 'jquery-rails', github: 'rails/jquery-rails'
