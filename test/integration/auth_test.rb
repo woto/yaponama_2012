@@ -10,15 +10,14 @@ class AuthTest < ActionDispatch::IntegrationTest
     visit '/login'
     click_link 'google_oauth2'
 
-    window = page.driver.browser.window_handles.last
-
-    page.within_window window do
+    page.within_window 'login' do
       fill_in 'Email', :with => 'yaponama.2012@gmail.com'
       fill_in 'Passwd', :with => '2012.yaponama'
       find('#signIn').click
       find("#submit_approve_access:not([disabled])").click
     end
 
-    assert page.has_css?('.hide', visible: false, text: /yaponama/)
+    # Ищем google uid
+    assert page.has_selector?('#auth-result', text: /105940515133361319903/)
   end
 end

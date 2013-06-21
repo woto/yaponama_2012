@@ -4,14 +4,22 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
-#require 'capybara/poltergeist'
+require 'capybara/poltergeist'
+
+
+#Capybara.register_driver :poltergeist do |app|
+#  Capybara::Poltergeist::Driver.new(app, {
+#    timeout: 120
+#  })
+#end
 
 Capybara.server_port = 3000
 Capybara.server_host = 'localhost'
-Capybara.default_driver = :selenium
-#Capybara.default_driver = :poltergeist
-#Capybara.javascript_driver = :poltergeist
-Capybara.default_wait_time = 10
+#Capybara.default_driver = :selenium
+Capybara.default_driver = :poltergeist
+Capybara.javascript_driver = :poltergeist
+#Capybara.default_wait_time = 10
+
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL

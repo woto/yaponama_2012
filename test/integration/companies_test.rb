@@ -84,10 +84,10 @@ class CompaniesTest < ActionDispatch::IntegrationTest
     find('#legal_address').find('.rotate-type').click
 
     # Факт. выбрали 'Такой же как и юр.'
-    find('#company_actual_address_id').find("option[value='-1']").click
+    find('#company_actual_address_id').find("option[value='-1']").select_option
 
     # Юр. выбрали 'Такой же как и факт.'
-    find('#company_legal_address_id').find("option[value='-1']").click
+    find('#company_legal_address_id').find("option[value='-1']").select_option
 
     # Отправляем форму
     submit 
@@ -103,7 +103,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
     visit '/user/companies/new'
 
     # Факт. выбрали 'Такой же как и юр.'
-    find('#company_actual_address_id').find("option[value='-1']").click
+    find('#company_actual_address_id').find('option[value="-1"]').select_option
 
     submit
 
@@ -146,7 +146,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
     find("#company_legal_address_attributes_room").set('Квартира')
 
     # Факт. адрес такой же как и юрид.
-    find('#company_actual_address_id').find("option[value='-1']").click
+    find('#company_actual_address_id').find("option[value='-1']").select_option
 
     submit
 
@@ -182,10 +182,10 @@ class CompaniesTest < ActionDispatch::IntegrationTest
     find("#company_inn").set('1234567890')
 
     # Юр. выбрали "Такой же как и физ."
-    find('#company_legal_address_id').find("option[value='#{postal_addresses(:first_user_postal_address).id}']").click
+    find('#company_legal_address_id').find("option[value='#{postal_addresses(:first_user_postal_address).id}']").select_option
 
     # Факт. выбрали имеющийся
-    find('#company_actual_address_id').find("option[value='-1']").click
+    find('#company_actual_address_id').find("option[value='-1']").select_option
 
     submit
 

@@ -14,7 +14,7 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
     visit '/user/products/status/incart'
 
     # Убеждаемся, что есть три товара
-    page.assert_selector("tr", count: 3)
+    page.has_selector?("tr", count: 3)
 
     # Выбираем первый
     first('input[type="checkbox"]').click
@@ -31,7 +31,7 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
     first("#checkbox_filter.modal div.modal-footer input.btn").click
 
     # Убеждаемся, что в результате остался один товар
-    page.assert_selector("tr", count: 2)
+    page.has_selector?("tr", count: 2)
 
   end
 
