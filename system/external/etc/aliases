@@ -1,0 +1,6 @@
+# See man 5 aliases for format
+postmaster:    root
+#yaponama_2012: "|/usr/local/bin/ruby /home/woto/rails/yaponama_2012/bin/rails r 'UserMailer.receive(STDIN.read)'"
+yaponama_2012: "|export LANG=ru_RU.UTF-8; export LC_ALL=ru_RU.UTF-8; /usr/local/bin/ruby /home/woto/rails/yaponama_2012/bin/rails r 'UserMailer.receive(STDIN.read)'"
+#yaponama_2012: "|exit 0"
+#
