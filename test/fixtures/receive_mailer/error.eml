@@ -1,0 +1,97 @@
+Delivered-To: oganer@gmail.com
+Received: by 10.90.68.7 with SMTP id q7cs148379aga;
+        Mon, 10 Jan 2011 00:05:24 -0800 (PST)
+Received: by 10.42.220.67 with SMTP id hx3mr3965607icb.350.1294646724400;
+        Mon, 10 Jan 2011 00:05:24 -0800 (PST)
+Return-Path: <service@youtube.com>
+Received: from sjl-smtp12.sjl.youtube.com (sjl-smtp12.sjl.youtube.com [208.65.153.16])
+        by mx.google.com with ESMTP id fh1si9550522icb.72.2011.01.10.00.05.23;
+        Mon, 10 Jan 2011 00:05:23 -0800 (PST)
+Received-SPF: pass (google.com: domain of service@youtube.com designates 208.65.153.16 as permitted sender) client-ip=208.65.153.16;
+DomainKey-Status: good (test mode)
+Authentication-Results: mx.google.com; spf=pass (google.com: domain of service@youtube.com designates 208.65.153.16 as permitted sender) smtp.mail=service@youtube.com; domainkeys=pass (test mode) header.From=service@youtube.com
+Received: from sjl-smtp12.sjl.youtube.com (localhost [127.0.0.1])
+	by sjl-smtp12.sjl.youtube.com (Postfix) with ESMTP id 6D68842309AD
+	for <Oganer@gmail.com>; Mon, 10 Jan 2011 00:05:22 -0800 (PST)
+DomainKey-Signature: a=rsa-sha1; b=kiVysVo2heDBXeI3VZuWiMoriVbxmoMn979QB7b8Ggwnktw0UwxpIWEmJIii/GJCKru0NsxC3NrP17mCj0HbQMDRG0LmE5fO3fR45FA2tkfeiKuVbPV6orP/jZMznhhCg4e1MXSNPqqDQKEPU/iAQK+As1y1IR92jc6P8naJcEk=; c=nofws; d=youtube.com; q=dns; s=selector1
+Received: from youtube.com (unknown [10.33.181.33])
+	by sjl-smtp12.sjl.youtube.com (Postfix) with ESMTP id C489042307B0
+	for <Oganer@gmail.com>; Mon, 10 Jan 2011 00:05:20 -0800 (PST)
+Received: from sjl-web709.sjl.youtube.com (localhost [127.0.0.1])
+	by youtube.com (Postfix) with ESMTP id B51EE18C56
+	for <Oganer@gmail.com>; Mon, 10 Jan 2011 00:05:20 -0800 (PST)
+Content-Type: multipart/alternative; boundary="===============0263019092=="
+MIME-Version: 1.0
+Subject: =?koi8_r?b?UmVwbHkgZnJvbSBTdXBlcjI4MDYxOTgwIG9uICLn4ekgKPbl8/T4KSI=?=
+From: YouTube Service <service@youtube.com>
+To: wotok7 <Oganer@gmail.com>
+Message-Id: <20110110080520.B51EE18C56@youtube.com>
+Date: Mon, 10 Jan 2011 00:05:20 -0800 (PST)
+
+
+
+
+  
+  Your mail reader is not capable of displaying this MIME message.
+  
+--===============0263019092==
+Content-Type: text/plain; charset="koi8_r"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+
+U3VwZXIyODA2MTk4MCBoYXMgcmVwbGllZCB0byB5b3VyIGNvbW1lbnQgb24g5+HpICj25fP0+Ck6
+CiAgICAgIEB3b3Rvazcg1SDNxc7RINcgzcHbyc7FIMvBzcXS2SDOxdTVIMvByyDQwdTPzSDEwcvB
+2sHU2CDe1M8gzdXTwdLBIMLM0SDQycTP0sHT2SDOwSDo9eog0yDSz8LP1NkKCgpZb3UgY2FuIHJl
+cGx5IGJhY2sgYnkgdmlzaXRpbmcgdGhlIGNvbW1lbnRzIHBhZ2U6Cmh0dHA6Ly93d3cueW91dHVi
+ZS5jb20vY29tbWVudF9zZXJ2bGV0P2FsbF9jb21tZW50cz0xJnY9VlVVaEVlUThBazQmZW1haWw9
+Y29tbWVudF9yZXBseV9yZWNlaXZlZAo=
+
+--===============0263019092==
+Content-Type: text/html; charset="koi8_r"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+
+ICAgIDxodG1sIGxhbmc9ImVuIj4KCiAgPGhlYWQ+CiAgICA8dGl0bGU+UmVwbHkgZnJvbSBTdXBl
+cjI4MDYxOTgwIG9uICLn4ekgKPbl8/T4KSI8L3RpdGxlPgogIDwvaGVhZD4KCgogIDxib2R5IHN0
+eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiAjRkZGOyBtYXJnaW46IDIwcHg7IHBhZGRpbmc6IDBweDsi
+PgogICAgPHRhYmxlIHdpZHRoPSIxMDAlIiBjZWxsc3BhY2luZz0iMCIgY2VsbHBhZGRpbmc9IjAi
+IGJvcmRlcj0iMCI+CgogICAgICA8dHIgdmFsaWduPSJjZW50ZXIiPgogICAgICAgIDx0ZCBhbGln
+bj0ibGVmdCIgd2lkdGg9IjE4MCI+CiAgICAgICAgICA8YSBocmVmPSJodHRwOi8vd3d3LnlvdXR1
+YmUuY29tLyI+CiAgICAgICAgICAgIDxpbWcgYm9yZGVyPSIwIiBhbHQ9IllvdVR1YmUiIHdpZHRo
+PSIxNzUiIGhlaWdodD0iMzMiIHNyYz0iaHR0cDovL3MueXRpbWcuY29tL3l0L2ltZy9sb2dvX3Rh
+Z2xpbmVfc21hbGwuZ2lmIj4KICAgICAgICAgIDwvYT4gICAgCiAgICAgICAgPC90ZD4KICAgICAg
+ICA8dGQgYWxpZ249InJpZ2h0Ij4KICAgICAgICAgIDxhIGhyZWY9Imh0dHA6Ly93d3cuZ29vZ2xl
+LmNvbS9zdXBwb3J0L3lvdXR1YmUvIj5oZWxwIGNlbnRlcjwvYT4KICAgICAgICAgIHwgPGEgaHJl
+Zj0iaHR0cDovL3d3dy55b3V0dWJlLmNvbS9hY2NvdW50I25vdGlmaWNhdGlvbnMvZXZlbnRzIj5l
+LW1haWwgb3B0aW9uczwvYT4KICAgICAgICAgICAgfCA8YSBocmVmPSJodHRwOi8vd3d3LnlvdXR1
+YmUuY29tL2VtYWlsX3NwYW0/dj0xYSZjPUtxeWhBaXBRelJtY1Q5WUljRzRvWlQ5dEJIeXl0YVE1
+eEhWZThWTEp3NU15dlI2Q1ZXaTR4UGlhOTc0UUZoRnFYUEVxbGpiVFZ2aUlKZFdiOWhKMDFoT3lR
+azhQUDBJZXVOcDBNcjEybmxTNnYtS1gtMHVsMi1GZllpWmlrYy1qXzhJODVFdHlKNG5icDdiVDFj
+QzBHR3lKdzVESmxVOGFfQjNuQk5nQ2FvSGxqMW5nSzhsTzVCYzZiOHNfZ2h4cjdIYl9zY1lFZ21f
+Xy1adUY2bXo1SGRmWXNqaEl4VTZfNHpnWmh2MXMzQjdiOXMtU2E1TzVmX2JaN2NqOTVMS2hoVWpf
+eXV5a1E5T0VpUGVxREdpcmtSamVhanZDUVkwcnN1dlhHR1lBMzloSFNXT3dmRXNRUERFMmdfbGcw
+VmtNM29iWE51dUl2S0JNT3dDY2pINVhaTHJpY1U2TWZtMm5DbVB0S2xEWnk4TzZoRUYzTEE2c2hI
+RUVrUWZYSXNPNXdXV0stdU1jRnNQbExfbTZWaE1fRzBrLU9kVl9jTk1GaEJieFlDSTA1UXJSY1lL
+WC05Y2ZBMEpqVlYzSW15dXY5dmdEOGswaVJQYXVVNElNRE1RbjVDeVVyQ2JBX2dNaWN4ZWlYblVJ
+U0Y0QnlsX2RSSHVncF9lMlVzZmRDeFlnTkNMTUhqQmhHZWt3TWttRU9JWjd2Zz09Ij5yZXBvcnQg
+c3BhbTwvYT4KICAgICAgICA8L3RkPgogICAgICA8L3RyPgoKICAgICAgPHRyPgogICAgICAgIDx0
+ZCBjb2xzcGFuPSIyIiBzdHlsZT0icGFkZGluZzogMTBweCAwcHggMHB4IDBweDsiPgoKICA8cD48
+YSBocmVmPSJodHRwOi8vd3d3LnlvdXR1YmUuY29tL3VzZXIvU3VwZXIyODA2MTk4MD9lbWFpbD1j
+b21tZW50X3JlcGx5X3JlY2VpdmVkIj5TdXBlcjI4MDYxOTgwPC9hPiBoYXMgcmVwbGllZCB0byB5
+b3VyIGNvbW1lbnQgb24gPGEgaHJlZj0iaHR0cDovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PVZV
+VWhFZVE4QWs0JmZlYXR1cmU9ZW1haWwmZW1haWw9Y29tbWVudF9yZXBseV9yZWNlaXZlZCI+5+Hp
+ICj25fP0+Ck8L2E+OgoKICAKICA8ZGl2IHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiAjRkZGOyBi
+b3JkZXI6IDBweDsgcGFkZGluZzogMHB4OyBtYXJnaW46IDE1cHggMHB4IDBweCAxNXB4OyI+CgoK
+ICAgICAgPGRpdiBzdHlsZT0ibWFyZ2luLWJvdHRvbTogMTVweDsiIGRpcj0ibHRyIj4KICAgICAg
+ICAgIEB3b3Rvazcg1SDNxc7RINcgzcHbyc7FIMvBzcXS2SDOxdTVIMvByyDQwdTPzSDEwcvB2sHU
+2CDe1M8gzdXTwdLBIMLM0SDQycTP0sHT2SDOwSDo9eog0yDSz8LP1NkKICAgICAgPC9kaXY+CgoK
+ICA8L2Rpdj4KCgogIDxwPllvdSBjYW4gcmVwbHkgYmFjayBieSB2aXNpdGluZyB0aGUgPGEgaHJl
+Zj0iaHR0cDovL3d3dy55b3V0dWJlLmNvbS9jb21tZW50X3NlcnZsZXQ/YWxsX2NvbW1lbnRzPTEm
+dj1WVVVoRWVROEFrNCZlbWFpbD1jb21tZW50X3JlcGx5X3JlY2VpdmVkIj5jb21tZW50czwvYT4g
+cGFnZS4KICAgICAgICA8L3RkPgogICAgICA8L3RyPgoKICAgICAgPHRyPgogICAgICAgIDx0ZCBj
+b2xzcGFuPSIyIiBhbGlnbj0iY2VudGVyIiBzdHlsZT0icGFkZGluZy10b3A6IDUwcHg7IGNvbG9y
+OiAjY2NjOyI+CiAgICAgICAgICAmY29weTsgMjAxMSBZb3VUdWJlLCBMTEM8YnI+CiAgICAgICAg
+ICA5MDEgQ2hlcnJ5IEF2ZSwgU2FuIEJydW5vLCBDQSA5NDA2NgogICAgICAgIDwvdGQ+CiAgICAg
+IDwvdHI+CgogICAgPC90YWJsZT4KICA8L2JvZHk+CiAgPC9odG1sPgo=
+
+--===============0263019092==--

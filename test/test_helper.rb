@@ -62,4 +62,8 @@ class ActiveSupport::TestCase
     end
   end
 
+  def email_fixture(email)
+    File.read(File.join(Rails.root, 'test', 'fixtures', 'receive_mailer', email))
+  end
+
 end
