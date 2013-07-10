@@ -8,18 +8,21 @@ first_admin_phone:
 
 first_user_phone:
   phone: 1231231231
+  phone_type: unknown
   profile: first_user_profile
   user: first_user
   creation_reason: fixtures
 
 otto_phone:
   phone: 5555555555
+  phone_type: unknown
   profile: otto_profile
   user: otto_user
   creation_reason: fixtures
 
 mark_phone:
   phone: 4444444444
+  phone_type: unknown
   profile: mark_profile
   user: mark_user
   creation_reason: fixtures

@@ -5,3 +5,11 @@ first_admin_profile:
 first_user_profile:
   user: first_user
   creation_reason: fixtures
+
+otto_profile:
+  user: otto_user
+  creation_reason: fixtures
+
+mark_profile:
+  user: mark_user
+  creation_reason: fixtures

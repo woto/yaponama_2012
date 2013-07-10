@@ -4,6 +4,6 @@ first_admin_email_address:
   user: first_admin
   creation_reason: fixtures
 
-first_user_email:
+first_user_email_address:
   email_address: first_user_email@example.com
   profile: first_user_profile

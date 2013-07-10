@@ -5,6 +5,7 @@ first_admin:
   prepayment: 20.0
   role: manager
   auth_token: PaV6t6OZxzRIWbl0nM9NGQ
+  # password 1111111111
   password_digest: $2a$04$rHSdT0UwnhP1CASNXzcYL.51uIkeSYdV.fw8wgAbMOlIYhxn9krha
   password_reset_email_token: 
   password_reset_sms_token: 
@@ -28,6 +29,7 @@ first_user:
   discount: 0
   prepayment: 100
   order_rule: all
+  # password: 1231231231
   password_digest: $2a$10$90bFORwosYEHSW28BqmF8eacXIBXwLuZ1P9pp0.bEpVp5c2FrgLI.
   sound: true
 
@@ -39,6 +41,7 @@ otto_user:
   prepayment: 100
   order_rule: all
   logout_from_other_places: true
+  # password: 5555555555
   password_digest: $2a$10$wQ1IG8ZsZX0PbzpDxWSgJ.qyB9XOvKceIckyzwEESavUNWGQZapvW
 
 mark_user:
@@ -49,4 +52,5 @@ mark_user:
   prepayment: 100
   order_rule: all
   logout_from_other_places: false
+  # password: 4444444444
   password_digest: $2a$10$3.PKll4wcX7cf2oDKkRZBOCdDDvHeO3XwTCwHBgHxQifFery8Fo5W
