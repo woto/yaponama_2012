@@ -13,7 +13,7 @@ class NotifySoundTogglerTest < ActionDispatch::IntegrationTest
     find('#talk-button-show').click
     assert_equal true, User.find(id).sound
     assert page.has_css?('#play-sound-on-new-message[data-value="true"]')
-    first('.notify-sound-switcher').click
+    first('.notify-sound-toggler-link').click
     sleep(1)
     visit '/'
     assert_equal false, User.find(id).sound
