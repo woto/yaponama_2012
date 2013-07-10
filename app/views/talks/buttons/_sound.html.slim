@@ -1,0 +1,5 @@
+= form_for @user, remote: true, html: {id: 'sound-form', style: "margin: 0; display: inline"} do |f|
+
+  a.notify-sound-switcher.btn.btn-unstyled style="width: 20px"
+    .hide = f.check_box :sound
+    i
