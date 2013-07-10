@@ -47,9 +47,13 @@ class NotifySoundToggler
       # и чекбокс
       $(event.currentTarget).find(':checkbox').prop('checked', new_status)
 
+      # В любом случае останавливаем при нажатии на значок аудио
       stop()
+
+      # Если включили, то бибикаем
       if new_status
         play()
+      # Если выключили, то останавливаем проигрываемый звук
       else
         NotifySound.stop()
 
