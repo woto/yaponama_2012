@@ -1,0 +1,20 @@
+From woto@macbook  Tue Jun 25 03:01:38 2013
+Return-Path: <woto@macbook>
+X-Original-To: woto@localhost
+Delivered-To: woto@localhost
+Received: by macbook (Postfix, from userid 1000)
+	id CE9EBA60757; Tue, 25 Jun 2013 03:01:37 +0400 (MSK)
+Date: Tue, 25 Jun 2013 03:01:37 +0400
+From: woto <woto@macbook>
+To: woto@localhost
+Subject: test
+Message-ID: <20130624230137.GA14695@macbook>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Status: O
+X-UID: 2
+
+hi
+

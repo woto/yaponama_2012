@@ -1,0 +1,76 @@
+Delivered-To: oganer@gmail.com
+Received: by 10.223.109.196 with SMTP id k4cs516232fap;
+        Fri, 29 May 2009 09:37:50 -0700 (PDT)
+Received: by 10.224.89.67 with SMTP id d3mr2967230qam.161.1243615069696;
+        Fri, 29 May 2009 09:37:49 -0700 (PDT)
+Return-Path: <fw-all-return-10533-oganer=gmail.com@lists.zend.com>
+Received: from www.zend.com ([67.15.86.102])
+        by mx.google.com with SMTP id 32si2155702qyk.31.2009.05.29.09.37.49;
+        Fri, 29 May 2009 09:37:49 -0700 (PDT)
+Received-SPF: pass (google.com: domain of fw-all-return-10533-oganer=gmail.com@lists.zend.com designates 67.15.86.102 as permitted sender) client-ip=67.15.86.102;
+Authentication-Results: mx.google.com; spf=pass (google.com: domain of fw-all-return-10533-oganer=gmail.com@lists.zend.com designates 67.15.86.102 as permitted sender) smtp.mail=fw-all-return-10533-oganer=gmail.com@lists.zend.com
+Received: (qmail 27127 invoked by uid 505); 29 May 2009 16:37:31 -0000
+Precedence: bulk
+Delivered-To: mailing list fw-all@lists.zend.com
+Received: (qmail 27044 invoked by uid 505); 29 May 2009 16:37:31 -0000
+List-Post: <mailto:fw-core@lists.zend.com>
+List-Help: <mailto:fw-core-help@lists.zend.com>
+List-Unsubscribe: <mailto:fw-core-unsubscribe@lists.zend.com>
+List-Subscribe: <mailto:fw-core-subscribe@lists.zend.com>
+Message-ID: <4A200F24.9060504@wolf-u.li>
+Date: Fri, 29 May 2009 18:36:52 +0200
+From: Uli Wolf <ml@wolf-u.li>
+User-Agent: Thunderbird 2.0.0.21 (Windows/20090302)
+MIME-Version: 1.0
+To: Julian <julian@dotboost.com>
+CC: fw-core@lists.zend.com, Hector Virgen <djvirgen@gmail.com>
+References: <4b9a3c080905290919p3ad6a50cu5e0075922d16ecf6@mail.gmail.com> <4A200BBC.1080109@wolf-u.li> <927291733.20090529193143@dotboost.com>
+In-Reply-To: <927291733.20090529193143@dotboost.com>
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+X-pstn-neptune: 0/0/0.00/0
+X-pstn-levels:     (S:61.51435/99.90000 CV: 7.7903 FC:95.5390 LC:95.5390 R:95.9108 P:95.9108 M:97.0282 C:98.6951 )
+X-pstn-settings: 1 (0.1500:0.1500) CV gt3 gt2 gt1 p m c 
+X-pstn-addresses: from <ml@wolf-u.li> [1597/77] 
+Subject: Re: [fw-core] RPM available for Zend Framework?
+
+Hello Julian
+
+thanks, i didn't know about this channel ;)
+
+Will try that one ;)
+
+Regards,
+Uli
+
+Julian wrote:
+> Hello Uli,
+> 
+> The up-to-date PEAR channel is
+> http://code.google.com/p/zend/
+> 
+> Updated few hours after a new version is released 
+> 
+> Friday, May 29, 2009, 7:22:20 PM, you wrote:
+>> Hi Hector,
+> 
+>> there is a inofficial PEAR-Channel available, but it's still on 1.8.0:
+> 
+>> http://pear.zfcampus.org/
+> 
+>> Regards,
+>> Uli
+> 
+> 
+>> Hector Virgen wrote:
+>>> Hello,
+>>>
+>>> Is there an RPM available for Zend Framework, preferably 1.8+? I've 
+>>> searched the site and google and didn't find one. Thanks!
+>>>
+>>> -Hector
+> 
+> 
+> 
+> 
+

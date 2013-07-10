@@ -1,0 +1,119 @@
+Delivered-To: oganer@gmail.com
+Received: by 10.213.8.135 with SMTP id h7cs117365ebh;
+        Wed, 6 Jul 2011 08:17:54 -0700 (PDT)
+Received: by 10.223.143.20 with SMTP id s20mr13276947fau.10.1309965473605;
+        Wed, 06 Jul 2011 08:17:53 -0700 (PDT)
+Return-Path: <robot00@z-payment.info>
+Received: from z-payment.info ([85.10.199.41])
+        by mx.google.com with ESMTPS id y7si11108476fag.203.2011.07.06.08.17.52
+        (version=TLSv1/SSLv3 cipher=OTHER);
+        Wed, 06 Jul 2011 08:17:52 -0700 (PDT)
+Received-SPF: neutral (google.com: 85.10.199.41 is neither permitted nor denied by best guess record for domain of robot00@z-payment.info) client-ip=85.10.199.41;
+Authentication-Results: mx.google.com; spf=neutral (google.com: 85.10.199.41 is neither permitted nor denied by best guess record for domain of robot00@z-payment.info) smtp.mail=robot00@z-payment.info
+Received: from localhost ([127.0.0.1] helo=localhost.localdomain)
+	by Debian-60-squeeze-32-minimal with esmtp (Exim 4.72)
+	(envelope-from <robot00@z-payment.info>)
+	id 1QeTrM-00058L-0Y
+	for oganer@gmail.com; Wed, 06 Jul 2011 17:17:52 +0200
+Date: Wed, 6 Jul 2011 19:16:21 +0400
+To: Client Z-Payment <oganer@gmail.com>
+From: Z-Payment <robot00@z-payment.info>
+Reply-to: Z-Payment <robot00@z-payment.info>
+Subject: =?windows-1251?B?Wi1QYXltZW50OiDC++/o8eDtIPH35fIguTEwMDY0MjMg8ejx8uXs+yBa?=
+ =?windows-1251?B?LVBheW1lbnQ=?=
+Message-ID: <6f1dea8d1d8cae3a741df4a10c9c512b@localhost.localdomain>
+X-Priority: 3
+X-Mailer: mPOP Web-Mail 2.19
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="b1_6f1dea8d1d8cae3a741df4a10c9c512b"
+
+
+--b1_6f1dea8d1d8cae3a741df4a10c9c512b
+Content-Type: text/plain; charset = "windows-1251"
+Content-Transfer-Encoding: 8bit
+
+Здравствуйте.
+
+Выписан счет на оплату товара (услуги).
+	Номер счета магазина: 694304
+	Номер счета Z-Payment: 1006423
+	Магазин: 2domains.ru - регистрация доменов (http://www.2domains.ru) 
+	Сумма оплаты: 106.00 руб
+	Описание: Пополнение баланса
+	Инструкция:
+	Счет успешно выписан.  Он действителен пять банковских дней. Для его оплаты посетите любое отделение Сбербанка в России и сделайте банковский перевод на реквизиты приведенные ниже.  ВНИМАНИЕ! Точно указывайте примечание к переводу и контролируйте оператора в банке. Если примечание будет с ошибками,  платеж НЕ будет принят. Для удобства и исключения ошибок Вы можете распечатать квитанцию. После оплаты  подтвердите перевод ссылкой из письма или используйте сервис Розыск платежа. Товар (услуга) будет предоставлены вам после получения перевода, согласно условиям сервиса.Платежи принимаются ТОЛЬКО от физических лиц - граждан России, переводы от юридических лиц и предпринимателей, и/или из других стран НЕ принимаются и подлежат возврату за вычетом банковских расходов. Оплачивать этот счет из отделений Сбербанка на территории стран СНГ (Казахстан, Армения, Кыргызстан и др.) ЗАПРЕЩЕНО, для оплаты используйте валютные переводы: 
+  Банковский перевод в Долларах США
+  Банковский перевод в Евро
+  Перевод в Фунтах стерлингах
+
+	РЕКВИЗИТЫ ДЛЯ ПЕРЕВОДА
+	ПолучательООО &#039;Зет Паймент&#039;
+			Банк получательАКБ &#039;Радиан&#039; (ОАО)
+			Городг. Иркутск
+			БИК042520827
+			Кор. счет30101810900000000827
+			Рас. счет40702810400000000492
+			ИНН3808174780
+			КПП380801001
+			ОКАТО25401370000
+			Сумма оплаты106 руб
+			ПримечаниеОплата счета 1006423 от 06.07.2011, НДС не облагается
+			
+	После перевода денег обязательно подтвердите факт оплаты по этой ссылке
+	Либо воспользуйтесь сервисом - Розыск платежа 
+
+Благодарим за использование платежной системы Z-Payment
+Если у Вас возникли вопросы по оплате или приему платежа, пожалуйста, обратитесь в службу поддержки
+По вопросам предоставления товара или услуги, пожалуйста, обращайтесь к продавцу.
+С уважением, 
+почтовый робот Z-Payment
+
+
+--b1_6f1dea8d1d8cae3a741df4a10c9c512b
+Content-Type: text/html; charset = "windows-1251"
+Content-Transfer-Encoding: 8bit
+
+<p>Здравствуйте.<br>
+<br>
+Выписан счет на оплату товара (услуги).<br>
+	Номер счета магазина: 694304<br>
+	Номер счета Z-Payment: 1006423<br>
+	Магазин: 2domains.ru - регистрация доменов (<a href="http://www.2domains.ru">http://www.2domains.ru</a>) <br>
+	Сумма оплаты: 106.00 руб<br>
+	Описание: Пополнение баланса<br>
+	<strong>Инструкция:</strong><br>
+	Счет успешно выписан.  Он действителен пять банковских дней. Для его оплаты посетите любое отделение Сбербанка в <b>России</b> и сделайте банковский перевод на реквизиты приведенные ниже. <br> ВНИМАНИЕ! Точно указывайте примечание к переводу и контролируйте оператора в банке. Если примечание будет с ошибками,  платеж НЕ будет принят. Для удобства и исключения ошибок Вы можете распечатать квитанцию. После оплаты  подтвердите перевод ссылкой из письма или используйте сервис <a href='https://z-payment.ru/search_pay.php' target='_blank'>Розыск платежа</a>. Товар (услуга) будет предоставлены вам после получения перевода, согласно условиям сервиса.<br><span class='TextError'>Платежи принимаются ТОЛЬКО от физических лиц - граждан России, переводы от юридических лиц и предпринимателей, и/или из других стран НЕ принимаются и подлежат возврату за вычетом банковских расходов. Оплачивать этот счет из отделений Сбербанка на территории стран СНГ (Казахстан, Армения, Кыргызстан и др.) ЗАПРЕЩЕНО,
+для оплаты используйте валютные переводы: <ul>
+  <li>Банковский перевод в Долларах США</li>
+  <li>Банковский перевод в Евро</li>
+  <li>Перевод в Фунтах стерлингах</li>
+</ul><span><br><br>
+	<strong>РЕКВИЗИТЫ ДЛЯ ПЕРЕВОДА</strong><br><table width="100%" border="0" cellpadding="2" cellspacing="1" class="TableFonSystems">
+	<tr><td class="TitleNameTable">Получатель</td><td class="ValueTable">ООО &#039;Зет Паймент&#039;</td></tr>
+			<tr><td class="TitleNameTable">Банк получатель</td><td class="ValueTable">АКБ &#039;Радиан&#039; (ОАО)</td></tr>
+			<tr><td class="TitleNameTable">Город</td><td class="ValueTable">г. Иркутск</td></tr>
+			<tr><td class="TitleNameTable">БИК</td><td class="ValueTable">042520827</td></tr>
+			<tr><td class="TitleNameTable">Кор. счет</td><td class="ValueTable">30101810900000000827</td></tr>
+			<tr><td class="TitleNameTable">Рас. счет</td><td class="ValueTable">40702810400000000492</td></tr>
+			<tr><td class="TitleNameTable">ИНН</td><td class="ValueTable">3808174780</td></tr>
+			<tr><td class="TitleNameTable">КПП</td><td class="ValueTable">380801001</td></tr>
+			<tr><td class="TitleNameTable">ОКАТО</td><td class="ValueTable">25401370000</td></tr>
+			<tr><td class="TitleNameTable">Сумма оплаты</td><td class="ValueTable">106 руб</td></tr>
+			<tr><td class="TitleNameTable">Примечание</td><td class="ValueTable">Оплата счета 1006423 от 06.07.2011, НДС не облагается</td></tr>
+			</table><br>
+	После перевода денег обязательно подтвердите факт оплаты по этой <a href="https://z-payment.ru/confirm_client.php?ID=3254638&KEY=e549766c02408f7c">ссылке</a><br>
+	Либо воспользуйтесь сервисом - <a href="https://z-payment.ru/search_pay.php">Розыск платежа</a><br> <br>
+<br>
+Благодарим за использование платежной системы Z-Payment<br />
+Если у Вас возникли вопросы по оплате или приему платежа, пожалуйста, обратитесь в <a
+	href='http://z-payment.info/support/'>службу поддержки</a><br />
+По вопросам предоставления товара или услуги, пожалуйста, обращайтесь к продавцу.</p>
+<p>С уважением, <br />
+почтовый робот Z-Payment<br /></p>
+
+
+
+--b1_6f1dea8d1d8cae3a741df4a10c9c512b--
+
+

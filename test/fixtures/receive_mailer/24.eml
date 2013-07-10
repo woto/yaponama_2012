@@ -1,0 +1,67 @@
+Delivered-To: oganer@gmail.com
+Received: by 10.229.69.136 with SMTP id z8csp72222qci;
+        Mon, 24 Jun 2013 16:56:03 -0700 (PDT)
+X-Received: by 10.15.102.68 with SMTP id bq44mr27062351eeb.89.1372118163184;
+        Mon, 24 Jun 2013 16:56:03 -0700 (PDT)
+Return-Path: <zaptrade@mail.zaptrade.ru>
+Received: from mail.zaptrade.ru (zaptrade.ru. [5.9.86.231])
+        by mx.google.com with ESMTP id o46si13664124eef.185.2013.06.24.16.56.02
+        for <oganer@gmail.com>;
+        Mon, 24 Jun 2013 16:56:03 -0700 (PDT)
+Received-SPF: pass (google.com: domain of zaptrade@mail.zaptrade.ru designates 5.9.86.231 as permitted sender) client-ip=5.9.86.231;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: domain of zaptrade@mail.zaptrade.ru designates 5.9.86.231 as permitted sender) smtp.mail=zaptrade@mail.zaptrade.ru
+Received: by mail.zaptrade.ru (Postfix, from userid 10000)
+	id 2712619009EF; Tue, 25 Jun 2013 02:00:02 +0200 (CEST)
+To: =?windows-1251?B?yu7w7eXiINDz8evg7Q==?= <oganer@gmail.com>
+Subject: =?windows-1251?B?x+Dq7u336Ovu8fwg4vDl7P8g8uXx8u7i7uPuIOTu8fLz7+Agd290by56?=  =?windows-1251?B?YXB0cmFkZS5ydQ==?=
+X-PHP-Originating-Script: 10000:class.phpmailer.php
+Date: Tue, 25 Jun 2013 07:00:02 +0700
+From: =?windows-1251?B?z+7k5OXw5urgIHphcHRyYWRlLnJ1?= <support@zaptrade.ru>
+Reply-to: =?windows-1251?B?z+7k5OXw5urgIHphcHRyYWRlLnJ1?= <support@zaptrade.ru>
+Message-ID: <629f9ae71d163f180bb133b75c3a2d77@zaptrade.ru>
+X-Priority: 3
+X-Mailer: PHPMailer (phpmailer.codeworxtech.com) [version 2.2]
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/html; charset="windows-1251"
+
+<HTML>
+  <HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+
+  </HEAD>
+  <BODY bgcolor="#ffffff" topmargin="0" leftmargin="0" rightmargin="0" marginwidth="0" marginheight="0">
+
+<style>
+<!--
+body {font-family: Courier New, Arial; }
+.order th, .order td {border:1px solid #a9a9a9;font-family: Courier New, Arial; font-size: 12px;padding:5px;}
+.order th {background:#f5f5dc}
+table td {font-size: 12px;}
+p  {font-family: Courier New, Arial; font-size: 12px; color: #000000; padding: 8px;}
+li {font-family: Courier New, Arial; font-size: 12px; color: #000000;}
+-->
+</style>
+
+
+<p>
+   Уважаемый Корнев Руслан. Время вашего тестового доступа в систему <a href='http://zaptrade.ru'>ZapTrade</a> закончилось. <br/>
+   Если вы желаете продлить тестовый период или заключить договор на использование системы просьба обратиться к менеджеру службы поддержки - <a href='http://zaptrade.ru/contacts/'>http://zaptrade.ru/contacts/</a>
+<p>
+
+
+<p>
+C уважением, служба поддержки ZapTrade.ru<br />
+<br />
+<a href="http://zaptrade.ru/">http://zaptrade.ru/</a><br />
+support@zaptrade.ru
+</p>
+
+
+
+  </BODY>
+</HTML>
+
+
+

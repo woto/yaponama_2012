@@ -1,0 +1,471 @@
+Delivered-To: oganer@gmail.com
+Received: by 10.229.155.19 with SMTP id q19csp104614qcw;
+        Mon, 11 Feb 2013 20:40:41 -0800 (PST)
+X-Received: by 10.49.121.40 with SMTP id lh8mr7462188qeb.30.1360644040633;
+        Mon, 11 Feb 2013 20:40:40 -0800 (PST)
+DomainKey-Status: good
+Received-SPF: pass (google.com: domain of info@site.hh.ru designates 94.124.200.150 as permitted sender) client-ip=94.124.200.150;
+Received: by 10.224.194.68 with POP3 id dx4mf4892272qab.2;
+        Mon, 11 Feb 2013 20:40:40 -0800 (PST)
+X-Gmail-Fetch-Info: woto@mail.ru 1 pop.mail.ru 110 woto
+Return-path: <info@site.hh.ru>
+Authentication-Results: mxs.mail.ru;
+	 dkim=pass header.i=site.hh.ru
+Received: from [94.124.200.150] (port=47103 helo=mrelay4.hh.ru)
+	by mx124.mail.ru with esmtp (envelope-from <info@site.hh.ru>)
+	id 1U57LK-0005Ga-Vv
+	for woto@mail.ru; Tue, 12 Feb 2013 08:19:43 +0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=site.hh.ru; s=mail;
+	h=To:MIME-Version:From:Subject:Content-Transfer-Encoding:Content-Type:Message-Id:Date; bh=5TncIZNCx63Knu/rJ/U3KAKaja74yMwit7ithmD4gkk=;
+	b=htRE6mfB391yLMosJdjTFLbi9Ydh3deo1zCMFAFhpyWaBGGuAHGTBkgYREE0f5DLUghKt6PyXGfOj+0j9vTH1nl0+WT7uwrSYNz+76iXxxNc4hwJMUR3TfSZw65u/n5xOeaRx8BdnqeOGpllrm/UzfmBZ+TBCiW9XihFDzc14sU=;
+Received: from [192.168.1.173] (helo=192.168.1.11)
+	by mrelay4.hh.ru with smtp (Exim 4.71)
+	(envelope-from <info@site.hh.ru>)
+	id 1U57LK-00071d-UH
+	for woto@mail.ru; Tue, 12 Feb 2013 08:19:42 +0400
+Date: Tue, 12 Feb 2013 08:19:42 +0400
+Message-Id: <E1U57LK-00071d-UH@mrelay4.hh.ru>
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Subject: =?UTF-8?B?0JrRgtC+INC30LDQvdC40LzQsNC10YLRgdGPINCx0LU=?=
+ =?UTF-8?B?0YHQv9C+0LvQtdC30L3QvtC5INGA0LDQsdC+0YLQvtC5Pw==?=
+From: HeadHunter <info@site.hh.ru>
+MIME-Version: 1.0
+To: =?UTF-8?B?0JrQvtGA0L3QtdCyINCg0YPRgdC70LDQvQ==?= <woto@mail.ru>
+X-Mru-Trust-IP: 1
+
+<html>
+<head>
+  <meta http-equiv=3D"Content-Type" content=3D"text/html; cha=
+rset=3DUTF-8" />
+  <title>HeadHunter</title>
+</head>
+<body bgcolor=3D"white=
+" text=3D"#000000" topmargin=3D"0" bottommargin=3D"0" leftmargin=3D"0" righ=
+tmargin=3D"0" link=3D"#076CC7" alink=3D"#CC0000" vlink=3D"#076CC7">
+      <=
+html xmlns=3D"http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8" /=
+>
+<title>Untitled Document</title>
+</head>
+<body>
+<div style=3D"padding: 0; margin: 0; background: #ffffff;" bgcolor=3D"#FFF=
+FFF">
+	<center>
+		<table width=3D"880" cellpadding=3D"0" cellspacing=3D"0" border=3D"0">
+			<tr>
+				<td colspan=3D"9">
+					<table cellpadding=3D"0" cellspacing=3D"0" border=3D"0">
+						<tr>
+							<td width=3D"140"><img src=3D"http://hh.ru/file/8732142.png" style=
+=3D"display: block;" width=3D"100" alt=3D""></td>
+							<td><h1 style=3D"margin-top: 38px; font: normal 24px 'Times New Rom=
+an', serif;">=D0=9A=D1=82=D0=BE =D0=B7=D0=B0=D0=BD=D0=B8=D0=BC=D0=B0=D0=B5=
+=D1=82=D1=81=D1=8F =D0=B1=D0=B5=D1=81=D0=BF=D0=BE=D0=BB=D0=B5=D0=B7=D0=BD=
+=D0=BE=D0=B9 =D1=80=D0=B0=D0=B1=D0=BE=D1=82=D0=BE=D0=B9?</h1></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td style=3D"border-top: 1px solid #bfbfbf;" height=3D"24" colspan=3D"=
+9"><div style=3D"border:0; height:24px; overflow:hidden; width:1px"> </div>=
+</td>
+			</tr>
+			<tr>
+			  <td>
+			    <table>
+				      <tr height=3D"250">
+						<td width=3D"20"><div style=3D"border:0; height:1px; overflow:hidden=
+; width:20px;"> </div></td>
+						<td width=3D"160" style=3D"vertical-align:top;"><img src=3D"http://h=
+h.ru/file/10669312.jpg" style=3D"display: block;" width=3D"160" height=3D"1=
+15" alt=3D""><br/>
+							<em style=3D"font: italic 13px 'Times New Roman', serif; color: #7b=
+7b7b;">=D0=9D=D0=BE=D0=B2=D0=BE=D1=81=D1=82=D0=B8</em>
+							<h4 style=3D"margin: 4px 0;"><a href=3D"http://hh.ru/news/2378?utm_=
+source=3Demail&utm_medium=3Demail&utm_content=3Dsoisk_index_1102_old&utm_ca=
+mpaign=3Dmisc" target=3D"_blank" style=3D"font: 14px 'Times New Roman', ser=
+if; color: #076cc7;">=D0=A0=D1=8B=D0=BD=D0=BE=D0=BA =D1=82=D1=80=D1=83=D0=
+=B4=D0=B0 =D0=BE=D0=BD=D0=BB=D0=B0=D0=B9=D0=BD =E2=80=94 =D0=B1=D1=83=D0=B4=
+=D1=8C=D1=82=D0=B5 =D0=B2 =D0=BA=D1=83=D1=80=D1=81=D0=B5!</a></h4>
+							<p style=3D"font: 13px 'Times New Roman', serif; color: #000;">=D0=
+=A1=D0=B0=D0=BC=D1=8B=D0=B5 =D0=BF=D0=BE=D1=81=D0=BB=D0=B5=D0=B4=D0=BD=D0=
+=B8=D0=B5 =D0=B4=D0=B0=D0=BD=D0=BD=D1=8B=D0=B5 =D0=BE =D1=81=D0=B8=D1=82=D1=
+=83=D0=B0=D1=86=D0=B8=D0=B8 =D0=BD=D0=B0 =D1=80=D1=8B=D0=BD=D0=BA=D0=B5 =D1=
+=82=D1=80=D1=83=D0=B4=D0=B0 =D0=B2 =D1=80=D0=B5=D0=B6=D0=B8=D0=BC=D0=B5 =D1=
+=80=D0=B5=D0=B0=D0=BB=D1=8C=D0=BD=D0=BE=D0=B3=D0=BE =D0=B2=D1=80=D0=B5=D0=
+=BC=D0=B5=D0=BD=D0=B8: =D0=B4=D0=B8=D0=BD=D0=B0=D0=BC=D0=B8=D0=BA=D0=B0, =
+=D0=BF=D0=B5=D1=80=D1=81=D0=BF=D0=B5=D0=BA=D1=82=D0=B8=D0=B2=D1=8B, =D0=BC=
+=D0=BD=D0=B5=D0=BD=D0=B8=D1=8F =D1=8D=D0=BA=D1=81=D0=BF=D0=B5=D1=80=D1=82=
+=D0=BE=D0=B2. </p></td>
+				        <td width=3D"40"><div style=3D"border:0; height:1px; overflow:=
+hidden; width:40px;"> </div></td>				=09
+					    <td width=3D"160" style=3D"vertical-align:top;"><img src=3D"http:=
+//hh.ru/file/10669311.jpg" style=3D"display: block;" width=3D"160" height=
+=3D"115" alt=3D""><br/>				 =20
+							<em style=3D"font: italic 13px 'Times New Roman', serif; color: #7b=
+7b7b;">=D0=9D=D0=BE=D0=B2=D0=BE=D1=81=D1=82=D0=B8</em>
+							<h4 style=3D"margin: 4px 0;"><a href=3D"http://hh.ru/article/12947?=
+utm_source=3Demail&utm_medium=3Demail&utm_content=3Dsoisk_vebinar_1102_old&=
+utm_campaign=3Dmisc" target=3D"_blank" style=3D"font: 14px 'Times New Roman=
+', serif; color: #076cc7;">=D0=9D=D0=BE=D0=B2=D1=8B=D0=B9 =D1=81=D0=B5=D1=
+=80=D0=B2=D0=B8=D1=81 =E2=80=94 =C2=AB=D0=92=D0=B5=D0=B1=D0=B8=D0=BD=D0=B0=
+=D1=80=D1=8B=C2=BB</a></h4>
+							<p style=3D"font: 13px 'Times New Roman', serif; color: #000;">=D0=
+=A2=D0=B5=D0=BF=D0=B5=D1=80=D1=8C =D0=BB=D1=8E=D0=B1=D0=BE=D0=B9 =D0=B6=D0=
+=B5=D0=BB=D0=B0=D1=8E=D1=89=D0=B8=D0=B9 =D0=BC=D0=BE=D0=B6=D0=B5=D1=82 =D0=
+=B7=D0=B0=D0=B4=D0=B0=D1=82=D1=8C =D0=B2=D0=BE=D0=BF=D1=80=D0=BE=D1=81 =D0=
+=BD=D0=B0=D1=88=D0=B8=D0=BC =D1=8D=D0=BA=D1=81=D0=BF=D0=B5=D1=80=D1=82=D0=
+=B0=D0=BC =D0=BD=D0=B0 =D0=B1=D0=B5=D1=81=D0=BF=D0=BB=D0=B0=D1=82=D0=BD=D1=
+=8B=D1=85 =D0=BE=D0=B1=D1=83=D1=87=D0=B0=D1=8E=D1=89=D0=B8=D1=85 =D0=BE=D0=
+=BD=D0=BB=D0=B0=D0=B9=D0=BD-=D1=81=D0=B5=D0=BC=D0=B8=D0=BD=D0=B0=D1=80=D0=
+=B0=D1=85.</p></td>
+				        <td width=3D"40"><div style=3D"border:0; height:1px; overflow:=
+hidden; width:40px;"> </div></td>						=20
+						<td width=3D"160" style=3D"vertical-align:top;"><img src=3D"http://h=
+h.ru/file/10669314.jpg" style=3D"display: block;" width=3D"160" height=3D"1=
+15" alt=3D""><br/>
+							<em style=3D"font: italic 13px 'Times New Roman', serif; color: #7b=
+7b7b;">=D0=98=D1=81=D1=81=D0=BB=D0=B5=D0=B4=D0=BE=D0=B2=D0=B0=D0=BD=D0=B8=
+=D1=8F</em>
+							<h4 style=3D"margin: 4px 0;"><a href=3D"http://hh.ru/article/13279?=
+utm_source=3Demail&utm_medium=3Demail&utm_content=3Dsoisk_issl_1102_old&utm=
+_campaign=3Dmisc" target=3D"_blank" style=3D"font: 14px 'Times New Roman', =
+serif; color: #076cc7;">=D0=9A=D1=82=D0=BE =D0=B7=D0=B0=D0=BD=D0=B8=D0=BC=
+=D0=B0=D0=B5=D1=82=D1=81=D1=8F =D0=B1=D0=B5=D1=81=D0=BF=D0=BE=D0=BB=D0=B5=
+=D0=B7=D0=BD=D0=BE=D0=B9 =D1=80=D0=B0=D0=B1=D0=BE=D1=82=D0=BE=D0=B9?</a></h=
+4>
+							<p style=3D"font: 13px 'Times New Roman', serif; color: #000;">=D0=
+=9A=D0=B0=D0=B6=D0=B4=D1=8B=D0=B9 =D1=82=D1=80=D0=B5=D1=82=D0=B8=D0=B9: =D0=
+=BD=D0=B0 =D1=8D=D1=82=D0=BE =D1=83=D1=85=D0=BE=D0=B4=D0=B8=D1=82 =D0=BE=D1=
+=82 40 =D0=BC=D0=B8=D0=BD=D1=83=D1=82 =D0=B4=D0=BE 2 =D1=87=D0=B0=D1=81=D0=
+=BE=D0=B2 =D0=B5=D0=B6=D0=B5=D0=B4=D0=BD=D0=B5=D0=B2=D0=BD=D0=BE!</p></td>
+					  </tr><tr><td height=3D"50" colspan=3D"6">&nbsp;</td></tr>
+				      <tr height=3D"250">
+						<td width=3D"20"><div style=3D"border:0; height:1px; overflow:hidden=
+; width:20px;"> </div></td>
+						<td width=3D"160" style=3D"vertical-align:top;"><img src=3D"http://h=
+h.ru/file/10669336.jpg" style=3D"display: block;" width=3D"160" height=3D"1=
+15" alt=3D""><br/>
+							<em style=3D"font: italic 13px 'Times New Roman', serif; color: #7b=
+7b7b;">=D0=9D=D0=BE=D0=B2=D0=BE=D1=81=D1=82=D0=B8</em>
+							<h4 style=3D"margin: 4px 0;"><a href=3D"http://hh.ru/news/2391?utm_=
+source=3Demail&utm_medium=3Demail&utm_content=3Dsoisk_mail_1102_old&utm_cam=
+paign=3Dmisc" target=3D"_blank" style=3D"font: 14px 'Times New Roman', seri=
+f; color: #076cc7;">=D0=9E=D1=82=D0=BA=D0=BB=D0=B8=D0=BA=D0=B0=D1=82=D1=8C=
+=D1=81=D1=8F =D0=BD=D0=B0 =D0=B2=D0=B0=D0=BA=D0=B0=D0=BD=D1=81=D0=B8=D0=B8 =
+=D1=81=D1=82=D0=B0=D0=BB=D0=BE =D0=B5=D1=89=D0=B5 =D0=BF=D1=80=D0=BE=D1=89=
+=D0=B5!</a></h4>
+							<p style=3D"font: 13px 'Times New Roman', serif; color: #000;">=D0=
+=9C=D1=8B =D1=83=D1=81=D0=BE=D0=B2=D0=B5=D1=80=D1=88=D0=B5=D0=BD=D1=81=D1=
+=82=D0=B2=D0=BE=D0=B2=D0=B0=D0=BB=D0=B8 =D0=BC=D0=B5=D1=85=D0=B0=D0=BD=D0=
+=B8=D0=B7=D0=BC =D0=BE=D1=82=D0=BA=D0=BB=D0=B8=D0=BA=D0=BE=D0=B2 =D0=BD=D0=
+=B0 =D0=B2=D0=B0=D0=BA=D0=B0=D0=BD=D1=81=D0=B8=D0=B8, =D1=87=D1=82=D0=BE=D0=
+=B1=D1=8B =D0=92=D1=8B =D0=BD=D0=B5 =D1=82=D1=80=D0=B0=D1=82=D0=B8=D0=BB=D0=
+=B8 =D0=BB=D0=B8=D1=88=D0=BD=D0=B5=D0=B5 =D0=B2=D1=80=D0=B5=D0=BC=D1=8F.</p=
+></td>
+				        <td width=3D"40"><div style=3D"border:0; height:1px; overflow:=
+hidden; width:40px;"> </div></td>				=09
+					    <td width=3D"160" style=3D"vertical-align:top;"><img src=3D"http:=
+//hh.ru/file/10669330.jpg" style=3D"display: block;" width=3D"160" height=
+=3D"115" alt=3D""><br/>				 =20
+							<em style=3D"font: italic 13px 'Times New Roman', serif; color: #7b=
+7b7b;">=D0=9D=D0=B0=D1=88=D0=B8 =D0=BF=D1=80=D0=BE=D0=B5=D0=BA=D1=82=D1=8B<=
+/em>
+							<h4 style=3D"margin: 4px 0;"><a href=3D"http://hh.ru/safety?utm_sou=
+rce=3Demail&utm_medium=3Demail&utm_content=3Dsoisk_safety_1102_old&utm_camp=
+aign=3Dmisc" target=3D"_blank" style=3D"font: 14px 'Times New Roman', serif=
+; color: #076cc7;">=D0=91=D0=B5=D0=B7=D0=BE=D0=BF=D0=B0=D1=81=D0=BD=D1=8B=
+=D0=B9 HeadHunter</a></h4>
+							<p style=3D"font: 13px 'Times New Roman', serif; color: #000;">=D0=
+=9C=D1=8B =D0=B7=D0=BD=D0=B0=D0=B5=D0=BC, =D0=BA=D0=B0=D0=BA =D0=BD=D0=B0=
+=D0=B9=D1=82=D0=B8 =D0=B8 =D0=BD=D0=B0=D0=BA=D0=B0=D0=B7=D0=B0=D1=82=D1=8C =
+=D0=BC=D0=BE=D1=88=D0=B5=D0=BD=D0=BD=D0=B8=D0=BA=D0=BE=D0=B2. =D0=A3=D0=B7=
+=D0=BD=D0=B0=D0=B9=D1=82=D0=B5 =D0=B8 =D0=92=D1=8B!</p></td>
+				        <td width=3D"40"><div style=3D"border:0; height:1px; overflow:=
+hidden; width:40px;"> </div></td>						=20
+						<td width=3D"160" style=3D"vertical-align:top;"><img src=3D"http://h=
+h.ru/file/10669335.jpg" style=3D"display: block;" width=3D"160" height=3D"1=
+15" alt=3D""><br/>
+							<em style=3D"font: italic 13px 'Times New Roman', serif; color: #7b=
+7b7b;">=D0=A1=D0=BE=D0=B2=D0=B5=D1=82=D1=8B =D1=8D=D0=BA=D1=81=D0=BF=D0=B5=
+=D1=80=D1=82=D0=B0</em>
+							<h4 style=3D"margin: 4px 0;"><a href=3D"http://hh.ru/article/13281?=
+utm_source=3Demail&utm_medium=3Demail&utm_content=3Dsoisk_expert_1102_old&u=
+tm_campaign=3Dmisc" target=3D"_blank" style=3D"font: 14px 'Times New Roman'=
+, serif; color: #076cc7;">=D0=9A=D0=B0=D0=BA =D0=B2=D0=B7=D0=B2=D0=B5=D1=81=
+=D0=B8=D1=82=D1=8C =D1=81=D0=BB=D0=BE=D0=BD=D0=B0 =D0=B1=D0=B5=D0=B7 =D0=B2=
+=D0=B5=D1=81=D0=BE=D0=B2?</a></h4>
+							<p style=3D"font: 13px 'Times New Roman', serif; color: #000;">=D0=
+=9A=D0=B0=D0=B2=D0=B5=D1=80=D0=B7=D0=BD=D1=8B=D0=B5 =D0=B2=D0=BE=D0=BF=D1=
+=80=D0=BE=D1=81=D1=8B =D0=BD=D0=B0 =D1=81=D0=BE=D0=B1=D0=B5=D1=81=D0=B5=D0=
+=B4=D0=BE=D0=B2=D0=B0=D0=BD=D0=B8=D0=B8 =E2=80=94 =D0=B2=D0=BA=D0=BB=D1=8E=
+=D1=87=D0=B0=D0=B5=D0=BC =D0=BB=D0=BE=D0=B3=D0=B8=D0=BA=D1=83!</p></td>
+					  </tr>
+				</table>
+		=09
+			  <td width=3D"30"><div style=3D"border:0; height:1px; overflow:hidden;=
+ width:30px;"> </div></td>
+<td width=3D"250" style=3D"vertical-align:top;">
+<table width=3D"100%" bgcolor=3D"#fff9b5" cellpadding=3D"20" cellspacing=
+=3D"0">
+<tr>
+<td>
+						=09
+								<em style=3D"font: italic 13px 'Times New Roman', serif; color: #7=
+b7b7b;">=D0=A0=D0=B5=D0=BA=D0=BB=D0=B0=D0=BC=D0=B0</em>
+								<h4 style=3D"margin: 10px 0 4px 0; line-height: 15px;"><a href=3D"=
+http://hh.ru/click.mvc?bannerId=3D60476&targetUrl=3Dhttp://mba.ru/action?ut=
+m_source=3Dheadhunter%26utm_medium=3Dppl%26utm_term=3Dmail%26utm_content=3D=
+dream%26utm_campaign=3Dmba_action_february" target=3D"_blank" style=3D"font=
+: 14px 'Times New Roman', serif; color: #076cc7;">=D0=9C=D0=B5=D1=87=D1=82=
+=D0=B0=D0=B5=D1=82=D0=B5 =D0=BE =D0=BA=D0=B0=D1=80=D1=8C=D0=B5=D1=80=D0=BD=
+=D0=BE=D0=BC =D1=80=D0=BE=D1=81=D1=82=D0=B5?</a></h4>
+								<p style=3D"font: 13px 'Times New Roman', serif; color: #000;">=C2=
+=AB=D0=91=D1=83=D0=B4=D1=83=D1=89=D0=B5=D0=B5 =E2=80=94 =D1=81=D0=B5=D0=B3=
+=D0=BE=D0=B4=D0=BD=D1=8F!=C2=BB =D0=A2=D0=BE=D0=BB=D1=8C=D0=BA=D0=BE =D0=B2=
+ =D1=84=D0=B5=D0=B2=D1=80=D0=B0=D0=BB=D0=B5 =D1=81=D0=BF=D0=B5=D1=86=D0=B8=
+=D0=B0=D0=BB=D1=8C=D0=BD=D1=8B=D0=B5 =D1=86=D0=B5=D0=BD=D1=8B =D0=BD=D0=B0 =
+=D0=9C=D0=92=D0=90 + MacBook =D0=BF=D1=80=D0=B8 =D0=BF=D0=BE=D1=81=D1=82=D1=
+=83=D0=BF=D0=BB=D0=B5=D0=BD=D0=B8=D0=B8! =D0=9D=D0=B0=D0=B1=D0=BE=D1=80 =D0=
+=BE=D0=B3=D1=80=D0=B0=D0=BD=D0=B8=D1=87=D0=B5=D0=BD!</p>
+
+</td>
+</tr>
+</table>
+    </td>
+	<td width=3D"20"><div style=3D"border:0; height:1px; overflow:hidden; wid=
+th:20px;"> </div></td>
+			</tr>
+					  <tr><td height=3D"50" colspan=3D"9">&nbsp;</td>
+					  </tr>
+<tr>
+				<td colspan=3D"9">
+					<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0">
+						<tr>
+							<td width=3D"150" style=3D"text-align: center; vertical-align: top;=
+"><img src=3D"http://hh.ru/file/10669334.jpg" style=3D"display: block;" wid=
+th=3D"150" height=3D"98" alt=3D""></td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;
+														</td>
+							<td>
+								<em style=3D"font: italic 13px 'Times New Roman', serif; color: #7=
+b7b7b;">=D0=90=D0=BA=D1=86=D0=B8=D1=8F</em>
+								<h4 style=3D"margin-top: 5px; margin-bottom: 10px;"><a href=3D"htt=
+p://hh.ru/article/13282?utm_source=3Demail&utm_medium=3Demail&utm_content=
+=3Dsoisk_sale_1102_old&utm_campaign=3Dmisc" target=3D"_blank" style=3D"font=
+: 14px 'Times New Roman', serif; color: #076cc7;">=D0=98=D0=B4=D0=B5=D0=B0=
+=D0=BB=D1=8C=D0=BD=D0=B0=D1=8F =D0=BF=D0=B0=D1=80=D0=B0 HeadHunter</a></h4>
+								<p style=3D"font: 13px 'Times New Roman', serif; color: #000;">13-=
+=D0=B3=D0=BE =D0=B8 14-=D0=B3=D0=BE =D1=84=D0=B5=D0=B2=D1=80=D0=B0=D0=BB=D1=
+=8F =D0=BF=D1=80=D0=B8 =D0=BF=D0=BE=D0=BA=D1=83=D0=BF=D0=BA=D0=B5 =C2=AB=D0=
+=AF=D1=80=D0=BA=D0=BE=D0=B3=D0=BE =D1=80=D0=B5=D0=B7=D1=8E=D0=BC=D0=B5=C2=
+=BB =E2=80=94 =D1=81=D0=B5=D1=80=D0=B2=D0=B8=D1=81 =C2=AB=D0=90=D0=B2=D1=82=
+=D0=BE=D0=BE=D0=B1=D0=BD=D0=BE=D0=B2=D0=BB=D0=B5=D0=BD=D0=B8=D0=B5=C2=BB =
+=D0=B2 =D0=B4=D0=BE=D0=BF=D0=BE=D0=BB=D0=BD=D0=B5=D0=BD=D0=B8=D0=B5. =D0=A1=
+=D0=B4=D0=B5=D0=BB=D0=B0=D0=B9=D1=82=D0=B5 =D1=81=D0=B2=D0=BE=D0=B5 =D1=80=
+=D0=B5=D0=B7=D1=8E=D0=BC=D0=B5 =D0=B3=D0=B0=D1=80=D0=BC=D0=BE=D0=BD=D0=B8=
+=D1=87=D0=BD=D1=8B=D0=BC!</p>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+						<tr>
+				<td colspan=3D"9" height=3D"45" style=3D"border-bottom: 1px solid #bfb=
+fbf;"><div style=3D"border:0; height:45px; overflow:hidden; width:1px"> </d=
+iv></td>
+			</tr>
+			<tr>
+				<td colspan=3D"9" height=3D"45"><div style=3D"border:0; height:45px; o=
+verflow:hidden; width:1px"> </div></td>
+			</tr>
+    <tr>
+				<td colspan=3D"9">
+					<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0">
+						<tr>
+							<td width=3D"150" style=3D"text-align: center; vertical-align: top;=
+"><img src=3D"http://hh.ru/file/10669315.jpg" style=3D"display: block;" wid=
+th=3D"150" height=3D"98" alt=3D""></td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;
+														</td>
+							<td>
+								<em style=3D"font: italic 13px 'Times New Roman', serif; color: #7=
+b7b7b;">=D0=9E=D0=BF=D1=80=D0=BE=D1=81=D1=8B</em>
+								<h4 style=3D"margin-top: 5px; margin-bottom: 10px;"><a href=3D"htt=
+p://hhresearch.ru/index.php?sid=3D91813&lang=3Dru&utm_source=3Demail&utm_me=
+dium=3Demail&utm_content=3Dsoisk_opros3_1102_old&utm_campaign=3Dmisc" targe=
+t=3D"_blank" style=3D"font: 14px 'Times New Roman', serif; color: #076cc7;"=
+>=D0=90 =D0=92=D1=8B =D1=87=D1=83=D0=B2=D1=81=D1=82=D0=B2=D1=83=D0=B5=D1=82=
+=D0=B5 =D1=81=D0=B5=D0=B1=D1=8F =D0=BD=D0=B0 =D1=81=D0=B2=D0=BE=D0=B5=D0=BC=
+ =D0=BC=D0=B5=D1=81=D1=82=D0=B5?</a></h4>
+								<p style=3D"font: 13px 'Times New Roman', serif; color: #000;">=D0=
+=95=D1=81=D0=BB=D0=B8 =D0=BD=D0=B0 =D1=80=D0=B0=D0=B1=D0=BE=D1=82=D0=B5 =D1=
+=83 =D0=92=D0=B0=D1=81 =D0=BF=D0=BE=D1=80=D1=82=D0=B8=D1=82=D1=81=D1=8F =D0=
+=BD=D0=B0=D1=81=D1=82=D1=80=D0=BE=D0=B5=D0=BD=D0=B8=D0=B5, =D0=BC=D0=BE=D0=
+=B6=D0=B5=D1=82 =D0=B1=D1=8B=D1=82=D1=8C, =D0=BF=D0=BE=D1=80=D0=B0 =D1=87=
+=D1=82=D0=BE-=D1=82=D0=BE =D0=BC=D0=B5=D0=BD=D1=8F=D1=82=D1=8C?</p>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+						<tr>
+				<td colspan=3D"9" height=3D"45" style=3D"border-bottom: 1px solid #bfb=
+fbf;"><div style=3D"border:0; height:45px; overflow:hidden; width:1px"> </d=
+iv></td>
+			</tr>
+			<tr>
+				<td colspan=3D"9" height=3D"45"><div style=3D"border:0; height:45px; o=
+verflow:hidden; width:1px"> </div></td>
+			</tr>
+    <tr>
+				<td colspan=3D"9">
+					<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0">
+						<tr>
+							<td width=3D"150" style=3D"text-align: center; vertical-align: top;=
+"><img src=3D"http://hh.ru/file/10669333.jpg" style=3D"display: block;" wid=
+th=3D"150" height=3D"98" alt=3D""></td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;
+														</td>
+							<td>
+								<em style=3D"font: italic 13px 'Times New Roman', serif; color: #7=
+b7b7b;">=D0=A0=D0=B5=D0=BA=D0=BB=D0=B0=D0=BC=D0=B0</em>
+								<h4 style=3D"margin-top: 5px; margin-bottom: 10px;"><a href=3D"htt=
+p://hh.ru/click.mvc?bannerId=3D60485&targetUrl=3Dhttp://www.begin.ru/main/e=
+vents/EMBA-Fair" target=3D"_blank" style=3D"font: 14px 'Times New Roman', s=
+erif; color: #076cc7;">Executive MBA =D0=B8 =D0=BE=D0=B1=D1=83=D1=87=D0=B5=
+=D0=BD=D0=B8=D0=B5 =D0=B4=D0=BB=D1=8F =D1=82=D0=BE=D0=BF-=D0=BC=D0=B5=D0=BD=
+=D0=B5=D0=B4=D0=B6=D0=B5=D1=80=D0=BE=D0=B2</a></h4>
+								<p style=3D"font: 13px 'Times New Roman', serif; color: #000;">1 =
+=D0=BC=D0=B0=D1=80=D1=82=D0=B0 18.00-21.00 =D0=B2 =D0=BE=D1=82=D0=B5=D0=BB=
+=D0=B5 =C2=AB=D0=9D=D0=B0=D1=86=D0=B8=D0=BE=D0=BD=D0=B0=D0=BB=D1=8C=C2=BB =
+=D0=BF=D1=80=D0=BE=D0=B9=D0=B4=D1=91=D1=82 =D0=B2=D1=8B=D1=81=D1=82=D0=B0=
+=D0=B2=D0=BA=D0=B0 Executive MBA: INSEAD, Duke, IE, Skolkovo =D0=B8 =D0=B4=
+=D1=80. =D0=A1=D0=B5=D0=BA=D1=80=D0=B5=D1=82=D1=8B =D0=BF=D0=BE=D1=81=D1=82=
+=D1=83=D0=BF=D0=BB=D0=B5=D0=BD=D0=B8=D1=8F =D0=B8 =D0=B8=D1=81=D1=82=D0=BE=
+=D1=80=D0=B8=D0=B8 =D1=83=D1=81=D0=BF=D0=B5=D1=85=D0=B0.</p>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+						<tr>
+				<td colspan=3D"9" height=3D"45" style=3D"border-bottom: 1px solid #bfb=
+fbf;"><div style=3D"border:0; height:45px; overflow:hidden; width:1px"> </d=
+iv></td>
+			</tr>
+			<tr>
+				<td colspan=3D"9" height=3D"45"><div style=3D"border:0; height:45px; o=
+verflow:hidden; width:1px"> </div></td>
+			</tr>
+    <tr>
+				<td colspan=3D"9">
+					<table width=3D"100%">
+						<tr>
+							<td width=3D"230"><div style=3D"border:0; height:1px; overflow:hidd=
+en; width:230px;"> </div></td>
+							<td width=3D"420" style=3D"text-align: center; background: #f4f4f4;=
+">
+								<p style=3D"margin-top: 15px; margin-bottom: 10px; font: 17px 'Tim=
+es New Roman', serif; color: #000;">=D0=A1=D0=B5=D0=B9=D1=87=D0=B0=D1=81 =
+=D0=BD=D0=B0 =D1=81=D0=B0=D0=B9=D1=82=D0=B5 hh.ru <b>246 000</b> =D0=B0=D0=
+=BA=D1=82=D1=83=D0=B0=D0=BB=D1=8C=D0=BD=D1=8B=D1=85 =D0=B2=D0=B0=D0=BA=D0=
+=B0=D0=BD=D1=81=D0=B8=D0=B9.</p>
+								<p style=3D"margin-top: 10px; margin-bottom: 15px; font: 17px 'Tim=
+es New Roman', serif; color: #000;">=D0=92 =D0=BA=D0=B0=D0=B6=D0=B4=D0=BE=
+=D0=B9 =D0=BA=D0=B0=D1=80=D1=8C=D0=B5=D1=80=D0=B5 =D0=B5=D1=81=D1=82=D1=8C =
+hh.ru!</p>
+							</td>
+							<td width=3D"230"><div style=3D"border:0; height:1px; overflow:hidd=
+en; width:230px;"> </div></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		=09
+			<tr>
+     			<td colspan=3D"9" style=3D"text-align: center;"><em><br/>=D0=A1=D0=
+=BB=D0=B5=D0=B4=D0=B8=D1=82=D0=B5 =D0=B7=D0=B0 =D0=BD=D0=B0=D0=BC=D0=B8 =D0=
+=B2 =D1=81=D0=BE=D1=86=D0=B8=D0=B0=D0=BB=D1=8C=D0=BD=D1=8B=D1=85 =D1=81=D0=
+=B5=D1=82=D1=8F=D1=85:<br/>
+                                                               <strong><a =
+href=3D"http://on.fb.me/Y4ZNx6" target=3D"_blank" style=3D"font: 14px 'Time=
+s New Roman', serif;color: #076cc7;"><img src=3D"http://hh.ru/file/10223116=
+.jpg"/></a></strong>
+                                                               &nbsp;&nbsp=
+;
+                                                               <strong><a =
+href=3D"http://bit.ly/WV4uCL" target=3D"_blank" style=3D"font: 14px 'Times =
+New Roman', serif;color: #076cc7;"><img src=3D"http://hh.ru/file/10223117.j=
+pg"/></a></strong>
+                                                               &nbsp;&nbsp=
+;
+                                                               <strong><a =
+href=3D"http://bit.ly/RRevV1" target=3D"_blank" style=3D"font: 14px 'Times =
+New Roman', serif;color: #076cc7;"><img src=3D"http://hh.ru/file/10223118.j=
+pg"/></a></strong>
+                                                               &nbsp;&nbsp=
+;
+                                                               <strong><a =
+href=3D"http://bit.ly/11udjLq" target=3D"_blank" style=3D"font: 14px 'Times=
+ New Roman', serif;color: #076cc7;"><img src=3D"http://hh.ru/file/10422642.=
+png"/></a></strong></em>
+
+			=09
+			<tr>
+			<tr>
+				<td colspan=3D"9" height=3D"30"><div style=3D"border:0; height:30px; o=
+verflow:hidden; width:1px"> </div></td>
+			</tr>
+			<tr>
+				<td colspan=3D"9" style=3D"text-align: center;"><a href=3D"http://hh.r=
+u/searchvacancy/?orderBy=3D2&itemsOnPage=3D20&areaId=3D113&professionalArea=
+Id=3D0&compensationCurrencyCode=3DRUR&searchPeriod=3D30&page=3D0" target=3D=
+"_blank" style=3D"font: 14px 'Times New Roman', serif;color: #076cc7;">=D0=
+=9F=D0=BE=D0=B8=D1=81=D0=BA =D0=B2=D0=B0=D0=BA=D0=B0=D0=BD=D1=81=D0=B8=D0=
+=B9</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=3D"http://hh.ru/applicant/package.mv=
+c?from=3Dmail" target=3D"_blank" style=3D"font: 14px 'Times New Roman', ser=
+if; color: #076cc7;">=D0=9F=D1=80=D0=BE=D0=B4=D0=B2=D0=B8=D0=B6=D0=B5=D0=BD=
+=D0=B8=D0=B5 =D1=80=D0=B5=D0=B7=D1=8E=D0=BC=D0=B5</a></td>
+			</tr>
+			<tr>
+				<td colspan=3D"9" height=3D"35"><div style=3D"border:0; height:35px; o=
+verflow:hidden; width:1px"> </div></td>
+			</tr>
+			<tr>
+				<td colspan=3D"9" style=3D"text-align: center; font: 13px 'Times New R=
+oman', serif; color: #7b7b7b;">=D0=A1=D0=B0=D0=B9=D1=82 <a href=3D"http://h=
+h.ru" style=3D"color: #076cc7;">www.hh.ru</a>  =D1=80=D0=B0=D0=B7=D1=80=D0=
+=B5=D1=88=D1=91=D0=BD =D0=B4=D0=BB=D1=8F =D0=BF=D0=BE=D1=81=D0=B5=D1=89=D0=
+=B5=D0=BD=D0=B8=D1=8F =D0=B1=D0=B5=D0=B7 =D0=BE=D0=B3=D1=80=D0=B0=D0=BD=D0=
+=B8=D1=87=D0=B5=D0=BD=D0=B8=D1=8F  =D0=B2=D0=BE=D0=B7=D1=80=D0=B0=D1=81=D1=
+=82=D0=B0</td>
+			</tr>
+			<tr>
+				<td colspan=3D"9" style=3D"text-align: center; font: 13px 'Times New R=
+oman', serif; color: #7b7b7b;">=D0=94=D0=BB=D1=8F =D1=82=D0=BE=D0=B3=D0=BE =
+=D1=87=D1=82=D0=BE=D0=B1=D1=8B =D0=BE=D1=82=D0=BF=D0=B8=D1=81=D0=B0=D1=82=
+=D1=8C=D1=81=D1=8F =D0=BE=D1=82 =D1=80=D0=B0=D1=81=D1=81=D1=8B=D0=BB=D0=BA=
+=D0=B8, =D0=BF=D0=B5=D1=80=D0=B5=D0=B9=D0=B4=D0=B8=D1=82=D0=B5 =D0=BD=D0=B0=
+ =D1=81=D1=82=D1=80=D0=B0=D0=BD=D0=B8=D1=86=D1=83 <a href=3D"http://hh.ru/s=
+ubscribe" target=3D"_blank" style=3D"color: #076cc7;">=D1=83=D0=BF=D1=80=D0=
+=B0=D0=B2=D0=BB=D0=B5=D0=BD=D0=B8=D1=8F =D1=80=D0=B0=D1=81=D1=81=D1=8B=D0=
+=BB=D0=BA=D0=BE=D0=B9</a>. </td>
+			</tr>
+			<tr>
+				<td colspan=3D"9" height=3D"25"><div style=3D"border:0; height:25px; o=
+verflow:hidden; width:1px"> </div></td>
+			</tr>
+		</table>
+	</center>
+</div>
+
+</body>
+</html>
+</body>
+</html>
+
