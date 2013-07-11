@@ -13,7 +13,7 @@ window.initSimpleCkeditor = ->
       for ckeditor, i in placeholders
         tmp_ckeditor = CKEDITOR.replace(ckeditor, {
           # Без указания plugins к нему так же цепляется inline
-          plugins: 'basicstyles,list,link,pastetext,toolbar,undo,upload',
+          plugins: 'basicstyles,list,link,pastetext,toolbar,undo',
           toolbar: [
               { name: 'basicstyles', items: [ 'Bold', 'Italic' ] },
               { name: 'links', items: [ 'Link', 'Unlink' ] },
@@ -22,7 +22,7 @@ window.initSimpleCkeditor = ->
             ],
           forcePasteAsPlainText: true,
           height: 'auto',
-          extraPlugins: 'divarea,autogrow',
+          extraPlugins: 'divarea,autogrow,upload',
           removePlugins: 'resize'
         })
 
