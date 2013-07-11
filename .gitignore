@@ -24,3 +24,5 @@ node_modules
 
 /db/sphinx
 dump.rdb
+
+realtime/realtime.js
