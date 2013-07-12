@@ -2,18 +2,24 @@
 
 class UserTest < ActiveSupport::TestCase
 
-  test 'Если у пользователя (не гость) один профиль, то он автоматически должен стать главным' do
-    skip
+  test 'Если у нового созданного в памяти пользователя есть один профиль, то он автоматически должен стать главным' do
+    u = User.new
+    p = u.profiles.new
+    u.valid?
+    assert_equal p, u.main_profile
+    assert u.errors["main_profile"].blank?
   end
 
-  test 'Если у пользователя (не гость) несколько профилей и главный профиль не выбран, то должна возникнуть ошибка с предложением выбрать профиль' do
-    skip
+  test 'Если у уже сохраненного пользователя заполняется первый профиль, то он должен стать главным' do
+    u = users(:stan)
+    assert u.valid?
+    profile = u.profiles.new
+    name = profile.names.new
+    name.creation_reason = 'fixtures'
+    name.name = 'Стэн'
+    assert u.valid?
   end
 
-  test 'Если пользователь гость, то наличие главного профиля не оязательно' do 
-    skip
-  end
-  
   test 'Только что инициализированный пользователь должен содержать предопределенный набор ошибок' do
     u = User.new
     u.valid?

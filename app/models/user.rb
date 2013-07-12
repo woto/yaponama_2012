@@ -11,6 +11,16 @@ class User < ActiveRecord::Base
 
   has_many :uploads
 
+  # Понятие главного профиля
+  belongs_to :main_profile, :class_name => "Profile"
+  #validates :main_profile, presence: true, unless: -> { role == 'guest' } (Пользователь может входить с помощью социальных сетей не имея профиля в начала)
+  before_validation :make_profile_main_if_one
+  def make_profile_main_if_one
+    if profiles.length == 1
+      self.main_profile = profiles.first
+    end
+  end
+
   # TODO сделать.
   #has_many :brands
   #has_many :models
