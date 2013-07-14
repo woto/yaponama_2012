@@ -9,6 +9,8 @@ class EmailAddress < ActiveRecord::Base
   include BelongsToUser
   include Transactionable
 
+  validates :creation_reason, :presence => :true, :inclusion => { :in => Rails.configuration.user_email_address_creation_reason.keys }
+
   belongs_to :profile, :inverse_of => :email_addresses
 
   has_many :emails
