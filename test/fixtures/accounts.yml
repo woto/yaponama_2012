@@ -17,3 +17,8 @@ mark_account:
   debit: 0.0
   credit: 0.0
   accountable: mark_user (User)
+
+stan:
+  debit: 0.0
+  credit: 0.0
+  accountable: stan (User)
