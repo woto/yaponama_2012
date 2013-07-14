@@ -33,6 +33,7 @@ class UserTest < ActiveSupport::TestCase
     phone.creation_reason = 'fixtures'
     email_address = profile.email_addresses.new
     email_address.email_address = 'fake@example.com'
+    email_address.creation_reason = 'fixtures'
     passport = profile.passports.new(:gender => 'male', :seriya => '1', :nomer => '1', :passport_vidan => '1', :data_vidachi => DateTime.now, :kod_podrazdeleniya => '1', :data_rozhdeniya => DateTime.now, :mesto_rozhdeniya => 'Новый Дурулгуй')
     u.save!
     assert_equal 'Стэн', u.cached_main_profile['names'].first['name']
