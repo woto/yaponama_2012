@@ -64,3 +64,6 @@
 [submodule "system/submodules/JsSIP"]
 	path = system/submodules/JsSIP
 	url = https://github.com/versatica/JsSIP
+[submodule "system/submodules/jquery.maskedinput"]
+	path = system/submodules/jquery.maskedinput
+	url = https://github.com/digitalBush/jquery.maskedinput
