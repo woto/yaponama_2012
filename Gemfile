@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails',     github: 'rails/rails'
+#gem 'rails',     github: 'rails/rails'
+gem 'rails',     path: '/home/woto/vendor/rails'
 gem 'arel',      github: 'rails/arel'
 gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
 
@@ -30,9 +31,10 @@ end
 group :development, :test do
   gem 'debugger'
   gem 'capistrano'
-  gem 'capybara'
+  gem 'capybara', github: 'jnicklas/capybara'
   #gem 'selenium-webdriver'
   gem 'poltergeist'
+  #gem 'capybara-webkit'
 end
 
 gem 'jquery-rails', github: 'rails/jquery-rails'
@@ -45,10 +47,11 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.0.1'
 
 # To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.1.0'
 
 gem 'less-rails'
-gem "twitter-bootstrap-rails", github: 'seyhunak/twitter-bootstrap-rails'
+#ZAZ
+#gem "twitter-bootstrap-rails", github: 'seyhunak/twitter-bootstrap-rails'
 
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'cocoon', :git => 'https://github.com/nathanvda/cocoon'
@@ -93,4 +96,9 @@ gem 'omniauth-vkontakte'
 gem 'omniauth-odnoklassniki'
 gem 'omniauth-mailru'
 
-gem 'sht_rails'
+gem 'sht_rails', github: 'railsware/sht_rails'
+
+# Необходима версия 2.6.0 чтобы не резался многострочный заголовок
+gem 'mail', github: 'mikel/mail'
+
+gem 'puma'
