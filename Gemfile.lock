@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: bc106102338c7042f0d080bc803d904ff873f3fb
+  revision: 5e1d159adffb3f9623f7c234fe174364fc862088
   specs:
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -26,13 +26,13 @@ GIT
 
 GIT
   remote: git://github.com/rails/activerecord-deprecated_finders.git
-  revision: f6ed71d62d47f0f6397b5b3e801271567f30f960
+  revision: 86b8d3babecc30f3f3c9a2d937e3e845555b254a
   specs:
     activerecord-deprecated_finders (1.0.3)
 
 GIT
   remote: git://github.com/rails/arel.git
-  revision: 4524c7f8a8225677893e0731f40993de17d4babc
+  revision: a1a46fd8c2a3d53e02e2e58ca575b2596646b2c3
   specs:
     arel (4.0.0.20130418133826)
 
@@ -63,7 +63,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sprockets-rails.git
-  revision: ec03b0ab6f84f385568b3ae4df77abeef21b06dd
+  revision: 18026870bb5fde945802674fb5b88be976ff6b94
   specs:
     sprockets-rails (2.0.0)
       actionpack (>= 3.0)
@@ -104,13 +104,13 @@ GIT
 
 GIT
   remote: https://github.com/nathanvda/cocoon
-  revision: 7a402fdfb1ca910e3a05da5069f89e252e589cc2
+  revision: a43183786a264bdb414ce5783bb690206b887814
   specs:
     cocoon (1.2.0)
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: 73005f4fc8b0b4934b2fbe9dd54ea35a1692c84a
+  revision: 359606f222fa0972a4a14ec70140ac00f7c80839
   specs:
     simple_form (3.0.0.rc)
       actionpack (>= 4.0.0, < 4.1)
@@ -165,7 +165,7 @@ GEM
     ancestry (2.0.0)
       activerecord (>= 3.0.0)
     atomic (1.1.13)
-    bcrypt-ruby (3.1.1)
+    bcrypt-ruby (3.1.2)
     builder (3.1.4)
     cancan (1.6.10)
     capistrano (2.15.5)
@@ -179,7 +179,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
     charlock_holmes (0.6.9.4)
-    chronic (0.9.1)
+    chronic (0.10.1)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -194,8 +194,7 @@ GEM
     debugger-ruby_core_source (1.2.3)
     erubis (2.7.0)
     eventmachine (1.0.3)
-    execjs (1.4.0)
-      multi_json (~> 1.0)
+    execjs (2.0.1)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     fastercsv (1.5.5)
@@ -210,7 +209,7 @@ GEM
     hiredis (0.4.5)
     http_parser.rb (0.5.3)
     httpauth (0.2.0)
-    i18n (0.6.4)
+    i18n (0.6.5)
     innertube (1.1.0)
     jbuilder (1.0.2)
       activesupport (>= 3.0.0)
@@ -221,7 +220,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.8.0)
-    less (2.3.2)
+    less (2.3.3)
       commonjs (~> 0.2.6)
     less-rails (2.3.3)
       actionpack (>= 3.1)
@@ -230,12 +229,12 @@ GEM
     macaddr (1.6.1)
       systemu (~> 2.5.0)
     middleware (0.1.0)
-    mime-types (1.23)
+    mime-types (1.25)
     mini_portile (0.5.1)
     minitest (4.7.5)
     money (5.1.1)
       i18n (~> 0.6.0)
-    multi_json (1.7.8)
+    multi_json (1.7.9)
     multipart-post (1.2.0)
     mysql2 (0.3.12b4)
     net-scp (1.1.2)
@@ -259,7 +258,7 @@ GEM
       rack
     omniauth-facebook (1.4.1)
       omniauth-oauth2 (~> 1.1.0)
-    omniauth-google-oauth2 (0.2.0)
+    omniauth-google-oauth2 (0.2.1)
       omniauth (~> 1.0)
       omniauth-oauth2
     omniauth-mailru (1.0.0)
@@ -289,7 +288,7 @@ GEM
       capybara (~> 2.1.0)
       faye-websocket (>= 0.4.4, < 0.5.0)
       http_parser.rb (~> 0.5.3)
-    puma (2.0.1)
+    puma (2.5.1)
       rack (>= 1.1, < 2.0)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -298,7 +297,7 @@ GEM
     rake (10.1.0)
     redis (3.0.4)
     ref (1.0.5)
-    riddle (1.5.7)
+    riddle (1.5.8)
     rmagick (2.13.2)
     ruby-growl (4.0)
       uuid (~> 2.3, >= 2.3.5)
@@ -307,7 +306,7 @@ GEM
     sanitize (2.0.6)
       nokogiri (>= 1.4.4)
     sass (3.2.10)
-    sitemap_generator (4.1.1)
+    sitemap_generator (4.2.0)
       builder
     slim (2.0.1)
       temple (~> 0.6.6)
@@ -340,7 +339,7 @@ GEM
     turbolinks (1.3.0)
       coffee-rails
     tzinfo (0.3.37)
-    uglifier (2.1.2)
+    uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     unicorn (4.6.3)
@@ -354,7 +353,7 @@ GEM
       chronic (>= 0.6.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
-    yandex_mystem (0.0.2)
+    yandex_mystem (0.1.0)
 
 PLATFORMS
   ruby
