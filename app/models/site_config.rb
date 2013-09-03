@@ -1,5 +1,8 @@
 class SiteConfig
 
+  @@lock = Mutex.new
+  @@cache = nil
+
   include ActiveModel
 
   class << self
@@ -21,12 +24,27 @@ class SiteConfig
 
     def method_missing(meth, *args, &block)
       begin
-        record = Admin::SiteSetting.where(:environment => Rails.env).first
-        if record.blank?
-          raise NoMethodError
-        else
-          return record.send(meth)
+
+        # Такой способ лучше, если конечно он написан правильно :)
+        # в тестах, необходимо насильно сбрасывать кеш
+        # SiteConfig.class_variable_set(:@@cache, nil)
+        
+        @@lock.synchronize do
+          @@cache ||= Admin::SiteSetting.where(:environment => Rails.env).first
+          raise NoMethodError if @@cache.blank?
         end
+        
+        return @@cache.send(meth)
+
+        #Rails.logger.silence do
+        #  record = Admin::SiteSetting.where(:environment => Rails.env).first
+        #  if record.blank?
+        #    raise NoMethodError
+        #  else
+        #    return record.send(meth)
+        #  end
+        #end
+
       rescue Exception => e
         # Не удается, тогда загружаем конфиг
         config = YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env]
