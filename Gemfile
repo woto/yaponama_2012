@@ -35,6 +35,7 @@ group :development, :test do
   #gem 'selenium-webdriver'
   gem 'poltergeist'
   #gem 'capybara-webkit'
+  gem 'quiet_assets'
 end
 
 gem 'jquery-rails', github: 'rails/jquery-rails'
