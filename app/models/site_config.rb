@@ -1,8 +1,5 @@
 class SiteConfig
 
-  @@lock = Mutex.new
-  @@cache = nil
-
   include ActiveModel
 
   class << self
@@ -24,14 +21,11 @@ class SiteConfig
 
     def method_missing(meth, *args, &block)
       begin
-        # Не знаю правильно или нет
-        # сделал по не многочисленным мануалам
-        @@lock.synchronize do
-          unless @@cache
-            # Пытаемся получить аттрибут с условием текущего environment
-            @@cache = Admin::SiteSetting.where(:environment => Rails.env).first
-          end
-          @@cache.send(meth)
+        record = Admin::SiteSetting.where(:environment => Rails.env).first
+        if record.blank?
+          raise NoMethodError
+        else
+          return record.send(meth)
         end
       rescue Exception => e
         # Не удается, тогда загружаем конфиг
