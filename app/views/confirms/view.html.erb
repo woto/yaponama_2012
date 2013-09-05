@@ -1,0 +1,18 @@
+<%= page_header "Подтверждение <small>#{@contact.to_label}</small>".html_safe %>
+
+<div class="col-sm-8">
+
+  <%= form_for @contact, as: :confirm, url: smart_route(prefix: [:make], postfix: [:confirm, params[:resource_class].underscore]), builder: TwitterBootstrapFormBuilder, html: { class: "form-horizontal" }, method: :get  do |f| %>
+    <%= field_set_tag @page_header do %>
+      <%= f.text_input :pin %>
+      <%= f.standard_submit 'Подтвердить' %>
+    <% end %>
+  <% end %>
+
+</div>
+
+<div class="col-sm-4">
+  <div class="well">
+    <%= alert_link_to "Запросите PIN код повторно,", smart_route(prefix: [:ask], postfix: [:confirm, params[:resource_class].underscore]), method: :post %> если вдруг не получили его.
+  </div>
+</div>
