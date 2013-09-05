@@ -20,7 +20,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_cache_buster
 
-
+  # Twitter Bootstrap 3
+  add_flash_types :success, :info, :warning, :danger
 
   private
 
