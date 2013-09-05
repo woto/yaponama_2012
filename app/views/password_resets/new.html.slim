@@ -1,7 +1,0 @@
-= form_tag password_resets_path, :method => :post, :class => 'form-signin' do
-  h2.form-signin-heading Проблемы с входом? 
-  = text_field_tag :login, params[:login], :placeholder => "E-mail или телефон"
-  = submit_tag "Продолжить", :class => "button btn btn-primary actions"
-  |  или 
-  = link_to "вход на сайт", login_path
-  / admin_password_resets_path

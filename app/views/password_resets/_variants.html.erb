@@ -1,0 +1,12 @@
+<p class="lead"> 
+  Куда отправить инструкцию для восстановления пароля?  
+</p>
+
+<ul>
+  <li>
+  <%= link_to 'В письме на e-mail адрес', contacts_password_reset_path(password_reset: { with: 'email' }), class: 'lead' %>
+  </li>
+  <li>
+    <%= link_to 'SMS на мобильный телефон', contacts_password_reset_path(password_reset: { with: 'phone' }), class: 'lead' %>
+  </li>
+</ul>
