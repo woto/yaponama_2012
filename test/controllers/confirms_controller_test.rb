@@ -240,4 +240,12 @@ class ConfirmsControllerTest < ActionController::TestCase
     assert emails(:otto).reload.confirmed?
   end
 
+  test 'Если подтверждает не гость, то редирект в /user' do
+    skip
+  end
+
+  test 'Если подтверждает гость, то редирект в root_path' do
+    skip
+  end
+
 end
