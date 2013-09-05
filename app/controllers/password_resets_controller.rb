@@ -1,68 +1,97 @@
 #encoding: utf-8
 
 class PasswordResetsController < ApplicationController
-  before_action :only_not_authenticated, :only => [:new, :create, :edit, :update]
+  before_action :only_not_authenticated
 
-  # TODO проработать еще вопрос с сменой пароля через смс
+  def contacts
 
-  # Смена пароля - действие
-  def update
-    begin
-      @user = User.find_by!(password_reset_email_token: params[:id])
-      @user.password_required = true
+    @password_reset = PasswordReset.new(password_reset_params)
 
-      if @user.password_reset_sent_at < 2.hours.ago
-        redirect_to new_admin_password_reset_path, :alert => "В целях безопасности ваша инструкция по восстановлению пароля была признана устаревшей, пожалуйста запросите новую." and return
-      elsif @user.update_attributes(user_params)
-        redirect_to root_url, :notice => "Вы успешно сменили пароль, теперь можете войти на сайт." and return
+    if request.post?
+
+      if @password_reset.valid?
+
+        user = @password_reset.user
+        user.generate_token(:password_reset_token, :short)
+        user.password_reset_sent_at = Time.zone.now
+        # TODO Защититься
+        #user.password_reset_attempts = 0
+        user.save!
+
+        case @password_reset.with
+        when 'email'
+          PasswordResetMailer.email(@password_reset.value, user.password_reset_token).deliver
+        when 'phone'
+          PasswordResetMailer.phone(@password_reset.value, user.password_reset_token).deliver
+        end
+
+        redirect_to pin_password_reset_path(
+          "password_reset" => { 
+            "value" => @password_reset.value, 
+            "with" => @password_reset.with 
+        }), notice: t("helpers.flash.password_reset.#{@password_reset.with}")
+ 
+
+      else
+        render 'contacts'
       end
-
-      render :edit
-
-    rescue ValidationError => e
-      render :edit
-      #redirect_to :back, :alert => e.message
     end
   end
 
+  def pin
 
-  # Смена пароля по токену - форма
-  def edit
-    @user = User.find_by!(password_reset_email_token: params[:id])
-  end
+    @password_reset = PasswordReset.new(password_reset_params)
 
-  #def index
-  #end
+    if request.post?
 
-  # Запрос на смену пароля - форма
-  def new
-  end
+      @password_reset.pin_required = true
 
-  # Запрос на смену пароля - действие
-  def create
+      if @password_reset.valid?
 
-    email_address = EmailAddress.find_by_email_address(params[:login])
-    phone = Phone.find_by_phone(params[:login])
+        redirect_to password_password_reset_path(
+          "password_reset" => { 
+            "value" => @password_reset.value, 
+            "with" => @password_reset.with,
+            "pin" => @password_reset.pin
+        })
 
-    user = nil
-
-    if email_address.present?
-      user = email_address.user
-    elsif phone.present?
-      user = phone.user
+      else
+        render "pin"
+      end
     end
+  end
 
-    if user
-      user.send_password_reset
-      redirect_to root_url, :notice => "Мы отправили вам инструкцию по восстановлеию пароля."
+  def password
+    @password_reset = PasswordReset.new(password_reset_params)
+    @password_reset.pin_required = true
+    @password_reset.valid?
+  end
+
+  def done
+
+    @password_reset = PasswordReset.new(password_reset_params)
+
+    @password_reset.pin_required = true
+    @password_reset.password_required = true
+
+    if @password_reset.valid?
+
+      user = @password_reset.user
+
+      user.password = @password_reset.password
+
+      if user.save!
+        redirect_to root_url, :notice => "Вы успешно сменили пароль, теперь можете войти на сайт." and return
+        # TODO если захочу автоматически вводить пользователя под своим аккаунтом, то объединить с логином
+        # т.к. необходимо склеивание аккаунтов.
+      end
     else
-      flash[:alert] = "Мы не смогли найти среди зарегистрированных покупателей указанные вами данные, проверьте ввод и попробуйте еще раз."
-      render 'new'
+      render 'password'
     end
   end
 
-  def user_params
-    params.require(:user).permit!
+  def password_reset_params
+    params.require(:password_reset).permit!
   end
 
 end
