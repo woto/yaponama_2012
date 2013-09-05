@@ -1,0 +1,25 @@
+= form_for @user, url: register_path(with: params[:with]), builder: TwitterBootstrapFormBuilder, html: { class: "form-horizontal" } do |f|
+
+  = f.alert_danger do
+    | Пожалуйста исправьте ошибки для продолжения регистрации.
+
+  = f.fields_for :profiles do |pr|
+    = pr.fields_for :names do |n|
+      = n.text_input :name, placeholder: 'Как к вам обращаться?'
+      = n.standard_recreate
+
+    - if params[:with] == 'email'
+      = pr.fields_for :emails do |e|
+        = e.text_input :value, placeholder: "Адрес электронной почты"
+        = e.standard_recreate
+
+    - if params[:with] == 'phone'
+      = pr.fields_for :phones do |p|
+        = p.text_input :value, placeholder: "Номер мобильного телефона", rel: 'mobile-mask-on'
+        = p.standard_recreate
+
+  = f.password_input :password, placeholder: "Придумайте пароль не короче 6 символов"
+
+  = f.password_input :password_confirmation, placeholder: "Повторите ввод пароля" 
+
+  = f.standard_submit 'Зарегистрироваться'

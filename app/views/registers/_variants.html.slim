@@ -1,0 +1,7 @@
+p.lead Выберите удобный для вас способ регистрации:
+
+ul
+  li
+    = link_to "Регистрация с помощью e-mail адреса", edit_register_path(with: 'email'), class: 'lead'
+  li
+    = link_to "Регистрация с помощью мобильного телефона", edit_register_path(with: 'phone'), class: 'lead'
