@@ -1,0 +1,2 @@
+PIN: <%= @email.confirmation_token %>
+LINK: <%= make_user_confirm_email_url(id: @email.id, "confirm" => { "pin" => @email.confirmation_token } ) %>

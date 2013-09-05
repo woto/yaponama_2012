@@ -1,0 +1,2 @@
+PIN: <%= @phone.confirmation_token %>
+LINK: <%= make_user_confirm_phone_url(id: @phone.id, "confirm" => { "pin" => @phone.confirmation_token } ) %>

@@ -1,0 +1,4 @@
+PIN: <%= @password_reset_token %>
+
+<%# Было raw %>
+<%= link_to "LINK", password_password_reset_url("password_reset" => { value: @value, with: "email", pin: @password_reset_token }) %>
