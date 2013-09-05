@@ -1,0 +1,21 @@
+## Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+#
+#one:
+#  email_id: 
+#  cid: MyText
+#  email_part_type: MyText
+#  is_attachment: 1
+#  filename: MyText
+#  charset: MyText
+#  body: 
+#  size: 1
+#
+#two:
+#  email_id: 
+#  cid: MyText
+#  email_part_type: MyText
+#  is_attachment: 1
+#  filename: MyText
+#  charset: MyText
+#  body: 
+#  size: 1

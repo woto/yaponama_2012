@@ -1,8 +1,8 @@
-first_user_company:
+first_user:
   ownership: individual
   name: Рога и копыта
   inn: '1234567890'
-  legal_address: first_user_postal_address
-  actual_address: first_user_postal_address
+  legal_address: first_user
+  actual_address: first_user
   creation_reason: fixtures
   user: first_user

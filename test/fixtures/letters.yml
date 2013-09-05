@@ -1,0 +1,21 @@
+## Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+#
+#one:
+#  user_id: 
+#  email_id: 
+#  sender: MyText
+#  recipients: MyText
+#  subject: MyText
+#  source: 
+#  size: MyText
+#  type: MyText
+#
+#two:
+#  user_id: 
+#  email_id: 
+#  sender: MyText
+#  recipients: MyText
+#  subject: MyText
+#  source: 
+#  size: MyText
+#  type: MyText

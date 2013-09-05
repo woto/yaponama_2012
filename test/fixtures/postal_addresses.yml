@@ -1,4 +1,4 @@
-first_user_postal_address:
+first_user:
   postcode: '123456'
   region: '1'
   city: '1'

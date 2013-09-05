@@ -1,4 +1,4 @@
-first_admin_passport: 
+first_admin: 
   seriya: '1'
   nomer: '1'
   passport_vidan: '1'
@@ -7,6 +7,6 @@ first_admin_passport:
   gender: male
   data_rozhdeniya: 2013-05-22
   mesto_rozhdeniya: '1'
-  profile: first_admin_profile
-  creation_reason: profile
+  profile: first_admin
+  creation_reason: fixtures
   user: first_admin_profile

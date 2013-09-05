@@ -7,8 +7,7 @@ first_admin:
   auth_token: PaV6t6OZxzRIWbl0nM9NGQ
   # password 1111111111
   password_digest: $2a$04$rHSdT0UwnhP1CASNXzcYL.51uIkeSYdV.fw8wgAbMOlIYhxn9krha
-  password_reset_email_token: 
-  password_reset_sms_token: 
+  password_reset_token: 
   password_reset_sent_at: 
   ipgeobase_name: 
   ipgeobase_names_depth_cache: 
@@ -44,7 +43,7 @@ stan:
   # password: 3333333333
   password_digest: $2a$10$3.PKll4wcX7cf2oDKkRZBOCdDDvHeO3XwTCwHBgHxQifFery8Fo5W
 
-otto_user:
+otto:
   auth_token: 28eoqmbORBE0YW9HSw8FFa
   creation_reason: fixtures
   role: user
@@ -54,8 +53,10 @@ otto_user:
   logout_from_other_places: true
   # password: 5555555555
   password_digest: $2a$10$wQ1IG8ZsZX0PbzpDxWSgJ.qyB9XOvKceIckyzwEESavUNWGQZapvW
+  password_reset_token: 55555
+  password_reset_sent_at: <%= 1.second.ago.to_s(:db) %>
 
-mark_user:
+mark:
   auth_token: 9XOvKceIckyzwEE8ZsZX0P
   creation_reason: fixtures
   role: user
@@ -65,3 +66,7 @@ mark_user:
   logout_from_other_places: false
   # password: 4444444444
   password_digest: $2a$10$3.PKll4wcX7cf2oDKkRZBOCdDDvHeO3XwTCwHBgHxQifFery8Fo5W
+
+mike:
+  password_reset_token: 1234
+  password_reset_sent_at: <%= 3.hours.ago.to_s(:db) %>

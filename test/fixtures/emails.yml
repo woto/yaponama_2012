@@ -1,0 +1,30 @@
+first_admin:
+  value: foo@example.com
+  profile: first_admin
+  user: first_admin
+  creation_reason: fixtures
+
+first_user:
+  value: first_user_email@example.com
+  profile: first_user
+  creation_reason: fixtures
+
+otto:
+  value: foo@example.com
+  profile: otto
+  user: otto
+  creation_reason: fixtures
+  confirmation_token: 5555
+
+otto2:
+  value: fake@example.com
+  profile: otto
+  user: otto
+  creation_reason: fixtures
+  confirmed_by_user: true
+
+mark:
+  value: mark@example.com
+  profile: mark
+  confirmed_by_user: true
+  creation_reason: fixtures
