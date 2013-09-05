@@ -1,0 +1,31 @@
+<%= form_for @session, url: session_path(with: params[:with]), html: { class: "form-horizontal" }, builder: TwitterBootstrapFormBuilder, :method => :post do |f| %>
+
+  <%= f.alert_danger do %>
+    <%= @session.errors[:base].join %> Забыли пароль? 
+    <%= alert_link_to 'Восстановление пароля.', contacts_password_reset_path(password_reset: { with: params[:with] }) %>
+  <% end %>
+
+  <% if params[:with] == 'email' %>
+    <%= f.text_input :value %>
+  <% end %>
+
+  <% if params[:with] == 'phone' %>
+    <%= f.phone_input :value %>
+  <% end %>
+
+  <%= f.password_input :password %>
+
+  <%= f.form_group do %>
+    <div class="col-lg-offset-2 col-md-offset-3 col-sm-offset-3 col-lg-10 col-md-9 col-md-9">
+      <div class="checkbox">
+        <label>
+          <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+          Запомнить меня на этом компьютере
+        </label>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.standard_submit %>
+
+<% end %>

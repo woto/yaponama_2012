@@ -1,0 +1,9 @@
+p.lead С помощью каких сведений осуществить вход на сайт?
+
+ul
+  li
+    = link_to "Войти, указав e-mail адрес", new_session_path(with: 'email'), class: 'lead'
+  li
+    = link_to "Войти, указав номер телефона", new_session_path(with: 'phone'), class: 'lead'
+  / TODO li
+    = link_to "Войти, с помощью номера заказа", "#", class: 'lead', style: 'text-decoration: line-through'
