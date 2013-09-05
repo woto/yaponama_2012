@@ -1,4 +1,5 @@
 defaults: &defaults
+  from_email_address: 'robot@example.com'
   price_request_cache_with_replacements_in_seconds: 7776000 # 3 мес.
   price_request_cache_without_replacements_in_seconds: 3600 #  1 час.
   sms_notify_method: flash
@@ -47,6 +48,7 @@ defaults: &defaults
   avisosms_delivery_report: 1
   avisosms_flash_message: 0
   avisosms_validity_period: 10
+  avisosms_email_address: 123@avisosms.ru
   default_user_prepayment: 20
   default_user_discount: 0
   default_user_order_rule: all

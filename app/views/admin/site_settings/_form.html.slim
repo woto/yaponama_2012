@@ -6,6 +6,7 @@
 
   = f.input :environment
   - if params[:filter] == 'other' || params[:filter].blank? 
+    = f.input :from_email_address
     = f.input :send_request_from_search_page
     = f.input :sms_notify_method, :collection => Rails.configuration.sms_notify_methods, :required => true
     = f.input :price_request_cache_with_replacements_in_seconds, :as => :string, :required => true
@@ -55,6 +56,7 @@
     = f.input :avisosms_delivery_report
     = f.input :avisosms_flash_message
     = f.input :avisosms_validity_period
+    = f.input :avisosms_email_address
   - if params[:filter] == 'auths' || params[:filter].blank?
     = f.input :google_oauth2_key
     = f.input :google_oauth2_secret

@@ -6,6 +6,7 @@ table class="table table-striped"
     tr
       th= model_class.human_attribute_name(:environment)
       - if params[:filter] == 'other' || params[:filter].blank?
+        th= model_class.human_attribute_name(:from_email_address)
         th= model_class.human_attribute_name(:send_request_from_search_page)
         th= model_class.human_attribute_name(:sms_notify_method)
         th= model_class.human_attribute_name(:price_request_cache_with_replacements_in_seconds)
@@ -55,6 +56,7 @@ table class="table table-striped"
         th= model_class.human_attribute_name(:avisosms_delivery_report)
         th= model_class.human_attribute_name(:avisosms_flash_message)
         th= model_class.human_attribute_name(:avisosms_validity_period)
+        th= model_class.human_attribute_name(:avisosms_email_address)
       - if params[:filter] == 'auths' || params[:filter].blank?
         th= model_class.human_attribute_name(:google_oauth2_key)
         th= model_class.human_attribute_name(:google_oauth2_secret)
@@ -84,6 +86,7 @@ table class="table table-striped"
       tr
         td= admin_site_setting.environment
         - if params[:filter] == 'other' || params[:filter].blank?
+          td= admin_site_setting.from_email_address
           td= admin_site_setting.send_request_from_search_page
           td= admin_site_setting.sms_notify_method
           td= admin_site_setting.price_request_cache_with_replacements_in_seconds
@@ -133,6 +136,7 @@ table class="table table-striped"
           td= admin_site_setting.avisosms_delivery_report
           td= admin_site_setting.avisosms_flash_message
           td= admin_site_setting.avisosms_validity_period
+          td= admin_site_setting.avisosms_email_address
         - if params[:filter] == 'auths' || params[:filter].blank?
           td= admin_site_setting.google_oauth2_key
           td= admin_site_setting.google_oauth2_secret

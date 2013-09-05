@@ -1,6 +1,7 @@
 class CreateAdminSiteSettings < ActiveRecord::Migration
   def change
     create_table :admin_site_settings do |t|
+      t.string :from_email_address
       t.string :environment
       t.string :sms_notify_method
       t.boolean :send_request_from_search_page
@@ -48,6 +49,7 @@ class CreateAdminSiteSettings < ActiveRecord::Migration
       t.string :avisosms_delivery_report
       t.string :avisosms_flash_message
       t.string :avisosms_validity_period
+      t.string :avisosms_email_address
       t.string :site_address
       t.string :site_port
       t.string :redis_address
