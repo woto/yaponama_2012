@@ -36,11 +36,20 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :profileable do
-    ['name', 'phone', 'email_address', 'passport', 'profile', 'postal_address', 'car', 'company'].each do |item|
+    ['name', 'phone', 'email', 'passport', 'profile', 'postal_address', 'car', 'company'].each do |item|
       instance_eval <<-CODE, __FILE__, __LINE__ + 1
         resources :#{item.pluralize}, :controller => "profileables", :resource_class => '#{item.camelcase}' do
           concerns :transactionable
           concerns :filterable
+          if ['email', 'phone'].include? item
+            member do
+              scope 'confirm', as: 'confirm' do
+                get 'make' => 'confirms#make'
+                get 'view' => 'confirms#view'
+                post 'ask' => 'confirms#ask'
+              end
+            end
+          end
         end
       CODE
     end
