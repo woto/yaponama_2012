@@ -67,6 +67,32 @@ class UserTest < ActiveSupport::TestCase
 
   end
 
+  test 'Пароль короче 6-и символов' do
+    u = User.new
+    u.password_required = true
+
+    u.password = '123'
+    u.password_confirmation = '123'
+
+    u.valid?
+
+    assert_equal ["недостаточной длины (не может быть меньше 6 символов)"], u.errors[:password]
+    assert u.errors[:password_confirmation].blank?
+  end
+
+  test 'Пароль не совпадает с подтверждением' do
+    u = User.new
+    u.password_required = true
+
+    u.password = '123456'
+    u.password_confirmation = '654321'
+
+    u.valid?
+
+    assert u.errors[:password].blank?
+    assert_equal ["не совпадает с подтверждением"], u.errors[:password_confirmation]
+  end
+
 
   # TODO Это необходимо вынести в контроллер
   #test 'В случае невозможности выставления TimeОшибка в ассоциации time_zone должна вызвать ошибку в модели пользователя' do
