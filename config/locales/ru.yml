@@ -34,6 +34,15 @@ ru:
         value: E-mail
       phone:
         value: Телефон
+      passport:
+        seriya: Серия
+        nomer: Номер
+        passport_vidan: Паспорт выдан
+        data_vidachi: Дата выдачи
+        kod_podrazdeleniya: Код подразделения
+        gender: Пол
+        data_rozhdeniya: Дата рождения
+        mesto_rozhdeniya: Место рождения
       model:
         brand: Бренд
         name: Модель

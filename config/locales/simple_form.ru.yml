@@ -35,14 +35,6 @@ ru:
         active: Активна
         realize: Доставка в данную область осуществляется
 
-        seriya: Серия
-        nomer: Номер
-        passport_vidan: Паспорт выдан
-        data_vidachi: Дата выдачи
-        kod_podrazdeleniya: Код подразделения
-        female: Пол
-        data_rozhdeniya: Дата рождения
-        mesto_rozhdeniya: Место рождения
 
         comment: Комментарий
         hide_catalog_number: Скрыть каталожный номер
