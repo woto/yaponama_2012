@@ -30,6 +30,10 @@ ru:
       model: Модель
 
     attributes:
+      email:
+        value: E-mail
+      phone:
+        value: Телефон
       model:
         brand: Бренд
         name: Модель
