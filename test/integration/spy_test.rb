@@ -67,7 +67,7 @@ class SpyTest < ActionDispatch::IntegrationTest
     assert Stat.last.location.include? "products"
 
     # Находим ссылку на главную
-    page.find('.brand').click
+    page.find('.navbar-brand').click
 
     # Убеждаемся, что мы действительно посетили другую страницу
     # page.assert_selector '#stat-result.incomplete', visible: false
