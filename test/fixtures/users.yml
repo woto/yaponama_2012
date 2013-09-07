@@ -41,7 +41,7 @@ stan:
   order_rule: all
   logout_from_other_places: false
   # password: 3333333333
-  password_digest: $2a$10$3.PKll4wcX7cf2oDKkRZBOCdDDvHeO3XwTCwHBgHxQifFery8Fo5W
+  password_digest: $2a$10$CDmB19dFAPadZyy/CS8rQ.kkTbVUv8XvbXMfEV7OgkrACk3Ts6kma
 
 otto:
   auth_token: 28eoqmbORBE0YW9HSw8FFa
