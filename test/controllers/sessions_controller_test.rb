@@ -55,19 +55,30 @@ class SessionsControllerTest < ActionController::TestCase
     assert_equal response.code, '302'
   end
 
-  test 'Если стоит галка запомнить меня, то должны запомнить на X времени' do
-    skip
-  end
-
-  test 'Если не стоит галка запомнить, то забываем после закрытия браузера' do
-    skip
-  end
-
   test 'Т.к. допустимо иметь несколько одинаковых phone или email, то вход должен осуществиться в соответствии с паролем учетной записи' do
     skip
   end
 
-  test 'Проверять with(?)' do
-    skip
+  test 'Если у пользователя установлена опция logout_from_other_places, то после входа должен быть новый auth_token' do
+    user = users(:otto)
+    auth_token = user.auth_token
+    phone = '+7 (555) 555-55-55'
+    password = '5555555555'
+    post :create, { session: {value: phone, password: password, mobile: true }, with: 'phone' }
+    new_auth_token = user.reload.auth_token
+    assert_not_equal auth_token, new_auth_token
+    assert_equal cookies['auth_token'], new_auth_token
   end
+
+  test 'Если у пользователя не установлена опция logout_from_other_places, то после входа auth_token должен остаться прежним' do
+    user = users(:stan)
+    auth_token = user.auth_token
+    phone = '+7 (333) 333-33-33'
+    password = '3333333333'
+    post :create, { session: {value: phone, password: password, mobile: true }, with: 'phone' }
+    new_auth_token = user.reload.auth_token
+    assert_equal auth_token, new_auth_token
+    assert_equal cookies['auth_token'], new_auth_token
+  end
+
 end
