@@ -1,9 +1,11 @@
 //= require jquery
-//= require jquery.ui.all
+//
+// TODO вернуть ui (widget необходим для работы file-upload)
 //= require jquery_ujs
 
-// require bootstrap/bootstrap
-//= require bootstrap/dist/js/bootstrap
+// TWITTER BOOTSTRAP
+//= require bootstrap
+// require bootstrap/dist/js/bootstrap
 //
 //= require sockjs-client/sockjs
 //
