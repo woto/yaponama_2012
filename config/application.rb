@@ -71,8 +71,19 @@ module Yaponama2012
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    config.less.paths += [
+      File.join(config.root, 'system', 'submodules')
+      #File.join(config.root, 'vendor', 'assets', 'bootstrap', 'less'),
+      #File.join(config.root, 'vendor', 'assets', 'Font-Awesome', 'less')
+    ]
+
     # Дополнительная директория для библиотек, которые несут в себе всё вместе
-    config.assets.paths << "#{Rails.root}/vendor/assets/libraries/"
+    config.assets.paths += [
+      File.join(config.root, 'vendor', 'assets', 'libraries'),
+      File.join(config.root, 'app', 'assets', 'classes'),
+      File.join(config.root, 'app', 'assets', 'templates'),
+      File.join(config.root, 'app', 'assets', 'sounds'),
+    ]
 
     # Autoload ckeditor models folder
     # config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
