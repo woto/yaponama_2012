@@ -9,19 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  * TODO подключить стили jQuery-File-Upload там так же подключается через noscript тег, поэтому необходимо в другом месте видимо
+ *= require 'bootstrap'
+ *= require 'common'
  *
  *= require jquery.ui.all
  *= require_self
  *= require_tree .
  *= require select2/select2
  */
-
-.datetime {
-  width: auto
-}
-
-
-.nested-visualize {
-  margin: 0px 0 20px 0px; 
-  padding: 0 0 0 20px; 
-}
