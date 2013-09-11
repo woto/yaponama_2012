@@ -1,0 +1,29 @@
+<% css_style = "border-bottom-right-radius: 0; border-top-right-radius: 0" %>
+
+<%= f.form_group name do %>
+
+  <%= f.label name, class: "col-lg-2 col-md-3 col-sm-3 control-label" %>
+
+  <div class="col-lg-6 col-md-7 col-sm-8">
+
+    <div class="input-group">
+
+      <span class="input-group-btn">
+
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default" style="<%= css_style %>">
+            <%= f.check_box :mobile, rel: 'checkbox checkbox-mobile' %> Мобильный
+          </label>
+        </div>
+
+      </span><!-- /input-group-btn -->
+
+      <%= f.text_field name, rel: 'mobile-mask' %>
+
+    </div><!-- /input-group -->
+
+    <%= f.error name %>
+
+  </div><!-- /.col-sm-7 -->
+
+<% end %>
