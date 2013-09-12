@@ -57,8 +57,8 @@ class SpyTest < ActionDispatch::IntegrationTest
     # Посещаем страницу товаров
     visit '/user/products'
 
-    # Ждем пока в #stat-result появятся данные
-    page.assert_selector '#stat-result.complete', visible: false
+    # Ждем пока в #debug-stat-result появятся данные
+    page.assert_selector '#debug-stat-result.complete', visible: false
 
     # Проверяем, что запись принадлежит пользователю, который посетил
     assert User.last == Stat.last.user
@@ -70,12 +70,12 @@ class SpyTest < ActionDispatch::IntegrationTest
     page.find('.navbar-brand').click
 
     # Убеждаемся, что мы действительно посетили другую страницу
-    # page.assert_selector '#stat-result.incomplete', visible: false
+    # page.assert_selector '#debug-stat-result.incomplete', visible: false
     # Не получается обойти проблему, поэтому сделал просто sleep
     sleep 1
 
-    # Ждем пока в #stat-result появятся данные
-    page.assert_selector '#stat-result.complete', visible: false
+    # Ждем пока в #debug-stat-result появятся данные
+    page.assert_selector '#debug-stat-result.complete', visible: false
 
     # Проверяем, что предыдущая страница (referrer) записалась правильно
     assert Stat.last.referrer.include? "products"

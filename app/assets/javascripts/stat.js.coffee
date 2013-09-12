@@ -38,4 +38,4 @@ send_stat = ->
 
   $.post '/stats', data, ->
     # Сохраняем в элементе, чтобы поймать в Capybara
-    $('#stat-result').removeClass('incomplete').addClass('complete').text(JSON.stringify(data))
+    $('#debug-stat-result').removeClass('incomplete').addClass('complete').text(JSON.stringify(data, null, 4))
