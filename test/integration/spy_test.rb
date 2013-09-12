@@ -81,4 +81,14 @@ class SpyTest < ActionDispatch::IntegrationTest
     assert Stat.last.referrer.include? "products"
   end
 
+
+  test 'Другая временная зона' do
+    # TODO Если научусь подделывать время в capybara, то хорошо было бы написать
+    skip
+  end
+
+  test 'Другое время' do
+    skip
+  end
+
 end
