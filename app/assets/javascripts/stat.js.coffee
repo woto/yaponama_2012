@@ -8,8 +8,27 @@ $ ->
   send_stat()
 
 send_stat = ->
+
+  # Таким образом мы получаем не просто смещение временной зоны
+  # а именно реальную разницу между временем на сервере и часах
+  # посетителя
+
+  time = $('#server-time').text()
+
+  zone = moment().zone()
+  $('#debug-zone').text(zone)
+
+  server = moment(time)
+  $('#debug-server').text(server)
+
+  local = moment()
+  $('#debug-local').text(local)
+
+  offset = Math.round(server.diff(local) / 1000 / 60 / 60)
+  $('#debug-offset').text(offset)
+
   data = 
-    russian_time_zone_auto: moment().format('YYYY-MM-DDTHH:mm:ss')
+    russian_time_zone_auto_id: offset
     stat:
       location: window.location.href
       title: document.title

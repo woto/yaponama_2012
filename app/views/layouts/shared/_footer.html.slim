@@ -17,3 +17,24 @@
   #stat-result.incomplete
   #automatic_calculate_active = SiteConfig.automatic_calculate_active
   #max_automatic_calculated_cost = SiteConfig.max_automatic_calculated_cost
+
+.well
+  h4 DebugTime
+  dl
+    dt #server-time
+    / TODO
+    / потом поэксперементировать с zone, т.к. добавление, или 
+    / убавление не повлияло (проверял без изменений системного времени)
+    dd#server-time = Time.zone.now.utc
+  dl
+    dt #debug-server
+    dd#debug-server
+  dl
+    dt #debug-local
+    dd#debug-local
+  dl
+    dt #debug-zone
+    dd#debug-zone
+  dl
+    dt #debug-offset
+    dd#debug-offset

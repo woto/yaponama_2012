@@ -19,7 +19,7 @@ class SpyTest < ActionDispatch::IntegrationTest
   test 'Если на стороне клиента установлено неверное время, то ошибки произойти не должно, а будет установлен часовой пояс по-умолчанию. Если клиент изменит время на своем компьютере на верное, напр. +3 часа (плюс минус погрешности в минутах), то соответсвенно у него должен выставиться часовой пояс +3' do
 
     post '/stats', {
-      russian_time_zone_auto: Time.now - 1.year,
+      russian_time_zone_auto_id: 555,
       stat: {
         location: '' ,
         title:  '',
@@ -27,10 +27,10 @@ class SpyTest < ActionDispatch::IntegrationTest
       }
     }
 
-    assert_equal User.last.russian_time_zone_auto_id, 4
+    assert_equal 4, User.last.russian_time_zone_auto_id
 
     post '/stats', {
-      russian_time_zone_auto: Time.now + 3.hours + 10.minutes,
+      russian_time_zone_auto_id: '3.10',
       stat: {
         location: '' ,
         title:  '',
@@ -38,7 +38,7 @@ class SpyTest < ActionDispatch::IntegrationTest
       }
     }
 
-    assert_equal User.last.russian_time_zone_auto_id, 3
+    assert_equal 3, User.last.russian_time_zone_auto_id
   end
 
   test 'Мы должны запоминать переданные клиентом user_agent и accept_language как есть. Аналогично как и с ip, если эти аттрибуты меняются, то мы так же сохраняем новые значения' do
