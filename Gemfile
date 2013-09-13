@@ -54,8 +54,6 @@ end
 gem 'bcrypt-ruby', '~> 3.1.0'
 
 gem 'less-rails'
-#ZAZ
-#gem "twitter-bootstrap-rails", github: 'seyhunak/twitter-bootstrap-rails'
 
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'cocoon', :git => 'https://github.com/nathanvda/cocoon'
