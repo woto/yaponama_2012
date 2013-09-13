@@ -10,4 +10,9 @@ class Car < ActiveRecord::Base
     "#{vin} - #{frame} - #{car_number} - #{brand} - #{model} - #{generation} - #{modification} - #{god} - #{period} - #{dvigatel} - #{tip} - #{moschnost} - #{privod} - #{tip_kuzova} - #{kpp} - #{kod_kuzova} - #{kod_dvigatelya} - #{rinok} - #{komplektaciya} - #{dverey} - #{rul}"
   end
 
+
+  include Code_1AttrAccessorAndValidation
+  include CopyCode_1FromUser
+  include SetCreationReasonBasedOnCode_1
+
 end
