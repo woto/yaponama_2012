@@ -174,7 +174,7 @@ class ApplicationController < ActionController::Base
       else
         @current_user = User.new
         @current_user.assign_attributes(SiteConfig.default_user_attributes)
-        @current_user.creation_reason = "session"
+        @current_user.code_1 = 'session'
         @current_user.build_account
         @current_user.save!
         cookies.permanent[:auth_token] = @current_user.auth_token
