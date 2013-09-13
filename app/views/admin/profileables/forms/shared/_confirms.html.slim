@@ -1,0 +1,13 @@
+.controls
+  button.btn.btn-small.bottom-space type="button" data-toggle="collapse-next"
+    span Подтверждение
+
+div class="collapse-fields" class="collapse out" 
+  = f.input :confirmed_by_manager
+  = f.input :manager_confirmation_datetime
+  = f.input :confirmed_by_user, :disabled => true
+  = f.input :user_confirmation_datetime, :disabled => true
+  = f.input :confirmation_token, :disabled => true
+
+  / TODO переделаю под admin ....
+  = link_to "Отправить PIN код для подтверждения", smart_route({prefix: [:ask], postfix: [:confirm, f.object.class.name.underscore]}, user_id: params[:user_id], id: (f.object.persisted? ? f.object.id : '-1') ), method: :post
