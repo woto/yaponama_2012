@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 #gem 'rails',     github: 'rails/rails'
 gem 'rails',     path: '/home/woto/vendor/rails'
 gem 'arel',      github: 'rails/arel'
-gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
 
 gem 'pg'
 
