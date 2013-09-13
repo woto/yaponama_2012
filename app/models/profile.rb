@@ -52,5 +52,6 @@ class Profile < ActiveRecord::Base
   # В частности сначала мы должны сгенерировать cached_names, ..., а потом записывать
   # транзакцию, а не наоборот
   include Transactionable
+  include RenameMeConcern
 
 end

@@ -12,4 +12,7 @@ class PostalAddress < ActiveRecord::Base
   def to_label
     "#{postcode} - #{region} - #{city} - #{street} - #{house} - #{room} - #{notes} - #{notes_invisible}"
   end
+
+  include RenameMeConcern
+
 end

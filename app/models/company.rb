@@ -85,5 +85,6 @@ class Company < ActiveRecord::Base
       end
 
   end
+  include RenameMeConcern
 
 end
