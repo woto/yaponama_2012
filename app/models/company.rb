@@ -23,10 +23,13 @@ class Company < ActiveRecord::Base
   validates :ownership, :presence => true, :inclusion => { :in => Rails.configuration.company_ownerships.keys }
 
   def before
-
     # Выставляем пользователя и обратаываем ситуацию, когда только ввели один адрес
     # и выбрали использовать такой же в другом поле
     if legal_address
+      #II8A
+      #if legal_address.new_record?
+      #  legal_address.code_1 = 'company'
+      #end
       legal_address.user = user
       if legal_address.save
         if actual_address_type == 'old' && self.actual_address_id == -1
@@ -37,6 +40,10 @@ class Company < ActiveRecord::Base
 
     if actual_address
       actual_address.user = user
+      #II8A
+      #if actual_address.new_record?
+      #  actual_address.code_1 = 'company'
+      #end
       if actual_address.save
         if legal_address_type == 'old' && self.legal_address_id == -1
           self.legal_address_id = actual_address.id
