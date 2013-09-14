@@ -302,4 +302,10 @@ module ApplicationHelper
     end
   end
 
+  def nested_fields &block
+    content_tag :div, class: "nested-fields" do
+      yield
+    end
+  end
+
 end
