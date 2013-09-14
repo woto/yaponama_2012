@@ -14,6 +14,8 @@
 //= require handlebars
 //= require_tree ../../templates
 //
+//= require turbolinks
+//= require cocoon
 //
 // == console.log-wrapper
 //
@@ -25,7 +27,6 @@
 // #DIRTY TESTS TODO REFACTOR
 //= require stat
 //
-//= require turbolinks
 //
 //= require jquery-cookie/jquery.cookie
 //
@@ -36,7 +37,6 @@
 //= require ckeditor-helpers/simple
 //= require ckeditor-helpers/extended
 
-//= require cocoon
 
 //= require underscore/underscore
 
