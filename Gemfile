@@ -27,7 +27,7 @@ group :production do
 end
 
 group :development, :test do
-  gem 'debugger'
+  gem 'debugger', github: 'cldwalker/debugger'
   gem 'capistrano'
   gem 'capybara', github: 'jnicklas/capybara'
   #gem 'selenium-webdriver'
