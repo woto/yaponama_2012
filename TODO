@@ -1,6 +1,4 @@
-TODO вернуть ui (widget необходим для работы file-upload)
+TODO вернуть jquery-ui (widget необходим для работы file-upload)
 Задействовать или переделать password_reset_sent_at и все такое
 Переименовать russian_time_zone_auto_id в auto_offset. А так же доработать немного функционал. Целые числа (теперь не целые). Отрицательные/положительные смещения времени. Округление.
-
-
-
+Необходимо задействовать active_record.default_timezone ? получая время из базы через node.js

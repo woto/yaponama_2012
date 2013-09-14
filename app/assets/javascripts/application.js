@@ -1,6 +1,6 @@
-//= require jquery
+// FIRST CLASS LIBRARIES
 //
-// TODO вернуть ui (widget необходим для работы file-upload)
+//= require jquery
 //= require jquery_ujs
 
 // TWITTER BOOTSTRAP
