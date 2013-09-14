@@ -289,4 +289,17 @@ module ApplicationHelper
     end
   end
 
+
+  def a1 &block
+    content_tag :div, class: "col-lg-offset-2 col-md-offset-3 col-sm-offset-3 col-lg-6 col-md-7 col-sm-8" do
+      yield
+    end
+  end
+
+  def a2 &block
+    content_tag :div, class: "col-lg-6 col-md-7 col-sm-8" do
+      yield
+    end
+  end
+
 end

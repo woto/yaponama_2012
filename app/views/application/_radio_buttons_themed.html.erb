@@ -2,7 +2,7 @@
 
   <%= f.label method, class: "col-lg-2 col-md-3 col-sm-3 control-label" %>
 
-  <div class="col-lg-6 col-md-7 col-sm-8">
+  <%= a2 do %>
 
     <div class="btn-group" data-toggle="buttons">
       <%= f.collection_radio_buttons method, collection, value_method, text_method, options, html_options do |ch| %>
@@ -13,7 +13,7 @@
     </div>
     <%= f.error method %>
 
-  </div>
+  <% end %>
 
 <% end %>
 

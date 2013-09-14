@@ -2,9 +2,9 @@
 
   <%= f.label method, class: "col-lg-2 col-md-3 col-sm-3 control-label" %>
 
-  <div class="col-lg-6 col-md-7 col-sm-8">
+  <%= a2 do %>
     <%= f.date_select method, options, html_options %>
     <%= f.error method %>
-  </div>
+  <% end %>
 
 <% end %>
