@@ -132,6 +132,9 @@ class ProfileablesController < ApplicationController
 
     if @resource.creation_reason.blank?
       @resource.creation_reason = 'self'
+    #II8A
+    unless @resource.class == PostalAddress
+      @resource.code_1 = 'frontend profile'
     end
   end
 
