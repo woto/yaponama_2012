@@ -78,11 +78,10 @@
 // == nanoscroller
 //
 //= require 'nanoScrollerJS/coffeescripts/jquery.nanoscroller'
-//
-//
-// == holderjs
-//
 //= require holder.js/holder
+//
+//
+//
 //= require holder
 //
 //= require common 
