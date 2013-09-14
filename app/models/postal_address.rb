@@ -2,6 +2,7 @@ class PostalAddress < ActiveRecord::Base
   include BelongsToUser
   include BelongsToCreator
   include Transactionable
+
   has_many :orders
 
   validates :city, :street, :house, :region, :presence => true
@@ -12,7 +13,5 @@ class PostalAddress < ActiveRecord::Base
   def to_label
     "#{postcode} - #{region} - #{city} - #{street} - #{house} - #{room} - #{notes} - #{notes_invisible}"
   end
-
-  include RenameMeConcern
 
 end
