@@ -86,3 +86,5 @@
 //= require holder
 //
 //= require common 
+//= require jasmine_examples/Player
+//= require jasmine_examples/Song
