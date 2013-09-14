@@ -82,6 +82,7 @@
 //
 //
 //
+//= require stand_alone_house
 //= require holder
 //
 //= require common 
