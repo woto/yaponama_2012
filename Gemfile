@@ -23,8 +23,7 @@ group :assets do
 end
 
 group :production do
-  # Use unicorn as the app server
-  gem 'unicorn'
+  gem 'puma'
 end
 
 group :development, :test do
@@ -102,5 +101,3 @@ gem 'sht_rails', github: 'railsware/sht_rails'
 
 # Необходима версия 2.6.0 чтобы не резался многострочный заголовок
 gem 'mail', github: 'mikel/mail'
-
-gem 'puma'
