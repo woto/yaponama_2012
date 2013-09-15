@@ -1,8 +1,9 @@
-.controls
-  button.btn.btn-small.bottom-space type="button" data-toggle="collapse-next"
-    span Прочие поля
+= f.form_group nil, rel: "collapse-next" do
+  = a1 do
+    button.btn.btn-default.btn-xs type="button" data-toggle="collapse-next"
+      span Прочие поля
 
-div class="collapse-fields" class="collapse out" 
+div class="collapse out"
   = f.text_area_input :notes, rows: 4
   = f.text_area_input :notes_invisible, rows: 4
 

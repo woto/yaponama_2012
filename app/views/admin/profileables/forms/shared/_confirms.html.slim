@@ -1,8 +1,9 @@
-.controls
-  button.btn.btn-small.bottom-space type="button" data-toggle="collapse-next"
-    span Подтверждение
+= f.form_group nil, rel: "collapse-next" do
+  = a1 do
+    button.btn.btn-default.btn-xs type="button" data-toggle="collapse-next"
+      span Подтверждение
 
-div class="collapse-fields" class="collapse out" 
+div class="collapse out"
   = f.check_box_input :confirmed_by_manager
   = f.date_input :manager_confirmation_datetime
   = f.check_box_input :confirmed_by_user, :disabled => true
