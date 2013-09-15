@@ -1,0 +1,11 @@
+<%= nested_fields do %>
+
+      <%= f.text_input :surname %>
+      <%= f.text_input :name %>
+      <%= f.text_input :patronymic %>
+
+      <%= f.standard_recreate %>
+
+      <%= render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f} %>
+
+<% end %>
