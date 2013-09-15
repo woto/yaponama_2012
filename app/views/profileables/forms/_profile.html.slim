@@ -7,11 +7,11 @@
 .controls.links.top-space.bottom-space
   = link_to_add_association 'Добавить телефон', f, :phones, :class => "btn btn-success btn-small", :partial => '/profileables/forms/profile/phone'
 
-= f.simple_fields_for :email_addresses do |email_address|
-  = render '/profileables/forms/profile/email_address', :f => email_address 
+= f.simple_fields_for :emails do |email|
+  = render '/profileables/forms/profile/email', :f => email 
 
 .controls.links.top-space.bottom-space
-  = link_to_add_association 'Добавить e-mail', f, :email_addresses, :class => "btn btn-success btn-small", :partial => '/profileables/forms/profile/email_address'
+  = link_to_add_association 'Добавить e-mail', f, :emails, :class => "btn btn-success btn-small", :partial => '/profileables/forms/profile/email'
 
 /TODO паспорт может быть только один!
 = f.simple_fields_for :passports do |passport|
