@@ -1,8 +1,9 @@
-- model_class = @resource_class
-
 = user_tabs do
 
-  div class="page-header"
-    h3= @meta_title = t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human
+  = page_header(t("helpers.titles.#{@resource_class.to_s.underscore}.edit"))
 
-  = render :partial => "form"
+  .col-md-9
+    = render :partial => "form"
+
+  .col-md-3
+    = render 'right'
