@@ -1,4 +1,4 @@
-.well
+.well.well-sm
   - model_class = User
 
   - array = [ \
@@ -11,7 +11,7 @@
     h4.hover-profileable
       = link_to smart_route({:postfix => [item[:assoc].pluralize]}, :user_id => @user.id) do
         span
-          i.icon class="icon-#{item[:icon]}" 
+          i.icon class="icon-#{item[:icon]}"
           '
           = item[:title]
       '

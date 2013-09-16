@@ -2,8 +2,9 @@
 
   = page_header(t("helpers.titles.#{@resource_class.to_s.underscore}.new"))
 
-  .col-md-9
+  .col-md-2
+    = render 'right'
+
+  .col-md-10
     = render :partial => "form"
 
-  .col-md-3
-    = render 'right'
