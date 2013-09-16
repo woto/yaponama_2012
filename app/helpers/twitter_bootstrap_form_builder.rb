@@ -9,6 +9,10 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def text_field method, options = {}
+    options[:placeholder] = I18n.t("helpers.placeholders.#{method}", default: I18n.t("helpers.placeholders.#{self.object.class.to_s.underscore}.#{method}", default: '') || options[:placeholder] || '')
+    options[:class] = [ 'form-control', options[:class] ].compact
+    super method, options
+  end
     options[:placeholder] = I18n.t("helpers.placeholders.#{method}", default: options[:placeholder] || '')
     options[:class] = [ 'form-control', options[:class] ].compact
     super method, options
