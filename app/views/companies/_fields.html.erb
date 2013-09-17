@@ -1,4 +1,4 @@
-<%= f.radio_buttons :ownership, Rails.configuration.company_ownerships.map {|k,v| [v,k]}.to_a, :last, :first %>
+<%= f.radio_buttons_themed :ownership, Rails.configuration.company_ownerships.map {|k,v| [v,k]}.to_a, :last, :first %>
 <%= f.text_input :name %>
 <%= f.text_input :inn %>
 <%= f.text_input :kpp %>
@@ -72,7 +72,7 @@ array = [
 
       <div style="clear: both">
         <%= f.fields_for assoc.to_sym, type == 'new' ? eval("f.object.#{assoc}") : eval("f.object.build_#{assoc}") do |la| %>
-          <%= render 'profileables/forms/postal_address', :f => la %>
+          <%= render 'postal_addresses/fields', :f => la %>
         <% end %>
       </div>
 
@@ -81,3 +81,5 @@ array = [
   </div>
 
 <% end %>
+
+<%= render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f} %>

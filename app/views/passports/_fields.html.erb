@@ -9,7 +9,7 @@
     <%= f.text_input :passport_vidan %>
     <%= f.passport_date_input :data_vidachi %>
     <%= f.text_input :kod_podrazdeleniya %>
-    <%= f.radio_buttons_themed :gender, {male: 'Мужской', female: 'Женский'}, :first, :last %>
+    <%= f.radio_buttons_themed :gender, Rails.configuration.genders.map {|k,v| [v,k]}.to_a, :last, :first %>
     <%= f.passport_date_input :data_rozhdeniya %>
     <%= f.text_input :mesto_rozhdeniya %>
 

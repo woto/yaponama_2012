@@ -1,0 +1,27 @@
+= f.simple_fields_for :names do |name|
+  = render 'names/fields', :f => name
+
+= f.simple_fields_for :phones do |phone|
+  = render 'phones/fields', :f => phone
+
+= f.form_group do
+  = a1 do
+    = link_to_add_association 'Добавить телефон', f, :phones, :class => "btn btn-success", :data => {"association-insertion-node" => ".form-group", "association-insertion-traversal" => "closest"}, :partial => 'phones/fields'
+
+= f.simple_fields_for :emails do |email|
+  = render 'emails/fields', :f => email
+
+= f.form_group do
+  = a1 do
+    = link_to_add_association 'Добавить e-mail', f, :emails, :class => "btn btn-success", :data => {"association-insertion-node" => ".form-group", "association-insertion-traversal" => "closest"}, :partial => 'emails/fields'
+
+/TODO паспорт может быть только один!
+= f.simple_fields_for :passports do |passport|
+  = render 'passports/fields', :f => passport
+
+.links
+  = f.form_group do
+    = a1 do
+      = link_to_add_association 'Добавить паспорт', f, :passports, :class => "btn btn-success", :data => {"association-insertion-node" => ".links", "association-insertion-traversal" => "closest"}, :partial => 'passports/fields'
+
+= render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f}

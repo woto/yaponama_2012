@@ -1,0 +1,33 @@
+ul.nav.nav-tabs
+  li.active
+    a#tab1_toggle.ignoredirty href="#tab1" data-toggle="tab" Идентификатор
+  li
+    a#tab2_toggle.ignoredirty href="#tab2" data-toggle="tab" Характеристики
+
+.tab-content.top-space
+
+  #tab1.tab-pane.active
+    = f.text_input :vin
+    = f.text_input :frame
+    = f.text_input :car_number
+
+  #tab2.tab-pane
+
+    = f.select2_input :brand
+    = f.select2_input :model
+    = f.select2_input :generation
+    = f.select2_input :modification
+    = f.text_input :god
+    = f.text_input :period
+    = f.text_input :dvigatel
+    = f.text_input :tip
+    = f.text_input :moschnost
+    = f.text_input :privod
+    = f.text_input :tip_kuzova
+    = f.text_input :kpp
+    = f.text_input :kod_kuzova
+    = f.text_input :kod_dvigatelya
+    = f.text_input :rinok
+    = f.text_input :komplektaciya
+    = f.text_input :dverey
+    = f.text_input :rul
