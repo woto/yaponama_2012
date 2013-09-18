@@ -1,20 +1,31 @@
-.profileable-item-control {
+@import 'bootstrap/less/mixins.less';
+@import 'bootstrap/less/variables';
+@import 'bootstrap/less/type';
+
+// Элементы управления - добавление, редактирование, удаление
+.profileable-category-add, .profileable-item-edit {
   position: absolute;
   right: 0px;
   top: 50%;
-  margin-top: -11px;
+  margin-top: -15px;
+  color: white !important;
 }
+
+// Конкретный элемент profileable - конкретный адрес, профиль и т.д.
 .profileable-item {
   position: relative;
+  .text-warning;
 }
 
-.profileable-removed {
-  text-decoration: line-through;
-}
+//.profileable-removed {
+//  text-decoration: line-through;
+//}
 
-.hover-profileable {
-  span {
-    color: black;
+// Категория - заголовок
+.profileable-category {
+  position: relative;
+  div {
+    .text-primary;
   }
   a {
     text-decoration: none;
