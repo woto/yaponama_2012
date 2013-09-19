@@ -49,28 +49,12 @@ class ProfileablesController < ApplicationController
   # GET /names/new
   def new
     @resource = @resource_class.new
-
-    case @resource.class.to_s
-      when 'Company'
-        @resource.prepare_company(@user)
-      when 'Profile'
-        @resource.names.new
-        @resource.phones.new(hide_remove_button_on_first_on_new: true)
-    end
-
   end
 
 
   # GET /names/1/edit
   def edit
     @user = @resource.user
-
-    case @resource.class.to_s
-      when 'Company'
-        @resource.legal_address_type = 'old'
-        @resource.actual_address_type = 'old'
-    end
-
   end
 
   # POST /names

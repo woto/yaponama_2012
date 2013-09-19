@@ -19,6 +19,8 @@ class CompaniesController < ProfileablesController
 
   # GET /companies/1/edit
   def edit
+    super
+
     @resource.legal_address_type = 'old'
     @resource.actual_address_type = 'old'
   end
