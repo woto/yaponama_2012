@@ -70,20 +70,6 @@ class Company < ActiveRecord::Base
   end
 
 
-  def prepare_company(u)
-
-      build_legal_address
-      build_actual_address
-
-      if u.postal_addresses.present?
-        self.legal_address_type = 'old'
-        self.actual_address_type = 'old'
-      else
-        self.legal_address_type = 'new'
-        self.actual_address_type = 'old'
-      end
-
-  end
   include RenameMeConcern
 
 end
