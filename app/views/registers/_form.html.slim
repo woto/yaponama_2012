@@ -10,12 +10,12 @@
 
     - if params[:with] == 'email'
       = pr.fields_for :emails do |e|
-        = e.text_input :value, placeholder: "Адрес электронной почты"
+        = e.text_input :value, placeholder: "Адрес электронной почты", label: 'email'
         = e.standard_recreate
 
     - if params[:with] == 'phone'
       = pr.fields_for :phones do |p|
-        = p.text_input :value, placeholder: "Номер мобильного телефона", rel: 'mobile-mask-on'
+        = p.text_input :value, placeholder: "Номер мобильного телефона", rel: 'mobile-mask-on', label: 'mobile_phone'
         = p.standard_recreate
 
   = f.password_input :password, placeholder: "Придумайте пароль не короче 6 символов"

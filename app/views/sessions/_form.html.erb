@@ -6,11 +6,11 @@
   <% end %>
 
   <% if params[:with] == 'email' %>
-    <%= f.text_input :value %>
+    <%= f.text_input :value, label: 'email' %>
   <% end %>
 
   <% if params[:with] == 'phone' %>
-    <%= f.phone_input :value %>
+    <%= f.phone_input :value, label: 'phone' %>
   <% end %>
 
   <%= f.password_input :password %>

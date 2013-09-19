@@ -6,9 +6,9 @@
 
   <% case @password_reset.with %>
   <% when 'email' %>
-    <%= f.text_input :value  %>
+    <%= f.text_input :value, label: 'email'  %>
   <% when 'phone' %>
-    <%= f.text_input :value, rel: 'mobile-mask-on' %>
+    <%= f.text_input :value, rel: 'mobile-mask-on', label: 'mobile_phone' %>
   <% end %>
 
   <%= f.hidden_field :with %>
