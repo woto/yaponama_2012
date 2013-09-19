@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class Admin::Products::CompleteController < Products::CompleteController
+class Admin::Products::CompleteController < ApplicationController # < Products::CompleteController
   include Admined
   include ProductsConcern
 

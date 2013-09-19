@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class Admin::Products::StockController < Products::StockController
+class Admin::Products::StockController < ApplicationController #< Products::StockController
   include Admined
   include ProductsConcern
 

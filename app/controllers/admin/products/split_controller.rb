@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class Admin::Products::SplitController < Products::SplitController
+class Admin::Products::SplitController < ApplicationController #< Products::SplitController
   include Admined
   include ProductsConcern
 

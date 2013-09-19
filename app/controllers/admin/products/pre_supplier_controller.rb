@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class Admin::Products::PreSupplierController < Products::PreSupplierController
+class Admin::Products::PreSupplierController < ApplicationController #< Products::PreSupplierController
   include Admined
   include ProductsConcern
 
