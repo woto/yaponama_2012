@@ -189,13 +189,15 @@ class ApplicationController < ActionController::Base
     @comment = Comment.new()
     @comment.commentable = obj
     @name = current_user.names.where(:creation_reason => Rails.configuration.user_name_creation_reason['self']).first.try(:to_label)
-    @email_address = current_user.email_addresses.first.try(:to_label)
+    @email = current_user.emails.first.try(:to_label)
   end
 
 
 private
 
   def set_user_time_zone
+    # TODO необходимо протестировать в функциональном тесте, 
+    # + поговаривают, что это не правильный способ, т.к. не threadsafe, а если и таковой, то неправильный
     Time.zone = case current_user.use_auto_russian_time_zone
     when true
       current_user.russian_time_zone_auto_id
@@ -208,13 +210,13 @@ private
 
   def only_not_authenticated
     if ["admin", "manager", "user"].include? current_user.role
-      redirect_to root_path, :notice => "Вы уже вошли на сайт." and return
+      redirect_to root_path, :info => "Вы уже вошли на сайт." and return
     end
   end
 
   def only_authenticated
     if ['guest'].include? current_user.role
-      redirect_to root_path, :notice => "Пожалуйста войдите на сайт." and return
+      redirect_to root_path, :danger => "Пожалуйста войдите на сайт." and return
     end
   end
 
@@ -233,5 +235,4 @@ private
 
     @visible_columns
   end
-
 end
