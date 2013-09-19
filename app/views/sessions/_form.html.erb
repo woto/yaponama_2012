@@ -1,4 +1,4 @@
-<%= form_for @session, url: session_path(with: params[:with]), html: { class: "form-horizontal" }, builder: TwitterBootstrapFormBuilder, :method => :post do |f| %>
+<%= form_for @session, url: login_with_path(with: params[:with]), html: { class: "form-horizontal" }, builder: TwitterBootstrapFormBuilder, :method => :post do |f| %>
 
   <%= f.alert_danger do %>
     <%= @session.errors[:base].join %> Забыли пароль? 

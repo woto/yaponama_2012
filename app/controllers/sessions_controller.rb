@@ -3,31 +3,20 @@
 class SessionsController < ApplicationController
   before_action :only_authenticated, :only => [:destroy]
   before_action :only_not_authenticated, :only => [:new, :create]
+  before_action { @meta_title = 'Вход на сайт' }
+
 
   def new
+    @session = Session.new(mobile: true)
   end
 
   def create
+    @session = Session.new(session_params)
+    @session.code_2 = params[:with]
 
-    email_addresses = EmailAddress.where(:email_address => params[:login])
-    phones = Phone.where(:phone => params[:login])
+    if @session.valid?
 
-    authenticated_user = nil
-
-    email_addresses.each do |email_address|
-      break if authenticated_user = email_address.user.authenticate(params[:password])
-    end
-
-    phones.each do |phone|
-      break if authenticated_user = phone.user.authenticate(params[:password])
-    end
-
-    if authenticated_user
-
-      if authenticated_user.logout_from_other_places?
-        authenticated_user.generate_token :auth_token
-        authenticated_user.save!
-      end
+      authenticated_user = @session.user
 
       if params[:remember_me]
         cookies.permanent[:auth_token] = { :value => authenticated_user.auth_token}
@@ -39,12 +28,12 @@ class SessionsController < ApplicationController
       #session[:user_id] = authenticated.id
       # TODO Сделал так чтобы если пользователь зарегистрирован в системе, значит он имеет какие-то привилении
       # соответственно старный гостевой аккаунт не нужен и 'он не хотел под ним работать на сайте'
+ 
       @user.destroy
       # TODO наверное круто было бы, если бы я делал merge пользователей
 
-      redirect_to user_path, :notice => "Вы успешно вошли."
+      redirect_to user_path, :success => "Вы успешно вошли."
     else
-      flash.now[:alert] = 'Пара e-mail/телефон и пароль не найдены.'
       render 'new'
     end
 
@@ -53,7 +42,11 @@ class SessionsController < ApplicationController
   def destroy
     #session[:user_id] = nil
     cookies.delete(:auth_token)
-    redirect_to root_path, :notice => "Вы успешно вышли."
+    redirect_to root_path, :success => "Вы успешно вышли."
+  end
+
+  def session_params
+    params.require(:session).permit!
   end
 
 end
