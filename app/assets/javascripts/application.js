@@ -81,6 +81,7 @@
 //
 //
 //
+//= require profileables
 //= require stand_alone_house
 //= require collapse_next
 //= require holder
