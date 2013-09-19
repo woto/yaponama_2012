@@ -34,4 +34,3 @@ $(document).on 'change', "[rel~='radio']", ->
 
 $(document).on 'change', "[rel~='checkbox']", ->
   $(this).trigger('custom-change')
-
