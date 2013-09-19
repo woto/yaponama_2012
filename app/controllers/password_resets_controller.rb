@@ -2,6 +2,7 @@
 
 class PasswordResetsController < ApplicationController
   before_action :only_not_authenticated
+  before_action { @meta_title = 'Восстановление пароля' }
 
   def contacts
 
@@ -29,7 +30,7 @@ class PasswordResetsController < ApplicationController
           "password_reset" => { 
             "value" => @password_reset.value, 
             "with" => @password_reset.with 
-        }), notice: t("helpers.flash.password_reset.#{@password_reset.with}")
+        }), info: t("helpers.flash.password_reset.#{@password_reset.with}")
  
 
       else
@@ -81,7 +82,7 @@ class PasswordResetsController < ApplicationController
       user.password = @password_reset.password
 
       if user.save!
-        redirect_to root_url, :notice => "Вы успешно сменили пароль, теперь можете войти на сайт." and return
+        redirect_to root_url, :success => "Вы успешно сменили пароль, теперь можете войти на сайт." and return
         # TODO если захочу автоматически вводить пользователя под своим аккаунтом, то объединить с логином
         # т.к. необходимо склеивание аккаунтов.
       end
