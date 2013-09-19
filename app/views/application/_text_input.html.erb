@@ -1,6 +1,6 @@
 <%= f.form_group name do %>
 
-  <%= f.label name, class: "col-lg-2 col-md-3 col-sm-3 control-label" %>
+  <%= f.control_label(label || name) %>
 
   <%= a2 do %>
     <%= f.text_field name, placeholder: placeholder, rel: rel %>

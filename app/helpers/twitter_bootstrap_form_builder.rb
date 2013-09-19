@@ -64,11 +64,14 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def phone_input name, opts={}
-    @template.render 'phone_input', f: self, name: name, placeholder: opts[:placeholder], rel: opts[:rel]
+    @template.render 'phone_input', f: self, name: name, placeholder: opts[:placeholder], rel: opts[:rel], label: opts[:label]
+  end
+
   end
 
   def text_input name, opts={}
-    @template.render 'text_input', f: self, name: name, placeholder: opts[:placeholder], rel: opts[:rel]
+    @template.render 'text_input', f: self, name: name, placeholder: opts[:placeholder], rel: opts[:rel], label: opts[:label]
+  end
   end
 
   def password_input name, opts={}
