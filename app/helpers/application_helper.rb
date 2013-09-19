@@ -290,6 +290,24 @@ module ApplicationHelper
   end
 
 
+  def page_header
+    content_tag :div, class: 'page-header' do
+      content_tag :h1 do
+        [
+
+          h(@meta_title),
+
+          " ",
+
+          content_tag(:small) do
+            h(@meta_title_small)
+          end
+
+        ].join.html_safe
+      end
+    end
+  end
+
   def a1 &block
     content_tag :div, class: "col-lg-offset-2 col-md-offset-3 col-sm-offset-3 col-lg-6 col-md-7 col-sm-8" do
       yield

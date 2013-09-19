@@ -20,5 +20,9 @@ class TextInputTest < ActionDispatch::IntegrationTest
     visit '/user/postal_addresses/new'
     assert_equal 'Номер квартиры или офиса', find('#postal_address_room')['placeholder']
   end
+
+  test 'Проверка функциональности label' do
+    skip
+  end
 end
 
