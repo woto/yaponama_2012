@@ -1,0 +1,82 @@
+<% model_class = User %>
+
+<%
+    array = [
+      {title: 'Профиль', icon: 'user', assoc: 'profile'},
+      {title: 'Адрес', icon: 'home', assoc: 'postal_address'},
+      {title: 'Автомобиль', icon: 'truck', assoc: 'car'},
+      {title: 'Компания', icon: 'briefcase', assoc: 'company'} ]
+%>
+
+<% array.each do |item| %>
+
+  <h4 class="profileable-category">
+    <%= link_to smart_route({:postfix => [item[:assoc].pluralize]}, :user_id => @user.id) do %>
+      <div>
+        <i class="icon icon-<%= item[:icon] %>"></i>
+        <%= item[:title] %>
+      </div>
+    <% end %>
+    <%= link_to smart_route({:prefix => [:new], :postfix => [item[:assoc]]}, :user_id => @user.id), :class => "btn btn-sm btn-primary profileable-category-add" do %>
+      <i class="icon-plus"> </i>
+    <% end %>
+  </h4>
+
+  <% @user.send(item[:assoc].pluralize).each do |partial| %>
+    <div class="profileable-item left-space">
+      <%= render :partial => "profileables/shows/#{partial.class.name.underscore}", :locals => {partial.class.name.underscore.to_sym => partial} %>
+      <%= render :partial => 'profileables/shows/notes', :locals => {resource: partial} %>
+      <%= render :partial => 'profileables/item_controls', :locals => {:resource => partial} %>
+    </div>
+  <% end %>
+<% end %>
+
+
+<h4 class="profileable-category">
+  <div>
+    <i class="icon icon-money"></i>
+    Деньги
+  </div>
+</h4>
+
+<div class="profileable-item left-space">
+  В работе: <%= number_to_currency @user.account.credit %>
+</div>
+
+<div class="profileable-item left-space">
+  На счету: <%= number_to_currency @user.account.debit %>
+  <div class="profileable-item-controls">
+    <%= link_to [:new, :admin, @user, :cashes], class: "btn btn-warning btn-sm" do %>
+      <i class="icon-edit"> </i>
+    <% end %>
+  </div>
+</div>
+
+<div class="profileable-item left-space">
+  Скидка: <%= @user.discount_was %> %
+  <div class="profileable-item-controls">
+    <%= link_to edit_admin_user_discount_path(@user), class: "btn btn-warning btn-sm" do %>
+      <i class="icon-edit"> </i>
+    <% end %>
+  </div>
+</div>
+
+<div class="profileable-item left-space">
+  Предоплата: <%= @user.prepayment_was %> %
+  <div class="profileable-item-controls">
+    <%= link_to edit_admin_user_prepayment_path(@user), class: "btn btn-warning btn-sm" do %>
+      <i class="icon-edit"> </i>
+    <% end %>
+  </div>
+</div>
+
+<h4 class="profileable-category">
+  <div>
+    <i class="icon icon-group"></i>
+    Соц. сети
+  </div>
+</h4>
+
+<% @user.auths.each do |auth| %>
+  <%= render :partial => "shared/auth_logged_in", :locals => {:auth => auth} %>
+<% end %>
