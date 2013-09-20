@@ -16,36 +16,36 @@ module Confirmed
         errors.add(:pin, 'указан неверный PIN код.')
       else
         self.confirmation_token = ''
-        self.confirmed_by_user = true
+        self.confirmed = true
       end
     end
+
+    attr_accessor :confirm_required
+    attr_accessor :force_confirm
+
+    def force_confirm!
+      @force_confirm = true
+      confirmation_token_will_change!
+    end
+
+    def become_confirmed?
+      confirmed_was.blank? && confirmed.present?
+    end
+
+    def reset_confirmed
+      self.confirmed = false
+      generate_token(:confirmation_token, :short)
+    end
+
 
   end
 
   module ClassMethods
 
     def confirmed
-      where(( arel_table[:confirmed_by_user].eq(true) ).or( arel_table[:confirmed_by_manager].eq(true) ))
+      where(confirmed: true)
     end
 
-    def not_confirmed
-      where(( arel_table[:confirmed_by_user].eq(false) ).and( arel_table[:confirmed_by_manager].eq(false) ))
-    end
-
-  end
-
-  def confirmed?
-    confirmed_by_user || confirmed_by_manager
-  end
-
-  def become_confirmed?
-    ( confirmed_by_user_was.blank? && confirmed_by_user.present? ) || (confirmed_by_manager_was.blank? && confirmed_by_manager.present? )
-  end
-
-  def reset_confirmed
-    self.confirmed_by_user = false
-    self.confirmed_by_manager = false
-    generate_token(:confirmation_token, :short)
   end
 
 end

@@ -32,7 +32,7 @@ otto2:
   value: +7 (555) 555-55-55
   mobile: true
   confirmation_token: 5555
-  confirmed_by_manager: true
+  confirmed: true
   profile: otto
   user: otto
   creation_reason: fixtures
@@ -40,7 +40,7 @@ otto2:
 otto3:
   value: 8-888-888-88-88
   mobile: false
-  confirmed_by_manager: true
+  confirmed: true
   confirmation_token: 8888
   profile: otto
   user: otto
@@ -57,7 +57,7 @@ mark:
   value: +7 (444) 444-44-44
   mobile: true
   confirmation_token: 4444
-  confirmed_by_user: true
+  confirmed: true
   profile: mark
   user: mark
   creation_reason: fixtures
@@ -65,7 +65,7 @@ mark:
 mike:
   value: +7 (777) 777-77-77
   mobile: true
-  confirmed_by_manager: true
+  confirmed: true
   profile: mike
   user: mike
   creation_reason: fixtures

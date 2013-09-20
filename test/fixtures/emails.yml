@@ -21,10 +21,10 @@ otto2:
   profile: otto
   user: otto
   creation_reason: fixtures
-  confirmed_by_user: true
+  confirmed: true
 
 mark:
   value: mark@example.com
   profile: mark
-  confirmed_by_user: true
+  confirmed: true
   creation_reason: fixtures
