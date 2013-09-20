@@ -1,6 +1,6 @@
 class AddConfirmableFields < ActiveRecord::Migration
   def change
-    ['email_addresses', 'phones'].each do |table|
+    ['emails', 'phones'].each do |table|
       add_column table, :confirmed_by_user, :boolean, :default => false
       add_column table, :confirmed_by_manager, :boolean, :default => false
       add_column table, :user_confirmation_datetime, :datetime 
