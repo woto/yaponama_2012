@@ -11,7 +11,7 @@ class ConfirmsController < ApplicationController
     @contact.force_confirm!
     @contact.save
 
-    redirect_to url_for(action: 'view'), notice: t("helpers.flash.confirm.#{params[:resource_class]}")
+    redirect_to url_for(action: 'view'), info: t("helpers.flash.confirm.#{params[:resource_class]}")
   end
 
   def make
@@ -20,9 +20,9 @@ class ConfirmsController < ApplicationController
 
     if @contact.update(confirm_params)
       if @user.role == 'guest'
-        redirect_to root_path, notice: "#{@contact.to_label} успешно подтвержден"
+        redirect_to root_path, success: "<strong>#{@contact.to_label}</strong> успешно подтвержден.".html_safe
       else
-        redirect_to user_path, notice: "#{@contact.to_label} успешно подтвержден"
+        redirect_to user_path, success: "<strong>#{@contact.to_label}</strong> успешно подтвержден.".html_safe
       end
     else
       render 'view'
@@ -55,14 +55,14 @@ class ConfirmsController < ApplicationController
     case params[:resource_class]
     when 'Phone'
       @contact = @user.phones.where(id: params[:id]).not_confirmed.first
-      notice = 'Ваш номер телефона уже подтвержден.'
+      success = 'Ваш номер телефона уже подтвержден.'
     when 'Email'
       @contact = @user.emails.where(id: params[:id]).not_confirmed.first
-      notice = 'Ваш электронный адрес уже подтвержден.'
+      success = 'Ваш электронный адрес уже подтвержден.'
     end
 
     unless @contact
-      redirect_to user_path, notice: notice
+      redirect_to user_path, success: success
     end
 
   end
