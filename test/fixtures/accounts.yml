@@ -22,3 +22,8 @@ stan:
   debit: 0.0
   credit: 0.0
   accountable: stan (User)
+
+mike:
+  debit:  0.0 
+  credit: 0.0
+  accountable: mike (User)
