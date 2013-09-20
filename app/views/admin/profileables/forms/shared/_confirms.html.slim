@@ -3,7 +3,7 @@
     button.btn.btn-default.btn-xs type="button" data-toggle="collapse-next"
       span Подтверждение
 
-div class="collapse out"
+div rel='acceptance-test' class="collapse"
   = f.check_box_input :confirmed_by_manager
   = f.date_input :manager_confirmation_datetime
   = f.check_box_input :confirmed_by_user, :disabled => true
