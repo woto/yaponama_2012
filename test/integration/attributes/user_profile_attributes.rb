@@ -10,13 +10,13 @@ module UserProfileAttributes
         },
         'phones_attributes' => {
           '0' => {
-            'phone' => '1',
-            'phone_type' => 'unknown'
+            'value' => '1',
+            'mobile' => '0'
           }
         },
-        'email_addresses_attributes' => {
+        'emails_attributes' => {
           '0' => {
-            'email_address' => 'a@a.ru'
+            'value' => 'a@a.ru'
           }
         },
         'passports_attributes' => {

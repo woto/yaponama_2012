@@ -11,15 +11,15 @@ module ChangedUserProfileAttributes
         },
         'phones_attributes' => {
           '0' => {
-            'phone' => '2222222222',
-            'phone_type' => 'mobile_russia',
+            'value' => '+7 (222) 222-22-22',
+            'mobile' => '1',
             'id' => Phone.last.id
           }
         },
-        'email_addresses_attributes' => {
+        'emails_attributes' => {
           '0' => {
-            'email_address' => 'q@q.ru',
-            'id' => EmailAddress.last.id
+            'value' => 'q@q.ru',
+            'id' => Email.last.id
           }
         },
         'passports_attributes' => {

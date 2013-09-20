@@ -27,7 +27,7 @@ class ConfirmsControllerTest < ActionController::TestCase
     assert_redirected_to view_user_confirm_email_path(id: id)
 
     # Проверка оповещения flash
-    assert_equal 'Мы отправили вам электронное письмо с PIN кодом. Введите его в поле, расположенное ниже, либо перейдите по ссылке в письме. Не забудьте проверить папку спам, если долго не получаете письмо.', flash[:notice]
+    assert_equal 'Мы отправили вам электронное письмо с PIN кодом. Введите его в поле, расположенное ниже, либо перейдите по ссылке в письме. Не забудьте проверить папку спам, если долго не получаете письмо.', flash[:info]
 
     pin = emails(:otto).reload.confirmation_token
 
@@ -70,7 +70,7 @@ class ConfirmsControllerTest < ActionController::TestCase
     assert_redirected_to view_user_confirm_phone_path(id: id)
 
     # Проверка оповещения flash
-    assert_equal 'Мы отправили вам SMS с PIN кодом. Введите его в поле, расположенное ниже, либо перейдите по ссылке если ваш телефон поддерживает эту функцию. Сделайте повторный запрос PIN кода, если вы вдруг не получили SMS.', flash[:notice]
+    assert_equal 'Мы отправили вам SMS с PIN кодом. Введите его в поле, расположенное ниже, либо перейдите по ссылке если ваш телефон поддерживает эту функцию. Сделайте повторный запрос PIN кода, если вы вдруг не получили SMS.', flash[:info]
 
     pin = phones(:otto).reload.confirmation_token
 
@@ -162,10 +162,10 @@ class ConfirmsControllerTest < ActionController::TestCase
 
   test 'Отправка формы с PIN кодом со страницы подтверждения e-mail. PIN код правильный' do
     cookies['auth_token'] = users(:otto).auth_token
-    id = phones(:otto).id
+    id = emails(:otto).id
     get :make, id: id, resource_class: 'Email', confirm: { pin: '5555' }
     assert emails(:otto).reload.confirmed?
-    # TODO тут еще проверка flash'a
+    assert_equal '<strong>foo@example.com</strong> успешно подтвержден.', flash[:success]
   end
 
   test 'Отправка формы с PIN кодом со страницы подтверждения phone. PIN код правильный' do
@@ -173,7 +173,7 @@ class ConfirmsControllerTest < ActionController::TestCase
     id = phones(:otto).id
     get :make, id: id, resource_class: 'Phone', confirm: { pin: '5555' }
     assert phones(:otto).reload.confirmed?
-    # TODO тут еще проверка flash'a
+    assert_equal '<strong>+7 (111) 111-11-11</strong> успешно подтвержден.', flash[:success]
   end
 
   #

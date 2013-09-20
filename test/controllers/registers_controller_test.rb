@@ -110,7 +110,7 @@ class RegistersControllerTest < ActionController::TestCase
 
     assert assigns(:user).valid?
 
-    assert_equal 'Регистрация завершена. Вы успешно вошли на сайт под своей учетной записью.', flash[:notice]
+    assert_equal 'Регистрация завершена. Вы успешно вошли на сайт под своей учетной записью.', flash[:success]
 
     delivery = ActionMailer::Base.deliveries.last
 
@@ -123,6 +123,9 @@ class RegistersControllerTest < ActionController::TestCase
     email = Email.where(value: 'foo@example.com').order(id: :desc).limit(1).first
     pin = email.confirmation_token
     id = email.id
+
+    assert !email.confirmed_by_user
+    assert !email.confirmed_by_manager
 
     # pin код в письме
     assert_match Regexp.new("PIN: " + pin), delivery.body.encoded
@@ -146,7 +149,7 @@ class RegistersControllerTest < ActionController::TestCase
 
     assert assigns(:user).valid?
 
-    assert_equal 'Регистрация завершена. Вы успешно вошли на сайт под своей учетной записью.', flash[:notice]
+    assert_equal 'Регистрация завершена. Вы успешно вошли на сайт под своей учетной записью.', flash[:success]
 
     delivery = ActionMailer::Base.deliveries.last
 
@@ -156,9 +159,12 @@ class RegistersControllerTest < ActionController::TestCase
     # Заголовок письма
     assert_equal "+71111111111", delivery.subject
 
-    sms = Phone.where(value: '+7 (111) 111-11-11').order(id: :desc).limit(1).first
-    pin = sms.confirmation_token
-    id = sms.id
+    phone = Phone.where(value: '+7 (111) 111-11-11').order(id: :desc).limit(1).first
+    pin = phone.confirmation_token
+    id = phone.id
+
+    assert !phone.confirmed_by_user
+    assert !phone.confirmed_by_manager
 
     # pin код в письме
     assert_match Regexp.new("PIN: " + pin), delivery.body.encoded
