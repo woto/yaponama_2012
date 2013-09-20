@@ -32,12 +32,6 @@
 //
 //= require jquery-dirtyforms/jquery.dirtyforms
 
-//= require ckeditor-helpers/extended_options
-//= require ckeditor-helpers/basepath
-//= require ckeditor-helpers/simple
-//= require ckeditor-helpers/extended
-
-
 //= require underscore/underscore
 
 //= require jquery-jsonp/src/jquery.jsonp
@@ -48,13 +42,13 @@
 
 //= require jquery.cachedScript
 //= require jquery.editableHighlight
+//= require moment/moment
 //
 //= require select2
 //
 //= require brand_model
 //= require cars
 //
-//= require moment/moment
 //
 // TODO когда создам application.js в admin, тогда перенесу подключение туда
 //= require admin/users
@@ -88,3 +82,9 @@
 //= require common 
 //= require jasmine_examples/Player
 //= require jasmine_examples/Song
+//
+//= require ckeditor-helpers/extended_options
+//= require ckeditor-helpers/basepath
+//= require ckeditor-helpers/simple
+//= require ckeditor-helpers/extended
+//
