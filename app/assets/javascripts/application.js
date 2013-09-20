@@ -67,7 +67,6 @@
 //= require items_progress
 //= require 'sidebar'
 //= require 'time_zone_checkbox'
-//= require 'button_swap'
 //= require 'deliveries/places/places'
 //= require 'deliveries'
 //= require 'auth'
