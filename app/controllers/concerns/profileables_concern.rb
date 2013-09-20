@@ -76,36 +76,6 @@ module ProfileablesConcern
     end
 
     def set_preferable_columns
-      case @resource_class.to_s
-      when 'Name'
-        @grid.name_visible = '1'
-      when 'Phone'
-        @grid.phone_visible = '1'
-      when 'EmailAddress'
-        @grid.email_address_visible = '1'
-      when 'PostalAddress'
-        @grid.city_visible = '1'
-        @grid.house_visible = '1'
-        @grid.postcode_visible = '1'
-        @grid.region_visible = '1'
-        @grid.room_visible = '1'
-        @grid.street_visible = '1'
-      when 'Car'
-        @grid.brand_visible = '1'
-        @grid.frame_visible = '1'
-        @grid.god_visible = '1'
-        @grid.model_visible = '1'
-        @grid.vin_visible = '1'
-      when 'Company'
-        @grid.inn_visible = '1'
-        @grid.name_visible = '1'
-        @grid.ogrn_visible = '1'
-        @grid.ownership_visible = '1'
-      when 'Profile'
-        @grid.cached_names_visible = '1'
-        @grid.cached_phones_visible = '1'
-      end
-
       @grid.id_visible = '1'
       @grid.notes_visible = '1'
 

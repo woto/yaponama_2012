@@ -25,4 +25,14 @@ class CompaniesController < ProfileablesController
     @resource.actual_address_type = 'old'
   end
 
+  private
+
+  def set_preferable_columns
+    super
+    @grid.inn_visible = '1'
+    @grid.name_visible = '1'
+    @grid.ogrn_visible = '1'
+    @grid.ownership_visible = '1'
+  end
+
 end
