@@ -33,13 +33,13 @@ class CompaniesTest < ActionDispatch::IntegrationTest
     submit
 
     # Есть ошибка в наименовании организации
-    assert page.has_css? ".company_name.error"
+    assert page.has_css? "#company_name ~ span b", text: 'не может быть пустым'
 
     # Есть ошибка в индексе юр. адреса
-    assert page.has_css? ".company_legal_address_postcode.error"
+    assert page.has_css? "#company_legal_address_attributes_postcode ~ span", text: 'не может быть пустым'
 
     # Есть ошибка в списке выбора факт. адреса
-    assert page.has_css? ".company_actual_address.error"
+    assert page.has_css? "#company_actual_address_id ~ span", text: 'не может быть пустым'
   end
 
   test "Адресов нет | юр. - ничего не выбрали | факт. - не заполнили поля | => | Ошибка у обоих" do
@@ -55,10 +55,10 @@ class CompaniesTest < ActionDispatch::IntegrationTest
     submit
 
     # Проверяем наличие ошибки у поля для выбора юр. адреса
-    assert page.has_css?('.company_legal_address.error')
+    assert page.has_css?('#company_legal_address_id ~ span', text: 'не может быть пустым')
 
     # Проверяем наличие ошибки у поля для ввода индекса факт. адреса
-    assert page.has_css?('.company_actual_address_postcode.error')
+    assert page.has_css?('#company_actual_address_attributes_postcode ~ span b', text: 'не может быть пустым')
   end
 
   test "Адресов нет | юр. и факт. - список, но ничего не выбрали | => | Ошибка у обоих" do
@@ -71,10 +71,10 @@ class CompaniesTest < ActionDispatch::IntegrationTest
     submit
 
     # Проверяем наличие ошибки у поля для выбора юр. адреса
-    assert page.has_css?('.company_legal_address.error')
+    assert page.has_css?('#company_legal_address_id ~ span', text: 'не может быть пустым')
 
     # Проверяем наличие ошибки у поля для выбора факт. адреса
-    assert page.has_css?('.company_actual_address.error')
+    assert page.has_css?('#company_actual_address_id ~ span', text: 'не может быть пустым')
   end
 
   test "Адресов нет | юр и факт - в обоих сослались на противоположный | => | Ошибка у обоих" do
@@ -93,10 +93,10 @@ class CompaniesTest < ActionDispatch::IntegrationTest
     submit 
 
     # Проверяем наличие ошибки у поля для выбора юр. адреса
-    assert page.has_css?('.company_legal_address.error')
+    assert page.has_css?('#company_legal_address_id ~ span', text: 'не может быть пустым')
 
     # Проверяем наличие ошибки у поля для выбора факт. адреса
-    assert page.has_css?('.company_actual_address.error')
+    assert page.has_css?('#company_actual_address_id ~ span', text: 'не может быть пустым')
   end
 
   test "Адресов нет | юр. - не заполн. индекс | факт - такой же как и юр. | => | ошибка у юр. | факт. ошибку не отображаем" do
@@ -108,10 +108,10 @@ class CompaniesTest < ActionDispatch::IntegrationTest
     submit
 
     # Есть ошибка в индексе юр. адреса
-    assert page.has_css? ".company_legal_address_postcode.error"
+    assert page.has_css? "#company_legal_address_attributes_postcode ~ span", text: 'не может быть пустым'
 
     # Нет ошибки в факт. адресе
-    assert page.has_css? ".company_actual_address:not(.error)"
+    assert page.has_no_css? "#company_actual_address_id ~ span", text: 'не может быть пустым'
 
   end
 
@@ -155,7 +155,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
   end
 
   test "Адрес есть | => | проверяем первичное состояние формы для ввода компании." do
-    auth('1231231231', '1231231231')
+    auth('+7 (123) 123-12-31', '1231231231')
     visit '/user/companies/new'
 
     # Есть поле для ввода наименования организации
@@ -169,7 +169,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
   end 
 
   test "Адрес есть | факт. - имеющийся | юр. - такой же как и юр | => | валидация адресов пройдена" do
-    auth('1231231231', '1231231231')
+    auth('+7 (123) 123-12-31', '1231231231')
     visit '/user/companies/new'
 
     # Организационно правовая форма
@@ -182,7 +182,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
     find("#company_inn").set('1234567890')
 
     # Юр. выбрали "Такой же как и физ."
-    find('#company_legal_address_id').find("option[value='#{postal_addresses(:first_user_postal_address).id}']").select_option
+    find('#company_legal_address_id').find("option[value='#{postal_addresses(:first_user).id}']").select_option
 
     # Факт. выбрали имеющийся
     find('#company_actual_address_id').find("option[value='-1']").select_option
@@ -194,8 +194,8 @@ class CompaniesTest < ActionDispatch::IntegrationTest
   end
   
   test "Редактирование компании - юр. и факт. адреса в виде выбора эл-ов списка" do
-    auth('1231231231', '1231231231')
-    company_id = companies(:first_user_company)
+    auth('+7 (123) 123-12-31', '1231231231')
+    company_id = companies(:first_user)
     visit edit_user_company_path(company_id)
 
     # Есть поле для выбора факт. адреса

@@ -8,7 +8,7 @@ require 'capybara/poltergeist'
 
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, {
-    timeout: 60
+    timeout: 20
     #debug: true
   })
 end
@@ -18,7 +18,7 @@ Capybara.server_host = 'localhost'
 #Capybara.default_driver = :selenium
 Capybara.default_driver = :poltergeist
 Capybara.javascript_driver = :poltergeist
-Capybara.default_wait_time = 60
+Capybara.default_wait_time = 20
 
 
 class ActionDispatch::IntegrationTest
@@ -26,13 +26,17 @@ class ActionDispatch::IntegrationTest
 
   private
 
-  def auth(login, password)
-
-    visit '/login'
+  def auth(login, password, remember_me=false)
+    visit '/login/phone'
     #assert page.has_css?('#login')
-    fill_in 'login', with: login
-    fill_in 'password', with: password
-    find('#submit').click
+    fill_in 'session[value]', with: login
+    fill_in 'session[password]', with: password
+    check 'remember_me' if remember_me
+    # debugger
+    #find('type["submit"], text: 'Войти').click
+    click_button 'Войти'
+    #find('#submit').click
+    #save_screenshot('1.png', full: true)
     #assert page.has_css? ".alert-success", text: "Вы успешно вошли."
   end
 
@@ -53,7 +57,7 @@ class ActiveSupport::TestCase
 
   def authenticated_as(login, password)
     open_session do |sess|
-      post '/login', { :login => login, :password => password }
+      post '/login/phone', { session: {value: login, password: password, mobile: true } }
       follow_redirect!
       assert flash[:notice] = "Вы успешно вошли."
       yield sess if block_given?
@@ -67,3 +71,12 @@ class ActiveSupport::TestCase
   end
 
 end
+
+
+  #test "Параллельные" do
+  #  session1 = Capybara::Session.new Capybara.current_driver, Capybara.app
+  #  session1.visit root_path
+
+  #  session2 = Capybara::Session.new Capybara.current_driver, Capybara.app
+  #  session2.visit root_path
+  #end

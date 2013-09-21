@@ -13,32 +13,29 @@ class UserTest < ActiveSupport::TestCase
   test 'Если у уже сохраненного пользователя заполняется первый профиль, то он должен стать главным' do
     u = users(:stan)
     assert u.valid?
-    profile = u.profiles.new
+    profile = u.profiles.new(creation_reason: 'fixtures')
     name = profile.names.new
-    name.creation_reason = 'fixtures'
+    name.creation_reason = 'frontend'
     name.name = 'Стэн'
     assert u.valid?
   end
 
   test 'При изменении профиля, который выставлен в качестве основного должны измениться закешированные поля профиля cached_names, cached_phones и т.д. и закешированное значение главного профиля пользователя cached_main_profile' do
     u = users(:stan)
-    assert u.profiles.blank?
-    profile = u.profiles.new
+    profile = u.profiles.new(code_1: 'frontend')
     name = profile.names.new
-    name.creation_reason = 'fixtures'
     name.name = 'Стэн'
-    phone = profile.phones.new
-    phone.phone = '123'
-    phone.phone_type = 'unknown'
-    phone.creation_reason = 'fixtures'
-    email_address = profile.email_addresses.new
-    email_address.email_address = 'fake@example.com'
-    email_address.creation_reason = 'fixtures'
+    ph = profile.phones.new
+    ph.value = '123'
+    ph.mobile = false
+    email = profile.emails.new
+    email.value = 'test@example.com'
     passport = profile.passports.new(:gender => 'male', :seriya => '1', :nomer => '1', :passport_vidan => '1', :data_vidachi => DateTime.now, :kod_podrazdeleniya => '1', :data_rozhdeniya => DateTime.now, :mesto_rozhdeniya => 'Новый Дурулгуй')
+    u.main_profile = profile
     u.save!
     assert_equal 'Стэн', u.cached_main_profile['names'].first['name']
-    assert_equal 'fake@example.com', u.cached_main_profile['email_addresses'].first['email_address']
-    assert_equal '123', u.cached_main_profile['phones'].first['phone']
+    assert_equal 'test@example.com', u.cached_main_profile['emails'].first['value']
+    assert_equal '123', u.cached_main_profile['phones'].first['value']
     assert_equal 'Новый Дурулгуй', u.cached_main_profile['passports'].first['mesto_rozhdeniya']
   end
 

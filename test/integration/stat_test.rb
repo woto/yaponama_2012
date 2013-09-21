@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class SpyTest < ActionDispatch::IntegrationTest
+class StatTest < ActionDispatch::IntegrationTest
 
   test 'Сначала мы сэмулируем заход пользователя с ip адресом 85.117.95.1 и обнаружим, что пользователь с Норильска, запишем ip, город и регион, а потом зайдем с 127.0.0.1 запишем новый ip, а город и регион обнулятся' do
     get '/', {}, { 'REMOTE_ADDR' => '85.117.95.1' }

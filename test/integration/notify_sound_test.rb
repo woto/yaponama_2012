@@ -19,7 +19,7 @@ class NotifySoundTest < ActionDispatch::IntegrationTest
     sleep 3
 
     Capybara.session_name = :first
-    auth('1111111111', '1111111111')
+    auth('+7 (111) 111-11-11', '1111111111')
     assert has_css? ".alert-success", text: "Вы успешно вошли."
 
     find('#talk-button-show').click
@@ -27,7 +27,7 @@ class NotifySoundTest < ActionDispatch::IntegrationTest
     save_screenshot('1.png', full: true)
 
     Capybara.session_name = :second
-    auth('4444444444', '4444444444')
+    auth('+7 (444) 444-44-44', '4444444444')
     assert has_css? ".alert-success", text: "Вы успешно вошли."
 
     find('#talk-button-show').click

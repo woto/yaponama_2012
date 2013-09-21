@@ -3,6 +3,27 @@
 require 'test_helper'
 
 class WelcomeControllerTest < ActionController::TestCase
+
+  test 'Проверка отображения ссылок для подтверждения у пользователя' do
+
+    cookies['auth_token'] = users(:otto).auth_token
+
+    get :index
+
+    assert_select '.confirm-phone', count: 1 do |link|
+      assert_select "a[href=?]", /\/user\/phones\/\d+\/confirm\/view/
+      assert_select "a", text: '+7 (111) 111-11-11'
+    end
+
+    assert_select '.confirm-email', count: 1 do |link|
+      assert_select "a[href=?]", /\/user\/emails\/\d+\/confirm\/view/
+      assert_select "a", text: 'foo@example.com'
+    end
+
+    #assert_match /\/user\/emails\/\d+\/confirm/, find('a', text: 'Подтвердить')['href']
+
+  end
+
   test "Если посетитель запрашивает страницу с несуществующим auth_token'ом, то он должен быть перенаправлен на главную страницу и auth_token должен быть сброшен." do
 
     cookies['auth_token'] = 'auth_token_of_nonexistent_user'
@@ -19,6 +40,8 @@ class WelcomeControllerTest < ActionController::TestCase
     assert_equal user.auth_token, cookies['auth_token']
     assert_equal 'session', user.creation_reason
   end
+
+  test 'Сделать проверку @meta_...' do
 
   end
 

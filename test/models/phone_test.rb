@@ -3,112 +3,126 @@ require 'test_helper'
 
 class PhoneTest < ActiveSupport::TestCase
 
-  test 'Если сменили номер подтвержденного телефона, то его статус должен стать не подтвержденный' do
+  test 'Если сменили номер подтвержденного телефона (мобильного) с флагом confirm_required, то его статус должен стать не подтвержденный, а пользователю должен получить смс с кодом' do
+    # TODO Этот тест удалится, т.к. есть более правильный на уровне контроллера
+    ActionMailer::Base.deliveries.clear
 
-    p = phones(:first_admin_phone)
-    assert !p.confirmed?
-
-    p.assign_attributes(phone: '123')
-    p.save!
-    p.confirmed_by_user = true
-    p.confirmed_by_manager = true
-    assert p.confirmed?
-
-    p.phone = '321'
+    p = phones(:mark)
+    p.value = '+7 (321) 321-32-11'
+    p.confirm_required = true
     p.save!
 
     assert !p.confirmed?
+    assert_equal 1, ActionMailer::Base.deliveries.size
   end
 
-  test 'Если сменился просто формат записи и телефон подтвержден, то он должен остаться подтвержденным' do
-    p = phones(:first_admin_phone)
-    p.phone = '(111) 222-33-44'
-    p.save!
-    p.confirmed_by_manager = true
-    p.confirmed_by_user = true
-    p.save!
-    assert p.confirmed_by_manager
-    assert p.confirmed_by_user
+  test 'Если сменили номер подтвержденного телефона (мобильного) без флага confirm_required, то его статус должен остаться прежним, а смс не должна быть отправлена' do
+    # TODO Этот тест удалится, т.к. есть более правильный на уровне контроллера
+    ActionMailer::Base.deliveries.clear
 
-    p.phone = '111 222 33 44'
+    p = phones(:mark)
+    p.value = '+7 (321) 321-32-11'
+    p.confirm_required = false
     p.save!
-    assert p.confirmed_by_manager
-    assert p.confirmed_by_user
+
+    assert p.confirmed?
+    assert_equal 0, ActionMailer::Base.deliveries.size
+  end
+
+
+  test 'Если сменился просто формат записи и телефон подтвержден, то он должен остаться подтвержденным даже с выставленным флагом confirm_required' do
+    # TODO Этот тест удалится, т.к. есть более правильный на уровне контроллера
+    p = phones(:otto3)
+    p.value = '8 888 888 88 88'
+    p.confirm_required = true
+    p.save!
+    assert p.confirmed?
   end
 
   test 'При проверке на возможность существования нескольких подтвержденных одинаковых телефонных номеров; телефон считается таким же если совпадают только цифры номера (прочие символы откидываются)' do
-    p1 = phones(:first_admin_phone)
+    p1 = phones(:first_admin)
 
-    p1.phone = '1112223344'
+    p1.value = '+7 (111) 222-33-44'
+    p1.confirm_required = false
     p1.save!
-    p1.assign_attributes(phone_type: 'mobile_russia', confirmed_by_manager: true)
+    p1.assign_attributes(mobile: true, confirmed: true, confirm_required: false)
     p1.save!
-    assert p1.errors[:phone].blank?
+    assert p1.errors[:value].blank?
 
     p2 = p1.dup
-    p2.assign_attributes(phone: '(111) 222-33-44', phone_type: 'unknown')
+    p2.assign_attributes(value: '71112223344', mobile: '0', confirm_required: false)
     p2.valid?
-    assert p2.errors[:phone].present?
+    assert p2.errors[:value].present?
   end
 
   test 'Разные пользователи могут иметь один и тот же номер телефона без подтверждения' do
-    p1 = Phone.new(phone: '1234567890', phone_type: 'mobile_russia')
-    p2 = Phone.new(phone: '1234567890', phone_type: 'mobile_russia')
+    pr1 = profiles(:otto)
+    ph1 = pr1.phones.new(value: '1234567890', mobile: '0', creation_reason: 'fixtures')
+    pr1_count = pr1.phones.count
 
-    p1.valid?
-    p2.valid?
+    pr2 = profiles(:mark)
+    ph2 = pr2.phones.new(value: '1234567890', mobile: '0', creation_reason: 'fixtures')
+    pr2_count = pr2.phones.count
 
-    assert p1.errors[:phone].blank?
-    assert p2.errors[:phone].blank?
+    pr1.save!
+    pr2.save!
+
+    assert_equal pr1.phones(true).count, pr1_count+1
+    assert_equal pr2.phones(true).count, pr2_count+1
   end
 
   test 'Нельзя использовать номер телефона, если существует такой же подтвержденный' do
-    p1 = phones(:first_admin_phone)
-    p1.confirmed_by_manager = true
+    p1 = phones(:first_admin)
+    p1.confirmed = true
     p1.save
     assert p1.confirmed?
 
     p2 = p1.dup
-    p2.confirmed_by_manager = false
+    p2.confirmed = false
     assert !p2.valid?
   end
 
   test 'Если имеются несколько одинаковых номеров телефонов, то после подтверждения остальные должны быть удалены' do
-    p1 = phones(:first_admin_phone)
-    assert p1.valid?
-
-    p2 = p1.dup
+    p1 = phones(:first_admin)
+    p2 = phones(:otto)
+    p2.confirm_required = false
+    p2.confirmed = true
     p2.save!
-    p2.confirmed_by_user = true
-    p2.save!
-
     assert !Phone.exists?(p1)
   end
 
-  test 'При создании нового номера телефона должен генерироваться confirmation_token' do
-    p = Phone.new
-    p.valid?
+  test 'При создании нового номера телефона должен генерироваться confirmation_token (Если выставлен confirm_required)' do
+    u = users(:first_admin)
+    p = u.profiles.first.phones.new(value: '+7 (123) 456-78-90', mobile: true, confirm_required: true, creation_reason: 'fixtures')
+    p.save!
     assert_not_nil p.confirmation_token
   end
 
-  test 'При изменении номера телефона (реальном) происходит перегенерация confirmation_token, а при изменении формата не перегенерируется' do
-    p = phones(:first_admin_phone)
-    p.confirmed_by_manager = true
+  test 'При создании нового номера телефона не должен генерироваться confirmation_token (Если не выставлен confirm_required)' do
+    u = users(:first_admin)
+    p = u.profiles.first.phones.new(value: '123', mobile: false, confirm_required: false, creation_reason: 'fixtures')
     p.save!
-
-    assert p.confirmation_token.present?
-    assert p.confirmed?
-
-    p.phone = "+#{p.phone}"
-    p.save!
-
-    assert p.confirmed?
-
-    p.phone = "2#{p.phone}"
-    p.save!
-
-    assert !p.confirmed?
+    assert_nil p.confirmation_token
   end
 
+  test 'При изменении номера телефона (реальном) происходит перегенерация confirmation_token' do
+    p = phones(:mark)
+    old_confirmation_token = p.confirmation_token
+    p.confirm_required = true
+    p.value = '+7 (549) 948-23-43'
+    p.save!
+    new_confirmation_token = p.confirmation_token
+    refute_equal new_confirmation_token, old_confirmation_token
+  end
+
+  test 'При изменении номера телефона (формата записи) перегенерации confirmation_token не происходит даже при выставленном флаге confirm_required' do
+    p = phones(:otto3)
+    old_confirmation_token = p.confirmation_token
+    p.confirm_required = true
+    p.value = '8 8888888888'
+    p.save!
+    new_confirmation_token = p.confirmation_token
+    assert_equal new_confirmation_token, old_confirmation_token
+  end
 
 end

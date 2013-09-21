@@ -4,7 +4,8 @@ require 'test_helper'
 
 class ProfileTest < ActiveSupport::TestCase
   test "Пустой новый профиль должен иметь ошибки: Принадлежать пользователю, иметь имя, иметь номер телефона" do
-    profile = Profile.new
+    u = users(:stan)
+    profile = u.profiles.new
     profile.valid?
 
     assert profile.errors[:user]    
@@ -13,7 +14,8 @@ class ProfileTest < ActiveSupport::TestCase
   end
 
   test "Профиль не может иметь более 1-ого имени или паспорта" do
-    profile = Profile.new
+    u = users(:stan)
+    profile = u.profiles.new
     1.times do
       profile.passports.new
       profile.names.new
@@ -31,6 +33,12 @@ class ProfileTest < ActiveSupport::TestCase
 
     assert profile.errors[:names]
     assert profile.errors[:passports]
+  end
+
+  test 'Если у пользователя заполнен хотя бы один профиль, то его удалить уже нельзя. (Если регистрация происходит через email или телефон. То можно удалить контакт и не иметь возможности зайти на сайт с контактом - паролем)' do
+    u = users(:stan)
+    p = u.profiles.first
+    refute p.destroy
   end
 
 end

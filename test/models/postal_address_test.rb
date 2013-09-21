@@ -5,7 +5,7 @@ require 'test_helper'
 class PostalAddressTest < ActiveSupport::TestCase
 
   test 'Проверяем взаимодействие флага на требование к заполнению номера дома' do
-    pa = PostalAddress.new(code_1: 'frontend profile')
+    pa = postal_addresses(:first_user)
 
     # Не отдельно стоящее
     pa.stand_alone_house = false
@@ -19,7 +19,7 @@ class PostalAddressTest < ActiveSupport::TestCase
   end
 
   test 'Проверяем валидацию почтового индекса' do
-    pa = PostalAddress.new(code_1: 'frontend profile')
+    pa = postal_addresses(:first_user)
 
     # Пустое значение
     pa.postcode = ''
