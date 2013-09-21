@@ -15,3 +15,9 @@ otto:
   profile: otto
   user: otto
   creation_reason: fixtures
+
+mark:
+  name: Марк
+  profile: mark
+  user: mark
+  creation_reason: fixtures
