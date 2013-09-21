@@ -1,15 +1,11 @@
 - model_class = Cash
+- @meta_title = t('.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human)
 
-.row-fluid
-  .span3
-    = render 'users/show'
-  #workspace.span9
-    div class="page-header"
-      h3=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human
-    = simple_form_for [:admin, @user, @cash], :html => { :class => "form-horizontal dirtyforms" } do |f|
-      = f.input :debit, :as => :string, input_html: { autocomplete: 'off' }
-      = f.input :comment, :as => :text
-      .form-actions
-        = f.button :submit, :class => "btn btn-primary"
-        '
-        = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_user_path(@user), :class => 'btn'
+= user_tabs do
+
+  .row
+    .col-md-9
+      = render :partial => "form"
+    .col-md-3
+      = render 'profileables/right'
+

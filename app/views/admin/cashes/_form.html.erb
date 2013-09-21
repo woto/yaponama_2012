@@ -1,0 +1,5 @@
+<%= form_for [:admin, @user, @cash], builder: TwitterBootstrapFormBuilder, :html => { :class => "form-horizontal dirtyforms" } do |f| %>
+  <%= f.text_input :debit %>
+  <%= f.text_area_input :comment %>
+  <%= f.standard_submit 'Внести на счет' %>
+<% end %>
