@@ -42,7 +42,7 @@ class CashTest < ActiveSupport::TestCase
     assert @cash.valid?
   end
 
-  test 'После вызова сохранения должна создасться траназкция' do
+  test 'После вызова сохранения должна создаться транзакция' do
     @cash.debit = 1
     assert_difference 'AccountTransaction.count' do
       @cash.save

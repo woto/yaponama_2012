@@ -9,15 +9,26 @@ class AccountTransaction < ActiveRecord::Base
 
   attr_accessor :debit, :credit
 
+  def credit=(val)
+    @credit = val.to_d
+  end
+
+  def debit=(val)
+    @debit = val.to_d
+  end
+
   def update_account
 
     if credit
-      account.credit += credit.to_d
+      account.send(:write_attribute, :credit, account.credit + credit)
     end
 
     if debit
-      account.debit += debit.to_d
+      account.send(:write_attribute, :debit, account.debit + debit)
     end
+
+    #self.accountable_id = account.accountable_id
+    #self.accountable_type = account.accountable_type
 
     self.credit_before = account.credit_was
     self.credit_after = account.credit

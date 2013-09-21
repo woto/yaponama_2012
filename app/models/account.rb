@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  belongs_to :accountable, :polymorphic => true, touch: true
+  belongs_to :accountable, :polymorphic => true, touch: true, inverse_of: :account
   has_many :account_transactions
 
   # TODO Хотелось бы это переделать в виртуальные методы (вопрос с dirty)
@@ -12,5 +12,13 @@ class Account < ActiveRecord::Base
 
   # TODO FIXME WARNING при создании юзера (и по-видимому поставщика) не фиксируется начальные значения!!!
   # ps Это было еще до того как я отказался от прямого изменения account и переделал через ....money_transactions.create...
+
+  def credit=(val)
+    raise 'Прямое изменение credit запрещено, воспользуйтесь AccountTransaction'
+  end
+
+  def debit=(val)
+    raise 'Прямое изменение debit запрещено, воспользуйтесь AccountTransaction'
+  end
 
 end
