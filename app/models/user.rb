@@ -41,19 +41,9 @@ class User < ActiveRecord::Base
     Thread.current[:current_user]
   end
 
-  has_secure_password validations: false
+  include PasswordValidations
 
-  attr_accessor :password_required
 
-  validates :password, 
-    :presence => true, 
-    :confirmation => true, 
-    :length => { :minimum => 6 }, 
-    if: -> { password_required }
-
-  validates :password_confirmation, 
-    :presence => true,
-    if: -> { password_required }
 
   # Railscasts 274
   #
