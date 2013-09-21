@@ -124,8 +124,7 @@ class RegistersControllerTest < ActionController::TestCase
     pin = email.confirmation_token
     id = email.id
 
-    assert !email.confirmed_by_user
-    assert !email.confirmed_by_manager
+    refute email.confirmed?
 
     # pin код в письме
     assert_match Regexp.new("PIN: " + pin), delivery.body.encoded
@@ -163,8 +162,7 @@ class RegistersControllerTest < ActionController::TestCase
     pin = phone.confirmation_token
     id = phone.id
 
-    assert !phone.confirmed_by_user
-    assert !phone.confirmed_by_manager
+    refute phone.confirmed?
 
     # pin код в письме
     assert_match Regexp.new("PIN: " + pin), delivery.body.encoded
