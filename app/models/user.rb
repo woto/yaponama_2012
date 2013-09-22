@@ -112,23 +112,6 @@ class User < ActiveRecord::Base
   has_one :account, :as => :accountable, :dependent => :destroy
   validates :account, :presence => true
 
-
-
-  def send_password_reset
-    generate_token(:password_reset_email_token)
-    generate_token(:password_reset_sms_token)
-    self.password_reset_sent_at = Time.zone.now
-    save!
-
-    namespace = nil
-    if ["admin", "manager"].include? self.role
-      namespace = "admin"
-    end
-
-    UserMailer.password_reset(namespace, self).deliver
-  end
-
-
   def to_label
     "#{names.collect(&:name).join(', ')}"
   end
