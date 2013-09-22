@@ -1,6 +1,7 @@
 #encoding: utf-8
 
-module Admined
+
+module Admin::Admined
 
   extend ActiveSupport::Concern
 
