@@ -24,4 +24,12 @@ class PasswordsControllerTest < ActionController::TestCase
       assigns(:user).errors[:password_confirmation]
   end
 
+  test 'После успешной смены пароля пароль пользователя должен измениться' do
+    cookies['auth_token'] = users(:otto).auth_token
+    old_password_digest = users(:otto).password_digest
+    patch :update, user: { password: '9i8B*3', password_confirmation: '9i8B*3' }
+    assert_not_equal old_password_digest, users(:otto).reload.password_digest
+    assert_response :redirect
+  end
+
 end
