@@ -1,4 +1,4 @@
-ul.unstyled
+ul.list-unstyled
 
   - profile.names.each do |name|
     li 
@@ -13,10 +13,10 @@ ul.unstyled
           a href="#" SMS
           a href="#" Звонок
 
-  - profile.email_addresses.each do |email_address|
+  - profile.emails.each do |email|
     li
       a href="#"
-        = email_address.to_label
+        = email.to_label
 
   - profile.passports.each do |passport|
     li
