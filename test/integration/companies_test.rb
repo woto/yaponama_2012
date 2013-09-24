@@ -14,6 +14,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
   end
 
   test "Адресов нет | => | проверяем первичное состояние формы для ввода компании." do
+    auth('+5 (555) 555-55-55', '5555555555')
     visit '/user/companies/new'
 
     # Есть поле для ввода наименования организации
@@ -27,6 +28,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
   end
 
   test "Адресов нет | Наимен. орг. - не заполнили | юр. адрес - не заполнили индекс | факт. - не выбрали" do
+    auth('+5 (555) 555-55-55', '5555555555')
     visit '/user/companies/new'
 
     # Отправляем форму
@@ -43,14 +45,15 @@ class CompaniesTest < ActionDispatch::IntegrationTest
   end
 
   test "Адресов нет | юр. - ничего не выбрали | факт. - не заполнили поля | => | Ошибка у обоих" do
+    auth('+5 (555) 555-55-55', '5555555555')
     visit '/user/companies/new'
 
     # Щелкаем на ссылке для появления юр. адреса из списка
-    find('#legal_address').find('.rotate-type').click
+    find('#company_legal_address_type_old', visible: false).find(:xpath,".//..").click
 
     # Щелкаем на ссылке для появления полей для ввода нового факт. адреса
-    find('#actual_address').find('.rotate-type').click
-
+    find('#company_actual_address_type_new', visible: false).find(:xpath,".//..").click
+    
     # Отправляем форму
     submit
 
@@ -62,10 +65,11 @@ class CompaniesTest < ActionDispatch::IntegrationTest
   end
 
   test "Адресов нет | юр. и факт. - список, но ничего не выбрали | => | Ошибка у обоих" do
+    auth('+5 (555) 555-55-55', '5555555555')
     visit '/user/companies/new'
 
     # Щелкаем на ссылке для появления юр. адреса из списка
-    find('#legal_address').find('.rotate-type').click
+    find('#company_legal_address_type_old', visible: false).find(:xpath,".//..").click
 
     # Отправляем форму
     submit
@@ -78,10 +82,11 @@ class CompaniesTest < ActionDispatch::IntegrationTest
   end
 
   test "Адресов нет | юр и факт - в обоих сослались на противоположный | => | Ошибка у обоих" do
+    auth('+5 (555) 555-55-55', '5555555555')
     visit '/user/companies/new'
 
     # Щелкаем на ссылке для появления юр. адреса из списка
-    find('#legal_address').find('.rotate-type').click
+    find('#company_legal_address_type_old', visible: false).find(:xpath,".//..").click
 
     # Факт. выбрали 'Такой же как и юр.'
     find('#company_actual_address_id').find("option[value='-1']").select_option
@@ -100,6 +105,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
   end
 
   test "Адресов нет | юр. - не заполн. индекс | факт - такой же как и юр. | => | ошибка у юр. | факт. ошибку не отображаем" do
+    auth('+5 (555) 555-55-55', '5555555555')
     visit '/user/companies/new'
 
     # Факт. выбрали 'Такой же как и юр.'
@@ -116,6 +122,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
   end
 
   test "Рекв. компании - валидны | юр. адрес - валиден | факт. - валиден | => | Новая компания и адрес" do
+    auth('+5 (555) 555-55-55', '5555555555')
     visit '/user/companies/new'
 
     # Организационно правовая форма
