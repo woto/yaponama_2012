@@ -1,31 +1,26 @@
-rotate_types = (context) ->
-  type_store = $(context).closest('.type-store')
-  radio_buttons = type_store.find('.type-radio-buttons')
-  checked = radio_buttons.filter(':checked')
-  unchecked = radio_buttons.not(':checked')
+$(document).on 'custom-change', "[rel~='radio-postal-address-switcher']", ->
+  # TODO Оставлю рефакторинг до исправления ошибки с change event у twbs themed radio button
 
-  hidden_block = type_store.find("." + unchecked.val())
-  hidden_block.find(":input").prop("disabled", true);
-  hidden_block.hide()
+  block = $(this).closest("[rel~='type-store']")
 
-  visible_block = type_store.find("." + checked.val())
-  visible_block.show()
-  visible_block.find(":input").prop("disabled", false);
+  radio = ['new', 'old']
 
-$(document).on 'change', '.type-radio-buttons', ->
-  rotate_types(this)
+  if $(this).is(':checked')
+    if  $(this).val() == 'new'
+      opposite = 'old'
+    else
+      opposite = 'new'
+  else
+    if  $(this).val() == 'old'
+      opposite = 'old'
+    else
+      opposite = 'new'
 
-init = ->
-  $('.type-store').each ->
-    rotate_types(this)
+  cur = block.find("[rel~='" + $(this).val() + "']")
+  opp = block.find("[rel~='" + opposite + "']")
 
-$(document).on 'click', '.rotate-type', ->
-  type_store = $(this).closest('.type-store')
-  unchecked = type_store.find('.type-radio-buttons:not(:checked)')
-  unchecked.prop('checked', true).change()
+  cur.show()
+  opp.hide()
 
-$(document).on 'page:load', ->
-  init()
-
-$ ->
-  init()
+  cur.find(":input").prop("disabled", false);
+  opp.find(":input").prop("disabled", true);

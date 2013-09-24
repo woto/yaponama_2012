@@ -1,0 +1,27 @@
+<% assoc_type = "#{assoc}_type".to_sym %>
+<% assoc_id = "#{assoc}_id".to_sym %>
+<% type = eval("f.object.#{assoc_type}") %>
+
+<div rel="type-store" id="<%= assoc %>">
+
+  <% options = [['new', 'Добавить новый'] ,['old', 'Выбрать из списка']] %>
+  <%= f.twbs_collection_radio_buttons assoc_type, options, :first, :last, {variation: :themed}, rel: 'radio radio-postal-address-switcher' %>
+
+  <div rel="old">
+    <% options = @user.postal_addresses.map{|pa| [pa.to_label, pa.id]} + [[opposite, '-1']] %>
+    <%= f.twbs_select(assoc_id, options, {:include_blank => true}) %>
+
+    <%= f.form_group do %>
+      <%= a1 do %>
+        <%= help_block("Исправить или удалить более не используемый адрес вы можете в ", 'настройках аккаунта.') %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div rel="new">
+    <%= f.fields_for assoc.to_sym, type == 'new' ? eval("f.object.#{assoc}") : eval("f.object.build_#{assoc}") do |la| %>
+      <%= render 'postal_addresses/fields', :f => la %>
+    <% end %>
+  </div>
+
+</div>
