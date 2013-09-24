@@ -7,10 +7,7 @@ class ConfirmsController < ApplicationController
   before_action :user_contact, only: [:view, :ask]
 
   def ask
-
-    @contact.force_confirm!
-    @contact.save
-
+    _ask
     redirect_to url_for(action: 'view'), info: t("helpers.flash.confirm.#{params[:resource_class]}")
   end
 
@@ -69,6 +66,13 @@ class ConfirmsController < ApplicationController
 
   def confirm_params
     params.require(:confirm).permit!
+  end
+
+  private
+
+  def _ask
+    @contact.force_confirm!
+    @contact.save
   end
 
 end
