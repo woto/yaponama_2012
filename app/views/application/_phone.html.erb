@@ -1,8 +1,8 @@
 <% css_style = "border-bottom-right-radius: 0; border-top-right-radius: 0" %>
 
-<%= f.form_group name do %>
+<%= f.form_group method do %>
 
-  <%= f.control_label(label || name) %>
+  <%= f.control_label(extra[:label] || method, asterisk: extra[:asterisk]) %>
 
   <%= a2 do %>
 
@@ -18,11 +18,12 @@
 
       </span><!-- /input-group-btn -->
 
-      <%= f.text_field name, rel: 'mobile-mask' %>
+      <%= f.text_field method, class: 'form-control', rel: 'mobile-mask' %>
 
     </div><!-- /input-group -->
 
-    <%= f.error name %>
+    <%= f.error method %>
+    <%= f.hint method %>
 
   <% end %>
 

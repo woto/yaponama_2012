@@ -1,6 +1,6 @@
 <%= f.form_group method do %>
 
-  <%= f.label method, class: "col-lg-2 col-md-3 col-sm-3 control-label" %>
+  <%= f.control_label(extra[:label] || method, asterisk: extra[:asterisk]) %>
 
   <%= a2 do %>
 
@@ -12,6 +12,7 @@
       <% end %>
     </div>
     <%= f.error method %>
+    <%= f.hint method %>
 
   <% end %>
 

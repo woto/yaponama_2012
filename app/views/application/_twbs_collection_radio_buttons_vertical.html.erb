@@ -1,12 +1,15 @@
 <%= f.form_group method do %>
 
-  <%= f.label method, class: "col-lg-2 col-md-3 col-sm-3 control-label" %>
+  <%= f.control_label(extra[:label] || method, asterisk: extra[:asterisk]) %>
 
   <%= a2 do %>
     <%= f.collection_radio_buttons method, collection, value_method, text_method, options, html_options do |ch| %>
-      <%= ch.label(class: 'radio-inline') {ch.radio_button + ch.text} %>
+      <div class="radio">
+        <%= ch.label {ch.radio_button + ch.text} %>
+      </div>
     <% end %>
     <%= f.error method %>
+    <%= f.hint method %>
   <% end %>
 
 <% end %>

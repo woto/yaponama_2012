@@ -1,0 +1,11 @@
+<%= f.form_group method do %>
+
+  <%= f.control_label(extra[:label] || method, asterisk: extra[:asterisk]) %>
+
+  <%= a2 do %>
+    <%= f.text_field method, options %>
+    <%= f.error method %>
+    <%= f.hint method %>
+  <% end %>
+
+<% end %>
