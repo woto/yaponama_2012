@@ -1,5 +1,5 @@
 class Admin::PrepaymentsController < ApplicationController
-  include Admined
+  include Admin::Admined
 
   def edit
   end

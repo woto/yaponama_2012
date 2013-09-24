@@ -1,3 +1,3 @@
 class Admin::Products::CancelController < Products::CancelController
-  include Admined
+  include Admin::Admined
 end

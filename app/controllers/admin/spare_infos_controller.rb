@@ -1,3 +1,3 @@
 class Admin::SpareInfosController < SpareInfosController
-  include Admined
+  include Admin::Admined
 end

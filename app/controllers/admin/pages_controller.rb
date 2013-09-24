@@ -1,7 +1,7 @@
 #encoding: utf-8
 
 class Admin::PagesController < PagesController
-  include Admined
+  include Admin::Admined
 
   # GET /pages
   # GET /pages.json

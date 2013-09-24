@@ -2,6 +2,8 @@
 
 class Admin::CashesController < ApplicationController
   include Admin::Admined
+  
+  before_action {@meta_title = "Внесение средств на счет"}
 
   def new
     @cash = Cash.new
@@ -27,6 +29,7 @@ class Admin::CashesController < ApplicationController
 
   def cash_params
     params.require(:cash).permit!
+    # TODO Запретить credit
   end
 
 end

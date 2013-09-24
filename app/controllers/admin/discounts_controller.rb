@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Admin::DiscountsController < ApplicationController
-  include Admined
+  include Admin::Admined
 
   def edit
   end

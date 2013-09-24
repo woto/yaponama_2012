@@ -1,3 +1,3 @@
 class Admin::CallsController < CallsController
-  include Admined
+  include Admin::Admined
 end

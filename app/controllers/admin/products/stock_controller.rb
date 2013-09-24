@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Admin::Products::StockController < ApplicationController #< Products::StockController
-  include Admined
+  include Admin::Admined
   include ProductsConcern
 
   before_filter do 

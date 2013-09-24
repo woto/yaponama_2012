@@ -514,3 +514,22 @@ http://forums.asterisk.org/viewtopic.php?p=155594
 
 Отображение профиля пользователя (одна страница, а на ней телефон, имя и т.д.)
 http://gridster.net/
+
+
+
+
+
+
+
+http://jamesflorentino.github.io/nanoScrollerJS/
+https://github.com/rails/jquery-ujs/wiki/ajax
+https://github.com/jamesflorentino/nanoScrollerJS/pull/138
+https://github.com/jamesflorentino/nanoScrollerJS/issues/152
+http://railsware.com/blog/2012/05/21/shared-handlebars-templates-for-rails-3/
+http://learnvimscriptthehardway.stevelosh.com/chapters/02.html
+http://handlebarsjs.com
+
+
+
+
+Решить вопрос с экстра плагинама к ckeditor. они не должны находиться в app. а в vendor/../ckeditor засунуть не получается. как вариант добавлять путь в javascript'e, либо найти другой вариант (возможно использовать другую директорию)

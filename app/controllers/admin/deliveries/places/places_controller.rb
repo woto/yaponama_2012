@@ -1,5 +1,5 @@
 class Admin::Deliveries::Places::PlacesController < ApplicationController
-  include Admined
+  include Admin::Admined
   before_action :set_deliveries_places_place, only: [:show, :edit, :update, :destroy]
 
   # GET /deliveries/places/places

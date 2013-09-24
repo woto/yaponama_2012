@@ -1,5 +1,5 @@
 class Admin::BlocksController < ApplicationController
-  include Admined
+  include Admin::Admined
 
   # GET /admin/blocks
   # GET /admin/blocks.json

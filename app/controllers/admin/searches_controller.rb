@@ -1,4 +1,4 @@
 class Admin::SearchesController < SearchesController
-  include Admined
+  include Admin::Admined
 
 end

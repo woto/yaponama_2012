@@ -16,4 +16,3 @@ $(document).on "click", '#use_auto_russian_time_zone', ->
 
 $(document).on 'page:load', (e) ->
   change()
-

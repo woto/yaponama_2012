@@ -1,3 +1,3 @@
 class Admin::Products::MultipleDestroyController < Products::MultipleDestroyController
-  include Admined
+  include Admin::Admined
 end

@@ -1,5 +1,5 @@
 class Admin::SuppliersController < ApplicationController
-  include Admined
+  include Admin::Admined
 
   # GET /admin/suppliers
   # GET /admin/suppliers.json

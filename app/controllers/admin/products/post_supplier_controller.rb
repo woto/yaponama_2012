@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Admin::Products::PostSupplierController < ApplicationController #< Products::PostSupplierController
-  include Admined
+  include Admin::Admined
   include ProductsConcern
 
   before_filter do 

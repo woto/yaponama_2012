@@ -1,5 +1,5 @@
 class Admin::DeliveriesController < ApplicationController
-  include Admined
+  include Admin::Admined
 
   # GET /admin/deliveries
   # GET /admin/deliveries.json

@@ -18,7 +18,6 @@ class ProfileablesController < ApplicationController
 
 
   def filter
-
     respond_to do |format|
       format.html
       format.js { render 'shared/filter' }

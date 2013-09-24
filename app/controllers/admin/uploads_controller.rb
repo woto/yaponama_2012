@@ -1,3 +1,3 @@
 class Admin::UploadsController < UploadsController
-  include Admined
+  include Admin::Admined
 end

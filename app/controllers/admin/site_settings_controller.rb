@@ -1,5 +1,5 @@
 class Admin::SiteSettingsController < ApplicationController
-  include Admined
+  include Admin::Admined
 
   # GET /admin/site_settings
   # GET /admin/site_settings.json

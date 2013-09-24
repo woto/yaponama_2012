@@ -1,5 +1,5 @@
 class Admin::BrandsController < ApplicationController
-  include Admined
+  include Admin::Admined
 
   respond_to :json
 

@@ -1,3 +1,3 @@
 class Admin::Products::InorderController < Products::InorderController
-  include Admined
+  include Admin::Admined
 end

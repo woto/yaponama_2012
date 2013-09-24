@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 class Admin::UsersController < UsersController
-  include Admined
+  include Admin::Admined
 
   # GET /users
   # GET /users.json
