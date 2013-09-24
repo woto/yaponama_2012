@@ -1,0 +1,33 @@
+<% confirm = capture do %>
+
+  <% current_user.profiles.each do |profile| %>
+
+    <% profile.phones.mobile.each do |phone| %>
+      <% if !phone.confirmed? && phone.persisted? %>
+        <div>
+          Подтвердите номер мобильного телефона 
+          <%= alert_link_to phone.to_label, view_user_confirm_phone_path(phone), class: 'confirm-link confirm-phone' %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% profile.emails.each do |email| %>
+      <% if !email.confirmed? && email.persisted? %>
+        <div>
+          Подтвердите e-mail адрес 
+          <%= alert_link_to email.to_label, view_user_confirm_email_path(email), class: 'confirm-link confirm-email' %>
+        </div>
+      <% end %>
+    <% end %>
+
+  <% end %>
+
+<% end %>
+
+<% if confirm.present? %>
+  <%# TODO Как-то наверно нужно сделать общий хелпер %>
+  <div class="alert fade in alert-info">
+    <button class="close" data-dismiss="alert"> × </button>
+    <%= confirm %>
+  </div>
+<% end %>
