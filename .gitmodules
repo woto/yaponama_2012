@@ -76,3 +76,9 @@
 [submodule "system/submodules/html5shiv"]
 	path = system/submodules/html5shiv
 	url = https://github.com/aFarkas/html5shiv
+[submodule "system/submodules/jquery"]
+	path = system/submodules/jquery
+	url = https://github.com/jquery/jquery
+[submodule "system/submodules/jquery-ui"]
+	path = system/submodules/jquery-ui
+	url = https://github.com/jquery/jquery-ui
