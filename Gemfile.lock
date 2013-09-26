@@ -101,6 +101,13 @@ GIT
       sprockets (~> 2.8)
 
 GIT
+  remote: git://github.com/rails/turbolinks.git
+  revision: 7ff7de06f0631649a57f3bfb592e1e68858fb78b
+  specs:
+    turbolinks (2.0.0)
+      coffee-rails
+
+GIT
   remote: git://github.com/railsware/sht_rails.git
   revision: b0e07a895e590689d2f5dca778d5cc87d197fbac
   specs:
@@ -185,12 +192,6 @@ PATH
       activesupport (= 4.0.0)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-
-PATH
-  remote: /home/woto/vendor/turbolinks
-  specs:
-    turbolinks (2.0.0)
-      coffee-rails
 
 GEM
   remote: https://rubygems.org/
