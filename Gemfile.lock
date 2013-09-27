@@ -1,15 +1,15 @@
 GIT
   remote: git://github.com/cldwalker/debugger.git
-  revision: a3c8887f6395ef3ad7e1a95a1621a5939f394f98
+  revision: 830710cf6c0fe01044a1a47bdfb8b0801728bc44
   specs:
-    debugger (1.6.1)
+    debugger (1.6.2)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
       debugger-ruby_core_source (~> 1.2.3)
 
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: d76c013b58fdc189bb855be3ebeb150c5162abaa
+  revision: 6d4fad6cdf85a2658de21b9388daf682091f4f45
   specs:
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -20,10 +20,9 @@ GIT
 
 GIT
   remote: git://github.com/joliss/jquery-ui-rails.git
-  revision: 61a5a520ba4ae3413d18101bc4b32584a5f50fae
+  revision: 955785724d2d9fb5f820a166fa800fbd63d8cef1
   specs:
-    jquery-ui-rails (4.0.4)
-      jquery-rails
+    jquery-ui-rails (4.0.5)
       railties (>= 3.1.0)
 
 GIT
@@ -43,14 +42,14 @@ GIT
 
 GIT
   remote: git://github.com/pivotal/jasmine-gem.git
-  revision: 3206b1b2fa36116e599710baf286b95241c42370
+  revision: 4e639f6806dcdd683b461f0a8fcc861b124f4a39
   specs:
     jasmine (2.0.0.rc2)
       jasmine-core (~> 2.0.0.alpha)
       nokogiri
+      phantomjs
       rack
-      rspec (>= 1.3.1)
-      selenium-webdriver (>= 0.1.3)
+      rake
 
 GIT
   remote: git://github.com/rails/arel.git
@@ -84,7 +83,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sass-rails.git
-  revision: 31f756f208ee71af935454ab4dfb34786d15e891
+  revision: 4c58b432a05de820870a28cc8fb1b491a69bb01d
   specs:
     sass-rails (4.0.0)
       railties (>= 4.0.0, < 5.0)
@@ -141,15 +140,15 @@ GIT
 
 GIT
   remote: https://github.com/nathanvda/cocoon
-  revision: a43183786a264bdb414ce5783bb690206b887814
+  revision: 4bba2b0d8ddfc1a7c47c861b4e0d99067d4d9fec
   specs:
-    cocoon (1.2.0)
+    cocoon (1.2.1)
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: f0b95cb9805ebc895947cafaf33a07b67eeb8c71
+  revision: 50c4ac4a8bd0cb883ddaa309b779978e4207fef4
   specs:
-    simple_form (3.0.0.rc)
+    simple_form (3.0.0)
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
 
@@ -196,7 +195,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    active_utils (2.0.0)
+    active_utils (2.0.1)
       activesupport (>= 2.3.11)
       i18n
     activerecord-deprecated_finders (1.0.3)
@@ -217,8 +216,6 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
     charlock_holmes (0.6.9.4)
-    childprocess (0.3.9)
-      ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     cliver (0.2.2)
     coffee-script (2.2.0)
@@ -235,7 +232,6 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     fastercsv (1.5.5)
-    ffi (1.9.0)
     handlebars (0.4.0)
       commonjs (~> 0.2.3)
       therubyracer (~> 0.11.1)
@@ -317,6 +313,8 @@ GEM
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
     pg (0.17.0)
+    phantomjs (1.8.1.1)
+      poltergeist
     poltergeist (1.4.1)
       capybara (~> 2.1.0)
       cliver (~> 0.2.1)
@@ -341,12 +339,11 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     rspec-core (2.14.5)
-    rspec-expectations (2.14.2)
+    rspec-expectations (2.14.3)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.3)
     ruby-growl (4.0)
       uuid (~> 2.3, >= 2.3.5)
-    rubyzip (0.9.9)
     russian (0.6.0)
       i18n (>= 0.5.0)
     sanitize (2.0.6)
@@ -355,11 +352,6 @@ GEM
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
-    selenium-webdriver (2.35.1)
-      childprocess (>= 0.2.5)
-      multi_json (~> 1.0)
-      rubyzip (< 1.0.0)
-      websocket (~> 1.0.4)
     sitemap_generator (4.2.0)
       builder
     slim (2.0.1)
@@ -393,7 +385,6 @@ GEM
     tzinfo (0.3.37)
     uuid (2.3.7)
       macaddr (~> 1.0)
-    websocket (1.0.7)
     websocket-driver (0.3.0)
     whenever (0.8.4)
       activesupport (>= 2.3.4)
