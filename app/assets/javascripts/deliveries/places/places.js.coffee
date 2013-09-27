@@ -1,7 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
 window.initMap = ->
 
   $(document).on 'click', '#geocode-address-button', ->
@@ -35,6 +31,13 @@ window.initMap = ->
     $('#deliveries_places_place_vertices').val(google.maps.geometry.encoding.encodePath(shape.getPath()))
 
   add_events_handler_to_shape = (shape) ->
+
+    allow_furher_adding = ->
+      window.drawingManager.setDrawingMode google.maps.drawing.OverlayType.POLYGON
+
+      drawingManager.setOptions
+        drawingControl: true
+
     google.maps.event.addListener shape.getPath(), 'set_at', (index) ->
       update_vertices(shape)
     google.maps.event.addListener shape.getPath(), 'remove_at', (index) ->
@@ -43,8 +46,12 @@ window.initMap = ->
       update_vertices(shape)
 
     google.maps.event.addListener shape, "rightclick", (mev) ->
-      shape.getPath().removeAt mev.vertex  if mev.vertex?
-      # TODO включать режим редактирования если удалили последнюю точку
+      path = shape.getPath()
+      if path.getLength() <= 3
+        path.clear()
+        allow_furher_adding()
+      else
+        shape.getPath().removeAt mev.vertex  if mev.vertex?
 
   initialize = ->
     window.map = new google.maps.Map(document.getElementById("map"),
@@ -80,8 +87,6 @@ window.initMap = ->
       polygonOptions: polyOptions
       map: window.map
     )
-
-    # TODO дописать код чтобы можно было добавлять точки, в случае если удалили последнюю
 
     dont_allow_further_adding = ->
       # Switch back to non-drawing mode after drawing a shape.
