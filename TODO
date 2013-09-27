@@ -4,3 +4,8 @@ TODO вернуть jquery-ui (widget необходим для работы fil
 Необходимо задействовать active_record.default_timezone ? получая время из базы через node.js
 Убрал creation_reason из postal_address. В логах можно найти объяснение. На самом деле например флаг. Доставка по данному адресу уже осуществлялась гораздо полезнее II8A
 Проработать ключ :required => true для элементов формы
+
+Проработать 
+  - content_for :form_error do
+    = f.error_notification
+
