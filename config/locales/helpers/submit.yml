@@ -1,0 +1,7 @@
+ru:
+  helpers:
+    submit:
+      session:
+        create: Войти
+      password_reset:
+        create: Далее
