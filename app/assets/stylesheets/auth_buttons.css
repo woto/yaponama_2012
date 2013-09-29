@@ -1,0 +1,12 @@
+#auth-buttons a {
+  text-decoration: none;
+}
+
+#auth-buttons img {
+  width: 24px;
+  height: 24px;
+}
+
+#auth-buttons li {
+  margin-bottom: 10px;
+}
