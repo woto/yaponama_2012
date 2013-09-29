@@ -1,0 +1,20 @@
+<div id="toolbar-per-page">
+
+  <div class="form-inline">
+
+    <%= content_tag :span,
+      class: "dashed",
+      title: "Строк на странице",
+      rel: "popover",
+      data: {
+        toggle: "popover",
+        html: "true",
+        placement: "bottom",
+        content: render('application/grid/per_page_data_content').gsub("\"", "'")
+      } do %>
+      по <%= @grid.per_page %> на страницу
+    <% end %>
+
+  </div>
+
+</div>
