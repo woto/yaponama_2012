@@ -35,18 +35,17 @@ GIT
 
 GIT
   remote: git://github.com/mikel/mail.git
-  revision: f83da1d3a7aa5d4cc8a9671e20a8ed7ea48ce55b
+  revision: c0b8352c08803af1935916353a137978df83a029
   specs:
     mail (2.6.0.edge)
       mime-types (~> 1.16)
 
 GIT
   remote: git://github.com/pivotal/jasmine-gem.git
-  revision: 4e639f6806dcdd683b461f0a8fcc861b124f4a39
+  revision: e3442cd854f3a1f6aaaf11c4fc9665b1e642218c
   specs:
     jasmine (2.0.0.rc2)
       jasmine-core (~> 2.0.0.alpha)
-      nokogiri
       phantomjs
       rack
       rake
@@ -101,7 +100,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/turbolinks.git
-  revision: 7ff7de06f0631649a57f3bfb592e1e68858fb78b
+  revision: f90775d484b78f5ffd823f13f2265aef52a2620c
   specs:
     turbolinks (2.0.0)
       coffee-rails
@@ -228,7 +227,7 @@ GEM
     debugger-ruby_core_source (1.2.3)
     diff-lcs (1.2.4)
     erubis (2.7.0)
-    execjs (2.0.1)
+    execjs (2.0.2)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     fastercsv (1.5.5)
