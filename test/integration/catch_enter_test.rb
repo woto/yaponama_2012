@@ -25,6 +25,7 @@ class CatchEnterTest < ActionDispatch::IntegrationTest
   private 
 
   def common
+    old_url = current_url
     js_code = <<-HERE 
       var e = jQuery.Event("keypress"); 
       e.which = 13; 
@@ -34,6 +35,12 @@ class CatchEnterTest < ActionDispatch::IntegrationTest
     execute_script js_code
 
     assert has_css? '#debug-catch-enter', visible: false, text: 'true'
+
+    # TODO Оказывается посылая этот js Enter Почему-то в действительности не нажимается,
+    # хотя событие срабатывает правильно, а вот e.preventDefault() для этого кастомного события
+    # становится бесполезным, т.к. submit'a формы почему-то не происходит
+
+    assert_equal old_url, current_url
   end
 
 end

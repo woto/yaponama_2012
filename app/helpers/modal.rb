@@ -19,4 +19,3 @@ class Modal < AbstractBootstrap
   end
 
 end
-
