@@ -9,6 +9,28 @@ TODO вернуть jquery-ui (widget необходим для работы fil
   - content_for :form_error do
     = f.error_notification
 
+==================
+
 TODO Создать тестовый проект, там посмотреть код error_notification, если получится, сделать так, чтобы если форма содержит ошибку
 то выкидывала вверх. Наверно будет удобно через опцию формы, а если нет. Особое внимание fields_for, чтобы ошибки вложенных форм
 так же обрабатывались.
+
+  div class="page-header"
+    h2=t '.title', :default => [:'helpers.titles.new', 'Список %{model}'], :model => model_class.model_name.human
+
+==================
+
+  <%= f.input :name %>
+  <%= f.input :notes, :input_html => {:rows => 3} %>
+  <%= f.input :available %>
+  <%= f.input :sequence %>
+  <%= f.input :full_prepayment_required %>
+  <%= f.input :name_required %>
+  <%= f.input :phone_required %>
+  <%= f.input :metro_required %>
+  <%= f.input :shop_required %>
+  <%= f.input :postal_address_required %>
+  <%= f.input :delivery_cost_required %>
+  <%= f.input :image %>
+  <%= f.input :notes_invisible, :input_html => {:rows => 3}  %>
+  company_required
