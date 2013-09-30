@@ -43,9 +43,6 @@
 [submodule "system/submodules/underscore"]
 	path = system/submodules/underscore
 	url = git://github.com/documentcloud/underscore.git
-[submodule "system/submodules/bootstrap-datepicker"]
-	path = system/submodules/bootstrap-datepicker
-	url = git://github.com/eternicode/bootstrap-datepicker.git
 [submodule "system/submodules/Respond"]
 	path = system/submodules/Respond
 	url = https://github.com/scottjehl/Respond.git
