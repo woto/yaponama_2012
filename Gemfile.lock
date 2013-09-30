@@ -42,7 +42,7 @@ GIT
 
 GIT
   remote: git://github.com/pivotal/jasmine-gem.git
-  revision: e3442cd854f3a1f6aaaf11c4fc9665b1e642218c
+  revision: 6a3c47efcb9eb257bd3af08f169837d53f6826e1
   specs:
     jasmine (2.0.0.rc2)
       jasmine-core (~> 2.0.0.alpha)
@@ -347,7 +347,7 @@ GEM
       i18n (>= 0.5.0)
     sanitize (2.0.6)
       nokogiri (>= 1.4.4)
-    sass (3.2.10)
+    sass (3.2.11)
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
