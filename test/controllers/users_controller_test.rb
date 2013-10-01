@@ -4,7 +4,7 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
 
-  test 'Пользователь перегенировывает auth_token (Делает выход со всех компьютеров)' do
+  test 'Пользователь перегенерировывает auth_token (Делает выход со всех компьютеров)' do
     auth_token = users(:otto).auth_token
     cookies['auth_token'] = auth_token
 

@@ -8,4 +8,8 @@ class Admin::PasswordsControllerTest < ActionController::TestCase
     skip
   end
 
+  test 'После смены пароля продавец попадает на главную страницу пользователя' do
+    skip
+  end
+
 end

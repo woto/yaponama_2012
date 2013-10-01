@@ -4,7 +4,7 @@ require 'test_helper'
 
 class Admin::UsersControllerTest < ActionController::TestCase
 
-  test 'Менеджер перегенировывает auth_token покупателю' do
+  test 'Менеджер перегенерировывает auth_token покупателю' do
     # TODO это может сделать только продавец
     first_admin = users(:first_admin)
     stan = users(:stan)
