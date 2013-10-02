@@ -15,6 +15,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
     new_auth_token = stan.reload.auth_token
     assert_not_equal new_auth_token, old_auth_token
+    assert_equal new_auth_token.size, 22
   end
 
 end
