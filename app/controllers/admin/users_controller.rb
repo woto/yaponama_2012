@@ -93,7 +93,7 @@ class Admin::UsersController < UsersController
   def logout_from_all_places
     @user.generate_token :auth_token, :long
     @user.save!
-    redirect_to :back, notice: "Вы разлогинили пользователя со всех компьютеров. Теперь ему потребуется заново войти на сайт."
+    redirect_to admin_user_path(@user), success: "Вы разлогинили пользователя со всех компьютеров. Теперь ему потребуется заново войти на сайт."
   end
 
   private
