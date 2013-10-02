@@ -40,16 +40,16 @@
     dd#debug-offset
 
 <div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#DebugStat">
-          | DebugStat
+
+
+  = panel 'default' do |p|
+    = p.heading do
+      = p.title
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Stat">
+          | Stat
         </a>
-      </h4>
-    </div>
-    <div id="DebugStat" class="panel-collapse collapse">
-      <div class="panel-body">
+    = p.collapse id: "Stat" do
+      = p.body do
         dl
           dt #server-time
           / TODO
@@ -72,22 +72,31 @@
         dl
           dt #debug-stat-result
           dd : pre#debug-stat-result.incomplete
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
+
+
+  = panel 'default' do |p|
+    = p.heading do
+      = p.title
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#CatchEnter">
+          | CatchEnter
+        </a>
+
+    = p.collapse id: "CatchEnter" do
+      = p.body do
+        dl
+          dt #debug-catch-enter
+          dd#debug-catch-enter
+
+
+  = panel 'default' do |p|
+    = p.heading do
+      = p.title
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#XXX">
           | XXX
         </a>
-      </h4>
-    </div>
-    <div id="XXX" class="panel-collapse collapse">
-      <div class="panel-body">
+    = p.collapse id: 'XXX'
+      = p.body
         | XXX
-      </div>
-    </div>
-  </div>
+
 </div>
 

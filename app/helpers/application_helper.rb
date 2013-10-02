@@ -326,4 +326,11 @@ module ApplicationHelper
     end
   end
 
+
+  def panel type, &block
+    content_tag :div, class: "panel panel-#{type}" do
+      yield Panel.new(self)
+    end
+  end
+
 end
