@@ -10,7 +10,9 @@ class UsersControllerTest < ActionController::TestCase
 
     delete :logout_from_all_places
 
-    assert_not_equal auth_token, users(:otto).reload.auth_token
+    new_token = users(:otto).reload.auth_token
+    assert_not_equal auth_token, new_token
+    assert_equal new_token.size, 22
     assert_equal 'Вы успешно вышли со всех компьютеров, где использовалась ваша учетная запись.', flash[:success]
   end
 

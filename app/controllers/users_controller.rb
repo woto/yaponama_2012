@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def logout_from_all_places
-    @user.generate_token :auth_token
+    @user.generate_token :auth_token, :long
     @user.save!
     redirect_to root_path, notice: "Вы успешно вышли со всех компьютеров, где использовалась ваша учетная запись."
   end
