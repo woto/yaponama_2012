@@ -96,6 +96,12 @@ module ProductsConcern
     def set_grid_class
 
       @grid_class = Class.new(AbstractGrid)
+      @grid_class.instance_eval do
+        include ActiveModel::Validations
+        def self.model_name
+          ActiveModel::Name.new(self, nil, "grid")
+        end
+      end
 
       columns_hash = {}
 
@@ -249,7 +255,6 @@ module ProductsConcern
       @grid.quantity_ordered_visible = '1'
       @grid.manufacturer_visible = '1'
       @grid.catalog_number_visible = '1'
-      @grid.updated_at_visible = '1'
 
 
       unless @user
