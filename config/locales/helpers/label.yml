@@ -1,0 +1,6 @@
+ru:
+  helpers:
+    label:
+      company:
+        legal_address_type: Юридический адрес
+        actual_address_type: Фактический адрес

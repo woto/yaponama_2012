@@ -1,0 +1,8 @@
+ru:
+  helpers:
+    links:
+      transactions: История
+      new: Новый
+      destroy: Удалить
+      edit: Редактировать
+      cancel: Назад

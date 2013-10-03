@@ -1,0 +1,17 @@
+ru:
+  activemodel:
+    attributes:
+      cash:
+        debit: Сумма
+      #register:
+      #  name: Имя
+      #  phone_number: Мобильный телефон
+      #  email_address: E-mail
+      #session:
+      #  phone_number: Телефон
+      #  email_address: E-mail
+      #password_reset:
+      #  phone_number: Мобильный телефон
+      #  email_address: E-mail
+      confirm:
+

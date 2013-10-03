@@ -1,0 +1,12 @@
+ru:
+  activerecord:
+    models:
+      order: Заказ
+      product: Товар
+      model: Модель
+      profile: Контактное лицо
+      postal_address: Почтовый адрес
+      car: Автомобиль
+      company: Компанию
+      user: Пользователя
+      deliveries/places/place: Зону доставки

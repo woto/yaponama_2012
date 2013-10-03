@@ -1,0 +1,109 @@
+ru:
+  activerecord:
+    attributes:
+      page:
+        description: Описание SEO
+        keywords: Ключевые слова SEO
+        robots: Запрет индексации и следования
+        title: Заголовок
+        path: Путь
+        content: Содержание
+      deliveries/places/place:
+        postal_address_required: Требуется указание адреса доставки
+        name: Название
+        z_index: Приоритет
+      deliveries/places/variant:
+        name: Название
+        active: Активен
+        sequence: Приоритет
+        delivery_cost: Стоимость доставки
+      email:
+        value: E-mail
+        comment: Комментарий к e-mail
+      phone:
+        value: Телефон
+        comment: Комментарий к телефону
+      profile:
+        comment: Комментарий к контактному лицу
+      passport:
+        seriya: Серия
+        nomer: Номер
+        passport_vidan: Паспорт выдан
+        data_vidachi: Дата выдачи
+        kod_podrazdeleniya: Код подразделения
+        gender: Пол
+        data_rozhdeniya: Дата рождения
+        mesto_rozhdeniya: Место рождения
+        comment: Комментарий к паспорту
+      model:
+        brand: Бренд
+        name: Модель
+        creator: Создатель
+        created_at: Создано
+        updated_at: Обновлено
+      postal_address:
+        comment: Комментарий к адресу
+      metro:
+        metro: Станция метро
+        delivery_cost: Стоимость доставки
+        created_at: Создан
+        updated_at: Изменен
+      order:
+        status: Статус заказа
+        metro: Станция метро
+        metro_id: Станция метро
+        shop: Магазин
+        shop_id: Магазин
+        postal_address: Почтовый адрес
+        postal_address_id: Почтовый адрес
+        phone: Телефон
+        phone_id: Телефон
+        delivery: Способ доставки
+        delivery_id: Способ доставки
+        name: Получатель
+        name_id: Получатель
+        user: Покупатель
+        inorder_order_cost: Сформировано
+        ordered_order_cost: Запущено
+        delivery_cost: Сумма доставки
+        products: Заказанные товары
+        creation_reason: Причина созд.
+        user_id: Покупатель
+        notes: Комментарий
+        notes_invisible: Служ. зам.
+        creator_id: Создатель
+      name:
+        surname: Фамилия
+        name: Имя
+        patronymic: Отчество
+        comment: Комментарий к имени
+      
+      user:
+        order_rule: Правило оплаты
+        logout_from_other_places: При входе с другого компьютера автоматически выходить со всех остальных
+        main_profile_id: Основной профиль
+        post: Должность сотрудника
+        use_auto_russian_time_zone: Часовой пояс
+        deliveries_places_place_id: Расположение сотрудника
+
+      car:
+        kpp: Тип коробки переключения передач (КПП)
+        comment: Комментарий к автомобилю
+      company:
+        ownership: Организационно-правовая форма
+        inn: ИНН
+        kpp: КПП
+        ogrn: ОГРН
+        account: Расчетный счёт
+        bank: Наименование банка
+        correspondent: Корреспондентский счет
+        bik: БИК
+        okpo: ОКПО
+        okved: ОКВЭД
+        okato: ОКАТО
+        legal_address_id: Юридический адрес
+        actual_address_id: Фактический адрес
+        legal_address: Юридический адрес
+        actual_address: Фактический адрес
+        name: Наименование организации
+        comment: Комментарий к компании
