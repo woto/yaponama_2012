@@ -11,19 +11,7 @@ module OrdersConcern
       @resource_class = Order
     end
 
-    def set_grid_class
-
-      @grid_class = Class.new(AbstractGrid)
-
-      @grid_class = Class.new(AbstractGrid)
-      @grid_class.instance_eval do
-        include ActiveModel::Validations
-        def self.model_name
-          ActiveModel::Name.new(self, nil, "grid")
-        end
-      end
-
-      columns_hash = {}
+    def adjust_columns!(columns_hash)
 
       columns_hash['token'] = {
         :type => :string
@@ -109,8 +97,6 @@ module OrdersConcern
         :type => :belongs_to,
         :belongs_to => User,
       }
-
-      @grid_class.const_set("COLUMNS", columns_hash)
 
     end
 
