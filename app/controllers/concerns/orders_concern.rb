@@ -15,16 +15,18 @@ module OrdersConcern
 
       @grid_class = Class.new(AbstractGrid)
 
+      @grid_class = Class.new(AbstractGrid)
+      @grid_class.instance_eval do
+        include ActiveModel::Validations
+        def self.model_name
+          ActiveModel::Name.new(self, nil, "grid")
+        end
+      end
+
       columns_hash = {}
 
-      columns_hash['id'] = {
-        :type => :single_integer
-      }
-
-
-      columns_hash['name_id'] = {
-        :type => :belongs_to,
-        :belongs_to => Name,
+      columns_hash['token'] = {
+        :type => :string
       }
 
       columns_hash['postal_address_id'] = {
@@ -32,35 +34,43 @@ module OrdersConcern
         :belongs_to => PostalAddress,
       }
 
-      columns_hash['metro_id'] = {
+      columns_hash['company_id'] = {
         :type => :belongs_to,
-        :belongs_to => Metro,
-      }
-
-
-      columns_hash['shop_id'] = {
-        :type => :belongs_to,
-        :belongs_to => Shop,
+        :belongs_to => Company,
       }
 
       columns_hash['delivery_cost'] = {
         :type => :number,
       }
 
-
       columns_hash['status'] = {
         :type => :set,
         :set => Hash[*Rails.configuration.orders_status.map{|k, v| [v['title'], k]}.flatten],
       }
 
-      columns_hash['delivery_id'] = {
+      #columns_hash['delivery_id'] = {
+      #  :type => :belongs_to,
+      #  :belongs_to => Delivery,
+      #}
+
+
+      columns_hash['profile_id'] = {
         :type => :belongs_to,
-        :belongs_to => Delivery,
+        :belongs_to => Profile,
       }
 
-      columns_hash['phone_id'] = {
-        :type => :belongs_to,
-        :belongs_to => Phone,
+      columns_hash['cached_profile'] = {
+        :type => :string,
+      }
+
+      if admin_zone?
+        columns_hash['phantom'] = {
+          :type => :boolean,
+        }
+      end
+
+      columns_hash['legal'] = {
+        :type => :boolean,
       }
 
       columns_hash['created_at'] = {
@@ -73,7 +83,7 @@ module OrdersConcern
 
       columns_hash['creation_reason'] = {
         :type => :set,
-        :set => eval("Hash[*Rails.configuration.user_#{@resource_class.name.underscore}_creation_reason.map{|k, v| [v, k]}.flatten]"),
+        :set => eval("Hash[*Rails.configuration.#{@resource_class.name.underscore}_creation_reason.map{|k, v| [v, k]}.flatten]"),
       }
 
       columns_hash['notes'] = {
@@ -106,8 +116,9 @@ module OrdersConcern
 
     def set_preferable_columns
 
-      @grid.id_visible = '1'
-      @grid.delivery_id_visible = '1'
+      @grid.token_visible = '1'
+      #@grid.delivery_id_visible = '1'
+      @grid.cached_profile_visible = '1'
       @grid.notes_visible = '1'
       @grid.updated_at_visible = '1'
 
