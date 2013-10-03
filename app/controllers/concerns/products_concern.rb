@@ -2,13 +2,9 @@
 
 module ProductsConcern
   extend ActiveSupport::Concern
-  include GridConcern
+  include AbstractGridable
 
   included do
-
-    before_action :set_resource_class
-    before_action :set_grid_class
-    before_action :set_grid
 
     helper_method :products_user_order_tab_scope
 

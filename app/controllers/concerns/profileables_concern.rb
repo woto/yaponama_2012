@@ -1,18 +1,11 @@
 module ProfileablesConcern
   extend ActiveSupport::Concern
-  include GridConcern
+  include AbstractGridable
 
   included do
 
     private
 
-    before_action :set_resource_class
-    before_action :set_grid_class
-    before_action :set_grid, :only => [:index, :filter]
-
-    def set_resource_class
-      @resource_class = params[:resource_class].singularize.constantize
-    end
 
     def set_grid_class
 
@@ -86,11 +79,14 @@ module ProfileablesConcern
     end
 
     def additional_conditions
-
       if @user
         @items = @items.where(:user_id => @user.id)
       end
       
+    end
+
+    def set_resource_class
+      @resource_class = params[:controller].camelize.demodulize.singularize.constantize
     end
 
   end

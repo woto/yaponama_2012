@@ -2,13 +2,10 @@
 
 module OrdersConcern
   extend ActiveSupport::Concern
-  include GridConcern
+  include AbstractGridable
 
   included do
 
-    before_action :set_resource_class
-    before_action :set_grid_class
-    before_action :set_grid, :only => [:index, :filter]
 
     def set_resource_class
       @resource_class = Order

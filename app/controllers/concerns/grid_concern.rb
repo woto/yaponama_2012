@@ -3,6 +3,8 @@ module GridConcern
 
   included do
 
+    before_action :set_grid, :only => [:index, :filter]
+
     private
 
     def set_grid
