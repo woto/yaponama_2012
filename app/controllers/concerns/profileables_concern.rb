@@ -7,65 +7,56 @@ module ProfileablesConcern
     private
 
 
-    def set_grid_class
+    def adjust_columns!(columns_hash)
 
-      @grid_class = Class.new(AbstractGrid)
+      columns_hash['id'] = {
+        :type => :single_integer,
+      }
 
-      columns_hash = {}
+      columns_hash['notes'] = {
+        :type => :string,
+      }
 
-      # Не очень красиво, но рабочее, пересекающихся полей разного типа не планируется
-      @resource_class.column_names.each do |column_name|
-        case column_name
-        when 'phone_type'
-          columns_hash[column_name] = {
-            :type => :set,
-            :set => Hash[*Rails.configuration.phone_types.map{|k, v| [v, k]}.flatten],
-          }
-        when *['created_at', 'updated_at', 'user_confirmation_datetime', 'manager_confirmation_datetime']
-          columns_hash[column_name] = {
-            :type => :date
-          }
-        when *['confirmed_by_user', 'confirmed_by_manager']
-          columns_hash[column_name] = {
-            :type => :boolean,
-          }
-        when 'ownership'
-          columns_hash[column_name] = {
-            :type => :set,
-            :set => Hash[*Rails.configuration.company_ownerships.map{|k, v| [v, k]}.flatten],
-          }
-        when 'id'
-          columns_hash[column_name] = {
-            :type => :single_integer,
-          }
-        when 'creation_reason'
-          columns_hash[column_name] = {
-            :type => :set,
-            :set => eval("Hash[*Rails.configuration.user_#{@resource_class.name.underscore}_creation_reason.map{|k, v| [v, k]}.flatten]"),
-          }
-        when 'notes_invisible'
-          if admin_zone?
-            columns_hash[column_name] = {
-              :type => :string,
-            }
-          end
-        when 'user_id'
-          if admin_zone?
-            unless @user
-              columns_hash['user_id'] = {
-                :type => :belongs_to,
-                :belongs_to => User,
-              }
-            end
-          end
-        else
-          columns_hash[column_name] = {
-            :type => :string,
-          }
-        end
+      if admin_zone?
+
+        columns_hash['notes_invisible'] = {
+          :type => :string,
+        }
+
       end
 
-      @grid_class.const_set("COLUMNS", columns_hash)
+      columns_hash['created_at'] = {
+        :type => :date
+      }
+      columns_hash['updated_at'] = {
+        :type => :date
+      }
+
+      if admin_zone?
+
+        columns_hash['creation_reason'] = {
+          :type => :set,
+          :set => eval("Hash[*Rails.configuration.#{@resource_class.name.underscore}_creation_reason.map{|k, v| [v, k]}.flatten]"),
+        }
+
+      end
+
+      if admin_zone?
+
+        unless @user
+          columns_hash['user_id'] = {
+            :type => :belongs_to,
+            :belongs_to => User,
+          }
+        end
+
+        columns_hash['creator_id'] = {
+          :type => :belongs_to,
+          :belongs_to => User,
+        }
+
+      end
+
     end
 
     def set_preferable_columns
