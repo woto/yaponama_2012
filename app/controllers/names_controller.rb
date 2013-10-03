@@ -9,4 +9,17 @@ class NamesController < ProfileablesController
     @grid.patronymic_visible = '1'
   end
 
+  def adjust_columns!(columns_hash)
+    super
+    columns_hash['surname'] = {
+      :type => :string,
+    }
+    columns_hash['name'] = {
+      :type => :string,
+    }
+    columns_hash['patronymic'] = {
+      :type => :string,
+    }
+  end
+
 end
