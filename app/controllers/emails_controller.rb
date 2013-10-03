@@ -7,5 +7,18 @@ class EmailsController < ProfileablesController
     @grid.value_visible = '1'
   end
 
+  def adjust_columns!(columns_hash)
+    super
+    columns_hash['value'] = {
+      :type => :string,
+    }
+    columns_hash['confirmed'] = {
+      :type => :boolean
+    }
+    columns_hash['confirmation_datetime'] = {
+      :type => :date
+    }
+  end
+
 end
 
