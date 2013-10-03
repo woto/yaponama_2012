@@ -176,11 +176,13 @@ module GridConcern
             to = eval("@grid.#{column_name}_to")
 
             if from.present?
+              from = Date.parse(from)
               @items = @items.where(arel[column_name.to_sym].gteq(from))
               mark_as_filter_enabled(column_name)
             end
 
             if to.present?
+              to = Date.parse(to)
               @items = @items.where(arel[column_name.to_sym].lteq(to))
               mark_as_filter_enabled(column_name)
             end
