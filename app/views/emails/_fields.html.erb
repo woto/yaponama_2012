@@ -1,15 +1,27 @@
-<%= nested_fields do %>
+<%= f.nested_fields do %>
 
   <%= f.destroyable do %>
 
-    <%= f.standard_remove %>
+    <%= panel 'primary' do |p| %>
 
-    <%= f.text_input :value %>
+      <%= p.heading do %>
+        <%= p.title do %>
+          E-mail
+          <%= f.standard_remove %>
+        <% end %>
+      <% end %>
 
-    <%= f.standard_recreate %>
+      <%= p.body do %>
 
-    <%= render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f} %>
-    <%= render :partial => 'profileables/forms/shared/confirms', :locals => {:f => f} %>
+        <%= f.twbs_text_field :value, asterisk: true, label: false %>
+
+        <%= render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f} %>
+        <%= render :partial => 'profileables/forms/shared/confirms', :locals => {:f => f} %>
+
+
+      <% end %>
+
+    <% end %>
 
   <% end %>
 

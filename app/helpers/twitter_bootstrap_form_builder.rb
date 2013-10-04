@@ -21,7 +21,7 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def destroyable
-    if object._destroy
+    if object.marked_for_destruction?
       @template.hidden_field_tag("#{object_name}[_destroy]", '1')
     else
       yield
@@ -40,8 +40,8 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
   def standard_remove
     @template.link_to_remove_association '<i class="icon-trash ignoredirty"></i>'.html_safe, 
       self, 
-      :class => "btn btn-danger pull-right ignoredirty", 
-      data: { confirm: 'Вы уверены?' }
+      :class => "btn pull-right ignoredirty btn-unstyled",
+      data: { confirm: 'Действительно хотите удалить?' }
   end
 
   def standard_recreate
