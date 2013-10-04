@@ -1,21 +1,32 @@
-<%= nested_fields do %>
+<%= f.nested_fields do %>
 
   <%= f.destroyable do %>
 
-    <%= f.standard_remove %>
+    <%= panel 'primary' do |p| %>
 
-    <%= f.text_input :seriya %>
-    <%= f.text_input :nomer %>
-    <%= f.text_input :passport_vidan %>
-    <%= f.passport_date_input :data_vidachi %>
-    <%= f.text_input :kod_podrazdeleniya %>
-    <%= f.radio_buttons_themed :gender, Rails.configuration.genders.map {|k,v| [v,k]}.to_a, :last, :first %>
-    <%= f.passport_date_input :data_rozhdeniya %>
-    <%= f.text_input :mesto_rozhdeniya %>
+      <%= p.heading do %>
+        <%= p.title do %>
+          Паспорт
+          <%= f.standard_remove %>
+        <% end %>
+      <% end %>
 
-    <%= f.standard_recreate %>
+      <%= p.body do %>
 
-    <%= render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f} %>
+        <%= f.twbs_text_field :seriya, asterisk: true %>
+        <%= f.twbs_text_field :nomer, asterisk: true %>
+        <%= f.twbs_text_field :passport_vidan, asterisk: true %>
+        <%= f.twbs_date_select_passport :data_vidachi, asterisk: true %>
+        <%= f.twbs_text_field :kod_podrazdeleniya, asterisk: true %>
+        <%= f.twbs_collection_radio_buttons :gender, Rails.configuration.genders.map {|k,v| [v,k]}.to_a, :last, :first, variation: :vertical, asterisk: true %>
+        <%= f.twbs_date_select_passport :data_rozhdeniya, asterisk: true %>
+        <%= f.twbs_text_field :mesto_rozhdeniya, asterisk: true %>
+
+        <%= render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f} %>
+
+      <% end %>
+
+    <% end %>
 
   <% end %>
 
