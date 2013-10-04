@@ -1,27 +1,41 @@
-<% assoc_type = "#{assoc}_type".to_sym %>
-<% assoc_id = "#{assoc}_id".to_sym %>
-<% type = eval("f.object.#{assoc_type}") %>
-
-<div rel="type-store" id="<%= assoc %>">
-
-  <% options = [['new', 'Добавить новый'] ,['old', 'Выбрать из списка']] %>
-  <%= f.twbs_collection_radio_buttons assoc_type, options, :first, :last, {variation: :themed}, rel: 'radio radio-postal-address-switcher' %>
-
-  <div rel="old">
-    <% options = @user.postal_addresses.map{|pa| [pa.to_label, pa.id]} + [[opposite, '-1']] %>
-    <%= f.twbs_select(assoc_id, options, {:include_blank => true}) %>
-
-    <%= f.form_group do %>
-      <%= a1 do %>
-        <%= help_block("Исправить или удалить более не используемый адрес вы можете в ", 'настройках аккаунта.') %>
-      <% end %>
+<%= panel 'primary' do |p| %>
+  <%= p.heading do %>
+    <%= p.title do %>
+      <%= title %>
     <% end %>
-  </div>
+  <% end %>
+  <%= p.body do %>
+    <%= f.nested_fields do %>
 
-  <div rel="new">
-    <%= f.fields_for assoc.to_sym, type == 'new' ? eval("f.object.#{assoc}") : eval("f.object.build_#{assoc}") do |la| %>
-      <%= render 'postal_addresses/fields', :f => la %>
+      <% assoc_type = "#{assoc}_type".to_sym %>
+      <% assoc_id = "#{assoc}_id".to_sym %>
+      <% type = eval("f.object.#{assoc_type}") %>
+
+      <div rel="type-store" id="<%= assoc %>">
+
+        <%# TODO Задействовать label: false и label: nil %>
+        <%= f.twbs_collection_radio_buttons assoc_type, [['new', 'Добавить новый'] ,['old', 'Выбрать из списка']], :first, :last, {variation: :vertical, label: false}, rel: 'radio radio-postal-address-switcher' %>
+
+        <div rel="old">
+          <% options = @user.postal_addresses.map{|pa| [pa.to_label, pa.id]} + [[opposite, '-1']] %>
+          <%# TODO Задействовать label: false и label: nil %>
+          <%= f.twbs_select(assoc_id, options, {include_blank: true, label: false}) %>
+
+          <%= f.form_group do %>
+            <%= help_block("Исправить или удалить более не используемый адрес вы можете в ", 'настройках аккаунта.') %>
+          <% end %>
+        </div>
+
+        <div rel="new">
+          <%= f.fields_for assoc.to_sym, type == 'new' ? eval("f.object.#{assoc}") : eval("f.object.build_#{assoc}") do |la| %>
+            <%= render 'postal_addresses/fields', :f => la %>
+          <% end %>
+        </div>
+
+      </div>
+
     <% end %>
-  </div>
 
-</div>
+  <% end %>
+
+<% end %>
