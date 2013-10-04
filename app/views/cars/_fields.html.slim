@@ -7,27 +7,29 @@ ul.nav.nav-tabs
 .tab-content.top-space
 
   #tab1.tab-pane.active
-    = f.text_input :vin
-    = f.text_input :frame
-    = f.text_input :car_number
+    = f.twbs_text_field :vin
+    = f.twbs_text_field :frame
+    = f.twbs_text_field :car_number
+
+    = render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f}
 
   #tab2.tab-pane
 
-    = f.select2_input :brand
-    = f.select2_input :model
-    = f.select2_input :generation
-    = f.select2_input :modification
-    = f.text_input :god
-    = f.text_input :period
-    = f.text_input :dvigatel
-    = f.text_input :tip
-    = f.text_input :moschnost
-    = f.text_input :privod
-    = f.text_input :tip_kuzova
-    = f.text_input :kpp
-    = f.text_input :kod_kuzova
-    = f.text_input :kod_dvigatelya
-    = f.text_input :rinok
-    = f.text_input :komplektaciya
-    = f.text_input :dverey
-    = f.text_input :rul
+    = f.select2 :brand
+    = f.select2 :model
+    = f.select2 :generation
+    = f.select2 :modification
+    = f.twbs_text_field :god
+    = f.twbs_text_field :period
+    = f.twbs_text_field :dvigatel
+    = f.twbs_text_field :tip
+    = f.twbs_text_field :moschnost
+    = f.twbs_text_field :privod
+    = f.twbs_text_field :tip_kuzova
+    = f.twbs_text_field :kpp
+    = f.twbs_text_field :kod_kuzova
+    = f.twbs_text_field :kod_dvigatelya
+    = f.twbs_text_field :rinok
+    = f.twbs_text_field :komplektaciya
+    = f.twbs_text_field :dverey
+    = f.twbs_text_field :rul
