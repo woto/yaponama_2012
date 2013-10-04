@@ -10,6 +10,12 @@ first_user:
   user: first_user
   creation_reason: fixtures
 
+stan:
+  name: Стэн
+  profile: stan
+  user: stan
+  creation_reason: fixtures
+
 otto:
   name: Отто
   profile: otto
