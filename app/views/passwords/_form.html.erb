@@ -1,0 +1,16 @@
+<%= row do %>
+
+  <div class="col-sm-7">
+
+    <%= twbs_form_for @user, :url => smart_route({postfix: ['password']}, user_id: @user.id) do |f| %>
+
+      <%= f.twbs_password_field :password, placeholder: "Придумайте пароль не короче 6 символов" %>
+      <%= f.twbs_password_field :password_confirmation, placeholder: "Повторите ввод пароля" %>
+
+      <%= f.twbs_submit 'Сменить пароль' %>
+
+    <% end %>
+
+  </div>
+
+<% end %>
