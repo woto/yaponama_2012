@@ -1,19 +1,33 @@
-<%= nested_fields do %>
+<%= f.nested_fields do %>
 
   <%= f.destroyable do %>
 
-    <% if f.object.hide_remove_button_on_first_on_new.to_s == "false" %>
-      <%= f.standard_remove %>
+    <%= panel 'primary' do |p| %>
+
+      <%= p.heading do %>
+        <%= p.title do %>
+          Телефон
+          <% if f.object.hide_remove_button_on_first_on_new.to_s == "false" %>
+            <%= f.standard_remove %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <%= p.body do %>
+
+        <%= f.phone :value, asterisk: true, label: false %>
+
+        <%= f.hidden_field :hide_remove_button_on_first_on_new %>
+
+        <%= f.standard_recreate %>
+
+        <%= render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f} %>
+        <%= render :partial => 'profileables/forms/shared/confirms', :locals => {:f => f} %>
+
+
+      <% end %>
+
     <% end %>
-
-    <%= f.phone_input :value %>
-
-    <%= f.hidden_field :hide_remove_button_on_first_on_new %>
-
-    <%= f.standard_recreate %>
-
-    <%= render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f} %>
-    <%= render :partial => 'profileables/forms/shared/confirms', :locals => {:f => f} %>
 
   <% end %>
 
