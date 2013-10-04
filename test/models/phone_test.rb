@@ -125,4 +125,19 @@ class PhoneTest < ActiveSupport::TestCase
     assert_equal new_confirmation_token, old_confirmation_token
   end
 
+  test 'Проверка validators/phone_validator' do
+    phone = Phone.new(value: '123', mobile: false)
+    phone.valid?
+    assert_empty phone.errors[:value]
+
+    phone.mobile = true
+    phone.valid?
+    assert_equal ['имеет неверное значение'], phone.errors[:value]
+
+    phone.value = '+7 (948) 392-72-30'
+    phone.valid?
+    assert_empty phone.errors[:value]
+
+  end
+
 end

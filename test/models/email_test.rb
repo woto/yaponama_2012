@@ -72,4 +72,13 @@ class EmailTest < ActiveSupport::TestCase
     assert !Email.exists?(ea1)
   end
 
+  test 'Проверка validators/email_validator' do
+    e = Email.new(value: 'fake@mail.ru')
+    e.valid?
+    assert_empty e.errors[:value]
+
+    e.value = 'test'
+    e.valid?
+    assert_equal ['имеет неверное значение'], e.errors[:value]
+  end
 end
