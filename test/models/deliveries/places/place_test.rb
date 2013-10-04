@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Deliveries::Places::PlaceTest < ActiveSupport::TestCase
   test 'Тестируем validators/css_hex_color_validator' do
-    place = Place.new(active_fill_color: '#G00000')
+    place = Deliveries::Places::Place.new(active_fill_color: '#G00000')
     place.valid?
     assert_equal ["указан не правильный HEX код цвета"], place.errors[:active_fill_color]
 

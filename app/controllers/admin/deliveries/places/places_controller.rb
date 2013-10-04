@@ -16,6 +16,7 @@ class Admin::Deliveries::Places::PlacesController < ApplicationController
   # GET /deliveries/places/places/new
   def new
     @deliveries_places_place = ::Deliveries::Places::Place.new
+    @deliveries_places_place.variants.new
     @deliveries_places_place.prepare
   end
 
