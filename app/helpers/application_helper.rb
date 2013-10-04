@@ -327,6 +327,12 @@ module ApplicationHelper
   end
 
 
+  def input_group options={}, &block
+    content_tag :div, class: 'input-group' do
+      yield InputGroup.new(self)
+    end
+  end
+
   def panel type, &block
     content_tag :div, class: "panel panel-#{type}" do
       yield Panel.new(self)
