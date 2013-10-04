@@ -1,19 +1,17 @@
-<%= f.text_input :postcode %>
-<%= f.text_input :region %>
-<%= f.text_input :city %>
-<%= f.text_input :street %>
-<%= f.text_input :house %>
+<%= f.twbs_text_field :postcode, asterisk: true %>
+<%= f.twbs_text_field :region, asterisk: true %>
+<%= f.twbs_text_field :city, asterisk: true %>
+<%= f.twbs_text_field :street, asterisk: true %>
+<%= f.twbs_text_field :house, asterisk: true %>
 
 <div rel="stand-alone-group">
 
   <%= f.form_group do %>
-    <%= a1 do %>
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-default" rel="button-stand-alone-house">
-          <%= f.check_box :stand_alone_house, rel: "checkbox checkbox-stand-alone-house" %> Отдельно стоящее здание
-        </label>
-      </div>
-    <% end %>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-default" rel="button-stand-alone-house">
+        <%= f.check_box :stand_alone_house, rel: "checkbox checkbox-stand-alone-house" %> Отдельно стоящее здание
+      </label>
+    </div>
   <% end %>
 
   <div rel="room">
