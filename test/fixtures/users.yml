@@ -31,6 +31,9 @@ first_user:
   # password: 1231231231
   password_digest: $2a$10$90bFORwosYEHSW28BqmF8eacXIBXwLuZ1P9pp0.bEpVp5c2FrgLI.
   sound: true
+  russian_time_zone_auto_id: 4
+  russian_time_zone_manual_id: 8
+  use_auto_russian_time_zone: false
 
 stan:
   auth_token: ckysZX9XOzwEEeI8ZvKc0P
@@ -42,6 +45,9 @@ stan:
   logout_from_other_places: false
   # password: 3333333333
   password_digest: $2a$10$CDmB19dFAPadZyy/CS8rQ.kkTbVUv8XvbXMfEV7OgkrACk3Ts6kma
+  russian_time_zone_auto_id: 9
+  russian_time_zone_manual_id: 7
+  use_auto_russian_time_zone: true
 
 otto:
   auth_token: 28eoqmbORBE0YW9HSw8FFa
@@ -55,6 +61,10 @@ otto:
   password_digest: $2a$10$wQ1IG8ZsZX0PbzpDxWSgJ.qyB9XOvKceIckyzwEESavUNWGQZapvW
   password_reset_token: 55555
   password_reset_sent_at: <%= 1.second.ago.to_s(:db) %>
+  russian_time_zone_auto_id: 11
+  russian_time_zone_manual_id: 11
+  use_auto_russian_time_zone: true
+
 
 mark:
   auth_token: 9XOvKceIckyzwEE8ZsZX0P
@@ -66,6 +76,9 @@ mark:
   logout_from_other_places: false
   # password: 4444444444
   password_digest: $2a$10$3.PKll4wcX7cf2oDKkRZBOCdDDvHeO3XwTCwHBgHxQifFery8Fo5W
+  russian_time_zone_auto_id: 12
+  russian_time_zone_manual_id: 11
+  use_auto_russian_time_zone: false
 
 mike:
   auth_token: 0z0EKi883eFiEaEwXZeIcF
