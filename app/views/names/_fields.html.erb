@@ -1,11 +1,9 @@
-<%= nested_fields do %>
+<%= f.nested_fields do %>
 
-      <%= f.text_input :surname %>
-      <%= f.text_input :name %>
-      <%= f.text_input :patronymic %>
+  <%= f.twbs_text_field :surname %>
+  <%= f.twbs_text_field :name, asterisk: true %>
+  <%= f.twbs_text_field :patronymic %>
 
-      <%= f.standard_recreate %>
-
-      <%= render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f} %>
+  <%= render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f} %>
 
 <% end %>
