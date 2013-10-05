@@ -1,10 +1,5 @@
+- @meta_title = t("helpers.titles.#{@resource_class.to_s.underscore}.new")
+
 = user_tabs do
 
-  = page_header(t("helpers.titles.#{@resource_class.to_s.underscore}.new"))
-
-  .col-md-2
-    = render 'right'
-
-  .col-md-10
-    = render :partial => "form"
-
+  = render :partial => "form"

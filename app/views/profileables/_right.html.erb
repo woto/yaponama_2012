@@ -87,15 +87,5 @@
 
 <ul id="auth-buttons" class="list-unstyled list-inline left-space">
   <%# Муть какая-то, если слить в одну строку, то пробела не будет, иначе как - не знаю %>
-  <% @user.auths.each do |auth| %>
-    <li>
-      <%= render "shared/auth_logged_in", auth: auth %> 
-    </li>
-  <% end %>
+  <%- @user.auths.each do |auth| -%><li><%= render "application/auth/logged_in", auth: auth %></li><%- end -%>
 </ul>
-
-<hr />
-
-<%= link_to 'Сменить пароль', smart_route({prefix: [:edit], postfix: [:password]}, user_id: @user) %>
-
-<hr />

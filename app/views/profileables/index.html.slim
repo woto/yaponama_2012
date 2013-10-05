@@ -2,8 +2,7 @@
 
 = user_tabs do
 
-  div class="page-header"
-    h2=t '.title', :default => [:'helpers.titles.new', 'Список %{model}'], :model => model_class.model_name.human
+  - @meta_title = t("helpers.titles.#{@resource_class.to_s.underscore}.index")
 
   = form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [@resource_class.name.pluralize.underscore.to_sym]}, :primary_key => params[:primary_key], :user_id => params[:user_id]), :remote => true do |f|
 
@@ -22,7 +21,7 @@
             i.icon-time
 
         .pull-right.right-space
-          = render :partial => 'shared/grid_per_page'
+          = render :partial => 'application/grid/per_page'
 
         .pull-left
           = render :partial => "shared/grid_toolbar_selected"

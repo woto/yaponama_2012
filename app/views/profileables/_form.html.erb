@@ -1,0 +1,15 @@
+<%= row do %>
+  <div class="col-md-8">
+    <%= twbs_form_for @resource, :url => smart_route({:postfix => [@resource]}, :user_id => params[:user_id]) do |f| %>
+
+      <%= f.alert_danger do %>
+        <%= f.error(:base) %>
+      <% end %>
+
+      <%= render "fields", f: f %>
+
+      <%= f.twbs_submit %>
+
+    <% end %>
+  </div>
+<% end %>
