@@ -1,0 +1,22 @@
+<%= f.form_group nil, rel: "collapse-next" do %>
+  <button class="btn btn-default btn-xs" type="button" data-toggle="collapse-next">
+    <%# TODO Интересно, а можно у компании вывести как Комментарий к юр. адр. / факт. адр. %>
+    <span><%=f.object.class.human_attribute_name('comment')%></span>
+  </button>
+<% end %>
+
+<div rel='acceptance-test' class="collapse">
+  <%= f.twbs_text_area :notes, rows: 4 %>
+  <%= f.twbs_text_area :notes_invisible, rows: 4 %>
+
+  <%= f.twbs_date_select :created_at, disabled: true %>
+  <%= f.twbs_date_select :updated_at, disabled: true %>
+
+  <% obj = f.object.class.to_s.underscore %>
+  <% collection = eval("Rails.configuration.#{obj}_creation_reason.map {|k,v| [v,k]}.to_a") %>
+  <%= f.twbs_select :creation_reason, collection, {}, :disabled => 'disabled' %>
+
+  <code><%= f.object.creator.to_label if f.object.creator %></code>
+  <br />
+  <code><%= f.object.user.to_label if f.object.try(:user) %></code>
+</div>

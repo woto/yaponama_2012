@@ -14,4 +14,4 @@
 <%= render 'postal_address_fields', f: f, assoc: 'legal_address', title: 'Юридический адрес', opposite: 'Такой же как и фактический' %>
 <%= render 'postal_address_fields', f: f, assoc: 'actual_address', title: 'Фактический адрес', opposite: 'Такой же как и юридический'  %>
 
-<%= render :partial => 'profileables/forms/shared/inputs', :locals => {:f => f} %>
+<%= render :partial => 'profileables/forms/shared/notes', :locals => {:f => f} %>
