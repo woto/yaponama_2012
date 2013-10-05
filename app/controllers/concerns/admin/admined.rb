@@ -21,7 +21,7 @@ module Admin::Admined
 
     def only_authenticated
       unless ['admin', 'manager'].include? current_user.role
-        redirect_to root_path, :notice => "У вас нет доступа к этой части сайта." and return
+        redirect_to root_path, :danger => "У вас нет доступа к этой части сайта." and return
       end
     end
 
