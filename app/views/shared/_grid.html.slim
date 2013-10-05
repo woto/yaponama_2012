@@ -20,32 +20,7 @@
   = f.hidden_field :sort_direction
   = f.hidden_field :page
 
-  / МОДАЛЬНОЕ ОКНО С ВЫБОРОМ ОТОБРАЖАЕМЫХ КОЛОНОК
-  div#columns.modal.hide.fade tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-    div.modal-header
-      button.close type="button" data-dismiss="modal" aria-hidden="true" ×
-      h3#myModalLabel Отображаемые столбцы
-
-    div.modal-body
-      .control-group
-        / WTF IS THIS?! HOW TO SPLIT IT IN ONE LINE?!!! TODO
-        - available_columns =  @grid_class::COLUMNS.to_a
-        - grid_size = available_columns
-        - left_grid = available_columns[ 0, ( grid_size.size / 2.0 ).round ]
-        - right_grid = available_columns - left_grid
-        - full_grid = [left_grid, right_grid]
-
-        -  full_grid.each do |chunks|
-          .span6
-            - chunks.each do |column_name, column_settings|
-              .controls
-                label.checkbox.inline
-                  = check_box_tag "grid[#{column_name}_visible]".to_sym, '1', eval("@grid.#{column_name}_visible") == '1'
-                  = t column_name, :scope => "activerecord.attributes.#{@resource_class.name.underscore}", :default => t(column_name)
-
-    div.modal-footer
-      input.btn.btn-primary name="columns" type="submit" value="Обновить столбцы"
-      button.btn data-dismiss="modal" aria-hidden="true" Закрыть
+  = render 'shared/grid_modal_columns', f: f
 
   / TABLE
   table.table.table-striped

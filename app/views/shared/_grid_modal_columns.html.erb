@@ -1,0 +1,33 @@
+<%= modal id: 'columns' do |modal| %>
+
+  <%= modal.header do |header| %>
+    <%= header.close %>
+    <%= header.title { "Отображаемые столбцы" } %>
+  <% end %>
+
+  <%= modal.body do %>
+    <%# WTF IS THIS?! HOW TO SPLIT IT IN ONE LINE?!!! TODO %>
+    <% available_columns =  @grid_class::COLUMNS.to_a %>
+    <% grid_size = available_columns %>
+    <% left_grid = available_columns[ 0, ( grid_size.size / 2.0 ).round ] %>
+    <% right_grid = available_columns - left_grid %>
+    <% full_grid = [left_grid, right_grid] %>
+
+    <div class="row">
+      <% full_grid.each do |chunks| %>
+        <div class="col-md-6">
+          <% chunks.each do |column_name, column_settings| %>
+            <%= f.twbs_check_box :"#{column_name}_visible" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+  <% end %>
+
+  <%= modal.footer do |footer| %>
+    <%= footer.close %>
+    <input class="btn btn-primary" name="columns" type="submit" value="Сохранить" />
+  <% end %>
+
+<% end %>
