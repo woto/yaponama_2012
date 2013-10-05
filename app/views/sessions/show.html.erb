@@ -1,11 +1,9 @@
-<div class="col-sm-8">
-  <%= render 'variants' %>
-</div>
+<%= row do %>
 
-<div class="col-sm-4">
-  <div class="well">
-    <%= render 'shared/forgot_password' %>
-    <%= render 'shared/not_registered_yet' %>
-    <%= render 'shared/auth_log_in' %>
+  <div class="col-sm-8">
+    <%= render 'variants' %>
   </div>
-</div>
+
+  <%= render 'right' %>
+
+<% end %>
