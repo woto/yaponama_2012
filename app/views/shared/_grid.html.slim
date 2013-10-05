@@ -146,14 +146,16 @@
 
   / МОДАЛЬНЫЕ ОКНА ДЛЯ НАСТРОЕК ФИЛЬТРАЦИИ
   - visible_columns.each do |column_name|
-    .modal.hide.fade id="#{column_name}_filter" tabindex="-1"
-      .modal-header
-        button.close type="button" data-dismiss="modal" aria-hidden="true" &times;
-        h3 Фильтр для: #{t(column_name, :scope => "activerecord.attributes.#{@resource_class.name.underscore}", :default => t(column_name))}
-      .modal-body
-        = render 'shared/grid_filter_input', :column_name => column_name, :type => @grid_class::COLUMNS[column_name][:type], :grid => @grid_class
-      .modal-footer
-        input.btn.btn-primary name="filters" type="submit" value="Применить фильтр"
-        button.btn data-dismiss="modal" aria-hidden="true" Закрыть
+    = modal id: "#{column_name}_filter" do |modal|
+      = modal.header do |header|
+        = header.close
+        = header.title { "Фильтр для: #{@resource_class.human_attribute_name(column_name)}" }
+      = modal.body
+        = render 'shared/grid_filter_input', :column_name => column_name, :type => @grid_class::COLUMNS[column_name][:type], :grid => @grid_class, f: f
+      = modal.footer do |footer|
+        = footer.close
+        input.btn.btn-primary name="filters" type="submit" class="ignoredirty"  value="Применить фильтр"
 
-  = paginate @items, :theme => :toolbar, :window => 2, :remote => true
+  - if @items.num_pages > 1
+    .form-actions style="margin: 0 auto; background: white"
+      = paginate @items, :theme => :toolbar, :window => 2, :remote => true
