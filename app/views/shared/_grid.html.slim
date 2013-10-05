@@ -14,10 +14,11 @@
         | Вы находитесь на странице, которая больше доступных,  
         b= link_to "хотите перейти на первую страницу?", smart_route({:postfix => [@resource_class.name.pluralize.underscore.to_sym]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :status => params[:status], :page => 1)
 
-  = hidden_field_tag 'grid[sort_column]', @grid.sort_column
-  = hidden_field_tag 'grid[sort_direction]', @grid.sort_direction
-  = hidden_field_tag 'grid[page]', @grid.page
   /= hidden_field_tag 'grid[per_page]', @grid.per_page
+
+  = f.hidden_field :sort_column
+  = f.hidden_field :sort_direction
+  = f.hidden_field :page
 
   / МОДАЛЬНОЕ ОКНО С ВЫБОРОМ ОТОБРАЖАЕМЫХ КОЛОНОК
   div#columns.modal.hide.fade tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
