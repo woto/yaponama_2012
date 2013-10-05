@@ -144,17 +144,7 @@
             = link_to smart_route({:prefix => [:transactions], :postfix => [item]}, :id => item.id, :user_id => item.user_id), data: { toggle: "tooltip" }, title: "#{ t('.transactions', :default => t("helpers.links.transactions")) }", :class => 'btn', :rel => "tooltip" do
               i.icon-time
 
-  / МОДАЛЬНЫЕ ОКНА ДЛЯ НАСТРОЕК ФИЛЬТРАЦИИ
-  - visible_columns.each do |column_name|
-    = modal id: "#{column_name}_filter" do |modal|
-      = modal.header do |header|
-        = header.close
-        = header.title { "Фильтр для: #{@resource_class.human_attribute_name(column_name)}" }
-      = modal.body
-        = render 'shared/grid_filter_input', :column_name => column_name, :type => @grid_class::COLUMNS[column_name][:type], :grid => @grid_class, f: f
-      = modal.footer do |footer|
-        = footer.close
-        input.btn.btn-primary name="filters" type="submit" class="ignoredirty"  value="Применить фильтр"
+  = render 'shared/grid_modal_filters', f: f
 
   - if @items.num_pages > 1
     = paginate @items, :theme => :toolbar, :window => 2, :remote => true
