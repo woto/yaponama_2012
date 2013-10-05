@@ -157,5 +157,4 @@
         input.btn.btn-primary name="filters" type="submit" class="ignoredirty"  value="Применить фильтр"
 
   - if @items.num_pages > 1
-    .form-actions style="margin: 0 auto; background: white"
-      = paginate @items, :theme => :toolbar, :window => 2, :remote => true
+    = paginate @items, :theme => :toolbar, :window => 2, :remote => true

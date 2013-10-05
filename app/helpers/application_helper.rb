@@ -5,8 +5,8 @@ module ApplicationHelper
   def sortable(column_name, title, options )
     title ||= column_name.titleize
     direction = column_name.to_s == @grid.sort_column && @grid.sort_direction == 'asc' ? 'desc' : 'asc'
-    css_class = (column_name == @grid.sort_column) ? "#{@grid.sort_direction}" : nil
-    link_to url_for(params.merge(:sort_column => column_name, :sort_direction => direction)), options.merge({:class => css_class, :remote => true}) do
+    css_class =  "text-warning" if column_name == @grid.sort_column
+    link_to url_for(params.merge(:sort_column => column_name, :sort_direction => direction)), options.merge({:class => "ignoredirty #{css_class}", :remote => true}) do
       if column_name.to_s == @grid.sort_column
         if @grid.sort_direction == 'asc'
           content_tag(:i, '', :class => 'icon icon-sort-up') + '&nbsp;'.html_safe
