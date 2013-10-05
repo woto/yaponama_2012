@@ -1,13 +1,11 @@
-<div class="col-sm-8">
-  <%= render 'variants' %>
-  <hr>
-  <%= render 'contacts_form' %>
-</div>
+<%= row do %>
 
-<div class="col-sm-4">
-  <div class="well">
-    <%= render 'remember_password' %>
-    <%= render 'shared/not_registered_yet' %>
-    <%= render 'shared/auth_log_in' %>
+  <div class="col-sm-8">
+    <%= render 'variants' %>
+    <hr>
+    <%= render 'contacts_form' %>
   </div>
-</div>
+
+  <%= render 'right' %>
+
+<% end %>

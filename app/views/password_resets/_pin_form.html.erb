@@ -1,13 +1,21 @@
-<%= form_for @password_reset, url: pin_password_reset_path, builder: TwitterBootstrapFormBuilder, html: { class: 'form-horizontal' } do |f| %>
+<%= row do %>
 
-  <%= f.alert_danger do %>
-    <%= @password_reset.errors[:base].join %>
-  <% end %>
+  <div class="col-sm-8">
 
-  <%= f.text_input :pin %>
-  <%= f.hidden_field :value %>
-  <%= f.hidden_field :with %>
+    <%= twbs_form_for @password_reset, url: pin_password_reset_path do |f| %>
 
-  <%= f.standard_submit %>
+      <%= f.alert_danger do %>
+        <%= @password_reset.errors[:base].join %>
+      <% end %>
+
+      <%= f.twbs_text_field :pin, asterisk: true %>
+      <%= f.hidden_field :value %>
+      <%= f.hidden_field :with %>
+
+      <%= f.twbs_submit %>
+
+    <% end %>
+
+  </div>
 
 <% end %>
