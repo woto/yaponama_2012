@@ -54,7 +54,6 @@
 //= require tooltip_popover_rel
 //= require items_progress
 //= require 'sidebar'
-//= require 'time_zone_checkbox'
 //= require 'deliveries/places/places'
 //= require 'deliveries'
 //= require 'auth'
@@ -82,6 +81,7 @@
 //= require jasmine_examples/Player
 //= require jasmine_examples/Song
 //
+//= require 'time_zone_checkbox'
 //
 //= require toolbar-checkboxes
 //
