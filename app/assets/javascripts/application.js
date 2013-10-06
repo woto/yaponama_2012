@@ -40,7 +40,6 @@
 //= require jquery.editableHighlight
 //= require moment/moment
 //
-//= require select2
 //
 //
 //
@@ -74,6 +73,7 @@
 //
 //= require catch_enter
 //
+//= require select2
 //= require cars
 //= require brand_model
 //
