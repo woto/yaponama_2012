@@ -52,7 +52,6 @@
 //= require turbolinks_events
 //
 //= require tooltip_popover_rel
-//= require items_progress
 //= require 'sidebar'
 //= require 'deliveries/places/places'
 //= require 'deliveries'
@@ -89,4 +88,7 @@
 //= require ckeditor-helpers/basepath
 //= require ckeditor-helpers/simple
 //= require ckeditor-helpers/extended
+//
+//
+//= require items_progress
 //
