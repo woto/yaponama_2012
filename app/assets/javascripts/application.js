@@ -46,7 +46,6 @@
 //= require select2
 //
 //= require brand_model
-//= require cars
 //
 //
 // TODO когда создам application.js в admin, тогда перенесу подключение туда
@@ -81,6 +80,7 @@
 //
 //= require catch_enter
 //
+//= require cars
 //
 //= require jasmine_examples/Player
 //= require jasmine_examples/Song
