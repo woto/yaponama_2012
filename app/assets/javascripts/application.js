@@ -36,7 +36,6 @@
 //= require jquery-jsonp/src/jquery.jsonp
 //=require tests
 
-//= require jquery.cachedScript
 //= require jquery.editableHighlight
 //= require moment/moment
 //= require jquery.maskedinput/dist/jquery.maskedinput.min
@@ -87,6 +86,7 @@
 //
 //= require toolbar-checkboxes
 //
+//= require jquery.cachedScript
 //= require ckeditor-helpers/extended_options
 //= require ckeditor-helpers/basepath
 //= require ckeditor-helpers/simple
