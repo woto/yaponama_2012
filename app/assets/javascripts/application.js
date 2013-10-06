@@ -48,7 +48,6 @@
 //= require admin/users
 //=require mustache/mustache.js
 //
-//= require companies
 //= require turbolinks_events
 //
 //= require tooltip_popover_rel
@@ -69,6 +68,7 @@
 //= require stand_alone_house
 //= require collapse_next
 //= require holder
+//= require companies
 //
 //= require catch_enter
 //
