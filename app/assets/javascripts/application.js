@@ -16,7 +16,6 @@
 //= require turbolinks
 //= require cocoon
 //
-// == console.log-wrapper
 // OTHER LIBRARIES
 //
 //= require console.log-wrapper/consolelog.min.js
