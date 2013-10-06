@@ -34,9 +34,6 @@
 //= require underscore/underscore
 
 //= require jquery-jsonp/src/jquery.jsonp
-
-//=require toolbar-checkboxes
-
 //=require tests
 
 //= require jquery.cachedScript
@@ -84,6 +81,9 @@
 //
 //= require jasmine_examples/Player
 //= require jasmine_examples/Song
+//
+//
+//= require toolbar-checkboxes
 //
 //= require ckeditor-helpers/extended_options
 //= require ckeditor-helpers/basepath
