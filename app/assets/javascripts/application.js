@@ -39,6 +39,8 @@
 //= require jquery.cachedScript
 //= require jquery.editableHighlight
 //= require moment/moment
+//= require jquery.maskedinput/dist/jquery.maskedinput.min
+//
 //
 //
 //
