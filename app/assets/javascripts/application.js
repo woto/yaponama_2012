@@ -64,7 +64,6 @@
 //= require 'deliveries/places/places'
 //= require 'deliveries'
 //= require 'auth'
-//= require 'catch_enter'
 //
 //
 // == nanoscroller
@@ -78,6 +77,9 @@
 //= require stand_alone_house
 //= require collapse_next
 //= require holder
+//
+//= require catch_enter
+//
 //
 //= require common 
 //= require jasmine_examples/Player
