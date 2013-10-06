@@ -66,6 +66,7 @@
 //= require stat
 //= require profileables
 //= require mobile_mask
+//= require phone_input
 //= require stand_alone_house
 //= require collapse_next
 //= require holder
