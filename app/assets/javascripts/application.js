@@ -73,6 +73,7 @@
 //
 //
 //
+//= require common
 //= require profileables
 //= require stand_alone_house
 //= require collapse_next
@@ -81,7 +82,6 @@
 //= require catch_enter
 //
 //
-//= require common 
 //= require jasmine_examples/Player
 //= require jasmine_examples/Song
 //
