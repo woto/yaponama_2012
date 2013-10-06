@@ -90,9 +90,9 @@
   width: 120px;
   padding: 15px;
   background: white;
-  opacity: 1;
   color: @text-color;
   border: 1px solid @brand-primary;
+  .border-radius( 5px );
 }
 
 /////////////////////
@@ -168,4 +168,11 @@
   a {
     text-decoration: none;
   }
+}
+
+/////////////////////
+
+// Звездочки для обязательных полей asterisk: true
+label.required:after {
+  content: "\00a0*"
 }

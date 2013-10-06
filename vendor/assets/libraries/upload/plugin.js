@@ -16,7 +16,7 @@ CKEDITOR.plugins.add( 'upload', {
 			// The text part of the button (if available) and tooptip.
 			label: 'Закачка файлов',
 
-      click: function (editor) { window.open('/uploads?CKEditor=' + editor.name,'Закачка файлов','width=500,height=400'); },
+      click: function (editor) { window.open('/uploads?CKEditor=' + editor.name,'Закачка файлов','scrollbars=yes, resizable=yes, width=500, height=500'); },
 
 			// The button placement in the toolbar (toolbar group name).
 			toolbar: 'insert'
@@ -24,4 +24,3 @@ CKEDITOR.plugins.add( 'upload', {
 
 	}
 });
-
