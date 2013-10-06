@@ -1,23 +1,26 @@
-.container.top-space.bottom-space
+.container
+
   .page-header
-    h2 Обрезка изображения
+    h1 Обрезка изображения
 
-  .alert.alert-notice
-    h5 Подсказка
-    |Вы можете изменить размер окна и перегрузить страницу и тогда размер обрезаемого изображения подстроится под размер окна.
+  .row
+    .col-xs-12
 
-  = simple_form_for @upload, remote: true  do |f|
-    .hide
-      = f.input :crop_x
-      = f.input :crop_y
-      = f.input :crop_w
-      = f.input :crop_h
-      = f.input :image_w
-      = f.input :image_h
-      = f.input :operation
-    = f.submit 'Обрезать', class: "btn btn-primary"
+      .alert.alert-info
+        |Вы можете изменить размер окна и перегрузить страницу и тогда размер обрезаемого изображения подстроится под размер окна.
 
-  = image_tag @upload.upload.url, :class => 'img-crop'
+      = twbs_form_for @upload, remote: true  do |f|
+        = f.hidden_field :crop_x
+        = f.hidden_field :crop_y
+        = f.hidden_field :crop_w
+        = f.hidden_field :crop_h
+        = f.hidden_field :image_w
+        = f.hidden_field :image_h
+        = f.hidden_field :operation
+
+        = f.twbs_submit 'Обрезать'
+
+      = image_tag @upload.upload.url, :class => 'img-crop img-responsive'
 
 = javascript_include_tag 'uploads/crop'
 = stylesheet_link_tag 'uploads/crop'
