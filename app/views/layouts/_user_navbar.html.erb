@@ -1,0 +1,103 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+
+  <div class="container">
+
+    <div class="navbar-header">
+
+      <button class="navbar-toggle ignoredirty" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+
+        <span class="sr-only">Навигация</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+
+      </button>
+
+      <a class="navbar-brand" href="/" style='padding-top: 5px; padding-bottom: 5px'>
+        <%= image_tag "logo.png", style: "width: 186px; height: 38px" %>
+      </a>
+
+    </div> <!-- /.navbar-header -->
+
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+
+      <ul class="nav navbar-nav">
+
+        <%= dropdown do |dd| %>
+
+          <%= dd.toggle do %>
+            Покупателям 
+            <%= caret %>
+          <% end %>
+
+          <%= dd.menu do %>
+            <li> <%= link_to "Новости компании", "#" %> </li>
+            <li> <%= link_to "Акции и бонусы", "#" %> </li>
+            <li> <%= link_to "Способы оплаты", "#" %> </li>
+            <li class="<%= highlight_active([:controller => "/deliveries"]) %>">
+              <%= link_to "Доставка и самовывоз", deliveries_path %>
+            </li>
+            <li> <%= link_to "Частые вопросы", "#" %> </li>
+          <% end %>
+
+        <% end %>
+
+        <li class="divider-vertical invisible">
+          <%# TODO пока просто перенес %>
+          <% if content_for :pages_controler %>
+            <%= yield(:pages_controller) %>
+          <% end %>
+        </li>
+
+      </ul>
+
+      <%= form_tag user_searches_path, :class => "navbar-form navbar-left", :method => :get do %>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Артикул детали"></input>
+        </div>
+        <button class="btn btn-default" type="submit"> Искать </button>
+      <% end %>
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <li class="<%= highlight_active([:controller => '/products', :status => 'incart']) %>">
+          <%= link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do %>
+            <%= icon 'shopping-cart' %> 
+            Корзина
+          <% end %>
+        </li>
+
+        <%= dropdown do |dd| %>
+
+          <%= dd.toggle do %>
+            <%= icon 'user' %>
+            <% if @user.role != 'guest' %>
+              <%= @user.cached_main_profile.try(:[], 'names').try(:first).try(:[], 'name') %>
+            <% else %>
+              Личный кабинет
+            <% end %>
+            <%= caret %>
+          <% end %>
+
+          <%= dd.menu do %>
+            <% if current_user.role == 'guest' %>
+              <li> <%= link_to "Вход на сайт", login_path %> </li>
+              <li> <%= link_to "Регистрация", register_path %> </li>
+              <%= divider %>
+              <li> <%= link_to "Забыли пароль?", password_reset_path %> </li>
+            <% else %>
+              <li> <%= link_to "Личный кабинет", user_path %> </li>
+              <%= divider %>
+              <li> <%= link_to "Выход", logout_path, :method => :delete %> </li>
+            <% end %>
+          <% end %>
+
+        <% end %>
+
+      </ul>
+
+    </div>
+
+  </div> <!-- /.container -->
+
+</nav>
