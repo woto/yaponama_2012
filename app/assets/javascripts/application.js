@@ -3,8 +3,6 @@
 //= require jquery
 //= require jquery.ui.all
 //= require jquery_ujs
-
-// TWITTER BOOTSTRAP
 //= require bootstrap
 // require bootstrap/dist/js/bootstrap
 //
@@ -19,6 +17,7 @@
 //= require cocoon
 //
 // == console.log-wrapper
+// OTHER LIBRARIES
 //
 //= require console.log-wrapper/consolelog.min.js
 //= require console.log-wrapper/consolelog.detailprint.min.js
@@ -62,10 +61,12 @@
 //= require holder.js/holder
 //
 //
+// APPLICATION
 //
 //= require common
 //= require stat
 //= require profileables
+//= require mobile_mask
 //= require stand_alone_house
 //= require collapse_next
 //= require holder
