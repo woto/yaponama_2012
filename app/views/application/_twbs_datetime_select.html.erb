@@ -2,7 +2,9 @@
 
   <%= f.control_label(method, label: extra[:label], asterisk: extra[:asterisk]) %>
 
-  <%= f.password_field method, options %>
+  <%= btn_toolbar do %>
+    <%= f.datetime_select method, options, html_options %>
+  <% end %>
 
   <%= f.error method %>
 

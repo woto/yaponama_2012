@@ -1,17 +1,13 @@
 <%= f.form_group method do %>
 
-  <%= a1 do %>
+  <div class="checkbox">
+    <label>
+      <%= f.check_box method, options, checked_value, unchecked_value %>
+      <%# Это неправильная структура, вложенного label быть не должно, оставил для локализации %>
+      <%= f.requireable_label(method, label: extra[:label], asterisk: extra[:asterisk]) %>
+    </label>
+  </div>
 
-    <div class="checkbox">
-      <label>
-        <%= f.check_box method, options, checked_value, unchecked_value %>
-        <%# Это неправильная структура, вложенного label быть не должно, оставил для локализации %>
-        <%= f.requireable_label(options[:label] || method, asterisk: extra[:asterisk]) %>
-      </label>
-    </div>
-
-    <%= f.hint method %>
-
-  <% end %>
+  <%= f.hint(method, hint: extra[:hint]) %>
 
 <% end %>

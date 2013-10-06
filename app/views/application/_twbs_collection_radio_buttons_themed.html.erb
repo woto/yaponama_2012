@@ -1,9 +1,8 @@
 <%= f.form_group method do %>
 
-  <%= f.control_label(extra[:label] || method, asterisk: extra[:asterisk]) %>
+  <%= f.control_label(method, label: extra[:label], asterisk: extra[:asterisk]) %>
 
-  <%= a2 do %>
-
+  <%= btn_toolbar do %>
     <div class="btn-group" data-toggle="buttons">
       <%= f.collection_radio_buttons method, collection, value_method, text_method, options, html_options do |ch| %>
         <%= ch.label(class: 'btn btn-default') do %>
@@ -11,10 +10,11 @@
         <% end %>
       <% end %>
     </div>
-    <%= f.error method %>
-    <%= f.hint method %>
-
   <% end %>
+
+  <%= f.error method %>
+
+  <%= f.hint(method, hint: extra[:hint]) %>
 
 <% end %>
 

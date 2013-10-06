@@ -1,13 +1,13 @@
 <%= f.form_group method do %>
 
-  <%= f.control_label(extra[:label] || method, asterisk: extra[:asterisk]) %>
+  <%= f.control_label(method, label: extra[:label], asterisk: extra[:asterisk]) %>
 
-  <%= a2 do %>
-    <%= f.collection_radio_buttons method, collection, value_method, text_method, options, html_options do |ch| %>
-      <%= ch.label(class: 'radio-inline') {ch.radio_button + ch.text} %>
-    <% end %>
-    <%= f.error method %>
-    <%= f.hint method %>
+  <%= f.collection_radio_buttons method, collection, value_method, text_method, options, html_options do |ch| %>
+    <%= ch.label(class: 'radio-inline') {ch.radio_button + ch.text} %>
   <% end %>
+
+  <%= f.error method %>
+
+  <%= f.hint(method, hint: extra[:hint]) %>
 
 <% end %>
