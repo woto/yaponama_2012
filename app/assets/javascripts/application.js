@@ -25,7 +25,6 @@
 //
 //
 // #DIRTY TESTS TODO REFACTOR
-//= require stat
 //
 //
 //= require jquery-cookie/jquery.cookie
@@ -74,6 +73,7 @@
 //
 //
 //= require common
+//= require stat
 //= require profileables
 //= require stand_alone_house
 //= require collapse_next
