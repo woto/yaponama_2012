@@ -53,8 +53,6 @@
 //
 //= require tooltip_popover_rel
 //= require 'sidebar'
-//= require 'deliveries/places/places'
-//= require 'deliveries'
 //= require 'auth'
 //
 //
@@ -89,6 +87,8 @@
 //= require ckeditor-helpers/simple
 //= require ckeditor-helpers/extended
 //
+//= require deliveries/places/places
+//= require deliveries
 //
 //= require items_progress
 //
