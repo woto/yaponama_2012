@@ -46,6 +46,10 @@ module Confirmed
       where(confirmed: true)
     end
 
+    def not_confirmed
+      where(confirmed: false)
+    end
+
   end
 
 end
