@@ -28,6 +28,21 @@ module AbstractGridable
       @grid_class.const_set("COLUMNS", columns_hash)
     end
 
+
+    # Проверка выделения хотя бы одной позиции
+    def any_checked_validation
+      if @items.blank?
+        raise ValidationError.new "Ни одна позиция не выделена"
+      end
+    end
+
+
+    def one_checked_validation
+      if @items.size != 1
+        raise ValidationError.new "Для данной операции необходимо чтобы была выделена только 1 позиция."
+      end
+    end
+
     include GridConcern
 
   end

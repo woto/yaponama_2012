@@ -8,8 +8,8 @@ class Products::EditController < ApplicationController
 
       Rails.application.routes.recognize_path params[:return_path]
       @items = products_user_order_tab_scope( @items, 'checked' )
-      products_any_checked_validation
-      products_only_one_validation
+      any_checked_validation
+      one_checked_validation
       products_all_statuses_validation ['incart', 'inorder', 'ordered', 'pre_supplier', 'post_supplier', 'stock', 'complete', 'cancel']
 
     rescue ValidationError => e

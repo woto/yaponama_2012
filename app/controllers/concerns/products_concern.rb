@@ -35,14 +35,6 @@ module ProductsConcern
     end
 
 
-    # Проверка выделения хотя бы одной позиции
-    def products_any_checked_validation
-      if @items.blank?
-        raise ValidationError.new "Ни одна позиция не выделена"
-      end
-    end
-
-
     # Проверка допустимости статуса
     def products_all_statuses_validation valid_statuses
       @items.map(&:status).each do |status|
@@ -85,12 +77,6 @@ module ProductsConcern
         end
       end
 
-    end
-
-    def products_only_one_validation
-      if @items.size != 1
-        raise ValidationError.new "Для данной операции необходимо чтобы был выделена только 1 позиция."
-      end
     end
 
     def adjust_columns!(columns_hash)

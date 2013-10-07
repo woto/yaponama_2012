@@ -9,7 +9,7 @@ class Admin::Products::CompleteController < ApplicationController # < Products::
 
       Rails.application.routes.recognize_path params[:return_path]
       @items = products_user_order_tab_scope( @items, 'checked' )
-      products_any_checked_validation
+      any_checked_validation
       products_all_statuses_validation ['stock', 'cancel']
 
     rescue ValidationError => e

@@ -8,7 +8,7 @@ class Products::InorderController < ApplicationController
 
       Rails.application.routes.recognize_path params[:return_path]
       @items = products_user_order_tab_scope( @items, 'checked' ) 
-      products_any_checked_validation
+      any_checked_validation
       products_belongs_to_one_user_validation!
       products_all_statuses_validation ["incart", "inorder", "ordered", "pre_supplier", 'cancel']
 

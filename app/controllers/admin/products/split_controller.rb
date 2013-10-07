@@ -9,9 +9,9 @@ class Admin::Products::SplitController < ApplicationController #< Products::Spli
 
       Rails.application.routes.recognize_path params[:return_path]
       @items = products_user_order_tab_scope( @items, 'checked' )
-      products_any_checked_validation
+      any_checked_validation
+      one_checked_validation
       products_all_statuses_validation ['incart', 'inorder', 'ordered', 'pre_supplier', 'post_supplier', 'stock', 'complete']
-      products_only_one_validation
 
       if @items.first.quantity_ordered <= 1
         raise ValidationError.new "Невозможно разбить позицию состоящую из одного товара."
