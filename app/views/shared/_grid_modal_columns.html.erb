@@ -17,7 +17,7 @@
       <% full_grid.each do |chunks| %>
         <div class="col-md-6">
           <% chunks.each do |column_name, column_settings| %>
-            <%= f.twbs_check_box :"#{column_name}_visible" %>
+            <%= f.twbs_check_box :"#{column_name}_visible", label: @resource_class.human_attribute_name(column_name) %>
           <% end %>
         </div>
       <% end %>
