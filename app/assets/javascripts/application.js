@@ -50,7 +50,6 @@
 //
 //= require tooltip_popover_rel
 //= require 'sidebar'
-//= require 'auth'
 //
 //
 // == nanoscroller
@@ -94,5 +93,5 @@
 //= require deliveries
 //
 //= require items_progress
-//
+//= require 'auth'
 //= require 'jquery.editableHighlight'
