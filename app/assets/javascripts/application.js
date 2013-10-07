@@ -35,7 +35,6 @@
 //= require jquery-jsonp/src/jquery.jsonp
 //=require tests
 
-//= require jquery.editableHighlight
 //= require moment/moment
 //= require jquery.maskedinput/dist/jquery.maskedinput.min
 //
@@ -96,3 +95,4 @@
 //
 //= require items_progress
 //
+//= require 'jquery.editableHighlight'
