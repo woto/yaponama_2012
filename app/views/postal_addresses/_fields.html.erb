@@ -9,7 +9,7 @@
   <%= f.form_group do %>
     <div class="btn-group" data-toggle="buttons">
       <label class="btn btn-default" rel="button-stand-alone-house">
-        <%= f.check_box :stand_alone_house, rel: "checkbox checkbox-stand-alone-house" %> Отдельно стоящее здание
+        <%= f.check_box :stand_alone_house, rel: "checkbox checkbox-stand-alone-house" %> <%= PostalAddress.human_attribute_name(:stand_alone_house) %>
       </label>
     </div>
   <% end %>
