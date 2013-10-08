@@ -7,7 +7,6 @@ class Products::CancelController < ApplicationController
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
-      @items = products_user_order_tab_scope( @items, 'checked' )
       any_checked_validation
 
     rescue ValidationError => e

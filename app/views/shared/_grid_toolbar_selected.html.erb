@@ -1,5 +1,3 @@
-<div id="toolbar-selected">
-  <% if @resource_class == Product # TODO %>
-    Выделено: <%= products_user_order_tab_scope(@items, 'checked').size %>
-  <% end %>
-</div>
+<% selected = @grid.item_ids.select { |key, value| value == '1' } %>
+
+Выделено: <%= selected.size %>

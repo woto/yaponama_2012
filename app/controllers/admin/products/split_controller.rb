@@ -8,7 +8,6 @@ class Admin::Products::SplitController < ApplicationController #< Products::Spli
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
-      @items = products_user_order_tab_scope( @items, 'checked' )
       any_checked_validation
       one_checked_validation
       products_all_statuses_validation ['incart', 'inorder', 'ordered', 'pre_supplier', 'post_supplier', 'stock', 'complete']

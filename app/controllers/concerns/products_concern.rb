@@ -14,27 +14,6 @@ module ProductsConcern
       redirect_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => status, :order_id => (@order && @order.id || params[:order_id]), :user_id => params[:user_id])
     end
 
-
-    # Сужение области по покупателю и заказу на основе текущего местоположения (адреса страницы) менеджера,
-    # а так же таба (отдельные случаи - виртуальные табы all и checked)
-    def products_user_order_tab_scope products, status
-
-      products = products.limit(100).offset(0)
-
-      case status
-        when *Rails.configuration.products_status.select{|k, v| v['real']}.keys
-          products = products.where(:status => status)
-        when 'active'
-          products = products.active
-        when 'checked'
-          products = products.where('id IN (?)', @grid.item_ids && @grid.item_ids.select{ |k, v| v == '1' }.keys )
-      end
-
-      products
-      
-    end
-
-
     # Проверка допустимости статуса
     def products_all_statuses_validation valid_statuses
       @items.map(&:status).each do |status|
@@ -138,7 +117,7 @@ module ProductsConcern
       if params[:status].blank? || params[:status] == 'all'
         columns_hash['status'] = {
           :type => :set,
-          :set => Hash[*Rails.configuration.products_status.map{|k, v| [v['title'], k]}.flatten],
+          :set => Hash[*Rails.configuration.products_status.select{|k, v| v['real'] == true}.map{|k, v| [v['title'], k]}.flatten],
         }
       end
 
@@ -210,8 +189,11 @@ module ProductsConcern
         @items = @items.where(:user_id => @user.id)
       end
 
-      if params[:status] != 'all' && params[:status].present?
-        @items = @items.where(:status => params[:status]) 
+      case params[:status]
+        when *Rails.configuration.products_status.select{|k, v| v['real']}.keys
+          @items = @items.where(status: params[:status])
+        when 'active'
+          @items = @items.active
       end
 
       if params[:order_id]

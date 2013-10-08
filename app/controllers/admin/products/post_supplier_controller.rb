@@ -8,7 +8,6 @@ class Admin::Products::PostSupplierController < ApplicationController #< Product
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
-      @items = products_user_order_tab_scope( @items, 'checked' )
       any_checked_validation
       products_all_statuses_validation ['pre_supplier', 'post_supplier', 'stock', 'cancel']
 
