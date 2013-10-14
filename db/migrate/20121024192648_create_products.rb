@@ -11,7 +11,7 @@ class CreateProducts < ActiveRecord::Migration
       t.integer :max_days
       t.decimal :buy_cost, :precision => 8, :scale => 2
       t.decimal :sell_cost, :precision => 8, :scale => 2
-      t.boolean :hide_catalog_number, :default => false
+      t.boolean :hide_catalog_number
       t.string :status
       t.integer :probability
 
