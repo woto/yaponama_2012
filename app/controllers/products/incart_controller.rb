@@ -7,6 +7,7 @@ class Products::IncartController < ApplicationController
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
+      @items = @items.selected(@grid.item_ids)
       any_checked_validation
       products_all_statuses_validation ['incart', 'inorder', 'ordered', 'pre_supplier', 'cancel']
 
