@@ -8,6 +8,7 @@ class Admin::Products::PreSupplierController < ApplicationController #< Products
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
+      @items = @items.selected(@grid.item_ids)
       any_checked_validation
       products_all_statuses_validation ['ordered', 'pre_supplier', 'post_supplier', 'cancel']
 
