@@ -7,6 +7,7 @@ class Products::EditController < ApplicationController
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
+      @items = @items.selected(@grid.item_ids)
       any_checked_validation
       one_checked_validation
       products_all_statuses_validation ['incart', 'inorder', 'ordered', 'pre_supplier', 'post_supplier', 'stock', 'complete', 'cancel']
