@@ -7,6 +7,7 @@ class Products::CancelController < ApplicationController
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
+      @items = @items.selected(@grid.item_ids)
       any_checked_validation
 
     rescue ValidationError => e
