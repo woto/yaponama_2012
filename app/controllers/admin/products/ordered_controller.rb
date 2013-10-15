@@ -8,6 +8,7 @@ class Admin::Products::OrderedController < ApplicationController # < Products::O
     begin
 
       Rails.application.routes.recognize_path params[:return_path]
+      @items = @items.selected(@grid.item_ids)
       any_checked_validation
       products_all_statuses_validation ['inorder', 'cancel']
       products_belongs_to_one_user_validation!
