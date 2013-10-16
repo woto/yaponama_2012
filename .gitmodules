@@ -79,3 +79,6 @@
 [submodule "system/submodules/jquery-ui"]
 	path = system/submodules/jquery-ui
 	url = https://github.com/jquery/jquery-ui
+[submodule "system/submodules/bootswatch"]
+	path = system/submodules/bootswatch
+	url = git@github.com:thomaspark/bootswatch.git
