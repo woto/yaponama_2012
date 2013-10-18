@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/deivid-rodriguez/byebug.git
-  revision: 952ecca719734b82f9f3cb64fc11964f52286598
+  revision: 51af4f6b3f1753cd42915cd1dee732e0ea6c6eaf
   specs:
-    byebug (2.3.0)
+    byebug (2.3.1)
       columnize (~> 0.3.6)
       debugger-linecache (~> 1.2.0)
 
@@ -19,14 +19,14 @@ GIT
 
 GIT
   remote: git://github.com/joliss/jquery-ui-rails.git
-  revision: 955785724d2d9fb5f820a166fa800fbd63d8cef1
+  revision: 7d58c69297370715aeedc6803601139e254a43f9
   specs:
     jquery-ui-rails (4.0.5)
       railties (>= 3.1.0)
 
 GIT
   remote: git://github.com/lautis/uglifier.git
-  revision: 314b9d4a61f9ac1a4161d1c5aec3810dcd419a75
+  revision: 86a0f7aedb2db8adb813606d72025f0158aebf60
   specs:
     uglifier (2.2.1)
       execjs (>= 0.3.0)
@@ -51,21 +51,21 @@ GIT
 
 GIT
   remote: git://github.com/rails/arel.git
-  revision: bd6adc877af4687aec636f08e96e19785eea209d
+  revision: b64c886483e3ad2dc92bf54510cd481f9124fb69
   specs:
     arel (4.0.0.20130418133826)
 
 GIT
   remote: git://github.com/rails/coffee-rails.git
-  revision: c812f4da1f5adc226ef834b57c2498467761cb2c
+  revision: 471ae515b57d484d494eba7e0a1f1016ebcc57e4
   specs:
-    coffee-rails (4.0.0)
+    coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
 
 GIT
   remote: git://github.com/rails/jbuilder.git
-  revision: dd3b82e705d2c63003aa09187c60c7e11c2a9f56
+  revision: 399de9b6bec6c6556d1ee4429256f0ab7091da29
   specs:
     jbuilder (1.5.2)
       activesupport (>= 3.0.0)
@@ -81,18 +81,18 @@ GIT
 
 GIT
   remote: git://github.com/rails/sass-rails.git
-  revision: 4c58b432a05de820870a28cc8fb1b491a69bb01d
+  revision: debabfce664370f18e5ed6e6ae2fb3772883a284
   specs:
-    sass-rails (4.0.0)
+    sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
 
 GIT
   remote: git://github.com/rails/sprockets-rails.git
-  revision: 18026870bb5fde945802674fb5b88be976ff6b94
+  revision: 6a03c314bec3a84a3f6c8076bf058b33ed672a13
   specs:
-    sprockets-rails (2.0.0)
+    sprockets-rails (2.0.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
@@ -144,7 +144,7 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: 50c4ac4a8bd0cb883ddaa309b779978e4207fef4
+  revision: b5ae13112ccd6b2ec12a3c5190bc6264c993b42d
   specs:
     simple_form (3.0.0)
       actionpack (>= 4.0.0, < 4.1)
@@ -239,7 +239,7 @@ GEM
     i18n (0.6.5)
     innertube (1.1.0)
     jasmine-core (2.0.0.rc3)
-    json (1.8.0)
+    json (1.8.1)
     jwt (0.1.8)
       multi_json (>= 1.5)
     kaminari (0.14.1)
@@ -259,7 +259,7 @@ GEM
     minitest (4.7.5)
     money (5.1.1)
       i18n (~> 0.6.0)
-    multi_json (1.8.1)
+    multi_json (1.8.2)
     multipart-post (1.2.0)
     mysql2 (0.3.12b4)
     net-scp (1.1.2)
@@ -297,10 +297,10 @@ GEM
     omniauth-twitter (1.0.1)
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
-    omniauth-vkontakte (1.2.0)
+    omniauth-vkontakte (1.3.1)
       multi_json
-      omniauth (~> 1.1.0)
-      omniauth-oauth2 (~> 1.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
     omniauth-yandex (0.0.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
@@ -330,10 +330,10 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    rspec-core (2.14.5)
+    rspec-core (2.14.6)
     rspec-expectations (2.14.3)
       diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.14.3)
+    rspec-mocks (2.14.4)
     ruby-growl (4.0)
       uuid (~> 2.3, >= 2.3.5)
     russian (0.6.0)
@@ -359,7 +359,7 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sshkit (1.0.0)
+    sshkit (1.1.0)
       net-scp
       net-ssh
       term-ansicolor
