@@ -73,7 +73,9 @@
   top: 0;
   width: 100%;
   height: 100%;
-  .opacity(0.8);
+  // TODO Наблюдаются проблемы с перерисовкой,
+  // пока закомментировал для эксперимента
+  .opacity(0.5);
   display: none;
 }
 
@@ -205,12 +207,116 @@ label.required:after {
 
 /////////////////////
 
+#grid-toolbar-new {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#grid-toolbar-edit {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#grid-toolbar-remove {
+  display: inline-block;
+  margin-right: 5px;
+}
+
 // Полоска 'по N на страницу'
-#toolbar-per-page {
-  margin: 7px;
+#grid-toolbar-per-page {
+  display: inline-block;
+  margin-right: 5px;
 }
 
 // Полоска 'Выделено: N'
-#toolbar-selected {
-  margin: 7px;
+#grid-toolbar-selected {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#grid-toolbar-check-uncheck {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#grid-toolbar-actions {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#grid-toolbar-columns {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#grid-toolbar-transactions {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/////////////////////
+
+.label-all, .badge-all {
+  background-color: white !important;
+  color: black !important;
+}
+
+.label-active, .badge-active {
+  background-color: white !important;
+  color: black !important;
+}
+
+.label-checked, .badge-checked {
+  background-color: white !important;
+  color: black !important;
+}
+
+.label-incart, .badge-incart {
+  background-color: #999999 !important;
+}
+
+.label-inorder, .badge-inorder {
+  background-color: #468847 !important;
+}
+
+.label-ordered, .badge-ordered {
+  background-color: #B94A48 !important;
+}
+
+.label-pre_supplier, .badge-pre_supplier {
+  background-color: #3A87AD !important;
+}
+
+.label-post_supplier, .badge-post_supplier {
+  background-color: #F89406 !important;
+}
+
+.label-stock, .badge-stock{
+  background-color: #333 !important;
+}
+
+
+.label-complete, .badge-complete{
+  background-color: white !important;
+  color: black !important;
+}
+
+.label-cancel, .badge-cancel {
+  background-color: white !important;
+  color: black !important;
+}
+
+/////////////////////
+
+.page-header {
+  margin-top: 0;
+  h1 {
+    margin-top: 0;
+  }
+}
+
+/////////////////////
+// Пока не уверен что это правильный способ
+.select2-container {
+  width: 100%
 }
