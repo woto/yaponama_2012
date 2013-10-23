@@ -3,7 +3,7 @@ module GridConcern
 
   included do
 
-    before_action :set_grid, :only => [:index, :filter]
+    before_action :set_grid
 
     private
 
@@ -70,7 +70,7 @@ module GridConcern
 
       # ПЕРЕПИСЫВАЕМ НА ПОЛУЧЕННЫЕ
       
-      if params[:sort_column]
+      if request.GET[:sort_column]
         @grid.sort_column = params[:sort_column]
       elsif params[:grid] && params[:grid][:sort_column]
       elsif old_grid && old_grid.sort_column
@@ -79,7 +79,7 @@ module GridConcern
         @grid.sort_column = "updated_at"
       end
 
-      if params[:sort_direction]
+      if request.GET[:sort_direction]
         @grid.sort_direction = params[:sort_direction]
       elsif params[:grid] && params[:grid][:sort_direction]
       elsif old_grid && old_grid.sort_direction
@@ -88,7 +88,7 @@ module GridConcern
         @grid.sort_direction = 'desc'
       end
 
-      if params[:page]
+      if request.GET[:page]
         @grid.page = params[:page]
       elsif params[:grid] && params[:grid][:page]
       elsif old_grid && old_grid.page
@@ -107,8 +107,17 @@ module GridConcern
 
         case column_settings[:type]
 
-          when :string
+          when :catalog_number
+            like = eval("@grid.#{column_name}_like")
+            if like.present?
+              @items = @items.where(arel[column_name.to_sym].matches("%#{like}%"))
+              unless admin_zone?
+                @items = @items.where(arel[:hide_catalog_number].not_eq(true))
+              end
+              mark_as_filter_enabled(column_name)
+            end
 
+          when :string
             like = eval("@grid.#{column_name}_like")
             if like.present?
               @items = @items.where(arel[column_name.to_sym].matches("%#{like}%"))
@@ -176,13 +185,13 @@ module GridConcern
             to = eval("@grid.#{column_name}_to")
 
             if from.present?
-              from = Date.parse(from)
+              from = Time.zone.parse(from)
               @items = @items.where(arel[column_name.to_sym].gteq(from))
               mark_as_filter_enabled(column_name)
             end
 
             if to.present?
-              to = Date.parse(to)
+              to = Time.zone.parse(to)
               @items = @items.where(arel[column_name.to_sym].lteq(to))
               mark_as_filter_enabled(column_name)
             end
@@ -203,7 +212,7 @@ module GridConcern
 
   end
 
-  def url_options
+  def default_url_options
     params.delete :grid
     params.delete :utf8
     params.delete :columns
