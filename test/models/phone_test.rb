@@ -92,14 +92,14 @@ class PhoneTest < ActiveSupport::TestCase
   end
 
   test 'При создании нового номера телефона должен генерироваться confirmation_token (Если выставлен confirm_required)' do
-    u = users(:first_admin)
+    u = somebodies(:first_admin)
     p = u.profiles.first.phones.new(value: '+7 (123) 456-78-90', mobile: true, confirm_required: true, creation_reason: 'fixtures')
     p.save!
     assert_not_nil p.confirmation_token
   end
 
   test 'При создании нового номера телефона не должен генерироваться confirmation_token (Если не выставлен confirm_required)' do
-    u = users(:first_admin)
+    u = somebodies(:first_admin)
     p = u.profiles.first.phones.new(value: '123', mobile: false, confirm_required: false, creation_reason: 'fixtures')
     p.save!
     assert_nil p.confirmation_token

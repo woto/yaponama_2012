@@ -8,9 +8,9 @@ class Admin::CashesControllerTest < ActionController::TestCase
   end
 
   test 'Кладя на счет деньги убеждаемся в правильности записи транзакций' do
-    first_admin = users(:first_admin)
+    first_admin = somebodies(:first_admin)
     cookies['auth_token'] = first_admin.auth_token
-    stan = users(:stan)
+    stan = somebodies(:stan)
 
     assert_difference 'AccountTransaction.count' do
       post :create, 'cash' => { "debit"=>"1.1", "comment"=>"тест" }, user_id: stan.id

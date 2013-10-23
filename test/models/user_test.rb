@@ -11,7 +11,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'Если у уже сохраненного пользователя заполняется первый профиль, то он должен стать главным' do
-    u = users(:stan)
+    u = somebodies(:stan)
     assert u.valid?
     profile = u.profiles.new(creation_reason: 'fixtures')
     name = profile.names.new
@@ -21,7 +21,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'При изменении профиля, который выставлен в качестве основного должны измениться закешированные поля профиля cached_names, cached_phones и т.д. и закешированное значение главного профиля пользователя cached_main_profile' do
-    u = users(:stan)
+    u = somebodies(:stan)
     profile = u.profiles.new(code_1: 'frontend')
     name = profile.names.new
     name.name = 'Стэн'

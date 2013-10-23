@@ -98,6 +98,7 @@ mark:
   russian_time_zone_auto_id: 12
   russian_time_zone_manual_id: 11
   use_auto_russian_time_zone: false
+  main_profile: mark
 
 mike:
   online: false

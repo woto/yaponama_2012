@@ -5,21 +5,21 @@ require 'test_helper'
 class ConfirmsControllerTest < ActionController::TestCase
 
   test 'Проверка отображения и адреса ссылки для высылки PIN кода для подтверждения e-mail' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = emails(:otto).id
     get :view, id: id, resource_class: 'Email'
-    assert_select "a[href=/user/emails/#{id}/confirm/ask]", text: 'Запросите PIN код повторно,' 
+    assert_select "a[href=/user/emails/#{id}/confirm/ask]", text: 'Запросите PIN код повторно' 
   end
 
   test 'Проверка отображения и адреса ссылки для высылки PIN кода для подтверждения phone' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = phones(:otto).id
     get :view, id: id, resource_class: 'Phone'
-    assert_select "a[href=/user/phones/#{id}/confirm/ask]", text: 'Запросите PIN код повторно,' 
+    assert_select "a[href=/user/phones/#{id}/confirm/ask]", text: 'Запросите PIN код повторно' 
   end
 
   test 'Проверка работы ссылки запроса PIN кода на e-mail' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = emails(:otto).id
     post :ask, id: id, resource_class: 'Email'
 
@@ -62,7 +62,7 @@ class ConfirmsControllerTest < ActionController::TestCase
   end
 
   test 'Проверка работы ссылки запроса PIN кода на телефон' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = phones(:otto).id
     post :ask, id: id, resource_class: 'Phone'
 
@@ -100,14 +100,14 @@ class ConfirmsControllerTest < ActionController::TestCase
   end
 
   test 'Проверка отображения формы для ввода PIN кода для подтверждения e-mail' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = emails(:otto).id
     get :view, id: id, resource_class: 'Email'
     assert_select "input[name='confirm[pin]']"
   end
 
   test 'Проверка отображения формы для ввода PIN кода для подтверждения phone' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = phones(:otto).id
     get :view, id: id, resource_class: 'Phone'
     assert_select "input[name='confirm[pin]']"
@@ -115,14 +115,14 @@ class ConfirmsControllerTest < ActionController::TestCase
 
 
   test 'Мы не можем открыть форму для ввода pin кода подтвержденного email' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = emails(:otto2).id
     get :view, id: id, resource_class: 'Email'
     assert_redirected_to user_path
   end
 
   test 'Мы не можем открыть форму для ввода pin кода подтвержденного phone' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = phones(:otto2).id
     get :view, id: id, resource_class: 'Phone'
     assert_redirected_to user_path
@@ -130,21 +130,21 @@ class ConfirmsControllerTest < ActionController::TestCase
 
 
   test 'Мы не можем запросить ссылку и pin для подтверждения email, который уже подтвержден' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = emails(:otto2).id
     post :ask, id: id, resource_class: 'Email'
     assert_redirected_to user_path
   end
 
   test 'Мы не можем запросить ссылку и pin для подтверждения phone, который уже подтвержден' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = phones(:otto2).id
     post :ask, id: id, resource_class: 'Phone'
     assert_redirected_to user_path
   end
 
   test 'Отправка формы с PIN кодом со страницы подтверждения e-mail. PIN код не правильный' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = phones(:otto).id
     get :make, id: id, resource_class: 'Email', confirm: { pin: 'oeia' }
     # TODO 'Тут еще добавить проверку отображения ошибки'
@@ -152,7 +152,7 @@ class ConfirmsControllerTest < ActionController::TestCase
   end
 
   test 'Отправка формы с PIN кодом со страницы подтверждения phone. PIN код не правильный' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = phones(:otto).id
     get :make, id: id, resource_class: 'Phone', confirm: { pin: 'oeia' }
     # TODO 'Тут еще добавить проверку отображения ошибки'
@@ -161,7 +161,7 @@ class ConfirmsControllerTest < ActionController::TestCase
 
 
   test 'Отправка формы с PIN кодом со страницы подтверждения e-mail. PIN код правильный' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = emails(:otto).id
     get :make, id: id, resource_class: 'Email', confirm: { pin: '5555' }
     assert emails(:otto).reload.confirmed?
@@ -169,7 +169,7 @@ class ConfirmsControllerTest < ActionController::TestCase
   end
 
   test 'Отправка формы с PIN кодом со страницы подтверждения phone. PIN код правильный' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     id = phones(:otto).id
     get :make, id: id, resource_class: 'Phone', confirm: { pin: '5555' }
     assert phones(:otto).reload.confirmed?
@@ -181,28 +181,28 @@ class ConfirmsControllerTest < ActionController::TestCase
   #
 
   test 'Пользователь не может запросить ссылку и пин код для email, если не владеем им' do
-    cookies['auth_token'] = users(:mark).auth_token
+    cookies['auth_token'] = somebodies(:mark).auth_token
     id = emails(:otto).id
     post :ask, id: id, resource_class: 'Email'
     assert_redirected_to user_path
   end
 
   test 'Пользователь не может запросить ссылку и пин код для phone, если не владеем им' do
-    cookies['auth_token'] = users(:mark).auth_token
+    cookies['auth_token'] = somebodies(:mark).auth_token
     id = phones(:otto).id
     post :ask, id: id, resource_class: 'Phone'
     assert_redirected_to user_path
   end
 
   test 'Попытка отображения формы для ввода PIN кода пользователем не владеющим этим email' do
-    cookies['auth_token'] = users(:mark).auth_token
+    cookies['auth_token'] = somebodies(:mark).auth_token
     id = emails(:otto).id
     get :view, id: id, resource_class: 'Email'
     assert_redirected_to user_path
   end
 
   test 'Попытка отображения формы для ввода PIN кода пользователем не владеющим этим phone' do
-    cookies['auth_token'] = users(:mark).auth_token
+    cookies['auth_token'] = somebodies(:mark).auth_token
     id = phones(:otto).id
     get :view, id: id, resource_class: 'Phone'
     assert_redirected_to user_path
@@ -213,7 +213,7 @@ class ConfirmsControllerTest < ActionController::TestCase
   #
 
   test 'Отправка формы с PIN кодом со страницы подтверждения phone пользователем не владеющим этим phone. PIN код правильный' do
-    cookies['auth_token'] = users(:mark).auth_token
+    cookies['auth_token'] = somebodies(:mark).auth_token
     id = phones(:otto).id
     get :make, id: id, resource_class: 'Phone', confirm: { pin: '5555' }
     assert phones(:otto).reload.confirmed?
@@ -221,7 +221,7 @@ class ConfirmsControllerTest < ActionController::TestCase
 
 
   test 'Отправка формы с PIN кодом со страницы подтверждения email пользователем не владеющим этим phone. PIN код правильный' do
-    cookies['auth_token'] = users(:mark).auth_token
+    cookies['auth_token'] = somebodies(:mark).auth_token
     id = emails(:otto).id
     get :make, id: id, resource_class: 'Email', confirm: { pin: '5555' }
     assert emails(:otto).reload.confirmed?

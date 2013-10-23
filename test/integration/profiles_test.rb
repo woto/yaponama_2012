@@ -18,8 +18,8 @@ class TransactionsTest < ActionDispatch::IntegrationTest
         instance_eval <<-CODE, __FILE__, __LINE__ + 1
 
           assert_equal 'create', #{profileable.camelize}Transaction.last.operation
-          assert_equal #{profileable.camelize}Transaction.last.creator_id, users(:first_user).id
-          assert_equal #{profileable.camelize}Transaction.last.user_id, users(:first_user).id
+          assert_equal #{profileable.camelize}Transaction.last.creator_id, somebodies(:first_user).id
+          assert_equal #{profileable.camelize}Transaction.last.somebody_id, somebodies(:first_user).id
 
           if profileable != 'profile'
             assert_equal #{profileable.camelize}Transaction.last.profile_id_after, Profile.last.id
@@ -35,15 +35,15 @@ class TransactionsTest < ActionDispatch::IntegrationTest
     authenticated_as '+7 (111) 111-11-11', '1111111111' do |sess|
       request = { resource_class: 'Profile' }.merge(changed_user_profile_attributes)
 
-      patch admin_user_profile_path(users(:first_user), Profile.last), request
+      patch admin_user_profile_path(somebodies(:first_user), Profile.last), request
 
       ['name', 'phone', 'email', 'passport', 'profile'].each do |profileable|
 
         instance_eval <<-CODE, __FILE__, __LINE__ + 1
 
           assert_equal 'update', #{profileable.camelize}Transaction.last.operation, "#{profileable}"
-          assert_equal #{profileable.camelize}Transaction.last.creator_id, users(:first_admin).id
-          assert_equal #{profileable.camelize}Transaction.last.user_id, users(:first_user).id
+          assert_equal #{profileable.camelize}Transaction.last.creator_id, somebodies(:first_admin).id
+          assert_equal #{profileable.camelize}Transaction.last.somebody_id, somebodies(:first_user).id
 
           if profileable != 'profile'
             assert_equal #{profileable.camelize}Transaction.last.profile_id_after, Profile.last.id
@@ -69,10 +69,10 @@ class TransactionsTest < ActionDispatch::IntegrationTest
 
     #
     # Транзакции имени пользователя от администратора
-    get admin_user_name_transactions_path users(:first_user), Name.last
+    get admin_user_name_transactions_path somebodies(:first_user), Name.last
 
     # Транзакции всех имен пользователя от администратора
-    get transactions_admin_user_names_path users(:first_user)
+    get transactions_admin_user_names_path somebodies(:first_user)
 
     # Транзакции имен всех пользователей от администратора
     get transactions_admin_names_path
@@ -86,8 +86,8 @@ class TransactionsTest < ActionDispatch::IntegrationTest
         instance_eval <<-CODE, __FILE__, __LINE__ + 1
 
           assert_equal 'destroy', #{profileable.camelize}Transaction.last.operation
-          assert_equal #{profileable.camelize}Transaction.last.creator_id, users(:first_user).id
-          assert_equal #{profileable.camelize}Transaction.last.user_id, users(:first_user).id
+          assert_equal #{profileable.camelize}Transaction.last.creator_id, somebodies(:first_user).id
+          assert_equal #{profileable.camelize}Transaction.last.somebody_id, somebodies(:first_user).id
 
         CODE
       end

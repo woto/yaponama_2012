@@ -7,7 +7,7 @@ class Admin::CollapseNextTest < ActionDispatch::IntegrationTest
   test 'Проверка работы collapse-next функционала' do
     Capybara.reset!
     auth('+7 (111) 111-11-11', '1111111111')
-    user = users(:first_user)
+    user = somebodies(:first_user)
     postal_address = postal_addresses(:first_user)
     visit "/admin/users/#{user.id}/postal_addresses/#{postal_address.id}/edit"
 

@@ -9,14 +9,14 @@ class PasswordsControllerTest < ActionController::TestCase
   end
 
   test 'Проверка полей формы' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     get :edit
     assert_select "[name='user[password]']"
     assert_select "[name='user[password_confirmation]']"
   end
 
   test 'Проверка отправки не заполненной формы' do
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
     patch :update, user: { password: '', password_confirmation: '' }
     assert_equal ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символов)"],
       assigns(:user).errors[:password]
@@ -25,10 +25,10 @@ class PasswordsControllerTest < ActionController::TestCase
   end
 
   test 'После успешной смены пароля пароль пользователя должен измениться' do
-    cookies['auth_token'] = users(:otto).auth_token
-    old_password_digest = users(:otto).password_digest
+    cookies['auth_token'] = somebodies(:otto).auth_token
+    old_password_digest = somebodies(:otto).password_digest
     patch :update, user: { password: '9i8B*3', password_confirmation: '9i8B*3' }
-    assert_not_equal old_password_digest, users(:otto).reload.password_digest
+    assert_not_equal old_password_digest, somebodies(:otto).reload.password_digest
     assert_response :redirect
     assert_equal 'Пароль был успешно изменен.', flash[:success]
     # TODO пользователь попадает на правильную страницу

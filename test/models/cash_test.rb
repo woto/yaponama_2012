@@ -3,11 +3,11 @@ require 'test_helper'
 class CashTest < ActiveSupport::TestCase
   def setup
     @cash = Cash.new
-    @cash.user = users(:otto)
+    @cash.somebody = somebodies(:otto)
   end
 
   test 'Не может быть без пользователя' do
-    @cash.user = nil
+    @cash.somebody = nil
     @cash.debit = 1
     refute @cash.valid?
   end

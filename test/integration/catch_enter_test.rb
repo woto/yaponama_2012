@@ -18,7 +18,7 @@ class CatchEnterTest < ActionDispatch::IntegrationTest
 
   test 'Проверка правильной работы catch enter на странице редактирования карт' do
     auth('+7 (111) 111-11-11', '1111111111')
-    visit '/admin/deliveries/places/places/new'
+    visit '/admin/deliveries/places/new'
     common
   end
 

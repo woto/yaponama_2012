@@ -22,7 +22,7 @@ class ProfilesControllerTest < ActionController::TestCase
 
   test 'А вот при редактировании удалить первый номер телефона уже можно (т.е. например был добавлено два, а первый больше не рабочий. Иначе пришлось бы копировать второй телефон, его удалять и вставлять в первый)' do
     @profile = profiles(:first_admin)
-    get 'edit', { user_id: @profile.user.id, resource_class: 'Profile', id: @profile.id }
+    get 'edit', { user_id: @profile.somebody.id, resource_class: 'Profile', id: @profile.id }
     assert_select '#profile_phones_attributes_0__destroy'
   end
 

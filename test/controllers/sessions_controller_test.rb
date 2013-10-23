@@ -49,7 +49,7 @@ class SessionsControllerTest < ActionController::TestCase
   end
 
   test "Если админ с правильно выставленным auth_token делаем delete :destroy. То auth_token должен сброситься и его должно редиректнуть" do
-    cookies['auth_token'] = users(:first_admin).auth_token
+    cookies['auth_token'] = somebodies(:first_admin).auth_token
     delete :destroy
     assert_nil cookies['auth_token']
     assert_equal response.code, '302'
@@ -60,7 +60,7 @@ class SessionsControllerTest < ActionController::TestCase
   end
 
   test 'Если у пользователя установлена опция logout_from_other_places, то после входа должен быть новый auth_token' do
-    user = users(:otto)
+    user = somebodies(:otto)
     auth_token = user.auth_token
     phone = '+7 (555) 555-55-55'
     password = '5555555555'
@@ -71,7 +71,7 @@ class SessionsControllerTest < ActionController::TestCase
   end
 
   test 'Если у пользователя не установлена опция logout_from_other_places, то после входа auth_token должен остаться прежним' do
-    user = users(:stan)
+    user = somebodies(:stan)
     auth_token = user.auth_token
     phone = '+7 (333) 333-33-33'
     password = '3333333333'

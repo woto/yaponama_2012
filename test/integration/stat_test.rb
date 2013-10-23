@@ -30,7 +30,7 @@ class StatTest < ActionDispatch::IntegrationTest
     assert_equal 4, User.last.russian_time_zone_auto_id
 
     post '/stats', {
-      russian_time_zone_auto_id: '3.10',
+      russian_time_zone_auto_id: '-3.10',
       stat: {
         location: '' ,
         title:  '',
@@ -61,7 +61,7 @@ class StatTest < ActionDispatch::IntegrationTest
     page.assert_selector '#debug-stat-result.complete', visible: false
 
     # Проверяем, что запись принадлежит пользователю, который посетил
-    assert User.last == Stat.last.user
+    assert User.last == Stat.last.somebody
 
     # Проверяем, что местонахождения пользователя в статистике записалось правильно
     assert Stat.last.location.include? "products"

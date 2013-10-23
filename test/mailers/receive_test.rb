@@ -20,7 +20,7 @@ class ReceiveTest < ActionMailer::TestCase
   test "Если письмо приходит от адреса, закрепленного за пользователем, то письмо попадает в talk к нему. Имя в соответствующем профиле не обновляется, т.к. такой адрес уже был" do
 
     assert_no_difference "emails(:first_user).profile.names.count" do
-      assert_difference "users(:first_user).talks.count" do
+      assert_difference "somebodies(:first_user).talks.count" do
         mail = ReceiveMailer.receive(email_fixture('40.eml'))
       end
     end

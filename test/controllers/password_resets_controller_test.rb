@@ -40,9 +40,9 @@ class PasswordResetsControllerTest < ActionController::TestCase
 
   test 'Номер мобильного телефона заполнен правильно. Является мобильным. Является подтвержденным. ' do
     
-    old_password_reset_token = users(:otto).password_reset_token
+    old_password_reset_token = somebodies(:otto).password_reset_token
     post :contacts, password_reset: { value: "+7 (555) 555-55-55", with: "phone" }
-    new_password_reset_token = users(:otto).reload.password_reset_token
+    new_password_reset_token = somebodies(:otto).reload.password_reset_token
 
     # password_reset_token должен измениться
     refute_equal old_password_reset_token, new_password_reset_token
@@ -105,9 +105,9 @@ class PasswordResetsControllerTest < ActionController::TestCase
 
   test 'E-mail заполнен правильно. Является подтвержденным.' do
 
-    old_password_reset_token = users(:otto).password_reset_token
+    old_password_reset_token = somebodies(:otto).password_reset_token
     post :contacts, password_reset: { value: "fake@example.com", with: "email" }
-    new_password_reset_token = users(:otto).reload.password_reset_token
+    new_password_reset_token = somebodies(:otto).reload.password_reset_token
     #
     # password_reset_token должен измениться
     refute_equal old_password_reset_token, new_password_reset_token

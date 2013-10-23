@@ -9,3 +9,11 @@ otto:
   vin_or_frame: 'frame'
   frame: 123
   creation_reason: 'fixtures'
+
+mark:
+  somebody: mark
+  brand: nissan
+  model: teana
+  generation: luxury
+  modification: two_and_half_cvt
+  creation_reason: 'fixtures'

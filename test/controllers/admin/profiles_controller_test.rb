@@ -5,8 +5,8 @@ require 'test_helper'
 class Admin::ProfilesControllerTest < ActionController::TestCase
 
   def setup
-    cookies['auth_token'] = users(:first_admin).auth_token
-    @user = users(:otto)
+    cookies['auth_token'] = somebodies(:first_admin).auth_token
+    @user = somebodies(:otto)
     @confirmed = phones(:otto2)
     @not_confirmed = phones(:otto)
     @confirmed_email = emails(:otto2)

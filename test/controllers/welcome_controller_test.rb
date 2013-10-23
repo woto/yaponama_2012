@@ -6,7 +6,7 @@ class WelcomeControllerTest < ActionController::TestCase
 
   test 'Проверка отображения ссылок для подтверждения у пользователя' do
 
-    cookies['auth_token'] = users(:otto).auth_token
+    cookies['auth_token'] = somebodies(:otto).auth_token
 
     get :index
 
