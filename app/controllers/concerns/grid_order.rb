@@ -1,15 +1,10 @@
 #encoding: utf-8
 
-module OrdersConcern
+module GridOrder
   extend ActiveSupport::Concern
   include AbstractGridable
 
   included do
-
-
-    def set_resource_class
-      @resource_class = Order
-    end
 
     def adjust_columns!(columns_hash)
 
