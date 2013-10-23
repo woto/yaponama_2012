@@ -28,7 +28,7 @@ window.initMap = ->
     shape.setEditable true
     
   update_vertices = (shape) ->
-    $('#deliveries_places_place_vertices').val(google.maps.geometry.encoding.encodePath(shape.getPath()))
+    $('#deliveries_place_vertices').val(google.maps.geometry.encoding.encodePath(shape.getPath()))
 
   add_events_handler_to_shape = (shape) ->
 
@@ -55,8 +55,8 @@ window.initMap = ->
 
   initialize = ->
     window.map = new google.maps.Map(document.getElementById("map"),
-      zoom: parseInt($('#deliveries_places_place_zoom').val())
-      center: new google.maps.LatLng(parseFloat($('#deliveries_places_place_lat').val()), parseFloat($('#deliveries_places_place_lng').val()))
+      zoom: parseInt($('#deliveries_place_zoom').val())
+      center: new google.maps.LatLng(parseFloat($('#deliveries_place_lat').val()), parseFloat($('#deliveries_place_lng').val()))
       mapTypeId: google.maps.MapTypeId.ROADMAP
       disableDefaultUI: true
       zoomControl: true
@@ -65,10 +65,10 @@ window.initMap = ->
     # Вешаем обработчики событий изменения позиции на карте и зума
 
     google.maps.event.addListener window.map, 'zoom_changed', ->
-      $('#deliveries_places_place_zoom').val(window.map.getZoom())
+      $('#deliveries_place_zoom').val(window.map.getZoom())
     google.maps.event.addListener window.map, 'bounds_changed', ->
-      $('#deliveries_places_place_lat').val(window.map.getCenter().lat())
-      $('#deliveries_places_place_lng').val(window.map.getCenter().lng())
+      $('#deliveries_place_lat').val(window.map.getCenter().lat())
+      $('#deliveries_place_lng').val(window.map.getCenter().lng())
 
 
     polyOptions =
@@ -96,9 +96,9 @@ window.initMap = ->
         drawingControl: false
 
     zoom_and_center_to_polygon = ->
-      window.map.setZoom(parseInt($('#deliveries_places_place_zoom').val()))
-      lat = parseFloat($('#deliveries_places_place_lat').val())
-      lng = parseFloat($('#deliveries_places_place_lng').val())
+      window.map.setZoom(parseInt($('#deliveries_place_zoom').val()))
+      lat = parseFloat($('#deliveries_place_lat').val())
+      lng = parseFloat($('#deliveries_place_lng').val())
       coords = new google.maps.LatLng(lat, lng)
       window.map.setCenter(coords)
 
@@ -121,11 +121,11 @@ window.initMap = ->
 
 
     # Инициализация карты
-    if $('#deliveries_places_place_vertices').val() != ''
+    if $('#deliveries_place_vertices').val() != ''
       poly = new google.maps.Polygon(polyOptions)
       poly.setMap(map)
 
-      path = google.maps.geometry.encoding.decodePath($('#deliveries_places_place_vertices').val())
+      path = google.maps.geometry.encoding.decodePath($('#deliveries_place_vertices').val())
 
       poly.setPath path
       setSelection poly
@@ -150,6 +150,9 @@ $ ->
   if $('#map').length != 0
     $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry&callback=initMap')
 
-$(document).on 'page:change', ->
+# В свете версии 2.0 (еще не выпущена)
+# Раньше было (до того момента как page:load стал так же вызываться на DOM Ready)
+# $(document).on 'page:change', ->
+$(document).on 'page:load', ->
   if $('#map').length != 0
     $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry&callback=initMap')
