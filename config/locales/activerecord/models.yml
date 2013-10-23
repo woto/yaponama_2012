@@ -9,4 +9,6 @@ ru:
       car: Автомобиль
       company: Компанию
       user: Пользователя
-      deliveries/places/place: Зону доставки
+      deliveries/place: Зону доставки
+      page: Страницу
+      spare_info: Описание товара

@@ -14,4 +14,6 @@ ru:
       #  phone_number: Мобильный телефон
       #  email_address: E-mail
       confirm:
+      item_collection:
+        quantity: Количество первой партии
 

@@ -20,31 +20,6 @@ ru:
     confirmation_datetime: Дата подтверждения
     confirmed: Подтвержден
 
-    vin: VIN код
-    frame: FRAME код
-    generation: Поколение
-    modification: Модификация
-    car_number: Автомобильный номер
-    selling: Продается
-    cost: Цена
-    advertisement: Текст объявления
-    god: Год выпуска
-    period: Период выпуска
-    dverey: Количество дверей
-    rul:  Расположение руля
-    torg: Торг
-    brand: Марка
-    model: Модель
-    dvigatel: Объем двигателя (литров)
-    tip: Тип двигателя
-    moschnost: Мощность двигателя (лошадинных сил)
-    privod: Привод
-    tip_kuzova: Тип кузова
-    kod_kuzova: Код кузова
-    kod_dvigatelya: Код двигателя
-    rinok: Рынок
-    komplektaciya: Комплектация
-
     created_at: Дата создания
     updated_at: Дата изменения
     creation_reason: Причина создания
@@ -57,32 +32,13 @@ ru:
     id: ID
     token: ID 
     cached_profile: cached_profile
-    cached_names: Имя
-    cached_phones: Телефон
-    cached_emails: E-mail
-    cached_passports: Паспорт
-    order_id: № заказа
-    supplier_id: Поставщик
-    catalog_number: Артикул
-    manufacturer: Производитель
-    quantity_available: Доступно шт.
-    quantity_ordered: Заказано шт.
-    buy_cost: Сумма закупки
-    sell_cost: Сумма продажи
     phone: Телефон
     email: E-mail
     mobile_phone: Мобильный телефон
     phone_type: Тип номера
-    short_name: Название
-    long_name: Прочие названия
-    probability: Вероятность
-    min_days: Мин. срок
-    max_days: Макс. срок
     status: Статус
     order: Заказ
     supplier: Поставщик
-    hide_catalog_number: Артикул скрыт
-    product_id: Род-ий товар
     email_address: E-mail адрес
 
     active_fill_color: Цвет заливки активной области
@@ -103,9 +59,6 @@ ru:
     realize: Доставка в данную область осуществляется
 
 
-    hide_catalog_number: Скрыть каталожный номер от покупателя
-    short_name: Название
-    long_name: Прочие названия
     site_address: Адрес этого сайта
     site_port: Порт этого сайта
     redis_address: Адрес redis
@@ -140,20 +93,11 @@ ru:
     password_confirmation: Подтверждение пароля
     role: Права
     split_quantity_ordered: Количество первой партии
-    buy_cost: Закупочная цена 1 шт.
-    sell_cost:  Продажная цена 1 шт.
     prepayment_percent: Процент предоплаты
     discount: Процент скидки
     debit: Дебет 
     credit: Кредит
-    quantity_ordered: Необходимо шт.
-    quantity_available: В наличии шт.
-    probability: Вероятность
-    min_days: Минимальный срок
-    max_days: Максимальный срок 
     # cost: Стоимость 1 шт.
-    catalog_number: Каталожный номер
-    manufacturer: Производитель
     creation_reason: Причина создания
     creator_id: Создатель
     email_address: E-mail

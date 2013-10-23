@@ -1,6 +1,10 @@
 ru:
   activerecord:
     attributes:
+      spare_info:
+        catalog_number: Каталожный номер
+        brand: Производитель
+        content: Содержание
       page:
         description: Описание SEO
         keywords: Ключевые слова SEO
@@ -8,14 +12,16 @@ ru:
         title: Заголовок
         path: Путь
         content: Содержание
-      deliveries/places/place:
+      deliveries/place:
         postal_address_required: Требуется указание адреса доставки
+        full_prepayment_required: Требуется полная предоплата
         name: Название
         z_index: Приоритет
-      deliveries/places/variant:
+      deliveries/variant:
         name: Название
         active: Активен
         sequence: Приоритет
+        option: Опции заказа
         delivery_cost: Стоимость доставки
       email:
         value: E-mail
@@ -23,7 +29,12 @@ ru:
       phone:
         value: Телефон
         comment: Комментарий к телефону
+        mobile: Мобильный
       profile:
+        cached_names: Имена кешированные
+        cached_phones: Телефоны кешированные
+        cached_emails: E-mail адреса кешированные
+        cached_passports: Паспорта кешированные
         comment: Комментарий к контактному лицу
       passport:
         seriya: Серия
@@ -35,13 +46,23 @@ ru:
         data_rozhdeniya: Дата рождения
         mesto_rozhdeniya: Место рождения
         comment: Комментарий к паспорту
+      brand:
+        parent_brand_id: Родительский производитель
+        name: Название производителя
+        image: Логотип
+        rating: Рейтинг
+        content: Описание
       model:
-        brand: Бренд
-        name: Модель
-        creator: Создатель
-        created_at: Создано
-        updated_at: Обновлено
+        name: Название модели
+        parent_brand_id: Бренд
+      generation:
+        model_id: Модель
+        name: Название поколения
+      modification:
+        name: Название модификации
+        generation_id: Поколение
       postal_address:
+        stand_alone_house: Отдельно стоящее здание
         comment: Комментарий к адресу
       metro:
         metro: Станция метро
@@ -71,7 +92,6 @@ ru:
         user_id: Покупатель
         notes: Комментарий
         notes_invisible: Служ. зам.
-        creator_id: Создатель
       name:
         surname: Фамилия
         name: Имя
@@ -79,14 +99,46 @@ ru:
         comment: Комментарий к имени
       
       user:
+        password_reset_sent_at: Дата отправки сброса пароля
+        prepayment: Процент предоплаты
         order_rule: Правило оплаты
-        logout_from_other_places: При входе с другого компьютера автоматически выходить со всех остальных
-        main_profile_id: Основной профиль
+        logout_from_other_places: Автовыход
+        main_profile_id: Основное контактное лицо
+        cached_main_profile: Кешированное основное контактное лицо
         post: Должность сотрудника
-        use_auto_russian_time_zone: Часовой пояс
-        deliveries_places_place_id: Расположение сотрудника
+        use_auto_russian_time_zone: Часовой пояс автоматически
+        place_id: Расположение сотрудника
+        ipgeobase_name: Населенный пункт
+        ipgeobase_names_depth_cache: Регион
+        russian_time_zone_manual_id: Ручное время
+        russian_time_zone_auto_id: Автоматическое время
+        remote_ip: IP адрес
 
       car:
+        vin: VIN код
+        frame: FRAME код
+        generation: Поколение
+        modification: Модификация
+        car_number: Автомобильный номер
+        selling: Продается
+        cost: Цена
+        advertisement: Текст объявления
+        god: Год выпуска
+        period: Период выпуска
+        dverey: Количество дверей
+        rul:  Расположение руля
+        torg: Торг
+        parent_brand_id: Производитель
+        model: Модель
+        dvigatel: Объем двигателя (литров)
+        tip: Тип двигателя
+        moschnost: Мощность двигателя (лошадинных сил)
+        privod: Привод
+        tip_kuzova: Тип кузова
+        kod_kuzova: Код кузова
+        kod_dvigatelya: Код двигателя
+        rinok: Рынок
+        komplektaciya: Комплектация
         kpp: Тип коробки переключения передач (КПП)
         comment: Комментарий к автомобилю
       company:
@@ -107,3 +159,19 @@ ru:
         actual_address: Фактический адрес
         name: Наименование организации
         comment: Комментарий к компании
+      product:
+        product_id: Родительский товар
+        quantity_ordered: Необходимо шт.
+        quantity_available: В наличии шт.
+        probability: Вероятность наличия
+        short_name: Название
+        long_name: Прочие названия
+        hide_catalog_number: Каталожный номер скрыт
+        min_days: Мин. срок
+        max_days: Макс. срок
+        catalog_number: Каталожный номер
+        manufacturer: Производитель
+        buy_cost: Закупочная цена 1 шт.
+        sell_cost:  Продажная цена 1 шт.
+        order_id: № заказа
+        supplier_id: Поставщик
