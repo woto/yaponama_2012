@@ -1,24 +1,39 @@
-ul.nav.nav-tabs
-  li.active
-    a#tab1_toggle.ignoredirty href="#tab1" data-toggle="tab" Идентификатор
-  li
-    a#tab2_toggle.ignoredirty href="#tab2" data-toggle="tab" Характеристики
+= panel 'default' do |p|
 
-.tab-content.top-space
+  = p.heading do 
+    = p.title { 'Идентификатор автомобиля' }
 
-  #tab1.tab-pane.active
+  = p.body do
+    = f.twbs_collection_radio_buttons :vin_or_frame, [['VIN код', 'vin'], ['FRAME код', 'frame']], :last, :first, { variation: 'vertical', label: false }, rel: 'radio radio-vin-or-frame'
     = f.twbs_text_field :vin
     = f.twbs_text_field :frame
-    = f.twbs_text_field :car_number
 
-    = render :partial => 'profileables/forms/shared/notes', :locals => {:f => f}
+    = f.fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b|
+      = f.form_group :brand do
+        = b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, asterisk: true
+        = f.error(:brand)
 
-  #tab2.tab-pane
+    = f.fields_for :model, f.object.model || f.object.build_model, include_id: false do |m|
+      = f.form_group :model do
+        = m.twbs_select2 :name, rel: 'select2-model', data: {"true-id" => f.object.model_id}, asterisk: true
+        = f.error(:model)
 
-    = f.select2 :brand
-    = f.select2 :model
-    = f.select2 :generation
-    = f.select2 :modification
+    = f.fields_for :generation, f.object.generation || f.object.build_generation, include_id: false do |g|
+      = f.form_group :generation do
+        = g.twbs_select2 :name, rel: 'select2-generation', data: {"true-id" => f.object.generation_id}
+        = f.error(:generation)
+
+    = f.fields_for :modification, f.object.modification || f.object.build_modification, include_id: false do |m|
+      = f.form_group :modification do
+        = m.twbs_select2 :name, rel: 'select2-modification', data: {"true-id" => f.object.modification_id}
+        = f.error(:modification)
+
+= panel 'default' do |p|
+
+  = p.heading do
+    = p.title { 'Дополнительные характеристики' }
+
+  = p.body
     = f.twbs_text_field :god
     = f.twbs_text_field :period
     = f.twbs_text_field :dvigatel
@@ -33,3 +48,6 @@ ul.nav.nav-tabs
     = f.twbs_text_field :komplektaciya
     = f.twbs_text_field :dverey
     = f.twbs_text_field :rul
+    = f.twbs_text_field :car_number
+
+= render :partial => 'profileables/forms/shared/notes', :locals => {:f => f}
