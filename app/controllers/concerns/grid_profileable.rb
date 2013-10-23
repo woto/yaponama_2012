@@ -1,11 +1,10 @@
-module ProfileablesConcern
+module GridProfileable
   extend ActiveSupport::Concern
   include AbstractGridable
 
   included do
 
     private
-
 
     def adjust_columns!(columns_hash)
 
@@ -44,7 +43,7 @@ module ProfileablesConcern
       if admin_zone?
 
         unless @user
-          columns_hash['user_id'] = {
+          columns_hash['somebody_id'] = {
             :type => :belongs_to,
             :belongs_to => User,
           }
@@ -64,20 +63,19 @@ module ProfileablesConcern
       @grid.notes_visible = '1'
 
       unless @user
-        @grid.user_id_visible = '1'
+        @grid.somebody_id_visible = '1'
       end
 
     end
 
     def additional_conditions
+
+      # @items = @items.includes(:somebody)
+
       if @user
-        @items = @items.where(:user_id => @user.id)
+        @items = @items.where(:somebody_id => @user.id)
       end
       
-    end
-
-    def set_resource_class
-      @resource_class = params[:controller].camelize.demodulize.singularize.constantize
     end
 
   end
