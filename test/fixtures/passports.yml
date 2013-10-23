@@ -9,4 +9,5 @@ first_admin:
   mesto_rozhdeniya: '1'
   profile: first_admin
   creation_reason: fixtures
-  user: first_admin_profile
+  somebody: first_admin
+  profile: first_admin

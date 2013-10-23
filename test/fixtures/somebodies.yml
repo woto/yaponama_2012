@@ -1,5 +1,8 @@
 first_admin:
-  creator_id:
+  online: false
+  type: User
+  phantom: false
+  creator: first_admin
   creation_reason: fixtures
   discount: 0.0
   prepayment: 20.0
@@ -22,6 +25,10 @@ first_admin:
   order_rule: all
 
 first_user:
+  online: false
+  phantom: false
+  type: User
+  creator: stan
   auth_token: YbFORw8BE0qmF8eWHS29oa
   creation_reason: fixtures
   role: user
@@ -36,6 +43,10 @@ first_user:
   use_auto_russian_time_zone: false
 
 stan:
+  online: false
+  phantom: false
+  type: User
+  creator: otto
   auth_token: ckysZX9XOzwEEeI8ZvKc0P
   creation_reason: fixtures
   role: user
@@ -50,6 +61,10 @@ stan:
   use_auto_russian_time_zone: true
 
 otto:
+  online: false
+  phantom: false
+  type: User
+  creator: mark
   auth_token: 28eoqmbORBE0YW9HSw8FFa
   creation_reason: fixtures
   role: user
@@ -67,6 +82,10 @@ otto:
 
 
 mark:
+  online: false
+  phantom: false
+  type: User
+  creator: otto
   auth_token: 9XOvKceIckyzwEE8ZsZX0P
   creation_reason: fixtures
   role: user
@@ -81,6 +100,10 @@ mark:
   use_auto_russian_time_zone: false
 
 mike:
+  online: false
+  phantom: false
+  type: User
+  creator: stan
   auth_token: 0z0EKi883eFiEaEwXZeIcF
   creation_reason: fixtures
   discount: 14.3
@@ -89,3 +112,27 @@ mike:
   role: user
   password_reset_token: 1234
   password_reset_sent_at: <%= 3.hours.ago.to_s(:db) %>
+
+phantom:
+  online: false
+  phantom: true
+  type: User
+  role: user
+
+online:
+  online: true
+  phantom: true
+  type: User
+  role: user
+
+first_supplier:
+  online: false
+  phantom: false
+  type: Supplier
+  creation_reason: fixtures
+
+second_supplier:
+  online: false
+  phantom: false
+  type: Supplier
+  creation_reason: fixtures

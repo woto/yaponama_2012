@@ -7,4 +7,4 @@ first_user:
   stand_alone_house: true
   room: ''
   creation_reason: fixtures
-  user: first_user
+  somebody: first_user

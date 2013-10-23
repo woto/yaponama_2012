@@ -1,4 +1,11 @@
 stan:
-  user: stan
+  somebody: stan
   vin: 17171717171717171
-  creation_reason: 'frontend'
+  vin_or_frame: 'vin'
+  creation_reason: 'fixtures'
+
+otto:
+  somebody: otto
+  vin_or_frame: 'frame'
+  frame: 123
+  creation_reason: 'fixtures'

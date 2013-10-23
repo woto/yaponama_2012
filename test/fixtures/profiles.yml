@@ -1,23 +1,23 @@
 first_admin:
-  user: first_admin
+  somebody: first_admin
   creation_reason: fixtures
 
 first_user:
-  user: first_user
+  somebody: first_user
   creation_reason: fixtures
 
 stan:
-  user: stan
+  somebody: stan
   creation_reason: fixtures
 
 otto:
-  user: otto
+  somebody: otto
   creation_reason: fixtures
 
 mark:
-  user: mark
+  somebody: mark
   creation_reason: fixtures
 
 mike:
-  user: mike
+  somebody: mike
   creation_reason: fixtures

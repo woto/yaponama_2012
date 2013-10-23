@@ -1,0 +1,41 @@
+nissens:
+  name: NISSENS
+  rating: 500
+  content: Хорошая компания
+  phantom: false
+  creator: first_admin
+
+toyota:
+  name: TOYOTA
+  rating: 1000
+  phantom: false
+  creator: otto
+
+ty:
+  name: TY
+  rating: 1000
+  content: Сокращенное название Toyota
+  phantom: false
+  creator: first_admin
+  brand: toyota
+
+mitsubishi:
+  name: MITSUBISHI
+  rating: 950
+  phantom: true
+  creator: otto
+
+nissan:
+  name: NISSAN
+  rating: 1000
+  phantom: false
+  creator: stan
+
+kia:
+  name: KIA
+  image: kia.png
+  rating: 800
+  phantom: false
+  content: Корейская поделка
+  creator: mike
+

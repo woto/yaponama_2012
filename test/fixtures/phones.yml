@@ -3,21 +3,21 @@ first_admin:
   mobile: true
   confirmation_token: 1111
   profile: first_admin
-  user: first_admin
+  somebody: first_admin
   creation_reason: fixtures
 
 first_user:
   value: +7 (123) 123-12-31
   mobile: true
   profile: first_user
-  user: first_user
+  somebody: first_user
   creation_reason: fixtures
 
 stan:
   value: +7 (333) 333-33-33
   mobile: true
   profile: stan
-  user: stan
+  somebody: stan
   creation_reason: fixtures
 
 otto:
@@ -25,7 +25,7 @@ otto:
   mobile: true
   confirmation_token: 5555
   profile: otto
-  user: otto
+  somebody: otto
   creation_reason: fixtures
 
 otto2:
@@ -34,7 +34,7 @@ otto2:
   confirmation_token: 5555
   confirmed: true
   profile: otto
-  user: otto
+  somebody: otto
   creation_reason: fixtures
 
 otto3:
@@ -43,14 +43,14 @@ otto3:
   confirmed: true
   confirmation_token: 8888
   profile: otto
-  user: otto
+  somebody: otto
   creation_reason: fixtures
 
 otto4:
   value: +7 (666) 666-66-66
   mobile: false
   profile: otto
-  user: otto
+  somebody: otto
   creation_reason: fixtures
 
 mark:
@@ -59,7 +59,7 @@ mark:
   confirmation_token: 4444
   confirmed: true
   profile: mark
-  user: mark
+  somebody: mark
   creation_reason: fixtures
 
 mike:
@@ -67,5 +67,5 @@ mike:
   mobile: true
   confirmed: true
   profile: mike
-  user: mike
+  somebody: mike
   creation_reason: fixtures

@@ -5,4 +5,4 @@ first_user:
   legal_address: first_user
   actual_address: first_user
   creation_reason: fixtures
-  user: first_user
+  somebody: first_user

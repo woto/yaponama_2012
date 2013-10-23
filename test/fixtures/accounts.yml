@@ -1,29 +1,39 @@
 first_admin_account:
   debit: 0.0
   credit: 0.0
-  accountable: first_admin (User)
+  somebody: first_admin
 
 user_account:
   debit: 0.0
   credit: 0.0
-  accountable: first_user (User)
+  somebody: first_user
 
 otto_account:
   debit: 0.0
   credit: 0.0
-  accountable: otto (User)
+  somebody: otto
 
 mark_account:
   debit: 0.0
   credit: 0.0
-  accountable: mark (User)
+  somebody: mark
 
 stan:
   debit: 0.0
   credit: 0.0
-  accountable: stan (User)
+  somebody: stan
 
 mike:
   debit:  0.0 
   credit: 0.0
-  accountable: mike (User)
+  somebody: mike
+
+first_supplier:
+  debit: 0.0
+  credit: 0.0
+  somebody: first_supplier
+
+second_supplier:
+  debit: 0.0
+  credit: 0.0
+  somebody: second_supplier
