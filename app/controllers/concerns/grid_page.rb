@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-module PagesConcern
+module GridPage
   extend ActiveSupport::Concern
   include AbstractGridable
 
@@ -20,7 +20,7 @@ module PagesConcern
         :type => :string,
       }
 
-      columns_hash['content'] = {
+      columns_hash['title'] = {
         :type => :string,
       }
 
@@ -32,11 +32,11 @@ module PagesConcern
         :type => :string,
       }
 
-      columns_hash['title'] = {
+      columns_hash['robots'] = {
         :type => :string,
       }
 
-      columns_hash['robots'] = {
+      columns_hash['content'] = {
         :type => :string,
       }
 
@@ -55,21 +55,16 @@ module PagesConcern
 
     end
 
-    def set_resource_class
-      @resource_class = Page
-    end
-
     def set_preferable_columns
       @grid.checkbox_visible = '1'
+      @grid.id_visible = '1'
       @grid.path_visible = '1'
-      @grid.path_visible = '1'
-      @grid.content_visible = '1'
+      @grid.title_visible = '1'
       @grid.keywords_visible = '1'
       @grid.description_visible = '1'
-      @grid.title_visible = '1'
       @grid.robots_visible = '1'
+      @grid.content_visible = '1'
       @grid.creator_id_visible = '1'
-      @grid.created_at_visible = '1'
       @grid.updated_at_visible = '1'
 
     end
