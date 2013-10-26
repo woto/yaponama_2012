@@ -4,29 +4,28 @@ class PasswordsController < ApplicationController
 
   before_action { @meta_title = 'Смена пароля' }
 
-  def edit
-  end
-
   def update
     respond_to do |format|
 
-      @user.assign_attributes(user_params)
-      @user.password_required = true
+      @resource.assign_attributes(resource_params)
+      @resource.password_required = true
 
-      if @user.save
-        format.html { redirect_to edit_admin_user_path(@user, :tab => params[:tab]), :notice => 'Пароль был успешно изменен.' }
-        format.json { head :no_content }
+      if @resource.save
+        format.html { redirect_to url_for(controller: :users, action: :show), :success => 'Пароль был успешно изменен.' }
       else
         format.html { render :action => "edit" }
-        format.json { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
 
   private
 
-  def user_params
-    params.require(:user).permit!
+  def find_resource
+    @resource = @user
+  end
+
+  def set_resource_class
+    @resource_class = User
   end
 
 end

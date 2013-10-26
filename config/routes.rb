@@ -180,6 +180,9 @@ Yaponama2012::Application.routes.draw do
       resource :cashes, :only => [:new, :create]
       resource :discount, :only => [:edit, :update]
       resource :prepayment, :only => [:edit, :update]
+      get :password, :on => :member, to: "passwords#edit"
+      patch :password, :on => :member, to: "passwords#update"
+      #resource :password, :only => [:edit, :update]
     end
 
 
@@ -203,6 +206,9 @@ Yaponama2012::Application.routes.draw do
     concerns :productable
     concerns :complex_products
     concerns :complex_orders
+    #resource :password, :only => [:edit, :update]
+    get :password, :on => :member, to: "passwords#edit"
+    patch :password, :on => :member, to: "passwords#update"
   end
 
   resources :talks do
