@@ -1,0 +1,10 @@
+first:
+  path: 1/1
+  content: content
+  keywords: keywords
+  description: description
+  title: title
+  robots: robots
+  creator_id: first_admin
+  creation_reason: fixtures
+  phantom: false
