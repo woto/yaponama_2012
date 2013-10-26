@@ -34,6 +34,7 @@ class CatchEnterTest < ActionDispatch::IntegrationTest
     HERE
     execute_script js_code
 
+    sleep 1
     assert has_css? '#debug-catch-enter', visible: false, text: 'true'
 
     # TODO Оказывается посылая этот js Enter Почему-то в действительности не нажимается,

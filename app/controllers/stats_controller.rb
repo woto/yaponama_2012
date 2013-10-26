@@ -2,10 +2,12 @@
 
 class StatsController < ApplicationController
 
-  # POST /stats
-  # POST /stats.json
+  include SetUserAndCreationReasonDummy
+  include CreateResourceDummy
+  include SetResourceClassDummy
+
   def create
-    current_user.russian_time_zone_auto_id = params['russian_time_zone_auto_id'].to_f.round.abs
+    current_user.russian_time_zone_auto_id = - params['russian_time_zone_auto_id'].to_f.round
     current_user.stats.new(stat_params)
     current_user.save!
 
@@ -17,8 +19,7 @@ class StatsController < ApplicationController
   private
 
   def stat_params
-    # TODO Security
-    params.require(:stat).permit!
+    params.require(:stat).permit(:location, :title, :referrer)
   end
 
 end
