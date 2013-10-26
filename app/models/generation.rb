@@ -1,11 +1,26 @@
 class Generation < ActiveRecord::Base
-  belongs_to :model
-  has_many :modifications, :dependent => :destroy
+  include Selectable
+  include BelongsToCreator
+  include CachedModel
 
-  validates :model, :name, :presence => true
+  belongs_to :model, :inverse_of => :generations
+  validates :model, :presence => true
+
+  validates :name, :presence => true, uniqueness:  { case_sensitive: false, :scope => :model_id }
+
+  has_many :cars, :inverse_of => :generation
+
+  has_many :modifications, :inverse_of => :generation, :dependent => :destroy
 
   def to_label
-    "#{model.to_label} -> #{name}"
+    name
+  end
+
+  after_save :update_all_cached_generation
+
+  def update_all_cached_generation
+    cars.update_all(cached_generation: name)
+    modifications.update_all(cached_generation: name)
   end
 
 end
