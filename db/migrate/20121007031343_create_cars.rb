@@ -18,6 +18,7 @@ class CreateCars < ActiveRecord::Migration
       t.string :rinok
       t.string :vin
       t.string :frame
+      t.string :vin_or_frame
       t.string :komplektaciya
       t.integer :dverey
       t.string :rul

@@ -339,6 +339,11 @@ module Yaponama2012
 
     config.phone_types_keys = config.phone_types.keys
 
+    config.vin_or_frame = {
+      'vin' => 'VIN код',
+      'frame' => 'Frame код'
+    }
+
     config.default_user_role = 'guest'
 
     ## Default settings for new users

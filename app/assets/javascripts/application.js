@@ -80,6 +80,7 @@
 //= require jasmine_examples/Song
 //
 //= require 'time_zone_checkbox'
+//= require 'vin_or_frame'
 //
 //= require toolbar-checkboxes
 //
