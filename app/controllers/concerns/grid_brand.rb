@@ -34,11 +34,12 @@ module GridBrand
 
     def set_preferable_columns
       @grid.visible_id = '1'
+      @grid.visible_creator_id = '1'
+      @grid.visible_content = '1'
       @grid.visible_cached_brand = '1'
       @grid.visible_name = '1'
       @grid.visible_image = '1'
       @grid.visible_rating = '1'
-      @grid.visible_content = '1'
       @grid.visible_created_at = '1'
       @grid.visible_updated_at = '1'
     end

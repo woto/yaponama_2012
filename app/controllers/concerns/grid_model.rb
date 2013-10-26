@@ -14,7 +14,9 @@ module GridModel
           :type => :string,
         }
 
-        columns_hash['cached_brand'] = {
+        cached_brand(columns_hash)
+
+        columns_hash['content'] = {
           :type => :string,
         }
 
@@ -24,6 +26,8 @@ module GridModel
 
     def set_preferable_columns
       @grid.visible_id = '1'
+      @grid.visible_creator_id = '1'
+      @grid.visible_content = '1'
       @grid.visible_cached_brand = '1'
       @grid.visible_name = '1'
       @grid.visible_created_at = '1'
