@@ -19,4 +19,14 @@ class Admin::UsersControllerTest < ActionController::TestCase
     assert_equal 'Вы разлогинили пользователя со всех компьютеров. Теперь ему потребуется заново войти на сайт.', flash[:success]
   end
 
+  test 'Администратор может создавать новых пользователей' do
+    # TODO это может сделать только администратор
+    cookies['auth_token'] = somebodies(:first_admin).auth_token
+    assert_difference 'User.count' do
+      post :create, :user => {:id => ''}
+    end
+    assert_redirected_to admin_user_path(User.last)
+    assert_equal "User was successfully created.", flash[:success]
+  end
+
 end
