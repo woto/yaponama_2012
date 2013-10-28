@@ -2,15 +2,7 @@
 
 class UserTest < ActiveSupport::TestCase
 
-  test 'Если у нового созданного в памяти пользователя есть один профиль, то он автоматически должен стать главным' do
-    u = User.new
-    p = u.profiles.new
-    u.valid?
-    assert_equal p, u.main_profile
-    assert u.errors["main_profile"].blank?
-  end
-
-  test 'Если у уже сохраненного пользователя заполняется первый профиль, то он должен стать главным' do
+  test 'Если у пользователя заполняется первый профиль, то он должен стать главным' do
     u = somebodies(:stan)
     assert u.valid?
     profile = u.profiles.new(creation_reason: 'fixtures')
@@ -33,10 +25,10 @@ class UserTest < ActiveSupport::TestCase
     passport = profile.passports.new(:gender => 'male', :seriya => '1', :nomer => '1', :passport_vidan => '1', :data_vidachi => DateTime.now, :kod_podrazdeleniya => '1', :data_rozhdeniya => DateTime.now, :mesto_rozhdeniya => 'Новый Дурулгуй')
     u.main_profile = profile
     u.save!
-    assert_equal 'Стэн', u.cached_main_profile['names'].first['name']
-    assert_equal 'test@example.com', u.cached_main_profile['emails'].first['value']
-    assert_equal '123', u.cached_main_profile['phones'].first['value']
-    assert_equal 'Новый Дурулгуй', u.cached_main_profile['passports'].first['mesto_rozhdeniya']
+    assert_equal 'Стэн', JSON.parse(u.cached_main_profile)['names'].first['name']
+    assert_equal 'test@example.com', JSON.parse(u.cached_main_profile)['emails'].first['value']
+    assert_equal '123', JSON.parse(u.cached_main_profile)['phones'].first['value']
+    assert_equal 'Новый Дурулгуй', JSON.parse(u.cached_main_profile)['passports'].first['mesto_rozhdeniya']
   end
 
   test 'Только что инициализированный пользователь должен содержать предопределенный набор ошибок' do
@@ -89,6 +81,49 @@ class UserTest < ActiveSupport::TestCase
     assert u.errors[:password].blank?
     assert_equal ["не совпадает с подтверждением"], u.errors[:password_confirmation]
   end
+
+
+  test 'Если менется main_profile_id' do
+    p1 = profiles(:mile_main)
+    p2 = profiles(:mile_not_main)
+
+    mile = somebodies(:mile)
+
+    # Это приходит в контроллере, поэтому сохраняю условия изменения (id приходит из селекта)
+    mile.main_profile_id = p2.id
+    old = mile.cached_main_profile
+
+    mile.save
+    new = mile.reload.cached_main_profile
+    refute_equal new, old
+  end
+
+
+  test 'Если менется main_profile (Ради эксперимента сравниваю вмест _id сам объект)' do
+    p1 = profiles(:mile_main)
+    p2 = profiles(:mile_not_main)
+
+    mile = somebodies(:mile)
+
+    mile.main_profile = p2
+    old = mile.cached_main_profile
+
+    mile.save
+    new = mile.reload.cached_main_profile
+    refute_equal new, old
+  end
+
+  test 'Если удаляем основной профиль, то другой должен стать основным' do
+    p1 = profiles(:mile_main)
+    p2 = profiles(:mile_not_main)
+
+    mile = somebodies(:mile)
+
+    p1.destroy 
+
+    assert_equal p2, mile.reload.main_profile
+  end
+
 
 
   # TODO Это необходимо вынести в контроллер
