@@ -1,11 +1,11 @@
 p#notice = notice
 
 p
-  strong Content:
-  = @admin_block.content
-p
   strong Name:
   = @admin_block.name
+p
+  strong Content:
+  = @admin_block.content
 
 = link_to 'Edit', edit_admin_block_path(@admin_block)
 '|

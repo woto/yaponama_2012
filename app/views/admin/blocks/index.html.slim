@@ -2,16 +2,16 @@ h1 Listing admin_blocks
 
 table
   tr
-    th Content
     th Name
+    th Content
     th
     th
     th
 
   - @admin_blocks.each do |admin_block|
     tr
-      td = admin_block.content
       td = admin_block.name
+      td = admin_block.content
       td = link_to 'Show', admin_block
       td = link_to 'Edit', edit_admin_block_path(admin_block)
       td = link_to 'Destroy', admin_block, :confirm => 'Are you sure?', :method => :delete
