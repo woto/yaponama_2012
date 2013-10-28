@@ -1,4 +1,4 @@
-class Admin::BlockTransaction < ActiveRecord::Base
+class BlockTransaction < ActiveRecord::Base
   include BelongsToCreator
   include BelongsToSomebody
 end

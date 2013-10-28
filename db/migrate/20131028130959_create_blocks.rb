@@ -1,6 +1,6 @@
-class CreateAdminBlocks < ActiveRecord::Migration
+class CreateBlocks < ActiveRecord::Migration
   def change
-    create_table :admin_blocks do |t|
+    create_table :blocks do |t|
       t.string :name
       t.text :content
 
