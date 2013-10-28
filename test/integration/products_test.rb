@@ -33,4 +33,24 @@ class ProductsTest < ActionDispatch::IntegrationTest
 
   end
 
+  test 'Если мы щелкаем на товаре, который заказали в кол-ве более 1 шт., то есть ссылка для разбития на партии' do
+    skip
+  end
+
+  test 'Если мы щелкаем на товаре, который заказали в кол-ве 1 шт., то ссылки на разбитие на партии нет' do
+    skip
+  end
+
+  test 'Проверяем правильность ссылки data-poload для popover ID столбца' do
+    cookies['auth_token'] = somebodies(:anton).auth_token
+    get_via_redirect '/user/products'
+
+    primary_key = request['primary_key']
+    third = products(:anton_third).id
+
+    assert_select "#id_product_#{third}" do
+      assert_select 'a[data-poload=?]', Regexp.new(Regexp.quote("/user/products/#{third}/info?primary_key=#{primary_key}&amp\;return_path=%2Fuser%2Fproducts%2Ffilter%3Fprimary_key%3D#{primary_key}"))
+    end
+  end
+
 end

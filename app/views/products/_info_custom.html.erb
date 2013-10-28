@@ -1,0 +1,3 @@
+<% if @item.quantity_ordered > 1 %>
+  <li> <%= link_to 'Разбить на партии', url_for(:action => :split, :id => @item.id, :return_path => params[:return_path] ) %> </li>
+<% end %>
