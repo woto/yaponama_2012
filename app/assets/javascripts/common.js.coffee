@@ -3,6 +3,16 @@ $ ->
 
 $(document).on 'page:change', ->
   init()
+  $("*[data-poload]").on "click", (e) ->
+    e.preventDefault()
+    that = $(this)
+    if that.data('visible')
+      that.data('visible', false)
+      that.popover "hide"
+    else
+      $.get that.data("poload"), (d) ->
+        that.data('visible', true)
+        that.popover(trigger: 'manual', html: 'true', content: d).popover "show"
 
 init = ->
   $("[rel~=tooltip]").tooltip()
