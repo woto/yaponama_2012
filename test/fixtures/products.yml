@@ -1,3 +1,50 @@
+anton_first:
+  catalog_number: 2102
+  brand: A.B.S.
+  short_name: УСТРОЙСТВО ДЛЯ НАТЯЖЕНИЯ РЕМНЯ
+  long_name: РОЛИК НАТЯЖНОЙ РЕМНЯ КОНДИЦИОНЕРА, УСТРОЙСТВО ДЛЯ НАТЯЖЕНИЯ РЕМНЯ, РЕМЕНЬ ГРМ, НАТЯЖИТЕЛЬ РЕМНЯ, НАТЯЖИТЕЛЬ ПРИВОДА РЕМНЯ ГЕНЕРАТОРА
+  quantity_ordered: 2
+  quantity_available: 10
+  min_days: 2
+  max_days: 5
+  buy_cost: 518.0
+  sell_cost: 820.0
+  hide_catalog_number: true
+  status: incart
+  probability: 83
+  created_at: 2012-08-21 03:45:38.527055000 Z
+  updated_at: 2012-08-21 03:45:38.527055000 Z
+  creation_reason: fixtures
+  notes:
+  notes_invisible:
+  somebody: anton
+  supplier: mile
+  creator: first_admin
+
+
+anton_second:
+  catalog_number: 3310
+  brand: Bando
+  short_name: Клиновой ремень
+  long_name: Ремень КЛИНОВОЙ, Генератор, клиновой ремень,
+  quantity_ordered: 3
+  quantity_available: 98
+  min_days: 1
+  max_days: 2
+  buy_cost: 932.0
+  sell_cost: 1211.0
+  hide_catalog_number: false
+  status: incart
+  probability: 95
+  created_at: 2012-08-11 03:45:38.527055000 Z
+  updated_at: 2012-08-30 03:45:38.527055000 Z
+  creation_reason: fixtures
+  notes: Коммент.
+  notes_invisible: Невидимый комментарий
+  somebody: anton
+  supplier: exist
+  creator: first_admin
+
 first_user_first_product:
   catalog_number: MR508329
   brand: nissan
@@ -292,7 +339,7 @@ otto11:
   notes: 1
   notes_invisible: 13adfadfadsf
   somebody: otto
-  supplier: first
+  supplier: mile
   creator: first_user
 
 
