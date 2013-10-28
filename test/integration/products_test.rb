@@ -11,4 +11,11 @@ class ProductsTest < ActionDispatch::IntegrationTest
     assert_select "#catalog_number_product_#{id}", :text => '2102', count: 0
   end
 
+  test 'Если у товара не стоит сокрытие каталожного номера, то мы прекрасного его видим' do
+    id = products(:first_admin_second_product).id
+    cookies['auth_token'] = somebodies(:first_admin).auth_token
+    get_via_redirect '/user/products'
+    assert_select "#catalog_number_product_#{id}", :text => '3310', count: 1
+  end
+
 end
