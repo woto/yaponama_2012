@@ -26,4 +26,8 @@ class ProfilesControllerTest < ActionController::TestCase
     assert_select '#profile_phones_attributes_0__destroy'
   end
 
+  test 'При удалении профиля так же необходимо сбрасывать кешированную версию в somebody' do
+    skip
+  end
+
 end
