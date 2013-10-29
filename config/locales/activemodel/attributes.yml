@@ -1,6 +1,8 @@
 ru:
   activemodel:
     attributes:
+      split:
+        quantity: Количество первой партии
       cash:
         debit: Сумма
       #register:
