@@ -34,11 +34,17 @@ class ProductsTest < ActionDispatch::IntegrationTest
   end
 
   test 'Если мы щелкаем на товаре, который заказали в кол-ве более 1 шт., то есть ссылка для разбития на партии' do
-    skip
+    cookies['auth_token'] = somebodies(:anton).auth_token
+    id = products(:anton_first).id
+    get_via_redirect "/user/products/#{id}/info"
+    assert_select 'li', :text => 'Разбить на партии'
   end
 
   test 'Если мы щелкаем на товаре, который заказали в кол-ве 1 шт., то ссылки на разбитие на партии нет' do
-    skip
+    cookies['auth_token'] = somebodies(:anton).auth_token
+    id = products(:anton_third).id
+    get_via_redirect "/user/products/#{id}/info"
+    assert_select 'li', :text => 'Разбить на партии', :count => 0
   end
 
   test 'Проверяем правильность ссылки data-poload для popover ID столбца' do
