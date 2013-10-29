@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
   include Transactionable
 
   # Продукты по которым ожидается движение
-  scope :active, -> { where("STRPOS(?, products.status) > 0", "ordered,pre_supplier,post_supplier,stock") }
+  scope :active, -> { where("products.status IN (?)", ["ordered", "pre_supplier", "post_supplier", "stock"]) }
   # TODO позже пригодится для расчета суммы для внесения пользователем для оформления заказа
   # ЭТО ВООБЩЕ ЧЕРЕЗ IN ДЕЛАЕТСЯ!
 
