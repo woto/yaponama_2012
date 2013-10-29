@@ -3,9 +3,10 @@
 class Cash
 
   include ActiveModel::Model
-  attr_accessor :debit, :comment, :user
+
+  attr_accessor :debit, :comment, :somebody
   validates :debit, presence: true, numericality: true
-  validates :user, presence: true
+  validates :somebody, presence: true
 
   validate :debit do
     if debit.to_s.to_d == 0
@@ -15,7 +16,7 @@ class Cash
 
   def save
     if valid?
-      return true if @user.account.account_transactions.create(:debit => debit, :comment => comment)
+      return true if somebody.account.account_transactions.create(:debit => debit, :comment => comment)
     end
   end
 

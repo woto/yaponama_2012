@@ -3,33 +3,31 @@
 class Admin::CashesController < ApplicationController
   include Admin::Admined
   
-  before_action {@meta_title = "Внесение средств на счет"}
-
-  def new
-    @cash = Cash.new
-  end
-
   def create
-    @cash = Cash.new(cash_params)
-    @cash.user = @user
-
     respond_to do |format|
-      if @cash.save
-          format.html { redirect_to [:admin, @user], success: "Успешно внесено #{view_context.number_to_currency(@cash.debit)}" }
-          format.json { render json: @cash, status: :created, location: @cash }
+      if @resource.save
+        format.html { redirect_to [:admin, @user], success: "Успешно внесено #{view_context.number_to_currency(@resource.debit)}" }
       else
+        byebug
         format.html { render action: "new" }
-        format.json { render json: @cash.errors, status: :unprocessable_entity }
       end
     end
 
   end
 
-  private 
+  def user_set
+    @somebody = @user = User.find(params[:user_id]) if params[:user_id]
+  end
 
-  def cash_params
-    params.require(:cash).permit!
-    # TODO Запретить credit
+  def somebody_set
+  end
+
+  def supplier_set
+    @somebody = @supplier = Supplier.find(params[:supplier_id]) if params[:supplier_id]
+  end
+
+  def set_resource_class
+    @resource_class = Cash
   end
 
 end

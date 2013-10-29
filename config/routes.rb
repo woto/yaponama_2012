@@ -22,6 +22,11 @@ Yaponama2012::Application.routes.draw do
 
   resources :delivery_zones
 
+  concern :cashable do
+    resource :cashes, :only => [:new, :create]
+  end
+
+
   resources :calls
 
   concern :filterable do
@@ -149,6 +154,7 @@ Yaponama2012::Application.routes.draw do
       resources :products do
         concerns :transactionable
       end
+      concerns :cashable
     end
 
     resources :account_transactions # admin/money_transactions
@@ -177,9 +183,8 @@ Yaponama2012::Application.routes.draw do
       concerns :complex_products
       concerns :complex_orders
 
-      resource :cashes, :only => [:new, :create]
       resource :discount, :only => [:edit, :update]
-      resource :prepayment, :only => [:edit, :update]
+      concerns :cashable
       get :password, :on => :member, to: "passwords#edit"
       patch :password, :on => :member, to: "passwords#update"
       #resource :password, :only => [:edit, :update]

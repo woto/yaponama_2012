@@ -1,11 +1,5 @@
-- model_class = Cash
-- @meta_title = t('.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human)
+- title_new
 
-= user_tabs do
+= somebody_tabs do
 
-  .row
-    .col-md-9
-      = render :partial => "form"
-    .col-md-3
-      = render 'profileables/right'
-
+  = render :partial => "form"
