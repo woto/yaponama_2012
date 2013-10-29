@@ -49,4 +49,11 @@ class CashTest < ActiveSupport::TestCase
     end
   end
 
+  test 'Внесение средств на счет не должно создать новой транзакции изменения пользователя' do
+    @cash.debit = 1
+    assert_no_difference 'SomebodyTransaction.count' do
+      @cash.save
+    end
+  end
+
 end
