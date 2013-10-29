@@ -29,4 +29,28 @@ class Admin::ProductsControllerTest < ActionController::TestCase
 
   end
 
+  test 'Изменение закупочной и продажной цен товара в статусе post_supplier' do
+    cookies['auth_token'] = somebodies(:first_admin).auth_token
+
+    patch :update, post_supplier_account_transaction_check(somebodies(:anton).id, products(:anton_fifth).id)
+
+    pt = ProductTransaction.first
+    at1 = AccountTransaction.first
+    at2 = AccountTransaction.last
+
+    assert_equal 'update', pt.operation
+    assert_equal 352, pt.buy_cost_before
+    assert_equal 351, pt.buy_cost_after
+    assert_equal 390, pt.sell_cost_before
+    assert_equal 392, pt.sell_cost_after
+    assert_equal 2, AccountTransaction.count
+    assert_equal pt.id, at1.product_transaction_id
+    assert_equal pt.id, at2.product_transaction_id
+    assert_equal 0, at1.credit_before
+    assert_equal 0, at2.credit_before
+    assert_equal 8, at1.credit_after
+    assert_equal -4, at2.credit_after.to_f
+
+  end
+
 end
