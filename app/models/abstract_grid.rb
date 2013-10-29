@@ -9,37 +9,37 @@ class AbstractGrid
 
       COLUMNS.each do |column_name, column_settings|
 
-        attr_accessor "#{column_name}_visible"
-        attr_accessor "#{column_name}_filterable"
-        attr_accessor "#{column_name}_filter_enabled"
+        attr_accessor "visible_#{column_name}"
+        #attr_accessor "filterable_#{column_name}"
+        attr_accessor "filter_enabled_#{column_name}"
 
         case column_settings[:type]
 
-          when :string
-            attr_accessor "#{column_name}_like"
+          when *[:string, :catalog_number]
+            attr_accessor "filter_#{column_name}_like"
 
           when :single_integer
-            attr_accessor "#{column_name}_single_integer"
+            attr_accessor "filter_#{column_name}_single_integer"
 
           when :number
-            attr_accessor "#{column_name}_from"
-            attr_accessor "#{column_name}_to"
+            attr_accessor "filter_#{column_name}_from"
+            attr_accessor "filter_#{column_name}_to"
 
           when  :boolean
-            attr_accessor "#{column_name}_boolean"
+            attr_accessor "filter_#{column_name}_boolean"
 
           when  :checkbox
-            attr_accessor "#{column_name}_checkbox"
+            attr_accessor "filter_#{column_name}_checkbox"
 
           when :set
-            attr_accessor "#{column_name}_set"
+            attr_accessor "filter_#{column_name}_set"
 
           when :belongs_to
-            attr_accessor "#{column_name}_belongs_to"
+            attr_accessor "filter_#{column_name}_belongs_to"
 
           when :date
-            attr_accessor "#{column_name}_from"
-            attr_accessor "#{column_name}_to"
+            attr_accessor "filter_#{column_name}_from"
+            attr_accessor "filter_#{column_name}_to"
 
         end
 

@@ -34,7 +34,7 @@ module GridConcern
         end
 
         if [:filters, :per_page].any?{ |p| params[p] }
-
+          # Редиректим на первую, если меняем кол-во эл-ов на странице или применяем фильтр
           redirect_to( smart_route({:prefix => [:filter], :postfix => [@resource_class.to_s.pluralize.underscore]}, :user_id => params[:user_id], :order_id => params[:order_id], :page => 1, :status => params[:status], :primary_key => params[:primary_key]))
         elsif params[:items]
           # Дописываем к ранее сохраненному grid
@@ -108,7 +108,9 @@ module GridConcern
         case column_settings[:type]
 
           when :catalog_number
-            like = eval("@grid.#{column_name}_like")
+
+            like = eval("@grid.filter_#{column_name}_like")
+
             if like.present?
               @items = @items.where(arel[column_name.to_sym].matches("%#{like}%"))
               unless admin_zone?
@@ -118,14 +120,18 @@ module GridConcern
             end
 
           when :string
-            like = eval("@grid.#{column_name}_like")
+
+            like = eval("@grid.filter_#{column_name}_like")
+
             if like.present?
               @items = @items.where(arel[column_name.to_sym].matches("%#{like}%"))
               mark_as_filter_enabled(column_name)
             end
 
           when :single_integer
-            single_integer = eval("@grid.#{column_name}_single_integer")
+
+            single_integer = eval("@grid.filter_#{column_name}_single_integer")
+
             if single_integer.present?
               @items = @items.where(arel[column_name.to_sym].eq(single_integer))
               mark_as_filter_enabled(column_name)
@@ -133,20 +139,24 @@ module GridConcern
 
           when :number
 
-            from = eval("@grid.#{column_name}_from")
+            from = eval("@grid.filter_#{column_name}_from")
+
             if from.present?
               @items = @items.where(arel[column_name.to_sym].gteq(from))
               mark_as_filter_enabled(column_name)
             end
 
-            to = eval("@grid.#{column_name}_to")
+            to = eval("@grid.filter_#{column_name}_to")
+
             if to.present?
               @items = @items.where(arel[column_name.to_sym].lteq(to))
               mark_as_filter_enabled(column_name)
             end
 
           when :boolean
-            boolean = eval("@grid.#{column_name}_boolean")
+
+            boolean = eval("@grid.filter_#{column_name}_boolean")
+
             if boolean.present?
               @items = @items.where(arel[column_name.to_sym].eq(boolean))
               mark_as_filter_enabled(column_name)
@@ -154,26 +164,35 @@ module GridConcern
 
           when :checkbox
 
-            checkbox = eval("@grid.#{column_name}_checkbox")
+            checkbox = eval("@grid.filter_#{column_name}_checkbox")
+
             if checkbox.present?
-              case checkbox
-              when '1'
-                @items = @items.where('id IN (?)', @grid.item_ids && @grid.item_ids.select{ |k, v| v == '1' }.keys )
-              when '0'
-                @items = @items.where('id NOT IN (?)', @grid.item_ids && @grid.item_ids.select{ |k, v| v == '1' }.keys )
+
+              if (keys = @grid.item_ids.select{ |k, v| v == '1' }.keys).any?
+                case checkbox
+                when '1'
+                  @items = @items.where('id IN (?)', @grid.item_ids && keys)
+                when '0'
+                  @items = @items.where('id NOT IN (?)', @grid.item_ids && keys)
+                end
               end
+
               mark_as_filter_enabled(column_name)
             end
 
           when :set
-            set = eval("@grid.#{column_name}_set")
+
+            set = eval("@grid.filter_#{column_name}_set")
+
             if set.respond_to?(:reject) && set.map(&:to_s).reject(&:empty?).present?
               @items = @items.where(arel[column_name.to_sym].in(set))
               mark_as_filter_enabled(column_name)
             end
 
           when :belongs_to
-            belongs_to = eval("@grid.#{column_name}_belongs_to")
+
+            belongs_to = eval("@grid.filter_#{column_name}_belongs_to")
+
             if belongs_to.respond_to?(:reject) && belongs_to.map(&:to_s).reject(&:empty?).present?
               @items = @items.where(arel[column_name.to_sym].in(belongs_to))
               mark_as_filter_enabled(column_name)
@@ -181,14 +200,15 @@ module GridConcern
 
           when :date
 
-            from = eval("@grid.#{column_name}_from")
-            to = eval("@grid.#{column_name}_to")
+            from = eval("@grid.filter_#{column_name}_from")
 
             if from.present?
               from = Time.zone.parse(from)
               @items = @items.where(arel[column_name.to_sym].gteq(from))
               mark_as_filter_enabled(column_name)
             end
+
+            to = eval("@grid.filter_#{column_name}_to")
 
             if to.present?
               to = Time.zone.parse(to)
@@ -224,7 +244,7 @@ module GridConcern
 
 
   def mark_as_filter_enabled(column_name)
-    @grid.instance_variable_set("@#{column_name}_filter_enabled", true)
+    @grid.instance_variable_set("@filter_enabled_#{column_name}", true)
   end
 
 end

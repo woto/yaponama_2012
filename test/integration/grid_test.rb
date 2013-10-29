@@ -21,14 +21,14 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
     assert page.has_css?('input[type="checkbox"][checked]')
 
     # Открываем окно фильтрации по чекбоксу
-    first('.icon-filter').click
-    assert page.has_css?('#grid_checkbox_checkbox_1')
+    first('.fa-filter').click
+    assert page.has_css?('#grid_filter_checkbox_checkbox_1')
 
     # Щелкаем в окне на выделенных - Да
-    first('#grid_checkbox_checkbox_1').click
+    first('#grid_filter_checkbox_checkbox_1').click
 
     # Сабмитим форму
-    first("#checkbox_filter.modal div.modal-footer input.btn").click
+    first("#filter_checkbox.modal div.modal-footer input.btn").click
 
     # Убеждаемся, что в результате остался один товар
     page.has_selector?("tr", count: 2)
