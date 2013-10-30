@@ -49,7 +49,7 @@
         <p>Не устраивают цена или срок доставки? Взгляните на <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> лучших предложений от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
       </div>
 
-      <p> А так же рекомендуем посмотреть <%= link_to "аналоги и замены \"#{catalog_number} - #{manufacturer}\"", search_searches_path(catalog_number, manufacturer, '1'), :class => 'ajax-search' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством.</p>
+      <p> А так же рекомендуем посмотреть <%= link_to "аналоги и замены \"#{catalog_number} - #{manufacturer}\"", user_searches_path(catalog_number, manufacturer, '1'), :class => 'ajax-search' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством.</p>
 
       <p> Наша оценка качества производителя: <div class="stars-rating->"></div> </p>
 
@@ -123,7 +123,7 @@
           <div>
             <%= link_to "Редактировать описание", edit_spare_info_path(data) %>
           </div>
-          <%= raw data.default_content %>
+          <%= raw data.content %>
         </div>
         <hr />
       <% end %>
@@ -140,4 +140,4 @@
 
 <br /> <br />
 <h2>Замены артикула</h2>
-Вы так же можете попробовать посмотреть <%= link_to "замены номера #{params[:catalog_number]} без указания производителя", search_searches_path(params[:catalog_number], nil, '1') %>.
+Вы так же можете попробовать посмотреть <%= link_to "замены номера #{params[:catalog_number]} без указания производителя", user_searches_path(params[:catalog_number], nil, '1') %>.
