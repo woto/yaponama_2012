@@ -28,7 +28,7 @@
       <div style="margin: 20px">
         <!-- КОПИПАСТ TODO -->
         <span style="visibility: hidden; display:none"><%= retail_cost = cost_decorator(mf_scope[:offers][0][:retail_cost]) %></span>
-        <%= form_for(:wish, :remote => true, :format => :json, :url => '', :method => :post, :html => {:style=>"margin: 0"}) do |f| %>
+        <%= form_for(:wish, :remote => true, :format => :json, :url => '#', :method => :post, :html => {:style=>"margin: 0"}) do |f| %>
           <%= f.hidden_field :cost, :value => retail_cost, :id => nil %>
           <%= f.hidden_field :catalog_number, :value => catalog_number, :id => nil %>
           <%= f.hidden_field :manufacturer, :value => manufacturer, :id => nil %>
@@ -49,10 +49,11 @@
         <p>Не устраивают цена или срок доставки? Взгляните на <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> лучших предложений от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
       </div>
 
-      <p> А так же рекомендуем посмотреть <%= link_to "аналоги и замены \"#{catalog_number} - #{manufacturer}\"", user_searches_path(catalog_number, manufacturer, '1'), :class => 'ajax-search' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством.</p>
+      <p> А так же рекомендуем посмотреть <%= link_to "аналоги и замены \"#{catalog_number} - #{manufacturer}\"", polymorphic_path([:search, (:admin_zone? ? :admin : :user), (:admin_zone? ? @somebody : nil), :searches], :catalog_number => catalog_number, :manufacturer => manufacturer, :replacements => '1'), :class => 'ajax-search' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством.</p>
 
-      <p> Наша оценка качества производителя: <div class="stars-rating->"></div> </p>
+      <p> Наша оценка качества производителя: <div class="stars-rating-<%= ( mf_scope[:brand].try(:[], :rating).to_i || 0) / 1000 %>"></div> </p>
 
+      <div class="brands"> <%= brands_decorator manufacturer, {:title => false} %> </div>
 
     </div>
 
@@ -65,6 +66,7 @@
         <th> <a href="#" rel="twipsy" title="Вероятность наличия детали у поставщика">Вер.</a></th>
         <th> <a href="#" rel="twipsy" title="Количество на складе поставщика">Кол-во</a></th>
         <th> <a href="#" rel="twipsy" title="Зайдите на сайт под своим аккаунтом, чтобы увидеть вашу цену со скидками, если таковые имеются">Цена</a></th>
+        <th> <a href="#" rel="twipsy" title="Служебная информация, отображается только менеджеру сайта">Служ.</a></th>
       </tr>
       <% mf_scope[:offers].each do |offer| %>
         <tr>
@@ -76,7 +78,7 @@
           <td> <%= count_decorator offer[:count] %> </td>
           <td>
             <span style="visibility: hidden; display:none"><%= retail_cost = cost_decorator(offer[:retail_cost]) %></span>
-            <%= form_for(:wish, :remote => true, :format => :json, :url => '', :method => :post, :html => {:style=>"margin: 0"}) do |f| %>
+            <%= form_for(:wish, :remote => true, :format => :json, :url => '#', :method => :post, :html => {:style=>"margin: 0"}) do |f| %>
               <%= f.hidden_field :cost, :value => retail_cost, :id => nil %>
               <%= f.hidden_field :catalog_number, :value => catalog_number, :id => nil %>
               <%= f.hidden_field :manufacturer, :value => manufacturer, :id => nil %>
@@ -89,6 +91,7 @@
               <%= f.submit raw("Купить #{retail_cost}"), :class => "btn buy-button primary", :style=>"width: 140px" %>
             <% end %>
           </td>
+          <td> <%= offer[:tech] %> </td>
         </tr>
       <% end %>
     </table>
@@ -116,17 +119,13 @@
     <!-- /TODO ЭТО КОПИПАСТ -->
 
     <h5>Информация написанная нами</h5>
-    <%= link_to "Новое описание", '' %><br /><br />
-    <% if mf_scope[:info][:own][:status] == 'avaliable' %>
-      <% mf_scope[:info][:own][:data].each do |data| %>
-        <div>
-          <div>
-            <%= link_to "Редактировать описание", edit_spare_info_path(data) %>
-          </div>
-          <%= raw data.content %>
-        </div>
-        <hr />
-      <% end %>
+    <%= link_to "Новое описание", new_spare_info_path(:catalog_number => catalog_number, :manufacturer => manufacturer) %>
+    <%= raw mf_scope[:info][:own][:data].content if mf_scope[:info][:own][:status] == 'avaliable'  %>
+
+    <h5>Хотите оценить качество детали или написать комментарий?</h5>
+    <% si = SpareInfo.new %>
+    <%= simple_form_for si do |f| %>
+      <% f.input :content, :label => false %>
     <% end %>
 
     <% #  Показываем разделитель только если не последний элемент %>
@@ -140,4 +139,4 @@
 
 <br /> <br />
 <h2>Замены артикула</h2>
-Вы так же можете попробовать посмотреть <%= link_to "замены номера #{params[:catalog_number]} без указания производителя", user_searches_path(params[:catalog_number], nil, '1') %>.
+Вы так же можете попробовать посмотреть <%= link_to "замены номера #{params[:catalog_number]} без указания производителя", polymorphic_path([:search, (:admin_zone? ? :admin : :user), (:admin_zone? ? @somebody : nil), :searches], :catalog_number => params[:catalog_number], :manufacturer => nil, :replacements => '1') %>.
