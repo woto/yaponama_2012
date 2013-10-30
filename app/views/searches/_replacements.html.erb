@@ -16,9 +16,9 @@
     <% @formatted_data.each do |catalog_number, cn_scope| %>
       <% cn_scope.each_with_index do |(manufacturer, mf_scope), i| %>
         <tr> 
-          <td> <div class="stars-rating-"></div> </td>
+          <td> <div class="stars-rating-<%= (mf_scope[:brand].try(:[], :rating).try(:to_i) || 0) / 1000 %>"></div> </td>
           <td> <%= manufacturer %> </td>
-          <td> <%= link_to catalog_number, search_searches_path(catalog_number, manufacturer.present? ? manufacturer : nil), :class => 'ajax-search' %> </td>
+          <td> <%= link_to catalog_number, polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => catalog_number, :manufacturer => manufacturer.present? ? manufacturer : nil), :class => 'ajax-search' %> </td>
           <td>
 
             <% # Если есть хотя бы какая-то информация, то показываем, что есть информация %>
