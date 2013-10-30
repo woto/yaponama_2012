@@ -1,6 +1,6 @@
 <br />
 
-<%= form_tag(polymorphic_path([:search, (:admin_zone? ? :admin : :user), (:admin_zone? ? @somebody : nil), :searches]), :method => :get) do %>
+<%= form_tag(polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches]), :method => :get) do %>
   <div class="inputs">
 
     <div class="clearfix string optional">
