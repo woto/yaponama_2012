@@ -38,13 +38,9 @@ class SearchesController < ApplicationController
     #end
   end
 
-  def forbidden_old_parameters
-    if params[:fast].present? or params[:show].present?
-      render :status => 410 and return
-    end
-  end
 
   def search_page_content
+    return
     @page = Page.where(:path => search_searches_path(params[:catalog_number], params[:manufacturer], params[:replacements]).gsub(/^\/+/, '')).first
     if @page
       @meta_title = @page.title
@@ -59,8 +55,6 @@ class SearchesController < ApplicationController
 
     @parsed_json = { "result_prices" => [] }
 
-    forbidden_old_parameters
-
     if params[:catalog_number].present?
 
       # Нужно для того чтобы если например набрали исключительно из символов, которые не попадают в допустимые и образуется пустая строка
@@ -69,12 +63,12 @@ class SearchesController < ApplicationController
         render :status => 410 and return
       end
 
-      #seo_url = search_searches_path(params[:catalog_number].present? ? params[:catalog_number] : nil, params[:manufacturer].present? ? params[:manufacturer] : nil, params[:replacements].to_i > 0 ? '1' : nil)
-      #if request.fullpath.upcase != seo_url.upcase
-      #  respond_to do |format|
-      #    format.html { redirect_to seo_url, :status => 301 and return }
-      #  end
-      #end
+      seo_url = polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => params[:catalog_number].present? ? params[:catalog_number] : nil, :manufacturer => params[:manufacturer].present? ? params[:manufacturer] : nil, :replacements => params[:replacements].to_i > 0 ? '1' : nil)
+      if request.fullpath.upcase != seo_url.upcase
+        respond_to do |format|
+          format.html { redirect_to seo_url, :status => 301 and return }
+        end
+      end
 
       set_meta_robots
 
@@ -89,6 +83,20 @@ class SearchesController < ApplicationController
         @parsed_json = (Rails.cache.read(price_request_cache_key)).dup
       else
 
+        # TODO Что сделать с ситуцией. Если зашел робот, на сервере прайсов создалась кешированная версия, через день зашел пользователь,
+        # все нормально. Я очистил тут кеш, зашел робот, взял кешированную версию (не запросил заново!) следом зашел пользователь и увидел 
+        # самую первую версию. 
+        #
+        # Если поисковые системы, то согласны взять и закешированную версию
+        #require 'netaddr'
+        #cached = ''
+        #APP_CONFIG['cached_ip'].each do |cidr_string|
+        #  cidr = NetAddr::CIDR.create(cidr_string)
+        #  if cidr.contains? request.remote_ip or cidr == request.remote_ip
+        #    cached = '&cached=1'
+        #    break
+        #  end
+        #end
         cached = '&cached=0'
 
         price_request_url = "http://#{SiteConfig.price_full_address}/prices/search?catalog_number=#{params[:catalog_number]}&manufacturer=#{CGI::escape(params[:manufacturer] || '')}&replacements=#{params[:replacements]}#{request_emex}&format=json&for_site=1#{cached}"
@@ -106,7 +114,6 @@ class SearchesController < ApplicationController
           render :status => 503 and return
         end
 
-        debugger
         @parsed_json = ActiveSupport::JSON.decode(resp.body)
         @parsed_json.delete("result_replacements")
         @parsed_json.delete("result_message")
@@ -174,7 +181,18 @@ class SearchesController < ApplicationController
           item.delete "real_job_id"
         end
 
+
+        if params[:replacements]
+          expires_in = SiteConfig.price_request_cache_with_replacements_in_seconds
+        else
+          expires_in = SiteConfig.price_request_cache_without_replacements_in_seconds
+        end
+
+        #@parsed_json["result_prices"].shuffle!
+         
         @parsed_json["result_prices"] = @parsed_json["result_prices"].sort_by { |a|  ( ( (a["job_import_job_delivery_days_average"].present? ? a["job_import_job_delivery_days_average"] : a["job_import_job_delivery_days_declared"]).to_f + a["job_import_job_delivery_days_declared"].to_f)/2/( (fast = params[:fast]).present? ? fast.to_f : 100) ) +  a["price_goodness"].to_f }
+
+        Rails.cache.write(price_request_cache_key, @parsed_json, :expires_in => expires_in)
       end
 
       #debugger
@@ -219,7 +237,8 @@ class SearchesController < ApplicationController
               :min_cost => nil,
               :max_cost => nil,
               :offers => [],
-              :brand => Brand.where(:name => mf),
+              #:brand => Brands::BRANDS[mf],
+              :brand => Brand.where(:name => mf).first,
               :info => item_status(item['catalog_number'], item['manufacturer']),
             }
 
@@ -319,18 +338,17 @@ class SearchesController < ApplicationController
       end
 
       # Сортируем в конце по цене
-      #@formatted_data = @formatted_data.map do |catalog_number, cn_scope|
-      #  debugger
-      #  [ catalog_number,
-      #    (cn_scope.sort do |a, b|
-      #    -a[1][:brand][:rating].to_i <=> -b[1][:brand][:rating].to_i
-      #    end).map do |manufacturer, mf_scope|
-      #      [manufacturer, mf_scope.merge(:offers => mf_scope[:offers].sort do |c, d|
-      #        c[:retail_cost] <=> d[:retail_cost]
-      #      end)]
-      #   end
-      #  ]
-      #end
+      @formatted_data = @formatted_data.map do |catalog_number, cn_scope|
+        [ catalog_number,
+          (cn_scope.sort do |a, b|
+          -(a[1][:brand].try(:[], :rating).try(:to_i) || 0) <=> -(b[1][:brand].try(:[], :rating).try(:to_i) || 0)
+          end).map do |manufacturer, mf_scope|
+            [manufacturer, mf_scope.merge(:offers => mf_scope[:offers].sort do |c, d|
+              c[:retail_cost] <=> d[:retail_cost]
+            end)]
+         end
+        ]
+      end
 
       # Получаем общее для связки каталожный номер + производитель имя
       @formatted_data.each do |catalog_number, cn_scope|
@@ -340,7 +358,7 @@ class SearchesController < ApplicationController
       end
 
 
-      @meta_canonical = search_searches_path(params[:catalog_number], params[:manufacturer].present? ? params[:manufacturer] : nil, params[:replacements].to_i > 0 ? '1' : nil)
+      @meta_canonical = polymorphic_path([:search, :user, :searches], :catalog_number => params[:catalog_number], :manufacturer => params[:manufacturer].present? ? params[:manufacturer] : nil, :replacements => params[:replacements].to_i > 0 ? '1' : nil)
     else
       @meta_title = "Поиск запчастей по номеру"
     end
@@ -403,7 +421,19 @@ class SearchesController < ApplicationController
   private
 
   def set_user
-    @user = User.find(current_user)
+    @somebody = @user = User.find(current_user)
+  end
+
+  def set_resource_class
+  end
+
+  def user_set
+  end
+
+  def somebody_set
+  end
+
+  def supplier_set
   end
 
 end
