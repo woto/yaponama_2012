@@ -19,7 +19,18 @@ class StatsController < ApplicationController
   private
 
   def stat_params
-    params.require(:stat).permit(:location, :title, :referrer)
+    params.require(:stat).permit(:location, :title, :referrer, :screen_width, :screen_height, :client_width, :client_height)
+  end
+
+  def user_set
+    @user = current_user
+  end
+
+  def somebody_set
+    @somebody = current_user
+  end
+
+  def supplier_set
   end
 
 end

@@ -6,8 +6,12 @@ class CreateStats < ActiveRecord::Migration
       t.string :location
       t.string :title
       t.string :referrer
+      t.integer :screen_width
+      t.integer :screen_height
+      t.integer :client_width
+      t.integer :client_height
 
-      t.references :user, index: true
+      t.references :somebody, index: true
 
       t.timestamps
     end

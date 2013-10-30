@@ -33,6 +33,10 @@ send_stat = ->
       location: window.location.href
       title: document.title
       referrer: window.referrer
+      screen_width: screen.width
+      screen_height: screen.height
+      client_width: $(window).width()
+      client_height: $(window).height()
 
   window.referrer = window.location.href 
 
