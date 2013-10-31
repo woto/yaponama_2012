@@ -1,0 +1,21 @@
+<% @meta_title_small = capture do %>
+  <span class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <span class="label label-<%= params[:status] || 'all' %>"><%= Rails.configuration.products_status[params[:status] || 'all']['title'] %> <%= caret %> </span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+      <% Rails.configuration.products_status.each do |k, v| %>
+        <li>
+          <%= link_to url_for(:controller => 'products', :action => :index, :status => k) do %>
+            <% if v['badge'].present? %>
+              <span class="badge badge-<%= k %>">
+                <%= v['badge'] %>
+              </span>
+            <% end %>
+            <%= v["title"] %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </span>
+<% end %>

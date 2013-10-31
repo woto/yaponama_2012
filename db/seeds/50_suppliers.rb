@@ -1,10 +1,14 @@
 # encoding: utf-8
 
-supplier = Supplier.new(name: "8-я миля")
+#rrda
+supplier = Supplier.new(SiteConfig.default_user_attributes)
 supplier.build_account
+supplier.code_1 = 'seed'
 supplier.save!
 
-supplier = Supplier.new(name: "Авториф")
+#rrda
+supplier = Supplier.new(SiteConfig.default_user_attributes)
 supplier.build_account
+supplier.code_1 = 'seed'
 supplier.save!
 

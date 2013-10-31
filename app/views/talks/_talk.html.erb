@@ -1,0 +1,165 @@
+<%= modal id: 'myModal' do |modal| %>
+
+  <%= modal.header do |header| %>
+    <%= render 'talks/buttons/hide' %>
+    <%= render 'talks/buttons/sound' %>
+    <%= header.title do %>
+      Служба поддержки. 
+      <span class="text-muted"> Номер посетителя: <%= current_user.id %> </span>
+    <% end %>
+  <% end %>
+
+  <%= modal.body do %>
+    <!-- TODO убрать user_id из публичной части и оставить только в админке -->
+    <div id="talk-room" class="clearfix" data-auth_token="<%=@user.auth_token %>" data-user_id="<%=@user.id %>" style="margin-bottom: 10px;">
+
+      <div class="hide">
+        <h6> <%= @user.id %> </h6>
+        <h6> <%= @user.auth_token %> </h6>
+      </div>
+
+    <div id="talk-residents">
+      <!-- = render '/talks/resident.handlebars' -->
+    </div>
+
+    <div id="talk-log-holder" class="nano">
+      <div id="talk-log-top"></div>
+      <div id="talk-log-bottom"></div>
+      <div id="talk-log" class="content">
+        <div id="talk-log-inner">
+          <% @user.talks.limit(5).order(:id => :desc).each do |talk| %>
+            <%= render "talks/talk.handlebars", handlebars: ActiveSupport::JSON.decode(render(template: 'talks/_show.json.jbuilder', locals: { talk: talk })) %>
+            <!-- = render '/talks/talk/show', name: talk -->
+          <% end %>
+
+          <!-- = render '/talks/talk/p6' -->
+          <!-- = render '/talks/talk/p1' -->
+          <!-- = render '/talks/talk/p2' -->
+          <!-- = render '/talks/talk/p3' -->
+          <!-- = render '/talks/talk/p4' -->
+          <!-- = render '/talks/talk/p5' -->
+        </div>
+      </div>
+    </div>
+
+    <div id="reply" style="width: 100%; position: relative; display: inline-block">
+      <!-- - debugger -->
+
+      <!-- - if  -->
+      <!--   - profile.names.new -->
+      <!--   - profile.phones.new -->
+      <!-- - else -->
+      <!--   - profile = current_user.profiles.first -->
+      <!--   - if profile.names.blank? -->
+      <!--     - profile.names.new -->
+      <!--   - if profile.phones.blank? -->
+      <!--     - profile.phones.new -->
+
+      <%= simple_form_for @user.talks.new(talkable: Chat.new), url: smart_route({postfix: [:talks]}, user_id: @user.id), html: { style: "margin-bottom: 0" }, remote: true do |f| %>
+
+        <% if current_user.role == 'guest' %>
+          <%= f.simple_fields_for :somebody do |somebody| %>
+            <% if somebody.object.profiles.length == 0 %>
+              <% somebody.object.profiles.new %>
+            <% end %>
+            <%= somebody.simple_fields_for :profiles do |profile| %>
+              <% if profile.object.names.blank? %>
+                <% profile.object.names.new %>
+              <% end %>
+              <%= profile.simple_fields_for :names do |name| %>
+                <%= name.input :name, label: false, placeholder: 'Имя', input_html: { class: 'form-control input-small' }, hint: false %>
+                <!-- //////= name.input :creation_reason, input_html: { value: 'chat' } -->
+              <% end %>
+              <% if profile.object.emails.blank? %>
+                <% profile.object.emails.new %>
+                <h5> Куда отправить уведомление об ответе? </h5>
+              <% end %>
+              <%= profile.simple_fields_for :emails do |email| %>
+                <%= email.input :value, label: false, placeholder: 'E-mail адрес', input_html: { class: 'form-control input-small' }, hint: false %>
+                <!-- / TODO!!!! WARNING -->
+                <!-- ///////= email.input :creation_reason, input_html: { value: 'chat' } -->
+              <% end %>
+              <h5> Или </h5>
+              <% if profile.object.phones.blank? %>
+                <% profile.object.phones.new %>
+              <% end %>
+              <%= profile.simple_fields_for :phones do |phone| %>
+                <%= phone.input :value, label: false, placeholder: 'Номер мобильного телефона', input_html: { class: 'form-control input-small' }, hint: false %>
+                <!-- //////= phone.input :phone_type, input_html: { value: 'unknown' } -->
+                <!-- //////= phone.input :creation_reason, input_html: { value: 'chat' } -->
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <%= f.input :somebody_id, as: :hidden %>
+        <%= f.input :talkable_type, as: :hidden %>
+        <!-- /= f.input :talkable_id, as: :hidden -->
+        
+        <%= f.fields_for :talkable do |chat| %>
+          <%= chat.input :content, input_html: { class: "ckeditor-simple" }, label: false, as: :text %>
+        <% end %>
+
+        <div class="btn-group dropup">
+          <%= f.button :button, id: "talk-submit", class: "btn btn-small btn-info" do %>
+            <i clas="icon-comments">
+              Написать
+            </i>
+          <% end %>
+          <button class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <% @user.profiles.each do |profile| %>
+              <% profile.emails.each do |email| %>
+                <li>
+                  <a href="#">
+                    Письмо на <%= email.to_label %>
+                  </a>
+                </li>
+              <% end %>
+              <% profile.phones.each do |phone| %>
+                <li>
+                  <a href="#">
+                    SMS на <%= phone.to_label %>
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+
+        <a id="connect-manager" class="btn btn-success btn-small" href="#">
+          Присоединиться
+        </a>
+
+        <hr />
+
+        <%= f.button :button, id: "talk-submit", class: "btn btn-small btn-info" do %>
+          <i class="icon-comments">
+            Написать
+          </i>
+        <% end %>
+
+      <% end %>
+
+      <%= modal.footer do %>
+
+        <button id="switch-online-debug">
+          Пимпочка
+        </button>
+
+      <% end %>
+
+    </div>
+
+  <% end %>
+
+
+  <%= modal.footer do |footer| %>
+    <%= footer.close %>
+    <button type="button" class="btn btn-primary">Save changes</button>
+  <% end %>
+
+
+<% end %>

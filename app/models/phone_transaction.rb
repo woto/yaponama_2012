@@ -1,4 +1,4 @@
 class PhoneTransaction < ActiveRecord::Base
   include BelongsToCreator
-  include BelongsToUser
+  include BelongsToSomebody
 end

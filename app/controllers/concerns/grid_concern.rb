@@ -23,6 +23,123 @@ module GridConcern
 
         # filters columns per_page items
 
+        # Проба избавиться от постоянной отправки выделенных столбцов
+        unless params[:columns]
+          # Восстанавливаем ..._visible на старые, т.к. их не меняем
+          @grid_class::COLUMNS.each do |column_name, column_settings| 
+            if old_grid.instance_variable_get("@visible_#{column_name}") == '1'
+              @grid.instance_variable_set("@visible_#{column_name}", '1')
+            end
+          end
+        end
+
+        # TODO Аналогично с фильтрами, ОБЪЕДИНИТЬ С НИЖНИМ БЛОКОМ. Пока сделано так, т.к. это
+        # наиболее логически правильный способ (на вскидку) В любом случае необходимо устранить задваивание
+
+        # Это тут не надо, т.к. другой фильтр тогда будет сбрасывать выставленный ранее
+        # unless params[:filters]
+
+          @grid_class::COLUMNS.each do |column_name, column_settings|
+
+            next unless visible_columns.include? column_name
+
+            case column_settings[:type]
+
+              when :catalog_number
+                if params["grid"].try(:key?, "filter_#{column_name}_like")
+                  like = @grid.instance_variable_get("@filter_#{column_name}_like")
+                else
+                  like = old_grid.instance_variable_get("@filter_#{column_name}_like")
+                end
+
+                @grid.instance_variable_set("@filter_#{column_name}_like", like)
+
+              when :string
+                if params["grid"].try(:key?, "filter_#{column_name}_like")
+                  like = @grid.instance_variable_get("@filter_#{column_name}_like")
+                else
+                  like = old_grid.instance_variable_get("@filter_#{column_name}_like")
+                end
+
+                @grid.instance_variable_set("@filter_#{column_name}_like", like)
+
+              when :single_integer
+                if params["grid"].try(:key?, "filter_#{column_name}_single_integer")
+                  single_integer = @grid.instance_variable_get("@filter_#{column_name}_single_integer")
+                else
+                  single_integer = old_grid.instance_variable_get("@filter_#{column_name}_single_integer")
+                end
+
+                @grid.instance_variable_set("@filter_#{column_name}_single_integer", single_integer)
+
+              when :number
+                if params["grid"].try(:key?, "filter_#{column_name}_from") || params["grid"].try(:key?, "filter_#{column_name}_to")
+                  from = @grid.instance_variable_get("@filter_#{column_name}_from")
+                  to = @grid.instance_variable_get("@filter_#{column_name}_to")
+                else
+                  from = old_grid.instance_variable_get("@filter_#{column_name}_from")
+                  to = old_grid.instance_variable_get("@filter_#{column_name}_to")
+                end
+
+                @grid.instance_variable_set("@filter_#{column_name}_from", from)
+                @grid.instance_variable_set("@filter_#{column_name}_to", to)
+
+              when :boolean
+                if params["grid"].try(:key?, "filter_#{column_name}_boolean")
+                  boolean = @grid.instance_variable_get("@filter_#{column_name}_boolean")
+                else
+                  boolean = old_grid.instance_variable_get("@filter_#{column_name}_boolean")
+                end
+
+                @grid.instance_variable_set("@filter_#{column_name}_boolean", boolean)
+
+              when :checkbox
+                if params["grid"].try(:key?, "filter_#{column_name}_checkbox")
+                  checkbox = @grid.instance_variable_get("@filter_#{column_name}_checkbox")
+                else
+                  checkbox = old_grid.instance_variable_get("@filter_#{column_name}_checkbox")
+                end
+
+                @grid.instance_variable_set("@filter_#{column_name}_checkbox", checkbox)
+
+              when :set
+                if params["grid"].try(:key?, "filter_#{column_name}_set")
+                  set = @grid.instance_variable_get("@filter_#{column_name}_set")
+                else
+                  set = old_grid.instance_variable_get("@filter_#{column_name}_set")
+                end
+
+                @grid.instance_variable_set("@filter_#{column_name}_set", set)
+
+              when :belongs_to
+                if params["grid"].try(:key?, "filter_#{column_name}_belongs_to")
+                  belongs_to = @grid.instance_variable_get("@filter_#{column_name}_belongs_to")
+                else
+                  belongs_to = old_grid.instance_variable_get("@filter_#{column_name}_belongs_to")
+                end
+
+                @grid.instance_variable_set("@filter_#{column_name}_belongs_to", belongs_to)
+
+              when :date
+                if params["grid"].try(:key?, "filter_#{column_name}_from") || params["grid"].try(:key?, "filter_#{column_name}_to")
+                  from = @grid.instance_variable_get("@filter_#{column_name}_from")
+                  to = @grid.instance_variable_get("@filter_#{column_name}_to")
+                else
+                  from = old_grid.instance_variable_get("@filter_#{column_name}_from")
+                  to = old_grid.instance_variable_get("@filter_#{column_name}_to")
+                end
+
+                @grid.instance_variable_set("@filter_#{column_name}_from", from)
+                @grid.instance_variable_set("@filter_#{column_name}_to", to)
+
+            end
+
+          end
+
+        #end
+
+
+
         unless params[:items]
           # Восстанавливаем item_ids на старые, т.к. их не меняем
           @grid.item_ids = old_grid.item_ids

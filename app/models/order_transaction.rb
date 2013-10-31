@@ -1,4 +1,4 @@
 class OrderTransaction < ActiveRecord::Base
   include BelongsToCreator
-  include BelongsToUser
+  include BelongsToSomebody
 end

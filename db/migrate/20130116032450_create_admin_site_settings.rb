@@ -40,9 +40,9 @@ class CreateAdminSiteSettings < ActiveRecord::Migration
       t.text :counter_openstat
       t.text :counter_liveinternet
 
-      t.float :default_user_prepayment
-      t.float :default_user_discount
-      t.string :default_user_order_rule
+      t.float :default_somebody_prepayment
+      t.float :default_somebody_discount
+      t.string :default_somebody_order_rule
       t.string :avisosms_username
       t.string :avisosms_password
       t.string :avisosms_source_address
@@ -76,6 +76,7 @@ class CreateAdminSiteSettings < ActiveRecord::Migration
       t.string :odnoklassniki_secret
       t.string :mailru_key
       t.string :mailru_secret
+      t.string :default_time_zone_id
 
       t.timestamps
     end

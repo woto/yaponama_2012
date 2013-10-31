@@ -1,13 +1,16 @@
-<%= simple_form_for [:admin, @supplier], :html => { :class => 'form-horizontal dirtyforms' } do |f| %>
-  <%= f.input :name %>
-  <%= f.simple_fields_for :account do |account| %>
-    <%= account.input :debit %>
-    <%= account.input :credit %>
+<%= somebody_tabs do %>
+
+  <%= simple_form_for [:admin, @somebody], :html => { :class => 'form-horizontal dirtyforms' } do |f| %>
+    <%= f.simple_fields_for :account do |account| %>
+      <%= account.input :debit %>
+      <%= account.input :credit %>
+    <% end %>
+
+    <div class="form-actions">
+      <%= f.button :submit, :class => 'btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  admin_suppliers_path, :class => 'btn' %>
+    </div>
   <% end %>
 
-  <div class="form-actions">
-    <%= f.button :submit, :class => 'btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                admin_suppliers_path, :class => 'btn' %>
-  </div>
 <% end %>

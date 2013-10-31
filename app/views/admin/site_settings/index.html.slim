@@ -1,169 +1,193 @@
-- model_class = Admin::SiteSetting
-div class="page-header"
-  h1=t '.title', :default => model_class.model_name.human.pluralize
-table class="table table-striped"
-  thead
-    tr
-      th= model_class.human_attribute_name(:environment)
-      - if params[:filter] == 'other' || params[:filter].blank?
-        th= model_class.human_attribute_name(:from_email_address)
-        th= model_class.human_attribute_name(:send_request_from_search_page)
-        th= model_class.human_attribute_name(:sms_notify_method)
-        th= model_class.human_attribute_name(:price_request_cache_with_replacements_in_seconds)
-        th= model_class.human_attribute_name(:price_request_cache_without_replacements_in_seconds)
-      - if params[:filter] == 'map' || params[:filter].blank?
-        th= model_class.human_attribute_name(:google_maps_key)
-        th= model_class.human_attribute_name(:travel_mode)
-        th= model_class.human_attribute_name(:warehouse_address)
-        th= model_class.human_attribute_name(:delivery_minute_cost)
-        th= model_class.human_attribute_name(:initial_map_zoom)
-        th= model_class.human_attribute_name(:initial_map_lat)
-        th= model_class.human_attribute_name(:initial_map_lng)
-        th= model_class.human_attribute_name(:automatic_calculate_active)
-        th= model_class.human_attribute_name(:max_automatic_calculated_cost)
-      - if params[:filter] == 'prices' || params[:filter].blank?
-        th= model_class.human_attribute_name(:request_emex)
-        th= model_class.human_attribute_name(:emex_income_rate)
-        th= model_class.human_attribute_name(:avtorif_income_rate)
-        th= model_class.human_attribute_name(:retail_rate)
-      - if params[:filter] == 'robokassa' || params[:filter].blank?
-        th= model_class.human_attribute_name(:robokassa_user)
-        th= model_class.human_attribute_name(:robokassa_pass_1)
-        th= model_class.human_attribute_name(:robokassa_pass_2)
-        th= model_class.human_attribute_name(:robokassa_integration_mode)
-      - if params[:filter] == 'checkout' || params[:filter].blank?
-        th= model_class.human_attribute_name(:checkout_account)
-        th= model_class.human_attribute_name(:checkout_bank)
-        th= model_class.human_attribute_name(:checkout_bik)
-        th= model_class.human_attribute_name(:checkout_correspondent)
-        th= model_class.human_attribute_name(:checkout_inn)
-        th= model_class.human_attribute_name(:checkout_recipient)
-      - if params[:filter] == 'counter' || params[:filter].blank?
-        th= model_class.human_attribute_name(:counter_yandex)
-        th= model_class.human_attribute_name(:counter_mail)
-        th= model_class.human_attribute_name(:counter_rambler)
-        th= model_class.human_attribute_name(:counter_google)
-        th= model_class.human_attribute_name(:counter_openstat)
-        th= model_class.human_attribute_name(:counter_liveinternet)
-      - if params[:filter] == 'default_users' || params[:filter].blank?
-        th= model_class.human_attribute_name(:default_user_prepayment)
-        th= model_class.human_attribute_name(:default_user_discount)
-        th= model_class.human_attribute_name(:default_user_order_rule)
-      - if params[:filter] == 'avisosms' || params[:filter].blank?
-        th= model_class.human_attribute_name(:avisosms_username)
-        th= model_class.human_attribute_name(:avisosms_password)
-        th= model_class.human_attribute_name(:avisosms_source_address)
-        th= model_class.human_attribute_name(:avisosms_delivery_report)
-        th= model_class.human_attribute_name(:avisosms_flash_message)
-        th= model_class.human_attribute_name(:avisosms_validity_period)
-        th= model_class.human_attribute_name(:avisosms_email_address)
-      - if params[:filter] == 'auths' || params[:filter].blank?
-        th= model_class.human_attribute_name(:google_oauth2_key)
-        th= model_class.human_attribute_name(:google_oauth2_secret)
-        th= model_class.human_attribute_name(:facebook_key)
-        th= model_class.human_attribute_name(:facebook_secret)
-        th= model_class.human_attribute_name(:yandex_key)
-        th= model_class.human_attribute_name(:yandex_secret)
-        th= model_class.human_attribute_name(:twitter_key)
-        th= model_class.human_attribute_name(:twitter_secret)
-        th= model_class.human_attribute_name(:vkontakte_key)
-        th= model_class.human_attribute_name(:vkontakte_secret)
-        th= model_class.human_attribute_name(:odnoklassniki_key)
-        th= model_class.human_attribute_name(:odnoklassniki_secret)
-        th= model_class.human_attribute_name(:mailru_key)
-        th= model_class.human_attribute_name(:mailru_secret)
-      - if params[:filter] == 'resources' || params[:filter].blank?
-        th= model_class.human_attribute_name(:site_full_address)
-        th= model_class.human_attribute_name(:redis_full_address)
-        th= model_class.human_attribute_name(:socket_io_full_address)
-        th= model_class.human_attribute_name(:juggernaut_full_address)
-        th= model_class.human_attribute_name(:price_full_address)
-        th= model_class.human_attribute_name(:get_image_data_full_address)
-      th= model_class.human_attribute_name(:updated_at)
-      th=t '.actions', :default => t("helpers.actions")
-  tbody
-    - (@admin_site_settings << SiteConfig).each do |admin_site_setting|
-      tr
-        td= admin_site_setting.environment
-        - if params[:filter] == 'other' || params[:filter].blank?
-          td= admin_site_setting.from_email_address
-          td= admin_site_setting.send_request_from_search_page
-          td= admin_site_setting.sms_notify_method
-          td= admin_site_setting.price_request_cache_with_replacements_in_seconds
-          td= admin_site_setting.price_request_cache_without_replacements_in_seconds
-        - if params[:filter] == 'map' || params[:filter].blank?
-          td= admin_site_setting.google_maps_key
-          td= admin_site_setting.travel_mode
-          td= admin_site_setting.warehouse_address
-          td= admin_site_setting.delivery_minute_cost
-          td= admin_site_setting.initial_map_zoom
-          td= admin_site_setting.initial_map_lat
-          td= admin_site_setting.initial_map_lng
-          td= admin_site_setting.automatic_calculate_active
-          td= admin_site_setting.max_automatic_calculated_cost
-        - if params[:filter] == 'prices' || params[:filter].blank?
-          td= admin_site_setting.request_emex
-          td= admin_site_setting.emex_income_rate
-          td= admin_site_setting.avtorif_income_rate
-          td= admin_site_setting.retail_rate
-        - if params[:filter] == 'robokassa' || params[:filter].blank?
-          td= admin_site_setting.robokassa_integration_mode
-          td= admin_site_setting.robokassa_pass_1
-          td= admin_site_setting.robokassa_pass_2
-          td= admin_site_setting.robokassa_user
-        - if params[:filter] == 'checkout' || params[:filter].blank?
-          td= admin_site_setting.checkout_account
-          td= admin_site_setting.checkout_bank
-          td= admin_site_setting.checkout_bik
-          td= admin_site_setting.checkout_correspondent
-          td= admin_site_setting.checkout_inn
-          td= admin_site_setting.checkout_recipient
-        - if params[:filter] == 'counter' || params[:filter].blank?
-          td= admin_site_setting.counter_yandex
-          td= admin_site_setting.counter_mail
-          td= admin_site_setting.counter_rambler
-          td= admin_site_setting.counter_google
-          td= admin_site_setting.counter_openstat
-          td= admin_site_setting.counter_liveinternet
-        - if params[:filter] == 'default_users' || params[:filter].blank?
-          td= admin_site_setting.default_user_prepayment
-          td= admin_site_setting.default_user_discount
-          td= admin_site_setting.default_user_order_rule
-        - if params[:filter] == 'avisosms' || params[:filter].blank?
-          td= admin_site_setting.avisosms_username
-          td= admin_site_setting.avisosms_password
-          td= admin_site_setting.avisosms_source_address
-          td= admin_site_setting.avisosms_delivery_report
-          td= admin_site_setting.avisosms_flash_message
-          td= admin_site_setting.avisosms_validity_period
-          td= admin_site_setting.avisosms_email_address
-        - if params[:filter] == 'auths' || params[:filter].blank?
-          td= admin_site_setting.google_oauth2_key
-          td= admin_site_setting.google_oauth2_secret
-          td= admin_site_setting.facebook_key
-          td= admin_site_setting.facebook_secret
-          td= admin_site_setting.yandex_key
-          td= admin_site_setting.yandex_secret
-          td= admin_site_setting.twitter_key
-          td= admin_site_setting.twitter_secret
-          td= admin_site_setting.vkontakte_key
-          td= admin_site_setting.vkontakte_secret
-          td= admin_site_setting.odnoklassniki_key
-          td= admin_site_setting.odnoklassniki_secret
-          td= admin_site_setting.mailru_key
-          td= admin_site_setting.mailru_secret
-        - if params[:filter] == 'resources' || params[:filter].blank?
-          td= admin_site_setting.site_full_address
-          td= admin_site_setting.redis_full_address
-          td= admin_site_setting.socket_io_full_address
-          td= admin_site_setting.juggernaut_full_address
-          td= admin_site_setting.price_full_address
-          td= admin_site_setting.get_image_data_full_address
-        td=l admin_site_setting.updated_at, :format => :short
-        td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_site_setting_path(admin_site_setting, :filter => params[:filter]), :class => 'btn btn-mini'
-          '
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_site_setting_path(admin_site_setting), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+= row do
+  <div class="col-md-3">
+    <div class="list-group">
+      <a href="#" class="list-group-item active">
+        Cras justo odio
+      </a>
+      = link_to 'Avisosms.ru', admin_site_settings_path(:filter => 'avisosms'), :class => 'list-group-item' 
+      = link_to 'Robokassa.ru', admin_site_settings_path(:filter => 'robokassa'), :class => 'list-group-item'
+      = link_to 'Форма ПД-4', admin_site_settings_path(:filter => 'checkout'), :class => 'list-group-item'
+      = link_to 'Счетчики посещений', admin_site_settings_path(:filter => 'counter'), :class => 'list-group-item'
+      = link_to 'Адреса ресурсов', admin_site_settings_path(:filter => 'resources'), :class => 'list-group-item'
+      = link_to 'Настройки новых покупателей', admin_site_settings_path(:filter => 'default_users'), :class => 'list-group-item'
+      = link_to 'Цены и поставщики', admin_site_settings_path(:filter => 'prices'), :class => 'list-group-item'
+      = link_to 'Карта и доставка', admin_site_settings_path(:filter => 'map'), :class => 'list-group-item'
+      = link_to 'Внешняя авторизация', admin_site_settings_path(:filter => 'auths'), :class => 'list-group-item'
+      = link_to 'Прочие настройки', admin_site_settings_path(:filter => 'other'), :class => 'list-group-item'
+      = link_to "Банковские счета", "#", :class => 'list-group-item'
+    </div>
+  </div>
 
-= link_to t('.new', :default => t("helpers.links.new")), new_admin_site_setting_path, :class => 'btn btn-primary'
+  <div class="col-md-9">
+    - model_class = Admin::SiteSetting
+    div class="page-header"
+      h1=t '.title', :default => model_class.model_name.human.pluralize
+    table class="table table-striped"
+      thead
+        tr
+          th= model_class.human_attribute_name(:environment)
+          - if params[:filter] == 'other' || params[:filter].blank?
+            th= model_class.human_attribute_name(:from_email_address)
+            th= model_class.human_attribute_name(:send_request_from_search_page)
+            th= model_class.human_attribute_name(:sms_notify_method)
+            th= model_class.human_attribute_name(:price_request_cache_with_replacements_in_seconds)
+            th= model_class.human_attribute_name(:price_request_cache_without_replacements_in_seconds)
+          - if params[:filter] == 'map' || params[:filter].blank?
+            th= model_class.human_attribute_name(:google_maps_key)
+            th= model_class.human_attribute_name(:travel_mode)
+            th= model_class.human_attribute_name(:warehouse_address)
+            th= model_class.human_attribute_name(:delivery_minute_cost)
+            th= model_class.human_attribute_name(:initial_map_zoom)
+            th= model_class.human_attribute_name(:initial_map_lat)
+            th= model_class.human_attribute_name(:initial_map_lng)
+            th= model_class.human_attribute_name(:automatic_calculate_active)
+            th= model_class.human_attribute_name(:max_automatic_calculated_cost)
+            th= model_class.human_attribute_name(:default_time_zone_id)
+          - if params[:filter] == 'prices' || params[:filter].blank?
+            th= model_class.human_attribute_name(:request_emex)
+            th= model_class.human_attribute_name(:emex_income_rate)
+            th= model_class.human_attribute_name(:avtorif_income_rate)
+            th= model_class.human_attribute_name(:retail_rate)
+          - if params[:filter] == 'robokassa' || params[:filter].blank?
+            th= model_class.human_attribute_name(:robokassa_user)
+            th= model_class.human_attribute_name(:robokassa_pass_1)
+            th= model_class.human_attribute_name(:robokassa_pass_2)
+            th= model_class.human_attribute_name(:robokassa_integration_mode)
+          - if params[:filter] == 'checkout' || params[:filter].blank?
+            th= model_class.human_attribute_name(:checkout_account)
+            th= model_class.human_attribute_name(:checkout_bank)
+            th= model_class.human_attribute_name(:checkout_bik)
+            th= model_class.human_attribute_name(:checkout_correspondent)
+            th= model_class.human_attribute_name(:checkout_inn)
+            th= model_class.human_attribute_name(:checkout_recipient)
+          - if params[:filter] == 'counter' || params[:filter].blank?
+            th= model_class.human_attribute_name(:counter_yandex)
+            th= model_class.human_attribute_name(:counter_mail)
+            th= model_class.human_attribute_name(:counter_rambler)
+            th= model_class.human_attribute_name(:counter_google)
+            th= model_class.human_attribute_name(:counter_openstat)
+            th= model_class.human_attribute_name(:counter_liveinternet)
+          - if params[:filter] == 'default_users' || params[:filter].blank?
+            th= model_class.human_attribute_name(:default_somebody_prepayment)
+            th= model_class.human_attribute_name(:default_somebody_discount)
+            th= model_class.human_attribute_name(:default_somebody_order_rule)
+          - if params[:filter] == 'avisosms' || params[:filter].blank?
+            th= model_class.human_attribute_name(:avisosms_username)
+            th= model_class.human_attribute_name(:avisosms_password)
+            th= model_class.human_attribute_name(:avisosms_source_address)
+            th= model_class.human_attribute_name(:avisosms_delivery_report)
+            th= model_class.human_attribute_name(:avisosms_flash_message)
+            th= model_class.human_attribute_name(:avisosms_validity_period)
+            th= model_class.human_attribute_name(:avisosms_email_address)
+          - if params[:filter] == 'auths' || params[:filter].blank?
+            th= model_class.human_attribute_name(:google_oauth2_key)
+            th= model_class.human_attribute_name(:google_oauth2_secret)
+            th= model_class.human_attribute_name(:facebook_key)
+            th= model_class.human_attribute_name(:facebook_secret)
+            th= model_class.human_attribute_name(:yandex_key)
+            th= model_class.human_attribute_name(:yandex_secret)
+            th= model_class.human_attribute_name(:twitter_key)
+            th= model_class.human_attribute_name(:twitter_secret)
+            th= model_class.human_attribute_name(:vkontakte_key)
+            th= model_class.human_attribute_name(:vkontakte_secret)
+            th= model_class.human_attribute_name(:odnoklassniki_key)
+            th= model_class.human_attribute_name(:odnoklassniki_secret)
+            th= model_class.human_attribute_name(:mailru_key)
+            th= model_class.human_attribute_name(:mailru_secret)
+          - if params[:filter] == 'resources' || params[:filter].blank?
+            th= model_class.human_attribute_name(:site_full_address)
+            th= model_class.human_attribute_name(:redis_full_address)
+            th= model_class.human_attribute_name(:socket_io_full_address)
+            th= model_class.human_attribute_name(:juggernaut_full_address)
+            th= model_class.human_attribute_name(:price_full_address)
+            th= model_class.human_attribute_name(:get_image_data_full_address)
+          th= model_class.human_attribute_name(:updated_at)
+          th=t '.actions', :default => t("helpers.actions")
+      tbody
+        - (@admin_site_settings << SiteConfig).each do |admin_site_setting|
+          tr
+            td= admin_site_setting.environment
+            - if params[:filter] == 'other' || params[:filter].blank?
+              td= admin_site_setting.from_email_address
+              td= admin_site_setting.send_request_from_search_page
+              td= admin_site_setting.sms_notify_method
+              td= admin_site_setting.price_request_cache_with_replacements_in_seconds
+              td= admin_site_setting.price_request_cache_without_replacements_in_seconds
+            - if params[:filter] == 'map' || params[:filter].blank?
+              td= admin_site_setting.google_maps_key
+              td= admin_site_setting.travel_mode
+              td= admin_site_setting.warehouse_address
+              td= admin_site_setting.delivery_minute_cost
+              td= admin_site_setting.initial_map_zoom
+              td= admin_site_setting.initial_map_lat
+              td= admin_site_setting.initial_map_lng
+              td= admin_site_setting.automatic_calculate_active
+              td= admin_site_setting.max_automatic_calculated_cost
+              td= admin_site_setting.default_time_zone_id
+            - if params[:filter] == 'prices' || params[:filter].blank?
+              td= admin_site_setting.request_emex
+              td= admin_site_setting.emex_income_rate
+              td= admin_site_setting.avtorif_income_rate
+              td= admin_site_setting.retail_rate
+            - if params[:filter] == 'robokassa' || params[:filter].blank?
+              td= admin_site_setting.robokassa_integration_mode
+              td= admin_site_setting.robokassa_pass_1
+              td= admin_site_setting.robokassa_pass_2
+              td= admin_site_setting.robokassa_user
+            - if params[:filter] == 'checkout' || params[:filter].blank?
+              td= admin_site_setting.checkout_account
+              td= admin_site_setting.checkout_bank
+              td= admin_site_setting.checkout_bik
+              td= admin_site_setting.checkout_correspondent
+              td= admin_site_setting.checkout_inn
+              td= admin_site_setting.checkout_recipient
+            - if params[:filter] == 'counter' || params[:filter].blank?
+              td= admin_site_setting.counter_yandex
+              td= admin_site_setting.counter_mail
+              td= admin_site_setting.counter_rambler
+              td= admin_site_setting.counter_google
+              td= admin_site_setting.counter_openstat
+              td= admin_site_setting.counter_liveinternet
+            - if params[:filter] == 'default_users' || params[:filter].blank?
+              td= admin_site_setting.default_somebody_prepayment
+              td= admin_site_setting.default_somebody_discount
+              td= admin_site_setting.default_somebody_order_rule
+            - if params[:filter] == 'avisosms' || params[:filter].blank?
+              td= admin_site_setting.avisosms_username
+              td= admin_site_setting.avisosms_password
+              td= admin_site_setting.avisosms_source_address
+              td= admin_site_setting.avisosms_delivery_report
+              td= admin_site_setting.avisosms_flash_message
+              td= admin_site_setting.avisosms_validity_period
+              td= admin_site_setting.avisosms_email_address
+            - if params[:filter] == 'auths' || params[:filter].blank?
+              td= admin_site_setting.google_oauth2_key
+              td= admin_site_setting.google_oauth2_secret
+              td= admin_site_setting.facebook_key
+              td= admin_site_setting.facebook_secret
+              td= admin_site_setting.yandex_key
+              td= admin_site_setting.yandex_secret
+              td= admin_site_setting.twitter_key
+              td= admin_site_setting.twitter_secret
+              td= admin_site_setting.vkontakte_key
+              td= admin_site_setting.vkontakte_secret
+              td= admin_site_setting.odnoklassniki_key
+              td= admin_site_setting.odnoklassniki_secret
+              td= admin_site_setting.mailru_key
+              td= admin_site_setting.mailru_secret
+            - if params[:filter] == 'resources' || params[:filter].blank?
+              td= admin_site_setting.site_full_address
+              td= admin_site_setting.redis_full_address
+              td= admin_site_setting.socket_io_full_address
+              td= admin_site_setting.juggernaut_full_address
+              td= admin_site_setting.price_full_address
+              td= admin_site_setting.get_image_data_full_address
+            td=l admin_site_setting.updated_at, :format => :short
+            td
+              = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_site_setting_path(admin_site_setting, :filter => params[:filter]), :class => 'btn btn-mini'
+              '
+              = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_site_setting_path(admin_site_setting), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
+    = link_to t('.new', :default => t("helpers.links.new")), new_admin_site_setting_path, :class => 'btn btn-primary'
+
+  </div>

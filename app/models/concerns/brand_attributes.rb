@@ -19,8 +19,6 @@ module BrandAttributes
         self.brand = nil
       end
 
-      #self.brand_id_will_change!
-
     end
 
   end

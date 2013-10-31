@@ -25,9 +25,7 @@
 <% end %>
 
 <% if confirm.present? %>
-  <%# TODO Как-то наверно нужно сделать общий хелпер %>
-  <div class="alert fade in alert-info">
-    <button class="close" data-dismiss="alert"> × </button>
+  <%= alert 'info' do %>
     <%= confirm %>
-  </div>
+  <% end %>
 <% end %>

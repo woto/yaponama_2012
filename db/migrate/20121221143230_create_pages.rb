@@ -8,6 +8,8 @@ class CreatePages < ActiveRecord::Migration
       t.string :title
       t.string :robots
       t.integer :creator_id
+      t.string :creation_reason
+      t.boolean :phantom
 
       t.timestamps
     end

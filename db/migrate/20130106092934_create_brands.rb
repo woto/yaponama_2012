@@ -9,6 +9,7 @@ class CreateBrands < ActiveRecord::Migration
       t.text :content
       t.references :creator, index: true
       t.boolean :phantom
+      t.boolean :catalog
 
       t.timestamps
     end

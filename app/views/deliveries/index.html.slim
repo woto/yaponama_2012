@@ -1,5 +1,4 @@
-.bottom-space
-  h3 Доставка и Самовывоз
+- @meta_title = "Доставка и Самовывоз"
 
 ul.nav.nav-tabs id="myTab"
 
@@ -10,22 +9,15 @@ ul.nav.nav-tabs id="myTab"
     a href="#profile" data-toggle="tab"
       strong Другие города
  
-div.tab-content
+div.tab-content.top-space
 
   div.tab-pane.active id="home"
 
-    form.form-search
-      .inputs
-        .bottom-space
-          .input-append
-            input#geocode-address-text.span12.search-query.catch-enter type="text" placeholder="Укажите адрес доставки"
-            a#geocode-address-button.press-enter class="btn" Найти адрес
-
-    .row-fluid
-      .span6
+    .row
+      .col-sm-5
 
         #deliveries-accordion.accordion
-          - Deliveries::Places::Place.where(active: true).each do |delivery_zone|
+          - Deliveries::Place.where(active: true).each do |delivery_zone|
             .accordion-group class="#{delivery_zone.realize? ? '' : 'hide'}"
               .accordion-heading.delivery_zone
                 / Картографические данные области
@@ -49,12 +41,20 @@ div.tab-content
                   strong= delivery_zone.name
               .accordion-body.collapse id="#{rand_id}"
                 .accordion-inner
-                  p= delivery_zone.content
+                  p== delivery_zone.content
                   - delivery_zone.variants.each do |variant|
                     strong = variant.name
                     p== variant.content
                     p= number_to_currency variant.delivery_cost
-      .span6
+      .col-sm-7
+
+        form
+          = form_group do
+            = input_group do |ig|
+              = twbs_text_field_tag '', '', id: "geocode-address-text", rel: "catch-enter", placeholder: "Укажите адрес доставки"
+              = ig.btn do
+                <button id="geocode-address-button" class="btn btn-default" rel="press-enter" type="button"> Найти адрес </button>
+
         #clientMap
 
     /- @deliveries.each do |delivery|
@@ -62,6 +62,4 @@ div.tab-content
 
     /- klass = delivery.class.reflect_on_all_associations.select{|ref| ref.active_record.to_s.deconstantize == 'Delivery'}.first.name.to_s.singularize.camelcase.constantize.all.each do |sub|
   div.tab-pane id="profile"
-    ' asdf
- 
-
+    h3 Другие города

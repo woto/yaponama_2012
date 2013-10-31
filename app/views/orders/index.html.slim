@@ -1,7 +1,7 @@
-= user_tabs do
-  = form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [@resource_class.name.pluralize.underscore.to_sym]}, :primary_key => params[:primary_key], :user_id => params[:user_id]), :remote => true do |f|
+= somebody_tabs do
+  = form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f|
 
-    h3 
+    h2.top-space.bottom-space
       ' Заказы
       = order_status_decorator(params[:status])
 
@@ -11,18 +11,19 @@
         .pull-right
 
           a href="#columns" role="button" class="btn" data-toggle="modal" title="Настроить отображаемые столбцы" rel="tooltip"
-            i.icon.icon-columns
+            = icon 'columns'
 
 
         .pull-right.right-space
 
           = link_to smart_route({:prefix => [:transactions], :postfix => [@resource_class.to_s.underscore.pluralize]}, :user_id => params[:user_id] ), data: {toggle: "tooltip"}, title: "#{ t('.transactions', :default => t("helpers.links.transactions")) }",  :class => "btn", rel: 'tooltip' do
-            i.icon-time
+            = icon 'time'
 
-        .pull-right.right-space
-          = render :partial => 'shared/grid_per_page'
+        <div id="toolbar-per-page" class="pull-right right-space">
+          = render 'grid_toolbar_per_page'
+        </div>
 
         .pull-left
-          = render :partial => "shared/grid_toolbar_selected"
+          = render :partial => "grid_toolbar_selected"
 
-      = render :partial => 'shared/grid'
+      = render :partial => 'grid'

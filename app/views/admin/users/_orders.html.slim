@@ -1,8 +1,0 @@
-#orders-tab.tab-pane.active
-  #orders
-    = f.simple_fields_for :orders do |order| 
-      = render 'order_fields', :f => order, :stack => 0 
-    
-    .links
-      = link_to_add_association 'Добавить заказ', f, :orders, :class => "btn btn-success ignoredirty", :render_options => {:locals => {:stack => 0}} 
-

@@ -1,14 +1,15 @@
-= user_tabs do
+- title_index
+- @meta_title_small = params[:status]
 
-  = form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [@resource_class.name.pluralize.underscore.to_sym]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :status => params[:status]), :remote => true do |f|
+= somebody_tabs do
+
+  = twbs_form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f|
 
     - if params[:order_id]
       = render :partial => 'orders/show', :locals => { :order => Order.find(params[:order_id]) }
 
-    h3 
-      ' Товары
-      = product_status_decorator(params[:status])
-
-    div style="border: 1px solid #ddd"
-      = render "button"
-      = render :partial => 'shared/grid'
+    = panel 'default' do |p|
+      = p.heading do
+        = render "head"
+      = p.body do
+        = render 'grid', f: f

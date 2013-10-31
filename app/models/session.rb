@@ -28,12 +28,12 @@ class Session
     when 'phone'
       phones = Phone.where(value: value)
       phones.each do |phone|
-        break if authenticated_user = phone.user.authenticate(password)
+        break if authenticated_user = phone.somebody.authenticate(password)
       end
     when 'email'
       eas = Email.where(:value => value)
       eas.each do |ea|
-        break if authenticated_user = ea.user.authenticate(password)
+        break if authenticated_user = ea.somebody.authenticate(password)
       end
     end
 

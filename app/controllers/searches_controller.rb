@@ -1,7 +1,6 @@
 #encoding: utf-8
 
 class SearchesController < ApplicationController
-  before_filter :set_user
 
   def initialize
     @status = {:offers => false, :page => false}
@@ -38,18 +37,6 @@ class SearchesController < ApplicationController
     #end
   end
 
-
-  def search_page_content
-    return
-    @page = Page.where(:path => search_searches_path(params[:catalog_number], params[:manufacturer], params[:replacements]).gsub(/^\/+/, '')).first
-    if @page
-      @meta_title = @page.title
-      @meta_description = @page.description
-      @meta_keywords = @page.keyword
-      @meta_robots = @page.robots
-      @status[:page] = true
-    end
-  end
 
   def index
 
@@ -363,8 +350,6 @@ class SearchesController < ApplicationController
       @meta_title = "Поиск запчастей по номеру"
     end
 
-    search_page_content
-
     if @formatted_data.present?
 
       # Keywords
@@ -420,14 +405,11 @@ class SearchesController < ApplicationController
 
   private
 
-  def set_user
+  def user_set
     @somebody = @user = User.find(current_user)
   end
 
   def set_resource_class
-  end
-
-  def user_set
   end
 
   def somebody_set
@@ -435,5 +417,4 @@ class SearchesController < ApplicationController
 
   def supplier_set
   end
-
 end

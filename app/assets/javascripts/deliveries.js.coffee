@@ -182,6 +182,8 @@ window.initClientMap = ->
 $ ->
   if $('#clientMap').length != 0
     $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&callback=initClientMap')
-$(document).on 'page:change', ->
+
+# В свете версии 2.0 (еще не выпущена)
+$(document).on 'page:load', ->
   if $('#clientMap').length != 0
     $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&callback=initClientMap')

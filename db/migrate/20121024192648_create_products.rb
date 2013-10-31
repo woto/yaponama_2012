@@ -2,7 +2,9 @@ class CreateProducts < ActiveRecord::Migration
   def change
     create_table :products do |t|
       t.string :catalog_number
-      t.string :manufacturer
+      t.belongs_to :brand
+      t.string :cached_brand
+      #t.string :manufacturer
       t.string :short_name
       t.text :long_name
       t.integer :quantity_ordered

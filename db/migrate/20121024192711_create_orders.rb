@@ -7,8 +7,12 @@ class CreateOrders < ActiveRecord::Migration
       t.string  :status, default: 'open'
       t.references :delivery, index: true
       t.references :profile, index: true
+      t.boolean :full_prepayment_required
+      t.string :cached_profile
+      t.boolean 'legal'
+      t.boolean 'phantom', default: true
       t.string :token, index: true
-      t.string :track_number: string
+      t.string :track_number
       # TODO Добавить валидацию. Если способ доставки подразумевает
       # наличие track_number после отправки, то при закрытии заказа
       # наличие track_number является необходимым условием, а так же 

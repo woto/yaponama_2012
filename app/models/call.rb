@@ -1,4 +1,5 @@
 class Call < ActiveRecord::Base
+  include BelongsToSomebody
 
   belongs_to :phone
   has_many :talks, :as => :talkable
@@ -6,8 +7,8 @@ class Call < ActiveRecord::Base
 
   after_create :create_associated
   
-  def phone_number=(phone_number)
-    self.phone = Phone.where(:phone => phone_number).first_or_initialize
+  def value=(value)
+    self.phone = Phone.where(:phone => value).first_or_initialize
   end
 
   def create_associated

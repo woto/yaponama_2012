@@ -72,7 +72,7 @@
           <%= dd.toggle do %>
             <%= icon 'user' %>
             <% if @user.role != 'guest' %>
-              <%= @user.cached_main_profile.try(:[], 'names').try(:first).try(:[], 'name') %>
+              <%= JSON.parse(@user.cached_main_profile).try(:[], 'names').try(:first).try(:[], 'name') %>
             <% else %>
               Личный кабинет
             <% end %>

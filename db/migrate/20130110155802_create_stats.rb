@@ -6,6 +6,7 @@ class CreateStats < ActiveRecord::Migration
       t.string :location
       t.string :title
       t.string :referrer
+      t.integer :russian_time_zone_auto_id
       t.integer :screen_width
       t.integer :screen_height
       t.integer :client_width

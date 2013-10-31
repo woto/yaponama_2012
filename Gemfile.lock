@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/deivid-rodriguez/byebug.git
-  revision: 51af4f6b3f1753cd42915cd1dee732e0ea6c6eaf
+  revision: 319be9a74c72dbd0cd3ed0ed23941df23f252463
   specs:
     byebug (2.3.1)
       columnize (~> 0.3.6)
@@ -312,8 +312,6 @@ GEM
       cliver (~> 0.2.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
-    puma (2.6.0)
-      rack (>= 1.1, < 2.0)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -430,7 +428,6 @@ DEPENDENCIES
   omniauth-yandex
   pg
   poltergeist
-  puma
   quiet_assets
   rails!
   redis (~> 3.0.1)

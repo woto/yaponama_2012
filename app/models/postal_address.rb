@@ -1,9 +1,13 @@
 class PostalAddress < ActiveRecord::Base
-  include BelongsToUser
+  include BelongsToSomebody
   include BelongsToCreator
   include Transactionable
+  include Selectable
 
   has_many :orders
+
+  has_many :companies_with_this_legal_address, :class_name => "Company", :foreign_key => "legal_address_id"
+  has_many :companies_with_this_actual_address, :class_name  => "Company", :foreign_key => "actual_address_id"
 
   validates :city, :street, :house, :region, :presence => true
   validates :postcode, :presence => true, length: {is: 6}, :numericality => { :only_integer => true }
@@ -11,7 +15,23 @@ class PostalAddress < ActiveRecord::Base
   validates :room, :presence => true, unless: Proc.new { |pa| pa.stand_alone_house }
 
   def to_label
-    "#{postcode} - #{region} - #{city} - #{street} - #{house} - #{room} - #{notes} - #{notes_invisible}"
+    res = []
+    res << postcode 
+    res << region
+    res << city
+    res << street
+    res << house
+    res << room
+    res.join(', ')
+  end
+
+  include RenameMeConcern
+
+  before_save :update_all_cached_postal_addresses
+
+  def update_all_cached_postal_addresses
+    companies_with_this_legal_address.update_all(cached_legal_address: self.to_label)
+    companies_with_this_actual_address.update_all(cached_actual_address: self.to_label)
   end
 
 end

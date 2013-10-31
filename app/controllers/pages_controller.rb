@@ -2,7 +2,6 @@
 
 class PagesController < ApplicationController
   include GridPage
-  include GetUserFromResourceDummy
 
   skip_before_filter :set_grid, only: [:new, :create, :edit, :update, :show, :destroy]
 
@@ -23,6 +22,32 @@ class PagesController < ApplicationController
 
   def find_resource
     @resource = @resource_class.where(:path => params[:path]).first
+  end
+
+  private
+
+  def set_resource_class
+    @resource_class = Page
+  end
+
+  def user_set
+    @user = current_user
+  end
+
+  def somebody_set
+    @somebody = current_user
+  end
+
+  def supplier_set
+  end
+
+  def user_get
+  end
+
+  def supplier_get
+  end
+
+  def somebody_get
   end
 
 end

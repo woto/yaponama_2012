@@ -7,11 +7,11 @@ class StatsController < ApplicationController
   include SetResourceClassDummy
 
   def create
-    current_user.russian_time_zone_auto_id = - params['russian_time_zone_auto_id'].to_f.round
-    current_user.stats.new(stat_params)
-    current_user.save!
-
-    #current_user.stats.create!(stat_params)
+    if params[:russian_time_zone_auto_id]
+      raise 's'
+    end
+    stat = current_user.stats.new(stat_params)
+    stat.save!
 
     render :nothing => true
   end
@@ -19,7 +19,7 @@ class StatsController < ApplicationController
   private
 
   def stat_params
-    params.require(:stat).permit(:location, :title, :referrer, :screen_width, :screen_height, :client_width, :client_height)
+    params.require(:stat).permit(:location, :title, :referrer, :screen_width, :screen_height, :client_width, :client_height, :russian_time_zone_auto_id)
   end
 
   def user_set

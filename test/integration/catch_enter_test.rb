@@ -4,6 +4,10 @@ require 'test_helper'
 
 class CatchEnterTest < ActionDispatch::IntegrationTest
 
+  def setup
+    Capybara.reset!
+  end
+
   test 'Проверка правильной работы catch enter на просмотра доставки и самовывоза' do
     visit '/deliveries'
     common
@@ -34,7 +38,7 @@ class CatchEnterTest < ActionDispatch::IntegrationTest
     HERE
     execute_script js_code
 
-    sleep 1
+    sleep 2
     assert has_css? '#debug-catch-enter', visible: false, text: 'true'
 
     # TODO Оказывается посылая этот js Enter Почему-то в действительности не нажимается,

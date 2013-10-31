@@ -4,7 +4,9 @@ class Passport < ActiveRecord::Base
   include HiddenRecreate
   include BelongsToProfile
   include BelongsToCreator
-  include BelongsToUser
+  include BelongsToSomebody
+  include Transactionable
+  include Selectable
 
   belongs_to :profile, :inverse_of => :passports
 
@@ -25,4 +27,7 @@ class Passport < ActiveRecord::Base
     </ul>
     CODE
   end
+
+  include RenameMeConcernTwo
+
 end

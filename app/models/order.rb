@@ -1,22 +1,63 @@
 #encoding: utf-8
 
 class Order < ActiveRecord::Base
-  include BelongsToUser
+  include BelongsToSomebody
   include BelongsToCreator
   include Transactionable
+  include Selectable
+
+  attr_accessor :current_step
+
+  # Валидацию для legal
+ 
+  # Для возможности выбора имеющегося или добавления нового получателя, компании
+  attr_accessor :profile_type
+  attr_accessor :company_type
+  
+
+  #has_many :order_profiles
+  #has_many :profiles, :through => :order_profiles
 
   belongs_to :delivery
-  belongs_to :name
-  belongs_to :phone
+  #belongs_to :name
+  #belongs_to :phone
+  #belongs_to :email
   belongs_to :postal_address
   belongs_to :metro
+
   belongs_to :company
+  accepts_nested_attributes_for :company
+
+  before_validation :remove_before_validation_unless_legal
+  after_validation :recreate_after_validation_unless_legal
+
+  def remove_before_validation_unless_legal
+    #uioi
+    #unless legal
+    #  if company
+    #    company.delete
+    #  end
+    #end
+  end
+
+  def recreate_after_validation_unless_legal
+    #uioi
+    #unless legal
+    #  c = Company.new
+    #  c.prepare_company(user)
+    #  self.company = c
+    #end
+  end
+
   belongs_to :shop
+
+  belongs_to :profile
+  accepts_nested_attributes_for :profile
 
   has_many :products, :dependent => :destroy
 
   def to_label
-    "#{id} - #{delivery.try(:to_label)} - #{name.try(:to_label)} - #{postal_address.try(:to_label)} - #{metro.try(:to_label)} - #{shop.try(:to_label)} - #{company.try(:to_label)} - #{phone.try(:to_label)}"
+    "#{id} - #{profile.try(:to_label)} - #{delivery.try(:to_label)} - #{postal_address.try(:to_label)} - #{metro.try(:to_label)} - #{shop.try(:to_label)}"
   end
 
   def update_order_on_products(products)
@@ -30,32 +71,39 @@ class Order < ActiveRecord::Base
   validate :multistep_order
 
   def multistep_order
-    unless delivery
-      errors.add(:delivery, "Выберите способ доставки")
-    else
-      if delivery.postal_address_required && postal_address.blank?
-        errors.add(:postal_address, "Пожалуйста укажите почтовый адрес")
-      end
-      if delivery.name_required && name.blank?
-        errors.add(:name, "Пожалуйста укажите имя получателя")
-      end
-      if delivery.phone_required && phone.blank?
-        errors.add(:phone, "Пожалуйста укажите номер телефона")
-      end
-      if delivery.metro_required && metro.blank?
-        errors.add(:metro, "Пожалуйста укажите станцию метро")
-      end
-      if delivery.shop_required && shop.blank?
-        errors.add(:shop, "Пожалуйста выберите магазин")
-      end
-      if delivery.company_required && company.blank?
-        errors.add(:company, "Пожалуйста выберите компанию")
-      end
-      if delivery.delivery_cost_required && delivery_cost.blank?
-        errors.add(:delivery_cost, "Пожалуйста укажите предполагаемую сумму доставки")
+    unless phantom
+      unless delivery
+        errors.add(:delivery, "Выберите способ доставки")
+      else
+        if delivery.postal_address_required && postal_address.blank?
+          errors.add(:postal_address, "Пожалуйста укажите почтовый адрес")
+        end
+        if delivery.name_required && name.blank?
+          errors.add(:name, "Пожалуйста укажите имя получателя")
+        end
+        if delivery.phone_required && phone.blank?
+          errors.add(:phone, "Пожалуйста укажите номер телефона")
+        end
+        if delivery.email_required && profile.email.blank?
+          profile.errors.add(:email, "Пожалуйста укажите электронный адрес E-mail")
+        end
+        if delivery.metro_required && metro.blank?
+          errors.add(:metro, "Пожалуйста укажите станцию метро")
+        end
+        if delivery.shop_required && shop.blank?
+          errors.add(:shop, "Пожалуйста выберите магазин")
+        end
+        if delivery.company_required && company.blank?
+          errors.add(:company, "Пожалуйста выберите компанию")
+        end
+        if delivery.delivery_cost_required && delivery_cost.blank?
+          errors.add(:delivery_cost, "Пожалуйста укажите предполагаемую сумму доставки")
+        end
       end
     end
   end
+
+
 
   before_create :generate_token
 

@@ -1,6 +1,9 @@
 #encoding: utf-8
 
 class PasswordResetsController < ApplicationController
+
+  include FindResourceDummy
+  
   before_action :only_not_authenticated
   before_action { @meta_title = 'Восстановление пароля' }
 
@@ -12,18 +15,18 @@ class PasswordResetsController < ApplicationController
 
       if @password_reset.valid?
 
-        user = @password_reset.user
-        user.generate_token(:password_reset_token, :short)
-        user.password_reset_sent_at = Time.zone.now
+        somebody = @password_reset.somebody
+        somebody.generate_token(:password_reset_token, :short)
+        somebody.password_reset_sent_at = Time.zone.now
         # TODO Защититься
-        #user.password_reset_attempts = 0
-        user.save!
+        #somebody.password_reset_attempts = 0
+        somebody.save!
 
         case @password_reset.with
         when 'email'
-          PasswordResetMailer.email(@password_reset.value, user.password_reset_token).deliver
+          PasswordResetMailer.email(@password_reset.value, somebody.password_reset_token).deliver
         when 'phone'
-          PasswordResetMailer.phone(@password_reset.value, user.password_reset_token).deliver
+          PasswordResetMailer.phone(@password_reset.value, somebody.password_reset_token).deliver
         end
 
         redirect_to pin_password_reset_path(
@@ -77,11 +80,11 @@ class PasswordResetsController < ApplicationController
 
     if @password_reset.valid?
 
-      user = @password_reset.user
+      somebody = @password_reset.somebody
 
-      user.password = @password_reset.password
+      somebody.password = @password_reset.password
 
-      if user.save!
+      if somebody.save!
         redirect_to root_url, :success => "Вы успешно сменили пароль, теперь можете войти на сайт." and return
         # TODO если захочу автоматически вводить пользователя под своим аккаунтом, то объединить с логином
         # т.к. необходимо склеивание аккаунтов.
@@ -93,6 +96,30 @@ class PasswordResetsController < ApplicationController
 
   def password_reset_params
     params.require(:password_reset).permit!
+  end
+
+  def set_resource_class
+    @resource_class = PasswordReset
+  end
+
+  def user_set
+    @user = current_user
+  end
+
+  def somebody_set
+    @somebody = current_user
+  end
+
+  def supplier_set
+  end
+
+  def user_get
+  end
+
+  def supplier_get
+  end
+
+  def somebody_get
   end
 
 end

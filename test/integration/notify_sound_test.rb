@@ -6,17 +6,19 @@ class NotifySoundTest < ActionDispatch::IntegrationTest
   test 'Если у пользователя включена пимпочка звукового оповещения при получении нового сообщения, то должен проиграться звук.' do
 
     Capybara.reset!
+    SiteConfig.class_variable_set(:@@cache, nil)
 
     visit '/'
     
-    command = "sudo RAILS_ENV=test coffee #{Rails.root}/realtime/realtime.coffee"
-    pid = Process.spawn(command)
+    pid = Process.spawn({"RAILS_ENV" => Rails.env}, "coffee #{Rails.root}/realtime/realtime.coffee")
 
     # Detach the spawned process
     Process.detach pid
 
     # Ждем пока иницилизируется node приложение
-    sleep 3
+    # TODO если проблема действительно во времени, то позже переделаю на обработку сигнала, чтобы
+    # не ждать слишком долго, но и быть уверенным, что приложение инициализировалось
+    sleep 5
 
     Capybara.session_name = :first
     auth('+7 (111) 111-11-11', '1111111111')

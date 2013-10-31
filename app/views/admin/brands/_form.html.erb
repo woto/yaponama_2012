@@ -1,0 +1,27 @@
+<%= row do %>
+
+  <div class="col-md-8">
+
+    <%= twbs_form_for [:admin, @resource] do |f| %>
+
+      <%= f.twbs_text_field :name %>
+
+      <%= f.fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b| %>
+        <%= f.form_group :brand do %>
+          <%= b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, asterisk: true %>
+          <%= f.error(:brand) %>
+        <% end %>
+      <% end %>
+
+      <%= f.twbs_file_field :image %>
+      <%= f.twbs_text_field :rating %>
+      <%= f.twbs_text_area :content, :class => "ckeditor-extended" %>
+      <%= f.twbs_check_box :catalog %>
+
+      <%= f.twbs_submit %>
+
+    <% end %>
+
+  </div>
+
+<% end %>

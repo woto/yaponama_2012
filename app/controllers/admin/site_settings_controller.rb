@@ -1,5 +1,8 @@
 class Admin::SiteSettingsController < ApplicationController
   include Admin::Admined
+  include SetResourceClassDummy
+  include SetUserAndCreationReasonDummy
+  include FindResourceDummy
 
   # GET /admin/site_settings
   # GET /admin/site_settings.json
@@ -23,16 +26,16 @@ class Admin::SiteSettingsController < ApplicationController
     end
   end
 
-  # GET /admin/site_settings/new
-  # GET /admin/site_settings/new.json
-  def new
-    @admin_site_setting = Admin::SiteSetting.new
+  ## GET /admin/site_settings/new
+  ## GET /admin/site_settings/new.json
+  #def new
+  #  @admin_site_setting = Admin::SiteSetting.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @admin_site_setting }
-    end
-  end
+  #  respond_to do |format|
+  #    format.html # new.html.erb
+  #    format.json { render json: @admin_site_setting }
+  #  end
+  #end
 
   # GET /admin/site_settings/1/edit
   def edit
@@ -87,6 +90,24 @@ class Admin::SiteSettingsController < ApplicationController
 
   def admin_site_setting_params
     params.require(:admin_site_setting).permit!
+  end
+
+  def user_set
+  end
+
+  def supplier_set
+  end
+
+  def somebody_set
+  end
+
+  def user_get
+  end
+
+  def supplier_get
+  end
+
+  def somebody_get
   end
 
 end

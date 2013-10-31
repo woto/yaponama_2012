@@ -1,5 +1,7 @@
 class Upload < ActiveRecord::Base
-  include BelongsToUser
+  include Code_1AttrAccessorAndValidation
+  include SetCreationReasonBasedOnCode_1
+  include BelongsToSomebody
   has_and_belongs_to_many :pages
   before_save :update_asset_attributes
   mount_uploader :upload, UploadUploader

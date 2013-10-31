@@ -1,0 +1,49 @@
+<%= row do %>
+
+  <div class="col-md-8">
+
+    <%= twbs_form_for @resource, url: [(admin_zone? ? :admin : nil), :user] do |f| %>
+
+      <%= f.twbs_collection_select :order_rule, Rails.configuration.somebody_order_rules, :first, :last %>
+
+      <%= f.twbs_text_field :prepayment %>
+
+      <%= f.twbs_collection_select :main_profile_id, @resource.profiles, :id, :to_label, :include_blank => true %>
+
+      <%= panel 'default' do |p| %>
+        <%= p.heading do %>
+          <%= p.title { 'Часовой пояс' } %>
+        <% end %>
+        <%= p.body do %>
+          <%= f.twbs_collection_radio_buttons :use_auto_russian_time_zone, [['Вручную', false], ['Автоматически', true]], :last, :first, { variation: 'vertical', label: false }, rel: 'radio radio-use-auto-russian-time-zone' %>
+          <%= f.twbs_select :russian_time_zone_manual_id, Rails.configuration.russian_time_zones.map {|k,v| [v,k]}, { label: false } %>
+          <%= f.twbs_select :cached_russian_time_zone_auto_id, Rails.configuration.russian_time_zones.map {|k,v| [v,k]}, { label: false }, :disabled => true %>
+        <% end %>
+      <% end %>
+
+      <%= panel 'default' do |p| %>
+        <%= p.heading do %>
+          <%= p.title { 'Права' } %>
+        <% end %>
+        <%= p.body do %>
+          <%= f.twbs_collection_select :role, Rails.configuration.somebody_roles.select{|k, v| v["real"] == true}.map{|k, v| [k, v['title']] }, :first, :last, :include_blank => false %>
+
+          <%# TODO Пользователь может принадлежать месту (магазину) (а может и нет) только если является менеджером %>
+          <%= f.twbs_collection_select :place_id, Deliveries::Place.all, :id, :name, { include_blank: true } %>
+
+          <%# TODO должность не может быть у гостя и пользователя %>
+          <%= f.twbs_text_field :post %>
+        <% end %>
+      <% end %>
+
+      <%= f.twbs_check_box :logout_from_other_places %>
+
+      <%= render 'profileables/forms/shared/notes', f: f %>
+
+      <%= f.twbs_submit %>
+
+    <% end %>
+
+  </div>
+
+<% end %>

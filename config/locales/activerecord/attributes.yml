@@ -3,7 +3,7 @@ ru:
     attributes:
       spare_info:
         catalog_number: Каталожный номер
-        brand: Производитель
+        #brand: Производитель
         content: Содержание
       page:
         description: Описание SEO
@@ -47,14 +47,14 @@ ru:
         mesto_rozhdeniya: Место рождения
         comment: Комментарий к паспорту
       brand:
-        parent_brand_id: Родительский производитель
+        #parent_brand_id: Родительский производитель
         name: Название производителя
         image: Логотип
         rating: Рейтинг
         content: Описание
       model:
         name: Название модели
-        parent_brand_id: Бренд
+        #parent_brand_id: Бренд
       generation:
         model_id: Модель
         name: Название поколения
@@ -104,7 +104,7 @@ ru:
         order_rule: Правило оплаты
         logout_from_other_places: Автовыход
         main_profile_id: Основное контактное лицо
-        cached_main_profile: Кешированное основное контактное лицо
+        cached_main_profile: Основное контактное лицо кешированное
         post: Должность сотрудника
         use_auto_russian_time_zone: Часовой пояс автоматически
         place_id: Расположение сотрудника
@@ -117,8 +117,6 @@ ru:
       car:
         vin: VIN код
         frame: FRAME код
-        generation: Поколение
-        modification: Модификация
         car_number: Автомобильный номер
         selling: Продается
         cost: Цена
@@ -128,8 +126,7 @@ ru:
         dverey: Количество дверей
         rul:  Расположение руля
         torg: Торг
-        parent_brand_id: Производитель
-        model: Модель
+        #parent_brand_id: Производитель
         dvigatel: Объем двигателя (литров)
         tip: Тип двигателя
         moschnost: Мощность двигателя (лошадинных сил)

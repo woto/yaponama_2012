@@ -1,8 +1,17 @@
 $ ->
-  init()
 
-$(document).on 'page:change', ->
-  init()
+  bootstrapperize()
+
+$(document).on 'page:load', ->
+  bootstrapperize()
+
+window.bootstrapperize = ->
+
+  #$("#grid-toolbar-columns").on "click", (e) ->
+  #  $(".modal-body").load "/render/62805", (result) ->
+  #    $("#myModal").modal show: true
+
+
   $("*[data-poload]").on "click", (e) ->
     e.preventDefault()
     that = $(this)
@@ -14,10 +23,10 @@ $(document).on 'page:change', ->
         that.data('visible', true)
         that.popover(trigger: 'manual', html: 'true', content: d).popover "show"
 
-init = ->
   $("[rel~=tooltip]").tooltip()
 
-  $("[rel~=popover]").popover()
+  $("[rel~=popover]").popover().click (e) ->
+    e.preventDefault()
 
   $("[rel~='checkbox']").each ->
 

@@ -1,27 +1,9 @@
-<%- model_class = Supplier -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
-</div>
+<%= somebody_tabs do %>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @supplier.name %></dd>
+  <ul class="list-unstyled">
+    <li><h4><%= link_to 'Движение средств', transactions_admin_supplier_accounts_path(supplier_id: @somebody) %></h4></li>
+  </ul>
 
-  <dt><strong><%= model_class.human_attribute_name(:debit) %>:</strong></dt>
-  <dd><%= @supplier.account.debit %></dd>
+  <%= render 'smart_show' %>
 
-  <dt><strong><%= model_class.human_attribute_name(:credit) %>:</strong></dt>
-  <dd><%= @supplier.account.credit %></dd>
-</dl>
-
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              admin_suppliers_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_admin_supplier_path(@supplier), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              admin_supplier_path(@supplier),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</div>
+<% end %>

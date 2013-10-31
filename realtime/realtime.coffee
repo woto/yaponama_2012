@@ -29,11 +29,12 @@ rooms = {}
 connections = {}
 
 db.connect (err) ->
-  console.log err if err?
+  #console.log err if err?
   db.query "SELECT * from admin_site_settings", (err, result) ->
-    console.log err if err?
+    #console.log err if err?
     config = result.rows[0]
 
+    debugger
     server.listen parseInt(config['socket_io_port'], 10), config['socket_io_address']
     sub = rs.createClient(config['redis_port'], config['reds_host'])
 
@@ -100,19 +101,49 @@ db.connect (err) ->
                   db.query "UPDATE users SET online = true where id=$1", [user_id]
 
                   # Получаем роль клиента
-                  db.query "SELECT role from users where id=$1", [user_id], (err, res) ->
-                    if res.rows[0].role in ['manager', 'admin']
-                      role = 'seller'
-                    else
-                      role = 'buyer'
+                  db.query "SELECT * from users where id=$1", [user_id], (err, res) ->
 
-                    # Инициализирум users
-                    users[user_id] = 
-                      role: role
-                      connections: [conn.id]
+                    cached_main_profile = JSON.parse(res.rows[0].cached_main_profile)
+                    debugger
 
-                    callback null
-                
+                    place_id = res.rows[0].deliveries_places_place_id
+                    post = res.rows[0].post
+                    name = cached_main_profile?.names?[0]?['name']
+                    phone = cached_main_profile?.phones?[0]?['phone']
+
+                    async.series [(callback) ->
+
+                      if place_id?
+                        db.query "SELECT * FROM deliveries_places_places WHERE id=$1", [place_id], (err, res) ->
+                          callback err, res.rows[0].name
+                      else
+                        callback null, null
+
+                        #, (callback) ->
+                        #  
+                        #  callback null, aaa
+
+                    ], (err, results) ->
+
+                      place = results[0]
+
+                      if res.rows[0].role in ['manager', 'admin']
+                        role = 'seller'
+                      else
+                        role = 'buyer'
+
+                      # Инициализирум users
+                      users[user_id] = 
+                        name: name
+                        phone: phone
+                        role: role
+                        connections: [conn.id]
+                        post: post
+                        # TODO Возможно лучше потом переименовать в place или location
+                        place: place
+
+                      callback null
+
               ], (err, results) ->
 
                 # Сохраняем сопоставление id сессии - инстанс сессии
@@ -142,7 +173,11 @@ db.connect (err) ->
               message: 'update residents'
               comment: debug
               room: room
-              residents: rooms[room]['users']
+              # Заменить на users (?)
+              residents: _.map(rooms[room]['users'], (user_id) ->
+                users[user_id]
+              )
+               
 
             connections[connection_id].write JSON.stringify(data)
 
@@ -176,43 +211,60 @@ db.connect (err) ->
 
         ), 5000
 
-    #sub.on "pmessage", (channel, msg, data) ->
-    #  console.log msg
-    #  console.log channel
-    #  console.log data
+    message_to_room = (room, talk) ->
+      debugger
+      for user in rooms[room]['users']
+        for connection_id in users[user]['connections']
+          data =
+            message: 'new talk'
+            comment: ''
+            room: room
+            talk: talk
 
-    #  switch msg
+          connections[connection_id].write JSON.stringify(data)
 
-    #    when 'daskfhlqwefuihg'
-    #      room = JSON.parse(data)['auth_token']
-    #      clients = io.sockets.in(room).emit 'talk',
-    #        data
-    #      break
+    sub.on "pmessage", (channel, msg, data) ->
+      #console.log msg
+      #console.log channel
+      #console.log data
 
-    #    # TODO Его уже нет. теперь эти поля в юзер, позже подумаю как надо
-    #    when 'rails.geo1.create'
-    #      clients = io.sockets.clients()
-    #      for client in clients
-    #        client.emit msg,
-    #          data
-    #      break
+      switch msg
 
-    #    when "rails.calls.create"
-    #      clients = io.sockets.clients()
-    #      for client in clients
-    #        client.emit msg,
-    #          data
-    #      break
+        when 'talk'
+          debugger
+          data = JSON.parse(data)
+          message_to_room(data['user_id'], data)
 
-    #    when "rails.stats.create"
-    #      clients = io.sockets.clients()
-    #      for client in clients
-    #        client.emit msg,
-    #          data
-    #      break
+          #when 'daskfhlqwefuihg'
+          #  room = JSON.parse(data)['auth_token']
+          #  clients = io.sockets.in(room).emit 'talk',
+          #    data
+          #  break
 
-    #    when "d"
-    #      console.log 'a'
+          ## TODO Его уже нет. теперь эти поля в юзер, позже подумаю как надо
+          #when 'rails.geo1.create'
+          #  clients = io.sockets.clients()
+          #  for client in clients
+          #    client.emit msg,
+          #      data
+          #  break
+
+          #when "rails.calls.create"
+          #  clients = io.sockets.clients()
+          #  for client in clients
+          #    client.emit msg,
+          #      data
+          #  break
+
+          #when "rails.stats.create"
+          #  clients = io.sockets.clients()
+          #  for client in clients
+          #    client.emit msg,
+          #      data
+          #  break
+
+          #when "d"
+          #  console.log 'a'
 
 
-    #sub.psubscribe "*"
+    sub.psubscribe "*"

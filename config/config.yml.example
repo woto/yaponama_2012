@@ -27,6 +27,7 @@ defaults: &defaults
   travel_mode: TRANSIT
   automatic_calculate_active: true
   max_automatic_calculated_cost: 600
+  default_time_zone_id: 4
 
   checkout_account: Номер счета получателя платежа
   checkout_bank: Наименование банка получателя платежа

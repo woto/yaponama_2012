@@ -1,0 +1,17 @@
+<%= row do %>
+
+  <div class="col-sm-5">
+
+    <%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
+
+      <%= f.twbs_hidden_field :model_id %>
+
+      <%= f.twbs_text_field :name %>
+
+      <%= f.twbs_submit %>
+
+    <% end %>
+
+  </div>
+
+<% end %>

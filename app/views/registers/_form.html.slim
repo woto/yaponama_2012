@@ -1,25 +1,27 @@
-= form_for @user, url: register_path(with: params[:with]), builder: TwitterBootstrapFormBuilder, html: { class: "form-horizontal" } do |f|
+= row do
+  .col-sm-8
+    = twbs_form_for @user, url: register_path(with: params[:with]) do |f|
 
-  = f.alert_danger do
-    | Пожалуйста исправьте ошибки для продолжения регистрации.
+      = f.alert_danger do
+        | Пожалуйста исправьте ошибки для продолжения.
 
-  = f.fields_for :profiles do |pr|
-    = pr.fields_for :names do |n|
-      = n.text_input :name, placeholder: 'Как к вам обращаться?'
-      = n.standard_recreate
+      = f.fields_for :profiles do |pr|
+        = pr.fields_for :names do |n|
+          = n.twbs_text_field :name, placeholder: 'Как к вам обращаться?', asterisk: true
+          = n.standard_recreate
 
-    - if params[:with] == 'email'
-      = pr.fields_for :emails do |e|
-        = e.text_input :value, placeholder: "Адрес электронной почты", label: 'email'
-        = e.standard_recreate
+        - if params[:with] == 'email'
+          = pr.fields_for :emails do |e|
+            = e.twbs_text_field :value, placeholder: "Адрес электронной почты, напр. pavel@mail.ru", label: 'E-mail', asterisk: true
+            = e.standard_recreate
 
-    - if params[:with] == 'phone'
-      = pr.fields_for :phones do |p|
-        = p.text_input :value, placeholder: "Номер мобильного телефона", rel: 'mobile-mask-on', label: 'mobile_phone'
-        = p.standard_recreate
+        - if params[:with] == 'phone'
+          = pr.fields_for :phones do |p|
+            = p.twbs_text_field :value, placeholder: "Номер мобильного телефона", rel: 'mobile-mask-on', label: 'Мобильный телефон', asterisk: true
+            = p.standard_recreate
 
-  = f.password_input :password, placeholder: "Придумайте пароль не короче 6 символов"
+      = f.twbs_password_field :password, placeholder: "Придумайте пароль не короче 6 символов", asterisk: true
 
-  = f.password_input :password_confirmation, placeholder: "Повторите ввод пароля" 
+      = f.twbs_password_field :password_confirmation, placeholder: "Повторите ввод пароля", asterisk: true
 
-  = f.standard_submit 'Зарегистрироваться'
+      = f.twbs_submit 'Зарегистрироваться'

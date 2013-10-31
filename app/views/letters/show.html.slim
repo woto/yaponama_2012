@@ -1,0 +1,87 @@
+p#notice = notice
+
+/p
+  strong User: 
+  = @letter.user
+/p
+  strong Email: 
+  = @letter.email
+
+h4 
+  = @letter.subject
+  '
+  a href="#{@letter.letter.url}" Скачать оригинал письма
+
+br
+
+- html = ''
+- plain = ''
+- attachments = ''
+
+- @letter.letter_parts.each do |letter_part|
+  / Вложения
+  - if letter_part.is_attachment?
+    - tmp = capture do
+      li
+        a href="/admin/users/#{@user.id}/letters/#{@letter.id}/letter_parts/cid/#{letter_part[:cid]}" #{letter_part.filename}
+    - attachments << tmp
+  / Части письма
+  - else
+    - if ['text/html', 'application/xhtml+xml'].include? letter_part.letter_part_type
+      - html = capture do
+        - body = letter_part.body.encode('utf-8', letter_part.charset)
+        / Rewrite body to link to embedded attachments served by cid
+        - body.gsub! /cid:([^'"> ]+)/, "/admin/users/#{@user.id}/letters/#{@letter.id}/letter_parts/cid/\\1"
+        / Rewrite body to open links in a new window
+        - body.gsub! /<a\s+/, '<a target="_blank" '
+        == body
+    - elsif letter_part.letter_part_type == 'text/plain'
+      - plain = capture do
+        pre == letter_part.body.encode('utf-8', letter_part.charset)
+    /- elsif !(['multipart/alternative'].include? letter_part.letter_part_type)
+      pre = letter_part.body.encode('utf-8', letter_part.charset)
+
+- self.activated = false
+
+- letter_type_css_class = 'wtf TODO'
+
+ul#letter-type.nav.nav-tabs
+  - if html.present?
+    li class="#{letter_type_css_class}"
+      a href="#html" Мультимедийное
+  - if plain.present?
+    li class="#{letter_type_css_class}"
+      a href="#plain" Текстовое
+  - if attachments.present?
+    li class="#{letter_type_css_class}"
+      a href="#attachments" Вложения
+ 
+- self.activated = false
+
+.tab-content
+  - if html.present?
+    .tab-pane.active id="html" class="#{letter_type_css_class}"
+      iframe class="letter-iframe" id='html-iframe' width="100%" height="400" src="" frameborder="0"
+      javascript:
+        $(function() {
+          html = "#{j(html)}"
+          $('#html-iframe').contents().find('html').html(html)
+        });
+  - if plain.present?
+    .tab-pane id="plain" class="#{letter_type_css_class}"
+      iframe class="letter-iframe" id='plain-iframe' width="100%" height="400" src="" frameborder="0"
+      javascript:
+        $(function() {
+          plain = "#{j(plain)}"
+          $('#plain-iframe').contents().find('html').html(plain)
+        });
+  - if attachments.present?
+    .tab-pane id="attachments"
+      iframe class="letter-iframe" id='attachments-iframe' width="100%" height="400" src="" frameborder="0"
+      javascript:
+        $(function() {
+          attachments = "#{j(attachments.html_safe)}"
+          $('#attachments-iframe').contents().find('html').html('<ul class="list-unstyled">' + attachments + '</ul>')
+        });
+
+hr

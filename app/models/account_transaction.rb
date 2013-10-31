@@ -30,13 +30,16 @@ class AccountTransaction < ActiveRecord::Base
     #self.accountable_id = account.accountable_id
     #self.accountable_type = account.accountable_type
 
+    self.somebody_id_before = account.somebody_id
+    self.somebody_id_after = account.somebody_id
+
     self.credit_before = account.credit_was
     self.credit_after = account.credit
 
     self.debit_before = account.debit_was
     self.debit_after = account.debit
 
-    account.save
+    account.save!
 
   end
 

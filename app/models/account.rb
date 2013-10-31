@@ -1,5 +1,7 @@
 class Account < ActiveRecord::Base
-  belongs_to :accountable, :polymorphic => true, touch: true, inverse_of: :account
+  include Selectable
+
+  belongs_to :somebody, inverse_of: :account
   has_many :account_transactions
 
   # TODO Хотелось бы это переделать в виртуальные методы (вопрос с dirty)
@@ -20,5 +22,41 @@ class Account < ActiveRecord::Base
   def debit=(val)
     raise 'Прямое изменение debit запрещено, воспользуйтесь AccountTransaction'
   end
+
+  after_save do
+    somebody.update_columns(:cached_debit => debit, :cached_credit => credit)
+  end
+
+  after_save do
+    #def check_orders
+    #  raise '1'
+    #  # TODO CHECK
+    #  
+    #  if order_rule.to_sym == :none
+    #    return
+    #  elsif order_rule.to_sym == :all 
+    #    inorder_orders = orders.where(:status => :inorder)
+    #    unless (account.debit + inorder_orders.inject(0){|summ, order| summ += order.order_cost}) * prepayment / 100.00 <= account.credit
+    #      return
+    #    end
+
+    #    inorder_orders.each do |order|
+    #      if (account.debit + order.order_cost) * prepayment / 100.00 <= account.credit
+    #        order.status = :ordered
+    #        order.products.each do |product|
+    #          product.update_attributes(:status => :ordered)
+    #        end
+    #        account.debit += order.order_cost
+    #        order.save
+    #        account.save
+    #      end
+    #    end
+
+    #  end
+
+    #end
+  end
+
+
 
 end

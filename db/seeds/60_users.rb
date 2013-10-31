@@ -1,20 +1,26 @@
 # encoding: utf-8
 
 user = User.new
-user.assign_attributes( SiteConfig.default_user_attributes )
+user.assign_attributes( SiteConfig.default_somebody_attributes )
 user.role = "admin"
 user.password = '1111111111'
+user.code_1 = 'seed'
+user.phantom = false
+user.online = false
 
 account = user.build_account
-account.assign_attributes( {:debit => 0, :credit => 0} )
+#account.assign_attributes( {:debit => 0, :credit => 0} )
 
 profile = user.profiles.new
-profile.names.new(:name => "Администратор", :creation_reason => "profile")
-profile.phones.new({:phone => '1111111111', :phone_type => 'mobile_russia', :creation_reason => 'profile'} )
-profile.email_addresses.new( {:email_address => 'admin@example.com'} )
+profile.names.new(:name => "Администратор")
+profile.phones.new({:value => '+7 (111) 111-11-11', :mobile => true} )
+profile.emails.new( {:value => 'admin@example.com'} )
 
 user.save!
 
 20.times do
-  user.products.create(catalog_number: TemplateData::CATALOG_NUMBERS.sample, manufacturer: TemplateData::MANUFACTURERS.sample, short_name: TemplateData::SHORT_NAMES.sample, buy_cost: rand(400..3000), sell_cost: rand(500..4000), quantity_ordered: rand(1..4))
+  catalog_number = TemplateData::CATALOG_NUMBERS.sample
+  manufacturer = Brand.where(name: TemplateData::MANUFACTURERS.sample).first_or_create
+  short_name = TemplateData::SHORT_NAMES.sample
+  product = user.products.create!(catalog_number: catalog_number, brand: manufacturer, short_name: short_name, buy_cost: rand(400..3000), sell_cost: rand(500..4000), quantity_ordered: rand(1..4), code_1: 'fixtures', hide_catalog_number: false)
 end

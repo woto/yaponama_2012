@@ -2,6 +2,10 @@
 
 class Page < ActiveRecord::Base
   include BelongsToCreator
+  include Transactionable
+  include Selectable
+  include Code_1AttrAccessorAndValidation
+  include SetCreationReasonBasedOnCode_1
 
   before_save :cut_first_slash
 
@@ -18,5 +22,9 @@ class Page < ActiveRecord::Base
   end
 
   has_many :comments, :as => :commentable
+
+  def to_label
+    path
+  end
 
 end

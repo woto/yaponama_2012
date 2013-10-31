@@ -1,3 +1,5 @@
+Написать тест для проверки правильности переключения vin/frame
+Написать тест для проверки 4 версий кешировнных и атрибутов
 TODO вернуть jquery-ui (widget необходим для работы file-upload)
 Задействовать или переделать password_reset_sent_at и все такое
 Переименовать russian_time_zone_auto_id в auto_offset. А так же доработать немного функционал. Целые числа (теперь не целые). Отрицательные/положительные смещения времени. Округление.
@@ -9,6 +11,10 @@ TODO вернуть jquery-ui (widget необходим для работы fil
   - content_for :form_error do
     = f.error_notification
 
+= f.alert_danger do
+  = f.error(:base)
+/= f.error_notification :message => f.error(:base)
+
 ==================
 
 TODO Создать тестовый проект, там посмотреть код error_notification, если получится, сделать так, чтобы если форма содержит ошибку
@@ -17,6 +23,9 @@ TODO Создать тестовый проект, там посмотреть �
 
   div class="page-header"
     h2=t '.title', :default => [:'helpers.titles.new', 'Список %{model}'], :model => model_class.model_name.human
+
+
+    h1 =t '.title', :default => model_class.model_name.human.pluralize
 
 ==================
 
@@ -34,3 +43,64 @@ TODO Создать тестовый проект, там посмотреть �
   <%= f.input :image %>
   <%= f.input :notes_invisible, :input_html => {:rows => 3}  %>
   company_required
+
+
+    # TODO
+    #[:mails].each do |table|
+    #  add_column table, :available, :boolean, :default => true
+    #  add_column table, :sequence, :integer
+    #  add_column table, :name, :string
+    #  add_column table, :delivery_cost, :decimal, :default => 0, :precision => 8, :scale => 2
+    #  add_column table, :delivery_id, :integer
+    #  add_column table, :content, :text
+    #  add_column table, :postal_address_required, :boolean, :default => false
+    #  add_column table, :full_prepayment_required, :boolean, :default => false
+    #  add_column table, :passport_required, :boolean, :default => false
+    #  add_column table, :track_number_required, :boolean, :default => false
+    #  #add_column table, :prepayment_for_delivery_required, :boolean, :default => false
+
+
+    #  add_index table, :delivery_id, name: "index_#{table}_on_delivery_id"
+    #end
+
+===================
+
+product_fields
+
+
+
+/ TODO вынести в shared, т.к. используется и в user и в edit контроллерах
+
+------------
+
+#root_products-tab.tab-pane.active
+  #root_products
+    
+    = f.simple_fields_for :root_products do |product| 
+      = render 'product_fields', :f => product, :stack => 0
+    .links
+      = link_to_add_association 'Добавить товар', f, :root_products, :class => "btn btn-success ignoredirty", :render_options => {:locals => {:stack => 0}}, :partial => 'product_fields' 
+
+=============
+
+Удалить все .form-actions
+
+=============
+
+/td
+  = link_to smart_route({:prefix => [:edit], :postfix => [item]}, :id => item.id, :user_id => item.user_id), data: { toggle: "tooltip" }, title: "#{ t('.edit', :default => t("helpers.links.edit")) }", :class => 'btn btn-warning', :rel => "tooltip" do
+    i.icon-edit
+
+/td
+  = link_to smart_route({:postfix => [item]}, :id => item.id, :user_id => item.user_id), :method => :delete, data: { toggle: "tooltip" }, title: "#{ t('.destroy', :default => t("helpers.links.destroy")) }", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :rel => "tooltip", :class => 'btn btn btn-danger' do
+    i.icon-trash
+
+/td
+  = link_to smart_route({:prefix => [:transactions], :postfix => [item]}, :id => item.id, :user_id => item.user_id), data: { toggle: "tooltip" }, title: "#{ t('.transactions', :default => t("helpers.links.transactions")) }", :class => 'btn', :rel => "tooltip" do
+    i.icon-time
+
+=============
+
+<li> 
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")), smart_route({:postfix => [:products, :multiple_destroy_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status]), :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }  %>
+</li>

@@ -1,23 +1,79 @@
 first_admin:
   somebody: first_admin
   creation_reason: fixtures
+  cached_names: '[{"surname":"Корнев","name":"Руслан","patronymic":"Михайлович"}]'
+  cached_phones: '[{"value":"+7 (111) 111-11-11"}]'
+  cached_emails: '[{"value":"foo@example.com"}]'
+  cached_passports: '[{"seriya":"1","nomer":"1","mesto_rozhdeniya":"1"}]'
 
 first_user:
   somebody: first_user
   creation_reason: fixtures
+  cached_names: '[{"surname":"","name":"Пользователь","patronymic":""}]'
+  cached_phones: '[{"value":"+7 (123) 123-12-31"}]'
+  cached_emails: '[{"value":"first_user_email@example.com"}]'
+  cached_passports: '[]'
 
 stan:
   somebody: stan
   creation_reason: fixtures
+  cached_names: '[{"surname":"","name":"Стэн","patronymic":""}]'
+  cached_phones: '[{"value":"+7 (333) 333-33-33"}]'
+  cached_emails: '[]'
+  cached_passports: '[]'
 
 otto:
   somebody: otto
   creation_reason: fixtures
+  cached_names: '[{"surname":"","name":"Отто","patronymic":""}]'
+  cached_phones: '[{"value":"+7 (666) 666-66-66"},{"value":"8-888-888-88-88"},{"value":"+7 (555) 555-55-55"},{"value":"+7 (111) 111-11-11"}]'
+  cached_emails: '[{"value":"fake@example.com"},{"value":"foo@example.com"}]'
+  cached_passports: '[]'
 
 mark:
   somebody: mark
   creation_reason: fixtures
+  cached_names: '[{"surname":"","name":"Марк","patronymic":""}]'
+  cached_phones: '[{"value":"+7 (444) 444-44-44"}]'
+  cached_emails: '[{"value":"mark@example.com"}]'
+  cached_passports: '[]'
 
 mike:
   somebody: mike
   creation_reason: fixtures
+  cached_names: '[{"surname":"Майков","name":"Майк","patronymic":"Майкович"}]'
+  cached_phones: '[{"value":"+7 (777) 777-77-77"}]'
+  cached_emails: '[]'
+  cached_passports: '[]'
+
+mile_main:
+  somebody: mile
+  cached_names: '[{"surname":"","name":"1","patronymic":""}]'
+  cached_phones: '[{"value":"1"}]'
+  cached_emails: '[]'
+  cached_passports: '[]'
+  creation_reason: fixtures
+
+mile_not_main:
+  somebody: mile
+  cached_names: '[{"surname":"","name":"2","patronymic":""}]'
+  cached_phones: '[{"value":"2"}]'
+  cached_emails: '[]'
+  cached_passports: '[]'
+  creation_reason: fixtures
+
+exist:
+  somebody: exist
+  creation_reason: fixtures
+  cached_names: '[{"surname":"Македонский","name":"Александр","patronymic":""}]'
+  cached_phones: '[{"value":"22-66-19"}]'
+  cached_emails: '[]'
+  cached_passports: '[]'
+
+anton:
+  somebody: anton
+  creation_reason: fixtures
+  cached_names: '[{"surname":"Чехов","name":"Aнтонон","patronymic":"Павлович"}]'
+  cached_phones: '[{"value":"+7 (112) 233-44-55"},{"value":"+7 (554) 433-22-11"}]'
+  cached_emails: '[]'
+  cached_passports: '[]'

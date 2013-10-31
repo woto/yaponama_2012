@@ -1,6 +1,6 @@
 class Transactionables < ActiveRecord::Migration
   def self.up
-    [:phones, :names, :email_addresses, :passports, :postal_addresses, :cars, :products, :companies, :accounts, :orders, :profiles].each do |table_name|
+    [:phones, :names, :emails, :passports, :postal_addresses, :cars, :products, :companies, :accounts, :orders, :profiles, :pages, :somebodies, :brands, :blocks].each do |table_name|
       create_table "#{table_name.to_s.singularize}_transactions".to_sym do |t|
 
         table_model = table_name.to_s.singularize.camelize.constantize
@@ -8,8 +8,10 @@ class Transactionables < ActiveRecord::Migration
         # id привязанного объекта
         eval "t.references :#{table_name.to_s.singularize}, index: true"
 
-        # Используется для profileable. Не для ProductTransaction
-        t.references :user, index: true
+        # Операция create, update, destroy
+        unless table_model == Account
+          t.string :operation
+        end
 
         # Ну и контроллировать кто это сделал
         t.references :creator, index: true
@@ -24,20 +26,19 @@ class Transactionables < ActiveRecord::Migration
 
         table_model.columns.each do |column|
           # ID Отслеживаемого объекта никогда не может меняться,
-          # поэтому следить за ним не надо. В отличии от supplier_id (в противовес user_id)
+          # поэтому следить за ним не надо. В отличии от supplier_id (в противовес somebody_id)
           # TODO
-          #if table_model == Account && ["accountable_id", "accountable_type"].include?(column.name)
-          #  eval "t.#{column.type.to_s} :#{column.name}"
-          #elsif !(["user_id", "id", "created_at", "updated_at"].include?(column.name))
-          if column.name != "id"
+          if table_model == Account && ["accountable_id", "accountable_type"].include?(column.name)
+            #eval "t.#{column.type.to_s} :#{column.name}"
+            nil
+          elsif !(["creator_id", "id", "created_at", "updated_at"].include?(column.name))
             eval "t.#{column.type.to_s} :#{column.name}_before"
             eval "t.#{column.type.to_s} :#{column.name}_after"
           end
         end
 
-        # TODO
-        #t.column :created_at, :datetime
-        t.timestamps
+        # У транзакции есть только дата создания.
+        t.column :created_at, :datetime
 
       end
     end

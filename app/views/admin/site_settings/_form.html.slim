@@ -21,6 +21,7 @@
     = f.input :travel_mode
     = f.input :automatic_calculate_active
     = f.input :max_automatic_calculated_cost
+    = f.input :default_time_zone_id, :collection => Rails.configuration.russian_time_zones.map {|k,v| [v,k]}
   - if params[:filter] == 'prices' || params[:filter].blank?
     = f.input :request_emex
     = f.input :emex_income_rate, :as => :string

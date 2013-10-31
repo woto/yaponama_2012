@@ -3,19 +3,22 @@
 /body#admin
 body
 
-  = render :partial => 'layouts/shared/body_head'
+  = render :partial => 'layouts/shared/body'
   = render :partial => "layouts/admin_navbar"
 
-  .container-fluid style="margin-top: 20px"
+  .container
 
-    = bootstrap_flash
+    = render 'flash'
+
     = yield :form_error
 
-    .row-fluid
-      .span12
-        - if @user
-          #chat-button-show.chat-button
-            i.icon.icon-double-angle-left
+    #confirm-block
+      = render 'confirm'
+
+    = page_header
+
+    .row
+      .col-sm-12
         = yield
 
     hr

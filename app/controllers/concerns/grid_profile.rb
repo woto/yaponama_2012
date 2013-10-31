@@ -31,7 +31,6 @@ module GridProfile
       @grid.visible_cached_names = '1'
       @grid.visible_cached_phones = '1'
       @grid.visible_cached_emails = '1'
-      @grid.visible_cached_passports = '1'
     end
 
   end

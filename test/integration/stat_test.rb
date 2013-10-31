@@ -19,19 +19,19 @@ class StatTest < ActionDispatch::IntegrationTest
   test 'Если на стороне клиента установлено неверное время, то ошибки произойти не должно, а будет установлен часовой пояс по-умолчанию. Если клиент изменит время на своем компьютере на верное, напр. +3 часа (плюс минус погрешности в минутах), то соответсвенно у него должен выставиться часовой пояс +3' do
 
     post '/stats', {
-      russian_time_zone_auto_id: 555,
       stat: {
+        russian_time_zone_auto_id: 555,
         location: '' ,
         title:  '',
         referrer: '',
       }
     }
 
-    assert_equal 4, User.last.russian_time_zone_auto_id
+    assert_equal 4, User.last.cached_russian_time_zone_auto_id
 
     post '/stats', {
-      russian_time_zone_auto_id: '-3.10',
       stat: {
+        russian_time_zone_auto_id: '-3.10',
         location: '' ,
         title:  '',
         referrer: '',

@@ -2,13 +2,7 @@
 <% @meta_title_small = @contact.to_label %>
 
 
-<%= user_tabs do %>
-
-    <strong>
-      <%= link_to "Запросите PIN код повторно,", smart_route(prefix: [:ask], postfix: [:confirm, params[:resource_class].underscore]), method: :post %> если вдруг не получили его.
-    </strong>
-
-    <hr />
+<%= somebody_tabs do %>
 
     <%= render 'form' %>
 

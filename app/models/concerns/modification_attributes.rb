@@ -6,7 +6,6 @@ module ModificationAttributes
 
     belongs_to :modification
     accepts_nested_attributes_for :modification
-    #validates :modification, associated: true
 
     def modification_attributes=(attr)
       if attr["name"].present? && generation.present?
@@ -19,8 +18,6 @@ module ModificationAttributes
       else
         self.modification = nil
       end
-
-      #self.modification_id_will_change!
 
     end
 

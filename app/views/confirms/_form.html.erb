@@ -3,7 +3,10 @@
   <div class="col-sm-7">
 
     <%= twbs_form_for @contact, as: :confirm, url: smart_route(prefix: [:make], postfix: [:confirm, params[:resource_class].underscore]), method: :get  do |f| %>
-      <%= f.twbs_text_field :pin %>
+      <% hint = capture do %>
+        <%= link_to "Запросите PIN код повторно", smart_route(prefix: [:ask], postfix: [:confirm, params[:resource_class].underscore]), method: :post %>, если вдруг не получили его.
+      <% end %>
+      <%= f.twbs_text_field :pin, hint: hint%>
       <%= f.twbs_submit 'Подтвердить' %>
     <% end %>
 

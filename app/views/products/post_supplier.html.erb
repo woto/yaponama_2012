@@ -1,0 +1,26 @@
+<% @meta_title = "В #{Rails.configuration.products_status['post_supplier']['title']}" %>
+
+<%= somebody_tabs do %>
+
+  <%= twbs_form_for @ic, url: smart_route({:prefix => [:post_supplier_action], :postfix => [:products]}, jaba) do |f| %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.twbs_select(:supplier, Supplier.all.collect {|p| [ p.to_label, p.id ]}, {:include_blank => true, :hint => 'Выберите поставщика у которого будет заказан товар'}) %>
+      </div>
+    </div>
+
+    <%= f.twbs_submit "Заказать" %>
+
+    <%= panel 'default' do |p| %>
+      <%= p.heading {} %>
+      <%= p.body do %>
+        <%= render :partial => 'application/grid' %>
+      <% end %>
+    <% end %>
+
+    <%= link_to "Назад", params[:return_path], :class => "btn btn-default" %>
+
+  <% end %>
+
+<% end %>

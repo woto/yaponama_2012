@@ -28,12 +28,22 @@ mike:
   credit: 0.0
   somebody: mike
 
-first_supplier:
+avtorif:
   debit: 0.0
   credit: 0.0
-  somebody: first_supplier
+  somebody: avtorif
 
-second_supplier:
+mile:
   debit: 0.0
   credit: 0.0
-  somebody: second_supplier
+  somebody: mile
+
+exist:
+  debit: 0.0
+  credit: 0.0
+  somebody: exist
+
+anton:
+  debit: 0.0
+  credit: 0.0
+  somebody: anton

@@ -25,7 +25,7 @@ ru:
     creation_reason: Причина создания
     notes: Заметки
     notes_invisible: Служ. заметки
-    user_id: Покупатель
+    somebody_id: Владелец
     creator_id: Ответственный
     creator: Ответственный 
     checkbox: ''
@@ -110,3 +110,7 @@ ru:
     company: Компания
     phone_number: Телефон
     notes: Комментарий
+    cached_model: Модель кешированная
+    cached_generation: Поколение кешированное
+    cached_modification: Модификация кешированная
+    cached_brand: Бренд кешированный

@@ -7,7 +7,7 @@ module BelongsToCreator
   end
 
   def set_creator
-    if changes.present?
+    if changes.present? || new_record?
       self.creator = User.current_user
     end
   end

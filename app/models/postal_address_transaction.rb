@@ -1,4 +1,4 @@
 class PostalAddressTransaction < ActiveRecord::Base
   include BelongsToCreator
-  include BelongsToUser
+  include BelongsToSomebody
 end

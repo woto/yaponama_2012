@@ -4,10 +4,10 @@ module BelongsToProfile
   included do
     validates :profile, presence: true, associated: true
     
-    before_save :copy_user_id_from_profile_to_self
+    before_save :copy_somebody_id_from_profile_to_self
 
-    def copy_user_id_from_profile_to_self
-      self.user_id = profile.user_id
+    def copy_somebody_id_from_profile_to_self
+      self.somebody_id = profile.somebody_id
     end
 
   end

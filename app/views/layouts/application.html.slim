@@ -1,126 +1,101 @@
-= render :partial => "layouts/head"
+= render :partial => "layouts/shared/head"
+
+/= javascript_include_tag "/assets/JsSIP/dist/jssip-0.3.4.js"
 
 body
 
-  = render :partial => 'layouts/shared/body_head'
-  
-  .navbar.navbar-static-top.bottom-space
-    .navbar-inner
-      a.btn.btn-navbar.ignoredirty data-target=".nav-collapse" data-toggle="collapse"
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
+  /coffee:
+    $ ->
+      configuration =
+        ws_servers: "ws://192.168.2.5:8088/ws"
+        uri: "sip:1060@doubango.org"
+        password: "1060"
+        stun_servers: 'stun:74.125.132.127:19302'
+        register: true
+        trace_sip: true
 
-      a.brand href="/" style="margin: 0; padding: 5px 0"
-        = image_tag "logo.png", style: "height: 40px";
+      coolPhone = new JsSIP.UA(configuration)
+      coolPhone.start()
 
-      .collapse.nav-collapse
+      # Make an audio/video call:
 
-        ul.nav
-          li.divider-vertical.invisible
-          li
-            div style="margin-top: 5px"
-              = form_tag user_searches_path, :class => "navbar-form form-search", :method => :get do
-                div.input-append
-                  input.search-query type="text" style="width: 120px" placeholder="Артикул детали"
-                  button type="submit" class="btn" Искать
-          li.divider-vertical.invisible
-          li class="#{highlight_active([:controller => '/products', :status => 'incart'])}"
-            = link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do
-              |Корзина
-          li.dropdown
-            a.ignoredirty.dropdown-toggle data-toggle="dropdown" href="#" 
-              |Личный кабинет
-            ul.dropdown-menu
-              li class="#{highlight_active([:controller => "/profileables", :resource_class => 'Car'])}"
-                = link_to user_cars_path do
-                  i.icon.icon-truck
-                  |  Гараж
-              li class="#{highlight_active([:controller => '/orders'])}"
-                = link_to user_orders_path do
-                  i.icon.icon-list-alt
-                  |  Заказы
-              li
-                = link_to do
-                  i.icon.icon-money
-                  |  Счет
-              - if current_user.role == 'guest'
-                li = link_to "Вход на сайт", login_path
-                li = link_to "Регистрация", register_path
-                li.divider
-                li = link_to "Проблемы с входом?", new_password_reset_path
-              - else
-                li = link_to user_path do
-                  i.icon.icon-wrench
-                  |  Настройки
-                li.divider
-                li = link_to "Выход", logout_path, :method => :delete
-          li.divider-vertical.invisible
-          / TODO пока просто перенес
-          - if content_for :pages_controler
-            = yield(:pages_controller)
+      # Register callbacks to desired call events
+      eventHandlers =
+        progress: (e) ->
+          console.log "call is in progress"
 
-        ul.nav.pull-right
+        failed: (e) ->
+          console.log "call failed with cause: " + e.data.cause
 
-          li.dropdown
-            a.ignoredirty.dropdown-toggle data-toggle="dropdown" href="#"
-              /i.icon.icon-home
-              /'
-              |Информация для покупателей
-              /'
-              /b.caret
-            ul.dropdown-menu
-              li = link_to "Новости компании", "#"
-              li = link_to "Акции и бонусы", "#"
-              li = link_to "Способы оплаты", "#"
-              li class="#{highlight_active([:controller => "/deliveries"])}"
-                = link_to "Доставка и самовывоз", deliveries_path
-              li = link_to "Частые вопросы", "#"
-              /li style="float: left"
-                = link_to "Магазины", shops_path, style: "display: inline-block; margin: 3px 30px 0 0;"
+        ended: (e) ->
+          console.log "call ended with cause: " + e.data.cause
 
+        started: (e) ->
+          rtcSession = e.sender
+          console.log "call started"
+          
+      options =
+        eventHandlers: eventHandlers
+        mediaConstraints:
+          audio: true
+          video: false
 
-  .container-fluid
+      # coolPhone.call "1061", options
 
-    = bootstrap_flash
+  = render :partial => 'layouts/shared/body'
+
+  = render '/layouts/user_navbar'
+
+  .container
+
+    = render 'menu'
+
+    = render 'flash'
+
     = yield :form_error
 
-    .row-fluid
-      #main.span8
+    #confirm-block
+      = render 'confirm'
+
+    / TODO page-header вроде бы должен быть тут
+    = page_header
+
+    .row
+      #main.col-sm-12
         #talk-button-show.talk-button
-          #talk-notify style="height: 20px; position: absolute;" data-toggle="popover" data-html="true" data-placement="left" data-animate="true"
-          i.icon.icon-double-angle-left
+          <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">Launch demo modal</a>
+          #talk-notify style="height: 150px; position: absolute;" data-toggle="popover" data-html="true" data-placement="left" data-animate="true"
+          img src="/assets/talk.png"
         = yield
-      #talk.span4
-        #talk-button-hide.talk-button
-          i.icon.icon-double-angle-right
 
-        = render :partial => "talks/talk"
+    #talk
+      = render :partial => "talks/talk"
 
-    hr
+    hr style="margin-top: 80px"
     footer
-      .row-fluid
-        .span2
+      .row
+        .col-md-2
           p &copy; Company 2012
-        .span2
+        .col-md-2
           small
-            ul.unstyled
+            ul.list-unstyled
               li : a href="#" Новости компании
               li : a href="#" Акции и бонусы
               li : a href="#" Способы оплаты
-              li : a href="#" Доставка и самовывоз
+              li = link_to 'Доставка и самовывоз', deliveries_path
               li : a href="#" Частые вопросы
-        .span2
+        .col-md-2
           small
-            ul.unstyled
+            ul.list-unstyled
               li : a href="#" Поставщикам
               li : a href="#" Вакансии
               li : a href="#" Юридическая информация
-        .span3
+        .col-md-3
           small
-            ul.unstyled
+            ul.list-unstyled
               li : a href="#" Связь с руководством
               - if ["admin", "manager"].include? current_user.role
                 li = link_to "Администрирование", admin_path
-        .span3
+        .col-md-3
       = render "layouts/shared/footer"
+

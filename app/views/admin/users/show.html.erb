@@ -1,0 +1,14 @@
+<% @meta_title = 'Главная' %>
+
+<%= somebody_tabs do %>
+  <ul class="list-unstyled">
+    <li><h4><%= link_to 'Движение средств', transactions_admin_user_accounts_path(@resource) %>
+    <li><h4><%= link_to 'Разлогинить со всех компьютеров.', logout_from_all_places_admin_user_path(@resource), method: :delete, data: {confirm: 'Вы уверены? Пользователю необходимо будет заново войти на сайт.'} %></h4></li>
+    <li><h4><%= link_to 'Сменить пароль', password_admin_user_path(@resource) %></h4></li>
+    <li><h4><%= link_to 'Настройки', edit_admin_user_path(@resource) %></h4></li>
+    <li><h4><%= link_to 'История изменения настроек', transactions_admin_user_path(@resource) %>
+  </ul>
+
+  <%= render 'smart_show' %>
+
+<% end %>

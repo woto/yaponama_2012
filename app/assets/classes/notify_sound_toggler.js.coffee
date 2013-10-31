@@ -25,12 +25,18 @@ class NotifySoundToggler
 
     play = ->
       try
+        audio.pause()
         audio.currentTime = 0
         audio.play()
 
     stop = ->
       try
         audio.pause()
+
+    # Для отладки
+    $(document).on 'ajax:complete', '.notify-sound-toggler-form', (xhr, status) =>
+      $('#sound-toggled').data('value', 'true')
+      $('#sound-toggled').text('true')
 
     $(document).on 'click', '.notify-sound-toggler-link', (event) =>
      
@@ -58,16 +64,15 @@ class NotifySoundToggler
 
       # Если не обновится в ближайшее время, то произойдет отправка на сервер
 
-      submit = ->
-        $('.notify-sound-toggler-form').trigger('submit.rails')
-
-      debounced_submit = _.debounce(submit, 500);
-
-      debounced_submit()
+      @debounced_submit()
 
       @update_icon()
 
       false
+
+  @debounced_submit = _.debounce((e) ->
+    $('.notify-sound-toggler-form').trigger('submit.rails')
+  , 500)
 
 $(document).on 'page:load', ->
   #NotifySoundToggler.init()

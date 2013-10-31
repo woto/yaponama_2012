@@ -4,15 +4,6 @@
 //= require jquery.ui.all
 //= require jquery_ujs
 //= require bootstrap
-// require bootstrap/dist/js/bootstrap
-//
-//= require sockjs-client/sockjs
-//
-// == sht_rails
-//
-//= require handlebars
-//= require_tree ../../templates
-//
 //= require turbolinks
 //= require cocoon
 //
@@ -21,40 +12,9 @@
 //= require console.log-wrapper/consolelog.min.js
 //= require console.log-wrapper/consolelog.detailprint.min.js
 //
-//
-//
-// #DIRTY TESTS TODO REFACTOR
-//
-//
-//= require jquery-cookie/jquery.cookie
-//
-//= require jquery-dirtyforms/jquery.dirtyforms
-
 //= require underscore/underscore
-
-//= require jquery-jsonp/src/jquery.jsonp
-//=require tests
-
 //= require moment/moment
 //= require jquery.maskedinput/dist/jquery.maskedinput.min
-//
-//
-//
-//
-//
-// TODO когда создам application.js в admin, тогда перенесу подключение туда
-//= require admin/users
-//=require mustache/mustache.js
-//
-//= require turbolinks_events
-//
-//= require tooltip_popover_rel
-//= require 'sidebar'
-//
-//
-// == nanoscroller
-//
-//= require 'nanoScrollerJS/coffeescripts/jquery.nanoscroller'
 //= require holder.js/holder
 //
 //
@@ -73,7 +33,6 @@
 //= require catch_enter
 //
 //= require select2
-//= require cars
 //= require brand_model
 //
 //= require jasmine_examples/Player
@@ -84,15 +43,33 @@
 //
 //= require toolbar-checkboxes
 //
+// require jquery-dirtyforms/jquery.dirtyforms
+//
 //= require jquery.cachedScript
+//
 //= require ckeditor-helpers/extended_options
 //= require ckeditor-helpers/basepath
 //= require ckeditor-helpers/simple
 //= require ckeditor-helpers/extended
 //
-//= require deliveries/places/places
+//= require deliveries/places
 //= require deliveries
+//
+//= require searches
 //
 //= require items_progress
 //= require 'auth'
+//= require 'tests'
 //= require 'jquery.editableHighlight'
+//
+//Started GET "/assets/talks/_resident.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
+//Started GET "/assets/talks/_talk.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
+//Started GET "/assets/letters.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
+//Started GET "/assets/scroller.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
+//Started GET "/assets/legal.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
+//Started GET "/assets/realtime.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
+//Started GET "/assets/notify_sound.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
+//Started GET "/assets/notify_window.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
+//Started GET "/assets/notify_sound_toggler.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
+//Started GET "/assets/talk.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
+//Started GET "/assets/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" for 192.168.2.9 at 2013-09-11 20:44:20 +0400

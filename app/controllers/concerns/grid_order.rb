@@ -47,22 +47,15 @@ module GridOrder
       }
 
       if admin_zone?
-        columns_hash['phantom'] = {
-          :type => :boolean,
-        }
+        phantom(columns_hash)
       end
 
       columns_hash['legal'] = {
         :type => :boolean,
       }
 
-      columns_hash['created_at'] = {
-        :type => :date,
-      }
-
-      columns_hash['updated_at'] = {
-        :type => :date,
-      }
+      created_at(columns_hash)
+      updated_at(columns_hash)
 
       columns_hash['creation_reason'] = {
         :type => :set,
@@ -88,10 +81,7 @@ module GridOrder
         end
       end
 
-      columns_hash['creator_id'] = {
-        :type => :belongs_to,
-        :belongs_to => User,
-      }
+      creator_id(columns_hash)
 
     end
 

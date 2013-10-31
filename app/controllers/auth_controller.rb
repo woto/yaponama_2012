@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class AuthController < ApplicationController
+
   before_action do
     @auth = request.env['omniauth.auth']
   end
@@ -12,7 +13,7 @@ class AuthController < ApplicationController
     # 2. Пользователь может привязывать доп. аккаунты
     record = Auth.where(uid:  @auth['uid'].to_s, provider: @auth['provider'].to_s).first_or_initialize
 
-    record.user = current_user
+    record.somebody = current_user
     record['data'] = @auth.to_yaml
 
     if record.changed?
@@ -27,4 +28,23 @@ class AuthController < ApplicationController
     Rails.logger.error @auth
     raise 'Извините, произошла непредвиденная ошибка.'
   end
+
+  def set_resource_class
+    @resource_class = Auth
+  end
+
+  def user_set
+    @user = current_user
+  end
+
+  def somebody_set
+    @somebody = current_user
+  end
+
+  def supplier_set
+  end
+
+  def resource_params
+  end
+
 end

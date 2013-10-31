@@ -53,7 +53,9 @@
 
       <p> Наша оценка качества производителя: <div class="stars-rating-<%= ( mf_scope[:brand].try(:[], :rating).to_i || 0) / 1000 %>"></div> </p>
 
-      <div class="brands"> <%= brands_decorator manufacturer, {:title => false} %> </div>
+      <div class="brands"> 
+        <%= brands_decorator mf_scope[:brand], {:title => false} %>
+      </div>
 
     </div>
 

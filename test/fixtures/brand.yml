@@ -1,3 +1,16 @@
+audi:
+  name: AUDI
+  rating: 950
+  content:
+  phantom: false
+  creator: first_admin
+
+infiniti:
+  name: Infiniti
+
+mazda:
+  name: Mazda
+
 nissens:
   name: NISSENS
   rating: 500
@@ -38,4 +51,5 @@ kia:
   phantom: false
   content: Корейская поделка
   creator: mike
+
 

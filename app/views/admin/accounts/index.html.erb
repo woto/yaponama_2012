@@ -1,0 +1,19 @@
+<% title_index %>
+
+<%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, :primary_key => params[:primary_key]), :remote => true do |f| %>
+
+  <%= panel 'default' do |p| %>
+
+    <%= p.heading do %>
+      <%= render 'head' %>
+    <% end %>
+
+    <%= p.body do %>
+      <%= render 'grid', f: f %>
+    <% end %>
+
+  <% end %>
+
+<% end %>
+
+<%#        td = link_to 'Контрагент', [:admin, account.accountable] if account.accountable.present? %>

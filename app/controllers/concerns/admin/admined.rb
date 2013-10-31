@@ -9,7 +9,7 @@ module Admin::Admined
 
     before_action :prepend_view_paths
     before_action :only_authenticated
-    before_action :set_supplier
+    #before_action :set_supplier
 
     layout 'admin'
 
@@ -25,21 +25,14 @@ module Admin::Admined
       end
     end
 
-    def set_user
-      if params[:user_id].present?
-        @user = User.find(params[:user_id]) 
+    def set_user_and_creation_reason
+      super
+      if @resource.respond_to? :code_1=
+        @resource.code_1 = 'backend'
       end
-    end
 
-    def set_order
-      if params[:order_id].present?
-        @order = Order.find(params[:order_id])
-      end
-    end
-
-    def set_supplier
-      if params[:supplier_id].present?
-        @supplier = Supplier.find(params[:supplier_id])
+      if @resource.respond_to? :phantom=
+        @resource.phantom = false
       end
     end
 

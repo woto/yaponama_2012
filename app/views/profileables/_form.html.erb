@@ -1,6 +1,6 @@
 <%= row do %>
   <div class="col-md-8">
-    <%= twbs_form_for @resource, :url => smart_route({:postfix => [@resource]}, :user_id => params[:user_id]) do |f| %>
+    <%= twbs_form_for @resource, :url => [(admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user), @resource] do |f| %>
 
       <%= f.alert_danger do %>
         <%= f.error(:base) %>

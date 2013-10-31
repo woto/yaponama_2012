@@ -6,8 +6,9 @@ class Phone < ActiveRecord::Base
   include BelongsToCreator
   include Confirmed
   include NotSelf
-  include BelongsToUser
+  include BelongsToSomebody
   include Transactionable
+  include Selectable
 
 
   def self.mobile

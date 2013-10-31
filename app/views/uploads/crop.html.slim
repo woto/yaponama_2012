@@ -9,7 +9,7 @@
       .alert.alert-info
         |Вы можете изменить размер окна и перегрузить страницу и тогда размер обрезаемого изображения подстроится под размер окна.
 
-      = twbs_form_for @upload, remote: true  do |f|
+      = twbs_form_for @resource, remote: true  do |f|
         = f.hidden_field :crop_x
         = f.hidden_field :crop_y
         = f.hidden_field :crop_w
@@ -20,7 +20,7 @@
 
         = f.twbs_submit 'Обрезать'
 
-      = image_tag @upload.upload.url, :class => 'img-crop img-responsive'
+      = image_tag @resource.upload.url, :class => 'img-crop img-responsive'
 
 = javascript_include_tag 'uploads/crop'
 = stylesheet_link_tag 'uploads/crop'

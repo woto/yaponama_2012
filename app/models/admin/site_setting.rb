@@ -3,7 +3,7 @@ class Admin::SiteSetting < ActiveRecord::Base
 
   validates :sms_notify_method, :inclusion => { :in => Rails.configuration.sms_notify_methods }
   validates :robokassa_integration_mode, :inclusion => { :in => Rails.configuration.robokassa_integration_modes }
-  validates :default_user_order_rule, :inclusion => { :in => Rails.configuration.user_order_rules }
+  validates :default_somebody_order_rule, :inclusion => { :in => Rails.configuration.somebody_order_rules }
   validates :environment, :presence => true
   validates :emex_income_rate, :numericality => true
   validates :avtorif_income_rate, :numericality => true
@@ -13,8 +13,8 @@ class Admin::SiteSetting < ActiveRecord::Base
   validates :robokassa_pass_1, :presence => true
   validates :robokassa_pass_2, :presence => true
   validates :robokassa_user, :presence => true
-  validates :default_user_prepayment, :numericality => true
-  validates :default_user_discount, :numericality => true
+  validates :default_somebody_prepayment, :numericality => true
+  validates :default_somebody_discount, :numericality => true
   validates :avisosms_username, :presence => true
   validates :avisosms_password, :presence => true
   validates :avisosms_source_address, :presence => true

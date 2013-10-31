@@ -1,3 +1,4 @@
-class Delivery::Metro < Delivery
-  has_many :metro
-end
+raise 'Не нужно'
+#class Delivery::Metro < Delivery
+#  has_many :metro
+#end

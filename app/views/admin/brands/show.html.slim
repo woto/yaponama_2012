@@ -11,36 +11,36 @@ div class="page-header"
 p
   strong= model_class.human_attribute_name(:name) + ':'
   br
-  = @brand.name
+  = @resource.name
 p
   strong= model_class.human_attribute_name(:brand_id) + ':'
   br
-  = @brand.brand_id
+  = @resource.brand_id
 p
   strong= model_class.human_attribute_name(:image) + ':'
   br
 
   div style="background: url(http://webucateus.com/desktop/wp-content/themes/desk-mess01/images/grid.png); width: 500px"
     div style="border: 1px solid red; padding: 100px" id="original"
-      = image_tag @brand.image, :id => "original", :class => "img-crop"
+      = image_tag @resource.image, :id => "original", :class => "img-crop"
 p
   strong= model_class.human_attribute_name(:image_thumb) + ':'
   br
   div style="background: url(http://webucateus.com/desktop/wp-content/themes/desk-mess01/images/grid.png); width: 300px "
     div style="border: 1px solid red; padding: 100px" id="thumb"
-      = image_tag @brand.image.thumb, :id => "thumb", :style => "border: 1px solid red", :class => "img-crop"
+      = image_tag @resource.image.thumb, :id => "thumb", :style => "border: 1px solid red", :class => "img-crop"
 p
   strong= model_class.human_attribute_name(:rating) + ':'
   br
-  = @brand.rating
+  = @resource.rating
 p
   strong= model_class.human_attribute_name(:content) + ':'
   br
-  = @brand.content
+  = @resource.content
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), admin_brands_path, :class => 'btn'
   '
-  = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_brand_path(@brand), :class => 'btn'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_brand_path(@resource), :class => 'btn'
   '
-  = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_brand_path(@brand), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_brand_path(@resource), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

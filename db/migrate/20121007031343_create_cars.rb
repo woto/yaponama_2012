@@ -3,10 +3,19 @@ class CreateCars < ActiveRecord::Migration
     create_table :cars do |t|
       t.integer :god
       t.string :period
-      t.string :brand
-      t.string :model
-      t.string :generation
-      t.string :modification
+
+      t.belongs_to :brand, index: true
+      t.string :cached_brand
+
+      t.belongs_to :model, index: true
+      t.string :cached_model
+
+      t.belongs_to :generation, index: true
+      t.string :cached_generation
+
+      t.belongs_to :modification, index: true
+      t.string :cached_modification
+
       t.string :dvigatel
       t.string :tip
       t.string :moschnost

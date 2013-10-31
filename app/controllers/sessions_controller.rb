@@ -1,6 +1,11 @@
 # encoding: utf-8
 
 class SessionsController < ApplicationController
+  
+  include FindResourceByIdDummy
+  include FindResourceDummy
+  include SetUserAndCreationReasonDummy
+
   before_action :only_authenticated, :only => [:destroy]
   before_action :only_not_authenticated, :only => [:new, :create]
   before_action { @meta_title = 'Вход на сайт' }
@@ -47,6 +52,32 @@ class SessionsController < ApplicationController
 
   def session_params
     params.require(:session).permit!
+  end
+
+  private
+
+  def set_resource_class
+    @resource_class = Session
+  end
+
+  def user_set
+    @user = current_user
+  end
+
+  def somebody_set
+    @somebody = current_user
+  end
+
+  def supplier_set
+  end
+
+  def user_get
+  end
+
+  def supplier_get
+  end
+
+  def somebody_get
   end
 
 end

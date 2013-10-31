@@ -1,14 +1,22 @@
-<%= twbs_form_for @page, :url => polymorphic_path([:admin, @page]) do |f| %>
+<%= row do %>
 
-  <%= f.twbs_text_field :path, asterisk: true %>
-  <%= f.twbs_text_field :title %>
-  <%= f.twbs_text_field :robots %>
-  <%= f.twbs_text_area :keywords %>
-  <%= f.twbs_text_area :description %>
-  <%= f.twbs_text_area :content, class: 'ckeditor-extended' %>
+  <div class="col-md-8">
 
-  <%# TODO f.association :creator, :disabled => true %>
+    <%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
 
-  <%= f.twbs_submit "Сохранить страницу" %>
+      <%= f.twbs_text_field :path, asterisk: true %>
+      <%= f.twbs_text_field :title %>
+      <%= f.twbs_text_field :robots %>
+      <%= f.twbs_text_area :keywords %>
+      <%= f.twbs_text_area :description %>
+      <%= f.twbs_text_area :content, class: 'ckeditor-extended' %>
+
+      <%# TODO f.association :creator, :disabled => true %>
+
+      <%= f.twbs_submit %>
+
+    <% end %>
+
+  </div>
 
 <% end %>

@@ -1,0 +1,28 @@
+<div id="grid-toolbar-actions">
+
+  <div class="btn-group">
+
+    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+      <%= icon 'bolt' %>
+      <%= t('.action', :default => t('helpers.actions'))  %>
+      <%= caret %>
+    </a>
+    <ul class="dropdown-menu">
+      <% Rails.configuration.products_status.select{|k, v| v['real'] == true}.each do |k, v| %>
+        <li>
+        <%= link_to smart_route({:prefix => [k.to_sym], :postfix => [:products]}, jaba.merge(:page => @page, :sort => params[:sort_column], :direction => params[:sort_direction], :return_path => request.fullpath)), id: "form_#{k}_action" do %>
+            <%= v["action"] %>
+            <% if v['badge'].present? %>
+              <span class="badge badge-<%= k %>">
+                <%= v['badge'] %>
+              </span>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+
+  </div>
+
+</div>
+

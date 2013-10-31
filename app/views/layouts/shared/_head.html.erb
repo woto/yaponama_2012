@@ -5,10 +5,8 @@
     <meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <% if "#{@meta_title} #{@meta_title_small}".present? %>
-      <title>
-        <%= "#{@meta_title} #{@meta_title_small}" %>
-      </title>
+    <% if @meta_title.present? %>
+      <title><%= @meta_title %></title>
     <% end %>
 
     <% if @meta_author.present? %>
@@ -16,19 +14,19 @@
     <% end %>
 
     <% if @meta_keywords.present? %>
-      <meta name="keywords" content="<% @meta_keywords %>" />
+      <meta name="keywords" content="<%= @meta_keywords %>" />
     <% end %>
 
     <% if @meta_description.present? %>
-      <meta name="description" content="<% @meta_description %>" />
+      <meta name="description" content="<%= @meta_description %>" />
     <% end %>
 
     <% if @meta_robots.present? %>
-      <meta name="robots" content="<% @meta_robots %>" />
+      <meta name="robots" content="<%= @meta_robots %>" />
     <% end %>
 
     <% if @meta_canonical.present? %>
-      <link rel="canonical" href="<% @meta_canonical %>" />
+      <link rel="canonical" href="<%= @meta_canonical %>" />
     <% end %>
 
     <%= csrf_meta_tags %>
@@ -46,5 +44,7 @@
     <%= favicon_link_tag "apple-touch-icon-72x72.png", :rel => "apple-touch-icon", :sizes => "72x72", :type => "image/png" %>
     <%= favicon_link_tag "apple-touch-icon-114x114.png", :rel => "apple-touch-icon", :sizes => "114x114", :type => "image/png" %>
     <%= favicon_link_tag "apple-touch-icon-144x144.png", :rel => "apple-touch-icon", :sizes => "144x144", :type => "image/png" %>
+    
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
 
   </head>

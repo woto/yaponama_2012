@@ -7,7 +7,7 @@ class PasswordReset
   include ActiveModel::SecurePassword
 
   attr_accessor :value
-  attr_accessor :user
+  attr_accessor :somebody
 
   include MobileField
   validates :value, presence: true, phone: true, if: -> {with == 'phone' }
@@ -29,7 +29,7 @@ class PasswordReset
     end
 
     if contact.present?
-      @user = contact.user
+      @somebody = contact.somebody
     else
       if errors.blank?
         errors.add(:base, "Мы не смогли найти среди зарегистрированных покупателей указанные вами данные, проверьте ввод и попробуйте еще раз, или свяжитесь с службой поддержки.")
@@ -45,12 +45,12 @@ class PasswordReset
 
   validate if: -> { pin_required && self.errors.none? } do
 
-    if @user.password_reset_token != pin
+    if @somebody.password_reset_token != pin
       errors.add(:pin, 'Указан неверный PIN код.')
       # TODO защититься
       #@user.password_reset_attempts = @user.password_reset_attempts + 1
       #@user.save!
-    elsif @user.password_reset_sent_at < 2.hours.ago
+    elsif @somebody.password_reset_sent_at < 2.hours.ago
       errors.add(:base, 'В целях безопасности ваша инструкция по восстановлению пароля была признана устаревшей, пожалуйста запросите новую.')
     end
 

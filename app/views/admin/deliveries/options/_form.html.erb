@@ -1,0 +1,9 @@
+<%= twbs_form_for @resource, :url => [:admin, @resource] do |f| %>
+
+    <%= f.twbs_text_field :name %>
+    <%= f.twbs_check_box :full_prepayment_required %>
+    <%= f.twbs_check_box :postal_address_required %>
+
+    <%= f.twbs_submit %>
+
+<% end %>

@@ -42,9 +42,9 @@ class ReceiveMailer < ActionMailer::Base
       user = nil
 
       if email.persisted?
-        user = email.profile.user
+        user = email.profile.somebody
       else
-        user = User.new(SiteConfig.default_user_attributes)
+        user = User.new(SiteConfig.default_somebody_attributes)
         user.build_account
 
         profile = user.profiles.new

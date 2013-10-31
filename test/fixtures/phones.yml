@@ -69,3 +69,43 @@ mike:
   profile: mike
   somebody: mike
   creation_reason: fixtures
+
+mile_main:
+  somebody: mile
+  profile: mile_main
+  value: 1
+  mobile : false
+  confirmed: false
+  creation_reason: fixtures
+
+mile_not_main:
+  somebody: mile
+  profile: mile_not_main
+  value: 2
+  mobile : false
+  confirmed: false
+  creation_reason: fixtures
+
+exist:
+  somebody: exist
+  profile: exist
+  value: 22-66-19
+  mobile : false
+  confirmed: false
+  creation_reason: fixtures
+
+anton_first:
+  somebody: anton
+  profile: anton
+  value: +7 (112) 233-44-55
+  mobile : true
+  confirmed: true
+  creation_reason: fixtures
+
+anton_second:
+  somebody: anton
+  profile: anton
+  value: +7 (554) 433-22-11
+  mobile : true
+  confirmed: false
+  creation_reason: fixtures

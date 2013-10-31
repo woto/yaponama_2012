@@ -2,13 +2,16 @@
 
 module AbstractGridable
   extend ActiveSupport::Concern
+  include GridCommonColumns
 
   included do
-    before_action :set_resource_class
     before_action :set_grid_class
 
-    def set_resource_class
-      raise 'set_resource_class'
+    def additional_conditions
+      # @items = @items.includes(:somebody)
+      if @somebody
+        @items = @items.where(:somebody_id => @somebody.id)
+      end
     end
 
     def set_grid_class
@@ -26,21 +29,6 @@ module AbstractGridable
       adjust_columns!(columns_hash)
 
       @grid_class.const_set("COLUMNS", columns_hash)
-    end
-
-
-    # Проверка выделения хотя бы одной позиции
-    def any_checked_validation
-      if @items.blank?
-        raise ValidationError.new "Ни одна позиция не выделена"
-      end
-    end
-
-
-    def one_checked_validation
-      if @items.size != 1
-        raise ValidationError.new "Для данной операции необходимо чтобы была выделена только 1 позиция."
-      end
     end
 
     include GridConcern

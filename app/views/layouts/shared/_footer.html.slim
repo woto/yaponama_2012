@@ -5,39 +5,69 @@
 == SiteConfig.counter_openstat
 == SiteConfig.counter_liveinternet
 
-.hide
-  #initial_map_zoom= SiteConfig.initial_map_zoom
-  #initial_map_lat= SiteConfig.initial_map_lat
-  #initial_map_lng= SiteConfig.initial_map_lng
-  #warehouse_address = SiteConfig.warehouse_address
-  #delivery_minute_cost = SiteConfig.delivery_minute_cost
-  #google_maps_key = SiteConfig.google_maps_key
-  #travel_mode = SiteConfig.travel_mode
-  #auth-result
-  #stat-result.incomplete
-  #automatic_calculate_active = SiteConfig.automatic_calculate_active
-  #max_automatic_calculated_cost = SiteConfig.max_automatic_calculated_cost
+audio#notify-audio src='/assets/notify.ogg'
+audio#notify-toggle-audio' src='/assets/toggle.ogg'
 
-.well
-  h4 DebugTime
+.well.hide
+  p 
+    b initial_map_zoom
+    #initial_map_zoom= SiteConfig.initial_map_zoom
+  p 
+    b initial_map_lat
+    #initial_map_lat= SiteConfig.initial_map_lat
+  p 
+    b initial_map_lng
+    #initial_map_lng= SiteConfig.initial_map_lng
+  p 
+    b warehouse_address
+    #warehouse_address = SiteConfig.warehouse_address
+  p 
+    b delivery_minute_cost
+    #delivery_minute_cost = SiteConfig.delivery_minute_cost
+  p 
+    b google_maps_key
+    #google_maps_key = SiteConfig.google_maps_key
+  p 
+    b travel_mode
+    #travel_mode = SiteConfig.travel_mode
+  p 
+    b auth-result
+    #auth-result
+  p 
+    b automatic_calculate_active
+    #automatic_calculate_active = SiteConfig.automatic_calculate_active
+  p 
+    b max_automatic_calculated_cost
+    #max_automatic_calculated_cost = SiteConfig.max_automatic_calculated_cost
+  p 
+    b realtime_port
+    #realtime_port = SiteConfig.socket_io_port
+  p 
+    b realtime_address
+    #realtime_address = SiteConfig.socket_io_address
+  / TODO потом убрать
+  p 
+    b current_user_id
+    #current_user_id = current_user.id
+
+.well.hide
+  h4 NotifySound
   dl
-    dt #server-time
-    / TODO
-    / потом поэксперементировать с zone, т.к. добавление, или 
-    / убавление не повлияло (проверял без изменений системного времени)
-    dd#server-time = Time.zone.now.utc
+    dt playing-count
+    dd#playing-count
+    dt is-playing
+    dd#is-playing
+    dt can-play-through
+    dd#can-play-through
+
+.well.hide
+  h4 NotifySoundToggler
   dl
-    dt #debug-server
-    dd#debug-server
+    dt play-sound-on-new-message
+    dd#play-sound-on-new-message data-value="#{current_user.sound}" #{current_user.sound}
   dl
-    dt #debug-local
-    dd#debug-local
-  dl
-    dt #debug-zone
-    dd#debug-zone
-  dl
-    dt #debug-offset
-    dd#debug-offset
+    dt sound-toggled
+    dd#sound-toggled
 
 <div class="panel-group" id="accordion">
 
@@ -100,3 +130,4 @@
 
 </div>
 
+/ TODO ДОБАИТЬ ЗАКРЫВАЮЩИЙ ТЕГ  </html>

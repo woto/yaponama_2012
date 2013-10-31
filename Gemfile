@@ -17,33 +17,39 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', platforms: :ruby
+  #gem 'therubyracer', platforms: :ruby, github: 'cowboyd/therubyracer'
 
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier', github: 'lautis/uglifier'
 
 end
 
-group :production do
-  gem 'puma'
-end
+#group :production do
+#  gem 'puma'
+#end
 
 group :development, :test do
-  gem 'debugger', github: 'cldwalker/debugger'
+  #gem 'debugger', github: 'cldwalker/debugger'
+  gem 'byebug', github: 'deivid-rodriguez/byebug'
   gem 'capistrano'
   gem 'capybara', github: 'jnicklas/capybara'
   #gem 'selenium-webdriver'
   gem 'poltergeist'
   #gem 'capybara-webkit'
   gem 'quiet_assets'
+  #gem 'rspec-rails'
+  gem 'rspec'
+  gem 'jasmine', github: 'pivotal/jasmine-gem'
 end
 
 gem 'jquery-rails', github: 'rails/jquery-rails'
 gem 'jquery-ui-rails', github: 'joliss/jquery-ui-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', github: 'rails/turbolinks'
+#gem 'turbolinks',     path: '/home/woto/vendor/turbolinks'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.0.1'
+# Build JSON APIs with ease. Read more: https://github.com/
+gem 'jbuilder', github: 'rails/jbuilder'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -79,7 +85,6 @@ gem "hiredis", "~> 0.4.5"
 
 gem 'ruby-growl'
 gem 'ancestry'
-gem 'turbolinks'
 
 # Mysql2 является обязательным требованием для SphinxQL
 gem 'mysql2',          '0.3.12b4'
@@ -98,6 +103,7 @@ gem 'omniauth-odnoklassniki'
 gem 'omniauth-mailru'
 
 gem 'sht_rails', github: 'railsware/sht_rails'
+#gem 'sht_rails', path: '/home/woto/vendor/sht_rails'
 
 # Необходима версия 2.6.0 чтобы не резался многострочный заголовок
 gem 'mail', github: 'mikel/mail'

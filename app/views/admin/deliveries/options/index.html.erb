@@ -1,0 +1,25 @@
+<% title_index %>
+
+<%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
+
+  <%= panel 'default' do |p| %>
+
+    <%= p.heading do %>
+      <%= render 'head' %>
+    <% end %>
+
+    <%= p.body do %>
+      <%= render 'grid', f: f %>
+    <% end %>
+
+  <% end %>
+
+
+<% end %>
+
+<%#/td = link_to 'Show', deliveries_option %>
+<%#/td = link_to 'Edit', edit_deliveries_option_path(deliveries_option) %>
+<%#/td = link_to 'Destroy', deliveries_option, :confirm => 'Are you sure?', :method => :delete %>
+<%# %>
+<%#br %>
+<%# %>

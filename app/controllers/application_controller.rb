@@ -1,7 +1,6 @@
 #encoding: utf-8
 
 class ApplicationController < ActionController::Base
-  before_action :set_user
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -14,14 +13,77 @@ class ApplicationController < ActionController::Base
   before_action :set_user_time_zone
   before_action :ipgeobase
   helper_method :visible_columns
+  helper_method :available_columns
 
   helper_method :sort_column
   helper_method :sort_direction
 
   before_filter :set_cache_buster
 
+  #helper :tag
+
   # Twitter Bootstrap 3
   add_flash_types :success, :info, :warning, :danger
+
+
+  def info
+    render :layout => false
+  end
+
+  def columns
+    render "grid_modal_columns", :layout => false
+  end
+
+  def filters
+    render "grid_modal_filters", :layout => false
+  end
+
+  def index
+    respond_to do |format|
+      format.html
+      format.js { render 'grid_filter' }
+    end
+  end
+
+  def new
+  end
+
+  def edit
+  end
+
+  def show
+  end
+
+  def create
+    respond_to do |format|
+      if @resource.save
+        format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path], :id => @resource.id), success: "#{@resource_class} was successfully created." }
+      else
+        format.html { render action: 'new' }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @resource.update(resource_params)
+        format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path]), success: "#{@resource_class} was successfully updated." }
+      else
+        format.html { render action: 'edit' }
+      end
+    end
+  end
+
+  def destroy
+    respond_to do |format|
+      if @resource.destroy
+        format.html { redirect_to url_for(params[:return_path]), success: "#{@resource_class} was successfully destroyed" }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to url_for(:controller => :users, :action => :show), danger: "Невозможно удалить." }
+      end
+    end
+  end
 
   private
 
@@ -55,7 +117,7 @@ class ApplicationController < ActionController::Base
     }
 
     # Наши данные
-    spare_info = SpareInfo.where(:catalog_number => catalog_number, :manufacturer => manufacturer)
+    spare_info = SpareInfo.where(:catalog_number => catalog_number, :cached_brand => manufacturer).first
 
     if spare_info.present?
       status[:own][:status] = 'avaliable'
@@ -82,13 +144,13 @@ class ApplicationController < ActionController::Base
        require 'redis'
        redis = Redis.new(:host => SiteConfig.redis_address, :port => SiteConfig.redis_port)
 
-       Juggernaut.publish(
-       nil, {
-         :command => 'info',
-         :catalog_number => catalog_number,
-         :manufacturer => manufacturer.presence || "WRONG_MANUFACTURER",
-         :channel => 'server'
-       }, {}, "custom")
+       #Juggernaut.publish(
+       #nil, {
+       #  :command => 'info',
+       #  :catalog_number => catalog_number,
+       #  :manufacturer => manufacturer.presence || "WRONG_MANUFACTURER",
+       #  :channel => 'server'
+       #}, {}, "custom")
       end
 
     end
@@ -105,7 +167,7 @@ class ApplicationController < ActionController::Base
     rescue_from ActiveRecord::RecordNotFound, :with => :render_404
   end
 
-  rescue_from AuthenticationError, with: -> { redirect_to root_path }
+  rescue_from AuthenticationError, with: -> { redirect_to root_path, danger: "Возможно вы или кто-то другой входил на сайт под вашей учетной записью с другого компьютера. Вы можете отключить функцию автоматического выхода в Личном кабинете для возможности одновременной работы с разных компьютеров." }
   
   # TODO потом детальнее посмотреть где и как используются @show_sidebar и @exception
   def render_404(exception)
@@ -173,9 +235,11 @@ class ApplicationController < ActionController::Base
         end
       else
         @current_user = User.new
-        @current_user.assign_attributes(SiteConfig.default_user_attributes)
+        @current_user.assign_attributes(SiteConfig.default_somebody_attributes)
         @current_user.code_1 = 'session'
         @current_user.build_account
+        @current_user.phantom = false
+        @current_user.online = true
         @current_user.save!
         cookies.permanent[:auth_token] = @current_user.auth_token
       end
@@ -188,7 +252,7 @@ class ApplicationController < ActionController::Base
     @comments = Comment.where(:commentable_id => obj.id, :commentable_type => obj.class).arrange(:order => :created_at)
     @comment = Comment.new()
     @comment.commentable = obj
-    @name = current_user.names.where(:creation_reason => Rails.configuration.user_name_creation_reason['self']).first.try(:to_label)
+    @name = current_user.names.where(:creation_reason => Rails.configuration.name_creation_reason['self']).first.try(:to_label)
     @email = current_user.emails.first.try(:to_label)
   end
 
@@ -200,7 +264,7 @@ private
     # + поговаривают, что это не правильный способ, т.к. не threadsafe, а если и таковой, то неправильный
     Time.zone = case current_user.use_auto_russian_time_zone
     when true
-      current_user.russian_time_zone_auto_id
+      current_user.cached_russian_time_zone_auto_id
     else
       current_user.russian_time_zone_manual_id
     end
@@ -220,19 +284,75 @@ private
     end
   end
 
-  def set_user
-    @user = current_user
+  def available_columns
+    @available_columns ||= @grid_class::COLUMNS
   end
 
   def visible_columns
     @visible_columns = []
 
     @grid_class::COLUMNS.each do |column_name, column_settings| 
-      if eval("@grid.#{column_name}_visible") == '1'
+      if eval("@grid.visible_#{column_name}") == '1'
         @visible_columns << column_name
       end
     end
 
     @visible_columns
   end
+
+  before_action :set_resource_class
+
+  before_action :user_set
+  before_action :somebody_set
+  before_action :supplier_set
+
+  before_action :find_resource, only: [:show, :edit, :update, :destroy, :logout_from_all_places]
+
+  def find_resource
+    @resource = @resource_class.find(params[:id])
+  end
+
+  before_action :user_get, :only => [:show, :edit, :update, :destroy]
+  before_action :supplier_get, :only => [:show, :edit, :update, :destroy]
+  before_action :somebody_get, :only => [:show, :edit, :update, :destroy]
+
+  before_action :new_resource, :only => [:new]
+
+  def new_resource
+    @resource = @resource_class.new
+  end
+
+  before_action :edit_resource, only: [:edit]
+
+  def edit_resource
+  end
+
+  before_action :create_resource, :only => [:create]
+
+  def create_resource
+    @resource = @resource_class.new(resource_params)
+  end
+
+  before_action :set_user_and_creation_reason, :only => [:create, :update]
+
+  def set_user_and_creation_reason
+    if @resource.respond_to? :somebody
+      @resource.somebody = @somebody
+    end
+
+    if @resource.respond_to? :creator
+      @resource.creator = current_user.creator
+    end
+
+    if @resource.respond_to? :code_1=
+      @resource.code_1 = 'frontend'
+    end
+  end
+
+
+  def resource_params
+    # TODO DANGER!
+    params.require(@resource_class.name.underscore.gsub('/', '_').to_sym).permit!
+  end
+
 end

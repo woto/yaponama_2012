@@ -6,7 +6,6 @@ module ModelAttributes
 
     belongs_to :model
     accepts_nested_attributes_for :model
-    #validates :model, associated: true
 
     def model_attributes=(attr)
       if attr["name"].present? && brand.present?
@@ -19,8 +18,6 @@ module ModelAttributes
       else
         self.model = nil
       end
-
-      #self.model_id_will_change!
 
     end
 

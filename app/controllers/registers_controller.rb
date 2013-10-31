@@ -2,6 +2,10 @@
 
 class RegistersController < ApplicationController
 
+  include SetResourceClassDummy
+  include FindResourceDummy
+  include SetUserAndCreationReasonDummy
+
   before_action :only_not_authenticated, :only => [:edit, :update, :show]
   before_action { @meta_title = 'Регистрация' }
 
@@ -40,6 +44,26 @@ class RegistersController < ApplicationController
       :password,
       :password_confirmation
     )
+  end
+
+  def user_set
+    @user = current_user
+  end
+  
+  def somebody_set
+    @somebody = current_user
+  end
+
+  def supplier_set
+  end
+
+  def user_get
+  end
+
+  def supplier_get
+  end
+
+  def somebody_get
   end
 
 end

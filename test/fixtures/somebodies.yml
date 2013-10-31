@@ -16,13 +16,15 @@ first_admin:
   ipgeobase_names_depth_cache: 
   accept_language: 
   user_agent: 
-  russian_time_zone_auto_id: 
+  cached_russian_time_zone_auto_id: 
   russian_time_zone_manual_id: 
   use_auto_russian_time_zone: true
   remote_ip: 
   notes: 
   notes_invisible: 
   order_rule: all
+  main_profile: first_admin
+  cached_main_profile: '{"names":[{"surname":"Корнев","name":"Руслан","patronymic":"Михайлович"}],"phones":[{"value":"+7 (111) 111-11-11"}],"emails":[{"value":"foo@example.com"}],"passports":[{"seriya":"1","nomer":"1","mesto_rozhdeniya":"1"}]}'
 
 first_user:
   online: false
@@ -38,9 +40,11 @@ first_user:
   # password: 1231231231
   password_digest: $2a$10$90bFORwosYEHSW28BqmF8eacXIBXwLuZ1P9pp0.bEpVp5c2FrgLI.
   sound: true
-  russian_time_zone_auto_id: 4
+  cached_russian_time_zone_auto_id: 4
   russian_time_zone_manual_id: 8
   use_auto_russian_time_zone: false
+  main_profile: first_user
+  cached_main_profile: '{"names":[{"surname":"","name":"Пользователь","patronymic":""}],"phones":[{"value":"+7 (123) 123-12-31"}],"emails":[{"value":"first_user_email@example.com"}],"passports":[]}'
 
 stan:
   online: false
@@ -56,9 +60,11 @@ stan:
   logout_from_other_places: false
   # password: 3333333333
   password_digest: $2a$10$CDmB19dFAPadZyy/CS8rQ.kkTbVUv8XvbXMfEV7OgkrACk3Ts6kma
-  russian_time_zone_auto_id: 9
+  cached_russian_time_zone_auto_id: 9
   russian_time_zone_manual_id: 7
   use_auto_russian_time_zone: true
+  main_profile: stan
+  cached_main_profile: '{"names":[{"surname":"","name":"Стэн","patronymic":""}],"phones":[{"value":"+7 (333) 333-33-33"}],"emails":[],"passports":[]}'
 
 otto:
   online: false
@@ -76,9 +82,11 @@ otto:
   password_digest: $2a$10$wQ1IG8ZsZX0PbzpDxWSgJ.qyB9XOvKceIckyzwEESavUNWGQZapvW
   password_reset_token: 55555
   password_reset_sent_at: <%= 1.second.ago.to_s(:db) %>
-  russian_time_zone_auto_id: 11
+  cached_russian_time_zone_auto_id: 11
   russian_time_zone_manual_id: 11
   use_auto_russian_time_zone: true
+  main_profile: otto
+  cached_main_profile: '{"names":[{"surname":"","name":"Отто","patronymic":""}],"phones":[{"value":"+7 (666) 666-66-66"},{"value":"8-888-888-88-88"},{"value":"+7 (555) 555-55-55"},{"value":"+7 (111) 111-11-11"}],"emails":[{"value":"fake@example.com"},{"value":"foo@example.com"}],"passports":[]}'
 
 
 mark:
@@ -95,10 +103,11 @@ mark:
   logout_from_other_places: false
   # password: 4444444444
   password_digest: $2a$10$3.PKll4wcX7cf2oDKkRZBOCdDDvHeO3XwTCwHBgHxQifFery8Fo5W
-  russian_time_zone_auto_id: 12
+  cached_russian_time_zone_auto_id: 12
   russian_time_zone_manual_id: 11
   use_auto_russian_time_zone: false
   main_profile: mark
+  cached_main_profile: '{"names":[{"surname":"","name":"Марк","patronymic":""}],"phones":[{"value":"+7 (444) 444-44-44"}],"emails":[{"value":"mark@example.com"}],"passports":[]}'
 
 mike:
   online: false
@@ -113,6 +122,8 @@ mike:
   role: user
   password_reset_token: 1234
   password_reset_sent_at: <%= 3.hours.ago.to_s(:db) %>
+  main_profile: mike
+  cached_main_profile: '{"names":[{"surname":"Майков","name":"Майк","patronymic":"Майкович"}],"phones":[{"value":"+7 (777) 777-77-77"}],"emails":[],"passports":[]}'
 
 phantom:
   online: false
@@ -126,14 +137,49 @@ online:
   type: User
   role: user
 
-first_supplier:
+avtorif:
+  auth_token: P6OZ392jf31vnD332xbl0nM
   online: false
   phantom: false
   type: Supplier
   creation_reason: fixtures
 
-second_supplier:
+mile:
+  auth_token: 2BSjfhjfTRs33esrj28fDFB
   online: false
   phantom: false
   type: Supplier
   creation_reason: fixtures
+  main_profile: mile_main
+  cached_main_profile: '{"names":[{"surname":"","name":"1","patronymic":""}],"phones":[{"value":"1"}],"emails":[],"passports":[]}'
+
+
+exist:
+  auth_token: 84SDefghsd3DFG234SGgh
+  online: true
+  phantom: true
+  type: Supplier
+  creation_reason: fixtures
+  main_profile: exist
+  cached_main_profile: '{"names":[{"surname":"Македонский","name":"Алксандр","patronymic":""}],"phones":[{"value":"22-66-19"}],"emails":[],"passports":[]}'
+
+
+anton:
+  online: false
+  phantom: false
+  type: User
+  creator: otto
+  auth_token: 35SD84dsD9fuhAS342FA
+  creation_reason: fixtures
+  role: user
+  discount: 0
+  prepayment: 100
+  order_rule: all
+  logout_from_other_places: false
+  # password: 1122334455
+  password_digest: $2a$10$iHUevIXm7uoYSWpTWLZf3O5bz0yiEzDGDFh22tkLQ9jmhQPnyNZPy
+  cached_russian_time_zone_auto_id: 9
+  russian_time_zone_manual_id: 7
+  use_auto_russian_time_zone: true
+  main_profile: anton
+  cached_main_profile: '{"names":[{"surname":"Чехов","name":"Антон","patronymic":"Павлович"}],"phones":[{"value":"+7 (112) 233-44-55"},{"value":"+7 (554) 433-22-11"}],"emails":[],"passports":[]}'

@@ -16,6 +16,6 @@ class CallsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def call_params
-      params.require(:call).permit(:file, :phone_number)
+      params.require(:call).permit(:file, :value)
     end
 end

@@ -1,30 +1,33 @@
-= user_tabs do
+/uioi
+/= somebody_tabs do
 
-  .alert.alert-block.alert-info
-    h4 Отлично, вы на пол пути оформления заказа! 
-    'Проверьте пожалуйста еще раз выбранные Вами товары и Создайте новый заказ или Выберите уже сделанный ранее. В нашем магазине вы можете добавлять товары в заказ, пока заказ имеет статус Открыт и не отправлен или не выдан Вам.
+- @meta_title = "Оформление заказа"
 
-  /ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['inorder']['title']}"
+= alert 'info' do
+  h4 Отлично, вы на пол пути оформления заказа! 
+  'Проверьте пожалуйста еще раз выбранные Вами товары и Создайте новый заказ или Выберите уже сделанный ранее. В нашем магазине вы можете добавлять товары в заказ, пока заказ имеет статус Открыт и не отправлен или не выдан Вам.
 
-  = form_tag smart_route({:prefix => [:order_select], :postfix => [:products, :inorder_index]}, :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => params[:return_path], :status => params[:status] ), :class => "dirtyforms" do |f|
+/ul.breadcrumb : li Смена статуса на "#{Rails.configuration.products_status['inorder']['title']}"
 
-    = render :partial => 'shared/grid'
-    - options = options_for_select [['Выберите...', nil], ['Новый заказ', '-1']] + @items.first.user.orders.all.map{|order| [order.to_label, order.id]}
-    = select_tag(:id, options)
-    / - step = session['orders'][session['orders']['current_order_id']]['step']
-    /- step = 'order'
-    /= render "#{step}_step", :f => f
-    .form-actions
-      =' link_to "Назад", params[:return_path], :class => "btn"
-      /= submit_tag "Назад", :name => "back_button", :class => "btn" unless Admin::ProductsController::ORDER_STEPS.first == step
-      /|  
-      /= submit_tag "Далее", :name => "next_button", :class => "btn btn-success"
-      = submit_tag "Далее", :class => "btn btn-primary"
+= form_tag smart_route({:prefix => [:order], :postfix => [:products, :inorder_index]}, jaba), :class => "dirtyforms" do |f|
+
+  = render :partial => 'shared/grid'
+  - options = options_for_select [['Выберите...', nil], ['Новый заказ', '-1']] + @items.first.user.orders.where(:phantom => false).map{|order| [order.to_label, order.id]}
+  = select_tag(:id, options)
+  / - step = session['orders'][session['orders']['current_order_id']]['step']
+  /- step = 'order'
+  /= render "#{step}_step", :f => f
+  .form-actions
+    =' link_to "Назад", params[:return_path], :class => "btn"
+    /= submit_tag "Назад", :name => "back_button", :class => "btn" unless Admin::ProductsController::ORDER_STEPS.first == step
+    /|  
+    /= submit_tag "Далее", :name => "next_button", :class => "btn btn-success"
+    = submit_tag "Далее", :class => "btn btn-primary"
 
 
-  //////////- options = options_for_select [['Please select ...', nil], ['New order', 'new']] + @items.first.user.orders.all.map{|order| [order.to_label, order.id]}
-  //////////= select_tag(:new_order_id, options)
-  ///////////- @items.each do |product|
-  ///////////  = hidden_field_tag 'product_ids[]', product.id
-  ///////////= select_tag(:order_id, op)
-  /////////// = f.association :delivery, :collection => Delivery.where(:available => true).order(:sequence), :prompt => "Choose a Company", :prompt => "Choose...", :include_blank => 'New'
+//////////- options = options_for_select [['Please select ...', nil], ['New order', 'new']] + @items.first.user.orders.all.map{|order| [order.to_label, order.id]}
+//////////= select_tag(:new_order_id, options)
+///////////- @items.each do |product|
+///////////  = hidden_field_tag 'product_ids[]', product.id
+///////////= select_tag(:order_id, op)
+/////////// = f.association :delivery, :collection => Delivery.where(:available => true).order(:sequence), :prompt => "Choose a Company", :prompt => "Choose...", :include_blank => 'New'

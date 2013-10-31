@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController 
-  include OrdersConcern
+
+  include GridOrder
 
   # GET /admin/orders
   # GET /admin/orders.json
@@ -17,17 +18,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.js { render 'shared/filter' }
-    end
-
-  end
-
-
-  def filter
-
-    respond_to do |format|
-      format.html
-      format.js { render 'shared/filter' }
+      format.js { render 'application/grid/filter' }
     end
 
   end
@@ -38,54 +29,54 @@ class OrdersController < ApplicationController
     redirect_to smart_route({:postfix => [:products]}, :user_id => params[:user_id], :order_id => params[:id]) and return
   end
 
-  # GET /admin/orders/new
-  # GET /admin/orders/new.json
-  def new
-    @order = Order.new
+  ## GET /admin/orders/new
+  ## GET /admin/orders/new.json
+  #def new
+  #  @order = Order.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @order }
-    end
-  end
+  #  respond_to do |format|
+  #    format.html # new.html.erb
+  #    format.json { render json: @order }
+  #  end
+  #end
 
-  # GET /admin/orders/1/edit
-  def edit
-    @order = Order.find(params[:id])
-  end
+  ## GET /admin/orders/1/edit
+  #def edit
+  #  @order = Order.find(params[:id])
+  #end
 
   # PUT /admin/orders/1
   # PUT /admin/orders/1.json
-  def update
+  #def update
 
-    @order = Order.find(params[:id])
+  #  @order = Order.find(params[:id])
 
-    respond_to do |format|
+  #  respond_to do |format|
 
-      if @order.update_attributes(order_params)
+  #    if @order.update_attributes(order_params)
 
-        format.html { redirect_to smart_route({:postfix => [@order]}) and return }
-        format.json { head :no_content }
-        else
-          format.html { render action: "edit" }
-          format.json { render json: @order.errors, status: :unprocessable_entity }
-        end
-      end
+  #      format.html { redirect_to smart_route({:postfix => [@order]}) and return }
+  #      format.json { head :no_content }
+  #      else
+  #        format.html { render action: "edit" }
+  #        format.json { render json: @order.errors, status: :unprocessable_entity }
+  #      end
+  #    end
 
-  end
+  #end
 
 
-  # DELETE /admin/orders/1
-  # DELETE /admin/orders/1.json
-  def destroy
-    @order = Order.find(params[:id])
-    @order.destroy
+  ## DELETE /admin/orders/1
+  ## DELETE /admin/orders/1.json
+  #def destroy
+  #  @order = Order.find(params[:id])
+  #  @order.destroy
 
-    respond_to do |format|
-      format.html { redirect_to :back }
-      format.json { head :no_content }
-    end
-  end
+  #  respond_to do |format|
+  #    format.html { redirect_to :back }
+  #    format.json { head :no_content }
+  #  end
+  #end
 
   def transactions
 

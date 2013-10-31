@@ -1,0 +1,49 @@
+<% if params[:product_id] %>
+  <%= alert 'info' do %>
+    Позиция будет отражена как перезаказанная с <%= Product.find(params[:product_id]).to_label %>
+  <% end %>
+<% end %>
+
+<%= twbs_form_for @resource, url: polymorphic_path([:admin, @user, @resource], :return_path => params[:return_path]) do |f| %>
+  <%= f.twbs_hidden_field :product_id %>
+
+  <%= f.twbs_text_field :catalog_number, asterisk: true %>
+  <%= f.twbs_check_box :hide_catalog_number %>
+
+  <%= f.fields_for :brand, f.object.brand || f.object.build_brand do |b| %>
+    <%= f.form_group :brand do %>
+      <%= b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, asterisk: true %>
+      <%= f.error(:brand) %>
+    <% end %>
+  <% end %>
+
+  <%# f.twbs_text_field :manufacturer, asterisk: true %>
+  <%= f.twbs_text_field :short_name %>
+  <%= f.twbs_text_field :quantity_ordered, asterisk: true %>
+  <%= f.twbs_text_field :buy_cost, asterisk: true %>
+  <%= f.twbs_text_field :sell_cost, asterisk: true %>
+  <%= f.twbs_text_area :long_name %>
+  <%= f.twbs_text_field :quantity_available %>
+  <%= f.twbs_text_field :probability %>
+  <%= f.twbs_text_field :min_days %>
+  <%= f.twbs_text_field :max_days %>
+
+  <%= render :partial => 'profileables/forms/shared/notes', :locals => {:f => f} %>
+  hr
+  <%= f.twbs_text_field :status, :collection => Rails.configuration.products_status.map {|k,v| [v['title'],k]}, :disabled => true %>
+  <%# /= f.association :order, :disabled => true %>
+  <%# /= f.association :supplier, :disabled => true %>
+
+  <%# #products %>
+  <%#   = f.simple_fields_for :products do |product| %>
+  <%#     = render '/users/product_fields', :f => product, :stack => stack +1 %>
+  <%#  %>
+  <%#   - stack = stack.nil? ? 0 : stack + 1 %>
+  <%#  %>
+  <%#   - if stack < 3 %>
+  <%#     .links %>
+  <%#       = link_to_add_association 'Перезаказать', f, :products, :class => "btn btn-mini btn-success", :render_options => {:locals => {:stack => stack}}, :partial => '/users/product_fields' %>
+  <%#  %>
+  <%# hr %>
+  <%= f.twbs_submit %>
+<% end %>

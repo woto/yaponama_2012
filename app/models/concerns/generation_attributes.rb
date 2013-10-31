@@ -6,7 +6,6 @@ module GenerationAttributes
 
     belongs_to :generation
     accepts_nested_attributes_for :generation
-    #validates :generation, associated: true
 
     def generation_attributes=(attr)
       if attr["name"].present? && model.present?
@@ -19,8 +18,6 @@ module GenerationAttributes
       else
         self.generation = nil
       end
-
-      #self.generation_id_will_change!
 
     end
 

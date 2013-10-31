@@ -1,3 +1,7 @@
 <% if @item.quantity_ordered > 1 %>
-  <li> <%= link_to 'Разбить на партии', url_for(:action => :split, :id => @item.id, :return_path => params[:return_path] ) %> </li>
+  <li> <%= link_to 'Разбить на партии', url_for(:controller => :splits, :action => :new, :product_id => params[:id], :return_path => params[:return_path] ) %> </li>
+<% end %>
+
+<% if @item.status == 'cancel' %>
+  <li> <%= link_to 'Перезаказать', url_for(:action => :new, :product_id => params[:id], :return_path => params[:return_path] ) %> </li>
 <% end %>

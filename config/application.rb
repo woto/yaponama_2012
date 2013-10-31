@@ -10,23 +10,13 @@ Bundler.require(*Rails.groups(assets: %w(development test)))
 module Yaponama2012
   class Application < Rails::Application
     
-    # TODO Разобраться более тщательно, т.к. полагаю, что это могут делать подключаемые гемы автоматически
-    # Generators
-    #config.generators do |g|
-    #  g.template_engine :slim
-    #  g.test_framework :rspec
-    #  g.view_specs false
-    #  g.helper_specs false
-    #  #g.form_builder :simple_form
-    #  g.fixture_replacement :factory_girl, :dir => 'spec/factories'
-    #end
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += %W(#{config.root}/delivery)
 
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
@@ -49,6 +39,7 @@ module Yaponama2012
     
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ru
 
     # Configure the default encoding used in templates for Ruby 1.9.
@@ -74,7 +65,7 @@ module Yaponama2012
     config.less.paths += [
       File.join(config.root, 'system', 'submodules')
       #File.join(config.root, 'vendor', 'assets', 'bootstrap', 'less'),
-      #File.join(config.root, 'vendor', 'assets', 'Font-Awesome', 'less')
+      #File.join(config.root, 'vendor', 'assets', 'bootstrap', 'less'),
     ]
 
     # Дополнительная директория для библиотек, которые несут в себе всё вместе
@@ -87,36 +78,64 @@ module Yaponama2012
 
     # Autoload ckeditor models folder
     # config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+    #
 
-    # User
-    config.user_creation_reason = { 
-      'register' => 'Регистрация',
-      'email' => 'Прислал e-mail',
+    config.somebody_creation_reason = { 
       'session' => 'Посетил сайт',
-      'merge' => 'Образовался в результате объединения',
-      'manager' => 'Создан менеджером',
-      'call' => 'Звонок',
       'order' => 'В процессе оформления заказа',
-      'fixtures' => 'Первичная загрузка'
+      'email' => 'Прислал e-mail',
+      'chat' => 'Сообщение чата',
+      'seed' => 'Первичная загрузка',
+      'fixtures' => 'Тестовые данные',
+      'register' => 'Регистрация',
+      'backend' => 'Менеджер',
+      'phone_number' => 'Регистрация с пом. тел. номера',
+      'email_address' => 'Регистрация с пом. эл. почты',
+      'merge' => 'Образовался в результате объединения',
+      'call' => 'Звонок',
+    }
+
+    config.supplier_creation_reason = config.somebody_creation_reason
+    config.user_creation_reason = config.somebody_creation_reason
+
+    config.product_creation_reason = {
+      'fixtures' => 'Тестовые данные',
+      'backend' => 'Бэкэнд',
+      'frontend' => 'Фронтэнд'
     }
 
 
     # Phones
-    config.user_phone_creation_reason = {
+    config.phone_creation_reason = {
+      'session' => 'Посетил сайт',
+      'order' => 'В процессе оформления заказа',
+      'email' => 'Прислал e-mail',
+      'chat' => 'Сообщение чата',
+      'seed' => 'Первичная загрузка',
+      'fixtures' => 'Тестовые данные',
       'register' => 'Регистрация',
-      'call' => 'Звонок',
+      'backend' => 'Менеджер',
+      'phone_number' => 'Регистрация с пом. тел. номера',
       'addressee' => 'В процессе оформления заказа (Контактный телефон)',
       'callback' => 'Заказал обратный вызов',
-      'order' => 'В процессе оформления заказа',
-      'profile' => 'Заполнение профиля',
-      'fixtures' => 'Первичная загрузка'
+      'backend' => 'Заполнение профиля',
+      'frontend' => 'Заполнение профиля',
+      'call' => 'Звонок',
     }
 
     # Names
-    config.user_name_creation_reason = {
-      'comment' => 'Комментарий',
+    config.name_creation_reason = {
+      'session' => 'Посетил сайт',
+      'order' => 'В процессе оформления заказа',
+      'email' => 'Прислал e-mail',
+      'chat' => 'Сообщение чата',
+      'seed' => 'Первичная загрузка',
+      'fixtures' => 'Тестовые данные',
       'register' => 'Регистрация',
-      'email' => 'Автоматически заполнено из e-mail',
+      'backend' => 'Менеджер',
+      'comment' => 'Комментарий',
+      'phone_number' => 'Регистрация с пом. тел. номера',
+      'email_address' => 'Регистрация с пом. эл. почты',
       'addressee' => 'В процессе оформления заказа (получатель)',
       'self' => 'Представился на сайте',
       'google_oauth2' => 'Google',
@@ -126,54 +145,109 @@ module Yaponama2012
       'vkontakte' => 'Вконтакте',
       'odnoklassniki' => 'Одноклассники',
       'mailru' => 'Mail.ru',
-      'order' => 'В процессе оформления заказа',
-      'profile' => 'Заполнение профиля',
-      'fixtures' => 'Первичная загрузка'
+      'backend' => 'Заполнение профиля',
+      'frontend' => 'Заполнение профиля',
+      'call' => 'Звонок',
     }
 
-    # EmailAddresses
-    config.user_email_address_creation_reason = {
+    # Emails
+    config.email_creation_reason = {
+      'session' => 'Посетил сайт',
+      'order' => 'В процессе оформления заказа',
+      'email' => 'Прислал e-mail',
+      'chat' => 'Сообщение чата',
+      'seed' => 'Первичная загрузка',
+      'fixtures' => 'Тестовые данные',
       'register' => 'Регистрация',
-      'email' => 'Получено письмо с этого адреса',
-      'order' => 'В процессе оформления заказа',
-      'profile' => 'Заполнение профиля',
-      'fixtures' => 'Первичная загрузка'
+      'backend' => 'Менеджер',
+      'email_address' => 'Регистрация с пом. эл. почты',
+      'backend' => 'Заполнение профиля',
+      'frontend' => 'Заполнение профиля',
+      'call' => 'Звонок',
     }
 
-    config.user_postal_address_creation_reason = {
+    config.postal_address_creation_reason = {
       'order' => 'В процессе оформления заказа',
-      'profile' => 'Заполнение профиля',
-      'fixtures' => 'Первичная загрузка'
+      'email' => 'Прислал e-mail',
+      'chat' => 'Сообщение чата',
+      'seed' => 'Первичная загрузка',
+      'fixtures' => 'Тестовые данные',
+      'backend' => 'Менеджер',
+      'company' => 'Ввод компании',
+      'backend' => 'Заполнение профиля',
+      'frontend' => 'Заполнение профиля',
     }
 
-    config.user_car_creation_reason = {
+    config.car_creation_reason = {
       'order' => 'В процессе оформления заказа',
-      'profile' => 'Заполнение профиля',
-      'fixtures' => 'Первичная загрузка'
+      'email' => 'Прислал e-mail',
+      'chat' => 'Сообщение чата',
+      'seed' => 'Первичная загрузка',
+      'fixtures' => 'Тестовые данные',
+      'backend' => 'Менеджер',
+      'backend' => 'Заполнение профиля',
+      'frontend' => 'Заполнение профиля',
     }
 
-    config.user_company_creation_reason = {
+    config.company_creation_reason = {
       'order' => 'В процессе оформления заказа',
-      'profile' => 'Заполнение профиля',
-      'fixtures' => 'Первичная загрузка'
+      'email' => 'Прислал e-mail',
+      'chat' => 'Сообщение чата',
+      'seed' => 'Первичная загрузка',
+      'fixtures' => 'Тестовые данные',
+      'backend' => 'Менеджер',
+      'backend' => 'Заполнение профиля',
+      'frontend' => 'Заполнение профиля',
     }
 
 
-    config.user_order_creation_reason = {
+    config.order_creation_reason = {
       'order' => 'В процессе оформления заказа',
-      'fixtures' => 'Первичная загрузка'
+      'email' => 'Прислал e-mail',
+      'chat' => 'Сообщение чата',
+      'seed' => 'Первичная загрузка',
+      'fixtures' => 'Тестовые данные',
+      'backend' => 'Менеджер',
     }
 
-    config.user_profile_creation_reason = {
+    config.profile_creation_reason = {
       'order' => 'В процессе оформления заказа',
-      'profile' => 'Заполнение профиля',
-      'fixtures' => 'Первичная загрузка'
+      'email' => 'Прислал e-mail',
+      'chat' => 'Сообщение чата',
+      'seed' => 'Первичная загрузка',
+      'fixtures' => 'Тестовые данные',
+      'register' => 'Регистрация',
+      'backend' => 'Менеджер',
+      'backend' => 'Заполнение профиля',
+      'frontend' => 'Заполнение профиля',
+      'call' => 'Звонок',
+      'session' => 'Посетил сайт',
     }
 
-    config.user_passport_creation_reason = {
+    config.passport_creation_reason = {
+      'session' => 'Посетил сайт',
       'order' => 'В процессе оформления заказа',
-      'profile' => 'Заполнение профиля',
-      'fixtures' => 'Первичная загрузка'
+      'email' => 'Прислал e-mail',
+      'chat' => 'Сообщение чата',
+      'seed' => 'Первичная загрузка',
+      'fixtures' => 'Тестовые данные',
+      'backend' => 'Менеджер',
+      'backend' => 'Заполнение профиля',
+      'frontend' => 'Заполнение профиля',
+    }
+
+    config.talk_creation_reason = {
+      'email' => 'Прислал e-mail',
+      'chat' => 'Сообщение чата'
+    }
+
+    config.page_creation_reason = {
+      'backend' => 'Бэкенд'
+    }
+
+    config.upload_creation_reason = {
+      'frontend' => 'Фронтенд',
+      'backend' => 'Бэкенд'
     }
 
     # Orders
@@ -315,11 +389,10 @@ module Yaponama2012
       enable_starttls_auto:    true
     }
 
-
     # User Order Rule
-    config.user_order_rules = {
-      'all' => 'Автоматически уйдут в работу только если будет достаточно денег на все товары в заказе',
-      'none' => 'Ни один заказ не будет оплачен',
+    config.somebody_order_rules = {
+      'all' => 'Хватает на все товары',
+      'none' => 'Отправлять вручную',
     }
     config.robokassa_integration_modes = {
       'production' => 'Рабочий режим',
@@ -327,24 +400,22 @@ module Yaponama2012
     }
 
 
-    config.phone_types = {
-      'mobile_russia' => 'Мобильный (Россия)',
-      'unknown' => 'Городской/Или другие страны'
-    }
-
     config.company_ownerships = {
       'individual' => 'Индивидуальный предприниматель',
       'legal' => 'Юридическое лицо'
     }
 
-    config.phone_types_keys = config.phone_types.keys
+    config.genders = {
+      'male' => 'Мужской', 
+      'female' => 'Женский'
+    }
 
     config.vin_or_frame = {
       'vin' => 'VIN код',
       'frame' => 'Frame код'
     }
 
-    config.default_user_role = 'guest'
+    config.default_somebody_role = 'guest'
 
     ## Default settings for new users
     #config.default_user_attributes = {
@@ -353,7 +424,7 @@ module Yaponama2012
     #  'order_rule' => 'all',
     #  'role' => 'guest'
     #}
-    config.user_roles = {
+    config.somebody_roles = {
       'all' => {
         'password_required' => false,
         'real' => false,
@@ -392,31 +463,31 @@ module Yaponama2012
     }
 
     # Все роли
-    config.user_roles_keys = config.user_roles
+    config.somebody_roles_keys = config.somebody_roles
       .select{ |k, v| v["real"] == true }
       .keys
 
     # Роли, где требуется пароль
-    config.user_roles_password_required_keys = config.user_roles
+    config.somebody_roles_password_required_keys = config.somebody_roles
       .select{ |k, v| v["real"] == true }
       .select{ |k, v| v["password_required"] == true }
       .keys
 
     # Роли, где не требуется пароль
-    config.user_roles_password_not_required_keys = config.user_roles
+    config.somebody_roles_password_not_required_keys = config.somebody_roles
       .select{ |k, v| v["real"] == true }
       .select{ |k, v| v["password_required"] == false }
       .keys
 
 
     # Привилeгированные 
-    config.user_roles_privileged_keys = config.user_roles
+    config.somebody_roles_privileged_keys = config.somebody_roles
       .select{ |k, v| v["real"] == true }
       .select{ |k, v| v["privileged"] == true }
       .keys
 
     # Не привилeгированные 
-    config.user_roles_not_privileged_keys = config.user_roles
+    config.somebody_roles_not_privileged_keys = config.somebody_roles
       .select{ |k, v| v["real"] == true }
       .select{ |k, v| v["privileged"] == false }
       .keys
@@ -436,6 +507,9 @@ module Yaponama2012
 
     config.sms_notify_methods = %w(flash sms growl)
 
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+      "#{html_tag}".html_safe 
+    }
 
   end
 end

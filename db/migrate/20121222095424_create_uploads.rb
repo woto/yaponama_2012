@@ -4,7 +4,8 @@ class CreateUploads < ActiveRecord::Migration
       t.string :upload
       t.string :content_type
       t.integer :file_size
-      t.references :user, index: true
+      t.references :somebody, index: true
+      t.string :creation_reason
 
       t.timestamps
     end

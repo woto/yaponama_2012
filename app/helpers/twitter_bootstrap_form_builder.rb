@@ -3,7 +3,9 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
   def alert_danger
     # TODO Проработать этот вопрос. base есть не всегда. Желательно выкидывать в самый верх, но тоже не во всех случая - для вложенных форм это будет криво.
     if @object.errors[:base].any?
-      @template.content_tag :div, class: 'alert alert-danger' do
+      @template.alert 'danger' do
+      # TODO Проверить
+      #@template.content_tag :div, class: 'alert alert-danger' do
         yield
       end
     end
@@ -38,35 +40,50 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def standard_remove
-    @template.link_to_remove_association '<i class="icon-trash ignoredirty"></i>'.html_safe, 
+    @template.link_to_remove_association( 
+      @template.icon('times'),
       self, 
       :class => "btn pull-right ignoredirty btn-unstyled",
       data: { confirm: 'Действительно хотите удалить?' }
+    )
   end
 
   def standard_recreate
     hidden_field :hidden_recreate
   end
 
-  def hint symbol_or_hint
-    if symbol_or_hint.is_a? Symbol
-      symbol_or_hint = symbol_or_hint.to_s.chomp('_id').to_sym
-      hint = I18n.t("#{self.object.class.to_s.underscore}.#{symbol_or_hint}", default: [symbol_or_hint, ''], scope: [:helpers, :hints])
-    else
-      hint = symbol_or_hint
-    end
-    @template.content_tag(:span, hint, class: "help-block") if hint.present?
+  def hint method, options
+      method = method.to_s.chomp('_id')
+      a1 = I18n.t("#{self.object.class.to_s.underscore}.#{method}", default: '', scope: [:helpers, :hints])
+      a2 = I18n.t("#{method}", default: '', scope: [:helpers, :hints])
+      a3 = options[:hint]
+      str = a1.presence || a2.presence || a3.presence
+      if str
+        @template.hint do
+          str
+        end
+      end
   end
 
   def control_label method, options = {}
-    options[:class] = ['col-lg-2 col-md-3 col-sm-3 control-label', options[:class]].compact
+    #options[:class] = ['col-lg-2 col-md-3 col-sm-3 control-label', options[:class]].compact
+    #options[:class] = ['col-xs-12', options[:class]].compact
+    options[:class] = ['control-label', options[:class]].compact
     requireable_label method, options
   end
 
   def requireable_label method, options = {}
-    asterisk = options.delete(:asterisk)
-    options[:class] = [asterisk ? 'required' : nil, options[:class]].compact
-    label(method, options)
+    if options[:label] == false
+      ''.html_safe
+    else
+      asterisk = options.delete(:asterisk)
+      options[:class] = [asterisk ? 'required' : nil, options[:class]].compact
+      if options[:label]
+        @template.label_tag method, options[:label], options
+      else
+        label(method, options)
+      end
+    end
   end
 
   def phone method, options={}
@@ -74,32 +91,84 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
     @template.render 'phone', f: self, method: method, extra: extra
   end
 
-  def select2 method, options={}
-    extra = common_options method, options
-    @template.render 'select2', f: self, method: method, options: options, extra: extra
-  end
-
   def twbs_submit value=nil, options={}
-    options[:class] = [ 'btn btn-primary', options[:class] ].compact
-    @template.render 'twbs_submit', f: self, value: value, options: options
+    options[:class] = [ 'btn btn-primary btn-lg top-space bottom-space', options[:class] ].compact
+    form_group do
+      @template.concat submit(value, options)
+      if @template.params[:return_path]
+        @template.concat '&nbsp;&nbsp;&nbsp;или&nbsp;&nbsp;&nbsp;'.html_safe
+        @template.concat(@template.link_to('Назад', @template.params[:return_path], :class => 'btn btn-default', :data => { :confirm => 'Уверены что хотите уйти без сохранения?' }))
+      end
+    end
   end
 
-  def twbs_text_field method, options = {}
+  def twbs_hidden_field(method, options = {})
+    hidden_field method, options
+  end
+
+  def twbs_1 method, options = {}
     extra = common_options method, options
     classify options
-    @template.render 'twbs_text_field', f: self, method: method, options: options, extra: extra
+    form_group(method) do
+      control_label(method, label: extra[:label], asterisk: extra[:asterisk]).to_s +
+      yield +
+      error(method).to_s +
+      hint(method, hint: extra[:hint]).to_s
+    end
+  end
+
+  def twbs_2 method, options = {}
+    # TODO Здесь все то же самое за исключением что отсутсвует вызов classify
+    extra = common_options method, options
+    form_group(method) do
+      control_label(method, label: extra[:label], asterisk: extra[:asterisk]).to_s +
+      yield +
+      error(method).to_s +
+      hint(method, hint: extra[:hint]).to_s
+    end
+  end
+
+  def twbs_select2 method, options={}
+    twbs_2(method, options) do
+      twbs_hidden_field(method, options)
+    end
+  end
+
+
+
+  def twbs_file_field method, options = {}
+    twbs_2(method, options) do
+      file_field(method, options).to_s
+    end
+  end
+   
+
+  def twbs_text_field method, options = {}
+    twbs_1(method, options) do
+      text_field(method, options).to_s
+    end
   end
 
   def twbs_text_area method, options={}
-    extra = common_options method, options
-    classify options
-    @template.render 'twbs_text_area', f: self, method: method, options: options, extra: extra
+    twbs_1(method, options) do
+      text_area(method, options).to_s
+    end
   end
 
+
   def twbs_password_field method, options={}
-    extra = common_options method, options
-    classify options
-    @template.render 'twbs_password_field', f: self, method: method, options: options, extra: extra
+    twbs_1(method, options) do
+      password_field(method, options).to_s
+    end
+  end
+
+
+  def nested_fields &block
+    res = @template.capture(&block)
+    @template.content_tag :div, class: "nested-fields" do
+      #@template.concat block.call
+      res + standard_recreate
+    end
   end
 
   def twbs_collection_radio_buttons method, collection, value_method, text_method, options = {}, html_options = {}, &block
@@ -112,7 +181,17 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
   def twbs_check_box(method, options = {}, checked_value = '1', unchecked_value = '0')
     extra = common_options method, options
-    @template.render 'twbs_check_box', f: self, method: method, options: options, checked_value: checked_value, unchecked_value: unchecked_value, extra: extra
+    #@template.render 'twbs_check_box', f: self, method: method, options: options, checked_value: checked_value, unchecked_value: unchecked_value, extra: extra
+    form_group(method) do
+      @template.content_tag(:div, class: 'checkbox') do
+        @template.content_tag :label do
+          check_box(method, options, checked_value, unchecked_value) +
+          # Это неправильная структура, вложенного label быть не должно, оставил для локализации
+          requireable_label(method, label: extra[:label], asterisk: extra[:asterisk])
+        end
+      end +
+      hint(method, hint: extra[:hint])
+    end
   end
 
   def check_box_themed(method, options = {}, checked_value = "1", unchecked_value = "0")
@@ -132,6 +211,20 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
     @template.render 'twbs_date_select', f: self, method: method, options: options, html_options: html_options, extra: extra
   end
 
+  def twbs_datetime_select method, options = {}, html_options = {}
+    extra = common_options method, options
+    classify html_options
+    html_options[:class] = ['datetime', html_options[:class] ].compact
+    @template.render 'twbs_datetime_select', f: self, method: method, options: options, html_options: html_options, extra: extra
+  end
+
+  def twbs_collection_select(method, collection, value_method, text_method, options = {}, html_options = {})
+    extra = common_options method, options
+    classify html_options
+    @template.render 'twbs_collection_select', f: self, method: method, collection: collection, value_method: value_method, text_method: text_method, options: options, html_options: html_options, extra: extra
+  end
+
+
   def twbs_select(method, choices, options = {}, html_options = {})
     extra = common_options method, options
     classify html_options
@@ -144,6 +237,7 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
     options[:placeholder] = I18n.t("helpers.placeholders.#{method}", default: [I18n.t("helpers.placeholders.#{self.object.class.to_s.underscore}.#{method}", default: [options[:placeholder], ''])])
     extra = {}
     extra[:label] = options.delete(:label)
+    extra[:hint] = options.delete(:hint)
     extra[:asterisk] = options.delete(:asterisk)
     extra
 

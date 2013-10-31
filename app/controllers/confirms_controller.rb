@@ -2,6 +2,8 @@
 
 class ConfirmsController < ApplicationController
 
+  include SetResourceClassDummy
+
   before_action :only_authenticated, only: [:ask, :new]
   before_action :anonymous_contact, only: [:make]
   before_action :user_contact, only: [:view, :ask]
@@ -73,6 +75,17 @@ class ConfirmsController < ApplicationController
   def _ask
     @contact.force_confirm!
     @contact.save
+  end
+
+  def user_set
+    @user = current_user
+  end
+
+  def somebody_set
+    @somebody = current_user
+  end
+
+  def supplier_set
   end
 
 end

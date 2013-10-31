@@ -11,19 +11,19 @@
 <% array.each do |item| %>
 
   <h4 class="profileable-category">
-    <%= link_to smart_route({:postfix => [item[:assoc].pluralize]}, :user_id => @user.id) do %>
+    <%= link_to smart_route({:postfix => [item[:assoc].pluralize]}, :user_id => @somebody.id) do %>
       <div>
         <%= icon item[:icon] %>
         <%= item[:title] %>
       </div>
     <% end %>
-    <%= link_to smart_route({:prefix => [:new], :postfix => [item[:assoc]]}, :user_id => @user.id), :class => "btn btn-sm btn-primary profileable-category-add" do %>
+    <%= link_to [:new, (admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user), item[:assoc]], :class => "btn btn-sm btn-primary profileable-category-add" do %>
       <%= icon 'plus' %>
     <% end %>
   </h4>
 
-  <% @user.send(item[:assoc].pluralize).each do |partial| %>
-    <div class="profileable-item left-space">
+  <% @somebody.send(item[:assoc].pluralize).each do |partial| %>
+    <div class="profileable-item">
       <%= render :partial => "profileables/shows/#{partial.class.name.underscore}", :locals => {partial.class.name.underscore.to_sym => partial} %>
       <%= render :partial => 'profileables/shows/notes', :locals => {resource: partial} %>
       <%= render :partial => 'profileables/item_controls', :locals => {:resource => partial} %>
@@ -41,35 +41,22 @@
 </h4>
 
 <%# В РАБОТЕ %>
-<div class="profileable-item left-space">
-  В работе: <%= number_to_currency @user.account.credit %>
+<div class="profileable-item">
+  В работе: <%= number_to_currency @somebody.cached_credit %>
+  <div class="profileable-item-controls">
+    <% namespace = admin_zone? ? [:admin, @somebody] : [:user] %>
+    <%= link_to polymorphic_path([:status, *namespace, :products], :status => 'active') , class: "btn btn-warning btn-sm" do %>
+      <%= icon 'edit' %>
+    <% end %>
+  </div>
 </div>
 
 <%# НА СЧЕТУ %>
-<div class="profileable-item left-space">
-  На счету: <%= number_to_currency @user.account.debit %>
+<div class="profileable-item">
+  На счету: <%= number_to_currency @somebody.cached_debit %>
   <div class="profileable-item-controls">
-    <%= link_to [:new, :admin, @user, :cashes], class: "btn btn-warning btn-sm" do %>
-      <%= icon 'edit' %>
-    <% end %>
-  </div>
-</div>
-
-<%# СКИДКА %>
-<div class="profileable-item left-space">
-  Скидка: <%= @user.discount_was %> %
-  <div class="profileable-item-controls">
-    <%= link_to edit_admin_user_discount_path(@user), class: "btn btn-warning btn-sm" do %>
-      <%= icon 'edit' %>
-    <% end %>
-  </div>
-</div>
-
-<%# ПРЕДОПЛАТА %>
-<div class="profileable-item left-space">
-  Предоплата: <%= @user.prepayment_was %> %
-  <div class="profileable-item-controls">
-    <%= link_to edit_admin_user_prepayment_path(@user), class: "btn btn-warning btn-sm" do %>
+    <% namespace = admin_zone? ? [:admin, @somebody] : [:user] %>
+    <%= link_to [:new, *namespace, :cashes], class: "btn btn-warning btn-sm" do %>
       <%= icon 'edit' %>
     <% end %>
   </div>
@@ -85,7 +72,7 @@
   <% end %>
 </h4>
 
-<ul id="auth-buttons" class="list-unstyled list-inline left-space">
+<ul id="auth-buttons" class="list-unstyled list-inline">
   <%# Муть какая-то, если слить в одну строку, то пробела не будет, иначе как - не знаю %>
-  <%- @user.auths.each do |auth| -%><li><%= render "application/auth/logged_in", auth: auth %></li><%- end -%>
+  <%- @somebody.auths.each do |auth| -%><li><%= render "application/auth/logged_in", auth: auth %></li><%- end -%>
 </ul>

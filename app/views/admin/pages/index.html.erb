@@ -1,34 +1,15 @@
-<% @meta_title = "Страницы" %>
+<% title_index %>
 
-<%= twbs_form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [@resource_class.name.pluralize.underscore.to_sym]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :status => params[:status]), :remote => true do |f| %>
+<%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
 
   <%= panel 'default' do |p| %>
 
     <%= p.heading do %>
-
-      <%= link_to new_admin_page_path, :class => "btn btn-primary" do %>
-        <%= icon 'plus' %>
-      <% end %>
-
-      <%= link_to new_admin_page_path, :class => "btn btn-warning" do %>
-        <%= icon 'edit' %>
-      <% end %>
-
-      <%= link_to new_admin_page_path, :class => "btn btn-danger" do %>
-        <%= icon 'remove' %>
-      <% end %>
-
-      <%= render 'application/grid/per_page' %>
-
-      <a href="#columns" role="button" class="btn btn-default" data-toggle="modal" title="Настроить отображаемые столбцы" rel='tooltip'>
-        <%= icon 'columns' %>
-      </a>
-      
-
+      <%= render 'head' %>
     <% end %>
 
     <%= p.body do %>
-      <%= render 'shared/grid', f: f %>
+      <%= render 'grid', f: f %>
     <% end %>
 
   <% end %>

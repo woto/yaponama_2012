@@ -26,12 +26,12 @@ module ConfigHelper
     "#{get_image_data_address}#{get_image_data_port.present? ? ":" + get_image_data_port : ''}"
   end
 
-  def default_user_attributes
+  def default_somebody_attributes
     {
-      'prepayment' => default_user_prepayment,
-      'discount' => default_user_discount,
-      'order_rule' => default_user_order_rule,
-      'role' => Rails.configuration.default_user_role
+      'prepayment' => default_somebody_prepayment,
+      'discount' => default_somebody_discount,
+      'order_rule' => default_somebody_order_rule,
+      'role' => Rails.configuration.default_somebody_role
     }
   end
 

@@ -1,9 +1,15 @@
 # encoding: utf-8
 
 class Company < ActiveRecord::Base
+  include HiddenRecreate
   include BelongsToCreator
-  include BelongsToUser
+  include BelongsToSomebody
   include Transactionable
+  include Selectable
+  include CachedLegalAddress
+  include CachedActualAddress
+
+  #include ProfileConfirmRequired
 
   attr_accessor :legal_address_type, :actual_address_type
 
@@ -26,7 +32,10 @@ class Company < ActiveRecord::Base
     # Выставляем пользователя и обратаываем ситуацию, когда только ввели один адрес
     # и выбрали использовать такой же в другом поле
     if legal_address
-      legal_address.user = user
+      legal_address.somebody = somebody
+      if legal_address.new_record?
+        legal_address.code_1 = self.code_1
+      end
       if legal_address.save
         if actual_address_type == 'old' && self.actual_address_id == -1
           self.actual_address_id = legal_address.id
@@ -35,7 +44,10 @@ class Company < ActiveRecord::Base
     end
 
     if actual_address
-      actual_address.user = user
+      actual_address.somebody = somebody
+      if actual_address.new_record?
+        actual_address.code_1 = self.code_1
+      end
       if actual_address.save
         if legal_address_type == 'old' && self.legal_address_id == -1
           self.legal_address_id = actual_address.id

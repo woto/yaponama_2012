@@ -6,8 +6,9 @@ class Email < ActiveRecord::Base
   include BelongsToCreator
   include Confirmed
   include NotSelf
-  include BelongsToUser
+  include BelongsToSomebody
   include Transactionable
+  include Selectable
 
   belongs_to :profile, :inverse_of => :emails
 

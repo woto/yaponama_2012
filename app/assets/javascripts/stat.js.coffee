@@ -28,11 +28,11 @@ send_stat = ->
   $('#debug-offset').text(offset)
 
   data = 
-    russian_time_zone_auto_id: offset
     stat:
       location: window.location.href
       title: document.title
       referrer: window.referrer
+      russian_time_zone_auto_id: -Math.round(offset)
       screen_width: screen.width
       screen_height: screen.height
       client_width: $(window).width()

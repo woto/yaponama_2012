@@ -1,0 +1,29 @@
+<%= f.nested_fields do %>
+
+  <%= panel 'default' do |p| %>
+
+    <%= p.heading do %>
+      <%= p.title do %>
+        Вариант доставки   
+        <%= f.standard_remove %>
+      <% end %>
+    <% end %>
+
+    <%= p.body do %>
+
+      <%= f.destroyable do %>
+
+        <%= f.twbs_text_field :name, asterisk: true %>
+        <%= f.twbs_check_box :active %>
+        <%= f.twbs_text_field :sequence, asterisk: true %>
+        <%= f.twbs_text_field :delivery_cost, asterisk: true %>
+        <%= f.twbs_collection_select :option_id, Deliveries::Option.all, :id, :name %>
+        <%= f.twbs_text_area :content, class: 'ckeditor-extended' %>
+
+      <% end %>
+
+    <% end %>
+
+  <% end %>
+
+<% end %>

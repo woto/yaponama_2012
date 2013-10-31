@@ -11,7 +11,7 @@ class TimeZoneCheckboxTest < ActionDispatch::IntegrationTest
   test 'У first_user по-умолчанию выбран час. пояс вручную - Красноярское время' do
     auth('+7 (123) 123-12-31', '1231231231')
     visit '/user/edit'
-    assert has_no_css? '#user_russian_time_zone_auto_id'
+    assert has_no_css? '#user_cached_russian_time_zone_auto_id'
     assert has_select? 'user_russian_time_zone_manual_id', selected: 'Красноярское время'
   end
 
@@ -19,7 +19,7 @@ class TimeZoneCheckboxTest < ActionDispatch::IntegrationTest
     auth('+7 (333) 333-33-33', '3333333333')
     visit '/user/edit'
     assert has_no_css? '#user_russian_time_zone_manual_id'
-    assert has_select? 'user_russian_time_zone_auto_id', selected: 'Московское время', disabled: true
+    assert has_select? 'user_cached_russian_time_zone_auto_id', selected: 'Московское время', disabled: true
   end
 
   test 'При щелчке на Автоматически должен показаться соответствующий select' do

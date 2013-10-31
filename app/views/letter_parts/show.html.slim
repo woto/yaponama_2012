@@ -1,0 +1,30 @@
+p#notice = notice
+
+p
+  strong Letter:
+  = @letter_part.letter
+p
+  strong Cid:
+  = @letter_part.cid
+p
+  strong Type:
+  = @letter_part.type
+p
+  strong Is attachment:
+  = @letter_part.is_attachment
+p
+  strong Filename:
+  = @letter_part.filename
+p
+  strong Charset:
+  = @letter_part.charset
+p
+  strong Body:
+  = @letter_part.body
+p
+  strong Size:
+  = @letter_part.size
+
+= link_to 'Edit', edit_letter_part_path(@letter_part)
+'|
+= link_to 'Back', letter_parts_path

@@ -1,0 +1,18 @@
+<!-- Main hero unit for a primary marketing message or call to action -->
+<div class="hero-unit">
+  <%= render(:partial => "blocks/show", :locals => {:block_name => 'hero_unit'}) %>
+</div>
+
+<div class="row" style="margin-left: 0; margin-bottom: 0px">
+    <%= render(:partial => "blocks/show", :locals => {:block_name => 'blockquote'}) %>
+</div>
+
+<div class="row" style="margin-left: 5px;">
+
+
+
+  <h3>Каталоги автозапчастей</h3>
+  <div class="brands force-clearfix" style="margin-bottom: 20px">
+    <%= raw Brand.where(:catalog => true).map{|a, b| brands_decorator(a, {:title => true})}.join %>
+  </div>
+</div>

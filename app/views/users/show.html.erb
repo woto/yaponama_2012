@@ -1,0 +1,15 @@
+<% @meta_title = 'Главная' %>
+
+<%= somebody_tabs do %>
+
+  <ul class="list-unstyled">
+    <li><h4><%= link_to 'Движение средств', transactions_user_accounts_path %>
+    <li><h4><%= link_to 'Выйти со всех компьютеров', logout_from_all_places_user_path, method: :delete, data: {confirm: 'Вы уверены что хотите выйти?'} %><h4></li>
+    <li><h4><%= link_to 'Сменить пароль', password_user_path %><h4></li>
+    <li><h4><%= link_to 'Настройки', edit_user_path, id: @resource.id %><h4></li>
+    <li><h4><%= render 'application/auth/buttons' %><h4></li>
+  </ul>
+
+  <%= render 'smart_show' %>
+
+<% end %>

@@ -1,0 +1,10 @@
+- content = capture do
+  ul
+    = @grid_class::COLUMNS.reject{|attribute| visible_columns.include? attribute}.select{|attribute| item[attribute].present?}.map{ |k, v| "<li>#{@resource_class.human_attribute_name(k)}: <i>#{render(k, item: item)}</i></li>" }.join.html_safe
+    li
+      = link_to 'Элемент', "/#{item.path}"
+    li
+      = link_to 'История элемента', smart_route({:prefix => [:transactions], :postfix => [@resource_class.name.underscore]}, :id => item)
+
+
+= link_to item.id, '#', :rel => 'popover', data: { html: true, content: content.gsub("\"", "'"), title: 'Дополнительная информация'}, class: "btn btn-info btn-mini ignoredirty", style: "min-width: 30px"

@@ -5,50 +5,50 @@ class UploadsController < ApplicationController
   # GET /uploads
   # GET /uploads.json
   def index
-    @uploads = Upload.all
+    @resources = Upload.all
 
     respond_to do |format|
       format.html { render layout: "lightweight" }
-      format.json { render json: { files: @uploads.map{|upload| upload.to_jq_upload } } }
+      format.json { render json: { files: @resources.map{|upload| upload.to_jq_upload } } }
     end
   end
 
   # POST /uploads
   # POST /uploads.json
   def create
-    @upload = Upload.new(upload_params)
-    @upload.user = current_user
+    #@resource = Upload.new(upload_params)
+    #@resource.user = current_user
 
     respond_to do |format|
-      if @upload.save
+      if @resource.save
         format.html {
-          render :json => { files: [@upload.to_jq_upload] },
+          render :json => { files: [@resource.to_jq_upload] },
           :content_type => 'text/html',
           :layout => false
         }
-        format.json { render json: { files: [@upload.to_jq_upload] }, status: :created, location: @upload }
+        format.json { render json: { files: [@resource.to_jq_upload] }, status: :created, location: @resource }
       else
         format.html { render action: "new" }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
+        format.json { render json: @resource.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def crop
-    @upload = Upload.find params[:id]
-    @upload.operation = 'crop'
+    @resource = Upload.find params[:id]
+    @resource.operation = 'crop'
     render layout: 'lightweight'
   end
 
   def rotate
-    @upload = Upload.find params[:id]
-    @upload.operation = 'rotate'
+    @resource = Upload.find params[:id]
+    @resource.operation = 'rotate'
     render layout: 'lightweight'
   end
 
   def update
-    @upload = Upload.find(params[:id])
-    if @upload.update_attributes(upload_params)
+    @resource = Upload.find(params[:id])
+    if @resource.update_attributes(upload_params)
       render 'close_and_update_image'
     end
   end
@@ -57,6 +57,30 @@ class UploadsController < ApplicationController
   
   def upload_params
     params.require(:upload).permit!
+  end
+
+  def set_resource_class
+    @resource_class = Upload
+  end
+
+  def user_set
+    @user = current_user
+  end
+
+  def somebody_set
+    @somebody = current_user
+  end
+
+  def supplier_set
+  end
+
+  def user_get
+  end
+
+  def supplier_get
+  end
+
+  def somebody_get
   end
 
 end
