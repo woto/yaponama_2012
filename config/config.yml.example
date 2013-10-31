@@ -50,9 +50,9 @@ defaults: &defaults
   avisosms_flash_message: 0
   avisosms_validity_period: 10
   avisosms_email_address: 123@avisosms.ru
-  default_user_prepayment: 20
-  default_user_discount: 0
-  default_user_order_rule: all
+  default_somebody_prepayment: 20
+  default_somebody_discount: 0
+  default_somebody_order_rule: all
   send_request_from_search_page: true
   get_image_data_address: 192.168.2.3
   get_image_data_port: 8800
