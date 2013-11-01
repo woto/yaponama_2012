@@ -22,6 +22,10 @@ module GridBrand
           :type => :number,
         }
 
+        columns_hash['path'] = {
+          :type => :string,
+        }
+
         columns_hash['content'] = {
           :type => :string,
         }
@@ -36,6 +40,7 @@ module GridBrand
       @grid.visible_id = '1'
       @grid.visible_creator_id = '1'
       @grid.visible_content = '1'
+      @grid.visible_path = '1'
       @grid.visible_cached_brand = '1'
       @grid.visible_name = '1'
       @grid.visible_image = '1'

@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 module Brands
 
   BRANDS = {
@@ -462,7 +461,15 @@ Brands::BRANDS.each do |name, opts|
   end
 
   begin
-    Brand.create!(:name => name, :rating => opts[:rating], :image => File.open(File.join(Rails.root, 'db', 'seeds', 'brands', "#{opts[:file]}.png")), phantom: true)
+    Brand.create!(
+      :name => opts[:title], 
+      :path => name,
+      :catalog => opts[:catalog],
+      :rating => opts[:rating], 
+      :is_brand => opts[:brand],
+      :image => File.open(File.join(Rails.root, 'db', 'seeds', 'brands', "#{opts[:file]}.png")), 
+      :phantom => true
+    )
   rescue Exception => e
     puts e.message
   end

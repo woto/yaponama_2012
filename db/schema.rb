@@ -166,6 +166,8 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "creator_id"
     t.string   "name_before"
     t.string   "name_after"
+    t.string   "path_before"
+    t.string   "path_after"
     t.integer  "brand_id_before"
     t.integer  "brand_id_after"
     t.string   "cached_brand_before"
@@ -180,6 +182,8 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.boolean  "phantom_after"
     t.boolean  "catalog_before"
     t.boolean  "catalog_after"
+    t.boolean  "is_brand_before"
+    t.boolean  "is_brand_after"
     t.datetime "created_at"
   end
 
@@ -188,6 +192,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
 
   create_table "brands", force: true do |t|
     t.string   "name"
+    t.string   "path"
     t.integer  "brand_id"
     t.string   "cached_brand"
     t.string   "image"
@@ -196,6 +201,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "creator_id"
     t.boolean  "phantom"
     t.boolean  "catalog"
+    t.boolean  "is_brand"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -521,7 +527,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "profile_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "confirmed",             default: "false"
+    t.boolean  "confirmed",             default: false
     t.datetime "confirmation_datetime"
     t.string   "confirmation_token"
     t.string   "creation_reason"
@@ -889,7 +895,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "profile_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "confirmed",             default: "false"
+    t.boolean  "confirmed",             default: false
     t.datetime "confirmation_datetime"
     t.string   "confirmation_token"
     t.string   "creation_reason"

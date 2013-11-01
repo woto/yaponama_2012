@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-#gem 'rails',     github: 'rails/rails'
-gem 'rails',     path: '/home/woto/vendor/rails'
+gem 'rails',     github: 'woto/rails', :branch => '4-0-1'
+#gem 'rails',     path: '/home/woto/vendor/rails'
 gem 'arel',      github: 'rails/arel'
 
 gem 'pg'
@@ -56,7 +56,7 @@ group :doc do
 end
 
 # To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.1.0'
+gem 'bcrypt-ruby'
 
 gem 'less-rails'
 

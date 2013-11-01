@@ -17,7 +17,7 @@ module ApplicationHelper
         title = brand.name.html_safe
       end
 
-      link_to(title, "/brands/#{brand.name}", :style => "width: 50px; height: 50px; display: block; background-image: url(#{asset_path(brand.image.url.to_s)})", :class => "brands-#{brand.name}")
+      link_to(title, "/#{brand.path}", :style => "background-image: url(#{asset_path(brand.image.url.to_s)})", :class => "brands-#{brand.name}")
       #brand.content
     end
   end
@@ -140,6 +140,9 @@ module ApplicationHelper
     (request.car.vin + " " + request.car.frame + " " + request.car.marka + " " + request.car.model + " " + request.car.god).strip
   end
   
+  ##################################3
+  # ВЫРЕЗКА СО СТАРОГО
+  #
   def days_decorator value
     html_escape("#{((value = value.to_i) > 0) ? value : '*'}") + "&nbsp;дн.".html_safe
   end 
@@ -157,6 +160,10 @@ module ApplicationHelper
   end
 
 
+  def phone_decorator value
+    value.gsub(/(\d{3})(\d{3})(\d{2})(\d{2})/, '(\1) \2-\3-\4')
+  end
+
   def probability_decorator value
     value.present? ? "#{value.to_i}%" : ""
   end
@@ -164,6 +171,9 @@ module ApplicationHelper
   def hint_decorator value, add_class=''
     raw "<p><span class=\"label #{add_class}\">К сведению</span> #{value}</p>"
   end
+
+  ##################################3
+  # / ВЫРЕЗКА СО СТАРОГО
 
   def hint &block
     content_tag(:span, class: "help-block") do
