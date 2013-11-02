@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   helper_method :admin_zone?
   #helper_method :complex_namespace_helper
   helper_method :smart_route
-  before_action :set_user_time_zone
+  around_action :set_user_time_zone
   before_action :ipgeobase
   helper_method :visible_columns
   helper_method :available_columns
@@ -260,14 +260,24 @@ class ApplicationController < ActionController::Base
 private
 
   def set_user_time_zone
-    # TODO необходимо протестировать в функциональном тесте, 
-    # + поговаривают, что это не правильный способ, т.к. не threadsafe, а если и таковой, то неправильный
-    Time.zone = case current_user.use_auto_russian_time_zone
+
+    tz = case current_user.use_auto_russian_time_zone
     when true
-      current_user.cached_russian_time_zone_auto_id
+      if Rails.configuration.russian_time_zones.key?(current_user.cached_russian_time_zone_auto_id.to_s)
+        current_user.cached_russian_time_zone_auto_id
+      else
+        # Несмотря на то, что такая временная зона может и есть, в России её нет.
+        # Поэтому для других стран пусть показвается дефолтной выбранное в настройках сайта (т.е. локальное для этого места)
+        SiteConfig.default_time_zone_id.to_i
+      end
     else
       current_user.russian_time_zone_manual_id
     end
+
+    Time.use_zone(tz) {
+      yield
+    }
+
   end
 
   private

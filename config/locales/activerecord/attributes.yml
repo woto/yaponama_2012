@@ -99,6 +99,13 @@ ru:
         comment: Комментарий к имени
       
       user:
+        cached_location: Текущее расположение URL кешированное
+        cached_title: Заголовок страницы кешированный
+        cached_referrer: Пришел со страницы URL кешированное
+        cached_screen_width: Ширина экрана кешированная
+        cached_screen_height: Высота экрана кешированная
+        cached_client_width: Ширина браузера кешированная
+        cached_client_height: Высота браузера кешированная
         password_reset_sent_at: Дата отправки сброса пароля
         prepayment: Процент предоплаты
         order_rule: Правило оплаты
@@ -111,7 +118,7 @@ ru:
         ipgeobase_name: Населенный пункт
         ipgeobase_names_depth_cache: Регион
         russian_time_zone_manual_id: Ручное время
-        russian_time_zone_auto_id: Автоматическое время
+        cached_russian_time_zone_auto_id: Автоматическое время кешированное
         remote_ip: IP адрес
 
       car:

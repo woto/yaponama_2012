@@ -124,7 +124,7 @@ module GridHelper
           end
         when *['sell_cost', 'buy_cost', 'debit', 'credit', 'cached_debit', 'cached_credit']
           number_to_currency(val)
-        when *['russian_time_zone_auto_id', 'russian_time_zone_manual_id']
+        when *['cached_russian_time_zone_auto_id', 'russian_time_zone_manual_id']
           Rails.configuration.russian_time_zones[val.to_s]
         when 'order_rule'
           Rails.configuration.somebody_order_rules[val]

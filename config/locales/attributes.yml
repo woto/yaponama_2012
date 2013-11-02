@@ -95,8 +95,10 @@ ru:
     split_quantity_ordered: Количество первой партии
     prepayment_percent: Процент предоплаты
     discount: Процент скидки
-    debit: Дебет 
-    credit: Кредит
+    debit: На счете
+    credit: В работе
+    cached_debit: На счете кешированное
+    cached_credit: В работе кешированное
     # cost: Стоимость 1 шт.
     creation_reason: Причина создания
     creator_id: Создатель

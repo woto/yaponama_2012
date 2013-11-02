@@ -7,9 +7,6 @@ class StatsController < ApplicationController
   include SetResourceClassDummy
 
   def create
-    if params[:russian_time_zone_auto_id]
-      raise 's'
-    end
     stat = current_user.stats.new(stat_params)
     stat.save!
 

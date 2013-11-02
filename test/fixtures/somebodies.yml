@@ -16,8 +16,8 @@ first_admin:
   ipgeobase_names_depth_cache: 
   accept_language: 
   user_agent: 
-  cached_russian_time_zone_auto_id: 
-  russian_time_zone_manual_id: 
+  cached_russian_time_zone_auto_id: 33
+  russian_time_zone_manual_id: 4
   use_auto_russian_time_zone: true
   remote_ip: 
   notes: 
@@ -82,8 +82,8 @@ otto:
   password_digest: $2a$10$wQ1IG8ZsZX0PbzpDxWSgJ.qyB9XOvKceIckyzwEESavUNWGQZapvW
   password_reset_token: 55555
   password_reset_sent_at: <%= 1.second.ago.to_s(:db) %>
-  cached_russian_time_zone_auto_id: 11
-  russian_time_zone_manual_id: 11
+  cached_russian_time_zone_auto_id: 5
+  russian_time_zone_manual_id: 6
   use_auto_russian_time_zone: true
   main_profile: otto
   cached_main_profile: '{"names":[{"surname":"","name":"Отто","patronymic":""}],"phones":[{"value":"+7 (666) 666-66-66"},{"value":"8-888-888-88-88"},{"value":"+7 (555) 555-55-55"},{"value":"+7 (111) 111-11-11"}],"emails":[{"value":"fake@example.com"},{"value":"foo@example.com"}],"passports":[]}'

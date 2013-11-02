@@ -82,10 +82,7 @@ audio#notify-toggle-audio' src='/assets/toggle.ogg'
       = p.body do
         dl
           dt #server-time
-          / TODO
-          / потом поэксперементировать с zone, т.к. добавление, или
-          / убавление не повлияло (проверял без изменений системного времени)
-          dd#server-time = Time.zone.now.utc
+          dd#server-time = Time.now.utc.iso8601
         dl
           dt #debug-server
           dd#debug-server
@@ -102,6 +99,18 @@ audio#notify-toggle-audio' src='/assets/toggle.ogg'
         dl
           dt #debug-stat-result
           dd : pre#debug-stat-result.incomplete
+
+  = panel 'default' do |p|
+    = p.heading do
+      = p.title
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Time">
+          | Time
+        </a>
+    = p.collapse id: "Time" do
+      = p.body do
+        dl
+          dt #anton-time
+          dd#anton-time = Product.where(catalog_number: 'TIME').first.created_at
 
 
   = panel 'default' do |p|

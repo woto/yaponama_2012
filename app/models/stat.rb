@@ -11,6 +11,7 @@ class Stat < ActiveRecord::Base
     h[:cached_screen_width] = screen_width
     h[:cached_screen_height] = screen_height
     h[:cached_russian_time_zone_auto_id] = russian_time_zone_auto_id
+
     somebody.update_columns(h)
   end
 

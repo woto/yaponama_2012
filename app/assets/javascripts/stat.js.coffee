@@ -24,7 +24,7 @@ send_stat = ->
   local = moment()
   $('#debug-local').text(local)
 
-  offset = Math.round(server.diff(local) / 1000 / 60 / 60)
+  offset = Math.round(((server.diff(local) / 1000 / 60 ) + zone) / 60)
   $('#debug-offset').text(offset)
 
   data = 

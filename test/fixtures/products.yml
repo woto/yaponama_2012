@@ -197,6 +197,24 @@ anton_ninth:
   supplier: exist
   creator: anton
 
+anton_time_check:
+  catalog_number: TIME
+  brand: mitsubishi
+  cached_brand: MITSUBISHI
+  quantity_ordered: 1
+  quantity_available: 1
+  buy_cost: 1
+  sell_cost: 1
+  hide_catalog_number: false
+  status: inorder
+  probability: 95
+  created_at: 2012-04-12 03:45:38.527055000 Z
+  updated_at: 2012-05-03 02:23:18.327055000 Z
+  creation_reason: fixtures
+  somebody: anton
+  supplier: exist
+  creator: anton
+
 first_user_first_product:
   catalog_number: MR508329
   brand: nissan
