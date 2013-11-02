@@ -1,2 +1,0 @@
-module Admin::BbbsHelper
-end
