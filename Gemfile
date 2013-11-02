@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails',     github: 'woto/rails', :branch => '4-0-1'
-#gem 'rails',     path: '/home/woto/vendor/rails'
+gem 'rails',     github: 'woto/rails', :branch => '4-0-stable'
 gem 'arel',      github: 'rails/arel'
 
 gem 'pg'

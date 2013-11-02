@@ -30,5 +30,17 @@ class CarsTest < ActionDispatch::IntegrationTest
 
   end
 
-end
+  test 'При щелчке на frame/vin должны показываться соответствующие поля frame/vin' do
+    auth('+7 (333) 333-33-33', '3333333333')
+    visit '/user/cars/new'
 
+    choose 'car_vin_or_frame_frame'
+
+    assert has_field? 'car_frame'
+
+    choose 'car_vin_or_frame_vin'
+
+    assert has_field? 'car_vin'
+  end
+
+end
