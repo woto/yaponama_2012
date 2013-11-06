@@ -1,144 +1,157 @@
-<% @formatted_data.each do |catalog_number, cn_scope| %>
-  <% cn_scope.each_with_index do |(manufacturer, mf_scope), i| %>
-<div itemscope itemtype="http://schema.org/Product">
-    <%= content_tag(:span, raw('&nbsp;'), :id => manufacturer)  %>
-    <h1 style="margin-top: 30px"> <span itemprop="brand"><%= manufacturer %></span> <small> <%= catalog_number %> </small> </h1>
-    
-    <div style="width: 200px; height: 200px; background: #999; float: left; margin: 0 20px 20px 0"> </div>
+<% if @status[:offers] %>
 
-    <div style="width: 600px; float: left">
-      <h3><span itemprop="name"><span style="display: none"><%= catalog_number %> (<%= manufacturer%>)</span> <%= mf_scope[:title] %></span></h3>
+  <% @formatted_data.each do |catalog_number, cn_scope| %>
 
-      <div itemprop="description">
-        <p><%= raw mf_scope[:titles].keys.map{|val| h(val)}.join(', ') %></p>
-        <% if mf_scope[:manufacturer_origs].size > 0 %>
-          <em>Прочие написания производителя детали:</em><br />
-          <p><strong><%= raw mf_scope[:manufacturer_origs].keys.map{|val| h(val)}.join(', ') %></strong></p>
-        <% end %>
-        <% if mf_scope[:catalog_number_origs].size > 0 %>
-          <em>Прочие написания артикула детали:</em><br />
-          <p><strong><%= raw mf_scope[:catalog_number_origs].keys.map{|val| h(val)}.join(', ') %></strong></p>
-        <% end %>
-        <% if mf_scope[:weights].size > 0 %>
-          <em>Веса:</em>
-          <p><%= raw mf_scope[:weights].keys.map{|val| h("#{val} кг.")}.join(', ') %></p>
-        <% end %>
-      </div>
+    <% cn_scope.each_with_index do |(manufacturer, mf_scope), i| %>
 
-      <div style="margin: 20px">
-        <!-- КОПИПАСТ TODO -->
-        <span style="visibility: hidden; display:none"><%= retail_cost = cost_decorator(mf_scope[:offers][0][:retail_cost]) %></span>
-        <%= form_for(:wish, :remote => true, :format => :json, :url => '/wish', :method => :post, :html => {:style=>"margin: 0"}) do |f| %>
-          <%= f.hidden_field :cost, :value => retail_cost, :id => nil %>
-          <%= f.hidden_field :catalog_number, :value => catalog_number, :id => nil %>
-          <%= f.hidden_field :manufacturer, :value => manufacturer, :id => nil %>
-          <%= f.hidden_field :title, :value => mf_scope[:offers][0][:title], :id => nil %>
-          <%= f.hidden_field :count, :value => mf_scope[:offers][0][:count], :id => nil %>
-          <%= f.hidden_field :declared, :value => mf_scope[:offers][0][:max_days], :id => nil %>
-          <%= f.hidden_field :average, :value => mf_scope[:offers][0][:min_days], :id => nil %>
-          <%= f.hidden_field :country, :value => mf_scope[:offers][0][:country], :id => nil %>
-          <%= f.hidden_field :probability, :value => mf_scope[:offers][0][:probability], :id => nil %>
-          <%= f.submit raw("Купить за #{retail_cost}"), :class => "btn buy-button success large", :style=>"width: 180px" %>
-        <% end %>
-        <!-- /КОПИПАСТ TODO -->
-      </div>
+      <div id="<%= manufacturer %>" class="part-title"></div>
 
+      <div itemscope itemtype="http://schema.org/Product">
 
-      <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
-        <meta itemprop="priceCurrency" content="RUB" />
-        <p>Не устраивают цена или срок доставки? Взгляните на <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> лучших предложений от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
-      </div>
-
-      <p> А так же рекомендуем посмотреть <%= link_to "аналоги и замены \"#{catalog_number} - #{manufacturer}\"", polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => catalog_number, :manufacturer => manufacturer, :replacements => '1'), :class => 'ajax-search' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством.</p>
-
-      <p> Наша оценка качества производителя: <div class="stars-rating-<%= ( mf_scope[:brand].try(:[], :rating).to_i || 0) / 1000 %>"></div> </p>
-
-      <div class="brands"> 
-        <%= brands_decorator mf_scope[:brand], {:title => false} %>
-      </div>
-
-    </div>
-
-    <table style="width: 100%" class="zebra-striped">
-      <tr>
-        <th> <a href="#" rel="twipsy" title="Расположение склада поставщика">Расп.</a></th>
-        <th> <a href="#" rel="twipsy" title="Способ доставки на наш склад">Дост.</a></th>
-        <th> <a href="#" rel="twipsy" title="Минимальный срок поставки на наш склад">Мин.</a></th>
-        <th> <a href="#" rel="twipsy" title="Максимальный срок поставки на наш склад">Макс.</a></th>
-        <th> <a href="#" rel="twipsy" title="Вероятность наличия детали у поставщика">Вер.</a></th>
-        <th> <a href="#" rel="twipsy" title="Количество на складе поставщика">Кол-во</a></th>
-        <th> <a href="#" rel="twipsy" title="Зайдите на сайт под своим аккаунтом, чтобы увидеть вашу цену со скидками, если таковые имеются">Цена</a></th>
-        <th> <a href="#" rel="twipsy" title="Служебная информация, отображается только менеджеру сайта">Служ.</a></th>
-      </tr>
-      <% mf_scope[:offers].each do |offer| %>
-        <tr>
-          <td> <%= country_decorator offer[:country] %> </td>
-          <td> <%= offer[:delivery] %> </td>
-          <td> <%= days_decorator offer[:min_days] %> </td>
-          <td> <%= days_decorator offer[:max_days] %> </td>
-          <td> <%= offer[:probability] %>% </td>
-          <td> <%= count_decorator offer[:count] %> </td>
-          <td>
-            <span style="visibility: hidden; display:none"><%= retail_cost = cost_decorator(offer[:retail_cost]) %></span>
-            <%= form_for(:wish, :remote => true, :format => :json, :url => '/wish', :method => :post, :html => {:style=>"margin: 0"}) do |f| %>
-              <%= f.hidden_field :cost, :value => retail_cost, :id => nil %>
-              <%= f.hidden_field :catalog_number, :value => catalog_number, :id => nil %>
-              <%= f.hidden_field :manufacturer, :value => manufacturer, :id => nil %>
-              <%= f.hidden_field :title, :value => offer[:title], :id => nil %>
-              <%= f.hidden_field :count, :value => offer[:count], :id => nil %>
-              <%= f.hidden_field :declared, :value => offer[:max_days], :id => nil %>
-              <%= f.hidden_field :average, :value => offer[:min_days], :id => nil %>
-              <%= f.hidden_field :country, :value => offer[:country], :id => nil %>
-              <%= f.hidden_field :probability, :value => offer[:probability], :id => nil %>
-              <%= f.submit raw("Купить #{retail_cost}"), :class => "btn buy-button primary", :style=>"width: 140px" %>
+        <%= panel 'primary' do |p| %>
+          <%= p.heading do %>
+            <%= p.title do %>
+              <span itemprop="name"><span style="display: none"><%= catalog_number %> (<%= manufacturer%>)</span> <%= mf_scope[:title] %></span>
             <% end %>
-          </td>
-          <td> <%= offer[:tech] %> </td>
-        </tr>
-      <% end %>
-    </table>
+          <% end %>
 
-    <h5>Информация с каталогов</h5>
+          <%= p.body do %>
 
-    <!-- TODO ЭТО КОПИПАСТ переписывается -->
-      <% # Если есть Их информация, то показываем, что есть информация %>
-      <% if mf_scope[:info][:their][:status] == 'avaliable' %>
-        <%= tag("img", :src => "/assets/information.png", :width => "35", :height => "32", :class => "info", :id => "info_#{i}", :data => {:catalog_number => catalog_number, :manufacturer => manufacturer}, :alt => "Информация", :title => "Информация", :rel => "nofollow")  %>
-        <div class="static"> <%= mf_scope[:info][:their][:data].html_safe %> </div>
-      <% end %>
+            <%= row do %>
+              <div class="col-md-2">
 
-      <% # Если Их информация отсутсвует то показываем 1x1 %>
-      <% if mf_scope[:info][:their][:status] == 'unavaliable' %>
-        <%= tag("img", :src => "/assets/1x1.gif", :width => "35", :height => "32", :class => "info", :id => "info_#{i}", :data => {:catalog_number => catalog_number, :manufacturer => manufacturer}, :alt => "Информация", :title => "Информация") %>
-        <div class="static"></div>
-      <% end %>
+                <h5 style="text-align: center">
+                  <span itemprop="brand"><%= manufacturer %></span>
+                  <br />
+                  <small> <%= catalog_number %> </small>
+                </h4>
 
-      <% # Если неизвестно об Их информации, то показываем init, который подхыватывается Javascript'ом %>
-      <% if mf_scope[:info][:their][:status] == 'unknown' %>
-        <%= tag("img", :src => "/assets/init.gif", :width => "35", :height => "32", :class => "info", :id => "info_#{i}", :data => {:catalog_number => catalog_number, :manufacturer => manufacturer}, :rel => "nofollow", :alt => "Информация", :title => "Информация") %>
-      <% end %>
-      <div class="dynamic"></div>
-    <!-- /TODO ЭТО КОПИПАСТ -->
+                <div class="brands" style="clear: both; display: block; margin: 0 auto; width: 96px; height: 100px"> 
+                  <%= brands_decorator mf_scope[:brand], {:title => false} %>
+                </div>
 
-    <h5>Информация написанная нами</h5>
-    <%= link_to "Новое описание", new_spare_info_path(:catalog_number => catalog_number, :manufacturer => manufacturer) %>
-    <%= raw mf_scope[:info][:own][:data].content if mf_scope[:info][:own][:status] == 'avaliable'  %>
+                <div class="stars" style="clear: both; text-align: center; margin-bottom: 20px">
+                  <%= brand_rating mf_scope[:brand] %>
+                </div>
 
-    <h5>Хотите оценить качество детали или написать комментарий?</h5>
-    <% si = SpareInfo.new %>
-    <%= simple_form_for si do |f| %>
-      <% f.input :content, :label => false %>
+              </div>
+
+              <div class="col-md-10">
+
+                <div itemprop="description">
+                  <% if mf_scope[:titles].size > 0 %>
+                    <em>Прочие названия детали:</em><br />
+                    <p><%= raw mf_scope[:titles].keys.map{|val| h(val)}.join(', ') %></p>
+                  <% end %>
+                  <% if mf_scope[:manufacturer_origs].size > 0 %>
+                    <em>Прочие написания производителя детали:</em><br />
+                    <p><%= raw mf_scope[:manufacturer_origs].keys.map{|val| h(val)}.join(', ') %></p>
+                  <% end %>
+                  <% if mf_scope[:catalog_number_origs].size > 0 %>
+                    <em>Прочие написания артикула детали:</em><br />
+                    <p><%= raw mf_scope[:catalog_number_origs].keys.map{|val| h(val)}.join(', ') %></p>
+                  <% end %>
+                  <% if mf_scope[:weights].size > 0 %>
+                    <em>Веса:</em>
+                    <p><%= raw mf_scope[:weights].keys.map{|val| h("#{val} кг.")}.join(', ') %></p>
+                  <% end %>
+                </div>
+
+                <div style="margin: 20px 0">
+                  <a href="#" class="btn btn-success buy-button btn" style="width: 200px"> 
+                    Купить за x
+                    <br />
+                    <small>Доставка от x до x дн.</small>
+                  </a>
+                </div>
+
+
+                <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+                  <meta itemprop="priceCurrency" content="RUB" />
+                  <p>Не устраивают цена или срок доставки? Взгляните на <a href="#"><span itemprop="offerCount"><%= mf_scope[:offers].size %></span> лучших предложений</a> от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
+                </div>
+
+                <p> А так же рекомендуем посмотреть <%= link_to "аналоги и замены \"#{catalog_number} - #{manufacturer}\"", polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => catalog_number, :manufacturer => manufacturer, :replacements => '1'), :class => 'ajax-search' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством.</p>
+
+                <a href="#" class="btn btn-default" rel="tooltip" title="Интерактивная карта доставки и точки самовывоза">
+                  <%= icon 'globe' %> 
+                  <br>
+                  Доставка
+                </a>
+
+                <a href="#" class="btn btn-default" rel="tooltip" title="Задать вопрос менеджеру прямо сейчас">
+                  <%= icon 'question-circle' %>
+                  <br>
+                  Вопросы?
+                </a>
+
+                <br />
+                <br />
+
+                <% if mf_scope[:info][:own][:data].blank? %>
+                  <p>Хотите участвовать в жизни сайта? Будьте первым кто оставит комментарий к этой странице. Нажмите прямо на меня чтобы начать правку материла. Внимание, все материалы проверяются на предмет спама.</p>
+
+                  <%= link_to '1', new_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath) %>
+                <% else %>
+                  <p>Хотите участвовать в жизни сайта? Заметили ошибку, неточность или ошибку в оформлении? Нажмите прямо на статью для редактирования. Внимание, все материалы проверяются на предмет спама.</p>
+
+                  <%= link_to '2', edit_spare_info_path(mf_scope[:info][:own][:data], :return_path => request.fullpath) %>
+
+                <% end %>
+
+              </div>
+
+            <% end %>
+
+            <br />
+            <br />
+
+            <% if mf_scope[:info][:own][:status] == 'avaliable' %>
+              <%= mf_scope[:info][:own][:data].content.html_safe %>
+            <% end %>
+
+            <table style="margin-top: 20px" class="table table-striped">
+              <tr>
+                <th> <a href="#" rel="tooltip" title="Расположение склада поставщика">Расп.</a></th>
+                <th> <a href="#" rel="tooltip" title="Способ доставки на наш склад">Дост.</a></th>
+                <th> <a href="#" rel="tooltip" title="Минимальный срок поставки на наш склад">Мин.</a></th>
+                <th> <a href="#" rel="tooltip" title="Максимальный срок поставки на наш склад">Макс.</a></th>
+                <th> <a href="#" rel="tooltip" title="Вероятность наличия детали у поставщика">Вер.</a></th>
+                <th> <a href="#" rel="tooltip" title="Количество на складе поставщика">Кол-во</a></th>
+                <th> <a href="#" rel="tooltip" title="Зайдите на сайт под своим аккаунтом, чтобы увидеть вашу цену со скидками, если таковые имеются">Цена</a></th>
+                <th> <a href="#" rel="tooltip" title="Служебная информация, отображается только менеджеру сайта">Служ.</a></th>
+              </tr>
+              <% mf_scope[:offers].each do |offer| %>
+                <tr>
+                  <td> <%= country_decorator offer[:country] %> </td>
+                  <td> <%= offer[:delivery] %> </td>
+                  <td> <%= days_decorator offer[:min_days] %> </td>
+                  <td> <%= days_decorator offer[:max_days] %> </td>
+                  <td> <%= offer[:probability] %>% </td>
+                  <td> <%= count_decorator offer[:count] %> </td>
+                  <td>
+                    <span style="visibility: hidden; display:none"><%= retail_cost = cost_decorator(offer[:retail_cost]) %></span>
+                    aaaa
+                  </td>
+                  <td> <%= offer[:tech] %> </td>
+                </tr>
+              <% end %>
+            </table>
+
+          <% end %>
+
+        <% end %>
+
+      </div>
+
     <% end %>
 
-    <% #  Показываем разделитель только если не последний элемент %>
-    <% if i != cn_scope.size-1 %>
-      <hr />
-    <% end %>
-
-  </div>
   <% end %>
-<% end %>
 
-<br /> <br />
-<h2>Замены артикула</h2>
-Вы так же можете попробовать посмотреть <%= link_to "замены номера #{params[:catalog_number]} без указания производителя", polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => params[:catalog_number], :manufacturer => nil, :replacements => '1') %>.
+  <br />
+  <br />
+
+  <h3>Замены артикула</h3>
+  Вы так же можете попробовать посмотреть <%= link_to "замены номера #{params[:catalog_number]} без указания производителя", polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => params[:catalog_number], :manufacturer => nil, :replacements => '1') %>.
+
+<% end %>

@@ -8,9 +8,12 @@
   <div id="loading" style="display: none; position: absolute; background: #FFF; border: 1px solid #999; padding: 50px; z-index: 500">
     <div style="margin: 0 auto; text-align: center">
       <p style="text-align: center">Пожалуйста ожидайте, идет поиск по базе</p>
-      <p style="margin: 0 auto; text-align: center"><img src="/assets/loading-wide.gif" /></p>
 
-      <br />
+      <div class="progress progress-striped active">
+        <div class="progress-bar"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+          <span class="sr-only">100% Загрузка</span>
+        </div>
+      </div>
       <p>Нажимая на &nbsp;лайк&nbsp; вы помогаете делать<br />наши цены еще более привлекательными!</p>
       <br />
 

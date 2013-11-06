@@ -20,7 +20,7 @@ class BrandsController < ApplicationController
   end
 
   def find_resource
-    @resource = Brand.where(:name => params[:brand]).first
+    @resource = Brand.where(:name => CGI.unescape(params[:brand])).first
     commentable_helper @resource
   end
 

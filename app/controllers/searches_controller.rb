@@ -3,7 +3,7 @@
 class SearchesController < ApplicationController
 
   def initialize
-    @status = {:offers => false, :page => false}
+    @status = { :offers => false }
     super
   end
 
@@ -29,15 +29,6 @@ class SearchesController < ApplicationController
   end
 
 
-  def set_meta_robots
-    #if params[:replacements]
-    #  @meta_robots = 'noindex, follow'
-    #else
-    #  @meta_robots = 'index, follow'
-    #end
-  end
-
-
   def index
 
     @parsed_json = { "result_prices" => [] }
@@ -49,15 +40,6 @@ class SearchesController < ApplicationController
       if params[:catalog_number].blank?
         render :status => 410 and return
       end
-
-      seo_url = polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => params[:catalog_number].present? ? params[:catalog_number] : nil, :manufacturer => params[:manufacturer].present? ? params[:manufacturer] : nil, :replacements => params[:replacements].to_i > 0 ? '1' : nil)
-      if request.fullpath.upcase != seo_url.upcase
-        respond_to do |format|
-          format.html { redirect_to seo_url, :status => 301 and return }
-        end
-      end
-
-      set_meta_robots
 
       request_emex = ''
       if SiteConfig.request_emex
@@ -189,7 +171,6 @@ class SearchesController < ApplicationController
       @formatted_data = {}
 
       @parsed_json["result_prices"].each do |item|
-        next if item["job_import_job_country_short"].nil? || item["job_import_job_country_short"].include?("avtorif.ru")
 
         # Необходимо поступать так, т.к. только в момент разбора можем понять есть если ли что-нибудь или нет
         # т.к. необходимо игнорировать точки и не нулевая длина массива еще не показатель, что есть что отображать
@@ -224,12 +205,9 @@ class SearchesController < ApplicationController
               :min_cost => nil,
               :max_cost => nil,
               :offers => [],
-              #:brand => Brands::BRANDS[mf],
-              :brand => Brand.where(:name => mf).first,
-              :info => item_status(item['catalog_number'], item['manufacturer']),
+              :brand => Brand.where(:name => mf).first || Brand.create(:name => mf.upcase, :phantom => true),
+              :info => item_status(item['catalog_number'], item['manufacturer'])
             }
-
-            #@manufacturers = mf
 
           end
 
@@ -328,7 +306,23 @@ class SearchesController < ApplicationController
       @formatted_data = @formatted_data.map do |catalog_number, cn_scope|
         [ catalog_number,
           (cn_scope.sort do |a, b|
-          -(a[1][:brand].try(:[], :rating).try(:to_i) || 0) <=> -(b[1][:brand].try(:[], :rating).try(:to_i) || 0)
+
+          # На самом деле это не очень хорошо - обращаться к 
+          # родителю, поэтому нужно закешировать
+
+          if a[1][:brand].brand_id?
+            k = a[1][:brand].brand
+          else
+            k = a[1][:brand]
+          end
+
+          if b[1][:brand].brand_id?
+            l = b[1][:brand].brand
+          else
+            l = b[1][:brand]
+          end
+
+          -(k.try(:[], :rating).try(:to_i) || 0) <=> -(l.try(:[], :rating).try(:to_i) || 0)
           end).map do |manufacturer, mf_scope|
             [manufacturer, mf_scope.merge(:offers => mf_scope[:offers].sort do |c, d|
               c[:retail_cost] <=> d[:retail_cost]
@@ -344,14 +338,11 @@ class SearchesController < ApplicationController
         end
       end
 
-
-      @meta_canonical = polymorphic_path([:search, :user, :searches], :catalog_number => params[:catalog_number], :manufacturer => params[:manufacturer].present? ? params[:manufacturer] : nil, :replacements => params[:replacements].to_i > 0 ? '1' : nil)
-    else
-      @meta_title = "Поиск запчастей по номеру"
     end
 
-    if @formatted_data.present?
-
+    unless @status[:offers]
+      render :status => 404 and return
+    else
       # Keywords
       keywords = Hash.new {|hash,key| hash[key] = 0}
       @formatted_data.map{|k, v| v.map{|kk, vv| vv[:titles].map{|kkk, vvv| kkk}}}.flatten.join(', ').split(/[, ]/).reject{|kkk| kkk.size < 2}.each { |word| keywords[word] += 1 }
@@ -390,10 +381,6 @@ class SearchesController < ApplicationController
       end
       @meta_description << ". Удобная оплата. Отправка в регионы, доставка по Москве, самовывоз м. Динамо, Аэропорт."
       # /Description
-    end
-
-    unless params.include?(:skip) || @status.any?{|k, v| v}
-      render :status => 404 and return
     end
 
     respond_to do |format|

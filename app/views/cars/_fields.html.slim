@@ -1,7 +1,7 @@
-= panel 'default' do |p|
+= panel 'primary' do |p|
 
   = p.heading do 
-    = p.title { 'Идентификатор автомобиля' }
+    = p.title { 'Основные сведения' }
 
   = p.body do
     = f.twbs_collection_radio_buttons :vin_or_frame, [['VIN код', 'vin'], ['FRAME код', 'frame']], :last, :first, { variation: 'vertical', label: false }, rel: 'radio radio-vin-or-frame'
@@ -28,10 +28,10 @@
         = m.twbs_select2 :name, rel: 'select2-modification', data: {"true-id" => f.object.modification_id}
         = f.error(:modification)
 
-= panel 'default' do |p|
+= panel 'primary' do |p|
 
   = p.heading do
-    = p.title { 'Дополнительные характеристики' }
+    = p.title { 'Дополнительные сведения' }
 
   = p.body
     = f.twbs_text_field :god

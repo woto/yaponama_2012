@@ -1,45 +1,40 @@
 <br />
 
-<%= form_tag(polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches]), :method => :get) do %>
-  <div class="inputs">
+<%= form_tag(polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches]), :method => :get, :class => 'ajax-form bottom-space') do %>
 
-    <div class="clearfix string optional">
-      <label class="string optional">
-        <a class="catalog-number-link" href="#" data-controls-modal="catalog-number-modal">Каталожный номер</a>
-      </label>
-      <div class="input">
-        <%= text_field_tag :catalog_number, params[:catalog_number], :id => "catalog-number" %> <div id="clear-catalog-number" class='icons icons-sprite icons-delete'></div>
-        <span class="help-block">Например: <span id="random-catalog-number"><%= TemplateData::CATALOG_NUMBERS.sample %></span></span>
-      </div>
-    </div>
-    
-
-    <div class="clearfix string optional">
-      <label class="string optional">
-        <a class="catalog-number-link" href="#" data-controls-modal="catalog-number-modal">Производитель</a>
-      </label>
-      <div class="input">
-        <%= text_field_tag :manufacturer, params[:manufacturer], :id => "manufacturer" %> <div id="clear-manufacturer" class='icons icons-sprite icons-delete'></div>
-        <span class="help-block">Например: <%= TemplateData::MANUFACTURERS.sample %></span>        
-      </div>
-    </div>
-
-
-    <div class="clearfix string optional">
-      <label class="string optional">
-        <a class="replacements-link" href="#" data-controls-modal="replacements-modal">Замены и аналоги</a>
-      </label>
-      <div class="input" style="margin-top: 6px">
-        <%= check_box_tag :replacements, "1", params[:replacements].to_i > 0 ? true : false %> <br />
-      </div>
-    </div>
-    
-    <%= hidden_field_tag :rnd, rand(), :id => nil %>
-
-    <div class="actions">
-      <%= submit_tag "Искать", :class => "primary btn", :disable_with => "Пожалуйста подождите..." %>&nbsp;&nbsp;
+  <div class="clearfix string optional">
+    <label class="string optional">
+      <a class="catalog-number-link" href="#" data-controls-modal="catalog-number-modal">Каталожный номер</a>
+    </label>
+    <div class="input">
+      <%= text_field_tag :catalog_number, params[:catalog_number], :id => "catalog-number" %> <div id="clear-catalog-number" class='icons icons-sprite icons-delete'></div>
+      <span class="help-block">Например: <span id="random-catalog-number"><%= TemplateData::CATALOG_NUMBERS.sample %></span></span>
     </div>
   </div>
-<% end %>
+  
 
-<%= render :partial => "hints" %>
+  <div class="clearfix string optional">
+    <label class="string optional">
+      <a class="catalog-number-link" href="#" data-controls-modal="catalog-number-modal">Производитель</a>
+    </label>
+    <div class="input">
+      <%= text_field_tag :manufacturer, params[:manufacturer], :id => "manufacturer" %> <div id="clear-manufacturer" class='icons icons-sprite icons-delete'></div>
+      <span class="help-block">Например: <%= TemplateData::MANUFACTURERS.sample %></span>        
+    </div>
+  </div>
+
+
+  <div class="clearfix string optional">
+    <label class="string optional">
+      <a class="replacements-link" href="#" data-controls-modal="replacements-modal">Замены и аналоги</a>
+    </label>
+    <div class="input" style="margin-top: 6px">
+      <%= check_box_tag :replacements, "1", params[:replacements].to_i > 0 ? true : false %> <br />
+    </div>
+  </div>
+  
+  <%= hidden_field_tag :rnd, rand(), :id => nil %>
+
+  <%= submit_tag "Искать", :class => "btn btn-primary btn-lg", :data => { :disable_with => "Пожалуйста подождите..." } %> &nbsp;&nbsp;
+
+<% end %>

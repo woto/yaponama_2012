@@ -73,4 +73,8 @@ class SpareInfosController < ApplicationController
   def somebody_get
   end
 
+  def new_resource
+    @resource = @resource_class.new(resource_params)
+  end
+
 end

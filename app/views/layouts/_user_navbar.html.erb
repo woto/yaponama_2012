@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 
   <div class="container">
 
@@ -51,11 +51,11 @@
 
       </ul>
 
-      <%= form_tag user_searches_path, :class => "navbar-form navbar-left", :method => :get do %>
+      <%= form_tag user_searches_path, :class => "navbar-form navbar-left ajax-form", :method => :get do %>
         <div class="form-group">
-          <input class="form-control" type="text" placeholder="Артикул детали"></input>
+          <%= text_field_tag :catalog_number, params[:catalog_number], :placeholder => 'Артикул детали', :class => "form-control" %>
         </div>
-        <button class="btn btn-default" type="submit"> Искать </button>
+        <button class="btn btn-default ajax-search" type="submit"> Искать </button>
       <% end %>
 
       <ul class="nav navbar-nav navbar-right">

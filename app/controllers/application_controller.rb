@@ -110,10 +110,8 @@ class ApplicationController < ActionController::Base
   end
 
   def item_status(catalog_number, manufacturer)
-
     status = {
       :own => {:status => 'unavaliable', :data => nil},
-      :their => {:status => 'unavaliable', :data => nil}
     }
 
     # Наши данные
@@ -124,41 +122,8 @@ class ApplicationController < ActionController::Base
       status[:own][:data] = spare_info
     end
 
-    key_part = "#{catalog_number}:#{manufacturer}".mb_chars.gsub(/[^а-яА-Яa-zA-z0-9]/,'_')
-
-    # Их данные
-    begin
-      File.open("#{Rails.root}/system/parts_info/f:#{key_part}", "r") do |file|
-        if (status[:their][:status] = file.read) == 'avaliable'
-          File.open("#{Rails.root}/system/parts_info/s:#{key_part}", "r") do |file|
-            status[:their][:data] = file.read
-          end
-        end
-      end
-    rescue Exception => exc
-      if exc.instance_of? Errno::ENOENT
-        status[:their][:status] = 'unknown'
-      end
-
-     if SiteConfig.send_request_from_search_page
-       require 'redis'
-       redis = Redis.new(:host => SiteConfig.redis_address, :port => SiteConfig.redis_port)
-
-       #Juggernaut.publish(
-       #nil, {
-       #  :command => 'info',
-       #  :catalog_number => catalog_number,
-       #  :manufacturer => manufacturer.presence || "WRONG_MANUFACTURER",
-       #  :channel => 'server'
-       #}, {}, "custom")
-      end
-
-    end
-
     return status
-
   end
-
 
   unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, :with => :render_500

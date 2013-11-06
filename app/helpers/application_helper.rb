@@ -6,20 +6,57 @@ module ApplicationHelper
     content_tag :i, '', options.merge(class: "fa fa-#{method}")
   end
 
-  def brands_decorator brand, options
-    if brand
-      if brand.brand
-        return raw brand.brands.map{|ref| brands_decorator(ref, options)}
-      end
+  def brand_rating brand
 
-      title = ""
-      if options[:title] == true
-        title = brand.name.html_safe
-      end
-
-      link_to(title, "/#{brand.path}", :style => "background-image: url(#{asset_path(brand.image.url.to_s)})", :class => "brands-#{brand.name}")
-      #brand.content
+    if brand.brand.present?
+      return brand_rating brand.brand
     end
+
+    value = ( brand.try(:[], :rating).to_i || 0 ) / 2000.0
+    content_tag(:div, class: "stars") do
+
+      res = "".html_safe
+
+      accum = 0
+
+      value.to_i.downto(2) do |i|
+        accum += 1
+        res << icon('star fa-lg')
+      end
+
+      if value.to_i != value
+        accum += 1
+        res << icon('star-half-o fa-lg')
+      end
+
+      (5 - accum).downto(1) do |i|
+        res << icon('star-o fa-lg')
+      end
+
+      res
+
+    end
+
+  end
+
+  def brands_decorator brand, options
+
+    if brand.brand.present?
+      return raw brands_decorator(brand.brand, options)
+    end
+
+    title = ""
+    if options[:title] == true
+      title = brand.name
+    end
+
+    if brand.image.present?
+      image = asset_path(brand.image.url.to_s)
+    else
+      image = asset_path('no_brand.jpg')
+    end
+
+    link_to(title, "/#{CGI.escape(brand.name)}", :style => "background: url(#{image}) no-repeat scroll center center", :class => "brands-#{brand.name}")
   end
 
   def sortable(column_name, title, options )
@@ -44,42 +81,56 @@ module ApplicationHelper
   def somebody_tabs(&block)
 
     res = ''.html_safe
-    workspace_class = 'col-md-12'
+    css_class = 'col-md-12'
 
-    ['',
+    [
 
     content_tag(:div, :class => 'row') do
       res = ''.html_safe
 
       if @somebody
-        workspace_class = 'col-md-10 col-md-push-2'
+        css_class = 'col-md-10 col-md-push-2'
       end
 
       res <<
 
-      content_tag(:div, :class => workspace_class) do
+      content_tag(:div, :class => css_class) do
 
-        if @somebody
+        content_tag(:div, :id => 'main', &block)
+      
+      end
 
-          content_tag(:ul, :class => 'nav nav-pills bottom-space') do
+      res << 
+
+      if @somebody
+        content_tag(:div, :class => 'col-md-2 col-md-pull-10') do
+
+          content_tag(:ul, :class => 'nav nav-pills nav-stacked') do
             [ 
-              { :title => 'Главная', 
-                :catch => [ {:action => 'show', :id => @somebody.id, :user_id => nil }, { action: :edit, :id => @somebody.id, :user_id => nil  }, { controller: 'passwords', action: 'edit', :id => @somebody.id } ], 
+              { :title => 'Главная',
+                :catch => [ {:action => 'show' }, { action: :edit  }, { controller: 'passwords', action: 'edit', :id => @somebody.id } ], 
                 :link => polymorphic_path([(admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user)]),
                 :class => '',
                 :dropdown => []
               },
 
-              { :title => 'Заказы',  
+              { :title => 'Заказы',
                 :catch => [ { :controller => 'orders' } ], 
                 :link => '#',
                 :class => 'dropdown',
                 :dropdown => _build_dropdowns('order')
               },
 
-              { :title => 'Товары',  
+              { :title => "Товары&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.products_status[params[:status]].try(:[], 'title')} </span>".html_safe,
                 :catch => [ { :controller => 'products' } ],
-                :link => polymorphic_path([(admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user), :products]),
+                :link => '#',
+                :class => 'dropdown',
+                :dropdown => _build_dropdowns('product')
+              },
+
+              { :title => 'История',
+                :catch => [],
+                :link => 'http://ya.ru',
                 :class => '',
                 :dropdown => []
               },
@@ -115,19 +166,8 @@ module ApplicationHelper
                 end
               end
             end.join.html_safe
-          end
-        end.to_s.html_safe +
-        
-        content_tag(:div, :class => "tab-content") do
-          content_tag(:div, :class => 'tab-pane active', &block)
-        end
-      
-      end
-
-      res << 
-
-      if @somebody
-        content_tag(:div, :class => 'col-md-2 col-md-pull-10') do
+          end +
+          "<hr>".html_safe +
           (render 'profileables/right')
         end
       end

@@ -7,7 +7,7 @@ class BrandConstraint
   def matches?(request)
     #@ips.include?(request.remote_ip)
     @brand_names = Brand.pluck(:name)
-    @brand_names.include? request.params[:brand]
+    @brand_names.include? CGI.unescape(request.params[:brand])
   end
 end
 
@@ -99,8 +99,9 @@ Yaponama2012::Application.routes.draw do
 
   concern :parts_searchable do
     resources :searches do
-      match '(/:catalog_number(/:manufacturer))' => "searches#index", :on => :collection, :as => 'search', :via => :get
-      match '?skip' => "searches#index", :on => :collection, :as => :skip_search, :via => :get
+      get 'search', :on => :collection, :as => 'search', :to => 'searches#index'
+      #match '(/:catalog_number(/:manufacturer))' => "searches#index", :on => :collection, :as => 'search', :via => :get
+      #match '?skip' => "searches#index", :on => :collection, :as => :skip_search, :via => :get
     end
   end
 

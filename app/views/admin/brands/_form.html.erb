@@ -4,11 +4,12 @@
 
     <%= twbs_form_for [:admin, @resource] do |f| %>
 
-      <%= f.twbs_text_field :name %>
+      <%= f.twbs_text_field :name, asterisk: true%>
 
       <%= f.fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b| %>
+
         <%= f.form_group :brand do %>
-          <%= b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, asterisk: true %>
+          <%= b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, :label => 'Родительский производитель', :hint => 'Все найденные результаты для этого производителя будут переадресованы родительскому' %>
           <%= f.error(:brand) %>
         <% end %>
       <% end %>

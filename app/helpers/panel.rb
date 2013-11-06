@@ -13,8 +13,9 @@ class Panel < AbstractBootstrap
     end
   end
 
-  def title
-    @template.content_tag :h4, class: 'panel-title' do
+  def title options={}
+    options[:class] = ['panel-title', options[:class] ].compact
+    @template.content_tag :h3, options do
       yield
     end
   end

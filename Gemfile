@@ -16,18 +16,12 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', platforms: :ruby
-  #gem 'therubyracer', platforms: :ruby, github: 'cowboyd/therubyracer'
 
   gem 'uglifier', github: 'lautis/uglifier'
 
 end
 
-#group :production do
-#  gem 'puma'
-#end
-
 group :development, :test do
-  #gem 'debugger', github: 'cldwalker/debugger'
   gem 'byebug', github: 'deivid-rodriguez/byebug'
   gem 'capistrano'
   gem 'capybara', github: 'jnicklas/capybara'
@@ -35,7 +29,7 @@ group :development, :test do
   gem 'poltergeist'
   #gem 'capybara-webkit'
   gem 'quiet_assets'
-  #gem 'rspec-rails'
+  gem 'rspec-rails'
   gem 'rspec'
   gem 'jasmine', github: 'pivotal/jasmine-gem'
 end
@@ -44,7 +38,6 @@ gem 'jquery-rails', github: 'rails/jquery-rails'
 gem 'jquery-ui-rails', github: 'joliss/jquery-ui-rails'
 
 gem 'turbolinks', github: 'rails/turbolinks'
-#gem 'turbolinks',     path: '/home/woto/vendor/turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/
 gem 'jbuilder', github: 'rails/jbuilder'
@@ -102,7 +95,7 @@ gem 'omniauth-odnoklassniki'
 gem 'omniauth-mailru'
 
 gem 'sht_rails', github: 'railsware/sht_rails'
-#gem 'sht_rails', path: '/home/woto/vendor/sht_rails'
 
 # Необходима версия 2.6.0 чтобы не резался многострочный заголовок
 gem 'mail', github: 'mikel/mail'
+gem 'htmlentities'

@@ -8,11 +8,8 @@
 </div>
 
 <div class="row" style="margin-left: 5px;">
-
-
-
   <h3>Каталоги автозапчастей</h3>
   <div class="brands force-clearfix" style="margin-bottom: 20px">
-    <%= raw Brand.where(:is_brand => true).map{|a, b| brands_decorator(a, {:title => true})}.join %>
+    <%= raw Brand.where("brand_id is NULL").map{|a, b| brands_decorator(a, {:title => true})}.join %>
   </div>
 </div>

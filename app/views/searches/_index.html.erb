@@ -1,9 +1,8 @@
-<h1>Поиск автозапчастей</h1>
-<%= render :partial => "form" %>
+<% if admin_zone? %>
+  <%= render :partial => "form" %>
+<% end %>
 
 <% if @status[:offers] %>
-
-  <% render :partial => "pages/add_menu_elements" %>
 
   <% if params[:replacements] == '1' %>
     <%= render :partial => "replacements" %>
@@ -11,11 +10,10 @@
     <%= render :partial => "results" %>
   <% end %>
 
-  <%= image_tag "spare_parts.png", :style => "z-index: 11; position: absolute; display: none", :id => "wishes-logo" %>
-
 <% else %>
 
   <% unless params.key? :skip %>
+    <% @meta_title = "Поиск запчастей по номеру" %>
     <% if params[:catalog_number].blank? %>
       <h3>Вы не указали искомый каталожный номер</h3>
     <% else %>
@@ -25,5 +23,3 @@
     <% end %>
   <% end %>
 <% end %>
-
-<%= raw @page.default_content if @status[:page] %>

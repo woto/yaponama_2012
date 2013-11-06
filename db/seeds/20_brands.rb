@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 module Brands
 
   BRANDS = {
@@ -439,40 +440,45 @@ end
 Brand.delete_all
 
 Brands::BRANDS.each do |name, opts|
+  h = {}
 
-  unless opts.key? :title
-    opts[:title] = name
+  if opts.key? :title
+    h[:name] = HTMLEntities.new.decode(opts[:title])
+  else
+    h[:name] = name
   end
 
-  unless opts.key? :catalog
-    opts[:catalog] = false
+  if opts.key? :catalog
+    h[:catalog] = true
+  else
+    h[:catalog] = false
   end
 
-  unless opts.key? :rating
-    opts[:rating] = nil
+  if opts.key? :rating
+    h[:rating] = opts[:rating]
+  else
+    h[:rating] = nil
   end
 
-  unless opts.key? :brand
-    opts[:brand] = false
-  end
+  #unless opts.key? :ref
+  #  opts[:brand] = Brand.where('upper(name) = ?', opts[:title]).first
+  #end
 
-  unless opts.key? :file
-    opts[:file] = name.downcase.strip.gsub(/[^а-яА-Я0-9A-Za-z.\-]/, '_')
+  file = nil
+  if opts.key? :file
+    file = opts[:file]
+  else
+    file = name.downcase.strip.gsub(/[^а-яА-Я0-9A-Za-z.\-]/, '_')
   end
 
   begin
-    Brand.create!(
-      :name => opts[:title], 
-      :path => name,
-      :catalog => opts[:catalog],
-      :rating => opts[:rating], 
-      :is_brand => opts[:brand],
-      :image => File.open(File.join(Rails.root, 'db', 'seeds', 'brands', "#{opts[:file]}.png")), 
-      :phantom => true
-    )
-  rescue Exception => e
-    puts e.message
+    h[:image] = File.open(File.join(Rails.root, 'db', 'seeds', 'brands', "#{file}.png"))
+  rescue Errno::ENOENT => e
   end
+  h[:is_brand] = opts[:brand]
+  h[:phantom] = false
 
+  brand = Brand.where('upper(name) = ?', h[:name]).first || Brand.new(name: h[:name].upcase)
+  brand.update!(h)
  
 end

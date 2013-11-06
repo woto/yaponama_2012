@@ -44,13 +44,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
 
   add_index "accounts", ["somebody_id"], name: "index_accounts_on_somebody_id", using: :btree
 
-  create_table "admin_bbbs", force: true do |t|
-    t.string   "name"
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "admin_site_settings", force: true do |t|
     t.string   "from_email_address"
     t.string   "environment"

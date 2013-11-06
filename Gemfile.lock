@@ -124,7 +124,7 @@ GIT
 
 GIT
   remote: git://github.com/woto/rails.git
-  revision: 2ddf42bd9a575a08e5591f14f83650a54677e3e9
+  revision: 2fba51f4748679d41f11377dea700572843ae210
   branch: 4-0-stable
   specs:
     actionmailer (4.0.1)
@@ -237,6 +237,7 @@ GEM
     hashie (2.0.5)
     hike (1.2.3)
     hiredis (0.4.5)
+    htmlentities (4.3.1)
     httpauth (0.2.0)
     i18n (0.6.5)
     innertube (1.1.0)
@@ -334,6 +335,13 @@ GEM
     rspec-expectations (2.14.3)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.4)
+    rspec-rails (2.14.0)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
     ruby-growl (4.0)
       uuid (~> 2.3, >= 2.3.5)
     russian (0.6.0)
@@ -410,6 +418,7 @@ DEPENDENCIES
   coffee-rails!
   fastercsv
   hiredis (~> 0.4.5)
+  htmlentities
   ipgeobase!
   jasmine!
   jbuilder!
@@ -435,6 +444,7 @@ DEPENDENCIES
   redis (~> 3.0.1)
   rmagick
   rspec
+  rspec-rails
   ruby-growl
   russian
   sanitize

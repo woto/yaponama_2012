@@ -1,3 +1,5 @@
+- raise 'add_menu_elements'
+
 = content_for(:pages_controller) do
   - path = CGI::unescape(request.fullpath).gsub(/^\/+/, '')
   - if (page = Page.where(:path => path).first).present?
