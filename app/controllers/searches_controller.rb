@@ -31,6 +31,11 @@ class SearchesController < ApplicationController
 
   def index
 
+    plog = Logger.new Rails.root.join('log', 'prices.log')
+    plog.formatter = Logger::Formatter.new
+
+    plog.debug "-----------------------------"
+
     @parsed_json = { "result_prices" => [] }
 
     if params[:catalog_number].present?
@@ -48,9 +53,13 @@ class SearchesController < ApplicationController
 
       price_request_cache_key = "#{params[:catalog_number]}-#{params[:manufacturer]}-#{params[:replacements]}"
 
+
+      plog.debug "Проверка наличия кеша"
       if Rails.cache.exist? price_request_cache_key
         @parsed_json = (Rails.cache.read(price_request_cache_key)).dup
+        plog.debug "Кеш найден"
       else
+        plog.debug "Кеш не найден"
 
         # TODO Что сделать с ситуцией. Если зашел робот, на сервере прайсов создалась кешированная версия, через день зашел пользователь,
         # все нормально. Я очистил тут кеш, зашел робот, взял кешированную версию (не запросил заново!) следом зашел пользователь и увидел 
@@ -74,7 +83,9 @@ class SearchesController < ApplicationController
 
         begin
           require 'net/http'
+          plog.debug "Запрос к серверу прайсов"
           resp = Net::HTTP.get_response(parsed_price_request_url)
+          plog.debug "/Запрос к серверу прайсов"
         rescue Exception => e
           response.headers["Retry-After"] = (Time.now + 1.day).httpdate.to_s
           # @show_sidebar = true
@@ -86,6 +97,7 @@ class SearchesController < ApplicationController
         @parsed_json = ActiveSupport::JSON.decode(resp.body)
         @parsed_json.delete("result_replacements")
         @parsed_json.delete("result_message")
+        plog.debug 'Большой цикл очистки JSON'
         @parsed_json["result_prices"].map do |item|
           item.delete "ij_income_rate"
           item.delete "ps_retail_rate"
@@ -149,6 +161,7 @@ class SearchesController < ApplicationController
           item.delete "job_import_job_output_order"
           item.delete "real_job_id"
         end
+        plog.debug '/Большой цикл очистки JSON'
 
 
         if params[:replacements]
@@ -162,6 +175,7 @@ class SearchesController < ApplicationController
         @parsed_json["result_prices"] = @parsed_json["result_prices"].sort_by { |a|  ( ( (a["job_import_job_delivery_days_average"].present? ? a["job_import_job_delivery_days_average"] : a["job_import_job_delivery_days_declared"]).to_f + a["job_import_job_delivery_days_declared"].to_f)/2/( (fast = params[:fast]).present? ? fast.to_f : 100) ) +  a["price_goodness"].to_f }
 
         Rails.cache.write(price_request_cache_key, @parsed_json, :expires_in => expires_in)
+        plog.debug 'Кеш записан'
       end
 
       #debugger
@@ -170,8 +184,8 @@ class SearchesController < ApplicationController
 
       @formatted_data = {}
 
+      plog.debug 'Большой цикл обработки JSON'
       @parsed_json["result_prices"].each do |item|
-
         # Необходимо поступать так, т.к. только в момент разбора можем понять есть если ли что-нибудь или нет
         # т.к. необходимо игнорировать точки и не нулевая длина массива еще не показатель, что есть что отображать
         unless @status[:offers]
@@ -301,8 +315,10 @@ class SearchesController < ApplicationController
         end
 
       end
+      plog.debug '/Большой цикл обработки JSON'
 
       # Сортируем в конце по цене
+      plog.debug 'Сортировка по цене'
       @formatted_data = @formatted_data.map do |catalog_number, cn_scope|
         [ catalog_number,
           (cn_scope.sort do |a, b|
@@ -330,6 +346,7 @@ class SearchesController < ApplicationController
          end
         ]
       end
+      plog.debug '/Сортировка по цене'
 
       # Получаем общее для связки каталожный номер + производитель имя
       @formatted_data.each do |catalog_number, cn_scope|
@@ -343,6 +360,8 @@ class SearchesController < ApplicationController
     unless @status[:offers]
       render :status => 404 and return
     else
+      plog.debug 'Заполняем метаданные'
+
       # Keywords
       keywords = Hash.new {|hash,key| hash[key] = 0}
       @formatted_data.map{|k, v| v.map{|kk, vv| vv[:titles].map{|kkk, vvv| kkk}}}.flatten.join(', ').split(/[, ]/).reject{|kkk| kkk.size < 2}.each { |word| keywords[word] += 1 }
@@ -381,6 +400,8 @@ class SearchesController < ApplicationController
       end
       @meta_description << ". Удобная оплата. Отправка в регионы, доставка по Москве, самовывоз м. Динамо, Аэропорт."
       # /Description
+
+      plog.debug '/Заполняем метаданные'
     end
 
     respond_to do |format|
