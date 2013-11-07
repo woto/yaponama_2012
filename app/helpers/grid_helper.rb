@@ -37,7 +37,7 @@ module GridHelper
         when 'content'
           truncate val
         when 'id'
-          link_to item.id, '#', data: { html: true, :"poload" => polymorphic_path([:info, (admin_zone? ? :admin : :user), item], :primary_key => params[:primary_key], :return_path => request.fullpath ) }, class: "btn btn-default btn-xs ignoredirty", style: "min-width: 30px"
+          link_to item.id, '#', data: { html: true, :"poload" => polymorphic_path([:info, (admin_zone? ? :admin : :user), item], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status] ) }, class: "btn btn-default btn-xs ignoredirty", style: "min-width: 30px"
         when 'checkbox'
         when 'cached_main_profile'
           res = []

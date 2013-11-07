@@ -35,7 +35,6 @@
 
   <% if admin_zone? %>
     <%= f.twbs_check_box :hide_catalog_number %>
-    <%# f.twbs_text_field :manufacturer, asterisk: true %>
     <%= f.twbs_text_field :short_name %>
     <%= f.twbs_text_field :quantity_ordered, asterisk: true %>
     <%= f.twbs_text_field :buy_cost, asterisk: true %>
@@ -49,21 +48,6 @@
     <%= render :partial => 'profileables/forms/shared/notes', :locals => {:f => f} %>
   <% end %>
 
-  <%# /= f.association :order, :disabled => true %>
-  <%# /= f.association :supplier, :disabled => true %>
-
-  <%# #products %>
-  <%#   = f.simple_fields_for :products do |product| %>
-  <%#     = render '/users/product_fields', :f => product, :stack => stack +1 %>
-  <%#  %>
-  <%#   - stack = stack.nil? ? 0 : stack + 1 %>
-  <%#  %>
-  <%#   - if stack < 3 %>
-  <%#     .links %>
-  <%#       = link_to_add_association 'Перезаказать', f, :products, :class => "btn btn-mini btn-success", :render_options => {:locals => {:stack => stack}}, :partial => '/users/product_fields' %>
-  <%#  %>
-  <%# hr %>
-  
   <% if admin_zone? %>
     <%= f.twbs_submit %>
   <% end %>
