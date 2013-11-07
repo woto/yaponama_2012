@@ -26,5 +26,11 @@ class Panel < AbstractBootstrap
     end
   end
 
+  def footer
+    @template.content_tag :div, class: 'panel-footer' do
+      yield
+    end
+  end
+
 end
 

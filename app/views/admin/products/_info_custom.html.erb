@@ -2,6 +2,4 @@
   <li> <%= link_to 'Разбить на партии', url_for(:controller => :splits, :action => :new, :product_id => params[:id], :return_path => params[:return_path] ) %> </li>
 <% end %>
 
-<% if @item.status == 'cancel' %>
-  <li> <%= link_to 'Перезаказать', url_for(:action => :new, :product_id => params[:id], :return_path => params[:return_path] ) %> </li>
-<% end %>
+<%= render 'info_custom_2' %>

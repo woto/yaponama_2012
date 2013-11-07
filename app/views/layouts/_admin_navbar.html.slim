@@ -34,7 +34,16 @@ nav.navbar.navbar-fixed-top.navbar-inverse role="navigation"
                       = v["title"]
 
             
-            li = link_to "Товары", admin_products_path
+            li.dropdown-submenu
+              = link_to "Товары", admin_products_path
+              ul.dropdown-menu
+                - Rails.configuration.products_status.each do |k, v|
+                  li 
+                    = link_to url_for(:user_id => nil, :order_id => nil, :controller => '/admin/products', :action => :index, :status => k) do
+                      - if v['badge'].present?
+                        span class="badge badge-#{k}" = v['badge']
+                      '
+                      = v["title"]
 
             li = link_to "Деньги", transactions_admin_accounts_path
 

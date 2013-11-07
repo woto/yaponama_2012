@@ -2,6 +2,7 @@
 
   <%= panel 'primary' do |p| %>
     <%= p.heading do %>
+      <%= p.title { 'Замены' } %>
     <% end %>
 
     <table id="result-prices" class="table table-striped">
@@ -22,7 +23,14 @@
             <tr> 
               <td> <%= brand_rating mf_scope[:brand] %> </td>
               <td> <%= manufacturer %> </td>
-              <td> <%= link_to catalog_number, polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => catalog_number, :anchor => manufacturer ), :class => 'ajax-search' %> </td>
+              <td> 
+                <% if !@resource %>
+                  <%= link_to catalog_number, polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => catalog_number, :anchor => manufacturer ), :class => 'ajax-search' %> 
+                <% else %>
+                  <%= catalog_number %>
+                <% end %>
+              </td>
+
               <td>
                 <% # Если есть хотя бы какая-то информация, то показываем, что есть информация %>
                 <% if mf_scope[:info].any?{|key, value| value[:status] == 'avaliable'} %>

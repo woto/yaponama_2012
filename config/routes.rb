@@ -252,7 +252,6 @@ Yaponama2012::Application.routes.draw do
       concerns :transactionable
 
       concerns :letter
-      concerns :parts_searchable
 
       #concerns :productable
       concerns :complex_products
@@ -367,6 +366,8 @@ Yaponama2012::Application.routes.draw do
   get 'clear_session' => "trash_help#clear_session"
 
   resources :deliveries
+
+  concerns :parts_searchable
 
   get "*brand" => "brands#show", :constraints => BrandConstraint.new
   get "*path" => "pages#show", :constraints => PageConstraint.new

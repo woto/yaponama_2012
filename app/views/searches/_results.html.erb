@@ -38,64 +38,95 @@
 
               <div class="col-md-10">
 
-                <div itemprop="description">
-                  <% if mf_scope[:titles].size > 0 %>
-                    <em>Прочие названия детали:</em><br />
-                    <p><%= raw mf_scope[:titles].keys.map{|val| h(val)}.join(', ') %></p>
+                <%= row do %>
+
+                  <% if @resource %>
+                    <% css_class = "col-md-12" %>
+                  <% else %>
+                    <% css_class = "col-md-8" %>
                   <% end %>
-                  <% if mf_scope[:manufacturer_origs].size > 0 %>
-                    <em>Прочие написания производителя детали:</em><br />
-                    <p><%= raw mf_scope[:manufacturer_origs].keys.map{|val| h(val)}.join(', ') %></p>
+
+                  <div class="<%= css_class %>">
+
+                    <div itemprop="description">
+                      <% if mf_scope[:titles].size > 0 %>
+                        <em>Прочие названия детали:</em><br />
+                        <p><%= raw mf_scope[:titles].keys.map{|val| h(val)}.join(', ') %></p>
+                      <% end %>
+                      <% if mf_scope[:manufacturer_origs].size > 0 %>
+                        <em>Прочие написания производителя детали:</em><br />
+                        <p><%= raw mf_scope[:manufacturer_origs].keys.map{|val| h(val)}.join(', ') %></p>
+                      <% end %>
+                      <% if mf_scope[:catalog_number_origs].size > 0 %>
+                        <em>Прочие написания артикула детали:</em><br />
+                        <p><%= raw mf_scope[:catalog_number_origs].keys.map{|val| h(val)}.join(', ') %></p>
+                      <% end %>
+                      <% if mf_scope[:weights].size > 0 %>
+                        <em>Веса:</em>
+                        <p><%= raw mf_scope[:weights].keys.map{|val| h("#{val} кг.")}.join(', ') %></p>
+                      <% end %>
+                    </div>
+
+                    <div style="margin: 20px 0">
+                      <a href="#" class="btn btn-success buy-button btn" style="width: 200px"> 
+                        Купить за x
+                        <br />
+                        <small>Доставка от x до x дн.</small>
+                      </a>
+                    </div>
+
+
+                  </div>
+
+                  <% unless @resource %>
+
+                    <div class="col-md-3">
+
+                      <span style="display: none">
+                        <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+                          <meta itemprop="priceCurrency" content="RUB" />
+                          Не устраивают цена или срок доставки? Взгляните на <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> лучших предложений от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
+                        </div>
+                      </span>
+
+                      <ul class="nav nav-pills nav-stacked">
+
+                        <li>
+                          <a href="#" class="btn btn-default" rel="tooltip show-offer" title="Другие предложения по автозапчасти">
+                            <%= icon 'truck' %>
+                            Предложения
+                          </a>
+                        </li>
+
+
+                        <li>
+                          <%= link_to polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => catalog_number, :manufacturer => manufacturer, :replacements => '1'), :class => 'ajax-search btn btn-default', :rel => "tooltip", :title => "Аналоги и замены \"#{catalog_number} - #{manufacturer}\"" do %>
+                              <%= icon 'refresh' %> 
+                              Замены
+                            <% end %>
+                          </a>
+                        </li>
+
+
+                        <li>
+                          <a href="#" class="btn btn-default" rel="tooltip" title="Интерактивная карта доставки и точки самовывоза">
+                            <%= icon 'globe' %> 
+                            Доставка
+                          </a>
+                        </li>
+
+                        <li>
+                          <a href="#" class="btn btn-default" rel="tooltip" title="Задать вопрос менеджеру прямо сейчас">
+                            <%= icon 'question-circle' %>
+                            Вопросы?
+                          </a>
+                        </li>
+
+                      </ul>
+
+                    </div>
+
                   <% end %>
-                  <% if mf_scope[:catalog_number_origs].size > 0 %>
-                    <em>Прочие написания артикула детали:</em><br />
-                    <p><%= raw mf_scope[:catalog_number_origs].keys.map{|val| h(val)}.join(', ') %></p>
-                  <% end %>
-                  <% if mf_scope[:weights].size > 0 %>
-                    <em>Веса:</em>
-                    <p><%= raw mf_scope[:weights].keys.map{|val| h("#{val} кг.")}.join(', ') %></p>
-                  <% end %>
-                </div>
-
-                <div style="margin: 20px 0">
-                  <a href="#" class="btn btn-success buy-button btn" style="width: 200px"> 
-                    Купить за x
-                    <br />
-                    <small>Доставка от x до x дн.</small>
-                  </a>
-                </div>
-
-
-                <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
-                  <meta itemprop="priceCurrency" content="RUB" />
-                  <p>Не устраивают цена или срок доставки? Взгляните на <a href="#"><span itemprop="offerCount"><%= mf_scope[:offers].size %></span> лучших предложений</a> от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
-                </div>
-
-                <p> А так же рекомендуем посмотреть <%= link_to "аналоги и замены \"#{catalog_number} - #{manufacturer}\"", polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => catalog_number, :manufacturer => manufacturer, :replacements => '1'), :class => 'ajax-search' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством.</p>
-
-                <a href="#" class="btn btn-default" rel="tooltip" title="Интерактивная карта доставки и точки самовывоза">
-                  <%= icon 'globe' %> 
-                  <br>
-                  Доставка
-                </a>
-
-                <a href="#" class="btn btn-default" rel="tooltip" title="Задать вопрос менеджеру прямо сейчас">
-                  <%= icon 'question-circle' %>
-                  <br>
-                  Вопросы?
-                </a>
-
-                <br />
-                <br />
-
-                <% if mf_scope[:info][:own][:data].blank? %>
-                  <p>Хотите участвовать в жизни сайта? Будьте первым кто оставит комментарий к этой странице. Нажмите прямо на меня чтобы начать правку материла. Внимание, все материалы проверяются на предмет спама.</p>
-
-                  <%= link_to '1', new_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath) %>
-                <% else %>
-                  <p>Хотите участвовать в жизни сайта? Заметили ошибку, неточность или ошибку в оформлении? Нажмите прямо на статью для редактирования. Внимание, все материалы проверяются на предмет спама.</p>
-
-                  <%= link_to '2', edit_spare_info_path(mf_scope[:info][:own][:data], :return_path => request.fullpath) %>
 
                 <% end %>
 
@@ -103,14 +134,13 @@
 
             <% end %>
 
-            <br />
-            <br />
-
-            <% if mf_scope[:info][:own][:status] == 'avaliable' %>
-              <%= mf_scope[:info][:own][:data].content.html_safe %>
+            <% unless @resource %>
+              <% css_style = "display: none;" %>
+            <% else %>
+              <% css_style = "display: block;" %>
             <% end %>
 
-            <table style="margin-top: 20px" class="table table-striped">
+            <table style="<%= css_style %> margin-top: 20px" class="table table-striped" rel="offers">
               <tr>
                 <th> <a href="#" rel="tooltip" title="Расположение склада поставщика">Расп.</a></th>
                 <th> <a href="#" rel="tooltip" title="Способ доставки на наш склад">Дост.</a></th>
@@ -138,6 +168,24 @@
               <% end %>
             </table>
 
+            <% unless @resource %>
+              <% if mf_scope[:info][:own][:data].blank? %>
+                <p>Хотите участвовать в жизни сайта? Будьте первым кто оставит комментарий к этой странице. Нажмите прямо на меня чтобы начать правку материла. Внимание, все материалы проверяются на предмет спама.</p>
+
+                <%= link_to '1', new_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath) %>
+              <% else %>
+                <p>Хотите участвовать в жизни сайта? Заметили ошибку, неточность или ошибку в оформлении? Нажмите прямо на статью для редактирования. Внимание, все материалы проверяются на предмет спама.</p>
+
+                <%= link_to '2', edit_spare_info_path(mf_scope[:info][:own][:data], :return_path => request.fullpath) %>
+
+              <% end %>
+            <% end %>
+
+            <% if mf_scope[:info][:own][:status] == 'avaliable' %>
+              <%= mf_scope[:info][:own][:data].content.html_safe %>
+            <% end %>
+
+
           <% end %>
 
         <% end %>
@@ -148,10 +196,9 @@
 
   <% end %>
 
-  <br />
-  <br />
-
-  <h3>Замены артикула</h3>
-  Вы так же можете попробовать посмотреть <%= link_to "замены номера #{params[:catalog_number]} без указания производителя", polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => params[:catalog_number], :manufacturer => nil, :replacements => '1') %>.
+  <% if !@resource %>
+    <h3>Замены артикула</h3>
+    Вы так же можете попробовать посмотреть <%= link_to "замены номера #{@c9} без указания производителя", polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => @c9, :manufacturer => nil, :replacements => '1'), :class => 'ajax-search' %>.
+  <% end %>
 
 <% end %>

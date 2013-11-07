@@ -1,4 +1,37 @@
 class ProductsController < ApplicationController
+
+  include ProductsSearch
+
+  def new
+  end
+
+  def edit
+    #search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '0'
+  end
+
+  # create и update идентичны, TODO: устранить
+  def create
+    case
+    when params[:commit]
+      super
+    when params[:search]
+      search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '0'
+    when params[:replacements]
+      search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '1'
+    end
+  end
+
+  def update
+    case
+    when params[:commit]
+      super
+    when params[:search]
+      search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '0'
+    when params[:replacements]
+      search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '1'
+    end
+  end
+
   
   before_action do
     # Доработать

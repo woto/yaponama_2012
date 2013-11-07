@@ -1,25 +1,25 @@
-<% if admin_zone? %>
-  <%= render :partial => "form" %>
-<% end %>
-
 <% if @status[:offers] %>
 
-  <% if params[:replacements] == '1' %>
-    <%= render :partial => "replacements" %>
+  <% if @r9 == '1' %>
+    <%= render :partial => "/searches/replacements" %>
   <% else %>
-    <%= render :partial => "results" %>
+    <%= render :partial => "/searches/results" %>
   <% end %>
 
 <% else %>
 
   <% unless params.key? :skip %>
     <% @meta_title = "Поиск запчастей по номеру" %>
-    <% if params[:catalog_number].blank? %>
-      <h3>Вы не указали искомый каталожный номер</h3>
+    <% if @c9.blank? %>
+      <% unless @resource %>
+        <h3>Вы не указали искомый каталожный номер</h3>
+      <% end %>
     <% else %>
-      <h3>Ничего не найдено <%= (catalog_number = params[:catalog_number]).present? ? "по каталожному номеру #{catalog_number}" : "" %> <%= (manufacturer = params[:manufacturer]).present? ? "и производителю #{manufacturer}" : ""%> <%= params[:replacements].present? ? "с учетом аналогов" : "без учета аналогов"  %> <br />
-        <%= "Повторить поиск #{ link_to 'с учетом аналогов', polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => params[:catalog_number], :manufacturer => params[:manufacturer], :replacements => '1'), :class => 'ajax-search' } <br />".html_safe if (params[:replacements].to_i != 1) %>
-        <%= "Повторить поиск #{ link_to 'без указания производителя', polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => params[:catalog_number], :manufacturer => "", :replacements => params[:replacements]), :class => 'ajax-search' } <br />".html_safe if params[:manufacturer].present? %></h3>
+      <h3>Ничего не найдено <%= (catalog_number = @c9).present? ? "по каталожному номеру #{catalog_number}" : "" %> <%= (manufacturer = @b9).present? ? "и производителю #{manufacturer}" : ""%> <%= @r9 == '1' ? "с учетом аналогов" : "без учета аналогов"  %></h3>
+      <% if !@resource %>
+        <h3><%= "Повторить поиск #{ link_to 'с учетом аналогов', polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => @c9, :manufacturer => @b9, :replacements => '1'), :class => 'ajax-search' } <br />".html_safe if (@r9.to_i != 1) %></h3>
+        <h3><%= "Повторить поиск #{ link_to 'без указания производителя', polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => @c9, :manufacturer => "", :replacements => @r9), :class => 'ajax-search' } <br />".html_safe if @b9.present? %></h3>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
