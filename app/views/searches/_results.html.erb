@@ -68,11 +68,12 @@
                     </div>
 
                     <div style="margin: 20px 0">
-                      <a href="#" class="btn btn-success buy-button btn" style="width: 200px"> 
-                        Купить за x
+                      <% offer = mf_scope[:offers][0] %>
+                      <%= buy_button offer, catalog_number, manufacturer, class: "btn btn-success buy-button", style: "width: 230px" do %>
+                        Купить за <%= number_to_currency(offer[:retail_cost], precision: 0) %>
                         <br />
-                        <small>Доставка от x до x дн.</small>
-                      </a>
+                        <small>Доставка от <%= offer[:min_days] %> до <%= offer[:max_days] %> дн.</small>
+                      <% end %>
                     </div>
 
 
@@ -160,8 +161,9 @@
                   <td> <%= offer[:probability] %>% </td>
                   <td> <%= count_decorator offer[:count] %> </td>
                   <td>
-                    <span style="visibility: hidden; display:none"><%= retail_cost = cost_decorator(offer[:retail_cost]) %></span>
-                    aaaa
+                    <%= buy_button offer, catalog_number, manufacturer, class: "btn btn-default btn-xs buy-button" do %>
+                      Купить <%= number_to_currency(offer[:retail_cost], precision: 0) %>
+                    <% end %>
                   </td>
                   <td> <%= offer[:tech] %> </td>
                 </tr>

@@ -47,9 +47,9 @@
     = f.input :counter_openstat
     = f.input :counter_liveinternet
   - if params[:filter] == 'default_users' || params[:filter].blank?
-    = f.input :default_user_prepayment, :as => :string
-    = f.input :default_user_discount, :as => :string
-    = f.input :default_user_order_rule, :collection => Rails.configuration.user_order_rules, :value_method => :first, :label_method => :last
+    = f.input :default_somebody_prepayment, :as => :string
+    = f.input :default_somebody_discount, :as => :string
+    = f.input :default_somebody_order_rule, :collection => Rails.configuration.somebody_order_rules, :value_method => :first, :label_method => :last
   - if params[:filter] == 'avisosms' || params[:filter].blank?
     = f.input :avisosms_username
     = f.input :avisosms_password, :as => :string

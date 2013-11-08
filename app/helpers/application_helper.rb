@@ -6,6 +6,13 @@ module ApplicationHelper
     content_tag :i, '', options.merge(class: "fa fa-#{method}")
   end
 
+
+  def buy_button offer, catalog_number, manufacturer, options
+    link_to '#', options.merge( data: { cost: offer[:retail_cost], catalog_number: catalog_number, manufacturer: manufacturer, title: offer[:title], count: offer[:count], max_days: offer[:max_days], min_days: offer[:min_days], country: offer[:country], probability: offer[:probability], tech: offer[:tech] } ) do
+      yield
+    end
+  end 
+
   def brand_rating brand
 
     if brand.brand.present?
