@@ -1,9 +1,10 @@
 <% @meta_title = "Подтверждение" %>
 <% @meta_title_small = @contact.to_label %>
 
-
 <%= somebody_tabs do %>
 
-    <%= render 'form' %>
+  <%= page_header %>
+
+  <%= render 'form' %>
 
 <% end %>

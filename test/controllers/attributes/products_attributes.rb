@@ -20,7 +20,8 @@ module ProductsAttributes
        "notes_invisible"=>""},
      "return_path" => '/user',
      "user_id" => user_id,
-     "id" => id
+     "id" => id,
+     "commit" => 'x'
    }
   end
 

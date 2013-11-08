@@ -1,8 +1,0 @@
-- raise 'add_menu_elements'
-
-= content_for(:pages_controller) do
-  - path = CGI::unescape(request.fullpath).gsub(/^\/+/, '')
-  - if (page = Page.where(:path => path).first).present?
-    li = link_to "Редактировать", edit_admin_page_path(page)
-  - else
-    li = link_to "Создать", admin_new_predefined_page_path(CGI::escape(CGI::escape(path)))

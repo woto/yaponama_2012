@@ -5,6 +5,7 @@ class RegistersController < ApplicationController
   include SetResourceClassDummy
   include FindResourceDummy
   include SetUserAndCreationReasonDummy
+  include UpdateResourceDummy
 
   before_action :only_not_authenticated, :only => [:edit, :update, :show]
   before_action { @meta_title = 'Регистрация' }

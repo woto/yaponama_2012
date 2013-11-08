@@ -11,7 +11,7 @@ class Admin::ProductsControllerTest < ActionController::TestCase
     cookies['auth_token'] = somebodies(:first_admin).auth_token
     @user = somebodies(:first_admin)
     return_path = 'http://ya.ru'
-    post :create, {:user_id => @user.id, :product => new_brand, :return_path => return_path}
+    post :create, {:user_id => @user.id, :product => new_brand, :return_path => return_path, :commit => 'x'}
 
     brand = Brand.last
     assert_equal "new", brand.name, 'Созданный бренд имеет неверное название'

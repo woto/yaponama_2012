@@ -308,6 +308,13 @@ private
     @resource = @resource_class.new(resource_params)
   end
 
+  before_action :update_resource, :only => [:update]
+
+  def update_resource
+    @resource.assign_attributes(resource_params)
+  end
+
+
   before_action :set_user_and_creation_reason, :only => [:create, :update]
 
   def set_user_and_creation_reason

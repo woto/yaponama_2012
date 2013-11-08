@@ -450,6 +450,7 @@ module ApplicationHelper
   ['index', 'new', 'edit', 'show'].each do |method_name|
     define_method "title_#{method_name}" do
       @meta_title = t("helpers.titles.#{@resource_class.to_s.underscore}.#{method_name}")
+      page_header
     end
   end
 
