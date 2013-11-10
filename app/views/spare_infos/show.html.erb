@@ -1,3 +1,5 @@
+<%= render 'smart_show' %>
+
 <script>
   $(function(){
     
@@ -9,24 +11,13 @@
     // Your code to save "data", usually though Ajax.
 </script>
 
-<%- model_class = SpareInfo -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+<br />
+<br />
+<br />
+
+<h3> Тест </h3>
+<div id="editable" contenteditable="true">
+  <%= raw Sanitize.clean @resource.content, Rails.configuration.sanitize_config %>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:catalog_number) %>:</strong></dt>
-  <dd><%= @resource.catalog_number %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:brand) %>:</strong></dt>
-  <dd><%= @resource.brand %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
-  <dd>
-    <div id="editable" contenteditable="true">
-      <%= raw Sanitize.clean @resource.content, Rails.configuration.sanitize_config %>
-    </div>
-  </dd>
-</dl>
-
 <button id="zzz"></button>
-
-<%= link_to 'назад', params[:return_path] %>

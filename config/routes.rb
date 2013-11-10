@@ -96,16 +96,6 @@ Yaponama2012::Application.routes.draw do
     end
   end
 
-
-  concern :parts_searchable do
-    resources :searches do
-      get 'search', :on => :collection, :as => 'search', :to => 'searches#index'
-      #match '(/:catalog_number(/:manufacturer))' => "searches#index", :on => :collection, :as => 'search', :via => :get
-      #match '?skip' => "searches#index", :on => :collection, :as => :skip_search, :via => :get
-    end
-  end
-
-
   concern :accountable do
     resources :accounts, :only => ['transactions'] do
       collection do
@@ -292,7 +282,6 @@ Yaponama2012::Application.routes.draw do
     concerns :transactionable
     concerns :complex_orders
     concerns :legal_or_personal
-    concerns :parts_searchable
     #resource :password, :only => [:edit, :update]
     get :password, :on => :member, to: "passwords#edit"
     patch :password, :on => :member, to: "passwords#update"
@@ -367,7 +356,12 @@ Yaponama2012::Application.routes.draw do
 
   resources :deliveries
 
-  concerns :parts_searchable
+  # TODO Для перехвата /searches/2102/KURYAKYN
+  resources :searches do
+    #get 'search', :on => :collection, :as => 'search', :to => 'searches#index'
+    match '(/:catalog_number(/:manufacturer))' => "searches#index", :on => :collection, :as => 'search', :via => :get
+    #match '?skip' => "searches#index", :on => :collection, :as => :skip_search, :via => :get
+  end
 
   get "*brand" => "brands#show", :constraints => BrandConstraint.new
   get "*path" => "pages#show", :constraints => PageConstraint.new

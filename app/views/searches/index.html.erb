@@ -1,3 +1,16 @@
 <% @resource = Product.new %>
 <%= render 'products/form' %>
-<%= render 'search' %>
+
+<%= row do %>
+
+  <div class="col-md-9 col-md-push-3">
+    <%= page_header %>
+
+    <%= render 'search' %>
+  </div>
+
+  <div class="col-md-3 col-md-pull-9">
+    <%= render 'right' %>
+  </div>
+
+<% end %>

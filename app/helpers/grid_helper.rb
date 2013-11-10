@@ -34,8 +34,8 @@ module GridHelper
 
       content_tag_for(:span, item, column_name, :class => column_name) do
         case column_name
-        when 'content'
-          truncate val
+        when *['content', 'long_name']
+          truncate val, length: 80
         when 'id'
           link_to item.id, '#', data: { html: true, :"poload" => polymorphic_path([:info, (admin_zone? ? :admin : :user), item], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status] ) }, class: "btn btn-default btn-xs ignoredirty", style: "min-width: 30px"
         when 'checkbox'

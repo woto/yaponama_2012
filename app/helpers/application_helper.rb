@@ -7,8 +7,9 @@ module ApplicationHelper
   end
 
 
-  def buy_button offer, catalog_number, manufacturer, options
-    link_to '#', options.merge( data: { cost: offer[:retail_cost], catalog_number: catalog_number, manufacturer: manufacturer, title: offer[:title], count: offer[:count], max_days: offer[:max_days], min_days: offer[:min_days], country: offer[:country], probability: offer[:probability], tech: offer[:tech] } ) do
+  def buy_button offer, catalog_number, manufacturer, short_name, long_name, options
+    # TODO Вроде бы title всегда пустой... ? Потом когда вернусь к 'производителю' посмотрю
+    link_to '#', options.merge( data: {short_name: short_name, long_name: long_name, cost: offer[:retail_cost], catalog_number: catalog_number, manufacturer: manufacturer, title: offer[:title], count: offer[:count], max_days: offer[:max_days], min_days: offer[:min_days], country: offer[:country], probability: offer[:probability], tech: offer[:tech], income_cost: offer[:income_cost] } ) do
       yield
     end
   end 
@@ -367,11 +368,12 @@ module ApplicationHelper
 
   def twbs_form_for(name, *args, &block)
     options = args.extract_options!
+    options[:class] = ['dirtyforms', options[:class] ].compact
     # TODO замутить fieldset disabled?
     #content_tag :fieldset do
     # fieldset должен быть внутри формы
     # убрал form-horizontal
-    form_for(name, *(args << options.merge(builder: TwitterBootstrapFormBuilder, html: { class: "dirtyforms"} )), &block)
+    form_for(name, *(args << options.merge(builder: TwitterBootstrapFormBuilder, html: { class: options[:class] } )), &block)
     #end
   end
 

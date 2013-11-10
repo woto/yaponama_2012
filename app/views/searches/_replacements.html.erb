@@ -5,7 +5,7 @@
       <%= p.title { 'Замены' } %>
     <% end %>
 
-    <table id="result-prices" class="table table-striped">
+    <table id="result-prices" class="table table-striped table-responsive">
       <thead>
         <tr>
           <th style="width: 55px">  <a href="#" rel="tooltip" title="Рейтинг производителя">Рейт.</a> </th>
@@ -24,11 +24,8 @@
               <td> <%= brand_rating mf_scope[:brand] %> </td>
               <td> <%= manufacturer %> </td>
               <td> 
-                <% if !@resource %>
-                  <%= link_to catalog_number, polymorphic_path([:search, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :searches], :catalog_number => catalog_number, :anchor => manufacturer ), :class => 'ajax-search' %> 
-                <% else %>
-                  <%= catalog_number %>
-                <% end %>
+                <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
+                <%= link_to catalog_number, polymorphic_path([new_or_edit, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :product], :id => @resource, :catalog_number => catalog_number, :product_id => @resource.try(:product_id), :return_path => params[:return_path], :anchor => manufacturer ), :class => 'ajax-search search-button' %> 
               </td>
 
               <td>

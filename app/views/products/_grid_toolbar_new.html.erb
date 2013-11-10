@@ -1,5 +1,5 @@
 <div id="grid-toolbar-new">
-  <% if @user.present? %>
+  <% if admin_zone? && @user.present? %>
     <%= link_to url_for(:action => :new, :return_path => request.fullpath), :class => "btn btn-primary" do %>
       <%= icon 'plus' %>
     <% end %>

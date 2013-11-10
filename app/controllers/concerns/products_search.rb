@@ -245,7 +245,8 @@ module ProductsSearch
               :count => item["count"],
               :title => '',
               :delivery => item["job_import_job_delivery_summary"],
-              :tech => techs.map {|tech| item[tech].to_s + ", "}.to_s
+              :income_cost => item["income_cost"],
+              :tech => techs.map{|tech| item[tech].to_s}.reject(&:blank?).join(', ')
             })
 
             # Мин. кол-во дней

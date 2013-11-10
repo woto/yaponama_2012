@@ -3,34 +3,35 @@ class ProductsController < ApplicationController
   include ProductsSearch
 
   def new
+    search params[:catalog_number], params[:manufacturer], params[:replacements]
   end
 
   def edit
-    #search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '0'
+    search params[:catalog_number], params[:manufacturer], params[:replacements]
   end
 
   # create и update идентичны, TODO: устранить
-  def create
-    case
-    when params[:commit]
-      super
-    when params[:search]
-      search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '0'
-    when params[:replacements]
-      search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '1'
-    end
-  end
+  #def create
+  #  case
+  #  when params[:commit]
+  #    super
+  #  when params[:s]
+  #    search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '0'
+  #  when params[:r]
+  #    search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '1'
+  #  end
+  #end
 
-  def update
-    case
-    when params[:commit]
-      super
-    when params[:search]
-      search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '0'
-    when params[:replacements]
-      search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '1'
-    end
-  end
+  #def update
+  #  case
+  #  when params[:commit]
+  #    super
+  #  when params[:s]
+  #    search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '0'
+  #  when params[:r]
+  #    search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '1'
+  #  end
+  #end
 
   
   before_action do
@@ -39,7 +40,7 @@ class ProductsController < ApplicationController
   end
 
   before_action do
-    if params[:product_id]
+    if params[:product_id].present?
       @somebody = @user = Product.find(params[:product_id]).somebody
     end
   end

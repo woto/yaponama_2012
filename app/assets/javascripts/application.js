@@ -41,6 +41,13 @@
 //
 //= require 'time_zone_checkbox'
 //= require 'vin_or_frame'
+//= require 'buy_button'
+//
+//
+// TODO
+//= require 'search_button'
+//= require 'replacement_button'
+// УДАЛИТЬ
 //
 //= require toolbar-checkboxes
 //

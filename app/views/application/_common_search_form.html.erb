@@ -1,0 +1,11 @@
+<% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
+<%= form_tag polymorphic_path([new_or_edit, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :product], :id => @resource), :class => "navbar-form navbar-left ajax-form", :method => :get do %>
+  <div class="form-group">
+    <%= text_field_tag :catalog_number, params[:catalog_number], :placeholder => 'Артикул детали', :class => "form-control" %>
+  </div>
+  <%# hidden_field_tag :manufacturer, params[:manufacturer] %>
+  <%# hidden_field_tag :replacements, params[:replacements] %>
+  <%= hidden_field_tag :product_id, @resource.try(:product_id) %>
+  <%= hidden_field_tag :return_path, params[:return_path] %>
+  <button class="btn btn-default ajax-search" type="submit"> Искать </button>
+<% end %>

@@ -1,12 +1,13 @@
 <%= somebody_tabs do %>
+
   <%= title_edit %>
+
+  <%= render 'searches/search' %>
 
   <%= row do %>
     <div class="col-md-8">
       <%= render 'form' %>
     </div>
   <% end %>
-
-  <%= render 'searches/search' %>
 
 <% end %>

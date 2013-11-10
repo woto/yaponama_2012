@@ -51,12 +51,7 @@
 
       </ul>
 
-      <%= form_tag user_searches_path, :class => "navbar-form navbar-left ajax-form", :method => :get do %>
-        <div class="form-group">
-          <%= text_field_tag :catalog_number, params[:catalog_number], :placeholder => 'Артикул детали', :class => "form-control" %>
-        </div>
-        <button class="btn btn-default ajax-search" type="submit"> Искать </button>
-      <% end %>
+      <%= render 'common_search_form' %>
 
       <ul class="nav navbar-nav navbar-right">
 
