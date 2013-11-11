@@ -180,7 +180,7 @@ module ApplicationHelper
         end
       else
         content_tag(:div, :class => 'col-md-2 col-md-pull-10') do
-          render 'right'
+          render 'application/right'
         end
       end
 
