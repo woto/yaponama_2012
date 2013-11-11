@@ -89,15 +89,20 @@ module ApplicationHelper
   def somebody_tabs(&block)
 
     res = ''.html_safe
+    css_class = 'col-md-12'
 
     [
 
     content_tag(:div, :class => 'row') do
       res = ''.html_safe
 
+      if (admin_zone? && @somebody) || !admin_zone?
+        css_class = 'col-md-10 col-md-push-2'
+      end
+
       res <<
 
-      content_tag(:div, :class => 'col-md-10 col-md-push-2') do
+      content_tag(:div, :class => css_class) do
 
         content_tag(:div, :id => 'main', &block)
       
@@ -105,9 +110,8 @@ module ApplicationHelper
 
       res << 
 
-      content_tag(:div, :class => 'col-md-2 col-md-pull-10') do
-
-        if @somebody.role != 'guest'
+      if (admin_zone? || current_user.role != 'guest') && @somebody
+        content_tag(:div, :class => 'col-md-2 col-md-pull-10') do
 
           content_tag(:ul, :class => 'nav nav-pills nav-stacked') do
             [ 
@@ -173,7 +177,9 @@ module ApplicationHelper
           end +
           "<hr>".html_safe +
           (render 'profileables/right')
-        else
+        end
+      else
+        content_tag(:div, :class => 'col-md-2 col-md-pull-10') do
           render 'right'
         end
       end
