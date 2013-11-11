@@ -44,11 +44,6 @@
 //= require 'buy_button'
 //
 //
-// TODO
-//= require 'search_button'
-//= require 'replacement_button'
-// УДАЛИТЬ
-//
 //= require toolbar-checkboxes
 //
 // require jquery-dirtyforms/jquery.dirtyforms
