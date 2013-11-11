@@ -3,17 +3,26 @@
     <div class="well">
       <div class="clearfix">
         <%= render 'common_search_form' %>
+        <div class="navbar-form">
+          <a data-toggle="modal" href="#ask_quantity" class="btn btn-warning">Форма</a>
+        </div>
       </div>
     </div>
   </div>
 <% end %>
 
-<%= panel 'primary' do |p| %>
-  <%= p.heading do %>
-    <%= p.title { 'Товар' } %>
+<%= modal :id => 'ask_quantity' do |m| %>
+
+  <%= m.header do |h| %>
+    <%= h.close %>
+    <%= h.title do %>
+      Добавление в корзину
+    <% end %>
   <% end %>
-  <%= p.body do %>
+
+  <%= m.body do %>
     <%= twbs_form_for @resource, url: polymorphic_path([(admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), @resource], :return_path => params[:return_path]), class: 'product' do |f| %>
+
       <%= f.twbs_hidden_field :product_id %>
 
       <% if f.object.product_id.present? %>
@@ -48,4 +57,16 @@
 
     <% end %>
   <% end %>
+
+  <%= m.footer do %>
+    <a href="#" class="btn btn-default btn-success">
+      <%= icon 'reply' %>
+      Продолжить покупки
+    </a>
+    <a href="#" class="btn btn-default btn-primary">
+      <%= icon 'check' %>
+      Перейти к оформлению заказа 
+    </a>
+  <% end %>
+
 <% end %>

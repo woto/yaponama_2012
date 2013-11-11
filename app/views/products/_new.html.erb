@@ -1,14 +1,10 @@
 <%= somebody_tabs do %>
 
+  <% @meta_title_small = 'Новый товар' %>
   <%= page_header %>
-  <%# title_new %>
+
+  <%= render 'form' %>
 
   <%= render 'searches/search' %>
-
-  <%= row do %>
-    <div class="col-md-8">
-      <%= render 'form' %>
-    </div>
-  <% end %>
 
 <% end %>
