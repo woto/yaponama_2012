@@ -366,6 +366,8 @@ module ProductsSearch
 
       end
 
+      @meta_title = "Поиск запчастей по номеру"
+
       unless @status[:offers]
         render :status => 404 and return
       else

@@ -356,12 +356,12 @@ Yaponama2012::Application.routes.draw do
 
   resources :deliveries
 
-  # TODO Для перехвата /searches/2102/KURYAKYN
-  resources :searches do
-    #get 'search', :on => :collection, :as => 'search', :to => 'searches#index'
-    match '(/:catalog_number(/:manufacturer))' => "searches#index", :on => :collection, :as => 'search', :via => :get
-    #match '?skip' => "searches#index", :on => :collection, :as => :skip_search, :via => :get
-  end
+  ## TODO Для перехвата /searches/2102/KURYAKYN
+  #resources :searches do
+  #  #get 'search', :on => :collection, :as => 'search', :to => 'searches#index'
+  #  match '(/:catalog_number(/:manufacturer))' => "searches#index", :on => :collection, :as => 'search', :via => :get
+  #  #match '?skip' => "searches#index", :on => :collection, :as => :skip_search, :via => :get
+  #end
 
   get "*brand" => "brands#show", :constraints => BrandConstraint.new
   get "*path" => "pages#show", :constraints => PageConstraint.new

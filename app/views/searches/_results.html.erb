@@ -86,7 +86,7 @@
                   </div>
                 </span>
 
-                <% unless @resource %>
+                <% if current_user.role == 'guest' %>
                   <% css_style = "display: none;" %>
                 <% else %>
                   <% css_style = "display: table;" %>

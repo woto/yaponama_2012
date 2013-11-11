@@ -1,3 +1,3 @@
 <% if @item.status == 'cancel' %>
-  <li> <%= link_to 'Перезаказать', url_for(:action => :new, :product_id => params[:id], :return_path => params[:return_path] ) %> </li>
+  <li> <%= link_to 'Перезаказать', url_for(:action => :new, :product_id => params[:id], :return_path => params[:return_path], :skip => true ) %> </li>
 <% end %>

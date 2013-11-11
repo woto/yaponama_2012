@@ -11,11 +11,8 @@
 <% else %>
 
   <% unless params.key? :skip %>
-    <% @meta_title = "Поиск запчастей по номеру" %>
     <% if @c9.blank? %>
-      <% unless @resource %>
-        <h3>Вы не указали искомый каталожный номер</h3>
-      <% end %>
+      <h3>Вы не указали искомый каталожный номер</h3>
     <% else %>
       <h3>Ничего не найдено <%= (catalog_number = @c9).present? ? "по каталожному номеру #{catalog_number}" : "" %> <%= (manufacturer = @b9).present? ? "и производителю #{manufacturer}" : ""%> <%= @r9 == '1' ? "с учетом аналогов" : "без учета аналогов"  %></h3>
 

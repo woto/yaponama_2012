@@ -2,7 +2,7 @@ class Admin::ProductsController < ProductsController
   include Admin::Admined
 
   def user_set
-    @somebody = @user = User.find(params[:user_id]) if params[:user_id]
+    @somebody = @user = User.find(params[:user_id]) if params[:user_id].present?
   end
 
   def somebody_set

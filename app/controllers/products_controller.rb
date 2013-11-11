@@ -10,30 +10,6 @@ class ProductsController < ApplicationController
     search params[:catalog_number], params[:manufacturer], params[:replacements]
   end
 
-  # create и update идентичны, TODO: устранить
-  #def create
-  #  case
-  #  when params[:commit]
-  #    super
-  #  when params[:s]
-  #    search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '0'
-  #  when params[:r]
-  #    search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '1'
-  #  end
-  #end
-
-  #def update
-  #  case
-  #  when params[:commit]
-  #    super
-  #  when params[:s]
-  #    search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '0'
-  #  when params[:r]
-  #    search params[:product][:catalog_number], params[:product][:brand_attributes][:name], '1'
-  #  end
-  #end
-
-  
   before_action do
     # Доработать
     Rails.application.routes.recognize_path params[:return_path]
