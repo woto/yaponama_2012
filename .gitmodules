@@ -82,3 +82,6 @@
 [submodule "system/submodules/bootswatch"]
 	path = system/submodules/bootswatch
 	url = https://github.com/thomaspark/bootswatch.git
+[submodule "system/submodules/purl"]
+	path = system/submodules/purl
+	url = https://github.com/allmarkedup/purl

@@ -9,6 +9,8 @@
 //
 // OTHER LIBRARIES
 //
+//= require purl/purl
+//
 //= require console.log-wrapper/consolelog.min.js
 //= require console.log-wrapper/consolelog.detailprint.min.js
 //
