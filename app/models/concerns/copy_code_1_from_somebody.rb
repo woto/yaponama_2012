@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module CopyCode_1FromSomebody
   extend ActiveSupport::Concern
 

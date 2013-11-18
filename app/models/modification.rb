@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Modification < ActiveRecord::Base
   include Selectable
   include BelongsToCreator

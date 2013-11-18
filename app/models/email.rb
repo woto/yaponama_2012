@@ -1,5 +1,5 @@
-#encoding: utf-8
-
+# encoding: utf-8
+#
 class Email < ActiveRecord::Base
   include HiddenRecreate
   include BelongsToProfile

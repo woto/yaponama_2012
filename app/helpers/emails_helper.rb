@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module EmailsHelper
   attr_accessor :activated
 

@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module GridConcern
   extend ActiveSupport::Concern
 

@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Delivery < ActiveRecord::Base
   has_many :orders
   mount_uploader :image, DeliveryImageUploader

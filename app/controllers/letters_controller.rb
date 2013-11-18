@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class LettersController < ApplicationController
   before_action :set_letter, only: [:show, :edit, :update, :destroy]
 

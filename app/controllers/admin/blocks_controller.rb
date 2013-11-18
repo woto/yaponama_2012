@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Admin::BlocksController < ApplicationController
   before_action :set_admin_block, only: [:show, :edit, :update, :destroy]
 

@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 # TODO удалить
 ##encoding: utf-8
 #

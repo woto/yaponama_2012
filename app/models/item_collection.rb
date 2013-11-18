@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class ItemCollection < AbstractCollection
 
   attr_accessor :operation

@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module BelongsToSupplier
   extend ActiveSupport::Concern
 

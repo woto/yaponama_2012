@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Brand < ActiveRecord::Base
   include Selectable
   include Transactionable

@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class RobotsTxtController < ApplicationController
   def index
     render :text => <<EOF

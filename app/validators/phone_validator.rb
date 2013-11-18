@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#
 class PhoneValidator < ActiveModel::EachValidator
 
   def validate_each(object, attribute, value)

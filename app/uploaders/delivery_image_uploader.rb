@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#
 class DeliveryImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
   process :resize_to_fit => [200, 100]

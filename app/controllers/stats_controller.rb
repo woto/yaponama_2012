@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#
 class StatsController < ApplicationController
 
   include SetUserAndCreationReasonDummy

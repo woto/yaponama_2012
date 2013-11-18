@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module ProductsSearch
 
   extend ActiveSupport::Concern

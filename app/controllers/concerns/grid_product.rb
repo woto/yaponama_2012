@@ -1,5 +1,5 @@
-#encoding: utf-8
-
+# encoding: utf-8
+#
 module GridProduct
   extend ActiveSupport::Concern
   include AbstractGridable

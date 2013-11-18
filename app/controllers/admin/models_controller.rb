@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Admin::ModelsController < ApplicationController
   include Admin::Admined
   include GridModel

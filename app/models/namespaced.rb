@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module Namespaced
   def self.table_name_prefix
     'namespaced_'

@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module Selectable
   extend ActiveSupport::Concern
 

@@ -1,6 +1,5 @@
-#encoding: utf-8
-
-
+# encoding: utf-8
+#
 module Admin::Admined
 
   extend ActiveSupport::Concern

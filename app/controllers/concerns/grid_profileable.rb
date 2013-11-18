@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module GridProfileable
   extend ActiveSupport::Concern
   include AbstractGridable

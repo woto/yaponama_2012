@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module CachedModel
   extend ActiveSupport::Concern
 

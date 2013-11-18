@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#
 class AuthController < ApplicationController
 
   before_action do

@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#
 class PasswordReset
   include ActiveModel::Model
   include ActiveModel::Dirty

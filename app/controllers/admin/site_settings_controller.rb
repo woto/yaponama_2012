@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Admin::SiteSettingsController < ApplicationController
   include Admin::Admined
   include SetResourceClassDummy

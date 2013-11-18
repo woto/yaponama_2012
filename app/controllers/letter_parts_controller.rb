@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class LetterPartsController < ApplicationController
   before_action :set_letter_part, only: [:show, :edit, :update, :destroy]
 

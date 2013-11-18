@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class PostalAddressesController < ProfileablesController
   include GridPostalAddress
 

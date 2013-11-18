@@ -1,5 +1,5 @@
-#encoding: utf-8
-
+# encoding: utf-8
+#
 class AccountTransaction < ActiveRecord::Base
   include BelongsToCreator
   belongs_to :product_transaction

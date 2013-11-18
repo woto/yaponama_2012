@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class SomebodyTransaction < ActiveRecord::Base
   include BelongsToCreator
   include BelongsToSomebody

@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class UploadUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
   include CarrierWave::MimeTypes

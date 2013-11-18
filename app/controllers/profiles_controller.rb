@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class ProfilesController < ProfileablesController
   include GridProfile
 

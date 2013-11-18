@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Stat < ActiveRecord::Base
   belongs_to :somebody, inverse_of: :stats, counter_cache: true
 

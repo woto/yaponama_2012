@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#
 class Session
   # ActiveModel
   include ActiveModel::Model

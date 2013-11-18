@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class OrdersController < ApplicationController 
 
   include GridOrder

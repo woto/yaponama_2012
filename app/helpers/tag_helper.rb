@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module TagHelper
 
   def control_label method, options = {}

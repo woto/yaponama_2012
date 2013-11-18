@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class PostalAddress < ActiveRecord::Base
   include BelongsToSomebody
   include BelongsToCreator

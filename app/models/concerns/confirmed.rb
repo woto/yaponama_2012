@@ -1,5 +1,5 @@
-#encoding: utf-8
-
+# encoding: utf-8
+#
 module Confirmed
   include Tokenable
   extend ActiveSupport::Concern

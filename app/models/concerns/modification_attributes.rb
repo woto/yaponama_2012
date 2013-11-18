@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module ModificationAttributes
 
   extend ActiveSupport::Concern

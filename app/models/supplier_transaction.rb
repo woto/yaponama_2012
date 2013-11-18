@@ -1,4 +1,4 @@
-# rrda
+# encoding: utf-8
 #
 class SupplierTransaction < ActiveRecord::Base
   include BelongsToCreator

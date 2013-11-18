@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Modal::Header < AbstractBootstrap
 
   def close &block

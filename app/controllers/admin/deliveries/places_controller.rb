@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Admin::Deliveries::PlacesController < ApplicationController
   include Admin::Admined
   include GridPlace

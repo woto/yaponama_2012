@@ -1,5 +1,5 @@
-#encoding: utf-8
-
+# encoding: utf-8
+#
 class Somebody < ActiveRecord::Base
 
   include BelongsToCreator

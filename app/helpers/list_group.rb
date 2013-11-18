@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class ListGroup < AbstractBootstrap
 
   def item method, options={}

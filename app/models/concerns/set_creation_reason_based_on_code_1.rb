@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module SetCreationReasonBasedOnCode_1
   extend ActiveSupport::Concern
 

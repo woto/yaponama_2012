@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Admin::SplitsController < ApplicationController
 
   include Admin::Admined

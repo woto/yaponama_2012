@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class UploadsController < ApplicationController
   # TODO убрать hide_toolbar, т.к. стал использовать lightwaight layout
   #

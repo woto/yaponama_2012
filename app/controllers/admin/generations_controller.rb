@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Admin::GenerationsController < ApplicationController
   include Admin::Admined
   include GridGeneration

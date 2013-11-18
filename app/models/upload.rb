@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Upload < ActiveRecord::Base
   include Code_1AttrAccessorAndValidation
   include SetCreationReasonBasedOnCode_1

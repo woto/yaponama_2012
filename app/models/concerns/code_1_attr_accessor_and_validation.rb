@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module Code_1AttrAccessorAndValidation
   extend ActiveSupport::Concern
 

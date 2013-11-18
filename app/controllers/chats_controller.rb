@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class ChatsController < ApplicationController
   before_action :set_chat, only: [:show, :edit, :update, :destroy]
 

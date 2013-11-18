@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Car < ActiveRecord::Base
   include BelongsToSomebody
   include BelongsToCreator

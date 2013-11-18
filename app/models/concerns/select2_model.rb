@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module Select2Model
 
   extend ActiveSupport::Concern

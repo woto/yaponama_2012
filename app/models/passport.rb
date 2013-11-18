@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#
 class Passport < ActiveRecord::Base
   include HiddenRecreate
   include BelongsToProfile

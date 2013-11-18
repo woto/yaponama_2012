@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Ipgeobase::Ip < ActiveRecord::Base
 
   self.table_name = "ipgeobase_ips"

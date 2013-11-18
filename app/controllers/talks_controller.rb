@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class TalksController < ApplicationController
   before_action :set_talk, only: [:show, :edit, :update, :destroy]
 

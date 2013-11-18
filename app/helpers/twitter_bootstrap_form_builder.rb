@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
   def alert_danger

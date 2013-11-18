@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Admin::ModificationsController < ApplicationController
   include Admin::Admined
   include GridModification

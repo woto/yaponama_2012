@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class PasswordResetMailer < ApplicationMailer
 
   def email(value, password_reset_token)

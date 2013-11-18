@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Letter < ActiveRecord::Base
   mount_uploader :letter, LetterUploader
   include BelongsToSomebody
