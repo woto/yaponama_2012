@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#
 require 'test_helper'
 
 class GridChecboxTest < ActionDispatch::IntegrationTest
@@ -13,26 +13,29 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
     # Получаем список товаров в корзине
     visit '/user/products/status/incart'
 
-    # Убеждаемся, что есть три товара
-    page.has_selector?("tr", count: 3)
+    # Убеждаемся, что отображается два товара
+    first = products(:first_user_first_product)
+    second = products(:first_user_second_product)
+
+    assert has_css? "#product_#{first.id}"
+    assert has_css? "#product_#{second.id}"
 
     # Выбираем первый
-    first('input[type="checkbox"]').click
-    assert page.has_css?('input[type="checkbox"][checked]')
+    check "grid_item_ids_#{first.id}"
+    assert has_checked_field? "grid_item_ids_#{first.id}"
 
     # Открываем окно фильтрации по чекбоксу
     first('.fa-filter').click
-    assert page.has_css?('#grid_filter_checkbox_checkbox_1')
 
     # Щелкаем в окне на выделенных - Да
-    first('#grid_filter_checkbox_checkbox_1').click
+    choose 'grid_filter_checkbox_checkbox_1'
 
     # Сабмитим форму
     first("#filter_checkbox.modal div.modal-footer input.btn").click
 
     # Убеждаемся, что в результате остался один товар
-    page.has_selector?("tr", count: 2)
-
+    assert has_css? "#product_#{first.id}"
+    assert has_no_css? "#product_#{second.id}"
   end
 
   test "Если мы выделяем элемент, то после обновления страницы браузера элемент должен остаться выделенным" do
@@ -44,18 +47,24 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
 
     visit '/user/products/status/incart'
 
-    # Убеждаемся, что есть три товара
-    page.assert_selector("tr", count: 3)
+    # Убеждаемся, что отображается два товара
+    first = products(:first_user_first_product)
+    second = products(:first_user_second_product)
 
-    # Выбираем первый
-    first('input[type="checkbox"]').click
-    assert page.has_css?('input[type="checkbox"][checked]')
+    assert has_css? "#product_#{first.id}"
+    assert has_css? "#product_#{second.id}"
+
+    # Выбираем товар
+    check "grid_item_ids_#{second.id}"
+    assert has_checked_field? "grid_item_ids_#{second.id}"
+
+    sleep 0.5
 
     # Обновляем страницу браузера
     visit(page.driver.browser.current_url)
 
     # Убеждаемся, что товар по-прежнему выделен
-    assert page.has_css?('input[type="checkbox"][checked]')
+    assert has_checked_field? "grid_item_ids_#{second.id}"
 
   end
 
@@ -69,23 +78,27 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
     # Получаем список товаров в корзине
     visit '/user/products/status/incart'
 
-    # Убеждаемся, что есть три товара
-    page.assert_selector("tr", count: 3)
+    # Убеждаемся, что отображается два товара
+    first = products(:first_user_first_product)
+    second = products(:first_user_second_product)
+
+    assert has_css? "#product_#{first.id}"
+    assert has_css? "#product_#{second.id}"
 
     # Щелкаем на ссылке для ввода нового кол-ва товаров на странице
-    find('.dashed').click
+    find('#grid-toolbar-per-page .btn').click
 
     # Дожидаемся появления окна для ввода нового кол-ва
     assert page.has_css?('.in')
 
-    # Укаываем - 1 на страницу
+    # Указываем - 1 на страницу
     find('input#grid_per_page').set('1')
 
     # Отправляем на сервер
     find('[name=per_page]').click
 
     # Убеждаемся, что на странице остался 1 товар
-    page.assert_selector("tr", count: 2)
+    assert has_css? ".product", count: 1
 
   end
 end
