@@ -235,4 +235,19 @@ class Product < ActiveRecord::Base
     "#{catalog_number} (#{cached_brand})"
   end
 
+
+
+
+
+
+
+  # Можно перезаказать только отказанный товар (или если он удален - ситуация с split)
+  before_validation do
+    if product.present? && product.status != 'cancel' && !product.destroyed?
+      errors.add(:base, 'Невозможно перезаказать товар, пока по нему не выставлен отказ.')
+      return false
+    end
+  end
+
+
 end
