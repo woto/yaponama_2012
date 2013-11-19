@@ -1,3 +1,14 @@
+
+
+<% @preset_catalog_number = @resource.catalog_number %>
+
+<% if @resource.persisted? %>
+  <%= alert 'info' do %>
+    Редактирование позиции <%= @resource.to_label %>
+  <% end %>
+<% end %>
+
+
 <%= row do %>
   <div class="col-lg-12">
     <div class="well">
