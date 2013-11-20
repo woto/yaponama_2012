@@ -1,4 +1,4 @@
-$(document).on 'click', '.buy-button', event, -> 
+$(document).on 'click', '.buy-button', (event) ->
   event.preventDefault()
   $("#product_catalog_number").val($(this).data('catalog-number'))
   $("#product_sell_cost").val($(this).data('cost'))
@@ -6,10 +6,14 @@ $(document).on 'click', '.buy-button', event, ->
   $("#product_min_days").val($(this).data('min-days'))
   $("#product_max_days").val($(this).data('max-days'))
   $("#product_probability").val($(this).data('probability'))
+
   $("#s2id_product_brand_attributes_name").select2('val', $(this).data('manufacturer'));
+  $("#product_brand_attributes_name").val($(this).data('manufacturer'))
+
   $("#product_buy_cost").val($(this).data('income-cost'))
   $("#product_short_name").val($(this).data('short-name'))
   $("#product_long_name").val($(this).data('long-name'))
+  $('#product_modal_form').modal('show')
   
   
   # TODO Доработаю позже когда буду разбираться с поставщиком

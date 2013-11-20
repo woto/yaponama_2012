@@ -4,9 +4,7 @@
 
     <% cn_scope.each_with_index do |(manufacturer, mf_scope), i| %>
 
-      <div id="<%= manufacturer %>" class="part-title"></div>
-
-      <div itemscope itemtype="http://schema.org/Product">
+      <div id="<%= manufacturer %>" itemscope itemtype="http://schema.org/Product">
 
         <%= panel 'primary' do |p| %>
 
@@ -92,40 +90,49 @@
                   <% css_style = "display: table;" %>
                 <% end %>
 
-                <table style="<%= css_style %>" class="table table-striped table-responsive" rel="offers">
-                  <tr>
-                    <th> <a href="#" rel="tooltip" title="Расположение склада поставщика">Расп.</a></th>
-                    <th> <a href="#" rel="tooltip" title="Способ доставки на наш склад">Дост.</a></th>
-                    <th> <a href="#" rel="tooltip" title="Минимальный срок поставки на наш склад">Мин.</a></th>
-                    <th> <a href="#" rel="tooltip" title="Максимальный срок поставки на наш склад">Макс.</a></th>
-                    <th> <a href="#" rel="tooltip" title="Вероятность наличия детали у поставщика">Вер.</a></th>
-                    <th> <a href="#" rel="tooltip" title="Количество на складе поставщика">Кол-во</a></th>
-                    <th> <a href="#" rel="tooltip" title="Зайдите на сайт под своим аккаунтом, чтобы увидеть вашу цену со скидками, если таковые имеются">Цена</a></th>
-                    <% if admin_zone? %>
-                      <th> <a href="#" rel="tooltip" title="Служебная информация, отображается только менеджеру сайта">Служ.</a></th>
-                    <% end %>
-                  </tr>
-                  <% mf_scope[:offers].each do |offer| %>
-                    <tr>
-                      <td> <%= raw country_decorator offer[:country] %> </td>
-                      <td> <%= raw offer[:delivery] %> </td>
-                      <td> <%= raw days_decorator offer[:min_days] %> </td>
-                      <td> <%= raw days_decorator offer[:max_days] %> </td>
-                      <td> <%= raw offer[:probability] %>% </td>
-                      <td> <%= raw count_decorator offer[:count] %> </td>
-                      <td>
-                        <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, class: "btn btn-success btn-xs buy-button" do %>
-                          Купить <%= number_to_currency(offer[:retail_cost], precision: 0) %>
+                <div class="table-responsive">
+                  <table style="<%= css_style %>" class="table table-hover" rel="offers">
+
+                    <thead>
+                      <tr>
+                        <th> <a href="#" rel="tooltip" title="Расположение склада поставщика">Расп.</a></th>
+                        <th> <a href="#" rel="tooltip" title="Способ доставки на наш склад">Дост.</a></th>
+                        <th> <a href="#" rel="tooltip" title="Минимальный срок поставки на наш склад">Мин.</a></th>
+                        <th> <a href="#" rel="tooltip" title="Максимальный срок поставки на наш склад">Макс.</a></th>
+                        <th> <a href="#" rel="tooltip" title="Вероятность наличия детали у поставщика">Вер.</a></th>
+                        <th> <a href="#" rel="tooltip" title="Количество на складе поставщика">Кол-во</a></th>
+                        <th> <a href="#" rel="tooltip" title="Зайдите на сайт под своим аккаунтом, чтобы увидеть вашу цену со скидками, если таковые имеются">Цена</a></th>
+                        <% if admin_zone? %>
+                          <th> <a href="#" rel="tooltip" title="Служебная информация, отображается только менеджеру сайта">Служ.</a></th>
                         <% end %>
-                      </td>
-                      <% if admin_zone? %>
-                        <td> 
-                          <%= offer[:tech] %> 
-                        </td>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <% mf_scope[:offers].each do |offer| %>
+                        <tr>
+                          <td> <%= raw country_decorator offer[:country] %> </td>
+                          <td> <%= raw offer[:delivery] %> </td>
+                          <td> <%= raw days_decorator offer[:min_days] %> </td>
+                          <td> <%= raw days_decorator offer[:max_days] %> </td>
+                          <td> <%= raw offer[:probability] %>% </td>
+                          <td> <%= raw count_decorator offer[:count] %> </td>
+                          <td>
+                            <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, class: "btn btn-success btn-xs buy-button" do %>
+                              Купить <%= number_to_currency(offer[:retail_cost], precision: 0) %>
+                            <% end %>
+                          </td>
+                          <% if admin_zone? %>
+                            <td> 
+                              <%= offer[:tech] %> 
+                            </td>
+                          <% end %>
+                        </tr>
                       <% end %>
-                    </tr>
-                  <% end %>
-                </table>
+                    </tbody>
+
+                  </table>
+                </div>
 
                 <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
                 <p>А так же рекомендуем посмотреть <%= link_to  "аналоги и замены, \"#{catalog_number} - #{manufacturer}\"", polymorphic_path([new_or_edit, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :product], :id => @resource, :catalog_number => catalog_number, :manufacturer => manufacturer, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'ajax-search replacement-button' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством </p>
@@ -160,8 +167,7 @@
 
   <% end %>
 
-  <h3>Замены артикула</h3>
   <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-  Вы так же можете попробовать посмотреть <%= link_to "замены номера #{@c9} без указания производителя", polymorphic_path([new_or_edit, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil),  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'ajax-search replacement-button' %>.
+  <h4>Вы так же можете попробовать посмотреть <%= link_to "замены номера #{@c9} без указания производителя", polymorphic_path([new_or_edit, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil),  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'ajax-search replacement-button' %>.</h4>
 
 <% end %>
