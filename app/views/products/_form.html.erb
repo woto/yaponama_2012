@@ -1,3 +1,8 @@
+<% if @resource.product.present? && !@resource.persisted? %>
+  <%= alert 'info' do %>
+    Позиция будет отражена как перезаказанная с <%= @resource.product.to_label %>
+  <% end %>
+<% end %>
 
 
 <% @preset_catalog_number = @resource.catalog_number %>
