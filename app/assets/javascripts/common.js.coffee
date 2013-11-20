@@ -1,3 +1,26 @@
+$(document).popover({
+  selector: "[rel~=popover]"
+})
+
+$(document).tooltip({
+  selector: "[rel~=tooltip]"
+})
+
+$(document).on 'click', '[rel~=popover]',  (event) ->
+  event.preventDefault()
+
+$(document).on 'click', "*[data-poload]", (event) ->
+  event.preventDefault()
+  that = $(this)
+  if that.data('visible')
+    that.data('visible', false)
+    that.popover "hide"
+  else
+    $.get that.data("poload"), (d) ->
+      that.data('visible', true)
+      that.popover(trigger: 'manual', content: d).popover "show"
+
+
 $ ->
 
   bootstrapperize()
@@ -11,22 +34,6 @@ window.bootstrapperize = ->
   #  $(".modal-body").load "/render/62805", (result) ->
   #    $("#myModal").modal show: true
 
-
-  $("*[data-poload]").on "click", (e) ->
-    e.preventDefault()
-    that = $(this)
-    if that.data('visible')
-      that.data('visible', false)
-      that.popover "hide"
-    else
-      $.get that.data("poload"), (d) ->
-        that.data('visible', true)
-        that.popover(trigger: 'manual', html: 'true', content: d).popover "show"
-
-  $("[rel~=tooltip]").tooltip()
-
-  $("[rel~=popover]").popover().click (e) ->
-    e.preventDefault()
 
   $("[rel~='checkbox']").each ->
 
