@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/deivid-rodriguez/byebug.git
-  revision: 319be9a74c72dbd0cd3ed0ed23941df23f252463
-  specs:
-    byebug (2.3.1)
-      columnize (~> 0.3.6)
-      debugger-linecache (~> 1.2.0)
-
-GIT
   remote: git://github.com/jnicklas/capybara.git
   revision: ccdd49d1f0e609ed7d17627452fd6e8a45eb10a1
   specs:
@@ -31,6 +23,13 @@ GIT
     uglifier (2.3.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+
+GIT
+  remote: git://github.com/mikel/mail.git
+  revision: 896972544b6dce25807420b671f1a04363bf134e
+  specs:
+    mail (2.6.0.edge)
+      mime-types (~> 1.16)
 
 GIT
   remote: git://github.com/pivotal/jasmine-gem.git
@@ -73,13 +72,56 @@ GIT
       thor (>= 0.14, < 2.0)
 
 GIT
-  remote: git://github.com/rails/rails.git
-  revision: 0693758aa8cd1cb5b97097776f566c9033a4a1cb
+  remote: git://github.com/rails/sass-rails.git
+  revision: 0fcdff806511d0cfaf0bf379f3530ad11cb16f5c
+  specs:
+    sass-rails (4.0.1)
+      railties (>= 4.0.0, < 5.0)
+      sass (>= 3.2.0)
+      sprockets-rails (~> 2.0.0)
+
+GIT
+  remote: git://github.com/rails/sprockets-rails.git
+  revision: 6a03c314bec3a84a3f6c8076bf058b33ed672a13
+  specs:
+    sprockets-rails (2.0.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      sprockets (~> 2.8)
+
+GIT
+  remote: git://github.com/rails/turbolinks.git
+  revision: 7b2dcd568c5251885c644bc5b502d1dcc9caabd0
+  specs:
+    turbolinks (2.0.0)
+      coffee-rails
+
+GIT
+  remote: git://github.com/railsware/sht_rails.git
+  revision: b0e07a895e590689d2f5dca778d5cc87d197fbac
+  specs:
+    sht_rails (0.2.0)
+      execjs (>= 0.3.0)
+      handlebars (>= 0.4.0)
+      rails (>= 3.1.0)
+      sprockets (>= 2.0.3)
+      tilt (>= 1.3.3)
+
+GIT
+  remote: git://github.com/woto/ipgeobase.git
+  revision: 07dc8b283d6f932443dd918182ca5ec1273b3cba
+  specs:
+    ipgeobase (0.0.1)
+      ancestry
+
+GIT
+  remote: git://github.com/woto/rails.git
+  revision: 56a43c9bab2e05cd5afc5a215f1e1b79118b0802
   branch: 4-0-stable
   specs:
     actionmailer (4.0.1)
       actionpack (= 4.0.1)
-      mail (~> 2.5.4)
+      mail
     actionpack (4.0.1)
       activesupport (= 4.0.1)
       builder (~> 3.1.0)
@@ -113,49 +155,6 @@ GIT
       activesupport (= 4.0.1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-
-GIT
-  remote: git://github.com/rails/sass-rails.git
-  revision: 0fcdff806511d0cfaf0bf379f3530ad11cb16f5c
-  specs:
-    sass-rails (4.0.1)
-      railties (>= 4.0.0, < 5.0)
-      sass (>= 3.2.0)
-      sprockets-rails (~> 2.0.0)
-
-GIT
-  remote: git://github.com/rails/sprockets-rails.git
-  revision: 6a03c314bec3a84a3f6c8076bf058b33ed672a13
-  specs:
-    sprockets-rails (2.0.1)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      sprockets (~> 2.8)
-
-GIT
-  remote: git://github.com/rails/turbolinks.git
-  revision: b5e4d0f05d37a64946dc391ad0be3bd289708542
-  specs:
-    turbolinks (2.0.0)
-      coffee-rails
-
-GIT
-  remote: git://github.com/railsware/sht_rails.git
-  revision: b0e07a895e590689d2f5dca778d5cc87d197fbac
-  specs:
-    sht_rails (0.2.0)
-      execjs (>= 0.3.0)
-      handlebars (>= 0.4.0)
-      rails (>= 3.1.0)
-      sprockets (>= 2.0.3)
-      tilt (>= 1.3.3)
-
-GIT
-  remote: git://github.com/woto/ipgeobase.git
-  revision: 07dc8b283d6f932443dd918182ca5ec1273b3cba
-  specs:
-    ipgeobase (0.0.1)
-      ancestry
 
 GIT
   remote: https://github.com/Shopify/active_merchant
@@ -192,6 +191,7 @@ GEM
       activesupport (>= 2.3.11)
       i18n
     activerecord-deprecated_finders (1.0.3)
+    addressable (2.3.5)
     ancestry (2.0.0)
       activerecord (>= 3.0.0)
     atomic (1.1.14)
@@ -215,13 +215,46 @@ GEM
     coffee-script-source (1.6.3)
     columnize (0.3.6)
     commonjs (0.2.7)
+    cookiejar (0.3.0)
+    dalli (2.6.4)
+    debugger (1.6.2)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.3)
     debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.3)
     diff-lcs (1.2.4)
+    em-hiredis (0.2.1)
+      hiredis (~> 0.4.0)
+    em-http-request (1.1.1)
+      addressable (>= 2.3.4)
+      cookiejar
+      em-socksify (>= 0.3)
+      eventmachine (>= 1.0.3)
+      http_parser.rb (>= 0.6.0.beta.2)
+    em-socksify (0.3.0)
+      eventmachine (>= 1.0.0.beta.4)
     erubis (2.7.0)
+    eventmachine (1.0.3)
     execjs (2.0.2)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     fastercsv (1.5.5)
+    faye (1.0.0)
+      cookiejar (>= 0.3.0)
+      em-http-request (>= 0.3.0)
+      eventmachine (>= 0.12.0)
+      faye-websocket (>= 0.7.0)
+      multi_json (>= 1.0.0)
+      rack (>= 1.0.0)
+      websocket-driver (>= 0.3.0)
+    faye-redis (0.2.0)
+      em-hiredis (>= 0.2.0)
+      eventmachine (>= 0.12.0)
+      multi_json (>= 1.0.0)
+    faye-websocket (0.7.0)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.3.0)
     handlebars (0.5.0)
       commonjs (~> 0.2.3)
       handlebars-source (~> 1.0.12)
@@ -231,6 +264,7 @@ GEM
     hike (1.2.3)
     hiredis (0.4.5)
     htmlentities (4.3.1)
+    http_parser.rb (0.6.0.beta.2)
     httpauth (0.2.0)
     i18n (0.6.5)
     innertube (1.1.0)
@@ -249,9 +283,6 @@ GEM
     libv8 (3.16.14.3)
     macaddr (1.6.1)
       systemu (~> 2.5.0)
-    mail (2.5.4)
-      mime-types (~> 1.16)
-      treetop (~> 1.4.8)
     middleware (0.1.0)
     mime-types (1.25)
     mini_portile (0.5.2)
@@ -311,7 +342,8 @@ GEM
       cliver (~> 0.2.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
-    polyglot (0.3.3)
+    puma (2.6.0)
+      rack (>= 1.1, < 2.0)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -386,9 +418,6 @@ GEM
       atomic
     tilt (1.4.1)
     tins (0.12.0)
-    treetop (1.4.15)
-      polyglot
-      polyglot (>= 0.3.1)
     tzinfo (0.3.38)
     uuid (2.3.7)
       macaddr (~> 1.0)
@@ -408,7 +437,6 @@ DEPENDENCIES
   ancestry
   arel!
   bcrypt-ruby
-  byebug!
   cancan
   capistrano
   capybara!
@@ -416,7 +444,11 @@ DEPENDENCIES
   charlock_holmes
   cocoon!
   coffee-rails!
+  dalli
+  debugger
   fastercsv
+  faye
+  faye-redis
   hiredis (~> 0.4.5)
   htmlentities
   ipgeobase!
@@ -427,6 +459,7 @@ DEPENDENCIES
   json
   kaminari
   less-rails
+  mail!
   mysql2 (= 0.3.12b4)
   omniauth
   omniauth-facebook
@@ -438,6 +471,7 @@ DEPENDENCIES
   omniauth-yandex
   pg
   poltergeist
+  puma
   quiet_assets
   rails!
   redis (~> 3.0.1)
