@@ -5,9 +5,6 @@ class Admin::GenerationsController < GenerationsController
   include GridGeneration
 
   skip_before_action :set_grid, :only => [:new, :edit, :update, :create, :destroy, :show, :search]
-  skip_before_filter :only_authenticated, :only => :search
-
-  respond_to :json
 
   def new_resource
     super
@@ -15,10 +12,6 @@ class Admin::GenerationsController < GenerationsController
   end
 
   private
-
-  def set_resource_class
-    @resource_class = Generation
-  end
 
   def user_set
     @somebody = @user = User.find(params[:user_id]) if params[:user_id]

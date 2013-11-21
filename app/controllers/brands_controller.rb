@@ -2,6 +2,10 @@
 #
 class BrandsController < ApplicationController
 
+  respond_to :json
+
+  skip_before_filter :only_authenticated, :only => :search
+  skip_before_action :find_resource, :only => :search
 
   def search
     brand_t = Brand.arel_table

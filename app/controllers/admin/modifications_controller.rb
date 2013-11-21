@@ -5,9 +5,6 @@ class Admin::ModificationsController < ModificationsController
   include GridModification
 
   skip_before_action :set_grid, :only => [:new, :edit, :update, :create, :destroy, :show, :search]
-  skip_before_filter :only_authenticated, :only => :search
-
-  respond_to :json
 
   def new_resource
     super

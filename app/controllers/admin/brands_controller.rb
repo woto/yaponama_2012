@@ -5,9 +5,6 @@ class Admin::BrandsController < BrandsController
   include GridBrand
 
   skip_before_filter :set_grid, :only => [:new, :create, :edit, :update, :show, :destroy, :search]
-  skip_before_filter :only_authenticated, :only => :search
-
-  respond_to :json
 
   private
 

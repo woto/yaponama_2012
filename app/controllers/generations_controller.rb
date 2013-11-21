@@ -2,6 +2,11 @@
 #
 class GenerationsController < ApplicationController
 
+  respond_to :json
+
+  skip_before_filter :only_authenticated, :only => :search
+  skip_before_action :find_resource, :only => :search
+
   def search
     generation_t = Generation.arel_table
 
@@ -18,6 +23,23 @@ class GenerationsController < ApplicationController
     @generations = @generations.order(generation_t[:name]).page params[:page]
 
     respond_with @generations
+  end
+
+  private 
+
+  def set_resource_class
+    @resource_class = Generation
+  end
+
+  def user_set
+    @user = current_user
+  end
+
+  def somebody_set
+    @somebody = current_user
+  end
+
+  def supplier_set
   end
 
 end
