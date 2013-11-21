@@ -6,17 +6,12 @@
 <div id="items">
 
   <div>
-
-    <div id="items-progress">
-      <%#<div id="items-progress-center"> %>
-      <%#  <%= icon 'spinner icon-spin' %>
-      <%#  Ожидайте... %>
-      <%#</div> %>
-    </div>
-
     <% if @items.num_pages == 0 %>
       <%= alert 'warning' do %> 
         Не найдено ни одной строки соответствующей данному условию.
+
+      <div id="items-progress"> </div>
+
       <% end %>
     <% elsif @items.num_pages > 0 && @grid.page.to_i > @items.num_pages %>
       <%= alert 'warning' do  %>
