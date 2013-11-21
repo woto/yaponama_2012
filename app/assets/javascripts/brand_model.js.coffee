@@ -76,7 +76,7 @@ Application.initSelect2 = ->
               text: options.term
               new: true
 
-      $.getJSON "/admin/brands/search/?" + $.param(params), (data) ->
+      $.getJSON "/brands/search/?" + $.param(params), (data) ->
 
         data.map (data) ->
           zzz.results.push
@@ -134,7 +134,7 @@ Application.initSelect2 = ->
               text: options.term
               new: true
 
-      $.getJSON "/admin/models/search/?" + $.param(params), (data) ->
+      $.getJSON "/models/search/?" + $.param(params), (data) ->
 
         data.map (data) ->
           zzz.results.push
@@ -189,7 +189,7 @@ Application.initSelect2 = ->
               text: options.term
               new: true
 
-      $.getJSON "/admin/generations/search/?" + $.param(params), (data) ->
+      $.getJSON "/generations/search/?" + $.param(params), (data) ->
 
         data.map (data) ->
           zzz.results.push
@@ -244,7 +244,7 @@ Application.initSelect2 = ->
               text: options.term
               new: true
 
-      $.getJSON "/admin/modifications/search/?" + $.param(params), (data) ->
+      $.getJSON "/modifications/search/?" + $.param(params), (data) ->
 
         data.map (data) ->
           zzz.results.push
