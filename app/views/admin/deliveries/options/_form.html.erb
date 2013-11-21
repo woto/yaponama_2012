@@ -1,9 +1,18 @@
-<%= twbs_form_for @resource, :url => [:admin, @resource] do |f| %>
+<%= row do %>
 
-    <%= f.twbs_text_field :name %>
-    <%= f.twbs_check_box :full_prepayment_required %>
-    <%= f.twbs_check_box :postal_address_required %>
+  <div class="col-md-6">
 
-    <%= f.twbs_submit %>
+    <%= twbs_form_for @resource, :url => [:admin, @resource] do |f| %>
+
+        <%= f.twbs_text_field :name %>
+        <%= f.twbs_check_box :full_prepayment_required %>
+        <%= f.twbs_check_box :postal_address_required %>
+        <%= f.twbs_check_box :passport_required %>
+
+        <%= f.twbs_submit %>
+
+    <% end %>
+
+  </div>
 
 <% end %>
