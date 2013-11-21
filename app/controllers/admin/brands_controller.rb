@@ -9,21 +9,6 @@ class Admin::BrandsController < BrandsController
 
   respond_to :json
 
-  def search
-    brand_t = Brand.arel_table
-
-    @resources = Brand
-
-    if params[:name].present?
-      @resources = Brand.where(brand_t[:name].matches("#{params[:name]}%"))
-    end
-
-    @resources = @resources.order(:name).page params[:page]
-
-    respond_with @resources
-  end
-
-
   private
 
   def set_user_and_creation_reason
