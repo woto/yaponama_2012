@@ -2,8 +2,9 @@
 #
 class Panel < AbstractBootstrap
 
-  def heading
-    @template.content_tag :div, class: 'panel-heading' do
+  def heading options={}
+    options[:class] = ['panel-heading', options[:class] ].compact
+    @template.content_tag :div, options do
       yield
     end
   end
@@ -28,8 +29,9 @@ class Panel < AbstractBootstrap
     end
   end
 
-  def footer
-    @template.content_tag :div, class: 'panel-footer' do
+  def footer options={}
+    options[:class] = ['panel-footer', options[:class] ].compact
+    @template.content_tag :div, options do
       yield
     end
   end
