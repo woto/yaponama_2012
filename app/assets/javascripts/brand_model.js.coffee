@@ -1,3 +1,5 @@
+window.Application ||= {}
+
 format_result = (data) -> 
   if data.new?
     "Создать: " + data.text.toString().toUpperCase()
@@ -12,14 +14,14 @@ format_selection = (data) ->
   data.text.toString().toUpperCase()
 
 $ ->
-  initSelect2()
+  Application.initSelect2()
 
 $(document).on 'page:load', ->
-  initSelect2()
+  Application.initSelect2()
 
 # TODO позже разобраться, когда начну делать подгрузку фильтров через ajax
 # Делается вызов где-то из js.erb (в продуктах чтоли)
-window.initSelect2 = ->
+Application.initSelect2 = ->
 
   # Так уже не надо
   brand = undefined

@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#
 require 'test_helper'
 
 # TODO пока это тут, до момента пока окончательно не
@@ -14,6 +14,6 @@ class PageTitleTest < ActionDispatch::IntegrationTest
     h1 = find('h1')
     assert_equal 'Подтверждение +7 (111) 111-11-11', h1.text
     assert_equal '+7 (111) 111-11-11', h1.find('small').text
-    assert_equal 'Подтверждение', title
+    assert_equal 'Подтверждение +7 (111) 111-11-11', title
   end
 end

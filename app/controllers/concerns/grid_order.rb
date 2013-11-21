@@ -74,7 +74,7 @@ module GridOrder
    
       if admin_zone?
         unless @user
-          columns_hash['user_id'] = {
+          columns_hash['somebody_id'] = {
             :type => :belongs_to,
             :belongs_to => User,
           }
@@ -87,25 +87,25 @@ module GridOrder
 
     def set_preferable_columns
 
-      @grid.token_visible = '1'
-      #@grid.delivery_id_visible = '1'
-      @grid.cached_profile_visible = '1'
-      @grid.notes_visible = '1'
-      @grid.updated_at_visible = '1'
+      @grid.visible_token = '1'
+      #@grid.delivery_id = '1'
+      @grid.visible_cached_profile = '1'
+      @grid.visible_notes = '1'
+      @grid.visible_updated_at = '1'
 
       unless @user
-        @grid.user_id_visible = '1'
+        @grid.visible_somebody_id = '1'
       end
 
       if params[:status].blank? || ['all'].include?(params[:status])
-        @grid.status_visible = '1'
+        @grid.visible_status = '1'
       end
 
     end
 
     def additional_conditions
       if @user
-        @items = @items.where(:user_id => @user.id)
+        @items = @items.where(:somebody_id => @user.id)
       end
 
       if params[:status] != 'all' && params[:status].present?

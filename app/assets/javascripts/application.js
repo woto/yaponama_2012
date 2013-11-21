@@ -7,6 +7,7 @@
 //= require turbolinks
 //= require cocoon
 //
+//
 // OTHER LIBRARIES
 //
 //= require purl/purl

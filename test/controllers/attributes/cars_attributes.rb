@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module CarsAttributes
 
   def new_car

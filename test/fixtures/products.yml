@@ -1,6 +1,7 @@
 anton_first:
   catalog_number: 2102
   brand: A.B.S.
+  cached_brand: A.B.S.
   short_name: УСТРОЙСТВО ДЛЯ НАТЯЖЕНИЯ РЕМНЯ
   long_name: РОЛИК НАТЯЖНОЙ РЕМНЯ КОНДИЦИОНЕРА, УСТРОЙСТВО ДЛЯ НАТЯЖЕНИЯ РЕМНЯ, РЕМЕНЬ ГРМ, НАТЯЖИТЕЛЬ РЕМНЯ, НАТЯЖИТЕЛЬ ПРИВОДА РЕМНЯ ГЕНЕРАТОРА
   quantity_ordered: 2
@@ -25,6 +26,7 @@ anton_first:
 anton_second:
   catalog_number: 3310
   brand: Bando
+  cached_brand: BANDO
   short_name: Клиновой ремень
   long_name: Ремень КЛИНОВОЙ, Генератор, клиновой ремень,
   quantity_ordered: 3
@@ -48,6 +50,7 @@ anton_second:
 anton_third:
   catalog_number: 3515
   brand: Производитель
+  cached_brand: ПРОИЗВОДИТЕЛЬ
   short_name: Название
   quantity_ordered: 1
   quantity_available: 2
@@ -218,6 +221,7 @@ anton_time_check:
 first_user_first_product:
   catalog_number: MR508329
   brand: nissan
+  cached_brand: NISSAN
   short_name: Цилиндр сцепления рабочий
   long_name: Цилиндр, цилиндр для сцепления
   quantity_ordered: 3
@@ -242,6 +246,7 @@ first_user_first_product:
 first_user_second_product:
   catalog_number: 13401−20030
   brand: nissens
+  cached_brand: NISSENS
   short_name: Выключатель обогрева заднего стекла
   quantity_ordered: 4
   buy_cost: 1425.0
@@ -256,6 +261,7 @@ first_user_second_product:
 otto:
   catalog_number: 1
   brand: ty
+  cached_brand: TY
   short_name: Ламбрусское
   long_name: 1
   quantity_ordered: 1
@@ -280,6 +286,7 @@ otto:
 otto2:
   catalog_number: 398394-32921
   brand: mitsubishi
+  cached_brand: MITSUBISHI
   short_name: Либрусек
   long_name: adsfl;kj
   quantity_ordered: 1
@@ -304,6 +311,7 @@ otto2:
 otto3:
   catalog_number: 19392918
   brand: toyota
+  cached_brand: TOYOTA
   short_name: adsfkljadsf
   long_name: 1
   quantity_ordered: 1
@@ -328,6 +336,7 @@ otto3:
 otto4:
   catalog_number: 19291293-12329239
   brand: nissan
+  cached_brand: NISSAN
   short_name: Кардаган
   long_name: 1
   quantity_ordered: 1
@@ -352,6 +361,7 @@ otto4:
 otto5:
   catalog_number: 392918-4322391
   brand: nissan
+  cached_brand: NISSAN
   short_name: Оттава
   long_name: 1
   quantity_ordered: 1
@@ -375,6 +385,7 @@ otto5:
 otto6:
   catalog_number: 129123012-329128
   brand: kia
+  cached_brand: KIA
   short_name: Кишенев
   long_name: 1
   quantity_ordered: 1
@@ -399,6 +410,7 @@ otto6:
 otto7:
   catalog_number: 2391920-322312
   brand: kia
+  cached_brand: KIA
   short_name: Армавир
   long_name: 1
   quantity_ordered: 1
@@ -422,6 +434,7 @@ otto7:
 otto8:
   catalog_number: 3291-321
   brand: nissan
+  cached_brand: NISSAN
   short_name: Арзамас
   long_name: 1
   quantity_ordered: 1
@@ -445,6 +458,7 @@ otto8:
 otto9:
   catalog_number: 19392121
   brand: nissan
+  cached_brand: NISSAN
   short_name: gaG
   long_name: adfjs
   quantity_ordered: 12
@@ -469,6 +483,7 @@ otto9:
 otto10:
   catalog_number: 9291919
   brand: kia
+  cached_brand: KIA
   short_name: gaga
   long_name: gaga
   quantity_ordered: 8
@@ -492,6 +507,7 @@ otto10:
 otto11:
   catalog_number: 39282828
   brand: mitsubishi
+  cached_brand: MITSUBISHI
   short_name: aga
   long_name: Проверка
   quantity_ordered: 5
@@ -516,6 +532,7 @@ otto11:
 otto12:
   catalog_number: 667744
   brand: nissan
+  cached_brand: NISSAN
   short_name: Кентуки шт.
   long_name: 1
   quantity_ordered: 12
@@ -539,6 +556,7 @@ otto12:
 otto13:
   catalog_number: 392918-4322391
   brand: nissan
+  cached_brand: NISSAN
   short_name: Оттава
   long_name: 1
   quantity_ordered: 1
@@ -562,6 +580,7 @@ otto13:
 otto14:
   catalog_number: 392918-4322391
   brand: mitsubishi
+  cached_brand: MITSUBISHI
   short_name: Оттава
   long_name: 1
   quantity_ordered: 1
@@ -585,6 +604,7 @@ otto14:
 otto15:
   catalog_number: 392918-4322391
   brand: ty
+  cached_brand: TY
   short_name: Оттава
   long_name: 1
   quantity_ordered: 1
@@ -608,6 +628,7 @@ otto15:
 otto16:
   catalog_number: 392918-4322391
   brand: kia
+  cached_brand: KIA
   short_name: Оттава
   long_name: 1
   quantity_ordered: 1
@@ -631,6 +652,7 @@ otto16:
 otto17:
   catalog_number: 392918-4322391
   brand: kia
+  cached_brand: KIA
   short_name: Оттава
   long_name: 1
   quantity_ordered: 1
@@ -654,6 +676,7 @@ otto17:
 otto18:
   catalog_number: 392918-4322391
   brand: nissan
+  cached_brand: NISSAN
   short_name: Оттава
   long_name: 1
   quantity_ordered: 1
@@ -677,6 +700,7 @@ otto18:
 otto19:
   catalog_number: 392918-4322391
   brand: nissan
+  cached_brand: NISSAN
   short_name: Оттава
   long_name: 1
   quantity_ordered: 1
@@ -700,6 +724,7 @@ otto19:
 otto20:
   catalog_number: 398394-32921
   brand: nissan
+  cached_brand: NISSAN
   short_name: Либрусек
   long_name: adsfl;kj
   quantity_ordered: 1
@@ -724,6 +749,7 @@ otto20:
 otto21:
   catalog_number: 398394-32921
   brand: kia
+  cached_brand: KIA
   short_name: Либрусек
   long_name: adsfl;kj
   quantity_ordered: 1
@@ -748,6 +774,7 @@ otto21:
 otto22:
   catalog_number: 398394-32921
   brand: kia
+  cached_brand: KIA
   short_name: Либрусек
   long_name: adsfl;kj
   quantity_ordered: 1
@@ -771,6 +798,7 @@ otto22:
 otto23:
   catalog_number: 398394-32921
   brand: nissan
+  cached_brand: NISSAN
   short_name: Либрусек
   long_name: adsfl;kj
   quantity_ordered: 1
@@ -795,6 +823,7 @@ otto23:
 otto24:
   catalog_number: 398394-32921
   brand: mitsubishi
+  cached_brand: MITSUBISHI
   short_name: Либрусек
   long_name: adsfl;kj
   quantity_ordered: 1
@@ -818,6 +847,7 @@ otto24:
 otto25:
   catalog_number: 398394-32921
   brand: nissan
+  cached_brand: NISSAN
   short_name: Либрусек
   long_name: adsfl;kj
   quantity_ordered: 1
@@ -842,6 +872,7 @@ otto25:
 otto26:
   catalog_number: 93123123
   brand: ty
+  cached_brand: TY
   short_name: Деталька
   long_name: Проверка
   quantity_ordered: 5
@@ -865,6 +896,7 @@ otto26:
 otto27:
   catalog_number: 982342132
   brand: kia
+  cached_brand: KIA
   short_name: aga
   long_name: Проверочка
   quantity_ordered: 3

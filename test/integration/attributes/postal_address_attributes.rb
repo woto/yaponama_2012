@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module PostalAddressAttributes
   def postal_address_attributes
     {

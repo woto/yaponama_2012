@@ -85,13 +85,13 @@
                 </span>
 
                 <% if current_user.role == 'guest' %>
-                  <% css_style = "display: none;" %>
+                  <% css_class = ' collapse' %>
                 <% else %>
-                  <% css_style = "display: table;" %>
+                  <% css_class = ' in' %>
                 <% end %>
 
-                <div class="table-responsive">
-                  <table style="<%= css_style %>" class="table table-hover" rel="offers">
+                <div class="table-responsive<%= css_class %>" rel="offers">
+                  <table class="table table-hover">
 
                     <thead>
                       <tr>

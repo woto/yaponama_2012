@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module ChangedUserProfileAttributes
 
   def changed_user_profile_attributes 

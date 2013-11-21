@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module RegistersAttributes
 
   def empty_fields_with_phone

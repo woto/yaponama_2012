@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module ProfilesAttributes
 
   def avtorif_new_profile(somebody_id)

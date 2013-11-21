@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#
 require 'test_helper'
 require 'integration/attributes/user_profile_attributes'
 require 'integration/attributes/changed_user_profile_attributes'

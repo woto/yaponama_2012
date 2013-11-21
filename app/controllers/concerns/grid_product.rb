@@ -9,6 +9,7 @@ module GridProduct
     private
 
     def redirect_to_relative_path status, order = nil
+      # TODO должно редиректиться на заказ
       redirect_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => status, :order_id => (@order && @order.id || params[:order_id]), :user_id => params[:user_id])
     end
 
@@ -71,7 +72,7 @@ module GridProduct
       if params[:status].blank? || ['all', 'active'].include?(params[:status])
         columns_hash['status'] = {
           :type => :set,
-          :set => Hash[*Rails.configuration.products_status.select{|k, v| v['real'] == true}.map{|k, v| [v['title'], k]}.flatten],
+          :set => Hash[*Rails.configuration.products_status.select{|k, v| v['real'] == true}.map{|k, v| [v['full_title'], k]}.flatten],
         }
       end
 
@@ -98,7 +99,7 @@ module GridProduct
 
       if admin_zone?
         unless params[:order_id]
-          columns_hash['order_id'] = {
+          columns_hash['cached_order'] = {
             :type => :belongs_to,
             :belongs_to => Order,
           }

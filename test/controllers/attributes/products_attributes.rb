@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module ProductsAttributes
 
   def post_supplier_account_transaction_check user_id, id

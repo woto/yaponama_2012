@@ -1,12 +1,7 @@
 @import 'bootstrap';
 @import 'font-awesome';
-
-/////////////////////
-
-body {
-  font-size: 14px;
-  padding-top: 70px;
-}
+//@import 'bootswatch/flatly/variables';
+//@import 'bootswatch/flatly/bootswatch';
 
 /////////////////////
 
@@ -29,9 +24,9 @@ body {
 /////////////////////
 
 .dashed {
-  color: #005580;
-  border-bottom: dashed #005580 1px;
-  cursor: pointer
+  border-bottom: dashed @text-muted 1px;
+  cursor: pointer;
+  color: @text-color !important;
 }
 
 .dashed:hover {
@@ -111,8 +106,8 @@ body {
 }
 
 #auth-buttons img {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
 }
 
 #auth-buttons li {
@@ -165,7 +160,9 @@ body {
 // Конкретный элемент profileable - конкретный адрес, профиль и т.д.
 .profileable-item {
   position: relative;
-  .text-warning;
+  .text-muted;
+  margin-bottom: 10px;
+  word-wrap: break-word;
 }
 
 // Категория - заголовок
@@ -273,44 +270,56 @@ label.required:after {
   color: black !important;
 }
 
-.label-checked, .badge-checked {
-  background-color: white !important;
-  color: black !important;
-}
-
 .label-incart, .badge-incart {
-  background-color: #999999 !important;
+  background-color:  #A2A5B4!important;
+  color: white !important;
 }
 
 .label-inorder, .badge-inorder {
-  background-color: #468847 !important;
+  background-color: #FFDD03 !important;
+  color: white !important;
 }
 
 .label-ordered, .badge-ordered {
-  background-color: #B94A48 !important;
+  background-color: #069CD3 !important;
+  color: white !important;
 }
 
 .label-pre_supplier, .badge-pre_supplier {
-  background-color: #3A87AD !important;
+  background-color: #92007B !important;
+  color: white !important;
 }
 
 .label-post_supplier, .badge-post_supplier {
-  background-color: #F89406 !important;
+  background-color: #0A6F20 !important;
+  color: white !important;
 }
 
 .label-stock, .badge-stock{
-  background-color: #333 !important;
+  background-color: #8CCE3A !important;
+  color: white !important;
 }
 
-
 .label-complete, .badge-complete{
-  background-color: white !important;
-  color: black !important;
+  background-color: #FF7F00 !important;
+  color: white !important;
 }
 
 .label-cancel, .badge-cancel {
-  background-color: white !important;
-  color: black !important;
+  background-color: #CD0506 !important;
+  color: white !important;
+}
+
+/////////////////////
+
+.label-open, .badge-open {
+  background-color: #072889 !important;
+  color: white !important;
+}
+
+.label-close, .badge-close {
+  background-color: #7F0000 !important;
+  color: white !important;
 }
 
 /////////////////////
@@ -318,9 +327,10 @@ label.required:after {
 .page-header {
   margin-top: 10px;
   margin-bottom: 10px;
+  border-bottom: none;
   h1 {
     margin-top: 0;
-    font-size: 26px;
+    font-size: 24px;
   }
 }
 
@@ -344,14 +354,21 @@ label.required:after {
 /////////////////////
 .stars {
   white-space: nowrap;
-  //color: @state-info-text;
+  color: @text-muted;
 }
 
 /////////////////////
 
-div.part-title {
-  padding-top: 70px;
-  margin-top: -45px;
+.pagination {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
-/////////////////////
+#loading {
+  display: none;
+  position: absolute;
+  background: #FFF;
+  border: 1px solid #999;
+  padding: 50px;
+  z-index: 500
+}

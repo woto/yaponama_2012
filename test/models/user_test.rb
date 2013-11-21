@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#
 class UserTest < ActiveSupport::TestCase
 
   test 'Если у пользователя заполняется первый профиль, то он должен стать главным' do

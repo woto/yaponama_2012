@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 module UserProfileAttributes
 
   def user_profile_attributes 

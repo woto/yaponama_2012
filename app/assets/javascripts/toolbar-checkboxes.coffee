@@ -26,7 +26,7 @@ update = ->
       value: ''
   }).appendTo(items)
 
-  form.trigger("submit.rails")  
+  form.trigger("submit.rails")
 
 #$(document).on 'page:restore', -> 
 #  alert('page:restore')

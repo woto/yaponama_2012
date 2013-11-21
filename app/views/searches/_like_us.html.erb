@@ -4,7 +4,7 @@
 </script>
 <!-- /Google + -->
 
-<div id="loading" style="display: none; position: absolute; background: #FFF; border: 1px solid #999; padding: 50px; z-index: 500">
+<div id="loading">
   <div style="margin: 0 auto; text-align: center">
     <p style="text-align: center">Пожалуйста ожидайте, идет поиск по базе</p>
 
@@ -22,13 +22,3 @@
   </div>
 
 </div>
-
-<%= row do %>
-  <div class="col-md-12">
-    <div id="search-area-parent">
-      <div id="search-area">
-        <%= render :partial => "searches/index" %>
-      </div>
-    </div>
-  </div>
-<% end %>

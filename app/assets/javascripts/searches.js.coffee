@@ -7,14 +7,15 @@ Application.toTop = ->
 
 Application.showLoading = ->
   Application.toTop();
-  #$("#loading").css "top", (parseInt(($(window).height() - $("#loading").innerHeight() - $(window).height()/2 )/2, 10)) + "px"
-  #$("#loading").css "left", parseInt(($(window).width() - $("#loading").innerWidth())/2, 10) + "px"
+  # TODO Потом разберусь с позиционированием, сейчас вполне устраивает в левом верхнему углу
+  #$("#loading").css "top", (parseInt(($(window).height() - $("#loading").innerHeight() - parseInt($(window).height()/2, 10) )/2, 10)) + "px"
+  #$("#loading").css "left", parseInt(($(window).width() - $("#loading").innerWidth() - parseInt($(window).width()/2, 10))/2, 10) + "px"
   $("#loading").show()
-  $("#search-area-parent").animate({ opacity: 0 })
+  $("#main").animate({ opacity: 0 })
 
 Application.hideLoading = ->
   $("#loading").hide()
-  $("#search-area-parent").animate({ opacity: 100 })
+  $("#main").animate({ opacity: 100 })
 
 $(document).on "click", ".ajax-search", ->
   Application.showLoading()

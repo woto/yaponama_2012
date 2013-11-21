@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#
 require 'test_helper'
 require 'controllers/attributes/profiles_attributes'
 
