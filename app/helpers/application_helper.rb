@@ -61,7 +61,7 @@ module ApplicationHelper
     if brand.image.present?
       image = asset_path(brand.image.url.to_s)
     else
-      image = asset_path('no_brand.jpg')
+      image = asset_path('no_brand.png')
     end
 
     link_to(title, "/#{CGI.escape(brand.name)}", :style => "background: url(#{image}) no-repeat scroll center center", :class => "brands-#{brand.name}")
@@ -104,6 +104,7 @@ module ApplicationHelper
 
       content_tag(:div, :class => css_class) do
 
+        render('searches/like_us') +
         content_tag(:div, :id => 'main', &block)
       
       end
@@ -111,10 +112,29 @@ module ApplicationHelper
       res << 
 
       if (admin_zone? || current_user.role != 'guest') && @somebody
+
         content_tag(:div, :class => 'col-md-2 col-md-pull-10') do
 
           content_tag(:ul, :class => 'nav nav-pills nav-stacked') do
-            [ 
+            aaa = _build_dropdowns('product', 'products', Rails.configuration.products_status, Rails.configuration.products_menu, @somebody)
+
+            if admin_zone?
+              aaa += 
+              [{ :title => '',
+                :catch => [],
+                :link => '',
+                :class => 'divider',
+                :dropdown => []
+              },
+              { :title => "&nbsp;&nbsp;".html_safe << icon('plus') << '&nbsp;&nbsp;Добавить'.html_safe,
+                :catch => [],
+                :link => new_admin_user_product_path(@somebody, :return_path => request.fullpath, :skip => true),
+                :class => '',
+                :dropdown => []
+              }]
+            end
+
+            links = [ 
               { :title => 'Главная',
                 :catch => [ {:action => 'show' }, { action: :edit  }, { controller: 'passwords', action: 'edit', :id => @somebody.id } ], 
                 :link => polymorphic_path([(admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user)]),
@@ -122,18 +142,18 @@ module ApplicationHelper
                 :dropdown => []
               },
 
-              { :title => 'Заказы',
+              { :title => params[:controller] == 'orders' ? "Заказы&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.orders_status[params[:status]].try(:[], 'title')} </span>".html_safe : "Заказы",
                 :catch => [ { :controller => 'orders' } ], 
                 :link => '#',
                 :class => 'dropdown',
-                :dropdown => _build_dropdowns('order')
+                :dropdown => _build_dropdowns('order', 'orders', Rails.configuration.orders_status, Rails.configuration.orders_menu, @somebody)
               },
 
-              { :title => "Товары&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.products_status[params[:status]].try(:[], 'title')} </span>".html_safe,
+              { :title => params[:controller] == 'products' ? "Товары&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.products_status[params[:status]].try(:[], 'title')} </span>".html_safe : "Товары",
                 :catch => [ { :controller => 'products' } ],
                 :link => '#',
                 :class => 'dropdown',
-                :dropdown => _build_dropdowns('product')
+                :dropdown => aaa
               },
 
               { :title => 'История',
@@ -143,42 +163,18 @@ module ApplicationHelper
                 :dropdown => []
               },
 
-            ].collect do |item|
+            ]
 
-              #begin
-                link = url_for(item[:link])
-              #rescue ActionController::UrlGenerationError
-              #end
+            links.collect do |item|
 
-              if item[:dropdown].blank? 
-                content_tag :li, link_to(item[:title], link), :class => highlight_active(item[:catch])
-              else
-                content_tag :li, :class => "#{highlight_active(item[:catch])} #{item[:class]}" do
-                  [ 
-                    ( link_to(item[:title], link, "data-toggle" => item[:class]).to_s ), 
+              render_menu(item)
 
-                    ( content_tag :ul, :class => 'dropdown-menu' do |ul|
-                      item[:dropdown].collect do |dropdown|
-
-                          #begin
-                            link = url_for(dropdown[:link])
-                          #rescue ActionController::UrlGenerationError
-                          #end
-                          content_tag :li, :class => highlight_active(dropdown[:catch]) do
-                            link_to(dropdown[:title], link)
-
-                        end
-                      end.join.html_safe
-                    end.to_s ) 
-                  ].join.html_safe
-                end
-              end
             end.join.html_safe
           end +
           "<hr>".html_safe +
           (render 'profileables/right')
         end
-      else
+      elsif !admin_zone?
         content_tag(:div, :class => 'col-md-2 col-md-pull-10') do
           render 'application/right'
         end
@@ -186,6 +182,26 @@ module ApplicationHelper
 
     end].join.html_safe
 
+  end
+
+  def render_menu item
+    link = url_for(item[:link])
+
+    if item[:dropdown].blank?
+      content_tag :li, link.present? ? link_to(item[:title], link) : '', :class => "#{highlight_active(item[:catch])} #{item[:class]}"
+    else
+      content_tag :li, :class => "#{highlight_active(item[:catch])} #{item[:class]}" do
+        [
+          ( link_to(item[:title], link, "data-toggle" => item[:class]).to_s ),
+
+          ( content_tag :ul, :class => 'dropdown-menu' do |ul|
+            item[:dropdown].collect do |dropdown|
+              render_menu dropdown if dropdown
+            end.join.html_safe
+          end.to_s )
+        ].join.html_safe
+      end
+    end
   end
 
   def car_identity(request)
@@ -291,29 +307,28 @@ module ApplicationHelper
   #  end
   #end
   
-  def _build_dropdowns(singular)
-
-    plural = singular.pluralize
+  def _build_dropdowns(singular, plural, statuses, menu, somebody)
 
     dropdowns = []
 
-    tmp = eval("Rails.configuration.#{plural}_status")
+    menu.each do |k, v|
 
-    tmp.each do |k, v|
       title = ''
-      if v['badge'].present?
-        title << content_tag(:span, v['badge'], :class => "badge badge-#{k}")
+      if statuses[k]['badge'].present?
+        title << content_tag(:span, statuses[k]['badge'].html_safe, :class => "badge badge-#{k}")
         title << ' '
+      else
+        title << '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
       end
-      title  << v['title']
+      title  << statuses[k]['title']
 
       dropdowns <<
       {
        :title => title.html_safe,
-       :catch => [ { :controller => plural, :action => 'index', :status => k.to_sym, :order_id => nil } ],
-       :link => smart_route({:prefix => [:status], :postfix => [plural]}, :status => k.to_sym, :user_id => @somebody),
-       :class => '',
-       :dropdown => []
+       :catch => [],
+       :link => smart_route({:prefix => [:status], :postfix => [plural]}, :status => k.to_sym, :user_id => somebody),
+       :class => v.any? ? 'dropdown-submenu' : '',
+       :dropdown => v.any? ? _build_dropdowns(singular, plural, statuses, v, somebody) : []
       }
     end
 
