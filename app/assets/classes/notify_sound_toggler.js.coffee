@@ -13,11 +13,11 @@ class NotifySoundToggler
     status = @get_status()
 
     if status
-      icon.removeClass('icon-volume-off')
-      icon.addClass('icon-volume-up')
+      icon.removeClass('fa fa-volume-off')
+      icon.addClass('fa fa-volume-up')
     else
-      icon.removeClass('icon-volume-up')
-      icon.addClass('icon-volume-off')
+      icon.removeClass('fa fa-volume-up')
+      icon.addClass('fa fa-volume-off')
 
   @init: ->
 

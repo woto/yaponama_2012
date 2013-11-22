@@ -26,7 +26,7 @@ class NotifyWindow
 
   @close_button_template = '
     <button id="hide-notify" class="btn btn-unstyled ignoredirty">
-      <i class="icon icon-remove-sign" style="width: 20px"></i>
+      <i class="fa fa-times" style="width: 20px"></i>
     </button>
   '
 
