@@ -6,9 +6,9 @@ module Selectable
   included do
 
     def self.selected(item_ids)
-      if item_ids.any?
-        ids = item_ids.select { |key, value| value == '1'}.keys
-        where('id IN (?)', ids).limit(1000).offset(0)
+      ids = item_ids && item_ids.select { |key, value| value == '1'}.keys
+      if ids.any?
+        where("#{self.name.tableize}.id IN (?)", ids).limit(1000).offset(0)
       else
         none
       end
