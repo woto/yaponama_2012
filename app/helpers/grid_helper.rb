@@ -113,38 +113,88 @@ module GridHelper
           Rails.configuration.company_ownerships[val]
         when *['hide_catalog_number', 'use_auto_russian_time_zone', 'logout_from_other_places', 'sound', 'online', 'phantom', 'confirmed', 'mobile', 'stand_alone_house']
           if val == true
-            "Да"
+            if admin_zone?
+              link_to_fast_edit "Да", item, column_name
+            else
+              'Да'
+            end
           elsif val == false
-            "Нет"
+            if admin_zone?
+              link_to_fast_edit "Нет", item, column_name
+            else
+              'Нет'
+            end
           else 
             raise "true/false тип boolean не выставлен #{@resource_class}. #{column_name}"
           end
         when *['catalog_number']
           if item.class == Product
+            res = "".html_safe
             if item.hide_catalog_number
-              res = "".html_safe
               if admin_zone?
                 res << h(val)
               end
-              res << " " << icon('asterisk text-muted')
+              res << " " << content_tag(:sup, icon('asterisk text-muted', :title => 'Каталожный номер скрыт', :rel => 'tooltip'))
             else
-              val
+              res << val
             end
+
+            if admin_zone?
+              link_to_fast_edit res, item, column_name
+            else
+              res
+            end
+
           end
         when *['probability', 'discount', 'prepayment']
-          if val.present?
-            "#{val}%"
+          if admin_zone?
+            if val.present?
+              link_to_fast_edit("#{val}%", item, column_name)
+            else
+              link_to_fast_edit("", item, column_name)
+            end
+          else
+            if val.present?
+              "#{val}%"
+            else
+              ''
+            end
           end
-        when *['quantity_ordered', 'quantity_available']
-          if val.present?
-            "#{val} шт."
+        when *['quantity_available']
+          if admin_zone?
+            link_to_fast_edit(plain_quantity(val), item, column_name)
+          else
+            plain_quantity(val)
+          end
+        when *['quantity_ordered']
+          if val.present? && ( ['incart', 'inorder'].include?(item.status) || admin_zone? )
+            link_to_fast_edit("#{val} шт.", item, column_name)
+          else
+            plain_quantity(val)
           end
         when *['min_days', 'max_days']
-          if val.present?
-            "#{val} дн."
+          if admin_zone?
+            if val.present?
+              link_to_fast_edit "#{val} дн.", item, column_name
+            else
+              link_to_fast_edit "", item, column_name
+            end
+          else
+            if val.present?
+              "#{val} дн."
+            else
+              ''
+            end
           end
-        when *['sell_cost', 'buy_cost', 'debit', 'credit', 'cached_debit', 'cached_credit']
-          number_to_currency(val)
+        when *['debit', 'credit', 'cached_debit', 'cached_credit']
+          number_to_currency(val, precision: 0)
+        when *['sell_cost', 'buy_cost']
+          val = number_to_currency(val, precision: 0)
+          if admin_zone?
+            link_to_fast_edit(val, item, column_name)
+          else
+            val
+          end
         when *['cached_russian_time_zone_auto_id', 'russian_time_zone_manual_id']
           Rails.configuration.russian_time_zones[val.to_s]
         when 'order_rule'
@@ -194,7 +244,7 @@ module GridHelper
 
       end
 
-    end
+    #end
 
   end
 
@@ -253,6 +303,18 @@ module GridHelper
   def refactor_mmm(arr)
     content_tag(:ul, :class => "list-unstyled") do
       arr.collect{ |item| content_tag(:li, h(item)) }.join.html_safe
+    end
+  end
+
+  def plain_quantity(val)
+    if val.present?
+      "#{val} шт."
+    end
+  end
+
+  def link_to_fast_edit content, item, column_name
+    link_to polymorphic_path([:fast_edit, (admin_zone? ? :admin : :user), item], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status], :column => column_name  ), remote: true, class: "dashed" do
+      content.presence || icon('plus-square-o')
     end
   end
 
