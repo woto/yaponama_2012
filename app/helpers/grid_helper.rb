@@ -8,9 +8,6 @@ module GridHelper
         content_tag :ul, class: 'list-unstyled' do
           available_columns.reject do |attribute| 
             visible_columns.include? attribute
-          end.select do |attribute| 
-            item[attribute].present?
-            #true
           end.map do |k, v| 
             content_tag :li do 
               concat(content_tag(:strong) do
