@@ -20,20 +20,6 @@ Capybara.server do |app, port|
   end.run.join
 end
 
-bayeux = Faye::RackAdapter.new(
-  Rails.application,
-  :mount => '/faye',
-  :timeout => 25,
-  :engine  => {
-    :type  => Faye::Redis,
-    :host  => SiteConfig.redis_address,
-    :port  => SiteConfig.redis_port
-  }
-)
-
-Capybara.app = bayeux
-
-
 Capybara.server_port = 3000
 Capybara.server_host = 'localhost'
 #Capybara.default_driver = :selenium
