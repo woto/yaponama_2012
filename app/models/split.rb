@@ -26,9 +26,10 @@ class Split
         p1.quantity_ordered = quantity
         p2.quantity_ordered = product.quantity_ordered - quantity
 
+        product.destroy!
+
         p1.save!
         p2.save!
-        product.destroy!
       end
     end
   end
