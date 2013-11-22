@@ -69,16 +69,20 @@
 //= require 'tests'
 //= require 'jquery.editableHighlight'
 //
-//Started GET "/assets/talks/_resident.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
-//Started GET "/assets/talks/_talk.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
-//Started GET "/assets/letters.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
-//Started GET "/assets/scroller.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
-//Started GET "/assets/legal.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
-//Started GET "/assets/realtime.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
-//Started GET "/assets/notify_sound.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
-//Started GET "/assets/notify_window.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
-//Started GET "/assets/notify_sound_toggler.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
-//Started GET "/assets/talk.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
-//Started GET "/assets/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" for 192.168.2.9 at 2013-09-11 20:44:20 +0400
+//= require 'jquery-cookie/jquery.cookie'
+//= require 'sockjs-client/sockjs'
+//= require 'nanoScrollerJS/coffeescripts/jquery.nanoscroller'
 //
+//
+//= require handlebars
+//= require talks/_resident
+//= require talks/_talk
+//= letters
+//= legal
+//= require scroller
+//= require realtime
+//= require talk.js
+//= require notify_sound
+//= require notify_window
+//= require notify_sound_toggler
 //= require faye
