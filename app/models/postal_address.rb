@@ -24,7 +24,7 @@ class PostalAddress < ActiveRecord::Base
     res << street
     res << house
     res << room
-    res.join(', ')
+    res.reject(&:blank?).join(', ')
   end
 
   include RenameMeConcern
