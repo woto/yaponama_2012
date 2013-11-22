@@ -222,8 +222,6 @@ class ApplicationController < ActionController::Base
   end
 
 
-private
-
   def set_user_time_zone
 
     tz = case current_user.use_auto_russian_time_zone
@@ -244,8 +242,6 @@ private
     }
 
   end
-
-  private
 
   def only_not_authenticated
     if ["admin", "manager", "user"].include? current_user.role

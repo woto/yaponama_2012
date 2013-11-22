@@ -3,6 +3,7 @@
 module AbstractGridable
   extend ActiveSupport::Concern
   include GridCommonColumns
+  include FastEditable
 
   included do
     before_action :set_grid_class
