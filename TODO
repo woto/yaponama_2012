@@ -110,3 +110,51 @@ product_fields
 <li> 
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")), smart_route({:postfix => [:products, :multiple_destroy_index]}, :user_id => params[:user_id], :order_id => params[:order_id], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status]), :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }  %>
 </li>
+
+
+=============
+
+Вырезал из application.html.slim
+
+/= javascript_include_tag "/assets/JsSIP/dist/jssip-0.3.4.js"
+
+...
+
+  /coffee:
+    $ ->
+      configuration =
+        ws_servers: "ws://192.168.2.5:8088/ws"
+        uri: "sip:1060@doubango.org"
+        password: "1060"
+        stun_servers: 'stun:74.125.132.127:19302'
+        register: true
+        trace_sip: true
+
+      coolPhone = new JsSIP.UA(configuration)
+      coolPhone.start()
+
+      # Make an audio/video call:
+
+      # Register callbacks to desired call events
+      eventHandlers =
+        progress: (e) ->
+          console.log "call is in progress"
+
+        failed: (e) ->
+          console.log "call failed with cause: " + e.data.cause
+
+        ended: (e) ->
+          console.log "call ended with cause: " + e.data.cause
+
+        started: (e) ->
+          rtcSession = e.sender
+          console.log "call started"
+          
+      options =
+        eventHandlers: eventHandlers
+        mediaConstraints:
+          audio: true
+          video: false
+
+      # coolPhone.call "1061", options
+

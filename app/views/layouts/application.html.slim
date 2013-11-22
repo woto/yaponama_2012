@@ -1,46 +1,6 @@
 = render :partial => "layouts/shared/head"
 
-/= javascript_include_tag "/assets/JsSIP/dist/jssip-0.3.4.js"
-
 body
-
-  /coffee:
-    $ ->
-      configuration =
-        ws_servers: "ws://192.168.2.5:8088/ws"
-        uri: "sip:1060@doubango.org"
-        password: "1060"
-        stun_servers: 'stun:74.125.132.127:19302'
-        register: true
-        trace_sip: true
-
-      coolPhone = new JsSIP.UA(configuration)
-      coolPhone.start()
-
-      # Make an audio/video call:
-
-      # Register callbacks to desired call events
-      eventHandlers =
-        progress: (e) ->
-          console.log "call is in progress"
-
-        failed: (e) ->
-          console.log "call failed with cause: " + e.data.cause
-
-        ended: (e) ->
-          console.log "call ended with cause: " + e.data.cause
-
-        started: (e) ->
-          rtcSession = e.sender
-          console.log "call started"
-          
-      options =
-        eventHandlers: eventHandlers
-        mediaConstraints:
-          audio: true
-          video: false
-
-      # coolPhone.call "1061", options
 
   = render :partial => 'layouts/shared/body'
 
