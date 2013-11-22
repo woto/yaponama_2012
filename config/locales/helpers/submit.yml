@@ -3,6 +3,8 @@
 ru:
   helpers:
     submit:
+      product:
+        create: Добавить в корзину
       session:
         create: Войти
       password_reset:

@@ -80,3 +80,5 @@
 //Started GET "/assets/notify_sound_toggler.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
 //Started GET "/assets/talk.js?body=1" for 192.168.2.9 at 2013-09-11 20:44:19 +0400
 //Started GET "/assets/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" for 192.168.2.9 at 2013-09-11 20:44:20 +0400
+//
+//= require faye

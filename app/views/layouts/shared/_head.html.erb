@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
     <% if @meta_title.present? %>
-      <title><%= @meta_title %></title>
+      <title> <%= @meta_title %> <%= @meta_title_small %> </title>
     <% end %>
 
     <% if @meta_author.present? %>
@@ -31,6 +31,7 @@
 
     <%= csrf_meta_tags %>
 
+    <%= javascript_include_tag "/faye/client.js", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag "application", "data-turbolinks-track" => true, :media => "all" %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 

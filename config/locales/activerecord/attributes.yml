@@ -165,8 +165,8 @@ ru:
         comment: Комментарий к компании
       product:
         product_id: Родительский товар
-        quantity_ordered: Необходимо шт.
-        quantity_available: В наличии шт.
+        quantity_ordered: Необходимо
+        quantity_available: В наличии
         probability: Вероятность наличия
         short_name: Название
         long_name: Прочие названия
