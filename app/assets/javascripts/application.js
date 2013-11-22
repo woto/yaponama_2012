@@ -45,7 +45,7 @@
 //= require 'time_zone_checkbox'
 //= require 'vin_or_frame'
 //= require 'buy_button'
-//= require 'product_modal_form'
+//= require 'modal_form'
 //
 //
 //= require toolbar-checkboxes
