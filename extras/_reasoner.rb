@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 class Reasoner
 
   delegate :params, to: controller
