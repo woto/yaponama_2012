@@ -1,8 +1,12 @@
 # encoding: utf-8
-
+#
 require 'test_helper'
 
 class TimeTest < ActionDispatch::IntegrationTest
+
+  def setup
+    Capybara.reset!
+  end
 
   test 'Если у пользователя вообще пустой cached_russian_time_zone_auto_id (Например новый пользователь)' do
     get '/'

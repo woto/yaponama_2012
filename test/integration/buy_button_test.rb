@@ -5,6 +5,7 @@ require 'test_helper'
 class BuyButtonTest < ActionDispatch::IntegrationTest
 
   test 'Проверяем правильность заполнения полей при нажатии на кнопке Купить от buyer' do
+    Capybara.reset!
     visit '/user/products/new/?catalog_number=1111111111'
 
     common()
@@ -12,6 +13,7 @@ class BuyButtonTest < ActionDispatch::IntegrationTest
   end
 
   test 'Проверяем кнопку Купить от лица seller' do
+    Capybara.reset!
     auth('+7 (111) 111-11-11', '1111111111')
     otto = somebodies(:otto)
     visit "/admin/users/#{otto.id}/products/new?catalog_number=1111111111"

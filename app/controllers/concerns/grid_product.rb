@@ -100,8 +100,8 @@ module GridProduct
       if admin_zone?
         unless params[:order_id]
           columns_hash['cached_order'] = {
-            :type => :belongs_to,
-            :belongs_to => Order,
+            :type => :set,
+            :set => Order.all.map{|item| [item[:token], item[:token]]},
           }
         end
       end
@@ -128,7 +128,7 @@ module GridProduct
       end
 
       if params[:order_id]
-        @items = @items.where(:order_id => params[:order_id])
+        @items = @items.where(:cached_order => params[:order_id])
       end
 
       @items = @items.includes(:somebody)
@@ -154,7 +154,7 @@ module GridProduct
 
       if admin_zone?
         if ['inorder', 'ordered', 'pre_supplier', 'post_supplier', 'stock', 'complete'].include?(params[:status]) && params[:order_id].blank?
-          @grid.visible_order_id = '1'
+          @grid.visible_cached_order = '1'
         end
       end
 

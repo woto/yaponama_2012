@@ -1,10 +1,11 @@
 # encoding: utf-8
-
+#
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
 require 'capybara/poltergeist'
+require 'faye'
 
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, {
@@ -12,6 +13,26 @@ Capybara.register_driver :poltergeist do |app|
     #debug: true
   })
 end
+
+Capybara.server do |app, port|
+  Puma::Server.new(app).tap do |s|
+    s.add_tcp_listener '127.0.0.1', port
+  end.run.join
+end
+
+bayeux = Faye::RackAdapter.new(
+  Rails.application,
+  :mount => '/faye',
+  :timeout => 25,
+  :engine  => {
+    :type  => Faye::Redis,
+    :host  => SiteConfig.redis_address,
+    :port  => SiteConfig.redis_port
+  }
+)
+
+Capybara.app = bayeux
+
 
 Capybara.server_port = 3000
 Capybara.server_host = 'localhost'
@@ -72,6 +93,15 @@ class ActiveSupport::TestCase
 
 end
 
+class ActiveRecord::Base
+  mattr_accessor :shared_connection
+  @@shared_connection = nil
+
+  def self.connection
+    @@shared_connection || retrieve_connection
+  end
+end
+ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 
   #test "Параллельные" do
   #  session1 = Capybara::Session.new Capybara.current_driver, Capybara.app

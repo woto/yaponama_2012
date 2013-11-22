@@ -5,6 +5,8 @@ module GridConcern
 
   included do
 
+    skip_before_filter :find_resource, :only => [:columns, :filters]
+
     before_action :set_grid
 
     private
@@ -294,6 +296,8 @@ module GridConcern
                 when '0'
                   @items = @items.where('id NOT IN (?)', @grid.item_ids && keys)
                 end
+              else
+                @items = @items.none
               end
 
               mark_as_filter_enabled(column_name)

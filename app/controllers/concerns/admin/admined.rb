@@ -7,7 +7,7 @@ module Admin::Admined
   included do
 
     before_action :prepend_view_paths
-    before_action :only_authenticated
+    #before_action :only_authenticated
     #before_action :set_supplier
 
     layout 'admin'

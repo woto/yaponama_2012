@@ -1,9 +1,8 @@
 # encoding: utf-8
-
+#
 require 'test_helper'
 
 class CarsTest < ActionDispatch::IntegrationTest
-  fixtures :cars
 
   def setup
     Capybara.reset!

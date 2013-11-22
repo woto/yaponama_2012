@@ -8,6 +8,8 @@ class ConfirmsController < ApplicationController
   before_action :anonymous_contact, only: [:make]
   before_action :user_contact, only: [:view, :ask]
 
+  skip_before_action :find_resource, :only => [:view, :ask, :make]
+
   def ask
     _ask
     redirect_to url_for(action: 'view'), info: t("helpers.flash.confirm.#{params[:resource_class]}")

@@ -26,8 +26,14 @@ class Car < ActiveRecord::Base
   include ModificationAttributes
 
   def to_label
-    raise 'Где это используется?'
-    "#{vin} - #{frame} - #{car_number} - #{brand} - #{model} - #{generation} - #{modification} - #{god} - #{period} - #{dvigatel} - #{tip} - #{moschnost} - #{privod} - #{tip_kuzova} - #{kpp} - #{kod_kuzova} - #{kod_dvigatelya} - #{rinok} - #{komplektaciya} - #{dverey} - #{rul}"
+    res = []
+    res << vin
+    res << frame
+    res << cached_brand
+    res << cached_model
+    res << cached_generation
+    res << cached_modification
+    res.reject(&:blank?).join(', ')
   end
 
   include RenameMeConcern

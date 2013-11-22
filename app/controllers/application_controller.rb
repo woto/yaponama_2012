@@ -281,7 +281,10 @@ private
   before_action :somebody_set
   before_action :supplier_set
 
-  before_action :find_resource, only: [:show, :edit, :update, :destroy, :logout_from_all_places]
+  before_action :find_resource, except: [:new, :create, :index]
+
+  # Потом вынести в concern transactionable?
+  skip_before_action :find_resource, :only => [:transactions]
 
   def find_resource
     @resource = @resource_class.find(params[:id])
