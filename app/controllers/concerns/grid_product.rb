@@ -147,7 +147,7 @@ module GridProduct
       @grid.visible_catalog_number = '1'
 
 
-      unless @user
+      unless @somebody
         @grid.visible_somebody_id = "1"
       end
 

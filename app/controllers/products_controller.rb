@@ -2,7 +2,13 @@
 #
 class ProductsController < ApplicationController
 
+  include GridProduct
+
   include ProductsSearch
+
+  #ORDER_STEPS = %w[order delivery postal_address phone name notes]
+
+  skip_before_filter :set_grid, only: [:new, :create, :edit, :update, :show, :destroy]
 
   def new
     search params[:catalog_number], params[:manufacturer], params[:replacements]
@@ -22,12 +28,6 @@ class ProductsController < ApplicationController
       @somebody = @user = Product.find(params[:product_id]).somebody
     end
   end
-
-  include GridProduct
-
-  ORDER_STEPS = %w[order delivery postal_address phone name notes]
-
-  skip_before_filter :set_grid, :only => [:new, :create, :edit, :update, :show, :destroy]
 
   def destroy
     raise 'Нельзя'

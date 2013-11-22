@@ -13,7 +13,7 @@ $(document).on 'click', '.buy-button', (event) ->
   $("#product_buy_cost").val($(this).data('income-cost'))
   $("#product_short_name").val($(this).data('short-name'))
   $("#product_long_name").val($(this).data('long-name'))
-  $('#product_modal_form').modal('show')
+  $('#modal_form').modal('show')
   
   
   # TODO Доработаю позже когда буду разбираться с поставщиком
