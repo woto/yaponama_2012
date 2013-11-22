@@ -83,7 +83,7 @@ db.connect (err) ->
             auth_token = data.payload
 
             async.series [(callback) ->
-              db.query "SELECT id FROM users WHERE auth_token=$1", [auth_token], (err, res) ->
+              db.query "SELECT id FROM somebodies WHERE auth_token=$1", [auth_token], (err, res) ->
                 # Получаем user_id из auth_token'a и сохраняем
                 user_id = res.rows[0].id.toString()
                 callback null
@@ -98,10 +98,10 @@ db.connect (err) ->
                   callback null
                 else
                   # Иначе делаем этот user_id online
-                  db.query "UPDATE users SET online = true where id=$1", [user_id]
+                  db.query "UPDATE somebodies SET online = true where id=$1", [user_id]
 
                   # Получаем роль клиента
-                  db.query "SELECT * from users where id=$1", [user_id], (err, res) ->
+                  db.query "SELECT * from somebodies where id=$1", [user_id], (err, res) ->
 
                     cached_main_profile = JSON.parse(res.rows[0].cached_main_profile)
                     debugger
@@ -200,7 +200,7 @@ db.connect (err) ->
 
             delete users[user_id]
 
-            db.query "UPDATE users SET online = false where id=$1", [user_id]
+            db.query "UPDATE somebodies SET online = false where id=$1", [user_id]
 
             #else
 
