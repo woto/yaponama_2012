@@ -408,8 +408,9 @@ module ApplicationHelper
     end
   end
 
-  def panel type, &block
-    content_tag :div, class: "panel panel-#{type}" do
+  def panel type, options={}, &block
+    options[:class] = ["panel panel-#{type}", options[:class] ].compact
+    content_tag :div, options do
       yield Panel.new(self)
     end
   end
@@ -427,7 +428,8 @@ module ApplicationHelper
     # Добавить сюда aria-labelledby: "auth-label"
     # А у строки - заголовка - h3, расположенного внутри modal-header id="auth-label" (На данный момент в 3-м bootstrap'e не нашел)
     options[:class] = [ 'modal', options[:class] ].compact
-    options[:tabindex] = "-1"
+    # К сожалению если раскомментировать, то select2 перестанет работать
+    #options[:tabindex] = "-1"
     options[:role] = "dialog"
     options["aria-hidden"] = "true"
     content_tag :div, options do
@@ -467,6 +469,14 @@ module ApplicationHelper
   def jaba2
     @resource_class.name.pluralize.underscore.gsub('/', '_').to_sym
   end
+
+  def jaba3
+    [
+      (admin_zone? ? :admin : :user),
+      (admin_zone? ? @somebody : nil)
+    ]
+  end
+
 
   ['index', 'new', 'edit', 'show'].each do |method_name|
     define_method "title_#{method_name}" do
