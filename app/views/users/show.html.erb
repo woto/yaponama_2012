@@ -1,6 +1,7 @@
-<% @meta_title = 'Главная' %>
-
 <%= somebody_tabs do %>
+
+  <% @meta_title = 'Личный кабинет' %>
+  <%= page_header %>
 
   <ul class="list-unstyled">
     <li><h4><%= link_to 'Движение средств', transactions_user_accounts_path %>
