@@ -33,10 +33,24 @@ module GridHelper
 
       content_tag_for(:span, item, column_name, :class => column_name) do
         case column_name
-        when *['content', 'long_name']
-          truncate val, length: 80
+        # READ ONLY
+        when *['content', 'user_agent', 'accept_language', 'cached_location', 'cached_referrer', 'cached_title']
+          new_val = truncate(val, length: 20)
+          content_tag :span, (new_val != val ? {data: { title: val }, rel: 'tooltip'} : {} ) do
+            truncate val, length: 20
+          end
+        # EDITABLE
+        when *['name', 'title', 'short_name', 'long_name']
+          new_val = truncate(val, length: 20)
+          content_tag :span, (new_val != val ? {data: { title: val }, rel: 'tooltip'} : {} ) do
+            if admin_zone?
+              link_to_fast_edit(new_val, item, column_name)
+            else
+              new_val
+            end
+          end
         when 'id'
-          link_to item.id, '#', data: { html: true, :"poload" => polymorphic_path([:info, (admin_zone? ? :admin : :user), item], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status] ) }, class: "btn btn-default btn-xs ignoredirty", style: "min-width: 30px"
+          link_to item.id, '#', data: {html: true, title: 'Информация об элементе', placement: 'right', :"poload" => polymorphic_path([:info, (admin_zone? ? :admin : :user), item], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status] ) }, class: "btn btn-success btn-xs ignoredirty", style: "min-width: 30px"
         when 'checkbox'
         when 'cached_main_profile'
           res = []
@@ -58,6 +72,14 @@ module GridHelper
           rescue
           end
           refactor_mmm(res)
+        when *['notes']
+          link_to_fast_edit val, item, column_name
+        when *['notes_invisible', 'cached_brand']
+          if admin_zone?
+            link_to_fast_edit val, item, column_name
+          else
+            val
+          end
         when 'cached_names'
           res = []
           begin

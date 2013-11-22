@@ -1,4 +1,4 @@
-nav.navbar.navbar-fixed-top.navbar-inverse role="navigation"
+nav.navbar.navbar-static-top.navbar-inverse role="navigation"
 
   .container
 
@@ -23,27 +23,20 @@ nav.navbar.navbar-fixed-top.navbar-inverse role="navigation"
             = caret
           = dd.menu
             = dd.submenu
-              = link_to "Заказы", admin_orders_path
-              = dd.menu
-                li
-                  - Rails.configuration.orders_status.each do |k, v|
-                    = link_to url_for(:user_id => nil, :controller => '/admin/orders', :action => :index, :status => k) do
-                      - if v['badge'].present?
-                        span class="badge badge-#{k}" = v['badge']
-                      '
-                      = v["title"]
 
-            
-            li.dropdown-submenu
-              = link_to "Товары", admin_products_path
-              ul.dropdown-menu
-                - Rails.configuration.products_status.each do |k, v|
-                  li 
-                    = link_to url_for(:user_id => nil, :order_id => nil, :controller => '/admin/products', :action => :index, :status => k) do
-                      - if v['badge'].present?
-                        span class="badge badge-#{k}" = v['badge']
-                      '
-                      = v["title"]
+              = render_menu \
+                :title => "Заказы", \
+                :catch => [], \
+                :link => admin_orders_path, \
+                :class => 'dropdown-submenu', \
+                :dropdown => _build_dropdowns('order', 'orders', Rails.configuration.orders_status, Rails.configuration.orders_menu, nil)
+
+              = render_menu \
+                :title => "Товары", \
+                :catch => [], \
+                :link => admin_products_path, \
+                :class => 'dropdown-submenu', \
+                :dropdown => _build_dropdowns('product', 'products', Rails.configuration.products_status, Rails.configuration.products_menu, nil)
 
             li = link_to "Деньги", transactions_admin_accounts_path
 

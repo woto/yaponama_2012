@@ -4,6 +4,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :catalog_number
       t.belongs_to :brand
       t.string :cached_brand
+      t.string :cached_order
       #t.string :manufacturer
       t.string :short_name
       t.text :long_name

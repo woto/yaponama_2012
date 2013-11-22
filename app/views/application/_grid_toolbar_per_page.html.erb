@@ -2,8 +2,8 @@
 
   <div class="form-inline">
 
-    <%= content_tag :span,
-      class: "dashed",
+    <%= content_tag :div,
+      class: "btn btn-default",
       title: "Строк на странице",
       rel: "popover",
       data: {
@@ -12,7 +12,8 @@
         placement: "bottom",
         content: render('grid_toolbar_per_page_data_content').gsub("\"", "'")
       } do %>
-      по <%= @grid.per_page %> на страницу
+      <%= icon 'list-ol' %>
+      <%= @grid.per_page %>
     <% end %>
 
   </div>
