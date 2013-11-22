@@ -18,8 +18,8 @@ class ItemCollection < AbstractCollection
     case operation
     when *['incart']
       all_status_validation 'incart', 'inorder', 'ordered', 'pre_supplier'
-    when *['inorder']
-      all_status_validation 'incart'
+    when *['inorder', 'inorder_action']
+      all_status_validation 'incart', 'inorder', 'ordered', 'pre_supplier'
     when *['ordered']
       all_status_validation 'inorder'
     when *['pre_supplier']

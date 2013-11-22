@@ -68,6 +68,7 @@ class Product < ActiveRecord::Base
         when 'inorder'
           case new_status
             when 'incart'
+            when 'inorder'
             when 'cancel'
             when 'ordered'
               @transaction.account_transactions.create(:account => somebody.account, :credit => sell_cost * quantity_ordered)
@@ -83,6 +84,8 @@ class Product < ActiveRecord::Base
             when 'cancel'
               @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
             when 'pre_supplier'
+            when 'inorder'
+              @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
             else
               raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
             end
@@ -97,6 +100,8 @@ class Product < ActiveRecord::Base
           when 'post_supplier'
             @transaction.account_transactions.create(:account => supplier.account, :credit => (buy_cost * quantity_ordered))
           when 'incart'
+            @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
+          when 'inorder'
             @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
           else
             raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
