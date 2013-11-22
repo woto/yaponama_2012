@@ -5,7 +5,7 @@
     <% profile.phones.mobile.each do |phone| %>
       <% if !phone.confirmed? && phone.persisted? %>
         <div>
-          Подтвердите номер мобильного телефона 
+          Пожалуйста, подтвердите номер мобильного телефона 
           <%= alert_link_to phone.to_label, view_user_confirm_phone_path(phone), class: 'confirm-link confirm-phone' %>
         </div>
       <% end %>
@@ -14,7 +14,7 @@
     <% profile.emails.each do |email| %>
       <% if !email.confirmed? && email.persisted? %>
         <div>
-          Подтвердите e-mail адрес 
+          Пожалуйста, подтвердите e-mail адрес 
           <%= alert_link_to email.to_label, view_user_confirm_email_path(email), class: 'confirm-link confirm-email' %>
         </div>
       <% end %>
