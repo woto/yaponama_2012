@@ -13,7 +13,8 @@ class SearchFormTest < ActionDispatch::IntegrationTest
 
     click_button 'Искать'
 
-    path = '/user/products/new?utf8=%25E2%259C%2593&catalog_number=1&product_id=&return_path=%252F'
+    path = '/user/products/new?utf8=%E2%9C%93&catalog_number=1&product_id=&return_path=%2F'
+
 
     uri = URI.parse(current_url)
     assert_equal path, "#{uri.path}?#{uri.query}"
@@ -32,7 +33,7 @@ class SearchFormTest < ActionDispatch::IntegrationTest
     fill_in 'catalog_number', with: '1'
     click_button 'Искать'
 
-    path = '/admin/users/128399616/products/809317025/edit?utf8=%25E2%259C%2593&catalog_number=1&product_id=&return_path=%252Fadmin%252Fproducts%252Fstatus%252Fall%253F'
+    path = '/admin/users/128399616/products/809317025/edit?utf8=%E2%9C%93&catalog_number=1&product_id=&return_path=%2Fadmin%2Fproducts%2Fstatus%2Fall%3F'
 
     assert has_text?('Редактирование позиции 2391920-322312 (KIA)'), 'Должен отображаться alert с информацией о том, что производится редактирование'
     uri = URI.parse(current_url)
@@ -55,7 +56,7 @@ class SearchFormTest < ActionDispatch::IntegrationTest
     end
 
     uri = URI.parse(current_url)
-    assert_equal "/user/products/new?utf8=%25E2%259C%2593&catalog_number=2&product_id=#{product.id}&return_path=%252Fuser%252Fproducts%252Fstatus%252Fall%253Fprimary_key%253D44%2526sort_column%253Dcached_brand%2526sort_direction%253Dasc", "#{uri.path}?#{uri.query}"
+    assert_equal "/user/products/new?utf8=%E2%9C%93&catalog_number=2&product_id=#{product.id}&return_path=%2Fuser%2Fproducts%2Fstatus%2Fall%3Fprimary_key%3D44%26sort_column%3Dcached_brand%26sort_direction%3Dasc", "#{uri.path}?#{uri.query}"
   end
 
 end
