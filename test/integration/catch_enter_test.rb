@@ -29,6 +29,8 @@ class CatchEnterTest < ActionDispatch::IntegrationTest
   private 
 
   def common
+    assert has_css? '[rel="catch-enter"]'
+
     old_url = current_url
     js_code = <<-HERE 
       var e = jQuery.Event("keypress"); 
@@ -36,9 +38,9 @@ class CatchEnterTest < ActionDispatch::IntegrationTest
       e.keyCode = 13;
       $('[rel="catch-enter"]').trigger(e);
     HERE
-    execute_script js_code
 
-    sleep 2
+    page.execute_script js_code
+
     assert has_css? '#debug-catch-enter', visible: false, text: 'true'
 
     # TODO Оказывается посылая этот js Enter Почему-то в действительности не нажимается,
