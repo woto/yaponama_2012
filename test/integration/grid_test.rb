@@ -8,7 +8,7 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
     Capybara.reset!
 
     # Логинимся
-    auth('1231231231', '1231231231')
+    auth('+7 (123) 123-12-31', '1231231231')
 
     # Получаем список товаров в корзине
     visit '/user/products/status/incart'
@@ -43,7 +43,7 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
     Capybara.reset!
 
     # Логинимся
-    auth('1231231231', '1231231231')
+    auth('+7 (123) 123-12-31', '1231231231')
 
     visit '/user/products/status/incart'
 
@@ -73,7 +73,7 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
     Capybara.reset!
 
     # Логинимся
-    auth('1231231231', '1231231231')
+    auth('+7 (123) 123-12-31', '1231231231')
 
     # Получаем список товаров в корзине
     visit '/user/products/status/incart'
