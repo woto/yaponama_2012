@@ -180,7 +180,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
     visit '/user/companies/new'
 
     # Организационно правовая форма
-    find("#company_ownership_individual").trigger('click')
+    choose "company_ownership_individual"
 
     # Наименование организации 
     find("#company_name").set('Рога и копыта')
