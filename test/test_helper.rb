@@ -30,13 +30,18 @@ Capybara.default_wait_time = 20
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
+  include ShowMeTheCookies
 
   private
 
+  def fill_phone(id, login)
+    assert has_css?(id)
+    page.execute_script "$('" + id + "').val('#{login}')"
+  end
+
   def auth(login, password, remember_me=false)
     visit '/login/phone'
-    #assert page.has_css?('#login')
-    fill_in 'session[value]', with: login
+    fill_phone '#session_value', login
     fill_in 'session[password]', with: password
     check 'remember_me' if remember_me
     # debugger
