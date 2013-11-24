@@ -54,8 +54,8 @@ class CreateAdminSiteSettings < ActiveRecord::Migration
       t.string :site_port
       t.string :redis_address
       t.string :redis_port
-      t.string :socket_io_address
-      t.string :socket_io_port
+      t.string :realtime_address
+      t.string :realtime_port
       t.string :juggernaut_address
       t.string :juggernaut_port
       t.string :price_address

@@ -63,8 +63,8 @@ ru:
     site_port: Порт этого сайта
     redis_address: Адрес redis
     redis_port: Порт redis
-    socket_io_address: Адрес socket.io
-    socket_io_port: Порт socket.io
+    realtime_address: Адрес realtime
+    realtime_port: Порт realtime
     price_address: Адрес сервера прайсов
     price_port: Порт сервера прайсов
     juggernaut_address: Адрес Juggernaut

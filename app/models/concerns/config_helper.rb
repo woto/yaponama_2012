@@ -4,8 +4,8 @@ module ConfigHelper
 
   extend ActiveSupport::Concern
 
-  def socket_io_full_address
-    "#{socket_io_address}#{socket_io_port.present? ? ":" + socket_io_port : ''}"
+  def realtime_full_address
+    "#{realtime_address}#{realtime_port.present? ? ":" + realtime_port : ''}"
   end
 
   def juggernaut_full_address

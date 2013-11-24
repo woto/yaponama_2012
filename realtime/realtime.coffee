@@ -35,7 +35,7 @@ db.connect (err) ->
     config = result.rows[0]
 
     debugger
-    server.listen parseInt(config['socket_io_port'], 10), config['socket_io_address']
+    server.listen parseInt(config['realtime_port'], 10), config['realtime_address']
     sub = rs.createClient(config['redis_port'], config['reds_host'])
 
     sjs_talk.on "connection", (conn) ->

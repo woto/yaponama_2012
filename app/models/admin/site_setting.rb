@@ -27,8 +27,8 @@ class Admin::SiteSetting < ActiveRecord::Base
   validates :site_port, :presence => true
   validates :redis_address, :presence => true
   validates :redis_port, :presence => true
-  validates :socket_io_address, :presence => true
-  validates :socket_io_port, :presence => true
+  validates :realtime_address, :presence => true
+  validates :realtime_port, :presence => true
   validates :price_address, :presence => true
   validates :price_port, :presence => true
   validates :juggernaut_address, :presence => true
