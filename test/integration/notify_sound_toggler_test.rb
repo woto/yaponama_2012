@@ -9,10 +9,10 @@ class NotifySoundTogglerTest < ActionDispatch::IntegrationTest
     id = somebodies(:first_user).id
 
     Capybara.reset!
-    auth('1231231231', '1231231231')
+    auth('+7 (123) 123-12-31', '1231231231')
 
     # Щелкаем на кнопке службы поддержки
-    find('#talk-button-show').click
+    find('#talk-button-modal-show').click
 
     # Убеждаемся, что звуковое оповещение включено
     assert has_css?('#play-sound-on-new-message[data-value="true"]', visible: false)
