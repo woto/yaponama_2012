@@ -32,7 +32,7 @@ class RegistersTest < ActionDispatch::IntegrationTest
     visit '/register/edit?with=phone'
 
     fill_in 'user[profiles_attributes][0][names_attributes][0][name]', with: 'Иван'
-    fill_in 'user[profiles_attributes][0][phones_attributes][0][value]', with: '+7 (746) 394-31-94'
+    fill_phone '[name="user[profiles_attributes][0][phones_attributes][0][value]"]', '+7 (746) 394-31-94'
     fill_in 'user[password]', with: '123456'
     fill_in 'user[password_confirmation]', with: '123456'
     click_button 'Зарегистрироваться'
