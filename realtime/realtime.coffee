@@ -1,3 +1,4 @@
+debugger
 colors = require 'colors'
 pg = require 'pg' 
 async = require 'async'
@@ -29,14 +30,15 @@ rooms = {}
 connections = {}
 
 db.connect (err) ->
-  #console.log err if err?
+  console.error "PostgreSQL connect error", err if err?
   db.query "SELECT * from admin_site_settings", (err, result) ->
-    #console.log err if err?
+    console.error "SELECT * from admin_site_settings", err if err?
+    throw 'Настройки не найдены для RAILS_ENV=' + rails_env unless result.rows.length > 0
     config = result.rows[0]
 
     debugger
-    server.listen parseInt(config['realtime_port'], 10), config['realtime_address']
-    sub = rs.createClient(config['redis_port'], config['reds_host'])
+    server.listen parseInt(config.realtime_port, 10), config.realtime_address
+    sub = rs.createClient(config.redis_port, config.reds_host)
 
     sjs_talk.on "connection", (conn) ->
 
@@ -84,6 +86,7 @@ db.connect (err) ->
 
             async.series [(callback) ->
               db.query "SELECT id FROM somebodies WHERE auth_token=$1", [auth_token], (err, res) ->
+                console.error "SELECT id FROM somebodies WHERE auth_token=$1", err if err?
                 # Получаем user_id из auth_token'a и сохраняем
                 user_id = res.rows[0].id.toString()
                 callback null
