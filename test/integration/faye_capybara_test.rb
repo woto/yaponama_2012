@@ -5,10 +5,15 @@ require 'test_helper'
 class VisitTest < ActionDispatch::IntegrationTest
 
   test 'Visiting root page with Capybara shoud not raise error' do
+    Capybara.reset!
 
-    visit '/'
+    first = Capybara::Session.new Capybara.current_driver, Capybara.app
 
-    page.execute_script <<-"EOL"
+    first.visit '/'
+
+    sleep 0.5
+
+    first.execute_script <<-"EOL"
 
     window.Application || (window.Application = {});
 
@@ -18,9 +23,13 @@ class VisitTest < ActionDispatch::IntegrationTest
 
     EOL
 
+    second = Capybara::Session.new Capybara.current_driver, Capybara.app
+
+    second.visit 'http://localhost:3000'
+
     sleep 0.5
 
-    page.execute_script <<-"EOL"
+    second.execute_script <<-"EOL"
 
     window.Application || (window.Application = {});
 
@@ -30,9 +39,7 @@ class VisitTest < ActionDispatch::IntegrationTest
 
     EOL
 
-    sleep 0.5
-
-    assert has_text?('Got a message: Hello world')
+    assert first.has_text?('Got a message: Hello world')
 
   end
 end
