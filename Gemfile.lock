@@ -1,6 +1,7 @@
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: ccdd49d1f0e609ed7d17627452fd6e8a45eb10a1
+  revision: 338b2d1d87f4b50f4b082f999f6163e2a07c1686
+  tag: 2.1.0
   specs:
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -17,10 +18,20 @@ GIT
       railties (>= 3.1.0)
 
 GIT
-  remote: git://github.com/lautis/uglifier.git
-  revision: 9ee5f0949ad3a4bec0a94d76d39c287675e7ef69
+  remote: git://github.com/jonleighton/poltergeist.git
+  revision: 28822b375d6adff80038e11f42819809282f972b
   specs:
-    uglifier (2.3.0)
+    poltergeist (1.4.1)
+      capybara (~> 2.1.0)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
+
+GIT
+  remote: git://github.com/lautis/uglifier.git
+  revision: c8006b0c2da0884e75d79400fd22f3774ebd11e0
+  specs:
+    uglifier (2.3.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
 
@@ -33,19 +44,13 @@ GIT
 
 GIT
   remote: git://github.com/pivotal/jasmine-gem.git
-  revision: 1ae33981c2e9b22a078961e657257315acc2c92a
+  revision: 72dd6c06a776aa520bb41af03d29321b08842a46
   specs:
     jasmine (2.0.0.rc5)
       jasmine-core (~> 2.0.0.rc5)
       phantomjs
       rack (>= 1.2.1)
       rake
-
-GIT
-  remote: git://github.com/rails/arel.git
-  revision: 9e53488b1d8d535182a989bd38fbb171aebbeef5
-  specs:
-    arel (4.0.1.20131022201058)
 
 GIT
   remote: git://github.com/rails/coffee-rails.git
@@ -57,7 +62,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/jbuilder.git
-  revision: c2e7766672406dac1f376c27bb9977c3cbc6577d
+  revision: fa39a308d6f7f8ee37829be0bd3d3f3bded823d8
   specs:
     jbuilder (2.0.0.beta)
       activesupport (>= 3.0.0)
@@ -116,7 +121,7 @@ GIT
 
 GIT
   remote: git://github.com/woto/rails.git
-  revision: 56a43c9bab2e05cd5afc5a215f1e1b79118b0802
+  revision: d88a42a829e564cbe5aa189ed45a199dc32a84bb
   branch: 4-0-stable
   specs:
     actionmailer (4.0.1)
@@ -172,13 +177,13 @@ GIT
 
 GIT
   remote: https://github.com/nathanvda/cocoon
-  revision: 420eddaa04aa94998ee9ee3141e4a106642bf828
+  revision: ae1543d63af2d5f6669d192982b9a5d2a0de774e
   specs:
-    cocoon (1.2.1)
+    cocoon (1.2.3)
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: b5ae13112ccd6b2ec12a3c5190bc6264c993b42d
+  revision: 9d964b8b565e3bb6fe21e73ae0b8f06d8d297fd1
   specs:
     simple_form (3.0.0)
       actionpack (>= 4.0.0, < 4.1)
@@ -191,70 +196,49 @@ GEM
       activesupport (>= 2.3.11)
       i18n
     activerecord-deprecated_finders (1.0.3)
-    addressable (2.3.5)
     ancestry (2.0.0)
       activerecord (>= 3.0.0)
+    arel (4.0.1)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
     cancan (1.6.10)
-    capistrano (3.0.0)
+    capistrano (3.0.1)
       i18n
       rake (>= 10.0.0)
       sshkit (>= 0.0.23)
+    capybara-webkit (1.0.0)
+      capybara (~> 2.0, >= 2.0.2)
+      json
     carrierwave (0.9.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
     charlock_holmes (0.6.9.4)
+    childprocess (0.3.9)
+      ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
-    cliver (0.2.2)
+    cliver (0.3.1)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
     columnize (0.3.6)
     commonjs (0.2.7)
-    cookiejar (0.3.0)
     dalli (2.6.4)
     debugger (1.6.2)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
       debugger-ruby_core_source (~> 1.2.3)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.3)
-    diff-lcs (1.2.4)
-    em-hiredis (0.2.1)
-      hiredis (~> 0.4.0)
-    em-http-request (1.1.1)
-      addressable (>= 2.3.4)
-      cookiejar
-      em-socksify (>= 0.3)
-      eventmachine (>= 1.0.3)
-      http_parser.rb (>= 0.6.0.beta.2)
-    em-socksify (0.3.0)
-      eventmachine (>= 1.0.0.beta.4)
+    debugger-ruby_core_source (1.2.4)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
-    eventmachine (1.0.3)
     execjs (2.0.2)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     fastercsv (1.5.5)
-    faye (1.0.0)
-      cookiejar (>= 0.3.0)
-      em-http-request (>= 0.3.0)
-      eventmachine (>= 0.12.0)
-      faye-websocket (>= 0.7.0)
-      multi_json (>= 1.0.0)
-      rack (>= 1.0.0)
-      websocket-driver (>= 0.3.0)
-    faye-redis (0.2.0)
-      em-hiredis (>= 0.2.0)
-      eventmachine (>= 0.12.0)
-      multi_json (>= 1.0.0)
-    faye-websocket (0.7.0)
-      eventmachine (>= 0.12.0)
-      websocket-driver (>= 0.3.0)
+    ffi (1.9.3)
     handlebars (0.5.0)
       commonjs (~> 0.2.3)
       handlebars-source (~> 1.0.12)
@@ -264,7 +248,6 @@ GEM
     hike (1.2.3)
     hiredis (0.4.5)
     htmlentities (4.3.1)
-    http_parser.rb (0.6.0.beta.2)
     httpauth (0.2.0)
     i18n (0.6.5)
     innertube (1.1.0)
@@ -272,7 +255,7 @@ GEM
     json (1.8.1)
     jwt (0.1.8)
       multi_json (>= 1.5)
-    kaminari (0.14.1)
+    kaminari (0.15.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     less (2.4.0)
@@ -287,8 +270,8 @@ GEM
     mime-types (1.25)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    money (5.1.1)
-      i18n (~> 0.6.0)
+    money (6.0.0)
+      i18n (~> 0.6.4)
     multi_json (1.8.2)
     multipart-post (1.2.0)
     mysql2 (0.3.12b4)
@@ -307,7 +290,7 @@ GEM
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
-    omniauth-facebook (1.4.1)
+    omniauth-facebook (1.5.1)
       omniauth-oauth2 (~> 1.1.0)
     omniauth-google-oauth2 (0.2.1)
       omniauth (~> 1.0)
@@ -335,13 +318,7 @@ GEM
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
     pg (0.17.0)
-    phantomjs (1.8.1.1)
-      poltergeist
-    poltergeist (1.4.1)
-      capybara (~> 2.1.0)
-      cliver (~> 0.2.1)
-      multi_json (~> 1.0)
-      websocket-driver (>= 0.2.0)
+    phantomjs (1.9.2.0)
     puma (2.6.0)
       rack (>= 1.1, < 2.0)
     quiet_assets (1.0.2)
@@ -352,7 +329,7 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    redis (3.0.5)
+    redis (3.0.6)
     ref (1.0.5)
     riddle (1.5.9)
     rmagick (2.13.2)
@@ -361,7 +338,7 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     rspec-core (2.14.7)
-    rspec-expectations (2.14.3)
+    rspec-expectations (2.14.4)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.4)
     rspec-rails (2.14.0)
@@ -373,6 +350,7 @@ GEM
       rspec-mocks (~> 2.14.0)
     ruby-growl (4.0)
       uuid (~> 2.3, >= 2.3.5)
+    rubyzip (1.0.0)
     russian (0.6.0)
       i18n (>= 0.5.0)
     sanitize (2.0.6)
@@ -381,7 +359,14 @@ GEM
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
-    sitemap_generator (4.2.0)
+    selenium-webdriver (2.37.0)
+      childprocess (>= 0.2.5)
+      multi_json (~> 1.0)
+      rubyzip (~> 1.0.0)
+      websocket (~> 1.0.4)
+    show_me_the_cookies (2.1.0)
+      capybara (~> 2.0)
+    sitemap_generator (4.3.0)
       builder
     slim (2.0.2)
       temple (~> 0.6.6)
@@ -391,13 +376,13 @@ GEM
       activesupport (>= 3.0, < 4.1)
       railties (>= 3.0, < 4.1)
       slim (~> 2.0)
-    sprockets (2.10.0)
+    sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sshkit (1.1.0)
-      net-scp
+    sshkit (1.2.0)
+      net-scp (>= 1.1.2)
       net-ssh
       term-ansicolor
     systemu (2.5.2)
@@ -417,10 +402,11 @@ GEM
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
-    tins (0.12.0)
+    tins (0.13.1)
     tzinfo (0.3.38)
     uuid (2.3.7)
       macaddr (~> 1.0)
+    websocket (1.0.7)
     websocket-driver (0.3.0)
     whenever (0.8.4)
       activesupport (>= 2.3.4)
@@ -428,6 +414,7 @@ GEM
     xpath (2.0.0)
       nokogiri (~> 1.3)
     yandex_mystem (0.1.0)
+    yui-compressor (0.12.0)
 
 PLATFORMS
   ruby
@@ -435,11 +422,11 @@ PLATFORMS
 DEPENDENCIES
   activemerchant!
   ancestry
-  arel!
   bcrypt-ruby
   cancan
   capistrano
   capybara!
+  capybara-webkit
   carrierwave
   charlock_holmes
   cocoon!
@@ -447,8 +434,6 @@ DEPENDENCIES
   dalli
   debugger
   fastercsv
-  faye
-  faye-redis
   hiredis (~> 0.4.5)
   htmlentities
   ipgeobase!
@@ -470,7 +455,7 @@ DEPENDENCIES
   omniauth-vkontakte
   omniauth-yandex
   pg
-  poltergeist
+  poltergeist!
   puma
   quiet_assets
   rails!
@@ -483,6 +468,8 @@ DEPENDENCIES
   sanitize
   sass-rails!
   sdoc
+  selenium-webdriver
+  show_me_the_cookies
   sht_rails!
   simple_form!
   sitemap_generator
@@ -494,3 +481,4 @@ DEPENDENCIES
   uglifier!
   whenever
   yandex_mystem
+  yui-compressor
