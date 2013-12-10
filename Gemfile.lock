@@ -19,19 +19,19 @@ GIT
 
 GIT
   remote: git://github.com/jonleighton/poltergeist.git
-  revision: 28822b375d6adff80038e11f42819809282f972b
+  revision: 06e68b43ab33cdb6570b6148ea0858bf437592c1
   specs:
-    poltergeist (1.4.1)
-      capybara (~> 2.1.0)
+    poltergeist (1.5.0)
+      capybara (~> 2.1)
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
 
 GIT
   remote: git://github.com/lautis/uglifier.git
-  revision: c8006b0c2da0884e75d79400fd22f3774ebd11e0
+  revision: a2ee56e65d0f625030584fd774bf97217b37389f
   specs:
-    uglifier (2.3.1)
+    uglifier (2.3.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
 
@@ -44,7 +44,7 @@ GIT
 
 GIT
   remote: git://github.com/pivotal/jasmine-gem.git
-  revision: 72dd6c06a776aa520bb41af03d29321b08842a46
+  revision: 7c5d56fe8d231ae6fa804299b8568353fecc7407
   specs:
     jasmine (2.0.0.rc5)
       jasmine-core (~> 2.0.0.rc5)
@@ -62,9 +62,9 @@ GIT
 
 GIT
   remote: git://github.com/rails/jbuilder.git
-  revision: fa39a308d6f7f8ee37829be0bd3d3f3bded823d8
+  revision: 4f6d667f80a57dac2101482f6f7ae13734bfef3b
   specs:
-    jbuilder (2.0.0.beta)
+    jbuilder (2.0.0.beta2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
 
@@ -78,7 +78,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sass-rails.git
-  revision: 0fcdff806511d0cfaf0bf379f3530ad11cb16f5c
+  revision: a2d0ae608e92127a2eb4a728fc0fe8b67d9b641f
   specs:
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -87,7 +87,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sprockets-rails.git
-  revision: 6a03c314bec3a84a3f6c8076bf058b33ed672a13
+  revision: 10042f650681d9740cb664772284865860561771
   specs:
     sprockets-rails (2.0.1)
       actionpack (>= 3.0)
@@ -96,7 +96,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/turbolinks.git
-  revision: 7b2dcd568c5251885c644bc5b502d1dcc9caabd0
+  revision: 58bfac777c473bb51849c99497ea621d768a4fea
   specs:
     turbolinks (2.0.0)
       coffee-rails
@@ -177,15 +177,15 @@ GIT
 
 GIT
   remote: https://github.com/nathanvda/cocoon
-  revision: ae1543d63af2d5f6669d192982b9a5d2a0de774e
+  revision: bd8c4a232568cd79dfbec1f9709d3c8a9098ee4b
   specs:
-    cocoon (1.2.3)
+    cocoon (1.2.5)
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: 9d964b8b565e3bb6fe21e73ae0b8f06d8d297fd1
+  revision: 4362210975621c0e9051e8b5672f941feb3158fb
   specs:
-    simple_form (3.0.0)
+    simple_form (3.0.1)
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
 
@@ -207,7 +207,7 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 0.0.23)
-    capybara-webkit (1.0.0)
+    capybara-webkit (1.1.0)
       capybara (~> 2.0, >= 2.0.2)
       json
     carrierwave (0.9.0)
@@ -226,10 +226,10 @@ GEM
     columnize (0.3.6)
     commonjs (0.2.7)
     dalli (2.6.4)
-    debugger (1.6.2)
+    debugger (1.6.3)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.2.3)
+      debugger-ruby_core_source (~> 1.2.4)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.4)
     diff-lcs (1.2.5)
@@ -249,7 +249,7 @@ GEM
     hiredis (0.4.5)
     htmlentities (4.3.1)
     httpauth (0.2.0)
-    i18n (0.6.5)
+    i18n (0.6.9)
     innertube (1.1.0)
     jasmine-core (2.0.0.rc5)
     json (1.8.1)
@@ -267,7 +267,7 @@ GEM
     macaddr (1.6.1)
       systemu (~> 2.5.0)
     middleware (0.1.0)
-    mime-types (1.25)
+    mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
     money (6.0.0)
@@ -319,7 +319,7 @@ GEM
       omniauth-oauth2 (~> 1.0)
     pg (0.17.0)
     phantomjs (1.9.2.0)
-    puma (2.6.0)
+    puma (2.7.1)
       rack (>= 1.1, < 2.0)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
@@ -350,7 +350,7 @@ GEM
       rspec-mocks (~> 2.14.0)
     ruby-growl (4.0)
       uuid (~> 2.3, >= 2.3.5)
-    rubyzip (1.0.0)
+    rubyzip (1.1.0)
     russian (0.6.0)
       i18n (>= 0.5.0)
     sanitize (2.0.6)
@@ -359,10 +359,10 @@ GEM
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
-    selenium-webdriver (2.37.0)
+    selenium-webdriver (2.38.0)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
-      rubyzip (~> 1.0.0)
+      rubyzip (~> 1.0)
       websocket (~> 1.0.4)
     show_me_the_cookies (2.1.0)
       capybara (~> 2.0)
@@ -371,7 +371,7 @@ GEM
     slim (2.0.2)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
-    slim-rails (2.0.3)
+    slim-rails (2.0.4)
       actionpack (>= 3.0, < 4.1)
       activesupport (>= 3.0, < 4.1)
       railties (>= 3.0, < 4.1)
@@ -407,7 +407,7 @@ GEM
     uuid (2.3.7)
       macaddr (~> 1.0)
     websocket (1.0.7)
-    websocket-driver (0.3.0)
+    websocket-driver (0.3.1)
     whenever (0.8.4)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
