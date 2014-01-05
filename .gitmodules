@@ -52,9 +52,6 @@
 [submodule "system/submodules/console.log-wrapper"]
 	path = system/submodules/console.log-wrapper
 	url = https://github.com/cpatik/console.log-wrapper.git
-[submodule "system/submodules/nanoScrollerJS"]
-	path = system/submodules/nanoScrollerJS
-	url = https://github.com/jamesflorentino/nanoScrollerJS
 [submodule "system/submodules/sockjs-client"]
 	path = system/submodules/sockjs-client
 	url = https://github.com/sockjs/sockjs-client
@@ -85,3 +82,6 @@
 [submodule "system/submodules/purl"]
 	path = system/submodules/purl
 	url = https://github.com/allmarkedup/purl
+[submodule "system/submodules/headroom.js"]
+	path = system/submodules/headroom.js
+	url = https://github.com/WickyNilliams/headroom.js

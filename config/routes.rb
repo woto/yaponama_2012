@@ -38,18 +38,6 @@ Yaponama2012::Application.routes.draw do
     resource :cashes, :only => [:new, :create]
   end
 
-  concern :letter do
-    #resources :letter_parts
-
-    resources :letters do
-      member do
-        get :download
-      end
-      resources :letter_parts do
-        get 'cid/:cid', to: "letter_parts#cid", on: :collection, cid: /.*/
-      end
-    end
-  end
 
   resources :chats
 
@@ -240,8 +228,6 @@ Yaponama2012::Application.routes.draw do
 
       concerns :gridable
       concerns :transactionable
-
-      concerns :letter
 
       #concerns :productable
       concerns :complex_products
