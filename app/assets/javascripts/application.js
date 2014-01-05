@@ -51,12 +51,13 @@
 // require jquery-dirtyforms/jquery.dirtyforms
 
 //= require jquery.cachedScript
-//
-//= require ckeditor-helpers/extended_options
+
 //= require ckeditor-helpers/basepath
-//= require ckeditor-helpers/simple
+//= require ckeditor-helpers/extended_options
 //= require ckeditor-helpers/extended
-//
+//= require ckeditor-helpers/simple_options
+//= require ckeditor-helpers/simple
+
 //= require deliveries/places
 //= require deliveries
 
