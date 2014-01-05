@@ -83,4 +83,4 @@
 //= require notify_sound
 //= require notify_window
 //= require notify_sound_toggler
-//= require faye
+//= require slide_top

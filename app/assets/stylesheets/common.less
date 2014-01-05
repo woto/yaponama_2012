@@ -1,5 +1,27 @@
 @import 'bootstrap';
 @import 'font-awesome';
+
+#slide-top {
+  cursor: pointer;
+  .opacity(0.5);
+  z-index: 1000;
+  right: 1%;
+  position: fixed;
+  .transition(all .3s ease-in-out);
+  &:hover {
+    .opacity(1);
+  }
+
+  &.affix-top {
+    bottom: -50px;
+    .invisible();
+  }
+
+  &.affix {
+    bottom: 1%;
+  }
+}
+
 //@import 'bootswatch/flatly/variables';
 //@import 'bootswatch/flatly/bootswatch';
 
