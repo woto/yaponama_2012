@@ -1,9 +1,8 @@
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: 338b2d1d87f4b50f4b082f999f6163e2a07c1686
-  tag: 2.1.0
+  revision: 39272a8c2515cfaafece70d7f6ebd0a0532baebe
   specs:
-    capybara (2.1.0)
+    capybara (2.2.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
@@ -12,14 +11,14 @@ GIT
 
 GIT
   remote: git://github.com/joliss/jquery-ui-rails.git
-  revision: 4aa7de5ced2b5910b971f84c053871e3147ffd8c
+  revision: abce5bed208e706b791f4e37f478ecd313942f7d
   specs:
-    jquery-ui-rails (4.1.0)
+    jquery-ui-rails (4.1.1)
       railties (>= 3.1.0)
 
 GIT
   remote: git://github.com/jonleighton/poltergeist.git
-  revision: 06e68b43ab33cdb6570b6148ea0858bf437592c1
+  revision: 02f63aa8fead20108d2d83be07761cf5fda31abc
   specs:
     poltergeist (1.5.0)
       capybara (~> 2.1)
@@ -29,9 +28,9 @@ GIT
 
 GIT
   remote: git://github.com/lautis/uglifier.git
-  revision: a2ee56e65d0f625030584fd774bf97217b37389f
+  revision: b4dd4da8dc1333c498c397db06f7776f57c218e8
   specs:
-    uglifier (2.3.2)
+    uglifier (2.3.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
 
@@ -44,10 +43,10 @@ GIT
 
 GIT
   remote: git://github.com/pivotal/jasmine-gem.git
-  revision: 7c5d56fe8d231ae6fa804299b8568353fecc7407
+  revision: cd7f4a23919e154a5d7aef47af71e636af197b95
   specs:
-    jasmine (2.0.0.rc5)
-      jasmine-core (~> 2.0.0.rc5)
+    jasmine (2.0.0)
+      jasmine-core (~> 2.0.0)
       phantomjs
       rack (>= 1.2.1)
       rake
@@ -62,7 +61,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/jbuilder.git
-  revision: 4f6d667f80a57dac2101482f6f7ae13734bfef3b
+  revision: a986587658e0607db27e9fc575860d5af84b34a5
   specs:
     jbuilder (2.0.0.beta2)
       activesupport (>= 3.0.0)
@@ -70,7 +69,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/jquery-rails.git
-  revision: f79e8f178f8358c57f6faf65f72c7b0bbfb42f65
+  revision: 16aa3f633d8f8f48df73942b057132356bfd3d9a
   specs:
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
@@ -78,7 +77,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sass-rails.git
-  revision: a2d0ae608e92127a2eb4a728fc0fe8b67d9b641f
+  revision: 52b24bab699adf382f9a2b1faff35613aedd3e4a
   specs:
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -87,7 +86,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sprockets-rails.git
-  revision: 10042f650681d9740cb664772284865860561771
+  revision: 25eee989fbb3a11d96241d1a7e79bb9670e51f5b
   specs:
     sprockets-rails (2.0.1)
       actionpack (>= 3.0)
@@ -96,21 +95,10 @@ GIT
 
 GIT
   remote: git://github.com/rails/turbolinks.git
-  revision: 58bfac777c473bb51849c99497ea621d768a4fea
+  revision: 176135140c4a6e4a74c9004033d2bb3dd0ae6fd1
   specs:
-    turbolinks (2.0.0)
+    turbolinks (2.1.0)
       coffee-rails
-
-GIT
-  remote: git://github.com/railsware/sht_rails.git
-  revision: b0e07a895e590689d2f5dca778d5cc87d197fbac
-  specs:
-    sht_rails (0.2.0)
-      execjs (>= 0.3.0)
-      handlebars (>= 0.4.0)
-      rails (>= 3.1.0)
-      sprockets (>= 2.0.3)
-      tilt (>= 1.3.3)
 
 GIT
   remote: git://github.com/woto/ipgeobase.git
@@ -183,7 +171,7 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: 4362210975621c0e9051e8b5672f941feb3158fb
+  revision: 6ce9a15a5abbd17f82fe4a0173fcfe676b0a2138
   specs:
     simple_form (3.0.1)
       actionpack (>= 4.0.0, < 4.1)
@@ -218,7 +206,7 @@ GEM
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
-    cliver (0.3.1)
+    cliver (0.3.2)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -239,11 +227,6 @@ GEM
       multipart-post (~> 1.2.0)
     fastercsv (1.5.5)
     ffi (1.9.3)
-    handlebars (0.5.0)
-      commonjs (~> 0.2.3)
-      handlebars-source (~> 1.0.12)
-      therubyracer (~> 0.12.0)
-    handlebars-source (1.0.12)
     hashie (2.0.5)
     hike (1.2.3)
     hiredis (0.4.5)
@@ -251,7 +234,7 @@ GEM
     httpauth (0.2.0)
     i18n (0.6.9)
     innertube (1.1.0)
-    jasmine-core (2.0.0.rc5)
+    jasmine-core (2.0.0)
     json (1.8.1)
     jwt (0.1.8)
       multi_json (>= 1.5)
@@ -278,7 +261,7 @@ GEM
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
-    nokogiri (1.6.0)
+    nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     oauth (0.4.7)
     oauth2 (0.8.1)
@@ -310,15 +293,15 @@ GEM
     omniauth-twitter (1.0.1)
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
-    omniauth-vkontakte (1.3.1)
+    omniauth-vkontakte (1.3.2)
       multi_json
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
     omniauth-yandex (0.0.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
-    pg (0.17.0)
-    phantomjs (1.9.2.0)
+    pg (0.17.1)
+    phantomjs (1.9.2.1)
     puma (2.7.1)
       rack (>= 1.1, < 2.0)
     quiet_assets (1.0.2)
@@ -359,14 +342,14 @@ GEM
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
-    selenium-webdriver (2.38.0)
+    selenium-webdriver (2.39.0)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0.4)
     show_me_the_cookies (2.1.0)
       capybara (~> 2.0)
-    sitemap_generator (4.3.0)
+    sitemap_generator (4.3.1)
       builder
     slim (2.0.2)
       temple (~> 0.6.6)
@@ -381,7 +364,7 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sshkit (1.2.0)
+    sshkit (1.3.0)
       net-scp (>= 1.1.2)
       net-ssh
       term-ansicolor
@@ -408,7 +391,7 @@ GEM
       macaddr (~> 1.0)
     websocket (1.0.7)
     websocket-driver (0.3.1)
-    whenever (0.8.4)
+    whenever (0.9.0)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
     xpath (2.0.0)
@@ -470,7 +453,6 @@ DEPENDENCIES
   sdoc
   selenium-webdriver
   show_me_the_cookies
-  sht_rails!
   simple_form!
   sitemap_generator
   slim-rails
