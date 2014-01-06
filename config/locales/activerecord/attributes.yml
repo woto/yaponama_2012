@@ -120,6 +120,8 @@ ru:
         russian_time_zone_manual_id: Ручное время
         cached_russian_time_zone_auto_id: Автоматическое время кешированное
         remote_ip: IP адрес
+        first_referrer: Откуда пришел впервые
+
 
       car:
         vin: VIN код

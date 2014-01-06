@@ -4,6 +4,10 @@ require 'test_helper'
 
 class StatTest < ActionDispatch::IntegrationTest
 
+  def setup
+    Capybara.reset!
+  end
+
   test 'Сначала мы сэмулируем заход пользователя с ip адресом 85.117.95.1 и обнаружим, что пользователь с Норильска, запишем ip, город и регион, а потом зайдем с 127.0.0.1 запишем новый ip, а город и регион обнулятся' do
     get '/', {}, { 'REMOTE_ADDR' => '85.117.95.1' }
     assert_equal User.last.remote_ip, '85.117.95.1'
@@ -89,6 +93,44 @@ class StatTest < ActionDispatch::IntegrationTest
 
   test 'Другое время' do
     skip
+  end
+
+  test 'Проверяем работу first_referrer' do
+
+    post '/stats', {
+      stat: {
+        russian_time_zone_auto_id: '',
+        location: '' ,
+        title:  '',
+        referrer: 'http://example.com',
+      }
+    }
+
+    u1 = User.last
+
+    assert_equal 'http://example.com', u1.first_referrer
+
+    post '/stats', {
+      stat: {
+        russian_time_zone_auto_id: '',
+        location: '' ,
+        title:  '',
+        referrer: 'http://not-same.com',
+      }
+    }
+
+    u2 = User.last
+
+    assert_equal 'http://example.com', u2.first_referrer
+
+    assert_equal u1, u2
+
+    # Так не работает https://github.com/thoughtbot/capybara-webkit/issues/574
+    #page.driver.add_headers "Referer" => "https://example.com"
+    #page.execute_script "document.referer = 'https://example.com'"
+    #visit '/'
+    #sleep 10
+
   end
 
 end

@@ -128,6 +128,10 @@ module GridUser
         :type => :string
       }
 
+      columns_hash['first_referrer'] = {
+        :type => :string
+      }
+
       columns_hash['cached_screen_width'] = {
         :type => :string
       }

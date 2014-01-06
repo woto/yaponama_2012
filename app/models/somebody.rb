@@ -19,7 +19,14 @@ class Somebody < ActiveRecord::Base
   #has_many :brands
   #has_many :models
 
-  has_many :stats, :dependent => :destroy, inverse_of: :somebody
+  has_many :stats, :dependent => :destroy, inverse_of: :somebody, after_add: :save_first_referrer
+
+  def save_first_referrer(stat)
+    if stats.length == 1
+      self.first_referrer = stat.referrer
+      save!
+    end
+  end
 
   #has_many :comments
   

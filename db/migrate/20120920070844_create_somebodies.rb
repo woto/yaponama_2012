@@ -66,6 +66,7 @@ class CreateSomebodies < ActiveRecord::Migration
       t.string :cached_location
       t.string :cached_title
       t.string :cached_referrer
+      t.string :first_referrer
       t.string :cached_screen_width
       t.string :cached_screen_height
       t.string :cached_client_width
