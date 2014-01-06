@@ -5,49 +5,28 @@ class Talk
   @visible: false
 
   @show = ->
-    #$("#main").css("display", "inline").removeAttr("class").addClass "col-sm-7"
-    #$("#talk").css("display", "inline").removeAttr("class").addClass "col-sm-5"
-    #$.cookie('talk_button', 1, {path: '/' });
-    #$('#talk-button-hide').show()
-    #$('#talk-button-show').hide()
-
     @visible = true
-    App.Scroller.init()
     App.NotifyWindow.hide()
 
   @hide = ->
-    #$("#main").css("display", "inline").removeAttr("class").addClass "col-sm-12"
-    #$("#talk").removeAttr("class").css "display", "none"
-    #$.cookie('talk_button', 0, {path: '/' });
-    #$('#talk-button-hide').hide()
-    #$('#talk-button-show').show()
     @visible = false
     NotifySound.stop()
 
   @message = (title, text) ->
+    title = "<strong>" + $(text).find('.talk-addresser').html() + "</strong>"
+    text = $(text).find('.talk-body').html()
+
     unless @visible 
       NotifyWindow.show(title, text)
     NotifySound.play()
 
 App.Talk = Talk
 
-init = ->
-  #if $.cookie('talk_button') == '1'
-  #  App.Talk.show()
-  #else
-  #  App.Talk.hide()
-
-$ ->
-  init()
-
-$(document).on 'page:load', ->
-  init()
-
-$(document).on 'click', '#talk-button-hide', ->
-  App.Talk.hide()
-
-$(document).on 'click', '#talk-button-show', ->
+$(document).on 'show.bs.modal', '#myModal', ->
   App.Talk.show()
+
+$(document).on 'hidden.bs.modal', '#myModal', ->
+  App.Talk.hide()
 
 $(document).on 'click', "a[rel='ask-question']", ->
   event.preventDefault()

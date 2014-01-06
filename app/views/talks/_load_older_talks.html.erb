@@ -1,0 +1,37 @@
+<% last_id = nil %>
+
+<% @talks.each do |resource| %>
+  <%# Если не последний, или единственный %>
+  <%# Тут не совсем правильно и красиво получилось, из-за того, что хотел хранить число в одном месте. Но в общем работает правильно. TODO позже переписать получше %>
+  <% if resource != @talks.last || @talks.length == 1 %>
+    <%= render partial: '/talks/show', locals: { resource: resource } %>
+  <% else %>
+    <% last_id = resource.id %>
+  <% end %>
+<% end %>
+
+<% if last_id %>
+  <div id="load-older-talk" class="clearfix text-center">
+    <%= link_to polymorphic_path([:load_older_talks, *jaba3, :talks], last_id: last_id), class: "btn btn-default btn-xs", data: {last_id: last_id}, remote: true do %>
+      <%= icon 'angle-double-down' %>
+      Ещё...
+    <% end %>
+  </div>
+<% end %>
+
+
+<%= javascript_tag do %>
+
+  (function() {
+
+    App = typeof exports !== "undefined" && exports !== null ? exports : this;
+
+    $(function() {
+
+      window.bootstrapperize();
+
+    })
+
+  }).call(this);
+
+<% end %>

@@ -1,8 +1,10 @@
-<%= form_for @user, remote: true, html: {class: 'notify-sound-toggler-form pull-right'} do |f| %>
-  <button class="notify-sound-toggler-link btn-unstyled" type="button">
-    <div class="hide">
-      <%= f.check_box :sound, class: 'notify-sound-toggler-checkbox' %>
-    </div>
-    <i class="notify-sound-toggler-icon"> </i>
-  </button>
-<% end %>
+<div id='sound-standard'>
+  <%= form_for current_user, remote: true, html: {class: 'notify-sound-toggler-form pull-right'} do |f| %>
+    <button class="notify-sound-toggler-link control" type="button">
+      <div class="hide">
+        <%= f.check_box :sound, class: 'notify-sound-toggler-checkbox' %>
+      </div>
+      <i class="fa notify-sound-toggler-icon fa-lg"></i>
+    </button>
+  <% end %>
+</div>

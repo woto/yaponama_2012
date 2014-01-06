@@ -1,0 +1,20 @@
+<div data-id="<%= resource.id %>" class="talk-item">
+
+  <div class="talk-head">
+
+    <div class="pull-right">
+
+      <div class="talk-time pull-right">
+        <%= l resource.created_at, format: :short %>
+      </div>
+
+    </div>
+
+    <b class="talk-addresser"><%= resource.creator.try(:to_label) %></b> 
+    <%= icon 'angle-right' %>
+    <b class="talk-addressee"><%= resource.addressee.try(:to_label) || 'Всем' %></b>
+  </div>
+
+  <%= render partial: '/talks/talk_body', locals: { resource: resource } %>
+
+</div>

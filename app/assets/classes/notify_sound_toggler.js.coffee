@@ -74,7 +74,7 @@ class NotifySoundToggler
     $('.notify-sound-toggler-form').trigger('submit.rails')
   , 500)
 
-$(document).on 'page:load', ->
+$(document).on 'page:update', ->
   #NotifySoundToggler.init()
   NotifySoundToggler.update_icon()
 

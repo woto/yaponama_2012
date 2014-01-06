@@ -6,27 +6,39 @@ class NotifyWindow
   @visible = ->
     @_visible
 
+    #@_stopAnimateTitle = ->
+    #  NotifyWindow.animation_running = false
+    #  $(document).attr("title", @original_title)
+    #  clearTimeout NotifyWindow.animation_id
+
+    #@_animateTitle = ->
+    #  title = $(document).attr("title")
+    #  $(document).attr "title", title + "<"
+    #  NotifyWindow.animation_id = setTimeout NotifyWindow._animateTitle, 1000
+
+    #@_startAnimateTitle = ->
+    #  unless NotifyWindow.animation_running
+    #    NotifyWindow.animation_running = true
+    #    @original_title = $(document).attr("title")
+    #    NotifyWindow._animateTitle()
+
   @show = (title, text) ->
-    @_show_popover(title, text)
     @_visible = true
-
-  @hide = ->
-    NotifySound.stop()
-    @_hide_popover()
-    @_visible = false
-
-  @_show_popover = (title, text) ->
+    #@_startAnimateTitle()
     $('#talk-notify').popover('destroy')
     $('#talk-notify').attr('data-content', text)
-    $('#talk-notify').attr('data-original-title', title + $('.notify-sound-toggler-form').html() + @close_button_template)
+    $('#talk-notify').attr('data-original-title', @close_button_template + $('#sound-standard').html() + title)
     $('#talk-notify').popover('show')
 
-  @_hide_popover = ->
+  @hide = ->
+    @_visible = false
+    #@_stopAnimateTitle()
+    NotifySound.stop()
     $('#talk-notify').popover('hide')
 
   @close_button_template = '
-    <button id="hide-notify" class="btn btn-unstyled ignoredirty">
-      <i class="fa fa-times" style="width: 20px"></i>
+    <button id="hide-notify" aria-hidden="true" class="control" data-dismiss="modal" type="button">
+      <i class="fa fa-times fa-lg"></i>
     </button>
   '
 

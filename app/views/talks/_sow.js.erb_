@@ -1,5 +1,0 @@
-alert(" don't used talks show.js.erb ")
-/*
-$('#talk-log-inner').prepend("<%= j(render "/talks/talk/temp", talk: @talk ) %>")
-Talk.init_nano_scroller()
-*/
