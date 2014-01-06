@@ -5,18 +5,20 @@
       = f.alert_danger do
         | Пожалуйста исправьте ошибки для продолжения.
 
-      = f.fields_for :profiles do |pr|
-        = pr.fields_for :names do |n|
+
+      = f.fields_for :profiles, @profile do |pr|
+
+        = pr.fields_for :names, @name do |n|
           = n.twbs_text_field :name, placeholder: 'Как к вам обращаться?', asterisk: true
           = n.standard_recreate
 
         - if params[:with] == 'email'
-          = pr.fields_for :emails do |e|
+          = pr.fields_for :emails, @email do |e|
             = e.twbs_text_field :value, placeholder: "Адрес электронной почты, напр. pavel@mail.ru", label: 'E-mail', asterisk: true
             = e.standard_recreate
 
         - if params[:with] == 'phone'
-          = pr.fields_for :phones do |p|
+          = pr.fields_for :phones, @phone do |p|
             = p.twbs_text_field :value, placeholder: "Номер мобильного телефона", rel: 'mobile-mask-on', label: 'Мобильный телефон', asterisk: true
             = p.standard_recreate
 

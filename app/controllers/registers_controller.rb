@@ -12,10 +12,10 @@ class RegistersController < ApplicationController
 
   def edit
     @user = current_user
-    profile = @user.profiles.first_or_initialize
-    profile.emails.first_or_initialize
-    profile.phones.first_or_initialize
-    profile.names.first_or_initialize
+    @profile = @user.profiles.first_or_initialize
+    @email = @profile.emails.first_or_initialize
+    @phone = @profile.phones.first_or_initialize
+    @name = @profile.names.first_or_initialize
   end
 
   def update
@@ -58,13 +58,5 @@ class RegistersController < ApplicationController
   def supplier_set
   end
 
-  def user_get
-  end
-
-  def supplier_get
-  end
-
-  def somebody_get
-  end
 
 end
