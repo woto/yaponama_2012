@@ -1,0 +1,18 @@
+.dashed {
+
+  text-decoration: none;
+  border-bottom: dashed @link-color 1px;
+  cursor: pointer;
+  color: @link-color !important;
+
+  &:hover,
+  &:focus {
+    color: @link-hover-color !important;
+    text-decoration: none;
+  }
+
+}
+
+table .dashed {
+  color: @text-color !important;
+}

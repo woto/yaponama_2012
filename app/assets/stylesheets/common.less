@@ -1,76 +1,32 @@
 @import 'bootstrap';
 @import 'font-awesome';
+@import 'theme';
 
-#slide-top {
-  cursor: pointer;
-  .opacity(0.5);
-  z-index: 1000;
-  right: 1%;
-  position: fixed;
-  .transition(all .3s ease-in-out);
-  &:hover {
-    .opacity(1);
-  }
+/////////////////////
 
-  &.affix-top {
-    bottom: -50px;
-    .invisible();
-  }
+@import 'slide_top';
 
-  &.affix {
-    bottom: 1%;
-  }
-}
+/////////////////////
+
+@import 'font';
+
+/////////////////////
+
 
 //@import 'bootswatch/flatly/variables';
 //@import 'bootswatch/flatly/bootswatch';
 
 /////////////////////
 
-.top-space {
-  margin-top: 20px;
-}
-
-.right-space {
-  margin-right: 20px;
-}
-
-.bottom-space {
-  margin-bottom: 20px;
-}
-
-.left-space {
-  margin-left: 20px;
-}
+@import 'space';
 
 /////////////////////
 
-.dashed {
-  border-bottom: dashed @text-muted 1px;
-  cursor: pointer;
-  color: @text-color !important;
-}
-
-.dashed:hover {
-  text-decoration: none;
-  border-bottom: solid #005580 1px;
-}
+@import 'text';
 
 /////////////////////
 
-.btn-unstyled {
-  width: 20px;
-  color: white;
-  //color: @state-info-text !important;
-  .box-shadow(none) !important;
-  background: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
-  &:hover {
-    color: lighten(@state-info-text, 10%) !important;
-  }
-}
+@import 'dashed';
 
 /////////////////////
 
@@ -117,247 +73,27 @@
 
 /////////////////////
 
-#clientMap {
-  width: 100%;
-  height: 400px;
-}
-
-.delivery_zone_vertices {
-  //display: none;
-}
-
-// Bootstrap 2 hack for map
-#clientMap img {
-  max-width: none;
-}
+@import 'map';
 
 /////////////////////
 
-#map {
-  padding: 0;
-  margin: 0;
-  height: 500px;
-  width: 100%;
-}
-
-// Bootstrap 2 hack for map
-#map img {
-  max-width: none;
-}
+@import 'leftbar';
 
 /////////////////////
 
-// Элементы управления - добавление, редактирование, удаление
-.profileable-category-add, .profileable-item-controls {
-  position: absolute;
-  right: 0px;
-  top: 50%;
-  margin-top: -15px;
-  color: white !important;
-  visibility: hidden;
-  display: inline
-}
-
-// Конкретный элемент profileable - конкретный адрес, профиль и т.д.
-.profileable-item {
-  position: relative;
-  .text-muted;
-  margin-bottom: 10px;
-  word-wrap: break-word;
-}
-
-// Категория - заголовок
-.profileable-category {
-  position: relative;
-  div {
-    .text-primary;
-  }
-  a {
-    text-decoration: none;
-  }
-}
+@import 'form';
 
 /////////////////////
 
-// Звездочки для обязательных полей asterisk: true
-label.required:after {
-  content: "\00a0*"
-}
+@import 'talk_button';
 
 /////////////////////
 
-// Минимальная высота для поля ckeditor (как минимум simple),
-// из-за plugin autgrow (по-моему так называется)
-
-.cke_wysiwyg_div
-{
-  min-height: 75px;
-}
+@import 'grid';
 
 /////////////////////
 
-#talk-button-show {
-
-  top: 50%;
-  margin-top: -75px;
-  position: fixed;
-  cursor: pointer;
-  z-index: 100;
-
-  .animation(talk_button_show .5s);
-  .animation-delay(.5s);
-  right: -300px;
-  width: 300px;
-  .box-shadow(0 5px 10px rgba(0, 0, 0, .2)) !important;
-
-  -webkit-animation-fill-mode: forwards; /* Safari and Chrome */
-     -moz-animation-fill-mode: forwards; /* Firefox */
-      -ms-animation-fill-mode: forwards; /* Internet Explorer */
-       -o-animation-fill-mode: forwards; /* Opera */
-          animation-fill-mode: forwards;
-}
-
-@keyframes talk_button_show {
-    from { right: -300px; }
-    to   { right: -273px; }
-}
-
-/* Firefox */
-@-moz-keyframes talk_button_show {
-    from { right: -300px; }
-    to   { right: -273px; }
-}
-
-/* Safari and Chrome */
-@-webkit-keyframes talk_button_show {
-    from { right: -300px; }
-    to   { right: -273px; }
-}
-
-/* Internet Explorer */
-@-ms-keyframes talk_button_show {
-    from { right: -300px; }
-    to   { right: -273px; }
-}
-
-/* Opera */
-@-o-keyframes talk_button_show {
-    from { right: -300px; }
-    to   { right: -273px; }
-}
-
-/////////////////////
-
-#grid-toolbar-new {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-#grid-toolbar-edit {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-#grid-toolbar-remove {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-// Полоска 'по N на страницу'
-#grid-toolbar-per-page {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-// Полоска 'Выделено: N'
-#grid-toolbar-selected {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-#grid-toolbar-check-uncheck {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-#grid-toolbar-actions {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-#grid-toolbar-columns {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-#grid-toolbar-transactions {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-/////////////////////
-
-.label-all, .badge-all {
-  background-color: white !important;
-  color: black !important;
-}
-
-.label-active, .badge-active {
-  background-color: white !important;
-  color: black !important;
-}
-
-.label-incart, .badge-incart {
-  background-color:  #A2A5B4!important;
-  color: white !important;
-}
-
-.label-inorder, .badge-inorder {
-  background-color: #FFDD03 !important;
-  color: white !important;
-}
-
-.label-ordered, .badge-ordered {
-  background-color: #069CD3 !important;
-  color: white !important;
-}
-
-.label-pre_supplier, .badge-pre_supplier {
-  background-color: #92007B !important;
-  color: white !important;
-}
-
-.label-post_supplier, .badge-post_supplier {
-  background-color: #0A6F20 !important;
-  color: white !important;
-}
-
-.label-stock, .badge-stock{
-  background-color: #8CCE3A !important;
-  color: white !important;
-}
-
-.label-complete, .badge-complete{
-  background-color: #FF7F00 !important;
-  color: white !important;
-}
-
-.label-cancel, .badge-cancel {
-  background-color: #CD0506 !important;
-  color: white !important;
-}
-
-/////////////////////
-
-.label-open, .badge-open {
-  background-color: #072889 !important;
-  color: white !important;
-}
-
-.label-close, .badge-close {
-  background-color: #7F0000 !important;
-  color: white !important;
-}
+@import 'label';
 
 /////////////////////
 
@@ -369,12 +105,6 @@ label.required:after {
     margin-top: 0;
     //font-size: 28px;
   }
-}
-
-/////////////////////
-// Пока не уверен что это правильный способ
-.select2-container {
-  width: 100%
 }
 
 /////////////////////
@@ -391,7 +121,7 @@ label.required:after {
 /////////////////////
 .stars {
   white-space: nowrap;
-  color: @text-muted;
+  //color: @text-muted;
 }
 
 /////////////////////
@@ -409,3 +139,61 @@ label.required:after {
   padding: 50px;
   z-index: 500
 }
+
+/////////////////////
+
+
+//
+// Close icons
+// --------------------------------------------------
+
+
+.control {
+  float: right;
+  //font-size: (@font-size-base * 1.5);
+  width: 30px;
+  font-weight: @close-font-weight;
+  line-height: 1;
+  color: @close-color;
+  text-shadow: @close-text-shadow;
+  .opacity(.2);
+
+  &:hover,
+  &:focus {
+    color: @close-color;
+    text-decoration: none;
+    cursor: pointer;
+    .opacity(.5);
+  }
+
+  // Additional properties for button version
+  // iOS requires the button element instead of an anchor tag.
+  // If you want the anchor version, it requires `href="#"`.
+  button& {
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+  }
+}
+
+/////////////////////
+
+.confirm-link {
+  white-space: nowrap;
+}
+
+/////////////////////
+
+@import 'talk';
+
+/////////////////////
+
+#sound-standard {
+  .hidden();
+}
+
+/////////////////////
+
+@import 'topbar';

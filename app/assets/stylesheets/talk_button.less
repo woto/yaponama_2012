@@ -1,0 +1,49 @@
+#talk-button-show {
+
+  top: 50%;
+  margin-top: -75px;
+  position: fixed;
+  cursor: pointer;
+  z-index: 100;
+
+  .animation(talk_button_show .5s);
+  //.animation-delay(.1s);
+  right: -300px;
+  width: 300px;
+  .box-shadow(0 5px 10px rgba(0, 0, 0, .2)) !important;
+
+  -webkit-animation-fill-mode: forwards; /* Safari and Chrome */
+     -moz-animation-fill-mode: forwards; /* Firefox */
+      -ms-animation-fill-mode: forwards; /* Internet Explorer */
+       -o-animation-fill-mode: forwards; /* Opera */
+          animation-fill-mode: forwards;
+}
+
+@keyframes talk_button_show {
+    from { right: -300px; }
+    to   { right: -273px; }
+}
+
+/* Firefox */
+@-moz-keyframes talk_button_show {
+    from { right: -300px; }
+    to   { right: -273px; }
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes talk_button_show {
+    from { right: -300px; }
+    to   { right: -273px; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes talk_button_show {
+    from { right: -300px; }
+    to   { right: -273px; }
+}
+
+/* Opera */
+@-o-keyframes talk_button_show {
+    from { right: -300px; }
+    to   { right: -273px; }
+}
