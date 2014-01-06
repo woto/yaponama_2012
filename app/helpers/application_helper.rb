@@ -113,7 +113,7 @@ module ApplicationHelper
 
       if (admin_zone? || current_user.role != 'guest') && @somebody
 
-        content_tag(:div, :class => 'col-md-2 col-md-pull-10') do
+        content_tag(:div, :class => 'col-md-2 col-md-pull-10 text-sm') do
 
           content_tag(:ul, :class => 'nav nav-pills nav-stacked') do
             aaa = _build_dropdowns('product', 'products', Rails.configuration.products_status, Rails.configuration.products_menu, @somebody)
@@ -175,7 +175,7 @@ module ApplicationHelper
           (render 'profileables/right')
         end
       elsif !admin_zone?
-        content_tag(:div, :class => 'col-md-2 col-md-pull-10') do
+        content_tag(:div, :class => 'col-md-2 col-md-pull-10 text-sm') do
           render 'application/right'
         end
       end

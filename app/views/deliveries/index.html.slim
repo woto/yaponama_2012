@@ -14,7 +14,7 @@ div.tab-content.top-space
   div.tab-pane.active id="home"
 
     .row
-      .col-sm-5
+      .col-sm-5.bottom-space
 
         #deliveries-accordion.accordion
           - Deliveries::Place.where(active: true).each do |delivery_zone|
