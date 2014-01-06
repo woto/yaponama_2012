@@ -14,15 +14,4 @@ class Admin::ProfilesController < ProfilesController
     @somebody = @supplier = Supplier.find(params[:supplier_id]) if params[:supplier_id]
   end
 
-  def user_get
-    @user = @resource.somebody
-  end
-
-  def somebody_get
-    @somebody = @resource.somebody
-  end
-
-  def supplier_get
-  end
-
 end

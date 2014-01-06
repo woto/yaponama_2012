@@ -81,14 +81,4 @@ class Admin::Deliveries::PlacesController < ApplicationController
     @somebody = @supplier = Supplier.find(params[:supplier_id]) if params[:supplier_id]
   end
 
-
-  def user_get
-  end
-
-  def supplier_get
-  end
-
-  def somebody_get
-  end
-
 end

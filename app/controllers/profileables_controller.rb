@@ -38,15 +38,4 @@ class ProfileablesController < ApplicationController
   def supplier_set
   end
 
-  def user_get
-    @user = current_user
-  end
-
-  def somebody_get
-    @somebody = current_user
-  end
-
-  def supplier_get
-  end
-
 end

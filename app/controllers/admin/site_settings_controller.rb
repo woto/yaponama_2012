@@ -103,13 +103,8 @@ class Admin::SiteSettingsController < ApplicationController
   def somebody_set
   end
 
-  def user_get
   end
 
-  def supplier_get
-  end
-
-  def somebody_get
   end
 
 end

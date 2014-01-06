@@ -45,13 +45,4 @@ class BrandsController < ApplicationController
     commentable_helper @resource
   end
 
-  def user_get
-  end
-
-  def somebody_get
-  end
-
-  def supplier_get
-  end
-
 end
