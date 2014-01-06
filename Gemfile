@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails',     github: 'woto/rails', :branch => '4-0-stable'
-gem 'arel',      github: 'rails/arel'
 
 gem 'pg'
 
@@ -25,9 +24,10 @@ group :development, :test do
   gem 'debugger'
   gem 'capistrano'
   gem 'capybara', github: 'jnicklas/capybara'
-  #gem 'selenium-webdriver'
-  gem 'poltergeist'
-  #gem 'capybara-webkit'
+  gem 'show_me_the_cookies'
+  gem 'selenium-webdriver'
+  gem 'poltergeist', github: 'jonleighton/poltergeist'
+  gem 'capybara-webkit'
   gem 'quiet_assets'
   gem 'rspec-rails'
   gem 'rspec'
@@ -94,12 +94,9 @@ gem 'omniauth-vkontakte'
 gem 'omniauth-odnoklassniki'
 gem 'omniauth-mailru'
 
-gem 'sht_rails', github: 'railsware/sht_rails'
-
 # Необходима версия 2.6.0 чтобы не резался многострочный заголовок
 gem 'mail', github: 'mikel/mail'
 gem 'htmlentities'
 gem 'dalli'
 gem 'puma'
-gem 'faye'
-gem 'faye-redis'
+gem 'yui-compressor'

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: 39272a8c2515cfaafece70d7f6ebd0a0532baebe
+  revision: 60683d9054b4f4024c57591a122cebfe11dfdcc3
   specs:
     capybara (2.2.0)
       mime-types (>= 1.16)
@@ -11,14 +11,14 @@ GIT
 
 GIT
   remote: git://github.com/joliss/jquery-ui-rails.git
-  revision: abce5bed208e706b791f4e37f478ecd313942f7d
+  revision: 14ff35531a19e2a882a67bda96379bbb9cce6de9
   specs:
     jquery-ui-rails (4.1.1)
       railties (>= 3.1.0)
 
 GIT
   remote: git://github.com/jonleighton/poltergeist.git
-  revision: 02f63aa8fead20108d2d83be07761cf5fda31abc
+  revision: 09c6570dea3804cf6ea47821081710b6311be445
   specs:
     poltergeist (1.5.0)
       capybara (~> 2.1)
@@ -28,9 +28,9 @@ GIT
 
 GIT
   remote: git://github.com/lautis/uglifier.git
-  revision: b4dd4da8dc1333c498c397db06f7776f57c218e8
+  revision: d75b236d458ff46ffce29292c275a77ef4b1c47e
   specs:
-    uglifier (2.3.3)
+    uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
 
@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: git://github.com/pivotal/jasmine-gem.git
-  revision: cd7f4a23919e154a5d7aef47af71e636af197b95
+  revision: 5f334f18d536abcbea4d500a3da46f41c3e60a21
   specs:
     jasmine (2.0.0)
       jasmine-core (~> 2.0.0)
@@ -61,15 +61,15 @@ GIT
 
 GIT
   remote: git://github.com/rails/jbuilder.git
-  revision: a986587658e0607db27e9fc575860d5af84b34a5
+  revision: 8c1a8e9ca083a8d7af2a596cf86babcff62f0b0c
   specs:
-    jbuilder (2.0.0.beta2)
+    jbuilder (2.0.2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
 
 GIT
   remote: git://github.com/rails/jquery-rails.git
-  revision: 16aa3f633d8f8f48df73942b057132356bfd3d9a
+  revision: 1155bf5be79a0755a5327561ea26e1d4be534332
   specs:
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
@@ -77,7 +77,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sass-rails.git
-  revision: 52b24bab699adf382f9a2b1faff35613aedd3e4a
+  revision: f65b9005de112b74cd09e5dedeae23603c3b1413
   specs:
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -171,7 +171,7 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: 6ce9a15a5abbd17f82fe4a0173fcfe676b0a2138
+  revision: 4052bc371b233e1e38924f9f4c83e0f897227b2d
   specs:
     simple_form (3.0.1)
       actionpack (>= 4.0.0, < 4.1)
@@ -214,12 +214,12 @@ GEM
     columnize (0.3.6)
     commonjs (0.2.7)
     dalli (2.6.4)
-    debugger (1.6.3)
+    debugger (1.6.5)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.2.4)
+      debugger-ruby_core_source (~> 1.3.1)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.4)
+    debugger-ruby_core_source (1.3.1)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
@@ -275,7 +275,7 @@ GEM
       rack
     omniauth-facebook (1.5.1)
       omniauth-oauth2 (~> 1.1.0)
-    omniauth-google-oauth2 (0.2.1)
+    omniauth-google-oauth2 (0.2.2)
       omniauth (~> 1.0)
       omniauth-oauth2
     omniauth-mailru (1.0.0)
@@ -309,7 +309,7 @@ GEM
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
-    rake (10.1.0)
+    rake (10.1.1)
     rdoc (3.12.2)
       json (~> 1.4)
     redis (3.0.6)
@@ -324,8 +324,9 @@ GEM
     rspec-expectations (2.14.4)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.4)
-    rspec-rails (2.14.0)
+    rspec-rails (2.14.1)
       actionpack (>= 3.0)
+      activemodel (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec-core (~> 2.14.0)
@@ -338,7 +339,7 @@ GEM
       i18n (>= 0.5.0)
     sanitize (2.0.6)
       nokogiri (>= 1.4.4)
-    sass (3.2.12)
+    sass (3.2.13)
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
@@ -390,7 +391,7 @@ GEM
     uuid (2.3.7)
       macaddr (~> 1.0)
     websocket (1.0.7)
-    websocket-driver (0.3.1)
+    websocket-driver (0.3.2)
     whenever (0.9.0)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
