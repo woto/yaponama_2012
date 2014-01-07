@@ -13,7 +13,7 @@ class Somebody < ActiveRecord::Base
   belongs_to :main_profile, :class_name => "Profile", :inverse_of => :user_where_is_main_profile
 
   #validates :main_profile, presence: true, unless: -> { role == 'guest' } (Пользователь может входить с помощью социальных сетей не имея профиля в начала)
-  
+
   belongs_to :default_addressee, class_name: "Somebody"
 
   has_many :talks, inverse_of: :somebody
@@ -67,8 +67,6 @@ class Somebody < ActiveRecord::Base
   has_many :emails, :dependent => :destroy, inverse_of: :somebody
   #accepts_nested_attributes_for :emails, :allow_destroy => true
 
-  has_many :letters, :dependent => :destroy, inverse_of: :somebody
-
   # TODO ПЕРЕДЕЛАТЬ!
   has_many :phones, :dependent => :destroy, inverse_of: :somebody
   #accepts_nested_attributes_for :phones, :allow_destroy => true
@@ -111,6 +109,15 @@ class Somebody < ActiveRecord::Base
     end
   end
 
+  def name
+    begin
+      JSON.parse(cached_main_profile).try(:[], 'names').try(:first).try(:[], 'name')
+    rescue
+      # Потом устранить
+    end
+  end
+
+
   #attr_accessor :update_cached_main_profile
 
   before_save do
@@ -143,5 +150,13 @@ class Somebody < ActiveRecord::Base
   ########################################################################
 
   include Transactionable
+
+  ########################################################################
+
+  after_save do
+    if (['admin', 'manager'].include?(role_was) || ['admin', 'manager'].include?(role) ) && changes.present?
+      $redis.publish("#{Rails.env}:update sellers", JSON.dump(comment: changes))
+    end
+  end
 
 end
