@@ -308,13 +308,6 @@ http://stackoverflow.com/questions/1794219/ckeditor-instance-already-exists
 SOCKET.IO
 chat https://github.com/liamks/Chatty
 
-AFFIX
-http://jsfiddle.net/s54va/
-http://stackoverflow.com/questions/12070970/how-to-use-the-new-affix-plugin-in-twitters-bootstrap-2-1-0
-http://jsfiddle.net/NRhv8/13/
-http://jsfiddle.net/namuol/Uaa3U/
-
-
 http://liamkaufman.com/blog/2012/02/25/adding_real-time_to_rails_with_socket.IO_nodejs_and_backbonejs_with_demo/
 https://github.com/liamks/Chatty
 https://github.com/nhunzaker/backbone-socket.io-examples
