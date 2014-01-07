@@ -1,5 +1,34 @@
 <% model_class = User %>
 
+<h4 class="profileable-category">
+  <div>
+    <%= icon 'money' %>
+    Деньги
+  </div>
+</h4>
+
+<%# В РАБОТЕ %>
+<div class="profileable-item bottom-space-none">
+  В работе: <%= number_to_currency @somebody.cached_credit, :precision => 0 %>
+  <div class="profileable-item-controls">
+    <% namespace = admin_zone? ? [:admin, @somebody] : [:user] %>
+    <%= link_to polymorphic_path([:status, *namespace, :products], :status => 'active') , class: "btn btn-warning btn-sm" do %>
+      <%= icon 'edit' %>
+    <% end %>
+  </div>
+</div>
+
+<%# НА СЧЕТУ %>
+<div class="profileable-item bottom-space-none">
+  На счету: <%= number_to_currency @somebody.cached_debit, :precision => 0 %>
+  <div class="profileable-item-controls">
+    <% namespace = admin_zone? ? [:admin, @somebody] : [:user] %>
+    <%= link_to [:new, *namespace, :cashes], class: "btn btn-warning btn-sm" do %>
+      <%= icon 'edit' %>
+    <% end %>
+  </div>
+</div>
+
 <%
     array = [
       {title: 'Конт. лицо', icon: 'user', assoc: 'profile'},
@@ -31,36 +60,6 @@
   <% end %>
 
 <% end %>
-
-
-<h4 class="profileable-category">
-  <div>
-    <%= icon 'money' %>
-    Деньги
-  </div>
-</h4>
-
-<%# В РАБОТЕ %>
-<div class="profileable-item">
-  В работе: <%= number_to_currency @somebody.cached_credit %>
-  <div class="profileable-item-controls">
-    <% namespace = admin_zone? ? [:admin, @somebody] : [:user] %>
-    <%= link_to polymorphic_path([:status, *namespace, :products], :status => 'active') , class: "btn btn-warning btn-sm" do %>
-      <%= icon 'edit' %>
-    <% end %>
-  </div>
-</div>
-
-<%# НА СЧЕТУ %>
-<div class="profileable-item">
-  На счету: <%= number_to_currency @somebody.cached_debit %>
-  <div class="profileable-item-controls">
-    <% namespace = admin_zone? ? [:admin, @somebody] : [:user] %>
-    <%= link_to [:new, *namespace, :cashes], class: "btn btn-warning btn-sm" do %>
-      <%= icon 'edit' %>
-    <% end %>
-  </div>
-</div>
 
 <%# СОЦ СЕТИ %>
 <h4 class="profileable-category">
