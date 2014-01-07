@@ -39,6 +39,3 @@ $(document).on 'socket.joined', (e) ->
 
   window.socket.on "rails.geo1.create", (msg) ->
     console.log $.parseJSON(msg)
-
-$(document).on 'click', '#switch-online-debug', ->
-  aaa

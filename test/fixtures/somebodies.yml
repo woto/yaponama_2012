@@ -1,7 +1,5 @@
 first_admin:
-  online: false
   type: User
-  phantom: false
   creator: first_admin
   creation_reason: fixtures
   discount: 0.0
@@ -25,10 +23,12 @@ first_admin:
   order_rule: all
   main_profile: first_admin
   cached_main_profile: '{"names":[{"surname":"Корнев","name":"Руслан","patronymic":"Михайлович"}],"phones":[{"value":"+7 (111) 111-11-11"}],"emails":[{"value":"foo@example.com"}],"passports":[{"seriya":"1","nomer":"1","mesto_rozhdeniya":"1"}]}'
+  place: first
+  post: Администратор сайта
+  default_addressee: ivan
+
 
 first_user:
-  online: false
-  phantom: false
   type: User
   creator: stan
   auth_token: YbFORw8BE0qmF8eWHS29oa
@@ -47,8 +47,6 @@ first_user:
   cached_main_profile: '{"names":[{"surname":"","name":"Пользователь","patronymic":""}],"phones":[{"value":"+7 (123) 123-12-31"}],"emails":[{"value":"first_user_email@example.com"}],"passports":[]}'
 
 stan:
-  online: false
-  phantom: false
   type: User
   creator: otto
   auth_token: ckysZX9XOzwEEeI8ZvKc0P
@@ -66,9 +64,25 @@ stan:
   main_profile: stan
   cached_main_profile: '{"names":[{"surname":"","name":"Стэн","patronymic":""}],"phones":[{"value":"+7 (333) 333-33-33"}],"emails":[],"passports":[]}'
 
+fry:
+  type: User
+  creator: otto
+  auth_token: 8ZcEeIvKc0PkysZX9XOzwE
+  creation_reason: fixtures
+  role: user
+  discount: 5
+  prepayment: 10
+  order_rule: all
+  logout_from_other_places: false
+  # password: 3213213213
+  password_digest: $2a$10$c7lned5SgUsMMeCjsIqDpuLJKTQlho8Xt/r7qnEBIBSUBEtsHRO6.
+  cached_russian_time_zone_auto_id: 9
+  russian_time_zone_manual_id: 7
+  use_auto_russian_time_zone: true
+  main_profile: fry
+  cached_main_profile: '{"names":[{"surname":"","name":"Фрай","patronymic":""}],"phones":[{"value":"+7 (321) 321-32-13"}],"emails":[],"passports":[]}'
+
 otto:
-  online: false
-  phantom: false
   type: User
   creator: mark
   auth_token: 28eoqmbORBE0YW9HSw8FFa
@@ -87,11 +101,10 @@ otto:
   use_auto_russian_time_zone: true
   main_profile: otto
   cached_main_profile: '{"names":[{"surname":"","name":"Отто","patronymic":""}],"phones":[{"value":"+7 (666) 666-66-66"},{"value":"8-888-888-88-88"},{"value":"+7 (555) 555-55-55"},{"value":"+7 (111) 111-11-11"}],"emails":[{"value":"fake@example.com"},{"value":"foo@example.com"}],"passports":[]}'
+  default_addressee: first_admin
 
 
 mark:
-  online: false
-  phantom: false
   type: User
   creator: otto
   auth_token: 9XOvKceIckyzwEE8ZsZX0P
@@ -108,10 +121,10 @@ mark:
   use_auto_russian_time_zone: false
   main_profile: mark
   cached_main_profile: '{"names":[{"surname":"","name":"Марк","patronymic":""}],"phones":[{"value":"+7 (444) 444-44-44"}],"emails":[{"value":"mark@example.com"}],"passports":[]}'
+  total_talks: 5
+  unread_talks: 4
 
 mike:
-  online: false
-  phantom: false
   type: User
   creator: stan
   auth_token: 0z0EKi883eFiEaEwXZeIcF
@@ -126,7 +139,6 @@ mike:
   cached_main_profile: '{"names":[{"surname":"Майков","name":"Майк","patronymic":"Майкович"}],"phones":[{"value":"+7 (777) 777-77-77"}],"emails":[],"passports":[]}'
 
 phantom:
-  online: false
   phantom: true
   type: User
   role: user
@@ -139,15 +151,11 @@ online:
 
 avtorif:
   auth_token: P6OZ392jf31vnD332xbl0nM
-  online: false
-  phantom: false
   type: Supplier
   creation_reason: fixtures
 
 mile:
   auth_token: 2BSjfhjfTRs33esrj28fDFB
-  online: false
-  phantom: false
   type: Supplier
   creation_reason: fixtures
   main_profile: mile_main
@@ -165,8 +173,6 @@ exist:
 
 
 anton:
-  online: false
-  phantom: false
   type: User
   creator: otto
   auth_token: 35SD84dsD9fuhAS342FA
@@ -183,3 +189,74 @@ anton:
   use_auto_russian_time_zone: true
   main_profile: anton
   cached_main_profile: '{"names":[{"surname":"Чехов","name":"Антон","patronymic":"Павлович"}],"phones":[{"value":"+7 (112) 233-44-55"},{"value":"+7 (554) 433-22-11"}],"emails":[],"passports":[]}'
+
+guest:
+  type: User
+  auth_token: 8e9beU3E20YWHmF1RBSwFa
+  creation_reason: fixtures
+  role: guest
+  discount: 0
+  prepayment: 100
+  order_rule: all
+
+guest_with_profile:
+  type: User
+  auth_token: 8e9beU3E20YWHmF1RBSwFa
+  creation_reason: fixtures
+  role: guest
+  discount: 0
+  prepayment: 100
+  order_rule: all
+
+ivan:
+  type: User
+  creator: first_admin
+  creation_reason: fixtures
+  discount: 5.0
+  prepayment: 0.0
+  role: manager
+  auth_token: bl0M9PGQt6O6IWaVNZxzRn
+  # password 999999999
+  password_digest: $2a$10$dJd3HGIFVqDPO9oHQVv9C.BzhwqIs7pIM/gEhndm1AiNQHWUBE/5.
+  order_rule: all
+  main_profile: ivan
+  cached_main_profile: '{"names":[{"surname":"Иванов","name":"Иван","patronymic":"Иванович"}],"phones":[{"value":"+7 (999) 999-99-99"}],"emails":[{"value":"six@example.com"}],"passports":[]}'
+  place: second
+  post: Консультант менеджер
+
+petr:
+  type: User
+  creator: first_admin
+  creation_reason: fixtures
+  discount: 10.0
+  prepayment: 10.0
+  role: manager
+  auth_token: b6RnNVl0IWaM6OZxz9PGQt
+  # password 2222222222
+  password_digest: $2a$10$x0dKUlaGZpETt7lATCvLgejh4wypwUBEUqYmJlFlXvhj4pwJkPXMC
+  order_rule: all
+  main_profile: petr
+  cached_main_profile: '{"names":[{"surname":"Петров","name":"Пётр","patronymic":"Петрович"}],"phones":[{"value":"+7 (222) 222-22-22"}],"emails":[{"value":"seven@example.com"}],"passports":[]}'
+  place: second
+  post: Старший менеджер
+  total_talks: 3
+  unread_talks: 3
+
+sidor:
+  type: User
+  creator: first_admin
+  creation_reason: fixtures
+  discount: 0.0
+  prepayment: 10.0
+  role: manager
+  auth_token: MnNVbWal0I9PGQt6UZxz6R
+  # password 0000000000
+  password_digest: $2a$10$1qv0DwY1UUPGa1lxksFrFuzRHtKA9M38hPUcgJOKJMqE11bPFaGDe
+  order_rule: all
+  main_profile: sidor
+  cached_main_profile: '{"names":[{"surname":"Сидоров","name":"Сидор","patronymic":"Сидорович"}],"phones":[{"value":"+7 (000) 000-00-00"}],"emails":[],"passports":[]}'
+  place: first
+  post: Старший менеджер
+  logout_from_other_places: false
+  total_talks: 3
+  unread_talks: 3

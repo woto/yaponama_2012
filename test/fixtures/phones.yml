@@ -20,6 +20,13 @@ stan:
   somebody: stan
   creation_reason: fixtures
 
+fry:
+  value: +7 (321) 321-32-13
+  mobile: true
+  profile: fry
+  somebody: fry
+  creation_reason: fixtures
+
 otto:
   value: +7 (111) 111-11-11
   mobile: true
@@ -108,4 +115,28 @@ anton_second:
   value: +7 (554) 433-22-11
   mobile : true
   confirmed: false
+  creation_reason: fixtures
+
+ivan:
+  somebody: ivan
+  profile: ivan
+  value: +7 (999) 999-99-99
+  mobile : true
+  confirmed: true
+  creation_reason: fixtures
+
+petr:
+  somebody: petr
+  profile: petr
+  value: +7 (222) 222-22-22
+  mobile : true
+  confirmed: false
+  creation_reason: fixtures
+
+sidor:
+  somebody: sidor
+  profile: sidor
+  value: +7 (000) 000-00-00
+  mobile : true
+  confirmed: true
   creation_reason: fixtures

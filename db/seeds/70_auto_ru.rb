@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 Dir[File.join("#{Rails.root}", "system", "scripts", "auto.ru", "bmw")].each do |path|
   name = File.basename(path)
   if name != 'script.rb'

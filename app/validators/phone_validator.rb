@@ -7,7 +7,7 @@ class PhoneValidator < ActiveModel::EachValidator
     if object.errors[:value].blank?
 
       unless [true, false].include? object.mobile
-        object.errors[attribute] << (options[:message] || "имеет непредусмотренное значение")
+        object.errors[attribute] << (options[:message] || "тип телефона не указан")
       end
 
       if object.mobile

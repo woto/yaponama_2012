@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top" role="navigation">
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 
   <div class="container">
 
@@ -13,43 +13,13 @@
 
       </button>
 
-      <a class="navbar-brand" href="/" style='padding-top: 5px; padding-bottom: 5px'>
+      <a class="navbar-brand" href="/">
         <%= image_tag "logo.png", style: "width: 186px; height: 38px" %>
       </a>
 
     </div> <!-- /.navbar-header -->
 
     <div class="navbar-collapse collapse navbar-responsive-collapse">
-
-      <ul class="nav navbar-nav">
-
-        <%= dropdown do |dd| %>
-
-          <%= dd.toggle do %>
-            Покупателям 
-            <%= caret %>
-          <% end %>
-
-          <%= dd.menu do %>
-            <li> <%= link_to "Новости компании", "#" %> </li>
-            <li> <%= link_to "Акции и бонусы", "#" %> </li>
-            <li> <%= link_to "Способы оплаты", "#" %> </li>
-            <li class="<%= highlight_active([:controller => "/deliveries"]) %>">
-              <%= link_to "Доставка и самовывоз", deliveries_path %>
-            </li>
-            <li> <%= link_to "Частые вопросы", "#" %> </li>
-          <% end %>
-
-        <% end %>
-
-        <li class="divider-vertical invisible">
-          <%# TODO пока просто перенес %>
-          <% if content_for :pages_controler %>
-            <%= yield(:pages_controller) %>
-          <% end %>
-        </li>
-
-      </ul>
 
       <%= render 'common_search_form' %>
 
@@ -58,16 +28,23 @@
         <li class="<%= highlight_active([:controller => '/products', :status => 'incart']) %>">
           <%= link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do %>
             <%= icon 'shopping-cart' %> 
-            Корзина <span class="badge"><%= @somebody.products.where(:status => 'incart').count %></span>
+            <% count = @somebody.products.where(:status => 'incart').count %>
+            Корзина <span id="products_incart" class="badge"><%= count if count > 0 %></span>
           <% end %>
         </li>
+
+        <%= render 'bell' %>
 
         <%= dropdown do |dd| %>
 
           <%= dd.toggle do %>
             <%= icon 'user' %>
             <% if @user.role != 'guest' %>
-              <%= JSON.parse(@user.cached_main_profile).try(:[], 'names').try(:first).try(:[], 'name') %>
+              <% begin %>
+                <%= JSON.parse(@user.cached_main_profile).try(:[], 'names').try(:first).try(:[], 'name') %>
+              <% rescue %>
+                <!-- Потом устранить -->
+              <% end %>
             <% else %>
               Личный кабинет
             <% end %>
@@ -81,8 +58,11 @@
               <%= divider %>
               <li> <%= link_to "Забыли пароль?", password_reset_path %> </li>
             <% else %>
+              <% if ["admin", "manager"].include? current_user.role %>
+                <li> <%= link_to "Закрытая зона", admin_path %> </li>
+                <%= divider %>
+              <% end %>
               <li> <%= link_to "Личный кабинет", user_path %> </li>
-              <%= divider %>
               <li> <%= link_to "Выход", logout_path, :method => :delete %> </li>
             <% end %>
           <% end %>
@@ -96,3 +76,23 @@
   </div> <!-- /.container -->
 
 </nav>
+
+
+
+<div id="nav-second" class="navbar navbar-inverse navbar-static-top">
+
+  <div class="container">
+
+    <div class="collapse navbar-collapse navbar-responsive-collapse">
+      <ul class="nav navbar-nav text-sm">
+        <li> <%= link_to "Новости компании", "#" %> </li>
+        <li> <%= link_to "Акции и бонусы", "#" %> </li>
+        <li> <%= link_to "Способы оплаты", "#" %> </li>
+        <li class="<%= highlight_active([:controller => "/deliveries"]) %>">
+          <%= link_to "Доставка и самовывоз", deliveries_path %>
+        </li>
+        <li> <%= link_to "Частые вопросы", "#" %> </li>
+      </ul>
+    </div>	
+   </div>	
+</div>

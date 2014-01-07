@@ -1,6 +1,9 @@
-<%= render :partial => "layouts/shared/head" %>
-<body>
-  <%= render :partial => 'layouts/shared/body' %>
-  <%= yield %>
-  <%= render "layouts/shared/footer" %>
-</body>
+<%= render :partial => "layouts/shared/html_prefix" %>
+
+<%= render :partial => 'layouts/shared/body_prefix' %>
+
+<%= yield %>
+
+<%= render :partial => 'layouts/shared/body_suffix' %>
+
+<%= render :partial => "layouts/shared/html_suffix" %>

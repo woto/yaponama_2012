@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 (b = Brand.where(:name => %q|ALFA_ROMEO|).first_or_create); b.update(:content => %q|<h1>
 	Alfa Romeo <small>(рус. Альфа Ромео)</small></h1>
 <ul>

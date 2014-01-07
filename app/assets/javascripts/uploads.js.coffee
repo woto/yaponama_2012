@@ -1,5 +1,8 @@
+#  require jQuery-File-Upload/js/vendor/jquery.ui.widget.js
 #= require jQuery-File-Upload/js/jquery.iframe-transport
 #= require jQuery-File-Upload/js/jquery.fileupload
+
+App = exports ? this
 
 # Обработка изображений (crop, rotate)
 $(document).on 'click', '.image-process', (event) ->
@@ -49,5 +52,9 @@ $ ->
     progressall: (e, data) ->
       $('#insert_files_into_ckeditor').show()
 
-  $("#fileupload").fileupload "option",
+  $(".fileupload").fileupload "option",
     paramName: "upload[upload]"
+
+$ ->
+  App.init_jquery_file_upload()
+

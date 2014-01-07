@@ -30,11 +30,6 @@ $(document).on 'page:load', ->
 
 window.bootstrapperize = ->
 
-  #$("#grid-toolbar-columns").on "click", (e) ->
-  #  $(".modal-body").load "/render/62805", (result) ->
-  #    $("#myModal").modal show: true
-
-
   $("[rel~='checkbox']").each ->
 
     if $(this).is(':checked')
@@ -44,6 +39,17 @@ window.bootstrapperize = ->
 
     # Нельзя вызывать change
     $(this).trigger('custom-change')
+
+  # TODO Это тут только для чернового варианта, убрать
+  # Я пока не хочу создавать отдельный обработчик и заморачиваться
+  # т.к. кнопка просмотрено/не просмотрено отображается правильно во всех
+  # случаях, а используется вызов bootstrapperize для выставления класса
+  # active у кнопок просмотра, то я задействовал этот участок
+
+  $("[rel~='talk-read']").each (i, eye) ->
+    unless $('#admin_zone').data('value')
+      $(eye).closest('fieldset').attr('disabled', 'disabled')
+
 
   $("[rel~='radio']").each ->
 

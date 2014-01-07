@@ -5,15 +5,21 @@ class Somebody < ActiveRecord::Base
   include BelongsToCreator
   include Selectable
 
+  belongs_to :place, class_name: "Deliveries::Place"
+
   has_many :uploads
 
   # Понятие главного профиля
   belongs_to :main_profile, :class_name => "Profile", :inverse_of => :user_where_is_main_profile
 
   #validates :main_profile, presence: true, unless: -> { role == 'guest' } (Пользователь может входить с помощью социальных сетей не имея профиля в начала)
+  
+  belongs_to :default_addressee, class_name: "Somebody"
 
   has_many :talks, inverse_of: :somebody
   accepts_nested_attributes_for :talks
+
+  has_many :talks_where_i_am_addresse, class_name: "Talk"
 
   # TODO сделать.
   #has_many :brands
@@ -95,16 +101,13 @@ class Somebody < ActiveRecord::Base
   #validates :account, :presence => true
 
   def to_label
-    #"#{names.collect(&:name).join(', ')}
-    # TODO Сделать как-нибудь лучше
-    #cached_main_profile
-    #profiles.map(&:to_label).join(', ')
     res = []
     
     begin
       name = JSON.parse(cached_main_profile)['names'].first
       [name['surname'], name['name']].join(' ')
     rescue
+      "Посетитель № #{id.to_s.scan(/.{2}|.+/).join("-")}"
     end
   end
 

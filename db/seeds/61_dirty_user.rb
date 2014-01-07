@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#
 user = User.new
 user.assign_attributes( SiteConfig.default_somebody_attributes )
 user.role = "user"

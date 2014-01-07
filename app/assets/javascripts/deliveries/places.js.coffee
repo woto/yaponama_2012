@@ -16,7 +16,7 @@ window.initMap = ->
           position: results[0].geometry.location
         )
       else
-        alert "Не удалось определить местоположение, попробуйте уточнить запрос. " + status
+        console.log "Не удалось определить местоположение, попробуйте уточнить запрос. " + status
 
   clearSelection = ->
     if selectedShape

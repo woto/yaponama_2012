@@ -45,6 +45,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    current_user.update_column(:online, false)
+    $redis.publish("#{Rails.env}:update sellers", JSON.dump({comment: 'sessions#destroy'}))
     #session[:user_id] = nil
     cookies.delete(:auth_token)
     redirect_to root_path, :success => "Вы успешно вышли."

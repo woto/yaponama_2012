@@ -35,8 +35,9 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
   def error method, options = {}
     method = method.to_s.chomp('_id').to_sym
     if @object.errors[method].present?
-      @template.content_tag :span, class: "help-block" do
-        @template.content_tag :b, @object.errors[method].join(', ')
+      options[:class] = ['help-block', options[:class]].compact
+      @template.content_tag :span, options do
+        @template.content_tag :b, @object.errors[method].uniq.join(', ')
       end
     end
   end
@@ -45,7 +46,7 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
     @template.link_to_remove_association( 
       @template.icon('times'),
       self, 
-      :class => "btn pull-right ignoredirty btn-unstyled",
+      :class => "ignoredirty control",
       data: { confirm: 'Действительно хотите удалить?' }
     )
   end

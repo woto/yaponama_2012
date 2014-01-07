@@ -66,10 +66,12 @@ class ApplicationController < ActionController::Base
 
   def update
     respond_to do |format|
-      if @resource.update(resource_params)
-        format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path]), success: "#{@resource_class} was successfully updated." }
+      if @resource.save
+        format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path]), success: "#{@resource_class} был успешно обновлен" }
+        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
+        format.json { render json: @resource.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -204,7 +206,7 @@ class ApplicationController < ActionController::Base
         @current_user.code_1 = 'session'
         @current_user.build_account
         @current_user.phantom = false
-        @current_user.online = true
+        #@current_user.online = true
         @current_user.save!
         cookies.permanent[:auth_token] = @current_user.auth_token
       end
@@ -305,6 +307,8 @@ class ApplicationController < ActionController::Base
 
   def create_resource
     @resource = @resource_class.new(resource_params)
+    #debugger
+    #puts
   end
 
   before_action :update_resource, :only => [:update]
@@ -317,12 +321,14 @@ class ApplicationController < ActionController::Base
   before_action :set_user_and_creation_reason, :only => [:create, :update]
 
   def set_user_and_creation_reason
-    if @resource.respond_to? :somebody
+    #debugger
+    if @resource.respond_to?(:somebody) && @resource.somebody.blank?
       @resource.somebody = @somebody
     end
 
-    if @resource.respond_to? :creator
-      @resource.creator = current_user.creator
+    # TODO черновой вариант
+    if @resource.respond_to?(:creator) && !(@resource.persisted? && @resource.is_a?(Talk))
+      @resource.creator = current_user
     end
 
     if @resource.respond_to? :code_1=
@@ -333,7 +339,20 @@ class ApplicationController < ActionController::Base
 
   def resource_params
     # TODO DANGER!
-    params.require(@resource_class.name.underscore.gsub('/', '_').to_sym).permit!
+    params.fetch(@resource_class.name.underscore.gsub('/', '_').to_sym, {}).permit!
+  end
+
+
+  def user_get
+    @user = @resource.somebody if @resource && @resource.respond_to?(:somebody)
+  end
+
+  def somebody_get
+    @somebody = @resource.somebody if @resource && @resource.respond_to?(:somebody)
+  end
+
+  def supplier_get
+    @supplier = @resource.supplier if @resource && @resource.respond_to?(:supplier)
   end
 
 end

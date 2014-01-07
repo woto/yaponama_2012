@@ -70,14 +70,6 @@ class Admin::PagesController < PagesController
 
   private
 
-  #def page_params
-  #  params.require(:page).permit!
-  #end
-
-  def find_resource
-    @resource = @resource_class.find(params[:id])
-  end
-
   def user_set
     @somebody = @user = User.find(params[:user_id]) if params[:user_id]
   end

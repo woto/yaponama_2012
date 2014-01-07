@@ -1,23 +1,27 @@
-<% confirm = capture do %>
+<% if current_user.role != 'guest' %>
 
-  <% current_user.profiles.each do |profile| %>
+  <% confirm = capture do %>
 
-    <% profile.phones.mobile.each do |phone| %>
-      <% if !phone.confirmed? && phone.persisted? %>
-        <div>
-          Пожалуйста, подтвердите номер мобильного телефона 
-          <%= alert_link_to phone.to_label, view_user_confirm_phone_path(phone), class: 'confirm-link confirm-phone' %>
-        </div>
+    <% current_user.profiles.each do |profile| %>
+
+      <% profile.phones.mobile.each do |phone| %>
+        <% if !phone.confirmed? && phone.persisted? %>
+          <div>
+            Пожалуйста, подтвердите номер мобильного телефона 
+            <%= alert_link_to phone.to_label, view_user_confirm_phone_path(phone), class: 'confirm-link confirm-phone' %>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
 
-    <% profile.emails.each do |email| %>
-      <% if !email.confirmed? && email.persisted? %>
-        <div>
-          Пожалуйста, подтвердите e-mail адрес 
-          <%= alert_link_to email.to_label, view_user_confirm_email_path(email), class: 'confirm-link confirm-email' %>
-        </div>
+      <% profile.emails.each do |email| %>
+        <% if !email.confirmed? && email.persisted? %>
+          <div>
+            Пожалуйста, подтвердите e-mail адрес 
+            <%= alert_link_to email.to_label, view_user_confirm_email_path(email), class: 'confirm-link confirm-email' %>
+          </div>
+        <% end %>
       <% end %>
+
     <% end %>
 
   <% end %>

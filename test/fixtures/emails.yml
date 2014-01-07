@@ -30,3 +30,24 @@ mark:
   somebody: mark
   confirmed: true
   creation_reason: fixtures
+
+guest_with_profile:
+  value: guest_with_profile@example.com
+  profile: guest_with_profile
+  somebody: guest_with_profile
+  confirmed: false
+  creation_reason: fixtures
+
+ivan:
+  value: six@example.com
+  profile: ivan
+  somebody: ivan
+  confirmed: false
+  creation_reason: fixtures
+
+petr:
+  value: seven@example.com
+  profile: petr
+  somebody: petr
+  confirmed: true
+  creation_reason: fixtures

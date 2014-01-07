@@ -22,6 +22,14 @@ stan:
   cached_emails: '[]'
   cached_passports: '[]'
 
+fry:
+  somebody: fry
+  creation_reason: fixtures
+  cached_names: '[{"surname":"","name":"Фрай","patronymic":""}]'
+  cached_phones: '[{"value":"+7 (321) 321-32-13"}]'
+  cached_emails: '[]'
+  cached_passports: '[]'
+
 otto:
   somebody: otto
   creation_reason: fixtures
@@ -75,5 +83,37 @@ anton:
   creation_reason: fixtures
   cached_names: '[{"surname":"Чехов","name":"Aнтонон","patronymic":"Павлович"}]'
   cached_phones: '[{"value":"+7 (112) 233-44-55"},{"value":"+7 (554) 433-22-11"}]'
+  cached_emails: '[]'
+  cached_passports: '[]'
+
+guest_with_profile:
+  somebody: guest_with_profile
+  creation_reason: fixtures
+  cached_names: '[{"surname":"","name":"Гость","patronymic":""}]'
+  cached_phones: '[{"value":""}]'
+  cached_emails: '[{"value":"guest_with_profile@example.com"}]'
+  cached_passports: '[]'
+
+ivan:
+  somebody: ivan
+  creation_reason: fixtures
+  cached_names: '[{"surname":"Иванов","name":"Иван","patronymic":"Иванович"}]'
+  cached_phones: '[{"value":"+7 (999) 999-99-99"}]'
+  cached_emails: '[{"value":"six@example.com"}]'
+  cached_passports: '[]'
+
+petr:
+  somebody: petr
+  creation_reason: fixtures
+  cached_names: '[{"surname":"Петров","name":"Пётр","patronymic":"Петрович"}]'
+  cached_phones: '[{"value":"+7 (222) 222-22-22"}]'
+  cached_emails: '[{"value":"seven@example.com"}]'
+  cached_passports: '[]'
+
+sidor:
+  somebody: sidor
+  creation_reason: fixtures
+  cached_names: '[{"surname":"Сидоров","name":"Сидор","patronymic":"Сидорович"}]'
+  cached_phones: '[{"value":"+7 (000) 000-00-00"}]'
   cached_emails: '[]'
   cached_passports: '[]'

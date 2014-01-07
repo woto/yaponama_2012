@@ -97,7 +97,7 @@
           - if params[:filter] == 'resources' || params[:filter].blank?
             th= model_class.human_attribute_name(:site_full_address)
             th= model_class.human_attribute_name(:redis_full_address)
-            th= model_class.human_attribute_name(:socket_io_full_address)
+            th= model_class.human_attribute_name(:realtime_full_address)
             th= model_class.human_attribute_name(:juggernaut_full_address)
             th= model_class.human_attribute_name(:price_full_address)
             th= model_class.human_attribute_name(:get_image_data_full_address)
@@ -178,7 +178,7 @@
             - if params[:filter] == 'resources' || params[:filter].blank?
               td= admin_site_setting.site_full_address
               td= admin_site_setting.redis_full_address
-              td= admin_site_setting.socket_io_full_address
+              td= admin_site_setting.realtime_full_address
               td= admin_site_setting.juggernaut_full_address
               td= admin_site_setting.price_full_address
               td= admin_site_setting.get_image_data_full_address

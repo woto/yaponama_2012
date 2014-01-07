@@ -4,7 +4,7 @@ window.extended_options =
   #removeButtons: 'Anchor,Underline,Strike,Subscript,Superscript';
   height: 300
   #plugins: 'forms'
-  extraPlugins: 'timestamp,abbr,divarea,codemirror,oembed,image2'
+  extraPlugins: 'timestamp,abbr,divarea,codemirror,oembed,image2,upload'
   plugins: 'about,a11yhelp,basicstyles,bidi,blockquote,clipboard,colorbutton,colordialog,contextmenu,div,elementspath,enterkey,entities,filebrowser,find,flash,floatingspace,font,format,horizontalrule,htmlwriter,indent,justify,link,list,liststyle,magicline,maximize,newpage,pagebreak,pastefromword,pastetext,preview,print,removeformat,resize,save,selectall,showblocks,showborders,smiley,sourcearea,specialchar,stylescombo,tab,table,tabletools,templates,toolbar,undo,wysiwygarea'
   removePlugins: 'image,forms'
   toolbarGroups: [

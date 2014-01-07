@@ -173,6 +173,23 @@ module GridUser
         :type => :number
       }
 
+      columns_hash['cached_talk'] = {
+        :type => :string
+      }
+
+      columns_hash['total_talks'] = {
+        :type => :number
+      }
+
+      columns_hash['unread_talks'] = {
+        :type => :number
+      }
+
+      columns_hash['default_addressee_id'] = {
+        :type => :belongs_to,
+        :belongs_to => User,
+      }
+
     end
 
     def set_preferable_columns

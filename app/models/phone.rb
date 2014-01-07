@@ -9,7 +9,7 @@ class Phone < ActiveRecord::Base
   include BelongsToSomebody
   include Transactionable
   include Selectable
-
+  include DestroyIfEmpty
 
   def self.mobile
     where(mobile: true)
@@ -25,7 +25,7 @@ class Phone < ActiveRecord::Base
 
   has_many :orders
 
-  validates :value, presence: true, phone: true
+  validates :value, presence: true, phone: true, unless: -> { self.marked_for_destruction? }
 
   validate :value do
     if Phone.confirmed.not_self(id).same(value).first
@@ -34,7 +34,7 @@ class Phone < ActiveRecord::Base
     end
   end
 
-  scope :same, ->(value){ where("regexp_replace(value, '[^0-9]', '', 'g') = ?", value.gsub(/[^0-9]/, '')) }
+  scope :same, ->(value){ where("regexp_replace(value, '[^0-9]', '', 'g') = ?", value.gsub(/[^0-9]/, '')) if value }
 
   def value_really_changed
     value_changed? && ( value_was.to_s.gsub(/[^0-9]/, '') != value.to_s.gsub(/[^0-9]/, '') )
@@ -73,7 +73,7 @@ class Phone < ActiveRecord::Base
 
   include RenameMeConcernTwo
 
-  before_validation if: -> { ['register', 'chat'].include?(code_1) }  do
+  before_validation if: -> { ['register', 'chat'].include?(code_1) && !marked_for_destruction? }  do
     self.mobile = true
   end
 

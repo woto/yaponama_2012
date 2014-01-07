@@ -38,16 +38,16 @@ window.initClientMap = ->
     directionsService.route request, (response, status) ->
       switch status
         when google.maps.DirectionsStatus.OVER_QUERY_LIMIT
-          alert 'Превышена частота запросов, пожалуйста, попробуйте еще раз.'
+          console.log 'Превышена частота запросов, пожалуйста, попробуйте еще раз.'
         when google.maps.DirectionsStatus.ZERO_RESULTS, google.maps.DirectionsStatus.NOT_FOUND
-          alert 'Указанный адрес не найден, попробуйте уточнить запрос'
+          console.log 'Указанный адрес не найден, попробуйте уточнить запрос'
         when google.maps.DirectionsStatus.OK
           if response.routes.length != 1
-            alert 'routes != 1'
+            console.log 'routes != 1'
           else
             route = response.routes[0]
             if route.legs.length != 1
-              alert 'legs != 1'
+              console.log 'legs != 1'
             else
               leg = route.legs[0]
 
@@ -71,7 +71,7 @@ window.initClientMap = ->
                   found.closest('.accordion-group').find('.collapse').collapse('show');
                   found.parent().effect('highlight')
                 else
-                  alert "Сожалеем, доставка по Вашему адресу не может быть осуществлена. Данная область не обслуживается. TODO дописать"
+                  console.log "Сожалеем, доставка по Вашему адресу не может быть осуществлена. Данная область не обслуживается. TODO дописать"
 
               else
                 if $('#automatic_calculate_active').text() == 'true'
@@ -82,14 +82,14 @@ window.initClientMap = ->
                     position: coords
                   delivery_cost = Math.round(leg.duration.value/60 * parseFloat($('#delivery_minute_cost').text()))
                   if delivery_cost > parseFloat($('#max_automatic_calculated_cost').text())
-                    alert "Сожалеем, доставка по Вашему адресу не может быть осуществлена. TODO дописать"
+                    console.log "Сожалеем, доставка по Вашему адресу не может быть осуществлена. TODO дописать"
                   else
-                    alert "Стоимость доставки: TODO дописать" + delivery_cost
+                    console.log "Стоимость доставки: TODO дописать" + delivery_cost
                 else
-                  alert('Автоматический расчет стоимости доставки выключен. TODO дописать')
+                  console.log('Автоматический расчет стоимости доставки выключен. TODO дописать')
 
         else
-          alert status
+          console.log status
 
   $('#geocode-address-button').on 'click', ->
     calcRoute($('#geocode-address-text').val())

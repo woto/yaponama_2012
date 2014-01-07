@@ -16,7 +16,9 @@ class CatchEnterTest < ActionDispatch::IntegrationTest
   test 'Проверка правильной работы catch enter при переходе на эту страницу по ссылке на просмотра доставки и самовывоза ' do
     visit '/'
     # turbolinks не работает?
-    click_link "Доставка и самовывоз"
+    within('#nav-second') do
+      click_link "Доставка и самовывоз"
+    end
     common
   end
 

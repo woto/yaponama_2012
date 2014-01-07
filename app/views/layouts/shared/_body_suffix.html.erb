@@ -1,2 +1,283 @@
 <%= icon 'arrow-circle-o-up fa-3x', id: "slide-top" %>
 
+<div id="modal-form-placeholder"> </div>
+<div id="modal-talk-holder"> </div>
+
+<%== SiteConfig.counter_yandex %>
+<%== SiteConfig.counter_mail %>
+<%== SiteConfig.counter_rambler %>
+<%== SiteConfig.counter_google %>
+<%== SiteConfig.counter_openstat %>
+<%== SiteConfig.counter_liveinternet %>
+
+<audio id="notify-audio" src='/assets/notify.ogg'> </audio>
+<audio id="notify-toggle-audio" src='/assets/toggle.ogg'> </audio>
+
+<div class="panel-group hidden" id="accordion">
+
+  <%= panel 'info' do |p| %>
+    <%= p.heading do %>
+      <%= p.title do %>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#SiteConfig">
+          SiteConfig
+        </a>
+      <% end %>
+    <% end %>
+    <%= p.collapse id: 'SiteConfig' do %>
+      <%= p.body do %>
+        <p>
+          <b> initial_map_zoom </b>
+          <div id="initial_map_zoom"><%= SiteConfig.initial_map_zoom %></div>
+        </p>
+        <p>
+          <b> initial_map_lat </b>
+          <div id="initial_map_lat"><%= SiteConfig.initial_map_lat %></div>
+        </p>
+        <p>
+          <b> initial_map_lng </b>
+          <div id="initial_map_lng"><%= SiteConfig.initial_map_lng %></div>
+        </p>
+        <p>
+          <b> warehouse_address </b>
+          <div id="warehouse_address"><%= SiteConfig.warehouse_address %></div>
+        </p>
+        <p>
+          <b> delivery_minute_cost </b>
+          <div id="delivery_minute_cost"><%= SiteConfig.delivery_minute_cost %></div>
+        </p>
+        <p>
+          <b> google_maps_key </b>
+          <div id="google_maps_key"><%= SiteConfig.google_maps_key %></div>
+        </p>
+        <p>
+          <b> travel_mode </b>
+          <div id="travel_mode"><%= SiteConfig.travel_mode %></div>
+        </p>
+        <p>
+          <b> auth-result </b>
+          <div id="auth-result"> </div>
+        </p>
+        <p>
+          <b> automatic_calculate_active </b>
+          <div id="automatic_calculate_active"><%= SiteConfig.automatic_calculate_active %></div>
+        </p>
+        <p>
+          <b> max_automatic_calculated_cost </b>
+          <div id="max_automatic_calculated_cost"><%= SiteConfig.max_automatic_calculated_cost %></div>
+        </p>
+        <p>
+          <b> realtime_port </b>
+          <div id="realtime_port"><%= SiteConfig.realtime_port %></div>
+        </p>
+        <p>
+          <b> realtime_address </b>
+          <div id="realtime_address"><%= SiteConfig.realtime_address %></div>
+        </p>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= panel 'info' do |p| %>
+    <%= p.heading do %>
+      <%= p.title do %>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#NotifySound">
+          NotifySound
+        </a>
+      <% end %>
+    <% end %>
+    <%= p.collapse id: 'NotifySound' do %>
+      <%= p.body do %> 
+        <dl>
+          <dt> playing-count </dt>
+          <dd id="playing-count"> </dd>
+        </dl>
+        <dl>
+          <dt> is-playing </dt>
+          <dd id="is-playing"> </dd>
+        </dl>
+        <dl>
+          <dt> can-play-through </dt>
+          <dd id="can-play-through"> </dd>
+        </dl>
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+  <%= panel 'info' do |p| %>
+    <%= p.heading do %>
+      <%= p.title do %>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#NotifySoundToggler">
+          NotifySoundToggler
+        </a>
+      <% end %>
+    <% end %>
+    <%= p.collapse id: 'NotifySoundToggler' do %>
+      <%= p.body do %> 
+        <dl>
+          <dt> play-sound-on-new-message </dt>
+          <dd id="play-sound-on-new-message" data-value="<%= current_user.sound %>"><%= current_user.sound %></dd>
+        </dl>
+        <dl>
+          <dt> sound-toggled </dt>
+          <dd id="sound-toggled"> </dd>
+        </dl>
+
+        <%= render 'talks/buttons/sound' %>
+
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= panel 'info' do |p| %>
+    <%= p.heading do %>
+      <%= p.title do %>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Stat"> Stat </a>
+      <% end %>
+    <% end %>
+    <%= p.collapse id: "Stat" do %>
+      <%= p.body do %>
+        <dl>
+          <dt> #server-time </dt>
+          <dd id="server-time"><%= Time.now.utc.iso8601 %></dd>
+        </dl>
+        <dl>
+          <dt> #debug-server </dt>
+          <dd id="debug-server"> </dd>
+        </dl>
+        <dl>
+          <dt> #debug-local </dt>
+          <dd id="debug-local"> </dd>
+        </dl>
+        <dl>
+          <dt> #debug-zone </dt>
+          <dd id="debug-zone"> </dd>
+        </dl>
+        <dl>
+          <dt> #debug-offset </dt>
+          <dd id="debug-offset"> </dd>
+        </dl>
+        <dl>
+          <dt> #debug-stat-result </dt>
+          <dd> <pre id="debug-stat-result" class="incomplete"> </pre> </dd>
+        </dl>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= panel 'info' do |p| %>
+    <%= p.heading do %>
+      <%= p.title do %>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Time"> Time </a>
+      <% end %>
+    <% end %>
+    <%= p.collapse id: "Time" do %>
+      <%= p.body do %>
+        <dl>
+          <dt> #anton-time </dt>
+          <dd id="anton-time"><%= Product.where(catalog_number: 'TIME').first.created_at %></dd>
+        </dl>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= panel 'info' do |p| %>
+    <%= p.heading do %>
+      <%= p.title do %>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#CatchEnter"> CatchEnter </a>
+      <% end %>
+    <% end %>
+    <%= p.collapse id: "CatchEnter" do %>
+      <%= p.body do %>
+        <dl>
+          <dt> #debug-catch-enter </dt>
+          <dd id="debug-catch-enter"> </dd>
+        </dl>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= panel 'info' do |p| %>
+    <%= p.heading do %>
+      <%= p.title do %>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Talk"> Talk </a>
+      <% end %>
+    <% end %>
+    <%= p.collapse id: 'Talk' do %>
+      <%= p.body do %>
+        <dl> 
+          <dt> #authentication </dt>
+          <dd id="authentication"> </dd>
+        </dl>
+        <dl>
+          <dt> #sellers </dt>
+          <dd> <pre id="sellers">{}</pre> </dd>
+        </dl>
+        <dl>
+          <dt> #private-message </dt>
+          <dd> <pre id="private-message"> </pre> </dd>
+        </dl>
+        <dl>
+          <dt> #broadcast-message </dt>
+          <dd> <pre id="broadcast-message"> </pre> </dd>
+        </dl>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= panel 'info' do |p| %>
+    <%= p.heading do %>
+      <%= p.title do %>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#User">
+          User
+        </a>
+      <% end %>
+    <% end %>
+    <%= p.collapse id: 'User' do %>
+      <%= p.body do %> 
+        <dl>
+          <dt> #current_user_id </dt>
+          <dd id="current_user_id"><%= current_user.id %></dd>
+        </dl>
+        <dl>
+          <dt> #auth_token </dt>
+          <dd id="auth_token"><%= @somebody.try(:auth_token) %></dd>
+        </dl>
+        <dl>
+          <dt> #user_id </dt>
+          <dd id="user_id"><%= @somebody.try(:id) %></dd>
+        </dl>
+        <dl>
+          <dt> #current_user_role </dt>
+          <dd id="current_user_role"><%= current_user.try(:role) %></dd>
+        </dl>
+        <dl>
+          <dt> #somebody_role </dt>
+          <dd id="somebody_role"><%= @somebody.try(:role) %></dd>
+        </dl>
+        <dl>
+          <dt> #admin_zone </dt>
+          <dd id="admin_zone" data-value="<%= admin_zone? %>"><%= admin_zone? %></dd>
+        </dl>
+
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= panel 'info' do |p| %>
+    <%= p.heading do %>
+      <%= p.title do %>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#XXX">
+          XXX
+        </a>
+      <% end %>
+    <% end %>
+    <%= p.collapse id: 'XXX' do %>
+      <%= p.body do %>
+        XXX
+      <% end %>
+    <% end %>
+  <% end %>
+
+</div>
+</body>

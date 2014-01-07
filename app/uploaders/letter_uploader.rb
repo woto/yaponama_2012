@@ -54,8 +54,9 @@ class LetterUploader < CarrierWave::Uploader::Base
 
   # Псевдо уникальное имя файла
   def filename
-    secure_token
+    "#{secure_token}.eml"
   end
+
   protected
   def secure_token
     var = :"@#{mounted_as}_secure_token"

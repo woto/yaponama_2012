@@ -2,40 +2,9 @@
 #
 class ReceiveMailer < ActionMailer::Base
 
+  helper :application
+
   def receive(message)
-
-    #puts 'message.body.to_s'
-    #puts message.body.to_s
-    #puts '----------------------------'
-
-    #puts 'message.multipart?'
-    #puts message.multipart?
-    #puts '----------------------------'
-
-    #puts 'message.parts.length'
-    #puts message.parts.length
-    #puts '----------------------------'
-
-    #puts 'message.from_addrs.to_s'
-    #puts message.from_addrs.to_s
-    #puts '----------------------------'
-
-    #puts 'message.parts.map {|p| p.content_type}.join(', ').to_s'
-    #puts message.parts.map {|p| p.content_type}.join(', ').to_s
-    #puts '----------------------------'
-
-    #puts 'message.parts.map {|p| p.class}.join(', ').to_s'
-    #puts message.parts.map {|p| p.class}.join(', ').to_s
-    #puts '----------------------------'
-
-    #puts 'message.html_part ? message.html_part.body.to_s : nil'
-    #puts message.html_part ? message.html_part.body.to_s : nil
-    #puts '----------------------------'
-
-    #puts '(message.multipart? ? (message.text_part ? message.text_part.body.to_s : nil) : message.body.to_s)'
-    #puts (message.multipart? ? (message.text_part ? message.text_part.body.to_s : nil) : message.body.to_s)
-    #puts '----------------------------'
-    #
 
     message.from.each do |from|
 
@@ -68,9 +37,9 @@ class ReceiveMailer < ActionMailer::Base
         #user.save
       end
 
-      talk = user.talks.new(code_1: 'email')
+      @resource = user.talks.new(code_1: 'email')
 
-      letter = Letter.new(
+      letter = Talkables::Letter.new(
         subject: message.subject,
         #source: message.body.to_s,
         letter: StringWithFileNameIO.new('email', message.raw_source),
@@ -79,32 +48,16 @@ class ReceiveMailer < ActionMailer::Base
         #charset: message.charset
       )
 
-      talk.talkable = letter 
-
-      parts = message.all_parts
-      parts = [message] if parts.empty?
-
-      parts.each do |part|
-        letter.letter_parts.new(
-          cid: (part.respond_to?(:cid) ? part.cid : nil),
-          #letter_part: AppSpecificStringIO.new('letter_part', part.raw_source),
-          letter_part_type: (part.mime_type || 'text/plain'),
-          is_attachment: (part.attachment? ? 1 : 0),
-          filename: part.filename,
-          charset: part.charset,
-          body: part.body.to_s,
-          #size: part.body.to_s.length
-        )
-      end
-
+      @resource.talkable = letter 
+      @resource.creator = user
 
       #@talk = @user.talks.new(talk_params)
 
       user.save!
       #debugger
 
-      json = render_to_string(template: 'talks/_show.json.jbuilder', locals: { talk: talk })
-      $redis.publish('talk', json)
+      #json = render_to_string(template: 'talks/_show.json.jbuilder', locals: { talk: talk })
+      #$redis.publish('talk', json)
       #render :nothing => true
 
       #email_address.save

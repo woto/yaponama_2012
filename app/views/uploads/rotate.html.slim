@@ -11,10 +11,10 @@
 
         = f.form_group nil, style: "position: relative; z-index: 100"
           a.rotate-button class="btn btn-default" href="#" data-angle="90"
-            i.icon-rotate-left
+            = icon 'rotate-left'
           '
           a.rotate-button class="btn btn-default" href="#" data-angle="-90"
-            i.icon-rotate-right
+            = icon 'rotate-right'
           '
           = f.submit 'Сохранить', class: "btn btn-primary"
 

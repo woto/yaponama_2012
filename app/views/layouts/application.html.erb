@@ -1,81 +1,32 @@
-<%= render :partial => "layouts/shared/head" %>
+<%= render :partial => "layouts/shared/html_prefix" %>
 
-<body>
+<%= render :partial => 'layouts/shared/body_prefix' %>
 
-  <%= render :partial => 'layouts/shared/body' %>
+<%= render '/layouts/user_navbar' %>
 
-  <%= render '/layouts/user_navbar' %>
+<div class="container">
 
-  <div class="container">
+  <%= render 'menu' %>
 
-    <%= render 'menu' %>
+  <%= render 'flash' %>
 
-    <%= render 'flash' %>
+  <%= yield :form_error %>
 
-    <%= yield :form_error %>
-
-    <div id="confirm-block">
-      <%= render 'confirm' %>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-12">
-        <div id="talk-button-show" class="talk-button">
-          <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">Launch demo modal</a>
-          <div id="talk-notify" style="height: 150px; position: absolute;" data-toggle="popover" data-html="true" data-placement="left" data-animate="true"> </div>
-          <img src="/assets/talk.png"> </img>
-        </div>
-        <%= yield %>
-      </div>
-    </div>
-
-    <div id="talk">
-      <%= render :partial => "talks/talk" %>
-    </div>
-
-    <hr style="margin-top: 80px" />
-
-    <footer>
-      <div class="row">
-        <div class="col-md-2">
-          p &copy; Company 2012
-        </div>
-        <div class="col-md-2">
-          <small>
-            <ul class="list-unstyled">
-              <li> <a href="#"> Новости компании </a> </li>
-              <li> <a href="#"> Акции и бонусы </a> </li>
-              <li> <a href="#"> Способы оплаты </a> </li>
-              <li> <%= link_to 'Доставка и самовывоз', deliveries_path %> </li>
-              <li> <a href="#"> Частые вопросы </a> </li>
-            </ul>
-          </small>
-        </div>
-        <div class="col-md-2">
-          <small>
-            <ul class="list-unstyled">
-              <li> <a href="#"> Поставщикам </a> </li>
-              <li> <a href="#"> Вакансии </a> </li>
-              <li> <a href="#"> Юридическая информация </a> </li>
-            </ul>
-          </small>
-        </div>
-        <div class="col-md-3">
-          <small>
-            <ul class="list-unstyled">
-              <li> 
-                <a href="#"> Связь с руководством </a>
-              </li>
-              <% if ["admin", "manager"].include? current_user.role %>
-                <li> <%= link_to "Администрирование", admin_path %> </li>
-              <% end %>
-            </ul>
-          </small>
-        </div>
-        <div class="col-md-3">
-        </div>
-      </div>
-      <%= render "layouts/shared/footer" %>
-    </footer>
+  <div id="confirm-block">
+    <%= render 'confirm' %>
   </div>
-</body>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <%= render 'talk_button' %>
+      <%= yield %>
+    </div>
+  </div>
+
+  <%= render 'layouts/shared/footer' %>
+
+</div>
+
+<%= render :partial => 'layouts/shared/body_suffix' %>
+
+<%= render :partial => "layouts/shared/html_suffix" %>

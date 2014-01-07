@@ -2,9 +2,7 @@
 #
 class Admin::SiteSettingsController < ApplicationController
   include Admin::Admined
-  include SetResourceClassDummy
   include SetUserAndCreationReasonDummy
-  include FindResourceDummy
 
   # GET /admin/site_settings
   # GET /admin/site_settings.json
@@ -60,21 +58,21 @@ class Admin::SiteSettingsController < ApplicationController
     end
   end
 
-  # PUT /admin/site_settings/1
-  # PUT /admin/site_settings/1.json
-  def update
-    @admin_site_setting = Admin::SiteSetting.find(params[:id])
+  ## PUT /admin/site_settings/1
+  ## PUT /admin/site_settings/1.json
+  #def update
+  #  @admin_site_setting = Admin::SiteSetting.find(params[:id])
 
-    respond_to do |format|
-      if @admin_site_setting.update_attributes(admin_site_setting_params)
-        format.html { redirect_to @admin_site_setting, notice: 'Site setting was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @admin_site_setting.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #  respond_to do |format|
+  #    if @admin_site_setting.update_attributes(admin_site_setting_params)
+  #      format.html { redirect_to @admin_site_setting, notice: 'Site setting was successfully updated.' }
+  #      format.json { head :no_content }
+  #    else
+  #      format.html { render action: "edit" }
+  #      format.json { render json: @admin_site_setting.errors, status: :unprocessable_entity }
+  #    end
+  #  end
+  #end
 
   # DELETE /admin/site_settings/1
   # DELETE /admin/site_settings/1.json
@@ -103,8 +101,12 @@ class Admin::SiteSettingsController < ApplicationController
   def somebody_set
   end
 
+  def set_resource_class
+    @resource_class = Admin::SiteSetting
   end
 
+  def find_resource
+    @resource = @resource_class.find(params[:id])
   end
 
 end

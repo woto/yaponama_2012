@@ -30,6 +30,8 @@ Yaponama2012::Application.routes.draw do
     resources :talks do
       collection do
         get 'item'
+        get 'modal'
+        get 'load_older_talks'
       end
     end
   end

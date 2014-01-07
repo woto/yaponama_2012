@@ -15,9 +15,18 @@ class Profile < ActiveRecord::Base
       #serialize :cached_#{field}, JSON
       has_many :#{field}, inverse_of: :profile, dependent: :destroy
       accepts_nested_attributes_for :#{field},
-        :allow_destroy => true
-        #:reject_if => :all_blank
+        :allow_destroy => true,
+        :reject_if => :all_blank
     CODE
+  end
+
+  # Если оба (email и phone пустые, в процессе обращения в службу поддержки)
+  after_validation do
+    if ['chat'].include? code_1
+      if phones.first.try(:value).blank? && emails.first.try(:value).blank?
+        self.errors.add(:base, 'пожалуйста заполните Телефон и/или Email')
+      end
+    end
   end
 
   has_one :user_where_is_main_profile, :class_name => "Somebody", :foreign_key => :main_profile_id, :inverse_of => :main_profile

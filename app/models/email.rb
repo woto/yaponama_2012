@@ -9,12 +9,13 @@ class Email < ActiveRecord::Base
   include BelongsToSomebody
   include Transactionable
   include Selectable
+  include DestroyIfEmpty
 
   belongs_to :profile, :inverse_of => :emails
 
-  has_many :letters
+  has_many :letters, class_name: "Talkables::Letters"
 
-  validates :value, presence: true, email: true
+  validates :value, presence: true, email: true, unless: -> { self.marked_for_destruction? }
 
   validate :value do
     if Email.confirmed.not_self(id).same(value).first

@@ -18,6 +18,12 @@ stan:
   somebody: stan
   creation_reason: fixtures
 
+fry:
+  name: Фрай
+  profile: fry
+  somebody: fry
+  creation_reason: fixtures
+
 otto:
   name: Отто
   profile: otto
@@ -64,4 +70,34 @@ anton:
   name: Антон
   surname: Чехов
   patronymic: Павлович
+  creation_reason: fixtures
+
+guest_with_profile:
+  name: Гость с профилем
+  profile: guest_with_profile
+  somebody: guest_with_profile
+  creation_reason: fixtures
+
+ivan:
+  somebody: ivan
+  profile: ivan
+  name: Иван
+  surname: Иванов
+  patronymic: Иванович
+  creation_reason: fixtures
+
+petr:
+  somebody: petr
+  profile: petr
+  name: Пётр
+  surname: Петров
+  patronymic: Петрович
+  creation_reason: fixtures
+
+sidor:
+  somebody: sidor
+  profile: sidor
+  name: Сидор
+  surname: Сидоров
+  patronymic: Сидорович
   creation_reason: fixtures
