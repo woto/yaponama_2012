@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<nav class="navbar navbar-default navbar-static-top bottom-space-none" role="navigation">
 
   <div class="container">
 
@@ -35,16 +35,12 @@
 
         <%= render 'bell' %>
 
-        <%= dropdown do |dd| %>
+        <%= dropdown class: highlight_active2(['/login', '/register', '/password_reset']) do |dd| %>
 
           <%= dd.toggle do %>
             <%= icon 'user' %>
             <% if @user.role != 'guest' %>
-              <% begin %>
-                <%= JSON.parse(@user.cached_main_profile).try(:[], 'names').try(:first).try(:[], 'name') %>
-              <% rescue %>
-                <!-- Потом устранить -->
-              <% end %>
+              <%= @user.name %>
             <% else %>
               Личный кабинет
             <% end %>
@@ -87,12 +83,14 @@
       <ul class="nav navbar-nav text-sm">
         <li> <%= link_to "Новости компании", "#" %> </li>
         <li> <%= link_to "Акции и бонусы", "#" %> </li>
-        <li> <%= link_to "Способы оплаты", "#" %> </li>
+        <li class="<%= highlight_active([:controller => "/payments"]) %>">
+          <%= link_to "Способы оплаты", payments_path %>
+        </li>
         <li class="<%= highlight_active([:controller => "/deliveries"]) %>">
           <%= link_to "Доставка и самовывоз", deliveries_path %>
         </li>
         <li> <%= link_to "Частые вопросы", "#" %> </li>
       </ul>
-    </div>	
-   </div>	
+    </div>
+   </div>
 </div>

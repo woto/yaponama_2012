@@ -6,7 +6,7 @@ nav.navbar.navbar-static-top.navbar-inverse role="navigation"
 
       button.navbar-toggle.ignoredirty data-toggle="collapse" data-target=".navbar-responsive-collapse"
 
-        span.sr-only Наигация
+        span.sr-only Навигация
         span.icon-bar 
         span.icon-bar 
         span.icon-bar 
@@ -102,7 +102,7 @@ nav.navbar.navbar-static-top.navbar-inverse role="navigation"
             = icon 'user'
             '
             - if current_user.role != 'guest'
-              = JSON.parse(current_user.cached_main_profile).try(:[], 'names').try(:first).try(:[], 'name')
+              = current_user.name
             - else
               'Личный кабинет
             '
