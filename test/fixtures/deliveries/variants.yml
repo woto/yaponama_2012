@@ -1,0 +1,17 @@
+first:
+  place: first
+  active: true
+  sequence: 100
+  name: Самовывоз
+  delivery_cost: 0.0
+  content: ! "<p>Описание.</p>\r\n"
+  created_at: 2013-12-14 08:48:39.496586000 Z
+  updated_at: 2013-12-14 08:49:57.958496000 Z
+
+second:
+  place: second
+  active: true
+  sequence: 100
+  name: Самовывоз
+  delivery_cost: 0.0
+  content: ! "<p>Описание способа доставки.</p>\r\n"

@@ -1,0 +1,88 @@
+  first:
+    id: 1
+    chat_id: 1
+    chat_partable_id: 1
+    chat_partable_type: Talkables::ChatPartables::Text
+    order: 
+    created_at: 2013-12-26 02:33:02.353477000 Z
+    updated_at: 2013-12-26 02:33:02.353477000 Z
+  second:
+    id: 2
+    chat_id: 2
+    chat_partable_id: 2
+    chat_partable_type: Talkables::ChatPartables::Text
+    order: 
+    created_at: 2013-12-26 02:33:27.587385000 Z
+    updated_at: 2013-12-26 02:33:27.587385000 Z
+  third:
+    id: 3
+    chat_id: 3
+    chat_partable_id: 3
+    chat_partable_type: Talkables::ChatPartables::Text
+    order: 
+    created_at: 2013-12-26 02:33:44.363582000 Z
+    updated_at: 2013-12-26 02:33:44.363582000 Z
+  fourth:
+    id: 4
+    chat_id: 4
+    chat_partable_id: 4
+    chat_partable_type: Talkables::ChatPartables::Text
+    order: 
+    created_at: 2013-12-26 02:34:53.246736000 Z
+    updated_at: 2013-12-26 02:34:53.246736000 Z
+  fifth:
+    id: 5
+    chat_id: 5
+    chat_partable_id: 5
+    chat_partable_type: Talkables::ChatPartables::Text
+    order: 
+    created_at: 2013-12-26 02:35:12.496792000 Z
+    updated_at: 2013-12-26 02:35:12.496792000 Z
+  sixth:
+    id: 6
+    chat_id: 6
+    chat_partable_id: 6
+    chat_partable_type: Talkables::ChatPartables::Text
+    order: 
+    created_at: 2013-12-26 02:36:07.445148000 Z
+    updated_at: 2013-12-26 02:36:07.445148000 Z
+  seventh:
+    id: 7
+    chat_id: 7
+    chat_partable_id: 7
+    chat_partable_type: Talkables::ChatPartables::Text
+    order: 
+    created_at: 2013-12-26 02:37:08.869538000 Z
+    updated_at: 2013-12-26 02:37:08.869538000 Z
+  eigth:
+    id: 8
+    chat_id: 8
+    chat_partable_id: 8
+    chat_partable_type: Talkables::ChatPartables::Text
+    order: 
+    created_at: 2013-12-26 02:38:17.033603000 Z
+    updated_at: 2013-12-26 02:38:17.033603000 Z
+  ninth:
+    id: 9
+    chat_id: 9
+    chat_partable_id: 9
+    chat_partable_type: Talkables::ChatPartables::Text
+    order: 
+    created_at: 2013-12-26 02:38:43.428476000 Z
+    updated_at: 2013-12-26 02:38:43.428476000 Z
+  tenth:
+    id: 10
+    chat_id: 10
+    chat_partable_id: 10
+    chat_partable_type: Talkables::ChatPartables::Text
+    order: 
+    created_at: 2013-12-26 02:39:11.119454000 Z
+    updated_at: 2013-12-26 02:39:11.119454000 Z
+  eleventh:
+    id: 11
+    chat_id: 11
+    chat_partable_id: 11
+    chat_partable_type: Talkables::ChatPartables::Text
+    order: 
+    created_at: 2013-12-26 02:39:46.239302000 Z
+    updated_at: 2013-12-26 02:39:46.239302000 Z

@@ -117,7 +117,9 @@ class Admin::ProfilesControllerTest < ActionController::TestCase
   test 'Проверка сохранения кешированных значений профиля при создании первого профиля' do
 
     avtorif = somebodies(:avtorif)
-    cookies['auht_token'] = avtorif.auth_token
+    admin = somebodies(:first_admin)
+
+    cookies['auth_token'] = admin.auth_token
     assert_equal 0, avtorif.profiles.count, 'Для этого теста необходимо чтобы вначале не было ни одного профиля'
 
     post :create, avtorif_new_profile(avtorif.id)

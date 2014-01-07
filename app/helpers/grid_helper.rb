@@ -53,25 +53,7 @@ module GridHelper
           link_to item.id, '#', data: {html: true, title: 'Информация об элементе', placement: 'right', :"poload" => polymorphic_path([:info, (admin_zone? ? :admin : :user), item], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status] ) }, class: "btn btn-success btn-xs ignoredirty", style: "min-width: 30px"
         when 'checkbox'
         when 'cached_main_profile'
-          res = []
-          begin
-            JSON.parse(val).tap do |cached_main_profile|
-              cached_main_profile["names"].each do |cached_name|
-                res << refactor_cached_name(cached_name)
-              end
-              cached_main_profile["phones"].each do |cached_phone|
-                res << refactor_cached_value(cached_phone)
-              end
-              cached_main_profile["emails"].each do |cached_email|
-                res << refactor_cached_value(cached_email)
-              end
-              cached_main_profile["passports"].each do |cached_passport|
-                res << refactor_cached_passport(cached_passport)
-              end
-            end
-          rescue
-          end
-          refactor_mmm(res)
+          parsed_cached_main_profile(val)
         when *['notes']
           link_to_fast_edit val, item, column_name
         when *['notes_invisible', 'cached_brand']
@@ -301,7 +283,7 @@ module GridHelper
   end
 
   def refactor_mmm(arr)
-    content_tag(:ul, :class => "list-unstyled") do
+    content_tag(:ul, :class => "list-unstyled bottom-space-none") do
       arr.collect{ |item| content_tag(:li, h(item)) }.join.html_safe
     end
   end
@@ -315,6 +297,28 @@ module GridHelper
   def link_to_fast_edit content, item, column_name
     link_to polymorphic_path([:fast_edit, (admin_zone? ? :admin : :user), item], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status], :column => column_name  ), remote: true, class: "dashed" do
       content.presence || icon('plus-square-o')
+    end
+  end
+
+  def parsed_cached_main_profile val
+    res = []
+    begin
+      JSON.parse(val).tap do |cached_main_profile|
+        cached_main_profile["names"].each do |cached_name|
+          res << refactor_cached_name(cached_name)
+        end
+        cached_main_profile["phones"].each do |cached_phone|
+          res << refactor_cached_value(cached_phone)
+        end
+        cached_main_profile["emails"].each do |cached_email|
+          res << refactor_cached_value(cached_email)
+        end
+        cached_main_profile["passports"].each do |cached_passport|
+          res << refactor_cached_passport(cached_passport)
+        end
+      end
+      refactor_mmm(res)
+    rescue
     end
   end
 

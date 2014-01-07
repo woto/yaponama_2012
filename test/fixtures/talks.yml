@@ -1,0 +1,363 @@
+first:
+  id: 1
+  talkable_id: 1
+  talkable_type: Talkables::Chat
+  read: false
+  addressee_id: 
+  cached_talk: ! "<div data-id=\"1\" class=\"talk-item\">\n\n  <div class=\"talk-head\">\n\n
+    \   <div class=\"pull-right\">\n\n      <div class=\"talk-time pull-right\">\n
+    \       26 дек., 13:33\n      </div>\n\n    </div>\n\n    <b class=\"talk-addresser\">
+    Марк</b> \n    <i class=\"fa fa-angle-right\"></i>\n    <b class=\"talk-addressee\">Всем</b>\n
+    \   <!-- <span class=\"talk-type\"><i class=\"fa fa-comment\"></i></span> -->\n
+    \   <!--\n    <a href=\"#\">\n      <p> Авто: [VIN: WF0FXXGDDFVE11585]</p>\n
+    \   </a>\n    -->\n  </div>\n\n  <div class=\"pull-right top-space-xs bottom-space-xs\">\n\n
+    \ <a href=\"#\" class=\"btn btn-warning btn-sm pull-right right-space-xs\">\n
+    \   <i class=\"fa fa-edit\"></i>\n  </a>\n\n  <form accept-charset=\"UTF-8\"
+    action=\"/admin/talks/1\" class=\"pull-right\" data-remote=\"true\" id=\"edit_talk_1\"
+    method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\"
+    type=\"hidden\" value=\"&#x2713;\" /><input name=\"_method\" type=\"hidden\"
+    value=\"patch\" /></div>\n    1\n    <div class=\"btn-group right-space-xs\"
+    data-toggle=\"buttons\">\n      <label class=\"btn btn-default btn-sm\">\n        <input
+    name=\"talk[read]\" type=\"hidden\" value=\"0\" /><input class=\"talk_read\"
+    id=\"talk_read_1\" name=\"talk[read]\" rel=\"radio\" type=\"checkbox\" value=\"1\"
+    />\n        <i class=\"fa fa-eye\"></i>\n      </label>\n    </div>\n</form>\n</div>\n\n<div
+    class=\"talk-body clearfix\"> \n\n  <small>\n    somebody:  Марк\n    <br />\n
+    \   creator:  Марк\n    <br />\n    addressee: \n  </small>\n\n        <p><p>Сообщение
+    от Марка Всем</p></p>\n</div>\n\n\n</div>\n\n"
+  created_at: 2013-12-26 02:33:02.358767000 Z
+  updated_at: 2013-12-26 02:33:02.358767000 Z
+  creation_reason: chat
+  notes: ''
+  notes_invisible: ''
+  somebody_id: 645198450
+  creator_id: 645198450
+second:
+  id: 2
+  talkable_id: 2
+  talkable_type: Talkables::Chat
+  read: false
+  addressee_id: 768528655
+  cached_talk: ! "<div data-id=\"2\" class=\"talk-item\">\n\n  <div class=\"talk-head\">\n\n
+    \   <div class=\"pull-right\">\n\n      <div class=\"talk-time pull-right\">\n
+    \       26 дек., 13:33\n      </div>\n\n    </div>\n\n    <b class=\"talk-addresser\">
+    Марк</b> \n    <i class=\"fa fa-angle-right\"></i>\n    <b class=\"talk-addressee\">Сидоров
+    Сидор</b>\n    <!-- <span class=\"talk-type\"><i class=\"fa fa-comment\"></i></span>
+    -->\n    <!--\n    <a href=\"#\">\n      <p> Авто: [VIN: WF0FXXGDDFVE11585]</p>\n
+    \   </a>\n    -->\n  </div>\n\n  <div class=\"pull-right top-space-xs bottom-space-xs\">\n\n
+    \ <a href=\"#\" class=\"btn btn-warning btn-sm pull-right right-space-xs\">\n
+    \   <i class=\"fa fa-edit\"></i>\n  </a>\n\n  <form accept-charset=\"UTF-8\"
+    action=\"/admin/talks/2\" class=\"pull-right\" data-remote=\"true\" id=\"edit_talk_2\"
+    method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\"
+    type=\"hidden\" value=\"&#x2713;\" /><input name=\"_method\" type=\"hidden\"
+    value=\"patch\" /></div>\n    2\n    <div class=\"btn-group right-space-xs\"
+    data-toggle=\"buttons\">\n      <label class=\"btn btn-default btn-sm\">\n        <input
+    name=\"talk[read]\" type=\"hidden\" value=\"0\" /><input class=\"talk_read\"
+    id=\"talk_read_2\" name=\"talk[read]\" rel=\"radio\" type=\"checkbox\" value=\"1\"
+    />\n        <i class=\"fa fa-eye\"></i>\n      </label>\n    </div>\n</form>\n</div>\n\n<div
+    class=\"talk-body clearfix\"> \n\n  <small>\n    somebody:  Марк\n    <br />\n
+    \   creator:  Марк\n    <br />\n    addressee: Сидоров Сидор\n  </small>\n\n
+    \       <p><p>Сообщение от Марка Сидорову</p></p>\n</div>\n\n\n</div>\n\n"
+  created_at: 2013-12-26 02:33:27.589540000 Z
+  updated_at: 2013-12-26 02:33:27.589540000 Z
+  creation_reason: chat
+  notes: ''
+  notes_invisible: ''
+  somebody_id: 645198450
+  creator_id: 645198450
+third:
+  id: 3
+  talkable_id: 3
+  talkable_type: Talkables::Chat
+  read: false
+  addressee_id: 826268332
+  cached_talk: ! "<div data-id=\"3\" class=\"talk-item\">\n\n  <div class=\"talk-head\">\n\n
+    \   <div class=\"pull-right\">\n\n      <div class=\"talk-time pull-right\">\n
+    \       26 дек., 13:33\n      </div>\n\n    </div>\n\n    <b class=\"talk-addresser\">
+    Марк</b> \n    <i class=\"fa fa-angle-right\"></i>\n    <b class=\"talk-addressee\">Петров
+    Пётр</b>\n    <!-- <span class=\"talk-type\"><i class=\"fa fa-comment\"></i></span>
+    -->\n    <!--\n    <a href=\"#\">\n      <p> Авто: [VIN: WF0FXXGDDFVE11585]</p>\n
+    \   </a>\n    -->\n  </div>\n\n  <div class=\"pull-right top-space-xs bottom-space-xs\">\n\n
+    \ <a href=\"#\" class=\"btn btn-warning btn-sm pull-right right-space-xs\">\n
+    \   <i class=\"fa fa-edit\"></i>\n  </a>\n\n  <form accept-charset=\"UTF-8\"
+    action=\"/admin/talks/3\" class=\"pull-right\" data-remote=\"true\" id=\"edit_talk_3\"
+    method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\"
+    type=\"hidden\" value=\"&#x2713;\" /><input name=\"_method\" type=\"hidden\"
+    value=\"patch\" /></div>\n    3\n    <div class=\"btn-group right-space-xs\"
+    data-toggle=\"buttons\">\n      <label class=\"btn btn-default btn-sm\">\n        <input
+    name=\"talk[read]\" type=\"hidden\" value=\"0\" /><input class=\"talk_read\"
+    id=\"talk_read_3\" name=\"talk[read]\" rel=\"radio\" type=\"checkbox\" value=\"1\"
+    />\n        <i class=\"fa fa-eye\"></i>\n      </label>\n    </div>\n</form>\n</div>\n\n<div
+    class=\"talk-body clearfix\"> \n\n  <small>\n    somebody:  Марк\n    <br />\n
+    \   creator:  Марк\n    <br />\n    addressee: Петров Пётр\n  </small>\n\n        <p><p>Сообщение
+    от Марка Петрову</p></p>\n</div>\n\n\n</div>\n\n"
+  created_at: 2013-12-26 02:33:44.365896000 Z
+  updated_at: 2013-12-26 02:33:44.365896000 Z
+  creation_reason: chat
+  notes: ''
+  notes_invisible: ''
+  somebody_id: 645198450
+  creator_id: 645198450
+fourth:
+  id: 4
+  talkable_id: 4
+  talkable_type: Talkables::Chat
+  read: false
+  addressee_id: 
+  cached_talk: ! "<div data-id=\"4\" class=\"talk-item\">\n\n  <div class=\"talk-head\">\n\n
+    \   <div class=\"pull-right\">\n\n      <div class=\"talk-time pull-right\">\n
+    \       26 дек., 06:34\n      </div>\n\n    </div>\n\n    <b class=\"talk-addresser\">Петров
+    Пётр</b> \n    <i class=\"fa fa-angle-right\"></i>\n    <b class=\"talk-addressee\">Всем</b>\n
+    \   <!-- <span class=\"talk-type\"><i class=\"fa fa-comment\"></i></span> -->\n
+    \   <!--\n    <a href=\"#\">\n      <p> Авто: [VIN: WF0FXXGDDFVE11585]</p>\n
+    \   </a>\n    -->\n  </div>\n\n  <div class=\"pull-right top-space-xs bottom-space-xs\">\n\n
+    \ <a href=\"#\" class=\"btn btn-warning btn-sm pull-right right-space-xs\">\n
+    \   <i class=\"fa fa-edit\"></i>\n  </a>\n\n  <form accept-charset=\"UTF-8\"
+    action=\"/admin/talks/4\" class=\"pull-right\" data-remote=\"true\" id=\"edit_talk_4\"
+    method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\"
+    type=\"hidden\" value=\"&#x2713;\" /><input name=\"_method\" type=\"hidden\"
+    value=\"patch\" /></div>\n    4\n    <div class=\"btn-group right-space-xs\"
+    data-toggle=\"buttons\">\n      <label class=\"btn btn-default btn-sm\">\n        <input
+    name=\"talk[read]\" type=\"hidden\" value=\"0\" /><input class=\"talk_read\"
+    id=\"talk_read_4\" name=\"talk[read]\" rel=\"radio\" type=\"checkbox\" value=\"1\"
+    />\n        <i class=\"fa fa-eye\"></i>\n      </label>\n    </div>\n</form>\n</div>\n\n<div
+    class=\"talk-body clearfix\"> \n\n  <small>\n    somebody: Петров Пётр\n    <br
+    />\n    creator: Петров Пётр\n    <br />\n    addressee: \n  </small>\n\n        <p><p>Сообщение
+    от Петрова Всем</p></p>\n</div>\n\n\n</div>\n\n"
+  created_at: 2013-12-26 02:34:53.250389000 Z
+  updated_at: 2013-12-26 02:34:53.250389000 Z
+  creation_reason: chat
+  notes: ''
+  notes_invisible: ''
+  somebody_id: 826268332
+  creator_id: 826268332
+fifth:
+  id: 5
+  talkable_id: 5
+  talkable_type: Talkables::Chat
+  read: false
+  addressee_id: 768528655
+  cached_talk: ! "<div data-id=\"5\" class=\"talk-item\">\n\n  <div class=\"talk-head\">\n\n
+    \   <div class=\"pull-right\">\n\n      <div class=\"talk-time pull-right\">\n
+    \       26 дек., 06:35\n      </div>\n\n    </div>\n\n    <b class=\"talk-addresser\">Петров
+    Пётр</b> \n    <i class=\"fa fa-angle-right\"></i>\n    <b class=\"talk-addressee\">Сидоров
+    Сидор</b>\n    <!-- <span class=\"talk-type\"><i class=\"fa fa-comment\"></i></span>
+    -->\n    <!--\n    <a href=\"#\">\n      <p> Авто: [VIN: WF0FXXGDDFVE11585]</p>\n
+    \   </a>\n    -->\n  </div>\n\n  <div class=\"pull-right top-space-xs bottom-space-xs\">\n\n
+    \ <a href=\"#\" class=\"btn btn-warning btn-sm pull-right right-space-xs\">\n
+    \   <i class=\"fa fa-edit\"></i>\n  </a>\n\n  <form accept-charset=\"UTF-8\"
+    action=\"/admin/talks/5\" class=\"pull-right\" data-remote=\"true\" id=\"edit_talk_5\"
+    method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\"
+    type=\"hidden\" value=\"&#x2713;\" /><input name=\"_method\" type=\"hidden\"
+    value=\"patch\" /></div>\n    5\n    <div class=\"btn-group right-space-xs\"
+    data-toggle=\"buttons\">\n      <label class=\"btn btn-default btn-sm\">\n        <input
+    name=\"talk[read]\" type=\"hidden\" value=\"0\" /><input class=\"talk_read\"
+    id=\"talk_read_5\" name=\"talk[read]\" rel=\"radio\" type=\"checkbox\" value=\"1\"
+    />\n        <i class=\"fa fa-eye\"></i>\n      </label>\n    </div>\n</form>\n</div>\n\n<div
+    class=\"talk-body clearfix\"> \n\n  <small>\n    somebody: Петров Пётр\n    <br
+    />\n    creator: Петров Пётр\n    <br />\n    addressee: Сидоров Сидор\n  </small>\n\n
+    \       <p><p>Сообщение от Петрова Сидорову</p></p>\n</div>\n\n\n</div>\n\n"
+  created_at: 2013-12-26 02:35:12.500557000 Z
+  updated_at: 2013-12-26 02:35:12.500557000 Z
+  creation_reason: chat
+  notes: ''
+  notes_invisible: ''
+  somebody_id: 826268332
+  creator_id: 826268332
+sixth:
+  id: 6
+  talkable_id: 6
+  talkable_type: Talkables::Chat
+  read: false
+  addressee_id: 768528655
+  cached_talk: ! "<div data-id=\"6\" class=\"talk-item\">\n\n  <div class=\"talk-head\">\n\n
+    \   <div class=\"pull-right\">\n\n      <div class=\"talk-time pull-right\">\n
+    \       26 дек., 06:36\n      </div>\n\n    </div>\n\n    <b class=\"talk-addresser\">Петров
+    Пётр</b> \n    <i class=\"fa fa-angle-right\"></i>\n    <b class=\"talk-addressee\">Сидоров
+    Сидор</b>\n    <!-- <span class=\"talk-type\"><i class=\"fa fa-comment\"></i></span>
+    -->\n    <!--\n    <a href=\"#\">\n      <p> Авто: [VIN: WF0FXXGDDFVE11585]</p>\n
+    \   </a>\n    -->\n  </div>\n\n  <div class=\"pull-right top-space-xs bottom-space-xs\">\n\n
+    \ <a href=\"#\" class=\"btn btn-warning btn-sm pull-right right-space-xs\">\n
+    \   <i class=\"fa fa-edit\"></i>\n  </a>\n\n  <form accept-charset=\"UTF-8\"
+    action=\"/admin/talks/6\" class=\"pull-right\" data-remote=\"true\" id=\"edit_talk_6\"
+    method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\"
+    type=\"hidden\" value=\"&#x2713;\" /><input name=\"_method\" type=\"hidden\"
+    value=\"patch\" /></div>\n    6\n    <div class=\"btn-group right-space-xs\"
+    data-toggle=\"buttons\">\n      <label class=\"btn btn-default btn-sm\">\n        <input
+    name=\"talk[read]\" type=\"hidden\" value=\"0\" /><input class=\"talk_read\"
+    id=\"talk_read_6\" name=\"talk[read]\" rel=\"radio\" type=\"checkbox\" value=\"1\"
+    />\n        <i class=\"fa fa-eye\"></i>\n      </label>\n    </div>\n</form>\n</div>\n\n<div
+    class=\"talk-body clearfix\"> \n\n  <small>\n    somebody: Сидоров Сидор\n    <br
+    />\n    creator: Петров Пётр\n    <br />\n    addressee: Сидоров Сидор\n  </small>\n\n
+    \       <p><p>Сообщение от Петрова Сидорову</p></p>\n</div>\n\n\n</div>\n\n"
+  created_at: 2013-12-26 02:36:07.447475000 Z
+  updated_at: 2013-12-26 02:36:07.447475000 Z
+  creation_reason: chat
+  notes: ''
+  notes_invisible: ''
+  somebody_id: 768528655
+  creator_id: 826268332
+seventh:
+  id: 7
+  talkable_id: 7
+  talkable_type: Talkables::Chat
+  read: false
+  addressee_id: 645198450
+  cached_talk: ! "<div data-id=\"7\" class=\"talk-item\">\n\n  <div class=\"talk-head\">\n\n
+    \   <div class=\"pull-right\">\n\n      <div class=\"talk-time pull-right\">\n
+    \       26 дек., 06:37\n      </div>\n\n    </div>\n\n    <b class=\"talk-addresser\">Петров
+    Пётр</b> \n    <i class=\"fa fa-angle-right\"></i>\n    <b class=\"talk-addressee\">
+    Марк</b>\n    <!-- <span class=\"talk-type\"><i class=\"fa fa-comment\"></i></span>
+    -->\n    <!--\n    <a href=\"#\">\n      <p> Авто: [VIN: WF0FXXGDDFVE11585]</p>\n
+    \   </a>\n    -->\n  </div>\n\n  <div class=\"pull-right top-space-xs bottom-space-xs\">\n\n
+    \ <a href=\"#\" class=\"btn btn-warning btn-sm pull-right right-space-xs\">\n
+    \   <i class=\"fa fa-edit\"></i>\n  </a>\n\n  <form accept-charset=\"UTF-8\"
+    action=\"/admin/talks/7\" class=\"pull-right\" data-remote=\"true\" id=\"edit_talk_7\"
+    method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\"
+    type=\"hidden\" value=\"&#x2713;\" /><input name=\"_method\" type=\"hidden\"
+    value=\"patch\" /></div>\n    7\n    <div class=\"btn-group right-space-xs\"
+    data-toggle=\"buttons\">\n      <label class=\"btn btn-default btn-sm\">\n        <input
+    name=\"talk[read]\" type=\"hidden\" value=\"0\" /><input class=\"talk_read\"
+    id=\"talk_read_7\" name=\"talk[read]\" rel=\"radio\" type=\"checkbox\" value=\"1\"
+    />\n        <i class=\"fa fa-eye\"></i>\n      </label>\n    </div>\n</form>\n</div>\n\n<div
+    class=\"talk-body clearfix\"> \n\n  <small>\n    somebody:  Марк\n    <br />\n
+    \   creator: Петров Пётр\n    <br />\n    addressee:  Марк\n  </small>\n\n        <p><p>Сообщение
+    от Петрова Марку</p></p>\n</div>\n\n\n</div>\n\n"
+  created_at: 2013-12-26 02:37:08.872257000 Z
+  updated_at: 2013-12-26 02:37:08.872257000 Z
+  creation_reason: chat
+  notes: ''
+  notes_invisible: ''
+  somebody_id: 645198450
+  creator_id: 826268332
+eigth:
+  id: 8
+  talkable_id: 8
+  talkable_type: Talkables::Chat
+  read: false
+  addressee_id: 
+  cached_talk: ! "<div data-id=\"8\" class=\"talk-item\">\n\n  <div class=\"talk-head\">\n\n
+    \   <div class=\"pull-right\">\n\n      <div class=\"talk-time pull-right\">\n
+    \       26 дек., 06:38\n      </div>\n\n    </div>\n\n    <b class=\"talk-addresser\">Сидоров
+    Сидор</b> \n    <i class=\"fa fa-angle-right\"></i>\n    <b class=\"talk-addressee\">Всем</b>\n
+    \   <!-- <span class=\"talk-type\"><i class=\"fa fa-comment\"></i></span> -->\n
+    \   <!--\n    <a href=\"#\">\n      <p> Авто: [VIN: WF0FXXGDDFVE11585]</p>\n
+    \   </a>\n    -->\n  </div>\n\n  <div class=\"pull-right top-space-xs bottom-space-xs\">\n\n
+    \ <a href=\"#\" class=\"btn btn-warning btn-sm pull-right right-space-xs\">\n
+    \   <i class=\"fa fa-edit\"></i>\n  </a>\n\n  <form accept-charset=\"UTF-8\"
+    action=\"/admin/talks/8\" class=\"pull-right\" data-remote=\"true\" id=\"edit_talk_8\"
+    method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\"
+    type=\"hidden\" value=\"&#x2713;\" /><input name=\"_method\" type=\"hidden\"
+    value=\"patch\" /></div>\n    8\n    <div class=\"btn-group right-space-xs\"
+    data-toggle=\"buttons\">\n      <label class=\"btn btn-default btn-sm\">\n        <input
+    name=\"talk[read]\" type=\"hidden\" value=\"0\" /><input class=\"talk_read\"
+    id=\"talk_read_8\" name=\"talk[read]\" rel=\"radio\" type=\"checkbox\" value=\"1\"
+    />\n        <i class=\"fa fa-eye\"></i>\n      </label>\n    </div>\n</form>\n</div>\n\n<div
+    class=\"talk-body clearfix\"> \n\n  <small>\n    somebody: Сидоров Сидор\n    <br
+    />\n    creator: Сидоров Сидор\n    <br />\n    addressee: \n  </small>\n\n
+    \       <p><p>Сообщение от Сидорова Всем</p></p>\n</div>\n\n\n</div>\n\n"
+  created_at: 2013-12-26 02:38:17.035909000 Z
+  updated_at: 2013-12-26 02:38:17.035909000 Z
+  creation_reason: chat
+  notes: ''
+  notes_invisible: ''
+  somebody_id: 768528655
+  creator_id: 768528655
+ninth:
+  id: 9
+  talkable_id: 9
+  talkable_type: Talkables::Chat
+  read: false
+  addressee_id: 826268332
+  cached_talk: ! "<div data-id=\"9\" class=\"talk-item\">\n\n  <div class=\"talk-head\">\n\n
+    \   <div class=\"pull-right\">\n\n      <div class=\"talk-time pull-right\">\n
+    \       26 дек., 06:38\n      </div>\n\n    </div>\n\n    <b class=\"talk-addresser\">Сидоров
+    Сидор</b> \n    <i class=\"fa fa-angle-right\"></i>\n    <b class=\"talk-addressee\">Петров
+    Пётр</b>\n    <!-- <span class=\"talk-type\"><i class=\"fa fa-comment\"></i></span>
+    -->\n    <!--\n    <a href=\"#\">\n      <p> Авто: [VIN: WF0FXXGDDFVE11585]</p>\n
+    \   </a>\n    -->\n  </div>\n\n  <div class=\"pull-right top-space-xs bottom-space-xs\">\n\n
+    \ <a href=\"#\" class=\"btn btn-warning btn-sm pull-right right-space-xs\">\n
+    \   <i class=\"fa fa-edit\"></i>\n  </a>\n\n  <form accept-charset=\"UTF-8\"
+    action=\"/admin/talks/9\" class=\"pull-right\" data-remote=\"true\" id=\"edit_talk_9\"
+    method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\"
+    type=\"hidden\" value=\"&#x2713;\" /><input name=\"_method\" type=\"hidden\"
+    value=\"patch\" /></div>\n    9\n    <div class=\"btn-group right-space-xs\"
+    data-toggle=\"buttons\">\n      <label class=\"btn btn-default btn-sm\">\n        <input
+    name=\"talk[read]\" type=\"hidden\" value=\"0\" /><input class=\"talk_read\"
+    id=\"talk_read_9\" name=\"talk[read]\" rel=\"radio\" type=\"checkbox\" value=\"1\"
+    />\n        <i class=\"fa fa-eye\"></i>\n      </label>\n    </div>\n</form>\n</div>\n\n<div
+    class=\"talk-body clearfix\"> \n\n  <small>\n    somebody: Сидоров Сидор\n    <br
+    />\n    creator: Сидоров Сидор\n    <br />\n    addressee: Петров Пётр\n  </small>\n\n
+    \       <p><p>Сообщение от Сидорова Петрову</p></p>\n</div>\n\n\n</div>\n\n"
+  created_at: 2013-12-26 02:38:43.430986000 Z
+  updated_at: 2013-12-26 02:38:43.430986000 Z
+  creation_reason: chat
+  notes: ''
+  notes_invisible: ''
+  somebody_id: 768528655
+  creator_id: 768528655
+tenth:
+  id: 10
+  talkable_id: 10
+  talkable_type: Talkables::Chat
+  read: false
+  addressee_id: 826268332
+  cached_talk: ! "<div data-id=\"10\" class=\"talk-item\">\n\n  <div class=\"talk-head\">\n\n
+    \   <div class=\"pull-right\">\n\n      <div class=\"talk-time pull-right\">\n
+    \       26 дек., 06:39\n      </div>\n\n    </div>\n\n    <b class=\"talk-addresser\">Сидоров
+    Сидор</b> \n    <i class=\"fa fa-angle-right\"></i>\n    <b class=\"talk-addressee\">Петров
+    Пётр</b>\n    <!-- <span class=\"talk-type\"><i class=\"fa fa-comment\"></i></span>
+    -->\n    <!--\n    <a href=\"#\">\n      <p> Авто: [VIN: WF0FXXGDDFVE11585]</p>\n
+    \   </a>\n    -->\n  </div>\n\n  <div class=\"pull-right top-space-xs bottom-space-xs\">\n\n
+    \ <a href=\"#\" class=\"btn btn-warning btn-sm pull-right right-space-xs\">\n
+    \   <i class=\"fa fa-edit\"></i>\n  </a>\n\n  <form accept-charset=\"UTF-8\"
+    action=\"/admin/talks/10\" class=\"pull-right\" data-remote=\"true\" id=\"edit_talk_10\"
+    method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\"
+    type=\"hidden\" value=\"&#x2713;\" /><input name=\"_method\" type=\"hidden\"
+    value=\"patch\" /></div>\n    10\n    <div class=\"btn-group right-space-xs\"
+    data-toggle=\"buttons\">\n      <label class=\"btn btn-default btn-sm\">\n        <input
+    name=\"talk[read]\" type=\"hidden\" value=\"0\" /><input class=\"talk_read\"
+    id=\"talk_read_10\" name=\"talk[read]\" rel=\"radio\" type=\"checkbox\" value=\"1\"
+    />\n        <i class=\"fa fa-eye\"></i>\n      </label>\n    </div>\n</form>\n</div>\n\n<div
+    class=\"talk-body clearfix\"> \n\n  <small>\n    somebody: Петров Пётр\n    <br
+    />\n    creator: Сидоров Сидор\n    <br />\n    addressee: Петров Пётр\n  </small>\n\n
+    \       <p><p>Сообщение от Сидорова Петрову</p></p>\n</div>\n\n\n</div>\n\n"
+  created_at: 2013-12-26 02:39:11.126073000 Z
+  updated_at: 2013-12-26 02:39:11.126073000 Z
+  creation_reason: chat
+  notes: ''
+  notes_invisible: ''
+  somebody_id: 826268332
+  creator_id: 768528655
+eleventh:
+  id: 11
+  talkable_id: 11
+  talkable_type: Talkables::Chat
+  read: true
+  addressee_id: 645198450
+  cached_talk: ! "<div data-id=\"11\" class=\"talk-item\">\n\n  <div class=\"talk-head\">\n\n
+    \   <div class=\"pull-right\">\n\n      <div class=\"talk-time pull-right\">\n
+    \       26 дек., 06:39\n      </div>\n\n    </div>\n\n    <b class=\"talk-addresser\">Сидоров
+    Сидор</b> \n    <i class=\"fa fa-angle-right\"></i>\n    <b class=\"talk-addressee\">
+    Марк</b>\n    <!-- <span class=\"talk-type\"><i class=\"fa fa-comment\"></i></span>
+    -->\n    <!--\n    <a href=\"#\">\n      <p> Авто: [VIN: WF0FXXGDDFVE11585]</p>\n
+    \   </a>\n    -->\n  </div>\n\n  <div class=\"pull-right top-space-xs bottom-space-xs\">\n\n
+    \ <a href=\"#\" class=\"btn btn-warning btn-sm pull-right right-space-xs\">\n
+    \   <i class=\"fa fa-edit\"></i>\n  </a>\n\n  <form accept-charset=\"UTF-8\"
+    action=\"/admin/talks/11\" class=\"pull-right\" data-remote=\"true\" id=\"edit_talk_11\"
+    method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\"
+    type=\"hidden\" value=\"&#x2713;\" /><input name=\"_method\" type=\"hidden\"
+    value=\"patch\" /></div>\n    11\n    <div class=\"btn-group right-space-xs\"
+    data-toggle=\"buttons\">\n      <label class=\"btn btn-default btn-sm\">\n        <input
+    name=\"talk[read]\" type=\"hidden\" value=\"0\" /><input class=\"talk_read\"
+    id=\"talk_read_11\" name=\"talk[read]\" rel=\"radio\" type=\"checkbox\" value=\"1\"
+    />\n        <i class=\"fa fa-eye\"></i>\n      </label>\n    </div>\n</form>\n</div>\n\n<div
+    class=\"talk-body clearfix\"> \n\n  <small>\n    somebody:  Марк\n    <br />\n
+    \   creator: Сидоров Сидор\n    <br />\n    addressee:  Марк\n  </small>\n\n
+    \       <p><p>Сообщение от Сидорова Марку</p></p>\n</div>\n\n\n</div>\n\n"
+  created_at: 2013-12-26 02:39:46.242171000 Z
+  updated_at: 2013-12-26 02:39:46.242171000 Z
+  creation_reason: chat
+  notes: ''
+  notes_invisible: ''
+  somebody_id: 645198450
+  creator_id: 768528655

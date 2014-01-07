@@ -105,8 +105,4 @@ class Admin::SiteSettingsController < ApplicationController
     @resource_class = Admin::SiteSetting
   end
 
-  def find_resource
-    @resource = @resource_class.find(params[:id])
-  end
-
 end

@@ -322,6 +322,7 @@ class ApplicationController < ActionController::Base
 
   def set_user_and_creation_reason
     #debugger
+    # #TODO вроде не правильно && ... не должно быть нужно
     if @resource.respond_to?(:somebody) && @resource.somebody.blank?
       @resource.somebody = @somebody
     end

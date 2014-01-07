@@ -15,16 +15,12 @@ class NotifySoundTest < ActionDispatch::IntegrationTest
       assert has_css? ".alert-success", text: "Вы успешно вошли."
 
       click_link 'talk-button-show-inside'
-      #sleep 1
-      #save_screenshot('1.png', full: true)
 
       Capybara.session_name = :second
       auth('+7 (444) 444-44-44', '4444444444')
       assert has_css? ".alert-success", text: "Вы успешно вошли."
 
       click_link 'talk-button-show-inside'
-      #sleep 1
-      #save_screenshot('2.png', full: true)
 
     end
   end
