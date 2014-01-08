@@ -1,10 +1,19 @@
-<% @resource_class.column_names.each do |col| %>
-  <p>
-    <strong> <%= @resource_class.human_attribute_name(col.to_sym) %> : </strong>
-    <br>
-    <%= debug(@resource[col]) %>
-  </p>
-<% end %>
+<button type="button" class="btn btn-info bottom-space" data-toggle="collapse" data-target="#collapse-show">
+  Служебное отображение
+</button>
+<br />
+
+<div id="collapse-show" class="collapse">
+  <% @resource_class.column_names.each do |col| %>
+    <p>
+      <strong> <%= @resource_class.human_attribute_name(col.to_sym) %> : </strong>
+      <br />
+      <strong> <%= col.to_sym %> : </strong>
+      <br />
+      <%= debug(@resource[col]) %>
+    </p>
+  <% end %>
+</div>
 
 <%= link_to url_for(:action => :edit), :class => 'btn btn-warning' do %>
   <%= icon 'edit' %>
