@@ -14,7 +14,7 @@
       <div rel="type-store" id="<%= assoc %>">
 
         <%# TODO Задействовать label: false и label: nil %>
-        <%= f.twbs_collection_radio_buttons assoc_type, [['new', 'Добавить новый'] ,['old', 'Выбрать из списка']], :first, :last, {variation: :vertical, label: false}, rel: 'radio radio-postal-address-switcher' %>
+        <%= f.twbs_collection_radio_buttons assoc_type, [['new', 'Добавить новый'] ,['old', 'Выбрать из списка']], :first, :last, {variation: :vertical, label: false}, rel: 'radio radio-new-old-switcher' %>
 
         <div rel="old">
           <% options = @somebody.postal_addresses.map{|pa| [pa.to_label, pa.id]} + [[opposite, '-1']] %>

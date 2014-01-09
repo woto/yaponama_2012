@@ -1,4 +1,4 @@
-$(document).on 'custom-change', "input[rel~='radio-postal-address-switcher']", ->
+$(document).on 'custom-change', "input[rel~='radio-new-old-switcher']", ->
   # TODO Оставлю рефакторинг до исправления ошибки с change event у twbs themed radio button
 
   block = $(this).closest("[rel~='type-store']")
