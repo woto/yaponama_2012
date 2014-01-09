@@ -26,7 +26,7 @@ class PostallAddressesTest < ActionDispatch::IntegrationTest
     assert has_css?('[name="postal_address[room]"]', visible: true)
     assert !(all('[name="postal_address[stand_alone_house]"]', visible: false).last.checked?)
 
-    find("[rel='button-stand-alone-house']").click
+    check 'postal_address_stand_alone_house'
 
     assert has_css?('[name="postal_address[room]"]', visible: false)
     assert all('[name="postal_address[stand_alone_house]"]', visible: false).last.checked?
