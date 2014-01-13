@@ -1,0 +1,34 @@
+<div rel="type-store">
+
+  <%= f.twbs_collection_radio_buttons :postal_address_type, [['new', 'Добавить новый адрес плательщика'] ,['old', 'Выбрать ранее добавленный адрес']], :first, :last, {variation: :vertical, label: false}, rel: 'radio radio-new-old-switcher' %>
+
+  <div rel="old">
+    <%= f.twbs_collection_select :postal_address_id, @somebody.postal_addresses.where.not(postal_addresses: {id: nil}), :id, :to_label, { label: false, include_blank: true }, rel: "select select-and-fill"  %>
+
+    <% @somebody.postal_addresses.where.not(postal_addresses: {id: nil}).each do |postal_address| %>
+      <div id="select-and-fill-<%= postal_address.id %>" class="select-and-fill">
+
+        <% if f.object.postal_address.try(:id) == postal_address.id %>
+          <%= f.fields_for :postal_address do |postal_address| %>
+            <%= render 'postal_addresses/fields', f: postal_address %>
+          <% end %>
+
+        <% else %>
+          <%= f.fields_for :postal_address, postal_address do |p| %>
+            <%= render 'postal_addresses/fields', f: p %>
+          <% end %>
+        <% end %>
+
+      </div>
+    <% end %>
+  </div>
+
+
+  <div rel="new">
+
+    <%= f.fields_for :postal_address, (f.object.postal_address_type == 'new' ? f.object.postal_address : @somebody.postal_addresses.new) do |postal_address| %>
+      <%= render 'postal_addresses/fields', f: postal_address %>
+    <% end %>
+  </div>
+
+</div>

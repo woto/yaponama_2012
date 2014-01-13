@@ -1,0 +1,69 @@
+<%= somebody_tabs do %>
+
+  <% @meta_title = "Способы оплаты" %>
+  <%= page_header %>
+
+
+  <%= row do %>
+
+    <div class="col-md-8">
+
+      <%= twbs_form_for @resource, url: user_payments_path do |f| %>
+
+        <%= f.error_notification %>
+
+        <%= f.form_group :payment_type, class: 'clearfix' do %>
+
+          <div class="pull-left">
+            <% Rails.configuration.payment_systems.each do |k, v| %>
+              <%= f.label :payment_type, value: k, class: 'payment' do %>
+                <%= f.radio_button :payment_type, k, data: v, rel: 'radio' %>
+                <%= image_tag "/assets/payment/#{k}.gif", alt: k %>
+              <% end %>
+            <% end %>
+          </div>
+
+          <%= f.error :payment_type %>
+
+        <% end %>
+
+        <div id="payment-details"></div>
+
+        <%= f.twbs_text_field :amount, label: 'Вносимая сумма в руб.' %>
+
+        <%= panel 'default', id: 'payment-payer', class: 'payment-block' do |p| %>
+          <%= p.heading do %>
+            <%= p.title do %>
+              Плательщик
+            <% end %>
+          <% end %>
+          <%= p.body do %>
+            <% render 'profiles', f:f %>
+          <% end %>
+        <% end %>
+
+        <%= panel 'default', id: 'payment-payer-address', class: 'payment-block' do |p| %>
+          <%= p.heading do %>
+            <%= p.title do %>
+              Адрес плательщика
+            <% end %>
+          <% end %>
+          <%= p.body do %>
+            <% render 'postal_addresses', f:f %>
+          <% end %>
+        <% end %>
+
+        <%= f.twbs_submit 'Оплатить' %>
+
+        <%= f.twbs_hidden_field :somebody_id %>
+
+      <% end %>
+
+    </div>
+
+    <div class="col-md-5">
+    </div>
+
+  <% end %>
+
+<% end %>
