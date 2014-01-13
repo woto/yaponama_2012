@@ -205,3 +205,27 @@
 }
 
 /////////////////////
+
+.payment > input[type=radio]{
+  display: none;
+}
+
+input[type=radio] + img{
+  .user-select(none);
+  cursor: pointer;
+  margin: 3px;
+  border: 2px solid transparent;
+  &:hover {
+    border: 2px solid #DDD;
+  }
+}
+
+input[type=radio]:checked + img{
+  border: 2px solid #285e8e;
+}
+
+/////////////////////
+
+[rel="old"], [rel="new"], .payment-block {
+  display: none;
+}

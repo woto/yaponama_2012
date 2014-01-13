@@ -1,4 +1,4 @@
-<%= panel 'primary' do |p| %>
+<%= panel 'default' do |p| %>
   <%= p.heading do %>
     <%= p.title do %>
       <%= title %>
@@ -19,7 +19,7 @@
         <div rel="old">
           <% options = @somebody.postal_addresses.map{|pa| [pa.to_label, pa.id]} + [[opposite, '-1']] %>
           <%# TODO Задействовать label: false и label: nil %>
-          <%= f.twbs_select(assoc_id, options, {include_blank: true, label: false}) %>
+          <%= f.twbs_select(assoc_id, options, {include_blank: true, label: false}, {rel:'select select-and-fill'}) %>
         </div>
 
         <div rel="new">

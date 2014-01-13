@@ -61,8 +61,16 @@ window.bootstrapperize = ->
     # Нельзя вызывать change
     $(this).trigger('custom-change')
 
+  $("[rel~='select']").each ->
+
+    $(this).trigger('custom-change')
+
+
 $(document).on 'change', "[rel~='radio']", ->
   $(this).trigger('custom-change')
 
 $(document).on 'change', "[rel~='checkbox']", ->
+  $(this).trigger('custom-change')
+
+$(document).on 'change', "[rel~='select']", ->
   $(this).trigger('custom-change')
