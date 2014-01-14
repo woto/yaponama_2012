@@ -1,8 +1,29 @@
 <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
 <%= form_tag polymorphic_path([new_or_edit, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :product], :id => @resource), :class => "navbar-form navbar-left ajax-form", :method => :get do %>
   <div class="form-group">
+    <div class="input-group" id="catalog_number_parent">
+      <%= text_field_tag :catalog_number, params[:catalog_number] || @preset_catalog_number, :placeholder => 'Артикул детали', :class => "form-control" %>
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+        <ul class="dropdown-menu pull-right">
+          <% history = @somebody.stats.limit(4).where(is_search: true).order(id: :desc) %>
+          <% if history.any? %>
+            <% history.each do |stat| %>
+              <li><%= link_to truncate(stat.title, length: 40), stat.location %></li>
+            <% end %>
+            <li><a href="#"><small>Вся история</small></a></li>
+          <% else %>
+            <li><a href="#">История поиска пуста</a></li>
+          <% end %>
+        </ul>
+      </div><!-- /btn-group -->
+    </div><!-- /input-group -->
+  </div><!-- /form-group -->
+  <!--
+  <div class="form-group">
     <%= text_field_tag :catalog_number, params[:catalog_number] || @preset_catalog_number, :placeholder => 'Артикул детали', :class => "form-control" %>
   </div>
+  -->
   <%# hidden_field_tag :manufacturer, params[:manufacturer] %>
   <%# hidden_field_tag :replacements, params[:replacements] %>
   <%= hidden_field_tag :product_id, @resource.try(:product_id) %>
