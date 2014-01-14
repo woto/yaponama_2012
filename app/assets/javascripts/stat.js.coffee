@@ -37,6 +37,7 @@ send_stat = ->
       screen_height: screen.height
       client_width: $(window).width()
       client_height: $(window).height()
+      is_search: $("#is_search").length > 0
 
   window.referrer = window.location.href 
 

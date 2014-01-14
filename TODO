@@ -1,3 +1,7 @@
+Добавил div is_search и javascript по отправке stat отправляю ключ, потом либо пересмотреть, либо добавить тест на это дело
+
+==================
+
 Пересмотреть нужен ли cached_talk в Somebody
 
 ==================
@@ -173,4 +177,5 @@ product_fields
           video: false
 
       # coolPhone.call "1061", options
+
 

@@ -1,5 +1,7 @@
 <% if @status[:offers] %>
 
+  <div id="is_search"></div>
+
   <% @formatted_data.each do |catalog_number, cn_scope| %>
 
     <% cn_scope.each_with_index do |(manufacturer, mf_scope), i| %>

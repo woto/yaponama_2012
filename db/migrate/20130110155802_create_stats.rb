@@ -14,6 +14,8 @@ class CreateStats < ActiveRecord::Migration
 
       t.references :somebody, index: true
 
+      t.boolean :is_search
+
       t.timestamps
     end
   end
