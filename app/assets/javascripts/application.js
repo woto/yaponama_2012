@@ -30,7 +30,7 @@
 //= require phone_input
 //= require stand_alone_house
 //= require collapse_next
-//= require companies
+//= require radio_new_old_switcher
 //
 //= require catch_enter
 
@@ -83,3 +83,4 @@
 //= require notify_window
 //= require notify_sound_toggler
 //= require slide_top
+//= require payments

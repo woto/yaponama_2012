@@ -34,7 +34,9 @@ class SessionsController < ApplicationController
       # TODO Сделал так чтобы если пользователь зарегистрирован в системе, значит он имеет какие-то привилении
       # соответственно старный гостевой аккаунт не нужен и 'он не хотел под ним работать на сайте'
  
-      @user.destroy
+      @user.pass_my_attributes_to_somebody_and_destroy_self(@session.user)
+
+      #@user.destroy
       # TODO наверное круто было бы, если бы я делал merge пользователей
 
       redirect_to user_path, :success => "Вы успешно вошли."

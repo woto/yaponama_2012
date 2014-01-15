@@ -142,25 +142,18 @@ module ApplicationHelper
                 :dropdown => []
               },
 
-              { :title => params[:controller] == 'orders' ? "Заказы&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.orders_status[params[:status]].try(:[], 'title')} </span>".html_safe : "Заказы",
+              { :title => params[:controller].include?('orders') ? "Заказы&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.orders_status[params[:status]].try(:[], 'title')} </span>".html_safe : "Заказы",
                 :catch => [ { :controller => 'orders' } ], 
                 :link => '#',
                 :class => 'dropdown',
                 :dropdown => _build_dropdowns('order', 'orders', Rails.configuration.orders_status, Rails.configuration.orders_menu, @somebody)
               },
 
-              { :title => params[:controller] == 'products' ? "Товары&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.products_status[params[:status]].try(:[], 'title')} </span>".html_safe : "Товары",
+              { :title => params[:controller].include?('products') ? "Товары&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.products_status[params[:status]].try(:[], 'title')} </span>".html_safe : "Товары",
                 :catch => [ { :controller => 'products' } ],
                 :link => '#',
                 :class => 'dropdown',
                 :dropdown => aaa
-              },
-
-              { :title => 'История',
-                :catch => [],
-                :link => 'http://ya.ru',
-                :class => '',
-                :dropdown => []
               },
 
             ]
@@ -271,7 +264,6 @@ module ApplicationHelper
 
   private
 
-
   def highlight_active(routes)
     begin
       if routes.map{|route| current_page?(route)}.any?
@@ -280,6 +272,14 @@ module ApplicationHelper
         ''
       end
     rescue ActionController::UrlGenerationError
+    end
+  end
+
+  def highlight_active2(routes)
+    if routes.map{|route| request.fullpath.include? route}.any?
+      'active'
+    else
+      ''
     end
   end
 
@@ -442,7 +442,8 @@ module ApplicationHelper
   end
 
   def dropdown options={}, &block
-    content_tag :li, class: 'dropdown' do
+    options[:class] = ['dropdown', options[:class] ].compact
+    content_tag :li, options do
       yield Dropdown.new(self)
     end
   end

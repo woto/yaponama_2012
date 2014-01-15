@@ -14,8 +14,9 @@ class Dropdown < AbstractBootstrap
     end
   end
 
-  def submenu
-    @template.content_tag :li, class: "dropdown-submenu" do
+  def submenu options={}
+    options[:class] = ['dropdown-submenu', options[:class] ].compact
+    @template.content_tag :li, options do
       yield
     end
   end

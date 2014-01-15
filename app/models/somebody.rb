@@ -98,20 +98,31 @@ class Somebody < ActiveRecord::Base
   has_one :account, :dependent => :destroy, inverse_of: :somebody
   #validates :account, :presence => true
 
+
+  def pretty_id
+    id.to_s.scan(/.{2}|.+/).join("-")
+  end
+
   def to_label
-    res = []
     
-    begin
-      name = JSON.parse(cached_main_profile)['names'].first
-      [name['surname'], name['name']].join(' ')
-    rescue
-      "Посетитель № #{id.to_s.scan(/.{2}|.+/).join("-")}"
+    if (full_name = [surname, name]).any?
+      full_name.join(' ')
+    else
+      "Посетитель № #{pretty_id}"
     end
   end
 
   def name
     begin
       JSON.parse(cached_main_profile).try(:[], 'names').try(:first).try(:[], 'name')
+    rescue
+      # Потом устранить
+    end
+  end
+
+  def surname
+    begin
+      JSON.parse(cached_main_profile).try(:[], 'names').try(:first).try(:[], 'surname')
     rescue
       # Потом устранить
     end
@@ -157,6 +168,14 @@ class Somebody < ActiveRecord::Base
     if (['admin', 'manager'].include?(role_was) || ['admin', 'manager'].include?(role) ) && changes.present?
       $redis.publish("#{Rails.env}:update sellers", JSON.dump(comment: changes))
     end
+  end
+
+  def seller?
+    ['manager', 'admin'].include? role
+  end
+
+  def buyer?
+    ['guest', 'user'].include? role
   end
 
 end

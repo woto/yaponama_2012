@@ -66,7 +66,7 @@ class Profile < ActiveRecord::Base
 
   def to_label
     if cached_names
-      "#{JSON.parse(cached_names).first['surename']} #{JSON.parse(cached_names).first['name']} #{JSON.parse(cached_names).first['patronymic']}"
+      "#{JSON.parse(cached_names).first['surname']} #{JSON.parse(cached_names).first['name']} #{JSON.parse(cached_names).first['patronymic']}"
     end
   end
 

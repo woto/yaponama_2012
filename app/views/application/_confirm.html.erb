@@ -29,7 +29,9 @@
 <% end %>
 
 <% if confirm.present? %>
-  <%= alert 'warning' do %>
-    <%= confirm %>
-  <% end %>
+  <div id="confirm-block">
+    <%= alert 'warning' do %>
+      <%= confirm %>
+    <% end %>
+  </div>
 <% end %>

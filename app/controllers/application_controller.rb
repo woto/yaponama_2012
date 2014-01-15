@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   include SmsSenderHelper
   helper_method :current_user
   helper_method :admin_zone?
+  helper_method :public_zone?
   #helper_method :complex_namespace_helper
   helper_method :smart_route
   around_action :set_user_time_zone
@@ -18,7 +19,7 @@ class ApplicationController < ActionController::Base
   helper_method :sort_column
   helper_method :sort_direction
 
-  before_filter :set_cache_buster
+  #before_filter :set_cache_buster
 
   #helper :tag
 
@@ -57,7 +58,7 @@ class ApplicationController < ActionController::Base
   def create
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path], :id => @resource.id), success: "#{@resource_class} was successfully created." }
+        format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path], :id => @resource.id), success: "#{@resource_class} был успешно создан." }
       else
         format.html { render action: 'new' }
       end
@@ -89,11 +90,11 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_cache_buster
-    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
-    response.headers["Pragma"] = "no-cache"
-    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
-  end
+  #def set_cache_buster
+  #  response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+  #  response.headers["Pragma"] = "no-cache"
+  #  response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  #end
 
   def ipgeobase
     # GEO
@@ -159,6 +160,10 @@ class ApplicationController < ActionController::Base
 
   def admin_zone?
     params[:controller].partition('/').first == 'admin'
+  end
+
+  def public_zone?
+    !admin_zone?
   end
 
   #def complex_namespace_helper
@@ -295,7 +300,7 @@ class ApplicationController < ActionController::Base
   before_action :new_resource, :only => [:new]
 
   def new_resource
-    @resource = @resource_class.new
+    @resource = @resource_class.new resource_params
   end
 
   before_action :edit_resource, only: [:edit]
@@ -306,6 +311,7 @@ class ApplicationController < ActionController::Base
   before_action :create_resource, :only => [:create]
 
   def create_resource
+    #debugger
     @resource = @resource_class.new(resource_params)
     #debugger
     #puts

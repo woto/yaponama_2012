@@ -95,7 +95,7 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def twbs_submit value=nil, options={}
-    options[:class] = [ 'btn btn-primary btn-lg top-space bottom-space', options[:class] ].compact
+    options[:class] = [ 'btn btn-primary', options[:class] ].compact
     form_group do
       @template.concat submit(value, options)
       if @template.params[:return_path]
@@ -171,6 +171,23 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
     @template.content_tag :div, class: "nested-fields" do
       #@template.concat block.call
       res + standard_recreate
+    end
+  end
+
+  def error_notification
+    if @object.errors.any?
+      @template.alert 'danger' do
+        "Невозможно продолжить. Пожалуйста исправьте ошибки."
+        #@template.content_tag :ul, class:'list-unstyled' do
+        #  collector = []
+        #  @object.errors.full_messages.each do |msg|
+        #    collector << (@template.content_tag :li do
+        #      msg
+        #    end)
+        #  end
+        #  collector.join.html_safe
+        #end
+      end
     end
   end
 
