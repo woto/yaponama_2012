@@ -7,6 +7,8 @@ class Somebody < ActiveRecord::Base
 
   belongs_to :place, class_name: "Deliveries::Place"
 
+  #has_many :payments
+
   has_many :uploads
 
   # Понятие главного профиля
@@ -98,6 +100,45 @@ class Somebody < ActiveRecord::Base
   has_one :account, :dependent => :destroy, inverse_of: :somebody
   #validates :account, :presence => true
 
+  def pass_my_attributes_to_somebody_and_destroy_self new_user
+
+    # Переносим историю
+    stats.each do |stat|
+      stat.somebody = new_user
+      stat.save
+    end
+
+    stats.reload
+
+    ###
+
+    # Переносим диалоги
+    talks.each do |talk|
+      if talk.creator == self
+        talk.creator = new_user
+      end
+      if talk.addressee == self
+        talk.addressee = new_user
+      end
+      talk.somebody = new_user
+      talk.save
+    end
+
+    if talks.length > 0
+      # Мы переопределяем дефолтного менеджера пользователю
+      # только если есть диалоги под гостем
+      new_user.default_addressee = self.default_addressee
+    end
+
+    ###
+
+    # TODO Разобраться с counters
+    #User.reset_counters(new_user.id, :talks)
+    #new_user.total_talks = new_user.talks.length
+    #new_user.unread_talks = new_user.talks.where(read: false).length
+    new_user.save
+    self.destroy
+  end
 
   def pretty_id
     id.to_s.scan(/.{2}|.+/).join("-")
