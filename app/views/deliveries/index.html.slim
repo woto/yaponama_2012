@@ -1,65 +1,87 @@
-- @meta_title = "Доставка и Самовывоз"
 
-ul.nav.nav-tabs id="myTab"
+= somebody_tabs do
 
-  li.active
-    a href="#home" data-toggle="tab"
-      strong Москва
-  li
-    a href="#profile" data-toggle="tab"
-      strong Другие города
- 
-div.tab-content.top-space
+  - @meta_title = "Доставка и Самовывоз"
+  = page_header
 
-  div.tab-pane.active id="home"
+  ul.nav.nav-tabs id="myTab"
 
-    .row
-      .col-sm-5.bottom-space
+    li.active
+      a href="#home" data-toggle="tab"
+        strong Москва
+    li
+      a href="#profile" data-toggle="tab"
+        strong Россия
+   
+  div.tab-content.top-space
 
-        #deliveries-accordion.accordion
-          - Deliveries::Place.where(active: true).each do |delivery_zone|
-            .accordion-group class="#{delivery_zone.realize? ? '' : 'hide'}"
-              .accordion-heading.delivery_zone
-                / Картографические данные области
-                div style="display: none"
-                  .vertices= delivery_zone.vertices
-                  .lat = delivery_zone.lat
-                  .lng = delivery_zone.lng
-                  .zoom = delivery_zone.zoom
-                  .display_marker = delivery_zone.display_marker
-                  .z_index = delivery_zone.z_index
-                  .realize = delivery_zone.realize
-                  - ['active', 'inactive'].each do |style|
-                    div class="#{style}"
-                      .fill_color= delivery_zone["#{style}_fill_color"]
-                      .fill_opacity= delivery_zone["#{style}_fill_opacity"]
-                      .stroke_color= delivery_zone["#{style}_stroke_color"]
-                      .stroke_opacity= delivery_zone["#{style}_stroke_opacity"]
-                      .stroke_weight= delivery_zone["#{style}_stroke_weight"]
-                - rand_id = (0...25).map{ ('a'..'z').to_a[rand(26)] }.join
-                a.accordion-toggle data-toggle="collapse" data-parent="#deliveries-accordion" href="##{rand_id}"
-                  strong= delivery_zone.name
-              .accordion-body.collapse id="#{rand_id}"
-                .accordion-inner
-                  p== delivery_zone.content
-                  - delivery_zone.variants.each do |variant|
-                    strong = variant.name
-                    p== variant.content
-                    p= number_to_currency variant.delivery_cost
-      .col-sm-7
+    div.tab-pane.active id="home"
 
-        form
-          = form_group do
-            = input_group do |ig|
-              = twbs_text_field_tag '', '', id: "geocode-address-text", rel: "catch-enter", placeholder: "Укажите адрес доставки"
-              = ig.btn do
-                <button id="geocode-address-button" class="btn btn-default" rel="press-enter" type="button"> Найти адрес </button>
+      .row
+        .col-sm-6.bottom-space
 
-        #clientMap
+          h3.top-space-none.bottom-space Самовывоз
+          #deliveries-accordion.accordion
+            - Deliveries::Place.where(active: true).order(z_index: :desc).each do |delivery_zone|
+              .accordion-group class="#{delivery_zone.realize? ? '' : 'hide'}"
+                .accordion-heading.delivery_zone
+                  / Картографические данные области
+                  div style="display: none"
+                    .vertices= delivery_zone.vertices
+                    .lat = delivery_zone.lat
+                    .lng = delivery_zone.lng
+                    .zoom = delivery_zone.zoom
+                    .display_marker = delivery_zone.display_marker
+                    .z_index = delivery_zone.z_index
+                    .realize = delivery_zone.realize
+                    - ['active', 'inactive'].each do |style|
+                      div class="#{style}"
+                        .fill_color= delivery_zone["#{style}_fill_color"]
+                        .fill_opacity= delivery_zone["#{style}_fill_opacity"]
+                        .stroke_color= delivery_zone["#{style}_stroke_color"]
+                        .stroke_opacity= delivery_zone["#{style}_stroke_opacity"]
+                        .stroke_weight= delivery_zone["#{style}_stroke_weight"]
+                  - rand_id = (0...25).map{ ('a'..'z').to_a[rand(26)] }.join
+                  a.accordion-toggle data-toggle="collapse" data-parent="#deliveries-accordion" href="##{rand_id}"
+                    strong= delivery_zone.name
+                .accordion-body.collapse id="#{rand_id}"
+                  .accordion-inner
+                    p== delivery_zone.content
+                    - delivery_zone.variants.order(sequence: :desc).each do |variant|
+                      strong = variant.name
+                      p== variant.content
+                      p= number_to_currency variant.delivery_cost
+          h3.top-space.bottom-space Доставка
+          - pa = PostalAddress.new
+          = twbs_form_for pa, url:'#' do |f|
+            = render 'postal_addresses/fields', f:f
+        .col-sm-6
 
-    /- @deliveries.each do |delivery|
-      h3 style="margin-bottom: 30px"= delivery.name
+          form
+            = form_group do
+              = input_group do |ig|
+                = twbs_text_field_tag '', '', id: "geocode-address-text", rel: "catch-enter", placeholder: "Укажите адрес доставки"
+                = ig.btn do
+                  <button id="geocode-address-button" class="btn btn-default" rel="press-enter" type="button"> Найти адрес </button>
 
-    /- klass = delivery.class.reflect_on_all_associations.select{|ref| ref.active_record.to_s.deconstantize == 'Delivery'}.first.name.to_s.singularize.camelcase.constantize.all.each do |sub|
-  div.tab-pane id="profile"
-    h3 Другие города
+          #clientMap
+
+      /- @deliveries.each do |delivery|
+        h3 style="margin-bottom: 30px"= delivery.name
+
+      /- klass = delivery.class.reflect_on_all_associations.select{|ref| ref.active_record.to_s.deconstantize == 'Delivery'}.first.name.to_s.singularize.camelcase.constantize.all.each do |sub|
+    div.tab-pane id="profile"
+      h3 Другие города
+
+      <p>
+        <a href="/delivery#ems">
+          <img title="EMS Почта России" alt="EMS Почта России" src="/assets/delivery/ems.png" style="width: 135px; height: 80px; ">
+        </a>
+      </p>
+
+      <p>
+        <a href="/delivery#russian_post">
+          <img title="Почта России" alt="Почта России" src="/assets/delivery/russian_post.png" style="width: 135px; height: 80px; ">
+        </a>
+      </p>
+
