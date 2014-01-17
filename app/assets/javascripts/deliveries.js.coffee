@@ -115,6 +115,7 @@ window.initClientMap = ->
     mapTypeId: google.maps.MapTypeId.ROADMAP
     disableDefaultUI: true
     zoomControl: true
+    scrollwheel: false
   )
 
   $('.delivery_zone').each ->
