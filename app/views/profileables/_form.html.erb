@@ -2,6 +2,8 @@
   <div class="col-md-8">
     <%= twbs_form_for @resource, :url => [(admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user), @resource] do |f| %>
 
+      <%= f.error_notification %>
+
       <%= f.alert_danger do %>
         <%= f.error(:base) %>
       <% end %>

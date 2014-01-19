@@ -1,4 +1,4 @@
-= panel 'primary' do |p|
+= panel 'default' do |p|
 
   = p.heading do 
     = p.title { 'Основные сведения' }
@@ -28,7 +28,7 @@
         = m.twbs_select2 :name, rel: 'select2-modification', data: {"true-id" => f.object.modification_id}
         = f.error(:modification)
 
-= panel 'primary' do |p|
+= panel 'default' do |p|
 
   = p.heading do
     = p.title { 'Дополнительные сведения' }

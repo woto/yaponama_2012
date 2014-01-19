@@ -49,8 +49,7 @@
     <% end %>
 
     <%= modal.footer do |footer| %>
-      <%= footer.close %>
-      <input class="btn btn-primary ignoredirty" name="filters" type="submit" value="Применить фильтр"></input>
+      <%= footer.twbs_submit 'Применить фильтр', name:'filters' %>
     <% end %>
 
   <% end %>

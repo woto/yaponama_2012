@@ -4,6 +4,8 @@
 
     <%= twbs_form_for @resource, url: [:admin, @resource] do |f| %>
 
+      <%= f.error_notification %>
+
       <%= f.twbs_check_box :active %>
       <%= f.twbs_text_field :z_index, asterisk: true %>
 

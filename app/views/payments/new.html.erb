@@ -6,7 +6,7 @@
 
   <%= row do %>
 
-    <div class="col-md-8">
+    <div class="col-md-7">
 
       <%= twbs_form_for @resource, url: user_payments_path do |f| %>
 
@@ -18,7 +18,7 @@
             <% Rails.configuration.payment_systems.each do |k, v| %>
               <%= f.label :payment_type, value: k, class: 'payment' do %>
                 <%= f.radio_button :payment_type, k, data: v, rel: 'radio' %>
-                <%= image_tag "/assets/payment/#{k}.gif", alt: k %>
+                <%= image_tag "/assets/payment/#{k}.gif", alt: k, style: "width: 125px;" %>
               <% end %>
             <% end %>
           </div>
@@ -61,7 +61,11 @@
 
     </div>
 
-    <div class="col-md-5">
+    <div class="col-md-4">
+      <div class="text-info top-space">
+        <strong>Подсказка</strong><br />
+        Если вы не пользуетесь электронными деньгами, то можете выбрать вариант оплаты Сбербанк и оплатить наличными в ближайшем отделении банка.
+      </div>
     </div>
 
   <% end %>

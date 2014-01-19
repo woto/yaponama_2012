@@ -30,9 +30,7 @@
   <% end %>
 
   <%= modal.footer do |footer| %>
-    <input class="btn btn-primary btn-lg" name="columns" type="submit" value="Сохранить" />
-    &nbsp;&nbsp;&nbsp;или&nbsp;&nbsp;&nbsp;
-    <%= footer.close %>
+    <%= footer.twbs_submit nil, name:'columns' %>
   <% end %>
 
 <% end %>

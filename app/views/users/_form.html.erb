@@ -10,7 +10,7 @@
 
       <%= f.twbs_collection_select :main_profile_id, @resource.profiles, :id, :to_label, :include_blank => true %>
 
-      <%= panel 'primary' do |p| %>
+      <%= panel 'default' do |p| %>
         <%= p.heading do %>
           <%= p.title { 'Часовой пояс' } %>
         <% end %>
@@ -21,7 +21,7 @@
         <% end %>
       <% end %>
 
-      <%= panel 'primary' do |p| %>
+      <%= panel 'default' do |p| %>
         <%= p.heading do %>
           <%= p.title { 'Права' } %>
         <% end %>
