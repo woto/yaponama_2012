@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: 60683d9054b4f4024c57591a122cebfe11dfdcc3
+  revision: 743a117241e29958abfa05c5c024cd798d62fdc6
   specs:
     capybara (2.2.0)
       mime-types (>= 1.16)
@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: git://github.com/joliss/jquery-ui-rails.git
-  revision: 14ff35531a19e2a882a67bda96379bbb9cce6de9
+  revision: 4289cf7953b191912a06391e8850d8c0737e9d8f
   specs:
     jquery-ui-rails (4.1.1)
       railties (>= 3.1.0)
@@ -35,15 +35,8 @@ GIT
       json (>= 1.8.0)
 
 GIT
-  remote: git://github.com/mikel/mail.git
-  revision: 896972544b6dce25807420b671f1a04363bf134e
-  specs:
-    mail (2.6.0.edge)
-      mime-types (~> 1.16)
-
-GIT
   remote: git://github.com/pivotal/jasmine-gem.git
-  revision: 5f334f18d536abcbea4d500a3da46f41c3e60a21
+  revision: d8fae2d2b61fa2063f7405f39ca51150e054eb03
   specs:
     jasmine (2.0.0)
       jasmine-core (~> 2.0.0)
@@ -76,6 +69,48 @@ GIT
       thor (>= 0.14, < 2.0)
 
 GIT
+  remote: git://github.com/rails/rails.git
+  revision: fd2d1449bc241b1c8ed63b4b83ba40d47ddef4b6
+  branch: 4-0-stable
+  specs:
+    actionmailer (4.0.2)
+      actionpack (= 4.0.2)
+      mail (~> 2.5.4)
+    actionpack (4.0.2)
+      activesupport (= 4.0.2)
+      builder (~> 3.1.0)
+      erubis (~> 2.7.0)
+      rack (~> 1.5.2)
+      rack-test (~> 0.6.2)
+    activemodel (4.0.2)
+      activesupport (= 4.0.2)
+      builder (~> 3.1.0)
+    activerecord (4.0.2)
+      activemodel (= 4.0.2)
+      activerecord-deprecated_finders (~> 1.0.2)
+      activesupport (= 4.0.2)
+      arel (~> 4.0.0)
+    activesupport (4.0.2)
+      i18n (~> 0.6, >= 0.6.9)
+      minitest (~> 4.2)
+      multi_json (~> 1.3)
+      thread_safe (~> 0.1)
+      tzinfo (~> 0.3.37)
+    rails (4.0.2)
+      actionmailer (= 4.0.2)
+      actionpack (= 4.0.2)
+      activerecord (= 4.0.2)
+      activesupport (= 4.0.2)
+      bundler (>= 1.3.0, < 2.0)
+      railties (= 4.0.2)
+      sprockets-rails (~> 2.0.0)
+    railties (4.0.2)
+      actionpack (= 4.0.2)
+      activesupport (= 4.0.2)
+      rake (>= 0.8.7)
+      thor (>= 0.18.1, < 2.0)
+
+GIT
   remote: git://github.com/rails/sass-rails.git
   revision: f65b9005de112b74cd09e5dedeae23603c3b1413
   specs:
@@ -86,7 +121,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sprockets-rails.git
-  revision: 25eee989fbb3a11d96241d1a7e79bb9670e51f5b
+  revision: 7d53c55c96a1f900553038d6354136fed8536c8a
   specs:
     sprockets-rails (2.0.1)
       actionpack (>= 3.0)
@@ -95,9 +130,9 @@ GIT
 
 GIT
   remote: git://github.com/rails/turbolinks.git
-  revision: 176135140c4a6e4a74c9004033d2bb3dd0ae6fd1
+  revision: 18b596569df14f63fab420bc3fc71395102e98db
   specs:
-    turbolinks (2.1.0)
+    turbolinks (2.2.0)
       coffee-rails
 
 GIT
@@ -106,48 +141,6 @@ GIT
   specs:
     ipgeobase (0.0.1)
       ancestry
-
-GIT
-  remote: git://github.com/woto/rails.git
-  revision: d88a42a829e564cbe5aa189ed45a199dc32a84bb
-  branch: 4-0-stable
-  specs:
-    actionmailer (4.0.1)
-      actionpack (= 4.0.1)
-      mail
-    actionpack (4.0.1)
-      activesupport (= 4.0.1)
-      builder (~> 3.1.0)
-      erubis (~> 2.7.0)
-      rack (~> 1.5.2)
-      rack-test (~> 0.6.2)
-    activemodel (4.0.1)
-      activesupport (= 4.0.1)
-      builder (~> 3.1.0)
-    activerecord (4.0.1)
-      activemodel (= 4.0.1)
-      activerecord-deprecated_finders (~> 1.0.2)
-      activesupport (= 4.0.1)
-      arel (~> 4.0.0)
-    activesupport (4.0.1)
-      i18n (~> 0.6, >= 0.6.4)
-      minitest (~> 4.2)
-      multi_json (~> 1.3)
-      thread_safe (~> 0.1)
-      tzinfo (~> 0.3.37)
-    rails (4.0.1)
-      actionmailer (= 4.0.1)
-      actionpack (= 4.0.1)
-      activerecord (= 4.0.1)
-      activesupport (= 4.0.1)
-      bundler (>= 1.3.0, < 2.0)
-      railties (= 4.0.1)
-      sprockets-rails (~> 2.0.0)
-    railties (4.0.1)
-      actionpack (= 4.0.1)
-      activesupport (= 4.0.1)
-      rake (>= 0.8.7)
-      thor (>= 0.18.1, < 2.0)
 
 GIT
   remote: https://github.com/Shopify/active_merchant
@@ -171,7 +164,7 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: 4052bc371b233e1e38924f9f4c83e0f897227b2d
+  revision: ea5ceb7dfa613f432efbfa04195c86599a16d973
   specs:
     simple_form (3.0.1)
       actionpack (>= 4.0.0, < 4.1)
@@ -191,10 +184,10 @@ GEM
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
     cancan (1.6.10)
-    capistrano (3.0.1)
+    capistrano (3.1.0)
       i18n
       rake (>= 10.0.0)
-      sshkit (>= 0.0.23)
+      sshkit (~> 1.3)
     capybara-webkit (1.1.0)
       capybara (~> 2.0, >= 2.0.2)
       json
@@ -213,7 +206,7 @@ GEM
     coffee-script-source (1.6.3)
     columnize (0.3.6)
     commonjs (0.2.7)
-    dalli (2.6.4)
+    dalli (2.7.0)
     debugger (1.6.5)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -223,7 +216,7 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
-    faraday (0.8.8)
+    faraday (0.8.9)
       multipart-post (~> 1.2.0)
     fastercsv (1.5.5)
     ffi (1.9.3)
@@ -236,7 +229,7 @@ GEM
     innertube (1.1.0)
     jasmine-core (2.0.0)
     json (1.8.1)
-    jwt (0.1.8)
+    jwt (0.1.10)
       multi_json (>= 1.5)
     kaminari (0.15.0)
       actionpack (>= 3.0.0)
@@ -249,13 +242,16 @@ GEM
     libv8 (3.16.14.3)
     macaddr (1.6.1)
       systemu (~> 2.5.0)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
     middleware (0.1.0)
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
     money (6.0.0)
       i18n (~> 0.6.4)
-    multi_json (1.8.2)
+    multi_json (1.8.4)
     multipart-post (1.2.0)
     mysql2 (0.3.12b4)
     net-scp (1.1.2)
@@ -273,8 +269,8 @@ GEM
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
-    omniauth-facebook (1.5.1)
-      omniauth-oauth2 (~> 1.1.0)
+    omniauth-facebook (1.6.0)
+      omniauth-oauth2 (~> 1.1)
     omniauth-google-oauth2 (0.2.2)
       omniauth (~> 1.0)
       omniauth-oauth2
@@ -302,6 +298,7 @@ GEM
       omniauth-oauth2 (~> 1.0)
     pg (0.17.1)
     phantomjs (1.9.2.1)
+    polyglot (0.3.3)
     puma (2.7.1)
       rack (>= 1.1, < 2.0)
     quiet_assets (1.0.2)
@@ -310,11 +307,11 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     rake (10.1.1)
-    rdoc (3.12.2)
+    rdoc (4.1.1)
       json (~> 1.4)
     redis (3.0.6)
     ref (1.0.5)
-    riddle (1.5.9)
+    riddle (1.5.10)
     rmagick (2.13.2)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -337,12 +334,12 @@ GEM
     rubyzip (1.1.0)
     russian (0.6.0)
       i18n (>= 0.5.0)
-    sanitize (2.0.6)
+    sanitize (2.1.0)
       nokogiri (>= 1.4.4)
     sass (3.2.13)
-    sdoc (0.3.20)
-      json (>= 1.1.3)
-      rdoc (~> 3.10)
+    sdoc (0.4.0)
+      json (~> 1.8)
+      rdoc (~> 4.0, < 5.0)
     selenium-webdriver (2.39.0)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
@@ -387,6 +384,9 @@ GEM
       atomic
     tilt (1.4.1)
     tins (0.13.1)
+    treetop (1.4.15)
+      polyglot
+      polyglot (>= 0.3.1)
     tzinfo (0.3.38)
     uuid (2.3.7)
       macaddr (~> 1.0)
@@ -428,7 +428,6 @@ DEPENDENCIES
   json
   kaminari
   less-rails
-  mail!
   mysql2 (= 0.3.12b4)
   omniauth
   omniauth-facebook

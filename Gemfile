@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails',     github: 'woto/rails', :branch => '4-0-stable'
+gem 'rails',     github: 'rails/rails', :branch => '4-0-stable'
 
 gem 'pg'
 
@@ -95,7 +95,7 @@ gem 'omniauth-odnoklassniki'
 gem 'omniauth-mailru'
 
 # Необходима версия 2.6.0 чтобы не резался многострочный заголовок
-gem 'mail', github: 'mikel/mail'
+#gem 'mail', github: 'mikel/mail'
 gem 'htmlentities'
 gem 'dalli'
 gem 'puma'
