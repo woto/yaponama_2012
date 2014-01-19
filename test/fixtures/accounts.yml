@@ -48,7 +48,22 @@ exist:
   credit: 0.0
   somebody: exist
 
+sidor:
+  debit: 0.0
+  credit: 0.0
+  somebody: sidor
+
+petr:
+  debit: 0.0
+  credit: 0.0
+  somebody: petr
+
 anton:
   debit: 0.0
   credit: 0.0
   somebody: anton
+
+ivan:
+  debit: 0.0
+  credit: 0.0
+  somebody: ivan

@@ -6,10 +6,10 @@ audi:
   creator: first_admin
 
 infiniti:
-  name: Infiniti
+  name: INFINITI
 
 mazda:
-  name: Mazda
+  name: MAZDA
 
 nissens:
   name: NISSENS
@@ -39,7 +39,7 @@ mitsubishi:
   creator: otto
 
 nissan:
-  name: Nissan
+  name: NISSAN
   rating: 1000
   phantom: false
   creator: stan

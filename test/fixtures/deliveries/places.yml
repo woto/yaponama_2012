@@ -45,3 +45,47 @@ second:
   zoom: 15
   z_index: 100
   display_marker: true
+
+ttk:
+  name: Доставка в пределах ТТК
+  content: ''
+  vertices: gahsI_jadFkxAse@oMyJsIkQwPuRiB_MaAuTmDkOu^yYqa@_o@me@mu@}Buu@VegAoBe{@uAshAdCqiAlC{ZeAy`@aJyz@TiMfA}KbEsLfGgKxs@{bAnN{]lQor@pX_b@bW{h@l@nAvEgCfe@CzRRpHK|G}@tTmNvIoJxH_IbJaDzCc@|Cn@|KdGfKbDfIXrH{@jPwJ`g@gp@nW}\dC{AbDn@hCdD`Obo@`M`q@xOd~@bJv`@xGj_@dy@znB?tb@sElkAiJnlBrEtTnJrKvFrKjDzOL~OgQd~@oTlkAyr@jgAwF~Pe`@hkBmDjLaHjLkl@rj@wMfC}QnZyRnSoSfFgR~B
+  active_fill_color: ! '#000000'
+  active_fill_opacity: '0.5'
+  active_stroke_color: ! '#000000'
+  active_stroke_opacity: '0.5'
+  active_stroke_weight: '0.5'
+  inactive_fill_color: ! '#000000'
+  inactive_fill_opacity: '0'
+  inactive_stroke_color: ! '#000000'
+  inactive_stroke_opacity: '0'
+  inactive_stroke_weight: '0'
+  realize: true
+  active: true
+  lat: 55.747583970085
+  lng: 37.6255576354981
+  zoom: 11
+  z_index: 100
+  display_marker: false
+
+sadovoe:
+  name: Садовое кольцо
+  content: ''
+  vertices: qglsI{rqdFa@kt@d@sSvGodAjU{jAlZgg@lLmEzL{@jNG~P`DtNrD~Sr@pYnBrHz@tKfJxb@ps@hTbe@jCvM|EjgAP|_A}@dMuVvkAgXdhAuC~IyHdEyh@zOcY_Cw_@{DiM_BsJcE{VaRsUw\kKuSqG}S{Io`@mAyU
+  active_fill_color: ! '#000000'
+  active_fill_opacity: '0.5'
+  active_stroke_color: ! '#000000'
+  active_stroke_opacity: '0.5'
+  active_stroke_weight: '0.5'
+  inactive_fill_color: ! '#000000'
+  inactive_fill_opacity: '0.5'
+  inactive_stroke_color: ! '#000000'
+  inactive_stroke_opacity: '0.5'
+  inactive_stroke_weight: '0.5'
+  realize: false
+  active: true
+  lat: 55.7505186269485
+  lng: 37.6213090164185
+  zoom: 12
+  z_index: 300
+  display_marker: false

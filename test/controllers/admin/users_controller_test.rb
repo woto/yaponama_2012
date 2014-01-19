@@ -26,7 +26,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
       post :create, :user => {:id => ''}
     end
     assert_redirected_to admin_user_path(User.last)
-    assert_equal "User was successfully created.", flash[:success]
+    assert_equal "User был успешно создан.", flash[:success]
   end
 
 end

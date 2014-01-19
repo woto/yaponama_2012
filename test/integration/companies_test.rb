@@ -157,7 +157,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
 
     submit
 
-    assert page.has_css? '.alert-success', text: "Company was successfully created."
+    assert page.has_css? '.alert-success', text: "Company был успешно создан."
 
   end
 
@@ -196,7 +196,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
 
     submit
 
-    assert page.has_css? '.alert-success', text: "Company was successfully created."
+    assert page.has_css? '.alert-success', text: "Company был успешно создан."
 
   end
   

@@ -15,3 +15,23 @@ second:
   name: Самовывоз
   delivery_cost: 0.0
   content: ! "<p>Описание способа доставки.</p>\r\n"
+
+ttk:
+  place: ttk
+  #option_id: 980190962
+  active: false
+  sequence: 100
+  name: Вариант 1
+  delivery_cost: 100.0
+  content: ''
+  created_at: 2014-01-17 13:39:23.839521000 Z
+  updated_at: 2014-01-17 13:39:23.839521000 Z
+
+sadovoe:
+  place: sadovoe
+  #option_id: 980190962
+  active: false
+  sequence: 1
+  name: '1'
+  delivery_cost: 1.0
+  content: ''
