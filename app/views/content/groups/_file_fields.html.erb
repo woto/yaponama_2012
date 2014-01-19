@@ -1,0 +1,26 @@
+<%= render :layout => 'content/groups/block', locals: { f: f } do %>
+
+  <%= f.twbs_hidden_field :order %>
+
+  <%= f.twbs_hidden_field :chat_partable_type %>
+
+  <%= f.fields_for :chat_partable do |partable| %>
+    <%= partable.twbs_file_field :file, label: false %>
+    <p> <a href="<%= partable.object.file.url %>" target="_blank"> <%= partable.object.title %> </a> </p>
+  <% end %>
+
+  <div rel="uploads-parent">
+
+    <%= f.form_group do %>
+      <span class="btn btn-default fileinput-button btn-sm">
+        <%= icon "plus" %>
+        <span>  Выбрать... </span>
+        <input class="fileupload" type="file" name="upload[upload]" multiple="" />
+      </span>
+    <% end %>
+
+    <div class="uploads clearfix"> </div>
+
+  </div>
+
+<% end %>

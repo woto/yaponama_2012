@@ -2,27 +2,22 @@
   .page-header
     h1 Закачка файлов
 
-  span.btn.btn-primary.fileinput-button
-    = icon "plus"
+  <div rel="uploads-parent">
+    span.btn.btn-primary.fileinput-button
+      = icon "plus"
+      '
+      span  Выбрать...
+      input.fileupload type="file" name="upload[upload]" multiple=""
     '
-    span  Выбрать...
-    input#fileupload type="file" name="upload[upload]" multiple=""
-  '
-  a#insert_files_into_ckeditor.btn.btn-success style="display: none" Вставить
+    a#insert_files_into_ckeditor.btn.btn-success style="display: none" Вставить
 
-  br
-  br
-
-  #uploads
+    .uploads.clearfix.top-space.bottom-space
+  </div>
 
   .alert.alert-info
     |Вы можете выбрать сразу несколько файлов за раз, а так же можете просто перетащить их курсором с компьютера на кнопку загрузки.
 
 #ckeditor-name.hide #{params['CKEditor']}
-
-= javascript_include_tag :uploads
-= stylesheet_link_tag :uploads
-
 
 /javascript:
 
@@ -33,3 +28,6 @@
   })
 
   window.CKEditorFuncNum = #{params['CKEditorFuncNum']}
+
+= javascript_include_tag 'uploads'
+= stylesheet_link_tag 'uploads'
