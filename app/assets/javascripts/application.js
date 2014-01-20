@@ -84,3 +84,4 @@
 //= require notify_sound_toggler
 //= require slide_top
 //= require payments
+//= require map
