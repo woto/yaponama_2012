@@ -1,20 +1,16 @@
 $(document).on 'page:update', ->
-  # Выставляем в динамике высоту.
-  $("#clientMap").css('height', $(window).height() - $('#myTab').offset().top - $('#myTab').height() - 30 + 50)
+  if $('#clientMap').length > 0
+    # Выставляем в динамике высоту.
+    #$("#clientMap").css('height', 100 + $(window).height() - $('#myTab').offset().top - $('#myTab').height())
+    #$("#clientMap").css('height', if $('.tab-content').height() > 300 then 300 else $('.tab-content').height())
+    $("#clientMap").css('height', if $(window).height() > $('.tab-content').height() then 400 else ( if $(window).height() > 300 then 300 else $(window).height()))
 
-  $("#clientMapOuter").affix offset:
-    top: ->
-      @top = 222
-      # Это число так же фигурирует в js
-    bottom: ->
-      @bottom = $(document).height() - $("#level").offset().top + 15
-      #@bottom = $("#level").offset().top
-      #@bottom = $("footer").outerHeight(true) + 50
+    $("#clientMapOuter").affix offset:
+      top: ->
+        @top = 150
+        # Это число так же фигурирует в js
+      bottom: ->
+        @bottom = $(document).height() - $("#level").offset().top + 20
 
-      #bottom: ->
-      ##  #@bottom = $(".bs-footer").outerHeight(true)
-      #  @bottom = 10
-  #$("#clientMapOuter").affix
-  #  offset:
-  #    top: 100
-
+        #.outerHeight(true)
+        #.offset().top
