@@ -21,7 +21,13 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'debugger'
+  gem 'pry'
+  gem 'pry-nav'
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
+  gem 'pry-doc'
+  #gem 'debugger'
+  #gem 'byebug'
   gem 'capistrano'
   gem 'capybara', github: 'jnicklas/capybara'
   gem 'show_me_the_cookies'
