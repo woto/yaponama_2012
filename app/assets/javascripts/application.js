@@ -33,6 +33,7 @@
 //= require radio_new_old_switcher
 //
 //= require catch_enter
+//= require submenu
 
 //= require select2
 //= require brand_model

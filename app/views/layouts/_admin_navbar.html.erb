@@ -35,7 +35,7 @@
                 :title => "Заказы", \
                 :catch => [], \
                 :link => admin_orders_path, \
-                :class => 'dropdown-submenu', \
+                :class => 'dropdown dropdown-submenu', \
                 :dropdown => _build_dropdowns('order', 'orders', Rails.configuration.orders_status, Rails.configuration.orders_menu, nil)
               %>
 
@@ -43,7 +43,7 @@
                 :title => "Товары", \
                 :catch => [], \
                 :link => admin_products_path, \
-                :class => 'dropdown-submenu', \
+                :class => 'dropdown dropdown-submenu', \
                 :dropdown => _build_dropdowns('product', 'products', Rails.configuration.products_status, Rails.configuration.products_menu, nil)
               %>
 
@@ -64,6 +64,7 @@
           <%= dd.toggle do %>
             <span class="ignoredirty">Реквизиты</span>
             <%= caret %>
+          <% end %>
           <%= dd.menu do %>
             <li> <%= link_to 'Контактные лица', admin_profiles_path %> </li>
             <li> <%= link_to 'Имена', admin_names_path %> </li>
@@ -75,7 +76,6 @@
             <li> <%= link_to 'Компании', admin_companies_path %> </li>
           <% end %>
 
-          <% end %>
         <% end %>
 
         <%= dropdown do |dd| %>
@@ -102,7 +102,9 @@
           <%= dd.menu do %>
             <li> <%= link_to "Настройки сайта", admin_site_settings_path %> </li>
             <%= dd.submenu do %>
-              <%= link_to "Доставка", "#" %>
+              <%= dd.toggle do %>
+                Доставка
+              <% end %>
               <%= dd.menu do %>
                 <li> <%= link_to "Опции заказов", admin_deliveries_options_path  %> </li>
                 <li> <%= link_to "Выделенные зоны", admin_deliveries_places_path %> </li>
@@ -114,7 +116,9 @@
               <% end %>
             <% end %>
             <%= dd.submenu do %>
-              <a href="#">Трэш</a>
+              <%= dd.toggle do %>
+                Трэш
+              <% end %>
               <%= dd.menu do %>
                 <li> <%= link_to "Фронт", "/trash_help/index" %> </li>
                 <li> <%= link_to "Звонки", calls_path %> </li>

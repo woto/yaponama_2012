@@ -181,11 +181,11 @@ module ApplicationHelper
     link = url_for(item[:link])
 
     if item[:dropdown].blank?
-      content_tag :li, link.present? ? link_to(item[:title], link) : '', :class => "#{highlight_active(item[:catch])} #{item[:class]}"
+      content_tag :li, link.present? ? link_to(item[:title], link) : '', :class => "#{highlight_active2(item[:catch])} #{item[:class]}"
     else
-      content_tag :li, :class => "#{highlight_active(item[:catch])} #{item[:class]}" do
+      content_tag :li, :class => "#{highlight_active2(item[:catch])} #{item[:class]}" do
         [
-          ( link_to(item[:title], link, "data-toggle" => item[:class]).to_s ),
+          ( link_to(item[:title], link, class: "dropdown-toggle", "data-toggle" => 'dropdown').to_s ),
 
           ( content_tag :ul, :class => 'dropdown-menu' do |ul|
             item[:dropdown].collect do |dropdown|
@@ -276,7 +276,9 @@ module ApplicationHelper
   end
 
   def highlight_active2(routes)
-    if routes.map{|route| request.fullpath.include? route}.any?
+    routes = [routes].flatten
+
+    if routes.map{|route| request.fullpath =~ route}.any?
       'active'
     else
       ''
