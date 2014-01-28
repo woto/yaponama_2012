@@ -18,6 +18,9 @@
 //= require underscore/underscore
 //= require moment/moment
 //= require jquery.maskedinput/dist/jquery.maskedinput.min
+//
+// require headroom.js/dist/headroom
+// require headroom.js/dist/jQuery.headroom
 
 
 // APPLICATION
@@ -86,3 +89,4 @@
 //= require slide_top
 //= require payments
 //= require map
+//= require navbar
