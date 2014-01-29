@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-class Admin::SplitsController < ApplicationController
+class Admin::SplitsController < SplitsController
 
   include Admin::Admined
   include SetResourceClassDummy
@@ -28,15 +28,4 @@ class Admin::SplitsController < ApplicationController
     params.require(:split).permit(:product_id, :quantity)
   end
 
-  def user_set
-    @user = current_user
-  end
-
-  def somebody_set
-    @somebody = current_user
-  end
-
-  def supplier_set
-  end
-  
 end

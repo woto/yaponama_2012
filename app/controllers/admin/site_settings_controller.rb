@@ -92,15 +92,6 @@ class Admin::SiteSettingsController < ApplicationController
     params.require(:admin_site_setting).permit!
   end
 
-  def user_set
-  end
-
-  def supplier_set
-  end
-
-  def somebody_set
-  end
-
   def set_resource_class
     @resource_class = Admin::SiteSetting
   end
