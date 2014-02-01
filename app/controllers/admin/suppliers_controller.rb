@@ -18,7 +18,7 @@ class Admin::SuppliersController < SuppliersController
   end
 
   def supplier_set
-    super
+    #super
     if params[:id]
       @somebody = @supplier = Supplier.find(params[:id])
     end

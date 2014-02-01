@@ -349,16 +349,34 @@ class ApplicationController < ActionController::Base
     params.fetch(@resource_class.name.underscore.gsub('/', '_').to_sym, {}).permit!
   end
 
+  def user_set
+    #binding.pry
+    @somebody = @user = current_user
+  end
+  
+  def somebody_set
+    #binding.pry
+    #@somebody = current_user
+  end
+
+  def supplier_set
+    #binding.pry
+    @somebody = @supplier = current_user
+  end
+
 
   def user_get
+    #binding.pry
     @user = @resource.somebody if @resource && @resource.respond_to?(:somebody)
   end
 
   def somebody_get
+    #binding.pry
     @somebody = @resource.somebody if @resource && @resource.respond_to?(:somebody)
   end
 
   def supplier_get
+    #binding.pry
     @supplier = @resource.supplier if @resource && @resource.respond_to?(:supplier)
   end
 

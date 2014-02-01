@@ -19,15 +19,4 @@ class StatsController < ApplicationController
     params.require(:stat).permit(:location, :title, :referrer, :screen_width, :screen_height, :client_width, :client_height, :russian_time_zone_auto_id, :is_search)
   end
 
-  def user_set
-    @user = current_user
-  end
-
-  def somebody_set
-    @somebody = current_user
-  end
-
-  def supplier_set
-  end
-
 end

@@ -160,17 +160,6 @@ class ProductsController < ApplicationController
     @resource_class = Product
   end
 
-  def user_set
-    @user = current_user
-  end
-
-  def somebody_set
-    @somebody = current_user
-  end
-
-  def supplier_set
-  end
-  
   def new_resource
     super
     @resource.product_id = params[:product_id]

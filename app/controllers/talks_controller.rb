@@ -135,18 +135,6 @@ class TalksController < ApplicationController
     @resource_class = Talk
   end
 
-  def user_set
-    @user = current_user
-  end
-
-  def somebody_set
-    @somebody = current_user
-  end
-
-  def supplier_set
-    @suppler = current_user
-  end
-
   def load_older_talks_sub(last_id=nil)
 
     t = Talk.arel_table

@@ -30,15 +30,4 @@ class PasswordsController < ApplicationController
     @resource_class = User
   end
 
-  def user_set
-    @user = current_user
-  end
-
-  def somebody_set
-    @somebody = current_user
-  end
-
-  def supplier_set
-  end
-
 end

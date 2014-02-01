@@ -40,7 +40,7 @@ class Admin::UsersController < UsersController
 
 
   def user_set
-    super
+    #super
     if params[:id]
       @somebody = @user = User.find(params[:id])
     end

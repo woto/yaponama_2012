@@ -55,17 +55,6 @@ class SpareInfosController < ApplicationController
     @resource_class = SpareInfo
   end
 
-  def user_set
-    @somebody = @user = current_user
-  end
-
-  def somebody_set
-  end
-
-  def supplier_set
-    @somebody = @supplier = Supplier.find(params[:supplier_id]) if params[:supplier_id]
-  end
-
   def new_resource
     @resource = @resource_class.new(resource_params)
   end

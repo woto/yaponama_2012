@@ -35,6 +35,35 @@ module Admin::Admined
       end
     end
 
+    private
+
+    def user_set
+      #binding.pry
+      #super
+      #if request.path.scan('users').any?
+      if params[:user_id]
+        @somebody = @user = User.find(params[:user_id]) 
+      end
+      #end
+    end
+
+    def somebody_set
+      #binding.pry
+      #super
+      #@somebody = Somebody.find(params[:somebody_id]) if params[:somebody_id]
+    end
+
+    def supplier_set
+      #binding.pry
+      #super
+      #if request.path.scan('suppliers').any?
+      if params[:supplier_id]
+        @somebody = @supplier = Supplier.find(params[:supplier_id]) 
+      end
+      #end
+    end
+
+
   end
 
 end

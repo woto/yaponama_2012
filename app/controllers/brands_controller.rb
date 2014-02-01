@@ -29,17 +29,6 @@ class BrandsController < ApplicationController
     @resource_class = Brand
   end
 
-  def user_set
-    @user = current_user
-  end
-
-  def somebody_set
-    @somebody = current_user
-  end
-
-  def supplier_set
-  end
-
   def find_resource
     @resource = Brand.where(:name => CGI.unescape(params[:brand])).first
     commentable_helper @resource

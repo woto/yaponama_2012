@@ -98,23 +98,12 @@ class OrdersController < ApplicationController
 
   private
 
-  def order_params
-    params.require(:order).permit!
-  end
+  #def order_params
+  #  params.require(:order).permit!
+  #end
 
   def set_resource_class
     @resource_class = Order
-  end
-
-  def user_set
-    @user = @somebody = current_user
-  end
-
-  def somebody_set
-  end
-
-  def supplier_set
-    @supplier = @somebody = current_user
   end
 
 end

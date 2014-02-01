@@ -33,17 +33,6 @@ class AuthController < ApplicationController
     @resource_class = Auth
   end
 
-  def user_set
-    @user = current_user
-  end
-
-  def somebody_set
-    @somebody = current_user
-  end
-
-  def supplier_set
-  end
-
   def resource_params
   end
 
