@@ -13,8 +13,8 @@
 /////////////////////
 
 
-//@import 'bootswatch/flatly/variables';
-//@import 'bootswatch/flatly/bootswatch';
+//@import 'bootswatch/cerulean/variables';
+//@import 'bootswatch/cerulean/bootswatch';
 
 /////////////////////
 
@@ -77,6 +77,10 @@
 
 /////////////////////
 
+@import 'navbar';
+
+/////////////////////
+
 @import 'leftbar';
 
 /////////////////////
@@ -86,6 +90,10 @@
 /////////////////////
 
 @import 'talk_button';
+
+/////////////////////
+
+@import 'right_hand';
 
 /////////////////////
 
@@ -99,7 +107,7 @@
 
 .page-header {
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   border-bottom: none;
   h1 {
     margin-top: 0;
@@ -210,6 +218,7 @@
   display: none;
 }
 
+
 input[type=radio] + img{
   .user-select(none);
   cursor: pointer;
@@ -227,5 +236,11 @@ input[type=radio]:checked + img{
 /////////////////////
 
 [rel="old"], [rel="new"], .payment-block {
+  //background: #999;
   display: none;
+}
+
+.breadcrumb > li + li:before {
+  font-family: "FontAwesome";
+  content: "\f0da";
 }
