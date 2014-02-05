@@ -17,4 +17,8 @@ class Admin::BrandsController < BrandsController
     @resource_class = Brand
   end
 
+  def find_resource
+    @resource = @resource_class.find(params[:id])
+  end
+
 end
