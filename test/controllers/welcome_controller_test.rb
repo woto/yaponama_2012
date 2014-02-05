@@ -11,12 +11,12 @@ class WelcomeControllerTest < ActionController::TestCase
     get :index
 
     assert_select '.confirm-phone', count: 1 do |link|
-      assert_select "a[href=?]", /\/user\/phones\/\d+\/confirm\/view/
+      assert_select "a[href=?]", /\/user\/phones\/\d+\/confirm\/view.*/
       assert_select "a", text: '+7 (111) 111-11-11'
     end
 
     assert_select '.confirm-email', count: 1 do |link|
-      assert_select "a[href=?]", /\/user\/emails\/\d+\/confirm\/view/
+      assert_select "a[href=?]", /\/user\/emails\/\d+\/confirm\/view.*/
       assert_select "a", text: 'foo@example.com'
     end
 

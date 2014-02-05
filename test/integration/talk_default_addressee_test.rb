@@ -93,6 +93,7 @@ class TalkDefaultAddresseeTest < ActionDispatch::IntegrationTest
     node do
       Capybara.session_name = :first
       auth('+7 (999) 999-99-99', '9999999999')
+      visit '/user'
       click_link 'talk-button-show-inside'
 
       Capybara.session_name = :second
@@ -103,6 +104,7 @@ class TalkDefaultAddresseeTest < ActionDispatch::IntegrationTest
 
       Capybara.session_name = :third
       auth('+7 (000) 000-00-00', '0000000000')
+      visit '/user'
       click_link 'talk-button-show-inside'
       click_link 'i-want-to-choose-seller'
       click_link "select-addressee-#{ivan.id}"
@@ -137,6 +139,7 @@ class TalkDefaultAddresseeTest < ActionDispatch::IntegrationTest
       # Заходим селлером (ivan) в публичную зону
       Capybara.session_name = :first
       auth('+7 (999) 999-99-99', '9999999999')
+      visit '/user'
       click_link 'talk-button-show-inside'
 
       # Заходим селлером (ivan) в админке, в свою зону

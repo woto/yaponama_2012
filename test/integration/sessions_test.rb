@@ -16,13 +16,24 @@ class SessionsTest < ActionDispatch::IntegrationTest
     refute get_me_the_cookie('auth_token')[:expires]
   end
 
-  test 'Мы должны войти если номер мобильного телефона и пароль верны' do
+  test 'Мы должны войти если номер мобильного телефона и пароль верны, под селлером попадаем в админку.' do
     Capybara.reset!
     visit '/login/phone'
     fill_phone '#session_value', '+7 (111) 111-11-11'
     fill_in 'session[password]', with: '1111111111'
     click_button 'Войти'
-    assert page.has_css? ".alert-success", text: "Вы успешно вошли."
+    #assert page.has_css? ".alert-success", text: "Вы успешно вошли."
+    assert current_url.end_with?('/admin')
+  end
+
+  test 'Мы должны войти если номер мобильного телефона и пароль верны, под байером попадаем в личный кабинет.' do
+    Capybara.reset!
+    visit '/login/phone'
+    fill_phone '#session_value', '+7 (123) 123-12-31'
+    fill_in 'session[password]', with: '1231231231'
+    click_button 'Войти'
+    #assert page.has_css? ".alert-success", text: "Вы успешно вошли."
+    assert current_url.end_with?('/user')
   end
 
   test 'Мы не можем войти если такой номер телефона числится, но пароль неверен' do
@@ -40,7 +51,8 @@ class SessionsTest < ActionDispatch::IntegrationTest
     fill_in 'session[value]', with: 'foo@example.com'
     fill_in 'session[password]', with: '1111111111'
     click_button 'Войти'
-    assert page.has_css? ".alert-success", text: "Вы успешно вошли."
+    #assert page.has_css? ".alert-success", text: "Вы успешно вошли."
+    assert current_url.end_with?('/admin')
   end
 
   test 'Мы не можем войти если такой email числится, но пароль неверен' do

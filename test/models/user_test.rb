@@ -12,7 +12,7 @@ class UserTest < ActiveSupport::TestCase
     assert u.valid?
   end
 
-  test 'При изменении профиля, который выставлен в качестве основного должны измениться закешированные поля профиля cached_names, cached_phones и т.д. и закешированное значение главного профиля пользователя cached_main_profile' do
+  test 'При изменении профиля, который выставлен в качестве основного должны измениться закешированные поля профиля cached_names, cached_phones и т.д. и закешированное значение главного профиля пользователя cached_profile' do
     u = somebodies(:stan)
     profile = u.profiles.new(code_1: 'frontend')
     name = profile.names.new
@@ -23,12 +23,12 @@ class UserTest < ActiveSupport::TestCase
     email = profile.emails.new
     email.value = 'test@example.com'
     passport = profile.passports.new(:gender => 'male', :seriya => '1', :nomer => '1', :passport_vidan => '1', :data_vidachi => DateTime.now, :kod_podrazdeleniya => '1', :data_rozhdeniya => DateTime.now, :mesto_rozhdeniya => 'Новый Дурулгуй')
-    u.main_profile = profile
+    u.profile = profile
     u.save!
-    assert_equal 'Стэн', JSON.parse(u.cached_main_profile)['names'].first['name']
-    assert_equal 'test@example.com', JSON.parse(u.cached_main_profile)['emails'].first['value']
-    assert_equal '123', JSON.parse(u.cached_main_profile)['phones'].first['value']
-    assert_equal 'Новый Дурулгуй', JSON.parse(u.cached_main_profile)['passports'].first['mesto_rozhdeniya']
+    assert_equal 'Стэн', JSON.parse(u.cached_profile)['names'].first['name']
+    assert_equal 'test@example.com', JSON.parse(u.cached_profile)['emails'].first['value']
+    assert_equal '123', JSON.parse(u.cached_profile)['phones'].first['value']
+    assert_equal 'Новый Дурулгуй', JSON.parse(u.cached_profile)['passports'].first['mesto_rozhdeniya']
   end
 
   test 'Только что инициализированный пользователь должен содержать предопределенный набор ошибок' do
@@ -83,33 +83,33 @@ class UserTest < ActiveSupport::TestCase
   end
 
 
-  test 'Если менется main_profile_id' do
+  test 'Если менется profile_id' do
     p1 = profiles(:mile_main)
     p2 = profiles(:mile_not_main)
 
     mile = somebodies(:mile)
 
     # Это приходит в контроллере, поэтому сохраняю условия изменения (id приходит из селекта)
-    mile.main_profile_id = p2.id
-    old = mile.cached_main_profile
+    mile.profile_id = p2.id
+    old = mile.cached_profile
 
     mile.save
-    new = mile.reload.cached_main_profile
+    new = mile.reload.cached_profile
     refute_equal new, old
   end
 
 
-  test 'Если менется main_profile (Ради эксперимента сравниваю вмест _id сам объект)' do
+  test 'Если менется profile (Ради эксперимента сравниваю вмест _id сам объект)' do
     p1 = profiles(:mile_main)
     p2 = profiles(:mile_not_main)
 
     mile = somebodies(:mile)
 
-    mile.main_profile = p2
-    old = mile.cached_main_profile
+    mile.profile = p2
+    old = mile.cached_profile
 
     mile.save
-    new = mile.reload.cached_main_profile
+    new = mile.reload.cached_profile
     refute_equal new, old
   end
 
@@ -121,7 +121,7 @@ class UserTest < ActiveSupport::TestCase
 
     p1.destroy 
 
-    assert_equal p2, mile.reload.main_profile
+    assert_equal p2, mile.reload.profile
   end
 
 

@@ -132,7 +132,7 @@ class TalkSellerReceiveTest < ActionDispatch::IntegrationTest
       click_button 'talk-submit'
 
       Capybara.session_name = :first
-      sleep 1
+      sleep 2
       assert find('#private-message', visible: false).has_content?(text)
     end
   end
@@ -175,7 +175,7 @@ class TalkSellerReceiveTest < ActionDispatch::IntegrationTest
       click_button 'talk-submit'
 
       Capybara.session_name = :first
-      sleep 1
+      sleep 2
       assert find('#private-message', visible: false).has_content?(text)
     end
   end

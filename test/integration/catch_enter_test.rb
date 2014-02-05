@@ -9,16 +9,18 @@ class CatchEnterTest < ActionDispatch::IntegrationTest
   end
 
   test 'Проверка правильной работы catch enter на просмотра доставки и самовывоза' do
-    visit '/deliveries'
-    common
+    skip
+    # TODO Тут уже не блокируем отправку формы, 
+    # т.к. перешло в область Rails form remote: true
+    #visit '/deliveries'
+    #common
   end
 
-  test 'Проверка правильной работы catch enter при переходе на эту страницу по ссылке на просмотра доставки и самовывоза ' do
+  test 'Проверка правильной работы catch enter при переходе на эту страницу по ссылке (с задействованным turbolinks)' do
     visit '/'
     # turbolinks не работает?
-    within('#nav-second') do
-      click_link "Доставка и самовывоз"
-    end
+    visit '/admin/deliveries/places/'
+    find('#grid-toolbar-new a').click
     common
   end
 

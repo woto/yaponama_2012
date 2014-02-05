@@ -28,9 +28,9 @@ class ProductsTest < ActionDispatch::IntegrationTest
     id = products(:anton_first).id
     cookies['auth_token'] = somebodies(:anton).auth_token
     get_via_redirect '/user/products'
-    post_via_redirect '/user/products/filters/', "primary_key" => request.params['primary_key'], "filters" => 'ok', "grid[filter_catalog_number_like]" => '2102'
-    assert_select "#product_#{id}", false
-
+    xhr :post, '/user/products/filter', "primary_key" => request.params['primary_key'], "filters" => 'ok', "grid[filter_catalog_number_like]" => '2102', format: :js 
+    follow_redirect!
+    refute_match /product_#{id}/, response.body
   end
 
   test 'Проверяем правильность ссылки data-poload для popover ID столбца' do

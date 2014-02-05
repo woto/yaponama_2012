@@ -25,7 +25,8 @@ class Admin::ProductsControllerTest < ActionController::TestCase
     assert_equal 'new', product.cached_brand, 'Кешированное значение бренда у добавленного товара неверное'
     
     assert_response :redirect, 'Редирект не произошел'
-    assert_redirected_to admin_user_product_path(@user, product, :return_path => 'http://ya.ru'), 'Редирект произошел не неверный адрес'
+    #assert_redirected_to admin_user_product_path(@user, product, :return_path => 'http://ya.ru'), 'Редирект произошел не неверный адрес'
+    assert_redirected_to status_admin_user_products_path(@user, 'incart'), 'Редирект должен был произойти в корзину пользователя'
 
   end
 

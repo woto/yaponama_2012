@@ -18,6 +18,13 @@ nissens:
   phantom: false
   creator: first_admin
 
+bando:
+  name: BANDO
+  rating: 500
+  content: 
+  phantom: false
+  creator: first_admin
+
 toyota:
   name: TOYOTA
   rating: 1000

@@ -21,10 +21,17 @@ class PagesControllerTest < ActionController::TestCase
   end
 
   test 'Провека не существующей страницы' do
-    assert_raise ActionController::RoutingError do
-      get :show, :path => 'Не существует'
-      assert_response :missing
-    end
+
+    assert_generates "not_exists.html", {:controller=>"error", :action=>"index", :error=>"not_exists.html"}
+
+    #assert_raise ActionController::RoutingError do
+    #  get :index
+    #end
+
+    #assert_raise ActionController::RoutingError do
+    #  get :show, :path => 'Не существует'
+    #  assert_response :missing
+    #end
   end
 
 end

@@ -90,26 +90,26 @@ class Admin::ProfilesControllerTest < ActionController::TestCase
   test 'Администратор обновляет не главный профиль' do
     mile = somebodies(:mile)
     old_mile_updated_at = mile.updated_at
-    old = mile.cached_main_profile
+    old = mile.cached_profile
     mile_not_main = profiles(:mile_not_main)
 
-    patch :update, mile_update_not_main_profile(mile.id, mile_not_main.id, names(:mile_not_main).id, phones(:mile_not_main).id )
+    patch :update, mile_update_not_profile(mile.id, mile_not_main.id, names(:mile_not_main).id, phones(:mile_not_main).id )
 
-    new = mile.reload.cached_main_profile
-    assert_equal new, old, 'cached_main_profile не должен был измениться'
+    new = mile.reload.cached_profile
+    assert_equal new, old, 'cached_profile не должен был измениться'
     assert_equal mile.reload.updated_at, old_mile_updated_at
   end
 
   test 'Администратор обновляет главный профиль' do
     mile = somebodies(:mile)
     old_mile_updated_at = mile.updated_at
-    old = mile.cached_main_profile
+    old = mile.cached_profile
     mile_main = profiles(:mile_main)
 
-    patch :update, mile_update_main_profile(mile.id, mile_main.id, names(:mile_main).id, phones(:mile_main).id)
+    patch :update, mile_update_profile(mile.id, mile_main.id, names(:mile_main).id, phones(:mile_main).id)
 
-    new = mile.reload.cached_main_profile
-    refute_equal new, old, 'cached_main_profile должен был измениться'
+    new = mile.reload.cached_profile
+    refute_equal new, old, 'cached_profile должен был измениться'
     refute_equal mile.reload.updated_at, old_mile_updated_at
   end
 
@@ -129,7 +129,7 @@ class Admin::ProfilesControllerTest < ActionController::TestCase
     assert_equal '[{"value":"fake@mail.ru"}]', Profile.last.cached_emails
     assert_equal '[{"seriya":"серия","nomer":"номер","mesto_rozhdeniya":"место рождения"}]', Profile.last.cached_passports
 
-    assert_equal avtorif.reload.main_profile, Profile.last, 'Созданные единственный профиль почему-то не стал основным'
+    assert_equal avtorif.reload.profile, Profile.last, 'Созданные единственный профиль почему-то не стал основным'
   end
 
 end

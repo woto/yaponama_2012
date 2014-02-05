@@ -22,8 +22,9 @@ class Admin::ProductsTest < ActionDispatch::IntegrationTest
     anton = somebodies(:anton)
     cookies['auth_token'] = somebodies(:first_admin).auth_token
     get_via_redirect "/admin/users/#{anton.id}/products"
-    post_via_redirect "/admin/users/#{anton.id}/products/filters/", "primary_key" => request.params['primary_key'], "filters" => 'ok', "grid[filter_catalog_number_like]" => '2102'
-    assert_select "#product_#{id}", true
+    xhr :post, "/admin/users/#{anton.id}/products/filter", "primary_key" => request.params['primary_key'], "filters" => 'ok', "grid[filter_catalog_number_like]" => '2102', formtat: :js
+    follow_redirect!
+    assert_match /product_#{id}/, response.body
   end
 
   test 'Если мы щелкаем на товаре, который заказали в кол-ве более 1 шт., то есть ссылка для разбития на партии' do
