@@ -2,12 +2,12 @@
 <%= some(@item) %> 
   <ul class="list-unstyled">
     <%= render 'info_custom' %>
-    <li><%= render 'info_edit' %></li>
+    <li> <%= link_to 'Просмотр', url_for(:action => :show, :return_path => params[:return_path]) %> </li>
+    <%# if @item.class == Product && admin_zone? %>
+    <% begin %>
+      <li><%= render 'info_edit' %></li>
+    <% rescue %>
+    <% end %>
+    <%# end %>
     <li><%= render 'info_destroy' %></li>
-    <li> <%= link_to 'Элемент', url_for(:action => :show) %> </li>
-    <li> <%= link_to 'История элемента', url_for(:action => :transactions) %> </li>
-      <%# link_to 'История элемента', smart_route({:prefix => [:transactions], :postfix => [@resource_class.name.underscore]}, :id => @item, :user_id => @item.somebody_id) %>
-      <%# link_to 'Элемент', smart_route({:postfix => [@resource_class.name.underscore]}, :id => @item, :user_id => @item.somebody_id) %>
-      <%# link_to 'История элемента', smart_route({:prefix => [:transactions], :postfix => [@resource_class.name.underscore]}, :id => @item, :user_id => @item.somebody_id) %>
-
   </ul>

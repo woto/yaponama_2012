@@ -1,22 +1,32 @@
-<%= row do %>
+<%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
 
-  <div class="col-md-8">
+  <%= row do %>
 
-    <%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
-      <%= f.twbs_text_field :catalog_number %>
+    <div class="col-md-8">
 
-      <%= f.fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b| %>
-        <%= f.form_group :brand do %>
-          <%= b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, asterisk: true %>
-          <%= f.error(:brand) %>
+        <%= f.twbs_text_field :catalog_number %>
+
+        <%= f.fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b| %>
+          <%= f.form_group :brand do %>
+            <%= b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, asterisk: true %>
+            <%= f.error(:brand) %>
+          <% end %>
         <% end %>
-      <% end %>
+
+    </div>
+
+  <% end %>
+
+  <%= row do %>
+
+    <div class="col-md-12" %>
+
       <%= f.twbs_text_area :content, :class => "ckeditor-extended" %>
 
       <%= f.twbs_submit %>
 
-    <% end %>
+    </div>
 
-  </div>
+  <% end %>
 
 <% end %>

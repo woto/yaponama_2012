@@ -1,5 +1,12 @@
-<%= render 'smart_show' %>
+<% @meta_title = @resource.to_label %>
 
+<%= breadcrumb true do |b| %>
+  <%= b.item @meta_title %>
+<% end %>
+
+<%= page_header %>
+
+<!--
 <script>
   $(function(){
     
@@ -10,14 +17,22 @@
   })
     // Your code to save "data", usually though Ajax.
 </script>
+-->
 
-<br />
-<br />
-<br />
+<!--<div id="editable" contenteditable="true"> -->
 
-<h3> Тест </h3>
-<div id="editable" contenteditable="true">
-  <%= raw Sanitize.clean @resource.content, Rails.configuration.sanitize_config %>
+<div style="background: #F5F5F5; margin: 10px 0; padding: 10px">
+  <%== @resource.content %>
 </div>
 
-<button id="zzz"></button>
+<%= link_to("Публичный просмотр", polymorphic_path([:new, :user,  :product], :catalog_number => @resource.catalog_number, anchor: @resource.cached_brand), target: "_blank", class: "btn btn-primary", target: "_blank") %>
+
+<%= link_to url_for(action: :new, return_path: request.fullpath), class: "btn btn-primary" do %>
+  <%= icon 'plus' %>
+<% end %>
+
+<%# raw Sanitize.clean @resource.content, Rails.configuration.sanitize_config %>
+<br />
+<br />
+
+<%= render 'smart_show' %>
