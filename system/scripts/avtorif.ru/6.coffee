@@ -3,6 +3,10 @@ util = require('util')
 async = require('async')
 _ = require('underscore')
 
+phantom.onError = (msg, trace) ->
+  null
+
+
 class Crawler
   constructor: (conf) ->
 
@@ -10,11 +14,27 @@ class Crawler
 
     @queue = async.queue((task, callback) =>
 
-      page = require('webpage').create
-        resourceTimeout: 5000
+      console.log task.url
 
-      page.open conf.host + task.url, (status) =>
-        #console.log @queue.length()
+      page = require('webpage').create
+        resourceTimeout: 15000
+
+      page.onResourceError = (error) ->
+        null
+        #console.log error
+      page.onError = (error) ->
+        null
+        #console.log error
+      page.onConsoleMessage = (error) ->
+        null
+        #console.log error
+
+
+      fullpath = conf.host + encodeURI(task.url)
+
+      page.open fullpath, (status) =>
+        #console.log fullpath
+        console.log @queue.length()
         #console.log status
 
         if status == 'success'
@@ -25,11 +45,24 @@ class Crawler
               Array::slice.call(document.querySelectorAll("a"), 0).map (link) ->
                 link.getAttribute "href"
 
+            #console.log(util.inspect(urls, false, 10, true));
+            #phantom.exit()
+
             for url in urls
-              if url not in @urls
-                @urls.push url
-                
-                @start url
+              if !(/^\/ru\/parts\/search/.test(url)) && !(/^#/.test(url)) && !(/^\/files/.test(url)) && !(/^\/img/.test(url)) && !(/^http:\/\//.test(url)) && !(/^javascript:/.test(url))
+
+                url = url.replace(conf.host, '')
+
+                unless /^\//.test(url)
+                  url = '/' + url
+
+                #console.log(util.inspect(url, false, 10, true));
+                #phantom.exit()
+
+                if url not in @urls
+                  @urls.push url
+                  
+                  @start url
 
             page.close()
             callback()
@@ -48,7 +81,7 @@ class Crawler
 
   start: (url, callback) =>
     @queue.push
-      url: url
+      url: decodeURI(url)
     , (err) ->
       #console.log err
       #console.log "finished processing foo"
@@ -133,27 +166,33 @@ class Crawler
 
 crawler = new Crawler 
 
-  host: "http://www.avtorif.ru"
+  host: "http://systemsauto.ru"
 
   success: (page, url, callback) ->
     post = require('webpage').create()
     server = 'http://localhost:3002/admin/pages'
 
-    documentHTML = page.evaluate(->
-      (if document.body and document.body.innerHTML then document.body.innerHTML else "")
+    content = page.evaluate(->
+      if document.body and document.body.innerHTML then document.body.innerHTML else ""
+      #if document.body and document.body.querySelector('#main') then  document.body.querySelector('#main').innerHTML else ""
     )
 
-    data = "page[path]=" + url + "&page[content]="+ encodeURIComponent(documentHTML)
+    title = page.evaluate(->
+      if document.title then document.title else ""
+    )
+
+    #console.log content
+    data = "page[title]=" + encodeURIComponent(title) + "&page[path]=" + encodeURIComponent(url) + "&page[content]="+ encodeURIComponent(content)
 
     post.open server, "post", data, (status) ->
       post.close()
-      console.log 'success - ' + url
+      #console.log 'success - ' + url
       callback null, page, url
 
     null
 
   failure: (page, url, callback) ->
-    console.log "failure - " + url
+    #console.log "failure - " + url
     callback null, page, url
 
 crawler.start '/', ->
