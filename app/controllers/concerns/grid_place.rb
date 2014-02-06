@@ -12,11 +12,15 @@ module GridPlace
       columns_hash['id'] = {
         :type => :single_integer
       }
+      columns_hash['name'] = {
+        :type => :string,
+      }
 
     end
 
     def set_preferable_columns
       @grid.visible_id = '1'
+      @grid.visible_name = '1'
     end
 
   end

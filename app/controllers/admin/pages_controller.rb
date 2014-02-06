@@ -3,6 +3,44 @@
 class Admin::PagesController < PagesController
   include Admin::Admined
 
+  skip_before_action :verify_authenticity_token
+  skip_before_filter :find_resource, only: [:multiple_destroy]
+  before_action :preprocess_filter, :only => [:multiple_destroy]
+
+  def preprocess_filter
+    @items = @items.selected(@grid.item_ids)
+    #binding.pry
+    @ic = ItemCollection.new(item_collection_params)
+    @ic.operation = params[:action]
+    #binding.pry
+    @somebody = @user = @supplier = @ic.user
+  end
+
+  def destroy
+    #binding.pry
+    #@items = @items.selected(@grid.item_ids)
+    @items = [@resource]
+    #binding.pry
+    @ic = ItemCollection.new(item_collection_params)
+    @ic.operation = 'multiple_destroy'
+    #binding.pry
+    @somebody = @user = @supplier = @ic.user
+    #binding.pry
+    multiple_destroy
+  end
+
+  def multiple_destroy
+    if @ic.operate
+      redirect_to params[:return_path]
+    else
+      redirect_to params[:return_path], :danger => @ic.errors.full_messages
+    end
+  end
+
+  def create
+    super
+  end
+
   def new_resource
     super
 
