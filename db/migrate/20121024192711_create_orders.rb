@@ -5,10 +5,15 @@ class CreateOrders < ActiveRecord::Migration
       t.references :company, index: true
       t.decimal :delivery_cost, :precision => 8, :scale => 2, default: 0
       t.string  :status, default: 'open'
-      t.references :delivery, index: true
+      t.references :delivery_place, index: true
+      t.references :delivery_variant, index: true
+      t.references :delivery_option, index: true
+
+      # Получатель
       t.references :profile, index: true
+      t.text :cached_profile
+
       t.boolean :full_prepayment_required
-      t.string :cached_profile
       t.boolean 'legal'
       t.boolean 'phantom', default: true
       t.string :token, index: true

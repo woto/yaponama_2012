@@ -3,9 +3,9 @@ class CreateStats < ActiveRecord::Migration
     create_table :stats do |t|
 
       # BROWSER
-      t.string :location
+      t.text :location, limit: 2048
       t.string :title
-      t.string :referrer
+      t.text :referrer, limit: 2048
       t.integer :russian_time_zone_auto_id
       t.integer :screen_width
       t.integer :screen_height

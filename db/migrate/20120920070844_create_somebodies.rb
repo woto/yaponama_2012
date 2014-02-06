@@ -23,7 +23,7 @@ class CreateSomebodies < ActiveRecord::Migration
       t.integer :cached_russian_time_zone_auto_id
       # ----------------------------------
       t.integer :russian_time_zone_manual_id
-      t.boolean :use_auto_russian_time_zone, :default => true
+      t.boolean :use_auto_russian_time_zone, default: true
       t.inet :remote_ip
 
       t.string :creation_reason
@@ -31,11 +31,11 @@ class CreateSomebodies < ActiveRecord::Migration
       t.text :notes_invisible
       t.references :creator, index: true
 
-      t.boolean :phantom # TODO Позже задействовать
+      t.boolean :phantom, default: false
 
       t.boolean :logout_from_other_places, default: true
 
-      t.boolean :online
+      t.boolean :online, default: false
 
       t.boolean :sound, default: true
 
@@ -48,8 +48,8 @@ class CreateSomebodies < ActiveRecord::Migration
       t.string :post
       
       # Главный профиль
-      t.references :main_profile
-      t.text :cached_main_profile
+      t.references :profile
+      t.text :cached_profile
 
       t.decimal :cached_debit, :default => 0, :precision => 8, :scale => 2
       t.decimal :cached_credit, :default => 0, :precision => 8, :scale => 2
@@ -63,14 +63,22 @@ class CreateSomebodies < ActiveRecord::Migration
 
       t.datetime :touch_confirm
 
-      t.string :cached_location
+      t.text :cached_location
       t.string :cached_title
-      t.string :cached_referrer
-      t.string :first_referrer
+      t.text :cached_referrer
+      t.text :first_referrer
       t.string :cached_screen_width
       t.string :cached_screen_height
       t.string :cached_client_width
       t.string :cached_client_height
+
+      t.string :cached_talk
+      t.string 
+
+      t.integer :unread_talks, default: 0
+      t.integer :total_talks, default: 0
+
+      t.references :default_addressee
 
       t.timestamps
     end
