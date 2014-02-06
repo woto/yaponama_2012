@@ -25,4 +25,5 @@ $(document).on 'click', '.select-addressee', (e) ->
   e.preventDefault()
   $('#talk_addressee_id').val($(this).data('id'))
   Realtime.render_sellers_2()
-  $('.concrete-seller').effect('highlight')
+  # TODO Отключил, т.к. отказался от jQueryUI
+  #$('.concrete-seller').effect('highlight')

@@ -13,12 +13,13 @@ $(document).on 'custom-change', "input[rel~='radio-new-old-switcher']", ->
     cur_block.show()
     opp_block.hide()
 
-    opp_block.find(':input').prop("disabled", true)
+    #opp_block.find(':input').prop("disabled", true)
 
     if cur == 'new'
-      cur_block.find(':input').prop("disabled", false)
+      #cur_block.find(':input').prop("disabled", false)
     else
-      cur_block.find("[rel~=select-and-fill]:input").prop("disabled", false).trigger('custom-change')
+      #cur_block.find("[rel~=select-and-fill]:input").prop("disabled", false).trigger('custom-change')
+      cur_block.find("[rel~=select-and-fill]:input").trigger('custom-change')
 
       ## Отключаем все элементы в текущем блоке
       #block.find("[rel~='"+cur+"']")

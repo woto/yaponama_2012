@@ -18,7 +18,7 @@ $(document).on 'change', 'input.item[type=checkbox]', ->
 update = ->
 
   form = $("#new_grid")
-  items = $('#items')
+  items = $('#grid-toolbar-selected')
 
   $('<input>').attr({
       type:  'hidden'

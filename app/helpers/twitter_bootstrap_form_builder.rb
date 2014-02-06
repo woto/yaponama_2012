@@ -46,7 +46,7 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
     @template.link_to_remove_association( 
       @template.icon('times'),
       self, 
-      :class => "ignoredirty control",
+      :class => "ignoredirty pull-right btn btn-unstyled btn-xs",
       data: { confirm: 'Действительно хотите удалить?' }
     )
   end
@@ -56,6 +56,9 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def hint method, options
+    if options[:hint] == false
+      ''.html_safe
+    else
       method = method.to_s.chomp('_id')
       a1 = I18n.t("#{self.object.class.to_s.underscore}.#{method}", default: '', scope: [:helpers, :hints])
       a2 = I18n.t("#{method}", default: '', scope: [:helpers, :hints])
@@ -66,6 +69,7 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
           str
         end
       end
+    end
   end
 
   def control_label method, options = {}
@@ -95,12 +99,12 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def twbs_submit value=nil, options={}
-    options[:class] = [ 'btn btn-primary', options[:class] ].compact
+    options[:class] = [ 'btn btn-primary btn-lg top-space bottom-space', options[:class] ].compact
     form_group do
       @template.concat submit(value, options)
       if @template.params[:return_path]
         @template.concat '&nbsp;&nbsp;&nbsp;или&nbsp;&nbsp;&nbsp;'.html_safe
-        @template.concat(@template.link_to('Назад', @template.params[:return_path], :class => 'btn btn-default', :data => { :confirm => 'Уверены что хотите уйти без сохранения?' }))
+        @template.concat(@template.link_to('Назад', @template.params[:return_path], :class => 'btn btn-default', :data => { :confirm => 'Уверены что хотите вернуться назад без сохранения?' }))
       end
     end
   end
@@ -177,16 +181,18 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
   def error_notification
     if @object.errors.any?
       @template.alert 'danger' do
-        "Невозможно продолжить. Пожалуйста исправьте ошибки."
-        #@template.content_tag :ul, class:'list-unstyled' do
-        #  collector = []
-        #  @object.errors.full_messages.each do |msg|
-        #    collector << (@template.content_tag :li do
-        #      msg
-        #    end)
-        #  end
-        #  collector.join.html_safe
-        #end
+        [
+          "<strong>Форма заполнена не корретно, пожалуйста исправьте ошибки.</strong><br />",
+          @template.content_tag(:ul, class:'list-unstyled') do
+            collector = []
+            @object.errors.full_messages.each do |msg|
+              collector << (@template.content_tag :li do
+                msg
+              end)
+            end
+            collector.join.html_safe
+          end
+        ].join.html_safe
       end
     end
   end
@@ -195,7 +201,7 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
     raise 'Unable to use with block' if block
     extra = common_options method, options
     variation = options.delete(:variation).to_s
-    raise 'wrong variation type [themed|inline|vertical]' unless ['themed', 'inline', 'vertical'].include? variation 
+    raise 'wrong variation type [themed|inline|vertical]' unless ['payment', 'themed', 'inline', 'vertical'].include? variation 
     @template.render "twbs_collection_radio_buttons_#{variation}", f: self, method: method, collection: collection, value_method: value_method, text_method: text_method, options: options, html_options: html_options, block: block, extra: extra
   end
 

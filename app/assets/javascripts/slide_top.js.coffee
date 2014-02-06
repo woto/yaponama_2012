@@ -1,7 +1,7 @@
 $(document).on 'page:update', ->
   $("#slide-top").affix
     offset:
-      top: 500
+      top: 100
       #bottom: ->
       #  @bottom = $("footer").outerHeight(true)
 

@@ -74,3 +74,6 @@ $(document).on 'change', "[rel~='checkbox']", ->
 
 $(document).on 'change', "[rel~='select']", ->
   $(this).trigger('custom-change')
+
+
+###########

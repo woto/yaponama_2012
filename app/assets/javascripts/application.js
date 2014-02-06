@@ -1,7 +1,7 @@
 // FIRST CLASS LIBRARIES
 //
 //= require jquery
-//= require jquery.ui.all
+//  require jquery.ui.all
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
@@ -35,6 +35,7 @@
 //= require collapse_next
 //= require radio_new_old_switcher
 //
+//= require right_hand
 //= require catch_enter
 //= require submenu
 
@@ -90,3 +91,4 @@
 //= require payments
 //= require map
 //= require navbar
+//= require assa

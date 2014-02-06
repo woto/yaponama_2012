@@ -2,6 +2,7 @@
 #
 class AbstractGrid
   include ActiveModel::Model
+  #extend ActiveModel::Naming
 
   def initialize(params)
 
@@ -40,6 +41,30 @@ class AbstractGrid
             attr_accessor "filter_#{column_name}_belongs_to"
 
           when :date
+            attr_accessor :temp_from
+            attr_accessor :temp_to
+
+            1.upto 5 do |i|
+              define_method "filter_#{column_name}_from(#{i}i)=" do |arg|
+                self.temp_from ||= {}
+                self.temp_from[i] = arg
+                if self.temp_from.length == 5
+                  instance_variable_set :"@filter_#{column_name}_from", DateTime.new(self.temp_from[1].to_i, self.temp_from[2].to_i, self.temp_from[3].to_i, self.temp_from[4].to_i, self.temp_from[5].to_i)
+                end
+              end
+            end
+
+            1.upto 5 do |i|
+              define_method "filter_#{column_name}_to(#{i}i)=" do |arg|
+                self.temp_to ||= {}
+                self.temp_to[i] = arg
+                if self.temp_to.length == 5
+                  instance_variable_set :"@filter_#{column_name}_to", DateTime.new(self.temp_to[1].to_i, self.temp_to[2].to_i, self.temp_to[3].to_i, self.temp_to[4].to_i, self.temp_to[5].to_i)
+                end
+                  
+              end
+            end
+
             attr_accessor "filter_#{column_name}_from"
             attr_accessor "filter_#{column_name}_to"
 

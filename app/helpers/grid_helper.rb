@@ -21,11 +21,32 @@ module GridHelper
     end
   end
 
+  def grid_row(item)
+    content_tag_for(:tr, item) do
+      [(
+        if visible_columns.include? 'checkbox'
+        content_tag(:td, class: "grid-checkbox") do
+          hidden_field_tag("grid[item_ids[#{item.id}]", '0') +
+          check_box_tag("grid[item_ids[#{item.id}]]", '1', @grid.item_ids.present? && @grid.item_ids[item.id.to_s] == '1', :class => 'item')
+        end
+      end),
+      #(Rails.cache.fetch([item, visible_columns, admin_zone?]) do
+      (
+        visible_columns.map do |column_name|
+          if column_name != 'checkbox'
+            content_tag :td, class: "grid-#{column_name}" do
+              grid_item_decorator(item, column_name)
+            end
+          end
+        end.join.html_safe
+        )].join.html_safe
+    end
+  end
+
   def grid_item_decorator(item, column_name)
-    if column_name == 'checkbox'
-      hidden_field_tag("grid[item_ids[#{item.id}]", '0') +
-      check_box_tag("grid[item_ids[#{item.id}]]", '1', @grid.item_ids.present? && @grid.item_ids[item.id.to_s] == '1', :class => 'item')
-    else
+
+      #Rails.cache.fetch([item, column_name, admin_zone?]) do
+ 
       if (m = item.respond_to?(column_name.to_sym))
         m = item.method(column_name.to_sym)
         val = m.call
@@ -34,13 +55,13 @@ module GridHelper
       content_tag_for(:span, item, column_name, :class => column_name) do
         case column_name
         # READ ONLY
-        when *['content', 'user_agent', 'accept_language', 'cached_location', 'cached_referrer', 'cached_title']
-          new_val = truncate(val, length: 20)
+        when *['content', 'user_agent', 'accept_language', 'cached_location', 'cached_referrer', 'cached_title', 'path', 'title']
+          new_val = truncate(val, length: 40)
           content_tag :span, (new_val != val ? {data: { title: val }, rel: 'tooltip'} : {} ) do
-            truncate val, length: 20
+            truncate val, length: 40
           end
         # EDITABLE
-        when *['name', 'title', 'short_name', 'long_name']
+        when *['name', 'short_name', 'long_name']
           new_val = truncate(val, length: 20)
           content_tag :span, (new_val != val ? {data: { title: val }, rel: 'tooltip'} : {} ) do
             if admin_zone?
@@ -49,11 +70,15 @@ module GridHelper
               new_val
             end
           end
-        when 'id'
-          link_to item.id, '#', data: {html: true, title: 'Информация об элементе', placement: 'right', :"poload" => polymorphic_path([:info, (admin_zone? ? :admin : :user), item], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status] ) }, class: "btn btn-success btn-xs ignoredirty", style: "min-width: 30px"
+        when *['id', 'token']
+          link_to item[column_name], '#', data: {html: true, title: 'Информация об элементе', placement: 'right', :"poload" => polymorphic_path([:info, (admin_zone? ? :admin : :user), item], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status] ) }, class: "btn btn-primary btn-xs ignoredirty", style: "min-width: 30px"
         when 'checkbox'
-        when 'cached_main_profile'
-          parsed_cached_main_profile(val)
+        when 'cached_profile'
+          truncate(strip_tags(parsed_cached_profile(val)), length: 20)
+        when 'cached_order'
+          if val
+            link_to val, polymorphic_path([*jaba3, :order], {id: val})
+          end
         when *['notes']
           link_to_fast_edit val, item, column_name
         when *['notes_invisible', 'cached_brand']
@@ -300,20 +325,20 @@ module GridHelper
     end
   end
 
-  def parsed_cached_main_profile val
+  def parsed_cached_profile val
     res = []
     begin
-      JSON.parse(val).tap do |cached_main_profile|
-        cached_main_profile["names"].each do |cached_name|
+      JSON.parse(val).tap do |cached_profile|
+        cached_profile["names"].each do |cached_name|
           res << refactor_cached_name(cached_name)
         end
-        cached_main_profile["phones"].each do |cached_phone|
+        cached_profile["phones"].each do |cached_phone|
           res << refactor_cached_value(cached_phone)
         end
-        cached_main_profile["emails"].each do |cached_email|
+        cached_profile["emails"].each do |cached_email|
           res << refactor_cached_value(cached_email)
         end
-        cached_main_profile["passports"].each do |cached_passport|
+        cached_profile["passports"].each do |cached_passport|
           res << refactor_cached_passport(cached_passport)
         end
       end

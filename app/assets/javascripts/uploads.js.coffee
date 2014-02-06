@@ -1,4 +1,4 @@
-#  require jQuery-File-Upload/js/vendor/jquery.ui.widget.js
+#= require jQuery-File-Upload/js/vendor/jquery.ui.widget.js
 #= require jQuery-File-Upload/js/jquery.iframe-transport
 #= require jQuery-File-Upload/js/jquery.fileupload
 

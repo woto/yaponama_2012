@@ -28,7 +28,8 @@ $(document).on 'show.bs.modal', '#myModal', ->
 $(document).on 'hidden.bs.modal', '#myModal', ->
   App.Talk.hide()
 
-$(document).on 'click', "a[rel='ask-question']", ->
+#$(document).on 'click', "a[rel='ask-question']", ->
+$(document).on 'click', "a[rel='ask-question']", (event) ->
   event.preventDefault()
   # TODO Нужно показать панель с чатом если она скрыта
   App.Talk.show()

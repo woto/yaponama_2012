@@ -5,6 +5,7 @@
 makeEditable = ->
   $('.editable').each ->
     $(this).attr('contenteditable', 'true')
+
     CKEDITOR.inline(this, window.extended_options);
     $(this).editableHighlight()
     #this.focus()

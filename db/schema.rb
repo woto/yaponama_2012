@@ -94,8 +94,8 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "site_port"
     t.string   "redis_address"
     t.string   "redis_port"
-    t.string   "socket_io_address"
-    t.string   "socket_io_port"
+    t.string   "realtime_address"
+    t.string   "realtime_port"
     t.string   "juggernaut_address"
     t.string   "juggernaut_port"
     t.string   "price_address"
@@ -326,12 +326,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "cars", ["modification_id"], name: "index_cars_on_modification_id", using: :btree
   add_index "cars", ["somebody_id"], name: "index_cars_on_somebody_id", using: :btree
 
-  create_table "chats", force: true do |t|
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "comments", force: true do |t|
     t.integer  "creator_id"
     t.text     "content"
@@ -534,6 +528,46 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "emails", ["profile_id"], name: "index_emails_on_profile_id", using: :btree
   add_index "emails", ["somebody_id"], name: "index_emails_on_somebody_id", using: :btree
 
+  create_table "faq_transactions", force: true do |t|
+    t.integer  "faq_id"
+    t.string   "operation"
+    t.integer  "creator_id"
+    t.text     "question_before"
+    t.text     "question_after"
+    t.text     "answer_before"
+    t.text     "answer_after"
+    t.boolean  "phantom_before"
+    t.boolean  "phantom_after"
+    t.string   "creation_reason_before"
+    t.string   "creation_reason_after"
+    t.text     "notes_before"
+    t.text     "notes_after"
+    t.text     "notes_invisible_before"
+    t.text     "notes_invisible_after"
+    t.integer  "somebody_id_before"
+    t.integer  "somebody_id_after"
+    t.datetime "created_at"
+  end
+
+  add_index "faq_transactions", ["creator_id"], name: "index_faq_transactions_on_creator_id", using: :btree
+  add_index "faq_transactions", ["faq_id"], name: "index_faq_transactions_on_faq_id", using: :btree
+
+  create_table "faqs", force: true do |t|
+    t.text     "question"
+    t.text     "answer"
+    t.boolean  "phantom",         default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "creation_reason"
+    t.text     "notes",           default: ""
+    t.text     "notes_invisible", default: ""
+    t.integer  "somebody_id"
+    t.integer  "creator_id"
+  end
+
+  add_index "faqs", ["creator_id"], name: "index_faqs_on_creator_id", using: :btree
+  add_index "faqs", ["somebody_id"], name: "index_faqs_on_somebody_id", using: :btree
+
   create_table "generations", force: true do |t|
     t.string   "name"
     t.text     "content"
@@ -567,38 +601,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   end
 
   add_index "ipgeobase_regions", ["ancestry"], name: "index_ipgeobase_regions_on_ancestry", using: :btree
-
-  create_table "letter_parts", force: true do |t|
-    t.integer  "letter_id"
-    t.text     "cid"
-    t.string   "letter_part"
-    t.text     "letter_part_type"
-    t.integer  "is_attachment"
-    t.text     "filename"
-    t.text     "charset"
-    t.binary   "body"
-    t.integer  "size"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "letter_parts", ["letter_id"], name: "index_letter_parts_on_letter_id", using: :btree
-
-  create_table "letters", force: true do |t|
-    t.integer  "somebody_id"
-    t.integer  "email_id"
-    t.text     "subject"
-    t.binary   "source"
-    t.string   "charset"
-    t.text     "size"
-    t.string   "letter"
-    t.text     "letter_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "letters", ["email_id"], name: "index_letters_on_email_id", using: :btree
-  add_index "letters", ["somebody_id"], name: "index_letters_on_somebody_id", using: :btree
 
   create_table "metro", force: true do |t|
     t.datetime "created_at"
@@ -677,6 +679,18 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "names", ["profile_id"], name: "index_names_on_profile_id", using: :btree
   add_index "names", ["somebody_id"], name: "index_names_on_somebody_id", using: :btree
 
+  create_table "order_deliveries", force: true do |t|
+    t.integer  "creator_id"
+    t.integer  "somebody_id"
+    t.integer  "postal_address_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "order_deliveries", ["creator_id"], name: "index_order_deliveries_on_creator_id", using: :btree
+  add_index "order_deliveries", ["postal_address_id"], name: "index_order_deliveries_on_postal_address_id", using: :btree
+  add_index "order_deliveries", ["somebody_id"], name: "index_order_deliveries_on_somebody_id", using: :btree
+
   create_table "order_transactions", force: true do |t|
     t.integer  "order_id"
     t.string   "operation"
@@ -689,14 +703,18 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.decimal  "delivery_cost_after"
     t.string   "status_before"
     t.string   "status_after"
-    t.integer  "delivery_id_before"
-    t.integer  "delivery_id_after"
+    t.integer  "delivery_place_id_before"
+    t.integer  "delivery_place_id_after"
+    t.integer  "delivery_variant_id_before"
+    t.integer  "delivery_variant_id_after"
+    t.integer  "delivery_option_id_before"
+    t.integer  "delivery_option_id_after"
     t.integer  "profile_id_before"
     t.integer  "profile_id_after"
+    t.text     "cached_profile_before"
+    t.text     "cached_profile_after"
     t.boolean  "full_prepayment_required_before"
     t.boolean  "full_prepayment_required_after"
-    t.string   "cached_profile_before"
-    t.string   "cached_profile_after"
     t.boolean  "legal_before"
     t.boolean  "legal_after"
     t.boolean  "phantom_before"
@@ -724,10 +742,12 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "company_id"
     t.decimal  "delivery_cost",            precision: 8, scale: 2, default: 0.0
     t.string   "status",                                           default: "open"
-    t.integer  "delivery_id"
+    t.integer  "delivery_place_id"
+    t.integer  "delivery_variant_id"
+    t.integer  "delivery_option_id"
     t.integer  "profile_id"
+    t.text     "cached_profile"
     t.boolean  "full_prepayment_required"
-    t.string   "cached_profile"
     t.boolean  "legal"
     t.boolean  "phantom",                                          default: true
     t.string   "token"
@@ -743,7 +763,9 @@ ActiveRecord::Schema.define(version: 99999999999999) do
 
   add_index "orders", ["company_id"], name: "index_orders_on_company_id", using: :btree
   add_index "orders", ["creator_id"], name: "index_orders_on_creator_id", using: :btree
-  add_index "orders", ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
+  add_index "orders", ["delivery_option_id"], name: "index_orders_on_delivery_option_id", using: :btree
+  add_index "orders", ["delivery_place_id"], name: "index_orders_on_delivery_place_id", using: :btree
+  add_index "orders", ["delivery_variant_id"], name: "index_orders_on_delivery_variant_id", using: :btree
   add_index "orders", ["postal_address_id"], name: "index_orders_on_postal_address_id", using: :btree
   add_index "orders", ["profile_id"], name: "index_orders_on_profile_id", using: :btree
   add_index "orders", ["somebody_id"], name: "index_orders_on_somebody_id", using: :btree
@@ -851,6 +873,24 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "passports", ["creator_id"], name: "index_passports_on_creator_id", using: :btree
   add_index "passports", ["profile_id"], name: "index_passports_on_profile_id", using: :btree
   add_index "passports", ["somebody_id"], name: "index_passports_on_somebody_id", using: :btree
+
+  create_table "payments", force: true do |t|
+    t.integer  "amount"
+    t.integer  "creator_id"
+    t.integer  "somebody_id"
+    t.integer  "profile_id"
+    t.integer  "postal_address_id"
+    t.integer  "company_id"
+    t.string   "payment_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payments", ["company_id"], name: "index_payments_on_company_id", using: :btree
+  add_index "payments", ["creator_id"], name: "index_payments_on_creator_id", using: :btree
+  add_index "payments", ["postal_address_id"], name: "index_payments_on_postal_address_id", using: :btree
+  add_index "payments", ["profile_id"], name: "index_payments_on_profile_id", using: :btree
+  add_index "payments", ["somebody_id"], name: "index_payments_on_somebody_id", using: :btree
 
   create_table "phone_transactions", force: true do |t|
     t.integer  "phone_id"
@@ -964,6 +1004,8 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "brand_id_after"
     t.string   "cached_brand_before"
     t.string   "cached_brand_after"
+    t.string   "cached_order_before"
+    t.string   "cached_order_after"
     t.string   "short_name_before"
     t.string   "short_name_after"
     t.text     "long_name_before"
@@ -1010,6 +1052,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "catalog_number"
     t.integer  "brand_id"
     t.string   "cached_brand"
+    t.string   "cached_order"
     t.string   "short_name"
     t.text     "long_name"
     t.integer  "quantity_ordered"
@@ -1018,7 +1061,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "max_days"
     t.decimal  "buy_cost",            precision: 8, scale: 2
     t.decimal  "sell_cost",           precision: 8, scale: 2
-    t.boolean  "hide_catalog_number"
+    t.boolean  "hide_catalog_number",                         default: false
     t.string   "status"
     t.integer  "probability"
     t.integer  "product_id"
@@ -1112,28 +1155,33 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.text     "notes"
     t.text     "notes_invisible"
     t.integer  "creator_id"
-    t.boolean  "phantom"
+    t.boolean  "phantom",                                                  default: false
     t.boolean  "logout_from_other_places",                                 default: true
-    t.boolean  "online"
+    t.boolean  "online",                                                   default: false
     t.boolean  "sound",                                                    default: true
     t.text     "chat"
     t.integer  "place_id"
     t.string   "post"
-    t.integer  "main_profile_id"
-    t.text     "cached_main_profile"
+    t.integer  "profile_id"
+    t.text     "cached_profile"
     t.decimal  "cached_debit",                     precision: 8, scale: 2, default: 0.0
     t.decimal  "cached_credit",                    precision: 8, scale: 2, default: 0.0
     t.string   "type"
     t.string   "order_rule"
     t.integer  "stats_count"
     t.datetime "touch_confirm"
-    t.string   "cached_location"
+    t.text     "cached_location"
     t.string   "cached_title"
-    t.string   "cached_referrer"
+    t.text     "cached_referrer"
+    t.text     "first_referrer"
     t.string   "cached_screen_width"
     t.string   "cached_screen_height"
     t.string   "cached_client_width"
     t.string   "cached_client_height"
+    t.string   "cached_talk"
+    t.integer  "unread_talks",                                             default: 0
+    t.integer  "total_talks",                                              default: 0
+    t.integer  "default_addressee_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -1194,10 +1242,10 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "place_id_after"
     t.string   "post_before"
     t.string   "post_after"
-    t.integer  "main_profile_id_before"
-    t.integer  "main_profile_id_after"
-    t.text     "cached_main_profile_before"
-    t.text     "cached_main_profile_after"
+    t.integer  "profile_id_before"
+    t.integer  "profile_id_after"
+    t.text     "cached_profile_before"
+    t.text     "cached_profile_after"
     t.decimal  "cached_debit_before"
     t.decimal  "cached_debit_after"
     t.decimal  "cached_credit_before"
@@ -1210,12 +1258,14 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "stats_count_after"
     t.datetime "touch_confirm_before"
     t.datetime "touch_confirm_after"
-    t.string   "cached_location_before"
-    t.string   "cached_location_after"
+    t.text     "cached_location_before"
+    t.text     "cached_location_after"
     t.string   "cached_title_before"
     t.string   "cached_title_after"
-    t.string   "cached_referrer_before"
-    t.string   "cached_referrer_after"
+    t.text     "cached_referrer_before"
+    t.text     "cached_referrer_after"
+    t.text     "first_referrer_before"
+    t.text     "first_referrer_after"
     t.string   "cached_screen_width_before"
     t.string   "cached_screen_width_after"
     t.string   "cached_screen_height_before"
@@ -1224,6 +1274,14 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "cached_client_width_after"
     t.string   "cached_client_height_before"
     t.string   "cached_client_height_after"
+    t.string   "cached_talk_before"
+    t.string   "cached_talk_after"
+    t.integer  "unread_talks_before"
+    t.integer  "unread_talks_after"
+    t.integer  "total_talks_before"
+    t.integer  "total_talks_after"
+    t.integer  "default_addressee_id_before"
+    t.integer  "default_addressee_id_after"
     t.datetime "created_at"
   end
 
@@ -1242,15 +1300,16 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "spare_infos", ["brand_id"], name: "index_spare_infos_on_brand_id", using: :btree
 
   create_table "stats", force: true do |t|
-    t.string   "location"
+    t.text     "location"
     t.string   "title"
-    t.string   "referrer"
+    t.text     "referrer"
     t.integer  "russian_time_zone_auto_id"
     t.integer  "screen_width"
     t.integer  "screen_height"
     t.integer  "client_width"
     t.integer  "client_height"
     t.integer  "somebody_id"
+    t.boolean  "is_search"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -1267,10 +1326,69 @@ ActiveRecord::Schema.define(version: 99999999999999) do
 
   add_index "suppliers", ["creator_id"], name: "index_suppliers_on_creator_id", using: :btree
 
+  create_table "talkables_chat_partables_files", force: true do |t|
+    t.string   "file"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "talkables_chat_partables_links", force: true do |t|
+    t.string   "url"
+    t.string   "title"
+    t.string   "target"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "talkables_chat_partables_texts", force: true do |t|
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "talkables_chat_partables_titles", force: true do |t|
+    t.string   "title"
+    t.string   "size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "talkables_chat_parts", force: true do |t|
+    t.integer  "chat_id"
+    t.integer  "chat_partable_id"
+    t.string   "chat_partable_type"
+    t.integer  "order"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "talkables_chat_parts", ["chat_id"], name: "index_talkables_chat_parts_on_chat_id", using: :btree
+  add_index "talkables_chat_parts", ["chat_partable_id", "chat_partable_type"], name: "talkables_chat_parts_on_chat_partable_id_and_chat_partable_type", using: :btree
+
+  create_table "talkables_chats", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "talkables_letters", force: true do |t|
+    t.integer  "email_id"
+    t.text     "subject"
+    t.text     "size"
+    t.string   "letter"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "talkables_letters", ["email_id"], name: "index_talkables_letters_on_email_id", using: :btree
+
   create_table "talks", force: true do |t|
     t.integer  "talkable_id"
     t.string   "talkable_type"
-    t.boolean  "read"
+    t.boolean  "read",            default: false
+    t.boolean  "received",        default: false
+    t.integer  "addressee_id"
+    t.text     "cached_talk"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "creation_reason"

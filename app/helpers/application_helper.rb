@@ -58,10 +58,12 @@ module ApplicationHelper
       title = brand.name
     end
 
+    # TODO Это странно, но при первой загрузке все ок, а в дальнешем 
+    # (видимо из-за Turbolinks) относительный url(/...) перестает работать 
     if brand.image.present?
-      image = asset_path(brand.image.url.to_s)
+      image = asset_url(brand.image.url.to_s)
     else
-      image = asset_path('no_brand.png')
+      image = asset_url('no_brand.png')
     end
 
     link_to(title, "/#{CGI.escape(brand.name)}", :style => "background: url(#{image}) no-repeat scroll center center", :class => "brands-#{brand.name}")
@@ -115,6 +117,7 @@ module ApplicationHelper
 
         content_tag(:div, :class => 'col-md-2 col-md-pull-10 text-sm') do
 
+          "<div class='row'><div class='col-xs-6 col-md-12'>".html_safe +
           content_tag(:ul, :class => 'nav nav-pills nav-stacked') do
             aaa = _build_dropdowns('product', 'products', Rails.configuration.products_status, Rails.configuration.products_menu, @somebody)
 
@@ -135,22 +138,23 @@ module ApplicationHelper
             end
 
             links = [ 
-              { :title => 'Главная',
-                :catch => [ {:action => 'show' }, { action: :edit  }, { controller: 'passwords', action: 'edit', :id => @somebody.id } ], 
+              { :title => 'Личный кабинет',
+                #:catch => [ {:action => 'show' }, { action: :edit  }, { controller: 'passwords', action: 'edit', :id => @somebody.id } ], 
+                :catch => [ /\/user$|\/admin\/users\/\d+$/ ], 
                 :link => polymorphic_path([(admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user)]),
                 :class => '',
                 :dropdown => []
               },
 
               { :title => params[:controller].include?('orders') ? "Заказы&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.orders_status[params[:status]].try(:[], 'title')} </span>".html_safe : "Заказы",
-                :catch => [ { :controller => 'orders' } ], 
+                :catch => [ /\/orders/ ], 
                 :link => '#',
                 :class => 'dropdown',
                 :dropdown => _build_dropdowns('order', 'orders', Rails.configuration.orders_status, Rails.configuration.orders_menu, @somebody)
               },
 
               { :title => params[:controller].include?('products') ? "Товары&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.products_status[params[:status]].try(:[], 'title')} </span>".html_safe : "Товары",
-                :catch => [ { :controller => 'products' } ],
+                :catch => [/^(?!.*orders).*products/],
                 :link => '#',
                 :class => 'dropdown',
                 :dropdown => aaa
@@ -164,8 +168,9 @@ module ApplicationHelper
 
             end.join.html_safe
           end +
-          "<hr>".html_safe +
-          (render 'profileables/right')
+          "</div><div id='leftbar-divider' class='col-md-12'><hr /></div><div class='col-xs-6 col-md-12 bottom-space'>".html_safe +
+          (render 'profileables/right') +
+          "</div></div>".html_safe
         end
       elsif !admin_zone?
         content_tag(:div, :class => 'col-md-2 col-md-pull-10 text-sm') do
@@ -242,14 +247,27 @@ module ApplicationHelper
     end
   end
 
-  def alert type, &block
+  def alert type, dismissable=true, options={}, &block
+    #
     # TODO
     # Муть какая-то, разобраться, почему в виде есть разница между do .. end и { "" } и как надо правильно?
     # В таком вариенте работает в обоих случаях.
-    content_tag :div, class: "alert alert-#{type} alert-dismissable fade in" do
 
-      a = capture do
-        content_tag(:button, :type=>"button", :class=>"close", :data=>{:dismiss=>"alert"}, :"aria-hidden"=>"true") { "×" }
+    if dismissable
+      css_class = "alert-dismissable"
+    else
+      css_style = "border-top: none; border-right: none; border-bottom: none; border-left-width: 5px; border-radius: 0;"
+    end
+
+    options[:class] = ["alert alert-#{type} #{css_class} fade in", options[:class] ].compact
+    options[:style] = css_style
+
+    content_tag :div, options do
+
+      if dismissable
+        a = capture do
+          content_tag(:button, :type=>"button", :class=>"close", :data=>{:dismiss=>"alert"}, :"aria-hidden"=>"true") { "×" }
+        end
       end
 
       b = capture do
@@ -257,7 +275,8 @@ module ApplicationHelper
         yield
       end
 
-      a + b
+      a.to_s.html_safe + b.to_s.html_safe
+
     end
 
   end
@@ -290,25 +309,30 @@ module ApplicationHelper
   #  content_tag(:span, '/', :class => 'divider')
   #end
 
-  #def breadcrumb elms
-  #  content_tag(:ul, :class => 'breadcrumb') do
-  #    index = 0
-  #    elms.collect do |k|
-  #      if k['condition']
-  #        if k['link'].present?
-  #          concat content_tag(:li, link_to(k['title'], k['link']))
-  #        else
-  #          concat content_tag(:li, k['title'], :class => 'active')
-  #        end
-  #        unless index == elms.size - 1
-  #          concat content_tag(:span, '/', :class => 'divider')
-  #        end
-  #        index += 1
-  #      end
-  #    end
-  #  end
-  #end
-  
+  def breadcrumb flag
+
+    str4 = capture do yield(Breadcrumb.new(self)) end
+
+    content_tag(:ol, :class => 'breadcrumb') do
+      str1 = capture do Breadcrumb.new(self).item(icon('home').html_safe, admin_zone? ? admin_path : root_path) end
+
+      if @somebody
+        str2 = capture do Breadcrumb.new(self).item('Личный кабинет', jaba3) end
+      end
+
+      if flag
+        if ['new', 'edit', 'show'].include? params[:action]
+          str3 = capture do Breadcrumb.new(self).item(t("helpers.titles.#{@resource_class.to_s.underscore}.index"), polymorphic_path([*jaba3, @resource_class.to_s.underscore.parameterize.underscore.pluralize])) end
+          #polymorphic_path([*jaba3, params['controller'].camelize.demodulize.underscore.to_sym])
+          #t("helpers.titles.#{params['controller'].camelize.demodulize.underscore.singularize}.index")
+        end
+      end
+
+      [str1, str2, str3, str4].join.html_safe
+
+    end
+  end
+
   def _build_dropdowns(singular, plural, statuses, menu, somebody)
 
     dropdowns = []
@@ -337,15 +361,6 @@ module ApplicationHelper
     return dropdowns
   end
 
-  # Тут еще был product_status_decorator, 
-  # объединить? TODO посмотреть в хелпере
-  def order_status_decorator(status)
-    status = status || 'all'
-    content_tag(:span, class: "label label-#{status}") do
-      Rails.configuration.orders_status[status]['title']
-    end
-  end
-
   def order_decorator(order)
     # TODO Пересмотреть
     if order
@@ -359,13 +374,16 @@ module ApplicationHelper
 
   def page_header
     content_tag :div, class: 'page-header' do
-      content_tag :h1 do
+      [content_tag(:h1, class: 'bottom-space-none') do
         h(@meta_title) +
         " " +
         content_tag(:small) do
           h(@meta_title_small)
         end
-      end
+      end,
+      content_tag(:div, class: 'text-muted text-sm') do
+        h(@meta_title_lead) 
+      end].join.html_safe
     end
   end
 
@@ -375,8 +393,9 @@ module ApplicationHelper
     end
   end
 
-  def row
-    content_tag :div, class: "row" do
+  def row options={}
+    options[:class] = ['row', options[:class] ].compact
+    content_tag :div, options do
       yield
     end
   end
@@ -465,7 +484,7 @@ module ApplicationHelper
       :order_id => params[:order_id], 
       :primary_key => params[:primary_key], 
       :status => params[:status], 
-      :return_path => params[:return_path]
+      #:return_path => params[:return_path]
      }
   end
 
@@ -473,18 +492,16 @@ module ApplicationHelper
     @resource_class.name.pluralize.underscore.gsub('/', '_').to_sym
   end
 
-  def jaba3
-    [
-      (admin_zone? ? :admin : :user),
-      (admin_zone? ? @somebody : nil)
-    ]
-  end
-
-
   ['index', 'new', 'edit', 'show'].each do |method_name|
     define_method "title_#{method_name}" do
       @meta_title = t("helpers.titles.#{@resource_class.to_s.underscore}.#{method_name}")
       page_header
+    end
+  end
+
+  def c1
+    content_tag :div, class: "col-lg-7 col-md-8 col-sm-9" do
+      yield
     end
   end
 

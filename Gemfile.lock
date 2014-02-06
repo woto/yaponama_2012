@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: 743a117241e29958abfa05c5c024cd798d62fdc6
+  revision: bf6d8e1d6edc49fddf0d9c35c7a57d17bb686528
   specs:
     capybara (2.2.0)
       mime-types (>= 1.16)
@@ -28,7 +28,7 @@ GIT
 
 GIT
   remote: git://github.com/lautis/uglifier.git
-  revision: d75b236d458ff46ffce29292c275a77ef4b1c47e
+  revision: b8ccfede83eff55626c128095335fff0bac09f36
   specs:
     uglifier (2.4.0)
       execjs (>= 0.3.0)
@@ -46,7 +46,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/coffee-rails.git
-  revision: 471ae515b57d484d494eba7e0a1f1016ebcc57e4
+  revision: 4a0ad7630602589b8b9646c438eb0e73f74368f7
   specs:
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -62,15 +62,15 @@ GIT
 
 GIT
   remote: git://github.com/rails/jquery-rails.git
-  revision: 1155bf5be79a0755a5327561ea26e1d4be534332
+  revision: f08040b92417faf43b3f92b6431f5431a1c363de
   specs:
-    jquery-rails (3.0.4)
+    jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: fd2d1449bc241b1c8ed63b4b83ba40d47ddef4b6
+  revision: 9369486c71a6a330eb6aff07f3f46122dafca114
   branch: 4-0-stable
   specs:
     actionmailer (4.0.2)
@@ -112,7 +112,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sass-rails.git
-  revision: f65b9005de112b74cd09e5dedeae23603c3b1413
+  revision: 6d4e551a114a7e3458ce3cb1edb39da07935919e
   specs:
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -121,7 +121,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sprockets-rails.git
-  revision: 7d53c55c96a1f900553038d6354136fed8536c8a
+  revision: 8bf70f674ec714dc1082d279fd021075fa036a74
   specs:
     sprockets-rails (2.0.1)
       actionpack (>= 3.0)
@@ -130,9 +130,9 @@ GIT
 
 GIT
   remote: git://github.com/rails/turbolinks.git
-  revision: 18b596569df14f63fab420bc3fc71395102e98db
+  revision: edff68c8016e310d54e47cb7b5d2cc5e7d1fefa2
   specs:
-    turbolinks (2.2.0)
+    turbolinks (2.2.1)
       coffee-rails
 
 GIT
@@ -164,7 +164,7 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: ea5ceb7dfa613f432efbfa04195c86599a16d973
+  revision: 32019827798eddbecc19676d69eb406a4f3902cc
   specs:
     simple_form (3.0.1)
       actionpack (>= 4.0.0, < 4.1)
@@ -198,7 +198,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
     charlock_holmes (0.6.9.4)
-    childprocess (0.3.9)
+    childprocess (0.4.0)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     cliver (0.3.2)
@@ -206,30 +206,29 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.6.3)
+    coffee-script-source (1.7.0)
     commonjs (0.2.7)
     dalli (2.7.0)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
-    faraday (0.8.9)
-      multipart-post (~> 1.2.0)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
     ffi (1.9.3)
     hashie (2.0.5)
     hike (1.2.3)
     hiredis (0.4.5)
     htmlentities (4.3.1)
-    httpauth (0.2.0)
     i18n (0.6.9)
     innertube (1.1.0)
     interception (0.4)
     jasmine-core (2.0.0)
     json (1.8.1)
-    jwt (0.1.10)
+    jwt (0.1.11)
       multi_json (>= 1.5)
-    kaminari (0.15.0)
+    kaminari (0.15.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     less (2.4.0)
@@ -248,26 +247,29 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    money (6.0.0)
+    monetize (0.1.4)
+    money (6.0.1)
       i18n (~> 0.6.4)
+      monetize (~> 0.1.3)
     multi_json (1.8.4)
-    multipart-post (1.2.0)
+    multi_xml (0.5.5)
+    multipart-post (2.0.0)
     mysql2 (0.3.12b4)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
-    net-ssh (2.7.0)
+    net-ssh (2.8.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     oauth (0.4.7)
-    oauth2 (0.8.1)
-      faraday (~> 0.8)
-      httpauth (~> 0.1)
-      jwt (~> 0.1.4)
-      multi_json (~> 1.0)
+    oauth2 (0.9.3)
+      faraday (>= 0.8, < 0.10)
+      jwt (~> 0.1.8)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
       rack (~> 1.2)
-    omniauth (1.1.4)
+    omniauth (1.2.1)
       hashie (>= 1.2, < 3)
-      rack
+      rack (~> 1.0)
     omniauth-facebook (1.6.0)
       omniauth-oauth2 (~> 1.1)
     omniauth-google-oauth2 (0.2.2)
@@ -279,9 +281,11 @@ GEM
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
-    omniauth-oauth2 (1.1.1)
-      oauth2 (~> 0.8.0)
-      omniauth (~> 1.0)
+    omniauth-oauth2 (1.1.2)
+      faraday (>= 0.8, < 0.10)
+      multi_json (~> 1.3)
+      oauth2 (~> 0.9.3)
+      omniauth (~> 1.2)
     omniauth-odnoklassniki (0.0.4)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
@@ -298,7 +302,7 @@ GEM
     pg (0.17.1)
     phantomjs (1.9.2.1)
     polyglot (0.3.3)
-    pry (0.9.12.4)
+    pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
@@ -324,7 +328,7 @@ GEM
     rake (10.1.1)
     rdoc (4.1.1)
       json (~> 1.4)
-    redis (3.0.6)
+    redis (3.0.7)
     ref (1.0.5)
     riddle (1.5.10)
     rmagick (2.13.2)
@@ -333,9 +337,9 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     rspec-core (2.14.7)
-    rspec-expectations (2.14.4)
+    rspec-expectations (2.14.5)
       diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.14.4)
+    rspec-mocks (2.14.5)
     rspec-rails (2.14.1)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -351,7 +355,7 @@ GEM
       i18n (>= 0.5.0)
     sanitize (2.1.0)
       nokogiri (>= 1.4.4)
-    sass (3.2.13)
+    sass (3.2.14)
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
@@ -360,14 +364,14 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0.4)
-    show_me_the_cookies (2.1.0)
+    show_me_the_cookies (2.2.0)
       capybara (~> 2.0)
     sitemap_generator (4.3.1)
       builder
     slim (2.0.2)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
-    slim-rails (2.0.4)
+    slim-rails (2.1.0)
       actionpack (>= 3.0, < 4.1)
       activesupport (>= 3.0, < 4.1)
       railties (>= 3.0, < 4.1)
@@ -386,7 +390,7 @@ GEM
     temple (0.6.7)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
-    therubyracer (0.12.0)
+    therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
     thinking-sphinx (3.0.0)
@@ -399,7 +403,7 @@ GEM
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
-    tins (0.13.1)
+    tins (0.13.2)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)

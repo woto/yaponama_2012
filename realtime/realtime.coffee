@@ -1,292 +1,375 @@
+util = require 'util'
 colors = require 'colors'
 pg = require 'pg' 
 async = require 'async'
-require 'js-yaml'
+yaml = require 'js-yaml'
 http = require 'http'
 sockjs = require 'sockjs'
 fs = require 'fs'
 rs = require 'redis'
 _ = require('underscore')._
 
-sjs_talk = sockjs.createServer()
-server = http.createServer()
-sjs_talk.installHandlers server, prefix: "/talk"
+App = exports ? this
 
+# Читаем RAILS_ENV
 rails_env = process.env.RAILS_ENV || 'development'
 
-doc = require('../config/database.yml')[rails_env];
+# Настраиваем SockJS
+sjs = sockjs.createServer()
+server = http.createServer()
+sjs.installHandlers server, prefix: "/realtime"
 
-pg.defaults.user = doc['username']
-pg.defaults.database = doc['database']
-pg.defaults.password = doc['password'] || undefined
-pg.defaults.host = doc['host'] || '/var/run/postgresql/'
-pg.defaults.port = doc['port'] || 5432
+# Читаем database.yml
+#console.log fs.realpathSync
+database_file = fs.readFileSync(__dirname + '/../config/database.yml', 'utf8')
+database_yml = yaml.safeLoad(database_file)[rails_env];
+console.log(util.inspect(database_yml, false, 10, true));
+pg.defaults.user = database_yml['username']
+pg.defaults.database = database_yml['database']
+pg.defaults.password = database_yml['password'] || undefined
+pg.defaults.host = database_yml['host'] || '/var/run/postgresql/'
+pg.defaults.port = database_yml['port'] || 5432
 
+# Инициализируем клиента PostgreSQL
 db = new pg.Client()
 
 users = {}
-rooms = {}
 connections = {}
+sellers = {}
 
 async.waterfall [(callback) ->
 
   # Подключаемся к PostgreSQL
   db.connect (err) ->
-    console.error "PostgreSQL connect error", err if err?
-    callback err
-
-, (callback) ->
-
-  # Получаем настройки сайта
-  db.query "SELECT * from admin_site_settings", (err, result) ->
-    console.error "SELECT * from admin_site_settings", err if err?
-    throw 'Настройки не найдены для RAILS_ENV=' + rails_env unless result.rows.length > 0
-    callback result
+    
+    if err?
+      callback err
+    else
+      callback null
 
 , (callback) ->
 
   # Делаем всех пользователей оффлайн
-  db.query "UPDATE somebodies SET online = false", (err, result) ->
-    console.error "UPDATE somebodies SET online = false", err if err?
-    callback result
+  query = "UPDATE somebodies SET online = false"
+  db.query query, (err, result) ->
 
-], (result) ->
+    if err?
+      callback err
+    else
+      callback null
 
-  # Продолжаем работу
-  config = result.rows[0]
+, (callback) ->
 
-  server.listen parseInt(config.realtime_port, 10), config.realtime_address
-  process.stdout.write("\nready\n")
+  # Получаем настройки сайта
+  query = "SELECT * from admin_site_settings"
+  db.query query, (err, result) ->
+
+    if err?
+      callback err
+    else if result.rows.length != 1
+      # Пригождается в случае запуска Rails тестов
+      callback null, require('../config/config.yml')[rails_env];
+      #callback query
+    else
+      callback null, result.rows[0]
+
+, (config, callback) ->
+
+  # Запускаем веб сервер
+  server.listen parseInt(config.realtime_port, 10), '0.0.0.0'
+
+  # Подключаемся к Redis
   sub = rs.createClient(config.redis_port, config.reds_host)
 
+  process.stdout.write("\n\nREADY\n\n")
 
-  sjs_talk.on "connection", (conn) ->
+  sjs.on "connection", (conn) ->
 
+    conn.send = (message, data) ->
+
+      to_send =
+        message: message
+        data: data
+
+      console.log 'SockJS SEND'.grey
+      console.log to_send
+      console.log ''
+      @write JSON.stringify(to_send)
 
     user_id = undefined
     auth_token = undefined
 
     conn.on 'data', (data) ->
 
+      console.log 'SockJS RECV'.grey
+      console.log data
+      console.log ''
+
       data = JSON.parse(data)
 
-      switch data.message
+      async.series [(callback) ->
 
-        when 'join room'
+        switch data.message
 
-          if user_id && auth_token
+          when 'request sellers'
 
-            # Разрешаем подключиться к любой комнате только если роль seller или только к собственной
-            if users[user_id]['role'] == 'seller' || user_id == data['payload']['room'].toString()
+            # Если sellers еще не заполнен, то заполняем и 
+            # из update_sellers бродкастится
+            unless _.some(sellers)
+              update_sellers (err) ->
+            else
+              conn.send "response sellers", sellers
 
-              room = data['payload']['room'].toString()
+          when 'request authentication'
 
-              # Если комната, к которой мы присоединяемся существует
-              if rooms[room]
+            # Сохраняем auth_token
+            auth_token = data.data
 
-                # Добавляем этого пользователя в список пользователей комнаты
-                rooms[room]['users'] = _.union(rooms[room]['users'] || [], [user_id])
+            async.waterfall [(callback) ->
 
-              else
-                # Иначе создаем комнату и сажаем туда текущую сессию
-                rooms[room] = 
-                  users: [user_id]
+              # Сохраняем user_id, полученный из auth_token
+              query = "SELECT * FROM somebodies WHERE auth_token=$1 LIMIT 1"
+              db.query query, [auth_token], (err, result) ->
 
-              # Добавляем эту комнату к списку комнат, в которых присутствует этот пользователь
-              users[user_id]['rooms'] = _.union(users[user_id]['rooms'] || [], [room])
+                if err?
+                  callback err
+                else if result.rows.length != 1
+                  callback query
+                else
+                  callback null, result.rows[0]
 
-              # И обновляем резидентов комнаты, к которой присоединились
-              update_residents room, "Вы присоединились к новой комнате, отправляем всем пользователям в этой комнате об изменении состава комнаты."
+            , (row, callback) ->
 
-            debug_globals()
+                # Сохраняем сопоставление id сессии - инстанс сессии
+                connections[conn.id] = conn
 
-        when 'authenticate'
+                user_id = row.id.toString()
 
-          # Сохраняем auth_token
-          auth_token = data.payload
-
-          async.series [(callback) ->
-            db.query "SELECT id FROM somebodies WHERE auth_token=$1", [auth_token], (err, res) ->
-              console.error "SELECT id FROM somebodies WHERE auth_token=$1", err if err?
-              throw 'Не найден somebody с auth_token: ' + auth_token if res.rows.length != 1
-              # Получаем user_id из auth_token'a и сохраняем
-              user_id = res.rows[0].id.toString()
-              callback null
-          , (callback) ->
-            async.series [(callback) ->
-              # Если пользователь с таким user_id уже подключен
-              if users[user_id]?
-                for room in users[user_id]['rooms']
-                  # Добавляем текущему пользователю в список его сессий
-                  # с которых он подключен текущую сессию
+                # Если пользователь с таким user_id уже подключен
+                # Добавляем текущему пользователю в список его сессий
+                # с которых он подключен текущую сессию
+                if users[user_id]
                   users[user_id]['connections'] = _.union(users[user_id]['connections'], [conn.id])
-                callback null
-              else
-                # Иначе делаем этот user_id online
-                db.query "UPDATE somebodies SET online = true where id=$1", [user_id]
+                  callback null
 
-                # Получаем роль клиента
-                db.query "SELECT * from somebodies where id=$1", [user_id], (err, res) ->
+                # Иначе
+                else
 
-                  cached_main_profile = JSON.parse(res.rows[0].cached_main_profile)
+                  async.waterfall [(callback) ->
 
-                  place_id = res.rows[0].deliveries_places_place_id
-                  post = res.rows[0].post
-                  name = cached_main_profile?.names?[0]?['name']
-                  phone = cached_main_profile?.phones?[0]?['phone']
-
-                  async.series [(callback) ->
-
-                    if place_id?
-                      db.query "SELECT * FROM deliveries_places_places WHERE id=$1", [place_id], (err, res) ->
-                        callback err, res.rows[0].name
-                    else
-                      callback null, null
-
-                      #, (callback) ->
-                      #  
-                      #  callback null, aaa
-
-                  ], (err, results) ->
-
-                    place = results[0]
-
-                    if res.rows[0].role in ['manager', 'admin']
-                      role = 'seller'
-                    else
-                      role = 'buyer'
-
-                    # Инициализирум users
-                    users[user_id] = 
-                      name: name
-                      phone: phone
-                      role: role
-                      connections: [conn.id]
-                      post: post
-                      # TODO Возможно лучше потом переименовать в place или location
-                      place: place
-
+                    # и запоминаем в users
+                    result = App.get_user_data row
+                    users[user_id] = _.extend(result, { connections: [conn.id] })
                     callback null
+
+
+                  , (callback) ->
+
+                    # делаем этот user_id online
+                    query = "UPDATE somebodies SET online = true where id=$1 AND online = false"
+                    db.query query, [user_id], (err, result) ->
+
+                      if err?
+                        callback err
+                      else if result.rowCount != 1
+                        callback query
+                      else
+                        callback null
+
+                  ], (err) ->
+
+                    if err?
+                      callback err
+                    else
+                      callback null
+
+            , (callback) ->
+
+              if users[user_id].role == 'seller'
+                update_sellers (err) ->
+
+                  if err?
+                    callback err
+                  else
+                    callback null
+
+              else
+                callback null
 
             ], (err, results) ->
 
-              # Сохраняем сопоставление id сессии - инстанс сессии
-              connections[conn.id] = conn
+              if err?
+                conn.end()
+                callback err
+              else
+                conn.send 'response authentication', 'success'
 
-              debug_globals()
+              callback null
+        
+      ], (err, results) ->
 
-              data =
-                message: 'authenticated'
-
-               conn.write JSON.stringify(data)
-
-          ]
-
-    debug_globals = ->
-      for connection in _.values(connections)
-        data = 
-          users: users
-          rooms: rooms
-          connections: _.keys(connections)
-        connection.write JSON.stringify(data)
-
-    update_residents = (room, debug) ->
-      for user in rooms[room]['users']
-        for connection_id in users[user]['connections']
-          data =
-            message: 'update residents'
-            comment: debug
-            room: room
-            # Заменить на users (?)
-            residents: _.map(rooms[room]['users'], (user_id) ->
-              users[user_id]
-            )
-             
-
-          connections[connection_id].write JSON.stringify(data)
+        if err?
+          console.log 'ERROR'.cyan
+          console.log err
+          console.log ''
+          #process.exit()
+        else
+          debug_globals()
 
     conn.on "close", ->
 
       _.delay (->
 
-        users[user_id]['connections'] = _.without(users[user_id]['connections'], conn.id)
-        delete connections[conn.id]
+        if users[user_id]
 
-        if users[user_id]['connections'].length == 0
+          users[user_id]['connections'] = _.without(users[user_id]['connections'], conn.id)
 
-          for room in users[user_id]['rooms']
-            rooms[room]['users'] = _.without(rooms[room]['users'], user_id)
+          delete connections[conn.id]
 
-            if rooms[room]['users'].length == 0
-              delete rooms[room]
+          async.waterfall [(callback) ->
+
+            if users[user_id]['connections'].length == 0
+
+              async.waterfall [(callback) ->
+
+                query = "UPDATE somebodies SET online = false where id=$1 AND online = true"
+                db.query query, [user_id], (err, result) ->
+
+                  if err?
+                    callback err
+
+                  if result.rowCount > 0 && users[user_id].role == 'seller'
+                    update_sellers (err) -> 
+
+                      if err?
+                        callback err
+                      else
+                        callback null
+
+                  else
+                    callback null
+
+              , (callback) ->
+
+                delete users[user_id]
+                callback null
+
+              ], (err, result) ->
+
+                if err?
+                  callback err
+                else
+                  callback null
+
             else
-              update_residents room, "За пользователем больше не осталось соединений, но комнаты в которых он присутсвовал еще живы, оповещаем всех оставшихся пользователей в них"
+              callback null
 
-          delete users[user_id]
+          ], (err, result) ->
 
-          db.query "UPDATE somebodies SET online = false where id=$1", [user_id]
+            debug_globals()
 
-          #else
-
-          #  for room in users[user_id]['rooms']
-          #    update_residents room, "За пользователем еще остались закрепленные соединения. Возможно это не нужно."
-
-        debug_globals()
-
-      ), 5000
-
-  message_to_room = (room, talk) ->
-    for user in rooms[room]['users']
-      for connection_id in users[user]['connections']
-        data =
-          message: 'new talk'
-          comment: ''
-          room: room
-          talk: talk
-
-        connections[connection_id].write JSON.stringify(data)
+      ), 0
 
   sub.on "pmessage", (channel, msg, data) ->
-    #console.log msg
-    #console.log channel
-    #console.log data
+    data = JSON.parse(data)
+    console.log 'Redis RECV'.grey
+    console.log 'channel:'.grey, channel
+    console.log 'msg:'.grey, msg
+    console.log 'data:'.grey, data
+    console.log ''
 
     switch msg
 
-      when 'talk'
-        data = JSON.parse(data)
-        message_to_room(data['user_id'], data)
+      when rails_env + ':update sellers'
+        update_sellers (err) ->
+          callback err if err?
 
-        #when 'daskfhlqwefuihg'
-        #  room = JSON.parse(data)['auth_token']
-        #  clients = io.sockets.in(room).emit 'talk',
-        #    data
-        #  break
+      when rails_env + ':show talk'
 
-        ## TODO Его уже нет. теперь эти поля в юзер, позже подумаю как надо
-        #when 'rails.geo1.create'
-        #  clients = io.sockets.clients()
-        #  for client in clients
-        #    client.emit msg,
-        #      data
-        #  break
+        # Мы хотим отправлять сообщение только на все устройства уникальных юзеров
+        user_ids = [data.somebody_id, data.creator_id, data.addressee_id]
+        user_ids = user_ids.concat(sellers.map (seller) -> seller.id)
+        user_ids = _.compact(_.uniq(user_ids))
+        
+        for user_id in user_ids
+          if users[user_id]?
+            for connection_id in users[user_id].connections
+              connections[connection_id].send 'show talk', data
 
-        #when "rails.calls.create"
-        #  clients = io.sockets.clients()
-        #  for client in clients
-        #    client.emit msg,
-        #      data
-        #  break
+  sub.psubscribe rails_env + ":*"
 
-        #when "rails.stats.create"
-        #  clients = io.sockets.clients()
-        #  for client in clients
-        #    client.emit msg,
-        #      data
-        #  break
+], (err, config) ->
+  console.error err
+  process.exit()
 
-        #when "d"
-        #  console.log 'a'
+update_sellers = (callback) ->
 
+  query = 'SELECT "somebodies".*, "deliveries_places"."name" as "place" FROM "somebodies" LEFT OUTER JOIN "deliveries_places" ON "deliveries_places"."id" = "somebodies"."place_id" WHERE "somebodies"."role" IN (\'manager\', \'admin\') ORDER BY "somebodies"."id" ASC'
 
-  sub.psubscribe "*"
+  db.query query, (err, result) ->
+
+    if err?
+      callback err
+    else
+      sellers = _.map result.rows, (seller) ->
+        App.get_user_data seller
+
+      broadcast_sellers()
+
+      callback null
+
+broadcast_sellers = ->
+
+  for connection_id, connection of connections
+    connection.send 'response sellers', sellers
+
+App.get_user_data = (row) ->
+
+  cached_profile = JSON.parse(row.cached_profile)
+  id = row.id
+  post = row.post
+  name = cached_profile?.names?[0]?['name']
+  surname = cached_profile?.names?[0]?['surname']
+  patronymic = cached_profile?.names?[0]?['patronymic']
+  phone = cached_profile?.phones?[0]?['value']
+  online = row.online
+
+  # Роль
+  if row.role in ['manager', 'admin']
+    role = 'seller'
+  else
+    role = 'buyer'
+
+  place = row.place
+
+  data =
+    id: id
+    place: place
+    post: post
+    name: name
+    surname: surname
+    patronymic: patronymic
+    phone: phone
+    role: role
+    online: online
+
+  data
+
+debug_globals = ->
+
+  data = 
+    users: users
+    connections: _.keys(connections)
+    sellers: sellers
+
+  console.log 'DEBUG'.grey
+  console.log data
+  console.log ''
+
+  #for connection_id, connection of connections
+  #  data = 
+  #    users: users
+  #    connections: _.keys(connections)
+  #    sellers: sellers
+
+  #  connection.send data
