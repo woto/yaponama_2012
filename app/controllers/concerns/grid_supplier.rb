@@ -11,7 +11,7 @@ module GridSupplier
 
       id(columns_hash)
 
-      columns_hash['cached_main_profile'] = {
+      columns_hash['cached_profile'] = {
         :type => :string
       }
 

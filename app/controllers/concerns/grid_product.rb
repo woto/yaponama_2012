@@ -8,9 +8,12 @@ module GridProduct
 
     private
 
-    def redirect_to_relative_path status, order = nil
-      # TODO должно редиректиться на заказ
-      redirect_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => status, :order_id => (@order && @order.id || params[:order_id]), :user_id => params[:user_id])
+    def redirect_to_relative_path status, return_path, order = nil
+      if order || params[:order_id]
+        redirect_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'all', :order_id => (order.try(:token) || params[:order_id]), :user_id => params[:user_id], return_path: params[:return_path])
+      else
+        redirect_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => status, :user_id => params[:user_id], return_path: params[:return_path])
+      end
     end
 
     def adjust_columns!(columns_hash)
@@ -97,13 +100,10 @@ module GridProduct
 
       creator_id(columns_hash)
 
-      if admin_zone?
-        unless params[:order_id]
-          columns_hash['cached_order'] = {
-            :type => :set,
-            :set => Order.all.map{|item| [item[:token], item[:token]]},
-          }
-        end
+      if !params[:order_id]
+        columns_hash['cached_order'] = {
+          :type => :string
+        }
       end
 
       supplier_id(columns_hash)
@@ -112,13 +112,13 @@ module GridProduct
 
     def additional_conditions
 
-      if @user
-        @items = @items.where(:somebody_id => @user.id)
+      if @somebody
+        @items = @items.where(:somebody_id => @somebody.id)
       end
 
-      if @supplier
-        @items = @items.where(:supplier_id => @supplier.id)
-      end
+      #if @supplier
+      #  @items = @items.where(:supplier_id => @supplier.id)
+      #end
 
       case params[:status]
         when *Rails.configuration.products_status.select{|k, v| v['real']}.keys

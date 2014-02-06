@@ -47,13 +47,8 @@ module GridPage
       @grid.visible_id = '1'
       @grid.visible_path = '1'
       @grid.visible_title = '1'
-      @grid.visible_keywords = '1'
-      @grid.visible_description = '1'
-      @grid.visible_robots = '1'
-      @grid.visible_content = '1'
       @grid.visible_creator_id = '1'
       @grid.visible_updated_at = '1'
-
     end
 
   end

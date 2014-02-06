@@ -12,6 +12,18 @@ module GridOrder
         :type => :string
       }
 
+      columns_hash['delivery_place_id'] = {
+        :type => :string
+      }
+
+      columns_hash['delivery_variant_id'] = {
+        :type => :string
+      }
+
+      columns_hash['delivery_option_id'] = {
+        :type => :string
+      }
+
       columns_hash['postal_address_id'] = {
         :type => :belongs_to,
         :belongs_to => PostalAddress,
@@ -26,29 +38,16 @@ module GridOrder
         :type => :number,
       }
 
-      columns_hash['status'] = {
-        :type => :set,
-        :set => Hash[*Rails.configuration.orders_status.map{|k, v| [v['title'], k]}.flatten],
-      }
-
       #columns_hash['delivery_id'] = {
       #  :type => :belongs_to,
       #  :belongs_to => Delivery,
       #}
 
-
-      columns_hash['profile_id'] = {
-        :type => :belongs_to,
-        :belongs_to => Profile,
-      }
-
       columns_hash['cached_profile'] = {
         :type => :string,
       }
 
-      if admin_zone?
-        phantom(columns_hash)
-      end
+      phantom(columns_hash)
 
       columns_hash['legal'] = {
         :type => :boolean,
@@ -83,9 +82,22 @@ module GridOrder
 
       creator_id(columns_hash)
 
+      columns_hash['status'] = {
+        :type => :set,
+        :set => Hash[*Rails.configuration.orders_status.map{|k, v| [v['title'], k]}.flatten],
+      }
+
+
     end
 
     def set_preferable_columns
+      
+      @grid.visible_delivery_place_id = '1'
+      @grid.visible_delivery_variant_id = '1'
+      @grid.visible_delivery_option_id = '1'
+      @grid.visible_postal_address_id = '1'
+      #@grid.visible_ = '1'
+      #@grid.visible_ = '1'
 
       @grid.visible_token = '1'
       #@grid.delivery_id = '1'

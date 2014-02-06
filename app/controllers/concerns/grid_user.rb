@@ -108,11 +108,11 @@ module GridUser
         :type => :string
       }
 
-      columns_hash['main_profile_id'] = {
+      columns_hash['profile_id'] = {
         :type => :string
       }
 
-      columns_hash['cached_main_profile'] = {
+      columns_hash['cached_profile'] = {
         :type => :string
       }
 
@@ -194,7 +194,7 @@ module GridUser
 
     def set_preferable_columns
       @grid.visible_id = '1'
-      @grid.visible_cached_main_profile = '1'
+      @grid.visible_cached_profile = '1'
       @grid.visible_cached_credit = '1'
       @grid.visible_cached_debit = '1'
       @grid.visible_stats_count = '1'
