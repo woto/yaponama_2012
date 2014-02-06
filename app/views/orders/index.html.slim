@@ -1,29 +1,20 @@
 = somebody_tabs do
-  = form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f|
 
-    h2.top-space.bottom-space
-      ' Заказы
-      = order_status_decorator(params[:status])
+  - title_index
+  - @meta_title_small = Rails.configuration.orders_status[params[:status] || 'all']['full_title']
+  - @meta_title_lead = "Вы просматриваете #{Rails.configuration.orders_status[params[:status] || 'all']['hint']}"
 
-    div style="border: 1px solid #ddd"
-      #toolbar.form-actions.clearfix style="margin-top: 0; border-top: 0"
+  = breadcrumb true do |b|
+    = b.item @meta_title
 
-        .pull-right
+  = title_index
 
-          a href="#columns" role="button" class="btn" data-toggle="modal" title="Настроить отображаемые столбцы" rel="tooltip"
-            = icon 'columns'
+  = twbs_form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f|
 
-
-        .pull-right.right-space
-
-          = link_to smart_route({:prefix => [:transactions], :postfix => [@resource_class.to_s.underscore.pluralize]}, :user_id => params[:user_id] ), data: {toggle: "tooltip"}, title: "#{ t('.transactions', :default => t("helpers.links.transactions")) }",  :class => "btn", rel: 'tooltip' do
-            = icon 'time'
-
-        <div id="toolbar-per-page" class="pull-right right-space">
-          = render 'grid_toolbar_per_page'
-        </div>
-
-        .pull-left
-          = render :partial => "grid_toolbar_selected"
-
-      = render :partial => 'grid'
+    = panel 'default' do |p|
+      = p.heading do
+        = render "head"
+      = p.body do
+        = render 'grid', f: f
+      #grid-footer
+        = render 'grid_footer', f: f, p: p

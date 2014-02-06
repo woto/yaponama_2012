@@ -1,0 +1,48 @@
+<%= somebody_tabs do %>
+
+  <% @meta_title = "Выбор получателя" %>
+  <% @meta_title_lead = "Укажите контактное лицо получающее товар. Пожалуйста отнеситесь к заполнению внимательно, т.к. часто почтовые и транспортные службы не позволяют менять получателя, либо эта услуга платная." %>
+
+  <%= breadcrumb true do |b| %>
+    <%= b.item "Заказ № #{ @resource.token}",  polymorphic_path([*jaba3, @resource]) %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= page_header %>
+
+  <%= row do %>
+
+    <div class="col-md-7">
+
+      <%= twbs_form_for @resource, url: url_for(action: :update) do |f| %>
+
+        <% content_for :form_error do %>
+          <%= f.error_notification %>
+        <% end %>
+
+        <%= f.hidden_field :profile_type, value: 'hack' %>
+
+        <%= panel 'primary' do |p| %>
+          <%= p.heading do %>
+            <%= p.title do %>
+              Получатель
+            <% end %>
+          <% end %>
+          <%= p.body do %>
+            <%= render 'payments/profiles', f:f %>
+          <% end %>
+        <% end %>
+
+        <%= hidden_field_tag :return_path, params[:return_path] %>
+
+        <%= f.twbs_submit @resource.phantom? ? 'Продолжить' : 'Сохранить' %>
+
+        <%= f.twbs_hidden_field :somebody_id %>
+
+      <% end %>
+
+    </div>
+
+  <% end %>
+
+<% end %>
