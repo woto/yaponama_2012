@@ -1,8 +1,10 @@
 <%= row do %>
-  <div class="col-md-8">
+  <%= c1 do %>
     <%= twbs_form_for @resource, :url => [(admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user), @resource] do |f| %>
 
-      <%= f.error_notification %>
+      <% content_for :form_error do %>
+        <%= f.error_notification %>
+      <% end %>
 
       <%= f.alert_danger do %>
         <%= f.error(:base) %>
@@ -13,5 +15,5 @@
       <%= f.twbs_submit %>
 
     <% end %>
-  </div>
+  <% end %>
 <% end %>

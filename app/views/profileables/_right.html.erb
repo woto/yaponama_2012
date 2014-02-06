@@ -1,34 +1,5 @@
 <% model_class = User %>
 
-<h4 class="profileable-category">
-  <div>
-    <%= icon 'money' %>
-    Деньги
-  </div>
-</h4>
-
-<%# В РАБОТЕ %>
-<div class="profileable-item bottom-space-none">
-  В работе: <%= number_to_currency @somebody.cached_credit, :precision => 0 %>
-  <div class="profileable-item-controls">
-    <% namespace = admin_zone? ? [:admin, @somebody] : [:user] %>
-    <%= link_to polymorphic_path([:status, *namespace, :products], :status => 'active') , class: "btn btn-warning btn-sm" do %>
-      <%= icon 'edit' %>
-    <% end %>
-  </div>
-</div>
-
-<%# НА СЧЕТУ %>
-<div class="profileable-item bottom-space-none">
-  На счету: <%= number_to_currency @somebody.cached_debit, :precision => 0 %>
-  <div class="profileable-item-controls">
-    <% namespace = admin_zone? ? [:admin, @somebody] : [:user] %>
-    <%= link_to [:new, *namespace, :cashes], class: "btn btn-warning btn-sm" do %>
-      <%= icon 'edit' %>
-    <% end %>
-  </div>
-</div>
-
 <%
     array = [
       {title: 'Конт. лицо', icon: 'user', assoc: 'profile'},
@@ -46,12 +17,12 @@
         <%= item[:title] %>
       </div>
     <% end %>
-    <%= link_to [:new, (admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user), item[:assoc]], :class => "btn btn-sm btn-primary profileable-category-add" do %>
+    <%= link_to [:new, *jaba3, item[:assoc]], :class => "btn btn-sm btn-primary profileable-category-add" do %>
       <%= icon 'plus' %>
     <% end %>
   </h4>
 
-  <% @somebody.send(item[:assoc].pluralize).each do |partial| %>
+  <% @somebody.send(item[:assoc].pluralize).select(&:persisted?).each do |partial| %>
     <div class="profileable-item">
       <%= render :partial => "profileables/shows/#{partial.class.name.underscore}", :locals => {partial.class.name.underscore.to_sym => partial} %>
       <%= render :partial => 'profileables/shows/notes', :locals => {resource: partial} %>
@@ -59,7 +30,39 @@
     </div>
   <% end %>
 
+
 <% end %>
+
+<h4 class="profileable-category">
+  <div>
+    <%= icon 'money' %>
+    Деньги
+  </div>
+</h4>
+
+<%# В РАБОТЕ %>
+<div class="profileable-item bottom-space-none">
+  В работе: <%= number_to_currency @somebody.cached_credit, :precision => 0 %>
+  <div class="profileable-item-controls">
+    <%# namespace = admin_zone? ? [:admin, @somebody] : [:user] %>
+    <%= link_to polymorphic_path([:status, *jaba3, :products], :status => 'active') , class: "btn btn-info btn-sm" do %>
+      <%= icon 'info-circle' %>
+    <% end %>
+  </div>
+</div>
+
+<%# НА СЧЕТУ %>
+<div class="profileable-item bottom-space-none">
+  На счету: <%= number_to_currency @somebody.cached_debit, :precision => 0 %>
+  <div class="profileable-item-controls">
+    <%# namespace = admin_zone? ? [:admin, @somebody] : [:user] %>
+    <%= link_to [:new, *jaba3, :cashes], class: "btn btn-primary btn-sm" do %>
+      <%= icon 'plus' %>
+    <% end %>
+  </div>
+</div>
+
+
 
 <%# СОЦ СЕТИ %>
 <h4 class="profileable-category">
