@@ -1,0 +1,23 @@
+<%= somebody_tabs do %>
+  <% @meta_title_lead = "Выберите интересующий вас вопрос. Если ваш вопрос отсутствует обратитесь в службу поддержки." %>
+  <%= title_index %>
+
+  <div class="panel-group" id="faqs">
+    <% Faq.all.each do |faq| %>
+      <%= panel 'primary' do |p| %>
+        <%= p.heading do %>
+          <%= p.title do %>
+            <a data-toggle="collapse" data-parent="#faqs" href="#faq-<%= faq.id %>">
+              <%= faq.question %>
+            </a>
+          <% end %>
+        <% end %>
+        <div id="faq-<%= faq.id %>" class="panel-collapse collapse">
+          <div class="panel-body">
+            <%== faq.answer %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
