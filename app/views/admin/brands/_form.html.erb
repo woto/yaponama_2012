@@ -1,8 +1,8 @@
-<%= row do %>
+<%= twbs_form_for [:admin, @resource] do |f| %>
 
-  <div class="col-md-8">
+  <%= row do %>
 
-    <%= twbs_form_for [:admin, @resource] do |f| %>
+    <%= c1 do %>
 
       <%= f.twbs_text_field :name, asterisk: true%>
 
@@ -16,13 +16,17 @@
 
       <%= f.twbs_file_field :image %>
       <%= f.twbs_text_field :rating %>
-      <%= f.twbs_text_area :content, :class => "ckeditor-extended" %>
       <%= f.twbs_check_box :catalog %>
-
-      <%= f.twbs_submit %>
 
     <% end %>
 
-  </div>
+  <% end %>
+
+  <%= row do %>
+    <div class="col-md-12">
+      <%= f.twbs_text_area :content, :class => "ckeditor-extended" %>
+      <%= f.twbs_submit %>
+    </div>
+  <% end %>
 
 <% end %>

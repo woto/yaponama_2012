@@ -1,16 +1,18 @@
 <%= somebody_tabs do %>
 
-  <% @meta_title = "Способы оплаты" %>
-  <%= page_header %>
-
-
   <%= row do %>
 
-    <div class="col-md-7">
+    <%= c1 do %>
+
+      <% @meta_title = "Способы оплаты" %>
+      <% @meta_title_lead = 'Если вы не пользуетесь электронными деньгами, то можете выбрать вариант оплаты Сбербанк и оплатить наличными в ближайшем отделении банка.' %>
+      <%= page_header %>
 
       <%= twbs_form_for @resource, url: user_payments_path do |f| %>
 
-        <%= f.error_notification %>
+        <% content_for :form_error do %>
+          <%= f.error_notification %>
+        <% end %>
 
         <%= f.form_group :payment_type, class: 'clearfix' do %>
 
@@ -18,7 +20,7 @@
             <% Rails.configuration.payment_systems.each do |k, v| %>
               <%= f.label :payment_type, value: k, class: 'payment' do %>
                 <%= f.radio_button :payment_type, k, data: v, rel: 'radio' %>
-                <%= image_tag "/assets/payment/#{k}.gif", alt: k, style: "width: 125px;" %>
+                <%= image_tag "/assets/payment/#{k}.gif", alt: k, width: '110px' %>
               <% end %>
             <% end %>
           </div>
@@ -31,7 +33,7 @@
 
         <%= f.twbs_text_field :amount, label: 'Вносимая сумма в руб.' %>
 
-        <%= panel 'default', id: 'payment-payer', class: 'payment-block' do |p| %>
+        <%= panel 'primary', id: 'payment-payer', class: 'payment-block' do |p| %>
           <%= p.heading do %>
             <%= p.title do %>
               Плательщик
@@ -42,7 +44,7 @@
           <% end %>
         <% end %>
 
-        <%= panel 'default', id: 'payment-payer-address', class: 'payment-block' do |p| %>
+        <%= panel 'primary', id: 'payment-payer-address', class: 'payment-block' do |p| %>
           <%= p.heading do %>
             <%= p.title do %>
               Адрес плательщика
@@ -59,13 +61,9 @@
 
       <% end %>
 
-    </div>
+    <% end %>
 
     <div class="col-md-4">
-      <div class="text-info top-space">
-        <strong>Подсказка</strong><br />
-        Если вы не пользуетесь электронными деньгами, то можете выбрать вариант оплаты Сбербанк и оплатить наличными в ближайшем отделении банка.
-      </div>
     </div>
 
   <% end %>

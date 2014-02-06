@@ -2,7 +2,7 @@
 
   <div class="col-sm-7">
 
-    <%= twbs_form_for @resource, :url => url_for(:action => :update) do |f| %>
+    <%= twbs_form_for @resource, :url => url_for(:action => :update, return_path: params[:return_path]) do |f| %>
 
       <%= f.twbs_password_field :password, placeholder: "Придумайте пароль не короче 6 символов" %>
       <%= f.twbs_password_field :password_confirmation, placeholder: "Повторите ввод пароля" %>

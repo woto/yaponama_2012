@@ -1,94 +1,113 @@
-<nav class="navbar navbar-default navbar-static-top bottom-space-none" role="navigation">
+<nav class="navbar navbar-default navbar-static-top">
 
-  <div class="container">
+  <div role="navigation">
 
-    <div class="navbar-header">
+    <div class="container">
 
-      <button class="navbar-toggle ignoredirty" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <div class="navbar-header">
 
-        <span class="sr-only">Навигация</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <button class="navbar-toggle ignoredirty" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
 
-      </button>
+          <span class="sr-only">Навигация</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
 
-      <a class="navbar-brand" href="/">
-        <%= image_tag "logo.png", style: "width: 186px; height: 38px" %>
-      </a>
+        </button>
 
-    </div> <!-- /.navbar-header -->
+        <a class="navbar-brand" href="/">
+          <%= image_tag "logo.png", style: "width: 186px; height: 38px" %>
+        </a>
 
-    <div class="navbar-collapse collapse navbar-responsive-collapse">
+      </div> <!-- /.navbar-header -->
 
-      <%= render 'common_search_form' %>
+      <div class="navbar-collapse collapse navbar-responsive-collapse">
 
-      <ul class="nav navbar-nav navbar-right">
+        <%= render 'common_search_form' %>
 
-        <li class="<%= highlight_active([:controller => '/products', :status => 'incart']) %>">
-          <%= link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do %>
-            <%= icon 'shopping-cart' %> 
-            <% count = @somebody.products.where(:status => 'incart').count %>
-            Корзина <span id="products_incart" class="badge"><%= count if count > 0 %></span>
-          <% end %>
-        </li>
+        <ul class="nav navbar-nav navbar-right">
 
-        <%= dropdown class: highlight_active2(['/login', '/register', '/password_reset']) do |dd| %>
-
-          <%= dd.toggle do %>
-            <%= icon 'user' %>
-            <% if @user.role != 'guest' %>
-              <%= @user.name %>
-            <% else %>
-              Личный кабинет
+          <li class="<%= highlight_active([:controller => '/products', :status => 'incart']) %>">
+            <%= link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do %>
+              <%= icon 'shopping-cart' %> 
+              <% count = current_user.products.where(:status => 'incart').count %>
+              Корзина <span id="products_incart" class="badge"><%= count if count > 0 %></span>
             <% end %>
-            <%= caret %>
-          <% end %>
+          </li>
 
-          <%= dd.menu do %>
-            <% if current_user.role == 'guest' %>
-              <li> <%= link_to "Вход на сайт", login_path %> </li>
-              <li> <%= link_to "Регистрация", register_path %> </li>
-              <%= divider %>
-              <li> <%= link_to "Забыли пароль?", password_reset_path %> </li>
-            <% else %>
-              <% if ["admin", "manager"].include? current_user.role %>
-                <li> <%= link_to "Закрытая зона", admin_path %> </li>
-                <%= divider %>
+          <%= dropdown class: highlight_active2([/\/login/, /\/register/, /\/password_reset/]) do |dd| %>
+
+            <%= dd.toggle do %>
+              <%= icon 'user' %>
+              <% if current_user.role != 'guest' %>
+                <%= current_user.name %>
+              <% else %>
+                Вход
               <% end %>
-              <li> <%= link_to "Личный кабинет", user_path %> </li>
-              <li> <%= link_to "Выход", logout_path, :method => :delete %> </li>
+              <%= caret %>
             <% end %>
+
+            <%= dd.menu do %>
+              <% if current_user.role == 'guest' %>
+                <li> <%= link_to "Вход на сайт", login_path %> </li>
+                <li> <%= link_to "Регистрация", register_path %> </li>
+                <%= divider %>
+                <li> <%= link_to "Забыли пароль?", password_reset_path %> </li>
+              <% else %>
+                <% if ["admin", "manager"].include? current_user.role %>
+                  <li> <%= link_to "Закрытая зона", admin_path %> </li>
+                  <%= divider %>
+                <% end %>
+                <li> <%= link_to "Личный кабинет", user_path %> </li>
+                <li> <%= link_to "Выход", logout_path, :method => :delete %> </li>
+              <% end %>
+            <% end %>
+
           <% end %>
 
-        <% end %>
+        </ul>
 
-      </ul>
+      </div>
 
-    </div>
+    </div> <!-- /.container -->
 
-  </div> <!-- /.container -->
+  </div>
+
+
+  <div id="nav-second" class="navbar-inverse">
+
+    <div class="container">
+
+      <div class="collapse navbar-collapse navbar-responsive-collapse">
+
+        <ul class="nav navbar-nav text-sm">
+
+          <%= content_tag :li, class: highlight_active2(/\/news/) do %>
+            <%= link_to "Новости компании", "/news" %>
+          <% end %>
+
+          <%= content_tag :li, class: highlight_active2(/\/discount/) do %>
+            <%= link_to "Акции и бонусы", "/discount" %>
+          <% end %>
+
+          <%= content_tag :li, class: highlight_active2(/\/user\/payments/) do %>
+            <%= link_to "Способы оплаты", new_user_payment_path %>
+          <% end %>
+
+          <%= content_tag :li, class: highlight_active([:controller => "/deliveries"]) do %>
+            <%= link_to "Доставка и самовывоз", deliveries_path %>
+          <% end %>
+
+          <%= content_tag :li, class: highlight_active2(/\/faqs/) do %>
+            <%= link_to "Частые вопросы", "/faqs" %>
+          <% end %>
+
+        </ul>
+
+      </div>
+
+    </div> <!-- /.container -->
+
+  </div>
 
 </nav>
-
-
-
-<div id="nav-second" class="navbar navbar-inverse navbar-static-top">
-
-  <div class="container">
-
-    <div class="collapse navbar-collapse navbar-responsive-collapse">
-      <ul class="nav navbar-nav text-sm">
-        <li> <%= link_to "Новости компании", "#" %> </li>
-        <li> <%= link_to "Акции и бонусы", "#" %> </li>
-        <li class="<%= highlight_active([:controller => "/payments"]) %>">
-          <%= link_to "Способы оплаты", payments_path %>
-        </li>
-        <li class="<%= highlight_active([:controller => "/deliveries"]) %>">
-          <%= link_to "Доставка и самовывоз", deliveries_path %>
-        </li>
-        <li> <%= link_to "Частые вопросы", "#" %> </li>
-      </ul>
-    </div>
-   </div>
-</div>

@@ -1,0 +1,126 @@
+<%= modal :id => 'modal_form' do |m| %>
+
+  <%= m.header do |h| %>
+    <%= h.close %>
+    <%= h.title do %>
+      <%= @resource.persisted? ? @resource.to_label : 'Товар' %>
+    <% end %>
+  <% end %>
+
+  <%= m.body do %>
+
+    <% readonly = { :readonly => (admin_zone? ? false : true) } %>
+
+    <% if params[:column] == 'catalog_number' || params[:column].blank? %>
+      <% if admin_zone? %>
+        <%= f.twbs_text_field :catalog_number, asterisk: true %>
+      <% else %>
+        <%= f.hidden_field :catalog_number %>
+      <% end %>
+    <% end %>
+
+    <% if params[:column] == 'hide_catalog_number' || params[:column].blank? %>
+      <%= f.twbs_check_box :hide_catalog_number if admin_zone? %>
+    <% end %>
+
+    <% if params[:column] == 'cached_brand' || params[:column].blank? %>
+      <% if admin_zone? %>
+        <%= f.fields_for :brand, f.object.brand || f.object.build_brand do |b| %>
+          <%= f.form_group :brand do %>
+            <%= b.twbs_select2 :name, readonly.merge(rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, asterisk: true) %>
+            <%= f.error(:brand) %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= f.fields_for :brand, f.object.brand || f.object.build_brand do |b| %>
+          <%= b.hidden_field :name %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if params[:column] == 'short_name' || params[:column].blank? %>
+      <% if admin_zone? %>
+        <%= f.twbs_text_field :short_name, readonly %>
+      <% else %>
+        <%= f.hidden_field :short_name %>
+      <% end %>
+    <% end %>
+
+    <% if params[:column] == 'quantity_ordered' || params[:column].blank? %>
+      <%= f.twbs_text_field :quantity_ordered, asterisk: true %>
+    <% end %>
+
+    <% if params[:column] == 'buy_cost' || params[:column].blank? %>
+      <% if admin_zone? %>
+        <%= f.twbs_text_field :buy_cost, readonly.merge(asterisk: true) %>
+      <% else %>
+        <%= f.twbs_hidden_field :buy_cost %>
+      <% end %>
+    <% end %>
+
+    <% if params[:column] == 'sell_cost' || params[:column].blank? %>
+      <% if admin_zone? %>
+        <%= f.twbs_text_field :sell_cost, readonly.merge(asterisk: true) %>
+      <% else %>
+        <%= f.twbs_hidden_field :sell_cost %>
+      <% end %>
+    <% end %>
+
+    <% if params[:column] == 'long_name' || params[:column].blank? %>
+      <% if admin_zone? %>
+        <%= f.twbs_text_area :long_name, readonly.merge(rows: 4) %>
+      <% else %>
+        <%= f.twbs_hidden_field :long_name %>
+      <% end %>
+    <% end %>
+
+    <% if params[:column] == 'quantity_available' || params[:column].blank? %>
+      <% if admin_zone? %>
+        <%= f.twbs_text_field :quantity_available, readonly %>
+      <% else %>
+        <%= f.twbs_hidden_field :quantity_available %>
+      <% end %>
+    <% end %>
+
+    <% if params[:column] == 'probability' || params[:column].blank? %>
+      <% if admin_zone? %>
+        <%= f.twbs_text_field :probability, readonly %>
+      <% else %>
+        <%= f.twbs_hidden_field :probability %>
+      <% end %>
+    <% end %>
+
+    <% if params[:column] == 'min_days' || params[:column].blank? %>
+      <% if admin_zone? %>
+        <%= f.twbs_text_field :min_days, readonly %>
+      <% else %>
+        <%= f.twbs_hidden_field :min_days %>
+      <% end %>
+    <% end %>
+
+    <% if params[:column] == 'max_days' || params[:column].blank? %>
+      <% if admin_zone? %>
+        <%= f.twbs_text_field :max_days, readonly %>
+      <% else %>
+        <%= f.twbs_hidden_field :max_days %>
+      <% end %>
+    <% end %>
+
+    <% if params[:column] == 'notes' || params[:column].blank? %>
+      <%= f.twbs_text_area :notes, rows: 4 %>
+    <% end %>
+
+    <% if params[:column] == 'notes_invisible' || params[:column].blank? %>
+      <% if admin_zone? %>
+        <%= f.twbs_text_area :notes_invisible, rows: 4 %>
+      <% end %>
+    <% end %>
+
+  <% end %>
+
+  <%= m.footer do |footer| %>
+    <%= footer.twbs_submit %>
+  <% end %>
+
+<% end %>
+

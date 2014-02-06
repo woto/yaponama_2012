@@ -1,0 +1,16 @@
+<%= render 'aaa' %>
+
+(function() {
+
+  App = typeof exports !== "undefined" && exports !== null ? exports : this;
+
+  $(function() {
+
+    $('#assa-result').show();
+    $('#assa-block').hide();
+
+    App.calcRoute('город Москва, Москва, <%= @resource.postal_address.street %> <%= @resource.postal_address.house %>');
+
+  })
+
+}).call(this);

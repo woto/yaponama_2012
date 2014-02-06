@@ -1,53 +1,52 @@
-= panel 'default' do |p|
+= f.twbs_collection_radio_buttons :vin_or_frame, [['VIN код', 'vin'], ['FRAME код', 'frame']], :last, :first, { variation: 'inline', label: false }, rel: 'radio radio-vin-or-frame'
+= f.twbs_text_field :vin, label: false
+= f.twbs_text_field :frame, label: false
 
-  = p.heading do 
-    = p.title { 'Основные сведения' }
+= f.fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b|
+  = f.form_group :brand do
+    = b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, asterisk: true
+    = f.error(:brand)
 
-  = p.body do
-    = f.twbs_collection_radio_buttons :vin_or_frame, [['VIN код', 'vin'], ['FRAME код', 'frame']], :last, :first, { variation: 'vertical', label: false }, rel: 'radio radio-vin-or-frame'
-    = f.twbs_text_field :vin
-    = f.twbs_text_field :frame
+= f.fields_for :model, f.object.model || f.object.build_model, include_id: false do |m|
+  = f.form_group :model do
+    = m.twbs_select2 :name, rel: 'select2-model', data: {"true-id" => f.object.model_id}, asterisk: true
+    = f.error(:model)
 
-    = f.fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b|
-      = f.form_group :brand do
-        = b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, asterisk: true
-        = f.error(:brand)
+= f.fields_for :generation, f.object.generation || f.object.build_generation, include_id: false do |g|
+  = f.form_group :generation do
+    = g.twbs_select2 :name, rel: 'select2-generation', data: {"true-id" => f.object.generation_id}
+    = f.error(:generation)
 
-    = f.fields_for :model, f.object.model || f.object.build_model, include_id: false do |m|
-      = f.form_group :model do
-        = m.twbs_select2 :name, rel: 'select2-model', data: {"true-id" => f.object.model_id}, asterisk: true
-        = f.error(:model)
+= f.fields_for :modification, f.object.modification || f.object.build_modification, include_id: false do |m|
+  = f.form_group :modification do
+    = m.twbs_select2 :name, rel: 'select2-modification', data: {"true-id" => f.object.modification_id}
+    = f.error(:modification)
 
-    = f.fields_for :generation, f.object.generation || f.object.build_generation, include_id: false do |g|
-      = f.form_group :generation do
-        = g.twbs_select2 :name, rel: 'select2-generation', data: {"true-id" => f.object.generation_id}
-        = f.error(:generation)
+p.text-muted
+  'В редких случаях нам необходимо знать дополнительные данные вашего автомобиля.
 
-    = f.fields_for :modification, f.object.modification || f.object.build_modification, include_id: false do |m|
-      = f.form_group :modification do
-        = m.twbs_select2 :name, rel: 'select2-modification', data: {"true-id" => f.object.modification_id}
-        = f.error(:modification)
-
-= panel 'default' do |p|
+= panel 'primary' do |p|
 
   = p.heading do
-    = p.title { 'Дополнительные сведения' }
+    = p.title do
+      <a data-toggle="collapse" href="#additional-car-info">Дополнительные сведения</a>
 
-  = p.body
-    = f.twbs_text_field :god
-    = f.twbs_text_field :period
-    = f.twbs_text_field :dvigatel
-    = f.twbs_text_field :tip
-    = f.twbs_text_field :moschnost
-    = f.twbs_text_field :privod
-    = f.twbs_text_field :tip_kuzova
-    = f.twbs_text_field :kpp
-    = f.twbs_text_field :kod_kuzova
-    = f.twbs_text_field :kod_dvigatelya
-    = f.twbs_text_field :rinok
-    = f.twbs_text_field :komplektaciya
-    = f.twbs_text_field :dverey
-    = f.twbs_text_field :rul
-    = f.twbs_text_field :car_number
-
-= render :partial => 'profileables/forms/shared/notes', :locals => {:f => f}
+  <div id="additional-car-info" class="panel-collapse collapse">
+    = p.body
+      = f.twbs_text_field :god
+      = f.twbs_text_field :period
+      = f.twbs_text_field :dvigatel
+      = f.twbs_text_field :tip
+      = f.twbs_text_field :moschnost
+      = f.twbs_text_field :privod
+      = f.twbs_text_field :tip_kuzova
+      = f.twbs_text_field :kpp
+      = f.twbs_text_field :kod_kuzova
+      = f.twbs_text_field :kod_dvigatelya
+      = f.twbs_text_field :rinok
+      = f.twbs_text_field :komplektaciya
+      = f.twbs_text_field :dverey
+      = f.twbs_text_field :rul
+      = f.twbs_text_field :car_number
+      = render :partial => 'profileables/forms/shared/notes', :locals => {:f => f}
+  </div>

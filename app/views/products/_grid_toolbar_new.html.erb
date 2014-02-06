@@ -1,11 +1,2 @@
-<div id="grid-toolbar-new">
-  <% if admin_zone? && @user.present? %>
-    <%= link_to url_for(:action => :new, :return_path => request.fullpath, :skip => true), :class => "btn btn-primary" do %>
-      <%= icon 'plus' %>
-    <% end %>
-  <% else %>
-    <a href="#" class="btn btn-primary disabled">
-      <%= icon 'plus' %>
-    </a>
-  <% end %>
-</div>
+<% raise 'a' %>
+TODO удалить

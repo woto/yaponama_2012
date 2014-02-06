@@ -6,19 +6,17 @@
     <%= render :partial => "/searches/results" %>
   <% end %>
 
-  <hr />
-
 <% else %>
 
   <% unless params.key? :skip %>
     <% if @c9.blank? %>
-      <h3>Вы не указали искомый каталожный номер</h3>
+      <h4>Вы не указали искомый каталожный номер</h4>
     <% else %>
-      <h3>Ничего не найдено <%= (catalog_number = @c9).present? ? "по каталожному номеру #{catalog_number}" : "" %> <%= (manufacturer = @b9).present? ? "и производителю #{manufacturer}" : ""%> <%= @r9 == '1' ? "с учетом аналогов" : "без учета аналогов"  %></h3>
+      <h4>Ничего не найдено <%= (catalog_number = @c9).present? ? "по каталожному номеру #{catalog_number}" : "" %> <%= (manufacturer = @b9).present? ? "и производителю #{manufacturer}" : ""%> <%= @r9 == '1' ? "с учетом аналогов" : "без учета аналогов"  %></h4>
 
       <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-      <h3><%= "Повторить поиск #{ link_to 'с учетом аналогов', polymorphic_path([new_or_edit, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :product], :id => @resource, :catalog_number => @c9, :manufacturer => @b9, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'ajax-search replacement-button' } <br />".html_safe if (@r9.to_i != 1) %></h3>
-      <h3><%= "Повторить поиск #{ link_to 'без указания производителя', polymorphic_path([new_or_edit, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :product], :id => @resource, :catalog_number => @c9, :replacements => @r9, :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'ajax-search search-button' } <br />".html_safe if @b9.present? %></h3>
+      <h4><%= "Повторить поиск #{ link_to 'с учетом аналогов', polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource, :catalog_number => @c9, :manufacturer => @b9, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'ajax-search replacement-button' } <br />".html_safe if (@r9.to_i != 1) %></h4>
+      <h4><%= "Повторить поиск #{ link_to 'без указания производителя', polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource, :catalog_number => @c9, :replacements => @r9, :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'ajax-search search-button' } <br />".html_safe if @b9.present? %></h4>
     <% end %>
   <% end %>
 <% end %>

@@ -1,0 +1,28 @@
+<%= render :partial => "layouts/shared/html_prefix" %>
+
+<%= render :partial => 'layouts/shared/body_prefix' %>
+
+<%= render :partial => "layouts/admin_navbar" %>
+
+<div class="container">
+
+  <%= render 'flash' %>
+
+  <%= yield :form_error %>
+
+  <%= render 'right_hand' %>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <%= render 'talk_button' %>
+      <%= yield %>
+    </div>
+  </div>
+
+  <%= render "layouts/admin_footer" %>
+
+</div>
+
+<%= render :partial => 'layouts/shared/body_suffix' %>
+
+<%= render :partial => "layouts/shared/html_suffix" %>

@@ -1,1 +1,22 @@
-<%= link_to "Просмотр", "/#{@resource.path}", class: "btn btn-primary" %>
+<% @meta_title = @resource.title %>
+
+<%= breadcrumb true do |b| %>
+  <%= b.item @meta_title %>
+<% end %>
+
+<%= page_header %>
+
+<div style="background: #F5F5F5; margin: 10px 0; padding: 10px">
+  <%== @resource.content %>
+</div>
+
+<%= link_to "Публичный просмотр", "/#{@resource.path}", class: "btn btn-primary", target: "_blank" %>
+
+<%= link_to url_for(action: :new, return_path: request.fullpath), class: "btn btn-primary" do %>
+  <%= icon 'plus' %>
+<% end %>
+
+<br />
+<br />
+
+<%= render 'smart_show' %>

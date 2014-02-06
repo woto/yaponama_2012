@@ -1,30 +1,31 @@
-javascript:
-  $(function(){
-    //CKEDITOR.config.floatSpacePinnedOffsetY = 35;
-    //CKEDITOR.config.extraPlugins = 'timestamp,abbr';
-  })
+= somebody_tabs do
+  javascript:
+    $(function(){
+      //CKEDITOR.config.floatSpacePinnedOffsetY = 35;
+      //CKEDITOR.config.extraPlugins = 'timestamp,abbr';
+    })
 
-= page_header
+  = page_header
 
-/ TODO bro sanitize check?!
-#editable.editable 
-  == @resource.content
+  / TODO bro sanitize check?!
+  #editable.editable 
+    == @resource.content
 
-= form_tag [:admin, @resource], :method => :put, :remote => true do
-  = hidden_field_tag 'page[content]', '', :id => :content
+  = form_tag [:admin, @resource], :method => :put, :remote => true do
+    = hidden_field_tag 'page[content]', '', :id => :content
+    hr
+    button#edit.btn.btn-warning Редактировать
+    |  
+    button#save.btn.btn-primary Сохранить  
+    |  
+    button#cancel.btn.btn-default Отмена  
+
   hr
-  button#edit.btn Редактировать
-  |  
-  button#save.btn.btn-primary Сохранить  
-  |  
-  button#cancel.btn Отмена  
-
-hr
 
 
 
-h3 
-  |  Комментарии 
-  i.icon-comment  
-== render :template => 'comments/index'
-== render 'comments/form'
+  h3 
+    |  Комментарии 
+    i.icon-comment  
+  == render :template => 'comments/index'
+  == render 'comments/form'

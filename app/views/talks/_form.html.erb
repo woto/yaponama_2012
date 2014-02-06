@@ -29,7 +29,7 @@
 
             <%= row do %>
 
-              <div class="col-sm-5">
+              <div class="col-xs-5">
 
                 <% if profile.object.emails.empty? %>
                   <% profile.object.emails.new %>
@@ -41,7 +41,7 @@
 
               </div>
 
-              <div class="col-sm-2 text-center">
+              <div class="col-xs-2 text-center">
 
                 <div class="form-horizontal">
                   <%= f.form_group do %>
@@ -51,7 +51,7 @@
 
               </div>
 
-              <div class="col-sm-5">
+              <div class="col-xs-5">
 
                 <% if profile.object.phones.empty? %>
                   <% profile.object.phones.new %>
@@ -107,8 +107,7 @@
 
         <div class="btn-group dropup pull-left">
 
-          <%= f.button :button, id: "talk-submit", class: "btn btn-primary", rel: "tooltip", data: {container: '#myModal'}, title: "Ctrl+Enter для отправки" do %>
-            <%= icon 'comments' %>
+          <%= f.button :button, id: "talk-submit", class: "btn btn-primary", rel: "tooltip", data: {container: '#myModal', disable_with: 'Отправить'}, title: "Ctrl+Enter для отправки" do %>
             Отправить
           <% end %>
 

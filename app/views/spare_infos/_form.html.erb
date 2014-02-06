@@ -2,18 +2,18 @@
 
   <%= row do %>
 
-    <div class="col-md-8">
+    <%= c1 do %>
 
-        <%= f.twbs_text_field :catalog_number %>
+      <%= f.twbs_text_field :catalog_number %>
 
-        <%= f.fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b| %>
-          <%= f.form_group :brand do %>
-            <%= b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, asterisk: true %>
-            <%= f.error(:brand) %>
-          <% end %>
+      <%= f.fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b| %>
+        <%= f.form_group :brand do %>
+          <%= b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, asterisk: true %>
+          <%= f.error(:brand) %>
         <% end %>
+      <% end %>
 
-    </div>
+    <% end %>
 
   <% end %>
 

@@ -1,0 +1,26 @@
+<% selected = @items.selected(@grid.item_ids) %>
+
+<% sell_cost = 0 %>
+<% buy_cost = 0 %>
+<% products = 0 %>
+<% max_days = 0 %>
+<% selected.each do |p| %>
+  <% sell_cost += p.sell_cost * p.quantity_ordered %>
+  <% buy_cost += p.buy_cost * p.quantity_ordered %>
+  <% products += p.quantity_ordered %>
+  <% max_days = p.max_days if p.max_days.to_i > max_days %>
+<% end %>
+
+Выделено
+<br />
+<small>
+  <strong>Позиций:</strong> <%= selected.size %> шт.
+  <br />
+  <strong>В них товаров:</strong> <%= products %> шт.
+  <br />
+  <strong>Закупочная сумма:</strong> <%= number_to_currency(buy_cost, precision: 0) %>
+  <br />
+  <strong>Продажная сумма:</strong> <%= number_to_currency(sell_cost, precision: 0) %>
+  <br />
+  <strong>Максимальный срок:</strong> <%= max_days %> дн.
+</small>

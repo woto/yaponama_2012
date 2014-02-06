@@ -1,0 +1,13 @@
+<%= somebody_tabs do %>
+
+  <% @meta_title = "Смена пароля" %>
+
+  <%= breadcrumb false do |b| %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= page_header %>
+
+  <%= render 'form' %>
+
+<% end %>

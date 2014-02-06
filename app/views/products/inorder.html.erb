@@ -1,0 +1,47 @@
+<%= somebody_tabs do %>
+
+  <% if false %>
+  <% if @current_user.role == 'guest' %>
+    <%= alert 'info', false do %>
+      <strong>Стоп! Уже делали покупки на нашем сайте?</strong><br/>
+      <%= alert_link_to("Войдите под своей учетной записью", login_with_path) %>, чтобы воспользоваться бонусами накопительной системы.
+    <% end %>
+  <% end %>
+  <% end %>
+
+  <% @meta_title = "Оформление заказа" %>
+  <% @meta_title_lead = 'Проверьте пожалуйста еще раз выбранные вами товары и создайте новый заказ или выберите уже сделанный ранее. В нашем магазине вы можете добавлять товары в заказ, пока он имеет статус "Открыт" и не отправлен или не выдан вам.' %>
+  <%= page_header %>
+
+  <%= twbs_form_for @ic, url: smart_route({:prefix => [:inorder_action], :postfix => [:products]}, jaba) do |f| %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <% orders = @somebody.orders.where(:status => :open).load.collect { |o| [o.to_label, o.id] } %>
+        <% orders << ['Новый заказ', '-1'] %>
+        <%= f.twbs_select(:order_id, orders, {hint: 'Создайте новый заказ или выберите уже сделанный ранее.', label: 'Заказ'} ) %>
+      </div>
+    </div>
+
+    <%# TODO а есть вообще способ типа current_path(a: 'b') чтобы при это сохранялся полностью путь с query params ? %>
+
+    <%# Это колдовство для того чтобы с последующих шагов нас не перекидовывало на inorder_action и как следствие не показывало ошибку %>
+    <% if params[:action] == 'inorder_action' %>
+      <%= hidden_field_tag :return_path, params[:return_path] %>
+    <% else %>
+      <%= hidden_field_tag :return_path, url_for(primary_key: params[:primary_key], return_path: params[:return_path]) %>
+    <% end %>
+
+    <%= f.twbs_submit 'Продолжить', class:"btn-lg top-space bottom-space" %>
+
+    <%= panel 'default' do |p| %>
+      <%= p.heading {'Выбранные товары'} %>
+      <%= p.body do %>
+        <%= render :partial => 'application/grid' %>
+      <% end %>
+    <% end %>
+
+  <% end %>
+
+
+<% end %>

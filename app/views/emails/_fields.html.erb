@@ -2,7 +2,7 @@
 
   <%= f.destroyable do %>
 
-    <%= panel 'primary' do |p| %>
+    <%= panel 'primary', class: 'profile-email' do |p| %>
 
       <%= p.heading do %>
         <%= p.title do %>
@@ -15,7 +15,7 @@
 
         <%= f.twbs_text_field :value, asterisk: true, label: false %>
 
-        <%= render :partial => 'profileables/forms/shared/notes', :locals => {:f => f} %>
+        <%# render :partial => 'profileables/forms/shared/notes', :locals => {:f => f} %>
         <%= render :partial => 'profileables/forms/shared/confirms', :locals => {:f => f} %>
 
 

@@ -1,37 +1,51 @@
 <div rel="type-store">
 
-  <%= f.twbs_collection_radio_buttons :profile_type, [['new', 'Добавить нового плательщика'] ,['old', 'Выбрать ранее добавленного плательщика']], :first, :last, {variation: :vertical, label: false}, rel: 'radio radio-new-old-switcher' %>
+  <%= f.twbs_collection_radio_buttons :profile_type, [['new', 'Добавить нового'] ,['old', 'Выбрать ранее добавленного']], :first, :last, {variation: :vertical, label: false}, rel: 'radio radio-new-old-switcher' %>
 
   <div rel="old">
-    <%= f.twbs_collection_select :profile_id, @somebody.profiles.where.not(profiles: {id: nil}), :id, :to_label, { label: false, include_blank: true }, rel: "select select-and-fill"  %>
+    <%= f.twbs_collection_select :old_profile_id, @somebody.profiles.where.not(profiles: {id: nil}), :id, :to_label, { label: false, include_blank: true }, rel: "select select-and-fill"  %>
 
-    <% @somebody.profiles.where.not(profiles: {id: nil}).each do |profile| %>
-      <div id="select-and-fill-<%= profile.id %>" class="select-and-fill">
+      <% @somebody.profiles.where.not(profiles: {id: nil}).each do |profile| %>
+        <div id="select-and-fill-<%= profile.id %>" class="select-and-fill">
 
-        <% if f.object.profile.try(:id) == profile.id %>
-          <%= f.fields_for :profile do |profile| %>
-            <%= render 'profiles/fields', f: profile %>
-          <% end %>
+          <div class="well">
 
-        <% else %>
-          <%= f.fields_for :profile, profile do |p| %>
-            <%= render 'profiles/fields', f: p %>
-          <% end %>
-        <% end %>
+            <% if f.object.old_profile_id == profile.id %>
 
-      </div>
-    <% end %>
+              <%= f.fields_for :old_profile do |profile| %>
+                <%= render 'profiles/fields', f: profile %>
+              <% end %>
+
+            <% else %>
+
+              <%= f.fields_for :old_profile, profile do |p| %>
+                <%= render 'profiles/fields', f: p %>
+              <% end %>
+
+            <% end %>
+
+          </div>
+
+        </div>
+
+      <% end %>
+
   </div>
 
 
   <div rel="new">
+    <div class="well">
 
-    <%= f.fields_for :profile, (f.object.profile_type == 'new' ? f.object.profile : @somebody.profiles.new.tap{|p| p.names.new; p.phones.new.tap{|p| p.mobile = true}; p.emails.new}) do |profile| %>
-      <%= render 'profiles/fields', f: profile %>
-    <% end %>
-    <%# f.fields_for assoc.to_sym, type == 'new' ? eval("f.object.#{assoc}") : eval("f.object.build_#{assoc}") do |la| %>
-      <%# render 'postal_addresses/fields', :f => la %>
-    <%# end %>
+      <%= f.fields_for :new_profile do |profile| %>
+        <!--<div class="select-and-fill"> -->
+          <%= render 'profiles/fields', f: profile %>
+        <!-- </div> -->
+      <% end %>
+      <%# f.fields_for assoc.to_sym, type == 'new' ? eval("f.object.#{assoc}") : eval("f.object.build_#{assoc}") do |la| %>
+        <%# render 'postal_addresses/fields', :f => la %>
+      <%# end %>
+
+    </div>
   </div>
 
 </div>

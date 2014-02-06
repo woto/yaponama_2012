@@ -1,4 +1,4 @@
-<%= panel 'default' do |p| %>
+<%= panel 'primary' do |p| %>
   <%= p.heading do %>
     <%= p.title do %>
       <%= title %>
@@ -19,13 +19,16 @@
         <div rel="old">
           <% options = @somebody.postal_addresses.map{|pa| [pa.to_label, pa.id]} + [[opposite, '-1']] %>
           <%# TODO Задействовать label: false и label: nil %>
-          <%= f.twbs_select(assoc_id, options, {include_blank: true, label: false}, {rel:'select select-and-fill'}) %>
+          <%= f.twbs_select("old_#{assoc_id}", options, {include_blank: true, label: false}, {rel:'select select-and-fill'}) %>
         </div>
 
         <div rel="new">
-          <%= f.fields_for assoc.to_sym, type == 'new' ? eval("f.object.#{assoc}") : eval("f.object.build_#{assoc}") do |la| %>
-            <%= render 'postal_addresses/fields', :f => la %>
-          <% end %>
+          <div class="well">
+            <%# TODO Странно type == 'new' ? eval("f.object.#{assoc}") : eval("f.object.build_#{assoc}") %>
+            <%= f.fields_for "new_#{assoc}".to_sym, type == 'new' ? eval("f.object.#{assoc}") : eval("f.object.build_#{assoc}") do |la| %>
+              <%= render 'postal_addresses/fields', :f => la %>
+            <% end %>
+          </div>
         </div>
 
       </div>

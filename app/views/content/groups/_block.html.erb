@@ -1,0 +1,22 @@
+<%= f.nested_fields do %>
+
+  <div class="well well-sm">
+
+    <%= f.destroyable do %>
+
+
+          <%= yield %>
+
+          <%= f.standard_remove %>
+
+          <%= icon 'toggle-up text-muted' %>
+
+          <%= icon 'toggle-down text-muted' %>
+
+
+
+    <% end %>
+
+  </div>
+
+<% end %>

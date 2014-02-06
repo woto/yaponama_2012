@@ -66,16 +66,22 @@
             <%= caret %>
           <% end %>
           <%= dd.menu do %>
-            <li> <%= link_to 'Контактные лица', admin_profiles_path %> </li>
-            <li> <%= link_to 'Имена', admin_names_path %> </li>
-            <li> <%= link_to 'Телефоны', admin_phones_path %> </li>
-            <li> <%= link_to 'E-mail адреса', admin_emails_path %> </li>
-            <li> <%= link_to 'Паспорта', admin_passports_path %> </li>
+            <%= dd.submenu do %>
+              <%= dd.toggle do %>
+                Контактные лица
+              <% end %>
+              <%= dd.menu do %>
+                <li> <%= link_to 'Всё вместе', admin_profiles_path %> </li>
+                <li> <%= link_to 'Имена', admin_names_path %> </li>
+                <li> <%= link_to 'Телефоны', admin_phones_path %> </li>
+                <li> <%= link_to 'E-mail адреса', admin_emails_path %> </li>
+                <li> <%= link_to 'Паспорта', admin_passports_path %> </li>
+              <% end %>
+            <% end %>
             <li> <%= link_to 'Почтовые адреса', admin_postal_addresses_path %> </li>
             <li> <%= link_to 'Автомобили', admin_cars_path %> </li>
             <li> <%= link_to 'Компании', admin_companies_path %> </li>
           <% end %>
-
         <% end %>
 
         <%= dropdown do |dd| %>
@@ -85,12 +91,14 @@
           <% end %>
           <%= dd.menu do %>
             <li> <%= link_to "Производители", admin_brands_path  %> </li>
-            <li> <%= link_to "Описания товаров", admin_spare_infos_path %> </li>
-            <li> <%= link_to "Страницы сайта", admin_pages_path %> </li>
             <%= divider %>
             <li> <%= link_to "Модели авто", admin_models_path %> </li>
             <li> <%= link_to "Поколения авто", admin_generations_path %> </li>
             <li> <%= link_to "Модификации авто", admin_modifications_path %> </li>
+            <%= divider %>
+            <li> <%= link_to "Описания товаров", admin_spare_infos_path %> </li>
+            <li> <%= link_to "Статические страницы", admin_pages_path %> </li>
+            <li> <%= link_to "Частые вопросы", admin_faqs_path %> </li>
           <% end %>
         <% end %>
 

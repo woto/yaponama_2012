@@ -19,70 +19,18 @@
     <div class="well">
       <div class="clearfix">
         <%= render 'common_search_form' %>
-        <div class="navbar-form">
-          <a data-toggle="modal" href="#ask_quantity" class="btn btn-warning">Форма</a>
-        </div>
+        <% if admin_zone? %>
+          <div class="navbar-form">
+            <a data-toggle="modal" href="#modal_form" class="btn btn-warning">Форма</a>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
 <% end %>
 
-<%= modal :id => 'ask_quantity' do |m| %>
+<%= twbs_form_for @resource, url: polymorphic_path([*jaba3, @resource], :return_path => params[:return_path], :skip => true, :modal => true), class: 'product' do |f| %>
 
-  <%= m.header do |h| %>
-    <%= h.close %>
-    <%= h.title do %>
-      Добавление в корзину
-    <% end %>
-  <% end %>
-
-  <%= m.body do %>
-    <%= twbs_form_for @resource, url: polymorphic_path([(admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), @resource], :return_path => params[:return_path]), class: 'product' do |f| %>
-
-      <%= f.twbs_hidden_field :product_id %>
-
-      <% if f.object.product_id.present? %>
-        <%= alert 'info' do %>
-          Позиция будет отражена как перезаказанная с <%= f.object.product.to_label %>
-        <% end %>
-      <% end %>
-
-      <%= f.twbs_text_field :catalog_number, asterisk: true, hint: "Например: #{TemplateData::CATALOG_NUMBERS.sample}" %>
-      <%= f.twbs_check_box :hide_catalog_number %>
-
-      <%= f.fields_for :brand, f.object.brand || f.object.build_brand do |b| %>
-        <%= f.form_group :brand do %>
-          <%= b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, asterisk: true, hint: "Например: #{TemplateData::MANUFACTURERS.sample}" %>
-          <%= f.error(:brand) %>
-        <% end %>
-      <% end %>
-
-      <%= f.twbs_text_field :short_name %>
-      <%= f.twbs_text_field :quantity_ordered, asterisk: true %>
-      <%= f.twbs_text_field :buy_cost, asterisk: true %>
-      <%= f.twbs_text_field :sell_cost, asterisk: true %>
-      <%= f.twbs_text_area :long_name, rows: 4 %>
-      <%= f.twbs_text_field :quantity_available %>
-      <%= f.twbs_text_field :probability %>
-      <%= f.twbs_text_field :min_days %>
-      <%= f.twbs_text_field :max_days %>
-
-      <%= render :partial => 'profileables/forms/shared/notes', :locals => {:f => f} %>
-
-      <%= f.twbs_submit %>
-
-    <% end %>
-  <% end %>
-
-  <%= m.footer do %>
-    <a href="#" class="btn btn-default btn-success">
-      <%= icon 'reply' %>
-      Продолжить покупки
-    </a>
-    <a href="#" class="btn btn-default btn-primary">
-      <%= icon 'check' %>
-      Перейти к оформлению заказа 
-    </a>
-  <% end %>
+  <%= render 'modal_form', f: f %>
 
 <% end %>

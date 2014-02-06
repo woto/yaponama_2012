@@ -61,7 +61,7 @@
                   <% end %>
                 </div>
 
-                <div style="margin: 20px 0">
+                <div class="top-space bottom-space">
                   <% offer = mf_scope[:offers][0] %>
                   <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, class: "btn btn-success buy-button" do %>
 
@@ -137,9 +137,9 @@
                 </div>
 
                 <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-                <p>А так же рекомендуем посмотреть <%= link_to  "аналоги и замены, \"#{catalog_number} - #{manufacturer}\"", polymorphic_path([new_or_edit, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil), :product], :id => @resource, :catalog_number => catalog_number, :manufacturer => manufacturer, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'ajax-search replacement-button' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством </p>
+                <p>А так же рекомендуем посмотреть <%= link_to  "аналоги и замены, \"#{catalog_number} - #{manufacturer}\"", polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource, :catalog_number => catalog_number, :manufacturer => manufacturer, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'ajax-search replacement-button' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством. </p>
 
-                <p>Есть вопросы? Менеджер готов проконсультировать вас прямо сейчас</p>
+                <p>Есть вопросы? <a href="#">Менеджер готов проконсультировать вас прямо сейчас</a>.</p>
 
                 <hr />
 
@@ -170,6 +170,6 @@
   <% end %>
 
   <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-  <h4>Вы так же можете попробовать посмотреть <%= link_to "замены номера #{@c9} без указания производителя", polymorphic_path([new_or_edit, (admin_zone? ? :admin : :user), (admin_zone? ? @somebody : nil),  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'ajax-search replacement-button' %>.</h4>
+  <h4>Вы так же можете попробовать посмотреть <%= link_to "замены номера #{@c9} без указания производителя", polymorphic_path([new_or_edit, *jaba3,  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'ajax-search replacement-button' %>.</h4>
 
 <% end %>

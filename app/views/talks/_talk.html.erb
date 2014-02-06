@@ -41,9 +41,17 @@
       </div>
 
     <% else %>
-      <div class="text-xs well well-sm">
-        <%= (parsed_cached_main_profile(@somebody.cached_main_profile))  || @somebody.to_label %>
-      </div>
+      <%= row class: "text-muted text-sm bottom-space" do %>
+        <div class="col-md-6">
+          <%= (parsed_cached_profile(@somebody.cached_profile))  || @somebody.to_label %>
+        </div>
+        <div class="col-md-6">
+          <ul class="list-unstyled">
+            <li>Текущая страница: TODO</li>
+            <li>Онлайн: TODO</li>
+            <li>Окно чата открыто: TODO</li>
+        </div>
+      <% end %>
     <% end %>
 
     <div id="talk-log" class="content">

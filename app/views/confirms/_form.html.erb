@@ -2,11 +2,12 @@
 
   <div class="col-sm-7">
 
-    <%= twbs_form_for @contact, as: :confirm, url: smart_route(prefix: [:make], postfix: [:confirm, params[:resource_class].underscore]), method: :get  do |f| %>
+    <%= twbs_form_for @contact, as: :confirm, url: polymorphic_path([:make, :user, :confirm, params[:resource_class].underscore]), method: :get  do |f| %>
       <% hint = capture do %>
-        <%= link_to "Запросите PIN код повторно", smart_route(prefix: [:ask], postfix: [:confirm, params[:resource_class].underscore]), method: :post %>, если вдруг не получили его.
+        <%= link_to "Запросите PIN код повторно", polymorphic_path([:ask, :user, :confirm, params[:resource_class].underscore], return_path: params[:return_path]), method: :post %>, если вдруг не получили его.
       <% end %>
-      <%= f.twbs_text_field :pin, hint: hint%>
+      <%= f.twbs_text_field :pin, hint: hint %>
+      <%= hidden_field_tag :return_path, params[:return_path] %>
       <%= f.twbs_submit 'Подтвердить' %>
     <% end %>
 

@@ -2,7 +2,7 @@
 
   <%= f.destroyable do %>
 
-    <%= panel 'primary' do |p| %>
+    <%= panel 'primary', id: 'profile-passport' do |p| %>
 
       <%= p.heading do %>
         <%= p.title do %>
@@ -22,7 +22,7 @@
         <%= f.twbs_date_select_passport :data_rozhdeniya, asterisk: true %>
         <%= f.twbs_text_field :mesto_rozhdeniya, asterisk: true %>
 
-        <%= render :partial => 'profileables/forms/shared/notes', :locals => {:f => f} %>
+        <%# render :partial => 'profileables/forms/shared/notes', :locals => {:f => f} %>
 
       <% end %>
 

@@ -1,16 +1,17 @@
 <%= row do %>
 
-  <div class="col-md-8">
+  <%= c1 do %>
 
-    <%= twbs_form_for @resource, url: [(admin_zone? ? :admin : nil), :user] do |f| %>
+    <%# url: [(admin_zone? ? :admin : nil), :user] %>
+    <%= twbs_form_for @resource, url: jaba3 do |f| %>
 
       <%= f.twbs_collection_select :order_rule, Rails.configuration.somebody_order_rules, :first, :last %>
 
       <%= f.twbs_text_field :prepayment %>
 
-      <%= f.twbs_collection_select :main_profile_id, @resource.profiles, :id, :to_label, :include_blank => true %>
+      <%= f.twbs_collection_select :profile_id, @resource.profiles, :id, :to_label, :include_blank => true %>
 
-      <%= panel 'default' do |p| %>
+      <%= panel 'default', class: 'top-space-lg' do |p| %>
         <%= p.heading do %>
           <%= p.title { 'Часовой пояс' } %>
         <% end %>
@@ -21,7 +22,7 @@
         <% end %>
       <% end %>
 
-      <%= panel 'default' do |p| %>
+      <%= panel 'default', class: 'top-space-lg' do |p| %>
         <%= p.heading do %>
           <%= p.title { 'Права' } %>
         <% end %>
@@ -44,6 +45,6 @@
 
     <% end %>
 
-  </div>
+  <% end %>
 
 <% end %>

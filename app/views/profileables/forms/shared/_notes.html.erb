@@ -1,9 +1,1 @@
-<%= f.form_group nil, rel: "collapse-next" do %>
-  <button class="btn btn-default btn-xs" type="button" data-toggle="collapse-next">
-    <span><%= f.object.class.human_attribute_name('comment') %></span>
-  </button>
-<% end %>
-
-<div rel='acceptance-test' class="collapse">
-  <%= f.twbs_text_area :notes, rows: 4 %>
-</div>
+<%= f.twbs_text_area :notes, rows: 2 %>

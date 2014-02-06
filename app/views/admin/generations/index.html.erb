@@ -1,3 +1,9 @@
+<% title_index %>
+
+<%= breadcrumb true do |b| %>
+  <%= b.item @meta_title %>
+<% end %>
+
 <%= title_index %>
 
 <%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
