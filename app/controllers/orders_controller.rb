@@ -4,31 +4,47 @@ class OrdersController < ApplicationController
 
   include GridOrder
 
+  skip_before_filter :set_grid, only: [:edit, :update, :new, :create, :show, :destroy]
+
+  #prepend_before_action do
+  #  #include GridProduct
+  #  class_eval do
+  #    include GridOrder
+  #  end
+  #end
+
+  #skip_before_action :set_grid, only: [:update, :consignee, :delivery]
+
   # GET /admin/orders
   # GET /admin/orders.json
-  def index
+  #def index
 
-    @orders = Order.order("id DESC").page(params[:page])
+  #  @orders = Order.order("id DESC").page(params[:page])
 
-    if params[:user_id]
-      @orders = @orders.where(:user_id => params[:user_id])
-    end
+  #  if params[:user_id]
+  #    @orders = @orders.where(:user_id => params[:user_id])
+  #  end
 
-    if Rails.configuration.orders_status.select{|k, v| v[:real]}.keys.include? params[:status]
-      @orders = @orders.where(:status => params[:status])
-    end
+  #  if Rails.configuration.orders_status.select{|k, v| v[:real]}.keys.include? params[:status]
+  #    @orders = @orders.where(:status => params[:status])
+  #  end
 
-    respond_to do |format|
-      format.html
-      format.js { render 'application/grid/filter' }
-    end
+  #  respond_to do |format|
+  #    format.html
+  #    format.js { render 'application/grid/filter' }
+  #  end
 
-  end
+  #end
+
+  #append_before_filter :user_get
+  #append_before_filter :somebody_get
+  #append_before_filter :supplier_get
 
   # GET /admin/orders/1
   # GET /admin/orders/1.json
   def show
-    redirect_to smart_route({:postfix => [:products]}, :user_id => params[:user_id], :order_id => params[:id]) and return
+    #redirect_to smart_route({:postfix => [:products]}, :user_id => params[:user_id], :order_id => params[:id]) and return
+    redirect_to polymorphic_path([*jaba3, @resource, :products], return_path: params[:return_path]) and return
   end
 
   ## GET /admin/orders/new

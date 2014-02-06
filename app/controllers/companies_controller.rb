@@ -25,6 +25,12 @@ class CompaniesController < ProfileablesController
     super
     @resource.legal_address_type = 'old'
     @resource.actual_address_type = 'old'
+
+    @resource.old_legal_address = @resource.legal_address
+    @resource.old_legal_address_id = @resource.legal_address_id
+
+    @resource.old_actual_address = @resource.actual_address
+    @resource.old_actual_address_id = @resource.actual_address_id
   end
 
   private

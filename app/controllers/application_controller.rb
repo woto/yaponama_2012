@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :admin_zone?
   helper_method :public_zone?
+  helper_method :jaba3
   #helper_method :complex_namespace_helper
   helper_method :smart_route
   around_action :set_user_time_zone
@@ -19,14 +20,42 @@ class ApplicationController < ActionController::Base
   helper_method :sort_column
   helper_method :sort_direction
 
-  #before_filter :set_cache_buster
+  before_action :set_resource_class
 
-  #helper :tag
+  before_action :somebody_set
+  before_action :user_set
+  before_action :supplier_set
+
+  before_action :find_resource, except: [:new, :create, :index]
+
+  # Потом вынести в concern transactionable?
+  skip_before_action :find_resource, only: [:transactions]
+
+  before_action :somebody_get, only: [:show, :edit, :update, :destroy]
+  before_action :user_get, only: [:show, :edit, :update, :destroy]
+  before_action :supplier_get, only: [:show, :edit, :update, :destroy]
+
+  before_action :new_resource, only: [:new]
+  before_action :edit_resource, only: [:edit]
+  before_action :create_resource, only: [:create]
+  before_action :update_resource, only: [:update]
+
+  before_action :set_user_and_creation_reason, only: [:create, :update]
+
+  #before_filter :set_cache_buster
 
   # Twitter Bootstrap 3
   add_flash_types :success, :info, :warning, :danger
 
+  #unless Rails.application.config.consider_all_requests_local
+    rescue_from Exception, :with => :render_500
+    rescue_from ActionController::RoutingError, :with => :render_404
+    rescue_from ActionController::UnknownController, :with => :render_404
+    rescue_from ActiveRecord::RecordNotFound, :with => :render_500
+  #end
 
+  rescue_from AuthenticationError, with: -> { redirect_to root_path, danger: "Возможно вы или кто-то другой входил на сайт под вашей учетной записью с другого компьютера. Вы можете отключить функцию автоматического выхода в Личном кабинете для возможности одновременной работы с разных компьютеров." }
+  
   def info
     render :layout => false
   end
@@ -56,11 +85,14 @@ class ApplicationController < ActionController::Base
   end
 
   def create
+    #binding.pry
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path], :id => @resource.id), success: "#{@resource_class} был успешно создан." }
+        format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path], :id => @resource.id) }
+        format.js { redirect_to url_for(:action => :show, :return_path => params[:return_path], :id => @resource.id) }
       else
         format.html { render action: 'new' }
+        format.js { render action: 'new' }
       end
     end
   end
@@ -68,7 +100,7 @@ class ApplicationController < ActionController::Base
   def update
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path]), success: "#{@resource_class} был успешно обновлен" }
+        format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path]) }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -128,18 +160,8 @@ class ApplicationController < ActionController::Base
     return status
   end
 
-  unless Rails.application.config.consider_all_requests_local
-    rescue_from Exception, :with => :render_500
-    rescue_from ActionController::RoutingError, :with => :render_404
-    rescue_from ActionController::UnknownController, :with => :render_404
-    rescue_from ActiveRecord::RecordNotFound, :with => :render_404
-  end
-
-  rescue_from AuthenticationError, with: -> { redirect_to root_path, danger: "Возможно вы или кто-то другой входил на сайт под вашей учетной записью с другого компьютера. Вы можете отключить функцию автоматического выхода в Личном кабинете для возможности одновременной работы с разных компьютеров." }
-  
-  # TODO потом детальнее посмотреть где и как используются @show_sidebar и @exception
+  # TODO потом детальнее посмотреть где и как используются @exception
   def render_404(exception)
-    @show_sidebar = true
     @exception = exception
     Rails.logger.error(exception)
     respond_to do |format|
@@ -149,7 +171,6 @@ class ApplicationController < ActionController::Base
 
 
   def render_500(exception)
-    @show_sidebar = true
     @exception = exception
     Rails.logger.error(exception)
     respond_to do |format|
@@ -161,6 +182,15 @@ class ApplicationController < ActionController::Base
   def admin_zone?
     params[:controller].partition('/').first == 'admin'
   end
+
+  def jaba3
+    [
+      (admin_zone? ? :admin : :user),
+      (admin_zone? ? @somebody : nil)
+    ]
+  end
+
+
 
   def public_zone?
     !admin_zone?
@@ -278,53 +308,25 @@ class ApplicationController < ActionController::Base
     @visible_columns
   end
 
-  before_action :set_resource_class
-
-  before_action :user_set
-  before_action :somebody_set
-  before_action :supplier_set
-
-  before_action :find_resource, except: [:new, :create, :index]
-
-  # Потом вынести в concern transactionable?
-  skip_before_action :find_resource, :only => [:transactions]
-
   def find_resource
     @resource = @resource_class.find(params[:id])
   end
-
-  before_action :user_get, :only => [:show, :edit, :update, :destroy]
-  before_action :supplier_get, :only => [:show, :edit, :update, :destroy]
-  before_action :somebody_get, :only => [:show, :edit, :update, :destroy]
-
-  before_action :new_resource, :only => [:new]
 
   def new_resource
     @resource = @resource_class.new resource_params
   end
 
-  before_action :edit_resource, only: [:edit]
-
   def edit_resource
   end
 
-  before_action :create_resource, :only => [:create]
-
   def create_resource
-    #debugger
+    #binding.pry
     @resource = @resource_class.new(resource_params)
-    #debugger
-    #puts
   end
-
-  before_action :update_resource, :only => [:update]
 
   def update_resource
     @resource.assign_attributes(resource_params)
   end
-
-
-  before_action :set_user_and_creation_reason, :only => [:create, :update]
 
   def set_user_and_creation_reason
     #debugger
@@ -342,7 +344,6 @@ class ApplicationController < ActionController::Base
       @resource.code_1 = 'frontend'
     end
   end
-
 
   def resource_params
     # TODO DANGER!
@@ -378,6 +379,11 @@ class ApplicationController < ActionController::Base
   def supplier_get
     #binding.pry
     @supplier = @resource.supplier if @resource && @resource.respond_to?(:supplier)
+  end
+
+  def item_collection_params
+    hash = { items: @items }
+    hash.merge(params.fetch(:item_collection, {}).permit!)
   end
 
 end

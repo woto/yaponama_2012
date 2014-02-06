@@ -12,15 +12,15 @@ class ConfirmsController < ApplicationController
 
   def ask
     _ask
-    redirect_to url_for(action: 'view'), info: t("helpers.flash.confirm.#{params[:resource_class]}")
+    redirect_to url_for(action: 'view', return_path: params[:return_path]), info: t("helpers.flash.confirm.#{params[:resource_class]}")
   end
 
   def make
-
     @contact.pin_required = true
 
     if @contact.update(confirm_params)
       if @user.role == 'guest'
+        #redirect_to edit_register_path(with: @contact.class.name.underscore), success: "<strong>#{@contact.to_label}</strong> успешно подтвержден. Пожалуйста завершите регистрацию придумав пароль.".html_safe
         redirect_to root_path, success: "<strong>#{@contact.to_label}</strong> успешно подтвержден.".html_safe
       else
         redirect_to user_path, success: "<strong>#{@contact.to_label}</strong> успешно подтвержден.".html_safe

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   include GridUser
 
-  skip_before_filter :set_grid, :only => [:create, :update, :logout_from_all_places, :show]
+  skip_before_filter :set_grid, :only => [:create, :update, :logout_from_all_places, :show, :postal_address]
 
   #before_action :only_authenticated, :only => [:show]
 
@@ -14,6 +14,24 @@ class UsersController < ApplicationController
   #    format.json { render :json => @resource }
   #  end
   #end
+
+  def update
+    respond_to do |format|
+      if @resource.save
+        format.html { redirect_to(url_for(:action => :show), success: 'Настройки пользователя успешно сохранены') }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @resource.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def postal_address
+    @somebody.update(resource_params)
+    debugger
+    puts
+  end
 
   def logout_from_all_places
     @resource.generate_token :auth_token, :long

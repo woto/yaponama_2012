@@ -39,7 +39,12 @@ class SessionsController < ApplicationController
       #@user.destroy
       # TODO наверное круто было бы, если бы я делал merge пользователей
 
-      redirect_to user_path, :success => "Вы успешно вошли."
+      if @session.user.seller?
+        redirect_to admin_path
+      else
+        redirect_to user_path
+      end
+
     else
       render 'new'
     end
@@ -51,7 +56,7 @@ class SessionsController < ApplicationController
     $redis.publish("#{Rails.env}:update sellers", JSON.dump({comment: 'sessions#destroy'}))
     #session[:user_id] = nil
     cookies.delete(:auth_token)
-    redirect_to root_path, :success => "Вы успешно вышли."
+    redirect_to root_path
   end
 
   def session_params

@@ -1,9 +1,11 @@
+
 # encoding: utf-8
 #
 class Products::InorderController < ApplicationController
   #include ProductsConcern
 
   before_filter do
+    raise 'a'
     begin
 
       Rails.application.routes.recognize_path params[:return_path]

@@ -8,12 +8,8 @@ class PasswordsController < ApplicationController
 
   def update
     respond_to do |format|
-
-      @resource.assign_attributes(resource_params)
-      @resource.password_required = true
-
       if @resource.save
-        format.html { redirect_to url_for(controller: :users, action: :show), :success => 'Пароль был успешно изменен.' }
+        format.html { redirect_to url_for(controller: :users, action: :show, id: @resource.id), :success => 'Пароль был успешно изменен.' }
       else
         format.html { render :action => "edit" }
       end
@@ -21,6 +17,11 @@ class PasswordsController < ApplicationController
   end
 
   private
+
+  def set_user_and_creation_reason
+    super
+    @resource.password_required = true
+  end
 
   def find_resource
     @resource = @user

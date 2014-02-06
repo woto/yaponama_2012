@@ -5,40 +5,29 @@ class PagesController < ApplicationController
 
   skip_before_filter :set_grid, only: [:new, :create, :edit, :update, :show, :destroy]
 
+  # TODO Не забыть вернуть!
+  skip_before_action :verify_authenticity_token
+
   def show
-    if @resource
-      @meta_title = @resource.title
-      @meta_canonical = '/' + @resource.path
-      @meta_description = @resource.description
-      @meta_keywords = @resource.keywords
-      @meta_robots = @resource.robots
+    @meta_title = @resource.title
+    @meta_canonical = '/' + @resource.path
+    @meta_description = @resource.description
+    @meta_keywords = @resource.keywords
+    @meta_robots = @resource.robots
 
-      commentable_helper(@resource)
-
-    else
-      raise ActionController::RoutingError, "Страница #{params[:path]} не существует"
-    end
-  end
-
-  def find_resource
-    @resource = @resource_class.where(:path => params[:path]).first
+    commentable_helper(@resource)
   end
 
   private
 
+  def find_resource
+    path = request.original_fullpath
+    path[0] = ''
+    @resource = @resource_class.where(:path => CGI::unescape(path)).first
+  end
+
   def set_resource_class
     @resource_class = Page
-  end
-
-  def user_set
-    @user = current_user
-  end
-
-  def somebody_set
-    @somebody = current_user
-  end
-
-  def supplier_set
   end
 
 end
