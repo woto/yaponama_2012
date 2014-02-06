@@ -70,28 +70,31 @@ ru:
         created_at: Создан
         updated_at: Изменен
       order:
-        status: Статус заказа
-        metro: Станция метро
-        metro_id: Станция метро
-        shop: Магазин
-        shop_id: Магазин
-        postal_address: Почтовый адрес
-        postal_address_id: Почтовый адрес
-        phone: Телефон
-        phone_id: Телефон
-        delivery: Способ доставки
-        delivery_id: Способ доставки
-        name: Получатель
-        name_id: Получатель
-        user: Покупатель
-        inorder_order_cost: Сформировано
-        ordered_order_cost: Запущено
-        delivery_cost: Сумма доставки
-        products: Заказанные товары
-        creation_reason: Причина созд.
-        user_id: Покупатель
-        notes: Комментарий
-        notes_invisible: Служ. зам.
+        #status: Статус заказа
+        #metro: Станция метро
+        #metro_id: Станция метро
+        #shop: Магазин
+        #shop_id: Магазин
+        #postal_address: Почтовый адрес
+        #postal_address_id: Почтовый адрес
+        #phone: Телефон
+        #phone_id: Телефон
+        #delivery: Способ доставки
+        #delivery_id: Способ доставки
+        #name: Получатель
+        #name_id: Получатель
+        #user: Покупатель
+        #inorder_order_cost: Сформировано
+        #ordered_order_cost: Запущено
+        #delivery_cost: Сумма доставки
+        #products: Заказанные товары
+        #creation_reason: Причина созд.
+        #user_id: Покупатель
+        #notes: Комментарий
+        #notes_invisible: Служ. зам.
+        phantom: Недооформлен
+        profile_id: Грузополучатель
+        cached_profile: Грузополучатель кешированный
       name:
         surname: Фамилия
         name: Имя
@@ -108,10 +111,10 @@ ru:
         cached_client_height: Высота браузера кешированная
         password_reset_sent_at: Дата отправки сброса пароля
         prepayment: Процент предоплаты
-        order_rule: Правило оплаты
+        order_rule: Переключение статуса оплаты товаров
         logout_from_other_places: Автовыход
-        main_profile_id: Основное контактное лицо
-        cached_main_profile: Основное контактное лицо кешированное
+        profile_id: Основное контактное лицо
+        cached_profile: Основное контактное лицо кешированное
         post: Должность сотрудника
         use_auto_russian_time_zone: Часовой пояс автоматически
         place_id: Расположение сотрудника
@@ -173,7 +176,7 @@ ru:
         comment: Комментарий к компании
       product:
         product_id: Родительский товар
-        quantity_ordered: Необходимо
+        quantity_ordered: Заказываемое количество
         quantity_available: В наличии
         probability: Вероятность наличия
         short_name: Название

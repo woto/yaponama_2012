@@ -7,24 +7,58 @@ class BrandConstraint
   def matches?(request)
     #@ips.include?(request.remote_ip)
     @brand_names = Brand.pluck(:name)
+    # TODO потом пересмотреть
     @brand_names.include? CGI.unescape(request.params[:brand])
   end
 end
 
 class PageConstraint
   def matches?(request)
-    @page = Page.where(:path => request.params[:path])
+    path = request.original_fullpath.clone
+    path[0] = ''
+    @page = Page.where(:path => CGI::unescape(path))
     @page.present?
   end
 end
 
 Yaponama2012::Application.routes.draw do
 
+  concern :global_and_admin do
+    resources :faqs, concerns: [:transactionable, :gridable]
+  end
+
+  resources :rspec_tests
+
   namespace :admin do
     resources :blocks
   end
 
   resources :tests
+
+  concern :aaa do
+    resource :order_deliveries
+  end
+
+  concern :fast_editable do
+    member do
+      get 'fast_edit'
+      get 'fast_show'
+      patch 'fast_update'
+    end
+  end
+
+  concern :cars_searchable do
+    resources :brands, :models, :generations, :modifications, :concerns => [:transactionable, :gridable, :searchable]
+
+    resources :brands, :shallow => true do
+      resources :models, :shallow => true do
+        resources :generations, :shallow => true do
+          resources :modifications, :shallow => true
+        end
+      end
+    end
+  end
+
 
   concern :talkable do
     resources :talks do
@@ -58,6 +92,7 @@ Yaponama2012::Application.routes.draw do
     match 'info', :via => [:get, :post], :on => :member, to: :info
     match 'filters', :via => [:get, :post], :on => :collection, to: :filters
     match 'columns', :via => [:get, :post], :on => :collection, to: :columns
+    concerns :fast_editable
   end
 
   concern :transactionable do
@@ -123,10 +158,11 @@ Yaponama2012::Application.routes.draw do
       collection do
         get 'incart'
         get 'inorder'
+        match 'inorder_action', via: [:get, :post]
         get 'ordered'
         get 'pre_supplier'
         get 'post_supplier'
-        post 'post_supplier_action'
+        match 'post_supplier_action', via: [:get, :post]
         get 'stock'
         get 'complete'
         get 'cancel'
@@ -154,10 +190,25 @@ Yaponama2012::Application.routes.draw do
       #concerns :productable
 
       concerns :complex_products
+
+      member do
+        resource :consignee, module: 'orders'
+        resource :delivery, module: 'orders'
+      end
+
+      #member do
+      #  get 'delivery' => 'orders/delivery#edit'
+      #  patch 'delivery' => 'orders/delivery#update'
+      #  get 'consignee' => 'orders/consignee#edit'
+      #  patch 'consignee' => 'orders/consignee#update'
+      #end
     end
   end
 
   namespace :admin do
+    concerns :global_and_admin
+
+    concerns :talkable
     concerns :accountable
 
     namespace :deliveries do
@@ -177,23 +228,19 @@ Yaponama2012::Application.routes.draw do
       get 'search', :on => :collection
     end
 
-    resources :brands, :models, :generations, :modifications, :concerns => [:transactionable, :gridable, :searchable]
 
-    resources :brands, :shallow => true do
-      resources :models, :shallow => true do
-        resources :generations, :shallow => true do
-          resources :modifications, :shallow => true
-        end
-      end
-    end
+    concerns :cars_searchable
 
     resources :uploads
 
-    get 'pages/new/:path' => "pages#new", :as => 'new_predefined_page', :constraints => {:path => /.*/}
+    #get 'pages/new/:path' => "pages#new", :as => 'new_predefined_page', :constraints => {:path => /.*/}
 
     resources :pages do
       concerns :gridable
       concerns :transactionable
+      collection do
+        get 'multiple_destroy'
+      end
     end
 
 
@@ -211,6 +258,8 @@ Yaponama2012::Application.routes.draw do
       #  concerns :transactionable
       #end
       concerns :cashable
+
+      concerns :talkable
     end
 
     concerns :profileable
@@ -225,6 +274,8 @@ Yaponama2012::Application.routes.draw do
 
 
     resources :users do
+      concerns :aaa
+
       concerns :accountable
       concerns :profileable
 
@@ -236,9 +287,10 @@ Yaponama2012::Application.routes.draw do
       concerns :complex_orders
 
       concerns :cashable
-      get :password, :on => :member, to: "passwords#edit"
-      patch :password, :on => :member, to: "passwords#update"
-      #resource :password, :only => [:edit, :update]
+      #get :password, to: "passwords#edit"
+      #patch :password, to: "passwords#update"
+      resource :password, :only => [:edit, :update]
+
       concerns :legal_or_personal
       delete :logout_from_all_places, on: :member
 
@@ -263,6 +315,14 @@ Yaponama2012::Application.routes.draw do
   resources :spare_infos
 
   resource :user  do
+    concerns :aaa
+
+    resources :payments do
+      member do
+        get :print
+      end
+    end
+
     concerns :accountable
     concerns :profileable
     #concerns :productable
@@ -270,12 +330,13 @@ Yaponama2012::Application.routes.draw do
     concerns :transactionable
     concerns :complex_orders
     concerns :legal_or_personal
-    #resource :password, :only => [:edit, :update]
-    get :password, :on => :member, to: "passwords#edit"
-    patch :password, :on => :member, to: "passwords#update"
+    resource :password, :only => [:edit, :update]
+    #get :password, :on => :member, to: "passwords#edit"
+    #patch :password, :on => :member, to: "passwords#update"
     delete :logout_from_all_places
     concerns :talkable
     concerns :cashable
+    post 'pretype', to: 'users#update'
   end
 
   resources :comments
@@ -289,7 +350,7 @@ Yaponama2012::Application.routes.draw do
   resources :attachments
 
 
-  get 'admin' => 'admin/users#index'
+  get 'admin' => 'admin/welcome#index'
 
   root :to => 'welcome#index'
 
@@ -330,6 +391,8 @@ Yaponama2012::Application.routes.draw do
   # STATS
   resources :stats, :only => [:create]
 
+  concerns :global_and_admin
+
 
   # СОМНИТЕЛЬНЫЕ МАРШРУТЫ
   get 'trash_help/notify_sms'
@@ -344,6 +407,8 @@ Yaponama2012::Application.routes.draw do
 
   resources :deliveries
 
+  concerns :cars_searchable
+
   ## TODO Для перехвата /searches/2102/KURYAKYN
   #resources :searches do
   #  #get 'search', :on => :collection, :as => 'search', :to => 'searches#index'
@@ -351,7 +416,10 @@ Yaponama2012::Application.routes.draw do
   #  #match '?skip' => "searches#index", :on => :collection, :as => :skip_search, :via => :get
   #end
 
-  get "*brand" => "brands#show", :constraints => BrandConstraint.new
-  get "*path" => "pages#show", :constraints => PageConstraint.new
+  get '/content/groups/:id' => 'groups#show'
+
+  get "*brand" => "brands#show", :constraints => BrandConstraint.new, format: false
+  get "*path" => "pages#show", :constraints => PageConstraint.new, format: false
+  get "*error", :to => "error#index", format: false
 
 end

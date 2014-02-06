@@ -18,7 +18,7 @@ defaults: &defaults
   robokassa_pass_2: password
   robokassa_user: login
 
-  initial_map_zoom: 5
+  initial_map_zoom: 9
   initial_map_lat: 55.7304426143438
   initial_map_lng: 37.63272449798592
   warehouse_address: Россия, Москва, Красная площадь, 3
@@ -84,14 +84,12 @@ development: &development
   <<: *defaults
   site_address: '192.168.2.3'
   site_port: '3000'
-  redis_address: '192.168.2.3'
   juggernaut_address: '192.168.2.3'
 
 production:
   <<: *defaults
   site_address: 'www.yaponama.ru'
   site_port: '80'
-  redis_address: 'www.yaponama.ru'
   juggernaut_address: 'www.yaponama.ru'
 
 test:

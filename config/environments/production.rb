@@ -24,7 +24,7 @@ Yaponama2012::Application.configure do
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor  = :uglifier
-  # config.assets.css_compressor = :sass
+  config.assets.css_compressor = :yui
 
   # Whether to fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
@@ -60,7 +60,7 @@ Yaponama2012::Application.configure do
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   config.assets.precompile += [
-    "html5shiv/html5shiv.js", 
+    "ltie9",
     "ckeditor/*",
     "uploads.js",
   ]

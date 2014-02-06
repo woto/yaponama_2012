@@ -17,7 +17,7 @@ module Yaponama2012
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/extras)
-    config.autoload_paths += %W(#{config.root}/delivery)
+    #config.autoload_paths += %W(#{config.root}/delivery)
 
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
@@ -36,6 +36,19 @@ module Yaponama2012
       "10" => 'Якутское время', 
       "11" => 'Владивостокское время', 
       "12" => 'Магаданское время',
+    }
+
+    config.payment_systems = {
+      "BANKOCEAN2R"          => { title: "Банковской картой", system: 'robokassa', blocks: ['payment-payer']},
+      "Qiwi29OceanR"         => { title: "QIWI", system: 'robokassa', blocks: ['payment-payer']},
+      "YandexMerchantOceanR" => { title: "Яндекс.Деньги", system: 'robokassa', blocks: ['payment-payer']},
+      "WMRM"                 => { title: "WMR", system: 'robokassa', blocks: ['payment-payer']},
+      "RapidaOceanSvyaznoyR" => { title: "Через Связной", system: 'robokassa', blocks: ['payment-payer']},
+      "RapidaOceanEurosetR"  => { title: "Через Евросеть", system: 'robokassa', blocks: ['payment-payer']},
+      "MegafonR"             => { title: "Мегафон", system: 'robokassa', blocks: ['payment-payer']},
+      "MobicomMtsR"          => { title: "МТС", system: 'robokassa', blocks: ['payment-payer']},
+      "MobicomBeelineR"      => { title: "Билайн", system: 'robokassa', blocks: ['payment-payer']},
+      "Sberbank"             => { title: "Сбербанк", system: 'sberbank', blocks: ['payment-payer', 'payment-payer-address']}
     }
     
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
@@ -80,6 +93,15 @@ module Yaponama2012
     # Autoload ckeditor models folder
     # config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
     #
+
+    config.talkables = {
+    }
+
+    config.talkables_creation_reason = {
+    }
+
+    config.talk_creation_reason = {
+    }
 
     config.somebody_creation_reason = { 
       'session' => 'Посетил сайт',
@@ -256,21 +278,62 @@ module Yaponama2012
       'all' => {
         'real' => false,
         'title' => "Все",
-        'hint' => "Все заказы, находящиеся в разных статусах.",
+        'full_title' => '',
+        'hint' => "весь список заказов.",
         'badge' => ''
       },
       'open' => {
         'real' => true,
         'title' => 'Открыт',
-        'hint' => 'В заказ возможно добавление товаров.',
+        'full_title' => 'Открытые',
+        'hint' => 'открытые заказы, вы можете изменить состав заказа или изменить параметры заказа.',
         'badge' => '1'
+      },
+      'ready' => {
+        'real' => true,
+        'title' => 'Готов',
+        'full_title' => 'Готовые к выдаче',
+        'hint' => 'заказы готовые к выдаче (отправке), изменение состава заказа или параметров заказа невозможно',
+        'badge' => '2',
       },
       'close' => {
         'real' => true,
-        'title' => 'Выполнен',
-        'hint' => 'Все товары заказа выданы или отправлены. Добавление товаров в заказ невозможно.',
-        'badge' => '2'
+        'title' => 'Выдан',
+        'full_title' => 'Выданые',
+        'hint' => 'выданные (отправленные) заказы, изменение состава заказа или параметров заказа невозможно.',
+        'badge' => '3'
       }
+    }
+
+    config.orders_menu = {
+      'all' => {},
+      'open' => {},
+      'ready' => {},
+      'close' => {}
+    }
+
+    config.product_guess_next_status = {
+      'incart' => 'inorder',
+      'inorder' => 'ordered',
+      'ordered' => 'pre_supplier',
+      'pre_supplier' => 'post_supplier',
+      'post_supplier' => 'stock',
+      'stock' => 'complete',
+    }
+
+    config.products_menu = {
+      'all' => {},
+      'incart' => {},
+      'inorder' => {},
+      'all_active' => {
+        'active' => {},
+        'ordered' => {},
+        'pre_supplier' => {},
+        'post_supplier' => {},
+        'stock' => {},
+      },
+      'complete' => {},
+      'cancel' => {},
     }
 
     # Products
@@ -278,8 +341,8 @@ module Yaponama2012
       'all' => {
         'real' => false,
         'title' => "Все",
-        'full_title' => 'Все',
-        'hint' => "все товары, находящиеся в разных статусах.",
+        'full_title' => '',
+        'hint' => "весь список товаров.",
         'badge' => ''
       },
       'incart' => {
@@ -287,7 +350,7 @@ module Yaponama2012
         'title' => 'В корз.',
         'full_title' => 'В корзине',
         'action' => 'Вернуть в корзину',
-        'hint' => 'товары, находящиеся в корзине. Выделите необходимые товары и оформите заказ.',
+        'hint' => 'товары, находящиеся в корзине. Отметтье необходимые товары и оформите заказ.',
         'badge' => '1'
       },
       'inorder' => { 
@@ -295,8 +358,15 @@ module Yaponama2012
         'title' => 'Оформ.',
         'full_title' => 'Офомрленные в заказ',
         'action' => 'Оформить заказ',
-        'hint' => 'товары, оформленные в заказ. При достаточном количестве средств на счете вы можете перевести их в статус оплаченные. Вы так же можете при необходимости переместить товары в другой заказ.',
+        'hint' => 'товары, оформленные в заказ. После внесения предоплаты товары сменят статус на Оплаченные. Вы так же можете при необходимости переместить товары в другой заказ.',
         'badge' => '2'
+      },
+      'all_active' => {
+        'real' => false,
+        'title' => 'Активн.',
+        'full_title' => 'Активные',
+        'hint' => 'товары, находящиеся в статусах Оплачен, В работе, Выкуплен, На складе',
+        'badge' => ''
       },
       'active' => {
         'real' => false,
@@ -405,8 +475,8 @@ module Yaponama2012
 
     # User Order Rule
     config.somebody_order_rules = {
-      'all' => 'Хватает на все товары',
-      'none' => 'Отправлять вручную',
+      'all' => 'Автоматически',
+      'none' => 'Вручную',
     }
     config.robokassa_integration_modes = {
       'production' => 'Рабочий режим',
@@ -417,6 +487,19 @@ module Yaponama2012
     config.company_ownerships = {
       'individual' => 'Индивидуальный предприниматель',
       'legal' => 'Юридическое лицо'
+    }
+
+    config.link_targets = {
+       '_blank' => 'Откроется в новом окне',
+       '_current' => 'Откроется в рабочем окне'
+    }
+
+    config.title_sizes = {
+       'h1' => 'Самый большой',
+       'h2' => 'Большой',
+       'h3' => 'Средний',
+       'h4' => 'Маленький',
+       'h5' => 'Самый маленький'
     }
 
     config.genders = {

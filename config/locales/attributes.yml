@@ -24,7 +24,7 @@ ru:
     updated_at: Дата изменения
     creation_reason: Причина создания
     notes: Заметки
-    notes_invisible: Служ. заметки
+    notes_invisible: Служебный комментарий
     somebody_id: Владелец
     creator_id: Ответственный
     creator: Ответственный 
@@ -108,7 +108,6 @@ ru:
     updated_at: Изменена
     utc_offset_hours: Часов
     utc_offset_minutes: Минут
-    notes_invisible: Служебная информация
     company: Компания
     phone_number: Телефон
     notes: Комментарий
