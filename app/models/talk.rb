@@ -14,7 +14,7 @@ class Talk < ActiveRecord::Base
     somebody.code_1 = code_1
   end
 
-  belongs_to :addressee, class_name: "User"
+  belongs_to :addressee, class_name: "Somebody"
 
   belongs_to :talkable, polymorphic: true, :dependent => :destroy
   accepts_nested_attributes_for :talkable

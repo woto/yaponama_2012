@@ -1,14 +1,25 @@
 # encoding: utf-8
 #
 class Delivery < ActiveRecord::Base
-  has_many :orders
-  mount_uploader :image, DeliveryImageUploader
 
-  validates :available, :inclusion => { :in => [true, false] }
+  #accepts_nested_attributes_for :postal_address
+  #def postal_address_attributes=(attr)
+  #  if attr['id']
+  #    self.postal_address = PostalAddress.find attr["id"]
+  #    self.postal_address.assign_attributes attr
+  #  else
+  #    super
+  #  end
+  #end
 
-  validates :name, :presence => true
+  #has_many :orders
+  #mount_uploader :image, DeliveryImageUploader
 
-  def to_label
-    name
-  end
+  #validates :available, :inclusion => { :in => [true, false] }
+
+  #validates :name, :presence => true
+
+  #def to_label
+  #  name
+  #end
 end

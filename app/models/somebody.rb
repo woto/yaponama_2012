@@ -7,14 +7,15 @@ class Somebody < ActiveRecord::Base
 
   belongs_to :place, class_name: "Deliveries::Place"
 
-  #has_many :payments
+  has_many :payments
+  has_many :order_deliveries
 
   has_many :uploads
 
   # Понятие главного профиля
-  belongs_to :main_profile, :class_name => "Profile", :inverse_of => :user_where_is_main_profile
+  belongs_to :profile, :class_name => "Profile", :inverse_of => :user_where_is_profile
 
-  #validates :main_profile, presence: true, unless: -> { role == 'guest' } (Пользователь может входить с помощью социальных сетей не имея профиля в начала)
+  #validates :profile, presence: true, unless: -> { role == 'guest' } (Пользователь может входить с помощью социальных сетей не имея профиля в начала)
 
   belongs_to :default_addressee, class_name: "Somebody"
 
@@ -88,7 +89,6 @@ class Somebody < ActiveRecord::Base
   accepts_nested_attributes_for :companies, :allow_destroy => true
 
   has_many :profiles, :dependent => :destroy, inverse_of: :somebody
-
   accepts_nested_attributes_for :profiles, :allow_destroy => true
 
   has_many :orders, :dependent => :destroy, inverse_of: :somebody
@@ -130,12 +130,89 @@ class Somebody < ActiveRecord::Base
       new_user.default_addressee = self.default_addressee
     end
 
+    talks.reload
+
     ###
 
     # TODO Разобраться с counters
     #User.reset_counters(new_user.id, :talks)
     #new_user.total_talks = new_user.talks.length
     #new_user.unread_talks = new_user.talks.where(read: false).length
+    #
+    # Переносим профили
+    profiles.each do |profile|
+      profile.somebody = new_user
+      profile.save
+    end
+
+    profiles.reload
+
+
+    # Переносим имена
+    names.each do |name|
+      name.somebody = new_user
+      name.save
+    end
+
+    names.reload
+
+    # Переносим телефоны
+    phones.each do |phone|
+      phone.somebody = new_user
+      phone.save
+    end
+
+    phones.reload
+
+    # Переносим emails
+    emails.each do |email|
+      email.somebody = new_user
+      email.save
+    end
+
+    emails.reload
+
+    # Переносим паспорта
+    passports.each do |passport|
+      passport.somebody = new_user
+      passport.save
+    end
+    
+    passports.reload
+
+    # Переносим почтовые адреса
+    postal_addresses.each do |postal_address|
+      postal_address.somebody = new_user
+      postal_address.save
+    end
+
+    postal_addresses.reload
+
+
+    # Переносим компании
+    companies.each do |company|
+      company.somebody = new_user
+      company.save
+    end
+
+    companies.reload
+
+    # Переносим заказы
+    orders.each do |order|
+      order.somebody = new_user
+      order.save
+    end
+
+    orders.reload
+
+    # Переносим товары
+    products.each do |product|
+      product.somebody = new_user
+      product.save
+    end
+
+    products.reload
+
     new_user.save
     self.destroy
   end
@@ -155,7 +232,7 @@ class Somebody < ActiveRecord::Base
 
   def name
     begin
-      JSON.parse(cached_main_profile).try(:[], 'names').try(:first).try(:[], 'name')
+      JSON.parse(cached_profile).try(:[], 'names').try(:first).try(:[], 'name')
     rescue
       # Потом устранить
     end
@@ -163,32 +240,16 @@ class Somebody < ActiveRecord::Base
 
   def surname
     begin
-      JSON.parse(cached_main_profile).try(:[], 'names').try(:first).try(:[], 'surname')
+      JSON.parse(cached_profile).try(:[], 'names').try(:first).try(:[], 'surname')
     rescue
       # Потом устранить
     end
   end
 
 
-  #attr_accessor :update_cached_main_profile
+  #attr_accessor :update_cached_profile
 
-  before_save do
-    if main_profile_id_changed?
-      self.cached_main_profile_will_change!
-    end
-  end
-
-  before_save do
-    if cached_main_profile_changed?
-      cached_main_profile = {}
-      Profile::FIELDS.each do |field|
-        instance_eval <<-CODE, __FILE__, __LINE__ + 1
-          cached_main_profile[field] = JSON.parse(main_profile.cached_#{field})
-        CODE
-      end
-      self.cached_main_profile = cached_main_profile.to_json
-    end
-  end
+  include CachedProfile
 
   include Code_1AttrAccessorAndValidation
   include SetCreationReasonBasedOnCode_1

@@ -5,105 +5,45 @@ class Order < ActiveRecord::Base
   include BelongsToCreator
   include Transactionable
   include Selectable
+  include RenameMeConcernThree
+  include RenameMeConcernFour
 
-  attr_accessor :current_step
+  #validates :old_profile_id, :presence => true, if: -> { profile_type == 'old' }
 
-  # Валидацию для legal
- 
   # Для возможности выбора имеющегося или добавления нового получателя, компании
   attr_accessor :profile_type
-  attr_accessor :company_type
-  
+  validates :profile_type, :inclusion => { :in => ['new', 'old'] }, allow_nil: true # TODO сейчас Требуется для создания пустого заказа
 
   #has_many :order_profiles
   #has_many :profiles, :through => :order_profiles
 
-  belongs_to :delivery
+  #belongs_to :delivery
   #belongs_to :name
   #belongs_to :phone
   #belongs_to :email
-  belongs_to :postal_address
-  belongs_to :metro
+  #belongs_to :metro
 
-  belongs_to :company
-  accepts_nested_attributes_for :company
+  #belongs_to :company
+  #accepts_nested_attributes_for :company
 
-  before_validation :remove_before_validation_unless_legal
-  after_validation :recreate_after_validation_unless_legal
+  belongs_to :profile, :inverse_of => :orders_where_is_profile, autosave: true
+  validates :new_profile, presence: true, associated: true, if: -> { profile_type == 'new' }
+  validates :old_profile, presence: true, associated: true, inclusion: { in: proc {|order| order.somebody.profiles } }, if: -> { profile_type == 'old' }
 
-  def remove_before_validation_unless_legal
-    #uioi
-    #unless legal
-    #  if company
-    #    company.delete
-    #  end
-    #end
-  end
+  include CachedProfile
 
-  def recreate_after_validation_unless_legal
-    #uioi
-    #unless legal
-    #  c = Company.new
-    #  c.prepare_company(user)
-    #  self.company = c
-    #end
-  end
+  attr_accessor :postal_address_type
+  validates :postal_address_type, :inclusion => { :in => ['new', 'old'] }, allow_nil: true # TODO allow_nil сейчас требуется чтобы создать пустой заказ
 
-  belongs_to :shop
-
-  belongs_to :profile
-  accepts_nested_attributes_for :profile
+  belongs_to :postal_address, :inverse_of => :orders_where_is_postal_address, autosave: true
+  validates :new_postal_address, presence: true, associated: true, if: -> { postal_address_type == 'new' }
+  validates :old_postal_address, presence: true, associated: true, inclusion: { in: proc {|order| order.somebody.postal_addresses } }, if: -> { postal_address_type == 'old' }
 
   has_many :products, :dependent => :destroy
 
   def to_label
-    "#{id} - #{profile.try(:to_label)} - #{delivery.try(:to_label)} - #{postal_address.try(:to_label)} - #{metro.try(:to_label)} - #{shop.try(:to_label)}"
+    "Заказ № #{token}"
   end
-
-  def update_order_on_products(products)
-    products.each do |product|
-      product.order = self
-      product.status = 'inorder'
-      product.save
-    end
-  end
-
-  validate :multistep_order
-
-  def multistep_order
-    unless phantom
-      unless delivery
-        errors.add(:delivery, "Выберите способ доставки")
-      else
-        if delivery.postal_address_required && postal_address.blank?
-          errors.add(:postal_address, "Пожалуйста укажите почтовый адрес")
-        end
-        if delivery.name_required && name.blank?
-          errors.add(:name, "Пожалуйста укажите имя получателя")
-        end
-        if delivery.phone_required && phone.blank?
-          errors.add(:phone, "Пожалуйста укажите номер телефона")
-        end
-        if delivery.email_required && profile.email.blank?
-          profile.errors.add(:email, "Пожалуйста укажите электронный адрес E-mail")
-        end
-        if delivery.metro_required && metro.blank?
-          errors.add(:metro, "Пожалуйста укажите станцию метро")
-        end
-        if delivery.shop_required && shop.blank?
-          errors.add(:shop, "Пожалуйста выберите магазин")
-        end
-        if delivery.company_required && company.blank?
-          errors.add(:company, "Пожалуйста выберите компанию")
-        end
-        if delivery.delivery_cost_required && delivery_cost.blank?
-          errors.add(:delivery_cost, "Пожалуйста укажите предполагаемую сумму доставки")
-        end
-      end
-    end
-  end
-
-
 
   before_create :generate_token
 
@@ -112,7 +52,9 @@ class Order < ActiveRecord::Base
   end
 
   def self.find(token)
-    Order.where(:token => token).first
+    found = Order.where(:token => token).first
+    raise ActiveRecord::RecordNotFound, "Заказ № #{token} не найден." unless found
+    found
   end
 
 

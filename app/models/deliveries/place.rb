@@ -5,11 +5,11 @@ class Deliveries::Place < ActiveRecord::Base
 
   has_many :variants, dependent: :destroy
   accepts_nested_attributes_for :variants, :reject_if => :all_blank, :allow_destroy => true
-  validates :variants, :length => { :minimum => 1 }
+  validates :variants, :length => { :minimum => 1 }, if: -> { realize }
 
   has_many :users
 
-  belongs_to :option
+  #belongs_to :option
 
   validates :vertices, :presence => true
   validates :z_index, numericality: { only_integer: true }

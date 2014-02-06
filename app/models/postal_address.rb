@@ -6,7 +6,7 @@ class PostalAddress < ActiveRecord::Base
   include Transactionable
   include Selectable
 
-  has_many :orders
+  has_many :orders_where_is_postal_address, :class_name => "Order", :foreign_key => :postal_address_id, :inverse_of => :postal_address
 
   has_many :companies_with_this_legal_address, :class_name => "Company", :foreign_key => "legal_address_id"
   has_many :companies_with_this_actual_address, :class_name  => "Company", :foreign_key => "actual_address_id"

@@ -129,6 +129,9 @@ class Product < ActiveRecord::Base
             @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
           when 'pre_supplier'
             @transaction.account_transactions.create(:account => supplier.account, :debit => (buy_cost * quantity_ordered) )
+          # TODO Очень важный шаг! TODO TODO TODO TODO TODO TODO TODO TODO TODO (!!! необходимо так же проверять поставщика)
+          #when 'post_supplier'
+          #  @transaction.account_transactions.create(:account => supplier.account, :credit => (buy_cost * quantity_ordered), :debit => (buy_cost * quantity_ordered) )
           when 'complete'
             @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered), :debit => -(sell_cost * quantity_ordered))
           else
@@ -141,8 +144,8 @@ class Product < ActiveRecord::Base
             # WTF? TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
             # Это когда товар выдали, а клиент принес его обратно. По нему ставится отказ. (Вроде логично) Тогда клиенту возвращаются деньги
             @transaction.account_transactions.create(:account => somebody.account, :debit => (sell_cost * quantity_ordered))
-            #user.account(true).credit -= sell_cost * quantity_ordered
-            #user.save
+            #somebody.account(true).credit -= sell_cost * quantity_ordered
+            #somebody.save
           when 'stock'
             @transaction.account_transactions.create(:account => somebody.account, :credit => (sell_cost * quantity_ordered), :debit => (sell_cost * quantity_ordered))
           else
@@ -173,6 +176,17 @@ class Product < ActiveRecord::Base
 
     # Если не происходила смена статуса
     else
+
+      # TODO TODO TODO TODO TODO TODO TODO TODO Просто скопировал со старого! ВТОРОЙ ВАЖНЫЙ ШАГ! 
+      ## При смене поставщика не присходит смена статуса
+      ## случай если меняется только поставщик post_supplier -> post_supplier
+      #if self.supplier_id_changed?
+      #  ActiveRecord::Base.transaction do
+      #    supplier_was = Supplier.find(changes["supplier_id"][0])
+      #    @transaction.account_transactions.create(:account => supplier_was.account, :credit => -(buy_cost * quantity_ordered))
+      #    @transaction.account_transactions.create(:account => supplier.account, :credit => (buy_cost * quantity_ordered))
+      #  end
+      #end
 
       # TODO необходимо доработать в контроллере вопрос уведомления покупателя
       if sell_cost_changed? || quantity_ordered_changed?
@@ -226,15 +240,30 @@ class Product < ActiveRecord::Base
     if self.status == nil
       self.status = "incart"
     end
+  end
 
+  # Можно перезаказать только отказанный товар (или если он удален - ситуация с split)
+  before_validation do
+    if product.present? && product.status != 'cancel' && !product.destroyed?
+      errors.add(:base, 'Невозможно перезаказать товар, пока по нему не выставлен отказ.')
+      return false
+    end
+  end
 
-    # Если есть родительский товар, то необходимо у текущего 
-    # выставить такого же пользователя, как и у родительского
+  # Если есть родительский товар, то необходимо у текущего 
+  # выставить такого же пользователя, как и у родительского
+  before_save do
     if product present?
       self.somebody = product.somebody
     end
-
   end
+
+
+  # Если товар принадлежит заказу, то сохраняем его token
+  before_save do
+    self.cached_order = order.token if order
+  end
+
 
   def to_label
     "#{catalog_number} (#{cached_brand})"
@@ -246,13 +275,7 @@ class Product < ActiveRecord::Base
 
 
 
-  # Можно перезаказать только отказанный товар (или если он удален - ситуация с split)
-  before_validation do
-    if product.present? && product.status != 'cancel' && !product.destroyed?
-      errors.add(:base, 'Невозможно перезаказать товар, пока по нему не выставлен отказ.')
-      return false
-    end
-  end
+
 
 
 end

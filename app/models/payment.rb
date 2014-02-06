@@ -2,52 +2,31 @@
 #
 class Payment < ActiveRecord::Base
 
-  validates :amount, numericality: { only_integer: true }
-
   include BelongsToSomebody
   include BelongsToCreator
+  include RenameMeConcernThree
+  include RenameMeConcernFour
 
-  belongs_to :profile#, autosave: true#, inverse_of: :payments
-  validates :profile, presence: true, associated: true, if: -> { profile_type == 'new' }
-  validates :profile, presence: true, associated: true, inclusion: { in: proc {|payment| payment.somebody.profiles } }, if: -> { profile_type == 'old' }
-
-  accepts_nested_attributes_for :profile
-  def profile_attributes=(attr)
-    # Из-за того что Rails не предоставляет возожности 
-    # обновлять belongs_to ассоциацию приходится делать так
-    if attr['id']
-      self.profile = Profile.find(attr["id"])
-      self.profile.assign_attributes attr
-    else
-      super
-    end
-  end
-
-  belongs_to :postal_address#, autosave: true#, inverse_of: :payments
-  validates :postal_address, associated: true, if: -> { profile_type == 'new' }, allow_nil: true
-  validates :postal_address, associated: true, inclusion: { in: proc {|payment| payment.somebody.postal_addresses } }, if: -> { postal_address_type == 'old' }, allow_nil: true
-
-  accepts_nested_attributes_for :postal_address
-  def postal_address_attributes=(attr)
-    if attr['id']
-      self.postal_address = PostalAddress.find attr["id"]
-      self.postal_address.assign_attributes attr
-    else
-      super
-    end
-  end
-
-  belongs_to :company
-
-  validates :payment_type, :inclusion => { in: Rails.configuration.payment_systems.keys, message: 'пожалуйста выберите платежную систему.' }
+  validates :amount, numericality: { only_integer: true }
 
   attr_accessor :profile_type
-  validates :profile_type, :inclusion => { :in => ['new', 'old'] }, allow_nil: true
+  belongs_to :profile, :class_name => "Profile", autosave: true
+  #belongs_to :profile#, autosave: true#, inverse_of: :payments
+  validates :profile_type, :inclusion => { :in => ['new', 'old'] }
+  validates :new_profile, associated: true, if: -> { profile_type == 'new' }
+  validates :old_profile, associated: true, inclusion: { in: proc {|payment| payment.somebody.profiles } }, if: -> { profile_type == 'old' }
 
   attr_accessor :postal_address_type
-  validates :postal_address_type, :inclusion => { :in => ['new', 'old'] }, allow_nil: true
+  validates :postal_address_type, :inclusion => { :in => ['new', 'old'] }
 
-  accepts_nested_attributes_for :company
+  belongs_to :postal_address, autosave: true#, inverse_of: :payments
+  validates :new_postal_address, associated: true, if: -> { payment_type == 'Sberbank' && postal_address_type == 'new' }
+  validates :old_postal_address, associated: true, inclusion: { in: proc {|payment| payment.somebody.postal_addresses } }, if: -> { payment_type == 'Sberbank' && postal_address_type == 'old' }
+
+  #belongs_to :company
+  #accepts_nested_attributes_for :company
+
+  validates :payment_type, :inclusion => { in: Rails.configuration.payment_systems.keys, message: 'пожалуйста выберите платежную систему.' }
 
   def payment_destination
     "Пополнение счета № #{somebody.pretty_id}"

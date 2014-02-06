@@ -4,7 +4,7 @@ class Deliveries::Variant < ActiveRecord::Base
   include HiddenRecreate
   belongs_to :place
 
-  has_one :option
+  #has_one :option
 
   validates :name, presence: true
   validates :sequence, presence: true, numericality: true

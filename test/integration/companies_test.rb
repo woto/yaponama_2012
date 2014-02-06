@@ -225,5 +225,7 @@ class CompaniesTest < ActionDispatch::IntegrationTest
     assert page.has_css? '#company_old_legal_address_id'
   end
 
+  # TODO дописать тест тестирующий фактическое создание компании и адресов (чтобы не дублировались и чтобы у компании эти адреса были выставлены, т.к. была проблема)
+
 
 end

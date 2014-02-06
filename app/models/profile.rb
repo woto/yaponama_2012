@@ -6,7 +6,9 @@ class Profile < ActiveRecord::Base
   include Selectable
   #include ConfirmRequired
 
-  validates :somebody, presence: true, associated: true
+  #has_many :payments, inverse_of: :profile
+
+  validates :somebody, presence: true#, associated: true
 
   FIELDS =  ['names', 'phones', 'emails', 'passports']
 
@@ -29,7 +31,8 @@ class Profile < ActiveRecord::Base
     end
   end
 
-  has_one :user_where_is_main_profile, :class_name => "Somebody", :foreign_key => :main_profile_id, :inverse_of => :main_profile
+  has_one :user_where_is_profile, :class_name => "Somebody", :foreign_key => :profile_id, :inverse_of => :profile
+  has_many :orders_where_is_profile, :class_name => "Order", :foreign_key => :profile_id, :inverse_of => :profile
 
   before_save do
     self.cached_names = names.to_json(only: [:surname, :name, :patronymic])
@@ -41,22 +44,35 @@ class Profile < ActiveRecord::Base
   after_create do
     # Если профиль единственный, то он становится главным
     if somebody.profiles.length == 1
-      self.user_where_is_main_profile = somebody
+      self.user_where_is_profile = somebody
     end
   end
 
   after_save do
-    if user_where_is_main_profile.present?
-      user_where_is_main_profile.cached_main_profile_will_change!
-      user_where_is_main_profile.save
+
+    if user_where_is_profile.present?
+      user_where_is_profile.cached_profile_will_change!
+      user_where_is_profile.save
     end
+
+    orders_where_is_profile.each do |order|
+      order.cached_profile_will_change!
+      order.save
+    end
+
   end
 
   after_destroy do
-    if user_where_is_main_profile.present?
-      self.user_where_is_main_profile.main_profile = user_where_is_main_profile.profiles.first
-      user_where_is_main_profile.save
+
+    if user_where_is_profile.present?
+      self.user_where_is_profile.profile = user_where_is_profile.profiles.first
+      user_where_is_profile.save
     end
+
+    if orders_where_is_profile.present?
+      raise 'TODO TODO Сделать что-то'
+    end
+
   end
 
   # Транзакции необходимо подключать в конце, т.к. очередность callback'ов важна.
