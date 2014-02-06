@@ -1,6 +1,6 @@
 class FaqsController < ApplicationController
   include GridFaq
-  #skip_before_filter :set_grid, only: [:new, :create, :edit, :update, :show, :destroy]
+  skip_before_filter :set_grid
 
   #before_action :set_faq, only: [:show, :edit, :update, :destroy]
 
