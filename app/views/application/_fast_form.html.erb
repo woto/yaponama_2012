@@ -1,0 +1,5 @@
+<%= twbs_form_for @resource, url: polymorphic_path([:fast_update, *jaba3, @resource], :primary_key => params[:primary_key], :return_path => params[:return_path], :status => params[:status], :skip => true, :modal => true, :column => params[:column]), remote: true, class: 'product' do |f| %>
+
+  <%= render 'modal_form', f: f %>
+
+<% end %>

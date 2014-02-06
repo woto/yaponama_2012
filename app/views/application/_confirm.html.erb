@@ -1,3 +1,5 @@
+<% raise '_confirm' %>
+
 <% if current_user.role != 'guest' %>
 
   <% confirm = capture do %>
@@ -30,8 +32,6 @@
 
 <% if confirm.present? %>
   <div id="confirm-block">
-    <%= alert 'warning' do %>
-      <%= confirm %>
-    <% end %>
+    <%= confirm %>
   </div>
 <% end %>

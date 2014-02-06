@@ -1,4 +1,5 @@
 <div id="grid-toolbar-selected">
-  <% selected = @items.selected(@grid.item_ids) %>
-  Выделено: <%= selected.size %>
+  <a href="#" class="btn btn-info" rel="tooltip" data-placement="bottom" data-html="true" data-trigger="hover" title="<%= render 'grid_toolbar_selected_content' %>">
+    <%= icon 'info-circle' %>
+  </a>
 </div>

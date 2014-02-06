@@ -1,43 +1,46 @@
-<p style="text-align: center" class="bottom-space">
-  <a href="/deliveries">
+<br />
+
+<p class="text-center bottom-space">
+  <%= link_to "/deliveries" do %>
+    <%= icon 'building-o fa-3x bottom-space-sm' %>
+    <br />
+    <strong>2 пункта выдачи, доставка по Москве и по всей России</strong>
+  <% end %>
+</p>
+
+<hr />
+
+<p class="text-center bottom-space">
+  <%= link_to new_user_payment_path do %>
+    <%= icon 'rub fa-3x bottom-space-sm' %>
+    <br />
+    <strong>Все популярные способы оплаты</strong>
+  <% end %>
+</p>
+
+<hr />
+
+<%= javascript_tag do %>
+  $(document).on('click', '#talk-button-show-2', function(){
+    $('#talk-button-show-inside').click();
+    return false;
+  });
+<% end %>
+
+<p class="text-center bottom-space">
+  <%= link_to '#', id: 'talk-button-show-2' do %>
+    <%= icon 'users fa-3x bottom-space-sm' %>
+    <br />
+    <strong>Мгновенная служба поддержки</strong>
+  <% end %>
+</p>
+
+<hr />
+
+<p class="text-center bottom-space">
+  <%= link_to '#' do %>
+    <%= icon 'gift fa-3x bottom-space-sm' %>
+    <br />
     <strong>Спецпредложение для жителей Северного Административного Округа г. Москвы!</strong>
-  </a>
-</p>
-
-<h4 class="text-muted">Магазины</h4 class="text-muted"> 
-...
-
-<h4 class="text-muted">Принимаем оплату</h4 class="text-muted"> 
-<p style="text-align: center; ">
-    <a href="/payment#yandex">
-        <img alt="Яндекс Деньги" title="Яндекс Деньги" src="/assets/payment/PCR.gif" style="width: 135px; height: 80px; ">
-    </a>
-    <a href="/payment#sberbank">
-        <img title="Сбербанк" alt="Сбербанк" src="/assets/payment/Sberbank.gif" style="width: 135px; height: 80px; ">
-    </a>
-    <a href="/payment#webmoney">
-        <img title="Вебмани" alt="Вебмани" src="/assets/payment/WM.gif" style="width: 135px; height: 80px; ">
-    </a>
-    <a href="/payment#euroset">
-        <img title="Евросеть" alt="Евросеть" src="/assets/payment/RapidaOceanEurosetR.gif" style="width: 135px; height: 80px; ">
-    </a>
-    <a href="/payment#qiwi">
-        <img title="Киви" alt="Киви" src="/assets/payment/QiwiR.gif" style="width: 135px; height: 80px; ">
-    </a>
-    <a href="/payment#svyaznoy">
-        <img title="Связной" alt="Связной" src="/assets/payment/RapidaOceanSvyaznoyR.gif" style="width: 135px; height: 80px; ">
-    </a>
-    <a href="/payment#bank">
-        <img title="Visa и MasterCard" alt="Visa и MasterCard" src="/assets/payment/BANKOCEANMR.gif" style="width: 135px; height: 80px; ">
-    </a>
-</p>
-
-<h4 class="text-muted">Отправляем</h4 class="text-muted"> 
-<p style="text-align: center; ">
-    <a href="/delivery#ems">
-        <img title="EMS Почта России" alt="EMS Почта России" src="/assets/delivery/ems.png" style="width: 135px; height: 80px; ">
-    </a>
-    <a href="/delivery#russian_post">
-        <img title="Почта России" alt="Почта России" src="/assets/delivery/russian_post.png" style="width: 135px; height: 80px; ">
-    </a>
+  <% end %>
 </p>

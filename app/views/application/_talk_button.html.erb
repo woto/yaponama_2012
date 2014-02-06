@@ -1,0 +1,10 @@
+<% if  @somebody %>
+
+  <div id="talk-button-show">
+    <%= link_to polymorphic_path([:modal] + jaba3 + [:talks]), id: 'talk-button-show-inside', remote: true do %>
+      <div id="talk-notify" data-toggle="popover" data-html="true" data-placement="left" data-animate="true"> </div>
+      <img src="/assets/talk.png"> </img>
+    <% end %>
+  </div>
+
+<% end %>

@@ -3,13 +3,25 @@
   <% f = form.dup %>
 <% end %>
 
-$('#items').replaceWith('<%= j render 'grid', f: f %>');
+// TODO попробовать еще раз убрать рендеринг таблицы при выделении элементов
+
+<% unless params[:items] %>
+  $('#items').replaceWith('<%= j render 'grid', f: f %>');
+<% end %>
+
+<% unless params[:items] %>
+  $('#grid-toolbar-per-page').replaceWith('<%= j render 'grid_toolbar_per_page', f: f %>');
+<% end %>
+
+<% unless params[:items] %>
+  $('#grid-footer').replaceWith('<%= j render 'grid_footer', f: f, p: Panel.new(self)  %>');
+<% end %>
 
 $('#grid-toolbar-remove').replaceWith('<%= j render 'grid_toolbar_remove', f: f %>');
 
 $('#grid-toolbar-selected').replaceWith('<%= j render 'grid_toolbar_selected', f: f %>');
 
-$('#grid-toolbar-per-page').replaceWith('<%= j render 'grid_toolbar_per_page', f: f %>');
+$('#grid-toolbar-actions').replaceWith('<%= j render 'grid_toolbar_actions', f: f %>');
 
 window.bootstrapperize()
 

@@ -37,15 +37,9 @@
       <%- when :belongs_to %>
         <%= f.twbs_collection_select "filter_#{column_name}_belongs_to", @grid_class::COLUMNS[column_name][:belongs_to].all, :id, :to_label, { hint: "Зажмите Ctrl чтобы выбрать несколько одновременно" }, { :multiple => true } %>
       <%- when :date %>
-        <div id="sandbox-container">
-          <%= f.twbs_text_field "filter_#{column_name}_from" %>
-          <%= f.twbs_text_field "filter_#{column_name}_to" %>
-        </div>
+        <%= f.twbs_date_select "filter_#{column_name}_from", include_blank: true %>
+        <%= f.twbs_date_select "filter_#{column_name}_to", include_blank: true %>
       <% end %>
-
-      <script>
-        $('#sandbox-container input').datepicker({ dateFormat: "dd.mm.yy" });
-      </script>
     <% end %>
 
     <%= modal.footer do |footer| %>
@@ -55,4 +49,3 @@
   <% end %>
 
 <%# end %>
-

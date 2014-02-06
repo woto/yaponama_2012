@@ -1,0 +1,43 @@
+- if current_user.seller?
+
+  - somebodies_without_answer = Somebody.select("somebodies.cached_profile").includes(:talks).where(talks: { read: false } ).order(:updated_at)
+
+  - to_all = Set.new
+  - to_current = Set.new
+
+  - somebodies_without_answer.each do |somebody|
+
+    - somebody.talks.each do |talk|
+      - if talk.addressee_id.blank?
+        - to_all.add somebody
+      - if talk.addressee_id == current_user.id
+        - to_current.add somebody
+
+  - bell_icon = ( to_all.any? || to_current.any? ) ? 'bell' : 'bell-o'
+
+  = dropdown do |dd|
+    = dd.toggle
+      = icon bell_icon, id: 'bell'
+      '  Чат
+      <span id="unread-talks" class="badge">
+        - count = ( to_all.clone.merge(to_current) ).count
+        = count if count > 0
+      </span>
+    = dd.menu
+
+      - if to_all.any?
+        li.dropdown-header Общие сообщения
+        - to_all.each do |somebody|
+          li = link_to somebody.to_label, [:admin, somebody]
+
+      - if to_all.any? && to_current.any?
+        li.divider
+      - elsif to_all.any? || to_current.any?
+      - else
+        li 
+          a.text-muted href="#" Не прочитанных вами сообщений нет
+
+      - if to_current.any?
+        li.dropdown-header Персон. сообщения
+        - to_current.each do |somebody|
+          li = link_to somebody.to_label, [:admin, somebody]
