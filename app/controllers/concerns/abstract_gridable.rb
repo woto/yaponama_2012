@@ -10,7 +10,7 @@ module AbstractGridable
 
     def additional_conditions
       # @items = @items.includes(:somebody)
-      if @somebody
+      if @somebody && @items.first.respond_to?(:somebody_id)
         @items = @items.where(:somebody_id => @somebody.id)
       end
     end

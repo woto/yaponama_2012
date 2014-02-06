@@ -156,7 +156,7 @@ module GridConcern
 
         if [:filters, :per_page].any?{ |p| params[p] }
           # Редиректим на первую, если меняем кол-во эл-ов на странице или применяем фильтр
-          redirect_to( smart_route({:prefix => [:filter], :postfix => [@resource_class.to_s.pluralize.underscore]}, :user_id => params[:user_id], :order_id => params[:order_id], :page => 1, :status => params[:status], :primary_key => params[:primary_key]))
+          redirect_to( smart_route({:prefix => [:filter], :postfix => [@resource_class.to_s.pluralize.underscore]}, :user_id => params[:user_id], :order_id => params[:order_id], :page => 1, :status => params[:status], :primary_key => params[:primary_key], return_path: params[:return_path]))
         elsif params[:items]
           # Дописываем к ранее сохраненному grid
           if params[:grid][:item_ids]
@@ -183,7 +183,7 @@ module GridConcern
 
           $redis.set("grid:#{params[:primary_key]}", @grid.to_json)
 
-          redirect_to :primary_key => params[:primary_key]
+          redirect_to url_for(:primary_key => params[:primary_key], return_path: params[:return_path])
 
         end
 
