@@ -33,7 +33,7 @@ group :development, :test do
   gem 'show_me_the_cookies'
   gem 'selenium-webdriver'
   gem 'poltergeist', github: 'jonleighton/poltergeist'
-  gem 'capybara-webkit'
+  #gem 'capybara-webkit'
   gem 'quiet_assets'
   gem 'rspec-rails'
   gem 'rspec'
