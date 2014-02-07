@@ -1,15 +1,15 @@
 defaults: &defaults
   from_email_address: 'robot@example.com'
-  price_request_cache_with_replacements_in_seconds: 7776000 # 3 мес.
-  price_request_cache_without_replacements_in_seconds: 3600 #  1 час.
+  price_request_cache_with_replacements_in_seconds: 1
+  price_request_cache_without_replacements_in_seconds: 1
   sms_notify_method: flash
+  redis_address: 'localhost'
   redis_port: '6379'
-  realtime_address: '192.168.2.3'
-  realtime_port: '80'
+  realtime_address: '192.168.0.254'
   juggernaut_port: '8080'
-  price_address: '192.168.2.9'
-  price_port: '3000'
-  request_emex: true
+  price_address: 'localhost'
+  price_port: '3001'
+  request_emex: false
   emex_income_rate: 1.05 # Наценка 5%
   avtorif_income_rate: 0.8002 # Скидка 19.98%
   retail_rate: 1.15
@@ -21,12 +21,14 @@ defaults: &defaults
   initial_map_zoom: 9
   initial_map_lat: 55.7304426143438
   initial_map_lng: 37.63272449798592
-  warehouse_address: Россия, Москва, Красная площадь, 3
+  warehouse_address: г. Москва, Рязанский проспект, д. 53
   delivery_minute_cost: 16
-  google_maps_key: Ключ google maps
-  travel_mode: TRANSIT
+  google_maps_key: AIzaSyBDWdW4KtQCWa1y4aHIqKIEI77v5emnlEs
+  # DRIVING, TRANSIT
+  travel_mode: DRIVING
   automatic_calculate_active: true
   max_automatic_calculated_cost: 600
+
   default_time_zone_id: 4
 
   checkout_account: Номер счета получателя платежа
@@ -54,7 +56,7 @@ defaults: &defaults
   default_somebody_discount: 0
   default_somebody_order_rule: all
   send_request_from_search_page: true
-  get_image_data_address: 192.168.2.3
+  get_image_data_address: 192.168.0.254
   get_image_data_port: 8800
   # https://code.google.com/apis/console
   google_oauth2_key:
@@ -82,15 +84,23 @@ defaults: &defaults
 
 development: &development
   <<: *defaults
-  site_address: '192.168.2.3'
-  site_port: '3000'
-  juggernaut_address: '192.168.2.3'
+  realtime_port: '3500'
+  site_address: '192.168.0.254'
+  site_port: '3002'
+  juggernaut_address: '192.168.0.254'
 
 production:
   <<: *defaults
-  site_address: 'www.yaponama.ru'
+  from_email_address: 'robot@avtorif.ru'
+  price_request_cache_with_replacements_in_seconds: 7776000 # 3 мес.
+  price_request_cache_without_replacements_in_seconds: 3600 #  1 час.
+  realtime_port: '8080'
+  realtime_address: 'avtorif.ru'
+  site_address: 'avtorif.ru'
   site_port: '80'
-  juggernaut_address: 'www.yaponama.ru'
+  price_address: 'avtorif.ru'
+  price_port: '85'
+  juggernaut_address: 'avtorif.ru'
 
 test:
   <<: *development
