@@ -880,13 +880,11 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "somebody_id"
     t.integer  "profile_id"
     t.integer  "postal_address_id"
-    t.integer  "company_id"
     t.string   "payment_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "payments", ["company_id"], name: "index_payments_on_company_id", using: :btree
   add_index "payments", ["creator_id"], name: "index_payments_on_creator_id", using: :btree
   add_index "payments", ["postal_address_id"], name: "index_payments_on_postal_address_id", using: :btree
   add_index "payments", ["profile_id"], name: "index_payments_on_profile_id", using: :btree
