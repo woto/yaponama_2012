@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("language","pt",{button:"botão",remove:"remover"});

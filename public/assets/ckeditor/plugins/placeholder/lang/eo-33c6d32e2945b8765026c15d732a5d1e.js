@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("placeholder","eo",{title:"Atributoj de la rezervita spaco",toolbar:"Krei la rezervitan spacon",name:"Placeholder Name",invalidName:"The placeholder can not be empty and can not contain any of following characters: [, ], <, >",pathName:"placeholder"});

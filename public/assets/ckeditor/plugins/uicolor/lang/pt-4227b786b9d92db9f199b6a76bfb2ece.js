@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("uicolor","pt",{title:"Seleção da Cor da IU",preview:"Pré-visualização Live ",config:"Colar este item no seu ficheiro config.js",predefined:"Conjuntos de cor predefinidos"});
