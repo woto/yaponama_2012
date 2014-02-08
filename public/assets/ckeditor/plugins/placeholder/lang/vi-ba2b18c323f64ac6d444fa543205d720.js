@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("placeholder","vi",{title:"Thuộc tính đặt chỗ",toolbar:"Tạo đặt chỗ",name:"Placeholder Name",invalidName:"The placeholder can not be empty and can not contain any of following characters: [, ], <, >",pathName:"placeholder"});
