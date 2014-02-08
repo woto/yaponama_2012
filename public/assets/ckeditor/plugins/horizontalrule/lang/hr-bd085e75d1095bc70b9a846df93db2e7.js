@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("horizontalrule","hr",{toolbar:"Ubaci vodoravnu liniju"});

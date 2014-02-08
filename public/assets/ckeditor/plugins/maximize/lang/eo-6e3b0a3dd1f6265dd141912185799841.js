@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("maximize","eo",{maximize:"Pligrandigi",minimize:"Malgrandigi"});

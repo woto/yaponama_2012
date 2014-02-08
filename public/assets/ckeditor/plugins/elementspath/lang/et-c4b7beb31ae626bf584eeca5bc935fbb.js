@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("elementspath","et",{eleLabel:"Elementide asukoht",eleTitle:"%1 element"});

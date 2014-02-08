@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("elementspath","eu",{eleLabel:"Elementu bidea",eleTitle:"%1 elementua"});

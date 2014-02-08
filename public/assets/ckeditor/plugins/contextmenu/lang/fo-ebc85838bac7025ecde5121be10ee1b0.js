@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("contextmenu","fo",{options:"Context Menu Options"});

@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("removeformat","sr-latn",{toolbar:"Ukloni formatiranje"});

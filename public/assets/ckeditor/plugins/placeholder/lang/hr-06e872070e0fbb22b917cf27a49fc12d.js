@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("placeholder","hr",{title:"Svojstva rezerviranog mjesta",toolbar:"Napravi rezervirano mjesto",text:"Tekst rezerviranog mjesta",edit:"Uredi rezervirano mjesto",textMissing:"Rezervirano mjesto mora sadržavati tekst."});

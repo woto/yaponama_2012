@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("elementspath","ca",{eleLabel:"Ruta dels elements",eleTitle:"%1 element"});
