@@ -141,6 +141,11 @@ class ApplicationController < ActionController::Base
 
     current_user.user_agent                = request.user_agent.to_s
     current_user.accept_language           = request.accept_language.to_s
+
+    current_user.cached_location = request.protocol + request.host_with_port + request.original_fullpath
+    current_user.cached_referrer = request.referer
+
+
     current_user.save!
   end
 
