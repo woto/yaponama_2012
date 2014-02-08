@@ -1,13 +1,12 @@
 # encoding: utf-8
 #
 class RobotsTxtController < ApplicationController
+  include SetResourceClassDummy
+
   def index
-    render :text => <<EOF
-User-Agent: *
-Allow: /
-Crawl-delay: 5
-Sitemap: http://#{SiteConfig.site_address}/sitemap_index.xml.gz
-Host: #{SiteConfig.site_address}
-EOF
+    render 'index', layout: false
   end
+
+  private
+
 end
