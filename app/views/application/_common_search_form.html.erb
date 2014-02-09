@@ -6,7 +6,7 @@
       <div class="input-group-btn">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
         <ul class="dropdown-menu pull-right">
-          <% history = Stat.find_by_sql "
+          <%# history = Stat.find_by_sql "
           SELECT t1.*
           FROM stats t1
           INNER JOIN

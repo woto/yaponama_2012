@@ -1,0 +1,10 @@
+{
+    "name": "yaponama_2012",
+    "description": "",
+    "version": "0.0.1",
+    "dependencies": {
+      "util": "*",
+      "async": "*",
+      "underscore": "*"
+    }
+}

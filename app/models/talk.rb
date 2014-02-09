@@ -47,9 +47,11 @@ class Talk < ActiveRecord::Base
   #######
 
   after_save do
-    talk = ApplicationController.new.render_to_string(template: 'talks/show.html.erb', layout: false, locals: { resource: self })
-    self.update_column(:cached_talk, talk)
-    $redis.publish("#{Rails.env}:show talk", JSON.dump(self.as_json))
+    if changes.any?
+      talk = ApplicationController.new.render_to_string(template: 'talks/show.html.erb', layout: false, locals: { resource: self })
+      self.update_column(:cached_talk, talk)
+      $redis.publish("#{Rails.env}:show talk", JSON.dump(self.as_json))
+    end
   end
 
 end

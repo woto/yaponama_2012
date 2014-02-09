@@ -27,7 +27,6 @@ class Realtime
       console.log ''
 
       switch message
-
         # RESPONSE SELLERS
         when 'response sellers'
           $('#sellers').html(JSON.stringify(data, null, 4))
@@ -72,16 +71,18 @@ class Realtime
               else if addressee_is_seller? && ( data.creator_id.toString() == $('#current_user_id').html() )
                 $('#talk_addressee_id').val(data.addressee_id)
 
-              if (data.addressee_id?)
-                App.select_addressee()
-              else
-                # Получается, что это тоже не нужно, т.к. проверка admin_zone
-                # переехала в самый верх
-                ## Если получатель в фронтэнде, т.к. селлер так же получит
-                ## это сообщение и у него сотрется получатель и будет менеджер
-                ## не отвечать на сообщения, а писать всем :)
-                #unless admin_zone
-                App.unselect_addressee()
+              # Если обновление, то дефолтного селлера не меняем
+              if data.created_at == data.updated_at
+                if (data.addressee_id?)
+                  App.select_addressee()
+                else
+                  # Получается, что это тоже не нужно, т.к. проверка admin_zone
+                  # переехала в самый верх
+                  ## Если получатель в фронтэнде, т.к. селлер так же получит
+                  ## это сообщение и у него сотрется получатель и будет менеджер
+                  ## не отвечать на сообщения, а писать всем :)
+                  #unless admin_zone
+                  App.unselect_addressee()
 
             $cleared_talk = $(data.cached_talk)
             #$cleared_talk.find(".seller-talk-controls").remove()
@@ -106,6 +107,16 @@ class Realtime
             unless data.addressee_id?
               $(document).trigger('broadcast-message', [data])
 
+          # Если я являюсь адресатом
+          aa1 = data.addressee_id?.toString() == $('#current_user_id').html()
+
+          # Если адресат не указан и я не отправитель, но сообщение все таки пришло мне
+          aa2 = !data.addressee_id?  && data.creator_id.toString() != $('#current_user_id').html()
+
+          if aa1 || aa2
+            Realtime.talk_received data.id
+
+
     Realtime.sock.onclose = () ->
       console.log 'onclose'
       _.delay ->
@@ -115,6 +126,14 @@ class Realtime
 App.Realtime = Realtime
 
 #####################################
+
+Realtime.talk_received = (id) ->
+
+  $.ajax
+    type: "PATCH"
+    url: "/user/talks/" + id
+    data: { talk: { received: true } }
+    dataType: 'script'
 
 Realtime.request_sellers = ->
   data =

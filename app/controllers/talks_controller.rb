@@ -9,15 +9,12 @@ class TalksController < ApplicationController
   def item
   end
 
-  ## GET /talks
-  ## GET /talks.json
-  #def index
-  #  @resource = @user.talks.order(id: :desc)
-  #end
-
-  # GET /talks/1
-  # GET /talks/1.json
-  def show
+  def update
+    respond_to do |format|
+      if @resource.save
+        format.js { render nothing: true }
+      end
+    end
   end
 
   def modal
@@ -28,15 +25,6 @@ class TalksController < ApplicationController
     chat_part.chat_partable = Talkables::ChatPartables::Text.new
     load_older_talks_sub()
   end
-
-  ## GET /talks/new
-  #def new
-  #  @resource = Talk.new
-  #end
-
-  ## GET /talks/1/edit
-  #def edit
-  #end
 
   # POST /talks
   # POST /talks.json
@@ -114,16 +102,6 @@ class TalksController < ApplicationController
       end
     end
   end
-
-  # DELETE /talks/1
-  # DELETE /talks/1.json
-  #def destroy
-  #  @resource.destroy
-  #  respond_to do |format|
-  #    format.html { redirect_to talks_url }
-  #    format.json { head :no_content }
-  #  end
-  #end
 
   def load_older_talks
     load_older_talks_sub(params[:last_id])

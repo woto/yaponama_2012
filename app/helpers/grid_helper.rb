@@ -55,7 +55,7 @@ module GridHelper
       content_tag_for(:span, item, column_name, :class => column_name) do
         case column_name
         # READ ONLY
-        when *['content', 'user_agent', 'accept_language', 'cached_location', 'cached_referrer', 'cached_title', 'path', 'title']
+        when *['content', 'user_agent', 'accept_language', 'path', 'title']
           new_val = truncate(val, length: 40)
           content_tag :span, (new_val != val ? {data: { title: val }, rel: 'tooltip'} : {} ) do
             truncate val, length: 40

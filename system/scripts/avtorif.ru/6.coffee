@@ -166,15 +166,15 @@ class Crawler
 
 crawler = new Crawler 
 
-  host: "http://systemsauto.ru"
+  host: "http://192.168.100.14"
 
   success: (page, url, callback) ->
     post = require('webpage').create()
-    server = 'http://localhost:3002/admin/pages'
+    server = 'http://localhost/admin/pages'
 
     content = page.evaluate(->
-      if document.body and document.body.innerHTML then document.body.innerHTML else ""
-      #if document.body and document.body.querySelector('#main') then  document.body.querySelector('#main').innerHTML else ""
+      #if document.body and document.body.innerHTML then document.body.innerHTML else ""
+      if document.body and document.body.querySelector('#main') then  document.body.querySelector('#main').innerHTML else ""
     )
 
     title = page.evaluate(->

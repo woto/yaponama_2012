@@ -11,7 +11,8 @@
       "underscore": "*",
       "async": "*",
       "sockjs": "*",
-      "colors": "*"
+      "colors": "*",
+      "util": "*"
     },
     "engines": {
       "node": "*",

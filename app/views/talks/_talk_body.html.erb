@@ -3,12 +3,19 @@
   <fieldset>
 
     <%= form_for resource, url: "/admin/talks/#{resource.id}", remote: true, html: { class: 'pull-right' } do |f| %>
+      <% if f.object.received? %>
+        <%= icon 'check-square-o' %>
+      <% else %>
+        <%= icon 'square-o' %>
+      <% end %>
+
       <div class="btn-group right-space-xs" data-toggle="buttons">
         <label class="btn btn-default btn-sm">
           <%= f.check_box :read, rel: "radio talk-read", class: "talk_read", id: "talk_read_#{f.object.id}" %>
           <%= icon "eye" %>
         </label>
       </div>
+
     <% end %>
 
     <!--

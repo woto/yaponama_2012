@@ -22,7 +22,7 @@ sjs.installHandlers server, prefix: "/realtime"
 # Читаем database.yml
 #console.log fs.realpathSync
 database_file = fs.readFileSync(__dirname + '/../config/database.yml', 'utf8')
-database_yml = yaml.safeLoad(database_file)[rails_env];
+database_yml = yaml.load(database_file)[rails_env];
 console.log(util.inspect(database_yml, false, 10, true));
 pg.defaults.user = database_yml['username']
 pg.defaults.database = database_yml['database']
