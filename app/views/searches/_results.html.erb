@@ -141,12 +141,14 @@
 
                 <p>Есть вопросы? <a href="#">Менеджер готов проконсультировать вас прямо сейчас</a>.</p>
 
-                <hr />
+                <% if @current_user.seller? %>
+                  <hr />
 
-                <% if mf_scope[:info][:own][:data].blank? %>
-                  <%= link_to 'Новая статья', new_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath), :class => "btn btn-default pull-right btn-xs" %>
-                <% else %>
-                  <%= link_to 'Редактировать статью', edit_spare_info_path(mf_scope[:info][:own][:data], :return_path => request.fullpath), :class => "btn btn-default pull-right btn-xs" %>
+                  <% if mf_scope[:info][:own][:data].blank? %>
+                    <%= link_to 'Новая статья', new_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath), :class => "btn btn-default pull-right btn-xs" %>
+                  <% else %>
+                    <%= link_to 'Редактировать статью', edit_spare_info_path(mf_scope[:info][:own][:data], :return_path => request.fullpath), :class => "btn btn-default pull-right btn-xs" %>
+                  <% end %>
                 <% end %>
 
                 <% if mf_scope[:info][:own][:status] == 'avaliable' %>
