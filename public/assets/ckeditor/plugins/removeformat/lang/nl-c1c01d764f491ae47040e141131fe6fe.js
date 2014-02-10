@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("removeformat","nl",{toolbar:"Opmaak verwijderen"});

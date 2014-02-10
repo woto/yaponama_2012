@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("elementspath","eo",{eleLabel:"Vojo al Elementoj",eleTitle:"%1 elementoj"});

@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("contextmenu","hr",{options:"Opcije izbornika"});

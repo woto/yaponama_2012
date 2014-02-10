@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("removeformat","ms",{toolbar:"Buang Format"});

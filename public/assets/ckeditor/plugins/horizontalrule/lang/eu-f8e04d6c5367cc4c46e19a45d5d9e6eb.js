@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("horizontalrule","eu",{toolbar:"Txertatu Marra Horizontala"});

@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("maximize","eu",{maximize:"Maximizatu",minimize:"Minimizatu"});
