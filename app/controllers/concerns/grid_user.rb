@@ -185,6 +185,10 @@ module GridUser
         :type => :number
       }
 
+      columns_hash['transport'] = {
+        :type => :string
+      }
+
       columns_hash['default_addressee_id'] = {
         :type => :belongs_to,
         :belongs_to => User,

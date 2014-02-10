@@ -11,7 +11,9 @@ class Realtime
 
   @connect = ->
     address = "http://" + $('#realtime_address').text() + ":" + $('#realtime_port').text() + "/realtime"
-    Realtime.sock = new SockJS(address, undefined, { debug: false, devel: false })
+    protocols = ['websocket', 'xdr-streaming', 'xhr-streaming', 'iframe-eventsource', 'iframe-htmlfile', 'xdr-polling', 'xhr-polling', 'iframe-xhr-polling', 'jsonp-polling']
+    options = {protocols_whitelist: protocols, debug: true, devel: true, jsessionid: false};
+    Realtime.sock = new SockJS(address, undefined, options);
 
     Realtime.sock.onopen = ->
       console.log 'onopen'
@@ -27,6 +29,7 @@ class Realtime
       console.log ''
 
       switch message
+
         # RESPONSE SELLERS
         when 'response sellers'
           $('#sellers').html(JSON.stringify(data, null, 4))
@@ -36,6 +39,7 @@ class Realtime
         when 'response authentication'
           $('#authentication').text(data)
           Realtime.request_sellers()
+          Realtime.transport()
 
         # SHOW TALK
         when 'show talk'
@@ -141,6 +145,12 @@ Realtime.request_sellers = ->
 
   Realtime.send data
 
+Realtime.transport = ->
+  data =
+    message: 'transport'
+    data: Realtime.sock.protocol
+
+  Realtime.send data
 
 Realtime.request_authentication = ->
   data =

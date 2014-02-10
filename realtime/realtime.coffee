@@ -111,6 +111,10 @@ async.waterfall [(callback) ->
 
         switch data.message
 
+          when 'transport'
+            query = "UPDATE somebodies SET transport = $1 where id=$2"
+            db.query query, [data.data, user_id], (err, result) ->
+
           when 'request sellers'
 
             # Если sellers еще не заполнен, то заполняем и 

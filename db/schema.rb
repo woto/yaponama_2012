@@ -1182,6 +1182,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "default_addressee_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "transport"
   end
 
   add_index "somebodies", ["creator_id"], name: "index_somebodies_on_creator_id", using: :btree
@@ -1281,6 +1282,8 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "default_addressee_id_before"
     t.integer  "default_addressee_id_after"
     t.datetime "created_at"
+    t.string   "transport_before"
+    t.string   "transport_after"
   end
 
   add_index "somebody_transactions", ["creator_id"], name: "index_somebody_transactions_on_creator_id", using: :btree
