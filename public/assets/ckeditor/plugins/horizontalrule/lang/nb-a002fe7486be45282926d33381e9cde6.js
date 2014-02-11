@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("horizontalrule","nb",{toolbar:"Sett inn horisontal linje"});

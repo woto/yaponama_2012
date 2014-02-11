@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("placeholder","sl",{title:"Lastnosti Ograde",toolbar:"Ustvari Ogrado",name:"Placeholder Name",invalidName:"The placeholder can not be empty and can not contain any of following characters: [, ], <, >",pathName:"placeholder"});

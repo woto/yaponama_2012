@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("language","cs",{button:"Nastavit jazyk",remove:"Odstranit jazyk"});

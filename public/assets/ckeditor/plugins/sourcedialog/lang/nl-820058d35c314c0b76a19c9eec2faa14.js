@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("sourcedialog","nl",{toolbar:"Code",title:"Code"});

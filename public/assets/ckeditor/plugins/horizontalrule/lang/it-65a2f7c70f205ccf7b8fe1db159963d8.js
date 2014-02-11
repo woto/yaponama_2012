@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("horizontalrule","it",{toolbar:"Inserisci riga orizzontale"});

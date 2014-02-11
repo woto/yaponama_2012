@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("removeformat","lv",{toolbar:"Noņemt stilus"});

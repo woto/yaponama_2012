@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("language","nb",{button:"Sett språk",remove:"Fjern språk"});

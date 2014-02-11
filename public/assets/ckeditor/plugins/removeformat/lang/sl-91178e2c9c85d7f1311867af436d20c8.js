@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("removeformat","sl",{toolbar:"Odstrani oblikovanje"});

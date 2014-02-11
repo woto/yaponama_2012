@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("language","ru",{button:"Установка языка",remove:"Удалить язык"});

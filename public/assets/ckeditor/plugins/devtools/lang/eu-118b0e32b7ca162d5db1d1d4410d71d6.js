@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("devtools","eu",{title:"Elementuaren Informazioa",dialogName:"Elkarrizketa leihoaren izena",tabName:"Fitxaren izena",elementId:"Elementuaren ID-a",elementType:"Elementu mota"});

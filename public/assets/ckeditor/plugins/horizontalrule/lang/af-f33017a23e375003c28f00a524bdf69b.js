@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("horizontalrule","af",{toolbar:"Horisontale lyn invoeg"});

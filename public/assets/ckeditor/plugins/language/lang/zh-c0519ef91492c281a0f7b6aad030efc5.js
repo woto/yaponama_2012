@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("language","zh",{button:"設定語言",remove:"移除語言"});

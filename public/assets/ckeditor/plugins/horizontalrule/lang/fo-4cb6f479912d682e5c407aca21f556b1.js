@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("horizontalrule","fo",{toolbar:"Ger vatnrætta linju"});

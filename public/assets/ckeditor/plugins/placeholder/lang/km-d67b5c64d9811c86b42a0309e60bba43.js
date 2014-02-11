@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("placeholder","km",{title:"លក្ខណៈ Placeholder",toolbar:"បង្កើត Placeholder",name:"Placeholder Name",invalidName:"The placeholder can not be empty and can not contain any of following characters: [, ], <, >",pathName:"placeholder"});

@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("placeholder","tr",{title:"Yer tutucu özellikleri",toolbar:"Yer tutucu oluşturun",name:"Placeholder Name",invalidName:"The placeholder can not be empty and can not contain any of following characters: [, ], <, >",pathName:"placeholder"});

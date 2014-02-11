@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("horizontalrule","en-ca",{toolbar:"Insert Horizontal Line"});

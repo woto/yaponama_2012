@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("language","en",{button:"Set language"});

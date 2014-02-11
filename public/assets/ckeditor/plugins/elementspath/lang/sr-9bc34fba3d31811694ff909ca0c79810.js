@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("elementspath","sr",{eleLabel:"Elements path",eleTitle:"%1 element"});

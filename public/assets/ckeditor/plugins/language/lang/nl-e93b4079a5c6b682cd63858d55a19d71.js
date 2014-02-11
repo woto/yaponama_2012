@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("language","nl",{button:"Taal instellen",remove:"Taal verwijderen"});

@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("placeholder","pt-br",{title:"Propriedades do Espaço Reservado",toolbar:"Criar Espaço Reservado",name:"Placeholder Name",invalidName:"The placeholder can not be empty and can not contain any of following characters: [, ], <, >",pathName:"placeholder"});
