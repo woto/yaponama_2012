@@ -92,3 +92,4 @@
 //= require map
 //= require navbar
 //= require assa
+//= require spare_catalog

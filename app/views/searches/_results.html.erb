@@ -141,8 +141,97 @@
 
                 <p>Есть вопросы? <a href="#">Менеджер готов проконсультировать вас прямо сейчас</a>.</p>
 
+                <hr />
+
+                <% benchmark("Bayes") do %>
+
+                  <% nbayes = NBayes::Base.new %>
+
+                  <% SpareCatalog.all.each do |spare_catalog| %>
+                    <% nbayes.train( spare_catalog.content.split(/\s+/), spare_catalog.name ) %>
+                    <%# nbayes.train( [spare_catalog.content], spare_catalog.name ) %>
+                  <% end %>
+
+                  <%# tokens = mf_scope[:titles].keys.map{|val| h(val)}.join(', ').to_s.split(/\s+/) %>
+                  <%# tokens = mf_scope[:titles].keys.map{|val| h(val)}.join('###').to_s.split(/###/) %>
+                  <% tokens = mf_scope[:titles].keys.map{|val| h(val)}.join(', ').to_s.split(/[[:punct:][:space:]]/).reject{|item| item.length < 3}.map{|item| item.gsub(/[^[:word:]]/, '')} %>
+                  <% tokens = tokens.reject{|item| ['ДЕТАЛЬ', 'ЗАПЧАСТЬ'].include? item} %>
+
+                  <% if tokens.any? %>
+
+                    <%# tokens %>
+
+                    <% result = nbayes.classify(tokens) %>
+
+                    <% if false %>
+                      <h4>
+                        <a href="#"> <%= result.max_class %> </a>
+                      </h4>
+                    <% end %>
+
+                    <%= row do %>
+                      <div class="col-sm-1">
+                        <%= icon 'book fa-3x', style: 'margin-top: 10px' %>
+                      </div>
+                      <div class="col-sm-11">
+                        <h4> Близкие по теме материалы энциклопедии автомобиля:</h4>
+
+                        <ul class="list-unstyled">
+                          <% result.sort_by {|k, v| -v}.take(2).each do |item, rate| %>
+                            <li><a href="#"><%= item %></a></li>
+                          <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+
+                  <% end %>
+
+                <% end %>
+
+
                 <% if @current_user.seller? %>
+
                   <hr />
+
+                  <%# if false %>
+                  <%# c = BayesMotel::Corpus.new('parts') %>
+
+                  <%# SpareCatalog.all.each do |spare_catalog| %>
+                    <%# c.train({:text => spare_catalog.text}, spare_catalog.title) %>
+                  <%# end %>
+                  <%# tokens = mf_scope[:titles].keys.map{|val| h(val)}.join(', ') %>
+                  <%# binding.pry %>
+                  <%# results = c.classify({:text => tokens}) %>
+                  <%# debug results %>
+                  <%# end %>
+
+                  <%# if false %>
+                    <%# cls = StuffClassifier::Bayes.new("test", :stemming => false) %>
+
+                    <%# SpareCatalog.all.each do |spare_catalog| %>
+                      <%# cls.train(Russian.translit(spare_catalog.title), Russian.translit(spare_catalog.text)) %>
+                    <%# end %>
+
+                    <%# tokens = Russian.translit(mf_scope[:titles].keys.map{|val| h(val)}.join(', ')) %>
+
+                    <%# if tokens.size > 0 %>
+
+                      <%# result = cls.classify(tokens) %>
+
+                      <%# debug result %>
+                    <%# end %>
+                  <%# end %>
+
+                  <%= twbs_form_for SpareCatalog.new(:name => '', :content => long_name), :remote => true, :url => polymorphic_path([:admin, :spare_catalogs], :return_path => request.fullpath) do |f| %>
+
+                    <%= f.twbs_text_area :content, rows: 4 %>
+
+                    <%= f.twbs_select2 :name, rel: 'select2-spare-catalog' %>
+
+                    <%= f.twbs_submit %>
+
+                  <% end %>
+                  
 
                   <% if mf_scope[:info][:own][:data].blank? %>
                     <%= link_to 'Новая статья', new_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath), :class => "btn btn-default pull-right btn-xs" %>
