@@ -1,0 +1,24 @@
+<% title_show %>
+
+<%= breadcrumb true do |b| %>
+  <%= b.item @meta_title %>
+<% end %>
+
+<%= title_show %>
+
+<h3>
+  <%= @resource.name %>
+</h3>
+
+<h3>
+  <%= @resource.content %>
+</h3>
+
+<%= link_to url_for(action: :new, return_path: request.fullpath), class: "btn btn-primary" do %>
+  <%= icon 'plus' %>
+<% end %>
+
+<br />
+<br />
+
+<%= render 'smart_show' %>

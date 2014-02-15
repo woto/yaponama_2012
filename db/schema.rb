@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 99999999999999) do
+ActiveRecord::Schema.define(version: 20140210162500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -269,14 +269,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "rul_after"
     t.string   "car_number_before"
     t.string   "car_number_after"
-    t.string   "creation_reason_before"
-    t.string   "creation_reason_after"
-    t.text     "notes_before"
-    t.text     "notes_after"
-    t.text     "notes_invisible_before"
-    t.text     "notes_invisible_after"
-    t.integer  "somebody_id_before"
-    t.integer  "somebody_id_after"
     t.datetime "created_at"
   end
 
@@ -405,14 +397,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "actual_address_id_after"
     t.string   "cached_actual_address_before"
     t.string   "cached_actual_address_after"
-    t.string   "creation_reason_before"
-    t.string   "creation_reason_after"
-    t.text     "notes_before"
-    t.text     "notes_after"
-    t.text     "notes_invisible_before"
-    t.text     "notes_invisible_after"
-    t.integer  "somebody_id_before"
-    t.integer  "somebody_id_after"
     t.datetime "created_at"
   end
 
@@ -495,14 +479,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.datetime "confirmation_datetime_after"
     t.string   "confirmation_token_before"
     t.string   "confirmation_token_after"
-    t.string   "creation_reason_before"
-    t.string   "creation_reason_after"
-    t.text     "notes_before"
-    t.text     "notes_after"
-    t.text     "notes_invisible_before"
-    t.text     "notes_invisible_after"
-    t.integer  "somebody_id_before"
-    t.integer  "somebody_id_after"
     t.datetime "created_at"
   end
 
@@ -538,14 +514,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.text     "answer_after"
     t.boolean  "phantom_before"
     t.boolean  "phantom_after"
-    t.string   "creation_reason_before"
-    t.string   "creation_reason_after"
-    t.text     "notes_before"
-    t.text     "notes_after"
-    t.text     "notes_invisible_before"
-    t.text     "notes_invisible_after"
-    t.integer  "somebody_id_before"
-    t.integer  "somebody_id_after"
     t.datetime "created_at"
   end
 
@@ -647,14 +615,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "patronymic_after"
     t.integer  "profile_id_before"
     t.integer  "profile_id_after"
-    t.string   "creation_reason_before"
-    t.string   "creation_reason_after"
-    t.text     "notes_before"
-    t.text     "notes_after"
-    t.text     "notes_invisible_before"
-    t.text     "notes_invisible_after"
-    t.integer  "somebody_id_before"
-    t.integer  "somebody_id_after"
     t.datetime "created_at"
   end
 
@@ -723,14 +683,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "token_after"
     t.string   "track_number_before"
     t.string   "track_number_after"
-    t.string   "creation_reason_before"
-    t.string   "creation_reason_after"
-    t.text     "notes_before"
-    t.text     "notes_after"
-    t.text     "notes_invisible_before"
-    t.text     "notes_invisible_after"
-    t.integer  "somebody_id_before"
-    t.integer  "somebody_id_after"
     t.datetime "created_at"
   end
 
@@ -837,14 +789,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "mesto_rozhdeniya_after"
     t.integer  "profile_id_before"
     t.integer  "profile_id_after"
-    t.string   "creation_reason_before"
-    t.string   "creation_reason_after"
-    t.text     "notes_before"
-    t.text     "notes_after"
-    t.text     "notes_invisible_before"
-    t.text     "notes_invisible_after"
-    t.integer  "somebody_id_before"
-    t.integer  "somebody_id_after"
     t.datetime "created_at"
   end
 
@@ -906,14 +850,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.datetime "confirmation_datetime_after"
     t.string   "confirmation_token_before"
     t.string   "confirmation_token_after"
-    t.string   "creation_reason_before"
-    t.string   "creation_reason_after"
-    t.text     "notes_before"
-    t.text     "notes_after"
-    t.text     "notes_invisible_before"
-    t.text     "notes_invisible_after"
-    t.integer  "somebody_id_before"
-    t.integer  "somebody_id_after"
     t.datetime "created_at"
   end
 
@@ -958,14 +894,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.boolean  "stand_alone_house_after"
     t.string   "room_before"
     t.string   "room_after"
-    t.string   "creation_reason_before"
-    t.string   "creation_reason_after"
-    t.text     "notes_before"
-    t.text     "notes_after"
-    t.text     "notes_invisible_before"
-    t.text     "notes_invisible_after"
-    t.integer  "somebody_id_before"
-    t.integer  "somebody_id_after"
     t.datetime "created_at"
   end
 
@@ -1032,14 +960,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "order_id_after"
     t.integer  "supplier_id_before"
     t.integer  "supplier_id_after"
-    t.string   "creation_reason_before"
-    t.string   "creation_reason_after"
-    t.text     "notes_before"
-    t.text     "notes_after"
-    t.text     "notes_invisible_before"
-    t.text     "notes_invisible_after"
-    t.integer  "somebody_id_before"
-    t.integer  "somebody_id_after"
     t.datetime "created_at"
   end
 
@@ -1092,14 +1012,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.text     "cached_emails_after"
     t.text     "cached_passports_before"
     t.text     "cached_passports_after"
-    t.string   "creation_reason_before"
-    t.string   "creation_reason_after"
-    t.text     "notes_before"
-    t.text     "notes_after"
-    t.text     "notes_invisible_before"
-    t.text     "notes_invisible_after"
-    t.integer  "somebody_id_before"
-    t.integer  "somebody_id_after"
     t.datetime "created_at"
   end
 
@@ -1177,12 +1089,12 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "cached_client_width"
     t.string   "cached_client_height"
     t.string   "cached_talk"
+    t.string   "transport"
     t.integer  "unread_talks",                                             default: 0
     t.integer  "total_talks",                                              default: 0
     t.integer  "default_addressee_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "transport"
   end
 
   add_index "somebodies", ["creator_id"], name: "index_somebodies_on_creator_id", using: :btree
@@ -1275,6 +1187,8 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "cached_client_height_after"
     t.string   "cached_talk_before"
     t.string   "cached_talk_after"
+    t.string   "transport_before"
+    t.string   "transport_after"
     t.integer  "unread_talks_before"
     t.integer  "unread_talks_after"
     t.integer  "total_talks_before"
@@ -1282,8 +1196,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "default_addressee_id_before"
     t.integer  "default_addressee_id_after"
     t.datetime "created_at"
-    t.string   "transport_before"
-    t.string   "transport_after"
   end
 
   add_index "somebody_transactions", ["creator_id"], name: "index_somebody_transactions_on_creator_id", using: :btree

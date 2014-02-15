@@ -73,7 +73,7 @@ class CreateSomebodies < ActiveRecord::Migration
       t.string :cached_client_height
 
       t.string :cached_talk
-      t.string 
+      t.string :transport
 
       t.integer :unread_talks, default: 0
       t.integer :total_talks, default: 0

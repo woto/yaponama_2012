@@ -23,8 +23,13 @@ end
 
 Yaponama2012::Application.routes.draw do
 
+  concern :searchable do
+    get 'search', :on => :collection
+  end
+
   concern :global_and_admin do
     resources :faqs, concerns: [:transactionable, :gridable]
+    resources :spare_catalogs, concerns: [:gridable, :searchable]
   end
 
   resources :rspec_tests
@@ -223,11 +228,6 @@ Yaponama2012::Application.routes.draw do
     resources :calls
 
     resources :blocks
-
-    concern :searchable do
-      get 'search', :on => :collection
-    end
-
 
     concerns :cars_searchable
 
