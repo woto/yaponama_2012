@@ -51,7 +51,9 @@ class UploadsController < ApplicationController
   def update
     @resource = Upload.find(params[:id])
     if @resource.update_attributes(upload_params)
-      render 'close_and_update_image'
+      respond_to do |format|
+        format.js { render 'close_and_update_image' } 
+      end
     end
   end
 

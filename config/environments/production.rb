@@ -1,3 +1,5 @@
+require 'uglifier'
+
 Yaponama2012::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -20,20 +22,26 @@ Yaponama2012::Application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = true
+  config.serve_static_assets = false
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor  = :uglifier
-  config.assets.css_compressor = :yui
+  #config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = Uglifier.new(
+    #:output => {
+    #  :beautify => true,
+    #},
+    :mangle => false
+  )
+  # config.assets.css_compressor = :sass , :yui
 
-  # Whether to fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = true
+  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = false
 
   # Generate digests for assets URLs.
   config.assets.digest = true
 
   # Version of your assets, change this if you want to expire all your assets.
-  config.assets.version = '1.5'
+  config.assets.version = '1.12'
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -59,17 +67,18 @@ Yaponama2012::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
+  # config.assets.precompile += %w( search.js )
+
   config.assets.precompile += [
-    "ltie9",
-    "ckeditor/*",
-    "uploads.js"
+    "ltie9.js",
+    "uploads.js",
+    "uploads.css"
+    "uploads/*",
   ]
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
-
-  config.action_mailer.perform_deliveries = false
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
@@ -77,10 +86,6 @@ Yaponama2012::Application.configure do
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
-
-  # Log the query plan for queries taking more than this (works
-  # with SQLite, MySQL, and PostgreSQL).
-  # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
