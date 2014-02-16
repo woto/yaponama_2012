@@ -5,6 +5,9 @@ class SpareInfosController < ApplicationController
 
   skip_before_filter :set_grid, only: [:edit, :new, :create, :show, :update]
 
+  # TODO Не забыть вернуть!
+  skip_before_action :verify_authenticity_token
+
   def transactions
     render :text => "SpareInfosController::transactions"
   end

@@ -20,7 +20,7 @@
             <% Rails.configuration.payment_systems.each do |k, v| %>
               <%= f.label :payment_type, value: k, class: 'payment' do %>
                 <%= f.radio_button :payment_type, k, data: v, rel: 'radio' %>
-                <%= image_tag "/assets/payment/#{k}.gif", alt: k, width: '110px' %>
+                <%= image_tag "payment/#{k}.gif", alt: k, width: '110px' %>
               <% end %>
             <% end %>
           </div>

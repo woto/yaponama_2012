@@ -10,8 +10,8 @@
 <%== SiteConfig.counter_openstat %>
 <%== SiteConfig.counter_liveinternet %>
 
-<audio id="notify-audio" src='/assets/notify.ogg'> </audio>
-<audio id="notify-toggle-audio" src='/assets/toggle.ogg'> </audio>
+<%= audio_tag "notify.ogg", id: "notify-audio" %>
+<%= audio_tag "toggle.ogg", id: "notify-toggle-audio" %>
 
 <div class="panel-group hidden" id="accordion">
 
