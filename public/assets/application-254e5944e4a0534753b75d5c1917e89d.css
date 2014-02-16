@@ -6479,8 +6479,8 @@ td.visible-print {
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url('/new_assets/Font-Awesome/fonts/fontawesome-webfont.eot?v=4.0.3');
-  src: url('/new_assets/Font-Awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'), url('/new_assets/Font-Awesome/fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'), url('/new_assets/Font-Awesome/fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'), url('/new_assets/Font-Awesome/fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
+  src: url('Font-Awesome/less/../fonts/fontawesome-webfont.eot?v=4.0.3');
+  src: url('Font-Awesome/less/../fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'), url('Font-Awesome/less/../fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'), url('Font-Awesome/less/../fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'), url('Font-Awesome/less/../fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
