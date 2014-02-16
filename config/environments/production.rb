@@ -72,8 +72,8 @@ Yaponama2012::Application.configure do
   config.assets.precompile += [
     "ltie9.js",
     "uploads.js",
-    "uploads.css"
-    "uploads/*",
+    "uploads.css",
+    "uploads/*"
   ]
 
   # Ignore bad email addresses and do not raise email delivery errors.
