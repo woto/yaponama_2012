@@ -21,6 +21,12 @@
 //
 // require headroom.js/dist/headroom
 // require headroom.js/dist/jQuery.headroom
+//
+//= require pickadate.js/lib/picker
+//= require pickadate.js/lib/picker.date
+//= require pickadate.js/lib/picker.time
+//= require pickadate.js/lib/legacy
+//= require pickadate.js/lib/translations/ru_RU
 
 
 // APPLICATION
