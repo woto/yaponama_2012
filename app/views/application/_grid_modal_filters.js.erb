@@ -38,15 +38,14 @@
         <%= f.twbs_collection_select "filter_#{column_name}_belongs_to", @grid_class::COLUMNS[column_name][:belongs_to].all, :id, :to_label, { hint: "Зажмите Ctrl чтобы выбрать несколько одновременно" }, { :multiple => true } %>
       <%- when :date %>
         <div id="sandbox-container">
-          <%= f.twbs_text_field "filter_#{column_name}_from" %>
-          <%= f.twbs_text_field "filter_#{column_name}_to" %>
+          <%= f.twbs_text_field "filter_#{column_name}_from", value: '', data: {value: eval("f.object.filter_#{column_name}_from")}  %>
+          <%= f.twbs_text_field "filter_#{column_name}_to", value: '', data: {value: eval("f.object.filter_#{column_name}_to")} %>
         </div>
         <script>
           $('#sandbox-container input').pickadate({
             container: 'body',
-            format: 'dd.mm.yy',
-            formatSubmit: undefined,
-            hiddenPrefix: undefined,
+            format: 'dd.mm.yyyy',
+            formatSubmit: 'dd.mm.yyyy',
             hiddenPrefix: '',
             hiddenSuffix: '',
           })
