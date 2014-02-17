@@ -27,7 +27,7 @@ module GridUser
       }
 
       columns_hash['password_reset_sent_at'] = {
-        :type => :datetime
+        :type => :date
       }
 
       columns_hash['ipgeobase_name'] = {
@@ -149,11 +149,11 @@ module GridUser
       }
 
       columns_hash['created_at'] = {
-        :type => :datetime
+        :type => :date
       }
 
       columns_hash['updated_at'] = {
-        :type => :datetime
+        :type => :date
       }
 
       columns_hash['order_rule'] = {
