@@ -101,6 +101,14 @@
             th= model_class.human_attribute_name(:juggernaut_full_address)
             th= model_class.human_attribute_name(:price_full_address)
             th= model_class.human_attribute_name(:get_image_data_full_address)
+          - if params[:filter] == 'mail' || params[:filter].blank?
+            th= model_class.human_attribute_name(:mail_delivery_method)
+            th= model_class.human_attribute_name(:smtp_address)
+            th= model_class.human_attribute_name(:smtp_port)
+            th= model_class.human_attribute_name(:smtp_user_name)
+            th= model_class.human_attribute_name(:smtp_password)
+            th= model_class.human_attribute_name(:smtp_authentication)
+            th= model_class.human_attribute_name(:smtp_enable_starttls_auto)
           th= model_class.human_attribute_name(:updated_at)
           th=t '.actions', :default => t("helpers.actions")
       tbody
@@ -182,6 +190,14 @@
               td= admin_site_setting.juggernaut_full_address
               td= admin_site_setting.price_full_address
               td= admin_site_setting.get_image_data_full_address
+            - if params[:filter] == 'mail' || params[:filter].blank?
+              td= admin_site_setting.mail_delivery_method
+              td= admin_site_setting.smtp_address
+              td= admin_site_setting.smtp_port
+              td= admin_site_setting.smtp_user_name
+              td= admin_site_setting.smtp_password
+              td= admin_site_setting.smtp_authentication
+              td= admin_site_setting.smtp_enable_starttls_auto
             td=l admin_site_setting.updated_at, :format => :short
             td
               = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_site_setting_path(admin_site_setting, :filter => params[:filter]), :class => 'btn btn-mini'

@@ -86,6 +86,14 @@
     = f.input :price_port
     = f.input :get_image_data_address
     = f.input :get_image_data_port
+  - if params[:filter] == 'mail' || params[:filter].blank?
+    = f.input :mail_delivery_method
+    = f.input :smtp_address
+    = f.input :smtp_port
+    = f.input :smtp_user_name
+    = f.input :smtp_password
+    = f.input :smtp_authentication
+    = f.input :smtp_enable_starttls_auto
 
 
   .form-actions
