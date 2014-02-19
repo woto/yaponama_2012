@@ -13,8 +13,8 @@ account = user.build_account
 
 profile = user.profiles.new
 profile.names.new(:name => "Администратор")
-profile.phones.new({:value => '+7 (111) 111-11-11', :mobile => true} )
-profile.emails.new( {:value => 'admin@example.com'} )
+profile.phones.new({:value => '+7 (111) 111-11-11', :mobile => true, :confirmed => true} )
+profile.emails.new( {:value => 'admin@example.com', :confirmed => true} )
 
 user.save!
 

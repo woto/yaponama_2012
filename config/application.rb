@@ -465,13 +465,41 @@ module Yaponama2012
       }
     }
 
-    config.action_mailer.delivery_method = :smtp
+    #config.action_mailer.delivery_method = :smtp
 
-    config.action_mailer.smtp_settings = {
-      address:                 "127.0.0.1",
-      port:                    25,
-      enable_starttls_auto:    true
-    }
+    #config.action_mailer.smtp_settings = {
+    #  address:                 "127.0.0.1",
+    #  port:                    25,
+    #  enable_starttls_auto:    true
+    #}
+
+    #config.action_mailer.delivery_method = :smtp
+    #config.action_mailer.smtp_settings = {
+    #  address:              'smtp.yandex.ru',
+    #  port:                 25,
+    #  #domain:               'avtorif.ru',
+    #  user_name:            'info@avtorif.ru',
+    #  password:             'Qwer3322!',
+    #  authentication:       'plain',
+    #  enable_starttls_auto: false  }
+
+    #config.action_mailer.smtp_settings = {
+    #  address:              'smtp.gmail.com',
+    #  port:                 587,
+    #  domain:               'avtorif.ru',
+    #  user_name:            'oganer',
+    #  password:             'vjqgfhjkm',
+    #  authentication:       'plain',
+    #  enable_starttls_auto: true  }
+
+    #require 'mail'
+    #Mail.defaults do
+    #  retriever_method :pop3, :address    => "pop.gmail.com",
+    #    :port       => 995,
+    #    :user_name  => 'info@yaponama.ru',
+    #    :password   => 'Qwer3322!',
+    #    :enable_ssl => true
+    #end
 
     # User Order Rule
     config.somebody_order_rules = {

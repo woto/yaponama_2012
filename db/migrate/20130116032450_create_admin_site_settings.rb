@@ -78,6 +78,14 @@ class CreateAdminSiteSettings < ActiveRecord::Migration
       t.string :mailru_secret
       t.string :default_time_zone_id
 
+      t.string :mail_delivery_method
+      t.string :smtp_address
+      t.boolean :smtp_port
+      t.string :smtp_user_name
+      t.string :smtp_password
+      t.string :smtp_authentication
+      t.boolean :smtp_enable_starttls_auto
+
       t.timestamps
     end
   end
