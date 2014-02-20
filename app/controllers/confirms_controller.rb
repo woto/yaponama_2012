@@ -20,8 +20,9 @@ class ConfirmsController < ApplicationController
 
     if @contact.update(confirm_params)
       if @user.role == 'guest'
-        #redirect_to edit_register_path(with: @contact.class.name.underscore), success: "<strong>#{@contact.to_label}</strong> успешно подтвержден. Пожалуйста завершите регистрацию придумав пароль.".html_safe
-        redirect_to root_path, success: "<strong>#{@contact.to_label}</strong> успешно подтвержден.".html_safe
+        cookies[:auth_token] = { :expire => nil, :value => @contact.profile.somebody.auth_token } 
+        redirect_to edit_register_path(with: @contact.class.name.underscore), success: "<strong>#{@contact.to_label}</strong> успешно подтвержден.".html_safe
+        #redirect_to root_path, success: "<strong>#{@contact.to_label}</strong> успешно подтвержден.".html_safe
       else
         redirect_to user_path, success: "<strong>#{@contact.to_label}</strong> успешно подтвержден.".html_safe
       end
