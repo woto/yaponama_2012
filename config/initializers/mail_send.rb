@@ -9,5 +9,5 @@ ActionMailer::Base.smtp_settings = {
   user_name:            ::SiteConfig.smtp_user_name,
   password:             ::SiteConfig.smtp_password,
   authentication:       ::SiteConfig.smtp_authentication,
-  enable_starttls_auto: ::SiteConfig.smtp_enable_starttls_auto  
+  enable_starttls_auto: ::SiteConfig.smtp_enable_starttls_auto
 }

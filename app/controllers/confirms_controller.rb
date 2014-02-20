@@ -4,7 +4,7 @@ class ConfirmsController < ApplicationController
 
   include SetResourceClassDummy
 
-  before_action :only_authenticated, only: [:ask, :new]
+  before_action :only_authenticated, only: [:new]
   before_action :anonymous_contact, only: [:make]
   before_action :user_contact, only: [:view, :ask]
 

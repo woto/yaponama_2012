@@ -1,6 +1,6 @@
 <% confirm = capture do %>
 
-  <% if current_user.role != 'guest' %>
+    <% confirmed_any = [] %>
 
     <% current_user.profiles.each do |profile| %>
 
@@ -11,6 +11,8 @@
             <%= alert_link_to phone.to_label, view_user_confirm_phone_path(phone, return_path: request.fullpath), class: 'confirm-link confirm-phone' %>
             <!-- чтобы мы были уверены, что вы получаете от нас SMS.  -->
           </div>
+        <% elsif phone.confirmed? && phone.persisted? %>
+          <% confirmed_any << 'phone' %>
         <% end %>
       <% end %>
 
@@ -21,18 +23,19 @@
             <%= alert_link_to email.to_label, view_user_confirm_email_path(email, return_path: request.fullpath), class: 'confirm-link confirm-email' %>
             <!-- чтобы мы были уверены, что вы получаете от нас письма. -->
           </div>
+        <% elsif email.confirmed? && email.persisted? %>
+          <% confirmed_any << 'email' %>
         <% end %>
+
       <% end %>
 
     <% end %>
 
-  <% else %>
-
-    <% if current_user.profiles.count > 0 %>
-      Мы автоматически зарегистрировали вас на нашем сайте, <%= alert_link_to "завершите регистрацию придумав себе пароль", register_path(return_path: request.fullpath) %>.
+    <% if confirmed_any.any? %>
+      Отлично!
+      <%= alert_link_to "Придумайте себе пароль", edit_register_path(return_path: request.fullpath, with: confirmed_any.first) %>
+      чтобы завершить регистрацию и иметь возможность входить с других компьютеров.
     <% end %>
-
-  <% end %>
 
 <% end %>
 
@@ -84,12 +87,12 @@
 
 
 <% if confirm.present? || pay.present? %>
-  <%= alert 'danger', false, class: 'clearfix', id: 'right_hand_alert' do %>
+  <%= alert 'warning', false, class: 'clearfix', id: 'right_hand_alert' do %>
 
     <div class="table bottom-space-none" style="display: table;">
       <ul class="table-row" style="display: table-row">
         <li class="table-cell" style="display: table-cell; vertical-align: middle"><%= icon 'hand-o-right fa-2x pull-left', id: 'right_hand' %></li>
-        <li class="table-cell" style="display: table-cell; vertical-align: middle">
+        <li class="table-cell" style="display: table-cell; vertical-align: middle; width: 100%; padding-left: 10px">
 
           <% if pay.present? %>
             <div id="pay-block">

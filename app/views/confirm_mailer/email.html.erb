@@ -1,2 +1,2 @@
-PIN: <%= @email.confirmation_token %>
-LINK: <%= make_user_confirm_email_url(id: @email.id, "confirm" => { "pin" => @email.confirmation_token } ) %>
+<p><%= link_to 'Перейдите по ссылке для подтверждения.', make_user_confirm_email_url(id: @email.id, "confirm" => { "pin" => @email.confirmation_token } ) %></p>
+<p>или введите PIN на странице подтвеждения <%= @email.confirmation_token %></p>
