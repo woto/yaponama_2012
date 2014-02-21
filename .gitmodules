@@ -22,12 +22,6 @@
 [submodule "system/submodules/Jcrop"]
 	path = system/submodules/Jcrop
 	url = https://github.com/tapmodo/Jcrop.git
-[submodule "db/seeds/brands"]
-	path = db/seeds/brands
-	url = https://github.com/woto/brands.git
-[submodule "db/seeds/brands_big"]
-	path = db/seeds/brands_big
-	url = https://github.com/woto/brands_big.git
 [submodule "system/images"]
 	path = system/images
 	url = https://github.com/woto/system_images.git
@@ -88,3 +82,9 @@
 [submodule "system/submodules/pickadate.js"]
 	path = system/submodules/pickadate.js
 	url = https://github.com/amsul/pickadate.js
+[submodule "system/submodules/brands_small"]
+	path = system/submodules/brands_small
+	url = https://github.com/woto/brands_small
+[submodule "system/submodules/brands_big"]
+	path = system/submodules/brands_big
+	url = https://github.com/woto/brands_big
