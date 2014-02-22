@@ -1,6 +1,6 @@
 namespace :app do
 
-  desc "Забиратель почты - тест"
+  desc "Почтоприемщик"
   task :imap_receive => :environment do
     require 'rubygems'
     require 'net/imap'
@@ -9,22 +9,30 @@ namespace :app do
 
     Net::IMAP.debug = true
 
-
     class MyMail
       def initialize
-        #@imap= Net::IMAP.new('imap.gmail.com', port: '993', ssl: true)
-        @imap= Net::IMAP.new('imap.yandex.ru', port: '993', ssl: true)
-        @imap.login('robot@avtorif.ru','123123')
-
         @idler_thread = Thread.new do
           loop do
             begin
-              @imap.select("INBOX")
-              process()
-            rescue StandardError => err
-              puts err
+              #@imap= Net::IMAP.new('imap.gmail.com', port: '993', ssl: true)
+              @imap= Net::IMAP.new('imap.yandex.ru', port: '993', ssl: true)
+              @imap.login('info@avtorif.ru','123123')
+
+              loop do
+                begin
+                  @imap.select("INBOX")
+                  process()
+                rescue IOError
+                  raise 'reconnect'
+                rescue StandardError => err
+                  puts err
+                end
+                sleep 3
+              end
+            rescue StandardError
+              #binding.pry
+              sleep 3
             end
-            sleep 3
           end
         end
         @idler_thread.run
@@ -35,9 +43,9 @@ namespace :app do
         @imap.search('ALL').each do |message_id|
           mail = Mail.new @imap.fetch(message_id, "RFC822")[0].attr["RFC822"]
           puts mail.subject
-          ReceiveMailer.receive mail
           @imap.store(message_id, "+FLAGS", [:Deleted])
           @imap.expunge
+          ReceiveMailer.receive mail
         end
       end
 
