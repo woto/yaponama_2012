@@ -1,7 +1,5 @@
 <div id="grid-footer">
-  <% if @items.num_pages > 1 %>
-    <%= p.footer class: 'clearfix' do %>
-      <%= paginate @items, :theme => :toolbar, :window => 2, :remote => true %>
-    <% end %>
+  <%= p.footer class: 'clearfix' do %>
+    <%= paginate @items, :theme => :toolbar, :window => 2, :remote => true %>
   <% end %>
 </div>
