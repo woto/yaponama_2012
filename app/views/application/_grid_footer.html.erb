@@ -1,5 +1,17 @@
 <div id="grid-footer">
+
   <%= p.footer class: 'clearfix' do %>
-    <%= paginate @items, :theme => :toolbar, :window => 2, :remote => true %>
+
+    <% if @items.num_pages > 1 %>
+
+      <%= paginate @items, :theme => :toolbar, :window => 2, :remote => true %>
+
+      <div class="small text-muted">
+        Страница <%= @items.current_page %> из <%= @items.total_pages %>, X на странице
+      </div>
+
+    <% end %>
+
   <% end %>
+
 </div>
