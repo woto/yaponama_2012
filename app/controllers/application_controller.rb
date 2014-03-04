@@ -129,6 +129,7 @@ class ApplicationController < ActionController::Base
   #end
 
   def ipgeobase
+
     # GEO
     remote_ip = request.remote_ip
 
@@ -145,6 +146,19 @@ class ApplicationController < ActionController::Base
     current_user.cached_location = request.protocol + request.host_with_port + request.original_fullpath
     current_user.cached_referrer = request.referer
 
+    # BOT
+
+    bot = false
+
+    if Bot.where("? <<= inet", remote_ip).present?
+      bot = true
+    end
+
+    if Bot.where(Bot.arel_table[:user_agent].matches("%#{current_user.user_agent}%")).present?
+      bot = true
+    end
+
+    current_user.bot = bot
 
     current_user.save!
   end

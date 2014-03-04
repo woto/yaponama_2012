@@ -86,6 +86,10 @@ module GridUser
         :type => :boolean
       }
 
+      columns_hash['bot'] = {
+        :type => :boolean
+      }
+
       columns_hash['logout_from_other_places'] = {
         :type => :boolean
       }

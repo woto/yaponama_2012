@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140213012421) do
+ActiveRecord::Schema.define(version: 20140304201759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,15 +117,15 @@ ActiveRecord::Schema.define(version: 20140213012421) do
     t.string   "mailru_key"
     t.string   "mailru_secret"
     t.string   "default_time_zone_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "mail_delivery_method"
     t.string   "smtp_address"
-    t.boolean  "smtp_port"
+    t.integer  "smtp_port"
     t.string   "smtp_user_name"
     t.string   "smtp_password"
     t.string   "smtp_authentication"
     t.boolean  "smtp_enable_starttls_auto"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "auths", force: true do |t|
@@ -156,6 +156,17 @@ ActiveRecord::Schema.define(version: 20140213012421) do
   create_table "blocks", force: true do |t|
     t.string   "name"
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bots", force: true do |t|
+    t.string   "title"
+    t.string   "comment"
+    t.string   "user_agent"
+    t.inet     "inet"
+    t.boolean  "phantom"
+    t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -1190,6 +1201,7 @@ ActiveRecord::Schema.define(version: 20140213012421) do
     t.integer  "default_addressee_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "bot",                                                      default: false
   end
 
   add_index "somebodies", ["creator_id"], name: "index_somebodies_on_creator_id", using: :btree
@@ -1291,6 +1303,8 @@ ActiveRecord::Schema.define(version: 20140213012421) do
     t.integer  "default_addressee_id_before"
     t.integer  "default_addressee_id_after"
     t.datetime "created_at"
+    t.boolean  "bot_before"
+    t.boolean  "bot_after"
   end
 
   add_index "somebody_transactions", ["creator_id"], name: "index_somebody_transactions_on_creator_id", using: :btree

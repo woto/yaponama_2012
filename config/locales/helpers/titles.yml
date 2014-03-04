@@ -1,6 +1,10 @@
 ru:
   helpers:
     titles:
+      bot:
+        index: Боты
+        new: Новый бот
+        edit: Редактирование бота
       spare_info:
         index: Описание товаров
         new: Новое описание товара
