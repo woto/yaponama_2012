@@ -10,17 +10,49 @@
 </div>
 
 <%= row do %>
-  <div class="col-lg-12">
+  <div class="col-sm-7">
     <h3>Каталоги автозапчастей</h3>
-    <div class="brands force-clearfix" style="margin-bottom: 20px">
-      <%= raw Brand.where("brand_id is NULL").map{|a, b| brands_decorator(a, {:title => true})}.join %>
+    <div class="brands clearfix" style="margin-bottom: 20px">
+      <%= raw Brand.where("brand_id is NULL").where(:is_brand => true).order(:name => :asc).map{|a, b| brands_decorator(a, {:title => true})}.join %>
     </div>
   </div>
-<% end %>
 
-<%= row class: "top-space-lg" do %>
-  <div class="col-lg-12">
-    <h3>Наше наличие</h3>
-    Начальный список и прайс для скачки.
+  <div class="col-sm-5">
+
+    <%= row do %>
+      <div class="col-sm-12">
+        <h3>Прайс лист автозапчастей</h3>
+      </div>
+    <% end %>
+    <%= row do %>
+      <div class="col-md-3">
+        <%= image_tag 'price.png', class: 'img-responsive center-block' %>
+      </div>
+      <div class="col-md-9">
+        <a href="#">Скачать прайс наличия от <span style="white-space: nowrap">22 февраля 2014 г. 12:35</span></a><br/>
+        <h6>цены со скидками доступны после регистрации.</h6>
+      </div>
+    <% end %>
+
+    <hr class="top-space bottom-space-sm"/>
+
+    <%= row do %>
+      <div class="col-sm-12">
+        <h3>Интерактивная карта доставки</h3>
+      </div>
+    <% end %>
+    <%= row do %>
+      <div class="col-md-3">
+        <%= image_tag 'map.png', class: 'img-responsive center-block' %>
+      </div>
+      <div class="col-md-9">
+        <a href="#">Выберите доступные магазины или узнайте стоимость доставки до вашего дома на интерактивной карте.</a><br/>
+        <h6>мы так же осуществляем доставку в регионы Почтой России, ПЭК и Деловыми Линиями.</h6>
+      </div>
+    <% end %>
+
+    <hr class="top-space-lg bottom-space-lg"/>
+
   </div>
+
 <% end %>
