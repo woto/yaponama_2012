@@ -10,9 +10,11 @@
 
 .DS_Store
 *~
-*.swp
+*.swl
+*.swm
+*.swn
 *.swo
-.swn
+*.swp
 
 /public/sitemap*
 /vendor/cache
