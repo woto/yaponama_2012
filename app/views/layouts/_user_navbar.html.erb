@@ -30,8 +30,10 @@
           <li class="<%= highlight_active([:controller => '/products', :status => 'incart']) %>">
             <%= link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do %>
               <%= icon 'shopping-cart' %> 
-              <% count = current_user.products.where(:status => 'incart').count %>
-              Корзина <span id="products_incart" class="badge"><%= count if count > 0 %></span>
+              <span class="hidden-sm">
+                <% count = current_user.products.where(:status => 'incart').count %>
+                Корзина <span id="products_incart" class="badge"><%= count if count > 0 %></span>
+              </span>
             <% end %>
           </li>
 
@@ -40,7 +42,7 @@
             <%= dd.toggle do %>
               <%= icon 'user' %>
               <% if current_user.role != 'guest' %>
-                <%= current_user.name %>
+                <span class="hidden-sm"><%= current_user.name %></span>
               <% else %>
                 Вход
               <% end %>

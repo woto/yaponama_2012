@@ -146,7 +146,9 @@
           <%= dd.toggle do %>
             <%= icon 'user' %>
             <% if current_user.role != 'guest' %>
-              <%= current_user.name %>
+              <span class="hidden-sm">
+                <%= current_user.name %>
+              </span>
             <% else %>
               Личный кабинет
             <% end %>

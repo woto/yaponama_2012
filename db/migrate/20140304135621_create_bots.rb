@@ -55,6 +55,34 @@ class CreateBots < ActiveRecord::Migration
     end
 
     [
+      { user_agent: 'Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/2.0; +http://go.mail.ru/help/robots)' },
+      { user_agent: 'Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/Fast/2.0; +http://go.mail.ru/help/robots)' }
+    ].each do |line|
+      Bot.create!({title: 'Mail', phantom: false}.merge(line))
+    end
+
+    [
+      { user_agent: 'Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/2.0; +http://go.mail.ru/help/robots)' },
+      { user_agent: 'Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/Fast/2.0; +http://go.mail.ru/help/robots)' }
+    ].each do |line|
+      Bot.create!({title: 'Mail', phantom: false}.merge(line))
+    end
+
+    [
+      { user_agent: 'Mozilla/5.0 (compatible; YandexMetrika/2.0; +http://yandex.com/bots mtmon3.yandex.ru)' },
+      { user_agent: 'Mozilla/5.0 (compatible; Rootlebot/1.2; +http://rootle.ru/)' },
+      { user_agent: 'WebBot-FindUrl' },
+      { user_agent: 'msnbot/2.0b (+http://search.msn.com/msnbot.htm)' },
+      { user_agent: 'Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)' },
+      { user_agent: 'Mozilla/5.0 (compatible; Exabot/3.0 (BiggerBetter); +http://www.exabot.com/go/robot)' },
+      { user_agent: 'msnbot-media/1.1 (+http://search.msn.com/msnbot.htm)' },
+      { user_agent: 'Mozilla/5.0 (compatible; MJ12bot/v1.4.4; http://www.majestic12.co.uk/bot.php?+)' },
+      { user_agent: 'Mozilla/5.0 (compatible; statdom.ru/Bot; +http://statdom.ru/bot.html)' }
+    ].each do |line|
+      Bot.create!({title: 'Обнаружены самостоятельно', phantom: false}.merge(line))
+    end
+
+    [
       "127.0.0.1/32",
       "66.249.64.0/19",
       "95.108.248.0/23",
