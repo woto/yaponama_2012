@@ -226,7 +226,7 @@ class Somebody < ActiveRecord::Base
     if (full_name = [surname, name]).any?
       full_name.join(' ')
     else
-      "Посетитель № #{pretty_id}"
+      "Посетитель: № #{pretty_id}"
     end
   end
 

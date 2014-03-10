@@ -35,11 +35,26 @@ class ProductsController < ApplicationController
   skip_before_filter :find_resource, only: [:incart, :inorder, :inorder_action, :ordered, :pre_supplier, :post_supplier, :post_supplier_action, :stock, :complete, :cancel, :multiple_destroy]
 
   def new
-    search params[:catalog_number], params[:manufacturer], params[:replacements]
+    respond_to do |format|
+      format.html do
+        search params[:catalog_number], params[:manufacturer], params[:replacements]
+      end
+      format.js do
+        redirect_via_turbolinks_to polymorphic_path([*jaba3, :product], params )
+      end
+    end
   end
 
   def edit
-    search params[:catalog_number], params[:manufacturer], params[:replacements]
+    respond_to do |format|
+      format.html do
+        search params[:catalog_number], params[:manufacturer], params[:replacements]
+      end
+      format.js do
+        redirect_via_turbolinks_to polymorphic_path([*jaba3, :product], params )
+      end
+    end
+    
   end
 
   def create
@@ -49,10 +64,22 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @resource.save
         format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: ("Товар <strong>".html_safe + @resource.to_label + "</strong> успешно добавлен в корзину.".html_safe)) }
-        format.js { raise 'Это где-нибудь используется?'; redirect_to polymorphic_path([:status, *jaba3, :products], {status: 'incart'}) }
+        format.js { redirect_via_turbolinks_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: ("Товар <strong>".html_safe + @resource.to_label + "</strong> успешно добавлен в корзину.".html_safe)) }
       else
         format.html { render action: 'new' }
-        format.js { raise 'Аналогично'; render action: 'new' }
+        format.js { render action: 'new' }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @resource.save
+        format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: ("Товар <strong>".html_safe + @resource.to_label + "</strong> успешно изменен.".html_safe)) }
+        format.js { redirect_via_turbolinks_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: ("Товар <strong>".html_safe + @resource.to_label + "</strong> успешно изменен.".html_safe)) }
+      else
+        format.html { render action: 'new' }
+        format.js { render action: 'new' }
       end
     end
   end

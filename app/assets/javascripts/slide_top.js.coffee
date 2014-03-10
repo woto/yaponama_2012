@@ -1,3 +1,8 @@
+App = exports ? this
+
+App.toTop = ->
+  $("html, body").animate({scrollTop: 0}, 'fast')
+
 $(document).on 'page:update', ->
   $("#slide-top").affix
     offset:
@@ -7,4 +12,5 @@ $(document).on 'page:update', ->
 
 $(document).on 'click', '#slide-top', (event) ->
   event.preventDefault()
-  $("html, body").animate({scrollTop: 0}, 'fast')
+  App.toTop()
+  #$("html, body").animate({scrollTop: 0}, 'fast')

@@ -8,20 +8,17 @@
 #we-are-offline-note {
   .text-warning();
   .bottom-space-sm();
-  .text-sm();
 }
 
 #we-are-online-note {
   .text-success();
   .bottom-space-sm();
-  .text-sm();
 }
 
 #i-dont-want-to-choose-seller-block, 
 #i-want-to-choose-seller-block {
   .text-info();
   .bottom-space();
-  .text-sm();
 }
 
 #talk-recipients {
@@ -32,7 +29,6 @@
 /////////////////////
 
 .talk-head {
-  .text-sm();
   #gradient > .vertical(rgb(240,240,240), darken(rgb(240,240,240), 1%));
   border-bottom: 1px solid #BED1CF;
   padding: 5px 10px;
@@ -40,7 +36,7 @@
 }
 
 .talk-body {
-  padding: 0 10px;
+  padding: 10px 0 0 10px;
   word-wrap: break-word;
 }
 
@@ -72,3 +68,22 @@
   position: absolute;
 }
 
+
+//// Scale up the modal
+//@media (min-width: @screen-sm-min) {
+//  // Automatically set modal's width for larger viewports
+//  .modal-dialog {
+//    width: @modal-md;
+//    margin: 30px auto;
+//  }
+//  .modal-content {
+//    .box-shadow(0 5px 15px rgba(0,0,0,.5));
+//  }
+//
+//  // Modal sizes
+//  .modal-sm { width: @modal-sm; }
+//}
+
+@media (min-width: @screen-sm-min) {
+  #myModal .modal-dialog { width: 450px; }
+}

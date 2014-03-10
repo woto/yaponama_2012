@@ -10,6 +10,7 @@
 
 // OTHER LIBRARIES
 //
+//= require nprogress/nprogress
 //= require purl/purl
 //
 //= require console.log-wrapper/consolelog.min.js
@@ -18,6 +19,9 @@
 //= require underscore/underscore
 //= require moment/moment
 //= require jquery.maskedinput/dist/jquery.maskedinput.min
+//
+//=  require list.js/dist/list.js
+//=  require list.pagination.js/dist/list.pagination.js
 //
 // require headroom.js/dist/headroom
 // require headroom.js/dist/jQuery.headroom
@@ -72,8 +76,6 @@
 //= require deliveries/places
 //= require deliveries
 
-//= require searches
-
 //= require items_progress
 //= require 'auth'
 //= require 'tests'
@@ -99,3 +101,5 @@
 //= require navbar
 //= require assa
 //= require spare_catalog
+//= require nprogress_init
+//= require list.js_init

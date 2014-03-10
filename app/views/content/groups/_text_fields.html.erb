@@ -5,7 +5,7 @@
   <%= f.twbs_hidden_field :chat_partable_type %>
 
   <%= f.fields_for :chat_partable do |partable| %>
-    <%= partable.twbs_text_area :text, placeholder: 'Текст', label: false, class: 'input-sm ckeditor-simple' %>
+    <%= partable.twbs_text_area :text, placeholder: 'Сообщение', label: false, class: 'input-sm ckeditor-simple' %>
   <% end %>
 
 

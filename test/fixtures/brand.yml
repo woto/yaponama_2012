@@ -1,4 +1,5 @@
 audi:
+  manufacturer: true
   name: AUDI
   rating: 950
   content:
@@ -6,9 +7,11 @@ audi:
   creator: first_admin
 
 infiniti:
+  manufacturer: true
   name: INFINITI
 
 mazda:
+  manufacturer: true
   name: MAZDA
 
 nissens:
@@ -26,12 +29,14 @@ bando:
   creator: first_admin
 
 toyota:
+  manufacturer: true
   name: TOYOTA
   rating: 1000
   phantom: false
   creator: otto
 
 ty:
+  manufacturer: true
   name: TY
   rating: 1000
   content: Сокращенное название Toyota
@@ -40,18 +45,29 @@ ty:
   brand: toyota
 
 mitsubishi:
+  manufacturer: true
   name: MITSUBISHI
   rating: 950
   phantom: true
   creator: otto
 
+ms:
+  name: MS
+  rating: 1000
+  content: Сокращенное название Mitsubishi
+  phantom: false
+  creator: first_admin
+  brand: mitsubishi
+
 nissan:
+  manufacturer: true
   name: NISSAN
   rating: 1000
   phantom: false
   creator: stan
 
 kia:
+  manufacturer: true
   name: KIA
   image: kia.png
   rating: 800

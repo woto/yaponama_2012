@@ -36,7 +36,7 @@
                 <% end %>
 
                 <%= profile.simple_fields_for :emails do |email| %>
-                  <%= email.twbs_text_field :value, label: false, placeholder: 'E-mail адрес', hint: false %>
+                  <%= email.twbs_text_field :value, class: 'input-sm', label: false, placeholder: 'E-mail адрес', hint: false %>
                 <% end %>
 
               </div>
@@ -58,12 +58,15 @@
                 <% end %>
 
                 <%= profile.simple_fields_for :phones do |phone| %>
-                  <%= phone.twbs_text_field :value, label: false, placeholder: 'Мобильный телефон', hint: false, rel: 'mobile-mask-on' %>
+                  <%= phone.twbs_text_field :value, class: 'input-sm', label: false, placeholder: 'Мобильный телефон', hint: false, rel: 'mobile-mask-on' %>
                 <% end %>
 
               </div>
 
             <% end %>
+
+
+
 
             <% if profile.object.errors[:base].present? %>
               <%= profile.form_group :base do  %>
@@ -141,6 +144,7 @@
 
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
               <%= icon 'cloud-upload' %>
+              Файл
             </button>
 
             <ul class="dropdown-menu" role="menu">

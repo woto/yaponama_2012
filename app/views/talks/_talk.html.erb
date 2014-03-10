@@ -1,13 +1,12 @@
 <%= javascript_async 'uploads' %>
 <%= stylesheet_async 'uploads' %>
 
-<%= modal id: 'myModal' do |modal| %>
+<%= modal id: 'myModal', class: 'text-sm' do |modal| %>
 
   <%= modal.header do |header| %>
     <%= render 'talks/buttons/close' %>
     <div class="sound-placeholder"> </div>
     <%= header.title do %>
-      Служба поддержки. 
       <span class="text-muted" style="white-space: nowrap">
         <%= current_user.to_label %>
       </span>
@@ -41,7 +40,7 @@
       </div>
 
     <% else %>
-      <%= row class: "text-muted text-sm bottom-space" do %>
+      <%= row class: "text-muted bottom-space" do %>
         <div class="col-md-6">
           <%= (parsed_cached_profile(@somebody.cached_profile))  || @somebody.to_label %>
         </div>

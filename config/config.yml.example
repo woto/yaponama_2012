@@ -19,7 +19,7 @@ defaults: &defaults
   robokassa_user: login
 
   # mail send
-  mail_delivery_method:      smtp
+  mail_delivery_method: smtp
 
   from_email_address: 'Отправитель <robot@example.com>'
 
@@ -115,4 +115,7 @@ production:
 
 test:
   <<: *development
+  mail_delivery_method: test
   realtime_port: '3600'
+  price_address: localhost
+  price_port: 3001

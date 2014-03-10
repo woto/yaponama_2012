@@ -1,5 +1,5 @@
 <% new_or_edit = @resource.is_a?(Product) && @resource.try(:persisted?) ? :edit : :new %>
-<%= form_tag polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource), :class => "navbar-form navbar-left ajax-form", :method => :get do %>
+<%= form_tag polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource), remote: true, :class => "navbar-form navbar-left", :method => :get do %>
   <div class="form-group">
     <div class="input-group" id="catalog_number_parent">
       <%= text_field_tag :catalog_number, params[:catalog_number] || @preset_catalog_number, :placeholder => 'Артикул детали', :class => "form-control" %>
@@ -48,5 +48,5 @@
   <%# hidden_field_tag :replacements, params[:replacements] %>
   <%= hidden_field_tag :product_id, @resource.try(:product_id) %>
   <%= hidden_field_tag :return_path, params[:return_path] || request.fullpath %>
-  <button class="btn btn-default ajax-search" type="submit"> Искать </button>
+  <button class="btn btn-default" type="submit"> Искать </button>
 <% end %>

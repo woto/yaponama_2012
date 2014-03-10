@@ -66,7 +66,7 @@ module ApplicationHelper
       image = asset_url('no_brand.png')
     end
 
-    link_to(title, "/#{CGI.escape(brand.name)}", :style => "background: url(#{image}) no-repeat scroll center center", :class => "brands-#{brand.name}")
+    link_to(title, "/#{CGI.escape(brand.name)}", :style => "background: url(#{image}) no-repeat scroll center center", :class => "brand brands-#{brand.name}")
   end
 
   def sortable(column_name, title, options )
@@ -106,7 +106,6 @@ module ApplicationHelper
 
       content_tag(:div, :class => css_class) do
 
-        render('searches/like_us') +
         content_tag(:div, :id => 'main', &block)
       
       end

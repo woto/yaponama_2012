@@ -59,7 +59,7 @@
     = title_index
 
 
-  = twbs_form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba.merge(:format => :js)), :remote => true do |f|
+  = twbs_form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f|
 
     = panel 'default' do |p|
       = p.heading do

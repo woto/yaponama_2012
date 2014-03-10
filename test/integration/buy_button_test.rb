@@ -32,6 +32,7 @@ class BuyButtonTest < ActionDispatch::IntegrationTest
 
     fill_in 'product_quantity_ordered', with: '2'
     click_button 'Добавить в корзину'
+    assert has_text? 'Товар 1111111111 (ПРОИЗВОДИТ) успешно добавлен в корзину'
 
     product = Product.last
 

@@ -1,0 +1,9 @@
+$('#modal_form').modal('hide');
+
+<% f = nil %>
+<% twbs_form_for @resource, url: '' do |form| %>
+  <% f = form.dup %>
+<% end %>
+
+$('#modal_form').replaceWith('<%=j render 'modal_form', f: f %>');
+$('#modal_form').modal('show');

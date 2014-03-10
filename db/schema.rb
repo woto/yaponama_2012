@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304201759) do
+ActiveRecord::Schema.define(version: 20140308173959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -196,6 +196,8 @@ ActiveRecord::Schema.define(version: 20140304201759) do
     t.boolean  "is_brand_before"
     t.boolean  "is_brand_after"
     t.datetime "created_at"
+    t.boolean  "manufacturer_before"
+    t.boolean  "manufacturer_after"
   end
 
   add_index "brand_transactions", ["brand_id"], name: "index_brand_transactions_on_brand_id", using: :btree
@@ -215,6 +217,7 @@ ActiveRecord::Schema.define(version: 20140304201759) do
     t.boolean  "is_brand"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "manufacturer"
   end
 
   add_index "brands", ["brand_id"], name: "index_brands_on_brand_id", using: :btree

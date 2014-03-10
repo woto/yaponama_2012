@@ -31,7 +31,7 @@ group :development, :test do
   gem 'capistrano'
   gem 'capybara', github: 'jnicklas/capybara'
   gem 'show_me_the_cookies'
-  gem 'selenium-webdriver'
+  #gem 'selenium-webdriver'
   gem 'poltergeist', github: 'jonleighton/poltergeist'
   #gem 'capybara-webkit'
   gem 'quiet_assets'

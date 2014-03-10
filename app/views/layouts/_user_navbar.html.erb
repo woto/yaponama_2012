@@ -1,10 +1,12 @@
-<nav class="navbar navbar-default navbar-static-top">
-
-  <div role="navigation">
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
 
     <div class="container">
 
       <div class="navbar-header">
+
+        <a class="navbar-brand" href="/">
+          <%= image_tag "logo.png" %>
+        </a>
 
         <button class="navbar-toggle ignoredirty" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
 
@@ -14,10 +16,6 @@
           <span class="icon-bar"></span>
 
         </button>
-
-        <a class="navbar-brand" href="/">
-          <%= image_tag "logo.png", style: "width: 186px; height: 38px" %>
-        </a>
 
       </div> <!-- /.navbar-header -->
 
@@ -69,6 +67,18 @@
 
         </ul>
 
+        <form class="navbar-form navbar-nav navbar-right">
+          <div class="form-group">
+            <button class="btn btn-success right-space">
+              <%= icon 'phone' %>
+              <span class="hidden-sm">Позвонить</span>
+              <!-- <small style="display: inline-block; vertical-align: text-bottom">+7 (495)</small> 485-30-12  -->
+            </button>
+          </div>
+        </form>
+
+
+
       </div>
 
     </div> <!-- /.container -->
@@ -88,9 +98,9 @@
             <%= link_to "Новости компании", "/news" %>
           <% end %>
 
-          <%= content_tag :li, class: highlight_active2(/\/discount/) do %>
-            <%= link_to "Акции и бонусы", "/discount" %>
-          <% end %>
+          <!-- <%= content_tag :li, class: highlight_active2(/\/discount/) do %> -->
+          <!--   <%= link_to "Акции и бонусы", "/discount" %> -->
+          <!-- <% end %> -->
 
           <%= content_tag :li, class: highlight_active2(/\/user\/payments/) do %>
             <%= link_to "Способы оплаты", new_user_payment_path %>
@@ -110,6 +120,14 @@
 
     </div> <!-- /.container -->
 
-  </div>
-
 </nav>
+
+
+<div class='center-block text-center bottom-space-lg'>
+  <%= image_tag 'under_construction.jpg', style: 'height: 120px' %>
+  <br />
+  <br />
+  <%= content_tag :strong, class: 'text-warning', style: 'display: block' do %>
+    Внимание! На сайте ведется реконструкция, некоторые части <br />могут работать неправильно. Заранее приносим извинения.
+  <% end %>
+</div>

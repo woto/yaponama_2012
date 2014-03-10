@@ -26,7 +26,7 @@
                 <td> <%= manufacturer %> </td>
                 <td> 
                   <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-                  <%= link_to catalog_number, polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource, :catalog_number => catalog_number, :product_id => @resource.try(:product_id), :return_path => params[:return_path], :anchor => manufacturer ), :class => 'ajax-search search-button' %> 
+                  <%= link_to catalog_number, polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource, :catalog_number => catalog_number, :product_id => @resource.try(:product_id), :return_path => params[:return_path], :anchor => manufacturer ), :class => 'search-button' %> 
                 </td>
 
                 <td>
