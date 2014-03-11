@@ -1,6 +1,20 @@
+<% content_for :continue_search do %>
+  <%= row do %>
+    <div class="clearfix">
+      <%= render 'common_search_form' %>
+      <% if admin_zone? %>
+        <div class="navbar-form">
+          <a data-toggle="modal" href="#modal_form" class="btn btn-warning">Форма</a>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
 <% if @resource.product.present? && !@resource.persisted? %>
   <%= alert 'info', false do %>
     Позиция будет отражена как перезаказанная с <%= @resource.product.to_label %>
+    <%= yield :continue_search %>
   <% end %>
 <% end %>
 
@@ -10,24 +24,10 @@
 <% if @resource.persisted? %>
   <%= alert 'info', false do %>
     Редактирование позиции <%= @resource.to_label %>
+    <%= yield :continue_search %>
   <% end %>
 <% end %>
 
-
-<%= row do %>
-  <div class="col-lg-12">
-    <div class="well">
-      <div class="clearfix">
-        <%= render 'common_search_form' %>
-        <% if admin_zone? %>
-          <div class="navbar-form">
-            <a data-toggle="modal" href="#modal_form" class="btn btn-warning">Форма</a>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-<% end %>
 
 <%= twbs_form_for @resource, url: polymorphic_path([*jaba3, @resource], :return_path => params[:return_path], :skip => true, :modal => true), class: 'product', :remote => true do |f| %>
 

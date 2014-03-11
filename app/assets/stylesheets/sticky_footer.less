@@ -4,25 +4,54 @@ html {
   position: relative;
   min-height: 100%;
 }
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 230px;
-}
 footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 180px;
-  background-color: #999;
+  background-color: #eee;
   font-size: 12px;
   padding-top: 20px; 
-  border-top: 4px solid #555;
+  border-top: 1px solid #ddd;
 }
 
-footer a {
-  color: white;
-  &:hover {
-    color: black;
+//  color: #999;
+//  &:hover {
+//    color: black;
+//  }
+//}
+
+@media (max-width: @screen-xs-max) { 
+  body {
+    margin-bottom: 510px;
   }
+  footer {
+    height: 490px;
+  } 
+}
+
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) { 
+  body {
+    margin-bottom: 240px;
+  }
+  footer {
+    height: 220px;
+  } 
+}
+
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) { 
+  body {
+    margin-bottom: 240px;
+  }
+  footer {
+    height: 200px;
+  } 
+}
+
+@media (min-width: @screen-lg-min) {
+  body {
+    margin-bottom: 220px;
+  }
+  footer {
+    height: 180px;
+  } 
 }

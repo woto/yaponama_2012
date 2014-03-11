@@ -152,14 +152,6 @@ module GridUser
         :type => :string
       }
 
-      columns_hash['created_at'] = {
-        :type => :date
-      }
-
-      columns_hash['updated_at'] = {
-        :type => :date
-      }
-
       columns_hash['order_rule'] = {
         :type => :set,
         :set => Hash[*Rails.configuration.somebody_order_rules.map{|k, v| [v, k]}.flatten],
@@ -198,14 +190,25 @@ module GridUser
         :belongs_to => User,
       }
 
+      columns_hash['created_at'] = {
+        :type => :date
+      }
+
+      columns_hash['updated_at'] = {
+        :type => :date
+      }
+
+
     end
 
     def set_preferable_columns
       @grid.visible_id = '1'
-      @grid.visible_cached_profile = '1'
-      @grid.visible_cached_credit = '1'
-      @grid.visible_cached_debit = '1'
+      @grid.visible_bot = '1'
+      @grid.visible_user_agent = '1'
       @grid.visible_stats_count = '1'
+      @grid.visible_cached_location = '1'
+      @grid.visible_cached_title = '1'
+      @grid.visible_online = '1'
       @grid.visible_updated_at = '1'
 
     end
