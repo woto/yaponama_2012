@@ -7,7 +7,6 @@
       "pg": "*",
       "js-yaml": "*",
       "nodemon": "*",
-      "debugger": "*",
       "underscore": "*",
       "async": "*",
       "sockjs": "*",
