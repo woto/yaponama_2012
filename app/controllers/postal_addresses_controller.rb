@@ -7,6 +7,7 @@ class PostalAddressesController < ProfileablesController
 
   def set_resource_class
     @resource_class = PostalAddress
+    @postal_address_type =  'postal_addresses'
   end
 
 end

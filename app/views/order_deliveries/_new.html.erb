@@ -1,6 +1,6 @@
 <div id="assa">
   <div id="assa-result" style="display: none">
-    <a id="assa-link" class="dashed" href="#"><strong>Ввести другой адрес</strong></a>
+    <a id="assa-link" class="dashed" href="#"><strong>Проверить другой адрес</strong></a>
     <div class="well top-space">
       <p>Тут отображать информацию о доставке</p>
 
@@ -35,15 +35,7 @@
 
    <%
 
-       resource = OrderDelivery.new
-
-       if @somebody.postal_addresses.any?
-         resource.postal_address_type = 'old'
-       else
-         resource.postal_address_type = 'new'
-       end
-
-       resource.new_postal_address = @somebody.postal_addresses.new(postcode: '000000', region: 'Москва', city: 'Москва')
+       resource = @order_delivery || @resource
 
        #TODO Как так? А может это и лучшему :)
        #@resource.old_postal_address = @resource.postal_address
@@ -51,9 +43,9 @@
 
    %>
 
-    <%= twbs_form_for resource, url: polymorphic_path([*jaba3, :order_deliveries]), method: :post, remote: true do |f| %>
+    <%= twbs_form_for resource, url: polymorphic_path([*jaba3, :order_deliveries], postal_address_type: @postal_address_type), method: :post, remote: true do |f| %>
       <%= render 'payments/postal_addresses', f:f %>
-      <%= f.submit 'Расчитать', class: "btn btn-info" %>
+      <%= f.submit 'Рассчитать', class: "btn btn-info btn-lg" %>
     <% end %>
   </div>
 </div>

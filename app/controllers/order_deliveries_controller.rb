@@ -11,6 +11,11 @@ class OrderDeliveriesController < ApplicationController
   #  end
   #end
 
+  def show
+    super
+    ugly_address
+  end
+
   private
 
     #def new_resource
@@ -19,6 +24,7 @@ class OrderDeliveriesController < ApplicationController
 
     def set_resource_class
       @resource_class = OrderDelivery
+      @postal_address_type = params['postal_address_type']
     end
 
     #def resource_params

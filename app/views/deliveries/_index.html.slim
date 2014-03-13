@@ -1,5 +1,6 @@
 
 = somebody_tabs do
+  - @meta_title_lead = "Выберите интересующий вас город."
 
   -  if params[:id]
 
@@ -13,17 +14,17 @@
 
   - else
 
-    - @meta_title = "Доставка и Самовывоз"
+    - @meta_title = "Магазины и Доставка"
     = page_header
 
-  ul.nav.nav-tabs id="myTab"
+  ul.nav.nav-tabs.bottom-space id="myTab"
 
     li.active
       a href="#home" data-toggle="tab"
-        strong Москва
+        h3 style="margin: 2px" Москва
     li
       a href="#profile" data-toggle="tab"
-        strong Россия
+        h3 style="margin: 2px" Россия
    
   div.tab-content.top-space
 
@@ -33,7 +34,7 @@
         .col-sm-6.bottom-space
 
           h3.top-space-none.bottom-space-none Магазины
-          <p class="text-sm top-space-none text-muted bottom-space"> Выберите магазин из списка...</p>
+          <p class="text-sm top-space-none text-muted bottom-space"> Выберите магазин из списка или на карте ...</p>
 
           <div class="panel-group" id="deliveries-accordion">
             - Deliveries::Place.where(active: true, display_marker: true).order(z_index: :desc).each do |delivery_zone|
@@ -73,7 +74,7 @@
                         = twbs_form_for @resource, url: url_for(action: :update) do |f|
                           = f.twbs_text_field :delivery_variant_id, value: variant.id
                           = hidden_field_tag :return_path, request.fullpath
-                          = f.submit 'Выбрать', class: 'btn btn-lg btn-primary bottom-space-none'
+                          = f.submit 'Выбрать', class: 'btn btn-lg btn-success bottom-space-none'
                   </div>
                 </div>
               </div>
@@ -164,7 +165,7 @@
                         = twbs_form_for @resource, url: url_for(action: :update) do |f|
                           = f.twbs_text_field :delivery_variant_id, value: variant.id
                           = hidden_field_tag :return_path, request.fullpath
-                          = f.submit 'Выбрать', class: 'btn btn-lg btn-primary bottom-space-none'
+                          = f.submit 'Выбрать', class: 'btn btn-lg btn-success bottom-space-none'
                   </div>
                 </div>
               </div>
@@ -189,7 +190,6 @@
 
       /- klass = delivery.class.reflect_on_all_associations.select{|ref| ref.active_record.to_s.deconstantize == 'Delivery'}.first.name.to_s.singularize.camelcase.constantize.all.each do |sub|
     div.tab-pane id="profile"
-      h3 Другие города
 
       <p>
         <a href="/delivery#ems">

@@ -37,6 +37,7 @@ class CompaniesController < ProfileablesController
 
   def set_resource_class
     @resource_class = Company
+    @postal_address_type = 'companies'
   end
 
 end

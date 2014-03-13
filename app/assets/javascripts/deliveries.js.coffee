@@ -124,9 +124,15 @@ window.initClientMap = ->
 
   add_event_listener_to_object = (object, that) ->
 
-    google.maps.event.addListener object, 'click', ->
+    google.maps.event.addListener object, 'click', (event) ->
 
       object.activate(that)
+
+      infoWindow = new google.maps.InfoWindow();
+      infoWindow.setContent($(that).find('a').html());
+      infoWindow.setPosition(event.latLng);
+      infoWindow.open(map);
+
 
   window.map = new google.maps.Map(document.getElementById("clientMap"),
     zoom: parseInt($('#initial_map_zoom').text())
@@ -182,6 +188,7 @@ window.initClientMap = ->
         bounds.extend step
 
       marker = new google.maps.Marker
+          icon: '/marker.png'
           position: bounds.getCenter()
           title: $(this).find('.accordion-toggle strong').text()
 
@@ -200,10 +207,6 @@ $(document).on 'page:load', ->
   if $('#clientMap').length != 0
     $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&callback=initClientMap')
 
-#$(document).on 'page:update', ->
-
 $(document).on 'show.bs.collapse', '[data-parent="#deliveries-accordion"]', (event) ->
-  $('.in').collapse('hide')
-
-$(document).on 'shown.bs.collapse', '[data-parent="#deliveries-accordion"]', (event) ->
   $("html, body").animate({scrollTop: $(event.target).closest('.accordion-group').offset().top - 5}, 'fast')
+  return false;
