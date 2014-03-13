@@ -184,7 +184,7 @@ class ApplicationController < ActionController::Base
     @exception = exception
     Rails.logger.error(exception)
     respond_to do |format|
-      format.all { render :template => 'errors/error_404', :layout => 'layouts/application', :status => 404 }
+      format.html { render :template => 'errors/error_404', :layout => 'layouts/application', :status => 404 }
     end
   end
 
@@ -193,7 +193,7 @@ class ApplicationController < ActionController::Base
     @exception = exception
     Rails.logger.error(exception)
     respond_to do |format|
-      format.all { render :template => 'errors/error_500', :layout => 'layouts/application', :status => 500 }
+      format.html { render :template => 'errors/error_500', :layout => 'layouts/application', :status => 500 }
     end
   end
 
