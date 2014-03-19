@@ -11,6 +11,10 @@ class Deliveries::Place < ActiveRecord::Base
 
   #belongs_to :option
 
+  def to_label
+    name
+  end
+
   validates :vertices, :presence => true
   validates :z_index, numericality: { only_integer: true }
   validates :name, :variants, :presence => true, if: -> { realize }

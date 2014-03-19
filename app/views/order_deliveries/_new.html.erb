@@ -1,14 +1,29 @@
 <div id="assa">
   <div id="assa-result" style="display: none">
     <a id="assa-link" class="dashed" href="#"><strong>Проверить другой адрес</strong></a>
-    <div class="well top-space">
-      <p>Тут отображать информацию о доставке</p>
 
-      <form accept-charset="UTF-8" action="/user/orders/563-04-024/delivery" class="dirtyforms" id="edit_order_12" method="post">
+    <div class="top-space">
+      <% if @resource.is_a? OrderDelivery %>
+        <strong><%= @resource.to_label %></strong>
+      <% end %>
+
+    </div>
+
+    <div class="top-space">
+
+      <%= content_tag :div, id: 'assa-form' do %>
+        <%= content_tag :div, id: 'assa-inject' do %>
+          <%= hidden_field_tag "order[old_postal_address_id]", @resource.try(:postal_address_id) %>
+          <%= hidden_field_tag "order[postal_address_type]", 'old' %>
+        <% end %>
+      <% end %>
+
+      <!--
+      <form accept-charset="UTF-8" action="/user/orders/491-14-034/delivery" class="dirtyforms" id="edit_order_12" method="post">
           <div style="margin:0;padding:0;display:inline">
               <input name="utf8" type="hidden" value="✓">
               <input name="_method" type="hidden" value="patch">
-              <input name="authenticity_token" type="hidden" value="kE3oCIjCmTRja1ZuHIlJvaxeDg3jMlRSsV0vSbtPfgE=">
+              <input name="authenticity_token" type="hidden" value="tmYg3qcXRtfAdhBcVs+65Gt1Q0pf4mVrM4BjKHFf9nE=">
           </div>
           <div class="form-group">
               <label class="control-label" for="order_delivery_variant_id">Delivery variant</label>
@@ -17,8 +32,7 @@
 
           <select class="form-control" id="order_old_postal_address_id" name="order[old_postal_address_id]" rel="select select-and-fill">
             <option value=""></option>
-            <option value="979462528">111111, 1, 1, 1, 1</option>
-            <option value="979462527">111111, 1, 1, 1, 1</option>
+            <option value="979462551">Адрес</option>
           </select>
 
           <input id="order_postal_address_type_old" name="order[postal_address_type]" rel="radio radio-new-old-switcher" type="radio" value="old">
@@ -28,20 +42,24 @@
               <input class="btn btn-primary btn-lg top-space bottom-space bottom-space-none btn-warning" name="commit" type="submit" value="Выбрать">&nbsp;&nbsp;&nbsp;или&nbsp;&nbsp;&nbsp;<a class="btn btn-default" data-confirm="Уверены что хотите вернуться назад без сохранения?" href="/user/orders/563-04-024/products/filter?primary_key=10994&amp;return_path=%2Fuser%2Forders%2Fstatus%2Fall%3Fprimary_key%3D10993">Назад</a>
           </div>
       </form>
+      -->
 
     </div>
   </div>
+
   <div id="assa-block">
 
-   <%
+    <%
 
-       resource = @order_delivery || @resource
+        resource = @order_delivery || @resource
 
-       #TODO Как так? А может это и лучшему :)
-       #@resource.old_postal_address = @resource.postal_address
-       #@resource.old_postal_address_id = @resource.postal_address_id
+        #TODO Как так? А может это и лучшему :)
+        #@resource.old_postal_address = @resource.postal_address
+        #@resource.old_postal_address_id = @resource.postal_address_id
 
-   %>
+    %>
+
+    
 
     <%= twbs_form_for resource, url: polymorphic_path([*jaba3, :order_deliveries], postal_address_type: @postal_address_type), method: :post, remote: true do |f| %>
       <%= render 'payments/postal_addresses', f:f %>

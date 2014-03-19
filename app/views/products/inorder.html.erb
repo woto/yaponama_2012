@@ -11,6 +11,11 @@
 
   <% @meta_title = "Оформление заказа" %>
   <% @meta_title_lead = 'Проверьте пожалуйста еще раз выбранные вами товары и создайте новый заказ или выберите уже сделанный ранее. В нашем магазине вы можете добавлять товары в заказ, пока он имеет статус "Открыт" и не отправлен или не выдан вам.' %>
+
+  <%= breadcrumb true do |b| %>
+    <%= b.item @meta_title %>
+  <% end %>
+
   <%= page_header %>
 
   <%= twbs_form_for @ic, url: smart_route({:prefix => [:inorder_action], :postfix => [:products]}, jaba) do |f| %>

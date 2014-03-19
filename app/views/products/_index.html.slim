@@ -38,8 +38,14 @@
 
           = p.body do
             ul.list-unstyled
-              li Самовывоз. 
-              li ул. Красноармейская, д.8, корп. 3
+              /li Самовывоз. 
+              /li ул. Красноармейская, д.8, корп. 3
+              li= @resource.delivery_variant.try(:place).try(:to_label)
+              li= @resource.postal_address.try(:to_label)
+              li= @resource.delivery_variant.try(:to_label)
+              li 
+                ' Стоимость доставки: 
+                = number_to_currency @resource.delivery_cost
 
       .col-sm-4
                             

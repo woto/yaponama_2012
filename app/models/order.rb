@@ -23,8 +23,12 @@ class Order < ActiveRecord::Base
   #belongs_to :email
   #belongs_to :metro
 
-  #belongs_to :company
-  #accepts_nested_attributes_for :company
+  belongs_to :delivery_place
+
+  belongs_to :delivery_variant, class_name: 'Deliveries::Variant'
+
+  belongs_to :company
+  accepts_nested_attributes_for :company
 
   belongs_to :profile, :inverse_of => :orders_where_is_profile, autosave: true
   validates :new_profile, presence: true, associated: true, if: -> { profile_type == 'new' }

@@ -12,7 +12,7 @@ App.calcRoute = (destination) ->
   #  destination: "город Москва улица Верхняя 4", 
   #  travelMode: "DRIVING"
 
-  console.log request
+  #console.log request
 
   directionsService = new google.maps.DirectionsService();
 
@@ -45,7 +45,13 @@ App.calcRoute = (destination) ->
                   found = $(this)
 
             if found?
-              found.data('polygon').activate(found)
+              found.data('polygon').activate(found, undefined)
+              if found.find('.realize').text() == 'true'
+                $a = found.next().find('.delivery-variant').clone()
+                $a.find('form').append($('#assa-inject').html())
+                $('#assa-form').append($a)
+              else
+                $('#assa-form').append('Сожалеем, доставка по Вашему адресу не может быть осуществлена. Не обслуживаемая область.')
 
             else
               if $('#automatic_calculate_active').text() == 'true'
@@ -56,11 +62,15 @@ App.calcRoute = (destination) ->
                   position: coords
                 delivery_cost = Math.round(leg.duration.value/60 * parseFloat($('#delivery_minute_cost').text()))
                 if delivery_cost > parseFloat($('#max_automatic_calculated_cost').text())
-                  alert "Сожалеем, доставка по Вашему адресу не может быть осуществлена. TODO дописать"
+                  $('#assa-form').append("Сожалеем, доставка по Вашему адресу не может быть осуществлена. Превышено расстояние от центрального склада.")
                 else
-                  alert "Стоимость доставки: TODO дописать" + delivery_cost
+                  $('#assa-form').append("<p>Стоимость доставки: " + delivery_cost + " руб.</p>")
+                  $a = $('#jjj').clone()
+                  $a.find('[name="order[delivery_cost]"]').val(delivery_cost)
+                  $a.find('form').append($('#assa-inject').html())
+                  $('#assa-form').append($a)
               else
-                alert('Автоматический расчет стоимости доставки выключен. TODO дописать')
+                alert('Автоматический расчет стоимости доставки выключен. [TODO]')
 
       else
         alert status
@@ -78,31 +88,44 @@ window.initClientMap = ->
   previous_selected = undefined
 
   activate_polygon_and_marker = (that, func) ->
-    if that.find('.realize').text() == 'true'
-    else
-      alert "Сожалеем, доставка по Вашему адресу не может быть осуществлена. Данная область не обслуживается. TODO дописать"
 
     previous_selected.inactivate() if previous_selected
-
-    that.closest('.accordion-group').find('.collapse').collapse('show');
-    # TODO Раньше (до удаления ui) была подсветка
-    #that.parent().effect('highlight')
 
     func.apply null
 
 
 
-  google.maps.Polygon::activate = (that) ->
+  google.maps.Polygon::activate = (that, event) ->
+
+    infoWindow.close(map)
+
     aaa = this
     activate_polygon_and_marker that, ->
       previous_selected = aaa
       zoom_and_move_to_common_style aaa
       aaa.setOptions aaa.active_style
 
+    if event?
+      content = ($(that).closest('.panel').find('.infomap-content').map ->
+        $(this).html()).get().join("<hr />")
+      infoWindow.setContent(content)
+      infoWindow.setPosition(event.latLng)
+      infoWindow.open(map)
+
+
+
+
   google.maps.Polygon::inactivate = ->
     this.setOptions(this.inactive_style)
 
-  google.maps.Marker::activate = (that) ->
+  google.maps.Marker::activate = (that, event) ->
+
+    infoWindow.close(map)
+
+    that.closest('.accordion-group').find('.collapse').collapse('show');
+    # TODO Раньше (до удаления ui) была подсветка
+    #that.parent().effect('highlight')
+
     aaa = this
     activate_polygon_and_marker that, ->
       previous_selected = aaa.polygon
@@ -120,19 +143,17 @@ window.initClientMap = ->
 
   $('.delivery_zone a').on 'click', ->
     dz = $(this).closest('.delivery_zone')
-    dz.data('polygon').activate(dz)
+    dz.data('polygon').activate(dz, undefined)
+
+  infoWindow = new google.maps.InfoWindow(
+    maxWidth: 200
+  );
 
   add_event_listener_to_object = (object, that) ->
 
     google.maps.event.addListener object, 'click', (event) ->
 
-      object.activate(that)
-
-      infoWindow = new google.maps.InfoWindow();
-      infoWindow.setContent($(that).find('a').html());
-      infoWindow.setPosition(event.latLng);
-      infoWindow.open(map);
-
+      object.activate(that, event)
 
   window.map = new google.maps.Map(document.getElementById("clientMap"),
     zoom: parseInt($('#initial_map_zoom').text())
@@ -190,7 +211,7 @@ window.initClientMap = ->
       marker = new google.maps.Marker
           icon: '/marker.png'
           position: bounds.getCenter()
-          title: $(this).find('.accordion-toggle strong').text()
+          #title: $(this).find('.accordion-toggle strong').text()
 
       marker.polygon = poly
 
@@ -208,5 +229,8 @@ $(document).on 'page:load', ->
     $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&callback=initClientMap')
 
 $(document).on 'show.bs.collapse', '[data-parent="#deliveries-accordion"]', (event) ->
+  $('.in').collapse('hide')
+
+
+$(document).on 'shown.bs.collapse', '[data-parent="#deliveries-accordion"]', (event) ->
   $("html, body").animate({scrollTop: $(event.target).closest('.accordion-group').offset().top - 5}, 'fast')
-  return false;

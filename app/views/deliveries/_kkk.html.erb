@@ -1,0 +1,7 @@
+<%= twbs_form_for @resource, url: url_for(action: :update) do |f| %>
+  <%= hidden_field_tag "order[postal_address_id]", '' %>
+  <%= f.twbs_hidden_field :delivery_cost, value: variant.delivery_cost %>
+  <%= f.twbs_hidden_field :delivery_variant_id, value: variant.id %>
+  <%= hidden_field_tag :return_path, request.fullpath %>
+  <%= f.submit 'Выбрать', class: 'btn btn-lg btn-success bottom-space-none' %>
+<% end %>

@@ -1,3 +1,7 @@
+- if @resource
+  .hidden
+    #jjj
+      = render 'kkk', variant: Deliveries::Variant.new(id: '-1')
 
 = somebody_tabs do
   - @meta_title_lead = "Выберите интересующий вас город."
@@ -37,8 +41,8 @@
           <p class="text-sm top-space-none text-muted bottom-space"> Выберите магазин из списка или на карте ...</p>
 
           <div class="panel-group" id="deliveries-accordion">
-            - Deliveries::Place.where(active: true, display_marker: true).order(z_index: :desc).each do |delivery_zone|
-              <div class="panel accordion-group #{delivery_zone.realize? ? 'panel-primary' : 'panel-default'}">
+            - Deliveries::Place.where(active: true).order(z_index: :desc).each do |delivery_zone|
+              <div class="panel accordion-group panel-primary #{delivery_zone.display_marker? ? '' : 'hidden'}">
                 <div class="panel-heading delivery_zone">
                   / Картографические данные области
                   .hidden 
@@ -67,116 +71,31 @@
                   <div class="panel-body">
                     p== delivery_zone.content
                     - delivery_zone.variants.order(sequence: :desc).each do |variant|
-                      strong = variant.name
-                      p== variant.content
-                      p= number_to_currency variant.delivery_cost
-                      - if @resource
-                        = twbs_form_for @resource, url: url_for(action: :update) do |f|
-                          = f.twbs_text_field :delivery_variant_id, value: variant.id
-                          = hidden_field_tag :return_path, request.fullpath
-                          = f.submit 'Выбрать', class: 'btn btn-lg btn-success bottom-space-none'
+                      <div class="delivery-variant">
+                        <div class="infomap-content">
+                          strong = variant.name
+                          p== variant.content
+                          p= number_to_currency variant.delivery_cost
+                        </div>
+                        - if @resource
+                          = render 'kkk', variant: variant
+                      </div>
                   </div>
                 </div>
               </div>
           </div>
 
 
-          /#deliveries-accordion.accordion
-            - Deliveries::Place.where(active: true).order(z_index: :desc).each do |delivery_zone|
-              .accordion-group class="#{delivery_zone.realize? ? '' : 'hide'}"
-                .accordion-heading.delivery_zone
-                  / Картографические данные области
-                  .hidden 
-                    .vertices= delivery_zone.vertices
-                    .lat = delivery_zone.lat
-                    .lng = delivery_zone.lng
-                    .zoom = delivery_zone.zoom
-                    .display_marker = delivery_zone.display_marker
-                    .z_index = delivery_zone.z_index
-                    .realize = delivery_zone.realize
-                    - ['active', 'inactive'].each do |style|
-                      div class="#{style}"
-                        .fill_color= delivery_zone["#{style}_fill_color"]
-                        .fill_opacity= delivery_zone["#{style}_fill_opacity"]
-                        .stroke_color= delivery_zone["#{style}_stroke_color"]
-                        .stroke_opacity= delivery_zone["#{style}_stroke_opacity"]
-                        .stroke_weight= delivery_zone["#{style}_stroke_weight"]
-                  - rand_id = (0...25).map{ ('a'..'z').to_a[rand(26)] }.join
-                  a.accordion-toggle data-toggle="collapse" data-parent="#deliveries-accordion" href="##{rand_id}"
-                    strong= delivery_zone.name
-                .accordion-body.collapse id="#{rand_id}"
-                  .accordion-inner
-                    p== delivery_zone.content
-                    - delivery_zone.variants.order(sequence: :desc).each do |variant|
-                      strong = variant.name
-                      p== variant.content
-                      p= number_to_currency variant.delivery_cost
-
           h3.top-space-lg.bottom-space-none Доставка
           <p class="text-sm top-space-none text-muted bottom-space"> ... или укажите адрес, чтобы мы смогли автоматически расчитать стоимость доставки до вашего дома.</p>
 
-          /h4.bottom-space-none Особые предложения
-          /h5.top-space-none.text-muted.bottom-space Если указанный вами адрес будет находиться в пределах следующих областей, то цена доставки будет фиксированной.
-
-          = panel 'primary' do |p|
+          = panel 'primary', id: 'auto-calculate' do |p|
             = p.heading do
               = p.title do
                 'Адрес доставки
             = p.body do
               = render 'order_deliveries/new'
 
-          /= render 'postal_addresses/fields1'
-
-          <div class="panel-group" id="deliveries-accordion1">
-            - Deliveries::Place.where(active: true, display_marker: false).order(z_index: :desc).each do |delivery_zone|
-              <div class="panel accordion-group #{delivery_zone.realize? ? 'panel-info' : 'panel-warning'}">
-                <div class="panel-heading delivery_zone">
-                  / Картографические данные области
-                  .hidden 
-                    .vertices= delivery_zone.vertices
-                    .lat = delivery_zone.lat
-                    .lng = delivery_zone.lng
-                    .zoom = delivery_zone.zoom
-                    .display_marker = delivery_zone.display_marker
-                    .z_index = delivery_zone.z_index
-                    .realize = delivery_zone.realize
-                    - ['active', 'inactive'].each do |style|
-                      div class="#{style}"
-                        .fill_color= delivery_zone["#{style}_fill_color"]
-                        .fill_opacity= delivery_zone["#{style}_fill_opacity"]
-                        .stroke_color= delivery_zone["#{style}_stroke_color"]
-                        .stroke_opacity= delivery_zone["#{style}_stroke_opacity"]
-                        .stroke_weight= delivery_zone["#{style}_stroke_weight"]
-                  - rand_id = (0...25).map{ ('a'..'z').to_a[rand(26)] }.join
-                  <h4 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#deliveries-accordion1" href="##{rand_id}">
-                      = delivery_zone.name
-                    </a>
-                  </h4>
-                </div>
-                <div id="#{rand_id}" class="panel-collapse collapse" data-parent="#deliveries-accordion1">
-                  <div class="panel-body">
-                    p== delivery_zone.content
-                    - delivery_zone.variants.order(sequence: :desc).each do |variant|
-                      strong = variant.name
-                      p== variant.content
-                      p= number_to_currency variant.delivery_cost
-                      - if @resource
-                        = twbs_form_for @resource, url: url_for(action: :update) do |f|
-                          = f.twbs_text_field :delivery_variant_id, value: variant.id
-                          = hidden_field_tag :return_path, request.fullpath
-                          = f.submit 'Выбрать', class: 'btn btn-lg btn-success bottom-space-none'
-                  </div>
-                </div>
-              </div>
-          </div>
-
-          /form
-            = form_group do
-              = input_group do |ig|
-                = twbs_text_field_tag '', '', id: "geocode-address-text", rel: "catch-enter", placeholder: "Укажите адрес доставки"
-                = ig.btn do
-                  <button id="geocode-address-button" class="btn btn-default" rel="press-enter" type="button"> Найти адрес </button>
           #level
 
         .col-sm-6.hidden-xs
@@ -185,10 +104,6 @@
             #clientMap
             .text-xs.text-muted.text-right.top-space-xs Точность отображения найденного адреса - до квартала
 
-      /- @deliveries.each do |delivery|
-        h3 style="margin-bottom: 30px"= delivery.name
-
-      /- klass = delivery.class.reflect_on_all_associations.select{|ref| ref.active_record.to_s.deconstantize == 'Delivery'}.first.name.to_s.singularize.camelcase.constantize.all.each do |sub|
     div.tab-pane id="profile"
 
       <p>

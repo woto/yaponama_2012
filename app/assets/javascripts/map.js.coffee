@@ -8,10 +8,10 @@ $(document).on 'page:update', ->
 
     $("#clientMapOuter").affix offset:
       top: ->
-        @top = 121
+        121
       #  # Это число так же фигурирует в js
       bottom: ->
-        @bottom = $(document).height() - $("#level").offset().top + 20
+        $(document).height() - $("#level").offset().top + 20
 
         #.outerHeight(true)
         #.offset().top

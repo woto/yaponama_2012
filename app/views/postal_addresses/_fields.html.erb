@@ -1,5 +1,3 @@
-<p><%= @postal_address_type %></p>
-
 <% unless ['deliveries', 'orders/deliveries'].include? @postal_address_type %>
   <%= f.twbs_text_field :postcode, asterisk: true %>
 <% else %>

@@ -132,6 +132,8 @@ mike:
   discount: 14.3
   prepayment: 12.5
   order_rule: none
+  # password: 4444444444
+  password_digest: $2a$10$x0TPNSOakOlI5vH1oVo66eyz6q5/a60hJR1i50hdrekFHTQprClMO
   role: user
   password_reset_token: 1234
   password_reset_sent_at: <%= 3.hours.ago.to_s(:db) %>

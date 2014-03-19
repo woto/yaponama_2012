@@ -5,6 +5,54 @@ first_user:
   street: '1'
   house: '1'
   stand_alone_house: true
-  room: ''
   creation_reason: fixtures
   somebody: first_user
+
+shuhova:
+  postcode: '000000'
+  region: "Москва"
+  city: "Москва"
+  street: "Шухова"
+  house: '21'
+  stand_alone_house: false
+  room: '21'
+  creation_reason: fixtures
+  somebody: mike
+  creator: mike
+
+bolshaya_yakimanka:
+  postcode: '000000'
+  region: "Москва"
+  city: "Москва"
+  street: "Большая Якиманка"
+  house: '12'
+  stand_alone_house: false
+  room: '32'
+  creation_reason: fixtures
+  somebody: mike
+  creator: mike
+
+ryazanka:
+  postcode: '000000'
+  region: "Москва"
+  city: "Москва"
+  street: "Рязанский проспект"
+  house: '1'
+  stand_alone_house: false
+  room: '143'
+  creation_reason: fixtures
+  somebody: mike
+  creator: mike
+
+rublyevskoe_shosse:
+  postcode: '000000'
+  region: "Москва"
+  city: "Москва"
+  street: "Рублевское шоссе"
+  house: '60'
+  stand_alone_house: true
+  creation_reason: fixtures
+  notes: 'На въезде нужен паспорт'
+  notes_invisible: 'Внтуреняя служба безопасности, без удостоверения (не водит. удост.) не пропустят'
+  somebody: mike
+  creator: mike
