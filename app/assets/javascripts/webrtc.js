@@ -54,8 +54,7 @@ $(document).on('click', '#call', function(event) {
     'mediaConstraints': {'audio': true, 'video': false}
   };
 
-
-  //coolPhone.call('sip:1061@avtorif.ru', options);
-  coolPhone.call('89169072788', options);
+  coolPhone.call('sip:1061@avtorif.ru', options);
+  //coolPhone.call('89169072788', options);
 
 });

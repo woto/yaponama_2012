@@ -16,7 +16,7 @@ namespace :app do
             begin
               #@imap= Net::IMAP.new('imap.gmail.com', port: '993', ssl: true)
               @imap= Net::IMAP.new('imap.yandex.ru', port: '993', ssl: true)
-              @imap.login('info@avtorif.ru','123123')
+              @imap.login('info@avtorif.ru','ASD123qwe')
 
               loop do
                 begin
