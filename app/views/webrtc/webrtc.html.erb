@@ -1,0 +1,30 @@
+<%= javascript_include_tag 'webrtc' %>
+
+<div class="container">
+
+  <% @meta_title = 'Онлайн звонок' %>
+  <%= page_header %>
+
+  <%= row do %>
+
+    <div class="col-lg-12">
+
+      <%= alert 'info', false do %>
+        С помощью данной страницы вы можете позвонить нам из браузера используя микрофон и наушники.<br/><strong>Внимание звонки можно осуществлять только из браузера Google Chrome <%= image_tag 'http://www.iconarchive.com/download/i38830/google/chrome/Google-Chrome.ico', style: 'height: 18px; vertical-align: top' %> </strong>
+      <% end %>
+
+      
+      <button id="call" class="btn btn-primary btn-lg">
+        <%= icon 'phone' %>
+        <span class="hidden-sm">Позвонить</span>
+      </button>
+
+
+      <video width="1" height="1" id="my-video" autoplay muted="true"></video>
+      <video width="1" height="1" id="peer-video" autoplay></video>
+
+    </div>
+
+  <% end %>
+
+</div>

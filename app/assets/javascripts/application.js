@@ -103,6 +103,3 @@
 //= require spare_catalog
 //= require nprogress_init
 //= require list.js_init
-//
-//= require JsSIP/dist/jssip-devel
-//= require webrtc
