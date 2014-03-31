@@ -41,7 +41,7 @@ Yaponama2012::Application.configure do
   config.assets.digest = true
 
   # Version of your assets, change this if you want to expire all your assets.
-  config.assets.version = '1.29'
+  config.assets.version = '1.31'
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -73,7 +73,8 @@ Yaponama2012::Application.configure do
     "ltie9.js",
     "uploads.js",
     "uploads.css",
-    "uploads/*"
+    "uploads/*",
+    "webrtc.js"
   ]
 
   # Ignore bad email addresses and do not raise email delivery errors.

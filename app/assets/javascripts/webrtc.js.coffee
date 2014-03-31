@@ -1,5 +1,4 @@
 #= require JsSIP/dist/jssip-devel
-#= require webrtc
 
 $(document).on "click", "#call", (event) ->
   event.preventDefault()
