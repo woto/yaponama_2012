@@ -16,7 +16,7 @@ namespace :app do
 
     desc 'Сохраняем бренды'
     task :save => :environment do
-        File.write("#{Rails.root}/data/brands/brands.json", JSON.pretty_generate(Brand.all.as_json))
+        File.write("#{Rails.root}/data/brands/brands.json", JSON.pretty_generate(Brand.order(:name).as_json))
     end
 
   end
