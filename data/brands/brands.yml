@@ -1,0 +1,290 @@
+---
+- !ruby/object:Brand
+  attributes:
+    id: 85693089
+    name: AUDI
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 950
+    content: 
+    creator_id: 692915070
+    phantom: false
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 11:40:44.000000000 Z
+    updated_at: 2014-03-17 11:40:44.000000000 Z
+    manufacturer: true
+- !ruby/object:Brand
+  attributes:
+    id: 407027630
+    name: INFINITI
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 
+    content: 
+    creator_id: 
+    phantom: 
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 11:40:44.000000000 Z
+    updated_at: 2014-03-17 11:40:44.000000000 Z
+    manufacturer: true
+- !ruby/object:Brand
+  attributes:
+    id: 106481261
+    name: MAZDA
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 
+    content: 
+    creator_id: 
+    phantom: 
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 11:40:44.000000000 Z
+    updated_at: 2014-03-17 11:40:44.000000000 Z
+    manufacturer: true
+- !ruby/object:Brand
+  attributes:
+    id: 310922336
+    name: NISSENS
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 500
+    content: "Хорошая компания"
+    creator_id: 692915070
+    phantom: false
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 11:40:44.000000000 Z
+    updated_at: 2014-03-17 11:40:44.000000000 Z
+    manufacturer: 
+- !ruby/object:Brand
+  attributes:
+    id: 949974806
+    name: BANDO
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 500
+    content: 
+    creator_id: 692915070
+    phantom: false
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 11:40:44.000000000 Z
+    updated_at: 2014-03-17 11:40:44.000000000 Z
+    manufacturer: 
+- !ruby/object:Brand
+  attributes:
+    id: 508133599
+    name: TOYOTA
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 1000
+    content: 
+    creator_id: 128399616
+    phantom: false
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 11:40:44.000000000 Z
+    updated_at: 2014-03-17 11:40:44.000000000 Z
+    manufacturer: true
+- !ruby/object:Brand
+  attributes:
+    id: 592668565
+    name: TY
+    path: 
+    brand_id: 508133599
+    cached_brand: 
+    image: 
+    rating: 1000
+    content: "Сокращенное название Toyota"
+    creator_id: 692915070
+    phantom: false
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 11:40:44.000000000 Z
+    updated_at: 2014-03-17 11:40:44.000000000 Z
+    manufacturer: true
+- !ruby/object:Brand
+  attributes:
+    id: 856124188
+    name: MITSUBISHI
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 950
+    content: 
+    creator_id: 128399616
+    phantom: true
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 11:40:44.000000000 Z
+    updated_at: 2014-03-17 11:40:44.000000000 Z
+    manufacturer: true
+- !ruby/object:Brand
+  attributes:
+    id: 411445140
+    name: MS
+    path: 
+    brand_id: 856124188
+    cached_brand: 
+    image: 
+    rating: 1000
+    content: "Сокращенное название Mitsubishi"
+    creator_id: 692915070
+    phantom: false
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 11:40:44.000000000 Z
+    updated_at: 2014-03-17 11:40:44.000000000 Z
+    manufacturer: 
+- !ruby/object:Brand
+  attributes:
+    id: 785323386
+    name: NISSAN
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 1000
+    content: 
+    creator_id: 500827742
+    phantom: false
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 11:40:44.000000000 Z
+    updated_at: 2014-03-17 11:40:44.000000000 Z
+    manufacturer: true
+- !ruby/object:Brand
+  attributes:
+    id: 894008563
+    name: KIA
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: kia.png
+    rating: 800
+    content: "Корейская поделка"
+    creator_id: 350169046
+    phantom: false
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 11:40:44.000000000 Z
+    updated_at: 2014-03-17 11:40:44.000000000 Z
+    manufacturer: true
+- !ruby/object:Brand
+  attributes:
+    id: 949974807
+    name: '5982245060'
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 
+    content: 
+    creator_id: 350169046
+    phantom: true
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 13:53:59.404535000 Z
+    updated_at: 2014-03-17 13:53:59.404535000 Z
+    manufacturer: 
+- !ruby/object:Brand
+  attributes:
+    id: 949974808
+    name: TRIO
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 
+    content: 
+    creator_id: 350169046
+    phantom: true
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 13:53:59.579113000 Z
+    updated_at: 2014-03-17 13:53:59.579113000 Z
+    manufacturer: 
+- !ruby/object:Brand
+  attributes:
+    id: 949974809
+    name: KURYAKYN
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 
+    content: 
+    creator_id: 350169046
+    phantom: true
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-17 13:54:13.846055000 Z
+    updated_at: 2014-03-17 13:54:13.846055000 Z
+    manufacturer: 
+- !ruby/object:Brand
+  attributes:
+    id: 949974810
+    name: OPEL
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 
+    content: 
+    creator_id: 350169046
+    phantom: true
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-26 01:04:25.162882000 Z
+    updated_at: 2014-03-26 01:04:25.162882000 Z
+    manufacturer: 
+- !ruby/object:Brand
+  attributes:
+    id: 949974811
+    name: CHEVROLET
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 
+    content: 
+    creator_id: 350169046
+    phantom: true
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-26 01:04:25.737904000 Z
+    updated_at: 2014-03-26 01:04:25.737904000 Z
+    manufacturer: 
+- !ruby/object:Brand
+  attributes:
+    id: 949974812
+    name: BMW
+    path: 
+    brand_id: 
+    cached_brand: 
+    image: 
+    rating: 
+    content: 
+    creator_id: 350169046
+    phantom: true
+    catalog: 
+    is_brand: 
+    created_at: 2014-03-26 01:20:07.617312000 Z
+    updated_at: 2014-03-26 01:20:07.617312000 Z
+    manufacturer: 
