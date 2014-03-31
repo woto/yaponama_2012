@@ -10,21 +10,23 @@ namespace :app do
       brands = JSON::load(File.read("#{Rails.root}/data/brands/brands.json"))
       brands.each do |brand|
         row = Brand.find_by_id(brand['id'])
+        file_name = brand['image']['url']
+        file_path = "#{Rails.root}/public#{file_name}"
         if row
           row.assign_attributes(brand)
-          row.image = File.open("#{Rails.root}/public#{brand['image']['url']}")
-          row.save
+          row.image = file_name ? File.open(file_path) : nil
+          row.save!
         else
           row = Brand.new(brand)
-          row.image = File.open("#{Rails.root}/public#{brand['image']['url']}")
-          row.save
+          row.image = file_name ? File.open(file_path) : nil
+          row.save!
         end
       end
     end
 
-    desc 'Сохраняем бренды'
+    desc 'Сохранение брендов'
     task :save => :environment do
-        File.write("#{Rails.root}/data/brands/brands.json", JSON.pretty_generate(Brand.order(:name).as_json(except: [:created_at, :updated_at])))
+      File.write("#{Rails.root}/data/brands/brands.json", JSON.pretty_generate(Brand.order(:id).as_json(except: [:created_at, :updated_at])))
     end
 
   end
