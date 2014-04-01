@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 99999999999999) do
+ActiveRecord::Schema.define(version: 20140308173959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1198,12 +1198,12 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "cached_client_width"
     t.string   "cached_client_height"
     t.string   "cached_talk"
+    t.string   "transport"
     t.integer  "unread_talks",                                             default: 0
     t.integer  "total_talks",                                              default: 0
     t.integer  "default_addressee_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "transport"
     t.boolean  "bot",                                                      default: false
   end
 
@@ -1297,6 +1297,8 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "cached_client_height_after"
     t.string   "cached_talk_before"
     t.string   "cached_talk_after"
+    t.string   "transport_before"
+    t.string   "transport_after"
     t.integer  "unread_talks_before"
     t.integer  "unread_talks_after"
     t.integer  "total_talks_before"
@@ -1304,8 +1306,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "default_addressee_id_before"
     t.integer  "default_addressee_id_after"
     t.datetime "created_at"
-    t.string   "transport_before"
-    t.string   "transport_after"
     t.boolean  "bot_before"
     t.boolean  "bot_after"
   end
