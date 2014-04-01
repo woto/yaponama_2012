@@ -97,3 +97,6 @@
 [submodule "system/submodules/list.pagination.js"]
 	path = system/submodules/list.pagination.js
 	url = https://github.com/javve/list.pagination.js
+[submodule "system/submodules/files"]
+	path = system/submodules/files
+	url = https://github.com/woto/files
