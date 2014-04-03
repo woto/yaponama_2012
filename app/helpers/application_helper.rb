@@ -255,7 +255,7 @@ module ApplicationHelper
     if dismissable
       css_class = "alert-dismissable"
     else
-      css_style = "border-top: none; border-right: none; border-bottom: none; border-left-width: 5px; border-radius: 0;"
+      css_style = ["border-top: none; border-right: none; border-bottom: none; border-left-width: 5px; border-radius: 0; ", options[:style] ].compact
     end
 
     options[:class] = ["alert alert-#{type} #{css_class} fade in", options[:class] ].compact

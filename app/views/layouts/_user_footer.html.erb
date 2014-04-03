@@ -4,44 +4,47 @@
 
     <div style="display: table; width: 100%;" class="bottom-space-lg">
       <div style="display: table-row">
-        <% width = 100 / Deliveries::Place.where(display_marker: true).count %>
-        <% Deliveries::Place.where(display_marker: true).each do |dp| %>
-          <div style="display: table-cell; width: <%= width %>%; padding:0 20px">
+        <% deliveries_count = Deliveries::Place.where(display_marker: true).count %>
+        <% if deliveries_count > 0 %>
+          <% width = 100 / deliveries_count %>
+          <% Deliveries::Place.where(display_marker: true).each do |dp| %>
+            <div style="display: table-cell; width: <%= width %>%; padding:0 20px">
 
-            <address style="margin-bottom: 0">
-              <div itemscope itemtype="http://schema.org/Organization">
-                <strong style="color: #eee; margin-bottom: 5px; display: inline-block; font-family: 'trebuchet ms','helvetica cy',sans-serif; text-transform: uppercase"><span itemprop="name"> <%= dp.name %>  </span></strong>
+              <address style="margin-bottom: 0">
+                <div itemscope itemtype="http://schema.org/Organization">
+                  <strong style="color: #eee; margin-bottom: 5px; display: inline-block; font-family: 'trebuchet ms','helvetica cy',sans-serif; text-transform: uppercase"><span itemprop="name"> <%= dp.name %>  </span></strong>
 
-                <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                  <span itemprop="addressLocality"><%= dp.address_locality %></span>
-                  <span itemprop="postalCode"><%= dp.postal_code %></span>
-                  <% if dp.postal_code.present? %>
-                    <br />
+                  <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                    <span itemprop="addressLocality"><%= dp.address_locality %></span>
+                    <span itemprop="postalCode"><%= dp.postal_code %></span>
+                    <% if dp.postal_code.present? %>
+                      <br />
+                    <% end %>
+                    <span itemprop="streetAddress"><%= dp.street_address %></span>
+                    <% if dp.street_address.present? %>
+                      <br />
+                    <% end %>
+                  </div>
+                  <% (1..5).each do |n| %>
+                    <% if dp.instance_eval("phone#{n}").present? %>
+                      <%= icon 'phone-square' %>
+                      <span itemprop="phone"><%= dp.instance_eval("phone#{n}") %></span><br />
+                    <% end %>
                   <% end %>
-                  <span itemprop="streetAddress"><%= dp.street_address %></span>
-                  <% if dp.street_address.present? %>
-                    <br />
+                  <% (1..3).each do |n| %>
+                    <% if dp.instance_eval("email#{n}").present? %>
+                      <%= icon 'envelope' %>
+                      <a href="mailto:<%= dp.instance_eval("email#{n}") %>"><span itemprop="email"><%= dp.instance_eval("email#{n}") %></span></a><br />
+                    <% end %>
                   <% end %>
+                  <div class="hidden">
+                    <a href="<%= request.protocol %><%= request.host %>" itemprop="url"><%= request.protocol %><%= request.host %> </a><br />
+                    <span itemprop="description"> Интернет магазин автозапчастей.</span>
+                  </div>
                 </div>
-                <% (1..5).each do |n| %>
-                  <% if dp.instance_eval("phone#{n}").present? %>
-                    <%= icon 'phone-square' %>
-                    <span itemprop="phone"><%= dp.instance_eval("phone#{n}") %></span><br />
-                  <% end %>
-                <% end %>
-                <% (1..3).each do |n| %>
-                  <% if dp.instance_eval("email#{n}").present? %>
-                    <%= icon 'envelope' %>
-                    <a href="mailto:<%= dp.instance_eval("email#{n}") %>"><span itemprop="email"><%= dp.instance_eval("email#{n}") %></span></a><br />
-                  <% end %>
-                <% end %>
-                <div class="hidden">
-                  <a href="<%= request.protocol %><%= request.host %>" itemprop="url"><%= request.protocol %><%= request.host %> </a><br />
-                  <span itemprop="description"> Интернет магазин автозапчастей.</span>
-                </div>
-              </div>
-            </address>
-          </div>
+              </address>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
