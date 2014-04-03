@@ -48,6 +48,22 @@
 
         <%= f.twbs_check_box :display_marker %>
 
+        <% (1..5).each do |n| %>
+          <%= f.instance_eval("twbs_text_field :phone#{n}") %>
+        <% end %>
+
+        <% (1..3).each do |n| %>
+          <%= f.instance_eval("twbs_text_field :email#{n}") %>
+        <% end %>
+
+        <%= f.twbs_text_field :address_locality %>
+        <%= f.twbs_text_field :postal_code %>
+        <%= f.twbs_text_field :street_address %>
+
+        <% (1..3).each do |n| %>
+          <%= f.instance_eval("twbs_file_field :image#{n}") %>
+        <% end %>
+
         <%= panel 'default' do |p| %>
 
           <%= p.heading do %>

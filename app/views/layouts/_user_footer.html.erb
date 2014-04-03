@@ -1,62 +1,52 @@
-<footer class="clearfix">
+<footer class="clearfix text-xs" style="padding-top: 30px; color: #999; background: #222">
 
-  <div class="container">
+  <div class="container-fluid">
 
-    <div class="row">
+    <div style="display: table; width: 100%;" class="bottom-space-lg">
+      <div style="display: table-row">
+        <% width = 100 / Deliveries::Place.where(display_marker: true).count %>
+        <% Deliveries::Place.where(display_marker: true).each do |dp| %>
+          <div style="display: table-cell; width: <%= width %>%; padding:0 20px">
 
-      <div class="col-sm-3">
-        <address>
-          <div itemscope itemtype="http://schema.org/Organization">
-            <strong>&copy; <span itemprop="name"> Авториф  </span> 1997 </strong><br />
-            <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-              <span itemprop="addressLocality">Россия, г. Москва</span>,
-              <span itemprop="postalCode">индекс 109428</span><br />
-              <span itemprop="streetAddress">Рязанский проспект, д. 53</span><br />
-            </div>
-            тел: <span itemprop="telephone">+7 (495) 544-57-41</span><br />
-            e-mail: <a href="mailto:info@avtorif.ru"><span itemprop="email">info@avtorif.ru</span></a><br />
-            <br />
-            <a href="http://avtorif.ru" itemprop="url"> http://www.avtorif.ru </a><br />
-            <span itemprop="description"> Интернет магазин автозапчастей.</span>
+            <address style="margin-bottom: 0">
+              <div itemscope itemtype="http://schema.org/Organization">
+                <strong style="color: #eee; margin-bottom: 5px; display: inline-block; font-family: 'trebuchet ms','helvetica cy',sans-serif; text-transform: uppercase"><span itemprop="name"> <%= dp.name %>  </span></strong>
+
+                <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                  <span itemprop="addressLocality"><%= dp.address_locality %></span>
+                  <span itemprop="postalCode"><%= dp.postal_code %></span>
+                  <% if dp.postal_code.present? %>
+                    <br />
+                  <% end %>
+                  <span itemprop="streetAddress"><%= dp.street_address %></span>
+                  <% if dp.street_address.present? %>
+                    <br />
+                  <% end %>
+                </div>
+                <% (1..5).each do |n| %>
+                  <% if dp.instance_eval("phone#{n}").present? %>
+                    <%= icon 'phone-square' %>
+                    <span itemprop="phone"><%= dp.instance_eval("phone#{n}") %></span><br />
+                  <% end %>
+                <% end %>
+                <% (1..3).each do |n| %>
+                  <% if dp.instance_eval("email#{n}").present? %>
+                    <%= icon 'envelope' %>
+                    <a href="mailto:<%= dp.instance_eval("email#{n}") %>"><span itemprop="email"><%= dp.instance_eval("email#{n}") %></span></a><br />
+                  <% end %>
+                <% end %>
+                <div class="hidden">
+                  <a href="<%= request.protocol %><%= request.host %>" itemprop="url"><%= request.protocol %><%= request.host %> </a><br />
+                  <span itemprop="description"> Интернет магазин автозапчастей.</span>
+                </div>
+              </div>
+            </address>
           </div>
-        </address>
-      </div>
-
-      <div class="col-sm-2">
-        <ul class="list-unstyled">
-          <li> <a href="#"> Поставщикам </a> </li>
-          <li> <a href="#"> Оптовым покупателям </a> </li>
-          <li> <a href="#"> Вакансии </a> </li>
-          <li> <a href="#"> Юридическая информация </a> </li>
-          <li> <a href="#"> Связь с руководством </a> </li>
-        </ul>
-
-      </div>
-
-      <div class="col-sm-2">
-        <ul class="list-unstyled">
-          <li> <a href="#"> Новости компании </a> </li>
-          <li> <a href="#"> Спомобы оплаты </a> </li>
-          <li> <a href="#"> Доставка и самовывоз </a> </li>
-          <li> <a href="#"> Частые вопросы </a> </li>
-        </ul>
-
-      </div>
-
-      <div class="col-sm-5">
-        <div class="center-block" style="padding: 10px; background: white; border: #999 1px solid; background: #FAFAFA;">
-          <div class="media">
-            <a class="pull-left" href="#">
-              <%= image_tag 'under_construction.jpg', style: 'height: 60px;', class: 'media-object right-space-sm' %>
-            </a>
-            <div class="media-body">
-              <h4 class="media-heading text-warning">Внимание!</h4>
-              На сайте ведется реконструкция, некоторые части могут работать неправильно. Заранее приносим извинения.
-            </div>
-          </div>
-        </div>
+        <% end %>
       </div>
     </div>
+
+    <!-- <div class="clearfix left-space bottom-space"> <strong> <span class="pull-left text-warning right-space-lg">21 мата 2014. Рады сообщить вам, чтобы ма запустили доставку с помощью ПЭК. </span> <span class="pull-right"> &copy; Авториф 1997г. </span> </strong> -->
 
   </div>
 

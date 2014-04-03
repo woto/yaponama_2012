@@ -504,4 +504,11 @@ module ApplicationHelper
     end
   end
 
+  def mark_first_as_active
+    if @first.blank?
+      @first = true
+      'active'
+    end
+  end
+
 end

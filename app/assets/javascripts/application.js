@@ -31,6 +31,9 @@
 //= require pickadate.js/lib/picker.time
 //= require pickadate.js/lib/legacy
 //= require pickadate.js/lib/translations/ru_RU
+//
+//= require skrollr/src/skrollr
+//= require skrollr
 
 
 // APPLICATION

@@ -3,6 +3,8 @@
 class WelcomeController < ApplicationController
   include SetResourceClassDummy
 
+  #layout 'lightweight'
+
   def index
   end
 

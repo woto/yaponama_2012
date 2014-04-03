@@ -100,3 +100,6 @@
 [submodule "system/submodules/files"]
 	path = system/submodules/files
 	url = https://github.com/woto/files
+[submodule "system/submodules/skrollr"]
+	path = system/submodules/skrollr
+	url = https://github.com/Prinzhorn/skrollr

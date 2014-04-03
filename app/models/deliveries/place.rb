@@ -1,6 +1,10 @@
 # encoding: utf-8
 #
 class Deliveries::Place < ActiveRecord::Base
+  mount_uploader :image1, PlaceUploader
+  mount_uploader :image2, PlaceUploader
+  mount_uploader :image3, PlaceUploader
+
   include Selectable
 
   has_many :variants, dependent: :destroy
