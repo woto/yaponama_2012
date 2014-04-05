@@ -4,24 +4,15 @@
 
 <%= render '/layouts/user_navbar' %>
 
-<div class="container-fluid">
+<%= render 'flash' %>
 
-  <%= render 'menu' %>
+<%= yield :form_error %>
 
-  <%= render 'flash' %>
+<%= render 'right_hand' %>
 
-  <%= yield :form_error %>
+<%= render 'talk_button' %>
 
-  <%= render 'right_hand' %>
-
-  <div class="row">
-    <div class="col-sm-12">
-      <%= render 'talk_button' %>
-      <%= yield %>
-    </div>
-  </div>
-
-</div>
+<%= yield %>
 
 <%= render 'layouts/user_footer' %>
 

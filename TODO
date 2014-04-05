@@ -18,6 +18,7 @@ http://jssip.net/
   OpenpyXL
   xlrd - начал поддерживать xlsx
   www.python-excel.org
+  https://github.com/onyxfish/csvkit
 
 Есть такая прблема, что в fixtures brands названия производителей могут быть только большими буквами. Иначе возникает проблема с валидацией на уникальность
 

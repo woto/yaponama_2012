@@ -1,6 +1,6 @@
-<nav class="navbar navbar-default navbar-static-top headroom" role="navigation">
+<nav class="navbar navbar-default navbar-static-top headroom" role="navigation" style="margin-bottom: 0">
 
-    <div class="container-fluid">
+    <div class="container">
 
       <div class="navbar-header">
 
@@ -70,11 +70,11 @@
         <form class="navbar-form navbar-nav navbar-right">
           <div class="form-group">
 
-            <a onclick="window.open('/webrtc', 'webrtc', 'scrollbars=no, resizable=no, width=500, height=300')" class="btn btn-success right-space">
+            <%= call_button '#', class: "btn btn-success right-space" do %>
               <%= icon 'phone' %>
               <span class="hidden-sm">Позвонить</span>
               <!--<small style="display: inline-block; vertical-align: text-bottom">+7 (495)</small> 485-30-12 -->
-            </a>
+            <% end %>
           </div>
         </form>
 
@@ -82,18 +82,18 @@
 
       </div>
 
-    </div> <!-- /.container-fluid -->
+    </div> <!-- /.container -->
 
   </div>
 
 
   <div id="nav-second" class="navbar-inverse">
 
-    <div class="container-fluid">
+    <div class="container">
 
       <div class="collapse navbar-collapse navbar-responsive-collapse">
 
-        <ul class="nav navbar-nav text-sm">
+        <ul class="nav navbar-nav">
 
           <%= content_tag :li, class: highlight_active2(/\/news/) do %>
             <%= link_to "Новости компании", "/news" %>
@@ -119,6 +119,6 @@
 
       </div>
 
-    </div> <!-- /.container-fluid -->
+    </div> <!-- /.container -->
 
 </nav>

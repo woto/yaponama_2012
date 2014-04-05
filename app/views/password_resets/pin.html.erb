@@ -1,13 +1,17 @@
-<%= row do %>
+<div class="container">
 
-  <div class="col-sm-8">
-    <% @meta_title = "Ввод PIN кода" %>
+  <%= row do %>
 
-    <%= page_header %>
+    <div class="col-sm-8">
+      <% @meta_title = "Ввод PIN кода" %>
 
-    <%= render 'pin_form' %>
-  </div>
+      <%= page_header %>
 
-  <%= render 'right' %>
+      <%= render 'pin_form' %>
+    </div>
 
-<% end %>
+    <%= render 'right' %>
+
+  <% end %>
+
+</div>

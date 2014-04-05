@@ -1,5 +1,5 @@
 <% flash.each do |key, value| %>
-  <%= alert key do %>
+  <%= alert key, false, style: 'margin-bottom: 0' do %>
     <%= value %>
   <% end %>
 <% end %>

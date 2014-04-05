@@ -18,12 +18,17 @@
   <% end %>
 <% end %>
 
-
 <% @preset_catalog_number = @resource.catalog_number %>
 
 <% if @resource.persisted? %>
   <%= alert 'info', false do %>
     Редактирование позиции <%= @resource.to_label %>
+    <%= yield :continue_search %>
+  <% end %>
+<% end %>
+
+<% unless @resource.persisted? %>
+  <%= alert 'info', false do %>
     <%= yield :continue_search %>
   <% end %>
 <% end %>

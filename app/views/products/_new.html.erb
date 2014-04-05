@@ -1,9 +1,17 @@
-<%= somebody_tabs do %>
+<div class="container">
 
-  <%= page_header %>
+  <%= row do %>
 
-  <%= render 'form' %>
+    <%= somebody_tabs do %>
 
-  <%= render 'searches/index' %>
+      <%= page_header %>
 
-<% end %>
+      <%= render 'form' %>
+
+      <%= render 'searches/index' %>
+
+    <% end %>
+
+  <% end %>
+
+</div>

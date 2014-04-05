@@ -1,27 +1,39 @@
-<% title_index %>
+<div class="container">
 
-<%= breadcrumb true do |b| %>
-  <%= b.item @meta_title %>
-<% end %>
+  <%= row do %>
 
-<%= title_index %>
+    <div class="col-lg-12">
 
-<%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
+      <% title_index %>
 
-  <%= panel 'default' do |p| %>
+      <%= breadcrumb true do |b| %>
+        <%= b.item @meta_title %>
+      <% end %>
 
-    <%= p.heading do %>
-      <%= render 'head' %>
-    <% end %>
+      <%= title_index %>
 
-    <%= p.body do %>
-      <%= render 'grid', f: f %>
-    <% end %>
+      <%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
 
-    <%= render 'grid_footer', f: f, p: p %>
+        <%= panel 'default' do |p| %>
 
+          <%= p.heading do %>
+            <%= render 'head' %>
+          <% end %>
+
+          <%= p.body do %>
+            <%= render 'grid', f: f %>
+          <% end %>
+
+          <%= render 'grid_footer', f: f, p: p %>
+
+
+        <% end %>
+
+
+      <% end %>
+
+    </div>
 
   <% end %>
 
-
-<% end %>
+</div>

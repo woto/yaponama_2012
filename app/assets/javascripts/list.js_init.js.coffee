@@ -1,7 +1,7 @@
 $(document).on 'page:update', ->
   options = {
     valueNames: [ 'brand' ]
-    page: 12,
+    page: 10,
     plugins: [ ListPagination({ }) ],
   }
 

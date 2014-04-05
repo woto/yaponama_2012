@@ -87,33 +87,37 @@
 
 
 <% if confirm.present? || pay.present? %>
-  <%= alert 'warning', false, class: 'clearfix', id: 'right_hand_alert', style: 'margin-bottom: 40px' do %>
 
-    <div class="table bottom-space-none" style="display: table;">
-      <ul class="table-row" style="display: table-row">
-        <li class="table-cell" style="display: table-cell; vertical-align: middle"><%= icon 'hand-o-right fa-2x pull-left', id: 'right_hand' %></li>
-        <li class="table-cell" style="display: table-cell; vertical-align: middle; width: 100%; padding-left: 10px">
 
-          <% if pay.present? %>
-            <div id="pay-block">
-              <%= pay %>
-            </div>
-          <% end %>
+      <%= alert 'warning', false, class: 'clearfix', id: 'right_hand_alert', style: 'margin-bottom: 0px' do %>
 
-          <% if confirm.present? %>
-            <div id="confirm-block">
-              <%= confirm %>
-            </div>
-          <% end %>
+        <div class="table bottom-space-none" style="display: table;">
+          <ul class="table-row" style="display: table-row">
+            <li class="table-cell" style="display: table-cell; vertical-align: middle"><%= icon 'hand-o-right fa-2x pull-left', id: 'right_hand' %></li>
+            <li class="table-cell" style="display: table-cell; vertical-align: middle; width: 100%; padding-left: 10px">
 
-        </li>
-      </ul>
-    </div>
+              <% if pay.present? %>
+                <div id="pay-block">
+                  <%= pay %>
+                </div>
+              <% end %>
 
-    <%# render 'confirm' %>
-    <%# render 'pay' %>
+              <% if confirm.present? %>
+                <div id="confirm-block">
+                  <%= confirm %>
+                </div>
+              <% end %>
 
-  <% end %>
+            </li>
+          </ul>
+        </div>
+
+        <%# render 'confirm' %>
+        <%# render 'pay' %>
+
+      <% end %>
+
+
 
 <% end %>
 

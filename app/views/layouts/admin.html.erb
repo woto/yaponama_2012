@@ -4,22 +4,15 @@
 
 <%= render :partial => "layouts/admin_navbar" %>
 
-<div class="container">
+<%= render 'flash' %>
 
-  <%= render 'flash' %>
+<%= yield :form_error %>
 
-  <%= yield :form_error %>
+<%= render 'right_hand' %>
 
-  <%= render 'right_hand' %>
+<%= render 'talk_button' %>
 
-  <div class="row">
-    <div class="col-sm-12">
-      <%= render 'talk_button' %>
-      <%= yield %>
-    </div>
-  </div>
-
-</div>
+<%= yield %>
 
 <%= render "layouts/admin_footer" %>
 

@@ -95,7 +95,7 @@ module ApplicationHelper
 
     [
 
-    content_tag(:div, :class => 'row') do
+    content_tag(:div, :class => 'row top-space') do
       res = ''.html_safe
 
       if (admin_zone? && @somebody) || !admin_zone?
@@ -509,6 +509,24 @@ module ApplicationHelper
       @first = true
       'active'
     end
+  end
+
+  def call_button(name = nil, options = nil, html_options = nil, &block)
+
+    # TODO Код полностью взят с link_to, за исключением одной строчки с webrtc
+
+    html_options, options, name = options, name, block if block_given?
+    options ||= {}
+
+    html_options = convert_options_to_data_attributes(options, html_options)
+
+    url = url_for(options)
+    html_options['href'] ||= url
+
+    html_options['onclick'] = "window.open('/webrtc', 'webrtc', 'scrollbars=no, resizable=no, width=500, height=300'); return false;"
+
+    content_tag(:a, name || url, html_options, &block)
+
   end
 
 end

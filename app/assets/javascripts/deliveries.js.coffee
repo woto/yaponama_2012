@@ -229,8 +229,5 @@ $(document).on 'page:load', ->
     $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&callback=initClientMap')
 
 $(document).on 'show.bs.collapse', '[data-parent="#deliveries-accordion"]', (event) ->
-  $('.in').collapse('hide')
-
-
-$(document).on 'shown.bs.collapse', '[data-parent="#deliveries-accordion"]', (event) ->
   $("html, body").animate({scrollTop: $(event.target).closest('.accordion-group').offset().top - 5}, 'fast')
+  false

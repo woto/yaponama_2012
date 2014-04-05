@@ -4,189 +4,211 @@
   <%= render(:partial => "blocks/show", :locals => {:block_name => 'hero_unit'}) %>
 </div>
 
-<%= row "data-top-bottom" => "background-position: 300px 0px", "data-center" => "background-position: 300px 200px", style: "padding: 80px 0; background: url('#{asset_url 'parts.jpg'}') 300px 0px; margin-top: -20px" do %>
+<%= content_tag :div, "data-0" => "background-position: -300px -230px", "data-top-bottom" => "background-position: -300px -430px", style: "padding: 80px 0px; background: url('#{asset_url 'parts.jpg'}') 0px 0px;" do %>
 
-    <div class="col-lg-5 col-lg-offset-1 col-md-6" style="color: white; text-shadow: 0 0 9px black;">
-      <h1 style="margin-bottom: 40px; font-size: 36px;" class="text-left">Добро пожаловать!</h1>
+  <div class="container">
 
-      <h4 style="line-height: 190%" class="text-justify">Мы занимаемся продажей оригинальных и неоригинальных запчастей для японских автомобилей. Для вашего удобства мы принимаем оплату всеми современными способами. Приобретенный товар вы можете самостоятельно забрать в наших магазинах в Москве или заказать доставку. Так же мы отправляем почтовыми и транспортными компаниями по России.</h4>
-    </div>
+    <%= row do %>
 
-    <div class="col-lg-5 col-md-6">
-      <div class="col-lg-10 col-lg-offset-1 top-space-lg bottom-space-lg">
-        <%= form_tag polymorphic_path([:new, *jaba3, :product]), remote: true, :method => :get, class: 'bottom-space-lg' do %>
-          <div class="input-group">
-            <input type="text" name="catalog_number" class="form-control input-lg" placeholder="Артикул детали">
-            <span class="input-group-btn">
-              <button class="btn btn-primary btn-lg" type="submit">Найти</button>
-            </span>
-          </div><!-- /input-group -->
-        <% end %>
-        <span style="color: white; text-shadow: 0 0 1px black"> Если вы уже знаете артикул запчасти, так же его называют каталожный номер, то можете сразу воспользоваться поиском. </span>
+      <div class="col-md-6 col-lg-offset-1 col-lg-5" style="color: white; text-shadow: 0 0 9px black;">
+        <h1 style="margin-bottom: 40px; font-size: 36px;" class="text-left">Добро пожаловать!</h1>
+
+        <h4 style="line-height: 190%" class="text-justify">Мы занимаемся продажей оригинальных и неоригинальных запчастей для японских автомобилей. Для вашего удобства мы принимаем оплату всеми современными способами. Приобретенный товар вы можете самостоятельно забрать в наших магазинах в Москве или заказать доставку. Так же мы отправляем почтовыми и транспортными компаниями по России.</h4>
       </div>
-    </div>
 
-    <div class="hidden">
-    <div class="clearfix"></div>
-
-    <div class="col-lg-12" style="height: 200px; margin-top: 40px">
-      <div class="panel panel-default" style="background: rgba(255,255,255,1); color: white; padding: 20px" >
-        <h4>Текст</h4>
-      </div>
-    </div>
-    </div>
-
-
-  <% end %>
-
-<%= row style: "padding: 40px 0; background: #FAFAFA; border-top: 3px solid #333" do %>
-
-  <div class="col-lg-3 col-lg-offset-1 col-md-4">
-    <h1 style="margin-bottom: 40px; font-size: 36px">Каталоги</h1>
-    <h4 class="text-justify" style="line-height: 190%">Если вы не знаете артикула детали и разбираетесь в устройстве автомобиля, то можете самостоятельно подобрать себе необходимую деталь. По вашему запросу менеджер проверит совместимость заказанных деталей с вашим автомобилем.</h4>
-  </div>
-  <div class="col-lg-7 col-md-8">
-    <div id="brands" class="bottom-space-lg">
-      <%= row do %>
-        <div class="col-lg-10 col-lg-offset-1 top-space-lg bottom-space">
-          <div class="input-group input-group-lg">
-            <span class="input-group-addon"><%= icon 'search' %></span>
-            <input type="text" class="form-control search" placeholder="Быстрый поиск">
-          </div>
+      <div class="col-md-6 col-lg-5">
+        <div class="col-lg-10 col-lg-offset-1 top-space-lg bottom-space-lg">
+          <%= form_tag polymorphic_path([:new, *jaba3, :product]), remote: true, :method => :get, class: 'bottom-space-lg' do %>
+            <div class="input-group">
+              <input type="text" name="catalog_number" class="form-control input-lg" placeholder="Артикул детали">
+              <span class="input-group-btn">
+                <button class="btn btn-primary btn-lg" type="submit">Найти</button>
+              </span>
+            </div><!-- /input-group -->
+          <% end %>
+          <span style="color: white; text-shadow: 0 0 1px black"> Если вы уже знаете артикул запчасти, так же его называют каталожный номер, то можете сразу воспользоваться поиском. </span>
         </div>
-      <% end %>
-      <ul class="clearfix list brands list-inline" style="background: #FFF; padding: 10px 0;">
-        <% Brand.where("brand_id is NULL").where(:manufacturer => true).order(:name => :asc).each do |a, b| %>
-          <li>
-            <%= brands_decorator(a, {:title => true}) %>
-          </li>
-        <% end %>
-      </ul>
-      <ul class="pagination hidden" style="margin: 10px 0 20px 20px !important"></ul>
-    </div>
-  </div>
+      </div>
 
-<% end %>
-
-
-<%= row style: "padding: 0; background: #eee; height: 300px; overflow: hidden; border-top: 3px solid #333" do %>
-  <div class="col-lg-12" style="position: relative">
-    <% Faq.all.each do |faq| %>
-      <p data-top="top:<%= -Random.rand(600) %>px" data-bottom="top:<%=Random.rand(600)%>px" class="text-muted unselectable" style="color: #555; font-size: <%= 20 + Random.rand(20) %>px; font-weight: bold; position: absolute; top: <%= Random.rand(340) - 40 %>px ; left: <%= Random.rand(800) - 100 %>px; padding: 0; display: block; white-space: nowrap"><%= faq.question %></p>
     <% end %>
 
-    <div style="top: 120px; position: absolute; left: 0; right: 0; width: 300px" class="center-block">
-      <a href="/faqs" class="btn btn-primary btn-lg btn-block"> Полезная информация </a>
-    </div>
-
   </div>
+
 <% end %>
 
-<%= row style: "padding: 60px 0; background: #3c5868" do %>
+<%= content_tag :div, style: "padding: 40px 0; border-top: 3px solid #333" do %>
 
-  <div class="col-lg-5 col-lg-offset-1 col-md-6 bottom-space-lg">
-    <h1 style="margin-bottom: 40px; font-size: 36px; color: white">Онлайн консультант</h1>
-    <h4 class="text-justify" style="line-height: 190%; color: white">Нет желания, опыта или времени разбираться в премудростях автомобиля и запчастях? Обратитесь в нашу службу поддержки и вам обязательно помогут наши специалисты. </h4>
+  <div class="container">
 
-    <ul class="top-space-lg list-inline bottom-space-lg" style="color: white">
+    <%= row do %>
 
-      <li>
-        <a href="#" class="btn btn-primary btn-lg" style="border: #293d49; color: white">
-          <%= icon 'phone' %>
-          Онлайн звонок
-        </a>
-        <a href="#" style="color: white">
-        </a>
-      </li>
+      <div class="col-md-5 col-lg-offset-1 col-lg-4">
+        <h1 style="margin-bottom: 40px; font-size: 36px">Каталоги</h1>
+        <h4 class="text-justify" style="line-height: 190%">Если вы не знаете артикула детали и разбираетесь в устройстве автомобиля, то можете самостоятельно подобрать себе необходимую деталь. По вашему запросу менеджер проверит совместимость заказанных деталей с вашим автомобилем.</h4>
+      </div>
+      <div class="col-md-7 col-lg-6">
+        <div id="brands" class="bottom-space-lg">
+          <%= row do %>
+            <div class="col-lg-10 col-lg-offset-1 top-space-lg bottom-space">
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon"><%= icon 'search' %></span>
+                <input type="text" class="form-control search" placeholder="Быстрый поиск">
+              </div>
+            </div>
+          <% end %>
+          <ul class="clearfix list brands list-inline" style="background: #FFF; padding: 10px 0;">
+            <% Brand.where("brand_id is NULL").where(:manufacturer => true).order(:name => :asc).each do |a, b| %>
+              <li>
+                <%= brands_decorator(a, {:title => true}) %>
+              </li>
+            <% end %>
+          </ul>
+          <ul class="pagination hidden" style="margin: 10px 0 20px 20px !important"></ul>
+        </div>
+      </div>
 
-      <li>
-        <a href="mailto:info@avtorif.ru" class="btn btn-primary btn-lg" style="border: #293d49; color: white">
-          <%= icon 'envelope' %>
-          info@mail.ru
-        </a>
-        <a href="#" style="color: white">
-        </a>
-      </li>
-
-      <li>
-        <a href="#" class="btn btn-primary btn-lg" style="border: #293d49; color: white">
-          <%= icon 'comments' %>
-          Чат
-        </a>
-        <a href="#" style="color: white">
-        </a>
-      </li>
-
-    </ul>
+    <% end %>
 
   </div>
 
-  <div class="col-lg-5 col-md-6">
+<% end %>
 
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
-      <% delivery_places = Deliveries::Place.where(display_marker: true) %>
+<%= content_tag :div, style: "padding: 0; background: #eee; height: 300px; overflow: hidden; border-top: 3px solid #333" do %>
 
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <% @first = nil %>
-        <% (0..delivery_places.count-1).each do |i| %>
-          <li data-target="#carousel-example-generic" data-slide-to="<%= i %>" <%= (i == 0) ? "class='active'".html_safe : '' %> ></li>
+  <div class="container">
+
+    <%= row do %>
+
+      <div class="col-lg-12" style="position: relative">
+        <% Faq.all.each do |faq| %>
+          <p data-top="top:<%= -Random.rand(600) %>px" data-bottom="top:<%=Random.rand(600)%>px" class="text-muted unselectable" style="color: #555; font-size: <%= 20 + Random.rand(20) %>px; font-weight: bold; position: absolute; top: <%= Random.rand(340) - 40 %>px ; left: <%= Random.rand(800) - 100 %>px; padding: 0; display: block; white-space: nowrap"><%= faq.question %></p>
         <% end %>
-      </ol>
 
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner">
+        <div style="top: 120px; position: absolute; left: 0; right: 0; width: 300px" class="center-block">
+          <a href="/faqs" class="btn btn-primary btn-lg btn-block"> Полезная информация </a>
+        </div>
 
-        <% delivery_places.each do |delivery_place| %>
+      </div>
 
-          <div class="item <%= mark_first_as_active %>">
-            <%= image_tag delivery_place.image1.url %>
-            <div class="carousel-caption" style="padding: 0; left: 15%; right: 15%; bottom: 0; top: 0">
-              <div style="display: table; height: 100%; width: 100%">
-                <div style="display: table-cell; vertical-align: middle">
-                  <div style="background: rgba(0,0,0,0.3); border-radius: 3px;>
-                    <a href="#">
-                    <h3 style="color: white"><%= delivery_place.name %></h3>
-                    <h4 style="color: white"><%= delivery_place.postal_address %></h4>
-                    <ul style="color: white; padding-left: 10px" class="list-unstyled">
-                      <% (1..5).each do |n| %>
-                        <% if delivery_place.instance_eval("phone#{n}").present? %>
-                          <li><%= delivery_place.instance_eval("phone#{n}") %></li>
-                        <% end %>
-                      <% end %>
-                    </ul>
-                    </a>
+    <% end %>
+
+  </div>
+
+<% end %>
+
+<%= content_tag :div, style: "padding: 60px 0; background: #3c5868" do %>
+
+  <div class="container">
+
+    <%= row do %>
+
+      <div class="col-md-6 col-lg-offset-1 col-lg-5 bottom-space-lg">
+        <h1 style="margin-bottom: 40px; font-size: 36px; color: white">Онлайн консультант</h1>
+        <h4 class="text-justify" style="line-height: 190%; color: white">Нет желания, опыта или времени разбираться в премудростях автомобиля и запчастях? Обратитесь в нашу службу поддержки и вам обязательно помогут наши специалисты. </h4>
+
+        <ul class="top-space-lg list-inline bottom-space-lg" style="color: white">
+
+          <li>
+            <%= call_button '#', class: 'btn btn-primary', style: 'border: #293d49; color: white' do %>
+              <%= icon 'phone' %>
+              Онлайн звонок
+            <% end %>
+          </li>
+
+          <li>
+            <a href="mailto:info@avtorif.ru" class="btn btn-primary" style="border: #293d49; color: white">
+              <%= icon 'envelope' %>
+              info@avtorif.ru
+            </a>
+          </li>
+
+          <li>
+          <%= link_to polymorphic_path([:modal] + jaba3 + [:talks]), remote: true, class: 'btn btn-primary', style: 'border: #293d49; color: white' do %>
+            <%= icon 'comments' %>
+            Чат
+          <% end %>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <div class="col-md-6 col-lg-5">
+
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+          <% delivery_places = Deliveries::Place.where(display_marker: true) %>
+
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <% @first = nil %>
+            <% (0..delivery_places.count-1).each do |i| %>
+              <li data-target="#carousel-example-generic" data-slide-to="<%= i %>" <%= (i == 0) ? "class='active'".html_safe : '' %> ></li>
+            <% end %>
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+
+            <% delivery_places.each do |delivery_place| %>
+
+              <div class="item <%= mark_first_as_active %>">
+                <%= image_tag delivery_place.image1.url %>
+                <div class="carousel-caption" style="padding: 0; left: 15%; right: 15%; bottom: 0; top: 0">
+                  <div style="display: table; height: 100%; width: 100%">
+                    <div style="display: table-cell; vertical-align: middle">
+                      <div style="background: rgba(0,0,0,0.3); border-radius: 3px;>
+                        <a href="#">
+                        <h3 style="color: white"><%= delivery_place.name %></h3>
+                        <h4 style="color: white"><%= delivery_place.postal_address %></h4>
+                        <ul style="color: white; padding-left: 10px" class="list-unstyled">
+                          <% (1..5).each do |n| %>
+                            <% if delivery_place.instance_eval("phone#{n}").present? %>
+                              <li><%= delivery_place.instance_eval("phone#{n}") %></li>
+                            <% end %>
+                          <% end %>
+                        </ul>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+
+            <% end %>
+
           </div>
 
-        <% end %>
+          <!-- Controls -->
+          <a href="#carousel-example-generic" class="left carousel-control" data-slide="prev">
+            <span class="icon-prev">
+            </span>
+          </a>
+          <a href="#carousel-example-generic" class="right carousel-control" data-slide="next">
+            <span class="icon-next">
+            </span>
+          </a>
+
+        </div>
 
       </div>
 
-      <!-- Controls -->
-      <a href="#carousel-example-generic" class="left carousel-control" data-slide="prev">
-        <span class="icon-prev">
-        </span>
-      </a>
-      <a href="#carousel-example-generic" class="right carousel-control" data-slide="next">
-        <span class="icon-next">
-        </span>
-      </a>
-
-    </div>
+    <% end %>
 
   </div>
 
 <% end %>
 
 
+<div class="container">
 
-<div class="row" style="margin-left: 0; margin-bottom: 0px">
-  <div class="col-lg-12">
-    <%= render(:partial => "blocks/show", :locals => {:block_name => 'blockquote'}) %>
-  </div>
+  <%= row style: 'margin-left: 0; margin-bottom: 0px' do %>
+
+    <div class="col-lg-12">
+      <%= render(:partial => "blocks/show", :locals => {:block_name => 'blockquote'}) %>
+    </div>
+
+  <% end %>
+
 </div>

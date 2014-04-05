@@ -1,13 +1,21 @@
-<%= somebody_tabs do %>
+<div class="container">
 
-  <% title_show %>
+  <%= row do %>
 
-  <%= breadcrumb true do |b| %>
-    <%= b.item @meta_title %>
+    <%= somebody_tabs do %>
+
+      <% title_show %>
+
+      <%= breadcrumb true do |b| %>
+        <%= b.item @meta_title %>
+      <% end %>
+
+      <%= title_show %>
+
+      <%= render 'smart_show' %>
+
+    <% end %>
+
   <% end %>
 
-  <%= title_show %>
-
-  <%= render 'smart_show' %>
-
-<% end %>
+</div>

@@ -105,7 +105,7 @@
                         <th> <a href="#" rel="tooltip" title="Вероятность наличия детали у поставщика">Вер.</a></th>
                         <th> <a href="#" rel="tooltip" title="Количество на складе поставщика">Кол-во</a></th>
                         <th> <a href="#" rel="tooltip" title="Зайдите на сайт под своим аккаунтом, чтобы увидеть вашу цену со скидками, если таковые имеются">Цена</a></th>
-                        <% if admin_zone? %>
+                        <% if current_user.seller? %>
                           <th> <a href="#" rel="tooltip" title="Служебная информация, отображается только менеджеру сайта">Служ.</a></th>
                         <% end %>
                       </tr>
@@ -125,7 +125,7 @@
                               Купить <%= number_to_currency(offer[:retail_cost], precision: 0) %>
                             <% end %>
                           </td>
-                          <% if admin_zone? %>
+                          <% if current_user.seller? %>
                             <td> 
                               <%= offer[:tech] %> 
                             </td>

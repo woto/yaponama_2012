@@ -1,20 +1,22 @@
-= somebody_tabs do
+.container
 
-  - title_index
-  - @meta_title_small = Rails.configuration.orders_status[params[:status] || 'all']['full_title']
-  - @meta_title_lead = "Вы просматриваете #{Rails.configuration.orders_status[params[:status] || 'all']['hint']}"
+  = somebody_tabs do
 
-  = breadcrumb true do |b|
-    = b.item @meta_title
+    - title_index
+    - @meta_title_small = Rails.configuration.orders_status[params[:status] || 'all']['full_title']
+    - @meta_title_lead = "Вы просматриваете #{Rails.configuration.orders_status[params[:status] || 'all']['hint']}"
 
-  = title_index
+    = breadcrumb true do |b|
+      = b.item @meta_title
 
-  = twbs_form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f|
+    = title_index
 
-    = panel 'default' do |p|
-      = p.heading do
-        = render "head"
-      = p.body do
-        = render 'grid', f: f
-      #grid-footer
-        = render 'grid_footer', f: f, p: p
+    = twbs_form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f|
+
+      = panel 'default' do |p|
+        = p.heading do
+          = render "head"
+        = p.body do
+          = render 'grid', f: f
+        #grid-footer
+          = render 'grid_footer', f: f, p: p
