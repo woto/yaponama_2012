@@ -1,16 +1,12 @@
 <div class="container">
 
-  <%= row do %>
+  <%= somebody_tabs do %>
 
-    <%= somebody_tabs do %>
+    <%= page_header %>
 
-      <%= page_header %>
+    <%= render 'form' %>
 
-      <%= render 'form' %>
-
-      <%= render 'searches/index' %>
-
-    <% end %>
+    <%= render 'searches/index' %>
 
   <% end %>
 
