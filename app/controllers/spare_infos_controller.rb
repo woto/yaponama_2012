@@ -3,7 +3,7 @@
 class SpareInfosController < ApplicationController
   include GridSpareInfo
 
-  skip_before_filter :set_grid, only: [:edit, :new, :create, :show, :update]
+  skip_before_filter :set_grid, :only => [:new, :create, :edit, :update, :show, :destroy]
 
   # TODO Не забыть вернуть!
   skip_before_action :verify_authenticity_token

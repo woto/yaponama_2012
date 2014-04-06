@@ -137,8 +137,8 @@ module GridHelper
             raise "true/false тип boolean не выставлен #{@resource_class}. #{column_name}"
           end
         when *['catalog_number']
+          res = "".html_safe
           if item.class == Product
-            res = "".html_safe
             if item.hide_catalog_number
               if admin_zone?
                 res << h(val)
@@ -153,7 +153,8 @@ module GridHelper
             else
               res
             end
-
+          else
+            res << val
           end
         when *['probability', 'discount', 'prepayment']
           if admin_zone?
