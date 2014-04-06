@@ -113,6 +113,10 @@
                   </table>
                 </div>
 
+                <p><strong> В случае заказа по телефону обязательно говорите, что вы увидели эту цену на сайте avtorif.ru </strong></p>
+                <br />
+
+
                 <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
                 <p>А так же рекомендуем посмотреть <%= link_to  "аналоги и замены, \"#{catalog_number} - #{manufacturer}\"", polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource, :catalog_number => catalog_number, :manufacturer => manufacturer, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством. </p>
 
