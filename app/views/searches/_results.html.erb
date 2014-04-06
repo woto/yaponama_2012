@@ -62,24 +62,6 @@
                   <% end %>
                 </div>
 
-                <div class="top-space bottom-space">
-                  <% offer = mf_scope[:offers][0] %>
-                  <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, class: "btn btn-success buy-button" do %>
-
-                    <%= icon 'shopping-cart fa-2x pull-left' %>
-                    Купить за <%= number_to_currency(offer[:retail_cost], precision: 0) %>
-                    <br />
-                    <small>Доставка от <%= offer[:min_days] %> до <%= offer[:max_days] %> дн.</small>
-                  <% end %>
-
-                  <a href="#" class="btn btn-default" rel="tooltip show-offer" title="Другие предложения по автозапчасти">
-                    <%= icon 'truck fa-2x pull-left' %>
-                    Всего: <%= mf_scope[:offers].count %> <%= Russian.p(mf_scope[:offers].count, "предложение", "предложения", "предложений") %><br />
-                    <small>от наших поставщиков</small>
-                  </a>
-
-                </div>
-
                 <span style="display: none">
                   <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
                     <meta itemprop="priceCurrency" content="RUB" />
@@ -87,26 +69,20 @@
                   </div>
                 </span>
 
-                <% if current_user.role == 'guest' %>
-                  <% css_class = ' collapse' %>
-                <% else %>
-                  <% css_class = ' in' %>
-                <% end %>
-
-                <div class="table-responsive<%= css_class %>" rel="offers">
+                <div class="text-lg table-responsive" rel="offers">
                   <table class="table table-hover">
 
                     <thead>
                       <tr>
-                        <th> <a href="#" rel="tooltip" title="Расположение склада поставщика">Расп.</a></th>
-                        <th> <a href="#" rel="tooltip" title="Способ доставки на наш склад">Дост.</a></th>
-                        <th> <a href="#" rel="tooltip" title="Минимальный срок поставки на наш склад">Мин.</a></th>
-                        <th> <a href="#" rel="tooltip" title="Максимальный срок поставки на наш склад">Макс.</a></th>
-                        <th> <a href="#" rel="tooltip" title="Вероятность наличия детали у поставщика">Вер.</a></th>
-                        <th> <a href="#" rel="tooltip" title="Количество на складе поставщика">Кол-во</a></th>
-                        <th> <a href="#" rel="tooltip" title="Зайдите на сайт под своим аккаунтом, чтобы увидеть вашу цену со скидками, если таковые имеются">Цена</a></th>
+                        <th> <b href="#" rel="tooltip" title="Расположение склада поставщика">Расп.</b></th>
+                        <th> <b href="#" rel="tooltip" title="Способ доставки на наш склад">Дост.</b></th>
+                        <th> <b href="#" rel="tooltip" title="Минимальный срок поставки на наш склад">Мин.</b></th>
+                        <th> <b href="#" rel="tooltip" title="Максимальный срок поставки на наш склад">Макс.</b></th>
+                        <th> <b href="#" rel="tooltip" title="Вероятность наличия детали у поставщика">Вер.</b></th>
+                        <th> <b href="#" rel="tooltip" title="Количество на складе поставщика">Кол-во</b></th>
+                        <th> <b href="#" rel="tooltip" title="Зайдите на сайт под своим аккаунтом, чтобы увидеть вашу цену со скидками, если таковые имеются">Цена</b></th>
                         <% if current_user.seller? %>
-                          <th> <a href="#" rel="tooltip" title="Служебная информация, отображается только менеджеру сайта">Служ.</a></th>
+                          <th> <b href="#" rel="tooltip" title="Служебная информация, отображается только менеджеру сайта">Служ.</b></th>
                         <% end %>
                       </tr>
                     </thead>
