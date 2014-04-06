@@ -89,7 +89,7 @@
 
                     <tbody>
                       <% mf_scope[:offers].each do |offer| %>
-                        <tr>
+                        <tr class="<%= offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 ? 'success' : '' %>">
                           <td> <%= raw country_decorator offer[:country] %> </td>
                           <td> <%= raw offer[:delivery] %> </td>
                           <td> <%= raw days_decorator offer[:min_days] %> </td>
@@ -102,7 +102,7 @@
                             <% end %>
                           </td>
                           <% if current_user.seller? %>
-                            <td> 
+                            <td>
                               <%= offer[:tech] %> 
                             </td>
                           <% end %>
