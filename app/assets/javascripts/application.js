@@ -38,7 +38,6 @@
 
 // APPLICATION
 //
-//= require offers
 //= require common
 //= require stat
 //= require profileables

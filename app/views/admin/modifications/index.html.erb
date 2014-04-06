@@ -1,36 +1,32 @@
 <div class="container">
 
-  <%= row do %>
+  <%= somebody_tabs do %>
 
-    <div class="col-lg-12">
+    <% title_index %>
 
-      <% title_index %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item @meta_title %>
+    <% end %>
 
-      <%= breadcrumb true do |b| %>
-        <%= b.item @meta_title %>
-      <% end %>
+    <%= title_index %>
 
-      <%= title_index %>
+    <%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
 
-      <%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
+      <%= panel 'default' do |p| %>
 
-        <%= panel 'default' do |p| %>
-
-          <%= p.heading do %>
-            <%= render 'head' %>
-          <% end %>
-
-          <%= p.body do %>
-            <%= render 'grid', f: f %>
-          <% end %>
-
-          <%= render 'grid_footer', f: f, p: p %>
-
+        <%= p.heading do %>
+          <%= render 'head' %>
         <% end %>
 
+        <%= p.body do %>
+          <%= render 'grid', f: f %>
+        <% end %>
+
+        <%= render 'grid_footer', f: f, p: p %>
+
       <% end %>
 
-    </div>
+    <% end %>
 
   <% end %>
 
