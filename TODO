@@ -19,6 +19,9 @@ http://jssip.net/
   xlrd - начал поддерживать xlsx
   www.python-excel.org
   https://github.com/onyxfish/csvkit
+  https://github.com/python-excel/xlwt
+  https://github.com/python-excel/xlutils
+  https://github.com/python-excel/tutorial/tree/master/tests
 
 Есть такая прблема, что в fixtures brands названия производителей могут быть только большими буквами. Иначе возникает проблема с валидацией на уникальность
 
