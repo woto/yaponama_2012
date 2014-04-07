@@ -83,8 +83,14 @@
                           <a href="mailto:#{delivery_zone.instance_eval("email#{n}") }"><span itemprop="email">#{delivery_zone.instance_eval("email#{n}") }</span></a><br />
                       p== delivery_zone.content
                       <div class='deliveries-image-shop top-space bottom-space'>
+                        <div class="row">
                         - (1..3).each do |n|
-                          = image_tag delivery_zone.instance_eval("image#{n}.url"), style: 'width: 100px; margin: 0 10px 0 0'
+                          - if delivery_zone.instance_eval("image#{n}").present?
+                            <div class="col-xs-6 col-md-4">
+                              = link_to delivery_zone.instance_eval("image#{n}.url"), target: '_blank', class: 'thumbnail' do
+                                = image_tag delivery_zone.instance_eval("image#{n}.thumb.url")
+                            </div>
+                        </div>
                       </div>
                       - delivery_zone.variants.order(sequence: :desc).each do |variant|
                         <div class="delivery-variant">

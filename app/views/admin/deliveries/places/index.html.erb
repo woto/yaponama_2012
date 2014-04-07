@@ -1,28 +1,36 @@
-<% title_index %>
+<div class="container">
 
-<%= breadcrumb true do |b| %>
-  <%= b.item @meta_title %>
-<% end %>
+  <%= row class: 'top-space' do %>
 
-<%= title_index %>
+    <% title_index %>
 
-<%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
-
-  <%= panel 'default' do |p| %>
-
-    <%= p.heading do %>
-      <%= render 'head' %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item @meta_title %>
     <% end %>
 
-    <%= p.body do %>
-      <%= render 'grid', f: f %>
+    <%= title_index %>
+
+    <%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
+
+      <%= panel 'default' do |p| %>
+
+        <%= p.heading do %>
+          <%= render 'head' %>
+        <% end %>
+
+        <%= p.body do %>
+          <%= render 'grid', f: f %>
+        <% end %>
+
+        <%= render 'grid_footer', f: f, p: p %>
+
+      <% end %>
+
+
     <% end %>
 
-    <%= render 'grid_footer', f: f, p: p %>
+    <%= link_to 'Новая зона', new_admin_deliveries_place_path %>
 
   <% end %>
 
-
-<% end %>
-
-<%= link_to 'Новая зона', new_admin_deliveries_place_path %>
+</div>

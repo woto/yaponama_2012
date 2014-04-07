@@ -1,9 +1,17 @@
-<% title_new %>
+<div class="container">
 
-<%= breadcrumb true do |b| %>
-  <%= b.item @meta_title %>
-<% end %>
+  <%= row class: 'top-space' do %>
 
-<%= title_new %>
+    <% title_new %>
 
-<%= render 'form' %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item @meta_title %>
+    <% end %>
+
+    <%= title_new %>
+
+    <%= render 'form' %>
+
+  <% end %>
+
+</div>

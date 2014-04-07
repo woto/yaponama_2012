@@ -1,9 +1,17 @@
-<% title_show %>
+<div class="container">
 
-<%= breadcrumb true do |b| %>
-  <%= b.item @meta_title %>
-<% end %>
+  <%= row class: 'top-space' do %>
 
-<%= title_show %>
+    <% title_show %>
 
-<%= render 'smart_show' %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item @meta_title %>
+    <% end %>
+
+    <%= title_show %>
+
+    <%= render 'smart_show' %>
+
+  <% end %>
+
+</div>

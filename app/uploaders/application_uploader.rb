@@ -1,6 +1,8 @@
 # encoding: utf-8
 #
 class ApplicationUploader < CarrierWave::Uploader::Base
+  include CarrierWave::RMagick
+  include CarrierWave::MimeTypes
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick

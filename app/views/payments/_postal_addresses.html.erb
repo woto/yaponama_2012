@@ -1,6 +1,8 @@
 <div rel="type-store">
 
-  <%= f.twbs_collection_radio_buttons :postal_address_type, [['new', 'Добавить новый'] ,['old', 'Выбрать ранее добавленный']], :first, :last, {variation: :vertical, label: false}, rel: 'radio radio-new-old-switcher' %>
+  <%= content_tag :div, class: @somebody.postal_addresses.size > 1 ? '' : 'hidden' do %>
+    <% f.twbs_collection_radio_buttons :postal_address_type, [['new', 'Добавить новый'] ,['old', 'Выбрать ранее добавленный']], :first, :last, {variation: :vertical, label: false}, rel: 'radio radio-new-old-switcher' %>
+  <% end %>
 
   <div rel="old">
     <%= f.twbs_collection_select :old_postal_address_id, @somebody.postal_addresses.where.not(postal_addresses: {id: nil}), :id, :to_label, { label: false, include_blank: true }, rel: "select select-and-fill"  %>
