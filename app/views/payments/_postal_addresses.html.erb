@@ -1,6 +1,6 @@
 <div rel="type-store">
 
-  <%= content_tag :div, class: @somebody.postal_addresses.size > 1 ? '' : 'hidden' do %>
+  <%= content_tag :div, class: @somebody.postal_addresses.count > 0 ? '' : 'hidden' do %>
     <% f.twbs_collection_radio_buttons :postal_address_type, [['new', 'Добавить новый'] ,['old', 'Выбрать ранее добавленный']], :first, :last, {variation: :vertical, label: false}, rel: 'radio radio-new-old-switcher' %>
   <% end %>
 

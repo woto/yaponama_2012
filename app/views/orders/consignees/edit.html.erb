@@ -1,48 +1,52 @@
-<%= somebody_tabs do %>
+<div class="container">
 
-  <% @meta_title = "Выбор получателя" %>
-  <% @meta_title_lead = "Укажите контактное лицо получающее товар. Пожалуйста отнеситесь к заполнению внимательно, т.к. часто почтовые и транспортные службы не позволяют менять получателя, либо эта услуга платная." %>
+  <%= somebody_tabs do %>
 
-  <%= breadcrumb true do |b| %>
-    <%= b.item "Заказ № #{ @resource.token}",  polymorphic_path([*jaba3, @resource]) %>
-    <%= b.item @meta_title %>
-  <% end %>
+    <% @meta_title = "Выбор получателя" %>
+    <% @meta_title_lead = "Укажите контактное лицо получающее товар. Пожалуйста отнеситесь к заполнению внимательно, т.к. часто почтовые и транспортные службы не позволяют менять получателя, либо эта услуга платная." %>
 
-  <%= page_header %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item "Заказ № #{ @resource.token}",  polymorphic_path([*jaba3, @resource]) %>
+      <%= b.item @meta_title %>
+    <% end %>
 
-  <%= row do %>
+    <%= page_header %>
 
-    <div class="col-md-7">
+    <%= row do %>
 
-      <%= twbs_form_for @resource, url: url_for(action: :update) do |f| %>
+      <div class="col-md-7">
 
-        <% content_for :form_error do %>
-          <%= f.error_notification %>
-        <% end %>
+        <%= twbs_form_for @resource, url: url_for(action: :update) do |f| %>
 
-        <%= f.hidden_field :profile_type, value: 'hack' %>
+          <% content_for :form_error do %>
+            <%= f.error_notification %>
+          <% end %>
 
-        <%= panel 'primary' do |p| %>
-          <%= p.heading do %>
-            <%= p.title do %>
-              Получатель
+          <%= f.hidden_field :profile_type, value: 'hack' %>
+
+          <%= panel 'primary' do |p| %>
+            <%= p.heading do %>
+              <%= p.title do %>
+                Получатель
+              <% end %>
+            <% end %>
+            <%= p.body do %>
+              <%= render 'payments/profiles', f:f %>
             <% end %>
           <% end %>
-          <%= p.body do %>
-            <%= render 'payments/profiles', f:f %>
-          <% end %>
+
+          <%= hidden_field_tag :return_path, params[:return_path] %>
+
+          <%= f.twbs_submit @resource.phantom? ? 'Продолжить' : 'Сохранить' %>
+
+          <%= f.twbs_hidden_field :somebody_id %>
+
         <% end %>
 
-        <%= hidden_field_tag :return_path, params[:return_path] %>
+      </div>
 
-        <%= f.twbs_submit @resource.phantom? ? 'Продолжить' : 'Сохранить' %>
-
-        <%= f.twbs_hidden_field :somebody_id %>
-
-      <% end %>
-
-    </div>
+    <% end %>
 
   <% end %>
 
-<% end %>
+</div>

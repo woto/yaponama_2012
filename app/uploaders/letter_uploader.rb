@@ -1,3 +1,5 @@
+# TODO Вроде не нужно больше?
+#
 # encoding: utf-8
 #
 class LetterUploader < CarrierWave::Uploader::Base
