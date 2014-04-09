@@ -7,37 +7,39 @@
 
     <div class="table-responsive">
       <table id="result-prices" class="table table-striped">
-        <thead>
+        <thead class="hidden-xs">
           <tr>
-            <th style="width: 55px">  <a href="#" rel="tooltip" title="Рейтинг производителя">Рейт.</a> </th>
-            <th style="width: 80px">  <a href="#" rel="tooltip" title="Производитель">Произв.</a> </th>
-            <th style="width: 80px"> <a href="#" rel="tooltip" title="Каталожный номер">Кат.&nbsp;ном.</a> </th>
-            <th style="width: 55px">  <a href="#" rel="tooltip" title="Информация">Инфо</a> </th>
+            <th> <a style="width: 55px" href="#" rel="tooltip" title="Рейтинг производителя">Рейт.</a> </th>
+            <th> <a style="width: 80px" href="#" rel="tooltip" title="Производитель">Произв.</a> </th>
+            <th> <a style="width: 80px" href="#" rel="tooltip" title="Каталожный номер">Кат.&nbsp;ном.</a> </th>
+            <th> <a style="width: 55px" href="#" rel="tooltip" title="Информация">Инфо</a> </th>
             <th> <a href="#" rel="tooltip" title="Название">Название</a> </th>
-            <th style="width: 90px">  <a href="#" rel="tooltip" title="Дней">Дней</a> </th>
-            <th style="width: 120px">  <a href="#" rel="tooltip" title="Цена">Цена</a> </th>
+            <th> <a style="width: 90px" href="#" rel="tooltip" title="Дней">Дней</a> </th>
+            <th> <a style="width: 120px" href="#" rel="tooltip" title="Цена">Цена</a> </th>
           </tr>
         </thead>
         <tbody>
           <% @formatted_data.each do |catalog_number, cn_scope| %>
             <% cn_scope.each_with_index do |(manufacturer, mf_scope), i| %>
               <tr> 
-                <td> <%= brand_rating mf_scope[:brand] %> </td>
-                <td> <%= manufacturer %> </td>
+                <td> <span class="visible-xs"> Рейтинг производителя: </span> <%= brand_rating mf_scope[:brand] %> </td>
+                <td> <span class="visible-xs"> Производитель: </span><%= manufacturer %> </td>
                 <td> 
+                  <span class="visible-xs"> Каталожный номер: </span>
                   <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
                   <%= link_to catalog_number, polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource, :catalog_number => catalog_number, :product_id => @resource.try(:product_id), :return_path => params[:return_path], :anchor => manufacturer ), :class => 'search-button' %> 
                 </td>
 
                 <td>
+                  <span class="visible-xs"> Информация: </span>
                   <% # Если есть хотя бы какая-то информация, то показываем, что есть информация %>
                   <% if mf_scope[:info].any?{|key, value| value[:status] == 'avaliable'} %>
                     <%= icon 'info-circle fa-lg' %>
                   <% end %>
                 </td>
-                <td> <%= mf_scope[:title] %> </td>
-                <td> <%= mf_scope[:min_days]%> - <%= mf_scope[:max_days] %> дн. </td>
-                <td> <%= mf_scope[:min_cost] %> - <%= mf_scope[:max_cost] %> руб. </td>
+                <td> <span class="visible-xs"> Название: </span> <%= mf_scope[:title] %> </td>
+                <td> <span class="visible-xs"> Дней: </span> <%= mf_scope[:min_days]%> - <%= mf_scope[:max_days] %> дн. </td>
+                <td> <span class="visible-xs"> Цена: </span> <%= mf_scope[:min_cost] %> - <%= mf_scope[:max_cost] %> руб. </td>
               </tr>
             <% end %>
           <% end %>

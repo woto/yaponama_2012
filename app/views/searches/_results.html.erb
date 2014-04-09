@@ -72,7 +72,7 @@
                 <div class="text-lg table-responsive" rel="offers">
                   <table class="table table-hover">
 
-                    <thead>
+                    <thead class="hidden-xs">
                       <tr>
                         <th> <b href="#" rel="tooltip" title="Расположение склада поставщика">Расп.</b></th>
                         <th> <b href="#" rel="tooltip" title="Способ доставки на наш склад">Дост.</b></th>
@@ -90,12 +90,12 @@
                     <tbody>
                       <% mf_scope[:offers].each do |offer| %>
                         <tr class="<%= offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 ? 'success' : '' %>">
-                          <td> <%= raw country_decorator offer[:country] %> </td>
-                          <td> <%= raw offer[:delivery] %> </td>
-                          <td> <%= raw days_decorator offer[:min_days] %> </td>
-                          <td> <%= raw days_decorator offer[:max_days] %> </td>
-                          <td> <%= raw offer[:probability] %>% </td>
-                          <td> <%= raw count_decorator offer[:count] %> </td>
+                          <td> <span class="visible-xs"> Расположение склада: </span> <%= raw country_decorator offer[:country] %> </td>
+                          <td> <span class="visible-xs"> Способ доставки: </span> <%= raw offer[:delivery] %> </td>
+                          <td> <span class="visible-xs"> Минимальный срок поставки: </span> <%= raw days_decorator offer[:min_days] %> </td>
+                          <td> <span class="visible-xs"> Максимальный срок поставки: </span> <%= raw days_decorator offer[:max_days] %> </td>
+                          <td> <span class="visible-xs"> Вероятность наличия детали: </span> <%= raw offer[:probability] %>% </td>
+                          <td> <span class="visible-xs"> Количество на складе: </span> <%= raw count_decorator offer[:count] %> </td>
                           <td>
                             <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, class: "btn btn-success btn-xs buy-button" do %>
                               Купить <%= number_to_currency(offer[:retail_cost], precision: 0) %>
@@ -103,6 +103,7 @@
                           </td>
                           <% if current_user.seller? %>
                             <td>
+                              <span class="visible-xs"> Служебная информация: </span>
                               <%= offer[:tech] %> 
                             </td>
                           <% end %>
