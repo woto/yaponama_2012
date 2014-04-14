@@ -399,6 +399,13 @@ module ApplicationHelper
     end
   end
 
+  def container options={}
+    options[:class] = ['container', options[:class] ].compact
+    content_tag :div, options do
+      yield
+    end
+  end
+
   def nested_visualize &block
     content_tag :div, class: "nested-visualize" do
       yield
