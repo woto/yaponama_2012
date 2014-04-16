@@ -3,7 +3,11 @@ namespace :app do
   desc 'Скачиваем наши прайсы чтобы заполнить ими spare_infos'
   task :our_spare_infos => :environment do
     require 'csv'
-    ['http://avtorif.ru:85/suppliers/156/price_settings/263/download'].each do |url|
+    ['http://avtorif.ru:85/suppliers/67/price_settings/106/download',
+     'http://avtorif.ru:85/suppliers/157/price_settings/265/download',
+     'http://avtorif.ru:85/suppliers/156/price_settings/263/download',
+     'http://avtorif.ru:85/suppliers/156/price_settings/264/download',
+    ].each do |url|
       open(url) do |f|
         f.each_line do |line| 
           row = CSV.parse(line)[0]
