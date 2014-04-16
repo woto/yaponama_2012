@@ -28,7 +28,7 @@ SitemapGenerator::Sitemap.create do
       '/suppliers/156/price_settings/264/download',
       '/suppliers/157/price_settings/265/download',
       '/suppliers/67/price_settings/106/download',
-      '/suppliers/67/price_settings/139/download',
+      #'/suppliers/67/price_settings/139/download',
       #'/suppliers/67/price_settings/135/download',
     ]
 
