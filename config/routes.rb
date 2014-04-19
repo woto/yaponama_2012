@@ -31,6 +31,7 @@ Yaponama2012::Application.routes.draw do
     resources :faqs, concerns: [:transactionable, :gridable]
     resources :spare_catalogs, concerns: [:gridable, :searchable]
     resources :bots, concerns: [:gridable]
+    resources :galleries, concerns: [:gridable]
   end
 
   resources :rspec_tests
@@ -243,7 +244,6 @@ Yaponama2012::Application.routes.draw do
         get 'multiple_destroy'
       end
     end
-
 
     # ПОСЛЕ ЭТОЙ СТРОКИ ИДУТ НЕ ПОВТОРЯЮЩИЕСЯ МАРШРУТЫ ТОЛЬКО В АДМИНИСТРАТИВНОЙ ЧАСТИ САЙТА
 

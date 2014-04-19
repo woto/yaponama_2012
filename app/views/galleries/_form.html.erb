@@ -1,0 +1,19 @@
+<%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
+
+  <%= row do %>
+
+    <%= c1 do %>
+
+      <%= f.twbs_text_field :title %>
+
+      <%= f.twbs_text_area :content, class: 'ckeditor-extended' %>
+
+      <%= f.twbs_file_field :image %>
+
+      <%= f.twbs_submit %>
+
+    <% end %>
+
+  <% end %>
+
+<% end %>

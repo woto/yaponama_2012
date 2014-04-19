@@ -138,12 +138,12 @@
 
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
-          <% delivery_places = Deliveries::Place.where(display_marker: true) %>
+          <% images = Gallery.all %>
 
           <!-- Indicators -->
           <ol class="carousel-indicators">
             <% @first = nil %>
-            <% (0..delivery_places.count-1).each do |i| %>
+            <% (0..images.count-1).each do |i| %>
               <li data-target="#carousel-example-generic" data-slide-to="<%= i %>" <%= (i == 0) ? "class='active'".html_safe : '' %> ></li>
             <% end %>
           </ol>
@@ -151,25 +151,16 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
 
-            <% delivery_places.each do |delivery_place| %>
+            <% images.each do |image| %>
 
               <div class="item <%= mark_first_as_active %>">
-                <%= image_tag delivery_place.image1.url %>
+                <%= image_tag image.image.welcome.url %>
                 <div class="carousel-caption" style="padding: 0; left: 15%; right: 15%; bottom: 0; top: 0">
                   <div style="display: table; height: 100%; width: 100%">
                     <div style="display: table-cell; vertical-align: middle">
-                      <div style="background: rgba(0,0,0,0.3); border-radius: 3px;>
-                        <a href="#">
-                        <h3 style="color: white"><%= delivery_place.name %></h3>
-                        <h4 style="color: white"><%= delivery_place.postal_address %></h4>
-                        <ul style="color: white; padding-left: 10px" class="list-unstyled">
-                          <% (1..5).each do |n| %>
-                            <% if delivery_place.instance_eval("phone#{n}").present? %>
-                              <li><%= delivery_place.instance_eval("phone#{n}") %></li>
-                            <% end %>
-                          <% end %>
-                        </ul>
-                        </a>
+                      <div style="background: rgba(0,0,0,0.3); border-radius: 3px;">
+                        <h3 style="color: white"><%= image.title %></h3>
+                        <p style="color: white;"><%== image.content %></p>
                       </div>
                     </div>
                   </div>
