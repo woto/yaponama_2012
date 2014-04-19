@@ -143,7 +143,6 @@ module GridConcern
         #end
 
 
-
         unless params[:items]
           # Восстанавливаем item_ids на старые, т.к. их не меняем
           @grid.item_ids = old_grid.item_ids
@@ -346,6 +345,15 @@ module GridConcern
       begin
         method(:additional_conditions)
         additional_conditions
+
+        # Эта магическая строчка нужна для того чтобы когда клиент переходил
+        # в коризину, то автоматически выбирались все товары. Это неожиданно(?),
+        # что данный участок кода проходит дважды, но в первом случае primary_key
+        # число, а во втором строка. Пока что разделяем так, но понятно, что это
+        # приятная случайность
+        if params['primary_key'].is_a?(Integer) && params['status'] == 'incart'
+          @grid.item_ids = Hash[@items.limit(nil).offset(nil).map{|item| [item.id, '1']}] 
+        end
       rescue StandardError
       end
 
