@@ -17,4 +17,8 @@ class SpareCatalog < ActiveRecord::Base
 
   end
 
+  def to_label
+    name
+  end
+
 end

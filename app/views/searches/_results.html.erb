@@ -151,18 +151,12 @@
                       </h4>
                     <% end %>
 
-                    <%= row do %>
-                      <div class="col-sm-1">
-                        <%= icon 'book fa-3x', style: 'margin-top: 10px' %>
-                      </div>
-                      <div class="col-sm-11">
-                        <h4> Близкие по теме материалы энциклопедии автомобиля:</h4>
-
-                        <ul class="list-unstyled">
-                          <% result.sort_by {|k, v| -v}.take(2).each do |item, rate| %>
-                            <li><a href="#"><%= item %></a></li>
-                          <% end %>
-                        </ul>
+                    <% result.sort_by {|k, v| -v}.take(2).each do |item, rate| %>
+                      <!-- <h4><a href="/<%= CGI.escape(item) %>"><%= item %></a></h4> -->
+                      <h4><%= item %></h4>
+                      <div class="text-muted">
+                        <% spare_catalog = SpareCatalog.where(name: item).first %>
+                        <%== spare_catalog.intro %>
                       </div>
                     <% end %>
 

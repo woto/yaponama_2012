@@ -24,6 +24,14 @@ module GridSpareCatalog
         :type => :string,
       }
 
+      columns_hash['intro'] = {
+        :type => :string,
+      }
+
+      columns_hash['page'] = {
+        :type => :string,
+      }
+
       columns_hash['created_at'] = {
         :type => :date,
       }
@@ -39,6 +47,8 @@ module GridSpareCatalog
       @grid.visible_id = '1'
       @grid.visible_name = '1'
       @grid.visible_content = '1'
+      @grid.visible_intro = '1'
+      @grid.visible_page = '1'
       @grid.visible_updated_at = '1'
 
     end
