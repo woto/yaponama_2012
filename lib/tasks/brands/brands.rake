@@ -22,6 +22,10 @@ namespace :app do
           row.save!
         end
       end
+
+      last_id = Brand.order(id: :desc).first.id
+      ActiveRecord::Base.connection.execute("ALTER SEQUENCE brands_id_seq RESTART WITH #{last_id+1}")
+
     end
 
     desc 'Сохранение брендов'

@@ -16,8 +16,11 @@ namespace :app do
         else
           row = Faq.new(faq)
         end
-        row.save
+        row.save!
       end
+
+      last_id = Faq.order(id: :desc).first.id
+      ActiveRecord::Base.connection.execute("ALTER SEQUENCE faqs_id_seq RESTART WITH #{last_id+1}")
 
     end
 

@@ -16,8 +16,11 @@ namespace :app do
         else
           row = Model.new(model)
         end
-        row.save
+        row.save!
       end
+
+      last_id = Model.order(id: :desc).first.id
+      ActiveRecord::Base.connection.execute("ALTER SEQUENCE models_id_seq RESTART WITH #{last_id+1}")
 
       generations = JSON::load(File.read("#{Rails.root}/data/cars/generations.json"))
       generations.each do |generation|
@@ -27,8 +30,11 @@ namespace :app do
         else
           row = Generation.new(generation)
         end
-        row.save
+        row.save!
       end
+
+      last_id = Generation.order(id: :desc).first.id
+      ActiveRecord::Base.connection.execute("ALTER SEQUENCE generations_id_seq RESTART WITH #{last_id+1}")
 
       modifications = JSON::load(File.read("#{Rails.root}/data/cars/modifications.json"))
       modifications.each do |modification|
@@ -38,8 +44,12 @@ namespace :app do
         else
           row = Modification.new(modification)
         end
-        row.save
+        row.save!
       end
+
+      last_id = Modification.order(id: :desc).first.id
+      ActiveRecord::Base.connection.execute("ALTER SEQUENCE modifications_id_seq RESTART WITH #{last_id+1}")
+
     end
 
     desc 'Сохранение автомобилей'
