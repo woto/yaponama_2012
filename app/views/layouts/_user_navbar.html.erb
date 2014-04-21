@@ -95,11 +95,15 @@
           <% end %>
 
           <%= content_tag :li, class: highlight_active([:controller => "/deliveries"]) do %>
-            <%= link_to "Доставка", deliveries_path %>
+            <%= link_to "Магазины", deliveries_path %>
+          <% end %>
+
+          <%= content_tag :li, class: highlight_active([:controller => "/service"]) do %>
+            <%= link_to "СТО", '/service' %>
           <% end %>
 
           <%= content_tag :li, class: highlight_active2(/\/faqs/) do %>
-            <%= link_to "Полезная информация", "/faqs" %>
+            <%= link_to "Информация", "/faqs" %>
           <% end %>
 
         </ul>
