@@ -19,6 +19,10 @@ module GridBot
         }
 
         columns_hash['inet'] = {
+          :type => :ip_address,
+        }
+
+        columns_hash['block'] = {
           :type => :string,
         }
 
@@ -37,6 +41,7 @@ module GridBot
       @grid.visible_title = '1'
       @grid.visible_user_agent = '1'
       @grid.visible_inet = '1'
+      @grid.visible_block = '1'
       @grid.visible_comment = '1'
       @grid.visible_created_at = '1'
       @grid.visible_updated_at = '1'

@@ -43,6 +43,9 @@ class AbstractGrid
             attr_accessor "filter_#{column_name}_from"
             attr_accessor "filter_#{column_name}_to"
 
+          when :ip_address
+            attr_accessor "filter_#{column_name}_ip_address"
+
         end
 
       end

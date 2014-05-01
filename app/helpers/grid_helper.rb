@@ -55,7 +55,7 @@ module GridHelper
       content_tag_for(:span, item, column_name, :class => column_name) do
         case column_name
         when 'inet'
-          val.inspect
+          val.inspect.scan(/#<IPAddr: IPv4:(.*)>/)[0][0]
         # READ ONLY
         when *['content', 'user_agent', 'accept_language', 'path', 'title', 'cached_location', 'first_referrer', 'cached_referrer']
           new_val = truncate(val, length: 40)
