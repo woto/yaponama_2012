@@ -13,13 +13,7 @@ class Bot < ActiveRecord::Base
 
   after_save do
 
-    if inet_was.present?
-      Somebody.where("remote_ip <<= ?", get_ip_mask(inet_was)[:w_cidr]).update_all(bot: false)
-    end
-
-    if user_agent_was.present?
-      Somebody.where(Somebody.arel_table[:user_agent].matches("%#{user_agent_was}%")).update_all(bot: false)
-    end
+    removing_bot
 
     if inet.present?
       Somebody.where("remote_ip <<= ?", get_ip_mask(inet)[:w_cidr]).update_all(bot: true)
@@ -32,10 +26,22 @@ class Bot < ActiveRecord::Base
   end
 
   after_destroy do
-    raise 'todo'
+    removing_bot
   end
 
   private
+
+  def removing_bot
+
+    if inet_was.present?
+      Somebody.where("remote_ip <<= ?", get_ip_mask(inet_was)[:w_cidr]).update_all(bot: false)
+    end
+
+    if user_agent_was.present?
+      Somebody.where(Somebody.arel_table[:user_agent].matches("%#{user_agent_was}%")).update_all(bot: false)
+    end
+
+  end
 
   def get_ip_mask(ipaddr)
     a = ipaddr.inspect.scan(/#<IPAddr: IPv4:(.*)\/(.*)>/)[0]
