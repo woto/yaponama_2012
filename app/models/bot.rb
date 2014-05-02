@@ -1,5 +1,6 @@
 class Bot < ActiveRecord::Base
   include BelongsToCreator
+  include ActiveRecord::ConnectionAdapters::PostgreSQLColumn::Cast
 
   validate :inet do |record|
     if inet.present?
@@ -16,7 +17,7 @@ class Bot < ActiveRecord::Base
     removing_bot
 
     if inet.present?
-      Somebody.where("remote_ip <<= ?", get_ip_mask(inet)[:w_cidr]).update_all(bot: true)
+      Somebody.where("remote_ip <<= ?", inet).update_all(bot: true)
     end
 
     if user_agent.present?
@@ -29,12 +30,21 @@ class Bot < ActiveRecord::Base
     removing_bot
   end
 
+  def inet
+    cidr_to_string self[:inet]
+  end
+
+  def inet_was
+    cidr_to_string self[:inet_was]
+  end
+
+
   private
 
   def removing_bot
 
     if inet_was.present?
-      Somebody.where("remote_ip <<= ?", get_ip_mask(inet_was)[:w_cidr]).update_all(bot: false)
+      Somebody.where("remote_ip <<= ?", inet_was).update_all(bot: false)
     end
 
     if user_agent_was.present?
@@ -42,15 +52,5 @@ class Bot < ActiveRecord::Base
     end
 
   end
-
-  def get_ip_mask(ipaddr)
-    a = ipaddr.inspect.scan(/#<IPAddr: IPv4:(.*)\/(.*)>/)[0]
-    b = a[1].to_i.to_s(2).count("1")
-    return {
-      w_mask: a[0].to_s + "/" + a[1].to_s,
-      w_cidr: a[0].to_s + "/" + b.to_s
-    }
-  end
-
 
 end
