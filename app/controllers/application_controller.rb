@@ -154,7 +154,7 @@ class ApplicationController < ActionController::Base
       bot = true
     end
 
-    if Bot.where(Bot.arel_table[:user_agent].matches("%#{current_user.user_agent}%")).present?
+    if Bot.where("? LIKE '%' || user_agent || '%'", "#{current_user.user_agent}").present?
       bot = true
     end
 
