@@ -154,7 +154,7 @@ class ApplicationController < ActionController::Base
       bot = true
     end
 
-    if Bot.where("? LIKE '%' || user_agent || '%'", "#{current_user.user_agent}").present?
+    if Bot.where("? LIKE '%' || user_agent || '%' AND length(user_agent) > 0", "#{current_user.user_agent}").map(&:user_agent)
       bot = true
     end
 
