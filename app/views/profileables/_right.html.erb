@@ -78,3 +78,20 @@
   <%# Муть какая-то, если слить в одну строку, то пробела не будет, иначе как - не знаю %>
   <%- @somebody.auths.each do |auth| -%><li><%= render "application/auth/logged_in", auth: auth %></li><%- end -%>
 </ul>
+
+<ul class="list-unstyled text-muted">
+  <li class="bottom-space-xs">Скидка: <b><%= @somebody.discount %>%</b></li>
+  <li class="bottom-space-xs">Предоплата по товару не в наличии: <b><%= @somebody.prepayment %>%</b></li>
+  <li class="bottom-space-xs">Населенный пункт: <b><%= @somebody.ipgeobase_name %></b></li>
+  <li class="bottom-space-xs">Регион: <b><%= @somebody.ipgeobase_names_depth_cache %></b></li>
+  <li class="bottom-space-xs">Версия браузера: <b><%= @somebody.user_agent %></b></li>
+  <li class="bottom-space-xs">Язы браузера: <b><%= @somebody.accept_language %></b></li>
+  <li class="bottom-space-xs">Часовой пояс: <b><%= @somebody.cached_russian_time_zone_auto_id %></b></li>
+  <li class="bottom-space-xs">IP адрес: <b><%= @somebody.remote_ip %></b></li>
+  <li class="bottom-space-xs">Он-лайн: <b><%= @somebody.online %></b></li>
+  <li class="bottom-space-xs">Просмотров страниц: <b><%= @somebody.stats_count %></b></li>
+  <li class="bottom-space-xs">Текущее расположение: <b><%= @somebody.cached_location %></b></li>
+  <li class="bottom-space-xs">Заголовок страницы: <b><%= @somebody.cached_title %></b></li>
+  <li class="bottom-space-xs">Пришел со страницы: <b><%= @somebody.cached_referrer %></b></li>
+  <li class="bottom-space-xs">Откуда пришел впервые: <b><%= @somebody.first_referrer %></b></li>
+</ul>
