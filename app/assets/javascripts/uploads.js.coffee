@@ -41,11 +41,11 @@ App.init_jquery_file_upload = ->
         name =  "<small>" + upload.name + "</small>"
 
         if upload.image
-          file = "<span class='upload'> <a class='image-process' href='" + upload.url + "'>" + name + "<br/> <img src='" + upload.thumbnail_url + "'></a> </span> "
+          file = "<span class='upload'> <a class='image-view' href='" + upload.url + "'>" + name + "<br/> <img src='" + upload.thumbnail_url + "'></a> </span> "
           rotate = '<a class="image-process btn btn-default btn-xs" href="' + upload.rotate_url + '"> <i class="fa fa-rotate-right"></i></a> '
           crop = '<a class="image-process btn btn-default btn-xs" href="' + upload.crop_url + '"> <i class="fa fa-crop"></i></a> '
         else
-          file = '<span class="upload"> <a class="image-process" href="' + upload.url + '">' + name + '</a> </span>'
+          file = '<span class="upload"> <a class="file-view" href="' + upload.url + '">' + name + '</a> </span>'
 
         remove = '<a class="btn btn-default btn-xs" href="' + '#' + '"> <i class="fa fa-times"></i></a> '
 

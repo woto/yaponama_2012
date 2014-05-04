@@ -34,6 +34,8 @@
 //
 //= require skrollr/src/skrollr
 //= require skrollr
+//
+//= require bootbox/bootbox
 
 
 // APPLICATION
@@ -105,3 +107,4 @@
 //= require spare_catalog
 //= require nprogress_init
 //= require list.js_init
+//= require image_view
