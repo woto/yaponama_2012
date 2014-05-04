@@ -350,7 +350,6 @@ Yaponama2012::Application.routes.draw do
 
   resources :attachments
 
-
   get 'admin' => 'admin/welcome#index'
 
   root :to => 'welcome#index'
@@ -411,6 +410,8 @@ Yaponama2012::Application.routes.draw do
   concerns :cars_searchable
 
   get 'webrtc' => 'webrtc#webrtc'
+
+  resources :ping
 
   ## TODO Для перехвата /searches/2102/KURYAKYN
   #resources :searches do
