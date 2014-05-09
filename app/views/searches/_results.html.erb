@@ -69,17 +69,15 @@
                   </div>
                 </span>
 
-                <div class="text-lg table-responsive" rel="offers">
-                  <table class="table table-hover">
+                <div class="text-lg table-responsive top-space" rel="offers">
+                  <table class="table">
 
                     <thead class="hidden-xs">
                       <tr>
-                        <th> <b href="#" rel="tooltip" title="Расположение склада поставщика">Расп.</b></th>
-                        <th> <b href="#" rel="tooltip" title="Способ доставки на наш склад">Дост.</b></th>
-                        <th> <b href="#" rel="tooltip" title="Минимальный срок поставки на наш склад">Мин.</b></th>
-                        <th> <b href="#" rel="tooltip" title="Максимальный срок поставки на наш склад">Макс.</b></th>
-                        <th> <b href="#" rel="tooltip" title="Вероятность наличия детали у поставщика">Вер.</b></th>
-                        <th> <b href="#" rel="tooltip" title="Количество на складе поставщика">Кол-во</b></th>
+                        <th> <b href="#" rel="tooltip" title="Расположение склада поставщика">Расположение<br />склада</b></th>
+                        <th> <b href="#" rel="tooltip" title="Минимальный срок поставки на наш склад">Мин.<br />срок</b></th>
+                        <th> <b href="#" rel="tooltip" title="Максимальный срок поставки на наш склад">Макс.<br />срок</b></th>
+                        <th> <b href="#" rel="tooltip" title="Количество на складе поставщика">Кол-во на<br />складе</b></th>
                         <th> <b href="#" rel="tooltip" title="Зайдите на сайт под своим аккаунтом, чтобы увидеть вашу цену со скидками, если таковые имеются">Цена</b></th>
                         <% if current_user.seller? %>
                           <th> <b href="#" rel="tooltip" title="Служебная информация, отображается только менеджеру сайта">Служ.</b></th>
@@ -89,15 +87,14 @@
 
                     <tbody>
                       <% mf_scope[:offers].each do |offer| %>
-                        <tr class="<%= offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 ? 'success' : '' %>">
+                        <% offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 ? presence = true : presence = false %>
+                        <tr class="<%= presence ? '' : '' %>">
                           <td> <span class="visible-xs"> Расположение склада: </span> <%= raw country_decorator offer[:country] %> </td>
-                          <td> <span class="visible-xs"> Способ доставки: </span> <%= raw offer[:delivery] %> </td>
-                          <td> <span class="visible-xs"> Минимальный срок поставки: </span> <%= raw days_decorator offer[:min_days] %> </td>
-                          <td> <span class="visible-xs"> Максимальный срок поставки: </span> <%= raw days_decorator offer[:max_days] %> </td>
-                          <td> <span class="visible-xs"> Вероятность наличия детали: </span> <%= raw offer[:probability] %>% </td>
+                          <td> <span class="visible-xs"> Минимальный срок: </span> <%= raw days_decorator offer[:min_days] %> </td>
+                          <td> <span class="visible-xs"> Максимальный срок: </span> <%= raw days_decorator offer[:max_days] %> </td>
                           <td> <span class="visible-xs"> Количество на складе: </span> <%= raw count_decorator offer[:count] %> </td>
                           <td>
-                            <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, class: "btn btn-success btn-xs buy-button" do %>
+                            <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, class: "btn  btn-success #{presence ? '' : 'btn-xs'} buy-button" do %>
                               Купить <%= number_to_currency(offer[:retail_cost], precision: 0) %>
                             <% end %>
                           </td>
@@ -114,16 +111,21 @@
                   </table>
                 </div>
 
-                <p><strong> В случае заказа по телефону обязательно говорите, что вы увидели эту цену на сайте avtorif.ru </strong></p>
-                <br />
-
-
                 <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
                 <p>А так же рекомендуем посмотреть <%= link_to  "аналоги и замены, \"#{catalog_number} - #{manufacturer}\"", polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource, :catalog_number => catalog_number, :manufacturer => manufacturer, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством. </p>
 
-                <p>Есть вопросы? <a href="#">Менеджер готов проконсультировать вас прямо сейчас</a>.</p>
-
-                <hr />
+                <%= row class: 'top-space-lg' do %>
+                  <div class="col-sm-8 col-md-9 col-lg-7">
+                    <%= panel 'default' do |p| %>
+                      <%= p.heading do %>
+                        Нужна помощь менеджера?
+                      <% end %>
+                      <%= p.body do %>
+                        <%= render 'support_buttons' %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% end %>
 
                 <% benchmark("Bayes") do %>
 
@@ -246,6 +248,6 @@
   <% end %>
 
   <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-  <h4>Вы так же можете попробовать посмотреть <%= link_to "замены номера #{@c9} без указания производителя", polymorphic_path([new_or_edit, *jaba3,  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %>.</h4>
+  <h3 class="top-space-lg bottom-space-lg">Вы так же можете попробовать посмотреть <%= link_to "замены номера #{@c9} без указания производителя", polymorphic_path([new_or_edit, *jaba3,  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %>.</h3>
 
 <% end %>
