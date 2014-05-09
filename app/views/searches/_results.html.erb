@@ -151,7 +151,15 @@
                       </h4>
                     <% end %>
 
+                    <% counter = 0 %>
+
                     <% result.sort_by {|k, v| -v}.take(2).each do |item, rate| %>
+
+                      <% if counter == 0 %>
+                        <% SpareCatalogWorker.perform_async(catalog_number, manufacturer, item) %>
+                        <% counter += 1 %>
+                      <% end %>
+
                       <!-- <h4><a href="/<%= CGI.escape(item) %>"><%= item %></a></h4> -->
                       <h4><%= item %></h4>
                       <div class="text-muted">
