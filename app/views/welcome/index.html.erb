@@ -107,30 +107,11 @@
         <h1 style="margin-bottom: 40px; font-size: 36px; color: white">Онлайн консультант</h1>
         <h4 class="text-justify" style="line-height: 190%; color: white">Нет желания, опыта или времени разбираться в премудростях автомобиля и запчастях? Обратитесь в нашу службу поддержки и вам обязательно помогут наши специалисты. </h4>
 
-        <ul class="top-space-lg list-inline bottom-space-lg" style="color: white">
-
-          <li>
-            <%= call_button '#', class: 'btn btn-primary', style: 'border: #293d49; color: white' do %>
-              <%= icon 'phone' %>
-              Онлайн звонок
-            <% end %>
-          </li>
-
-          <li>
-            <a href="mailto:info@avtorif.ru" class="btn btn-primary" style="border: #293d49; color: white">
-              <%= icon 'envelope' %>
-              info@avtorif.ru
-            </a>
-          </li>
-
-          <li>
-          <%= link_to polymorphic_path([:modal] + jaba3 + [:talks]), remote: true, class: 'btn btn-primary', style: 'border: #293d49; color: white' do %>
-            <%= icon 'comments' %>
-            Чат
-          <% end %>
-          </li>
-
-        </ul>
+        <%= row class: 'top-space-lg' do %>
+          <div class="col-sm-7 col-md-12">
+            <%= render 'support_buttons' %>
+          </div>
+        <% end %>
 
       </div>
 
