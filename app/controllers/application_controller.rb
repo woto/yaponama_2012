@@ -28,6 +28,8 @@ class ApplicationController < ActionController::Base
 
   before_action :find_resource, except: [:new, :create, :index]
 
+  skip_before_action :find_resource, only: [:render_404, :render_500]
+
   # Потом вынести в concern transactionable?
   skip_before_action :find_resource, only: [:transactions]
 
@@ -120,6 +122,25 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # TODO потом детальнее посмотреть где и как используются @exception
+  def render_404(exception=nil)
+    @exception = exception
+    Rails.logger.error(exception)
+    respond_to do |format|
+      format.html { render 'error_404', :status => 404 }
+    end
+  end
+
+
+  def render_500(exception=nil)
+    @exception = exception
+    Rails.logger.error(exception)
+    respond_to do |format|
+      format.html { render 'error_500', :status => 500 }
+    end
+  end
+
+
   private
 
   #def set_cache_buster
@@ -178,25 +199,6 @@ class ApplicationController < ActionController::Base
 
     return status
   end
-
-  # TODO потом детальнее посмотреть где и как используются @exception
-  def render_404(exception)
-    @exception = exception
-    Rails.logger.error(exception)
-    respond_to do |format|
-      format.html { render :template => 'errors/error_404', :layout => 'layouts/application', :status => 404 }
-    end
-  end
-
-
-  def render_500(exception)
-    @exception = exception
-    Rails.logger.error(exception)
-    respond_to do |format|
-      format.html { render :template => 'errors/error_500', :layout => 'layouts/application', :status => 500 }
-    end
-  end
-
 
   def admin_zone?
     params[:controller].partition('/').first == 'admin'
