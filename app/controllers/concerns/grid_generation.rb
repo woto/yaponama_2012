@@ -20,12 +20,22 @@ module GridGeneration
           :type => :string,
         }
 
+        columns_hash['from'] = {
+          :type => :date
+        }
+
+        columns_hash['to'] = {
+          :type => :date
+        }
+
       end
 
     end
 
     def set_preferable_columns
       @grid.visible_id = '1'
+      @grid.visible_from = '1'
+      @grid.visible_to = '1'
       @grid.visible_creator_id = '1'
       @grid.visible_content = '1'
       @grid.visible_cached_model = '1'
@@ -37,5 +47,3 @@ module GridGeneration
   end
 
 end
-
-
