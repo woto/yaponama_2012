@@ -11,7 +11,7 @@ class SearchFormTest < ActionDispatch::IntegrationTest
 
     assert has_no_link? 'Форма', 'Пользователь не должен видеть кнопку формы'
 
-    click_button 'Искать'
+    click_button 'Найти'
 
     path = '/user/products/new?utf8=%E2%9C%93&catalog_number=1&product_id=&return_path=%2F'
 
@@ -52,7 +52,7 @@ class SearchFormTest < ActionDispatch::IntegrationTest
 
     within 'nav' do
       fill_in('catalog_number', with: '2')
-      click_button 'Искать'
+      click_button 'Найти'
     end
 
     uri = URI.parse(current_url)

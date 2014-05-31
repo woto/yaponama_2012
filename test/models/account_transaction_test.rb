@@ -4,7 +4,7 @@ require 'test_helper'
 
 class AccountTransactionTest < ActiveSupport::TestCase
   test 'Проверяем набор полей таблицы' do
-    assert_equal [ "id", "account_id", "creator_id", "product_transaction_id", "comment", "debit_before", "debit_after", "credit_before", "credit_after", "created_at" ].sort, AccountTransaction.column_names.sort
+    assert_equal [ "id", "account_id", "creator_id", "product_transaction_id", "somebody_id_before", "somebody_id_after", "comment", "debit_before", "debit_after", "credit_before", "credit_after", "created_at" ].sort, AccountTransaction.column_names.sort
   end
 
   test 'Проверяем, чтобы присвоенные числа приводились к правильному типу' do
