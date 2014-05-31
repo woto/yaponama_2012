@@ -55,67 +55,6 @@ class ActionDispatch::IntegrationTest
     page.execute_script "$('" + id + "').val('#{login}')"
   end
 
-  def fill_talk(text)
-    assert has_css? '#cke_talk_talkable_attributes_chat_parts_attributes_0_chat_partable_attributes_text'
-    sleep 1
-    page.execute_script "CKEDITOR.instances.talk_talkable_attributes_chat_parts_attributes_0_chat_partable_attributes_text.setData('#{text}')"
-  end
-
-  def node &block
-    # Мы сбрасываем кеш и обращаемся к чему-нибудь, чтобы заполнился SiteConfig
-    #SiteConfig.class_variable_set(:@@cache, nil)
-    #visit '/uploads/'
-
-    #################
-    #
-    ##require 'rubygems'
-    ##require 'ostruct'
-    ##require 'open3'
-    ##require 'debugger'
-
-    ##Rails = OpenStruct.new
-    ##Rails.env    = "development"
-    ##Rails.root = '/home/woto/rails/yaponama_2012'
-
-    #stdin, stdout, stderr, wait_thr = Open3.popen3({"RAILS_ENV" => Rails.env}, "coffee #{Rails.root}/realtime/realtime.coffee")
-    #pid = wait_thr[:pid]  # pid of the started process.
-
-    #begin puts line = stdout.gets.chomp
-    #end while line != "READY"
-
-    ##stdin.close  # stdin, stdout and stderr should be closed explicitly in this form.
-    ##stdout.close
-    ##stderr.close
-    ##exit_status = wait_thr.value  # Process::Status object returned.
-    #sleep 5
-
-    #begin
-    #  block.call
-    #rescue Exception => e
-    #  raise e
-    #ensure
-    #  Process.kill "HUP", pid
-    #end
-    #
-    ################
-
-    pid = Process.spawn({"RAILS_ENV" => Rails.env}, "coffee #{Rails.root}/realtime/realtime.coffee")
-
-    # Detach the spawned process
-    Process.detach pid
-
-    sleep 5
-
-    begin
-      block.call
-    rescue Exception => e
-      raise e
-    ensure
-      Process.kill "HUP", pid
-    end
-
-  end
-
   def auth(login, password, remember_me=false)
     visit '/login/phone'
     fill_phone '#session_value', login

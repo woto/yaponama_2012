@@ -2,6 +2,8 @@ first:
   id: 1
   title: "Тестовая картинка"
   content: "<p>Тестовое описание</p>\r\n"
-  image: gallery.jpg
+  image: 4790e928341aa__1_.jpg
   creator_id: 4
   phantom: false
+  created_at: 2014-05-31 14:59:00.510058000 Z
+  updated_at: 2014-05-31 14:59:00.510058000 Z
