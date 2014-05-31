@@ -7,14 +7,15 @@ class SearchFormTest < ActionDispatch::IntegrationTest
   test 'Если пользователь находится на главной странице и вбивает в верхнюю панельку поиска каталожник, то он должен быть переадресован на правильный адрес' do
     Capybara.reset!
     visit '/'
-    fill_in 'catalog_number', with: '1'
+    fill_in 'catalog_number', with: '1', match: :first
 
     assert has_no_link? 'Форма', 'Пользователь не должен видеть кнопку формы'
 
-    click_button 'Найти'
+    click_button 'Найти', match: :first
 
-    path = '/user/products/new?utf8=%E2%9C%93&catalog_number=1&product_id=&return_path=%2F'
+    path = '/user/products/new?catalog_number=1&product_id=&return_path=%252F&utf8=%25E2%259C%2593'
 
+    assert has_text? 'Вы так же можете попробовать посмотреть'
 
     uri = URI.parse(current_url)
     assert_equal path, "#{uri.path}?#{uri.query}"

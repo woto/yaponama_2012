@@ -1,0 +1,7 @@
+first:
+  id: 1
+  title: "Тестовая картинка"
+  content: "<p>Тестовое описание</p>\r\n"
+  image: gallery.jpg
+  creator_id: 4
+  phantom: false
