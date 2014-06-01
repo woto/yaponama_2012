@@ -305,6 +305,9 @@ class ApplicationController < ActionController::Base
     @visible_columns
   end
 
+  def set_resource_class
+  end
+
   def find_resource
     @resource = @resource_class.find(params[:id])
   end
