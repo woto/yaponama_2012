@@ -31,13 +31,12 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
     assert has_unchecked_field? "grid_item_ids_#{second.id}"
 
     # Открываем окно фильтрации по чекбоксу
-    first('.fa-filter').click
-
-    sleep 2
-    assert has_text?('Фильтр для:')
+    sleep 0.5
+    click_link 'filter_checkbox'
 
     # Щелкаем в окне на выделенных - Да
-    choose 'grid_filter_checkbox_checkbox_1'
+    sleep 0.5
+    choose 'grid_filter_checkbox_checkbox_1', wait: 20
 
     # Сабмитим форму
     first("#filter_checkbox.modal div.modal-footer input.btn").click

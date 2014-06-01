@@ -39,7 +39,7 @@
                 <th style="white-space: nowrap">
                   <%= sortable(column_name, truncate(@resource_class.human_attribute_name(column_name), :length => 10, :omission => '.'), data: { toggle: "tooltip" }, title: @resource_class.human_attribute_name(column_name), rel: 'tooltip') %>
                   <% css_class = @grid.instance_variable_get("@filter_enabled_#{column_name}") ? "text-warning" : "" %>
-                  <%= link_to url_for(:action => :filters, :column_name => column_name, :primary_key => params[:primary_key]), :remote => true, :class => css_class do %>
+                  <%= link_to url_for(:action => :filters, :column_name => column_name, :primary_key => params[:primary_key]), id: "filter_#{column_name}", :remote => true, :class => css_class do %>
                     <%= icon 'filter' %>
                   <% end %>
                 </th>

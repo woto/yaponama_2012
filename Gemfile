@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails',     github: 'rails/rails', :branch => '4-1-stable'
+gem 'rails',     github: 'rails/rails', :branch => '4-0-stable'
 
 gem 'pg'
 
@@ -21,8 +21,8 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'pry-debugger'
   gem 'pry'
-  gem 'pry-nav'
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
   gem 'pry-doc'
