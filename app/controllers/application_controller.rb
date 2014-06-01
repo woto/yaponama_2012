@@ -1,6 +1,7 @@
 # encoding: utf-8
 #
 class ApplicationController < ActionController::Base
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -28,6 +29,7 @@ class ApplicationController < ActionController::Base
 
   before_action :find_resource, except: [:new, :create, :index]
 
+
   # Потом вынести в concern transactionable?
   skip_before_action :find_resource, only: [:transactions]
 
@@ -46,13 +48,6 @@ class ApplicationController < ActionController::Base
 
   # Twitter Bootstrap 3
   add_flash_types :success, :info, :warning, :danger
-
-  unless Rails.application.config.consider_all_requests_local
-    rescue_from Exception, :with => :render_500
-    rescue_from ActionController::RoutingError, :with => :render_404
-    rescue_from ActionController::UnknownController, :with => :render_404
-    rescue_from ActiveRecord::RecordNotFound, :with => :render_500
-  end
 
   rescue_from AuthenticationError, with: -> { redirect_to root_path, danger: "Возможно вы или кто-то другой входил на сайт под вашей учетной записью с другого компьютера. Вы можете отключить функцию автоматического выхода в Личном кабинете для возможности одновременной работы с разных компьютеров." }
   
@@ -120,6 +115,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  include ErrorHandling
+
   private
 
   #def set_cache_buster
@@ -178,25 +175,6 @@ class ApplicationController < ActionController::Base
 
     return status
   end
-
-  # TODO потом детальнее посмотреть где и как используются @exception
-  def render_404(exception)
-    @exception = exception
-    Rails.logger.error(exception)
-    respond_to do |format|
-      format.html { render :template => 'errors/error_404', :layout => 'layouts/application', :status => 404 }
-    end
-  end
-
-
-  def render_500(exception)
-    @exception = exception
-    Rails.logger.error(exception)
-    respond_to do |format|
-      format.html { render :template => 'errors/error_500', :layout => 'layouts/application', :status => 500 }
-    end
-  end
-
 
   def admin_zone?
     params[:controller].partition('/').first == 'admin'

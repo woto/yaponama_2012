@@ -624,6 +624,8 @@ ActiveRecord::Schema.define(version: 20140501151705) do
     t.boolean  "phantom"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "from"
+    t.date     "to"
   end
 
   add_index "generations", ["creator_id"], name: "index_generations_on_creator_id", using: :btree
@@ -663,6 +665,8 @@ ActiveRecord::Schema.define(version: 20140501151705) do
     t.boolean  "phantom"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "from"
+    t.date     "to"
   end
 
   add_index "models", ["brand_id"], name: "index_models_on_brand_id", using: :btree
@@ -677,6 +681,8 @@ ActiveRecord::Schema.define(version: 20140501151705) do
     t.boolean  "phantom"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "from"
+    t.date     "to"
   end
 
   add_index "modifications", ["creator_id"], name: "index_modifications_on_creator_id", using: :btree
