@@ -27,16 +27,19 @@ class SearchFormTest < ActionDispatch::IntegrationTest
     product = products(:otto7)
     visit "/admin/products/#{product.id}/edit?return_path=%2Fadmin%2Fproducts%2Fstatus%2Fall%3F&skip=true"
 
-    assert has_field?('catalog_number', :with => "#{product.catalog_number}"), 'В поиске должен быть заполнен каталожный номер как и у редактируемого товара'
+    assert has_text?("Редактирование позиции 2391920-322312 (KIA)"), 'Должна быть пометка о том, что мы производим редактирование'
 
     assert has_link? 'Форма', 'Администратор должен видеть кнопку формы редактирования'
 
     fill_in 'catalog_number', with: '1'
-    click_button 'Искать'
+    click_button 'Найти'
 
-    path = '/admin/users/128399616/products/809317025/edit?utf8=%E2%9C%93&catalog_number=1&product_id=&return_path=%2Fadmin%2Fproducts%2Fstatus%2Fall%3F'
+    sleep 1
 
-    assert has_text?('Редактирование позиции 2391920-322312 (KIA)'), 'Должен отображаться alert с информацией о том, что производится редактирование'
+    path = '/admin/users/128399616/products/809317025/edit?catalog_number=1&product_id=&return_path=%252Fadmin%252Fproducts%252Fstatus%252Fall%253F&utf8=%25E2%259C%2593'
+
+    assert has_text?('Вы так же можете попробовать посмотреть')
+
     uri = URI.parse(current_url)
     assert_equal path, "#{uri.path}?#{uri.query}"
 

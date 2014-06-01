@@ -20,12 +20,21 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
     assert has_css? "#product_#{first.id}"
     assert has_css? "#product_#{second.id}"
 
-    # Выбираем первый
-    check "grid_item_ids_#{first.id}"
+    # При заходе в корзину все товары должны быть отмеченными
     assert has_checked_field? "grid_item_ids_#{first.id}"
+    assert has_checked_field? "grid_item_ids_#{second.id}"
+
+    # Убираем выделение со второго
+    uncheck "grid_item_ids_#{second.id}"
+
+    assert has_checked_field? "grid_item_ids_#{first.id}"
+    assert has_unchecked_field? "grid_item_ids_#{second.id}"
 
     # Открываем окно фильтрации по чекбоксу
     first('.fa-filter').click
+
+    sleep 1
+    assert has_text?('Фильтр для:')
 
     # Щелкаем в окне на выделенных - Да
     choose 'grid_filter_checkbox_checkbox_1'

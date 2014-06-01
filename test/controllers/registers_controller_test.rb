@@ -127,7 +127,7 @@ class RegistersControllerTest < ActionController::TestCase
     refute email.confirmed?
 
     # pin код в письме
-    assert_match Regexp.new("PIN: " + pin), delivery.body.encoded
+    assert_match Regexp.new("PIN.*" + pin), delivery.body.encoded
 
     # ссылка в письме
     assert_match(
