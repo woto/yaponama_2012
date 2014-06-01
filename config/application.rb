@@ -85,9 +85,6 @@ module Yaponama2012
     # Дополнительная директория для библиотек, которые несут в себе всё вместе
     config.assets.paths += [
       File.join(config.root, 'vendor', 'assets', 'libraries'),
-      File.join(config.root, 'app', 'assets', 'classes'),
-      File.join(config.root, 'app', 'assets', 'templates'),
-      File.join(config.root, 'app', 'assets', 'sounds'),
     ]
 
     # Autoload ckeditor models folder

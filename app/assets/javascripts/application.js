@@ -86,19 +86,11 @@
 //= require 'jquery.editableHighlight'
 
 //= require 'jquery-cookie/jquery.cookie'
-//= require 'sockjs-client/sockjs'
-
-//= require_directory ../templates/
 
 //= legal
-//= require realtime
-//= require talk.js
 //= require talk_select_recipient
 //= require talk_temp
 //= require talk_custom_events
-//= require notify_sound
-//= require notify_window
-//= require notify_sound_toggler
 //= require slide_top
 //= require payments
 //= require map

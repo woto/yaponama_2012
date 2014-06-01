@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140401234808) do
+ActiveRecord::Schema.define(version: 20140501151705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 20140401234808) do
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "block",      default: false
   end
 
   create_table "brand_transactions", force: true do |t|
@@ -603,6 +604,16 @@ ActiveRecord::Schema.define(version: 20140401234808) do
 
   add_index "faqs", ["creator_id"], name: "index_faqs_on_creator_id", using: :btree
   add_index "faqs", ["somebody_id"], name: "index_faqs_on_somebody_id", using: :btree
+
+  create_table "galleries", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.string   "image"
+    t.integer  "creator_id"
+    t.boolean  "phantom",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "generations", force: true do |t|
     t.string   "name"
@@ -1333,6 +1344,8 @@ ActiveRecord::Schema.define(version: 20140401234808) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "intro"
+    t.text     "page"
   end
 
   create_table "spare_infos", force: true do |t|
