@@ -33,7 +33,7 @@ class GridChecboxTest < ActionDispatch::IntegrationTest
     # Открываем окно фильтрации по чекбоксу
     first('.fa-filter').click
 
-    sleep 1
+    sleep 2
     assert has_text?('Фильтр для:')
 
     # Щелкаем в окне на выделенных - Да
