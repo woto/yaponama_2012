@@ -1,41 +1,43 @@
-javascript:
-  $(function(){
-    $('#original').css({ opacity: 0.8 })
-    $('#thumb').css({ opacity: 0.8 })
-  })
+= b1 do
 
-- model_class = Brand
-div class="page-header"
-  h1=t '.title', :default => model_class.model_name.human
+  javascript:
+    $(function(){
+      $('#original').css({ opacity: 0.8 })
+      $('#thumb').css({ opacity: 0.8 })
+    })
 
-p
-  strong= model_class.human_attribute_name(:name) + ':'
-  br
-  = @resource.name
-p
-  strong= model_class.human_attribute_name(:brand_id) + ':'
-  br
-  = @resource.brand_id
-p
-  strong= model_class.human_attribute_name(:image) + ':'
-  br
+  - model_class = Brand
+  div class="page-header"
+    h1=t '.title', :default => model_class.model_name.human
 
-  div style="background: url(http://webucateus.com/desktop/wp-content/themes/desk-mess01/images/grid.png); width: 500px"
-    div style="border: 1px solid red; padding: 100px" id="original"
-      = image_tag @resource.image, :id => "original", :class => "img-crop"
-p
-  strong= model_class.human_attribute_name(:image_thumb) + ':'
-  br
-  div style="background: url(http://webucateus.com/desktop/wp-content/themes/desk-mess01/images/grid.png); width: 300px "
-    div style="border: 1px solid red; padding: 100px" id="thumb"
-      = image_tag @resource.image.thumb, :id => "thumb", :style => "border: 1px solid red", :class => "img-crop"
-p
-  strong= model_class.human_attribute_name(:rating) + ':'
-  br
-  = @resource.rating
-p
-  strong= model_class.human_attribute_name(:content) + ':'
-  br
-  = @resource.content
+  p
+    strong= model_class.human_attribute_name(:name) + ':'
+    br
+    = @resource.name
+  p
+    strong= model_class.human_attribute_name(:brand_id) + ':'
+    br
+    = @resource.brand_id
+  p
+    strong= model_class.human_attribute_name(:image) + ':'
+    br
 
-= render 'smart_show'
+    div style="background: url(http://webucateus.com/desktop/wp-content/themes/desk-mess01/images/grid.png); width: 500px"
+      div style="border: 1px solid red; padding: 100px" id="original"
+        = image_tag @resource.image, :id => "original", :class => "img-crop"
+  p
+    strong= model_class.human_attribute_name(:image_thumb) + ':'
+    br
+    div style="background: url(http://webucateus.com/desktop/wp-content/themes/desk-mess01/images/grid.png); width: 300px "
+      div style="border: 1px solid red; padding: 100px" id="thumb"
+        = image_tag @resource.image.thumb, :id => "thumb", :style => "border: 1px solid red", :class => "img-crop"
+  p
+    strong= model_class.human_attribute_name(:rating) + ':'
+    br
+    = @resource.rating
+  p
+    strong= model_class.human_attribute_name(:content) + ':'
+    br
+    = @resource.content
+
+  = render 'smart_show'
