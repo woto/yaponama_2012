@@ -511,6 +511,16 @@ module ApplicationHelper
     end
   end
 
+  def b1
+    container do
+      row class: 'top-space' do
+        content_tag :div, class: 'col-lg-12' do
+          yield
+        end
+      end
+    end
+  end
+
   def mark_first_as_active
     if @first.blank?
       @first = true
