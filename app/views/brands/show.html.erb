@@ -1,21 +1,25 @@
-<% @meta_title = @resource.name %>
+<%= b1 do %>
 
-<%= raw @resource.content %>
+  <% @meta_title = @resource.name %>
 
-<h3> Запчасти этого производителя</h3>
-<% @spare_infos.each do |spare_info| %>
-  <%= debug spare_info %>
-  <%= link_to polymorphic_path([:new, *jaba3, :product], :catalog_number => spare_info.catalog_number, :anchor => spare_info.cached_brand ) do %> 
-    <%= spare_info.catalog_number %>
-    <%= spare_info.content %>
+  <%= raw @resource.content %>
+
+  <h3> Запчасти этого производителя</h3>
+  <% @spare_infos.each do |spare_info| %>
+    <%= debug spare_info %>
+    <%= link_to polymorphic_path([:new, *jaba3, :product], :catalog_number => spare_info.catalog_number, :anchor => spare_info.cached_brand ) do %> 
+      <%= spare_info.catalog_number %>
+      <%= spare_info.content %>
+    <% end %>
+    <br />
   <% end %>
-  <br />
+
+  <br/ >
+  <%= paginate @spare_infos %>
+
+  <h3> Комментарии </h3>
+  <%= render :template => 'comments/index' %>
+  <h4> Добавить комментарий </h4>
+  <%= render 'comments/form' %>
+
 <% end %>
-
-<br/ >
-<%= paginate @spare_infos %>
-
-<h3> Комментарии </h3>
-<%= render :template => 'comments/index' %>
-<h4> Добавить комментарий </h4>
-<%= render 'comments/form' %>
