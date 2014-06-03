@@ -1,4 +1,5 @@
 class GalleriesController < ApplicationController
+  include Admin::Admined
   include GridGallery
 
   skip_before_filter :set_grid, only: [:new, :create, :edit, :update, :show, :destroy]
