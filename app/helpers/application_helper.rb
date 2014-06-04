@@ -66,7 +66,10 @@ module ApplicationHelper
       image = asset_url('no_brand.png')
     end
 
-    link_to(title, "/#{CGI.escape(brand.name)}", :style => "background: url(#{image}) no-repeat scroll center center", :class => "brand brands-#{brand.name}")
+    link = "/#{CGI.escape(brand.name)}"
+
+    link_to(title, link, :style => "background: url(#{image}) no-repeat scroll center center", :class => "brand brands-#{brand.name}")
+
   end
 
   def sortable(column_name, title, options )
@@ -92,6 +95,8 @@ module ApplicationHelper
 
     res = ''.html_safe
     css_class = 'col-md-12'
+
+    container do
 
     [
 
@@ -178,6 +183,8 @@ module ApplicationHelper
       end
 
     end].join.html_safe
+
+    end
 
   end
 
