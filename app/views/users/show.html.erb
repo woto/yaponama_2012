@@ -1,23 +1,19 @@
-<div class="container">
+<%= somebody_tabs do %>
 
-  <%= somebody_tabs do %>
+  <%# breadcrumb false do |b| %>
+  <%# end %>
 
-    <%# breadcrumb false do |b| %>
-    <%# end %>
+  <% @meta_title = 'Личный кабинет' %>
+  <%= page_header %>
 
-    <% @meta_title = 'Личный кабинет' %>
-    <%= page_header %>
+  <ul class="list-unstyled">
+    <li><h4><%= link_to 'Движение средств', transactions_user_accounts_path(return_path: request.fullpath) %>
+    <li><h4><%= link_to 'Выйти со всех компьютеров', logout_from_all_places_user_path, method: :delete, data: {confirm: 'Вы уверены что хотите выйти?'} %><h4></li>
+    <li><h4><%= link_to 'Сменить пароль', edit_user_password_path(return_path: request.fullpath) %><h4></li>
+    <li><h4><%= link_to 'Настройки', edit_user_path(return_path: request.fullpath), id: @resource.id %><h4></li>
+    <li><h4><%= render 'application/auth/buttons' %><h4></li>
+  </ul>
 
-    <ul class="list-unstyled">
-      <li><h4><%= link_to 'Движение средств', transactions_user_accounts_path(return_path: request.fullpath) %>
-      <li><h4><%= link_to 'Выйти со всех компьютеров', logout_from_all_places_user_path, method: :delete, data: {confirm: 'Вы уверены что хотите выйти?'} %><h4></li>
-      <li><h4><%= link_to 'Сменить пароль', edit_user_password_path(return_path: request.fullpath) %><h4></li>
-      <li><h4><%= link_to 'Настройки', edit_user_path(return_path: request.fullpath), id: @resource.id %><h4></li>
-      <li><h4><%= render 'application/auth/buttons' %><h4></li>
-    </ul>
+  <%= render 'smart_show' %>
 
-    <%= render 'smart_show' %>
-
-  <% end %>
-
-</div>
+<% end %>
