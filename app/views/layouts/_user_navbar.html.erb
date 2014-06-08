@@ -98,7 +98,7 @@
             <%= link_to "Магазины", deliveries_path %>
           <% end %>
 
-          <%= content_tag :li, class: highlight_active([:controller => "/service"]) do %>
+          <%= content_tag :li, class: highlight_active2(/\/service/) do %>
             <%= link_to "СТО", '/service' %>
           <% end %>
 
