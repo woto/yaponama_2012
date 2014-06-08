@@ -2,6 +2,10 @@
 
   <%= title_new %>
 
+  <%= breadcrumb true do |b| %>
+    <%= b.item @meta_title %>
+  <% end %>
+
   <%= render :partial => "form" %>
 
 <% end %>

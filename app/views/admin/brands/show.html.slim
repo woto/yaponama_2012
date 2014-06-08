@@ -1,5 +1,13 @@
 = b1 do
 
+  - @meta_title = "Просмотр производителя #{@resource.to_label}"
+
+  = breadcrumb true do |b|
+    = b.item @meta_title
+
+  = page_header
+
+
   javascript:
     $(function(){
       $('#original').css({ opacity: 0.8 })
@@ -7,13 +15,7 @@
     })
 
   - model_class = Brand
-  div class="page-header"
-    h1=t '.title', :default => model_class.model_name.human
 
-  p
-    strong= model_class.human_attribute_name(:name) + ':'
-    br
-    = @resource.name
   p
     strong= model_class.human_attribute_name(:brand_id) + ':'
     br
