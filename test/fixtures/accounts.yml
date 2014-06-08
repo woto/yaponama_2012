@@ -3,20 +3,10 @@ first_admin_account:
   credit: 0.0
   somebody: first_admin
 
-user_account:
+first_user:
   debit: 0.0
   credit: 0.0
   somebody: first_user
-
-otto_account:
-  debit: 0.0
-  credit: 0.0
-  somebody: otto
-
-mark_account:
-  debit: 0.0
-  credit: 0.0
-  somebody: mark
 
 stan:
   debit: 0.0
@@ -28,7 +18,27 @@ fry:
   credit: 0.0
   somebody: fry
 
+otto:
+  debit: 0.0
+  credit: 0.0
+  somebody: otto
+
+mark:
+  debit: 0.0
+  credit: 0.0
+  somebody: mark
+
 mike:
+  debit:  0.0 
+  credit: 0.0
+  somebody: mike
+
+phantom:
+  debit:  0.0 
+  credit: 0.0
+  somebody: mike
+
+online:
   debit:  0.0 
   credit: 0.0
   somebody: mike
@@ -48,22 +58,33 @@ exist:
   credit: 0.0
   somebody: exist
 
-sidor:
+anton:
   debit: 0.0
   credit: 0.0
-  somebody: sidor
+  somebody: anton
+
+guest:
+  debit: 0.0
+  credit: 0.0
+  somebody: guest
+
+guest_with_profile:
+  debit: 0.0
+  credit: 0.0
+  somebody: guest_with_profile
+
+ivan:
+  debit: 0.0
+  credit: 0.0
+  somebody: ivan
 
 petr:
   debit: 0.0
   credit: 0.0
   somebody: petr
 
-anton:
+sidor:
   debit: 0.0
   credit: 0.0
-  somebody: anton
+  somebody: sidor
 
-ivan:
-  debit: 0.0
-  credit: 0.0
-  somebody: ivan

@@ -194,7 +194,7 @@ anton:
 
 guest:
   type: User
-  auth_token: 8e9beU3E20YWHmF1RBSwFa
+  auth_token: 893YWHmF1SwFeR432hBbeUa
   creation_reason: fixtures
   role: guest
   discount: 0
@@ -209,6 +209,7 @@ guest_with_profile:
   discount: 0
   prepayment: 100
   order_rule: all
+  profile: guest_with_profile
 
 ivan:
   type: User
