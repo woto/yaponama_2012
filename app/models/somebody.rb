@@ -266,12 +266,6 @@ class Somebody < ActiveRecord::Base
 
   ########################################################################
 
-  after_save do
-    if (['admin', 'manager'].include?(role_was) || ['admin', 'manager'].include?(role) ) && changes.present?
-      $redis.publish("#{Rails.env}:update sellers", JSON.dump(comment: changes))
-    end
-  end
-
   def seller?
     ['manager', 'admin'].include? role
   end
