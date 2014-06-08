@@ -21,7 +21,7 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'pry-debugger'
+  gem 'pry-nav'
   gem 'pry'
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
