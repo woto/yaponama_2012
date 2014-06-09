@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: 59f751f1c4dcd570175cfc33d2a87da2f4ac7544
+  revision: 5e12101ad39284ba8e1ad236899b26ae5a32df0b
   specs:
-    capybara (2.2.0)
+    capybara (2.3.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/jonleighton/poltergeist.git
-  revision: c3d41c7652c46a52adb089069c28b38ffd955a0d
+  revision: b7271f286b40fae6fdafb0f824e0acf1e212b105
   specs:
     poltergeist (1.5.0)
       capybara (~> 2.1)
@@ -28,7 +28,7 @@ GIT
 
 GIT
   remote: git://github.com/lautis/uglifier.git
-  revision: b2ebc80686155671d3d33edafc23301fc23007cd
+  revision: 891889c24c1bde4ffb067ada4f37e2c849851360
   specs:
     uglifier (2.5.0)
       execjs (>= 0.3.0)
@@ -36,9 +36,9 @@ GIT
 
 GIT
   remote: git://github.com/pivotal/jasmine-gem.git
-  revision: f7694f8d2978deb5c18ddd4935426afc72022b9e
+  revision: 01d6eac2bab488f5b406fa81ca01bbdad277bac1
   specs:
-    jasmine (2.0.1)
+    jasmine (2.0.2)
       jasmine-core (~> 2.0.0)
       phantomjs
       rack (>= 1.2.1)
@@ -54,15 +54,15 @@ GIT
 
 GIT
   remote: git://github.com/rails/jbuilder.git
-  revision: 7b3acb95441152b755d2dea3e0f66b101f70e898
+  revision: f672a65ce2644fc736ba13bdcde6dca7867cc851
   specs:
-    jbuilder (2.0.7)
+    jbuilder (2.0.8)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
 
 GIT
   remote: git://github.com/rails/jquery-rails.git
-  revision: 7ae3bec2982692f8c0a1aa7816575ba4ac599df9
+  revision: 469171f4f24bbca1c38e741dcb258ba885724e5d
   specs:
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
@@ -70,48 +70,43 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 656bc9a31d4e272df9bdb7d0d8895796f56bb0c1
-  branch: 4-1-stable
+  revision: 4b19683f9f9fa3e7207272f20d201633c30b6962
+  branch: 4-0-stable
   specs:
-    actionmailer (4.1.1)
-      actionpack (= 4.1.1)
-      actionview (= 4.1.1)
-      mail (~> 2.5.4)
-    actionpack (4.1.1)
-      actionview (= 4.1.1)
-      activesupport (= 4.1.1)
+    actionmailer (4.0.5)
+      actionpack (= 4.0.5)
+      mail (~> 2.5, >= 2.5.4)
+    actionpack (4.0.5)
+      activesupport (= 4.0.5)
+      builder (~> 3.1.0)
+      erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    actionview (4.1.1)
-      activesupport (= 4.1.1)
-      builder (~> 3.1)
-      erubis (~> 2.7.0)
-    activemodel (4.1.1)
-      activesupport (= 4.1.1)
-      builder (~> 3.1)
-    activerecord (4.1.1)
-      activemodel (= 4.1.1)
-      activesupport (= 4.1.1)
-      arel (~> 5.0.0)
-    activesupport (4.1.1)
+    activemodel (4.0.5)
+      activesupport (= 4.0.5)
+      builder (~> 3.1.0)
+    activerecord (4.0.5)
+      activemodel (= 4.0.5)
+      activerecord-deprecated_finders (~> 1.0.2)
+      activesupport (= 4.0.5)
+      arel (~> 4.0.0)
+    activesupport (4.0.5)
       i18n (~> 0.6, >= 0.6.9)
-      json (~> 1.7, >= 1.7.7)
-      minitest (~> 5.1)
+      minitest (~> 4.2)
+      multi_json (~> 1.3)
       thread_safe (~> 0.1)
-      tzinfo (~> 1.1)
-    rails (4.1.1)
-      actionmailer (= 4.1.1)
-      actionpack (= 4.1.1)
-      actionview (= 4.1.1)
-      activemodel (= 4.1.1)
-      activerecord (= 4.1.1)
-      activesupport (= 4.1.1)
+      tzinfo (~> 0.3.37)
+    rails (4.0.5)
+      actionmailer (= 4.0.5)
+      actionpack (= 4.0.5)
+      activerecord (= 4.0.5)
+      activesupport (= 4.0.5)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.1.1)
+      railties (= 4.0.5)
       sprockets-rails (~> 2.0)
-    railties (4.1.1)
-      actionpack (= 4.1.1)
-      activesupport (= 4.1.1)
+    railties (4.0.5)
+      actionpack (= 4.0.5)
+      activesupport (= 4.0.5)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
 
@@ -127,7 +122,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sprockets-rails.git
-  revision: 94a033289ba895c036b73527ca5e567d88a35e58
+  revision: 60d9e2e3b4482f05ca0e45399134dae0d73b34df
   specs:
     sprockets-rails (2.1.2)
       actionpack (>= 4.0)
@@ -136,7 +131,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/turbolinks.git
-  revision: 23e5937ca74d4e81f8322c7afb735d096186061d
+  revision: 42285201dfb3365dfabe87b4b66a8c7569a07b48
   specs:
     turbolinks (2.2.2)
       coffee-rails
@@ -170,7 +165,7 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: d7306558665d38fe3a0c277ce263e99f635958de
+  revision: 122ac3b252f6d953c5e4e4856b95a63e6fd83f5a
   specs:
     simple_form (3.1.0.rc1)
       actionpack (~> 4.0)
@@ -179,12 +174,13 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    active_utils (2.0.2)
+    active_utils (2.2.1)
       activesupport (>= 2.3.11)
       i18n
+    activerecord-deprecated_finders (1.0.3)
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
-    arel (5.0.1.20140414130214)
+    arel (4.0.2)
     bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
@@ -203,7 +199,7 @@ GEM
       mime-types (>= 1.16)
     celluloid (0.15.2)
       timers (~> 1.1.0)
-    charlock_holmes (0.6.9.4)
+    charlock_holmes (0.7.3)
     childprocess (0.5.3)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
@@ -213,13 +209,14 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    colorize (0.7.3)
     commonjs (0.2.7)
     connection_pool (2.0.0)
-    dalli (2.7.0)
+    dalli (2.7.2)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    execjs (2.0.2)
+    execjs (2.2.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
@@ -227,18 +224,17 @@ GEM
     hashie (2.1.1)
     hike (1.2.3)
     hiredis (0.4.5)
-    htmlentities (4.3.1)
+    htmlentities (4.3.2)
     i18n (0.6.9)
     innertube (1.1.0)
     interception (0.5)
     jasmine-core (2.0.0)
     json (1.8.1)
-    jwt (0.1.11)
-      multi_json (>= 1.5)
-    kaminari (0.15.1)
+    jwt (1.0.0)
+    kaminari (0.16.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    less (2.5.0)
+    less (2.5.1)
       commonjs (~> 0.2.7)
     less-rails (2.5.0)
       actionpack (>= 3.1)
@@ -246,30 +242,29 @@ GEM
     libv8 (3.16.14.3)
     macaddr (1.7.1)
       systemu (~> 2.6.2)
-    mail (2.5.4)
-      mime-types (~> 1.16)
-      treetop (~> 1.4.8)
+    mail (2.6.1)
+      mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     middleware (0.1.0)
-    mime-types (1.25.1)
-    mini_portile (0.5.3)
-    minitest (5.3.4)
+    mime-types (2.3)
+    mini_portile (0.6.0)
+    minitest (4.7.5)
     money (6.1.1)
       i18n (~> 0.6.4)
-    multi_json (1.9.3)
+    multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     mysql2 (0.3.12b4)
     nbayes (0.1.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.9.0)
-    nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
+    net-ssh (2.9.1)
+    nokogiri (1.6.2.1)
+      mini_portile (= 0.6.0)
     oauth (0.4.7)
-    oauth2 (0.9.3)
+    oauth2 (0.9.4)
       faraday (>= 0.8, < 0.10)
-      jwt (~> 0.1.8)
+      jwt (~> 1.0)
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (~> 1.2)
@@ -306,8 +301,7 @@ GEM
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
     pg (0.17.1)
-    phantomjs (1.9.7.0)
-    polyglot (0.3.4)
+    phantomjs (1.9.7.1)
     pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -331,7 +325,7 @@ GEM
     rack-rewrite (1.5.0)
     rack-test (0.6.2)
       rack (>= 1.0)
-    rake (10.3.1)
+    rake (10.3.2)
     rdoc (4.1.1)
       json (~> 1.4)
     redis (3.0.7)
@@ -341,47 +335,51 @@ GEM
     remotipart (1.2.1)
     riddle (1.5.11)
     rmagick (2.13.2)
-    rspec (2.14.1)
-      rspec-core (~> 2.14.0)
-      rspec-expectations (~> 2.14.0)
-      rspec-mocks (~> 2.14.0)
-    rspec-core (2.14.8)
-    rspec-expectations (2.14.5)
-      diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.14.6)
-    rspec-rails (2.14.2)
+    rspec (3.0.0)
+      rspec-core (~> 3.0.0)
+      rspec-expectations (~> 3.0.0)
+      rspec-mocks (~> 3.0.0)
+    rspec-core (3.0.0)
+      rspec-support (~> 3.0.0)
+    rspec-expectations (3.0.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.0.0)
+    rspec-mocks (3.0.1)
+      rspec-support (~> 3.0.0)
+    rspec-rails (3.0.1)
       actionpack (>= 3.0)
-      activemodel (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-      rspec-core (~> 2.14.0)
-      rspec-expectations (~> 2.14.0)
-      rspec-mocks (~> 2.14.0)
+      rspec-core (~> 3.0.0)
+      rspec-expectations (~> 3.0.0)
+      rspec-mocks (~> 3.0.0)
+      rspec-support (~> 3.0.0)
+    rspec-support (3.0.0)
     ruby-growl (4.1)
       uuid (~> 2.3, >= 2.3.5)
-    rubyzip (1.1.3)
+    rubyzip (1.1.4)
     russian (0.6.0)
       i18n (>= 0.5.0)
     sanitize (2.1.0)
       nokogiri (>= 1.4.4)
-    sass (3.3.7)
+    sass (3.3.8)
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
-    selenium-webdriver (2.41.0)
+    selenium-webdriver (2.42.0)
       childprocess (>= 0.5.0)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0.4)
     show_me_the_cookies (2.2.0)
       capybara (~> 2.0)
-    sidekiq (3.0.0)
+    sidekiq (3.1.3)
       celluloid (>= 0.15.2)
       connection_pool (>= 2.0.0)
       json
       redis (>= 3.0.6)
       redis-namespace (>= 1.3.1)
-    sitemap_generator (5.0.2)
+    sitemap_generator (5.0.4)
       builder
     slim (2.0.2)
       temple (~> 0.6.6)
@@ -397,14 +395,12 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sshkit (1.4.0)
+    sshkit (1.5.1)
+      colorize
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-      term-ansicolor
     systemu (2.6.4)
     temple (0.6.7)
-    term-ansicolor (1.3.0)
-      tins (~> 1.0)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -415,15 +411,10 @@ GEM
       middleware (>= 0.1.0)
       riddle (>= 1.5.4)
     thor (0.19.1)
-    thread_safe (0.3.3)
+    thread_safe (0.3.4)
     tilt (1.4.1)
     timers (1.1.0)
-    tins (1.1.0)
-    treetop (1.4.15)
-      polyglot
-      polyglot (>= 0.3.1)
-    tzinfo (1.1.0)
-      thread_safe (~> 0.1)
+    tzinfo (0.3.39)
     uuid (2.3.7)
       macaddr (~> 1.0)
     websocket (1.0.7)
