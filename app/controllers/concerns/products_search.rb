@@ -132,10 +132,8 @@ module ProductsSearch
             item.delete "ps_absolute_buy_rate"
             item.delete "ps_relative_buy_rate"
             item.delete "income_cost_in_currency_without_weight"
-            item.delete "image_url"
             item.delete "created_at"
             item.delete "price_setting_id"
-            item.delete "image_url"
             item.delete "ij_income_rate"
             item.delete "ps_retail_rate"
             item.delete "min_order"
@@ -235,7 +233,10 @@ module ProductsSearch
                 :max_cost => nil,
                 :offers => [],
                 :brand => Brand.where(:name => mf).first || Brand.create(:name => mf.upcase, :phantom => true),
-                :info => item_status(item['catalog_number'], item['manufacturer'])
+                :info => item_status(item['catalog_number'], item['manufacturer']),
+                # image_url у всех одинаковый по определению, т.к. берется из price_catalogs
+                # несмотря на то, что на сервере прайсов заполняется по образу weights
+                :image_url => item["image_url"]
               }
 
             end
