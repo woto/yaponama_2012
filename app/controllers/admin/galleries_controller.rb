@@ -1,4 +1,4 @@
-class Admin::GalleriesController < GalleriesController
+class Admin::GalleriesController < ApplicationController
   include Admin::Admined
   include GridGallery
 
