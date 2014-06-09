@@ -209,7 +209,7 @@ module ApplicationHelper
   # ВЫРЕЗКА СО СТАРОГО
   #
   def days_decorator value
-    html_escape("#{((value = value.to_i) > 0) ? value : '*'}") + "&nbsp;дн.".html_safe
+    html_escape("#{((value = value.to_i) > 0) ? value.to_s + " дн.".html_safe : 'В наличии'}")
   end 
   
   def count_decorator value
