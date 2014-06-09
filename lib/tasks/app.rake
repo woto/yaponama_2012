@@ -63,7 +63,7 @@ namespace :app do
     require 'mail'
     require 'pry'
 
-    Net::IMAP.debug = true
+    Net::IMAP.debug = false
 
     class MyMail
       def initialize
@@ -81,11 +81,12 @@ namespace :app do
                 rescue IOError
                   raise 'reconnect'
                 rescue StandardError => err
-                  puts err
+                  #puts err
                 end
                 sleep 3
               end
-            rescue StandardError
+            rescue StandardError => err
+              #puts err
               #binding.pry
               sleep 3
             end
