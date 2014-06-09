@@ -1,5 +1,19 @@
 namespace :app do
 
+  desc 'Прогон по прайсу. В данном случае надо чтобы инициировалась отправка данных spare_catalogs'
+  task :progon, [:arg1] => [:environment] do |t, args|
+    require 'csv'
+
+    file = open(args[:arg1])
+
+    file.each_line do |line|
+      row = CSV.parse(line)[0]
+      puts row
+      open("http://www.avtorif.ru/user/products/new?catalog_number=#{CGI::escape(row[0].to_s)}")
+    end
+
+  end
+
   desc 'Проценка вызов происходит так: rake "app:protcenka[a]. Сравнение с прайсами, у которых visible_for_stock"'
   task :protcenka, [:arg1] => [:environment] do |t, args|
     require 'csv'
