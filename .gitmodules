@@ -106,3 +106,9 @@
 [submodule "system/submodules/bootbox"]
 	path = system/submodules/bootbox
 	url = https://github.com/makeusabrew/bootbox
+[submodule "system/submodules/autosize"]
+	path = system/submodules/autosize
+	url = https://github.com/jackmoore/autosize
+[submodule "system/submodules/nanoScrollerJS"]
+	path = system/submodules/nanoScrollerJS
+	url = https://github.com/jamesflorentino/nanoScrollerJS

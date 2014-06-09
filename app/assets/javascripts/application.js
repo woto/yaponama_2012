@@ -10,8 +10,12 @@
 
 // OTHER LIBRARIES
 //
+//= require autosize/jquery.autosize.min.js
 //= require nprogress/nprogress
 //= require purl/purl
+//
+//= require nanoScrollerJS/bin/javascripts/overthrow.min.js
+//= require nanoScrollerJS/bin/javascripts/jquery.nanoscroller.js
 //
 //= require console.log-wrapper/consolelog.min.js
 //= require console.log-wrapper/consolelog.detailprint.min.js
@@ -64,6 +68,7 @@
 //= require 'buy_button'
 //= require 'modal_form'
 
+//= require textarea_autosize
 
 //= require toolbar-checkboxes
 
@@ -108,3 +113,6 @@
 //= require nprogress_init
 //= require list.js_init
 //= require image_view
+//
+//= require jquery.remotipart
+//
