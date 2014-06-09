@@ -47,6 +47,23 @@ module ApplicationHelper
 
   end
 
+  def brand_preview brand
+
+    if brand.brand.present?
+      return brand_preview brand.brand
+    end
+
+    if brand.preview.present?
+      output = ''
+      output << h(brand.preview)
+      output << ' '
+      link = "/#{CGI.escape(brand.name)}"
+      output << link_to('подробнее...', link)
+      output.html_safe
+    end
+
+  end
+
   def brands_decorator brand, options
 
     if brand.brand.present?
