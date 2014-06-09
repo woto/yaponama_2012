@@ -90,8 +90,8 @@
   <li class="bottom-space-xs">IP адрес: <b><%= @somebody.remote_ip %></b></li>
   <li class="bottom-space-xs">Он-лайн: <b><%= @somebody.online %></b></li>
   <li class="bottom-space-xs">Просмотров страниц: <b><%= @somebody.stats_count %></b></li>
-  <li class="bottom-space-xs">Текущее расположение: <b><%= @somebody.cached_location %></b></li>
+  <li class="bottom-space-xs">Текущее расположение: <b><%= truncate @somebody.cached_location, length: 20 %></b></li>
   <li class="bottom-space-xs">Заголовок страницы: <b><%= @somebody.cached_title %></b></li>
-  <li class="bottom-space-xs">Пришел со страницы: <b><%= @somebody.cached_referrer %></b></li>
-  <li class="bottom-space-xs">Откуда пришел впервые: <b><%= @somebody.first_referrer %></b></li>
+  <li class="bottom-space-xs">Пришел со страницы: <b><%= truncate @somebody.cached_referrer, length: 20 %></b></li>
+  <li class="bottom-space-xs">Откуда пришел впервые: <b><%= truncate @somebody.first_referrer, length: 20 %></b></li>
 </ul>
