@@ -127,37 +127,40 @@ class ApplicationController < ActionController::Base
 
   def ipgeobase
 
-    # GEO
-    remote_ip = request.remote_ip
+    unless ['/ping', '/stats'].include? request.original_fullpath
 
-    if current_user.remote_ip != remote_ip
-      res = Ipgeobase::find_region_by_ip(remote_ip)
-      current_user.remote_ip = remote_ip
-      current_user.ipgeobase_name = res && res.name || ''
-      current_user.ipgeobase_names_depth_cache = res && res.names_depth_cache || ''
+      # GEO
+      remote_ip = request.remote_ip
+
+      if current_user.remote_ip != remote_ip
+        res = Ipgeobase::find_region_by_ip(remote_ip)
+        current_user.remote_ip = remote_ip
+        current_user.ipgeobase_name = res && res.name || ''
+        current_user.ipgeobase_names_depth_cache = res && res.names_depth_cache || ''
+      end
+
+      current_user.user_agent                = request.user_agent.to_s
+      current_user.accept_language           = request.accept_language.to_s
+
+      current_user.cached_location = request.protocol + request.host_with_port + request.original_fullpath
+      current_user.cached_referrer = request.referer
+
+      # BOT
+
+      bot = false
+
+      if Bot.where("? <<= inet", remote_ip).present?
+        bot = true
+      end
+
+      if Bot.where("? LIKE '%' || user_agent || '%' AND length(user_agent) > 0", "#{current_user.user_agent}").present?
+        bot = true
+      end
+
+      current_user.bot = bot
+
+      current_user.save!
     end
-
-    current_user.user_agent                = request.user_agent.to_s
-    current_user.accept_language           = request.accept_language.to_s
-
-    current_user.cached_location = request.protocol + request.host_with_port + request.original_fullpath
-    current_user.cached_referrer = request.referer
-
-    # BOT
-
-    bot = false
-
-    if Bot.where("? <<= inet", remote_ip).present?
-      bot = true
-    end
-
-    if Bot.where("? LIKE '%' || user_agent || '%' AND length(user_agent) > 0", "#{current_user.user_agent}").present?
-      bot = true
-    end
-
-    current_user.bot = bot
-
-    current_user.save!
   end
 
   def item_status(catalog_number, manufacturer)

@@ -127,52 +127,57 @@
                   </div>
                 <% end %>
 
-                <% benchmark("Bayes") do %>
+                <% if mf_scope[:image_url].present? %>
+                  <h4 style="color: red"> <%= mf_scope[:image_url] %> </h4>
+                <% else %>
+                  <% benchmark("Bayes") do %>
 
-                  <% nbayes = NBayes::Base.new %>
+                    <% nbayes = NBayes::Base.new %>
 
-                  <% SpareCatalog.all.each do |spare_catalog| %>
-                    <% nbayes.train( spare_catalog.content.split(/\s+/), spare_catalog.name ) %>
-                    <%# nbayes.train( [spare_catalog.content], spare_catalog.name ) %>
-                  <% end %>
-
-                  <%# tokens = mf_scope[:titles].keys.map{|val| h(val)}.join(', ').to_s.split(/\s+/) %>
-                  <%# tokens = mf_scope[:titles].keys.map{|val| h(val)}.join('###').to_s.split(/###/) %>
-                  <% tokens = mf_scope[:titles].keys.map{|val| h(val)}.join(', ').to_s.split(/[[:punct:][:space:]]/).reject{|item| item.length < 3}.map{|item| item.gsub(/[^[:word:]]/, '')} %>
-                  <% tokens = tokens.reject{|item| ['ДЕТАЛЬ', 'ЗАПЧАСТЬ'].include? item} %>
-
-                  <% if tokens.any? %>
-
-                    <%# tokens %>
-
-                    <% result = nbayes.classify(tokens) %>
-
-                    <% if false %>
-                      <h4>
-                        <a href="#"> <%= result.max_class %> </a>
-                      </h4>
+                    <% SpareCatalog.all.each do |spare_catalog| %>
+                      <% nbayes.train( spare_catalog.content.split(/\s+/), spare_catalog.name ) %>
+                      <%# nbayes.train( [spare_catalog.content], spare_catalog.name ) %>
                     <% end %>
 
-                    <% counter = 0 %>
+                    <%# tokens = mf_scope[:titles].keys.map{|val| h(val)}.join(', ').to_s.split(/\s+/) %>
+                    <%# tokens = mf_scope[:titles].keys.map{|val| h(val)}.join('###').to_s.split(/###/) %>
+                    <% tokens = mf_scope[:titles].keys.map{|val| h(val)}.join(', ').to_s.split(/[[:punct:][:space:]]/).reject{|item| item.length < 3}.map{|item| item.gsub(/[^[:word:]]/, '')} %>
+                    <% tokens = tokens.reject{|item| ['ДЕТАЛЬ', 'ЗАПЧАСТЬ'].include? item} %>
 
-                    <% result.sort_by {|k, v| -v}.take(2).each do |item, rate| %>
+                    <% if tokens.any? %>
 
-                      <% if counter == 0 %>
-                        <% SpareCatalogWorker.perform_async(catalog_number, manufacturer, item) %>
-                        <% counter += 1 %>
+                      <%# tokens %>
+
+                      <% result = nbayes.classify(tokens) %>
+
+                      <% if false %>
+                        <h4>
+                          <a href="#"> <%= result.max_class %> </a>
+                        </h4>
                       <% end %>
 
-                      <!-- <h4><a href="/<%= CGI.escape(item) %>"><%= item %></a></h4> -->
-                      <h4><%= item %></h4>
-                      <div class="text-muted">
-                        <% spare_catalog = SpareCatalog.where(name: item).first %>
-                        <%== spare_catalog.intro %>
-                      </div>
+                      <% counter = 0 %>
+
+                      <% result.sort_by {|k, v| -v}.take(2).each do |item, rate| %>
+
+                        <% if counter == 0 %>
+                          <% SpareCatalogWorker.perform_async(catalog_number, manufacturer, item) %>
+                          <% counter += 1 %>
+                        <% end %>
+
+                        <!-- <h4><a href="/<%= CGI.escape(item) %>"><%= item %></a></h4> -->
+                        <h4><%= item %></h4>
+                        <div class="text-muted">
+                          <% spare_catalog = SpareCatalog.where(name: item).first %>
+                          <%== spare_catalog.intro %>
+                        </div>
+                      <% end %>
+
                     <% end %>
 
                   <% end %>
-
                 <% end %>
+
 
 
                 <% if @current_user.seller? %>
