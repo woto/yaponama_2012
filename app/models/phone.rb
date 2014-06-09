@@ -9,7 +9,6 @@ class Phone < ActiveRecord::Base
   include BelongsToSomebody
   include Transactionable
   include Selectable
-  include DestroyIfEmpty
 
   def self.mobile
     where(mobile: true)
@@ -72,6 +71,7 @@ class Phone < ActiveRecord::Base
   end
 
   include RenameMeConcernTwo
+  include DestroyIfEmpty
 
   before_validation if: -> { ['register', 'chat'].include?(code_1) && !marked_for_destruction? }  do
     self.mobile = true

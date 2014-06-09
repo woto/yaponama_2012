@@ -5,23 +5,7 @@
   <%= f.twbs_hidden_field :chat_partable_type %>
 
   <%= f.fields_for :chat_partable do |partable| %>
-    <%= partable.twbs_text_area :text, placeholder: 'Сообщение', label: false, class: 'input-sm ckeditor-simple' %>
+    <%= partable.twbs_text_area :text, label: false, id: 'chat', class: "bottom-space-xs", placeholder: "Есть вопросы?", rows: '1' %>
   <% end %>
-
-
-  <%= javascript_tag do %>
-
-    (function() {
-
-      $(function() {
-
-        $(document).trigger('update-ckeditor-simple');
-
-      });
-
-    }).call(this);
-
-  <% end %>
-
 
 <% end %>

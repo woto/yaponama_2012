@@ -199,6 +199,8 @@ ActiveRecord::Schema.define(version: 20140501151705) do
     t.datetime "created_at"
     t.boolean  "manufacturer_before"
     t.boolean  "manufacturer_after"
+    t.text     "preview_before"
+    t.text     "preview_after"
   end
 
   add_index "brand_transactions", ["brand_id"], name: "index_brand_transactions_on_brand_id", using: :btree
@@ -219,6 +221,7 @@ ActiveRecord::Schema.define(version: 20140501151705) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "manufacturer"
+    t.text     "preview"
   end
 
   add_index "brands", ["brand_id"], name: "index_brands_on_brand_id", using: :btree

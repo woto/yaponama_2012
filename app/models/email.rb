@@ -9,7 +9,6 @@ class Email < ActiveRecord::Base
   include BelongsToSomebody
   include Transactionable
   include Selectable
-  include DestroyIfEmpty
 
   belongs_to :profile, :inverse_of => :emails
 
@@ -58,6 +57,7 @@ class Email < ActiveRecord::Base
   end
 
   include RenameMeConcernTwo
+  include DestroyIfEmpty
 
   before_validation if: -> { ['register', 'chat', 'frontend'].include?(code_1) }  do
     self.confirm_required = true

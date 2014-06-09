@@ -1,91 +1,62 @@
-<%= twbs_form_for @resource, url: [(admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user), @resource], remote: true do |f| %>
+<%= twbs_form_for @talk, url: [:user, @talk], remote: true, method: :post, multipart: true do |f| %>
 
   <div class='hidden'>
     <%= f.twbs_text_field :addressee_id %>
   </div>
 
-  <% unless admin_zone? %>
+  <% if current_user.role == 'guest' %>
 
-    <% if current_user.role == 'guest' %>
+    <fieldset id="talk-details" class="well">
 
-      <fieldset id="talk-details" class="well well-sm">
+      <%= f.fields_for :somebody do |somebody| %>
 
-        <%= f.simple_fields_for :somebody do |somebody| %>
+        <%= somebody.fields_for :profile do |profile| %>
 
-          <% if somebody.object.profiles.empty? %>
-            <% somebody.object.profiles.new %>
+          <%= profile.fields_for :names do |name| %>
+            <%= name.twbs_text_field :name, label: false, placeholder: 'Имя', hint: false %>
+            <%= name.standard_recreate %>
           <% end %>
 
-          <%= somebody.simple_fields_for :profiles do |profile| %>
 
-            <% if profile.object.names.empty? %>
-              <% profile.object.names.new %>
-            <% end %>
-
-            <%= profile.simple_fields_for :names do |name| %>
-              <%= name.twbs_text_field :name, label: false, placeholder: 'Имя', hint: false %>
-              <%= name.standard_recreate %>
-            <% end %>
-
-            <%= row do %>
-
-              <div class="col-xs-5">
-
-                <% if profile.object.emails.empty? %>
-                  <% profile.object.emails.new %>
-                <% end %>
-
-                <%= profile.simple_fields_for :emails do |email| %>
-                  <%= email.twbs_text_field :value, class: 'input-sm', label: false, placeholder: 'E-mail адрес', hint: false %>
-                <% end %>
-
-              </div>
-
-              <div class="col-xs-2 text-center">
-
-                <div class="form-horizontal">
-                  <%= f.form_group do %>
-                    <p class="form-control-static text-muted"><small>и / или</small></p>
-                  <% end %>
-                </div>
-
-              </div>
-
-              <div class="col-xs-5">
-
-                <% if profile.object.phones.empty? %>
-                  <% profile.object.phones.new %>
-                <% end %>
-
-                <%= profile.simple_fields_for :phones do |phone| %>
-                  <%= phone.twbs_text_field :value, class: 'input-sm', label: false, placeholder: 'Мобильный телефон', hint: false, rel: 'mobile-mask-on' %>
-                <% end %>
-
-              </div>
-
-            <% end %>
-
-
-
-
-            <% if profile.object.errors[:base].present? %>
-              <%= profile.form_group :base do  %>
-                <%= profile.error :base %>
-              <% end %>
-            <% end %>
-
+          <%= profile.fields_for :emails do |email| %>
+            <%= email.twbs_text_field :value, label: false, placeholder: 'E-mail адрес', hint: false %>
+            <%= email.standard_recreate %>
           <% end %>
+
+
+          <div class="text-center">
+            <%= f.form_group do %>
+              <p class="form-control-static text-xs text-muted">и / или</p>
+            <% end %>
+          </div>
+
+
+          <%= profile.fields_for :phones do |phone| %>
+            <%= phone.twbs_text_field :value, label: false, placeholder: 'Мобильный телефон', hint: false, rel: 'mobile-mask-on' %>
+            <%# phone.twbs_hidden_field :mobile %>
+            <%= phone.standard_recreate %>
+          <% end %>
+
+
+          <% if profile.object.errors[:base].present? %>
+            <%= profile.form_group :base do  %>
+              <%= profile.error :base %>
+            <% end %>
+          <% end %>
+
         <% end %>
-      </fieldset>
+      <%= somebody.twbs_hidden_field :profile_id %>
+      <% end %>
 
-    <% end %>
+
+    </fieldset>
 
   <% end %>
 
   <%= f.twbs_hidden_field :somebody_id %>
   <%= f.twbs_hidden_field :talkable_type %>
 
-  <% case @resource.talkable_type %>
+  <% case @talk.talkable_type %>
   <% when 'Talkables::Letter' %>
   <% when 'Talkables::Chat' %>
 
@@ -106,84 +77,13 @@
 
       <% end %>
 
-      <div class="part">
-
-        <div class="btn-group dropup pull-left">
-
-          <%= f.button :button, id: "talk-submit", class: "btn btn-primary", rel: "tooltip", data: {container: '#myModal', disable_with: 'Отправить'}, title: "Ctrl+Enter для отправки" do %>
-            Отправить
-          <% end %>
-
-          <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-            <span class="caret"></span>
-          </button>
-
-          <ul class="dropdown-menu">
-            <% @user.profiles.each do |profile| %>
-              <% profile.emails.each do |email| %>
-                <li>
-                  <a href="#">
-                    Отправить уведомление письмом на <%= email.to_label %>
-                  </a>
-                </li>
-              <% end %>
-              <% profile.phones.each do |phone| %>
-                <li>
-                  <a href="#">
-                    Отправить уведомление SMS на <%= phone.to_label %>
-                  </a>
-                </li>
-              <% end %>
-            <% end %>
-          </ul>
-        </div>
-
-        <%= f.form_group do %>
-
-          <div class="btn-group pull-right dropup">
-
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-              <%= icon 'cloud-upload' %>
-              Файл
-            </button>
-
-            <ul class="dropdown-menu" role="menu">
-
-              <li> <%= link_to_add_association 'Добавить заголовок', chat, :chat_parts, :wrap_object => Proc.new { |part| part.chat_partable = Talkables::ChatPartables::Title.new; part }, partial: 'content/groups/title_fields', :data => {"association-insertion-node" => ".part", "association-insertion-traversal" => "closest"} %> </li>
-
-              <li> <%= link_to_add_association 'Добавить текст', chat, :chat_parts, :wrap_object => Proc.new { |part| part.chat_partable = Talkables::ChatPartables::Text.new; part }, partial: 'content/groups/text_fields', :data => {"association-insertion-node" => ".part", "association-insertion-traversal" => "closest"} %> </li>
-
-              <li> <%= link_to_add_association 'Добавить ссылку', chat, :chat_parts, :wrap_object => Proc.new { |part| part.chat_partable = Talkables::ChatPartables::Link.new; part }, partial: 'content/groups/link_fields', :data => {"association-insertion-node" => ".part", "association-insertion-traversal" => "closest"} %> </li>
-
-              <li> <%= link_to_add_association 'Добавить файл', chat, :chat_parts, :wrap_object => Proc.new { |part| part.chat_partable = Talkables::ChatPartables::File.new; part }, partial: 'content/groups/file_fields', :data => {"association-insertion-node" => ".part", "association-insertion-traversal" => "closest"} %> </li>
-            </ul>
-
-          </div>
-
-        <% end %>
-
-      </div>
-
+      <%= f.submit 'Отправить', id: "talk-submit", class: "btn btn-xs btn-primary" %>
+      <span class="btn btn-xs btn-unstyled btn-file pull-right" style="color: white">
+        файл <%= file_field_tag :file, onchange: "$(this).closest('form').submit()" %>
+      </span>
 
     <% end %>
 
   <% end %>
-
-<% end %>
-
-<%= javascript_tag do %>
-
-  (function() {
-    var App;
-
-    App = typeof exports !== "undefined" && exports !== null ? exports : this;
-
-    $(function() {
-
-      Realtime.render_sellers();
-
-    })
-
-  }).call(this);
 
 <% end %>

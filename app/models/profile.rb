@@ -9,6 +9,8 @@ class Profile < ActiveRecord::Base
   #has_many :payments, inverse_of: :profile
 
   validates :somebody, presence: true#, associated: true
+  has_one :user_where_is_profile, class_name: "Somebody", inverse_of: :profile
+  accepts_nested_attributes_for :user_where_is_profile
 
   FIELDS =  ['names', 'phones', 'emails', 'passports']
 
@@ -22,11 +24,30 @@ class Profile < ActiveRecord::Base
     CODE
   end
 
+
+  before_validation do
+    if user_where_is_profile.present?
+      self.somebody = user_where_is_profile
+    end
+  end
+
   # Если оба (email и phone пустые, в процессе обращения в службу поддержки)
   after_validation do
     if ['chat'].include? code_1
-      if phones.first.try(:value).blank? && emails.first.try(:value).blank?
-        self.errors.add(:base, 'пожалуйста заполните Телефон и/или Email')
+      email = emails.first
+      phone = phones.first
+      if (phone.try(:value).blank? || phone.try(:marked_for_destruction?)) && (email.try(:value).blank? || email.try(:marked_for_destruction?))
+        if email
+          email.errors.add(:value, '')
+        else
+          emails.new.errors.add(:value, '')
+        end
+        if phone
+          phone.errors.add(:value, '')
+        else
+          phones.new.errors.add(:value, '')
+        end
+        self.errors.add(:base, 'пожалуйста укажите номер мобильного телефона и/или email')
       end
     end
   end

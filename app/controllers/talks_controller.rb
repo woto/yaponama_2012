@@ -2,8 +2,6 @@
 #
 class TalksController < ApplicationController
 
-  layout 'lightweight', only: [:modal]
-
   skip_before_action :find_resource, only: [:modal, :load_older_talks]
 
   def item
@@ -17,88 +15,28 @@ class TalksController < ApplicationController
     end
   end
 
-  def modal
-    @resource = @somebody.talks.new
-    @resource.addressee = current_user.default_addressee
-    chat = @resource.talkable = Talkables::Chat.new
-    chat_part = chat.chat_parts.new
-    chat_part.chat_partable = Talkables::ChatPartables::Text.new
-    load_older_talks_sub()
-  end
-
   # POST /talks
   # POST /talks.json
   def create
-    creator_role = @resource.creator.role
-    addressee_role = @resource.addressee.try(:role)
-
-    # TODO Тут видимо надо дописать проверку возможности публикации сообщения определенному пользователю, пока сейчас просто добавлю user_id в форму вида
-    #@resource = Talk.new(resource_params)
-    @resource.code_1 = 'chat'
-    #@resource.read = true if creator_role.in?(['admin', 'manager']) && addressee_role.in?(['guest', 'user'])
-    @resource.read = true if addressee_role.in?(['guest', 'user'])
-    #debugger
+    @talk.code_1 = 'chat'
 
     respond_to do |format|
 
-      if @resource.save
+      if @talk.save
 
-        if @resource.addressee
-
-          # Если есть получатель
-          # И я селлер
-          # то я становлюсь дефолтным селлером у получателя
-          if ['admin', 'manager'].include? creator_role
-            addressee = @resource.addressee
-            addressee.default_addressee = @resource.creator #current_user
-            addressee.save!
-          end
-
-        else
-
-          # Если получателя нет
-          # то сбрасывается дефолтный селлер
-          current_user.default_addressee = nil
-          current_user.save!
-
-        end
-
-        # Если получатель селлер
-        # то он становится дефолтным
-        if ['admin', 'manager'].include? addressee_role
-          current_user.default_addressee = @resource.addressee
-          current_user.save!
-        end
-
-
-        #### Если получатель - селлер, то он автоматически становится
-        #### дефолтным получателем отправителя
-        #### TODO Возможно я могу это перенести в модель.
-        #### UPD. Я могу это перенести в модель, но из-за того что current_user не выставляется
-        #### при получении письма пока не переделаю, нет
-        ###if ['admin', 'manager'].include? addressee_role
-        ###  current_user.default_addressee = @resource.addressee
-        ###  current_user.save
-        ####elsif ['admin', 'manager'].include? @resource.creator.role
-        ####  addressee = @resource.addressee
-        ####  addressee.default_addressee = current_user
-        ####  addressee.save!
-        ###elsif !@resource.addressee
-        ###  current_user.default_addressee = nil
-        ###  current_user.save!
-        ###end
-
-        format.html { redirect_to admin_user_talk_path(@user, @resource), notice: 'Talk was successfully created.' }
+        format.html { redirect_to admin_user_talk_path(@user, @talk), notice: 'Talk was successfully created.' }
         format.js do
-          redirect_to action: 'modal'
+          #redirect_to action: 'modal'
+          render js: '$("#talk-temporary").text("Чат норм")'
         end
-        format.json { render action: 'show', status: :created, location: @resource }
+        format.json { render action: 'show', status: :created, location: @talk }
       else
+        #binding.pry
         format.html { render action: 'new' }
         format.js do
           render 'new'
         end
-        format.json { render json: @resource.errors, status: :unprocessable_entity }
+        format.json { render json: @talk.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -111,6 +49,25 @@ class TalksController < ApplicationController
 
   def set_resource_class
     @resource_class = Talk
+  end
+
+  def create_resource
+    @talk = @resource_class.new(resource_params)
+  end
+
+  def set_user_and_creation_reason
+    if @talk.respond_to?(:somebody) && @talk.somebody.blank?
+      @talk.somebody = @talk
+    end
+
+    # TODO черновой вариант
+    if @talk.respond_to?(:creator) && !(@talk.persisted? && @talk.is_a?(Talk))
+      @talk.creator = current_user
+    end
+
+    if @talk.respond_to? :code_1=
+      @talk.code_1 = 'frontend'
+    end
   end
 
   def load_older_talks_sub(last_id=nil)

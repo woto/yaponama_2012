@@ -4,6 +4,83 @@
 
 <%= render '/layouts/user_navbar' %>
 
+<div id="talk-window">
+
+  <div class="clearfix">
+
+    <% @talk = @somebody.talks.new %>
+    <% profile = @somebody.profile.nil? ? @somebody.build_profile : @somebody.profile  %>
+    <% profile.names.new if profile.names.empty? %>
+    <% profile.phones.new(mobile: true) if profile.phones.empty? %>
+    <% profile.emails.new if profile.emails.empty? %>
+    <% @talk.addressee = current_user.default_addressee %>
+    <% chat = @talk.talkable = Talkables::Chat.new %>
+    <% chat_part = chat.chat_parts.new %>
+    <% chat_part.chat_partable = Talkables::ChatPartables::Text.new %>
+    <%# load_older_talks_sub() %>
+
+
+    <div id='talk-temporary'></div>
+
+    <div id="about" class="nano bottom-space-xs text-xs">
+      <div class="nano-content">
+
+        <div style="margin-right: 20px; padding: 5px; border-radius: 5px; background: #5cb85c">
+          Здравствуйте, подсказать что-нибудь?
+        </div>
+
+        <div style="margin-left: 20px; padding: 5px; border-radius: 5px; background: #5bc0de; margin-top: 5px;">
+          Однажды в студеную зимнюю пору я из лесу вышел был сильный мороз.
+        </div>
+
+        <div style="margin-right: 20px; padding: 5px; border-radius: 5px; background: #5cb85c; margin-top: 5px;">
+          Приобретенный товар вы можете самостоятельно забрать в наших магазинах в Москве или заказать доставку
+        </div>
+
+        <div style="margin-right: 20px; padding: 5px; border-radius: 5px; background: #5cb85c; margin-top: 5px;">
+          Однажды, в студеную зимнюю пору <br />
+          Я из лесу вышел; был сильный мороз. <br />
+          Гляжу, поднимается медленно в гору <br />
+          Лошадка, везущая хворосту воз. <br />
+          И шествуя важно, в спокойствии чинном, <br />
+          Лошадку ведет под уздцы мужичок <br />
+        </div>
+
+      </div>
+    </div>
+
+    <style>
+      .nano { background: #EEE; height: 200px; }
+      .nano .nano-content { padding: 5px; }
+      .nano .nano-pane   { background: #888; }
+      .nano .nano-slider { background: #111; }
+    </style>
+
+    <script>
+      $(document).ready(function(){
+        $(".nano").nanoScroller({
+          preventPageScrolling: true
+        });
+      })
+    </script>
+
+    <%= render 'talks/form' %>
+
+
+
+
+
+  </div>
+
+  <div style="position: absolute; right: -5px; top: -10px;">
+    <button class="btn btn-primary btn-xs" style="border-radius: 15px">
+      <%= icon 'times' %>
+    </button>
+  </div>
+
+
+</div>
+
 <%= render 'flash' %>
 
 <%= yield :form_error %>

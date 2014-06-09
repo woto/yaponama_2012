@@ -31,6 +31,9 @@ Yaponama2012::Application.routes.draw do
     resources :faqs, concerns: [:transactionable, :gridable]
     resources :spare_catalogs, concerns: [:gridable, :searchable]
     resources :bots, concerns: [:gridable]
+  end
+
+  concern :only_admin do
     resources :galleries, concerns: [:gridable]
   end
 
@@ -213,6 +216,7 @@ Yaponama2012::Application.routes.draw do
 
   namespace :admin do
     concerns :global_and_admin
+    concerns :only_admin
 
     concerns :talkable
     concerns :accountable
