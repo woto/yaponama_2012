@@ -87,7 +87,7 @@
                         - (1..3).each do |n|
                           - if delivery_zone.instance_eval("image#{n}").present?
                             <div class="col-xs-6 col-md-4">
-                              = link_to delivery_zone.instance_eval("image#{n}.url"), target: '_blank', class: 'thumbnail' do
+                              = link_to delivery_zone.instance_eval("image#{n}.url"), target: '_blank', class: 'thumbnail image-view' do
                                 = image_tag delivery_zone.instance_eval("image#{n}.thumb.url")
                             </div>
                         </div>
