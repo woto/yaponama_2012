@@ -10,6 +10,7 @@ module ErrorHandling
       rescue_from ActionController::RoutingError, :with => :render_404
       rescue_from ActionController::UnknownController, :with => :render_404
       rescue_from ActiveRecord::RecordNotFound, :with => :render_500
+      rescue_from AuthenticationError, with: -> { redirect_to root_path, danger: "Возможно вы или кто-то другой входил на сайт под вашей учетной записью с другого компьютера. Вы можете отключить функцию автоматического выхода в Личном кабинете для возможности одновременной работы с разных компьютеров." }
     end
 
   end

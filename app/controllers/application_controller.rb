@@ -49,8 +49,6 @@ class ApplicationController < ActionController::Base
   # Twitter Bootstrap 3
   add_flash_types :success, :info, :warning, :danger
 
-  rescue_from AuthenticationError, with: -> { redirect_to root_path, danger: "Возможно вы или кто-то другой входил на сайт под вашей учетной записью с другого компьютера. Вы можете отключить функцию автоматического выхода в Личном кабинете для возможности одновременной работы с разных компьютеров." }
-  
   def info
     render :layout => false
   end
