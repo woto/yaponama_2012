@@ -1,1 +1,1 @@
-CKEDITOR_BASEPATH = '/assets/ckeditor/';
+CKEDITOR_BASEPATH = '/assets-static/ckeditor/';

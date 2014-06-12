@@ -35,4 +35,7 @@ Yaponama2012::Application.configure do
   config.active_support.deprecation = :stderr
 
   config.assets.debug = true
+
+  config.assets.prefix = "/assets-test"
+
 end

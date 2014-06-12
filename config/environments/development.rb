@@ -34,4 +34,6 @@ Yaponama2012::Application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   config.assets.debug = true
 
+  config.assets.prefix = "/assets-development"
+
 end

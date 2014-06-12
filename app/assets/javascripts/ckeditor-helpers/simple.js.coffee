@@ -13,10 +13,10 @@ App.initSimpleCkeditor = ->
   placeholders = $('.ckeditor-simple')
   if placeholders.length > 0
     $(placeholders).removeClass('ckeditor-simple').addClass('ckeditor-simple-initialized')
-    url = "/assets/ckeditor/ckeditor.js"
+    url = "/assets-static/ckeditor/ckeditor.js"
     $.cachedScript(url).done (script, textStatus) ->
 
-      CKEDITOR.plugins.addExternal('upload', '/assets/upload/', 'plugin.js');
+      CKEDITOR.plugins.addExternal('upload', '/assets-static/upload/', 'plugin.js');
       for ckeditor, i in placeholders
         tmp_ckeditor = CKEDITOR.replace(ckeditor, window.simple_options())
 
