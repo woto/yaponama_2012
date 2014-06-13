@@ -427,6 +427,9 @@ Yaponama2012::Application.routes.draw do
 
   get "*brand" => "brands#show", :constraints => BrandConstraint.new, format: false
   get "*path" => "pages#show", :constraints => PageConstraint.new, format: false
-  get "*error", :to => "application#render_404", format: false
+
+  unless Rails.application.config.consider_all_requests_local
+    get "*error", :to => "application#render_404", format: false
+  end
 
 end

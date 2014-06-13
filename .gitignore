@@ -17,6 +17,7 @@
 *.swp
 
 /public/sitemap*
+/public/assets-production
 /vendor/cache
 /vendor/bundle
 /system/dump.rdb

@@ -1,6 +1,6 @@
 // FIRST CLASS LIBRARIES
 //
-//   require jquery.ui.all
+// require jquery.ui.all
 //
 //
 // OTHER LIBRARIES
@@ -8,6 +8,7 @@
 //= require nprogress/nprogress
 //= require select2/select2
 //
+//= require nanoScrollerJS/bin/css/nanoscroller
 //
 //= require pickadate.js/lib/themes/default
 //= require pickadate.js/lib/themes/default.date
@@ -16,7 +17,6 @@
 //
 // APPLICATION
 //
-//= require 'common'
-//= require 'submenu'
-//= require 'new_talk'
-
+//= require common
+//= require submenu
+//= require new_talk
