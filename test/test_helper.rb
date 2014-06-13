@@ -33,8 +33,11 @@ require 'capybara/poltergeist'
 #  end.run.join
 #end
 
+#Capybara.app_host
+#Capybara.always_include_port
+#Capybara.default_host
 Capybara.server_port = 3000
-Capybara.server_host = 'localhost'
+Capybara.server_host = '127.0.0.1'
 #Capybara.default_driver = :selenium
 #Capybara.default_driver = :selenium
 #Capybara.default_driver = :webkit
