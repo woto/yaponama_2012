@@ -3,22 +3,12 @@
 <div id="modal-form-placeholder"> </div>
 <div id="modal-talk-holder"> </div>
 
-<div style="background-color: #222; padding: 10px 0; border-top: 1px #999 solid">
-  <%= container do %>
-    <%= row do %>
-      <div class='col-lg-12'>
-        <div class="text-center">
-          <%== SiteConfig.counter_yandex %>
-          <%== SiteConfig.counter_mail %>
-          <%== SiteConfig.counter_rambler %>
-          <%== SiteConfig.counter_google %>
-          <%== SiteConfig.counter_openstat %>
-          <%== SiteConfig.counter_liveinternet %>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-</div>
+<%== SiteConfig.counter_yandex %>
+<%== SiteConfig.counter_mail %>
+<%== SiteConfig.counter_rambler %>
+<%== SiteConfig.counter_google %>
+<%== SiteConfig.counter_openstat %>
+<%== SiteConfig.counter_liveinternet %>
 
 <%= audio_tag "notify.ogg", id: "notify-audio" %>
 <%= audio_tag "toggle.ogg", id: "notify-toggle-audio" %>
