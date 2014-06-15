@@ -3,7 +3,15 @@ class PingController < ApplicationController
   def create
     @current_user.touch
 
-    if Talk.where("id > ?", params[:talk_item_id]).length > 0
+    talks = Talk.where(nil)
+
+    # Если еще ни одного сообщения нет,
+    # то параметра с последним id не будет
+    if params[:talk_item_id].present?
+      talks = talks.where("id > ?", params[:talk_item_id])
+    end
+
+    if talks.any?
       render 'create'
     else
       render nothing: true

@@ -105,7 +105,24 @@ class TalkTest < ActionDispatch::IntegrationTest
   end
 
   test 'Отправляем сообщение в одном окне, и в течении некоторого времени в другом окне мы так же видим это сообщение' do
-    skip
+    Capybara.reset!
+
+    Capybara.session_name = :first
+    visit '/'
+    auth('+7 (444) 444-44-44', '4444444444')
+
+    Capybara.session_name = :second
+    visit '/'
+    auth('+7 (444) 444-44-44', '4444444444')
+
+    Capybara.session_name = :first
+    fill_in 'talk[text]', with: 'Текст сообщения 2349823457983475'
+    click_button 'talk-submit'
+    assert has_text? 'Текст сообщения 2349823457983475'
+
+    Capybara.session_name = :second
+    assert has_text?('Текст сообщения 2349823457983475', wait: 10)
+
   end
 
   test 'После отправки сообщения анонимным пользователем у пользователя должен появиться профиль' do
