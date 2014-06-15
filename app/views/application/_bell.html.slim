@@ -7,11 +7,8 @@
 
   - somebodies_without_answer.each do |somebody|
 
-    - somebody.talks.each do |talk|
-      - if talk.addressee_id.blank?
-        - to_all.add somebody
-      - if talk.addressee_id == current_user.id
-        - to_current.add somebody
+    - to_all.add somebody
+    - to_current.add somebody
 
   - bell_icon = ( to_all.any? || to_current.any? ) ? 'bell' : 'bell-o'
 

@@ -77,3 +77,19 @@ $(document).on 'change', "[rel~='select']", ->
 
 
 ###########
+#
+# Автоматический подбор высоты поля ввода
+# (textarea) текста сообщения
+$(document).on 'page:update', ->
+  $('#talk_text').autosize()
+
+# Выбрав файл в чате происходит автоматическая отправка
+$(document).on 'change', '#talk_file', (event) ->
+  $(event.target).closest('form').trigger('submit.rails')
+
+
+# При переходе по страницам или после POST'a (remote)
+# в чате мы переиниализируем talk-log
+$(document).on 'page:update', ->
+  $(".nano").nanoScroller
+    preventPageScrolling: true

@@ -10,9 +10,9 @@ class TalkTest < ActionDispatch::IntegrationTest
     fill_in 'talk[somebody_attributes][profile_attributes][names_attributes][0][name]', with: 'Имя'
     fill_in 'talk[somebody_attributes][profile_attributes][emails_attributes][0][value]', with: 'email@example.com'
     page.execute_script "$('[name=\"talk[somebody_attributes][profile_attributes][phones_attributes][0][value]\"]').val('+7 (123) 324-52-34')"
-    fill_in 'talk[talkable_attributes][chat_parts_attributes][0][chat_partable_attributes][text]', with: 'Текст сообщения'
+    fill_in 'talk[text]', with: 'Текст сообщения 982374982374'
     click_button 'talk-submit'
-    assert has_text? 'Чат норм'
+    assert has_text? 'Текст сообщения 982374982374'
   end
 
   test 'Пишем гостем не заполняем ничего' do
@@ -23,7 +23,7 @@ class TalkTest < ActionDispatch::IntegrationTest
     sleep 1
     assert_equal 'has-error form-group', name['class']
     assert has_text? "пожалуйста укажите номер мобильного телефона и/или email"
-    talk = find_field('talk[talkable_attributes][chat_parts_attributes][0][chat_partable_attributes][text]').find(:xpath,".//..")
+    talk = find_field('talk[text]').find(:xpath,".//..")
     sleep 1
     assert_equal "has-error form-group", talk['class']
   end
@@ -33,9 +33,9 @@ class TalkTest < ActionDispatch::IntegrationTest
     visit '/'
     fill_in 'talk[somebody_attributes][profile_attributes][names_attributes][0][name]', with: 'Имя'
     fill_in 'talk[somebody_attributes][profile_attributes][emails_attributes][0][value]', with: 'email@example.com'
-    fill_in 'talk[talkable_attributes][chat_parts_attributes][0][chat_partable_attributes][text]', with: 'Текст сообщения'
+    fill_in 'talk[text]', with: 'Текст сообщения 823749842342349873402'
     click_button 'talk-submit'
-    assert has_text? 'Чат норм'
+    assert has_text? 'Текст сообщения 823749842342349873402'
   end
 
   test 'Пишем гостем, указываем только phone' do
@@ -43,18 +43,18 @@ class TalkTest < ActionDispatch::IntegrationTest
     visit '/'
     fill_in 'talk[somebody_attributes][profile_attributes][names_attributes][0][name]', with: 'Имя'
     page.execute_script "$('[name=\"talk[somebody_attributes][profile_attributes][phones_attributes][0][value]\"]').val('+7 (123) 324-52-34')"
-    fill_in 'talk[talkable_attributes][chat_parts_attributes][0][chat_partable_attributes][text]', with: 'Текст сообщения'
+    fill_in 'talk[text]', with: 'Текст сообщения 2938423443'
     click_button 'talk-submit'
-    assert has_text? 'Чат норм'
+    assert has_text? 'Текст сообщения 2938423443'
   end
 
   test 'Пишем гостем, у которого уже заполнены контактные данные (email).' do
     Capybara.reset!
     page.driver.set_cookie "auth_token", "8e9beU3E20YWHmF1RBSwFa"
     visit '/'
-    fill_in 'talk[talkable_attributes][chat_parts_attributes][0][chat_partable_attributes][text]', with: 'Текст сообщения'
+    fill_in 'talk[text]', with: 'Текст сообщения 234898723094875234234641'
     click_button 'talk-submit'
-    assert has_text? 'Чат норм'
+    assert has_text? 'Текст сообщения 234898723094875234234641'
   end
 
   test 'Пишем гостем, у которого уже заполнены контактные данные (phone)' do
@@ -68,9 +68,9 @@ class TalkTest < ActionDispatch::IntegrationTest
     page.driver.set_cookie "auth_token", "8e9beU3E20YWHmF1RBSwFa"
     visit '/'
     fill_in 'talk[somebody_attributes][profile_attributes][emails_attributes][0][value]', with: 'some_new_email_34234593@example.com'
-    fill_in 'talk[talkable_attributes][chat_parts_attributes][0][chat_partable_attributes][text]', with: 'Текст сообщения'
+    fill_in 'talk[text]', with: 'Текст сообщения 82348943289234'
     click_button 'talk-submit'
-    assert has_text? 'Чат норм'
+    assert has_text? 'Текст сообщения 82348943289234'
   end
 
   test 'Пишем гостем, у которого уже заполнены контактные данные (phone). И меняем их на свободные' do
@@ -83,7 +83,7 @@ class TalkTest < ActionDispatch::IntegrationTest
     page.driver.set_cookie "auth_token", "8e9beU3E20YWHmF1RBSwFa"
     visit '/'
     fill_in 'talk[somebody_attributes][profile_attributes][emails_attributes][0][value]', with: 'mark@example.com'
-    fill_in 'talk[talkable_attributes][chat_parts_attributes][0][chat_partable_attributes][text]', with: 'Текст сообщения'
+    fill_in 'talk[text]', with: 'Текст сообщения'
     click_button 'talk-submit'
     email = find_field('talk[somebody_attributes][profile_attributes][emails_attributes][0][value]').find(:xpath,".//..")
     sleep 1
@@ -99,9 +99,19 @@ class TalkTest < ActionDispatch::IntegrationTest
     Capybara.reset!
     auth('+7 (123) 123-12-31', '1231231231')
     visit '/'
-    fill_in 'talk[talkable_attributes][chat_parts_attributes][0][chat_partable_attributes][text]', with: 'Текст сообщения'
+    fill_in 'talk[text]', with: 'Текст сообщения 2349823457983475'
     click_button 'talk-submit'
-    assert has_text? 'Чат норм'
+    assert has_text? 'Текст сообщения 2349823457983475'
   end
+
+  test 'Отправляем сообщение в одном окне, и в течении некоторого времени в другом окне мы так же видим это сообщение' do
+    skip
+  end
+
+  test 'После отправки сообщения анонимным пользователем у пользователя должен появиться профиль' do
+    skip
+  end
+
+
 
 end

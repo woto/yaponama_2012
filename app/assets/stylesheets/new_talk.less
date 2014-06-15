@@ -1,5 +1,5 @@
-#talk-window { 
-  width: 250px;
+#talk-window {
+  width: 220px;
   position: fixed;
   right: 0;
   bottom: 0;
@@ -20,17 +20,49 @@
   .form-control {
     height: 30px;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.5;
     border-radius: 3px;
   }
 
   .help-block {
     font-size: 12px;
+    margin-bottom: 0;
   }
 
   .well {
-    padding: 9px;
+    padding: 5px;
   }
 
+  // Сообщения по отдельности разными цветами
+
+  .talk-item
+  {
+    padding: 5px 5px 0 5px;
+    border-radius: 5px;
+    margin: 0 0 5px 0;
+    a {
+      font-weight: bold;
+      color: brown;
+    }
+
+    p {
+      margin-bottom: 5px;
+      padding: 0px 0 5px 0;
+    }
+
+  }
+
+  .talk-item-admin, .talk-item-manager {
+    background: #5bc0de;
+  }
+
+  .talk-item-user, .talk-item-guest {
+   background: #5cb85c;
+  }
+
+  // nano элемент
+
+  .nano { max-height: 250px; }
+  .nano .nano-content { padding: 0 }
 }

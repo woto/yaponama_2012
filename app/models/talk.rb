@@ -10,21 +10,16 @@ class Talk < ActiveRecord::Base
   #  user
   #end
 
+  mount_uploader :file, FileUploader
+
   before_validation do
     somebody.code_1 = code_1
   end
 
-  belongs_to :addressee, class_name: "Somebody"
-
-  belongs_to :talkable, polymorphic: true, :dependent => :destroy
-  accepts_nested_attributes_for :talkable
+  validates :text, presence: true, if: -> { file.blank? }
+  validates :file, presence: true, if: -> { text.blank? }
 
   accepts_nested_attributes_for :somebody
-
-  def build_talkable(args)
-    # TODO Почему этого нет в Rails? В чем подвох?
-    self.talkable = talkable_type.constantize.new(args)
-  end
 
   before_save do
     # Это новая запись
@@ -43,15 +38,5 @@ class Talk < ActiveRecord::Base
   end
 
   include RenameMeConcern
-
-  #######
-
-  after_save do
-    if changes.any?
-      talk = ApplicationController.new.render_to_string(template: 'talks/show.html.erb', layout: false, locals: { resource: self })
-      self.update_column(:cached_talk, talk)
-      $redis.publish("#{Rails.env}:show talk", JSON.dump(self.as_json))
-    end
-  end
 
 end

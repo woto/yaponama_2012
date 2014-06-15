@@ -23,6 +23,7 @@
 //= require underscore/underscore
 //= require moment/moment
 //= require jquery.maskedinput/dist/jquery.maskedinput.min
+//= require jquery.remotipart
 //
 //=  require list.js/dist/list.js
 //=  require list.pagination.js/dist/list.pagination.js
@@ -68,8 +69,6 @@
 //= require 'buy_button'
 //= require 'modal_form'
 
-//= require textarea_autosize
-
 //= require toolbar-checkboxes
 
 // require jquery-dirtyforms/jquery.dirtyforms
@@ -93,9 +92,6 @@
 //= require 'jquery-cookie/jquery.cookie'
 
 //= legal
-//= require talk_select_recipient
-//= require talk_temp
-//= require talk_custom_events
 //= require slide_top
 //= require payments
 //= require map
@@ -106,5 +102,4 @@
 //= require list.js_init
 //= require image_view
 //
-//= require jquery.remotipart
-//
+//= require ping

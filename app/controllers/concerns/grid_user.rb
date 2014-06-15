@@ -96,9 +96,6 @@ module GridUser
       columns_hash['online'] = {
         :type => :boolean
       }
-      columns_hash['sound'] = {
-        :type => :boolean
-      }
 
       columns_hash['chat'] = {
         :type => :string
@@ -183,11 +180,6 @@ module GridUser
 
       columns_hash['transport'] = {
         :type => :string
-      }
-
-      columns_hash['default_addressee_id'] = {
-        :type => :belongs_to,
-        :belongs_to => User,
       }
 
       columns_hash['created_at'] = {

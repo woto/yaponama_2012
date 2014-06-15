@@ -2,7 +2,13 @@ class PingController < ApplicationController
 
   def create
     @current_user.touch
-    render nothing: true
+
+    if Talk.where("id > ?", params[:talk_item_id]).length > 0
+      render 'create'
+    else
+      render nothing: true
+    end
+
   end
 
   private

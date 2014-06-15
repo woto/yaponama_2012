@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140501151705) do
+ActiveRecord::Schema.define(version: 20140615070010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1212,7 +1212,6 @@ ActiveRecord::Schema.define(version: 20140501151705) do
     t.boolean  "phantom",                                                  default: false
     t.boolean  "logout_from_other_places",                                 default: true
     t.boolean  "online",                                                   default: false
-    t.boolean  "sound",                                                    default: true
     t.text     "chat"
     t.integer  "place_id"
     t.string   "post"
@@ -1236,7 +1235,6 @@ ActiveRecord::Schema.define(version: 20140501151705) do
     t.string   "transport"
     t.integer  "unread_talks",                                             default: 0
     t.integer  "total_talks",                                              default: 0
-    t.integer  "default_addressee_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "bot",                                                      default: false
@@ -1290,8 +1288,6 @@ ActiveRecord::Schema.define(version: 20140501151705) do
     t.boolean  "logout_from_other_places_after"
     t.boolean  "online_before"
     t.boolean  "online_after"
-    t.boolean  "sound_before"
-    t.boolean  "sound_after"
     t.text     "chat_before"
     t.text     "chat_after"
     t.integer  "place_id_before"
@@ -1338,8 +1334,6 @@ ActiveRecord::Schema.define(version: 20140501151705) do
     t.integer  "unread_talks_after"
     t.integer  "total_talks_before"
     t.integer  "total_talks_after"
-    t.integer  "default_addressee_id_before"
-    t.integer  "default_addressee_id_after"
     t.datetime "created_at"
     t.boolean  "bot_before"
     t.boolean  "bot_after"
@@ -1395,68 +1389,9 @@ ActiveRecord::Schema.define(version: 20140501151705) do
 
   add_index "suppliers", ["creator_id"], name: "index_suppliers_on_creator_id", using: :btree
 
-  create_table "talkables_chat_partables_files", force: true do |t|
-    t.string   "file"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "talkables_chat_partables_links", force: true do |t|
-    t.string   "url"
-    t.string   "title"
-    t.string   "target"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "talkables_chat_partables_texts", force: true do |t|
-    t.text     "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "talkables_chat_partables_titles", force: true do |t|
-    t.string   "title"
-    t.string   "size"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "talkables_chat_parts", force: true do |t|
-    t.integer  "chat_id"
-    t.integer  "chat_partable_id"
-    t.string   "chat_partable_type"
-    t.integer  "order"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "talkables_chat_parts", ["chat_id"], name: "index_talkables_chat_parts_on_chat_id", using: :btree
-  add_index "talkables_chat_parts", ["chat_partable_id", "chat_partable_type"], name: "talkables_chat_parts_on_chat_partable_id_and_chat_partable_type", using: :btree
-
-  create_table "talkables_chats", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "talkables_letters", force: true do |t|
-    t.integer  "email_id"
-    t.text     "subject"
-    t.text     "size"
-    t.string   "letter"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "talkables_letters", ["email_id"], name: "index_talkables_letters_on_email_id", using: :btree
-
   create_table "talks", force: true do |t|
-    t.integer  "talkable_id"
-    t.string   "talkable_type"
     t.boolean  "read",            default: false
     t.boolean  "received",        default: false
-    t.integer  "addressee_id"
     t.text     "cached_talk"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -1465,11 +1400,13 @@ ActiveRecord::Schema.define(version: 20140501151705) do
     t.text     "notes_invisible", default: ""
     t.integer  "somebody_id"
     t.integer  "creator_id"
+    t.text     "text"
+    t.string   "file"
+    t.string   "file_name"
   end
 
   add_index "talks", ["creator_id"], name: "index_talks_on_creator_id", using: :btree
   add_index "talks", ["somebody_id"], name: "index_talks_on_somebody_id", using: :btree
-  add_index "talks", ["talkable_id", "talkable_type"], name: "index_talks_on_talkable_id_and_talkable_type", using: :btree
 
   create_table "tests", force: true do |t|
     t.binary   "binary"

@@ -2,6 +2,8 @@
 #
 class ApplicationController < ActionController::Base
 
+  helper_method :prepare_talk_form
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -398,5 +400,13 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def prepare_talk_form
+    talk = current_user.talks.new
+    profile = current_user.profile.nil? ? current_user.build_profile : current_user.profile
+    profile.names.new if profile.names.empty?
+    profile.phones.new if profile.phones.empty?
+    profile.emails.new if profile.emails.empty?
+    talk
+  end
 
 end

@@ -25,8 +25,6 @@ first_admin:
   cached_profile: '{"names":[{"surname":"Корнев","name":"Руслан","patronymic":"Михайлович"}],"phones":[{"value":"+7 (111) 111-11-11"}],"emails":[{"value":"foo@example.com"}],"passports":[{"seriya":"1","nomer":"1","mesto_rozhdeniya":"1"}]}'
   place: first
   post: Администратор сайта
-  default_addressee: ivan
-
 
 first_user:
   type: User
@@ -39,7 +37,6 @@ first_user:
   order_rule: all
   # password: 1231231231
   password_digest: $2a$10$90bFORwosYEHSW28BqmF8eacXIBXwLuZ1P9pp0.bEpVp5c2FrgLI.
-  sound: true
   cached_russian_time_zone_auto_id: 4
   russian_time_zone_manual_id: 8
   use_auto_russian_time_zone: false
@@ -101,8 +98,6 @@ otto:
   use_auto_russian_time_zone: true
   profile: otto
   cached_profile: '{"names":[{"surname":"","name":"Отто","patronymic":""}],"phones":[{"value":"+7 (666) 666-66-66"},{"value":"8-888-888-88-88"},{"value":"+7 (555) 555-55-55"},{"value":"+7 (111) 111-11-11"}],"emails":[{"value":"fake@example.com"},{"value":"foo@example.com"}],"passports":[]}'
-  default_addressee: first_admin
-
 
 mark:
   type: User

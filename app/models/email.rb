@@ -12,8 +12,6 @@ class Email < ActiveRecord::Base
 
   belongs_to :profile, :inverse_of => :emails
 
-  has_many :letters, class_name: "Talkables::Letters"
-
   validates :value, presence: true, email: true, unless: -> { self.marked_for_destruction? }
 
   validate :value do

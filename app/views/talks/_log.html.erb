@@ -1,0 +1,34 @@
+<div id="talk-log" class="nano text-xs">
+
+  <div class="nano-content">
+
+    <% limit = 6 %>
+
+    <% @talks = @somebody.talks.order(id: :desc).limit(limit) %>
+
+    <% if @talks.any? %>
+
+      <% @talks.each do |talk| %>
+
+        <div data-id="<%= talk.id %>" class="talk-item talk-item-<%= talk.somebody.role -%>">
+
+          <%= simple_format talk.text if talk.text.present? %>
+          <% if talk.file.present? %>
+            <p>Файл: <%= link_to talk.file_name, talk.file.url, target: '_blank' %></p>
+          <% end %>
+
+        </div>
+
+     <% end %>
+
+     <% if @talks.length >= limit %>
+       <div class="text-center text-sm bottom-space-xs">
+         <%= link_to "Вся история переписки", user_talks_path, style: "color: white" %>
+       </div>
+     <% end %>
+
+   <% end %>
+
+  </div>
+
+</div>

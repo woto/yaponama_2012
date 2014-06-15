@@ -18,8 +18,6 @@ class Somebody < ActiveRecord::Base
 
   #validates :profile, presence: true, unless: -> { role == 'guest' } (Пользователь может входить с помощью социальных сетей не имея профиля в начала)
 
-  belongs_to :default_addressee, class_name: "Somebody"
-
   has_many :talks, inverse_of: :somebody
   accepts_nested_attributes_for :talks
 
@@ -118,17 +116,8 @@ class Somebody < ActiveRecord::Base
       if talk.creator == self
         talk.creator = new_user
       end
-      if talk.addressee == self
-        talk.addressee = new_user
-      end
       talk.somebody = new_user
       talk.save
-    end
-
-    if talks.length > 0
-      # Мы переопределяем дефолтного менеджера пользователю
-      # только если есть диалоги под гостем
-      new_user.default_addressee = self.default_addressee
     end
 
     talks.reload

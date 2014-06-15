@@ -71,12 +71,7 @@ Yaponama2012::Application.routes.draw do
 
 
   concern :talkable do
-    resources :talks do
-      collection do
-        get 'item'
-        get 'load_older_talks'
-      end
-    end
+    resources :talks
   end
 
   concern :cashable do

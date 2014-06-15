@@ -10,9 +10,6 @@
 <%== SiteConfig.counter_openstat %>
 <%== SiteConfig.counter_liveinternet %>
 
-<%= audio_tag "notify.ogg", id: "notify-audio" %>
-<%= audio_tag "toggle.ogg", id: "notify-toggle-audio" %>
-
 <div class="panel-group hidden" id="accordion">
 
   <%= panel 'info' do |p| %>
@@ -103,32 +100,6 @@
     <% end %>
   <% end %>
 
-
-  <%= panel 'info' do |p| %>
-    <%= p.heading do %>
-      <%= p.title do %>
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#NotifySoundToggler">
-          NotifySoundToggler
-        </a>
-      <% end %>
-    <% end %>
-    <%= p.collapse id: 'NotifySoundToggler' do %>
-      <%= p.body do %> 
-        <dl>
-          <dt> play-sound-on-new-message </dt>
-          <dd id="play-sound-on-new-message" data-value="<%= current_user.sound %>"><%= current_user.sound %></dd>
-        </dl>
-        <dl>
-          <dt> sound-toggled </dt>
-          <dd id="sound-toggled"> </dd>
-        </dl>
-
-        <%= render 'talks/buttons/sound' %>
-
-      <% end %>
-    <% end %>
-  <% end %>
-
   <%= panel 'info' do |p| %>
     <%= p.heading do %>
       <%= p.title do %>
@@ -192,34 +163,6 @@
         <dl>
           <dt> #debug-catch-enter </dt>
           <dd id="debug-catch-enter"> </dd>
-        </dl>
-      <% end %>
-    <% end %>
-  <% end %>
-
-  <%= panel 'info' do |p| %>
-    <%= p.heading do %>
-      <%= p.title do %>
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Talk"> Talk </a>
-      <% end %>
-    <% end %>
-    <%= p.collapse id: 'Talk' do %>
-      <%= p.body do %>
-        <dl> 
-          <dt> #authentication </dt>
-          <dd id="authentication"> </dd>
-        </dl>
-        <dl>
-          <dt> #sellers </dt>
-          <dd> <pre id="sellers">{}</pre> </dd>
-        </dl>
-        <dl>
-          <dt> #private-message </dt>
-          <dd> <pre id="private-message"> </pre> </dd>
-        </dl>
-        <dl>
-          <dt> #broadcast-message </dt>
-          <dd> <pre id="broadcast-message"> </pre> </dd>
         </dl>
       <% end %>
     <% end %>
