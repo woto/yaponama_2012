@@ -127,7 +127,7 @@ class ApplicationController < ActionController::Base
 
   def ipgeobase
 
-    unless ['/ping', '/stats'].include? request.original_fullpath
+    if [/pings/, /stats/, /talks/].none?{|str| request.original_fullpath =~ str}
 
       # GEO
       remote_ip = request.remote_ip
@@ -401,8 +401,8 @@ class ApplicationController < ActionController::Base
   end
 
   def prepare_talk_form
-    talk = current_user.talks.new
-    profile = current_user.profile.nil? ? current_user.build_profile : current_user.profile
+    talk = @somebody.talks.new
+    profile = @somebody.profile.nil? ? @somebody.build_profile : @somebody.profile
     profile.names.new if profile.names.empty?
     profile.phones.new if profile.phones.empty?
     profile.emails.new if profile.emails.empty?

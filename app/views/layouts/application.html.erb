@@ -4,29 +4,6 @@
 
 <%= render '/layouts/user_navbar' %>
 
-<div id="talk-window">
-
-  <!-- <div class="clearfix"> -->
-
-
-  <div id='talk-temporary'></div>
-
-  <%= render 'talks/log' %>
-
-  <% @talk = prepare_talk_form %>
-  <%= render 'talks/form' %>
-
-  <!-- </div> -->
-
-  <div style="position: absolute; right: -5px; top: -12px;">
-    <button class="btn btn-danger btn-xs" style="border-radius: 10px">
-      <%= icon 'times' %>
-    </button>
-  </div>
-
-
-</div>
-
 <%= render 'flash' %>
 
 <%= yield :form_error %>

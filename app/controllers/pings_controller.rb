@@ -1,9 +1,9 @@
-class PingController < ApplicationController
+class PingsController < ApplicationController
 
   def create
-    @current_user.touch
+    @somebody.touch
 
-    talks = Talk.where(nil)
+    talks = @somebody.talks.order(id: :desc)
 
     # Если еще ни одного сообщения нет,
     # то параметра с последним id не будет

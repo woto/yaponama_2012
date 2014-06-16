@@ -1,3 +1,27 @@
+<% if @somebody %>
+
+<div id="talk-window">
+
+  <!-- <div class="clearfix"> -->
+
+  <%= render 'talks/log' %>
+
+  <% @talk = prepare_talk_form %>
+  <%= render 'talks/form' %>
+
+  <!-- </div> -->
+
+  <div style="position: absolute; right: -5px; top: -12px;">
+    <button class="btn btn-danger btn-xs" style="border-radius: 10px">
+      <%= icon 'times' %>
+    </button>
+  </div>
+
+</div>
+
+<% end %>
+
+ 
 <%= icon 'arrow-circle-o-up fa-4x', id: "slide-top" %>
 
 <div id="modal-form-placeholder"> </div>
@@ -205,6 +229,24 @@
 
       <% end %>
     <% end %>
+  <% end %>
+
+  <% if @somebody %>
+  <%= panel 'info' do |p| %>
+    <%= p.heading do %>
+      <%= p.title do %>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Talk"> Talk </a>
+      <% end %>
+    <% end %>
+    <%= p.collapse id: 'Talk' do %>
+      <%= p.body do %>
+        <dl> 
+          <dt> #pings_path </dt>
+          <dd id="pings_path"> <%= polymorphic_path([*jaba3, :pings]) %> </dd>
+        </dl>
+      <% end %>
+    <% end %>
+  <% end %>
   <% end %>
 
   <%= panel 'info' do |p| %>

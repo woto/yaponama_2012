@@ -1,4 +1,4 @@
-<%= twbs_form_for @talk, url: [:user, @talk], remote: true, method: :post, multipart: true do |f| %>
+<%= twbs_form_for @talk, url: polymorphic_path([*jaba3, @talk]), remote: true, method: :post, multipart: true do |f| %>
 
   <% if current_user.role == 'guest' %>
 
@@ -53,7 +53,7 @@
   <%= f.twbs_hidden_field :somebody_id %>
 
   <fieldset id="talk-text" class="well">
-    <%= f.twbs_text_area :text, label: false, class: "bottom-space-xs", placeholder: "Задайте нам вопрос", rows: '1' %>
+    <%= f.twbs_text_area :text, label: false, class: "bottom-space-xs", placeholder: "Текст сообщения", rows: '1' %>
   </fieldset>
 
   <%= f.submit 'Отправить', id: "talk-submit", class: "btn btn-xs btn-primary" %>

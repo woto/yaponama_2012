@@ -37,6 +37,10 @@ Yaponama2012::Application.routes.draw do
     resources :galleries, concerns: [:gridable]
   end
 
+  concern :somebody_and_admin_somebody do
+    resources :pings
+  end
+
   resources :rspec_tests
 
   namespace :admin do
@@ -273,6 +277,7 @@ Yaponama2012::Application.routes.draw do
 
 
     resources :users do
+      concerns :somebody_and_admin_somebody
       concerns :aaa
 
       concerns :accountable
@@ -322,6 +327,7 @@ Yaponama2012::Application.routes.draw do
       end
     end
 
+    concerns :somebody_and_admin_somebody
     concerns :accountable
     concerns :profileable
     #concerns :productable
@@ -408,8 +414,6 @@ Yaponama2012::Application.routes.draw do
   concerns :cars_searchable
 
   get 'webrtc' => 'webrtc#webrtc'
-
-  resources :ping
 
   ## TODO Для перехвата /searches/2102/KURYAKYN
   #resources :searches do
