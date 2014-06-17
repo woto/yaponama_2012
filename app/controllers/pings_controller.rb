@@ -1,9 +1,18 @@
 class PingsController < ApplicationController
 
   def create
-    @somebody.touch
+    current_user.touch
 
     talks = @somebody.talks.order(id: :desc)
+
+    talks.where(read: false).each do |talk|
+      # Если отправитель - покупатель, а текущий - продавец
+      # Если отправитель - продавец, а текущий - покупатель
+      if ( talk.creator.buyer? && current_user.seller? ) || ( talk.creator.seller? && current_user.buyer? )
+        talk.read = true
+        talk.save
+      end
+    end
 
     # Если еще ни одного сообщения нет,
     # то параметра с последним id не будет
