@@ -10,7 +10,7 @@
 
       <% @talks.each do |talk| %>
 
-        <div data-id="<%= talk.id %>" class="talk-item talk-item-<%= talk.somebody.role -%>">
+        <div data-id="<%= talk.id %>" class="talk-item talk-item-<%= talk.creator.role -%>">
 
           <%= simple_format talk.text if talk.text.present? %>
           <% if talk.file.present? %>

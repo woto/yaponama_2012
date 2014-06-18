@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140615070010) do
+ActiveRecord::Schema.define(version: 20140617025202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1403,6 +1403,7 @@ ActiveRecord::Schema.define(version: 20140615070010) do
     t.text     "text"
     t.string   "file"
     t.string   "file_name"
+    t.boolean  "notified",        default: false
   end
 
   add_index "talks", ["creator_id"], name: "index_talks_on_creator_id", using: :btree

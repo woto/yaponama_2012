@@ -70,4 +70,21 @@ namespace :app do
     end
   end
 
+
+  desc 'Отправляем не полученное сообщение на почту/телефон'
+  task :talk_notifier => :environment  do
+    while true do
+      Talk.where(notified: false, read: false).where("created_at <= ?", 10.seconds.ago).each do |talk|
+        talk.update_column(:notified, true)
+        if talk.creator.buyer?
+          SellerNotifierMailer.email(talk, 'info@avtorif.ru').deliver
+        elsif talk.creator.seller?
+          talk.somebody.profile.emails.each{|email| BuyerNotifierMailer.email(talk, email.value).deliver}
+          talk.somebody.profile.phones.each{|phone| BuyerNotifierMailer.phone(talk, phone.value).deliver}
+        end
+      end
+      sleep 1
+    end
+  end
+
 end

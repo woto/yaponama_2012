@@ -1,2 +1,1 @@
-<p><%= link_to 'Перейдите по ссылке для подтверждения.', make_user_confirm_email_url(id: @email.id, "confirm" => { "pin" => @email.confirmation_token } ) %></p>
-<p>или введите PIN на странице подтвеждения <%= @email.confirmation_token %></p>
+Здравствуйте, пожалуйста подтвердите ваш e-mail адрес. Для этого <%= link_to 'перейдите по ссылке', make_user_confirm_email_url(id: @email.id, "confirm" => { "pin" => @email.confirmation_token } ) %>.<br />Данная процедура не обязательна, но крайне желательна с целью предотвращения ложных обращений и заказов.

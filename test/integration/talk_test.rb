@@ -122,7 +122,6 @@ class TalkTest < ActionDispatch::IntegrationTest
 
     Capybara.session_name = :second
     assert has_text?('Текст сообщения 2349823457983475', wait: 10)
-
   end
 
   test 'После отправки сообщения анонимным пользователем у пользователя должен появиться профиль' do

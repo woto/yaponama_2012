@@ -102,4 +102,4 @@
 //= require list.js_init
 //= require image_view
 //
-//= require ping
+//= require pings

@@ -1,4 +1,12 @@
 <% if @somebody %>
+<%# if @somebody && (@somebody.buyer? || @somebody != current_user) %>
+
+  <div id="talk-button-show">
+    <%= link_to '#', id: 'talk-button-show-inside', remote: true do %>
+      <div id="talk-notify" data-toggle="popover" data-html="true" data-placement="left" data-animate="true"> </div>
+      <%= image_tag "talk.png" %>
+    <% end %>
+  </div>
 
 <div id="talk-window">
 

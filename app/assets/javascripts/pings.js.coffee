@@ -1,3 +1,5 @@
+# Мы получаем путь напр. /user/pings или /admin/users/xxx/pings
+# и отправляем на него последний известный нам id
 ping = ->
 
   pings_path = $('#pings_path').text()

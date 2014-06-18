@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: 5e12101ad39284ba8e1ad236899b26ae5a32df0b
+  revision: 6ba0c70adee7a8ea04a083965473be44f60dcd96
   specs:
     capybara (2.3.0)
       mime-types (>= 1.16)
@@ -28,15 +28,15 @@ GIT
 
 GIT
   remote: git://github.com/lautis/uglifier.git
-  revision: 891889c24c1bde4ffb067ada4f37e2c849851360
+  revision: 932cf6479f6dbd78142738c835123b7de60486ad
   specs:
-    uglifier (2.5.0)
+    uglifier (2.5.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
 
 GIT
   remote: git://github.com/pivotal/jasmine-gem.git
-  revision: 01d6eac2bab488f5b406fa81ca01bbdad277bac1
+  revision: 869e99a5014558e6a60a294c4090989d76c65a3e
   specs:
     jasmine (2.0.2)
       jasmine-core (~> 2.0.0)
@@ -54,9 +54,9 @@ GIT
 
 GIT
   remote: git://github.com/rails/jbuilder.git
-  revision: f672a65ce2644fc736ba13bdcde6dca7867cc851
+  revision: ca1a95b90d33961de037f0c4d48b4f7b9ae8cc8f
   specs:
-    jbuilder (2.0.8)
+    jbuilder (2.1.1)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
 
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 4b19683f9f9fa3e7207272f20d201633c30b6962
+  revision: 1c2f52175008ffd4c31338138f5b11bff677123b
   branch: 4-0-stable
   specs:
     actionmailer (4.0.5)
@@ -221,7 +221,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
     ffi (1.9.3)
-    hashie (2.1.1)
+    hashie (2.1.2)
     hike (1.2.3)
     hiredis (0.4.5)
     htmlentities (4.3.2)
@@ -231,7 +231,7 @@ GEM
     jasmine-core (2.0.0)
     json (1.8.1)
     jwt (1.0.0)
-    kaminari (0.16.0)
+    kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     less (2.5.1)
@@ -339,9 +339,9 @@ GEM
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
       rspec-mocks (~> 3.0.0)
-    rspec-core (3.0.0)
+    rspec-core (3.0.1)
       rspec-support (~> 3.0.0)
-    rspec-expectations (3.0.0)
+    rspec-expectations (3.0.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.0.0)
     rspec-mocks (3.0.1)
@@ -373,7 +373,7 @@ GEM
       websocket (~> 1.0.4)
     show_me_the_cookies (2.2.0)
       capybara (~> 2.0)
-    sidekiq (3.1.3)
+    sidekiq (3.1.4)
       celluloid (>= 0.15.2)
       connection_pool (>= 2.0.0)
       json
@@ -384,7 +384,7 @@ GEM
     slim (2.0.2)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
-    slim-rails (2.1.4)
+    slim-rails (2.1.5)
       actionpack (>= 3.0, < 4.2)
       activesupport (>= 3.0, < 4.2)
       railties (>= 3.0, < 4.2)

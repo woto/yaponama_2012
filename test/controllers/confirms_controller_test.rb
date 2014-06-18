@@ -43,7 +43,7 @@ class ConfirmsControllerTest < ActionController::TestCase
     assert_equal "Подтверждение электронного адреса", delivery.subject
 
     # pin код в письме
-    assert_match Regexp.new("PIN.*" + pin), delivery.body.encoded
+    #assert_match Regexp.new("PIN.*" + pin), delivery.body.encoded
 
     # ссылка в письме
     assert_match(
@@ -85,17 +85,17 @@ class ConfirmsControllerTest < ActionController::TestCase
     # Заголовок письма
     assert_equal "+71111111111", delivery.subject
 
-    # pin код в письме
-    assert_match Regexp.new("PIN.*" + pin), delivery.body.encoded
+    # pin код в SMS
+    assert_match Regexp.new(pin), delivery.body.encoded
 
-    # ссылка в SMS
-    assert_match(
-      Regexp.new(
-        Regexp.escape(
-          make_user_confirm_phone_path(id: id, "confirm" => { "pin" => pin } )
-        )
-      ), delivery.body.encoded
-    )
+    ## ссылка в SMS
+    #assert_match(
+    #  Regexp.new(
+    #    Regexp.escape(
+    #      make_user_confirm_phone_path(id: id, "confirm" => { "pin" => pin } )
+    #    )
+    #  ), delivery.body.encoded
+    #)
 
   end
 

@@ -127,7 +127,7 @@ class RegistersControllerTest < ActionController::TestCase
     refute email.confirmed?
 
     # pin код в письме
-    assert_match Regexp.new("PIN.*" + pin), delivery.body.encoded
+    #assert_match Regexp.new(pin), delivery.body.encoded
 
     # ссылка в письме
     assert_match(
@@ -160,21 +160,21 @@ class RegistersControllerTest < ActionController::TestCase
 
     phone = Phone.where(value: '+7 (111) 111-11-11').order(id: :desc).limit(1).first
     pin = phone.confirmation_token
-    id = phone.id
+    #id = phone.id
 
     refute phone.confirmed?
 
-    # pin код в письме
-    assert_match Regexp.new("PIN: " + pin), delivery.body.encoded
+    # pin код в SMS
+    assert_match Regexp.new(pin), delivery.body.encoded
 
-    # ссылка в SMS
-    assert_match(
-      Regexp.new(
-        Regexp.escape(
-          make_user_confirm_phone_path(id: id, "confirm" => { "pin" => pin } )
-        )
-      ), delivery.body.encoded
-    )
+    ## ссылка в SMS
+    #assert_match(
+    #  Regexp.new(
+    #    Regexp.escape(
+    #      make_user_confirm_phone_path(id: id, "confirm" => { "pin" => pin } )
+    #    )
+    #  ), delivery.body.encoded
+    #)
 
     assert_redirected_to user_path
   end
