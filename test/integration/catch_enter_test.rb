@@ -17,6 +17,7 @@ class CatchEnterTest < ActionDispatch::IntegrationTest
   end
 
   test 'Проверка правильной работы catch enter при переходе на эту страницу по ссылке (с задействованным turbolinks)' do
+    auth('+7 (111) 111-11-11', '1111111111')
     visit '/'
     # turbolinks не работает?
     visit '/admin/deliveries/places/'
