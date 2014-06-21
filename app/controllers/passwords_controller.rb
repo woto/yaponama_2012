@@ -8,6 +8,7 @@ class PasswordsController < ApplicationController
 
   def update
     respond_to do |format|
+      #binding.pry
       if @resource.save
         format.html { redirect_to url_for(controller: :users, action: :show, id: @resource.id), :success => 'Пароль был успешно изменен.' }
       else

@@ -1,0 +1,23 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ru:
+  password_reset_mailer:
+    email:
+      subject: Восстановление пароля
+  confirm_mailer:
+    email:
+      subject: Подтверждение электронного адреса
+  admin:
+    products:
+      index:
+        title: Товары
+    orders:
+      index:
+        title: Заказы
+    users:
+      index:
+        title: Покупатели
+      edit:
+        title: Редактирование Покупателя
+

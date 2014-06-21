@@ -1,78 +1,75 @@
 <nav class="navbar navbar-default navbar-static-top headroom" role="navigation" style="margin-bottom: 0">
 
-    <div class="container">
+  <div class="container">
 
-      <div class="navbar-header">
+    <div class="navbar-header">
 
-        <a class="navbar-brand" href="/">
-          <%= image_tag "logo.png" %>
-        </a>
+      <a class="navbar-brand" href="/">
+        <%= image_tag "logo.png" %>
+      </a>
 
-        <button class="navbar-toggle ignoredirty" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <button class="navbar-toggle ignoredirty" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
 
-          <span class="sr-only">Навигация</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+        <span class="sr-only">Навигация</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
 
-        </button>
+      </button>
 
-      </div> <!-- /.navbar-header -->
+    </div> <!-- /.navbar-header -->
 
-      <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
 
-        <%= render 'common_search_form' %>
+      <%= render 'common_search_form' %>
 
-        <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right">
 
-          <li class="<%= highlight_active([:controller => '/products', :status => 'incart']) %>">
-            <%= link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do %>
-              <%= icon 'shopping-cart' %> 
-              <span class="hidden-sm">
-                <% count = current_user.products.where(:status => 'incart').count %>
-                Корзина <span id="products_incart" class="badge"><%= count if count > 0 %></span>
-              </span>
+        <li class="<%= highlight_active([:controller => '/products', :status => 'incart']) %>">
+          <%= link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do %>
+            <%= icon 'shopping-cart' %> 
+            <span class="hidden-sm">
+              <% count = current_user.products.where(:status => 'incart').count %>
+              Корзина <span id="products_incart" class="badge"><%= count if count > 0 %></span>
+            </span>
+          <% end %>
+        </li>
+
+        <%= dropdown class: highlight_active2([/\/login/, /\/register/, /\/password_reset/]) do |dd| %>
+
+          <%= dd.toggle do %>
+            <%= icon 'user' %>
+            <% if current_user.role != 'guest' %>
+              <span class="hidden-sm"><%= current_user.name %></span>
+            <% else %>
+              Вход
             <% end %>
-          </li>
-
-          <%= dropdown class: highlight_active2([/\/login/, /\/register/, /\/password_reset/]) do |dd| %>
-
-            <%= dd.toggle do %>
-              <%= icon 'user' %>
-              <% if current_user.role != 'guest' %>
-                <span class="hidden-sm"><%= current_user.name %></span>
-              <% else %>
-                Вход
-              <% end %>
-              <%= caret %>
-            <% end %>
-
-            <%= dd.menu do %>
-              <% if current_user.role == 'guest' %>
-                <li> <%= link_to "Вход на сайт", login_path %> </li>
-                <li> <%= link_to "Регистрация", register_path %> </li>
-                <%= divider %>
-                <li> <%= link_to "Забыли пароль?", password_reset_path %> </li>
-              <% else %>
-                <% if ["admin", "manager"].include? current_user.role %>
-                  <li> <%= link_to "Закрытая зона", admin_path %> </li>
-                  <%= divider %>
-                <% end %>
-                <li> <%= link_to "Личный кабинет", user_path %> </li>
-                <li> <%= link_to "Выход", logout_path, :method => :delete %> </li>
-              <% end %>
-            <% end %>
-
+            <%= caret %>
           <% end %>
 
-        </ul>
+          <%= dd.menu do %>
+            <% if current_user.role == 'guest' %>
+              <li> <%= link_to "Вход на сайт", login_path %> </li>
+              <li> <%= link_to "Регистрация", register_path %> </li>
+              <%= divider %>
+              <li> <%= link_to "Забыли пароль?", password_reset_path %> </li>
+            <% else %>
+              <% if ["admin", "manager"].include? current_user.role %>
+                <li> <%= link_to "Закрытая зона", admin_path %> </li>
+                <%= divider %>
+              <% end %>
+              <li> <%= link_to "Личный кабинет", user_path %> </li>
+              <li> <%= link_to "Выход", logout_path, :method => :delete %> </li>
+            <% end %>
+          <% end %>
 
-      </div>
+        <% end %>
 
-    </div> <!-- /.container -->
+      </ul>
 
-  </div>
+    </div>
 
+  </div> <!-- /.container -->
 
   <div id="nav-second" class="navbar-inverse">
 
@@ -111,5 +108,7 @@
       </div>
 
     </div> <!-- /.container -->
+
+  </div>
 
 </nav>

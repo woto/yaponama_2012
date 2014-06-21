@@ -63,8 +63,8 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: ("Товар <strong>".html_safe + @resource.to_label + "</strong> успешно добавлен в корзину.".html_safe)) }
-        format.js { redirect_via_turbolinks_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: ("Товар <strong>".html_safe + @resource.to_label + "</strong> успешно добавлен в корзину.".html_safe)) }
+        format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: "Товар #{@resource.to_label} успешно добавлен в корзину.") }
+        format.js { redirect_via_turbolinks_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: "Товар #{@resource.to_label} успешно добавлен в корзину.") }
       else
         format.html { render action: 'new' }
         format.js { render action: 'new' }
@@ -75,8 +75,8 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: ("Товар <strong>".html_safe + @resource.to_label + "</strong> успешно изменен.".html_safe)) }
-        format.js { redirect_via_turbolinks_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: ("Товар <strong>".html_safe + @resource.to_label + "</strong> успешно изменен.".html_safe)) }
+        format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: "Товар #{@resource.to_label} успешно изменен.") }
+        format.js { redirect_via_turbolinks_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: "Товар #{@resource.to_label} успешно изменен.") }
       else
         format.html { render action: 'new' }
         format.js { render action: 'new' }

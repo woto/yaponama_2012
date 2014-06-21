@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails',     github: 'rails/rails', :branch => '4-0-stable'
+gem 'rails',     github: 'rails/rails', :branch => '4-1-stable'
 
 gem 'pg'
 
@@ -60,7 +60,7 @@ gem 'less-rails'
 
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'cocoon', :git => 'https://github.com/nathanvda/cocoon'
-gem 'russian'
+#gem 'russian'
 gem 'kaminari'
 gem 'carrierwave'
 gem 'rmagick'
@@ -113,3 +113,4 @@ gem 'nbayes'
 gem 'sidekiq'
 #gem 'mail_view'
 gem 'remotipart'
+gem 'spring'

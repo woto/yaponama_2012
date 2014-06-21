@@ -1,17 +1,30 @@
 # encoding: utf-8
 #
 require 'test_helper'
-require 'controllers/attributes/products_attributes'
 
 class Admin::ProductsControllerTest < ActionController::TestCase
-  include ProductsAttributes
   
   test 'Тестируем добавление администратором товара пользователю с еще не существующим брендом.' do
 
     cookies['auth_token'] = somebodies(:first_admin).auth_token
     @user = somebodies(:first_admin)
     return_path = 'http://ya.ru'
-    post :create, {:user_id => @user.id, :product => new_brand, :return_path => return_path, :commit => 'x'}
+    post :create, {:user_id => @user.id, :product => {
+     "catalog_number"=>"new",
+     "hide_catalog_number"=>"0",
+     "brand_attributes" => { "name" => "new" },
+     "short_name"=>"new",
+     "quantity_ordered"=>"1",
+     "buy_cost"=>"1",
+     "sell_cost"=>"1",
+     "long_name"=>"new",
+     "quantity_available"=>"1",
+     "probability"=>"1",
+     "min_days"=>"1",
+     "max_days"=>"1",
+     "notes"=>"new",
+     "notes_invisible"=>"new"
+    }, :return_path => return_path, :commit => 'x'}
 
     brand = Brand.last
     assert_equal "new", brand.name, 'Созданный бренд имеет неверное название'
@@ -33,9 +46,30 @@ class Admin::ProductsControllerTest < ActionController::TestCase
   test 'Изменение закупочной и продажной цен товара в статусе post_supplier' do
     cookies['auth_token'] = somebodies(:first_admin).auth_token
 
-    patch :update, post_supplier_account_transaction_check(somebodies(:anton).id, products(:anton_fifth).id)
+    patch :update, {
+      "product" => {
+        "product_id"=>"",
+        "catalog_number"=>"MR245368",
+        "hide_catalog_number"=>"1",
+        "brand_attributes"=>{"name"=>"MITSUBISHI", "id"=>"856124188"},
+        "short_name"=>"НАСОС ОМЫВАТЕЛЯ",
+        "quantity_ordered"=>"4",
+        "buy_cost"=>"351.00",
+        "sell_cost"=>"392.00",
+        "long_name"=>"НАСОС ОМЫВАТЕЛЯ СТЕКЛА, ЛОБОВОГО",
+        "quantity_available"=>"2",
+        "probability"=>"95",
+        "min_days"=>"5",
+        "max_days"=>"9",
+        "notes"=>"",
+        "notes_invisible"=>""},
+     "return_path" => '/user',
+     "user_id" => somebodies(:anton).id,
+     "id" => products(:anton_fifth).id,
+     "commit" => 'x'
+   }
 
-    pt = ProductTransaction.first
+    pt = products(:anton_fifth).product_transactions.first
     at1 = AccountTransaction.first
     at2 = AccountTransaction.last
 

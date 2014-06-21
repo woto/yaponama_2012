@@ -38,12 +38,12 @@ class RegistersControllerTest < ActionController::TestCase
     post :update, empty_fields_with_phone
 
     assert_equal(
-      ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символов)"], 
+      ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символа)"], 
       assigns(:user).errors['password']
     )
 
     assert_equal( 
-      ["не может быть пустым", "не совпадает с подтверждением"], 
+      ["не может быть пустым", "не совпадает со значением поля Пароль"], 
       assigns(:user).errors[:password_confirmation]
     )
 
@@ -63,12 +63,12 @@ class RegistersControllerTest < ActionController::TestCase
     post :update, empty_fields_with_email
 
     assert_equal(
-      ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символов)"], 
+      ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символа)"], 
       assigns(:user).errors['password']
     )
 
     assert_equal( 
-      ["не может быть пустым", "не совпадает с подтверждением"], 
+      ["не может быть пустым", "не совпадает со значением поля Пароль"], 
       assigns(:user).errors[:password_confirmation]
     )
 

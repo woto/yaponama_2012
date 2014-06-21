@@ -62,7 +62,7 @@ class Session
     end
 
     self.user = authenticated_user
-    return !!authenticated_user
+    #return !!authenticated_user
 
   end
 

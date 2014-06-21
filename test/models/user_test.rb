@@ -65,7 +65,7 @@ class UserTest < ActiveSupport::TestCase
 
     u.valid?
 
-    assert_equal ["недостаточной длины (не может быть меньше 6 символов)"], u.errors[:password]
+    assert_equal ["недостаточной длины (не может быть меньше 6 символа)"], u.errors[:password]
     assert u.errors[:password_confirmation].blank?
   end
 
@@ -79,7 +79,7 @@ class UserTest < ActiveSupport::TestCase
     u.valid?
 
     assert u.errors[:password].blank?
-    assert_equal ["не совпадает с подтверждением"], u.errors[:password_confirmation]
+    assert_equal ["не совпадает со значением поля Пароль"], u.errors[:password_confirmation]
   end
 
 

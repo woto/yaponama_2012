@@ -258,7 +258,7 @@ class Somebody < ActiveRecord::Base
 
   ########################################################################
 
-  include Transactionable
+  #include Transactionable
 
   ########################################################################
 

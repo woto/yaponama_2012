@@ -71,7 +71,7 @@ class Product < ActiveRecord::Base
             when 'inorder'
             when 'cancel'
             when 'ordered'
-              @transaction.account_transactions.create(:account => somebody.account, :credit => sell_cost * quantity_ordered)
+              @transaction.account_transactions.new(:account => somebody.account, :credit => sell_cost * quantity_ordered)
             else
               raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
           end
@@ -80,12 +80,12 @@ class Product < ActiveRecord::Base
         when 'ordered'
           case new_status
             when 'incart'
-              @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
+              @transaction.account_transactions.new(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
             when 'cancel'
-              @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
+              @transaction.account_transactions.new(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
             when 'pre_supplier'
             when 'inorder'
-              @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
+              @transaction.account_transactions.new(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
             else
               raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
             end
@@ -95,14 +95,14 @@ class Product < ActiveRecord::Base
           case new_status
           when 'cancel'
             # TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
-            @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
+            @transaction.account_transactions.new(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
           when 'pre_supplier'
           when 'post_supplier'
-            @transaction.account_transactions.create(:account => supplier.account, :credit => (buy_cost * quantity_ordered))
+            @transaction.account_transactions.new(:account => supplier.account, :credit => (buy_cost * quantity_ordered))
           when 'incart'
-            @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
+            @transaction.account_transactions.new(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
           when 'inorder'
-            @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
+            @transaction.account_transactions.new(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
           else
             raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
           end
@@ -111,13 +111,13 @@ class Product < ActiveRecord::Base
         when 'post_supplier'
           case new_status
           when 'pre_supplier'
-            @transaction.account_transactions.create(:account => supplier.account, :credit => -(buy_cost * quantity_ordered))
+            @transaction.account_transactions.new(:account => supplier.account, :credit => -(buy_cost * quantity_ordered))
           when 'cancel'
             # TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
-            @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
-            @transaction.account_transactions.create(:account => supplier.account, :credit => -(buy_cost * quantity_ordered))
+            @transaction.account_transactions.new(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
+            @transaction.account_transactions.new(:account => supplier.account, :credit => -(buy_cost * quantity_ordered))
           when 'stock'
-            @transaction.account_transactions.create(:account => supplier.account, :credit => -(buy_cost * quantity_ordered), :debit => -(buy_cost * quantity_ordered))
+            @transaction.account_transactions.new(:account => supplier.account, :credit => -(buy_cost * quantity_ordered), :debit => -(buy_cost * quantity_ordered))
           else
             raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
           end
@@ -126,14 +126,14 @@ class Product < ActiveRecord::Base
           case new_status
           when 'cancel'
             # TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
-            @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
+            @transaction.account_transactions.new(:account => somebody.account, :credit => -(sell_cost * quantity_ordered))
           when 'pre_supplier'
-            @transaction.account_transactions.create(:account => supplier.account, :debit => (buy_cost * quantity_ordered) )
+            @transaction.account_transactions.new(:account => supplier.account, :debit => (buy_cost * quantity_ordered) )
           # TODO Очень важный шаг! TODO TODO TODO TODO TODO TODO TODO TODO TODO (!!! необходимо так же проверять поставщика)
           #when 'post_supplier'
-          #  @transaction.account_transactions.create(:account => supplier.account, :credit => (buy_cost * quantity_ordered), :debit => (buy_cost * quantity_ordered) )
+          #  @transaction.account_transactions.new(:account => supplier.account, :credit => (buy_cost * quantity_ordered), :debit => (buy_cost * quantity_ordered) )
           when 'complete'
-            @transaction.account_transactions.create(:account => somebody.account, :credit => -(sell_cost * quantity_ordered), :debit => -(sell_cost * quantity_ordered))
+            @transaction.account_transactions.new(:account => somebody.account, :credit => -(sell_cost * quantity_ordered), :debit => -(sell_cost * quantity_ordered))
           else
             raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
           end
@@ -143,11 +143,11 @@ class Product < ActiveRecord::Base
           when 'cancel'
             # WTF? TODO эта операция должна быть доступна администратору (по согласованию с снабженцем)'
             # Это когда товар выдали, а клиент принес его обратно. По нему ставится отказ. (Вроде логично) Тогда клиенту возвращаются деньги
-            @transaction.account_transactions.create(:account => somebody.account, :debit => (sell_cost * quantity_ordered))
+            @transaction.account_transactions.new(:account => somebody.account, :debit => (sell_cost * quantity_ordered))
             #somebody.account(true).credit -= sell_cost * quantity_ordered
             #somebody.save
           when 'stock'
-            @transaction.account_transactions.create(:account => somebody.account, :credit => (sell_cost * quantity_ordered), :debit => (sell_cost * quantity_ordered))
+            @transaction.account_transactions.new(:account => somebody.account, :credit => (sell_cost * quantity_ordered), :debit => (sell_cost * quantity_ordered))
           else
             raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
           end
@@ -159,16 +159,16 @@ class Product < ActiveRecord::Base
             when 'incart'
             when 'inorder'
             when 'ordered'
-              @transaction.account_transactions.create(:account => somebody.account, :credit => (sell_cost * quantity_ordered))
+              @transaction.account_transactions.new(:account => somebody.account, :credit => (sell_cost * quantity_ordered))
             when 'pre_supplier'
-              @transaction.account_transactions.create(:account => somebody.account, :credit => (sell_cost * quantity_ordered))
+              @transaction.account_transactions.new(:account => somebody.account, :credit => (sell_cost * quantity_ordered))
             when 'post_supplier'
-              @transaction.account_transactions.create(:account => somebody.account, :credit => (sell_cost * quantity_ordered))
-              @transaction.account_transactions.create(:account => supplier.account, :credit => (buy_cost * quantity_ordered))
+              @transaction.account_transactions.new(:account => somebody.account, :credit => (sell_cost * quantity_ordered))
+              @transaction.account_transactions.new(:account => supplier.account, :credit => (buy_cost * quantity_ordered))
             when 'stock'
-              @transaction.account_transactions.create(:account => somebody.account, :credit => (sell_cost * quantity_ordered))
+              @transaction.account_transactions.new(:account => somebody.account, :credit => (sell_cost * quantity_ordered))
             when 'complete'
-              @transaction.account_transactions.create(:account => somebody.account, :debit => -(sell_cost * quantity_ordered))
+              @transaction.account_transactions.new(:account => somebody.account, :debit => -(sell_cost * quantity_ordered))
             else
               raise "Позиция не может изменить свой статус с #{old_status} на #{new_status}"
           end
@@ -183,18 +183,18 @@ class Product < ActiveRecord::Base
       #if self.supplier_id_changed?
       #  ActiveRecord::Base.transaction do
       #    supplier_was = Supplier.find(changes["supplier_id"][0])
-      #    @transaction.account_transactions.create(:account => supplier_was.account, :credit => -(buy_cost * quantity_ordered))
-      #    @transaction.account_transactions.create(:account => supplier.account, :credit => (buy_cost * quantity_ordered))
+      #    @transaction.account_transactions.new(:account => supplier_was.account, :credit => -(buy_cost * quantity_ordered))
+      #    @transaction.account_transactions.new(:account => supplier.account, :credit => (buy_cost * quantity_ordered))
       #  end
       #end
 
       # TODO необходимо доработать в контроллере вопрос уведомления покупателя
       if sell_cost_changed? || quantity_ordered_changed?
         if ["ordered", "pre_supplier", "post_supplier", "stock"].include? status
-          @transaction.account_transactions.create(:account => somebody.account, :credit => ( (sell_cost * quantity_ordered) - (sell_cost_was * quantity_ordered_was) ))
+          @transaction.account_transactions.new(:account => somebody.account, :credit => ( (sell_cost * quantity_ordered) - (sell_cost_was * quantity_ordered_was) ))
         elsif ["incart", "inorder"].include? status
         elsif ["complete"].include? status
-          @transaction.account_transactions.create(:account => somebody.account, :debit => -( (sell_cost * quantity_ordered) - (sell_cost_was * quantity_ordered_was) ))
+          @transaction.account_transactions.new(:account => somebody.account, :debit => -( (sell_cost * quantity_ordered) - (sell_cost_was * quantity_ordered_was) ))
         else # cancel
           if sell_cost_changed?
             errors.add(:sell_cost, "Невозможно изменить продажную цену у позиции в данном статусе.")
@@ -209,10 +209,10 @@ class Product < ActiveRecord::Base
       if buy_cost_changed? || quantity_ordered_changed?
 
         if ["post_supplier"].include? status
-          @transaction.account_transactions.create(:account => supplier.account, :credit => ( (buy_cost * quantity_ordered) - (buy_cost_was * quantity_ordered_was) ))
+          @transaction.account_transactions.new(:account => supplier.account, :credit => ( (buy_cost * quantity_ordered) - (buy_cost_was * quantity_ordered_was) ))
         elsif ["incart", "inorder", "ordered", "pre_supplier"].include? status
         elsif ["stock", "complete"].include? status
-          @transaction.account_transactions.create(:account => supplier.account, :debit => -( (buy_cost * quantity_ordered) - (buy_cost_was * quantity_ordered_was) ))
+          @transaction.account_transactions.new(:account => supplier.account, :debit => -( (buy_cost * quantity_ordered) - (buy_cost_was * quantity_ordered_was) ))
         else # cancel
           if buy_cost_changed?
             errors.add(:buy_cost, "Невозможно изменить закупочную цену у позиции в данном статусе.")
@@ -246,7 +246,6 @@ class Product < ActiveRecord::Base
   before_validation do
     if product.present? && product.status != 'cancel' && !product.destroyed?
       errors.add(:base, 'Невозможно перезаказать товар, пока по нему не выставлен отказ.')
-      return false
     end
   end
 
