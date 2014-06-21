@@ -26,6 +26,7 @@ module Transactionable
       end
     end
 
+    #binding.pry
     @transaction.save!
   end
 
@@ -58,7 +59,8 @@ module Transactionable
         @transaction.operation = 'create'
       end
 
-      @transaction.save!
+      #binding.pry
+      #@transaction.save!
     end
   end
 end
