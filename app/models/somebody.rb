@@ -29,8 +29,9 @@ class Somebody < ActiveRecord::Base
 
   has_many :stats, :dependent => :destroy, inverse_of: :somebody, after_add: :save_first_referrer
 
-  # Особый случай с talks
-  before_validation if: -> {code_1 == 'chat'} do
+  # Особый случай с talks (Очередность проаверки условий важна! 
+  # Потратил 4 часа на то чтобы поменять местами условия if)
+  before_validation if: -> {code_1 == 'chat' && profile} do
     profile.code_1 = code_1 
   end
 
@@ -258,7 +259,7 @@ class Somebody < ActiveRecord::Base
 
   ########################################################################
 
-  #include Transactionable
+  include Transactionable
 
   ########################################################################
 

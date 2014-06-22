@@ -26,9 +26,10 @@ class Profile < ActiveRecord::Base
 
 
   before_validation do
-    # (somebody != user_where_is_profile) Если не делаю такой
+    # 1. (somebody != user_where_is_profile) Если не делаю такой
     # проверки, то code_1  перетирается
-    if user_where_is_profile.present? && (somebody != user_where_is_profile)
+    # 2. В какой-то момент это опять больше не потребовалось
+    if user_where_is_profile.present?
       self.somebody = user_where_is_profile
     end
   end
