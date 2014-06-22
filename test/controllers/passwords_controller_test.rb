@@ -20,7 +20,7 @@ class PasswordsControllerTest < ActionController::TestCase
     patch :update, user: { password: '', password_confirmation: '' }
     assert_equal ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символа)"],
       assigns(:user).errors[:password]
-    assert_equal ["не может быть пустым", "не совпадает с подтверждением"],
+    assert_equal ["не может быть пустым", "не совпадает со значением поля Пароль"],
       assigns(:user).errors[:password_confirmation]
   end
 
