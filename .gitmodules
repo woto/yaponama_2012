@@ -76,9 +76,6 @@
 [submodule "system/submodules/headroom.js"]
 	path = system/submodules/headroom.js
 	url = https://github.com/WickyNilliams/headroom.js
-[submodule "system/submodules/console.log-wrapper"]
-	path = system/submodules/console.log-wrapper
-	url = https://github.com/cpatik/console.log-wrapper.git
 [submodule "system/submodules/pickadate.js"]
 	path = system/submodules/pickadate.js
 	url = https://github.com/amsul/pickadate.js
