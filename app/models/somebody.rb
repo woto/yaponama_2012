@@ -210,6 +210,7 @@ class Somebody < ActiveRecord::Base
 
     products.reload
 
+    # TODO !!!
     new_user.save
     #self.destroy
   end
