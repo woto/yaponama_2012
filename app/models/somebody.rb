@@ -211,7 +211,7 @@ class Somebody < ActiveRecord::Base
     products.reload
 
     new_user.save
-    self.destroy
+    #self.destroy
   end
 
   def pretty_id

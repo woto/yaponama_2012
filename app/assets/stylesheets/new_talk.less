@@ -41,6 +41,7 @@
     padding: 5px 5px 0 5px;
     border-radius: 5px;
     margin: 0 0 5px 0;
+    word-wrap: break-word;
     a {
       font-weight: bold;
       color: brown;
@@ -50,7 +51,6 @@
       margin-bottom: 5px;
       padding: 0px 0 5px 0;
     }
-
   }
 
   .talk-item-admin, .talk-item-manager {
@@ -65,4 +65,17 @@
 
   .nano { max-height: 250px; }
   .nano .nano-content { padding: 0 }
+
+  // Кнопка закрытия чата
+  #talk-hide {
+    border-radius: 10px;
+    position: absolute;
+    right: -5px;
+    top: -12px;
+  }
+}
+
+// Кнопка службы поддержки
+#talk-show {
+  display: block;
 }

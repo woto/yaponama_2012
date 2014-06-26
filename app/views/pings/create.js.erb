@@ -1,2 +1,9 @@
-$('#talk-log').replaceWith("<%= j render 'talks/log' %>");
+(function() {
+  var App;
 
+  App = typeof exports !== "undefined" && exports !== null ? exports : this;
+
+  $('#talk-log').replaceWith("<%= j render 'talks/log' %>");
+  App.talk_show();
+
+}).call(this);

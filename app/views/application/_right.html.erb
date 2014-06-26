@@ -18,15 +18,8 @@
 
 <hr />
 
-<%= javascript_tag do %>
-  $(document).on('click', '#talk-button-show-2', function(){
-    $('#talk-button-show-inside').click();
-    return false;
-  });
-<% end %>
-
 <p class="text-center bottom-space">
-  <%= link_to '#', id: 'talk-button-show-2' do %>
+  <%= link_to '#', class: 'talk-show' do %>
     <%= icon 'users fa-3x bottom-space-sm' %>
     <br />
     <strong>Онлайн служба поддержки</strong>

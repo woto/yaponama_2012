@@ -1,31 +1,22 @@
 <% if @somebody %>
 <%# if @somebody && (@somebody.buyer? || @somebody != current_user) %>
 
-  <div id="talk-button-show">
-    <%= link_to '#', id: 'talk-button-show-inside', remote: true do %>
-      <div id="talk-notify" data-toggle="popover" data-html="true" data-placement="left" data-animate="true"> </div>
-      <%= image_tag "talk.png" %>
-    <% end %>
-  </div>
+  <a href="#" id="talk-show" class="talk-show">
+    <%= image_tag "talk.png" %>
+  </a>
 
-<div id="talk-window">
+  <div id="talk-window">
 
-  <!-- <div class="clearfix"> -->
+    <%= render 'talks/log' %>
 
-  <%= render 'talks/log' %>
+    <% @talk = prepare_talk_form %>
+    <%= render 'talks/form' %>
 
-  <% @talk = prepare_talk_form %>
-  <%= render 'talks/form' %>
-
-  <!-- </div> -->
-
-  <div style="position: absolute; right: -5px; top: -12px;">
-    <button class="btn btn-danger btn-xs" style="border-radius: 10px">
+    <a href="#" id="talk-hide" class="btn btn-danger btn-xs">
       <%= icon 'times' %>
-    </button>
-  </div>
+    </a>
 
-</div>
+  </div>
 
 <% end %>
 
