@@ -1,1 +1,2 @@
 <li><strong><%= link_to 'Добавить модель', new_admin_brand_model_path(@item.id) %></strong></li>
+<li><strong><%= link_to 'Публичный просмотр', "/#{CGI::escape(@item.name)}", target: '_blank' %></strong></li>
