@@ -413,8 +413,6 @@ Yaponama2012::Application.routes.draw do
 
   concerns :cars_searchable
 
-  get 'webrtc' => 'webrtc#webrtc'
-
   ## TODO Для перехвата /searches/2102/KURYAKYN
   #resources :searches do
   #  #get 'search', :on => :collection, :as => 'search', :to => 'searches#index'
