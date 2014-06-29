@@ -57,30 +57,25 @@
 
             <li> <%= link_to "Поставщики", admin_suppliers_path %> </li>
 
-          <% end %>
-        <% end %>
+            <%= divider %>
 
-        <%= dropdown do |dd| %>
-          <%= dd.toggle do %>
-            <span class="ignoredirty">Реквизиты</span>
-            <%= caret %>
-          <% end %>
-          <%= dd.menu do %>
             <%= dd.submenu do %>
               <%= dd.toggle do %>
                 Контактные лица
               <% end %>
               <%= dd.menu do %>
-                <li> <%= link_to 'Всё вместе', admin_profiles_path %> </li>
+                <li> <%= link_to 'Все', admin_profiles_path %> </li>
                 <li> <%= link_to 'Имена', admin_names_path %> </li>
                 <li> <%= link_to 'Телефоны', admin_phones_path %> </li>
                 <li> <%= link_to 'E-mail адреса', admin_emails_path %> </li>
                 <li> <%= link_to 'Паспорта', admin_passports_path %> </li>
               <% end %>
             <% end %>
+
             <li> <%= link_to 'Почтовые адреса', admin_postal_addresses_path %> </li>
             <li> <%= link_to 'Автомобили', admin_cars_path %> </li>
             <li> <%= link_to 'Компании', admin_companies_path %> </li>
+
           <% end %>
         <% end %>
 
