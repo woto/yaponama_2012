@@ -50,7 +50,7 @@ class Profile < ActiveRecord::Base
         else
           phones.new.errors.add(:value, '')
         end
-        self.errors.add(:base, 'пожалуйста укажите номер мобильного телефона и/или email')
+        self.errors.add(:base, 'укажите телефон и/или email')
       end
     end
   end
