@@ -1,11 +1,8 @@
 <% @meta_title = 'Восстановление пароля' %>
+<% @meta_title_lead = 'Куда отправить инструкцию для восстановления пароля?' %>
 <%= page_header %>
 
-<p class="lead"> 
-  Куда отправить инструкцию для восстановления пароля?  
-</p>
-
-<ul>
+<ul class="list-unstyled bottom-space-lg">
   <li>
   <%= link_to 'В письме на e-mail адрес', contacts_password_reset_path(password_reset: { with: 'email' }), class: 'lead' %>
   </li>

@@ -1,17 +1,19 @@
-<div class="container">
+<%= somebody_tabs do %>
 
   <%= row do %>
 
-    <div class="col-sm-8">
+    <div class="col-sm-8 bottom-space-lg">
+
       <% @meta_title = "Ввод PIN кода" %>
 
       <%= page_header %>
 
       <%= render 'pin_form' %>
+
     </div>
 
-    <%= render 'right' %>
+    <%= render 'auth_right' %>
 
   <% end %>
 
-</div>
+<% end %>
