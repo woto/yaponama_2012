@@ -1,7 +1,6 @@
-<%= row class: 'bottom-space-lg' do %>
+<%= row do %>
 
-  <%= c1 do %>
-  <!-- <div class="col-sm-8"> -->
+  <%= c2 do %>
 
     <%= twbs_form_for @session, url: login_with_path(with: params[:with]), :method => :post do |f| %>
 
@@ -31,8 +30,6 @@
 
     <% end %>
 
-  <!-- </div> -->
   <% end %>
-
 
 <% end %>
