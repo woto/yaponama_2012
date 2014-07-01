@@ -1,0 +1,16 @@
+<div class="col-sm-4 bottom-space-lg">
+  <%= panel 'primary' do |p| %>
+    <%= p.body do %>
+      <h5>
+        <%= alert_link_to 'Вход на сайт', login_path %> если уже проходили регистрацию.
+      </h5>
+      <h5>
+        <%= alert_link_to 'Восстановление пароля', password_reset_path %> если забыли пароль
+      </h5>
+      <h5>
+        <%= alert_link_to  'Регистрация', register_path %> если еще не зарегистрированы на сайте
+      </h5>
+      <%# render 'application/auth/log_in' %>
+    <% end %>
+  <% end %>
+</div>
