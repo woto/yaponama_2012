@@ -12,22 +12,26 @@ class ProductsController < ApplicationController
   #end
   
   before_action do
-    if params[:order_id]
-      @resource = Order.find(params[:order_id])
-      
-      if @resource.delivery_variant_id.blank?
-        redirect_to polymorphic_path([:edit, *jaba3, :delivery], {id: @resource, return_path: params[:return_path]}) and return
+    catch :return do
+      if params[:order_id]
+        @resource = Order.find(params[:order_id])
+        
+        if @resource.delivery_variant_id.blank?
+          redirect_to polymorphic_path([:edit, *jaba3, :delivery], {id: @resource, return_path: params[:return_path]})
+          throw :return
+        end
+
+        if @resource.profile.blank?
+          redirect_to polymorphic_path([:edit, *jaba3, :consignee], {id: @resource, return_path: params[:return_path]})
+          throw :return
+        end
+
+        @resource.update_attributes(phantom: false)
+
+        @somebody = @resource.somebody
+        @user = @resource.somebody
+        @supplier = @resource.somebody
       end
-
-      if @resource.profile.blank?
-        redirect_to polymorphic_path([:edit, *jaba3, :consignee], {id: @resource, return_path: params[:return_path]}) and return
-      end
-
-      @resource.update_attributes(phantom: false)
-
-      @somebody = @resource.somebody
-      @user = @resource.somebody
-      @supplier = @resource.somebody
     end
   end
 

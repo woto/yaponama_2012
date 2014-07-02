@@ -11,7 +11,6 @@
     <li><h4><%= link_to 'Выйти со всех компьютеров', logout_from_all_places_user_path, method: :delete, data: {confirm: 'Вы уверены что хотите выйти?'} %><h4></li>
     <li><h4><%= link_to 'Сменить пароль', edit_user_password_path(return_path: request.fullpath) %><h4></li>
     <li><h4><%= link_to 'Настройки', edit_user_path(return_path: request.fullpath), id: @resource.id %><h4></li>
-    <li><h4><%= render 'application/auth/buttons' %><h4></li>
   </ul>
 
   <%= render 'smart_show' %>

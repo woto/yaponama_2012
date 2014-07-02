@@ -1,17 +1,13 @@
-<div class="container">
+<%= somebody_tabs do %>
 
-  <%= somebody_tabs do %>
+  <% title_new %>
 
-    <% title_new %>
-
-    <%= breadcrumb true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
-
-    <%= title_new %>
-
-    <%= render :partial => "form" %>
-
+  <%= breadcrumb true do |b| %>
+    <%= b.item @meta_title %>
   <% end %>
 
-</div>
+  <%= title_new %>
+
+  <%= render :partial => "form" %>
+
+<% end %>

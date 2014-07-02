@@ -54,7 +54,6 @@
 //= require collapse_next
 //= require radio_new_old_switcher
 //
-//= require right_hand
 //= require catch_enter
 //= require submenu
 

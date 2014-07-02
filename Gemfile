@@ -67,8 +67,8 @@ gem 'slim-rails'
 gem "cancan"
 gem 'whenever'
 gem 'sitemap_generator'
-gem 'fastercsv'
-gem 'yandex_mystem'
+#gem 'fastercsv'
+#gem 'yandex_mystem'
 gem 'ipgeobase', :git => 'git://github.com/woto/ipgeobase.git'
 gem 'activemerchant', :require => 'active_merchant', :git => 'https://github.com/Shopify/active_merchant', :ref => 'b14e285774e599697653325c471e1c85a7163d64'
 
@@ -79,24 +79,24 @@ gem 'activemerchant', :require => 'active_merchant', :git => 'https://github.com
 gem "redis", "~> 3.0.1"
 gem "hiredis", "~> 0.4.5"
 
-gem 'ruby-growl'
+#gem 'ruby-growl'
 gem 'ancestry'
 
 # Mysql2 является обязательным требованием для SphinxQL
-gem 'mysql2',          '0.3.12b4'
-gem 'thinking-sphinx', '3.0.0'
+#gem 'mysql2',          '0.3.12b4'
+#gem 'thinking-sphinx', '3.0.0'
+#
+#gem 'charlock_holmes'
 
-gem 'charlock_holmes'
-
-gem 'omniauth'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
-
-gem 'omniauth-yandex'
-gem 'omniauth-vkontakte'
-gem 'omniauth-odnoklassniki'
-gem 'omniauth-mailru'
+#gem 'omniauth'
+#gem 'omniauth-google-oauth2'
+#gem 'omniauth-facebook'
+#gem 'omniauth-twitter'
+#
+#gem 'omniauth-yandex'
+#gem 'omniauth-vkontakte'
+#gem 'omniauth-odnoklassniki'
+#gem 'omniauth-mailru'
 
 # Необходима версия 2.6.0 чтобы не резался многострочный заголовок
 #gem 'mail', github: 'mikel/mail'
@@ -114,4 +114,4 @@ gem 'remotipart'
 gem 'spring'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
-gem 'font-awesome-rails'
+gem 'font-awesome-sass'

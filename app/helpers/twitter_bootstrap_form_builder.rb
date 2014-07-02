@@ -100,7 +100,7 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
   def twbs_submit value=nil, options={}
     options[:class] = [ 'btn btn-primary btn-lg top-space bottom-space', options[:class] ].compact
-    form_group do
+    form_group nil, class: 'bottom-space-none' do
       @template.concat submit(value, options)
       if @template.params[:return_path]
         @template.concat '&nbsp;&nbsp;&nbsp;или&nbsp;&nbsp;&nbsp;'.html_safe

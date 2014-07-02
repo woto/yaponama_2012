@@ -14,7 +14,9 @@
 
 <%= render 'layouts/user_footer' %>
 
-<%= render 'talk' %>
+<% if current_user.buyer? %>
+  <%= render 'talk' %>
+<% end %>
 
 <%= render :partial => 'layouts/shared/body_suffix' %>
 

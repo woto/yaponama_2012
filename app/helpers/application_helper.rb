@@ -529,11 +529,28 @@ module ApplicationHelper
     end
   end
 
-  def c1
-    content_tag :div, class: "col-lg-7 col-md-8 col-sm-9" do
+  def c0 options={}
+    options[:class] = ['col-lg-6 col-md-7 col-sm-8', options[:class] ].compact
+    content_tag :div, options do
       yield
     end
   end
+
+  def c1 options={}
+    options[:class] = ['col-lg-7 col-md-8 col-sm-9', options[:class] ].compact
+    content_tag :div, options do
+      yield
+    end
+  end
+
+  def c2 options={}
+    options[:class] = ['col-lg-8 col-md-9 col-sm-10', options[:class] ].compact
+    content_tag :div, options do
+      yield
+    end
+  end
+
+
 
   def b1
     container do

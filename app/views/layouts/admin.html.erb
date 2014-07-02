@@ -14,7 +14,9 @@
 
 <%= render "layouts/admin_footer" %>
 
-<%= render 'talk' %>
+<% if @somebody && @somebody.buyer? %>
+  <%= render 'talk' %>
+<% end %>
 
 <%= render :partial => 'layouts/shared/body_suffix' %>
 

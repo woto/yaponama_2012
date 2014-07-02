@@ -1,27 +1,31 @@
-<p class="text-center bottom-space">
-  <%= link_to "/deliveries" do %>
-    <%= icon 'building-o fa-3x bottom-space-sm' %>
-    <br />
-    <strong>Магазины в Москве, доставка по городу и всей России</strong>
-  <% end %>
-</p>
+<div class="hidden-xs hidden-sm bottom-space-lg">
 
-<hr />
+  <p class="text-center bottom-space">
+    <%= link_to "/deliveries" do %>
+      <%= icon 'building-o fa-3x bottom-space-sm' %>
+      <br />
+      <strong>Магазины в Москве, доставка по городу и всей России</strong>
+    <% end %>
+  </p>
 
-<p class="text-center bottom-space">
-  <%= link_to new_user_payment_path do %>
-    <%= icon 'rub fa-3x bottom-space-sm' %>
-    <br />
-    <strong>Все популярные способы оплаты</strong>
-  <% end %>
-</p>
+  <hr />
 
-<hr />
+  <p class="text-center bottom-space">
+    <%= link_to new_user_payment_path do %>
+      <%= icon 'rub fa-3x bottom-space-sm' %>
+      <br />
+      <strong>Все популярные способы оплаты</strong>
+    <% end %>
+  </p>
 
-<p class="text-center bottom-space">
-  <%= link_to '#', class: 'talk-show' do %>
-    <%= icon 'users fa-3x bottom-space-sm' %>
-    <br />
-    <strong>Онлайн служба поддержки</strong>
-  <% end %>
-</p>
+  <hr />
+
+  <p class="text-center bottom-space">
+    <%= link_to '#', class: 'talk-show' do %>
+      <%= icon 'users fa-3x bottom-space-sm' %>
+      <br />
+      <strong>Онлайн служба поддержки</strong>
+    <% end %>
+  </p>
+
+</div>

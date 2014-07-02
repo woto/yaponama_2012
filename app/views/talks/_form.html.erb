@@ -1,5 +1,9 @@
 <%= twbs_form_for @talk, url: polymorphic_path([*jaba3, @talk]), remote: true, method: :post, multipart: true do |f| %>
 
+  <div class="text-center text-muted text-xs bottom-space-xs">
+    <%= link_to 'укажите авто', new_user_car_path, style: 'color: white;' %>  (при необходимости)
+  </div>
+
   <% if current_user.role == 'guest' %>
 
     <fieldset id="talk-details" class="well">
@@ -58,8 +62,8 @@
 
   <%= f.submit 'Отправить', id: "talk-submit", class: "btn btn-xs btn-primary" %>
 
-  <span class="btn btn-xs btn-unstyled btn-file pull-right" style="color: white">
-    файл <%= f.file_field :file %>
+  <span class="btn btn-xs btn-primary btn-file pull-right">
+    Отправить файл <%= f.file_field :file %>
   </span>
 
 <% end %>

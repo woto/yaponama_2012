@@ -1,6 +1,6 @@
 <%= row do %>
 
-  <div class="col-sm-7">
+  <%= c0 do %>
 
     <%= twbs_form_for @contact, as: :confirm, url: polymorphic_path([:make, :user, :confirm, params[:resource_class].underscore]), method: :get  do |f| %>
       <% hint = capture do %>
@@ -11,6 +11,6 @@
       <%= f.twbs_submit 'Подтвердить' %>
     <% end %>
 
-  </div>
+  <% end %>
 
 <% end %>

@@ -18,7 +18,7 @@ class Orders::ConsigneesController < OrdersController
   end
 
   def show
-    redirect_to(polymorphic_path([*jaba3, :order], { id: params[:id], return_path: 'aaaa' }))
+    redirect_to(polymorphic_path([*jaba3, :order], { id: params[:id] }))
   end
 
 end

@@ -1,3 +1,13 @@
-<%= title_new %>
+<%= b1 do %>
 
-<%= render 'form' %>
+  <% title_new %>
+
+  <%= breadcrumb true do |b| %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= title_new %>
+
+  <%= render 'form' %>
+
+<% end %>

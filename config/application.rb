@@ -79,21 +79,6 @@ module Yaponama2012
     # Enable the asset pipeline
     config.assets.enabled = true
 
-    config.less.paths += [
-      File.join(config.root, 'system', 'submodules')
-      #File.join(config.root, 'vendor', 'assets', 'bootstrap', 'less'),
-      #File.join(config.root, 'vendor', 'assets', 'bootstrap', 'less'),
-    ]
-
-    # Дополнительная директория для библиотек, которые несут в себе всё вместе
-    config.assets.paths += [
-      File.join(config.root, 'vendor', 'assets', 'libraries'),
-    ]
-
-    # Autoload ckeditor models folder
-    # config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
-    #
-
     config.talkables = {
     }
 

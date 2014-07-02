@@ -1,18 +1,14 @@
-<div class="container">
+<% @meta_title = "Подтверждение" %>
+<% @meta_title_small = @contact.to_label %>
 
-  <% @meta_title = "Подтверждение" %>
-  <% @meta_title_small = @contact.to_label %>
+<%= somebody_tabs do %>
 
-  <%= somebody_tabs do %>
-
-    <%= breadcrumb false do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
-
-    <%= page_header %>
-
-    <%= render 'form' %>
-
+  <%= breadcrumb false do |b| %>
+    <%= b.item @meta_title %>
   <% end %>
 
-</div>
+  <%= page_header %>
+
+  <%= render 'form' %>
+
+<% end %>
