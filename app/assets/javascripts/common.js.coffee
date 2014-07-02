@@ -86,7 +86,7 @@ App.nanoscroller_init = ->
 
 # Выбрав файл в чате происходит автоматическая отправка
 $(document).on 'change', '#talk_file', (event) ->
-  $(event.target).closest('form').trigger('submit.rails')
+  $(event.target).closest('form').trigger('submit')
 
 ###########
 
