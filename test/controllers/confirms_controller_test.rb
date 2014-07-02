@@ -165,7 +165,7 @@ class ConfirmsControllerTest < ActionController::TestCase
     id = emails(:otto).id
     get :make, id: id, resource_class: 'Email', confirm: { pin: '5555' }
     assert emails(:otto).reload.confirmed?
-    assert_equal '<strong>foo@example.com</strong> успешно подтвержден.', flash[:success]
+    assert_equal 'foo@example.com успешно подтвержден.', flash[:success]
   end
 
   test 'Отправка формы с PIN кодом со страницы подтверждения phone. PIN код правильный' do
@@ -173,7 +173,7 @@ class ConfirmsControllerTest < ActionController::TestCase
     id = phones(:otto).id
     get :make, id: id, resource_class: 'Phone', confirm: { pin: '5555' }
     assert phones(:otto).reload.confirmed?
-    assert_equal '<strong>+7 (111) 111-11-11</strong> успешно подтвержден.', flash[:success]
+    assert_equal '+7 (111) 111-11-11 успешно подтвержден.', flash[:success]
   end
 
   #

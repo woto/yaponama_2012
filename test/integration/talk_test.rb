@@ -22,7 +22,7 @@ class TalkTest < ActionDispatch::IntegrationTest
     name = find_field('talk[somebody_attributes][profile_attributes][names_attributes][0][name]').find(:xpath,".//..")
     sleep 1
     assert_equal 'has-error form-group', name['class']
-    assert has_text? "пожалуйста укажите номер мобильного телефона и/или email"
+    assert has_text? "укажите телефон и/или email"
     talk = find_field('talk[text]').find(:xpath,".//..")
     sleep 1
     assert_equal "has-error form-group", talk['class']
