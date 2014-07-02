@@ -12,37 +12,35 @@
 // Конкретный элемент profileable - конкретный адрес, профиль и т.д.
 .profileable-item {
   position: relative;
-  //.text-muted;
-  //.text-info;
-  .text-warning;
+  @extend .text-warning;
   word-wrap: break-word;
-  .bottom-space-xs;
+  @extend .bottom-space-xs;
 }
 
 // Категория - заголовок
 .profileable-category {
   position: relative;
   div {
-    .text-primary;
+    @extend .text-primary;
   }
   a {
     text-decoration: none;
   }
-  .top-space-xs;
-  .bottom-space-xs;
+  @extend .top-space-xs;
+  @extend .bottom-space-xs;
 }
 
 #leftbar-divider {
-  @media (max-width: @screen-xs-max) {
+  @media (max-width: $screen-xs-max) {
     display: none;
   }
-  @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
     display: none;
   }
-  @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
     display: block;
  }
-  @media (min-width: @screen-lg-min) {
+  @media (min-width: $screen-lg-min) {
     display: block;
  }
 }
