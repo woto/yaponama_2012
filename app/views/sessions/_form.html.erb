@@ -21,7 +21,8 @@
 
       <div class="checkbox">
         <label>
-          <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+          <%= hidden_field_tag :remember_me, 0 %>
+          <%= check_box_tag :remember_me, 1, params[:remember_me] == '1' || params[:remember_me].blank? ? true : false %>
           Запомнить меня на этом компьютере
         </label>
       </div>

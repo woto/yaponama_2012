@@ -63,6 +63,7 @@ class ActionDispatch::IntegrationTest
     fill_phone '#session_value', login
     fill_in 'session[password]', with: password
     check 'remember_me' if remember_me
+    uncheck 'remember_me' unless remember_me
     # debugger
     #find('type["submit"], text: 'Войти').click
     click_button 'Войти'

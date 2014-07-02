@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
 
       authenticated_user = @session.user
 
-      if params[:remember_me]
+      if params[:remember_me] == '1'
         cookies.permanent[:auth_token] = { :value => authenticated_user.auth_token}
       else
         cookies[:auth_token] = { :expire => nil, :value => authenticated_user.auth_token } 
