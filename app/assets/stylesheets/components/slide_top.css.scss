@@ -1,23 +1,23 @@
 #slide-top {
   visibility: hidden;
   cursor: pointer;
-  .opacity(0);
+  opacity: 0;
   z-index: 1010;
   right: 5%;
   top: 5%;
   position: fixed;
-  .transition(all .3s ease-in-out);
+  transition: all .3s ease-in-out;
 
   &.affix-top {
-    .opacity(0);
+    opacity: 0;
     visibility: hidden;
   }
 
   &.affix {
-    .opacity(.7);
+    opacity: .7;
     visibility: visible;
     &:hover {
-      .opacity(1);
+      opacity: 1;
     }
   }
 
