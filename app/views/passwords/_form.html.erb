@@ -1,6 +1,6 @@
 <%= row do %>
 
-  <div class="col-sm-7">
+  <%= c0 do %>
 
     <%= twbs_form_for @resource, :url => url_for(:action => :update, return_path: params[:return_path]) do |f| %>
 
@@ -11,6 +11,6 @@
 
     <% end %>
 
-  </div>
+  <% end %>
 
 <% end %>

@@ -1,0 +1,47 @@
+<%= row do %>
+
+  <%= c2 do %>
+
+    <%= twbs_form_for @user, url: register_path(with: params[:with]) do |f| %>
+
+      <%= f.alert_danger do %>
+        Пожалуйста исправьте ошибки для продолжения.
+      <% end %>
+
+
+      <%= f.fields_for :profiles, @profile do |pr| %>
+
+        <%= pr.fields_for :names, @name do |n| %>
+          <%= n.twbs_text_field :name, placeholder: 'Как к вам обращаться?', asterisk: true %>
+          <%= n.standard_recreate %>
+        <% end %>
+
+
+        <%- if params[:with] == 'email' %>
+          <%= pr.fields_for :emails, @email do |e| %>
+            <%= e.twbs_text_field :value, placeholder: "Адрес электронной почты, напр. pavel@mail.ru", label: 'E-mail', asterisk: true, hint: false %>
+            <%= e.standard_recreate %>
+          <% end %>
+        <% end %>
+ 
+
+        <%- if params[:with] == 'phone' %>
+          <%= pr.fields_for :phones, @phone do |p| %>
+            <%= p.twbs_text_field :value, placeholder: "Номер мобильного телефона", rel: 'mobile-mask-on', label: 'Мобильный телефон', asterisk: true, hint: false %>
+            <%= p.standard_recreate %>
+          <% end %>
+        <% end %>
+
+      <% end %>
+
+      <%= f.twbs_password_field :password, placeholder: "Придумайте пароль не короче 6 символов", asterisk: true %>
+
+      <%= f.twbs_password_field :password_confirmation, placeholder: "Повторите ввод пароля", asterisk: true %>
+
+      <%= f.twbs_submit 'Зарегистрироваться' %>
+
+    <% end %>
+
+  <% end %>
+
+<% end %>
