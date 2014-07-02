@@ -1,0 +1,21 @@
+<% if @somebody %>
+<%# if @somebody && (@somebody.buyer? || @somebody != current_user) %>
+
+  <a href="#" id="talk-show" class="talk-show">
+    <%= image_tag "talk.png" %>
+  </a>
+
+  <div id="talk-window">
+
+    <%= render 'talks/log' %>
+
+    <% @talk = prepare_talk_form %>
+    <%= render 'talks/form' %>
+
+    <a href="#" id="talk-hide" class="btn btn-danger btn-xs">
+      <%= icon 'times' %>
+    </a>
+
+  </div>
+
+<% end %>
