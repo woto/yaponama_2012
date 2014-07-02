@@ -5,9 +5,19 @@
   bottom: 0;
   z-index: 1000;
   background: #333;
-  margin: 5px;
-  padding: 5px;
+  margin: 10px;
+  padding: 0px 5px 5px 5px;
   border-radius: 5px;
+
+  #talk-details {
+    .form-control-static { 
+      padding: 0
+    }
+  }
+
+  #talk-log {
+    @extend .top-space-xs;
+  }
 
   .form-group {
     margin-bottom: 5px;
@@ -70,12 +80,50 @@
   #talk-hide {
     border-radius: 10px;
     position: absolute;
-    right: -5px;
-    top: -12px;
+    right: -9px;
+    top: -9px;
   }
 }
 
 // Кнопка службы поддержки
 #talk-show {
   display: block;
+}
+
+// ############################
+
+// АНИМАЦИЯ
+
+#talk-window {
+  display: none;
+  opacity: 0;
+  animation: talk_window 0.3s;
+  animation-delay: 0.3s;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2) !important;
+  animation-fill-mode: forwards;
+}
+
+@keyframes talk_window {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#talk-show {
+  display:none;
+  top: 50%;
+  margin-top: -75px;
+  position: fixed;
+  cursor: pointer;
+  z-index: 100;
+  right: -300px;
+  width: 300px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2) !important;
+  animation: talk_show 0.4s;
+  animation-delay: 0.4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes talk_show {
+  from { right: -300px; }
+  to   { right: -273px; }
 }
