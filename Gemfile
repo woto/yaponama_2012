@@ -34,10 +34,8 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'poltergeist', github: 'jonleighton/poltergeist'
   #gem 'capybara-webkit'
-  gem 'quiet_assets'
   gem 'rspec-rails'
   gem 'rspec'
-  gem 'jasmine', github: 'pivotal/jasmine-gem'
 end
 
 gem 'jquery-rails', github: 'rails/jquery-rails'
