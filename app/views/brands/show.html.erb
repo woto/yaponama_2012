@@ -2,6 +2,12 @@
 
   <% @meta_title = @resource.name %>
 
+  <%= image_tag @resource.image_url %>
+  <br />
+  <br />
+  <%= raw @resource.preview %>
+  <br />
+  <br />
   <%= raw @resource.content %>
 
   <h3> Запчасти этого производителя</h3>

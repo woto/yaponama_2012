@@ -41,5 +41,14 @@
     strong= model_class.human_attribute_name(:content) + ':'
     br
     = @resource.content
+  p
+    strong= model_class.human_attribute_name(:preview) + ':'
+    br
+    = @resource.preview
+
+  = link_to 'Публичный просмотр', "/#{CGI::escape(@resource.name)}", class: 'btn btn-primary', target: '_blank'
+
+  <br />
+  <br />
 
   = render 'smart_show'
