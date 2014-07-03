@@ -250,15 +250,6 @@ class ApplicationController < ActionController::Base
     @current_user
   end
 
-  def commentable_helper obj
-    @comments = Comment.where(:commentable_id => obj.id, :commentable_type => obj.class).arrange(:order => :created_at)
-    @comment = Comment.new()
-    @comment.commentable = obj
-    @name = current_user.names.where(:creation_reason => Rails.configuration.name_creation_reason['self']).first.try(:to_label)
-    @email = current_user.emails.first.try(:to_label)
-  end
-
-
   def set_user_time_zone
 
     tz = case current_user.use_auto_russian_time_zone
@@ -339,9 +330,9 @@ class ApplicationController < ActionController::Base
     end
 
     # TODO черновой вариант
-    if @resource.respond_to?(:creator) && !(@resource.persisted? && @resource.is_a?(Talk))
-      @resource.creator = current_user
-    end
+    #if @resource.respond_to?(:creator) && !(@resource.persisted? && @resource.is_a?(Talk))
+    #  @resource.creator = current_user
+    #end
 
     if @resource.respond_to? :code_1=
       @resource.code_1 = 'frontend'

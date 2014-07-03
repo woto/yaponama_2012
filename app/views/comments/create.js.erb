@@ -1,8 +1,0 @@
-new_comment = "<%= escape_javascript(render partial: "comments/comment", :locals => {comment: @comment}) %>"
-<% if @comment.parent_id %>
-  tmp = $(new_comment).appendTo('#comment-<%= @comment.parent_id %>')
-<% else %>
-  tmp = $(new_comment).appendTo('#comments')
-<% end %>
-$('#new_comment').remove();
-tmp.effect("highlight", {}, 2000);

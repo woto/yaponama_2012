@@ -27,8 +27,6 @@ class Page < ActiveRecord::Base
     end
   end
 
-  has_many :comments, :as => :commentable
-
   def to_label
     path
   end

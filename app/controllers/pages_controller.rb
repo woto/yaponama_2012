@@ -14,8 +14,6 @@ class PagesController < ApplicationController
     @meta_description = @resource.description
     @meta_keywords = @resource.keywords
     @meta_robots = @resource.robots
-
-    commentable_helper(@resource)
   end
 
   private

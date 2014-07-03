@@ -32,7 +32,6 @@ class BrandsController < ApplicationController
   def find_resource
     @resource = Brand.where(:name => CGI.unescape(params[:brand])).first
     @spare_infos = @resource.spare_infos.page(params[:page]).order(id: :desc).per(50)
-    commentable_helper @resource
   end
 
 end

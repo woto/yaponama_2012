@@ -343,8 +343,6 @@ Yaponama2012::Application.routes.draw do
     concerns :cashable
     post 'pretype', to: 'users#update'
   end
-
-  resources :comments
   resources :uploads do
     member do
       get 'crop'

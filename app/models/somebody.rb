@@ -43,8 +43,6 @@ class Somebody < ActiveRecord::Base
     end
   end
 
-  #has_many :comments
-  
   [:name, :phone, :email, :passport, :postal_address, :car, :company, :order, :profile, :product].each do |table_name|
     has_many "#{table_name}_transactions".to_sym, :inverse_of => :somebody
   end
