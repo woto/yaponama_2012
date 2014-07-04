@@ -2,6 +2,7 @@
 /tmp
 /.bundle
 /.bundler
+/.idea
 
 /config/database.yml
 /config/config.yml
@@ -28,3 +29,4 @@ node_modules
 dump.rdb
 
 realtime/realtime.js
+
