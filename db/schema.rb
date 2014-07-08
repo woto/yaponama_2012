@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617025202) do
+ActiveRecord::Schema.define(version: 20140706053926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -351,18 +351,6 @@ ActiveRecord::Schema.define(version: 20140617025202) do
   add_index "cars", ["modification_id"], name: "index_cars_on_modification_id", using: :btree
   add_index "cars", ["somebody_id"], name: "index_cars_on_somebody_id", using: :btree
 
-  create_table "comments", force: true do |t|
-    t.integer  "creator_id"
-    t.text     "content"
-    t.integer  "commentable_id"
-    t.string   "commentable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "ancestry"
-  end
-
-  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
-
   create_table "companies", force: true do |t|
     t.string   "ownership"
     t.string   "name"
@@ -554,7 +542,7 @@ ActiveRecord::Schema.define(version: 20140617025202) do
     t.integer  "profile_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "confirmed",             default: false
+    t.boolean  "confirmed"
     t.datetime "confirmation_datetime"
     t.string   "confirmation_token"
     t.string   "creation_reason"
@@ -982,7 +970,7 @@ ActiveRecord::Schema.define(version: 20140617025202) do
     t.integer  "profile_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "confirmed",             default: false
+    t.boolean  "confirmed"
     t.datetime "confirmation_datetime"
     t.string   "confirmation_token"
     t.string   "creation_reason"

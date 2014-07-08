@@ -106,6 +106,7 @@ class StatTest < ActionDispatch::IntegrationTest
       }
     }
 
+    sleep 1
     u1 = User.last
 
     assert_equal 'http://example.com', u1.first_referrer
@@ -119,6 +120,7 @@ class StatTest < ActionDispatch::IntegrationTest
       }
     }
 
+    sleep 1
     u2 = User.last
 
     assert_equal 'http://example.com', u2.first_referrer

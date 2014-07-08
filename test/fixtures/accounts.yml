@@ -88,3 +88,7 @@ sidor:
   credit: 0.0
   somebody: sidor
 
+max:
+  debit: 0.0
+  credit: 0.0
+  somebody: max

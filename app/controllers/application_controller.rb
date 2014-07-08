@@ -328,15 +328,6 @@ class ApplicationController < ActionController::Base
     if @resource.respond_to?(:somebody) && @resource.somebody.blank?
       @resource.somebody = @somebody
     end
-
-    # TODO черновой вариант
-    #if @resource.respond_to?(:creator) && !(@resource.persisted? && @resource.is_a?(Talk))
-    #  @resource.creator = current_user
-    #end
-
-    if @resource.respond_to? :code_1=
-      @resource.code_1 = 'frontend'
-    end
   end
 
   def resource_params

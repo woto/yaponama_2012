@@ -4,7 +4,7 @@
 
     <% current_user.profiles.each do |profile| %>
 
-      <% profile.phones.mobile.each do |phone| %>
+      <% profile.phones.where(mobile: true).each do |phone| %>
         <% if !phone.confirmed? && phone.persisted? %>
           <div>
             Пожалуйста, подтвердите номер мобильного телефона

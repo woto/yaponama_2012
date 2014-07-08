@@ -38,12 +38,12 @@ require 'capybara/poltergeist'
 #Capybara.default_host
 Capybara.server_port = 3000
 Capybara.server_host = '127.0.0.1'
-#Capybara.default_driver = :selenium
-#Capybara.default_driver = :selenium
+Capybara.default_driver = :selenium
+Capybara.default_driver = :selenium
 #Capybara.default_driver = :webkit
 #Capybara.javascript_driver = :webkit
-Capybara.default_driver = :poltergeist
-Capybara.javascript_driver = :poltergeist
+#Capybara.default_driver = :poltergeist
+#Capybara.javascript_driver = :poltergeist
 Capybara.default_wait_time = 20
 
 

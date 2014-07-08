@@ -25,7 +25,7 @@ class PasswordReset
     when 'email'
       contact = Email.confirmed.find_by_value(value)
     when 'phone'
-      contact = Phone.confirmed.mobile.find_by_value(value)
+      contact = Phone.confirmed.where(mobile: true).find_by_value(value)
     end
 
     if contact.present?

@@ -7,7 +7,8 @@ class Name < ActiveRecord::Base
   include BelongsToSomebody
   include Transactionable
   include Selectable
-  #include RegisterCreationReason
+
+  read_only :creation_reason
 
   has_many :orders
 
@@ -17,7 +18,5 @@ class Name < ActiveRecord::Base
   def to_label
     "#{surname} #{name} #{patronymic}"
   end
-
-  include RenameMeConcernTwo
 
 end

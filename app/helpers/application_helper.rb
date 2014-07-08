@@ -500,11 +500,11 @@ module ApplicationHelper
   end
 
   def caret
-    tag :span, class: 'caret ignoredirty'
+    content_tag :span, '', class: 'caret ignoredirty'
   end
 
   def divider
-    tag :li, class: 'divider'
+    content_tag :li, '', class: 'divider'
   end
 
   def jaba

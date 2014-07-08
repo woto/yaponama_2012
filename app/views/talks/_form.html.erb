@@ -12,15 +12,19 @@
 
         <%= somebody.fields_for :profile do |profile| %>
 
+          <%= profile.read_only :creation_reason, value: 'talk' %>
+
           <%= profile.fields_for :names do |name| %>
             <%= name.twbs_text_field :name, label: false, placeholder: 'Имя', hint: false %>
+            <%= name.read_only :creation_reason, value: 'talk' %>
             <%= name.standard_recreate %>
           <% end %>
 
 
           <%= profile.fields_for :emails do |email| %>
             <%= email.twbs_text_field :value, label: false, placeholder: 'E-mail адрес', hint: false %>
-            <%= email.standard_recreate %>
+            <%= email.read_only :creation_reason, value: 'talk' %>
+            <%= email.read_only :confirm_required, value: true %>
           <% end %>
 
 
@@ -33,7 +37,9 @@
 
           <%= profile.fields_for :phones do |phone| %>
             <%= phone.twbs_text_field :value, label: false, placeholder: 'Мобильный телефон', hint: false, rel: 'mobile-mask-on' %>
-            <%= phone.standard_recreate %>
+            <%= phone.read_only :creation_reason, value: 'talk' %>
+            <%= phone.read_only :mobile, value: true %>
+            <%= phone.read_only :confirm_required, value: true %>
           <% end %>
 
 

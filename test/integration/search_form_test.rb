@@ -13,7 +13,7 @@ class SearchFormTest < ActionDispatch::IntegrationTest
 
     click_button 'Найти', match: :first
 
-    path = '/user/products/new?catalog_number=1&product_id=&return_path=%252F&utf8=%25E2%259C%2593'
+    path = '/user/products/new?catalog_number=1&product_id=&return_path=%2F&utf8=%E2%9C%93'
 
     assert has_text? 'Вы так же можете попробовать посмотреть'
 
@@ -36,7 +36,7 @@ class SearchFormTest < ActionDispatch::IntegrationTest
 
     sleep 1
 
-    path = '/admin/users/128399616/products/809317025/edit?catalog_number=1&product_id=&return_path=%252Fadmin%252Fproducts%252Fstatus%252Fall%253F&utf8=%25E2%259C%2593'
+    path = '/admin/users/128399616/products/809317025/edit?catalog_number=1&product_id=&return_path=%2Fadmin%2Fproducts%2Fstatus%2Fall%3F&utf8=%E2%9C%93'
 
     assert has_text?('Вы так же можете попробовать посмотреть')
 
@@ -62,7 +62,7 @@ class SearchFormTest < ActionDispatch::IntegrationTest
     assert has_text? 'Вы так же можете попробовать посмотреть'
 
     uri = URI.parse(current_url)
-    assert_equal "/user/products/new?catalog_number=2&product_id=#{product.id}&return_path=%252Fuser%252Fproducts%252Fstatus%252Fall%253Fprimary_key%253D44%2526sort_column%253Dcached_brand%2526sort_direction%253Dasc&utf8=%25E2%259C%2593", "#{uri.path}?#{uri.query}"
+    assert_equal "/user/products/new?catalog_number=2&product_id=#{product.id}&return_path=%2Fuser%2Fproducts%2Fstatus%2Fall%3Fprimary_key%3D44%26sort_column%3Dcached_brand%26sort_direction%3Dasc&utf8=%E2%9C%93", "#{uri.path}?#{uri.query}"
 
   end
 

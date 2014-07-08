@@ -52,7 +52,10 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def standard_recreate
-    hidden_field :hidden_recreate
+    #hidden_field :hidden_recreate, value: '1'
+    label = label(:hidden_recreate)
+    input = text_field(:hidden_recreate, value: '1')
+    @template.content_tag(:div, label + @template.tag(:br) + input, style: 'margin: 5px 0; display: none')
   end
 
   def hint method, options
@@ -174,7 +177,7 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
     res = @template.capture(&block)
     @template.content_tag :div, class: "nested-fields" do
       #@template.concat block.call
-      res + standard_recreate
+      res
     end
   end
 

@@ -1,10 +1,8 @@
 # encoding: utf-8
 #
 require 'test_helper'
-require 'controllers/attributes/registers_attributes'
 
 class RegistersControllerTest < ActionController::TestCase
-  include RegistersAttributes
 
   test 'Зарегистрироваться может только пользователь с ролью guest' do
     skip
@@ -35,7 +33,27 @@ class RegistersControllerTest < ActionController::TestCase
   end
 
   test 'Регистрация с помощью номера мобильного телефона. Поля не заполнены' do
-    post :update, empty_fields_with_phone
+    post :update, {
+      "with" => "phone",
+      "user" => {
+        "profiles_attributes" => {
+          "0" => {
+            "names_attributes" => {
+              "0" => {
+                "name" => "", "hidden_recreate" => "1"
+              }
+            },
+            "phones_attributes" => {
+              "0" => {
+                "value" => "", "hidden_recreate" => "1", "_mobile" => 'BAhU--d81a713a950620f2d5fe97f05fac06ce87b1729f', "_confirm_required" => "BAhU--3dde4daf45e25d949252ded4cbf2e2ea8f63770b"
+              }
+            }
+          }
+        },
+        "password"=>"",
+        "password_confirmation"=>""
+      }
+    }
 
     assert_equal(
       ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символа)"], 
@@ -60,7 +78,27 @@ class RegistersControllerTest < ActionController::TestCase
   end
 
   test 'Регистрация с помощью e-mail. Поля не заполнены' do
-    post :update, empty_fields_with_email
+    post :update, {
+      "with" => "email",
+      "user" => {
+        "profiles_attributes" => {
+          "0" => {
+            "names_attributes" => {
+              "0" => {
+                "name" => "", "hidden_recreate" => "1"
+              }
+            },
+            "emails_attributes" => {
+              "0" => {
+                "value" => "", "hidden_recreate" => "1", "_confirm_required" => "BAhU--3dde4daf45e25d949252ded4cbf2e2ea8f63770b"
+              }
+            }
+          }
+        },
+        "password"=>"",
+        "password_confirmation"=>""
+      }
+    }
 
     assert_equal(
       ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символа)"], 
@@ -84,29 +122,138 @@ class RegistersControllerTest < ActionController::TestCase
   end
 
   test 'Мобильный номер телефона указан в неверном формате' do
-    post :update, wrong_phone_format
+    post :update, {
+      "with" => "phone",
+        "user" => {
+        "profiles_attributes" => {
+          "0" => {
+            "names_attributes" => {
+              "0" => {
+                "name" => "", "hidden_recreate" => "1"
+              }
+            },
+            "phones_attributes" => {
+              "0" => {
+                "value" => "123", "hidden_recreate" => "1", "_mobile" => 'BAhU--d81a713a950620f2d5fe97f05fac06ce87b1729f', "_confirm_required" => "BAhU--3dde4daf45e25d949252ded4cbf2e2ea8f63770b"
+              }
+            }
+          }
+        },
+        "password"=>"",
+        "password_confirmation"=>""
+      }
+    }
     assert_equal(["имеет неверное значение"], assigns(:user).errors["profiles.phones.value"])
 
   end
 
   test 'E-mail указан в неверном формате' do
-    post :update, wrong_email_format
+    post :update, {
+      "with" => "email",
+      "user" => {
+        "profiles_attributes" => {
+          "0" => {
+            "names_attributes" => {
+              "0" => {
+                "name" => "", "hidden_recreate" => "1"
+              }
+            },
+            "emails_attributes" => {
+              "0" => {
+                "value" => "123", "hidden_recreate" => "1", "_confirm_required" => "BAhU--3dde4daf45e25d949252ded4cbf2e2ea8f63770b"
+              }
+            }
+          }
+        },
+        "password"=>"",
+        "password_confirmation"=>""
+      }
+    }
     assert_equal(["имеет неверное значение"], assigns(:user).errors["profiles.emails.value"])
   end
 
   test 'Нельзя использовать уже подтвержденный телефон' do
-    post :update, already_confirmed_phone
+    post :update, {
+      "with" => "phone",
+      "user" =>
+        {
+          "profiles_attributes" =>
+            {
+              "0" =>
+                {
+                  "names_attributes" => {
+                    "0" => {
+                      "name" => "Otto", "hidden_recreate" => "1"
+                    }
+                  },
+                  "phones_attributes" => {
+                    "0" => {
+                      "value" => "+7 (555) 555-55-55", "hidden_recreate" => "1", "_mobile" => 'BAhU--d81a713a950620f2d5fe97f05fac06ce87b1729f', "_confirm_required" => "BAhU--3dde4daf45e25d949252ded4cbf2e2ea8f63770b"
+                    }
+                  }
+                }
+            },
+          "password" => "555555",
+          "password_confirmation" => "555555"
+        }
+    }
     assert_equal ["Такой номер телефона уже занят."], assigns(:user).errors['profiles.phones.value']
 
   end
 
   test 'Нельзя использоватеь уже подтвержденный e-mail' do
-    post :update, already_confirmed_email
+    post :update, {
+      "with" => "email",
+      "user" =>
+        {
+          "profiles_attributes"=>
+            {
+              "0"=>
+                {
+                  "names_attributes" => {
+                    "0" => {
+                      "name" => "Otto", "hidden_recreate" => "1"
+                    }
+                  },
+                  "emails_attributes" => {
+                    "0" => {
+                      "value" => "fake@example.com", "hidden_recreate"=>"1", "_confirm_required" => "BAhU--3dde4daf45e25d949252ded4cbf2e2ea8f63770b"
+                    }
+                  }
+                }
+            },
+          "password"=>"555555",
+          "password_confirmation"=>"555555"
+        }
+    }
     assert_equal ["Такой e-mail адрес уже занят."], assigns(:user).errors['profiles.emails.value']
   end
 
   test 'Можно использовать не подтвержденный e-mail' do
-    post :update, not_confirmed_email
+    post :update, {
+      "with" => "email",
+      "user" =>
+        {
+          "profiles_attributes"=>
+            {
+              "0"=>
+                {
+                  "names_attributes" => {
+                    "0" => {
+                      "name" => "Otto", "hidden_recreate"=>"1"
+                    }
+                  },
+                  "emails_attributes" => {
+                    "0" => {
+                      "value" => "foo@example.com", "hidden_recreate"=>"1", "_confirm_required" => "BAhU--3dde4daf45e25d949252ded4cbf2e2ea8f63770b"
+                    }
+                  }
+                }
+            },
+          "password"=>"555555",
+          "password_confirmation"=>"555555"
+        }
+    }
 
     assert assigns(:user).valid?
 
@@ -144,7 +291,30 @@ class RegistersControllerTest < ActionController::TestCase
   end
 
   test 'Можно использовать не подтвержденный телефон' do
-    post :update, not_confirmed_phone
+    post :update, {
+      "with" => "phone",
+      "user" =>
+        {
+          "profiles_attributes" =>
+            {
+              "0" =>
+                {
+                  "names_attributes" => {
+                    "0" => {
+                      "name" => "Otto", "hidden_recreate" => "1"
+                    }
+                  },
+                  "phones_attributes" => {
+                    "0" => {
+                      "value" => "+7 (111) 111-11-11", "hidden_recreate" => "1", "_mobile" => 'BAhU--d81a713a950620f2d5fe97f05fac06ce87b1729f', "_confirm_required" => "BAhU--3dde4daf45e25d949252ded4cbf2e2ea8f63770b"
+                    }
+                  }
+                }
+            },
+          "password" => "1111111111",
+          "password_confirmation" => "1111111111"
+        }
+    }
 
     assert assigns(:user).valid?
 

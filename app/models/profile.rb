@@ -5,6 +5,8 @@ class Profile < ActiveRecord::Base
   include BelongsToSomebody
   include Selectable
   #include ConfirmRequired
+  
+  read_only :creation_reason
 
   #has_many :payments, inverse_of: :profile
 
@@ -14,15 +16,17 @@ class Profile < ActiveRecord::Base
 
   FIELDS =  ['names', 'phones', 'emails', 'passports']
 
-  FIELDS.each do |field|
-    instance_eval <<-CODE, __FILE__, __LINE__ + 1
-      #serialize :cached_#{field}, JSON
-      has_many :#{field}, inverse_of: :profile, dependent: :destroy
-      accepts_nested_attributes_for :#{field},
-        :allow_destroy => true,
-        :reject_if => :all_blank
-    CODE
-  end
+  has_many :names, inverse_of: :profile, dependent: :destroy
+  accepts_nested_attributes_for :names, allow_destroy: true
+
+  has_many :phones, inverse_of: :profile, dependent: :destroy
+  accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: proc { |attributes| attributes['value'].blank? && !attributes['hidden_recreate'] }
+
+  has_many :emails, inverse_of: :profile, dependent: :destroy
+  accepts_nested_attributes_for :emails, allow_destroy: true, reject_if: proc { |attributes| attributes['value'].blank? && !attributes['hidden_recreate'] }
+
+  has_many :passports, inverse_of: :profile, dependent: :destroy
+  accepts_nested_attributes_for :passports, allow_destroy: true
 
 
   before_validation do
@@ -34,23 +38,12 @@ class Profile < ActiveRecord::Base
     end
   end
 
-  # Если оба (email и phone пустые, в процессе обращения в службу поддержки)
   after_validation do
-    if ['chat'].include? code_1
-      email = emails.first
-      phone = phones.first
-      if (phone.try(:value).blank? || phone.try(:marked_for_destruction?)) && (email.try(:value).blank? || email.try(:marked_for_destruction?))
-        if email
-          email.errors.add(:value, '')
-        else
-          emails.new.errors.add(:value, '')
-        end
-        if phone
-          phone.errors.add(:value, '')
-        else
-          phones.new.errors.add(:value, '')
-        end
-        self.errors.add(:base, 'укажите телефон и/или email')
+    if creation_reason == 'talk' && errors.any?
+      email = emails.first || emails.new
+      phone = phones.first || phones.new
+      if phone.try(:value).blank? && email.try(:value).blank?
+        errors.add(:base, 'укажите телефон и/или email')
       end
     end
   end
@@ -116,8 +109,5 @@ class Profile < ActiveRecord::Base
       false
     end
   end
-
-
-  include RenameMeConcern
 
 end

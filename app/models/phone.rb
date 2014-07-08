@@ -10,9 +10,8 @@ class Phone < ActiveRecord::Base
   include Transactionable
   include Selectable
 
-  def self.mobile
-    where(mobile: true)
-  end
+  read_only :creation_reason
+  read_only :mobile
 
   belongs_to :profile, :inverse_of => :phones
 
@@ -35,7 +34,7 @@ class Phone < ActiveRecord::Base
 
   scope :same, ->(value){ where("regexp_replace(value, '[^0-9]', '', 'g') = ?", value.gsub(/[^0-9]/, '')) if value }
 
-  def value_really_changed
+  def value_really_changed?
     value_changed? && ( value_was.to_s.gsub(/[^0-9]/, '') != value.to_s.gsub(/[^0-9]/, '') )
   end
 
@@ -49,15 +48,15 @@ class Phone < ActiveRecord::Base
   end
 
   before_save do
-    if value_really_changed && confirm_required || force_confirm
+    if force_confirm
       # Телефон становится не подтвержденным.
       reset_confirmed
     end
   end
 
   after_save do
-    if value_really_changed && confirm_required || force_confirm
-      # Отправляем уведолмение
+    if force_confirm
+      # Отправляем уведомление
       ConfirmMailer.phone(self).deliver
     end
   end
@@ -68,25 +67,6 @@ class Phone < ActiveRecord::Base
     else
       value
     end
-  end
-
-  include RenameMeConcernTwo
-  include DestroyIfEmpty
-
-  before_validation if: -> { ['register', 'chat'].include?(code_1) && !marked_for_destruction? }  do
-    self.mobile = true
-  end
-
-  before_validation if: -> { ['register', 'chat', 'frontend'].include?(code_1) && mobile } do
-    self.confirm_required = true
-  end
-
-  before_validation if: -> {['backend'].include?(code_1) && !confirmed && mobile } do
-    self.confirm_required = true
-  end
-
-  before_validation if: -> { new_record? && !confirmed && mobile } do
-    force_confirm!
   end
 
 end

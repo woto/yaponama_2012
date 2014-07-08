@@ -19,7 +19,7 @@ class EmailTest < ActiveSupport::TestCase
     assert_equal 1, ActionMailer::Base.deliveries.size
   end
 
-  test 'Если сменили подтвержденный email адрес без флага confirmation_needed_if_changed, то его статус должен сохранить прежнее состояние и письмо не должно быть отправлено с запросом на подтверждение (т.е. адрес изменил менеджер)' do
+  test 'Если сменили подтвержденный email адрес без флага confirm_required, то его статус должен сохранить прежнее состояние и письмо не должно быть отправлено с запросом на подтверждение (т.е. адрес изменил менеджер)' do
     ActionMailer::Base.deliveries.clear
     ea = emails(:mark)
     ea.value = 'bar@example.com'

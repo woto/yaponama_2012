@@ -5,8 +5,6 @@ class TalksController < ApplicationController
   # POST /talks
   # POST /talks.json
   def create
-    @talk.code_1 = 'chat'
-
     respond_to do |format|
       if @talk.save
         format.js { redirect_to action: :index, format: :js }
@@ -38,10 +36,6 @@ class TalksController < ApplicationController
     # TODO черновой вариант
     if @talk.respond_to?(:creator) && !(@talk.persisted? && @talk.is_a?(Talk))
       @talk.creator = current_user
-    end
-
-    if @talk.respond_to? :code_1=
-      @talk.code_1 = 'frontend'
     end
   end
 

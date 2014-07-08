@@ -38,3 +38,6 @@
 <% unless ['deliveries'].include? @postal_address_type %>
   <%= render :partial => 'profileables/forms/shared/notes', :locals => {:f => f} %>
 <% end %>
+
+<%= f.read_only :creation_reason, value: 'profile' %>
+

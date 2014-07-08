@@ -4,10 +4,6 @@ require 'test_helper'
 
 class TimeTest < ActionDispatch::IntegrationTest
 
-  def setup
-    Capybara.reset!
-  end
-
   test 'Если у пользователя вообще пустой cached_russian_time_zone_auto_id (Например новый пользователь)' do
     get '/'
     assert_select '#anton-time', :text => '2012-04-12 07:45:38 +0400'
@@ -26,7 +22,7 @@ class TimeTest < ActionDispatch::IntegrationTest
   end
 
   test 'Если у пользователя выставлено use_auto_russian_time_zone в true, и значение cached_russian_time_zone_auto_id верное' do
-    cookies['auth_token'] = somebodies(:stan).auth_token
+    cookies['auth_token'] = somebodies(:max).auth_token
     get '/'
     assert_select '#anton-time', :text => '2012-04-12 12:45:38 +0900'
   end

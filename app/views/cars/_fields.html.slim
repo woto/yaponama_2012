@@ -50,3 +50,6 @@ p.text-muted
       = f.twbs_text_field :car_number
       = render :partial => 'profileables/forms/shared/notes', :locals => {:f => f}
   </div>
+
+
+= f.read_only :creation_reason, value: 'profile'

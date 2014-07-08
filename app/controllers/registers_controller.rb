@@ -39,8 +39,8 @@ class RegistersController < ApplicationController
       :profiles_attributes => [ 
         :id,
         { :names_attributes => [:id, :name, :hidden_recreate] },
-        { :emails_attributes => [:id, :value, :hidden_recreate] },
-        { :phones_attributes => [:id, :value, :hidden_recreate] },
+        { :emails_attributes => [:id, :value, :hidden_recreate, :_confirm_required] },
+        { :phones_attributes => [:id, :value, :hidden_recreate, :_mobile, :_confirm_required] },
       ] },
       :password,
       :password_confirmation

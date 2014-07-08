@@ -10,6 +10,8 @@ class Company < ActiveRecord::Base
   include CachedActualAddress
   include RenameMeConcernTest
 
+  read_only :creation_reason
+
   #include ProfileConfirmRequired
 
   attr_accessor :legal_address_type, :actual_address_type
@@ -38,9 +40,6 @@ class Company < ActiveRecord::Base
     # и выбрали использовать такой же в другом поле
     if legal_address
       legal_address.somebody = somebody
-      if legal_address.new_record?
-        legal_address.code_1 = self.code_1
-      end
       if legal_address.save
         if actual_address_type == 'old' && self.old_actual_address_id == -1
           self.actual_address = legal_address
@@ -51,9 +50,6 @@ class Company < ActiveRecord::Base
 
     if actual_address
       actual_address.somebody = somebody
-      if actual_address.new_record?
-        actual_address.code_1 = self.code_1
-      end
       if actual_address.save
         if legal_address_type == 'old' && self.old_legal_address_id == -1
           self.legal_address = actual_address
@@ -89,7 +85,5 @@ class Company < ActiveRecord::Base
 
   end
 
-
-  include RenameMeConcern
 
 end

@@ -20,6 +20,7 @@
         <%- if params[:with] == 'email' %>
           <%= pr.fields_for :emails, @email do |e| %>
             <%= e.twbs_text_field :value, placeholder: "Адрес электронной почты, напр. pavel@mail.ru", label: 'E-mail', asterisk: true, hint: false %>
+            <%= e.read_only :confirm_required, value: true %>
             <%= e.standard_recreate %>
           <% end %>
         <% end %>
@@ -28,6 +29,8 @@
         <%- if params[:with] == 'phone' %>
           <%= pr.fields_for :phones, @phone do |p| %>
             <%= p.twbs_text_field :value, placeholder: "Номер мобильного телефона", rel: 'mobile-mask-on', label: 'Мобильный телефон', asterisk: true, hint: false %>
+            <%= p.read_only :mobile, value: true %>
+            <%= p.read_only :confirm_required, value: true %>
             <%= p.standard_recreate %>
           <% end %>
         <% end %>

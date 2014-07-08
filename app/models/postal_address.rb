@@ -6,6 +6,8 @@ class PostalAddress < ActiveRecord::Base
   include Transactionable
   include Selectable
 
+  read_only :creation_reason
+
   has_many :orders_where_is_postal_address, :class_name => "Order", :foreign_key => :postal_address_id, :inverse_of => :postal_address
 
   has_many :companies_with_this_legal_address, :class_name => "Company", :foreign_key => "legal_address_id"
@@ -26,8 +28,6 @@ class PostalAddress < ActiveRecord::Base
     res << room
     res.reject(&:blank?).join(', ')
   end
-
-  include RenameMeConcern
 
   before_save :update_all_cached_postal_addresses
 

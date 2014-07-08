@@ -4,6 +4,8 @@
   <%= f.twbs_text_field :name, asterisk: true %>
   <%= f.twbs_text_field :patronymic %>
 
+  <%= f.read_only :creation_reason, value: 'profile' %>
+
   <%# render :partial => 'profileables/forms/shared/notes', :locals => {:f => f} %>
 
 <% end %>

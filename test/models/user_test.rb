@@ -14,7 +14,7 @@ class UserTest < ActiveSupport::TestCase
 
   test 'При изменении профиля, который выставлен в качестве основного должны измениться закешированные поля профиля cached_names, cached_phones и т.д. и закешированное значение главного профиля пользователя cached_profile' do
     u = somebodies(:stan)
-    profile = u.profiles.new(code_1: 'frontend')
+    profile = u.profiles.new
     name = profile.names.new
     name.name = 'Стэн'
     ph = profile.phones.new

@@ -2,18 +2,21 @@ first_admin:
   value: foo@example.com
   profile: first_admin
   somebody: first_admin
+  confirmed: false
   creation_reason: fixtures
 
 first_user:
   value: first_user_email@example.com
   profile: first_user
   somebody: first_user
+  confirmed: false
   creation_reason: fixtures
 
 otto:
   value: foo@example.com
   profile: otto
   somebody: otto
+  confirmed: false
   creation_reason: fixtures
   confirmation_token: 5555
 
@@ -21,8 +24,8 @@ otto2:
   value: fake@example.com
   profile: otto
   somebody: otto
-  creation_reason: fixtures
   confirmed: true
+  creation_reason: fixtures
 
 mark:
   value: mark@example.com

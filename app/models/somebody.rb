@@ -29,13 +29,6 @@ class Somebody < ActiveRecord::Base
 
   has_many :stats, :dependent => :destroy, inverse_of: :somebody, after_add: :save_first_referrer
 
-  # Особый случай с talks (Очередность проаверки условий важна! 
-  # Потратил 4 часа на то чтобы поменять местами условия if)
-  before_validation if: -> {code_1 == 'chat' && profile} do
-    profile.code_1 = code_1 
-  end
-
-
   def save_first_referrer(stat)
     if stats.length == 1
       self.first_referrer = stat.referrer

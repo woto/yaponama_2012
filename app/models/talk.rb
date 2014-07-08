@@ -12,10 +12,6 @@ class Talk < ActiveRecord::Base
 
   mount_uploader :file, FileUploader
 
-  before_validation do
-    somebody.code_1 = code_1
-  end
-
   validates :text, presence: true, if: -> { file.blank? }
   validates :file, presence: true, if: -> { text.blank? }
 
@@ -36,7 +32,5 @@ class Talk < ActiveRecord::Base
     end
 
   end
-
-  include RenameMeConcern
 
 end

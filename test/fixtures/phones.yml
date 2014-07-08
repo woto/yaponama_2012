@@ -4,6 +4,7 @@ first_admin:
   confirmation_token: 1111
   profile: first_admin
   somebody: first_admin
+  confirmed: false
   creation_reason: fixtures
 
 first_user:
@@ -11,6 +12,7 @@ first_user:
   mobile: true
   profile: first_user
   somebody: first_user
+  confirmed: false
   creation_reason: fixtures
 
 stan:
@@ -18,6 +20,7 @@ stan:
   mobile: true
   profile: stan
   somebody: stan
+  confirmed: false
   creation_reason: fixtures
 
 fry:
@@ -25,6 +28,7 @@ fry:
   mobile: true
   profile: fry
   somebody: fry
+  confirmed: false
   creation_reason: fixtures
 
 otto:
@@ -33,24 +37,25 @@ otto:
   confirmation_token: 5555
   profile: otto
   somebody: otto
+  confirmed: false
   creation_reason: fixtures
 
 otto2:
   value: +7 (555) 555-55-55
   mobile: true
   confirmation_token: 5555
-  confirmed: true
   profile: otto
   somebody: otto
+  confirmed: true
   creation_reason: fixtures
 
 otto3:
   value: 8-888-888-88-88
   mobile: false
-  confirmed: true
   confirmation_token: 8888
   profile: otto
   somebody: otto
+  confirmed: true
   creation_reason: fixtures
 
 otto4:
@@ -58,85 +63,86 @@ otto4:
   mobile: false
   profile: otto
   somebody: otto
+  confirmed: false
   creation_reason: fixtures
 
 mark:
   value: +7 (444) 444-44-44
   mobile: true
   confirmation_token: 4444
-  confirmed: true
   profile: mark
   somebody: mark
+  confirmed: true
   creation_reason: fixtures
 
 mike:
   value: +7 (777) 777-77-77
   mobile: true
-  confirmed: true
   profile: mike
   somebody: mike
+  confirmed: true
   creation_reason: fixtures
 
 mile_main:
   somebody: mile
+  confirmed: false
   profile: mile_main
   value: 1
   mobile : false
-  confirmed: false
   creation_reason: fixtures
 
 mile_not_main:
   somebody: mile
+  confirmed: false
   profile: mile_not_main
   value: 2
   mobile : false
-  confirmed: false
   creation_reason: fixtures
 
 exist:
   somebody: exist
+  confirmed: false
   profile: exist
   value: 22-66-19
   mobile : false
-  confirmed: false
   creation_reason: fixtures
 
 anton_first:
   somebody: anton
+  confirmed: true
   profile: anton
   value: +7 (112) 233-44-55
   mobile : true
-  confirmed: true
   creation_reason: fixtures
 
 anton_second:
   somebody: anton
+  confirmed: false
   profile: anton
   value: +7 (554) 433-22-11
   mobile : true
-  confirmed: false
   creation_reason: fixtures
 
 ivan:
   somebody: ivan
+  confirmed: true
   profile: ivan
   value: +7 (999) 999-99-99
   mobile : true
-  confirmed: true
   creation_reason: fixtures
 
 petr:
   somebody: petr
+  confirmed: false
   profile: petr
   value: +7 (222) 222-22-22
   mobile : true
-  confirmed: false
   creation_reason: fixtures
 
 sidor:
   somebody: sidor
+  confirmed: true
   profile: sidor
   value: +7 (000) 000-00-00
   mobile : true
-  confirmed: true
   creation_reason: fixtures

@@ -25,5 +25,7 @@
   </div>
 
 = f.twbs_hidden_field :somebody_id
+= f.read_only :creation_reason, value: 'profile'
+
 
 = render :partial => 'profileables/forms/shared/notes', :locals => {:f => f}

@@ -21,6 +21,7 @@ first_admin:
   notes: 
   notes_invisible: 
   order_rule: all
+  logout_from_other_places: false
   profile: first_admin
   cached_profile: '{"names":[{"surname":"Корнев","name":"Руслан","patronymic":"Михайлович"}],"phones":[{"value":"+7 (111) 111-11-11"}],"emails":[{"value":"foo@example.com"}],"passports":[{"seriya":"1","nomer":"1","mesto_rozhdeniya":"1"}]}'
   place: first
@@ -258,3 +259,19 @@ sidor:
   logout_from_other_places: false
   total_talks: 3
   unread_talks: 3
+
+max:
+  type: User
+  creator: otto
+  auth_token: EeIkysZzwE0PX98ZvKccXO
+  creation_reason: fixtures
+  role: guest
+  discount: 0
+  prepayment: 100
+  order_rule: all
+  logout_from_other_places: true
+  # password: maxmax
+  password_digest: "$2a$10$mbYYVLe03awy7Oik4LlWs.md9.qCIaL6cQ/c2dw9gH95X7SjSG6xW"
+  cached_russian_time_zone_auto_id: 9
+  russian_time_zone_manual_id: 7
+  use_auto_russian_time_zone: true

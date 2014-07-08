@@ -8,6 +8,8 @@ class Passport < ActiveRecord::Base
   include Transactionable
   include Selectable
 
+  read_only :creation_reason
+
   belongs_to :profile, :inverse_of => :passports
 
   validates :gender, :seriya, :nomer, :passport_vidan, :data_vidachi, :kod_podrazdeleniya, :data_rozhdeniya, :mesto_rozhdeniya, :presence => true
@@ -27,7 +29,5 @@ class Passport < ActiveRecord::Base
     </ul>
     CODE
   end
-
-  include RenameMeConcernTwo
 
 end
