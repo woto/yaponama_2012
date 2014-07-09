@@ -88,6 +88,14 @@
 // Кнопка службы поддержки
 #talk-show {
   display: block;
+  top: 50%;
+  margin-top: -75px;
+  position: fixed;
+  cursor: pointer;
+  z-index: 100;
+  right: -273px;
+  width: 300px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2) !important;
 }
 
 // ############################
@@ -110,14 +118,7 @@
 
 #talk-show {
   display:none;
-  top: 50%;
-  margin-top: -75px;
-  position: fixed;
-  cursor: pointer;
-  z-index: 100;
   right: -300px;
-  width: 300px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, .2) !important;
   animation: talk_show 0.4s;
   animation-delay: 0.4s;
   animation-fill-mode: forwards;
