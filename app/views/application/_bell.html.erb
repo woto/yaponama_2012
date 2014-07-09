@@ -1,0 +1,28 @@
+<% if current_user.seller? %>
+  <% somebodies_without_answer = Somebody.select("somebodies.cached_profile").includes(:talks).where(talks: { read: false } ).order(:updated_at) %>
+  <% to_all = Set.new %>
+  <% somebodies_without_answer.each do |somebody| %>
+    <% to_all.add somebody %>
+  <% end %>
+  <% bell_icon = to_all.any? ? 'bell' : 'bell-o' %>
+  <%= dropdown do |dd| %>
+    <%= dd.toggle do %>
+      <%= icon bell_icon, id: 'bell' %>
+      <span class="hidden-sm">
+        Чат
+        <span id="unread-talks" class="badge"><% count = to_all.count %><%= count if count > 0 %></span>
+      </span>
+    <% end %>
+    <%= dd.menu do %>
+      <% if to_all.any? %>
+        <% to_all.each do |somebody| %>
+          <li> <%= link_to somebody.to_label, [:admin, somebody] %> </li>
+        <% end %>
+      <% else %>
+        <li>
+          <a class="text-muted" href="#">Не прочитанных сообщений нет</a>
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
