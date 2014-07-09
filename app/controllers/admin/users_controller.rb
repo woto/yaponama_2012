@@ -23,7 +23,7 @@ class Admin::UsersController < UsersController
   end
 
   def create_resource
-    @resource = @resource_class.new(SiteConfig.default_somebody_attributes.merge( resource_params || {} ))
+    @resource = @resource_class.new(CONFIG.user['default'].merge( resource_params || {} ))
     @resource.build_account
   end
 

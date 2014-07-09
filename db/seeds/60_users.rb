@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 user = User.new
-user.assign_attributes( SiteConfig.default_somebody_attributes )
+user.assign_attributes( CONFIG.user['default'] )
 user.role = "admin"
 user.password = '1111111111'
 user.code_1 = 'seed'

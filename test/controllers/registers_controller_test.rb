@@ -323,7 +323,7 @@ class RegistersControllerTest < ActionController::TestCase
     delivery = ActionMailer::Base.deliveries.last
 
     # Адресат письма
-    assert_equal [SiteConfig.avisosms_email_address], delivery.to
+    assert_equal ['avisosms@fake.ru'], delivery.to
 
     # Заголовок письма
     assert_equal "+71111111111", delivery.subject

@@ -1,0 +1,17 @@
+defaults: &defaults
+  counter_yandex: <!-- yandex counter -->
+  counter_mail: <!-- mail counter -->
+  counter_rambler: <!-- rambler counter -->
+  counter_google: <!-- google counter -->
+  counter_openstat: <!-- openstat counter -->
+  counter_liveinternet: <!-- liveinternet counter -->
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+

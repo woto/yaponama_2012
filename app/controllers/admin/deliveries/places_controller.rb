@@ -13,9 +13,9 @@ class Admin::Deliveries::PlacesController < Deliveries::PlacesController
 
       @resource.variants.new
 
-      @resource.zoom = SiteConfig.initial_map_zoom
-      @resource.lat = SiteConfig.initial_map_lat
-      @resource.lng = SiteConfig.initial_map_lng
+      @resource.zoom = CONFIG.map['initial_zoom']
+      @resource.lat = CONFIG.map['initial_lat']
+      @resource.lng = CONFIG.map['initial_lng']
       @resource.z_index = 100
 
       ['active', 'inactive'].each do |style|

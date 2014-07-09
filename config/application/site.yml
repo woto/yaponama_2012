@@ -1,0 +1,14 @@
+defaults: &defaults
+  host: '192.168.0.254'
+  port: '3002'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  host: 'avtorif.ru'
+  port: '80'

@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
-Sitemap: http://www.<%= SiteConfig.site_address %>/sitemap.xml.gz
-Host: www.<%= SiteConfig.site_address %>
+Sitemap: http://www.<%= "#{CONFIG.site['host']}" %>/sitemap.xml.gz
+Host: www.<%= "#{CONFIG.site['host']}" %>

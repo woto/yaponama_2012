@@ -1,0 +1,15 @@
+defaults: &defaults
+  default:
+   prepayment: 20
+   discount: 0
+   order_rule: 'all'
+   role: 'guest'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

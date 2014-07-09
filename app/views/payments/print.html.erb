@@ -26,7 +26,7 @@ body {font-size: 10pt;}
 				<td align="right"><small><i>Форма № ПД-4</i></small></td>
 			</tr>
 			<tr>
-        <td style="border-bottom:1pt solid #000000;">&nbsp;<%= SiteConfig.checkout_recipient %></td>
+        <td style="border-bottom:1pt solid #000000;">&nbsp;<%= CONFIG.checkout['recipient'] %></td>
 			</tr>
 			<tr>
 				<td align="center"><small>(наименование получателя платежа)</small></td>
@@ -35,9 +35,9 @@ body {font-size: 10pt;}
 
 		<table border="0" cellspacing="0" cellpadding="0" style="width:122mm; margin-top:3pt;">
 			<tr>
-				<td style="width:37mm; border-bottom:1pt solid #000000;">&nbsp;<%= SiteConfig.checkout_inn %></td>
+				<td style="width:37mm; border-bottom:1pt solid #000000;">&nbsp;<%= CONFIG.checkout['inn'] %></td>
 				<td style="width:9mm;">&nbsp;</td>
-				<td style="border-bottom:1pt solid #000000;">&nbsp;<%= SiteConfig.checkout_account %></td>
+				<td style="border-bottom:1pt solid #000000;">&nbsp;<%= CONFIG.checkout['account'] %></td>
 			</tr>
 			<tr>
 				<td align="center"><small>(ИНН получателя платежа)</small></td>
@@ -48,9 +48,9 @@ body {font-size: 10pt;}
 		<table border="0" cellspacing="0" cellpadding="0" style="width:122mm; margin-top:3pt;">
 			<tr>
 				<td>в&nbsp;</td>
-				<td style="width:73mm; border-bottom:1pt solid #000000;">&nbsp;<%= SiteConfig.checkout_bank %></td>
+				<td style="width:73mm; border-bottom:1pt solid #000000;">&nbsp;<%= CONFIG.checkout['bank'] %></td>
 				<td align="right">БИК&nbsp;&nbsp;</td>
-				<td style="width:33mm; border-bottom:1pt solid #000000;">&nbsp;<%= SiteConfig.checkout_bik %></td>
+				<td style="width:33mm; border-bottom:1pt solid #000000;">&nbsp;<%= CONFIG.checkout['bik'] %></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -62,7 +62,7 @@ body {font-size: 10pt;}
 		<table border="0" cellspacing="0" cellpadding="0" style="width:122mm; margin-top:3pt;">
 			<tr>
 				<td width="1%" nowrap>Номер кор./сч. банка получателя платежа&nbsp;&nbsp;</td>
-				<td width="100%" style="border-bottom:1pt solid #000000;">&nbsp;<%= SiteConfig.checkout_correspondent %></td>
+				<td width="100%" style="border-bottom:1pt solid #000000;">&nbsp;<%= CONFIG.checkout['correspondent'] %></td>
 			</tr>
 		</table>
 		<table border="0" cellspacing="0" cellpadding="0" style="width:122mm; margin-top:3pt;">
@@ -129,7 +129,7 @@ body {font-size: 10pt;}
 				<td align="right"><small><i>Форма № ПД-4</i></small></td>
 			</tr>
 			<tr>
-				<td style="border-bottom:1pt solid #000000;">&nbsp;<%= SiteConfig.checkout_recipient %></td>
+				<td style="border-bottom:1pt solid #000000;">&nbsp;<%= CONFIG.checkout['recipient'] %></td>
 			</tr>
 			<tr>
 				<td align="center"><small>(наименование получателя платежа)</small></td>
@@ -138,9 +138,9 @@ body {font-size: 10pt;}
 
 		<table border="0" cellspacing="0" cellpadding="0" style="width:122mm; margin-top:3pt;">
 			<tr>
-				<td style="width:37mm; border-bottom:1pt solid #000000;">&nbsp;<%= SiteConfig.checkout_inn %></td>
+				<td style="width:37mm; border-bottom:1pt solid #000000;">&nbsp;<%= CONFIG.checkout['inn'] %></td>
 				<td style="width:9mm;">&nbsp;</td>
-				<td style="border-bottom:1pt solid #000000;">&nbsp;<%= SiteConfig.checkout_account %></td>
+				<td style="border-bottom:1pt solid #000000;">&nbsp;<%= CONFIG.checkout['account'] %></td>
 			</tr>
 			<tr>
 				<td align="center"><small>(ИНН получателя платежа)</small></td>
@@ -151,9 +151,9 @@ body {font-size: 10pt;}
 		<table border="0" cellspacing="0" cellpadding="0" style="width:122mm; margin-top:3pt;">
 			<tr>
 				<td>в&nbsp;</td>
-				<td style="width:73mm; border-bottom:1pt solid #000000;">&nbsp;<%= SiteConfig.checkout_bank %></td>
+				<td style="width:73mm; border-bottom:1pt solid #000000;">&nbsp;<%= CONFIG.checkout['bank'] %></td>
 				<td align="right">БИК&nbsp;&nbsp;</td>
-				<td style="width:33mm; border-bottom:1pt solid #000000;">&nbsp;<%= SiteConfig.checkout_bik %></td>
+				<td style="width:33mm; border-bottom:1pt solid #000000;">&nbsp;<%= CONFIG.checkout['bik'] %></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -165,7 +165,7 @@ body {font-size: 10pt;}
 		<table border="0" cellspacing="0" cellpadding="0" style="width:122mm; margin-top:3pt;">
 			<tr>
 				<td width="1%" nowrap>Номер кор./сч. банка получателя платежа&nbsp;&nbsp;</td>
-				<td width="100%" style="border-bottom:1pt solid #000000;">&nbsp;<%= SiteConfig.checkout_correspondent %></td>
+				<td width="100%" style="border-bottom:1pt solid #000000;">&nbsp;<%= CONFIG.checkout['correspondent'] %></td>
 			</tr>
 		</table>
 		<table border="0" cellspacing="0" cellpadding="0" style="width:122mm; margin-top:3pt;">

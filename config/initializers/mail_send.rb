@@ -1,13 +1,13 @@
-Yaponama2012::Application.config.action_mailer.default_url_options = { :host => ::SiteConfig.site_full_address }
-ActionMailer::Base.default :from => ::SiteConfig.from_email_address
+Yaponama2012::Application.config.action_mailer.default_url_options = { :host => ::CONFIG.site['host'] }
+ActionMailer::Base.default :from => ::CONFIG.mail['from']
 
-ActionMailer::Base.delivery_method = ::SiteConfig.mail_delivery_method.to_sym
+ActionMailer::Base.delivery_method = ::CONFIG.mail['delivery_method'].to_sym
 
 ActionMailer::Base.smtp_settings = {
-  address:              ::SiteConfig.smtp_address,
-  port:                 ::SiteConfig.smtp_port,
-  user_name:            ::SiteConfig.smtp_user_name,
-  password:             ::SiteConfig.smtp_password,
-  authentication:       ::SiteConfig.smtp_authentication,
-  enable_starttls_auto: ::SiteConfig.smtp_enable_starttls_auto
+  address:              ::CONFIG.mail['smtp_address'],
+  port:                 ::CONFIG.mail['smtp_port'],
+  user_name:            ::CONFIG.mail['smtp_user_name'],
+  password:             ::CONFIG.mail['smtp_password'],
+  authentication:       ::CONFIG.mail['smtp_authentication'],
+  enable_starttls_auto: ::CONFIG.mail['smtp_enable_starttls_auto']
 }

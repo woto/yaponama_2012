@@ -1,0 +1,19 @@
+defaults: &defaults
+  delivery_method:           'smtp'
+  from:                      'Отправитель <robot@example.com>'
+  smtp_address:              'smtp.example.com'
+  smtp_port:                 25
+  smtp_user_name:            'roboto@example.com'
+  smtp_password:             '123123'
+  smtp_authentication:       'plain'
+  smtp_enable_starttls_auto: false
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  delivery_method: 'test'
+
+production:
+  <<: *defaults

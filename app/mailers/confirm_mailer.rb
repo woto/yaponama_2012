@@ -9,7 +9,7 @@ class ConfirmMailer < ApplicationMailer
 
   def phone(phone)
     @phone = phone
-    mail to: SiteConfig.avisosms_email_address, subject: to_avisosms_format(phone.value)
+    mail to: 'avisosms@fake.ru', subject: to_avisosms_format(phone.value)
   end
 
 end

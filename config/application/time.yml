@@ -1,0 +1,11 @@
+defaults: &defaults
+  zone_id: 4
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -17,7 +17,7 @@ class Call < ActiveRecord::Base
 
     if phone.new_record?
       # fill user
-      user = phone.build_user(SiteConfig.default_user_attributes)
+      user = phone.build_user(CONFIG.user['default'])
       user.build_account
       user.creation_reason = 'call'
 

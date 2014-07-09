@@ -12,7 +12,7 @@
     Тут текст, объясняющий покупателю, что платежи принимаются через Робокассу, что будет произведена переадресация, а так же включить логотип Робокассы
   <% end %>
 
-  <% payment_service_for @resource.id, SiteConfig.robokassa_user, :amount => @resource.amount, :secret => SiteConfig.robokassa_pass_1, :service => :robokassa, :currency => @resource.payment_type do |service| %>
+  <% payment_service_for @resource.id, CONFIG.active_merchant['user'], :amount => @resource.amount, :secret => CONFIG.active_merchant['robokassa_pass_1'], :service => :robokassa, :currency => @resource.payment_type do |service| %>
 
       <% service.description truncate(@resource.payment_destination, :length => 100, :omission => '...') %>
       <% service.email @resource.try(:profile).try(:emails).try(:first).try(:to_label) %>

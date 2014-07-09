@@ -9,6 +9,6 @@ class BuyerNotifierMailer < ApplicationMailer
 
   def phone(talk, phone)
     @talk = talk
-    mail to: SiteConfig.avisosms_email_address, subject: to_avisosms_format(phone)
+    mail to: 'avisosms@fake.ru', subject: to_avisosms_format(phone)
   end
 end

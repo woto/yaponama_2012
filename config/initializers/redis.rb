@@ -1,1 +1,1 @@
-$redis = Redis.new(:host => ::SiteConfig.redis_address, :port => ::SiteConfig.redis_port)
+$redis = Redis.new(:host => ::CONFIG.redis['host'], :port => ::CONFIG.redis['port'])

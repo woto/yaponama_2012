@@ -15,14 +15,14 @@ module ProductsSearch
     def set_retail_cost item
       income_cost = case
         when item["supplier_title"] == "emex"
-          SiteConfig.emex_income_rate * item["income_cost"]
+          CONFIG.price['emex_income_rate'] * item["income_cost"]
         when item["supplier_title"] == "АВТОРИФ"
           item["income_cost"]
         else
-          SiteConfig.avtorif_income_rate * item["retail_cost"]
+          CONFIG.price['avtorif_income_rate'] * item["retail_cost"]
         end
 
-      retail_cost = SiteConfig.retail_rate * income_cost
+      retail_cost = CONFIG.price['retail_rate'] * income_cost
 
       # Скидка
       if current_user
@@ -57,7 +57,7 @@ module ProductsSearch
         end
 
         request_emex = ''
-        if SiteConfig.request_emex
+        if CONFIG.price['request_emex']
           request_emex = "&ext_ws=1"
         end
 
@@ -87,7 +87,7 @@ module ProductsSearch
           #end
           cached = '&cached=0'
 
-          price_request_url = "http://#{SiteConfig.price_full_address}/prices/search?catalog_number=#{c9}&manufacturer=#{CGI::escape(b9 || '')}&replacements=#{r9}#{request_emex}&format=json&for_site=1#{cached}"
+          price_request_url = "http://#{CONFIG.price['host']}:#{CONFIG.price['port']}/prices/search?catalog_number=#{c9}&manufacturer=#{CGI::escape(b9 || '')}&replacements=#{r9}#{request_emex}&format=json&for_site=1#{cached}"
 
           parsed_price_request_url = URI.parse(price_request_url)
 
@@ -173,9 +173,9 @@ module ProductsSearch
 
 
           if r9
-            expires_in = SiteConfig.price_request_cache_with_replacements_in_seconds
+            expires_in = CONFIG.price['price_request_cache_with_replacements_in_seconds']
           else
-            expires_in = SiteConfig.price_request_cache_without_replacements_in_seconds
+            expires_in = CONFIG.price['price_request_cache_without_replacements_in_seconds']
           end
 
           #@parsed_json["result_prices"].shuffle!

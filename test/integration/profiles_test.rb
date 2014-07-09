@@ -12,18 +12,21 @@ class TransactionsTest < ActionDispatch::IntegrationTest
         'profile' => {
           'names_attributes' => {
             '0' => { 
-              'name' => '1'
+              'name' => '1',
+              'creation_reason' => 'profile'
             }
           },
           'phones_attributes' => {
             '0' => {
               'value' => '1',
-              'mobile' => '0'
+              'mobile' => '0',
+              'creation_reason' => 'profile'
             }
           },
           'emails_attributes' => {
             '0' => {
-              'value' => 'a@a.ru'
+              'value' => 'a@a.ru',
+              'creation_reason' => 'profile'
             }
           },
           'passports_attributes' => {
@@ -39,10 +42,12 @@ class TransactionsTest < ActionDispatch::IntegrationTest
               'mesto_rozhdeniya' => '1',
               'nomer' => '1',
               'passport_vidan' => '1',
-              'seriya' => '1'
+              'seriya' => '1',
+              'creation_reason' => 'profile'
             }
           },
-          'notes' => '1'
+          'notes' => '1',
+          'creation_reason' => 'profile'
         }
       })
 
@@ -56,9 +61,9 @@ class TransactionsTest < ActionDispatch::IntegrationTest
 
           if profileable != 'profile'
             assert_equal #{profileable.camelize}Transaction.last.profile_id_after, Profile.last.id
-            assert_equal 'frontend', assigns(:resource).#{profileable.pluralize}.first.creation_reason 
+            assert_equal 'profile', assigns(:resource).#{profileable.pluralize}.first.creation_reason 
           else
-            assert_equal 'frontend', assigns(:resource).creation_reason
+            assert_equal 'profile', assigns(:resource).creation_reason
           end
 
         CODE
@@ -71,20 +76,23 @@ class TransactionsTest < ActionDispatch::IntegrationTest
           'names_attributes' => {
             '0' => {
               'name' => '2',
-              'id' => Name.last.id
+              'id' => Name.last.id,
+              'creation_reason' => 'profile'
             }
           },
           'phones_attributes' => {
             '0' => {
               'value' => '+7 (222) 222-22-22',
               'mobile' => '1',
-              'id' => Phone.last.id
+              'id' => Phone.last.id,
+              'creation_reason' => 'profile'
             }
           },
           'emails_attributes' => {
             '0' => {
               'value' => 'q@q.ru',
-              'id' => Email.last.id
+              'id' => Email.last.id,
+              'creation_reason' => 'profile'
             }
           },
           'passports_attributes' => {
@@ -101,11 +109,13 @@ class TransactionsTest < ActionDispatch::IntegrationTest
               'nomer' => '2',
               'passport_vidan' => '2',
               'seriya' => '2',
-              'id' => Passport.last.id
+              'id' => Passport.last.id,
+              'creation_reason' => 'profile'
             }
           }
         },
-        'notes' => '2'
+        'notes' => '2',
+        'creation_reason' => 'profile'
       })
 
       patch admin_user_profile_path(somebodies(:first_user), Profile.last), request
@@ -120,11 +130,11 @@ class TransactionsTest < ActionDispatch::IntegrationTest
 
           if profileable != 'profile'
             assert_equal #{profileable.camelize}Transaction.last.profile_id_after, Profile.last.id
-            # TODO Кстати тут правильно по смыслу остался creation_reason 'frontend', т.к.
+            # TODO Кстати тут правильно по смыслу остался creation_reason 'profile', т.к.
             # Наверно нужно написать похожий тест, только создание от лица администратора
-            assert_equal 'frontend', assigns(:resource).#{profileable.pluralize}.first.creation_reason
+            assert_equal 'profile', assigns(:resource).#{profileable.pluralize}.first.creation_reason
           else
-            assert_equal 'frontend', assigns(:resource).creation_reason
+            assert_equal 'profile', assigns(:resource).creation_reason
           end
 
         CODE
