@@ -63,7 +63,6 @@
 //= require jasmine_examples/Player
 //= require jasmine_examples/Song
 
-//= require 'time_zone_checkbox'
 //= require 'vin_or_frame'
 //= require 'buy_button'
 //= require 'modal_form'

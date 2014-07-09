@@ -15,12 +15,6 @@ class TimeTest < ActionDispatch::IntegrationTest
     assert_select '#anton-time', :text => '2012-04-12 07:45:38 +0400'
   end
 
-  test 'Если у пользователя выставлен use_auto_russian_time_zone в false, т.е. время выставлено вручную' do
-    cookies['auth_token'] = somebodies(:first_user).auth_token
-    get '/'
-    assert_select '#anton-time', :text => '2012-04-12 11:45:38 +0800'
-  end
-
   test 'Если у пользователя выставлено use_auto_russian_time_zone в true, и значение cached_russian_time_zone_auto_id верное' do
     cookies['auth_token'] = somebodies(:max).auth_token
     get '/'

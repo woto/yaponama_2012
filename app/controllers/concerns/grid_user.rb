@@ -46,20 +46,6 @@ module GridUser
         :type => :string
       }
  
-      columns_hash['russian_time_zone_manual_id'] = {
-        :type => :set,
-        :set =>  Rails.configuration.russian_time_zones.map{|k, v| [v, k]}
-      }
-
-      columns_hash['cached_russian_time_zone_auto_id'] = {
-        :type => :set,
-        :set =>  Rails.configuration.russian_time_zones.map{|k, v| [v, k]}
-      }
-
-      columns_hash['use_auto_russian_time_zone'] = {
-        :type => :boolean
-      }
-
       columns_hash['remote_ip'] = {
         :type => :string
       }

@@ -91,8 +91,6 @@ class Somebody < ActiveRecord::Base
   has_many :orders, :dependent => :destroy, inverse_of: :somebody
   accepts_nested_attributes_for :orders, :allow_destroy => true
 
-  validates :russian_time_zone_manual_id, :inclusion => { :in => Rails.configuration.russian_time_zones.keys.map(&:to_i) }, unless: Proc.new { |u| u.use_auto_russian_time_zone }
-
   # Financial
   has_one :account, :dependent => :destroy, inverse_of: :somebody
   #validates :account, :presence => true

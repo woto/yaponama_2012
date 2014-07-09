@@ -15,8 +15,6 @@ first_admin:
   accept_language: 
   user_agent: 
   cached_russian_time_zone_auto_id: 33
-  russian_time_zone_manual_id: 4
-  use_auto_russian_time_zone: true
   remote_ip: 
   notes: 
   notes_invisible: 
@@ -39,8 +37,6 @@ first_user:
   # password: 1231231231
   password_digest: $2a$10$90bFORwosYEHSW28BqmF8eacXIBXwLuZ1P9pp0.bEpVp5c2FrgLI.
   cached_russian_time_zone_auto_id: 4
-  russian_time_zone_manual_id: 8
-  use_auto_russian_time_zone: false
   profile: first_user
   cached_profile: '{"names":[{"surname":"","name":"Пользователь","patronymic":""}],"phones":[{"value":"+7 (123) 123-12-31"}],"emails":[{"value":"first_user_email@example.com"}],"passports":[]}'
 
@@ -57,8 +53,6 @@ stan:
   # password: 3333333333
   password_digest: $2a$10$CDmB19dFAPadZyy/CS8rQ.kkTbVUv8XvbXMfEV7OgkrACk3Ts6kma
   cached_russian_time_zone_auto_id: 9
-  russian_time_zone_manual_id: 7
-  use_auto_russian_time_zone: true
   profile: stan
   cached_profile: '{"names":[{"surname":"","name":"Стэн","patronymic":""}],"phones":[{"value":"+7 (333) 333-33-33"}],"emails":[],"passports":[]}'
 
@@ -75,8 +69,6 @@ fry:
   # password: 3213213213
   password_digest: $2a$10$c7lned5SgUsMMeCjsIqDpuLJKTQlho8Xt/r7qnEBIBSUBEtsHRO6.
   cached_russian_time_zone_auto_id: 9
-  russian_time_zone_manual_id: 7
-  use_auto_russian_time_zone: true
   profile: fry
   cached_profile: '{"names":[{"surname":"","name":"Фрай","patronymic":""}],"phones":[{"value":"+7 (321) 321-32-13"}],"emails":[],"passports":[]}'
 
@@ -95,8 +87,6 @@ otto:
   password_reset_token: 55555
   password_reset_sent_at: <%= 1.second.ago.to_s(:db) %>
   cached_russian_time_zone_auto_id: 5
-  russian_time_zone_manual_id: 6
-  use_auto_russian_time_zone: true
   profile: otto
   cached_profile: '{"names":[{"surname":"","name":"Отто","patronymic":""}],"phones":[{"value":"+7 (666) 666-66-66"},{"value":"8-888-888-88-88"},{"value":"+7 (555) 555-55-55"},{"value":"+7 (111) 111-11-11"}],"emails":[{"value":"fake@example.com"},{"value":"foo@example.com"}],"passports":[]}'
 
@@ -113,8 +103,6 @@ mark:
   # password: 4444444444
   password_digest: $2a$10$3.PKll4wcX7cf2oDKkRZBOCdDDvHeO3XwTCwHBgHxQifFery8Fo5W
   cached_russian_time_zone_auto_id: 12
-  russian_time_zone_manual_id: 11
-  use_auto_russian_time_zone: false
   profile: mark
   cached_profile: '{"names":[{"surname":"","name":"Марк","patronymic":""}],"phones":[{"value":"+7 (444) 444-44-44"}],"emails":[{"value":"mark@example.com"}],"passports":[]}'
   total_talks: 5
@@ -183,8 +171,6 @@ anton:
   # password: 1122334455
   password_digest: $2a$10$iHUevIXm7uoYSWpTWLZf3O5bz0yiEzDGDFh22tkLQ9jmhQPnyNZPy
   cached_russian_time_zone_auto_id: 9
-  russian_time_zone_manual_id: 7
-  use_auto_russian_time_zone: true
   profile: anton
   cached_profile: '{"names":[{"surname":"Чехов","name":"Антон","patronymic":"Павлович"}],"phones":[{"value":"+7 (112) 233-44-55"},{"value":"+7 (554) 433-22-11"}],"emails":[],"passports":[]}'
 
@@ -273,5 +259,3 @@ max:
   # password: maxmax
   password_digest: "$2a$10$mbYYVLe03awy7Oik4LlWs.md9.qCIaL6cQ/c2dw9gH95X7SjSG6xW"
   cached_russian_time_zone_auto_id: 9
-  russian_time_zone_manual_id: 7
-  use_auto_russian_time_zone: true

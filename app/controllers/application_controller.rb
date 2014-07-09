@@ -252,17 +252,13 @@ class ApplicationController < ActionController::Base
 
   def set_user_time_zone
 
-    tz = case current_user.use_auto_russian_time_zone
-    when true
-      if Rails.configuration.russian_time_zones.key?(current_user.cached_russian_time_zone_auto_id.to_s)
-        current_user.cached_russian_time_zone_auto_id
-      else
-        # Несмотря на то, что такая временная зона может и есть, в России её нет.
-        # Поэтому для других стран пусть показвается дефолтной выбранное в настройках сайта (т.е. локальное для этого места)
-        CONFIG.time['zone_id']
-      end
+    tz =
+    if Rails.configuration.russian_time_zones.key?(current_user.cached_russian_time_zone_auto_id.to_s)
+      current_user.cached_russian_time_zone_auto_id
     else
-      current_user.russian_time_zone_manual_id
+      # Несмотря на то, что такая временная зона может и есть, в России её нет.
+      # Поэтому для других стран пусть показвается дефолтной выбранное в настройках сайта (т.е. локальное для этого места)
+      CONFIG.time['zone_id']
     end
 
     Time.use_zone(tz) {

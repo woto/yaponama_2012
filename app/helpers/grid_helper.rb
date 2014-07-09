@@ -120,7 +120,7 @@ module GridHelper
           Rails.configuration.vin_or_frame[val]
         when 'ownership'
           Rails.configuration.company_ownerships[val]
-        when *['hide_catalog_number', 'use_auto_russian_time_zone', 'logout_from_other_places', 'sound', 'online', 'phantom', 'confirmed', 'mobile', 'stand_alone_house']
+        when *['hide_catalog_number', 'logout_from_other_places', 'sound', 'online', 'phantom', 'confirmed', 'mobile', 'stand_alone_house']
           if val == true
             if admin_zone?
               link_to_fast_edit "Да", item, column_name
@@ -205,7 +205,7 @@ module GridHelper
           else
             val
           end
-        when *['cached_russian_time_zone_auto_id', 'russian_time_zone_manual_id']
+        when *['cached_russian_time_zone_auto_id']
           Rails.configuration.russian_time_zones[val.to_s]
         when 'order_rule'
           Rails.configuration.somebody_order_rules[val]

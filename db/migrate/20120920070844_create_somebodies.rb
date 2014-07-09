@@ -22,8 +22,6 @@ class CreateSomebodies < ActiveRecord::Migration
       t.string :user_agent
       t.integer :cached_russian_time_zone_auto_id
       # ----------------------------------
-      t.integer :russian_time_zone_manual_id
-      t.boolean :use_auto_russian_time_zone, default: true
       t.inet :remote_ip
 
       t.string :creation_reason

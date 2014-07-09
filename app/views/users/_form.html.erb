@@ -9,19 +9,6 @@
 
       <%= f.twbs_text_field :prepayment %>
 
-      <%= f.twbs_collection_select :profile_id, @resource.profiles, :id, :to_label, :include_blank => true %>
-
-      <%= panel 'default', class: 'top-space-lg' do |p| %>
-        <%= p.heading do %>
-          <%= p.title { 'Часовой пояс' } %>
-        <% end %>
-        <%= p.body do %>
-          <%= f.twbs_collection_radio_buttons :use_auto_russian_time_zone, [['Вручную', false], ['Автоматически', true]], :last, :first, { variation: 'vertical', label: false }, rel: 'radio radio-use-auto-russian-time-zone' %>
-          <%= f.twbs_select :russian_time_zone_manual_id, Rails.configuration.russian_time_zones.map {|k,v| [v,k]}, { label: false } %>
-          <%= f.twbs_select :cached_russian_time_zone_auto_id, Rails.configuration.russian_time_zones.map {|k,v| [v,k]}, { label: false, :include_blank => true }, :disabled => true %>
-        <% end %>
-      <% end %>
-
       <%= panel 'default', class: 'top-space-lg' do |p| %>
         <%= p.heading do %>
           <%= p.title { 'Права' } %>
