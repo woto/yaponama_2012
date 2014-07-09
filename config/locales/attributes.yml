@@ -91,7 +91,7 @@ ru:
     avisosms_validity_period: Срок доставки
     password: Пароль
     password_confirmation: Подтверждение пароля
-    role: Права
+    role: Роль
     split_quantity_ordered: Количество первой партии
     prepayment_percent: Процент предоплаты
     discount: Процент скидки

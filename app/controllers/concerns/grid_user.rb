@@ -87,14 +87,6 @@ module GridUser
         :type => :string
       }
 
-      columns_hash['place_id'] = {
-        :type => :string
-      }
-
-      columns_hash['post'] = {
-        :type => :string
-      }
-
       columns_hash['profile_id'] = {
         :type => :string
       }

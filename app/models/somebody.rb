@@ -5,8 +5,6 @@ class Somebody < ActiveRecord::Base
   include BelongsToCreator
   include Selectable
 
-  belongs_to :place, class_name: "Deliveries::Place"
-
   has_many :payments
   has_many :order_deliveries
 

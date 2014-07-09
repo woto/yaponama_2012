@@ -39,12 +39,6 @@ class CreateSomebodies < ActiveRecord::Migration
 
       t.text :chat
 
-      # Место, где находится менеджер (может и не быть)
-      t.references :place
-
-      # Должность
-      t.string :post
-      
       # Главный профиль
       t.references :profile
       t.text :cached_profile

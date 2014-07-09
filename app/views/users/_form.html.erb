@@ -9,20 +9,7 @@
 
       <%= f.twbs_text_field :prepayment %>
 
-      <%= panel 'default', class: 'top-space-lg' do |p| %>
-        <%= p.heading do %>
-          <%= p.title { 'Права' } %>
-        <% end %>
-        <%= p.body do %>
-          <%= f.twbs_collection_select :role, Rails.configuration.somebody_roles.select{|k, v| v["real"] == true}.map{|k, v| [k, v['title']] }, :first, :last, :include_blank => false %>
-
-          <%# TODO Пользователь может принадлежать месту (магазину) (а может и нет) только если является менеджером %>
-          <%= f.twbs_collection_select :place_id, Deliveries::Place.all, :id, :name, { include_blank: true } %>
-
-          <%# TODO должность не может быть у гостя и пользователя %>
-          <%= f.twbs_text_field :post %>
-        <% end %>
-      <% end %>
+      <%= f.twbs_collection_select :role, Rails.configuration.somebody_roles.select{|k, v| v["real"] == true}.map{|k, v| [k, v['title']] }, :first, :last, :include_blank => false %>
 
       <%= f.twbs_check_box :logout_from_other_places %>
 
