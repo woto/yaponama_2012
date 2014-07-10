@@ -1,1 +1,10 @@
-$('#new_talk').replaceWith('<%= j render 'form' %>');
+(function() {
+  var App;
+
+  App = typeof exports !== "undefined" && exports !== null ? exports : this;
+
+  $('#new_talk').replaceWith('<%= j render 'form' %>');
+  App.nanoscroller_init()
+  App.autosize_init()
+
+}).call(this);

@@ -1,5 +1,3 @@
-#$(document).on 'page:update', ->
-#  alert 'page:update'
 #$(document).on 'page:before-change', ->
 #  alert 'page:before-change'
 #$(document).on 'page:fetch', ->
@@ -111,7 +109,7 @@ $(document).on 'change', '#talk_file', (event) ->
 
 ###########
 
-$(document).on 'page:update', ->
+$(document).on 'page:change', ->
   App.talk_init()
 
 $(document).on 'click', '.talk-show', (event) ->
@@ -125,16 +123,30 @@ $(document).on 'click', '#talk-hide', (event) ->
 # Показываем чат, прячем кнопку службы поддержки
 App.talk_show = ->
   $.cookie('talk', '1', {path: '/' })
-  $('#talk-window').show()
-  $('#talk-show').hide()
-  App.nanoscroller_init()
-  App.autosize_init()
+
+  $('#talk-window').removeClass("talk-window-animation")
+
+  _.delay (->
+    $("#talk-window").addClass("talk-window-animation")
+    $('#talk-window').show()
+
+    $('#talk-show').hide()
+    App.nanoscroller_init()
+    App.autosize_init()
+  ), 0
 
 # Показываем кнопку службы поддержки, прячем чат
 App.talk_hide = ->
   $.cookie('talk', '0', {path: '/' })
-  $('#talk-window').hide()
-  $('#talk-show').show()
+
+  $('#talk-show').removeClass("talk-show-animation")
+
+  _.delay (->
+    $("#talk-show").addClass("talk-show-animation")
+    $('#talk-show').show()
+
+    $('#talk-window').hide()
+  ), 0
 
 # Инициализация, проверяем cookie talk и на основе него
 # решаем что показать, а что скрыть (окно чата и кнопка

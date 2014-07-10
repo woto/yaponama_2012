@@ -1,3 +1,12 @@
-<% @talk = prepare_talk_form %>
-$('#new_talk').replaceWith("<%= j render 'form' %>");
-$('#talk-log').replaceWith("<%= j render 'log' %>");
+(function() {
+  var App;
+
+  App = typeof exports !== "undefined" && exports !== null ? exports : this;
+
+  <% @talk = prepare_talk_form %>
+  $('#new_talk').replaceWith("<%= j render 'form' %>");
+  $('#talk-log').replaceWith("<%= j render 'log' %>");
+  App.nanoscroller_init()
+  App.autosize_init()
+
+}).call(this);

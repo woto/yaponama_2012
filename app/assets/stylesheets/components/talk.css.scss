@@ -9,6 +9,9 @@
   padding: 0px 5px 5px 5px;
   border-radius: 5px;
 
+  display: none;
+  opacity: 0;
+
   #talk-details {
     .form-control-static { 
       padding: 0
@@ -93,18 +96,18 @@
   position: fixed;
   cursor: pointer;
   z-index: 100;
-  right: -273px;
   width: 300px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, .2) !important;
+
+  display: none;
+  right: -300px;
 }
 
 // ############################
 
 // АНИМАЦИЯ
 
-#talk-window {
-  display: none;
-  opacity: 0;
+.talk-window-animation {
   animation: talk_window 0.3s;
   animation-delay: 0.3s;
   box-shadow: 0 5px 10px rgba(0, 0, 0, .2) !important;
@@ -116,9 +119,7 @@
   100% { opacity: 1; }
 }
 
-#talk-show {
-  display:none;
-  right: -300px;
+.talk-show-animation {
   animation: talk_show 0.4s;
   animation-delay: 0.4s;
   animation-fill-mode: forwards;
