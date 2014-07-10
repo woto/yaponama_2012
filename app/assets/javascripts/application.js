@@ -6,6 +6,7 @@
 //= require bootstrap
 //= require turbolinks
 //= require cocoon
+//= require fastclick/lib/fastclick
 
 
 // OTHER LIBRARIES

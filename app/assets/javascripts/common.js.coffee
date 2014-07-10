@@ -15,6 +15,9 @@
 #$(document).on 'page:restore', ->
 #  alert 'page:restore'
 
+$(document).on 'page:change', ->
+  FastClick.attach(document.body)
+
 
 App = exports ? this
 
