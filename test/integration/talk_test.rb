@@ -26,6 +26,16 @@ class TalkTest < ActionDispatch::IntegrationTest
     assert_equal "has-error form-group", talk['class']
   end
 
+  test 'Пишем гостем, заполняем только имя и сообщение' do
+    Capybara.reset!
+    visit '/'
+
+    fill_in 'talk[somebody_attributes][profile_attributes][names_attributes][0][name]', with: 'Имя'
+    fill_in 'talk[text]', with: 'Текст сообщения 23844539023747432047'
+    click_button 'talk-submit'
+    assert has_text? "укажите телефон и/или email"
+  end
+
   test 'Пишем гостем, указываем только email' do
     Capybara.reset!
     visit '/'

@@ -38,6 +38,9 @@ class Profile < ActiveRecord::Base
     end
   end
 
+  validates :phones, presence: true, if: -> {emails.blank?}
+  validates :emails, presence: true, if: -> {phones.blank?}
+
   after_validation do
     if creation_reason == 'talk' && errors.any?
       email = emails.first || emails.new
