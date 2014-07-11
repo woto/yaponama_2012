@@ -216,7 +216,6 @@ GEM
     connection_pool (2.0.0)
     dalli (2.7.2)
     debug_inspector (0.0.2)
-    diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.0)
     ffi (1.9.3)
@@ -283,26 +282,6 @@ GEM
     ref (1.0.5)
     remotipart (1.2.1)
     rmagick (2.13.2)
-    rspec (3.0.0)
-      rspec-core (~> 3.0.0)
-      rspec-expectations (~> 3.0.0)
-      rspec-mocks (~> 3.0.0)
-    rspec-core (3.0.2)
-      rspec-support (~> 3.0.0)
-    rspec-expectations (3.0.2)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.0.0)
-    rspec-mocks (3.0.2)
-      rspec-support (~> 3.0.0)
-    rspec-rails (3.0.1)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      railties (>= 3.0)
-      rspec-core (~> 3.0.0)
-      rspec-expectations (~> 3.0.0)
-      rspec-mocks (~> 3.0.0)
-      rspec-support (~> 3.0.0)
-    rspec-support (3.0.2)
     rubyzip (1.1.4)
     sanitize (2.1.0)
       nokogiri (>= 1.4.4)
@@ -405,8 +384,6 @@ DEPENDENCIES
   redis (~> 3.0.1)
   remotipart
   rmagick
-  rspec
-  rspec-rails
   sanitize
   sass-rails!
   sdoc

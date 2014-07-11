@@ -34,8 +34,6 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'poltergeist', github: 'jonleighton/poltergeist'
   #gem 'capybara-webkit'
-  gem 'rspec-rails'
-  gem 'rspec'
 end
 
 gem 'jquery-rails', github: 'rails/jquery-rails'
