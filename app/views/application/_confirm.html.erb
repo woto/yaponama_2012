@@ -1,0 +1,41 @@
+<% content_for :confirm do %>
+
+  <% confirmed_any = [] %>
+
+  <% current_user.profiles.each do |profile| %>
+
+    <% profile.phones.where(mobile: true).each do |phone| %>
+      <% if !phone.confirmed? && phone.persisted? %>
+        <div>
+          Пожалуйста, подтвердите номер мобильного телефона
+          <%= alert_link_to phone.to_label, view_user_confirm_phone_path(phone), remote: true, class: 'confirm-link confirm-phone' %>
+          <!-- чтобы мы были уверены, что вы получаете от нас SMS.  -->
+        </div>
+      <% elsif phone.confirmed? && phone.persisted? %>
+        <% confirmed_any << 'phone' %>
+      <% end %>
+    <% end %>
+
+    <% profile.emails.each do |email| %>
+      <% if !email.confirmed? && email.persisted? %>
+        <div>
+          Пожалуйста, подтвердите e-mail адрес 
+          <%= alert_link_to email.to_label, view_user_confirm_email_path(email), remote: true, class: 'confirm-link confirm-email' %>
+          <!-- чтобы мы были уверены, что вы получаете от нас письма. -->
+        </div>
+      <% elsif email.confirmed? && email.persisted? %>
+        <% confirmed_any << 'email' %>
+      <% end %>
+
+    <% end %>
+
+  <% end %>
+
+  <% if confirmed_any.any? && current_user.role == 'guest' %>
+    Отлично!
+    <%= alert_link_to "Придумайте себе пароль", edit_register_path(return_path: request.fullpath, with: confirmed_any.first) %>
+    чтобы завершить регистрацию и иметь возможность входить с других компьютеров.
+  <% end %>
+
+<% end %>
+

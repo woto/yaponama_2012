@@ -126,22 +126,6 @@ label.required:after {
 
 /////////////////////
 
-#right_hand {
-  position: relative;
-  left: 0;
-
-  animation: right_hand 1s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-}
-
-@keyframes right_hand {
-    from { left: 0px; }
-    to   { left: 5px; }
-}
-
-/////////////////////
-
 .page-header {
   margin-top: 10px;
   margin-bottom: 15px;
@@ -273,3 +257,4 @@ input[type=radio]:checked + img{
 @import 'components/slide_top';
 @import 'components/label';
 @import 'components/grid';
+@import 'components/attention';

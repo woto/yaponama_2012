@@ -1,0 +1,23 @@
+#attention {
+  @extend .bg-danger;
+  @extend .bottom-space-none;
+  padding: 15px 0;
+
+  animation: attention 1s;
+  animation-delay: .5s;
+  animation-fill-mode: forwards;
+  background: $alert-danger-bg;
+  animation-iteration-count: 5;
+  transition-timing-function: ease-out;
+
+  &:empty {
+    padding: 0;
+  }
+}
+
+@keyframes attention {
+    0%   { background: $alert-danger-bg; }
+    1% { background: $alert-warning-bg; }
+    100%   { background: $alert-danger-bg; }
+}
+

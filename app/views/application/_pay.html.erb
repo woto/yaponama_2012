@@ -1,0 +1,38 @@
+<% if  @somebody %>
+
+  <% content_for :pay do %>
+
+    <%
+      #@current_debit = @somebody.account.debit
+      #current_credit = @somebody.account.credit
+
+      #after_credit = (current_credit + @somebody.products.where(status:'inorder').inject(0){|sum, item| sum += item.sell_cost * item.quantity_ordered}).round(2)
+      #@after_debit = (current_credit * @somebody.prepayment / 100 + @somebody.products.where(status:'inorder').inject(0){|sum, item| sum += item.sell_cost * item.quantity_ordered} * @somebody.prepayment / 100).round(2)
+
+      # TODO Это вакханалия. Переделать с использованием кеширования на уровне заказа(?)
+      @amount = (@somebody.products.active.summa) + (@somebody.products.where(status:'inorder')).summa - @somebody.account.debit
+      #
+      #@after_debit_magic = 
+      #  ( (@somebody.products.active.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => true}).summa) + 
+      #  (@somebody.products.active.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => false}).summa * @somebody.prepayment / 100) +
+      #  (Product.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => true}).where("products.id IN (#{@items.map{|item| item.id}.join(',')})").summa) +
+      #  (Product.includes(:order => :delivery).where(:deliveries => {:full_prepayment_required => false}).where("products.id IN (#{@items.map{|item| item.id}.join(',')})").summa * @somebody.prepayment / 100)).round(2)
+    %>
+
+    <% if @amount.to_i > 0 && @somebody.orders.where(phantom: false).count > 0%>
+      Внимание! Для запуска в работу 
+      заказанных товаров
+      <%# alert_link_to "заказанных товаров", smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'inorder', :user_id => @somebody) %>
+      необходимо 
+      <% amount = @amount.to_i %>
+      <% if public_zone? %>
+        <% pay_path = new_user_payment_path(payment: {amount:amount}) %>
+      <% else %>
+        <% pay_path = polymorphic_path([:new, *jaba3, :cashes], cash:{debit:amount}) %>
+      <% end %>
+      <%= alert_link_to "внести предоплату в размере #{number_to_currency(amount)}", pay_path %>
+    <% end %>
+
+  <% end %>
+
+<% end %>
