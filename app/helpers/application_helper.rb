@@ -189,7 +189,7 @@ module ApplicationHelper
 
             end.join.html_safe
           end +
-          "</div><div id='leftbar-divider' class='col-md-12'><hr /></div><div class='col-xs-6 col-md-12 bottom-space'>".html_safe +
+          "</div><div class='col-md-12 hidden-xs hidden-sm'><hr /></div><div class='col-xs-6 col-md-12 bottom-space'>".html_safe +
           (render 'profileables/right') +
           "</div></div>".html_safe
         end

@@ -29,18 +29,3 @@
   @extend .top-space-xs;
   @extend .bottom-space-xs;
 }
-
-#leftbar-divider {
-  @media (max-width: $screen-xs-max) {
-    display: none;
-  }
-  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-    display: none;
-  }
-  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-    display: block;
- }
-  @media (min-width: $screen-lg-min) {
-    display: block;
- }
-}
