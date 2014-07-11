@@ -159,7 +159,7 @@ module ApplicationHelper
             end
 
             links = [ 
-              { :title => 'Личный кабинет',
+              { :title => 'Кабинет',
                 #:catch => [ {:action => 'show' }, { action: :edit  }, { controller: 'passwords', action: 'edit', :id => @somebody.id } ], 
                 :catch => [ /\/user$|\/admin\/users\/\d+$/ ], 
                 :link => polymorphic_path([(admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user)]),
@@ -332,15 +332,17 @@ module ApplicationHelper
   #  content_tag(:span, '/', :class => 'divider')
   #end
 
-  def breadcrumb flag
+  def breadcrumb flag, exception=false
 
     str4 = capture do yield(Breadcrumb.new(self)) end
 
     content_tag(:ol, :class => 'breadcrumb') do
       str1 = capture do Breadcrumb.new(self).item(icon('home').html_safe, admin_zone? ? admin_path : root_path) end
 
-      if @somebody
-        str2 = capture do Breadcrumb.new(self).item('Личный кабинет', jaba3) end
+      unless exception
+        if @somebody
+          str2 = capture do Breadcrumb.new(self).item('Личный кабинет', jaba3) end
+        end
       end
 
       if flag
