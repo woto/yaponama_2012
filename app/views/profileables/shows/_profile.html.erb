@@ -1,0 +1,29 @@
+<ul class="list-unstyled">
+
+  <% profile.names.each do |name| %>
+    <li>
+     <%= name.to_label %>
+   </li>
+  <% end %>
+
+  <% profile.phones.each do |phone| %>
+    <li>
+      <% css_style = {style: 'font-weight: bold'} if phone.confirmed? %>
+      <%= content_tag :span, phone.to_label, css_style %>
+    </li>
+  <% end %>
+
+  <% profile.emails.each do |email| %>
+    <li>
+      <% css_style = {style: 'font-weight: bold'} if email.confirmed? %>
+      <%= content_tag :span, email.to_label, css_style %>
+    </li>
+  <% end %>
+
+  <% profile.passports.each do |passport| %>
+    <li>
+      <%= passport.seriya %>
+      -
+      <%= passport.nomer %>
+    </li>
+  <% end %>
