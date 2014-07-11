@@ -9,5 +9,5 @@ ping = ->
     ).always (data) ->
       setTimeout ping, 5000
 
-$(document).on 'page:change', ->
+$ ->
   ping()
