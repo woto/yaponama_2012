@@ -2,13 +2,13 @@
   <%= panel 'primary' do |p| %>
     <%= p.body do %>
       <h5>
-        <%= alert_link_to 'Вход на сайт', login_path %> если уже проходили регистрацию.
+        <strong><%= alert_link_to 'Вход на сайт', login_path %></strong><br>уже проходили регистрацию?
       </h5>
       <h5>
-        <%= alert_link_to 'Восстановление пароля', password_reset_path %> если забыли пароль
+        <strong><%= alert_link_to 'Восстановление пароля', password_reset_path %></strong><br>забыли пароль?
       </h5>
       <h5>
-        <%= alert_link_to  'Регистрация', register_path %> если еще не зарегистрированы на сайте
+        <strong><%= alert_link_to  'Регистрация', register_path %></strong><br>еще не зарегистрированы?
       </h5>
     <% end %>
   <% end %>
