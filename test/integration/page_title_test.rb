@@ -7,13 +7,10 @@ require 'test_helper'
 
 class PageTitleTest < ActionDispatch::IntegrationTest
   test 'Если заполнены @meta_title и @meta_title_small, то они должны правильно отображаться в заголовке страницы и title window' do
-    Capybara.reset!
-    id = phones(:otto).id
-    auth('+7 (555) 555-55-55', '5555555555')
-    visit "/user/phones/#{id}/confirm/view"
-    h1 = find('h1')
-    assert_equal 'Подтверждение +7 (111) 111-11-11', h1.text
-    assert_equal '+7 (111) 111-11-11', h1.find('small').text
-    assert_equal 'Подтверждение +7 (111) 111-11-11', title
+    get_via_redirect "/user/products/status/incart/"
+    assert_select 'h1', /Товары/
+    assert_select 'h1 > small', 'В корзине'
+    assert_select '.page-header > div', 'Вы просматриваете товары, находящиеся в корзине. Отметтье необходимые товары и оформите заказ.'
+    assert_select 'title', 'Товары В корзине'
   end
 end
