@@ -15,8 +15,8 @@ class Company < ActiveRecord::Base
   #include ProfileConfirmRequired
 
   attr_accessor :legal_address_type, :actual_address_type
-  validates :legal_address_type, :inclusion => { :in => ['new', 'old'] }, allow_blank: true #TODO Проверить потом
-  validates :actual_address_type, :inclusion => { :in => ['new', 'old'] }, allow_blank: true
+  validates :legal_address_type, :inclusion => { :in => ['new', 'old'] }, allow_nil: true #TODO Проверить потом
+  validates :actual_address_type, :inclusion => { :in => ['new', 'old'] }, allow_nil: true
 
   belongs_to :legal_address, :class_name => 'PostalAddress', autosave: true
   validates :new_legal_address, presence: true, associated: true, if: -> { legal_address_type == 'new' }
