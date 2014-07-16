@@ -7,6 +7,7 @@ class Admin::SplitsController < SplitsController
   include NewResourceDummy
   include FindResourceDummy
   include CreateResourceDummy
+  include ProductParent
 
   def new
     @resource = Split.new(:product_id => params[:product_id])
@@ -17,9 +18,9 @@ class Admin::SplitsController < SplitsController
 
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to params[:return_path], success: "Товар успешно разбит на партии" }
+        format.js { redirect_to(url_for(action: :show), attention: "Товар успешно разбит на партии. Пожалуйста обновите страницу чтобы увидеть результат операции.") }
       else
-        format.html { render action: 'new' }
+        format.js { render action: 'new' }
       end
     end
   end

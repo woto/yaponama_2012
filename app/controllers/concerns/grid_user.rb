@@ -79,9 +79,6 @@ module GridUser
       columns_hash['logout_from_other_places'] = {
         :type => :boolean
       }
-      columns_hash['online'] = {
-        :type => :boolean
-      }
 
       columns_hash['chat'] = {
         :type => :string
@@ -156,10 +153,6 @@ module GridUser
         :type => :number
       }
 
-      columns_hash['transport'] = {
-        :type => :string
-      }
-
       columns_hash['created_at'] = {
         :type => :date
       }
@@ -178,7 +171,6 @@ module GridUser
       @grid.visible_stats_count = '1'
       @grid.visible_cached_location = '1'
       @grid.visible_cached_title = '1'
-      @grid.visible_online = '1'
       @grid.visible_updated_at = '1'
 
     end

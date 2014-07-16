@@ -4,10 +4,9 @@
   padding: 15px 0;
 
   animation: important 1s;
-  animation-delay: 1.5s;
+  //animation-delay: 1.5s;
   animation-fill-mode: forwards;
   background: $alert-danger-bg;
-  animation-iteration-count: 3;
 
   &:empty {
     padding: 0;
@@ -16,6 +15,6 @@
 
 @keyframes important {
     0%   { background: $alert-danger-bg; }
-    2% { background: $alert-warning-bg; }
+    5% { background: $brand-danger; }
     100%   { background: $alert-danger-bg; }
 }

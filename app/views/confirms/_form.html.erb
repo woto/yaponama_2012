@@ -1,16 +1,4 @@
-<%= row do %>
-
-  <%= c0 do %>
-
-    <%= twbs_form_for @contact, as: :confirm, url: polymorphic_path([:make, :user, :confirm, params[:resource_class].underscore]), method: :get  do |f| %>
-      <% hint = capture do %>
-        <%= link_to "Запросите PIN код повторно", polymorphic_path([:ask, :user, :confirm, params[:resource_class].underscore], return_path: params[:return_path]), method: :post %>, если вдруг не получили его.
-      <% end %>
-      <%= f.twbs_text_field :pin, hint: hint %>
-      <%= hidden_field_tag :return_path, params[:return_path] %>
-      <%= f.twbs_submit 'Подтвердить' %>
-    <% end %>
-
-  <% end %>
-
+<%= twbs_form_for @contact, as: :confirm, url: polymorphic_path([:make, :user, :confirm, params[:resource_class].underscore]), method: :get, remote: true  do |f| %>
+  <%= f.twbs_text_field :pin %>
+  <%= f.twbs_submit 'Подтвердить' %>
 <% end %>

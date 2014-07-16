@@ -138,64 +138,69 @@ module ApplicationHelper
 
         content_tag(:div, :class => 'col-md-2 col-md-pull-10 text-sm') do
 
-          "<div class='row'><div class='col-xs-6 col-md-12'>".html_safe +
-          content_tag(:ul, :class => 'nav nav-pills nav-stacked') do
-            aaa = _build_dropdowns('product', 'products', Rails.configuration.products_status, Rails.configuration.products_menu, @somebody)
+          content_tag :div, id: 'sidebar' do
 
-            if admin_zone?
-              aaa += 
-              [{ :title => '',
-                :catch => [],
-                :link => '',
-                :class => 'divider',
-                :dropdown => []
-              },
-              { :title => "&nbsp;&nbsp;".html_safe << icon('plus') << '&nbsp;&nbsp;Добавить'.html_safe,
-                :catch => [],
-                :link => new_admin_user_product_path(@somebody, :return_path => request.fullpath, :skip => true),
-                :class => '',
-                :dropdown => []
-              }]
-            end
+            "<div class='row'><div class='col-md-12 visible-xs-block visible-sm-block'><hr /></div><div class='col-xs-6 col-md-12'>".html_safe +
+            content_tag(:ul, :class => 'nav nav-pills nav-stacked') do
+              aaa = _build_dropdowns('product', 'products', Rails.configuration.products_status, Rails.configuration.products_menu, @somebody)
 
-            links = [ 
-              { :title => 'Кабинет',
-                #:catch => [ {:action => 'show' }, { action: :edit  }, { controller: 'passwords', action: 'edit', :id => @somebody.id } ], 
-                :catch => [ /\/user$|\/admin\/users\/\d+$/ ], 
-                :link => polymorphic_path([(admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user)]),
-                :class => '',
-                :dropdown => []
-              },
+              if admin_zone?
+                aaa += 
+                [{ :title => '',
+                  :catch => [],
+                  :link => '',
+                  :class => 'divider',
+                  :dropdown => []
+                },
+                { :title => "&nbsp;&nbsp;".html_safe << icon('plus') << '&nbsp;&nbsp;Добавить'.html_safe,
+                  :catch => [],
+                  :link => new_admin_user_product_path(@somebody, :return_path => request.fullpath, :skip => true),
+                  :class => '',
+                  :dropdown => []
+                }]
+              end
 
-              { :title => params[:controller].include?('orders') ? "Заказы&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.orders_status[params[:status]].try(:[], 'title')} </span>".html_safe : "Заказы",
-                :catch => [ /\/orders/ ], 
-                :link => '#',
-                :class => 'dropdown',
-                :dropdown => _build_dropdowns('order', 'orders', Rails.configuration.orders_status, Rails.configuration.orders_menu, @somebody)
-              },
+              links = [ 
+                { :title => 'Кабинет',
+                  #:catch => [ {:action => 'show' }, { action: :edit  }, { controller: 'passwords', action: 'edit', :id => @somebody.id } ], 
+                  :catch => [ /\/user$|\/admin\/users\/\d+$/ ], 
+                  :link => polymorphic_path([(admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user)]),
+                  :class => '',
+                  :dropdown => []
+                },
 
-              { :title => params[:controller].include?('products') ? "Товары&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.products_status[params[:status]].try(:[], 'title')} </span>".html_safe : "Товары",
-                :catch => [/^(?!.*orders).*products/],
-                :link => '#',
-                :class => 'dropdown',
-                :dropdown => aaa
-              },
+                { :title => params[:controller].include?('orders') ? "Заказы&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.orders_status[params[:status]].try(:[], 'title')} </span>".html_safe : "Заказы",
+                  :catch => [ /\/orders/ ], 
+                  :link => '#',
+                  :class => 'dropdown',
+                  :dropdown => _build_dropdowns('order', 'orders', Rails.configuration.orders_status, Rails.configuration.orders_menu, @somebody)
+                },
 
-            ]
+                { :title => params[:controller].include?('products') ? "Товары&nbsp;<span class='label label-#{params[:status]}'>#{Rails.configuration.products_status[params[:status]].try(:[], 'title')} </span>".html_safe : "Товары",
+                  :catch => [/^(?!.*orders).*products/],
+                  :link => '#',
+                  :class => 'dropdown',
+                  :dropdown => aaa
+                },
 
-            links.collect do |item|
+              ]
 
-              render_menu(item)
+              links.collect do |item|
 
-            end.join.html_safe
-          end +
-          "</div><div class='col-md-12 hidden-xs hidden-sm'><hr /></div><div class='col-xs-6 col-md-12 bottom-space'>".html_safe +
-          (render 'profileables/right') +
-          "</div></div>".html_safe
+                render_menu(item)
+
+              end.join.html_safe
+            end +
+            "</div><div class='col-md-12 hidden-xs hidden-sm'><hr /></div><div class='col-xs-6 col-md-12 bottom-space'>".html_safe +
+            (render 'profileables/right') +
+            "</div></div>".html_safe
+          end
         end
       elsif !admin_zone?
         content_tag(:div, :class => 'col-md-2 col-md-pull-10 text-sm') do
-          render 'application/right'
+          content_tag :div, id: 'sidebar' do
+            render 'application/right'
+          end
         end
       end
 
@@ -209,11 +214,11 @@ module ApplicationHelper
     link = url_for(item[:link])
 
     if item[:dropdown].blank?
-      content_tag :li, link.present? ? link_to(item[:title], link) : '', :class => "#{highlight_active2(item[:catch])} #{item[:class]}"
+      content_tag :li, link.present? ? link_to(item[:title], link) : '', style: 'font-size: 14px', :class => "#{highlight_active2(item[:catch])} #{item[:class]}"
     else
       content_tag :li, :class => "#{highlight_active2(item[:catch])} #{item[:class]}" do
         [
-          ( link_to(item[:title], link, class: "dropdown-toggle", "data-toggle" => 'dropdown').to_s ),
+          ( link_to(item[:title], link, class: "dropdown-toggle", style: 'font-size: 14px', "data-toggle" => 'dropdown').to_s ),
 
           ( content_tag :ul, :class => 'dropdown-menu' do |ul|
             item[:dropdown].collect do |dropdown|
@@ -347,7 +352,10 @@ module ApplicationHelper
 
       if flag
         if ['new', 'edit', 'show'].include? params[:action]
-          str3 = capture do Breadcrumb.new(self).item(t("helpers.titles.#{@resource_class.to_s.underscore}.index"), polymorphic_path([*jaba3, @resource_class.to_s.underscore.parameterize.underscore.pluralize])) end
+          str3 = capture do 
+            Breadcrumb.new(self).item(t("helpers.titles.#{@resource_class.to_s.underscore}.index"), 
+                                      polymorphic_path([*jaba3, @resource_class.to_s.underscore.parameterize.underscore.pluralize]))
+          end
           #polymorphic_path([*jaba3, params['controller'].camelize.demodulize.underscore.to_sym])
           #t("helpers.titles.#{params['controller'].camelize.demodulize.underscore.singularize}.index")
         end

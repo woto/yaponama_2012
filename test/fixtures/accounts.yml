@@ -38,10 +38,10 @@ phantom:
   credit: 0.0
   somebody: mike
 
-online:
-  debit:  0.0 
-  credit: 0.0
-  somebody: mike
+#online:
+#  debit:  0.0 
+#  credit: 0.0
+#  somebody: mike
 
 avtorif:
   debit: 0.0
@@ -92,3 +92,13 @@ max:
   debit: 0.0
   credit: 0.0
   somebody: max
+
+sending1:
+  debit: 0.0
+  credit: 0.0
+  somebody: sending1
+
+receiving1:
+  debit: 0.0
+  credit: 0.0
+  somebody: receiving1

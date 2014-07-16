@@ -24,7 +24,7 @@ class RegistersController < ApplicationController
       @user.code_1 = 'register'
       @user.code_2 = params[:with]
       if @user.update_attributes(user_params)
-        format.html { redirect_to user_path, :success => "Регистрация завершена. Вы успешно вошли на сайт под своей учетной записью." }
+        format.html { redirect_to user_path, :attention => "Регистрация завершена. Вы успешно вошли на сайт под своей учетной записью." }
       else
         format.html { render :action => "edit" }
       end

@@ -49,11 +49,7 @@ class ApplicationController < ActionController::Base
   #before_filter :set_cache_buster
 
   # Twitter Bootstrap 3
-  add_flash_types :success, :info, :warning, :danger
-
-  def info
-    render :layout => false
-  end
+  add_flash_types :success, :info, :warning, :danger, :attention
 
   def columns
     render "grid_modal_columns", :layout => false
@@ -110,7 +106,7 @@ class ApplicationController < ActionController::Base
         format.html { redirect_to url_for(params[:return_path]), success: "#{I18n.t(@resource_class)} \"#{@resource.to_label}\" Был успешно удален" }
         format.json { head :no_content }
       else
-        format.html { redirect_to url_for(:controller => :users, :action => :show), danger: "Невозможно удалить." }
+        format.html { redirect_to url_for(:controller => :users, :action => :show), attention: "Невозможно удалить." }
       end
     end
   end
@@ -233,7 +229,11 @@ class ApplicationController < ActionController::Base
         @current_user = User.find_by(auth_token: cookies[:auth_token])
         unless @current_user.present?
           cookies.delete :auth_token
-          raise AuthenticationError
+          unless cookies[:role] == 'guest'
+            raise AuthenticationError.new 'Вы посещали сайт с другого комьютера, в целях безопасности мы автоматически сделали автовыход со всех прочих устройств. Вы можете отключить функцию автоматического выхода в Личном кабинете для возможности одновременной работы с разных компьютеров.'
+          else
+            raise AuthenticationError.new ''
+          end
         end
       else
         @current_user = User.new
@@ -241,9 +241,9 @@ class ApplicationController < ActionController::Base
         @current_user.code_1 = 'session'
         @current_user.build_account
         @current_user.phantom = false
-        #@current_user.online = true
         @current_user.save!
         cookies.permanent[:auth_token] = @current_user.auth_token
+        cookies.permanent[:role] = 'guest'
       end
 
     end
@@ -269,13 +269,13 @@ class ApplicationController < ActionController::Base
 
   def only_not_authenticated
     if ["admin", "manager", "user"].include? current_user.role
-      redirect_to root_path, :info => "Вы уже вошли на сайт." and return
+      redirect_to root_path, :attention => "Вы уже вошли на сайт." and return
     end
   end
 
   def only_authenticated
     if ['guest'].include? current_user.role
-      redirect_to root_path, :danger => "Пожалуйста войдите на сайт." and return
+      redirect_to root_path, :attention => "Пожалуйста войдите на сайт." and return
     end
   end
 
@@ -349,17 +349,17 @@ class ApplicationController < ActionController::Base
 
   def user_get
     #binding.pry
-    @user = @resource.somebody if @resource && @resource.respond_to?(:somebody)
+    @user = @resource.somebody if @resource && @resource.respond_to?(:somebody) && @resource.somebody.present?
   end
 
   def somebody_get
     #binding.pry
-    @somebody = @resource.somebody if @resource && @resource.respond_to?(:somebody)
+    @somebody = @resource.somebody if @resource && @resource.respond_to?(:somebody) && @resource.somebody.present?
   end
 
   def supplier_get
     #binding.pry
-    @supplier = @resource.supplier if @resource && @resource.respond_to?(:supplier)
+    @supplier = @resource.supplier if @resource && @resource.respond_to?(:supplier) && @resource.supplier.present?
   end
 
   def item_collection_params

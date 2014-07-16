@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 require 'test_helper'
 
 class SessionsTest < ActionDispatch::IntegrationTest
@@ -22,7 +20,7 @@ class SessionsTest < ActionDispatch::IntegrationTest
     fill_phone '#session_value', '+7 (111) 111-11-11'
     fill_in 'session[password]', with: '1111111111'
     click_button 'Войти'
-    #assert page.has_css? ".alert-success", text: "Вы успешно вошли."
+    assert has_text? "Вы успешно вошли"
     assert current_url.end_with?('/admin')
   end
 
@@ -32,7 +30,7 @@ class SessionsTest < ActionDispatch::IntegrationTest
     fill_phone '#session_value', '+7 (123) 123-12-31'
     fill_in 'session[password]', with: '1231231231'
     click_button 'Войти'
-    #assert page.has_css? ".alert-success", text: "Вы успешно вошли."
+    assert has_text? "Вы успешно вошли"
     assert current_url.end_with?('/user')
   end
 
@@ -51,7 +49,7 @@ class SessionsTest < ActionDispatch::IntegrationTest
     fill_in 'session[value]', with: 'foo@example.com'
     fill_in 'session[password]', with: '1111111111'
     click_button 'Войти'
-    #assert page.has_css? ".alert-success", text: "Вы успешно вошли."
+    assert has_text? "Вы успешно вошли"
     assert current_url.end_with?('/admin')
   end
 

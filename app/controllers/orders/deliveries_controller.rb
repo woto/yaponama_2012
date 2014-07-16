@@ -13,4 +13,9 @@ class Orders::DeliveriesController < DeliveriesController
     @postal_address_type = 'orders/deliveries'
   end
 
+  def find_resource
+    @resource = @resource_class.find_by_token(params[:id])
+  end
+
+
 end

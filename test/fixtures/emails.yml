@@ -54,3 +54,17 @@ petr:
   somebody: petr
   confirmed: true
   creation_reason: fixtures
+
+sending1:
+  value: sending1@example.com
+  profile: sending1
+  somebody: sending1
+  confirmed: false
+  creation_reason: fixtures
+
+receiving1:
+  value: receiving1@example.com
+  profile: receiving1
+  somebody: receiving1
+  confirmed: false
+  creation_reason: fixtures

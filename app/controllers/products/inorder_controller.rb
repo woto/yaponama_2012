@@ -5,7 +5,7 @@ class Products::InorderController < ApplicationController
   #include ProductsConcern
 
   before_filter do
-    raise 'a'
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
     begin
 
       Rails.application.routes.recognize_path params[:return_path]

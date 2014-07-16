@@ -27,12 +27,14 @@ class Order < ActiveRecord::Base
 
   belongs_to :delivery_variant, class_name: 'Deliveries::Variant'
 
+  belongs_to :delivery_option
+
   belongs_to :company
   accepts_nested_attributes_for :company
 
   belongs_to :profile, :inverse_of => :orders_where_is_profile, autosave: true
-  validates :new_profile, presence: true, associated: true, if: -> { profile_type == 'new' }
-  validates :old_profile, presence: true, associated: true, inclusion: { in: proc {|order| order.somebody.profiles } }, if: -> { profile_type == 'old' }
+  validates :new_profile, presence: true, if: -> { profile_type == 'new' }
+  validates :old_profile, presence: true, inclusion: { in: proc {|order| order.somebody.profiles } }, if: -> { profile_type == 'old' }
 
   include CachedProfile
 
@@ -55,10 +57,8 @@ class Order < ActiveRecord::Base
     token
   end
 
-  def self.find(token)
-    found = Order.where(:token => token).first
-    raise ActiveRecord::RecordNotFound, "Заказ № #{token} не найден." unless found
-    found
+  def self.finder token
+    find_by_token token 
   end
 
 

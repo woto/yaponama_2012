@@ -3,3 +3,15 @@ teana:
   brand: nissan
   phantom: false
   creator: first_admin
+
+sending1:
+  name: SENDING1
+  brand: sending1
+  phantom: false
+  creator: sending1
+
+receiving1:
+  name: RECEIVING1
+  brand: receiving1
+  phantom: false
+  creator: receiving1

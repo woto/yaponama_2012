@@ -1,0 +1,40 @@
+<%= alert 'danger', false, id: 'important' do %>
+
+  <%- render 'confirm' -%>
+  <%- render 'pay' -%>
+  <%- render 'attention' -%>
+
+  <% if content_for?(:confirm) || content_for?(:pay) || content_for?(:attention) %>
+
+      <%= container do %>
+
+        <%= row do %>
+
+          <div class="col-lg-12">
+
+            <% if content_for? :attention %>
+              <div id="attention-block">
+                <%= yield :attention %>
+              </div>
+            <% end %>
+
+            <% if content_for? :confirm %>
+              <div id="confirm-block">
+                <%= yield :confirm %>
+              </div>
+            <% end %>
+
+            <% if content_for? :pay %>
+              <div id="pay-block">
+                <%= yield :pay %>
+              </div>
+            <% end %>
+
+          </div>
+
+        <% end %>
+
+      <% end %>
+
+  <% end %>
+<% end %>

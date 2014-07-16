@@ -1,0 +1,13 @@
+<% @meta_title = "Подтверждение" %>
+<% @meta_title_small = @contact.to_label %>
+
+<%= page_header %>
+
+<div class="bottom-space">С целью предотвращения ложных и ошибочно заполненных заявок пожалуйста подтвердите, что <%= t "attributes.#{params[:resource_class].underscore}" %> действительно принадлежит вам.</div>
+
+<%= render 'flash' %>
+<%= yield :flash %>
+
+<%= render 'form' %>
+
+<p><%= link_to "Запросите PIN код повторно,", polymorphic_path([:ask, :user, :confirm, params[:resource_class].underscore]), method: :post, remote: true %> если вдруг не получили его.</p>

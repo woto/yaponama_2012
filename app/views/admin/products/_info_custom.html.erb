@@ -1,5 +1,5 @@
 <% if @item.quantity_ordered > 1 %>
-  <li><strong> <%= link_to 'Разбить на партии', url_for(:controller => :splits, :action => :new, :product_id => params[:id], :return_path => params[:return_path] ) %> </strong></li>
+  <li><strong> <%= link_to 'Разбить на партии', url_for(:controller => :splits, :action => :new, :product_id => params[:id] ), remote: true %> </strong></li>
 <% end %>
 
 <%= render 'info_custom_2' %>

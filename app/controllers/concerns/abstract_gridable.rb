@@ -32,6 +32,11 @@ module AbstractGridable
       @grid_class.const_set("COLUMNS", columns_hash)
     end
 
+    def info
+      render :layout => false
+    end
+
+
     include GridConcern
 
   end

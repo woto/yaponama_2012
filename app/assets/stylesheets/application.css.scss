@@ -242,6 +242,10 @@ input[type=radio]:checked + img{
 
 /////////////////////
 
+.modal {
+  z-index: 1070;
+}
+
 //.headroom {top: 0;left: 0;right: 0;transition: all .2s ease-in-out;}
 //.headroom--unpinned {top: -100px;}
 //.headroom--pinned {top: 0;}
@@ -257,4 +261,4 @@ input[type=radio]:checked + img{
 @import 'components/slide_top';
 @import 'components/label';
 @import 'components/grid';
-@import 'components/attention';
+@import 'components/important';

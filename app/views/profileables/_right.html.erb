@@ -2,10 +2,10 @@
 
 <%
     array = [
-      {title: 'Конт. лицо', icon: 'user', assoc: 'profile'},
-      {title: 'Адрес', icon: 'home', assoc: 'postal_address'},
-      {title: 'Автомобиль', icon: 'truck', assoc: 'car'},
-      {title: 'Компания', icon: 'briefcase', assoc: 'company'} ]
+      {title: 'Конт. лица', icon: 'user', assoc: 'profile'},
+      {title: 'Адреса', icon: 'home', assoc: 'postal_address'},
+      {title: 'Автомобили', icon: 'truck', assoc: 'car'},
+      {title: 'Компании', icon: 'briefcase', assoc: 'company'} ]
 %>
 
 <% array.each do |item| %>
@@ -56,39 +56,38 @@
   На счету: <%= number_to_currency @somebody.cached_debit, :precision => 0 %>
   <div class="profileable-item-controls">
     <%# namespace = admin_zone? ? [:admin, @somebody] : [:user] %>
-    <%= link_to [:new, *jaba3, :cashes], class: "btn btn-primary btn-sm" do %>
-      <%= icon 'plus' %>
+    <% if admin_zone? %>
+      <%= link_to [:new, *jaba3, :cashes], class: "btn btn-primary btn-sm", remote: true do %>
+        <%= icon 'plus' %>
+      <% end %>
+    <% else %>
+      <%= link_to new_user_payment_path, class: "btn btn-primary btn-sm" do %>
+        <%= icon 'plus' %>
+      <% end %>
     <% end %>
   </div>
 </div>
 
+<div class="profileable-item bottom-space-none">
+  Скидка: <%= @somebody.discount %>%
+</div>
 
-
-<%# СОЦ СЕТИ %>
-<h4 class="profileable-category">
-  <%= link_to '#' do %>
-    <div>
-      <%= icon 'group' %>
-      Соц. сети
-    </div>
-  <% end %>
-</h4>
+<div class="profileable-item bottom-space-none">
+  Предоплата: <%= @somebody.prepayment %>%
+</div>
 
 <ul id="auth-buttons" class="list-unstyled list-inline">
   <%# Муть какая-то, если слить в одну строку, то пробела не будет, иначе как - не знаю %>
   <%- @somebody.auths.each do |auth| -%><li><%= render "application/auth/logged_in", auth: auth %></li><%- end -%>
 </ul>
 
-<ul class="list-unstyled text-muted">
-  <li class="bottom-space-xs">Скидка: <b><%= @somebody.discount %>%</b></li>
-  <li class="bottom-space-xs">Предоплата по товару не в наличии: <b><%= @somebody.prepayment %>%</b></li>
+<ul class="list-unstyled text-muted hidden">
   <li class="bottom-space-xs">Населенный пункт: <b><%= @somebody.ipgeobase_name %></b></li>
   <li class="bottom-space-xs">Регион: <b><%= @somebody.ipgeobase_names_depth_cache %></b></li>
   <li class="bottom-space-xs">Версия браузера: <b><%= @somebody.user_agent %></b></li>
   <li class="bottom-space-xs">Язы браузера: <b><%= @somebody.accept_language %></b></li>
   <li class="bottom-space-xs">Часовой пояс: <b><%= @somebody.cached_russian_time_zone_auto_id %></b></li>
   <li class="bottom-space-xs">IP адрес: <b><%= @somebody.remote_ip %></b></li>
-  <li class="bottom-space-xs">Он-лайн: <b><%= @somebody.online %></b></li>
   <li class="bottom-space-xs">Просмотров страниц: <b><%= @somebody.stats_count %></b></li>
   <li class="bottom-space-xs">Текущее расположение: <b><%= truncate @somebody.cached_location, length: 20 %></b></li>
   <li class="bottom-space-xs">Заголовок страницы: <b><%= @somebody.cached_title %></b></li>

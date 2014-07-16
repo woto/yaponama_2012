@@ -1,3 +1,4 @@
+- binding.pry
 - model_class = User
 
 = somebody_tabs do
@@ -11,6 +12,10 @@
     / = f.error_notification :message => f.error(:base)
     - content_for :form_error do
       = f.error_notification
+
+
+
+
 
     .hide
       = f.radio_button(:legal, 'true', :checked => (@order.legal.to_s == 'true') )

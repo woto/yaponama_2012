@@ -1,4 +1,4 @@
-<% @item = @resource_class.find(params[:id]) %>
+<% @item = @resource_class.finder(params[:id]) %>
 <%= some(@item) %> 
   <ul class="list-unstyled">
     <%= render 'info_custom' %>

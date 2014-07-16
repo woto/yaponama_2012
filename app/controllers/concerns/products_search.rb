@@ -94,6 +94,7 @@ module ProductsSearch
           begin
             require 'net/http'
             plog.debug "Запрос к серверу прайсов"
+            #binding.pry
             resp = Net::HTTP.get_response(parsed_price_request_url)
             plog.debug "/Запрос к серверу прайсов"
           rescue Exception => e
@@ -104,6 +105,7 @@ module ProductsSearch
             render :status => 503 and return
           end
 
+          #binding.pry
           @parsed_json = ActiveSupport::JSON.decode(resp.body)
           @parsed_json.delete("result_replacements")
           @parsed_json.delete("result_message")

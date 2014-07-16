@@ -16,7 +16,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
     new_auth_token = stan.reload.auth_token
     assert_not_equal new_auth_token, old_auth_token
     assert_equal new_auth_token.size, 22
-    assert_equal 'Вы разлогинили пользователя со всех компьютеров. Теперь ему потребуется заново войти на сайт.', flash[:success]
+    assert_equal 'Вы разлогинили пользователя со всех компьютеров. Теперь ему потребуется заново войти на сайт.', flash[:attention]
   end
 
   test 'Администратор может создавать новых пользователей' do

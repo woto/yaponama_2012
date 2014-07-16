@@ -101,3 +101,19 @@ sidor:
   surname: Сидоров
   patronymic: Сидорович
   creation_reason: fixtures
+
+sending1:
+  somebody: sending1
+  profile: sending1
+  name: sending1
+  surname: sending1
+  patronymic: sending1
+  creation_reason: fixtures
+
+receiving1:
+  somebody: receiving1
+  profile: receiving1
+  name: receiving1
+  surname: receiving1
+  patronymic: receiving1
+  creation_reason: fixtures

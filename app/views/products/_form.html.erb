@@ -1,41 +1,31 @@
-<% content_for :continue_search do %>
+<% if @resource.product.present? && !@resource.persisted? %>
+  <% @preset_catalog_number = @resource.product.catalog_number %>
+  <%= alert 'info', false do %>
+    <strong>Обратите внимание!</strong> Добавляемая позиция при дальнейшей работе будет отражена как перезаказанная с <%= @resource.product.to_label %>. Если это не то что вы хотите, то просто перейдите на главную страницу и воспользуйтесь формой поиска как обычно.
+  <% end %>
+<% end %>
+
+
+<% if @resource.persisted? %>
+  <% @preset_catalog_number = @resource.catalog_number %>
+  <%= alert 'info', false do %>
+    <strong>Обратите внимание!</strong> Производится редактирование позиции. После добавления товара в корзину, товар <%= @resource.to_label %> будет изменен на вновь добавленный. Если это не то что вы хотите, то просто перейдите на главную страницу и воспользуйтесь формой поиска как обычно.
+  <% end %>
+<% end %>
+
+
+<% if admin_zone? %>
   <%= row do %>
     <div class="clearfix">
       <%= render 'common_search_form' %>
-      <% if admin_zone? %>
-        <div class="navbar-form">
-          <a data-toggle="modal" href="#modal_form" class="btn btn-warning">Форма</a>
-        </div>
-      <% end %>
+      <div class="navbar-form">
+        <a data-toggle="modal" href="#modal_form" class="btn btn-warning">Форма</a>
+      </div>
     </div>
   <% end %>
 <% end %>
 
-<% if @resource.product.present? && !@resource.persisted? %>
-  <%= alert 'info', false do %>
-    Позиция будет отражена как перезаказанная с <%= @resource.product.to_label %>
-    <%= yield :continue_search %>
-  <% end %>
-<% end %>
 
-<% @preset_catalog_number = @resource.catalog_number %>
-
-<% if @resource.persisted? %>
-  <%= alert 'info', false do %>
-    Редактирование позиции <%= @resource.to_label %>
-    <%= yield :continue_search %>
-  <% end %>
-<% end %>
-
-<% unless @resource.persisted? %>
-  <%= alert 'info', false do %>
-    <%= yield :continue_search %>
-  <% end %>
-<% end %>
-
-
-<%= twbs_form_for @resource, url: polymorphic_path([*jaba3, @resource], :return_path => params[:return_path], :skip => true, :modal => true), class: 'product', :remote => true do |f| %>
-
+<%= twbs_form_for @resource, url: polymorphic_path([*jaba3, @resource], :return_path => params[:return_path], :skip => true, :modal => true), class: 'product bottom-space-lg', :remote => true do |f| %>
   <%= render 'modal_form', f: f %>
-
 <% end %>

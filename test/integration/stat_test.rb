@@ -107,6 +107,7 @@ class StatTest < ActionDispatch::IntegrationTest
     }
 
     sleep 1
+    # TODO Переделать задействовав fixtures, не полагаясь на данные в бд
     u1 = User.last
 
     assert_equal 'http://example.com', u1.first_referrer

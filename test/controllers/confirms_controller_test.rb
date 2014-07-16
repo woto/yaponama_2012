@@ -7,21 +7,21 @@ class ConfirmsControllerTest < ActionController::TestCase
   test 'Проверка отображения и адреса ссылки для высылки PIN кода для подтверждения e-mail' do
     cookies['auth_token'] = somebodies(:otto).auth_token
     id = emails(:otto).id
-    get :view, id: id, resource_class: 'Email'
-    assert_select "a[href=/user/emails/#{id}/confirm/ask]", text: 'Запросите PIN код повторно' 
+    xhr :get, :view, id: id, resource_class: 'Email'
+    assert response.body.include?("/user/emails/#{id}/confirm/ask")
   end
 
   test 'Проверка отображения и адреса ссылки для высылки PIN кода для подтверждения phone' do
     cookies['auth_token'] = somebodies(:otto).auth_token
     id = phones(:otto).id
-    get :view, id: id, resource_class: 'Phone'
-    assert_select "a[href=/user/phones/#{id}/confirm/ask]", text: 'Запросите PIN код повторно' 
+    xhr :get, :view, id: id, resource_class: 'Phone'
+    assert response.body.include?("/user/phones/#{id}/confirm/ask")
   end
 
   test 'Проверка работы ссылки запроса PIN кода на e-mail' do
     cookies['auth_token'] = somebodies(:otto).auth_token
     id = emails(:otto).id
-    post :ask, id: id, resource_class: 'Email'
+    xhr :post, :ask, id: id, resource_class: 'Email'
 
     # Проверка редиректа на страницу ввода pin кода
     assert_redirected_to view_user_confirm_email_path(id: id)
@@ -70,7 +70,7 @@ class ConfirmsControllerTest < ActionController::TestCase
     assert_redirected_to view_user_confirm_phone_path(id: id)
 
     # Проверка оповещения flash
-    assert_equal 'Мы отправили вам SMS с PIN кодом. Введите его в поле, расположенное ниже, либо перейдите по ссылке если ваш телефон поддерживает эту функцию. Сделайте повторный запрос PIN кода, если вы вдруг не получили SMS.', flash[:info]
+    assert_equal 'Мы отправили вам SMS с PIN кодом. Введите его в поле, расположенное ниже, либо перейдите по ссылке если ваш телефон поддерживает эту функцию.', flash[:info]
 
     pin = phones(:otto).reload.confirmation_token
 
@@ -102,15 +102,15 @@ class ConfirmsControllerTest < ActionController::TestCase
   test 'Проверка отображения формы для ввода PIN кода для подтверждения e-mail' do
     cookies['auth_token'] = somebodies(:otto).auth_token
     id = emails(:otto).id
-    get :view, id: id, resource_class: 'Email'
-    assert_select "input[name='confirm[pin]']"
+    xhr :get, :view, id: id, resource_class: 'Email'
+    assert response.body.include?("confirm[pin]")
   end
 
   test 'Проверка отображения формы для ввода PIN кода для подтверждения phone' do
     cookies['auth_token'] = somebodies(:otto).auth_token
     id = phones(:otto).id
-    get :view, id: id, resource_class: 'Phone'
-    assert_select "input[name='confirm[pin]']"
+    xhr :get, :view, id: id, resource_class: 'Phone'
+    assert response.body.include?("confirm[pin]")
   end
 
 
@@ -165,7 +165,7 @@ class ConfirmsControllerTest < ActionController::TestCase
     id = emails(:otto).id
     get :make, id: id, resource_class: 'Email', confirm: { pin: '5555' }
     assert emails(:otto).reload.confirmed?
-    assert_equal 'foo@example.com успешно подтвержден.', flash[:success]
+    assert_equal 'foo@example.com успешно подтвержден.', flash[:attention]
   end
 
   test 'Отправка формы с PIN кодом со страницы подтверждения phone. PIN код правильный' do
@@ -173,7 +173,7 @@ class ConfirmsControllerTest < ActionController::TestCase
     id = phones(:otto).id
     get :make, id: id, resource_class: 'Phone', confirm: { pin: '5555' }
     assert phones(:otto).reload.confirmed?
-    assert_equal '+7 (111) 111-11-11 успешно подтвержден.', flash[:success]
+    assert_equal '+7 (111) 111-11-11 успешно подтвержден.', flash[:attention]
   end
 
   #

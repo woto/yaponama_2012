@@ -41,6 +41,29 @@ class WelcomeControllerTest < ActionController::TestCase
     assert_equal 'session', user.creation_reason
   end
 
+  test 'Новому пользователю без auth_token должен записаться auth_token и role в cookies' do
+    get :index
+    assert_not_nil cookies['auth_token']
+    assert_not_nil cookies['role']
+    
+  end
+
+  test 'В ситуациях когда к нам зашел посетитель, а потом мы произвели очистку в базе пользователей, то при следующем посещении мы не хотим показывать посетителю какие-то сообщения связанные с аутентификацией, а тихо перегенировываем его auth_token и редиректим на главную(?)' do
+    cookies[:auth_token] = '123'
+    cookies[:role] = 'guest'
+    get :index
+    assert_redirected_to :root
+    assert_equal '', flash[:attention]
+  end
+
+  test 'В ситуациях когда роль не гость и мы не нашли auth_token в базе, то говорим, о том, что мы произвели автовыход' do
+    cookies[:auth_token] = '123'
+    cookies[:role] = 'user'
+    get :index
+    assert_redirected_to :root
+    assert_equal 'Вы посещали сайт с другого комьютера, в целях безопасности мы автоматически сделали автовыход со всех прочих устройств. Вы можете отключить функцию автоматического выхода в Личном кабинете для возможности одновременной работы с разных компьютеров.', flash[:attention]
+  end
+
   test 'Сделать проверку @meta_...' do
 
   end

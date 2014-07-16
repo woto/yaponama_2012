@@ -6,7 +6,7 @@
   <% @talk = prepare_talk_form %>
   $('#new_talk').replaceWith("<%= j render 'form' %>");
   $('#talk-log').replaceWith("<%= j render 'log' %>");
-  $('#attention').replaceWith("<%= j render 'attention' %>");
+  $('#important').replaceWith("<%= j render 'important' %>");
   App.nanoscroller_init()
   App.autosize_init()
 

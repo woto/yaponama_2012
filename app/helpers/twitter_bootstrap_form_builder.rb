@@ -183,7 +183,7 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
   def error_notification
     if @object.errors.any?
-      @template.alert 'danger' do
+      @template.alert 'warning' do
         [
           "<strong>Форма заполнена не корретно, пожалуйста исправьте ошибки.</strong><br />",
           @template.content_tag(:ul, class:'list-unstyled') do

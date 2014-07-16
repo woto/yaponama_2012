@@ -7,6 +7,7 @@ class UserTest < ActiveSupport::TestCase
     assert u.valid?
     profile = u.profiles.new(creation_reason: 'fixtures')
     name = profile.names.new
+    phone = profile.phones.new(value: '226619', mobile: false)
     name.creation_reason = 'frontend'
     name.name = 'Стэн'
     assert u.valid?

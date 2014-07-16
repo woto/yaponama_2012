@@ -6,7 +6,6 @@ user.role = "admin"
 user.password = '1111111111'
 user.code_1 = 'seed'
 user.phantom = false
-user.online = false
 
 account = user.build_account
 #account.assign_attributes( {:debit => 0, :credit => 0} )

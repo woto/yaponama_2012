@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140706053926) do
+ActiveRecord::Schema.define(version: 20140714212333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1113,10 +1113,7 @@ ActiveRecord::Schema.define(version: 20140706053926) do
     t.integer  "creator_id"
     t.boolean  "phantom",                                                  default: false
     t.boolean  "logout_from_other_places",                                 default: true
-    t.boolean  "online",                                                   default: false
     t.text     "chat"
-    t.integer  "place_id"
-    t.string   "post"
     t.integer  "profile_id"
     t.text     "cached_profile"
     t.decimal  "cached_debit",                     precision: 8, scale: 2, default: 0.0
@@ -1134,7 +1131,6 @@ ActiveRecord::Schema.define(version: 20140706053926) do
     t.string   "cached_client_width"
     t.string   "cached_client_height"
     t.string   "cached_talk"
-    t.string   "transport"
     t.integer  "unread_talks",                                             default: 0
     t.integer  "total_talks",                                              default: 0
     t.datetime "created_at"
@@ -1188,10 +1184,6 @@ ActiveRecord::Schema.define(version: 20140706053926) do
     t.boolean  "online_after"
     t.text     "chat_before"
     t.text     "chat_after"
-    t.integer  "place_id_before"
-    t.integer  "place_id_after"
-    t.string   "post_before"
-    t.string   "post_after"
     t.integer  "profile_id_before"
     t.integer  "profile_id_after"
     t.text     "cached_profile_before"
@@ -1226,8 +1218,6 @@ ActiveRecord::Schema.define(version: 20140706053926) do
     t.string   "cached_client_height_after"
     t.string   "cached_talk_before"
     t.string   "cached_talk_after"
-    t.string   "transport_before"
-    t.string   "transport_after"
     t.integer  "unread_talks_before"
     t.integer  "unread_talks_after"
     t.integer  "total_talks_before"

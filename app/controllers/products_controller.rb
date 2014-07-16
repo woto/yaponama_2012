@@ -2,6 +2,8 @@
 #
 class ProductsController < ApplicationController
 
+  include ProductParent
+
   include GridProduct
 
   include ProductsSearch
@@ -14,7 +16,7 @@ class ProductsController < ApplicationController
   before_action do
     catch :return do
       if params[:order_id]
-        @resource = Order.find(params[:order_id])
+        @resource = Order.find_by_token(params[:order_id])
         
         if @resource.delivery_variant_id.blank?
           redirect_to polymorphic_path([:edit, *jaba3, :delivery], {id: @resource, return_path: params[:return_path]})
@@ -41,7 +43,20 @@ class ProductsController < ApplicationController
   def new
     respond_to do |format|
       format.html do
-        search params[:catalog_number], params[:manufacturer], params[:replacements]
+
+        if params[:catalog_number].present?
+          catalog_number = params[:catalog_number]
+        elsif params[:product_id].present?
+          catalog_number = Product.find(params[:product_id]).catalog_number
+        end
+
+        #if params[:manufacturer].present?
+        #  manufacturer = params[:manufacturer]
+        #elsif params[:product_id].present?
+        #  manufacturer = Product.find(params[:product_id]).cached_brand
+        #end
+
+        search catalog_number, params[:manufacturer], params[:replacements]
       end
       format.js do
         redirect_via_turbolinks_to polymorphic_path([*jaba3, :product], params )
@@ -52,7 +67,20 @@ class ProductsController < ApplicationController
   def edit
     respond_to do |format|
       format.html do
-        search params[:catalog_number], params[:manufacturer], params[:replacements]
+
+        if params[:catalog_number].present?
+          catalog_number = params[:catalog_number]
+        elsif params[:id].present?
+          catalog_number = Product.find(params[:id]).catalog_number
+        end
+
+        #if params[:manufacturer].present?
+        #  manufacturer = params[:manufacturer]
+        #elsif params[:id].present?
+        #  manufacturer = Product.find(params[:id]).cached_brand
+        #end
+
+        search catalog_number, params[:manufacturer], params[:replacements]
       end
       format.js do
         redirect_via_turbolinks_to polymorphic_path([*jaba3, :product], params )
@@ -67,8 +95,8 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: "Товар #{@resource.to_label} успешно добавлен в корзину.") }
-        format.js { redirect_via_turbolinks_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: "Товар #{@resource.to_label} успешно добавлен в корзину.") }
+        format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно добавлен в корзину.") }
+        format.js { redirect_via_turbolinks_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно добавлен в корзину.") }
       else
         format.html { render action: 'new' }
         format.js { render action: 'new' }
@@ -79,8 +107,8 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: "Товар #{@resource.to_label} успешно изменен.") }
-        format.js { redirect_via_turbolinks_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), success: "Товар #{@resource.to_label} успешно изменен.") }
+        format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно изменен.") }
+        format.js { redirect_via_turbolinks_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно изменен.") }
       else
         format.html { render action: 'new' }
         format.js { render action: 'new' }
@@ -92,15 +120,6 @@ class ProductsController < ApplicationController
     # Доработать
     Rails.application.routes.recognize_path params[:return_path]
   end
-
-  #before_action do
-  #  # TODO если родительский товар удален и мы редактируем этот,
-  #  # у которого родительский товар указан на удаленный, то тут
-  #  # происходит ошибка
-  #  if params[:product_id].present?
-  #    @somebody = @user = Product.find(params[:product_id]).somebody
-  #  end
-  #end
 
   def destroy
     #binding.pry
@@ -157,7 +176,7 @@ class ProductsController < ApplicationController
     if @ic.operate
       redirect_to_relative_path('incart', request.fullpath)
     else
-      redirect_to params[:return_path], :danger => @ic.errors.full_messages
+      redirect_to params[:return_path], :attention => @ic.errors.full_messages
     end
   end
 
@@ -175,14 +194,14 @@ class ProductsController < ApplicationController
     #    render 'inorder'
     #  end
     #else
-    #  redirect_to params[:return_path], :danger => @ic.errors.full_messages
+    #  redirect_to params[:return_path], :attention => @ic.errors.full_messages
     #end
 
     #binding.pry
     if @ic.operate
       render 'inorder'
     else
-      redirect_to params[:return_path], :danger => @ic.errors.full_messages
+      redirect_to params[:return_path], :attention => @ic.errors.full_messages
     end
 
   end
@@ -193,7 +212,7 @@ class ProductsController < ApplicationController
       redirect_to_relative_path('inorder', params[:return_path], @ic.order)
     else
       render 'inorder'
-      #redirect_to params[:return_path], :danger => @ic.errors.full_messages
+      #redirect_to params[:return_path], :attention => @ic.errors.full_messages
     end
   end
 
@@ -202,7 +221,7 @@ class ProductsController < ApplicationController
     if @ic.operate
       redirect_to_relative_path('ordered', request.fullpath)
     else
-      redirect_to params[:return_path], :danger => @ic.errors.full_messages
+      redirect_to params[:return_path], :attention => @ic.errors.full_messages
     end
   end
 
@@ -210,7 +229,7 @@ class ProductsController < ApplicationController
     if @ic.operate
       redirect_to_relative_path('pre_supplier', request.fullpath)
     else
-      redirect_to params[:return_path], :danger => @ic.errors.full_messages
+      redirect_to params[:return_path], :attention => @ic.errors.full_messages
     end
   end
 
@@ -218,7 +237,7 @@ class ProductsController < ApplicationController
     if @ic.operate
       render 'post_supplier'
     else
-      redirect_to params[:return_path], :danger => @ic.errors.full_messages
+      redirect_to params[:return_path], :attention => @ic.errors.full_messages
     end
   end
 
@@ -237,7 +256,7 @@ class ProductsController < ApplicationController
     if @ic.operate
       redirect_to_relative_path('stock', request.fullpath)
     else
-      redirect_to params[:return_path], :danger => @ic.errors.full_messages
+      redirect_to params[:return_path], :attention => @ic.errors.full_messages
     end
   end
 
@@ -245,7 +264,7 @@ class ProductsController < ApplicationController
     if @ic.operate
       redirect_to_relative_path('complete', request.fullpath)
     else
-      redirect_to params[:return_path], :danger => @ic.errors.full_messages
+      redirect_to params[:return_path], :attention => @ic.errors.full_messages
     end
   end
 
@@ -253,7 +272,7 @@ class ProductsController < ApplicationController
     if @ic.operate
       redirect_to_relative_path 'cancel', request.fullpath
     else
-      redirect_to params[:return_path], :danger => @ic.errors.full_messages
+      redirect_to params[:return_path], :attention => @ic.errors.full_messages
     end
   end
 
@@ -261,7 +280,7 @@ class ProductsController < ApplicationController
     if @ic.operate
       redirect_to params[:return_path]
     else
-      redirect_to params[:return_path], :danger => @ic.errors.full_messages
+      redirect_to params[:return_path], :attention => @ic.errors.full_messages
     end
   end
 

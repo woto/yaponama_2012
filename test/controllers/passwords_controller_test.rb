@@ -30,7 +30,7 @@ class PasswordsControllerTest < ActionController::TestCase
     patch :update, user: { password: '9i8B*3', password_confirmation: '9i8B*3' }
     assert_not_equal otto.password_digest, somebodies(:otto).reload.password_digest
     assert_response :redirect
-    assert_equal 'Пароль был успешно изменен.', flash[:success]
+    assert_equal 'Пароль был успешно изменен.', flash[:attention]
     # TODO пользователь попадает на правильную страницу
   end
 

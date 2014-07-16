@@ -146,3 +146,19 @@ sidor:
   value: +7 (000) 000-00-00
   mobile : true
   creation_reason: fixtures
+
+sending1:
+  somebody: sending1
+  confirmed: false
+  profile: sending1
+  value: sending1
+  mobile : false
+  creation_reason: fixtures
+
+receiving1:
+  somebody: receiving1
+  confirmed: false
+  profile: receiving1
+  value: receiving1
+  mobile : false
+  creation_reason: fixtures

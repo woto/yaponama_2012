@@ -56,7 +56,7 @@ class PasswordResetsControllerTest < ActionController::TestCase
     )
 
     # Уведомление о том, что мы отправили SMS.
-    assert_equal "Мы отправили вам SMS с PIN кодом. Введите его в поле, расположенное ниже, либо перейдите по ссылке если ваш телефон поддерживает эту функцию. Сделайте повторный запрос PIN кода, если вы вдруг не получили SMS.", flash[:info]
+    assert_equal "Мы отправили вам SMS с PIN кодом. Введите его в поле, расположенное ниже, либо перейдите по ссылке если ваш телефон поддерживает эту функцию.", flash[:attention]
 
     #  TODO время генерации токена и сброс количества попыток
 
@@ -121,7 +121,7 @@ class PasswordResetsControllerTest < ActionController::TestCase
     )
 
     # Уведомление о том, что мы отправили e-mail.
-    assert_equal "Мы отправили вам электронное письмо с PIN кодом. Введите его в поле, расположенное ниже, либо перейдите по ссылке в письме. Не забудьте проверить папку спам, если долго не получаете письмо.", flash[:info]
+    assert_equal "Мы отправили вам электронное письмо с PIN кодом. Введите его в поле, расположенное ниже, либо перейдите по ссылке в письме. Не забудьте проверить папку спам, если долго не получаете письмо.", flash[:attention]
 
     #  TODO время генерации токена и сброс количества попыток
 
@@ -191,6 +191,17 @@ class PasswordResetsControllerTest < ActionController::TestCase
     }
     assert_equal ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символа)"], assigns(:password_reset).errors[:password]
     assert_equal ["не может быть пустым"], assigns(:password_reset).errors[:password_confirmation]
+  end
+
+  test 'Введя правильный пин код мы должны попасть на страницу смены пароля' do
+    post :pin, "password_reset" => { "pin" => somebodies(:otto).password_reset_token, "value" => phones(:otto2).value, "with" => 'phone' }
+    assert_redirected_to password_password_reset_path "password_reset" => { "pin" => somebodies(:otto).password_reset_token, "value" => phones(:otto2).value, "with" => 'phone' }
+  end
+
+  test 'Сменив пароль на новый мы должны автоматически войти' do
+    post :done, "password_reset" => { "password" => '123123', "password_confirmation" => "123123", "pin" => somebodies(:otto).password_reset_token, "value" => phones(:otto2).value, "with" => 'phone'}
+    assert_redirected_to user_path
+    assert 'Вы успешно сменили пароль и автоматически вошли на сайт.', flash[:attention]
   end
 
   test 'Дописать и протестировать накрутки, проникновения и т.д.' do

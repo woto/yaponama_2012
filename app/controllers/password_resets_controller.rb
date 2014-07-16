@@ -3,6 +3,7 @@
 class PasswordResetsController < ApplicationController
 
   include FindResourceDummy
+  include SessionsPasswordResetsCommon
   
   before_action :only_not_authenticated
   before_action { @meta_title = 'Восстановление пароля' }
@@ -33,7 +34,7 @@ class PasswordResetsController < ApplicationController
           "password_reset" => { 
             "value" => @password_reset.value, 
             "with" => @password_reset.with 
-        }), info: t("helpers.flash.password_reset.#{@password_reset.with}")
+        }), attention: t("helpers.flash.password_reset.#{@password_reset.with}")
  
 
       else
@@ -85,9 +86,20 @@ class PasswordResetsController < ApplicationController
       somebody.password = @password_reset.password
 
       if somebody.save!
-        redirect_to root_url, :success => "Вы успешно сменили пароль, теперь можете войти на сайт." and return
-        # TODO если захочу автоматически вводить пользователя под своим аккаунтом, то объединить с логином
-        # т.к. необходимо склеивание аккаунтов.
+
+        authenticated_user = @password_reset.somebody
+
+        session_password_resets_common current_user, authenticated_user
+
+        #@somebody.pass_my_attributes_to_somebody_and_destroy_self(@password_reset.somebody)
+
+        attention = "Вы успешно сменили пароль и автоматически вошли на сайт."
+        if authenticated_user.seller?
+          redirect_to admin_path, :attention => attention and return
+        else
+          redirect_to user_path, :attention => attention and return
+        end
+
       end
     else
       render 'password'

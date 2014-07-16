@@ -31,9 +31,9 @@ class Admin::PagesController < PagesController
 
   def multiple_destroy
     if @ic.operate
-      redirect_to params[:return_path]
+      redirect_to params[:return_path], attention: 'Выбранные страницы успешно удалены.'
     else
-      redirect_to params[:return_path], :danger => @ic.errors.full_messages
+      redirect_to params[:return_path], attention: @ic.errors.full_messages
     end
   end
 

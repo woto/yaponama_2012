@@ -6,3 +6,21 @@ first_user:
   actual_address: first_user
   creation_reason: fixtures
   somebody: first_user
+
+sending1:
+  ownership: individual
+  name: sending1
+  inn: '1234567890'
+  legal_address: sending1
+  actual_address: sending1
+  creation_reason: fixtures
+  somebody: sending1
+
+receiving1:
+  ownership: individual
+  name: receiving1
+  inn: '1234567890'
+  legal_address: receiving1
+  actual_address: receiving1
+  creation_reason: fixtures
+  somebody: receiving1

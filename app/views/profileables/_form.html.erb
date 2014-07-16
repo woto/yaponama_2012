@@ -2,9 +2,7 @@
   <%= c1 do %>
     <%= twbs_form_for @resource, :url => [(admin_zone? ? :admin : nil), (admin_zone? ? @somebody : :user), @resource] do |f| %>
 
-      <% content_for :form_error do %>
-        <%= f.error_notification %>
-      <% end %>
+      <%= f.error_notification %>
 
       <%= f.alert_danger do %>
         <%= f.error(:base) %>

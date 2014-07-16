@@ -18,9 +18,7 @@
 
         <%= twbs_form_for @resource, url: url_for(action: :update) do |f| %>
 
-          <% content_for :form_error do %>
-            <%= f.error_notification %>
-          <% end %>
+          <%= f.error_notification %>
 
           <%= f.hidden_field :profile_type, value: 'hack' %>
 

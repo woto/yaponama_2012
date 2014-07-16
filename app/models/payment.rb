@@ -12,7 +12,7 @@ class Payment < ActiveRecord::Base
   attr_accessor :profile_type
   belongs_to :profile, :class_name => "Profile", autosave: true
   #belongs_to :profile#, autosave: true#, inverse_of: :payments
-  validates :profile_type, :inclusion => { :in => ['new', 'old'] }
+  validates :profile_type, :inclusion => { :in => ['new', 'old'] }, allow_blank: true # TODO проверить потом
   validates :new_profile, associated: true, if: -> { profile_type == 'new' }
   validates :old_profile, associated: true, inclusion: { in: proc {|payment| payment.somebody.profiles } }, if: -> { profile_type == 'old' }
 

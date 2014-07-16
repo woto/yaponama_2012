@@ -6,12 +6,18 @@ class Admin::CashesController < CashesController
   def create
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to [:admin, @user], success: "Успешно внесено #{view_context.number_to_currency(@resource.debit)}" }
+        format.js { redirect_to url_for(action: :show), attention: "Успешно внесено #{view_context.number_to_currency(@resource.debit)}" }
       else
-        format.html { render action: "new" }
+        format.js { render action: "new" }
       end
     end
 
+  end
+
+  private
+
+  def find_resource
+    @resource = @resource_class.new
   end
 
 end

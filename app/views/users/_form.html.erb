@@ -9,6 +9,8 @@
 
       <%= f.twbs_text_field :prepayment %>
 
+      <%= f.twbs_collection_select :profile_id, @resource.profiles, :id, :to_label, :include_blank => true %>
+
       <%= f.twbs_collection_select :role, Rails.configuration.somebody_roles.select{|k, v| v["real"] == true}.map{|k, v| [k, v['title']] }, :first, :last, :include_blank => false %>
 
       <%= f.twbs_check_box :logout_from_other_places %>

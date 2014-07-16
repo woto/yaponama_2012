@@ -38,13 +38,10 @@ class Profile < ActiveRecord::Base
     end
   end
 
-  validates :phones, presence: true, if: -> {emails.blank?}
-  validates :emails, presence: true, if: -> {phones.blank?}
-
   after_validation do
-    if creation_reason == 'talk' && errors.any?
+    if (creation_reason == 'talk' && errors.any?) || (emails.blank? && phones.blank? )
       email = emails.first || emails.new
-      phone = phones.first || phones.new
+      phone = phones.first || phones.new(mobile: true)
       if phone.try(:value).blank? && email.try(:value).blank?
         errors.add(:base, 'укажите телефон и/или email')
       end
@@ -108,7 +105,7 @@ class Profile < ActiveRecord::Base
 
   before_destroy do
     if somebody.profiles.length <= 1
-      errors.add(:base, 'unable')
+      errors.add(:base, 'Нельзя удалить последний профиль')
       false
     end
   end

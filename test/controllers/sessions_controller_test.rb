@@ -52,7 +52,7 @@ class SessionsControllerTest < ActionController::TestCase
     cookies['auth_token'] = somebodies(:first_admin).auth_token
     delete :destroy
     assert_nil cookies['auth_token']
-    assert_equal response.code, '302'
+    assert_equal '302', response.code
   end
 
   test 'Т.к. допустимо иметь несколько одинаковых phone или email, то вход должен осуществиться в соответствии с паролем учетной записи' do
@@ -79,6 +79,56 @@ class SessionsControllerTest < ActionController::TestCase
     new_auth_token = user.reload.auth_token
     assert_equal auth_token, new_auth_token
     assert_equal cookies['auth_token'], new_auth_token
+  end
+
+  test 'Если пользователь уже вошел на сайт, то при попытке запроса страниц, у которых only_not_authenticated мы должны увидеть уведомление, что вход уже осуществлен для ролей admin, manager, user' do
+    cookies['auth_token'] = somebodies(:stan).auth_token
+    get :show
+    assert_equal 'Вы уже вошли на сайт.', flash[:attention]
+  end
+
+  test 'И наоборот при попытке доступа не аутентифицированным пользователем к страницам, у которых only_authenticated мы должны увидеть уведомление, о необходимости входа для ролей guest' do
+    delete :destroy
+    assert_equal 'Пожалуйста войдите на сайт.', flash[:attention]
+  end
+
+  test 'Если гость вошел под пользовательской учетной записью или восстановил пароль, то необходимо передать данные (профили, заказы и т.д.) пользователю.' do
+    profile = profiles :sending1
+    phone = phones :sending1
+    email = emails :sending1
+    name = names :sending1
+    passport = passports :sending1
+    talk = talks :sending1
+    postal_address = postal_addresses :sending1
+    company = companies :sending1
+    car = cars :sending1
+    order = orders :sending1
+    product = products :sending1
+
+    sending1 = somebodies :sending1
+    receiving1 = somebodies :receiving1
+    cookies[:auth_token] = sending1.auth_token
+    post :create, "session" => {"mobile"=>"0", "value"=>"receiving1", "password"=>"receiving1"}, with: 'phone'
+
+    assert_equal receiving1, profile.reload.somebody
+    assert_equal receiving1, phone.reload.somebody
+    assert_equal receiving1, email.reload.somebody
+    assert_equal receiving1, name.reload.somebody
+    assert_equal receiving1, passport.reload.somebody
+    assert_equal receiving1, talk.reload.somebody
+    assert_equal receiving1, postal_address.reload.somebody
+    assert_equal receiving1, company.reload.somebody
+    assert_equal receiving1, car.reload.somebody
+    assert_equal receiving1, order.reload.somebody
+    assert_equal receiving1, product.reload.somebody
+  end
+
+  test 'Выход пользователя' do
+    cookies['auth_token'] = somebodies(:first_admin).auth_token
+    delete :destroy
+
+    assert_equal nil, cookies['auth_token']
+    assert_equal nil, cookies['role']
   end
 
 end

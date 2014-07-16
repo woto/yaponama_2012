@@ -1,13 +1,9 @@
-<div class="container">
+<%= somebody_tabs do %>
 
-  <%= somebody_tabs do %>
+  <%= page_header %>
 
-    <%= page_header %>
+  <%= render 'form' %>
 
-    <%= render 'form' %>
+  <%= render 'searches/index' %>
 
-    <%= render 'searches/index' %>
-
-  <% end %>
-
-</div>
+<% end %>

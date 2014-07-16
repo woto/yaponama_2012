@@ -3,6 +3,12 @@
 require 'test_helper'
 
 class Admin::ProductsControllerTest < ActionController::TestCase
+
+  test 'Продавец должен видеть кнопку Форма' do
+    cookies['auth_token'] = somebodies(:first_admin).auth_token
+    get :new, product_id: products(:sending1), user_id: somebodies(:sending1)
+    assert_select 'a[href=#modal_form]', true
+  end
   
   test 'Тестируем добавление администратором товара пользователю с еще не существующим брендом.' do
 
@@ -85,6 +91,9 @@ class Admin::ProductsControllerTest < ActionController::TestCase
     assert_equal 0, at2.credit_before
     assert_equal 8, at1.credit_after
     assert_equal -4, at2.credit_after.to_f
+
+    assert_equal "Товар MR245368 (MITSUBISHI) успешно изменен.", flash['attention']
+    assert_redirected_to "/admin/users/#{somebodies(:anton).id}/products/status/incart"
 
   end
 

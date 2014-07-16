@@ -86,7 +86,7 @@ class TalkReadTest < ActionDispatch::IntegrationTest
     assert has_text? 'Текст сообщения 129375238495712345432871234'
 
     Capybara.session_name = :first
-    assert has_text?('Текст сообщения 129375238495712345432871234', wait: 10)
+    assert has_text?('Текст сообщения 129375238495712345432871234')
 
     talk = Talk.where(text: 'Текст сообщения 129375238495712345432871234').first
     assert_equal true, talk.read

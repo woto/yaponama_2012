@@ -9,3 +9,5 @@ ru:
         create: Войти
       password_reset:
         create: Далее
+      split:
+        create: Разбить

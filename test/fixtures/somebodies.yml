@@ -8,7 +8,6 @@ first_admin:
   auth_token: PaV6t6OZxzRIWbl0nM9NGQ
   # password 1111111111
   password_digest: $2a$04$rHSdT0UwnhP1CASNXzcYL.51uIkeSYdV.fw8wgAbMOlIYhxn9krha
-  password_reset_token: 
   password_reset_sent_at: 
   ipgeobase_name: 
   ipgeobase_names_depth_cache: 
@@ -22,8 +21,6 @@ first_admin:
   logout_from_other_places: false
   profile: first_admin
   cached_profile: '{"names":[{"surname":"Корнев","name":"Руслан","patronymic":"Михайлович"}],"phones":[{"value":"+7 (111) 111-11-11"}],"emails":[{"value":"foo@example.com"}],"passports":[{"seriya":"1","nomer":"1","mesto_rozhdeniya":"1"}]}'
-  place: first
-  post: Администратор сайта
 
 first_user:
   type: User
@@ -129,11 +126,10 @@ phantom:
   type: User
   role: user
 
-online:
-  online: true
-  phantom: true
-  type: User
-  role: user
+#online:
+#  phantom: true
+#  type: User
+#  role: user
 
 avtorif:
   auth_token: P6OZ392jf31vnD332xbl0nM
@@ -150,7 +146,6 @@ mile:
 
 exist:
   auth_token: 84SDefghsd3DFG234SGgh
-  online: true
   phantom: true
   type: Supplier
   creation_reason: fixtures
@@ -206,8 +201,6 @@ ivan:
   order_rule: all
   profile: ivan
   cached_profile: '{"names":[{"surname":"Иванов","name":"Иван","patronymic":"Иванович"}],"phones":[{"value":"+7 (999) 999-99-99"}],"emails":[{"value":"six@example.com"}],"passports":[]}'
-  place: second
-  post: Консультант менеджер
 
 petr:
   type: User
@@ -222,8 +215,6 @@ petr:
   order_rule: all
   profile: petr
   cached_profile: '{"names":[{"surname":"Петров","name":"Пётр","patronymic":"Петрович"}],"phones":[{"value":"+7 (222) 222-22-22"}],"emails":[{"value":"seven@example.com"}],"passports":[]}'
-  place: second
-  post: Старший менеджер
   total_talks: 3
   unread_talks: 3
 
@@ -240,8 +231,6 @@ sidor:
   order_rule: all
   profile: sidor
   cached_profile: '{"names":[{"surname":"Сидоров","name":"Сидор","patronymic":"Сидорович"}],"phones":[{"value":"+7 (000) 000-00-00"}],"emails":[],"passports":[]}'
-  place: first
-  post: Старший менеджер
   logout_from_other_places: false
   total_talks: 3
   unread_talks: 3
@@ -259,3 +248,33 @@ max:
   # password: maxmax
   password_digest: "$2a$10$mbYYVLe03awy7Oik4LlWs.md9.qCIaL6cQ/c2dw9gH95X7SjSG6xW"
   cached_russian_time_zone_auto_id: 9
+
+sending1:
+  type: User
+  auth_token: E0ZvXOfYRsZzEeIU8RwdJj
+  creation_reason: fixtures
+  role: guest
+  discount: 0
+  prepayment: 100
+  order_rule: all
+  logout_from_other_places: false
+  # password: sending1
+  password_digest: "$2a$10$7rY9..jpSFZoBufCPjFc6.FFG2ZeWx0UcrrmBvBVUtdcqwsbAWg7C"
+  cached_russian_time_zone_auto_id: 9
+  profile: sending1
+  cached_profile: '{"names":[{"surname":"sending1","name":"sending1","patronymic":"sending1"}],"phones":[{"value":"sending1"}],"emails":[{"value":"sending1@example.com"}],"passports":[{"seriya":"sending1","nomer":"sending1","mesto_rozhdeniya":"sending1"}]}'
+
+receiving1:
+  type: User
+  auth_token: U8RfYRsZzE0ZvXOEeIwdJj
+  creation_reason: fixtures
+  role: user
+  discount: 0
+  prepayment: 100
+  order_rule: all
+  logout_from_other_places: false
+  # password: receiving1
+  password_digest: "$2a$10$HwSg7Aw8NXNHkk8D/KCL.eqVtB5..ZgSqLwFWbGguF1DceI.zRvH."
+  cached_russian_time_zone_auto_id: 9
+  profile: receiving1
+  cached_profile: '{"names":[{"surname":"receiving1","name":"receiving1","patronymic":"receiving1"}],"phones":[{"value":"receiving1"}],"emails":[{"value":"receiving1@example.com"}],"passports":[{"seriya":"receiving1","nomer":"receiving1","mesto_rozhdeniya":"receiving1"}]}'

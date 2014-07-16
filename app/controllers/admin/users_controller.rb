@@ -30,7 +30,7 @@ class Admin::UsersController < UsersController
   def logout_from_all_places
     @resource.generate_token :auth_token, :long
     @resource.save!
-    redirect_to admin_user_path(@resource), success: "Вы разлогинили пользователя со всех компьютеров. Теперь ему потребуется заново войти на сайт."
+    flash.now[:attention] = "Вы разлогинили пользователя со всех компьютеров. Теперь ему потребуется заново войти на сайт."
   end
 
   private

@@ -13,7 +13,7 @@ class UsersControllerTest < ActionController::TestCase
     new_token = somebodies(:otto).reload.auth_token
     assert_not_equal auth_token, new_token
     assert_equal new_token.size, 22
-    assert_equal 'Вы успешно вышли со всех компьютеров, где использовалась ваша учетная запись.', flash[:success]
+    assert_equal 'Вы успешно вышли со всех компьютеров, где использовалась ваша учетная запись.', flash[:attention]
   end
 
 end

@@ -1,3 +1,10 @@
+abs:
+  manufacturer: false
+  name: A.B.S.
+  rating: 300
+  content:
+  phantom: false
+  creator: first_admin
 audi:
   manufacturer: true
   name: AUDI
@@ -75,4 +82,30 @@ kia:
   content: Корейская поделка
   creator: mike
 
+hyundai:
+  manufacturer: true
+  name: HYUNDAI
+  rating: 1000
+  phantom: false
+  creator: first_admin
 
+vag:
+  manufacturer: true
+  name: VAG
+  rating: 1000
+  phantom: false
+  creator: first_admin
+
+sending1:
+  manufacturer: false 
+  name: SENDING1
+  rating: 1000
+  phantom: false
+  creator: sending1
+
+receiving1:
+  manufacturer: false 
+  name: RECEIVING1
+  rating: 1000
+  phantom: false
+  creator: receiving1

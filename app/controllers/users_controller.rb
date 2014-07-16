@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to(url_for(:action => :show), success: 'Настройки пользователя успешно сохранены') }
+        format.html { redirect_to(url_for(:action => :show), attention: 'Настройки пользователя успешно сохранены') }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -36,13 +36,13 @@ class UsersController < ApplicationController
   def logout_from_all_places
     @resource.generate_token :auth_token, :long
     @resource.save!
-    redirect_to root_path, success: "Вы успешно вышли со всех компьютеров, где использовалась ваша учетная запись."
+    redirect_to root_path, attention: "Вы успешно вышли со всех компьютеров, где использовалась ваша учетная запись."
   end
 
   #def update
   #  respond_to do |format|
   #    if @resource.update(resource_params)
-  #      format.html { redirect_to url_for(action: 'show'), :success => 'Настройки успешно сохранены' }
+  #      format.html { redirect_to url_for(action: 'show'), :attention => 'Настройки успешно сохранены' }
   #      format.json { head :no_content }
   #    else
   #      format.html { render :action => "edit" }

@@ -56,3 +56,27 @@ rublyevskoe_shosse:
   notes_invisible: 'Внтуреняя служба безопасности, без удостоверения (не водит. удост.) не пропустят'
   somebody: mike
   creator: mike
+
+sending1:
+  postcode: '000000'
+  region: "sending1"
+  city: "sending1"
+  street: "sending1"
+  house: 'sending1'
+  stand_alone_house: false
+  room: 'sending1'
+  creation_reason: fixtures
+  somebody: sending1
+  creator: sending1
+
+receiving1:
+  postcode: '000000'
+  region: "receiving1"
+  city: "receiving1"
+  street: "receiving1"
+  house: 'receiving1'
+  stand_alone_house: false
+  room: 'receiving1'
+  creation_reason: fixtures
+  somebody: receiving1
+  creator: receiving1

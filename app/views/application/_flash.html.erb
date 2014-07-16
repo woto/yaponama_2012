@@ -1,5 +1,7 @@
-<% flash.each do |key, value| %>
-  <%= alert key, false, style: 'margin-bottom: 0' do %>
-    <%= value %>
+<% content_for :flash do %>
+  <% [:success, :info, :warning, :danger].each do |key| %>
+    <%= alert key do %>
+      <%= flash[key] %>
+    <% end if flash[key] %>
   <% end %>
 <% end %>

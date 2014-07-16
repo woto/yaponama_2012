@@ -5,9 +5,10 @@ class SessionsController < ApplicationController
   include FindResourceByIdDummy
   include FindResourceDummy
   include SetUserAndCreationReasonDummy
+  include SessionsPasswordResetsCommon
 
   before_action :only_authenticated, :only => [:destroy]
-  before_action :only_not_authenticated, :only => [:new, :create]
+  before_action :only_not_authenticated, :only => [:show, :new, :create]
   before_action { @meta_title = 'Вход на сайт' }
 
 
@@ -23,26 +24,13 @@ class SessionsController < ApplicationController
 
       authenticated_user = @session.user
 
-      if params[:remember_me] == '1'
-        cookies.permanent[:auth_token] = { :value => authenticated_user.auth_token}
+      session_password_resets_common current_user, authenticated_user
+
+      attention = 'Вы успешно вошли, добро пожаловать!'
+      if authenticated_user.seller?
+        redirect_to admin_path, attention: attention
       else
-        cookies[:auth_token] = { :expire => nil, :value => authenticated_user.auth_token } 
-      end
-
-      #reset_session
-      #session[:user_id] = authenticated.id
-      # TODO Сделал так чтобы если пользователь зарегистрирован в системе, значит он имеет какие-то привилении
-      # соответственно старный гостевой аккаунт не нужен и 'он не хотел под ним работать на сайте'
- 
-      @user.pass_my_attributes_to_somebody_and_destroy_self(@session.user)
-
-      #@user.destroy
-      # TODO наверное круто было бы, если бы я делал merge пользователей
-
-      if @session.user.seller?
-        redirect_to admin_path
-      else
-        redirect_to user_path
+        redirect_to user_path, attention: attention
       end
 
     else
@@ -52,10 +40,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    current_user.update_column(:online, false)
     #session[:user_id] = nil
     cookies.delete(:auth_token)
-    redirect_to root_path
+    cookies.delete(:role)
+    redirect_to root_path, attention: 'Вы успешно вышли, всего доброго.'
   end
 
   def session_params

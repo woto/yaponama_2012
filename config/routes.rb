@@ -41,8 +41,6 @@ Yaponama2012::Application.routes.draw do
     resources :pings
   end
 
-  resources :rspec_tests
-
   namespace :admin do
     resources :blocks
   end
@@ -79,7 +77,7 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :cashable do
-    resource :cashes, :only => [:new, :create]
+    resource :cashes, :only => [:new, :create, :show]
   end
 
 
@@ -178,7 +176,7 @@ Yaponama2012::Application.routes.draw do
       end
 
       resources :products
-      resource :split, :only => [:new, :create]
+      resource :split, :only => [:new, :create, :show]
 
       concerns :transactionable
       concerns :gridable
@@ -340,7 +338,6 @@ Yaponama2012::Application.routes.draw do
     #patch :password, :on => :member, to: "passwords#update"
     delete :logout_from_all_places
     concerns :talkable
-    concerns :cashable
     post 'pretype', to: 'users#update'
   end
   resources :uploads do

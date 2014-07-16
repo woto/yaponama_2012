@@ -257,7 +257,7 @@ class RegistersControllerTest < ActionController::TestCase
 
     assert assigns(:user).valid?
 
-    assert_equal 'Регистрация завершена. Вы успешно вошли на сайт под своей учетной записью.', flash[:success]
+    assert_equal 'Регистрация завершена. Вы успешно вошли на сайт под своей учетной записью.', flash[:attention]
 
     delivery = ActionMailer::Base.deliveries.last
 
@@ -318,7 +318,7 @@ class RegistersControllerTest < ActionController::TestCase
 
     assert assigns(:user).valid?
 
-    assert_equal 'Регистрация завершена. Вы успешно вошли на сайт под своей учетной записью.', flash[:success]
+    assert_equal 'Регистрация завершена. Вы успешно вошли на сайт под своей учетной записью.', flash[:attention]
 
     delivery = ActionMailer::Base.deliveries.last
 

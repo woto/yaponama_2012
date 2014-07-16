@@ -12,7 +12,7 @@ class ConfirmsController < ApplicationController
 
   def ask
     _ask
-    redirect_to url_for(action: 'view', return_path: params[:return_path]), info: t("helpers.flash.confirm.#{params[:resource_class]}")
+    redirect_to url_for(action: 'view'), info: t("helpers.flash.confirm.#{params[:resource_class]}")
   end
 
   def make
@@ -21,10 +21,10 @@ class ConfirmsController < ApplicationController
     if @contact.update(confirm_params)
       if @user.role == 'guest'
         cookies[:auth_token] = { :expire => nil, :value => @contact.profile.somebody.auth_token } 
-        redirect_to edit_register_path(with: @contact.class.name.underscore), success: "#{@contact.to_label} успешно подтвержден."
-        #redirect_to root_path, success: "#{@contact.to_label} успешно подтвержден."
+        redirect_to edit_register_path(with: @contact.class.name.underscore), attention: "#{@contact.to_label} успешно подтвержден."
+        #redirect_to root_path, attention: "#{@contact.to_label} успешно подтвержден."
       else
-        redirect_to user_path, success: "#{@contact.to_label} успешно подтвержден."
+        redirect_to user_path, attention: "#{@contact.to_label} успешно подтвержден."
       end
     else
       render 'view'
@@ -41,6 +41,8 @@ class ConfirmsController < ApplicationController
   # для любого., напр. чтобы была возможности перейти по ссылке с телефона будучи не залогиненым
 
   def anonymous_contact
+    # TODO TODO TODO!
+    #binding.pry
     case params[:resource_class]
     when 'Phone'
       @contact = Phone.where(id: params[:id]).not_confirmed.first
@@ -57,14 +59,14 @@ class ConfirmsController < ApplicationController
     case params[:resource_class]
     when 'Phone'
       @contact = @user.phones.where(id: params[:id]).not_confirmed.first
-      success = 'Ваш номер телефона уже подтвержден.'
+      attention = 'Ваш номер телефона уже подтвержден.'
     when 'Email'
       @contact = @user.emails.where(id: params[:id]).not_confirmed.first
-      success = 'Ваш электронный адрес уже подтвержден.'
+      attention = 'Ваш электронный адрес уже подтвержден.'
     end
 
     unless @contact
-      redirect_to user_path, success: success
+      redirect_to user_path, attention: attention
     end
 
   end

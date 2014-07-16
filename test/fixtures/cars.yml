@@ -17,3 +17,19 @@ mark:
   generation: luxury
   modification: two_and_half_cvt
   creation_reason: 'fixtures'
+
+sending1:
+  somebody: sending1
+  brand: sending1
+  model: sending1
+  vin_or_frame: frame
+  frame: sending1
+  creation_reason: fixtures
+
+receiving1:
+  somebody: receiving1
+  brand: receiving1
+  model: receiving1
+  vin_or_frame: frame
+  frame: receiving1
+  creation_reason: fixtures

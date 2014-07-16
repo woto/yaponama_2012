@@ -120,7 +120,7 @@ module GridHelper
           Rails.configuration.vin_or_frame[val]
         when 'ownership'
           Rails.configuration.company_ownerships[val]
-        when *['hide_catalog_number', 'logout_from_other_places', 'sound', 'online', 'phantom', 'confirmed', 'mobile', 'stand_alone_house']
+        when *['hide_catalog_number', 'logout_from_other_places', 'sound', 'phantom', 'confirmed', 'mobile', 'stand_alone_house']
           if val == true
             if admin_zone?
               link_to_fast_edit "Да", item, column_name

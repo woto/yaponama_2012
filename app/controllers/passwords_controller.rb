@@ -10,7 +10,7 @@ class PasswordsController < ApplicationController
     respond_to do |format|
       #binding.pry
       if @resource.save
-        format.html { redirect_to url_for(controller: :users, action: :show, id: @resource.id), :success => 'Пароль был успешно изменен.' }
+        format.html { redirect_to url_for(controller: :users, action: :show, id: @resource.id), :attention => 'Пароль был успешно изменен.' }
       else
         format.html { render :action => "edit" }
       end

@@ -117,3 +117,19 @@ sidor:
   cached_phones: '[{"value":"+7 (000) 000-00-00"}]'
   cached_emails: '[]'
   cached_passports: '[]'
+
+sending1:
+  somebody: sending1
+  creation_reason: fixtures
+  cached_names: '[{"surname":"sending1","name":"","patronymic":""}]'
+  cached_phones: '[{"value":"sending1"}]'
+  cached_emails: '[{"value":"sending1@example.com"}]'
+  cached_passports: '[{"seriya":"sending1","nomer":"sending1","mesto_rozhdeniya":"sending1"}]'
+
+receiving1:
+  somebody: receiving1
+  creation_reason: fixtures
+  cached_names: '[{"surname":"receiving1","name":"","patronymic":""}]'
+  cached_phones: '[{"value":"receiving1"}]'
+  cached_emails: '[{"value":"receiving1@example.com"}]'
+  cached_passports: '[{"seriya":"receiving1","nomer":"receiving1","mesto_rozhdeniya":"receiving1"}]'
