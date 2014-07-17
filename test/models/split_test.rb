@@ -20,9 +20,9 @@ class SplitTest < ActiveSupport::TestCase
     assert_equal first.product_id, product.id
     assert_equal second.product_id, product.id
 
-    assert_equal 1, product.product_transactions.length
-    assert_equal 1, first.product_transactions.length
-    assert_equal 1, second.product_transactions.length
+    assert_equal 1, product.product_transactions.count
+    assert_equal 1, first.product_transactions.count
+    assert_equal 1, second.product_transactions.count
     
     pt = product.product_transactions.first
     ft = first.product_transactions.first
