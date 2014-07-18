@@ -166,11 +166,6 @@ GIT
       actionpack (~> 4.0)
       activemodel (~> 4.0)
 
-PATH
-  remote: ~/rails/read_only
-  specs:
-    read_only (0.0.3)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -276,6 +271,7 @@ GEM
     rake (10.3.2)
     rdoc (4.1.1)
       json (~> 1.4)
+    read_only (0.0.3)
     redis (3.0.7)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
@@ -380,7 +376,7 @@ DEPENDENCIES
   puma
   rack-rewrite
   rails!
-  read_only!
+  read_only
   redis (~> 3.0.1)
   remotipart
   rmagick
