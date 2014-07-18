@@ -1,10 +1,10 @@
 defaults: &defaults
-  checkout_account: Номер счета получателя платежа
-  checkout_bank: Наименование банка получателя платежа
-  checkout_bik: БИК
-  checkout_correspondent: Номер кор./сч. банка получателя платежа
-  checkout_inn: ИНН получателя платежа (не банка)
-  checkout_recipient: Наименования получателя платежа
+  account: Номер счета получателя платежа
+  bank: Наименование банка получателя платежа
+  bik: БИК
+  correspondent: Номер кор./сч. банка получателя платежа
+  inn: ИНН получателя платежа (не банка)
+  recipient: Наименования получателя платежа
 
 development:
   <<: *defaults
