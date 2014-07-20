@@ -52,7 +52,7 @@ class Session
       case code_2
       when 'phone'
         if self.errors.blank?
-          errors.add(:base, "Пара телефон и пароль не найдены.")
+          errors.add(:base, "Указанные вами телефон и пароль не найдены, попробуйте еще раз, или воспользуйтесь восстановлением пароля.")
         end
       when 'email'
         if self.errors.blank?
