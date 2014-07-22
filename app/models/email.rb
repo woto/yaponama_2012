@@ -17,7 +17,7 @@ class Email < ActiveRecord::Base
   validates :value, presence: true, email: true, unless: -> { self.marked_for_destruction? }
 
   validate :value do
-    if Email.confirmed.not_self(id).same(value).first
+    if Email.where(confirmed: true).not_self(id).same(value).first
       errors.add(:value, "Такой e-mail адрес уже занят.")
       false
     end

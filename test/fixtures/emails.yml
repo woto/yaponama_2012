@@ -40,6 +40,15 @@ guest_with_profile:
   somebody: guest_with_profile
   confirmed: false
   creation_reason: fixtures
+  confirmation_token: 8888
+
+guest_with_profile2:
+  value: guest_with_profile2@example.com
+  profile: guest_with_profile2
+  somebody: guest_with_profile2
+  confirmed: true
+  creation_reason: fixtures
+  confirmation_token: 9999
 
 ivan:
   value: six@example.com

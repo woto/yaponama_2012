@@ -56,7 +56,7 @@ class Session
         end
       when 'email'
         if self.errors.blank?
-          errors.add(:base, "Пара e-mail и пароль не найдены.")
+          errors.add(:base, "Указанные вами телефон и пароль не найдены, попробуйте еще раз, или воспользуйтесь восстановлением пароля.")
         end
       end
     end

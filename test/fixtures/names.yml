@@ -78,6 +78,12 @@ guest_with_profile:
   somebody: guest_with_profile
   creation_reason: fixtures
 
+guest_with_profile2:
+  name: Гость с профилем
+  profile: guest_with_profile2
+  somebody: guest_with_profile2
+  creation_reason: fixtures
+
 ivan:
   somebody: ivan
   profile: ivan

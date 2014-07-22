@@ -66,13 +66,13 @@ module Confirmed
 
   module ClassMethods
 
-    def confirmed
-      where(confirmed: true)
-    end
+    #def confirmed
+    #  where(confirmed: true)
+    #end
 
-    def not_confirmed
-      where(confirmed: false)
-    end
+    #def not_confirmed
+    #  where(confirmed: false)
+    #end
 
   end
 

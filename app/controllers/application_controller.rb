@@ -299,6 +299,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_resource
+    #binding.pry
     @resource = @resource_class.find(params[:id])
   end
 

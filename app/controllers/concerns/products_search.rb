@@ -63,7 +63,6 @@ module ProductsSearch
 
         price_request_cache_key = "#{c9}-#{b9}-#{r9}"
 
-
         plog.debug "Проверка наличия кеша"
         if Rails.cache.exist? price_request_cache_key
           @parsed_json = (Rails.cache.read(price_request_cache_key)).dup
@@ -360,7 +359,6 @@ module ProductsSearch
         keywords = keywords[0, (keywords.size/4.0).round]
         @meta_keywords = keywords.map{|k, v| k}.join(', ')
         # /Keywords
-
 
         titles = @formatted_data.map{|k, v| v.map{|kk, vv| vv[:titles]}}.map{|kkk| kkk.map{|kkkk| kkkk.to_a}}.flatten(2).sort{|kkkkk, vvvvv| kkkkk[1] <=> vvvvv[1]}.reverse.map{|kkkkk| kkkkk[0]}.uniq
 

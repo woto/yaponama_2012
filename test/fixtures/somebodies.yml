@@ -188,6 +188,16 @@ guest_with_profile:
   order_rule: all
   profile: guest_with_profile
 
+guest_with_profile2:
+  type: User
+  auth_token: 9bewFa18E20U3HmFeRBSYW
+  creation_reason: fixtures
+  role: guest
+  discount: 0
+  prepayment: 100
+  order_rule: all
+  profile: guest_with_profile2
+
 ivan:
   type: User
   creator: first_admin

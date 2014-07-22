@@ -27,7 +27,7 @@ class Phone < ActiveRecord::Base
   validates :value, presence: true, phone: true, unless: -> { self.marked_for_destruction? }
 
   validate :value do
-    if Phone.confirmed.not_self(id).same(value).first
+    if Phone.where(confirmed: true).not_self(id).same(value).first
       errors.add(:value, "Такой номер телефона уже занят.")
       false
     end
