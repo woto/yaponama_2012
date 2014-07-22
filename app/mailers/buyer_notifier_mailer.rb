@@ -9,6 +9,6 @@ class BuyerNotifierMailer < ApplicationMailer
 
   def phone(talk, phone)
     @talk = talk
-    mail to: 'avisosms@fake.ru', subject: to_avisosms_format(phone)
+    mail to: 'b049fb236f62a7f78166@avisosms.ru', subject: to_avisosms_format(phone)
   end
 end
