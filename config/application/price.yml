@@ -6,8 +6,8 @@ defaults: &defaults
 
   request_emex: false
   emex_income_rate: 1.05 # Наценка 5%
-  avtorif_income_rate: 0.8002 # Скидка 19.98%
-  retail_rate: 1.15
+  avtorif_income_rate: 1 # Скидка 19.98% TODO он не будет использоваться
+  retail_rate: 1
 
   send_request_from_search_page: true
 
