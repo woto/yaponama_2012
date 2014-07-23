@@ -288,3 +288,21 @@ receiving1:
   cached_russian_time_zone_auto_id: 9
   profile: receiving1
   cached_profile: '{"names":[{"surname":"receiving1","name":"receiving1","patronymic":"receiving1"}],"phones":[{"value":"receiving1"}],"emails":[{"value":"receiving1@example.com"}],"passports":[{"seriya":"receiving1","nomer":"receiving1","mesto_rozhdeniya":"receiving1"}]}'
+
+alena:
+  type: User
+  creator: mark
+  auth_token: B09H2qmbORSw8FE8eoYWFa
+  creation_reason: fixtures
+  role: user
+  discount: 0
+  prepayment: 100
+  order_rule: all
+  logout_from_other_places: true
+  # password: 5555555555
+  password_digest: $2a$10$wQ1IG8ZsZX0PbzpDxWSgJ.qyB9XOvKceIckyzwEESavUNWGQZapvW
+  password_reset_token: 55555
+  password_reset_sent_at: <%= 1.second.ago.to_s(:db) %>
+  cached_russian_time_zone_auto_id: 5
+  profile: alena
+  cached_profile: '{"names":[{"surname":"","name":"Алена","patronymic":""}],"phones":[],"emails":[{"value":"alena@example.com"}],"passports":[]}'

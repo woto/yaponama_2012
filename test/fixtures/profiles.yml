@@ -141,3 +141,11 @@ receiving1:
   cached_phones: '[{"value":"receiving1"}]'
   cached_emails: '[{"value":"receiving1@example.com"}]'
   cached_passports: '[{"seriya":"receiving1","nomer":"receiving1","mesto_rozhdeniya":"receiving1"}]'
+
+alena:
+  somebody: alena
+  creation_reason: fixtures
+  cached_names: '[{"surname":"","name":"Алена","patronymic":""}]'
+  cached_phones: '[]'
+  cached_emails: '[{"value":"alena@example.com"}]'
+  cached_passports: '[]'

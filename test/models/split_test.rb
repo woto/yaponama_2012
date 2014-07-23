@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class SplitTest < ActiveSupport::TestCase
+  fixtures :product_transactions
 
   test 'Если позицию разбили на две партии, то должно создастья 2 новых товара, а изначальный удалиться + работа транзакций' do
     ptc = ProductTransaction.count

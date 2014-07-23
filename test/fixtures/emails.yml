@@ -77,3 +77,11 @@ receiving1:
   somebody: receiving1
   confirmed: false
   creation_reason: fixtures
+
+alena:
+  value: alena@example.com
+  profile: alena
+  somebody: alena
+  confirmed: false
+  creation_reason: fixtures
+  confirmation_token: 5555

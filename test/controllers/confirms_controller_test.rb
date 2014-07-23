@@ -47,8 +47,10 @@ class ConfirmsControllerTest < ActionController::TestCase
   end
 
   test 'Проверка работы ссылки запроса PIN кода на e-mail' do
-    cookies['auth_token'] = somebodies(:otto).auth_token
-    id = emails(:otto).id
+    ActionMailer::Base.deliveries = [] 
+
+    cookies['auth_token'] = somebodies(:alena).auth_token
+    id = emails(:alena).id
     xhr :post, :ask, id: id, resource_class: 'Email'
 
     # Проверка редиректа на страницу ввода pin кода
@@ -57,7 +59,7 @@ class ConfirmsControllerTest < ActionController::TestCase
     # Проверка оповещения flash
     assert_equal 'Мы отправили вам электронное письмо с PIN кодом. Введите его в поле, расположенное ниже, либо перейдите по ссылке в письме. Не забудьте проверить папку спам, если долго не получаете письмо.', flash[:info]
 
-    pin = emails(:otto).reload.confirmation_token
+    pin = emails(:alena).reload.confirmation_token
 
     # pin код действительно изменился
     refute_equal '5555', pin
@@ -65,7 +67,7 @@ class ConfirmsControllerTest < ActionController::TestCase
     delivery = ActionMailer::Base.deliveries.last
 
     # Адресат письма
-    assert_equal ["foo@example.com"], delivery.to
+    assert_equal ["alena@example.com"], delivery.to
 
     # Заголовок письма
     assert_equal "Подтверждение электронного адреса", delivery.subject
@@ -82,6 +84,8 @@ class ConfirmsControllerTest < ActionController::TestCase
   end
 
   test 'Проверка работы ссылки запроса PIN кода на телефон' do
+    ActionMailer::Base.deliveries = [] 
+
     cookies['auth_token'] = somebodies(:otto).auth_token
     id = phones(:otto).id
     post :ask, id: id, resource_class: 'Phone'
