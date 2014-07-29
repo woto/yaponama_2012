@@ -1,0 +1,33 @@
+<%= container do %>
+
+  <% @meta_title = 'Поворот изображения' %>
+  <%= page_header %>
+
+  <%= row do %>
+    <div class="col-xs-12">
+      <%= twbs_form_for @resource, remote: true do |f| %>
+        <%= f.hidden_field :angle %>
+        <%= f.hidden_field :operation %>
+
+        <%= f.form_group nil, style: "position: relative; z-index: 100" do %>
+          <a class="rotate-button btn btn-default" href="#" data-angle="90">
+            <%= icon 'rotate-left' %>
+          </a>
+          <a class="rotate-button btn btn-default" href="#" data-angle="-90">
+            <%= icon 'rotate-right' %>
+          </a>
+          <%= f.twbs_submit 'Сохранить' %>
+        <% end %>
+      <% end %>
+
+      <div style="position: relative; z-index: 90">
+        <%= image_tag @resource.upload.url, id: 'img-rotate', class: 'img-responsive' %>
+      </div>
+
+    </div>
+  <% end %>
+
+<% end %>
+
+<%= javascript_include_tag 'uploads/rotate' %>
+<%= stylesheet_link_tag 'uploads/rotate' %>
