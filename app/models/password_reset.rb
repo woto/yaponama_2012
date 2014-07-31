@@ -23,9 +23,9 @@ class PasswordReset
     case with 
 
     when 'email'
-      contact = Email.confirmed.find_by_value(value)
+      contact = Email.where(confirmed: true).find_by_value(value)
     when 'phone'
-      contact = Phone.confirmed.where(mobile: true).find_by_value(value)
+      contact = Phone.where(confirmed: true, mobile: true).find_by_value(value)
     end
 
     if contact.present?

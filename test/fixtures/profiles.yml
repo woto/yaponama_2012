@@ -94,6 +94,14 @@ guest_with_profile:
   cached_emails: '[{"value":"guest_with_profile@example.com"}]'
   cached_passports: '[]'
 
+guest_with_profile2:
+  somebody: guest_with_profile2
+  creation_reason: fixtures
+  cached_names: '[{"surname":"","name":"Гость","patronymic":""}]'
+  cached_phones: '[{"value":""}]'
+  cached_emails: '[{"value":"guest_with_profile2@example.com"}]'
+  cached_passports: '[]'
+
 ivan:
   somebody: ivan
   creation_reason: fixtures
@@ -133,3 +141,11 @@ receiving1:
   cached_phones: '[{"value":"receiving1"}]'
   cached_emails: '[{"value":"receiving1@example.com"}]'
   cached_passports: '[{"seriya":"receiving1","nomer":"receiving1","mesto_rozhdeniya":"receiving1"}]'
+
+alena:
+  somebody: alena
+  creation_reason: fixtures
+  cached_names: '[{"surname":"","name":"Алена","patronymic":""}]'
+  cached_phones: '[]'
+  cached_emails: '[{"value":"alena@example.com"}]'
+  cached_passports: '[]'

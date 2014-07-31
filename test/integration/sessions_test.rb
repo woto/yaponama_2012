@@ -40,7 +40,7 @@ class SessionsTest < ActionDispatch::IntegrationTest
     fill_phone '#session_value', '+7 (111) 111-11-11'
     fill_in 'session[password]', with: '1111111112'
     click_button 'Войти'
-    assert page.has_css? ".alert-danger", text: "Пара телефон и пароль не найдены"
+    assert page.has_css? ".alert-warning", text: "Указанные вами телефон и пароль не найдены, попробуйте еще раз, или воспользуйтесь восстановлением пароля."
   end
 
   test 'Мы должны войти если email адрес и пароль верны' do
@@ -59,7 +59,7 @@ class SessionsTest < ActionDispatch::IntegrationTest
     fill_in 'session[value]', with: 'foo@example.com'
     fill_in 'session[password]', with: '2111111111'
     click_button 'Войти'
-    assert page.has_css? ".alert-danger", text: "Пара e-mail и пароль не найдены"
+    assert page.has_css? ".alert-warning", text: "Указанные вами телефон и пароль не найдены, попробуйте еще раз, или воспользуйтесь восстановлением пароля."
   end
 
 end

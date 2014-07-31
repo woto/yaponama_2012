@@ -4,9 +4,7 @@
 
     <%= twbs_form_for @user, url: register_path(with: params[:with]) do |f| %>
 
-      <%= f.alert_danger do %>
-        Пожалуйста исправьте ошибки для продолжения.
-      <% end %>
+      <%= f.error_notification %>
 
 
       <%= f.fields_for :profiles, @profile do |pr| %>

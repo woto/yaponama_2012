@@ -1,12 +1,12 @@
 defaults: &defaults
-  delivery_method:
-  from:
-  smtp_address:
-  smtp_port:
-  smtp_user_name:
-  smtp_password:
-  smtp_authentication:
-  smtp_enable_starttls_auto:
+  delivery_method:           'smtp'
+  from:                      'Отправитель <robot@example.com>'
+  smtp_address:              'smtp.example.com'
+  smtp_port:                 25
+  smtp_user_name:            'robot@example.com'
+  smtp_password:             
+  smtp_authentication:       
+  smtp_enable_starttls_auto: 
 
 development:
   <<: *defaults

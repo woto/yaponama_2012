@@ -73,6 +73,11 @@ guest_with_profile:
   credit: 0.0
   somebody: guest_with_profile
 
+guest_with_profile2:
+  debit: 0.0
+  credit: 0.0
+  somebody: guest_with_profile2
+
 ivan:
   debit: 0.0
   credit: 0.0
@@ -102,3 +107,8 @@ receiving1:
   debit: 0.0
   credit: 0.0
   somebody: receiving1
+
+alena:
+  debit: 0.0
+  credit: 0.0
+  somebody: alena

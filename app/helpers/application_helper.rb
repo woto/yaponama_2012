@@ -554,7 +554,7 @@ module ApplicationHelper
   end
 
   def c2 options={}
-    options[:class] = ['col-lg-8 col-md-9 col-sm-10', options[:class] ].compact
+    options[:class] = ['col-lg-10 col-md-11 col-sm-12', options[:class] ].compact
     content_tag :div, options do
       yield
     end

@@ -68,4 +68,11 @@ class WelcomeControllerTest < ActionController::TestCase
 
   end
 
+  test 'Если я гость и у меня есть подтвержденный email, то я должен увидеть предложение зарегистрироваться' do
+    cookies['auth_token'] = somebodies(:guest_with_profile2).auth_token
+    get :index
+    assert_select '#confirm-block .alert-link', "Придумайте себе пароль"
+  end
+
+
 end

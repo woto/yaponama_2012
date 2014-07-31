@@ -4,10 +4,6 @@
 
       <%= f.error_notification %>
 
-      <%= f.alert_danger do %>
-        <%= f.error(:base) %>
-      <% end %>
-
       <%= render "fields", f: f %>
 
       <%= f.twbs_submit %>

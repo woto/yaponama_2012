@@ -63,7 +63,7 @@ class PasswordResetsControllerTest < ActionController::TestCase
     delivery = ActionMailer::Base.deliveries.last
 
     # Адресат SMS
-    assert_equal ['avisosms@fake.ru'], delivery.to
+    assert_equal ['b049fb236f62a7f78166@avisosms.ru'], delivery.to
 
     # Заголовок SMS
     assert_equal "+75555555555", delivery.subject
