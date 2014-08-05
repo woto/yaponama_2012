@@ -1,0 +1,19 @@
+<% b = Breadcrumb.new(self) %>
+
+<%= b1 do %>
+
+  <ol class="breadcrumb">
+    <%= b.item('Категории', categories_path) %>
+    <%= b.item(@resource.name, category_brands_path(params[:category_id])) %>
+    <%= b.item(@brand.name, category_brand_path(params[:category_id], @brand.to_param)) %>
+    <%= b.item(@model.name, category_model_path(params[:category_id], @model.to_param)) %>
+    <%= b.item(@generation.name, category_model_path(params[:category_id], @generation.to_param)) %>
+    <%= b.item(@modification.name) %>
+  </ol>
+
+  <% @meta_title = "#{@resource.name} #{@brand.name} #{@model.name} #{@generation.name} #{@modification.name}" %>
+  <%= page_header %>
+
+  <%= render 'best_parts_list' %>
+
+<% end %>

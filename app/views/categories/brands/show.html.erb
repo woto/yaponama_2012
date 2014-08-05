@@ -1,0 +1,21 @@
+<% b = Breadcrumb.new(self) %>
+
+<%= b1 do %>
+
+  <ol class="breadcrumb">
+    <%= b.item('Категории', categories_path) %>
+    <%= b.item(@resource.name, category_brands_path(params[:category_id])) %>
+    <%= b.item(@brand.name) %>
+  </ol>
+
+  <% @meta_title = "#{@resource.name} #{@brand.name}" %>
+  <% @meta_title_small = "(рус. #{@brand.slang})" if @brand.slang.present? %>
+  <%= page_header %>
+
+  <ol id="category-models">
+    <% @models.each do |model| %>
+      <li> <%= link_to model.cached_model, category_model_path(params[:category_id], model.to_model_param) %> </li>
+    <% end %>
+  </ol>
+
+<% end %>

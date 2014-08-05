@@ -1,0 +1,24 @@
+<% b = Breadcrumb.new(self) %>
+
+<%= b1 do %>
+
+  <ol class="breadcrumb">
+    <%= b.item('Категории', categories_path) %>
+    <%= b.item(@resource.name, category_brands_path(params[:category_id])) %>
+    <%= b.item(@brand.name, category_brand_path(params[:category_id], @brand.to_param)) %>
+    <%= b.item(@model.name) %>
+  </ol>
+
+  <% @meta_title = "#{@resource.name} #{@brand.name} #{@model.name}" %>
+  <% @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present? %>
+  <%= page_header %>
+
+  <ol id="category-generations">
+    <% @generations.each do |generation| %>
+      <li> <%= link_to generation.cached_generation, category_generation_path(params[:category_id], generation.to_generation_param) %> </li>
+    <% end %>
+  </ol>
+
+  <%= render 'best_parts_list' %>
+
+<% end %>
