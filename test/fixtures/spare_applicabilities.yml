@@ -1,0 +1,137 @@
+1:
+  spare_info: 2102_nissan
+  brand: mitsubishi
+  model: galant
+  generation: galant_9_2
+  modification: mitsubishi_galant_9_2_cn_sedan
+  cached_brand: MITSUBISHI
+  cached_model: Galant
+  cached_generation: 2008 - 2013, 9 поколение [2-й рестайлинг]
+  cached_modification: CN седан 4-дв. 2.0 AT (160 л. с.)
+  cached_spare_info: 2102 (NISSAN)
+
+2:
+  spare_info: 2102_nissan
+  brand: toyota
+  model: celica_camry
+  cached_brand: TOYOTA
+  cached_model: Celica Camry
+  cached_spare_info: 2102 (NISSAN)
+
+3:
+  spare_info: 2102_kia
+  brand: toyota
+  model: camry_gracia
+  generation: camry_gracia_1996
+  modification: camry_gracia_2_2
+  cached_brand: TOYOTA
+  cached_model: Camry Gracia
+  cached_generation: Camry Gracia (1996)
+  cached_modification: 2.2 л, бензин, 140 л.с., АКПП, передний привод
+  cached_spare_info: 2102 (KIA)
+
+4:
+  spare_info: 2102_kia
+  brand: toyota
+  model: camry
+  generation: camry_xv10
+  modification: camry_xv10_sedan
+  cached_brand: TOYOTA
+  cached_model: Camry
+  cached_generation: Camry (XV10) (1991)
+  cached_modification: "Седан - 2.2 AT Overdrive (130 л. с.)"
+  cached_spare_info: 2102 (KIA)
+
+5:
+  spare_info: 2102_kia
+  brand: toyota
+  model: camry
+  generation: camry_xv50
+  modification: camry_xv50_standard
+  cached_brand: TOYOTA
+  cached_model: Camry
+  cached_generation: Camry (XV50) (2011)
+  cached_modification: 2.0 AT (148 л. с.) стандарт
+  cached_spare_info: 2102 (KIA)
+
+6:
+  spare_info: 3310_toyota
+  brand: mitsubishi
+  model: galant
+  generation: galant_9_2
+  cached_brand: MITSUBISHI
+  cached_model: Galant
+  cached_generation: 2008 - 2013, 9 поколение [2-й рестайлинг]
+  cached_spare_info: 3310 (TOYOTA)
+
+7:
+  spare_info: 3310_toyota
+  brand: mitsubishi
+  model: lancer_ralliart
+  cached_brand: MITSUBISHI
+  cached_model: Lancer Ralliart
+  cached_spare_info: 3310 (TOYOTA)
+
+8:
+  spare_info: 3310_toyota
+  brand: toyota
+  model: celica_camry
+  cached_brand: TOYOTA
+  cached_model: Celica Camry
+  cached_spare_info: 3310 (TOYOTA)
+
+9:
+  spare_info: 3310_toyota
+  brand: toyota
+  model: camry
+  generation: camry_xv50
+  modification: camry_xv50_comfort
+  cached_brand: TOYOTA
+  cached_model: Camry
+  cached_generation: Camry (XV50) (2011)
+  cached_modification: 2.5 AT (181 л. с.) комфорт
+  cached_spare_info: 3310 (TOYOTA)
+
+10:
+  spare_info: 3310_toyota
+  brand: toyota
+  model: camry
+  generation: camry_v10
+  cached_brand: TOYOTA
+  cached_model: Camry
+  cached_generation: Camry (V10) (1982)
+  cached_spare_info: 3310 (TOYOTA)
+
+11:
+  spare_info: 3310_infiniti
+  brand: mitsubishi
+  model: lancer
+  cached_brand: MITSUBISHI
+  cached_model: Lancer
+  cached_spare_info: 3310 (INFINITI)
+
+12:
+  spare_info: 3310_infiniti
+  brand: mitsubishi
+  model: lancer_ralliart
+  generation: lancer_ralliart_2008
+  cached_brand: MITSUBISHI
+  cached_model: Lancer Ralliart
+  cached_generation: Lancer Ralliart (2008)
+  cached_spare_info: 3310 (INFINITI)
+
+13:
+  spare_info: 3310_infiniti
+  brand: toyota
+  model: celica_camry
+  cached_brand: TOYOTA
+  cached_model: Celica Camry
+  cached_spare_info: 3310 (INFINITI)
+
+14:
+  spare_info: 3310_infiniti
+  brand: mitsubishi
+  model: galant
+  cached_brand: MITSUBISHI
+  cached_model: Galant
+  cached_spare_info: 2102 (NISSAN)

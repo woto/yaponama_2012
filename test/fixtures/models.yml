@@ -15,3 +15,43 @@ receiving1:
   brand: receiving1
   phantom: false
   creator: receiving1
+
+camry:
+  brand: toyota
+  cached_brand: TOYOTA
+  name: Camry
+  content: ''
+
+camry_gracia:
+  brand: toyota
+  cached_brand: TOYOTA
+  name: Camry Gracia
+
+celica_camry:
+  brand: toyota
+  cached_brand: TOYOTA
+  name: Celica Camry
+
+camry_hybrid:
+  brand: toyota
+  cached_brand: TOYOTA
+  name: Camry Hybrid
+
+galant:
+    brand: mitsubishi
+    cached_brand: MITSUBISHI
+    name: Galant
+    content: "<p>Описание Галанта.</p>\r\n"
+    from: 1969-01-01
+    to: 2013-01-01
+    slang: "Галант"
+
+lancer:
+    brand: mitsubishi
+    cached_brand: MITSUBISHI
+    name: Lancer
+
+lancer_ralliart:
+    brand: mitsubishi
+    cached_brand: MITSUBISHI
+    name: Lancer Ralliart

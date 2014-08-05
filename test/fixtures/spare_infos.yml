@@ -1,0 +1,33 @@
+3310_infiniti:
+    catalog_number: '3310'
+    brand: infiniti
+    cached_brand: INFINITI
+    content: "<p>Описание категории: Пыльник Рулевой Рейки.</p>\r\n"
+    name: 3310 - INFINITI
+    cached_spare_catalog: "ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ"
+    spare_catalog: pylnik_rulevoi_reiki
+
+3310_toyota:
+    catalog_number: '3310'
+    brand: toyota
+    cached_brand: TOYOTA
+    content: "<p>Описание категории рулевая тяга.</p>\r\n"
+    name: 3310 - TOYOTA
+    cached_spare_catalog: "РУЛЕВАЯ ТЯГА"
+    spare_catalog: rulevaya_tyga
+
+2102_nissan:
+    catalog_number: '2102'
+    brand: nissan
+    cached_brand: NISSAN
+    name: 2102 - NISSAN
+    cached_spare_catalog: "САЙЛЕНТБЛОК"
+    spare_catalog: sailentblock
+
+2102_kia:
+    catalog_number: '2102'
+    brand: kia
+    cached_brand: KIA
+    name: 2102 - KIA
+    cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
+    spare_catalog: bamper_zadniy

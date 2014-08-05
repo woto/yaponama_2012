@@ -3,3 +3,34 @@ two_and_half_cvt:
   generation: luxury
   phantom: false
   creator: first_admin
+
+camry_gracia_2_2:
+  name: 2.2 л, бензин, 140 л.с., АКПП, передний привод
+  generation: camry_gracia_1996
+  cached_generation: Camry Gracia (1996)
+
+camry_xv50_standard:
+  name: 2.0 AT (148 л. с.) стандарт
+  generation: camry_xv50
+  cached_generation: Camry (XV50) (2011)
+
+camry_xv50_classic:
+  name: 2.0 AT (148 л. с.) классик
+  generation: camry_xv50
+  cached_generation: Camry (XV50) (2011)
+
+camry_xv50_comfort:
+  name: 2.5 AT (181 л. с.) комфорт
+  generation: camry_xv50
+  cached_generation: Camry (XV50) (2011)
+
+camry_xv10_sedan:
+  name: "Седан - 2.2 AT Overdrive (130 л. с.)"
+  generation: camry_xv10
+  cached_generation: Camry (XV10) (1991)
+
+mitsubishi_galant_9_2_cn_sedan:
+  name: CN седан 4-дв. 2.0 AT (160 л. с.)
+  content: "<p>Описание модификации CN седана 4-х дверного.</p>\r\n"
+  generation: galant_9_2
+  cached_generation: 2008 - 2013, 9 поколение [2-й рестайлинг]
