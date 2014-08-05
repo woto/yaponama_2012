@@ -12,13 +12,11 @@
   <% @meta_title = "#{@brand.name} #{@model.name} #{@generation.name}" %>
   <%= page_header %>
 
-  <div id="catalogs-generation-modifications">
+  <ol id="catalogs-generation-modifications">
     <% @generations.each do |modification| %>
-      <%= div_for modification do %>
-        <%= link_to modification.cached_modification, catalogs_modification_path(modification.to_modification_param) %>
-      <% end %>
+      <li> <%= link_to modification.cached_modification, catalogs_modification_path(modification.to_modification_param) %> </li>
     <% end %>
-  </div>
+  </ol>
 
   <%= render 'best_parts_list' %>
 

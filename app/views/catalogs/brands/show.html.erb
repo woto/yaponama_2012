@@ -12,13 +12,11 @@
   <% @meta_title_small = "(рус. #{@brand.slang})" if @brand.slang.present? %>
   <%= page_header %>
 
-  <div id="catalogs-brand-models">
+  <ol id="catalogs-brand-models">
     <% @models.each do |model| %>
-      <%= div_for model do %>
-        <%= link_to model.cached_model, catalogs_model_path(model.to_model_param) %>
-      <% end %>
+      <li> <%= link_to model.cached_model, catalogs_model_path(model.to_model_param) %> </li>
     <% end %>
-  </div>
+  </ol>
 
   <hr />
   <div id="catalogs-brand-preview">

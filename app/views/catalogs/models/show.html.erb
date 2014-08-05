@@ -12,13 +12,11 @@
   <% @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present? %>
   <%= page_header %>
 
-  <div id="catalogs-model-generations">
+  <ol id="catalogs-model-generations">
     <% @generations.each do |generation| %>
-      <%= div_for generation do %>
-        <%= link_to generation.cached_generation, catalogs_generation_path(generation.to_generation_param) %>
-      <% end %>
+      <li> <%= link_to generation.cached_generation, catalogs_generation_path(generation.to_generation_param) %> </li>
     <% end %>
-  </div>
+  </ol>
 
   <%= render 'best_parts_list' %>
 

@@ -3,10 +3,10 @@
   <% @meta_title = 'Каталог запчастей' %>
   <%= page_header %>
 
-  <div id="catalogs-brands">
+  <ol id="catalogs-brands">
     <% @brands.each do |brand| %>
-      <div> <%= link_to brand.cached_brand, catalogs_brand_path(brand.to_brand_param) %> </div>
+      <li> <%= link_to brand.cached_brand, catalogs_brand_path(brand.to_brand_param) %> </li>
     <% end %>
-  </div>
+  </ol>
 
 <% end %>
