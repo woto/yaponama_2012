@@ -4,7 +4,7 @@ class Catalogs::BrandsController < ApplicationController
 
   def find_resource
     @brand = Brand.find(params[:id])
-    @brands = SpareApplicability.by_brand(params[:id])
+    @models = SpareApplicability.by_brand(params[:id])
   end
 
 end

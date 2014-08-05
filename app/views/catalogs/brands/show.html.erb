@@ -12,8 +12,8 @@
   <% @meta_title_small = "(рус. #{@brand.slang})" if @brand.slang.present? %>
   <%= page_header %>
 
-  <div id="catalogs-brands">
-    <% @brands.each do |model| %>
+  <div id="catalogs-models">
+    <% @models.each do |model| %>
       <div> <%= link_to model.cached_model, catalogs_model_path(model.to_model_param) %> </div>
     <% end %>
   </div>
