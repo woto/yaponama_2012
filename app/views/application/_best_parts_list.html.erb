@@ -1,0 +1,18 @@
+<% if @parts.present? %>
+  <% if @modification.present? %>
+
+  <% elsif @generation.present? %>
+    <h2> Запчасти, которые подходят на все модификации </h2>
+  <% elsif @model.present? %>
+    <h2> Запчасти, которые подходят на все поколения </h2>
+  <% end %>
+
+  <div id="best-parts-list">
+    <% @parts.each do |spare_info| %>
+      <div>
+        <%= link_to "#{spare_info.catalog_number} (#{spare_info.cached_brand}) #{spare_info.cached_spare_catalog}", new_user_product_path(catalog_number: spare_info.catalog_number, anchor: spare_info.cached_brand) %>
+        <%=  %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

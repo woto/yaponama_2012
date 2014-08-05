@@ -1,0 +1,32 @@
+<% b = Breadcrumb.new(self) %>
+
+<%= b1 do %>
+
+  <ol class="breadcrumb">
+    <%= b.item('Каталог', catalogs_path) %>
+    <%= b.item(@brand.name, catalogs_brand_path(@brand)) %>
+    <%= b.item(@model.name) %>
+  </ol>
+
+  <% @meta_title = "#{@brand.name} #{@model.name}" %>
+  <% @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present? %>
+  <%= page_header %>
+
+  <div id="catalogs-model-generations">
+    <% @generations.each do |generation| %>
+      <%= div_for generation do %>
+        <%= link_to generation.cached_generation, catalogs_generation_path(generation.to_generation_param) %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= render 'best_parts_list' %>
+
+  <% if @model.content.present? %>
+    <hr />
+    <div id="catalogs-model-content">
+      <%== @model.content %>
+    </div>
+  <% end %>
+
+<% end %>

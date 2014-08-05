@@ -6,7 +6,7 @@ class Catalogs::BrandsControllerTest < ActionController::TestCase
     get :show, id: brands(:mitsubishi)
     assert_select '.page-header', 'MITSUBISHI (рус. Митсубиси, Митсубиши)'
     assert_select '.breadcrumb', /Каталог.*MITSUBISHI/m
-    assert_select '#catalogs-models', /Galant\s+Lancer\s+Lancer Ralliart/m
+    assert_select '#catalogs-brand-models', /Galant\s+Lancer\s+Lancer Ralliart/m
     assert_select '#catalogs-brand-preview', 'Вступление'
     assert_select '#catalogs-brand-content', 'Описание'
   end
