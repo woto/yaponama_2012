@@ -1,0 +1,12 @@
+<%= b1 do %>
+
+  <% @meta_title = "Категории запчастей" %>
+  <%= page_header %>
+
+  <div id="categories-brands">
+    <% @categories.each do |category| %>
+      <div> <%= link_to category.cached_spare_catalog, category_brands_path(category.to_category_param) %> </div>
+    <% end %>
+  </div>
+
+<% end %>
