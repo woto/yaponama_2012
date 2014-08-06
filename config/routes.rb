@@ -36,13 +36,6 @@ Yaponama2012::Application.routes.draw do
     end
   end
 
-  resources :brands do
-    resources :parts
-  end
-
-
-
-
   concern :searchable do
     get 'search', :on => :collection
   end
@@ -421,6 +414,10 @@ Yaponama2012::Application.routes.draw do
   resources :deliveries
 
   concerns :cars_searchable
+
+  resources :brands do
+    resources :parts
+  end
 
   ## TODO Для перехвата /searches/2102/KURYAKYN
   #resources :searches do
