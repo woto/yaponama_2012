@@ -12459,9 +12459,9 @@
     "brand_id": null,
     "cached_brand": null,
     "image": {
-      "url": "/uploads/brand/metro.gif",
+      "url": null,
       "thumb": {
-        "url": "/uploads/brand/thumb_metro.gif"
+        "url": null
       }
     },
     "rating": null,
@@ -30871,27 +30871,6 @@
   },
   {
     "id": 1471,
-    "name": "CML",
-    "path": null,
-    "brand_id": null,
-    "cached_brand": null,
-    "image": {
-      "url": null,
-      "thumb": {
-        "url": null
-      }
-    },
-    "rating": null,
-    "content": null,
-    "creator_id": 495352,
-    "phantom": true,
-    "catalog": null,
-    "is_brand": null,
-    "manufacturer": null,
-    "preview": null
-  },
-  {
-    "id": 1472,
     "name": "CML",
     "path": null,
     "brand_id": null,

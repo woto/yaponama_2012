@@ -13,8 +13,8 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  #host: 'avtorif.ru'
-  #port: '85'
+  host: 'localhost'
+  port: 3001
 
 test:
   <<: *defaults

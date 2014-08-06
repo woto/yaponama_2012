@@ -11,7 +11,7 @@ class Somebody < ActiveRecord::Base
   has_many :uploads
 
   # Понятие главного профиля
-  belongs_to :profile, inverse_of: :user_where_is_profile
+  belongs_to :profile, inverse_of: :user_where_is_profile#, validate: false
   accepts_nested_attributes_for :profile
 
   #validates :profile, presence: true, unless: -> { role == 'guest' } (Пользователь может входить с помощью социальных сетей не имея профиля в начала)

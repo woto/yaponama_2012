@@ -103,7 +103,7 @@ class ApplicationController < ActionController::Base
   def destroy
     respond_to do |format|
       if @resource.destroy
-        format.html { redirect_to url_for(params[:return_path]), success: "#{I18n.t(@resource_class)} \"#{@resource.to_label}\" Был успешно удален" }
+        format.html { redirect_to url_for(params[:return_path]), attention: "#{I18n.t(@resource_class)} \"#{@resource.to_label}\" Был успешно удален" }
         format.json { head :no_content }
       else
         format.html { redirect_to url_for(:controller => :users, :action => :show), attention: "Невозможно удалить." }

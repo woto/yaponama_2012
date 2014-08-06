@@ -9,9 +9,12 @@ defaults: &defaults
 
 development:
   <<: *defaults
+  enabled: false
 
 test:
   <<: *defaults
+  enabled: false
 
 production:
   <<: *defaults
+  enabled: true

@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class ModificationsController < ApplicationController
 
   respond_to :json
@@ -28,8 +26,7 @@ class ModificationsController < ApplicationController
   private
 
   def set_resource_class
-    @resource_class = Brand
+    @resource_class = Modification
   end
 
 end
-

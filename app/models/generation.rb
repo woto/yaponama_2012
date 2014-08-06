@@ -14,13 +14,20 @@ class Generation < ActiveRecord::Base
 
   has_many :modifications, :inverse_of => :generation, :dependent => :destroy
 
+  has_many :spare_applicabilities
+
   def to_label
     name
+  end
+
+  def to_param
+    "#{id}-#{name.parameterize}"
   end
 
   after_save :update_all_cached_generation
 
   def update_all_cached_generation
+    spare_applicabilities.update_all(cached_generation: name)
     cars.update_all(cached_generation: name)
     modifications.update_all(cached_generation: name)
   end

@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class ModelsController < ApplicationController
 
   respond_to :json

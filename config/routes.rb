@@ -1,16 +1,10 @@
-class BrandConstraint
-  def initialize
-    #@ips = Blacklist.retrieve_ips
-    #@brand_names = Brand.pluck(:name)
-  end
-
+# TODO Удалить как поисковые роботы перестроятся
+class BrandRedirector
   def matches?(request)
-    #@ips.include?(request.remote_ip)
-    @brand_names = Brand.pluck(:name)
-    # TODO потом пересмотреть
-    @brand_names.include? CGI.unescape(request.params[:brand])
+    Brand.find_by(name: CGI.unescape(request.params[:brand]))
   end
 end
+
 
 class PageConstraint
   def matches?(request)
@@ -23,6 +17,32 @@ end
 
 Yaponama2012::Application.routes.draw do
 
+  concern :bmgm do
+    resources :brands
+    resources :models
+    resources :generations
+    resources :modifications
+  end
+
+  resource :catalogs do
+    scope module: 'catalogs' do
+      concerns :bmgm
+    end
+  end
+
+  resources :categories do
+    scope module: 'categories' do
+      concerns :bmgm
+    end
+  end
+
+  resources :brands do
+    resources :parts
+  end
+
+
+
+
   concern :searchable do
     get 'search', :on => :collection
   end
@@ -31,6 +51,7 @@ Yaponama2012::Application.routes.draw do
     resources :faqs, concerns: [:transactionable, :gridable]
     resources :spare_catalogs, concerns: [:gridable, :searchable]
     resources :bots, concerns: [:gridable]
+    resources :spare_infos, concerns: [:gridable, :transactionable, :searchable]
   end
 
   concern :only_admin do
@@ -39,10 +60,6 @@ Yaponama2012::Application.routes.draw do
 
   concern :somebody_and_admin_somebody do
     resources :pings
-  end
-
-  namespace :admin do
-    resources :blocks
   end
 
   resources :tests
@@ -268,11 +285,10 @@ Yaponama2012::Application.routes.draw do
     concerns :complex_products
     concerns :complex_orders
 
-    resources :spare_infos do
+    resources :spare_applicabilities do
       concerns :gridable
       concerns :transactionable
     end
-
 
     resources :users do
       concerns :somebody_and_admin_somebody
@@ -313,8 +329,6 @@ Yaponama2012::Application.routes.draw do
 
 
   end
-
-  resources :spare_infos
 
   resource :user  do
     concerns :aaa
@@ -415,9 +429,15 @@ Yaponama2012::Application.routes.draw do
   #  #match '?skip' => "searches#index", :on => :collection, :as => :skip_search, :via => :get
   #end
 
-  get '/content/groups/:id' => 'groups#show'
+  # TODO Удалить как поисковые роботы перестроятся
+  get "/:brand", constraints: BrandRedirector.new, to: redirect{|params, req|
+    brand = Brand.find_by(name: params[:brand])
+    if req.params[:page].present?
+      page = "?page=#{req.params[:page]}"
+    end
+    "/brands/#{brand.to_param}/parts#{page}"
+  }
 
-  get "*brand" => "brands#show", :constraints => BrandConstraint.new, format: false
   get "*path" => "pages#show", :constraints => PageConstraint.new, format: false
 
   unless Rails.application.config.consider_all_requests_local

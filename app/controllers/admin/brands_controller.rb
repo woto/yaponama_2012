@@ -13,12 +13,4 @@ class Admin::BrandsController < BrandsController
     @resource.phantom = false
   end
 
-  def set_resource_class
-    @resource_class = Brand
-  end
-
-  def find_resource
-    @resource = @resource_class.find(params[:id])
-  end
-
 end

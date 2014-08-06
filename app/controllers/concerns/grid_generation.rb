@@ -10,13 +10,11 @@ module GridGeneration
 
       c2(columns_hash) do
 
-        columns_hash['name'] = {
+        columns_hash['cached_model'] = {
           :type => :string,
         }
 
-        cached_model(columns_hash)
-
-        columns_hash['content'] = {
+        columns_hash['name'] = {
           :type => :string,
         }
 
@@ -26,6 +24,10 @@ module GridGeneration
 
         columns_hash['to'] = {
           :type => :date
+        }
+
+        columns_hash['content'] = {
+          :type => :string
         }
 
       end

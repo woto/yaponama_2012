@@ -1,0 +1,48 @@
+<%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
+
+  <%= row do %>
+
+    <%= c1 do %>
+
+      <%= f.fields_for :spare_info, f.object.spare_info || f.object.build_spare_info, include_id: false do |b| %>
+        <%= f.form_group :spare_info do %>
+          <%= b.twbs_select2 :name, rel: 'select2-spare-info', data: {"true-id" => f.object.spare_info_id}, asterisk: true %>
+          <%= f.error(:spare_info) %>
+        <% end %>
+      <% end %>
+
+      <%= f.fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b| %>
+        <%= f.form_group :brand do %>
+          <%= b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, asterisk: true %>
+          <%= f.error(:brand) %>
+        <% end %>
+      <% end %>
+
+      <%= f.fields_for :model, f.object.model || f.object.build_model, include_id: false do |b| %>
+        <%= f.form_group :model do %>
+          <%= b.twbs_select2 :name, rel: 'select2-model', data: {"true-id" => f.object.model_id}, asterisk: true %>
+          <%= f.error(:model) %>
+        <% end %>
+      <% end %>
+
+      <%= f.fields_for :generation, f.object.generation || f.object.build_generation, include_id: false do |b| %>
+        <%= f.form_group :generation do %>
+          <%= b.twbs_select2 :name, rel: 'select2-generation', data: {"true-id" => f.object.generation_id} %>
+          <%= f.error(:generation) %>
+        <% end %>
+      <% end %>
+
+      <%= f.fields_for :modification, f.object.modification || f.object.build_modification, include_id: false do |b| %>
+        <%= f.form_group :modification do %>
+          <%= b.twbs_select2 :name, rel: 'select2-modification', data: {"true-id" => f.object.modification_id} %>
+          <%= f.error(:modification) %>
+        <% end %>
+      <% end %>
+
+      <%= f.twbs_submit %>
+
+    <% end %>
+
+  <% end %>
+
+<% end %>

@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class BrandsController < ApplicationController
 
   respond_to :json
@@ -21,17 +19,10 @@ class BrandsController < ApplicationController
     respond_with @resources
   end
 
-
-
   private
 
   def set_resource_class
     @resource_class = Brand
-  end
-
-  def find_resource
-    @resource = Brand.where(:name => CGI.unescape(params[:brand])).first
-    @spare_infos = @resource.spare_infos.page(params[:page]).order(id: :desc).per(50)
   end
 
 end

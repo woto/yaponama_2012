@@ -97,6 +97,7 @@
 //= require navbar
 //= require assa
 //= require spare_catalog
+//= require spare_info
 //= require nprogress_init
 //= require list.js_init
 //= require image_view

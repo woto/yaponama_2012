@@ -56,7 +56,6 @@ gem 'less-rails'
 
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'cocoon', :git => 'https://github.com/nathanvda/cocoon'
-#gem 'russian'
 gem 'kaminari'
 gem 'carrierwave'
 gem 'rmagick'
@@ -114,3 +113,4 @@ gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'read_only'
+gem 'rails-i18n', '~> 4.0.0' # For 4.0.x

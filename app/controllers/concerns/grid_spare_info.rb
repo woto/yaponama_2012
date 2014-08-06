@@ -14,11 +14,13 @@ module GridSpareInfo
         :type => :string,
       }
 
-      columns_hash['content'] = {
+      columns_hash['cached_brand'] = {
         :type => :string,
       }
 
-      cached_brand(columns_hash)
+      columns_hash['content'] = {
+        :type => :string,
+      }
 
       created_at(columns_hash)
 
@@ -29,8 +31,8 @@ module GridSpareInfo
     def set_preferable_columns
       @grid.visible_id = '1'
       @grid.visible_catalog_number = '1'
-      @grid.visible_content = '1'
       @grid.visible_cached_brand = '1'
+      @grid.visible_content = '1'
       @grid.visible_created_at = '1'
       @grid.visible_updated_at = '1'
     end

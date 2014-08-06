@@ -66,7 +66,7 @@ class UserTest < ActiveSupport::TestCase
 
     u.valid?
 
-    assert_equal ["недостаточной длины (не может быть меньше 6 символа)"], u.errors[:password]
+    assert_equal ["недостаточной длины (не может быть меньше 6 символов)"], u.errors[:password]
     assert u.errors[:password_confirmation].blank?
   end
 

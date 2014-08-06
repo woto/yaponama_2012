@@ -10,13 +10,15 @@ module GridModel
 
       c2(columns_hash) do
 
+        columns_hash['cached_brand'] = {
+          :type => :string,
+        }
+
         columns_hash['name'] = {
           :type => :string,
         }
 
-        cached_brand(columns_hash)
-
-        columns_hash['content'] = {
+        columns_hash['slang'] = {
           :type => :string,
         }
 
@@ -26,6 +28,10 @@ module GridModel
 
         columns_hash['to'] = {
           :type => :date
+        }
+
+        columns_hash['content'] = {
+          :type => :string,
         }
 
       end
@@ -40,6 +46,7 @@ module GridModel
       @grid.visible_content = '1'
       @grid.visible_cached_brand = '1'
       @grid.visible_name = '1'
+      @grid.visible_slang = '1'
       @grid.visible_created_at = '1'
       @grid.visible_updated_at = '1'
     end

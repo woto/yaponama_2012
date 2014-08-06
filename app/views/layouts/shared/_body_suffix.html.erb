@@ -3,12 +3,14 @@
 <div id="modal-form-placeholder"> </div>
 <div id="modal-talk-holder"> </div>
 
-<%== CONFIG.counter['yandex'] %>
-<%== CONFIG.counter['mail'] %>
-<%== CONFIG.counter['rambler'] %>
-<%== CONFIG.counter['google'] %>
-<%== CONFIG.counter['openstat'] %>
-<%== CONFIG.counter['liveinternet'] %>
+<% if CONFIG.counter['enabled'] %>
+  <%== CONFIG.counter['yandex'] %>
+  <%== CONFIG.counter['mail'] %>
+  <%== CONFIG.counter['rambler'] %>
+  <%== CONFIG.counter['google'] %>
+  <%== CONFIG.counter['openstat'] %>
+  <%== CONFIG.counter['liveinternet'] %>
+<% end %>
 
 <div class="panel-group hidden" id="accordion">
 

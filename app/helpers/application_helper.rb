@@ -284,7 +284,7 @@ module ApplicationHelper
     if dismissable
       css_class = "alert-dismissable"
     else
-      css_style = ["border-top: none; border-right: none; border-bottom: none; border-left-width: 5px; border-radius: 0; ", options[:style] ].compact
+      css_style = ["border-top: none; border-right: none; border-bottom: none; border-left-width: 5px; border-radius: 0;", options[:style] ].compact
     end
 
     options[:class] = ["alert alert-#{type} #{css_class} fade in", options[:class] ].compact
@@ -564,7 +564,7 @@ module ApplicationHelper
 
   def b1
     container do
-      row class: 'top-space' do
+      row class: 'top-space bottom-space' do
         content_tag :div, class: 'col-lg-12' do
           yield
         end

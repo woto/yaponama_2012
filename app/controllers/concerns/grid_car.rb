@@ -19,13 +19,21 @@ module GridCar
           :type => :string,
         }
 
-        cached_brand(columns_hash)
+        columns_hash['cached_brand'] = {
+          :type => :string,
+        }
 
-        cached_model(columns_hash)
+        columns_hash['cached_model'] = {
+          :type => :string,
+        }
 
-        cached_generation(columns_hash)
+        columns_hash['cached_generation'] = {
+          :type => :string
+        }
 
-        cached_modification(columns_hash)
+        columns_hash['cached_modification'] = {
+          :type => :string,
+        }
 
         columns_hash['dvigatel'] = {
           :type => :string,

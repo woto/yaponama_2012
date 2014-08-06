@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class GenerationsController < ApplicationController
 
   respond_to :json
@@ -25,11 +23,10 @@ class GenerationsController < ApplicationController
     respond_with @generations
   end
 
-  private 
+  private
 
   def set_resource_class
     @resource_class = Generation
   end
 
 end
-

@@ -63,7 +63,7 @@ class ConfirmsController < ApplicationController
 
     unless @contact
       #raise AuthenticationError.new(attention)
-      redirect_to user_path, attention: attention
+      redirect_to polymorphic_path([*jaba3]), attention: attention
     end
 
   end

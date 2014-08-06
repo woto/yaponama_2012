@@ -18,7 +18,7 @@ class PostalAddressesControllerTest < ActionController::TestCase
 
     post :create, { resource_class: 'PostalAddress', postal_address: { postcode: '', region: '', city: '', street: '', house: '', room: '', stand_alone_house: false } }
 
-    assert_equal ["не может быть пустым", "неверной длины (может быть длиной ровно 6 символа)", "не является числом"], assigns(:resource).errors[:postcode]
+    assert_equal ["не может быть пустым", "неверной длины (может быть длиной ровно 6 символов)", "не является числом"], assigns(:resource).errors[:postcode]
     assert_equal ["не может быть пустым"], assigns(:resource).errors[:region]
     assert_equal ["не может быть пустым"], assigns(:resource).errors[:city]
     assert_equal ["не может быть пустым"], assigns(:resource).errors[:street]

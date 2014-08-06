@@ -1,0 +1,27 @@
+<%= b1 do %>
+
+  <% @meta_title = "Производитель запчастей #{@brand.name}" %>
+  <% @meta_title_lead = image_tag @brand.image_url %>
+  <% @meta_title_small = "(рус. #{@brand.slang})" if @brand.slang.present? %>
+  <%= page_header %>
+
+  <hr />
+
+  <div id="brand-preview"><%==  @brand.preview %></div>
+  <div id="brand-content"><%== @brand.content %></div>
+
+  <ul>
+    <% @spare_infos.each do |spare_info| %>
+      <li>
+        <%= link_to polymorphic_path([:new, *jaba3, :product], :catalog_number => spare_info.catalog_number, :anchor => spare_info.cached_brand ) do %> 
+          <%= spare_info.catalog_number %> (<%= spare_info.cached_brand %>) <%= spare_info.cached_spare_catalog %>
+        <% end %>
+        <%== spare_info.content %>
+      </li>
+    <% end %>
+  </ul>
+
+  <br/ >
+  <%= paginate @spare_infos %>
+
+<% end %>

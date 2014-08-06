@@ -11,6 +11,4 @@ class Admin::ModelsController < ModelsController
     @resource.brand_id = params[:brand_id]
   end
 
-  private
-
 end

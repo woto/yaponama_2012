@@ -9,11 +9,11 @@
   <%= page_header %>
 
   <ul class="list-unstyled">
-    <li><h4><%= link_to 'Движение средств', transactions_admin_user_accounts_path(@resource, return_path: request.fullpath) %>
+    <li><h4><%= link_to 'Движение средств', transactions_admin_user_accounts_path(@resource, return_path: request.fullpath) %></h4></li>
     <li><h4><%= link_to 'Разлогинить со всех компьютеров.', logout_from_all_places_admin_user_path(@resource, return_path: request.fullpath), remote: true, method: :delete, data: {confirm: 'Вы уверены? Пользователю необходимо будет заново войти на сайт.'} %></h4></li>
     <li><h4><%= link_to 'Сменить пароль', edit_admin_user_password_path(@resource, return_path: request.fullpath) %></h4></li>
     <li><h4><%= link_to 'Настройки', edit_admin_user_path(@resource, return_path: request.fullpath) %></h4></li>
-    <li><h4><%= link_to 'История изменения настроек', transactions_admin_user_path(@resource, return_path: request.fullpath) %>
+    <li><h4><%= link_to 'История изменения настроек', transactions_admin_user_path(@resource, return_path: request.fullpath) %></h4></li>
   </ul>
 
   <%= render 'smart_show' %>

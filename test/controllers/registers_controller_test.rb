@@ -56,7 +56,7 @@ class RegistersControllerTest < ActionController::TestCase
     }
 
     assert_equal(
-      ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символа)"], 
+      ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символов)"],
       assigns(:user).errors['password']
     )
 
@@ -101,7 +101,7 @@ class RegistersControllerTest < ActionController::TestCase
     }
 
     assert_equal(
-      ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символа)"], 
+      ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символов)"],
       assigns(:user).errors['password']
     )
 

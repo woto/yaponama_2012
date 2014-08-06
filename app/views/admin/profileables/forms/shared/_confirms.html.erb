@@ -10,7 +10,7 @@
 
   <% if f.object.persisted? %>
     <%= f.form_group do %>
-      <%= link_to "Отправить PIN код для подтверждения", smart_route({prefix: [:ask], postfix: [:confirm, f.object.class.name.underscore]}, user_id: params[:user_id], id: f.object.id), method: :post %>
+      <%= link_to "Отправить PIN код для подтверждения", smart_route({prefix: [:ask], postfix: [:confirm, f.object.class.name.underscore]}, user_id: params[:user_id], id: f.object.id), method: :post, remote: :true %>
     <% end %>
   <% end %>
 </div>

@@ -12,7 +12,7 @@ format_selection = (data) ->
   data.text.toString().toUpperCase()
 
 $(document).on 'page:change', ->
-  $("[rel='select2-spare-catalog']").select2
+  $("[rel='select2-spare_catalog']").select2
     #placeholder: ''
     allowClear: true
     initSelection: (element, callback) ->

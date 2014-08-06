@@ -14,12 +14,20 @@ namespace :app do
         file_path = "#{Rails.root}/public#{file_name}"
         if row
           row.assign_attributes(brand)
-          row.image = file_name ? File.open(file_path) : nil
-          row.save!
+          row.image = file_name ? File.open(CGI.unescape(file_path)) : nil
+          begin
+            row.save!
+          rescue
+            puts row.to_yaml
+          end
         else
           row = Brand.new(brand)
-          row.image = file_name ? File.open(file_path) : nil
-          row.save!
+          row.image = file_name ? File.open(CGI.unescape(file_path)) : nil
+          begin
+            row.save!
+          rescue
+            puts row.to_yaml
+          end
         end
       end
 

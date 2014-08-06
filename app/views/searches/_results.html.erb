@@ -122,10 +122,11 @@
                   </div>
                 <% end %>
 
-                <% if mf_scope[:image_url].present? %>
-                  <h4 style="color: red"> <%= mf_scope[:image_url] %> </h4>
+                <% if mf_scope[:info][:own][:data].present? && mf_scope[:info][:own][:data][:cached_spare_catalog].present? %>
+                  <% zzz = mf_scope[:info][:own][:data][:cached_spare_catalog] %>
+                <% elsif mf_scope[:image_url].present? %>
+                  <% zzz = mf_scope[:image_url] %>
                 <% else %>
-                  <% benchmark("Bayes") do %>
 
                     <% nbayes = NBayes::Base.new %>
 
@@ -158,19 +159,28 @@
                         <% if counter == 0 %>
                           <% SpareCatalogWorker.perform_async(catalog_number, manufacturer, item) %>
                           <% counter += 1 %>
+                          <% zzz = item %>
                         <% end %>
 
-                        <!-- <h4><a href="/<%= CGI.escape(item) %>"><%= item %></a></h4> -->
-                        <h4><%= item %></h4>
-                        <div class="text-muted">
-                          <% spare_catalog = SpareCatalog.where(name: item).first %>
-                          <%== spare_catalog.intro %>
-                        </div>
                       <% end %>
 
                     <% end %>
 
-                  <% end %>
+                <% end %>
+
+                <% if zzz %>
+                  <% spare_catalog = SpareCatalog.find_by(name: zzz) %>
+                  <h4><%= link_to spare_catalog.name, category_brands_path(spare_catalog) %> </h4>
+                  <div class="text-muted">
+                    <%== spare_catalog.intro %>
+
+                    <%# "КСПЕРИМЕНТ %>
+                    <%# TODO TODO TODO %>
+                    <% si = SpareInfo.find_by(catalog_number: catalog_number, cached_brand: manufacturer) %>
+                    <% if si %>
+                      <% si.update(spare_catalog_id: spare_catalog.id) %>
+                    <% end %>
+                  </div>
                 <% end %>
 
 
@@ -225,7 +235,7 @@
 
                       <%= f.twbs_text_area :content, rows: 4 %>
 
-                      <%= f.twbs_select2 :name, rel: 'select2-spare-catalog' %>
+                      <%= f.twbs_select2 :name, rel: 'select2-spare_catalog' %>
 
                       <%= f.twbs_submit %>
 
@@ -237,7 +247,32 @@
 
                 <% if mf_scope[:info][:own][:status] == 'avaliable' %>
                   <hr />
-                  <%= mf_scope[:info][:own][:data].content.html_safe %>
+                  <%== mf_scope[:info][:own][:data].content %>
+
+                  <% if mf_scope[:info][:own][:data].spare_applicabilities.present? %>
+                    <h4> Применимость детали </h4>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Производитель</th>
+                          <th>Модель</th>
+                          <th>Поколение</th>
+                          <th>Модификация</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% mf_scope[:info][:own][:data].spare_applicabilities.each do |spare_applicability| %>
+                          <tr>
+                            <td><%= link_to spare_applicability.cached_brand, catalogs_brand_path(spare_applicability.to_brand_param) if spare_applicability.cached_brand %></td>
+                            <td><%= link_to spare_applicability.cached_model, catalogs_model_path(spare_applicability.to_model_param) if spare_applicability.cached_model %></td>
+                            <td><%= link_to spare_applicability.cached_generation, catalogs_generation_path(spare_applicability.to_generation_param) if spare_applicability.cached_generation %></td>
+                            <td><%= link_to spare_applicability.cached_modification, catalogs_modification_path(spare_applicability.to_modification_param) if spare_applicability.cached_modification %></td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                  <% end %>
+
                 <% end %>
 
 

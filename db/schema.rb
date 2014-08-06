@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714212333) do
+ActiveRecord::Schema.define(version: 20140804054308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,27 +55,6 @@ ActiveRecord::Schema.define(version: 20140714212333) do
 
   add_index "auths", ["somebody_id"], name: "index_auths_on_somebody_id", using: :btree
 
-  create_table "block_transactions", force: true do |t|
-    t.integer  "block_id"
-    t.string   "operation"
-    t.integer  "creator_id"
-    t.string   "name_before"
-    t.string   "name_after"
-    t.text     "content_before"
-    t.text     "content_after"
-    t.datetime "created_at"
-  end
-
-  add_index "block_transactions", ["block_id"], name: "index_block_transactions_on_block_id", using: :btree
-  add_index "block_transactions", ["creator_id"], name: "index_block_transactions_on_creator_id", using: :btree
-
-  create_table "blocks", force: true do |t|
-    t.string   "name"
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "bots", force: true do |t|
     t.string   "title"
     t.string   "comment"
@@ -117,6 +96,8 @@ ActiveRecord::Schema.define(version: 20140714212333) do
     t.boolean  "manufacturer_after"
     t.text     "preview_before"
     t.text     "preview_after"
+    t.string   "slang_before"
+    t.string   "slang_after"
   end
 
   add_index "brand_transactions", ["brand_id"], name: "index_brand_transactions_on_brand_id", using: :btree
@@ -138,6 +119,7 @@ ActiveRecord::Schema.define(version: 20140714212333) do
     t.datetime "updated_at"
     t.boolean  "manufacturer"
     t.text     "preview"
+    t.string   "slang"
   end
 
   add_index "brands", ["brand_id"], name: "index_brands_on_brand_id", using: :btree
@@ -574,6 +556,7 @@ ActiveRecord::Schema.define(version: 20140714212333) do
     t.datetime "updated_at"
     t.date     "from"
     t.date     "to"
+    t.string   "slang"
   end
 
   add_index "models", ["brand_id"], name: "index_models_on_brand_id", using: :btree
@@ -1230,6 +1213,27 @@ ActiveRecord::Schema.define(version: 20140714212333) do
   add_index "somebody_transactions", ["creator_id"], name: "index_somebody_transactions_on_creator_id", using: :btree
   add_index "somebody_transactions", ["somebody_id"], name: "index_somebody_transactions_on_somebody_id", using: :btree
 
+  create_table "spare_applicabilities", force: true do |t|
+    t.integer  "spare_info_id"
+    t.integer  "brand_id"
+    t.integer  "model_id"
+    t.integer  "generation_id"
+    t.integer  "modification_id"
+    t.string   "cached_brand"
+    t.string   "cached_model"
+    t.string   "cached_generation"
+    t.string   "cached_modification"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "cached_spare_info"
+  end
+
+  add_index "spare_applicabilities", ["brand_id"], name: "index_spare_applicabilities_on_brand_id", using: :btree
+  add_index "spare_applicabilities", ["generation_id"], name: "index_spare_applicabilities_on_generation_id", using: :btree
+  add_index "spare_applicabilities", ["model_id"], name: "index_spare_applicabilities_on_model_id", using: :btree
+  add_index "spare_applicabilities", ["modification_id"], name: "index_spare_applicabilities_on_modification_id", using: :btree
+  add_index "spare_applicabilities", ["spare_info_id"], name: "index_spare_applicabilities_on_spare_info_id", using: :btree
+
   create_table "spare_catalogs", force: true do |t|
     t.string   "name"
     t.text     "content"
@@ -1246,9 +1250,13 @@ ActiveRecord::Schema.define(version: 20140714212333) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.string   "cached_spare_catalog"
+    t.integer  "spare_catalog_id"
   end
 
   add_index "spare_infos", ["brand_id"], name: "index_spare_infos_on_brand_id", using: :btree
+  add_index "spare_infos", ["spare_catalog_id"], name: "index_spare_infos_on_spare_catalog_id", using: :btree
 
   create_table "stats", force: true do |t|
     t.text     "location"

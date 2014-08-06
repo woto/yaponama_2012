@@ -2,10 +2,6 @@
 <% @meta_description = 'Мы занимаемся продажей оригинальных и неоригинальных запчастей для японских автомобилей. Для вашего удобства мы принимаем оплату всеми современными способами. Приобретенный товар вы можете самостоятельно забрать в наших магазинах в Москве или заказать доставку. Так же мы отправляем почтовыми и транспортными компаниями по России.' %>
 
 
-<div class="hero-unit">
-  <%= render(:partial => "blocks/show", :locals => {:block_name => 'hero_unit'}) %>
-</div>
-
 <%= content_tag :div, "smoothScrollingDuration" => "100", "data-smooth-scrolling" => "off", "data-0" => "background-position: -300px -430px", "data-top-bottom" => "background-position: -300px -230px", style: "padding: 80px 0px; background: #5A5A5A url('#{asset_url 'parts.jpg'}') 0px 0px;" do %>
 
   <div class="container">
@@ -173,16 +169,3 @@
   </div>
 
 <% end %>
-
-
-<div class="container">
-
-  <%= row style: 'margin-left: 0; margin-bottom: 0px' do %>
-
-    <div class="col-lg-12">
-      <%= render(:partial => "blocks/show", :locals => {:block_name => 'blockquote'}) %>
-    </div>
-
-  <% end %>
-
-</div>

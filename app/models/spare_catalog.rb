@@ -1,5 +1,10 @@
 class SpareCatalog < ActiveRecord::Base
 
+  has_many :spare_infos
+  has_many :spare_applicabilities, through: :spare_infos
+
+  validates :name, uniqueness: true
+
   before_save do
     name = self.name.mb_chars
     content = self.name.mb_chars
@@ -19,6 +24,10 @@ class SpareCatalog < ActiveRecord::Base
 
   def to_label
     name
+  end
+
+  def to_param
+    "#{id}-#{name.parameterize}"
   end
 
 end

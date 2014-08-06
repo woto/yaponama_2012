@@ -29,4 +29,13 @@ class Admin::UsersControllerTest < ActionController::TestCase
     #assert_equal "User был успешно создан.", flash[:success]
   end
 
+  # TODO Этот тест тестирует неправильную логику :)
+  # При запросе xhr /admin/users/123  должны отдаваться в теории какие-то данные пользователя
+  # а уж никак не результат подтверждения контакта
+  test 'Результат, полученный в результате попытки запроса уже подтвержденного контакта' do
+    cookies['auth_token'] = somebodies(:first_admin).auth_token
+    xhr :get, :show, id: somebodies(:otto)
+    assert_match "alert(\"Контакт уже подтвержден\");\n", response.body
+  end
+
 end

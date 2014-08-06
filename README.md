@@ -526,3 +526,156 @@ http://handlebarsjs.com
 
 
 Решить вопрос с экстра плагинама к ckeditor. они не должны находиться в app. а в vendor/../ckeditor засунуть не получается. как вариант добавлять путь в javascript'e, либо найти другой вариант (возможно использовать другую директорию)
+
+
+
+
+Тестовые данные в FIXTURES
+
+MITSUBISHI	
+  Galant
+    3310-infiniti
+    2008 - 2013, 9 поколение [2-й рестайлинг]
+      3310-toyota
+      CN седан 4-дв. 2....
+        2102-nissan
+  Lancer
+    3310-infiniti
+  Lancer Ralliart
+    3310-toyota
+    Lancer Ralliart (2008)
+      3310-infiniti
+
+
+TOYOTA
+  Camry Hybrid
+
+TOYOTA
+  Celica Camry
+    2102-nissan
+    3310-infiniti
+    3310-toyota
+
+TOYOTA	
+  Camry Gracia
+    Camry Gracia (1996)
+      2.2 л, бензин, 14...
+        2102-kia
+
+TOYOTA
+  Camry
+    Camry (XV10) (1991)
+      Седан - 2.2 AT Ov...
+        2102-kia
+    Camry (XV50) (2011)	
+      2.5 AT (181 л. с....
+        3310-toyota
+      2.0 AT (148 л. с....
+        2102-kia
+      2.0 AT (148 л. с....
+    Camry (V10) (1982)
+      3310-toyota
+
+
+
+
+Временно вырезал сюда в связи с написанием более изящным способом без find_by_sql
+
+    #sql = "
+    #  WITH DEDUPE AS (
+    #    SELECT sa.brand_id, sa.cached_brand, ROW_NUMBER() OVER (PARTITION BY sa.brand_id ORDER by sa.brand_id) AS OCCURENCE
+    #    FROM spare_infos si
+    #    JOIN spare_applicabilities sa ON si.id = sa.spare_info_id
+    #    WHERE si.spare_catalog_id = ?
+    #  )
+    #  SELECT * FROM DEDUPE
+    #  WHERE
+    #  OCCURENCE = 1
+    #".squish
+    #@brands = SpareApplicability.find_by_sql([sql, params[:category_id].to_i])
+
+    #sql = "
+    #  WITH DEDUPE AS (
+    #    SELECT sa.model_id, sa.cached_model, ROW_NUMBER() OVER (PARTITION BY sa.model_id ORDER by sa.model_id) AS OCCURENCE
+    #    FROM spare_infos si
+    #    JOIN spare_applicabilities sa ON si.id = sa.spare_info_id
+    #    WHERE si.spare_catalog_id = :spare_catalog_id
+    #      AND sa.brand_id = :brand_id
+    #  )
+    #  SELECT * FROM DEDUPE
+    #  WHERE
+    #  OCCURENCE = 1
+    #".squish
+    #@models = SpareApplicability.find_by_sql([sql, spare_catalog_id: params[:category_id].to_i, brand_id: params[:id].to_i])
+
+    #sql = "
+    #  WITH DEDUPE AS (
+    #    SELECT sa.modification_id, sa.cached_modification, ROW_NUMBER() OVER (PARTITION BY sa.modification_id ORDER by sa.modification_id) AS OCCURENCE
+    #    FROM spare_infos si
+    #    JOIN spare_applicabilities sa ON si.id = sa.spare_info_id
+    #    WHERE si.spare_catalog_id = :spare_catalog_id
+    #      AND sa.generation_id = :generation_id
+    #      AND sa.modification_id IS NOT NULL
+    #  )
+    #  SELECT * FROM DEDUPE
+    #  WHERE
+    #  OCCURENCE = 1
+    #".squish
+    #@modifications = SpareApplicability.find_by_sql([sql, spare_catalog_id: params[:category_id].to_i, generation_id: params[:id].to_i])
+
+    #@parts = SpareInfo.joins(:spare_applicabilities).where(spare_catalog_id: params[:category_id].to_i)
+    #@parts = @parts.where(spare_applicabilities: {generation_id: params[:id].to_i, modification_id: nil})
+
+
+    #sql = "
+    #  WITH DEDUPE AS (
+    #    SELECT sa.generation_id, sa.cached_generation, ROW_NUMBER() OVER (PARTITION BY sa.generation_id ORDER by sa.generation_id) AS OCCURENCE
+    #    FROM spare_infos si
+    #    JOIN spare_applicabilities sa ON si.id = sa.spare_info_id
+    #    WHERE si.spare_catalog_id = :spare_catalog_id
+    #      AND sa.model_id = :model_id
+    #      AND sa.generation_id IS NOT NULL
+    #  )
+    #  SELECT * FROM DEDUPE
+    #  WHERE
+    #  OCCURENCE = 1
+    #".squish
+
+    #@generations = SpareApplicability.find_by_sql([sql, spare_catalog_id: params[:category_id].to_i, model_id: params[:id].to_i])
+
+    #@parts = SpareInfo.joins(:spare_applicabilities).where(spare_catalog_id: params[:category_id].to_i)
+    #@parts = @parts.where(spare_applicabilities: {model_id: params[:id].to_i, generation_id: nil})
+
+
+
+    #@parts = SpareInfo.joins(:spare_applicabilities).where(spare_catalog_id: params[:category_id].to_i)
+    #@parts = @parts.where(spare_applicabilities: {modification_id: params[:id].to_i})
+
+
+
+    #sql = "
+    #WITH DEDUPE AS (
+    #  SELECT spare_catalog_id, cached_spare_catalog, ROW_NUMBER() OVER ( PARTITION BY spare_catalog_id ORDER BY spare_catalog_id) AS OCCURENCE FROM spare_infos
+    #)
+    #SELECT * FROM DEDUPE
+    #WHERE
+    #OCCURENCE = 1".squish
+
+
+    #@categories = SpareInfo.find_by_sql(sql)
+
+    ---------------
+
+
+    #has_many :spare_infos, ->(object){where(spare_applicabilities: {cached_modification: nil}).uniq}, through: :spare_applicabilities
+    #has_many :spare_infos, ->(object){where(spare_applicabilities: {cached_generation: nil}).uniq}, through: :spare_applicabilities
+    #has_many :spare_infos, ->(object){uniq}, through: :spare_applicabilities
+
+    ---------------
+
+    #get "/n/:category/", constraints: CategoriesConstraint.new, category: /.*/, to: "categories#show"
+    #get "/n/:category/:brand", constraints: CategoriesConstraint.new, category: /.*/, brand: /.*/, to: "categories#show"
+    #get "/n/:category/:brand/:model", constraints: CategoriesConstraint.new, category: /.*/, brand: /.*/, model: /.*/, to: "categories#show"
+    #get "/n/:category/:brand/:model/:generation", constraints: CategoriesConstraint.new, category: /.*/, brand: /.*/, model: /.*/, generation: /.*/, to: "categories#show"
+    #get "/n/:category/:brand/:model/:generation/:modification", constraints: CategoriesConstraint.new, category: /.*/, brand: /.*/, model: /.*/, generation: /.*/, modification: /.*/, to: "categories#show"
+

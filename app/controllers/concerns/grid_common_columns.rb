@@ -61,30 +61,6 @@ module GridCommonColumns
       }
     end
 
-    def cached_brand(columns_hash)
-      columns_hash['cached_brand'] = {
-        :type => :string,
-      }
-    end
-
-    def cached_model(columns_hash)
-      columns_hash['cached_model'] = {
-        :type => :string,
-      }
-    end
-
-    def cached_generation(columns_hash)
-      columns_hash['cached_generation'] = {
-        :type => :string
-      }
-    end
-
-    def cached_modification(columns_hash)
-      columns_hash['cached_modification'] = {
-        :type => :string,
-      }
-    end
-
     def name(columns_hash)
       columns_hash['name'] = {
         :type => :string,
