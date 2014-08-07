@@ -83,8 +83,6 @@ module ApplicationHelper
       image = asset_url('no_brand.png')
     end
 
-    link = "/#{CGI.escape(brand.name)}"
-
     link_to(title, brand_parts_path(brand), :style => "background: url(#{image}) no-repeat scroll center center", :class => "brand brands-#{brand.name}")
 
   end
