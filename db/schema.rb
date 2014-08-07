@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140804054308) do
+ActiveRecord::Schema.define(version: 20140806150318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1122,6 +1122,7 @@ ActiveRecord::Schema.define(version: 20140804054308) do
   end
 
   add_index "somebodies", ["creator_id"], name: "index_somebodies_on_creator_id", using: :btree
+  add_index "somebodies", ["type", "auth_token"], name: "index_somebodies_on_type_and_auth_token", unique: true, using: :btree
 
   create_table "somebody_transactions", force: true do |t|
     t.integer  "somebody_id"
@@ -1256,6 +1257,7 @@ ActiveRecord::Schema.define(version: 20140804054308) do
   end
 
   add_index "spare_infos", ["brand_id"], name: "index_spare_infos_on_brand_id", using: :btree
+  add_index "spare_infos", ["cached_spare_catalog"], name: "index_spare_infos_on_cached_spare_catalog", using: :btree
   add_index "spare_infos", ["spare_catalog_id"], name: "index_spare_infos_on_spare_catalog_id", using: :btree
 
   create_table "stats", force: true do |t|
