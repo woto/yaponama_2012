@@ -1,6 +1,23 @@
 ru:
   activerecord:
     attributes:
+      somebody/profile:
+        phones: Мобильный телефон
+        emails: E-mail
+      profile/names:
+        name: Имя
+      payment:
+        old_postal_address: Адрес плательщика из списка
+        new_postal_address: Адрес плательщика
+        profile_base: Пожалуйста
+        old_profile: Плательщик из списка
+        new_profile: Плательщик
+        amount: Вносимая сумма в руб.
+        payment_type: Платежная система
+        #=> [:"activerecord.attributes.payment/profile/names.name", :"activerecord.attributes.profile/names.name", :"attributes.name", "Profile names name", "Name"]
+        #
+
+        #=> [:"activerecord.attributes.payment/profile/names.name", {:count=>1, :default=>[:"activerecord.attributes.profile/names.name", :"attributes.name", "Profile names name", "Name"]}]
       spare_info:
         catalog_number: Каталожный номер
         #brand: Производитель
@@ -36,6 +53,7 @@ ru:
         cached_emails: E-mail адреса кешированные
         cached_passports: Паспорта кешированные
         comment: Комментарий к контактному лицу
+        base: В профиле
       passport:
         seriya: Серия
         nomer: Номер

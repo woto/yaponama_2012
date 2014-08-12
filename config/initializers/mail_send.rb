@@ -1,4 +1,9 @@
-Yaponama2012::Application.config.action_mailer.default_url_options = { :host => ::CONFIG.site['host'] }
+Yaponama2012::Application.config.action_mailer.default_url_options = {
+  :host => ::CONFIG.site['host'],
+  :port => ::CONFIG.site['port'],
+  :protocol => :http
+}
+
 ActionMailer::Base.default :from => ::CONFIG.mail['from']
 
 ActionMailer::Base.delivery_method = ::CONFIG.mail['delivery_method'].to_sym
