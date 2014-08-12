@@ -1,7 +1,0 @@
-= simple_form_for @call, :html => { :class => "form-horizontal" } do |f|
-  = f.input :phone_id
-  = f.input :file
-  .form-actions
-    = f.button :submit, :class => 'btn-primary'
-    '
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), calls_path, :class => 'btn'
