@@ -78,6 +78,11 @@ guest_with_profile2:
   credit: 0.0
   somebody: guest_with_profile2
 
+guest_with_profile3:
+  debit: 0.0
+  credit: 0.0
+  somebody: guest_with_profile3
+
 ivan:
   debit: 0.0
   credit: 0.0

@@ -50,6 +50,14 @@ guest_with_profile2:
   creation_reason: fixtures
   confirmation_token: 9999
 
+guest_with_profile3:
+  value: wefhs@iewiw.jp
+  profile: guest_with_profile3
+  somebody: guest_with_profile3
+  confirmed: true
+  creation_reason: fixtures
+  confirmation_token: diwu
+
 ivan:
   value: six@example.com
   profile: ivan

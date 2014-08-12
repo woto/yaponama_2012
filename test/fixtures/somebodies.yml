@@ -113,7 +113,7 @@ mike:
   discount: 14.3
   prepayment: 12.5
   order_rule: none
-  # password: 4444444444
+  # password: 7777777777
   password_digest: $2a$10$x0TPNSOakOlI5vH1oVo66eyz6q5/a60hJR1i50hdrekFHTQprClMO
   role: user
   password_reset_token: 1234
@@ -197,6 +197,16 @@ guest_with_profile2:
   prepayment: 100
   order_rule: all
   profile: guest_with_profile2
+
+guest_with_profile3:
+  type: User
+  auth_token: wU20eRBmFFa18EeYWS9b3H
+  creation_reason: fixtures
+  role: guest
+  discount: 0
+  prepayment: 100
+  order_rule: all
+  profile: guest_with_profile3
 
 ivan:
   type: User

@@ -102,6 +102,14 @@ guest_with_profile2:
   cached_emails: '[{"value":"guest_with_profile2@example.com"}]'
   cached_passports: '[]'
 
+guest_with_profile3:
+  somebody: guest_with_profile3
+  creation_reason: fixtures
+  cached_names: '[{"surname":"","name":"Ыфывоа","patronymic":""}]'
+  cached_phones: '[{"value":"+7 (328) 938-93-12"}]'
+  cached_emails: '[{"value":"wefhs@iewiw.jp"}]'
+  cached_passports: '[]'
+
 ivan:
   somebody: ivan
   creation_reason: fixtures

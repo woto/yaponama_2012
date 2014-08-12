@@ -123,6 +123,15 @@ anton_second:
   mobile : true
   creation_reason: fixtures
 
+guest_with_profile3:
+  value: +7 (328) 938-93-12
+  mobile: true
+  confirmation_token: sjdu
+  profile: guest_with_profile3
+  somebody: guest_with_profile3
+  confirmed: true
+  creation_reason: fixtures
+
 ivan:
   somebody: ivan
   confirmed: true
