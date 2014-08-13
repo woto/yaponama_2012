@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class Payment < ActiveRecord::Base
 
   include BelongsToSomebody
@@ -19,14 +17,14 @@ class Payment < ActiveRecord::Base
   attr_accessor :postal_address_type
   validates :postal_address_type, :inclusion => { :in => ['new', 'old'] }, allow_nil: true # TODO проверить потом
 
-  belongs_to :postal_address, autosave: true#, inverse_of: :payments
+  belongs_to :postal_address#, remote: true#, autosave: true#, inverse_of: :payments
   validates :new_postal_address, associated: true, if: -> { payment_type == 'Sberbank' && postal_address_type == 'new' }
   validates :old_postal_address, associated: true, inclusion: { in: proc {|payment| payment.somebody.postal_addresses } }, if: -> { payment_type == 'Sberbank' && postal_address_type == 'old' }
 
   #belongs_to :company
   #accepts_nested_attributes_for :company
 
-  validates :payment_type, :inclusion => { in: Rails.configuration.payment_systems.keys, message: 'пожалуйста выберите платежную систему.' }
+  validates :payment_type, :inclusion => { in: Rails.configuration.payment_systems.keys }
 
   def payment_destination
     "Пополнение счета № #{somebody.pretty_id}"

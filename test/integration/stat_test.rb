@@ -106,7 +106,8 @@ class StatTest < ActionDispatch::IntegrationTest
       }
     }
 
-    sleep 1
+    assert_response :success
+    # sleep 1
     # TODO Переделать задействовав fixtures, не полагаясь на данные в бд
     u1 = User.last
 
@@ -121,7 +122,8 @@ class StatTest < ActionDispatch::IntegrationTest
       }
     }
 
-    sleep 1
+    assert_response :success
+    #sleep 1
     u2 = User.last
 
     assert_equal 'http://example.com', u2.first_referrer

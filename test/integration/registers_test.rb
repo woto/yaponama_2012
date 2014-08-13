@@ -8,12 +8,13 @@ class RegistersTest < ActionDispatch::IntegrationTest
     Capybara.reset!
   end
 
+  # TODO вынести в функциональные тесты
   test "При успешной регистрации с помощью e-mail должен произойти редирект в личный кабинет, должно отправиться письмо на этот адрес и должна присутствовать ссылка для подтверждения вверху страницы" do
     ActionMailer::Base.deliveries.clear
 
     visit '/register/edit?with=email'
-    fill_in 'user[profiles_attributes][0][names_attributes][0][name]', with: 'Иван'
-    fill_in 'user[profiles_attributes][0][emails_attributes][0][value]', with: 'ivan@example.com'
+    fill_in 'user[profile_attributes][names_attributes][0][name]', with: 'Иван'
+    fill_in 'user[profile_attributes][emails_attributes][0][value]', with: 'ivan@example.com'
     fill_in 'user[password]', with: '123456'
     fill_in 'user[password_confirmation]', with: '123456'
     click_button 'Зарегистрироваться'
@@ -26,13 +27,14 @@ class RegistersTest < ActionDispatch::IntegrationTest
 
   end
 
+  # TODO вынести в функциональные тесты
   test 'При успешной регистрации с помощью мобильного телефона Россия должен произойти редирект в личный кабинет, должно отправиться sms и должна присутствоваться ссылка для подтверждения номера телефона' do
     ActionMailer::Base.deliveries.clear
 
     visit '/register/edit?with=phone'
 
-    fill_in 'user[profiles_attributes][0][names_attributes][0][name]', with: 'Иван'
-    fill_phone '[name="user[profiles_attributes][0][phones_attributes][0][value]"]', '+7 (746) 394-31-94'
+    fill_in 'user[profile_attributes][names_attributes][0][name]', with: 'Иван'
+    fill_phone '[name="user[profile_attributes][phones_attributes][0][value]"]', '+7 (746) 394-31-94'
     fill_in 'user[password]', with: '123456'
     fill_in 'user[password_confirmation]', with: '123456'
     click_button 'Зарегистрироваться'

@@ -21,10 +21,13 @@
           <% end %>
 
 
-          <%= profile.fields_for :emails do |email| %>
-            <%= email.twbs_text_field :value, label: false, placeholder: 'E-mail адрес', hint: false %>
-            <%= email.read_only :creation_reason, value: 'talk' %>
-            <%= email.read_only :confirm_required, value: true %>
+          <% profile.object.phones.present? || profile.object.phones.new(mobile: true) %>
+
+          <%= profile.fields_for :phones do |phone| %>
+            <%= phone.twbs_text_field :value, label: false, placeholder: 'Мобильный телефон', hint: false, rel: 'mobile-mask-on' %>
+            <%= phone.read_only :creation_reason, value: 'talk' %>
+            <%= phone.read_only :confirmed, value: nil %>
+            <%= phone.read_only :mobile, value: true %>
           <% end %>
 
 
@@ -35,14 +38,13 @@
           </div>
 
 
-          <%= profile.fields_for :phones do |phone| %>
-            <%= phone.twbs_text_field :value, label: false, placeholder: 'Мобильный телефон', hint: false, rel: 'mobile-mask-on' %>
-            <%= phone.read_only :creation_reason, value: 'talk' %>
-            <%= phone.read_only :mobile, value: true %>
-            <%= phone.read_only :confirm_required, value: true %>
+          <% profile.object.emails.present? || profile.object.emails.new %>
+
+          <%= profile.fields_for :emails do |email| %>
+            <%= email.twbs_text_field :value, label: false, placeholder: 'E-mail адрес', hint: false %>
+            <%= email.read_only :creation_reason, value: 'talk' %>
+            <%= email.read_only :confirmed, value: nil %>
           <% end %>
-
-
 
 
           <% if profile.object.errors[:base].present? %>

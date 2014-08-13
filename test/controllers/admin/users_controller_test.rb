@@ -11,7 +11,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
     old_auth_token = stan.auth_token
     cookies['auth_token'] = first_admin.auth_token
 
-    delete :logout_from_all_places, id: stan.id
+    xhr :delete, :logout_from_all_places, id: stan.id
 
     new_auth_token = stan.reload.auth_token
     assert_not_equal new_auth_token, old_auth_token

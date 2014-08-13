@@ -34,7 +34,7 @@ class Admin::CashesControllerTest < ActionController::TestCase
     stan = somebodies(:stan)
 
     assert_difference 'AccountTransaction.count' do
-      post :create, 'cash' => { "debit"=>"1.1", "comment"=>"тест" }, user_id: stan.id
+      xhr :post, :create, 'cash' => { "debit"=>"1.1", "comment"=>"тест" }, user_id: stan.id
     end
 
     at = AccountTransaction.last
@@ -50,7 +50,7 @@ class Admin::CashesControllerTest < ActionController::TestCase
     # Кладем деньги еще раз
 
     assert_difference 'AccountTransaction.count' do
-      post :create, 'cash' => { "debit"=>"1.01", "comment"=>"тест 2" }, user_id: stan.id
+      xhr :post, :create, 'cash' => { "debit"=>"1.01", "comment"=>"тест 2" }, user_id: stan.id
     end
 
     at = AccountTransaction.last

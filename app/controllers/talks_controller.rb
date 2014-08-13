@@ -5,6 +5,7 @@ class TalksController < ApplicationController
   # POST /talks
   # POST /talks.json
   def create
+    #binding.pry
     respond_to do |format|
       if @talk.save
         format.js { redirect_to action: :index, format: :js }

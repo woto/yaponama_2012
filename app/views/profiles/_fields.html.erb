@@ -1,10 +1,22 @@
+<% f.object.names.present? || f.object.names.new %>
+
 <%= f.simple_fields_for :names do |name| %>
   <%= render 'names/fields', :f => name %>
 <% end %>
 
+<% f.object.phones.reject{|r| r.marked_for_destruction?}.present? || f.object.phones.new(mobile: true) %>
+
 <%= f.simple_fields_for :phones do |phone| %>
   <%= render 'phones/fields', :f => phone %>
 <% end %>
+
+<div class="text-center">
+  <%= f.form_group do %>
+    <p class="form-control-static text-muted">и / или</p>
+  <% end %>
+</div>
+
+<% f.object.emails.reject{|r| r.marked_for_destruction?}.present? || f.object.emails.new %>
 
 <%= f.simple_fields_for :emails do |email| %>
   <%= render 'emails/fields', :f => email %>
@@ -27,6 +39,8 @@
     </ul>
   </div>
 <% end %>
+
+<%# TODO Добавить к телефону , :wrap_object => Proc.new { |phone| phone.mobile = true; phone }, а так же вызов; window.bootstrapperize() %>
 
 <%= f.twbs_hidden_field :somebody_id %>
 <%= f.read_only :creation_reason, value: 'profile' %>

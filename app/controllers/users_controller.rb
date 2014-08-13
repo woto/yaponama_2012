@@ -36,7 +36,11 @@ class UsersController < ApplicationController
   def logout_from_all_places
     @resource.generate_token :auth_token, :long
     @resource.save!
-    redirect_to root_path, attention: "Вы успешно вышли со всех компьютеров, где использовалась ваша учетная запись."
+    respond_to do |format|
+      format.html do
+        redirect_to root_path, attention: "Вы успешно вышли со всех компьютеров, где использовалась ваша учетная запись."
+      end
+    end
   end
 
   #def update

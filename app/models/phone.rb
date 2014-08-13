@@ -16,12 +16,6 @@ class Phone < ActiveRecord::Base
 
   belongs_to :profile, :inverse_of => :phones
 
-  attr_accessor :hide_remove_button_on_first_on_new
-
-  def hide_remove_button_on_first_on_new
-    @hide_remove_button_on_first_on_new || 'false'
-  end
-
   has_many :orders
 
   validates :value, presence: true, phone: true, unless: -> { self.marked_for_destruction? }
@@ -39,27 +33,16 @@ class Phone < ActiveRecord::Base
     value_changed? && ( value_was.to_s.gsub(/[^0-9]/, '') != value.to_s.gsub(/[^0-9]/, '') )
   end
 
-  before_save do
-
-    # Если стал подтвержденный, то удаляем остальные такие же
-    if become_confirmed?
-      Phone.not_self(id).same(value).destroy_all
-    end
-
+  def force_confirm_condition
+    become_unconfirmed? && mobile?
   end
 
-  before_save do
-    if force_confirm
-      # Телефон становится не подтвержденным.
-      reset_confirmed
-    end
+  def remove_same
+    Phone.not_self(id).same(value).destroy_all
   end
 
-  after_save do
-    if force_confirm
-      # Отправляем уведомление
-      ConfirmMailer.phone(self).deliver
-    end
+  def deliver_confirmation
+    ConfirmMailer.phone(self).deliver
   end
 
   def to_label

@@ -76,6 +76,7 @@ class ApplicationController < ActionController::Base
   end
 
   def create
+    #binding.pry
     # TODO postal_address_type здесь нужен для того чтобы после создания адреса доставки переброска на show происходила с postal_address_type, чтобы на следующем шаге мы знали показывать например поле для ввода квартиры или нет. Потом как-нибудь подумать, как сделать лучше
     respond_to do |format|
       if @resource.save
@@ -89,6 +90,7 @@ class ApplicationController < ActionController::Base
   end
 
   def update
+    #binding.pry
     respond_to do |format|
       if @resource.save
         format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path]) }
@@ -381,7 +383,11 @@ class ApplicationController < ActionController::Base
 
   def prepare_talk_form
     talk = @somebody.talks.new
-    profile = @somebody.profile.nil? ? @somebody.build_profile : @somebody.profile
+    if @somebody.profile.nil? || @somebody.profile.new_record?
+      profile = @somebody.build_profile
+    else
+      profile = @somebody.profile
+    end
     profile.names.new if profile.names.empty?
     profile.phones.new if profile.phones.empty?
     profile.emails.new if profile.emails.empty?

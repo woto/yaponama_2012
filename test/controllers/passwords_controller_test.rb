@@ -18,9 +18,9 @@ class PasswordsControllerTest < ActionController::TestCase
   test 'Проверка отправки не заполненной формы' do
     cookies['auth_token'] = somebodies(:otto).auth_token
     patch :update, user: { password: '', password_confirmation: '' }
-    assert_equal ["не может быть пустым", "недостаточной длины (не может быть меньше 6 символов)"],
+    assert_equal ["недостаточной длины (не может быть меньше 6 символов)"],
       assigns(:user).errors[:password]
-    assert_equal ["не может быть пустым", "не совпадает со значением поля Пароль"],
+    assert_equal ["не совпадает со значением поля Пароль"],
       assigns(:user).errors[:password_confirmation]
   end
 

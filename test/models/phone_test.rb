@@ -4,26 +4,12 @@ require 'test_helper'
 
 class PhoneTest < ActiveSupport::TestCase
 
-  test 'Если сменили номер подтвержденного телефона (мобильного) с флагом confirm_required, то его статус должен стать не подтвержденный, а пользователю должен получить смс с кодом' do
-    # TODO Этот тест удалится, т.к. есть более правильный на уровне контроллера
-    ActionMailer::Base.deliveries.clear
-
-    p = phones(:mark)
-    p.value = '+7 (321) 321-32-11'
-    p.confirm_required = true
-    p.save!
-
-    assert !p.confirmed?
-    assert_equal 1, ActionMailer::Base.deliveries.size
-  end
-
   test 'Если сменили номер подтвержденного телефона (мобильного) без флага confirm_required, то его статус должен остаться прежним, а смс не должна быть отправлена' do
     # TODO Этот тест удалится, т.к. есть более правильный на уровне контроллера
     ActionMailer::Base.deliveries.clear
 
     p = phones(:mark)
     p.value = '+7 (321) 321-32-11'
-    p.confirm_required = false
     p.save!
 
     assert p.confirmed?
@@ -35,7 +21,6 @@ class PhoneTest < ActiveSupport::TestCase
     # TODO Этот тест удалится, т.к. есть более правильный на уровне контроллера
     p = phones(:otto3)
     p.value = '8 888 888 88 88'
-    p.confirm_required = true
     p.save!
     assert p.confirmed?
   end
@@ -44,14 +29,13 @@ class PhoneTest < ActiveSupport::TestCase
     p1 = phones(:first_admin)
 
     p1.value = '+7 (111) 222-33-44'
-    p1.confirm_required = false
     p1.save!
-    p1.assign_attributes(mobile: true, confirmed: true, confirm_required: false)
+    p1.assign_attributes(mobile: true, confirmed: true)
     p1.save!
     assert p1.errors[:value].blank?
 
     p2 = p1.dup
-    p2.assign_attributes(value: '71112223344', mobile: '0', confirm_required: false)
+    p2.assign_attributes(value: '71112223344', mobile: '0')
     p2.valid?
     assert p2.errors[:value].present?
   end
@@ -86,40 +70,28 @@ class PhoneTest < ActiveSupport::TestCase
   test 'Если имеются несколько одинаковых номеров телефонов, то после подтверждения остальные должны быть удалены' do
     p1 = phones(:first_admin)
     p2 = phones(:otto)
-    p2.confirm_required = false
     p2.confirmed = true
     p2.save!
     assert !Phone.exists?(p1)
   end
 
-  test 'При создании нового номера телефона должен генерироваться confirmation_token (Если выставлен confirm_required)' do
+  test 'При создании нового номера телефона должен генерироваться confirmation_token (Если не confirmed)' do
     u = somebodies(:first_admin)
-    p = u.profiles.first.phones.new(value: '+7 (123) 456-78-90', mobile: true, confirm_required: true, creation_reason: 'fixtures')
+    p = u.profiles.first.phones.new(value: '+7 (123) 456-78-90', mobile: true, creation_reason: 'fixtures', confirmed: false)
     p.save!
     assert_not_nil p.confirmation_token
   end
 
-  test 'При создании нового номера телефона не должен генерироваться confirmation_token (Если не выставлен confirm_required)' do
+  test 'При создании нового номера телефона не должен генерироваться confirmation_token (Если confirmed)' do
     u = somebodies(:first_admin)
-    p = u.profiles.first.phones.new(value: '123', mobile: false, confirm_required: false, creation_reason: 'fixtures')
+    p = u.profiles.first.phones.new(value: '123', mobile: false, creation_reason: 'fixtures', confirmed: true)
     p.save!
     assert_nil p.confirmation_token
-  end
-
-  test 'При изменении номера телефона (реальном) происходит перегенерация confirmation_token' do
-    p = phones(:mark)
-    old_confirmation_token = p.confirmation_token
-    p.confirm_required = true
-    p.value = '+7 (549) 948-23-43'
-    p.save!
-    new_confirmation_token = p.confirmation_token
-    refute_equal new_confirmation_token, old_confirmation_token
   end
 
   test 'При изменении номера телефона (формата записи) перегенерации confirmation_token не происходит даже при выставленном флаге confirm_required' do
     p = phones(:otto3)
     old_confirmation_token = p.confirmation_token
-    p.confirm_required = true
     p.value = '8 8888888888'
     p.save!
     new_confirmation_token = p.confirmation_token

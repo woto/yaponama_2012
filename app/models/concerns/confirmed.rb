@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 module Confirmed
   include Tokenable
   extend ActiveSupport::Concern
@@ -20,15 +18,36 @@ module Confirmed
       end
     end
 
+    read_only :confirmed
+    # TODO Более не нужно
+    read_only :admin_zone
 
-    attr_accessor :confirm_required
-    read_only :confirm_required
+    # Мы не передаем флаг confirmed из страницы редактирования профиля
+    # в фронтенде или страницы регистрации и полагаемся только на реальное 
+    # изменение value
+    before_validation if: -> { confirmed.nil? } do
+      if value_really_changed?
+        self.confirmed = false
+      else
+        self.confirmed = true
+      end
+      true
+    end
+
     attr_accessor :force_confirm
 
+    before_validation if: :force_confirm_condition do
+      force_confirm!
+    end
+
     def force_confirm!
-      @force_confirm = true
+      self.force_confirm = true
       confirmation_token_will_change!
     end
+
+
+    # TODO Странно, я передаю из фронтенда nil, валидация прокатывает?
+    validates :confirmed, inclusion: [true, false]
 
     def become_confirmed?
       confirmed_changed? && confirmed == true
@@ -38,28 +57,19 @@ module Confirmed
       confirmed_changed? && confirmed == false
     end
 
-    def reset_confirmed
+    before_save if: :force_confirm do
       self.confirmed = false
       generate_token(:confirmation_token, :short)
     end
 
+    # Отправляем уведомление
+    after_save if: :force_confirm  do
+      deliver_confirmation
+    end
 
-    # new_record?
-    # become_confirmed? / become_unconfirmed?
-    # value_really_changed?
-    # confirmed?
-    # mobile?
-    # confirm_required
-    # TODO Написать правильную комбинацию
-    # А так же возможен такой сценарий. Телефон подтвержден
-    # менеджер его значительно меняет. И при этом возможны 
-    # два варианта. Телефон становится не подтвержденным неза
-    # висимо от того, что птичка подтверждения стояла.
-    # Либо меняет и забывает, что он уже подтержден, в итоге
-    # возможно он может занести ошибочный телефон, а подтверждение
-    # сохранится (т.к. про него забыл)
-    before_validation if: -> {((confirm_required && value_really_changed?) || (!confirm_required && become_unconfirmed?)) } do
-      force_confirm!
+    # Если стал подтвержденный, то удаляем остальные такие же
+    before_save if: :become_confirmed? do
+      remove_same
     end
 
   end

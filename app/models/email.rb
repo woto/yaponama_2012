@@ -29,27 +29,16 @@ class Email < ActiveRecord::Base
     value_changed? && ( value_was.to_s.downcase != value.to_s.downcase )
   end
 
-  before_save do
-
-    # Если стал подтвержденный, то удаляем остальные такие же
-    if become_confirmed?
-      Email.not_self(id).same(value).destroy_all
-    end
-
+  def force_confirm_condition
+    become_unconfirmed?
   end
 
-  before_save do
-    if force_confirm
-      # Адрес становится не подтвержденным.
-      reset_confirmed
-    end
+  def remove_same
+    Email.not_self(id).same(value).destroy_all
   end
 
-  after_save do
-    if force_confirm
-      # Отправляем уведомление
-      ConfirmMailer.email(self).deliver
-    end
+  def deliver_confirmation
+    ConfirmMailer.email(self).deliver
   end
 
   def to_label

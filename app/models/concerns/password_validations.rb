@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 module PasswordValidations
 
   extend ActiveSupport::Concern
@@ -10,12 +8,12 @@ module PasswordValidations
 
     has_secure_password validations: false
 
-    validates :password_confirmation,
-      :presence => true,
-      if: -> { password_required }
+    #validates :password_confirmation,
+    #  :presence => true,
+    #  if: -> { password_required }
 
     validates :password,
-      :presence => true,
+      #:presence => true,
       :confirmation => true,
       :length => { :minimum => 6 },
       if: -> { password_required }

@@ -47,7 +47,7 @@ class ConfirmsControllerTest < ActionController::TestCase
   end
 
   test 'Проверка работы ссылки запроса PIN кода на e-mail' do
-    ActionMailer::Base.deliveries = [] 
+    ActionMailer::Base.deliveries.clear
 
     cookies['auth_token'] = somebodies(:alena).auth_token
     id = emails(:alena).id

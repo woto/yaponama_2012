@@ -12,7 +12,7 @@ class RegistersController < ApplicationController
 
   def edit
     @user = current_user
-    @profile = @user.profiles.first_or_initialize
+    @profile = @user.profile || @user.build_profile
     @email = @profile.emails.first_or_initialize
     @phone = @profile.phones.first_or_initialize
     @name = @profile.names.first_or_initialize
@@ -34,17 +34,7 @@ class RegistersController < ApplicationController
   private
   
   def user_params
-    #params.require(:user).permit!
-    params.require(:user).permit( { 
-      :profiles_attributes => [ 
-        :id,
-        { :names_attributes => [:id, :name, :hidden_recreate] },
-        { :emails_attributes => [:id, :value, :hidden_recreate, :_confirm_required] },
-        { :phones_attributes => [:id, :value, :hidden_recreate, :_mobile, :_confirm_required] },
-      ] },
-      :password,
-      :password_confirmation
-    )
+    params.require(:user).permit!
   end
 
 end

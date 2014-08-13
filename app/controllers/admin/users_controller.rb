@@ -31,6 +31,9 @@ class Admin::UsersController < UsersController
     @resource.generate_token :auth_token, :long
     @resource.save!
     flash.now[:attention] = "Вы разлогинили пользователя со всех компьютеров. Теперь ему потребуется заново войти на сайт."
+    respond_to do |format|
+      format.js { render 'logout_from_all_places' }
+    end
   end
 
   private

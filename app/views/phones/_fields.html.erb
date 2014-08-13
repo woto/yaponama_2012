@@ -7,9 +7,7 @@
       <%= p.heading do %>
         <%= p.title do %>
           Телефон
-          <% if f.object.hide_remove_button_on_first_on_new.to_s == "false" %>
-            <%= f.standard_remove %>
-          <% end %>
+          <%= f.standard_remove %>
         <% end %>
       <% end %>
 
@@ -17,10 +15,7 @@
 
         <%= f.phone :value, asterisk: true, label: false %>
 
-        <%= f.hidden_field :hide_remove_button_on_first_on_new %>
-
         <%= f.read_only :creation_reason, value: 'profile' %>
-        <%= f.read_only :confirm_required, value: !admin_zone? %>
 
         <%# render :partial => 'profileables/forms/shared/notes', :locals => {:f => f} %>
         <%= render :partial => 'profileables/forms/shared/confirms', :locals => {:f => f} %>

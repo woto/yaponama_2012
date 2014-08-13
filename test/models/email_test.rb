@@ -4,21 +4,6 @@ require 'test_helper'
 
 class EmailTest < ActiveSupport::TestCase
 
-  test 'Если сменили подтвержденный email адрес с флагом confirmation_needed_if_changed, то его статус должен стать не подтвержденный, а пользователь должен получить письмо на новый адрес' do
-    ActionMailer::Base.deliveries.clear
-
-    ea = emails(:first_admin)
-    ea.confirmed = true
-    ea.save!
-
-    ea.confirm_required = true
-    ea.value = 'bar@example.com'
-    ea.save!
-
-    assert !ea.confirmed?
-    assert_equal 1, ActionMailer::Base.deliveries.size
-  end
-
   test 'Если сменили подтвержденный email адрес без флага confirm_required, то его статус должен сохранить прежнее состояние и письмо не должно быть отправлено с запросом на подтверждение (т.е. адрес изменил менеджер)' do
     ActionMailer::Base.deliveries.clear
     ea = emails(:mark)

@@ -1056,11 +1056,11 @@ ActiveRecord::Schema.define(version: 20140806150318) do
     t.text     "cached_passports"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "creation_reason"
     t.text     "notes",            default: ""
     t.text     "notes_invisible",  default: ""
     t.integer  "somebody_id"
     t.integer  "creator_id"
+    t.string   "creation_reason"
   end
 
   add_index "profiles", ["creator_id"], name: "index_profiles_on_creator_id", using: :btree
