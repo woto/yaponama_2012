@@ -69,8 +69,6 @@ class Somebody < ActiveRecord::Base
   has_many :phones, :dependent => :destroy, inverse_of: :somebody
   #accepts_nested_attributes_for :phones, :allow_destroy => true
 
-  has_many :calls, :dependent => :destroy, inverse_of: :somebody
-
   has_many :passports, :dependent => :destroy, inverse_of: :somebody
   #accepts_nested_attributes_for :passports, :allow_destroy => true
 
