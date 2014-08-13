@@ -88,7 +88,7 @@ class PaymentsControllerTest < ActionController::TestCase
          "somebody_id"=>@guest_id,
          "notes"=>"",
          "_creation_reason"=>"BAhJIgxwcm9maWxlBjoGRVQ=--4bae2158afe778b342bf76a1e1f8b7bfa8098979"},
-       "somebody_id"=>""}}
+       "somebody_id"=>@guest_id}}
 
     assert_redirected_to user_payment_path(assigns(:resource))
   end
@@ -182,7 +182,7 @@ class PaymentsControllerTest < ActionController::TestCase
           "somebody_id"=>@guest_id,
           "notes"=>"",
           "_creation_reason"=>"BAhJIgxwcm9maWxlBjoGRVQ=--4bae2158afe778b342bf76a1e1f8b7bfa8098979"},
-        "somebody_id"=>""}}
+        "somebody_id"=>@guest_id}}
 
 
     assert_equal ["имеет неверное значение"], assigns(:resource).errors[:new_postal_address]

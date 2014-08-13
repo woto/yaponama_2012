@@ -111,6 +111,11 @@ class StatTest < ActionDispatch::IntegrationTest
     # TODO Переделать задействовав fixtures, не полагаясь на данные в бд
     u1 = User.last
 
+    # Б*ть, я устал от этого теста
+    if u1.first_referrer != 'http://example.com'
+      binding.pry
+    end
+
     assert_equal 'http://example.com', u1.first_referrer
 
     post '/stats', {

@@ -24,12 +24,14 @@ module Confirmed
 
     # Мы не передаем флаг confirmed из страницы редактирования профиля
     # в фронтенде или страницы регистрации и полагаемся только на реальное 
-    # изменение value
+    # изменение value ЭТО НЕ ТАК. МЫ ПЕРЕДАЕМ CONFIRMED NIL
     before_validation if: -> { confirmed.nil? } do
       if value_really_changed?
         self.confirmed = false
       else
-        self.confirmed = true
+        # Сначала мы пытаемся считать старое значение, если не получается
+        # то помечаем как не подтвержденный
+        self.confirmed = confirmed_was || false
       end
       true
     end

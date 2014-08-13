@@ -8,13 +8,11 @@ module MobileField
 
     define_attribute_methods :mobile
 
-    TRUE_VALUES = [true, 1, '1', 't', 'T', 'true', 'TRUE', 'on', 'ON'].to_set
-
     def value_to_boolean(value)
       if value.is_a?(String) && value.empty?
         nil
       else
-        TRUE_VALUES.include?(value)
+        ActiveRecord::ConnectionAdapters::Column::TRUE_VALUES.include?(value)
       end
     end
 
