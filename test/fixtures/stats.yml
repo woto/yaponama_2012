@@ -1,0 +1,11 @@
+first_admin:
+  location: http://127.0.0.1:3000/login/phone
+  title: "Вход на сайт"
+  referrer: ''
+  russian_time_zone_auto_id: 6
+  screen_width: 1024
+  screen_height: 768
+  client_width: 755
+  client_height: 440
+  somebody_id: first_admin
+  is_search: false
