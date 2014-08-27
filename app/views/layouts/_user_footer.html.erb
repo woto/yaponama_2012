@@ -28,7 +28,7 @@
                   <% (1..5).each do |n| %>
                     <% if dp.instance_eval("phone#{n}").present? %>
                       <%= icon 'phone-square' %>
-                      <span itemprop="phone"><%= dp.instance_eval("phone#{n}") %></span><br />
+                      <span itemprop="telephone"><%= dp.instance_eval("phone#{n}") %></span><br />
                     <% end %>
                   <% end %>
                   <% (1..3).each do |n| %>

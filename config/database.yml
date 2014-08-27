@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: yaponama_2012_development
   pool: 5
-  username: yaponama_2012
+  username: woto
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -48,7 +48,7 @@ test:
   encoding: unicode
   database: yaponama_2012_test
   pool: 5
-  username: yaponama_2012
+  username: woto
   password:
 
 production:
@@ -56,5 +56,5 @@ production:
   encoding: unicode
   database: yaponama_2012_production
   pool: 5
-  username: yaponama_2012
+  username: woto
   password:
