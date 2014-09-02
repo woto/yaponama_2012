@@ -8,7 +8,7 @@
         <% if deliveries_count > 0 %>
           <% width = 100 / deliveries_count %>
           <% Deliveries::Place.where(display_marker: true).each do |dp| %>
-            <div style="display: table-cell; width: <%= width %>%; padding:0 20px">
+            <div style="display: table-cell; width: <%= width %>%;">
 
               <address style="margin-bottom: 0">
                 <div itemscope itemtype="http://schema.org/Organization">
