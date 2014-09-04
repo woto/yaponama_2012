@@ -30,8 +30,6 @@ module GridBot
           :type => :string,
         }
 
-        cached_brand(columns_hash)
-
       end
 
     end
