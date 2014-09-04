@@ -11,6 +11,7 @@ module ErrorHandling
       rescue_from ActionController::UnknownController, :with => :render_404
       rescue_from ActiveRecord::RecordNotFound, :with => :render_500
       rescue_from AuthenticationError, with: ->(exception) { redirect_to root_path, attention: exception.message }
+      rescue_from BanishError, with: ->(exception) { redirect_to 'http://example.com' }
     end
 
   end

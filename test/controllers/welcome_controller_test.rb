@@ -74,5 +74,24 @@ class WelcomeControllerTest < ActionController::TestCase
     assert_select '#confirm-block .alert-link', "Придумайте себе пароль"
   end
 
+  test 'Если я бот и заблокирован по User-Agent, то меня перекидывает на example.com' do
+    @request.headers["User-Agent"] = 'Majestic, Ahrefs'
+    get :index
+    assert_redirected_to 'http://example.com'
+  end
+
+  test 'Если я бот и не заблокирован, то я открываю страницу' do
+    @request.headers["User-Agent"] = 'Google, Yandex'
+    get :index
+    assert_response :success
+  end
+
+  test 'При посещении сайта независимо от того не бот я или бот, забаненный или не забаненный статистика посещений должна учитываться' do
+    skip
+  end
+
+  test 'Написать тест для проверки работоспособности механизма, определяющего бот/"or not" по ip' do
+    skip
+  end
 
 end

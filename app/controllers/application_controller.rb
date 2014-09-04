@@ -145,19 +145,17 @@ class ApplicationController < ActionController::Base
 
       # BOT
 
-      bot = false
+      bot = Bot.where("? <<= inet", remote_ip).first ||
+        Bot.where("? LIKE '%' || user_agent || '%' AND length(user_agent) > 0", "#{current_user.user_agent}").first
 
-      if Bot.where("? <<= inet", remote_ip).present?
-        bot = true
-      end
-
-      if Bot.where("? LIKE '%' || user_agent || '%' AND length(user_agent) > 0", "#{current_user.user_agent}").present?
-        bot = true
-      end
-
-      current_user.bot = bot
-
+      current_user.bot = bot.present?
       current_user.save!
+
+      if bot.present? && bot.block
+        raise BanishError
+        # Невозможно удалть пользователя, у которого есть хотя бы 1 профиль
+        # current_user.class.reflect_on_all_associations.select { |a| a.options[:dependent] == :destroy }.map(&:name)
+      end
     end
   end
 
