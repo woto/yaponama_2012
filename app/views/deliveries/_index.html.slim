@@ -60,7 +60,7 @@
                         .stroke_color= delivery_zone["#{style}_stroke_color"]
                         .stroke_opacity= delivery_zone["#{style}_stroke_opacity"]
                         .stroke_weight= delivery_zone["#{style}_stroke_weight"]
-                  - rand_id = (0...25).map{ ('a'..'z').to_a[rand(26)] }.join
+                  - rand_id = delivery_zone.name.parameterize
                   <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#deliveries-accordion" href="##{rand_id}">
                       = delivery_zone.name
