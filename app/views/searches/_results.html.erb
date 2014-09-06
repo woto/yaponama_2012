@@ -89,13 +89,13 @@
                     <tbody>
                       <% mf_scope[:offers].each do |offer| %>
                         <% offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 ? presence = true : presence = false %>
-                        <tr class="<%= presence ? '' : '' %>">
+                        <tr class="<%= presence ? 'active' : '' %>">
                           <td> <span class="visible-xs"> Расположение склада: </span> <%= raw country_decorator offer[:country] %> </td>
                           <td> <span class="visible-xs"> Минимальный срок: </span> <%= raw days_decorator offer[:min_days] %> </td>
                           <td> <span class="visible-xs"> Максимальный срок: </span> <%= raw days_decorator offer[:max_days] %> </td>
                           <td> <span class="visible-xs"> Количество на складе: </span> <%= raw count_decorator offer[:count] %> </td>
                           <td>
-                            <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, rel: "tooltip", title: (offer[:tech] if current_user.seller?), class: "btn  btn-success #{presence ? '' : 'btn-xs'} buy-button" do %>
+                            <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, rel: "tooltip", title: (offer[:tech] if current_user.seller?), class: "btn  btn-success buy-button" do %>
                               Купить <%= number_to_currency(offer[:retail_cost], precision: 0) %>
                             <% end %>
                           </td>
