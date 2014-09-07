@@ -20,6 +20,12 @@ class Brand < ActiveRecord::Base
   #has_many :spare_infos, through: :spare_applicabilities
   #has_many :for_cached_spare_infos, through: :spare_infos, class_name: "SpareApplicability", :source => :spare_applicabilities
 
+  validate do
+    if brand == self
+      errors[:brand] << 'Нельзя указывать в качестве родительского производителя себя'
+    end
+  end
+
   has_many :products
 
   def to_label
