@@ -67,18 +67,6 @@ label.required:after {
 
 /////////////////////
 
-// Доставка
-
-#deliveries-accordion .collapse {
-  display: block;
-
-  .in {
-    background: yellow;
-  }
-}
-
-/////////////////////
-
 .nested-visualize {
   margin: 0px 0 20px 0px; 
   padding: 0 0 0 40px; 
@@ -141,9 +129,8 @@ label.required:after {
 .brands a {
   display: block;
   text-align: center;
-  line-height: 180px;
   float: left;
-  height: 100px;
+  height: 135px;
   width: 96px;
 }
 

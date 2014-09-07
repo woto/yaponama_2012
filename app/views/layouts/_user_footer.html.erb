@@ -12,7 +12,7 @@
 
               <address style="margin-bottom: 0">
                 <div itemscope itemtype="http://schema.org/Organization">
-                  <strong style="color: #eee; margin-bottom: 5px; display: inline-block; font-family: 'trebuchet ms','helvetica cy',sans-serif; text-transform: uppercase"><span itemprop="name"> <%= link_to(dp.name, deliveries_path(anchor: dp.name.parameterize), style: "color: white") %> </span></strong>
+                  <strong style="color: #eee; margin-bottom: 5px; display: inline-block; font-family: 'trebuchet ms','helvetica cy',sans-serif; text-transform: uppercase"><span itemprop="name"> <%= link_to(dp.name, deliveries_path, style: "color: white") %> </span></strong>
 
                   <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
                     <span itemprop="addressLocality"><%= dp.address_locality %></span>

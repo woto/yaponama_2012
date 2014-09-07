@@ -1,25 +1,75 @@
+acura:
+  name: ACURA
+  phantom: false
+  is_brand: true
+  default_display: true
+
 abs:
-  manufacturer: false
   name: A.B.S.
   rating: 300
   content:
   phantom: false
   creator: first_admin
+
 audi:
-  manufacturer: true
   name: AUDI
   rating: 950
   content:
   phantom: false
   creator: first_admin
+  is_brand: true
+  default_display: false
+
+alpha_romeo:
+  name: ALPHA ROMEO
+  phantom: false
+  is_brand: true
+  default_display: true
+
+aston_martin:
+  name: ASTON MARTIN
+  phantom: false
+  is_brand: true
+  default_display: true
+
+baw:
+  name: BAW
+  phantom: false
+  is_brand: true
+  default_display: true
+
+bentley:
+  name: BENTLEY
+  phantom: false
+  is_brand: true
+  default_display: true
+
+bmw:
+  name: BMW
+  phantom: false
+  is_brand: true
+  default_display: true
+
+bugatti:
+  name: BUGATTI
+  phantom: false
+  is_brand: true
+  default_display: true
+
+buick: 
+  name: BUIK
+  phantom: false
+  is_brand: true
+  default_display: true
 
 infiniti:
-  manufacturer: true
   name: INFINITI
+  is_brand: true
 
 mazda:
-  manufacturer: true
   name: MAZDA
+  default_display: true
+  is_brand: true
 
 nissens:
   name: NISSENS
@@ -36,14 +86,14 @@ bando:
   creator: first_admin
 
 toyota:
-  manufacturer: true
   name: TOYOTA
   rating: 1000
   phantom: false
   creator: otto
+  default_display: true
+  is_brand: true
 
 ty:
-  manufacturer: true
   name: TY
   rating: 1000
   content: Сокращенное название Toyota
@@ -52,7 +102,6 @@ ty:
   brand: toyota
 
 mitsubishi:
-  manufacturer: true
   name: MITSUBISHI
   rating: 950
   phantom: true
@@ -70,45 +119,42 @@ ms:
   brand: mitsubishi
 
 nissan:
-  manufacturer: true
   name: NISSAN
   rating: 1000
   phantom: false
   creator: stan
 
 kia:
-  manufacturer: true
   name: KIA
   image: kia.png
   rating: 800
   phantom: false
   content: Корейская поделка
   creator: mike
+  default_display: true
+  is_brand: true
 
 hyundai:
-  manufacturer: true
   name: HYUNDAI
   rating: 1000
   phantom: false
   creator: first_admin
 
 vag:
-  manufacturer: true
   name: VAG
   rating: 1000
   phantom: false
   creator: first_admin
 
 sending1:
-  manufacturer: false 
   name: SENDING1
   rating: 1000
   phantom: false
   creator: sending1
 
 receiving1:
-  manufacturer: false 
   name: RECEIVING1
   rating: 1000
   phantom: false
   creator: receiving1
+

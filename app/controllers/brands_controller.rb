@@ -1,6 +1,6 @@
 class BrandsController < ApplicationController
 
-  respond_to :json
+  respond_to :json, :js
 
   skip_before_filter :only_authenticated, :only => :search
   skip_before_action :find_resource, :only => :search
@@ -13,6 +13,8 @@ class BrandsController < ApplicationController
     if params[:name].present?
       @resources = Brand.where(brand_t[:name].matches("#{params[:name]}%"))
     end
+
+    @resources = @resources.where(is_brand: true)
 
     @resources = @resources.order(:name).page params[:page]
 

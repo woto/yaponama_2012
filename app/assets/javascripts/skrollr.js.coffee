@@ -1,2 +1,4 @@
 $(document).on 'page:change', ->
-  # Перенес в list.js т.к. нужно чтобы инициализировался после списка
+  unless (/Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i).test(navigator.userAgent or navigator.vendor or window.opera)
+    s = skrollr.init forceHeight: false
+    s.refresh()

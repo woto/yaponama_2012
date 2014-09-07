@@ -26,9 +26,6 @@
 //= require jquery.maskedinput/dist/jquery.maskedinput.min
 //= require jquery.remotipart
 //
-//=  require list.js/dist/list.js
-//=  require list.pagination.js/dist/list.pagination.js
-//
 // require headroom.js/dist/headroom
 // require headroom.js/dist/jQuery.headroom
 //
@@ -99,7 +96,6 @@
 //= require spare_catalog
 //= require spare_info
 //= require nprogress_init
-//= require list.js_init
 //= require image_view
 //
 //= require pings

@@ -9,14 +9,19 @@ namespace :app do
     task :load => :environment do
 
       spare_catalogs = JSON::load(File.read("#{Rails.root}/data/spare_catalogs/spare_catalogs.json"))
-      spare_catalogs.each do |spare_catalog|
-        row = SpareCatalog.find_by_id(spare_catalog['id'])
-        if row
-          row.assign_attributes(spare_catalog)
-        else
-          row = SpareCatalog.new(spare_catalog)
+      row = nil
+      begin
+        spare_catalogs.each do |spare_catalog|
+          row = SpareCatalog.find_by_id(spare_catalog['id'])
+          if row
+            row.assign_attributes(spare_catalog)
+          else
+            row = SpareCatalog.new(spare_catalog)
+          end
+          row.save!
         end
-        row.save!
+      rescue StandardError => e
+        binding.pry
       end
 
       last_id = SpareCatalog.order(id: :desc).first.id

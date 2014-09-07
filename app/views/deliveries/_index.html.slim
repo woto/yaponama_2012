@@ -38,7 +38,7 @@
         .col-sm-6.bottom-space
 
           h3.top-space-none.bottom-space-none Магазины
-          <p class="text-sm top-space-none text-muted bottom-space"> Выберите магазин из списка или на карте ...</p>
+          <p class="text-sm top-space-none text-muted bottom-space">Выберите магазин из списка или на карте.</p>
 
           <div class="panel-group" id="deliveries-accordion">
             - Deliveries::Place.where(active: true).order(z_index: :desc).each do |delivery_zone|
@@ -60,14 +60,14 @@
                         .stroke_color= delivery_zone["#{style}_stroke_color"]
                         .stroke_opacity= delivery_zone["#{style}_stroke_opacity"]
                         .stroke_weight= delivery_zone["#{style}_stroke_weight"]
-                  - rand_id = delivery_zone.name.parameterize
+                  - shop_id = delivery_zone.name.parameterize
                   <h4 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#deliveries-accordion" href="##{rand_id}">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#deliveries-accordion" href="##{shop_id}">
                       = delivery_zone.name
                     </a>
                   </h4>
                 </div>
-                <div id="#{rand_id}" class="panel-collapse collapse" data-parent="#deliveries-accordion">
+                <div id="#{shop_id}" class="panel-collapse collapse" data-parent="#deliveries-accordion">
                   <div class="panel-body">
                     strong
                       span= delivery_zone.address_locality
@@ -123,7 +123,7 @@
 
 
           h3.top-space-lg.bottom-space-none Доставка
-          <p class="text-sm top-space-none text-muted bottom-space"> ... или укажите адрес, чтобы мы смогли автоматически расчитать стоимость доставки до вашего дома.</p>
+          <p class="text-sm top-space-none text-muted bottom-space">Укажите адрес, чтобы мы смогли автоматически расчитать стоимость доставки до вашего дома.</p>
 
           = panel 'primary', id: 'auto-calculate' do |p|
             = p.heading do

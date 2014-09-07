@@ -26,8 +26,12 @@ module GridBrand
           :type => :number,
         }
 
-        columns_hash['path'] = {
-          :type => :string,
+        columns_hash['is_brand'] = {
+          :type => :boolean,
+        }
+
+        columns_hash['default_display'] = {
+          :type => :boolean,
         }
 
         columns_hash['content'] = {
@@ -51,7 +55,8 @@ module GridBrand
       @grid.visible_creator_id = '1'
       @grid.visible_content = '1'
       @grid.visible_preview = '1'
-      @grid.visible_path = '1'
+      @grid.visible_is_brand = '1'
+      @grid.visible_default_display = '1'
       @grid.visible_cached_brand = '1'
       @grid.visible_name = '1'
       @grid.visible_slang = '1'

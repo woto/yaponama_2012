@@ -316,3 +316,23 @@ alena:
   cached_russian_time_zone_auto_id: 5
   profile: alena
   cached_profile: '{"names":[{"surname":"","name":"Алена","patronymic":""}],"phones":[],"emails":[{"value":"alena@example.com"}],"passports":[]}'
+
+wrong_cached_russian_time_zone_auto_id:
+  type: User
+  discount: 0.0
+  prepayment: 20.0
+  role: guest
+  auth_token: ZxzR9NGl0nMPaV6tQIWb6O
+  cached_russian_time_zone_auto_id: 33
+  order_rule: all
+  logout_from_other_places: false
+
+wrong_cached_russian_time_zone_auto_id_2:
+  type: User
+  discount: 0
+  prepayment: 100
+  role: guest
+  auth_token: F0w8aF28eoqmbOYW9HSRBE
+  cached_russian_time_zone_auto_id: 5
+  order_rule: all
+  logout_from_other_places: true

@@ -117,3 +117,13 @@ alena:
   debit: 0.0
   credit: 0.0
   somebody: alena
+
+wrong_cached_russian_time_zone_auto_id:
+  debit: 0.0
+  credit: 0.0
+  somebody: wrong_cached_russian_time_zone_auto_id
+
+wrong_cached_russian_time_zone_auto_id_2:
+  debit: 0.0
+  credit: 0.0
+  somebody: wrong_cached_russian_time_zone_auto_id_2

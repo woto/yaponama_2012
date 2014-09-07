@@ -64,10 +64,10 @@ module ApplicationHelper
 
   end
 
-  def brands_decorator brand, options
+  def brands_decorator path, brand, options
 
     if brand.brand.present?
-      return raw brands_decorator(brand.brand, options)
+      return raw brands_decorator(path, brand.brand, options)
     end
 
     title = ""
@@ -83,7 +83,7 @@ module ApplicationHelper
       image = asset_url('no_brand.png')
     end
 
-    link_to(title, brand_parts_path(brand), :style => "background: url(#{image}) no-repeat scroll center center", :class => "brand brands-#{brand.name}")
+    link_to(title, path.call(brand), :style => "background: url(#{image}) no-repeat scroll center center", :class => "brand brands-#{brand.name}")
 
   end
 

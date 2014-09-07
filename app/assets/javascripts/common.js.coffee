@@ -156,3 +156,13 @@ App.talk_init = ->
     App.talk_show()
   else
     App.talk_hide()
+
+
+###########
+
+App.throttled = _.throttle(->
+  $('#brands-fast-search-form').trigger('submit.rails')
+  300)
+
+$(document).on 'input', '.brands-fast-search-input', ->
+  App.throttled()

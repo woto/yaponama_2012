@@ -45,23 +45,21 @@
         <h4 class="text-justify" style="line-height: 190%">Если вы не знаете артикула детали и разбираетесь в устройстве автомобиля, то можете самостоятельно подобрать себе необходимую деталь. По вашему запросу менеджер проверит совместимость заказанных деталей с вашим автомобилем.</h4>
       </div>
       <div class="col-md-7 col-lg-6">
-        <div id="brands" class="bottom-space-lg">
+        <div id="brands">
           <%= row do %>
-            <div class="col-lg-10 col-lg-offset-1 top-space-lg bottom-space">
-              <div class="input-group input-group-lg">
-                <span class="input-group-addon"><%= icon 'search' %></span>
-                <input type="text" class="form-control search" placeholder="Быстрый поиск">
-              </div>
+            <div class="col-lg-10 col-lg-offset-1 top-space-lg bottom-space-lg">
+              <%= form_tag search_brands_path, remote: true, id: 'brands-fast-search-form', method: 'get' do %>
+                <div class="input-group input-group-lg">
+                  <span class="input-group-addon"><%= icon 'search' %></span>
+                  <%= text_field_tag :name, nil, class: "form-control brands-fast-search-input", placeholder: "Быстрый поиск" %>
+                </div>
+              <% end %>
             </div>
           <% end %>
-          <ul class="clearfix list brands list-inline" style="background: #FFF; padding: 10px 0;">
-            <% Brand.where("brand_id is NULL").where(:manufacturer => true).order(:name => :asc).each do |a, b| %>
-              <li>
-                <%= brands_decorator(a, {:title => true}) %>
-              </li>
-            <% end %>
+          <ul class="clearfix brands list-inline" id="brands-fast-search-list" style="background: #FFF; padding: 10px 0;">
+            <% @resources = Brand.where("brand_id is NULL").where(:default_display => true).order(:name => :asc).limit(10) %>
+              <%= render partial: 'brands_fast_search_list', collection: @resources %>
           </ul>
-          <ul class="pagination hidden" style="margin: 10px 0 20px 20px !important"></ul>
         </div>
       </div>
 

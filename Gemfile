@@ -1,24 +1,24 @@
 source 'https://rubygems.org'
 
-gem 'rails',     github: 'rails/rails', :branch => '4-1-stable'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.1.5'
 
 gem 'pg'
 
 gem 'json'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sprockets-rails', github: 'rails/sprockets-rails'
-  gem 'sass-rails',   github: 'rails/sass-rails'
-  gem 'coffee-rails', github: 'rails/coffee-rails'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.3'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', platforms: :ruby
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
 
-  gem 'uglifier', github: 'lautis/uglifier'
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
 
-end
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+gem 'therubyracer',  platforms: :ruby
+ 
 
 group :development, :test do
   gem 'pry-nav'
@@ -28,7 +28,6 @@ group :development, :test do
   gem 'pry-doc'
   #gem 'debugger'
   #gem 'byebug'
-  gem 'capistrano'
   gem 'capybara', github: 'jnicklas/capybara'
   gem 'show_me_the_cookies'
   gem 'selenium-webdriver'
@@ -36,21 +35,32 @@ group :development, :test do
   #gem 'capybara-webkit'
 end
 
-gem 'jquery-rails', github: 'rails/jquery-rails'
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+
 gem 'jquery-ui-rails', github: 'joliss/jquery-ui-rails'
 
-gem 'turbolinks', github: 'rails/turbolinks'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
 
-# Build JSON APIs with ease. Read more: https://github.com/
-gem 'jbuilder', github: 'rails/jbuilder'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.0'
 
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
+# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+gem 'spring',        group: :development
 
-# To use ActiveModel has_secure_password
-gem 'bcrypt-ruby'
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0',          group: :doc
+
+# Use ActiveModel has_secure_password
+gem 'bcrypt', '~> 3.1.7'
+
+ # Use unicorn as the app server
+ # gem 'unicorn'
+ 
+# Use Capistrano for deployment
+# gem 'capistrano-rails', group: :development
+ 
 
 gem 'less-rails'
 
@@ -108,7 +118,6 @@ gem 'nbayes'
 gem 'sidekiq'
 #gem 'mail_view'
 gem 'remotipart'
-gem 'spring'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'

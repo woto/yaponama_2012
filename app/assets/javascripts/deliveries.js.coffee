@@ -219,15 +219,9 @@ window.initClientMap = ->
 
       add_event_listener_to_object(marker, $(this))
 
-$ ->
+$(document).on 'page:change', ->
   if $('#clientMap').length != 0
     $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&callback=initClientMap')
 
-# В свете версии 2.0 (еще не выпущена)
-$(document).on 'page:load', ->
-  if $('#clientMap').length != 0
-    $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&callback=initClientMap')
-
-$(document).on 'show.bs.collapse', '[data-parent="#deliveries-accordion"]', (event) ->
-  $("html, body").animate({scrollTop: $(event.target).closest('.accordion-group').offset().top - 5}, 'fast')
-  false
+$(document).on 'shown.bs.collapse', '[data-parent="#deliveries-accordion"]', (event) ->
+  $("html, body").animate({scrollTop: elm.closest('.accordion-group').offset().top - 5}, 'fast')
