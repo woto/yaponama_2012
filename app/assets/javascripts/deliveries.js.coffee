@@ -215,7 +215,7 @@ window.initClientMap = ->
 
       marker.polygon = poly
 
-      marker.setMap(window.map);
+      marker.setMap(window.map)
 
       add_event_listener_to_object(marker, $(this))
 
@@ -224,4 +224,4 @@ $(document).on 'page:change', ->
     $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&callback=initClientMap')
 
 $(document).on 'shown.bs.collapse', '[data-parent="#deliveries-accordion"]', (event) ->
-  $("html, body").animate({scrollTop: elm.closest('.accordion-group').offset().top - 5}, 'fast')
+  $("html, body").animate({scrollTop: $(event.target).closest('.accordion-group').offset().top - 5}, 'fast')
