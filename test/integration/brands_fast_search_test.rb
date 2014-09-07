@@ -16,6 +16,7 @@ class WelcomeTest < ActionDispatch::IntegrationTest
   test 'Если мы что-то написали, а потом очистили, то мы увидим AUDI' do
     visit '/'
     fill_in 'name', with: '123'
+    sleep 500
     fill_in 'name', with: ''
     assert has_text? 'AUDI'
   end
