@@ -1,3 +1,7 @@
+CarrierWave.configure do |config|
+  config.asset_host = "http://#{CONFIG.site['host']}:#{CONFIG.site['port']}"
+end
+
 CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
 
 # Для возможности создания файла из строки

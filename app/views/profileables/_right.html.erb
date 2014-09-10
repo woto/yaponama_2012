@@ -81,16 +81,18 @@
   <%- @somebody.auths.each do |auth| -%><li><%= render "application/auth/logged_in", auth: auth %></li><%- end -%>
 </ul>
 
-<ul class="list-unstyled text-muted hidden">
-  <li class="bottom-space-xs">Населенный пункт: <b><%= @somebody.ipgeobase_name %></b></li>
-  <li class="bottom-space-xs">Регион: <b><%= @somebody.ipgeobase_names_depth_cache %></b></li>
-  <li class="bottom-space-xs">Версия браузера: <b><%= @somebody.user_agent %></b></li>
-  <li class="bottom-space-xs">Язы браузера: <b><%= @somebody.accept_language %></b></li>
-  <li class="bottom-space-xs">Часовой пояс: <b><%= @somebody.cached_russian_time_zone_auto_id %></b></li>
-  <li class="bottom-space-xs">IP адрес: <b><%= @somebody.remote_ip %></b></li>
-  <li class="bottom-space-xs">Просмотров страниц: <b><%= @somebody.stats_count %></b></li>
-  <li class="bottom-space-xs">Текущее расположение: <b><%= truncate @somebody.cached_location, length: 20 %></b></li>
-  <li class="bottom-space-xs">Заголовок страницы: <b><%= @somebody.cached_title %></b></li>
-  <li class="bottom-space-xs">Пришел со страницы: <b><%= truncate @somebody.cached_referrer, length: 20 %></b></li>
-  <li class="bottom-space-xs">Откуда пришел впервые: <b><%= truncate @somebody.first_referrer, length: 20 %></b></li>
+<hr />
+
+<ul class="list-unstyled text-muted text-xs">
+  <li>Населенный пункт: <%= @somebody.ipgeobase_name %></li>
+  <li>Регион: <%= @somebody.ipgeobase_names_depth_cache %></li>
+  <li>Версия браузера: <%= @somebody.user_agent %></li>
+  <li>Язы браузера: <%= @somebody.accept_language %></li>
+  <li>Часовой пояс: <%= @somebody.cached_russian_time_zone_auto_id %></li>
+  <li>IP адрес: <%= @somebody.remote_ip %></li>
+  <li>Просмотров страниц: <%= @somebody.stats_count %></li>
+  <li>Текущее расположение: <%= @somebody.cached_location %></li>
+  <li>Заголовок страницы: <%= @somebody.cached_title %></li>
+  <li>Пришел со страницы: <%= @somebody.cached_referrer %></li>
+  <li>Откуда пришел впервые: <%= @somebody.first_referrer %></li>
 </ul>

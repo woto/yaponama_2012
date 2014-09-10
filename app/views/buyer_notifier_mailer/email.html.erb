@@ -1,3 +1,18 @@
-<%= @talk.text %><br />
-<%= @talk.file_name %><br /><br />
-<%= link_to 'просмотреть', root_path %>
+<%= image_tag 'logo.png' %>
+<br />
+<br />
+
+<% if @talk.text.present? %>
+  <h3>Текст сообщения:</h3>
+  <%= @talk.text %>
+  <br />
+<% end %>
+
+<% if @talk.file_name.present? %>
+  <h3>Прикрепленный файл:</h3>
+  <%= link_to @talk.file_name, @talk.file_url %><br />
+  <br />
+<% end %>
+
+<br />
+<%= link_to 'Просмотреть сообщение', root_path %>

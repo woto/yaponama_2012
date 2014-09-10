@@ -269,3 +269,21 @@ validates :price_port, :presence => true
 validates :juggernaut_address, :presence => true
 validates :juggernaut_port, :presence => true
 
+==================================================================
+
+http://sms.ru/?panel=mass&subpanel=lists
+
+https://github.com/BrandyMint/littlesms
+http://littlesms.ru/
+
+https://github.com/Antiarchitect/smsc
+http://smsc.ru/
+
+http://www.infobip.com.ru/
+https://github.com/infobip/oneapi-ruby
+
+http://mainsms.ru/
+https://github.com/evserykh/mainsms_api
+
+http://sms24x7.ru/
+https://github.com/newmen/sms24x7

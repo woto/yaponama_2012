@@ -17,16 +17,14 @@ class Passport < ActiveRecord::Base
 
   def to_label
     <<-CODE
-    <ul>
-      <li>Серия: #{seriya}</li>
-      <li>Номер: #{nomer}</li>
-      <li>Паспорт выдан: #{passport_vidan}</li>
-      <li>Дата выдачи: #{data_vidachi}</li>
-      <li>Код подразделения: #{kod_podrazdeleniya}</li>
-      <li>Пол: #{gender == 'male' ? "Мужской" : "Женский"}</li>
-      <li>Дата рождения: #{data_rozhdeniya}</li>
-      <li>Место рождения: #{mesto_rozhdeniya}</li>
-    </ul>
+      Серия: #{seriya}, 
+      Номер: #{nomer}, 
+      Паспорт выдан: #{passport_vidan}, 
+      Дата выдачи: #{data_vidachi}, 
+      Код подразделения: #{kod_podrazdeleniya}, 
+      Пол: #{gender == 'male' ? "Мужской" : "Женский"}, 
+      Дата рождения: #{data_rozhdeniya}, 
+      Место рождения: #{mesto_rozhdeniya}
     CODE
   end
 
