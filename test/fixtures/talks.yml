@@ -1,4 +1,4 @@
-sending1:
+sending1: &sending1
   read: false
   received: false
   cached_talk: 
@@ -13,3 +13,15 @@ sending1:
   file: 
   file_name: 
   notified: false
+
+sending_from_guest_without_profile:
+  <<: *sending1
+  somebody: guest
+  creator: guest
+
+sending_to_shop:
+  <<: *sending1
+
+sending_from_shop:
+  <<: *sending1
+  creator: first_admin

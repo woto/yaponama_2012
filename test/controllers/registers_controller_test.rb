@@ -225,7 +225,7 @@ class RegistersControllerTest < ActionController::TestCase
     assert ["foo@example.com"], delivery.to
 
     # Заголовок письма
-    assert ["Подтверждение электронного адреса"], delivery.subject
+    assert_equal "Подтверждение электронного адреса", delivery.subject
 
     email = Email.where(value: 'foo@example.com').order(id: :desc).limit(1).first
     pin = email.confirmation_token

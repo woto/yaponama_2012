@@ -5,11 +5,14 @@ require File.expand_path('../config/application', __FILE__)
 
 Yaponama2012::Application.load_tasks
 
-begin
-  require 'jasmine'
-  load 'jasmine/tasks/jasmine.rake'
-rescue LoadError
-  task :jasmine do
-    abort "Jasmine is not available. In order to run jasmine, you must: (sudo) gem install jasmine"
+namespace :test do
+
+  desc "Run tests for rake"
+  Rake::TestTask.new(:rake) do |t|
+    t.libs << "test"
+    t.pattern = 'test/rake/**/*_test.rb'
   end
+
 end
+
+Rake::Task[:test].enhance { Rake::Task["test:rake"].invoke }

@@ -1,9 +1,8 @@
-# encoding: utf-8
-#
 class SellerNotifierMailer < ApplicationMailer
+  default to: CONFIG.mail['from']
 
-  def email(talk, email)
+  def email(talk)
     @talk = talk
-    mail to: email, subject: 'Новое сообщение на сайте www.avtorif.ru'
+    mail subject: "Новое сообщение на сайте www.#{CONFIG.site['host']} от #{@talk.somebody.to_label}"
   end
 end

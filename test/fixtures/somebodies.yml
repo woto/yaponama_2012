@@ -169,7 +169,7 @@ anton:
   profile: anton
   cached_profile: '{"names":[{"surname":"Чехов","name":"Антон","patronymic":"Павлович"}],"phones":[{"value":"+7 (112) 233-44-55"},{"value":"+7 (554) 433-22-11"}],"emails":[],"passports":[]}'
 
-guest:
+guest: &guest
   type: User
   auth_token: 893YWHmF1SwFeR432hBbeUa
   creation_reason: fixtures
@@ -177,6 +177,12 @@ guest:
   discount: 0
   prepayment: 100
   order_rule: all
+
+guest_with_fixed_id:
+  <<: *guest
+  id: 4387523
+  auth_token: mFW2hBR4aH31SwFe893YbeU
+
 
 guest_with_profile:
   type: User

@@ -63,10 +63,13 @@ anton:
   credit: 0.0
   somebody: anton
 
-guest:
+guest: &guest
   debit: 0.0
   credit: 0.0
   somebody: guest
+
+guest_with_fixed_id:
+  <<: *guest
 
 guest_with_profile:
   debit: 0.0

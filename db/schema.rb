@@ -1056,11 +1056,11 @@ ActiveRecord::Schema.define(version: 20140906201729) do
     t.text     "cached_passports"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "creation_reason"
     t.text     "notes",            default: ""
     t.text     "notes_invisible",  default: ""
     t.integer  "somebody_id"
     t.integer  "creator_id"
-    t.string   "creation_reason"
   end
 
   add_index "profiles", ["creator_id"], name: "index_profiles_on_creator_id", using: :btree
@@ -1257,7 +1257,6 @@ ActiveRecord::Schema.define(version: 20140906201729) do
   end
 
   add_index "spare_infos", ["brand_id"], name: "index_spare_infos_on_brand_id", using: :btree
-  add_index "spare_infos", ["cached_spare_catalog"], name: "index_spare_infos_on_cached_spare_catalog", using: :btree
   add_index "spare_infos", ["spare_catalog_id"], name: "index_spare_infos_on_spare_catalog_id", using: :btree
 
   create_table "stats", force: true do |t|

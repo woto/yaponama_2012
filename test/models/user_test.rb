@@ -125,6 +125,16 @@ class UserTest < ActiveSupport::TestCase
     assert_equal p2, mile.reload.profile
   end
 
+  test 'Метод to_label для пользователя должен возвращать его кешированные данные (фамилия, имя)' do
+    user = somebodies(:mike)
+    assert_equal 'Майков Майк', user.to_label
+  end
+
+  test 'Метод to_label для гостя должен возвращать его красивый номер pretty_id' do
+    user = somebodies(:guest_with_fixed_id)
+    assert_equal "Посетитель: № 43-87-52-3", user.to_label
+  end
+
 
 
   # TODO Это необходимо вынести в контроллер
