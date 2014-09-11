@@ -4,10 +4,10 @@
 
     <div style="display: table; width: 100%;" class="bottom-space-lg">
       <div style="display: table-row">
-        <% deliveries_count = Deliveries::Place.where(display_marker: true).count %>
+        <% deliveries_count = Deliveries::Place.where(display_marker: true, active: true).count %>
         <% if deliveries_count > 0 %>
           <% width = 100 / deliveries_count %>
-          <% Deliveries::Place.where(display_marker: true).each do |dp| %>
+          <% Deliveries::Place.where(display_marker: true, active: true).each do |dp| %>
             <div style="display: table-cell; width: <%= width %>%;">
 
               <address style="margin-bottom: 0">
