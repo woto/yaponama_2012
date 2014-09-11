@@ -56,11 +56,31 @@ bugatti:
   is_brand: true
   default_display: true
 
-buick: 
+buick: &buick
   name: BUIK
   phantom: false
   is_brand: true
   default_display: true
+
+byd:
+  <<: *buick
+  name: BYD
+
+cadillac:
+  <<: *buick
+  name: CADILLAC
+
+chana:
+  <<: *buick
+  name: CHANA
+
+chery:
+  <<: *buick
+  name: CHERY
+
+dacia:
+  <<: *buick
+  name: DACIA
 
 infiniti:
   name: INFINITI
