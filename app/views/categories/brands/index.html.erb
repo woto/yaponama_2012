@@ -24,4 +24,12 @@
 
   <div id="category-page"><%== @resource.page %></div>
 
+  <% if @current_user.seller? %>
+    <%= link_to edit_admin_spare_catalog_path(@resource), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
+      <%= icon 'edit' %>
+      Редактировать
+    <% end %>
+  <% end %>
+
+
 <% end %>
