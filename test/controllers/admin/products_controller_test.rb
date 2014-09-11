@@ -33,7 +33,7 @@ class Admin::ProductsControllerTest < ActionController::TestCase
     }, :return_path => return_path, :commit => 'x'}
 
     brand = Brand.last
-    assert_equal "new", brand.name, 'Созданный бренд имеет неверное название'
+    assert_equal "NEW", brand.name, 'Созданный бренд имеет неверное название'
     assert_equal brand.phantom, true, 'Созданный бренд должен быть фантомом'
 
     product = @user.products.last

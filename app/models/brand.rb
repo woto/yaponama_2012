@@ -36,6 +36,12 @@ class Brand < ActiveRecord::Base
     "#{id}-#{name.parameterize}"
   end
 
+  before_save :upcase_name
+
+  def upcase_name
+    self.name = name.upcase
+  end
+
   after_save :update_all_cached_brand
 
   def update_all_cached_brand
