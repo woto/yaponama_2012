@@ -12,6 +12,7 @@ module ErrorHandling
       rescue_from ActiveRecord::RecordNotFound, :with => :render_500
       rescue_from AuthenticationError, with: ->(exception) { redirect_to root_path, attention: exception.message }
       rescue_from BanishError, with: ->(exception) { redirect_to 'http://example.com' }
+      rescue_from ActionController::InvalidAuthenticityToken, :with => :render_500
     end
 
   end
@@ -21,7 +22,8 @@ module ErrorHandling
     @exception = exception
     Rails.logger.error(exception)
     respond_to do |format|
-    format.html { render 'error_404', :status => 404 }
+      format.html { render 'error_404', :status => 404 }
+      format.js { render js: "alert('Возникла непредвиденная ошибка на сайте #{CONFIG.site['host']}, поробуйте перезагрузить страницу или связаться с разработчиками сайта.');" }
     end
   end
 
@@ -29,7 +31,8 @@ module ErrorHandling
     @exception = exception
     Rails.logger.error(exception)
     respond_to do |format|
-    format.html { render 'error_500', :status => 500 }
+      format.html { render 'error_500', :status => 500 }
+      format.js { render js: "alert('Возникла непредвиденная ошибка на сайте #{CONFIG.site['host']}, поробуйте перезагрузить страницу или связаться с разработчиками сайта.');" }
     end
   end
 
