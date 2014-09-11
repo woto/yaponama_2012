@@ -8,7 +8,7 @@ class TalksController < ApplicationController
     #binding.pry
     respond_to do |format|
       if @talk.save
-        format.js { redirect_to action: :index, format: :js }
+        format.js { render action: :index }
       else
         format.js { render 'new' }
       end
