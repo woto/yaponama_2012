@@ -57,7 +57,7 @@
             </div>
           <% end %>
           <ul class="clearfix brands list-inline" id="brands-fast-search-list" style="background: #FFF; padding: 10px 0;">
-            <% @resources = Brand.where("brand_id is NULL").where(:default_display => true).order(:name => :asc).limit(10) %>
+            <% @resources = Brand.where("brand_id is NULL").where(:default_display => true).order(:name => :asc).limit(15) %>
               <%= render partial: 'brands_fast_search_list', collection: @resources %>
           </ul>
         </div>
