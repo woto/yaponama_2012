@@ -185,7 +185,7 @@ module ProductsSearch
             @parsed_json["result_prices"].sort_by do |a|
 
               days = (((a["job_import_job_delivery_days_average"].present? ? a["job_import_job_delivery_days_average"] : a["job_import_job_delivery_days_declared"]).to_f + a["job_import_job_delivery_days_declared"].to_f)/2 )
-              days +  a["price_goodness"].to_f - a["success_percent"]/5
+              days/5 +  a["price_goodness"].to_f - a["success_percent"]/10
             end
 
           Rails.cache.write(price_request_cache_key, @parsed_json, :expires_in => expires_in)
