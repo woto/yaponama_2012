@@ -12,8 +12,13 @@ ping = ->
 
   pings_path = $('#pings_path').text()
   if pings_path.length > 0
-    $.post(pings_path,
-      talk_item_id: $('#talk-log').find('.talk-item:first').data('id')
+    $.ajax(
+      type: "POST",
+      url: pings_path,
+      data:
+        talk_item_id: $('#talk-log').find('.talk-item:first').data('id')
+      #success: success,
+      dataType: 'script'
     ).always (data) ->
       throttled()
 
