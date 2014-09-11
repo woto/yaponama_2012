@@ -2,15 +2,15 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  host: 192.168.0.253
-  port: 3002
+  host: '192.168.0.253'
+  port: '3002'
 
 test:
   <<: *defaults
-  host: test.host
-  port: 80
+  host: 'test.host'
+  port: '80'
 
 production:
   <<: *defaults
-  host: avtorif.ru
-  port: 80
+  host: 'avtorif.ru'
+  port: '80'
