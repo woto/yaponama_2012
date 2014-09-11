@@ -13,6 +13,10 @@ class TalkTest < ActionDispatch::IntegrationTest
     fill_in 'talk[text]', with: 'Текст сообщения 982374982374'
     click_button 'talk-submit'
     assert has_text? 'Текст сообщения 982374982374'
+    assert has_field? 'talk_somebody_attributes_profile_attributes_names_attributes_0_name', with: 'Имя'
+    assert has_field? 'talk_somebody_attributes_profile_attributes_phones_attributes_0_value', with: '+7 (123) 324-52-34'
+    assert has_field? 'talk_somebody_attributes_profile_attributes_emails_attributes_0_value', with: 'email@example.com'
+    assert has_field? 'talk_text', with: ''
   end
 
   test 'Пишем гостем не заполняем ничего' do
