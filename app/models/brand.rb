@@ -36,7 +36,7 @@ class Brand < ActiveRecord::Base
     "#{id}-#{name.parameterize}"
   end
 
-  before_save :upcase_name
+  before_validation :upcase_name
 
   def upcase_name
     self.name = name.upcase

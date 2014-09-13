@@ -19,7 +19,7 @@ class SpareInfo < ActiveRecord::Base
 
   validates :catalog_number, :presence => true, uniqueness:  { case_sensitive: false, :scope => :brand_id }
 
-  #validates :catalog_number, presence: true
+  validates :spare_catalog, :presence => true
 
   before_save do
     self.name = "#{catalog_number} - #{cached_brand}"

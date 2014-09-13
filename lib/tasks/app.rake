@@ -60,7 +60,7 @@ namespace :app do
     ].each do |url|
       begin
         open(url) do |f|
-          f.each_line do |line| 
+          f.each_line do |line|
             row = CSV.parse(line)[0]
             begin
               SpareInfo.create(catalog_number: row[1], brand: Brand.where(name: row[3].to_s.upcase).first_or_initialize, content: row[4])
@@ -83,6 +83,11 @@ namespace :app do
       puts Time.zone.now
       sleep 1
     end
+  end
+
+  desc 'egrgroup_ru'
+  task :egrgroup_ru => :environment do
+    EgrgroupRu.egrgroup_ru
   end
 
 end

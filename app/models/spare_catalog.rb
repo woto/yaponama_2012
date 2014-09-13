@@ -3,7 +3,7 @@ class SpareCatalog < ActiveRecord::Base
   has_many :spare_infos
   has_many :spare_applicabilities, through: :spare_infos
 
-  validates :name, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 
   before_save do
     name = self.name.mb_chars
