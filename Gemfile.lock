@@ -103,6 +103,8 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
+    bootswatch-rails (3.2.4)
+      railties (>= 3.1)
     builder (3.2.2)
     cancan (1.6.10)
     carrierwave (0.10.0)
@@ -308,6 +310,7 @@ DEPENDENCIES
   autoprefixer-rails
   bcrypt (~> 3.1.7)
   bootstrap-sass
+  bootswatch-rails
   cancan
   capybara!
   carrierwave

@@ -31,15 +31,22 @@ $font-size-h4:            ceil(($font-size-base * 1.1));
 $font-size-h5:            $font-size-base;
 $font-size-h6:            ceil(($font-size-base * 0.85));
 
-h1, h2, h3 {
-  text-shadow: 0 1px 1px rgba(0,0,0,.3);
-}
+/////////////////////
 
+<% if CONFIG.site['host'] == 'zapstok.ru' %>
+@import "bootswatch/spacelab/variables";
+<% end %>
+
+// Then bootstrap itself
+@import 'bootstrap';
+@import 'bootstrap-sprockets';
+
+<% if CONFIG.site['host'] == '192.168.0.253' %>
+//@import "bootswatch/spacelab/bootswatch";
+<% end %>
 
 /////////////////////
 
-@import 'bootstrap';
-@import 'bootstrap-sprockets';
 
 @import "font-awesome-sprockets";
 @import 'font-awesome';
@@ -53,6 +60,11 @@ h1, h2, h3 {
 @import 'components/dashed';
 
 /////////////////////
+
+.shadowed {
+  text-shadow: 0 0 9px black;
+}
+
 
 // Звездочки для обязательных полей asterisk: true
 label.required:after {
