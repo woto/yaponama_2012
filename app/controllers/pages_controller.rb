@@ -9,6 +9,11 @@ class PagesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def show
+
+    if @resource.url?
+      redirect_to @resource.url, status: 301
+    end
+
     @meta_title = @resource.title
     @meta_canonical = '/' + @resource.path
     @meta_description = @resource.description

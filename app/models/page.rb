@@ -7,14 +7,17 @@ class Page < ActiveRecord::Base
   include Code_1AttrAccessorAndValidation
   include SetCreationReasonBasedOnCode_1
 
-  before_save :normilize
-  before_validation :normilize
+  # TODO разобраться почему это вызываю дважды
+  before_save :normalize
+  before_validation :normalize
 
-  validates :path, :presence => true, :uniqueness => {case_sensitive: false}
+  validates :path, presence: true, uniqueness: {case_sensitive: false}
+  validates :url, uniqueness: {case_sensitive: false}
+
 
   has_and_belongs_to_many :uploads
 
-  def normilize
+  def normalize
 
     self.path = self.path.gsub(/^\/+/, '')
     self.path = self.path.gsub(/\/+$/, '')

@@ -7,6 +7,9 @@ class Admin::PagesController < PagesController
   skip_before_filter :find_resource, only: [:multiple_destroy]
   before_action :preprocess_filter, :only => [:multiple_destroy]
 
+  def show
+  end
+
   def preprocess_filter
     @items = @items.selected(@grid.item_ids)
     #binding.pry

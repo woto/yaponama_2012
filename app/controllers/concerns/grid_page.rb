@@ -18,6 +18,10 @@ module GridPage
           :type => :string,
         }
 
+        columns_hash['url'] = {
+          :type => :string,
+        }
+
         columns_hash['title'] = {
           :type => :string,
         }
@@ -46,6 +50,7 @@ module GridPage
       @grid.visible_checkbox = '1'
       @grid.visible_id = '1'
       @grid.visible_path = '1'
+      @grid.visible_url = '1'
       @grid.visible_title = '1'
       @grid.visible_creator_id = '1'
       @grid.visible_updated_at = '1'
