@@ -4,10 +4,18 @@ require 'test_helper'
 
 class PagesControllerTest < ActionController::TestCase
 
-  test 'Проверка тестовой страницы' do
-
+  test 'Проверка работы урлов pages' do
     assert_generates '/1/1', { controller: 'pages', action: 'show', path: '1/1' }
     assert_generates '1/1', { controller: 'pages', action: 'show', path: '1/1' }
+  end
+
+  test 'Проверка редиректа' do
+    get :show, :path => '2/2'
+    assert_redirected_to 'http://ya.ru'
+    assert_equal 301, response.status
+  end
+
+  test 'Проверка тестовой страницы' do
 
     get :show, :path => '1/1'
 

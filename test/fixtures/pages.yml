@@ -8,3 +8,7 @@ first:
   creator_id: first_admin
   creation_reason: fixtures
   phantom: false
+
+second:
+  path: 2/2
+  url: http://ya.ru
