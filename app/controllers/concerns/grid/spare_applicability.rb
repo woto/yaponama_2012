@@ -1,8 +1,6 @@
-# encoding: utf-8
-#
-module GridSpareCatalog
+module Grid::SpareApplicability
   extend ActiveSupport::Concern
-  include AbstractGridable
+  include ::AbstractGridable
 
   included do
 
@@ -12,23 +10,23 @@ module GridSpareCatalog
         :type => :integer,
       }
 
-      columns_hash['checkbox'] = {
-        :type => :checkbox,
-      }
-
-      columns_hash['name'] = {
+      columns_hash['cached_spare_info'] = {
         :type => :string,
       }
 
-      columns_hash['content'] = {
+      columns_hash['cached_brand'] = {
         :type => :string,
       }
 
-      columns_hash['intro'] = {
+      columns_hash['cached_model'] = {
         :type => :string,
       }
 
-      columns_hash['page'] = {
+      columns_hash['cached_generation'] = {
+        :type => :string
+      }
+
+      columns_hash['cached_modification'] = {
         :type => :string,
       }
 
@@ -43,16 +41,16 @@ module GridSpareCatalog
     end
 
     def set_preferable_columns
-      @grid.visible_checkbox = '1'
       @grid.visible_id = '1'
-      @grid.visible_name = '1'
-      @grid.visible_content = '1'
-      @grid.visible_intro = '1'
-      @grid.visible_page = '1'
+      @grid.visible_cached_spare_info = '1'
+      @grid.visible_cached_brand = '1'
+      @grid.visible_cached_model = '1'
+      @grid.visible_cached_generation = '1'
+      @grid.visible_cached_modification = '1'
       @grid.visible_updated_at = '1'
-
     end
 
   end
 
 end
+

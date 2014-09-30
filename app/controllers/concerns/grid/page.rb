@@ -1,8 +1,8 @@
 # encoding: utf-8
 #
-module GridPage
+module Grid::Page
   extend ActiveSupport::Concern
-  include AbstractGridable
+  include ::AbstractGridable
 
   included do
 

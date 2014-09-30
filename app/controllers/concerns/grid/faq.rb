@@ -1,8 +1,8 @@
 # encoding: utf-8
 #
-module GridGallery
+module Grid::Faq
   extend ActiveSupport::Concern
-  include AbstractGridable
+  include ::AbstractGridable
 
   included do
 
@@ -14,15 +14,11 @@ module GridGallery
           :type => :checkbox,
         }
 
-        columns_hash['title'] = {
+        columns_hash['question'] = {
           :type => :string,
         }
 
-        columns_hash['content'] = {
-          :type => :string,
-        }
-
-        columns_hash['image'] = {
+        columns_hash['answer'] = {
           :type => :string,
         }
 
@@ -33,10 +29,10 @@ module GridGallery
     def set_preferable_columns
       @grid.visible_checkbox = '1'
       @grid.visible_id = '1'
-      @grid.visible_title = '1'
-      @grid.visible_content = '1'
-      @grid.visible_image = '1'
+      @grid.visible_question = '1'
+      @grid.visible_answer = '1'
       @grid.visible_updated_at = '1'
+
     end
 
   end

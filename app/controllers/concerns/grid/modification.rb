@@ -1,8 +1,8 @@
 # encoding: utf-8
 #
-module GridGeneration
+module Grid::Modification
   extend ActiveSupport::Concern
-  include AbstractGridable
+  include ::AbstractGridable
 
   included do
 
@@ -10,7 +10,7 @@ module GridGeneration
 
       c2(columns_hash) do
 
-        columns_hash['cached_model'] = {
+        columns_hash['cached_generation'] = {
           :type => :string,
         }
 
@@ -26,8 +26,9 @@ module GridGeneration
           :type => :date
         }
 
+
         columns_hash['content'] = {
-          :type => :string
+          :type => :string,
         }
 
       end
@@ -40,7 +41,7 @@ module GridGeneration
       @grid.visible_to = '1'
       @grid.visible_creator_id = '1'
       @grid.visible_content = '1'
-      @grid.visible_cached_model = '1'
+      @grid.visible_cached_generation = '1'
       @grid.visible_name = '1'
       @grid.visible_created_at = '1'
       @grid.visible_updated_at = '1'

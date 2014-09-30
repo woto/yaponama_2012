@@ -1,9 +1,9 @@
 # encoding: utf-8
 #
-module GridPostalAddress
+module Grid::PostalAddress
 
   extend ActiveSupport::Concern
-  include AbstractGridable
+  include ::AbstractGridable
 
   included do
 

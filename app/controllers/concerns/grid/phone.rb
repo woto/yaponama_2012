@@ -1,9 +1,9 @@
 # encoding: utf-8
 #
-module GridPhone
+module Grid::Phone
 
   extend ActiveSupport::Concern
-  include AbstractGridable
+  include ::AbstractGridable
 
   included do
 

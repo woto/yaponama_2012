@@ -1,9 +1,9 @@
 # encoding: utf-8
 #
-module GridUser
+module Grid::User
 
   extend ActiveSupport::Concern
-  include AbstractGridable
+  include ::AbstractGridable
 
   included do
 

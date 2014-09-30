@@ -1,9 +1,9 @@
 # encoding: utf-8
 #
-module GridCompany
+module Grid::Company
 
   extend ActiveSupport::Concern
-  include AbstractGridable
+  include ::AbstractGridable
 
   included do
     def adjust_columns!(columns_hash)

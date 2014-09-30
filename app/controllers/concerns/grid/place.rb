@@ -1,9 +1,9 @@
 # encoding: utf-8
 #
-module GridPlace
+module Grid::Place
 
   extend ActiveSupport::Concern
-  include AbstractGridable
+  include ::AbstractGridable
 
   included do
 

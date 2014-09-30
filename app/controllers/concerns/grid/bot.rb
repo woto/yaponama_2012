@@ -1,8 +1,8 @@
 # encoding: utf-8
 #
-module GridBot
+module Grid::Bot
   extend ActiveSupport::Concern
-  include AbstractGridable
+  include ::AbstractGridable
 
   included do
 

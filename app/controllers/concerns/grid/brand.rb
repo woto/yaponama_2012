@@ -1,8 +1,8 @@
 # encoding: utf-8
 #
-module GridBrand
+module Grid::Brand
   extend ActiveSupport::Concern
-  include AbstractGridable
+  include ::AbstractGridable
 
   included do
 

@@ -1,8 +1,8 @@
 # encoding: utf-8
 #
-module GridPassport
+module Grid::Passport
   extend ActiveSupport::Concern
-  include AbstractGridable
+  include ::AbstractGridable
 
   included do
 

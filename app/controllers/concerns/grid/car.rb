@@ -1,9 +1,9 @@
 # encoding: utf-8
 #
-module GridCar
+module Grid::Car
 
   extend ActiveSupport::Concern
-  include AbstractGridable
+  include ::AbstractGridable
 
   included do
 
