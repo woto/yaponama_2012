@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 class CompaniesController < ProfileablesController
-  include GridCompany
+  include Grid::Company
 
   # GET /companies/new
   def new

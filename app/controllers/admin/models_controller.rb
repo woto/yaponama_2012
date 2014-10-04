@@ -2,7 +2,7 @@
 #
 class Admin::ModelsController < ModelsController
   include Admin::Admined
-  include GridModel
+  include Grid::Model
 
   skip_before_action :set_grid, :only => [:show, :new, :edit, :update, :create, :destroy, :search]
 

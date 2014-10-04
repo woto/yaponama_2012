@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 class PagesController < ApplicationController
-  include GridPage
+  include Grid::Page
 
   skip_before_filter :set_grid, only: [:new, :create, :edit, :update, :show, :destroy]
 

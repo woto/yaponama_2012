@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 class PhonesController < ProfileablesController
-  include GridPhone
+  include Grid::Phone
 
   private
 

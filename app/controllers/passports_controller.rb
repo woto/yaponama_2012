@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 class PassportsController < ProfileablesController
-  include GridPassport
+  include Grid::Passport
 
   private
 

@@ -10,6 +10,10 @@ module Grid::Brand
 
       c2(columns_hash) do
 
+        columns_hash['brand_id'] = {
+          :type => :integer,
+        }
+
         columns_hash['name'] = {
           :type => :string,
         }
@@ -58,6 +62,7 @@ module Grid::Brand
       @grid.visible_is_brand = '1'
       @grid.visible_default_display = '1'
       @grid.visible_cached_brand = '1'
+      @grid.visible_brand_id = '1'
       @grid.visible_name = '1'
       @grid.visible_slang = '1'
       @grid.visible_image = '1'

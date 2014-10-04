@@ -2,7 +2,7 @@
 #
 class ProfileablesController < ApplicationController
 
-  include GridProfileable
+  include Grid::Profileable
 
   skip_before_filter :set_grid, :only => [:edit, :update, :new, :create, :show, :destroy]
 

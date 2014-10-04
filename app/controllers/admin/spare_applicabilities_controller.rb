@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 class Admin::SpareApplicabilitiesController < ApplicationController
-  include GridSpareApplicability
+  include Grid::SpareApplicability
   include Admin::Admined
 
   skip_before_filter :set_grid, :only => [:new, :create, :edit, :update, :show, :destroy]

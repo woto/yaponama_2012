@@ -2,7 +2,7 @@
 #
 class Admin::Deliveries::OptionsController < Deliveries::OptionsController
   include Admin::Admined
-  include GridOption
+  include Grid::Option
 
   skip_before_filter :set_grid, only: [:new, :create, :edit, :update, :show, :destroy]
 

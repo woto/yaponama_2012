@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 class CarsController < ProfileablesController
-  include GridCar
+  include Grid::Car
 
   def new_resource
     @resource = @resource_class.new(vin_or_frame: 'vin')

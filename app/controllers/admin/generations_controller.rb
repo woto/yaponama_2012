@@ -2,7 +2,7 @@
 #
 class Admin::GenerationsController < GenerationsController
   include Admin::Admined
-  include GridGeneration
+  include Grid::Generation
 
   skip_before_action :set_grid, :only => [:new, :edit, :update, :create, :destroy, :show, :search]
 

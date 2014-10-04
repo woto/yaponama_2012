@@ -2,7 +2,7 @@
 #
 class Admin::BrandsController < BrandsController
   include Admin::Admined
-  include GridBrand
+  include Grid::Brand
 
   skip_before_filter :set_grid, :only => [:new, :create, :edit, :update, :show, :destroy, :search]
 

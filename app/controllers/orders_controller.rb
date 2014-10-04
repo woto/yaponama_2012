@@ -2,7 +2,7 @@
 #
 class OrdersController < ApplicationController 
 
-  include GridOrder
+  include Grid::Order
 
   skip_before_filter :set_grid, only: [:edit, :update, :new, :create, :show, :destroy]
 

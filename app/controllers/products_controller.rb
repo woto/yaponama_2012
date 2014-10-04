@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   include ProductParent
 
-  include GridProduct
+  include Grid::Product
 
   include ProductsSearch
 

@@ -1,5 +1,5 @@
 class BotsController < ApplicationController
-  include GridBot
+  include Grid::Bot
 
   skip_before_filter :set_grid, only: [:new, :create, :edit, :update, :show, :destroy]
 

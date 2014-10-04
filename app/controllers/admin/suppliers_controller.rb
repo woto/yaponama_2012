@@ -2,7 +2,7 @@
 #
 class Admin::SuppliersController < SuppliersController
   include Admin::Admined
-  include GridSupplier
+  include Grid::Supplier
   #include GetUserFromResourceDummy
 
   skip_before_filter :set_grid, :only => [:new, :create, :edit, :update, :show, :destroy]

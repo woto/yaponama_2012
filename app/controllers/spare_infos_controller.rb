@@ -4,7 +4,7 @@ class SpareInfosController < ApplicationController
 
   respond_to :json
 
-  include GridSpareInfo
+  include Grid::SpareInfo
 
   skip_before_action :find_resource, :only => :search
 

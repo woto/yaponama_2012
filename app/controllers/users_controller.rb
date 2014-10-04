@@ -2,7 +2,7 @@
 #
 class UsersController < ApplicationController
 
-  include GridUser
+  include Grid::User
 
   skip_before_filter :set_grid, :only => [:create, :update, :logout_from_all_places, :show, :postal_address]
 

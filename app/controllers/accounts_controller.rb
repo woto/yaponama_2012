@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 class AccountsController < ApplicationController
-  # include GridAccount
+  # include Grid::Account
 
   def transactions
     # Перенес из account_transactions_controller

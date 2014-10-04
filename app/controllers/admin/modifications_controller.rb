@@ -2,7 +2,7 @@
 #
 class Admin::ModificationsController < ModificationsController
   include Admin::Admined
-  include GridModification
+  include Grid::Modification
 
   skip_before_action :set_grid, :only => [:new, :edit, :update, :create, :destroy, :show, :search]
 

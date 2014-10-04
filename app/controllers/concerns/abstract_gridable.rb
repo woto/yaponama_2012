@@ -2,7 +2,7 @@
 #
 module AbstractGridable
   extend ActiveSupport::Concern
-  include GridCommonColumns
+  include ::GridCommonColumns
   include FastEditable
 
   included do
@@ -37,7 +37,7 @@ module AbstractGridable
     end
 
 
-    include GridConcern
+    include ::GridConcern
 
   end
 

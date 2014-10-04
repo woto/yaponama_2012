@@ -1,5 +1,5 @@
 class SpareCatalogsController < ApplicationController
-  include GridSpareCatalog
+  include Grid::SpareCatalog
   skip_before_filter :set_grid
 
   private

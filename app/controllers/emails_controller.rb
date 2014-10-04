@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 class EmailsController < ProfileablesController
-  include GridEmail
+  include Grid::Email
 
   private
 

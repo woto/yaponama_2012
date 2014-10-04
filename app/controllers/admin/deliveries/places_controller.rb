@@ -2,7 +2,7 @@
 #
 class Admin::Deliveries::PlacesController < Deliveries::PlacesController
   include Admin::Admined
-  include GridPlace
+  include Grid::Place
 
   skip_before_filter :set_grid, :only => [:edit, :update, :new, :create, :show, :destroy]
 

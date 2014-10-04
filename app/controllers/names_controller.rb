@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 class NamesController < ProfileablesController
-  include GridName
+  include Grid::Name
 
   private
 
