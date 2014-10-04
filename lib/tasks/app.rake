@@ -65,4 +65,9 @@ namespace :app do
     FebestComUa.febest_com_ua
   end
 
+  desc 'pg_dump'
+  task :pg_dump => :environment do
+    PgDump.pg_dump
+  end
+
 end
