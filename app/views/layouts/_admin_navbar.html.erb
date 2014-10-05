@@ -87,13 +87,17 @@
           <%= dd.menu do %>
             <li> <%= link_to "Производители", admin_brands_path  %> </li>
             <%= divider %>
-            <li> <%= link_to "Модели авто", admin_models_path %> </li>
-            <li> <%= link_to "Поколения авто", admin_generations_path %> </li>
-            <li> <%= link_to "Модификации авто", admin_modifications_path %> </li>
+            <li role="presentation" class="dropdown-header">Автомобили</li>
+            <li> <%= link_to "Модели", admin_models_path %> </li>
+            <li> <%= link_to "Поколения", admin_generations_path %> </li>
+            <li> <%= link_to "Модификации", admin_modifications_path %> </li>
             <%= divider %>
-            <li> <%= link_to "Описания товаров", admin_spare_infos_path %> </li>
-            <li> <%= link_to "Применимость товаров", admin_spare_applicabilities_path %> </li>
-            <li> <%= link_to "Каталогизатор товаров", admin_spare_catalogs_path %> </li>
+            <li role="presentation" class="dropdown-header">Товары</li>
+            <li> <%= link_to "Описания", admin_spare_infos_path %> </li>
+            <li> <%= link_to "Применимость", admin_spare_applicabilities_path %> </li>
+            <li> <%= link_to "Категории", admin_spare_catalogs_path %> </li>
+            <li> <%= link_to "Замены", admin_spare_replacements_path %> </li>
+            <%= divider %>
             <li> <%= link_to "Статические страницы", admin_pages_path %> </li>
             <li> <%= link_to "Частые вопросы", admin_faqs_path %> </li>
           <% end %>

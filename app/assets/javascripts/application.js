@@ -85,7 +85,7 @@
 //= require 'tests'
 //= require 'jquery.editableHighlight'
 
-//= require 'jquery-cookie/jquery.cookie'
+//= require 'jquery-cookie/src/jquery.cookie'
 
 //= legal
 //= require slide_top

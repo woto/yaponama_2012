@@ -73,6 +73,11 @@ class ApplicationController < ActionController::Base
   end
 
   def show
+    respond_to do |format|
+      format.html {render}
+      format.json {render}
+      format.js {render}
+    end
   end
 
   def create
