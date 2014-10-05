@@ -1,5 +1,5 @@
 1:
-  spare_info: 2102_nissan
+  spare_info: nissan_2102
   brand: mitsubishi
   model: galant
   generation: galant_9_2
@@ -11,7 +11,7 @@
   cached_spare_info: 2102 (NISSAN)
 
 2:
-  spare_info: 2102_nissan
+  spare_info: nissan_2102
   brand: toyota
   model: celica_camry
   cached_brand: TOYOTA
@@ -19,7 +19,7 @@
   cached_spare_info: 2102 (NISSAN)
 
 3:
-  spare_info: 2102_kia
+  spare_info: kia_2102
   brand: toyota
   model: camry_gracia
   generation: camry_gracia_1996
@@ -31,7 +31,7 @@
   cached_spare_info: 2102 (KIA)
 
 4:
-  spare_info: 2102_kia
+  spare_info: kia_2102
   brand: toyota
   model: camry
   generation: camry_xv10
@@ -43,7 +43,7 @@
   cached_spare_info: 2102 (KIA)
 
 5:
-  spare_info: 2102_kia
+  spare_info: kia_2102
   brand: toyota
   model: camry
   generation: camry_xv50
@@ -55,7 +55,7 @@
   cached_spare_info: 2102 (KIA)
 
 6:
-  spare_info: 3310_toyota
+  spare_info: toyota_3310
   brand: mitsubishi
   model: galant
   generation: galant_9_2
@@ -65,7 +65,7 @@
   cached_spare_info: 3310 (TOYOTA)
 
 7:
-  spare_info: 3310_toyota
+  spare_info: toyota_3310
   brand: mitsubishi
   model: lancer_ralliart
   cached_brand: MITSUBISHI
@@ -73,7 +73,7 @@
   cached_spare_info: 3310 (TOYOTA)
 
 8:
-  spare_info: 3310_toyota
+  spare_info: toyota_3310
   brand: toyota
   model: celica_camry
   cached_brand: TOYOTA
@@ -81,7 +81,7 @@
   cached_spare_info: 3310 (TOYOTA)
 
 9:
-  spare_info: 3310_toyota
+  spare_info: toyota_3310
   brand: toyota
   model: camry
   generation: camry_xv50
@@ -93,7 +93,7 @@
   cached_spare_info: 3310 (TOYOTA)
 
 10:
-  spare_info: 3310_toyota
+  spare_info: toyota_3310
   brand: toyota
   model: camry
   generation: camry_v10
@@ -103,7 +103,7 @@
   cached_spare_info: 3310 (TOYOTA)
 
 11:
-  spare_info: 3310_infiniti
+  spare_info: infiniti_3310
   brand: mitsubishi
   model: lancer
   cached_brand: MITSUBISHI
@@ -111,7 +111,7 @@
   cached_spare_info: 3310 (INFINITI)
 
 12:
-  spare_info: 3310_infiniti
+  spare_info: infiniti_3310
   brand: mitsubishi
   model: lancer_ralliart
   generation: lancer_ralliart_2008
@@ -121,7 +121,7 @@
   cached_spare_info: 3310 (INFINITI)
 
 13:
-  spare_info: 3310_infiniti
+  spare_info: infiniti_3310
   brand: toyota
   model: celica_camry
   cached_brand: TOYOTA
@@ -129,7 +129,7 @@
   cached_spare_info: 3310 (INFINITI)
 
 14:
-  spare_info: 3310_infiniti
+  spare_info: infiniti_3310
   brand: mitsubishi
   model: galant
   cached_brand: MITSUBISHI

@@ -1,4 +1,4 @@
-3310_infiniti:
+infiniti_3310:
     catalog_number: '3310'
     brand: infiniti
     cached_brand: INFINITI
@@ -7,7 +7,7 @@
     cached_spare_catalog: "ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ"
     spare_catalog: pylnik_rulevoi_reiki
 
-3310_toyota:
+toyota_3310:
     catalog_number: '3310'
     brand: toyota
     cached_brand: TOYOTA
@@ -16,7 +16,7 @@
     cached_spare_catalog: "РУЛЕВАЯ ТЯГА"
     spare_catalog: rulevaya_tyga
 
-2102_nissan:
+nissan_2102:
     catalog_number: '2102'
     brand: nissan
     cached_brand: NISSAN
@@ -24,7 +24,7 @@
     cached_spare_catalog: "САЙЛЕНТБЛОК"
     spare_catalog: sailentblock
 
-2102_kia:
+kia_2102:
     catalog_number: '2102'
     brand: kia
     cached_brand: KIA

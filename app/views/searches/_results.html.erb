@@ -88,6 +88,7 @@
 
                     <tbody>
                       <% mf_scope[:offers].each do |offer| %>
+                        <% next if offer[:probability] == 0 %>
                         <% offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 ? presence = true : presence = false %>
                         <tr class="<%= presence ? 'active' : '' %>">
                           <td> <span class="visible-xs"> Расположение склада: </span> <%= raw country_decorator offer[:country] %> </td>
