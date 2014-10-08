@@ -1,9 +1,11 @@
 require 'csv'
 
-class EgrgroupRu
-    def self.egrgroup_ru
-      CSV.foreach("egrgroup_ru.csv") do |row|
+class EgrgroupRuImport
+    def self.egrgroup_ru_import
+      path = File.join(Rails.root, 'catalog', 'egrgroup_ru.csv')
+      CSV.foreach(path) do |row|
 
+        if !row[1].nil? && !row[2].nil? && !row[3].nil? && !row[4].nil? && !row[5].nil? && !row[6].nil? && !row[7].nil?
 
         c9 = row[1]
         b9 = row[3]
@@ -20,7 +22,7 @@ class EgrgroupRu
         #binding.pry
         if @parsed_json["result_prices"].present?
 
-          brand = Brand.find_or_create_by(name: row[3].mb_chars.upcase)
+          brand = BrandMate.find_or_create_canonical(row[3])
           model = Model.find_or_create_by(name: row[4], brand: brand)
           generation = Generation.find_or_create_by(name: row[2], model: model)
 
@@ -40,7 +42,7 @@ class EgrgroupRu
             #binding.pry
          end
         end
+        end
       end
     end
 end
-
