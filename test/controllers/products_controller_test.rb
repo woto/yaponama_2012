@@ -109,6 +109,16 @@ class ProductsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'Ищем замены 2 с производителем TOYOTA, находим только 2 - TOYOTA' do
+    get :new, catalog_number: 2, manufacturer: 'TOYOTA', replacements: '1'
+    assert_match '2 - 2 руб.', response.body
+  end
+
+  test 'Ищем замены 2 без производителя, находим и TOYOTA и TY сгруппированным' do
+    get :new, catalog_number: 2, replacements: '1'
+    assert_match '2 - 40 руб.', response.body
+  end
+
   test 'Ссылки' do
     skip
     # Протестировать ссылки на замены, купить и т.д.
