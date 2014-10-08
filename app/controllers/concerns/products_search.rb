@@ -211,6 +211,7 @@ module ProductsSearch
 
           cn = item["catalog_number"].to_s
           mf = item["manufacturer"].to_s
+          mf = BrandMate.find_or_create_canonical!(mf).name
 
           if counter[h] <= 5
             set_retail_cost item
@@ -233,7 +234,7 @@ module ProductsSearch
                 :min_cost => nil,
                 :max_cost => nil,
                 :offers => [],
-                :brand => Brand.where(:name => mf).first || Brand.create(:name => mf.upcase, :phantom => true),
+                :brand => BrandMate.find_or_create_canonical!(mf),
                 :info => item_status(item['catalog_number'], item['manufacturer']),
                 # image_url у всех одинаковый по определению, т.к. берется из price_catalogs
                 # несмотря на то, что на сервере прайсов заполняется по образу weights

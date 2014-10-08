@@ -100,6 +100,15 @@ class ProductsControllerTest < ActionController::TestCase
     assert_select '.search-form[action=?]', "/user/products/new"
   end
 
+  test 'Ищем товар 2. У него производители TOYOTA и TY. Должны сгруппироваться в TOYOTA' do
+    get :new, catalog_number: 2
+    assert_select '#TOYOTA'
+    assert_select '#TY', false
+    assert_select '#TOYOTA' do
+      assert_select 'p', text: '1, 22'
+    end
+  end
+
   test 'Ссылки' do
     skip
     # Протестировать ссылки на замены, купить и т.д.
