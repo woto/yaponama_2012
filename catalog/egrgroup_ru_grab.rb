@@ -1,11 +1,10 @@
-# encoding: utf-8
-#
 require 'test_helper'
 require 'csv'
 
-class EgrgroupRu < ActionDispatch::IntegrationTest
-  test 'egrgroup_ru' do
-    CSV.open("egrgroup_ru.csv", "wb") do |csv|
+class EgrgroupRuGrab < ActionDispatch::IntegrationTest
+  test 'egrgroup_ru_grab' do
+    path = File.join(Rails.root, 'catalog', 'egrgroup_ru.csv')
+    CSV.open(path, "wb") do |csv|
       visit 'http://egrgroup.ru'
       links = all('td.dtree a').map{|el| {'title' => el.text, 'url' => el['href']}}
       links.each_with_index do |link, index|
