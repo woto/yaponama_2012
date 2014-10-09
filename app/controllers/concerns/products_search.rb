@@ -206,12 +206,12 @@ module ProductsSearch
             @status[:offers] = true
           end
 
-          h = item["catalog_number"].to_s + " - " + item["manufacturer"].to_s
-          counter[h] += 1
-
           cn = item["catalog_number"].to_s
-          mf = item["manufacturer"].to_s
-          mf = BrandMate.find_or_create_canonical!(mf).name
+          canonical_brand = BrandMate.find_or_create_canonical!(item["manufacturer"])
+          mf = canonical_brand.name.to_s
+
+          h = cn + " - " + mf
+          counter[h] += 1
 
           if counter[h] <= 5
             set_retail_cost item
@@ -234,8 +234,8 @@ module ProductsSearch
                 :min_cost => nil,
                 :max_cost => nil,
                 :offers => [],
-                :brand => BrandMate.find_or_create_canonical!(mf),
-                :info => item_status(item['catalog_number'], item['manufacturer']),
+                :brand => canonical_brand,
+                :info => item_status(item['catalog_number'], mf),
                 # image_url у всех одинаковый по определению, т.к. берется из price_catalogs
                 # несмотря на то, что на сервере прайсов заполняется по образу weights
                 :image_url => item["image_url"]
@@ -307,7 +307,7 @@ module ProductsSearch
           weight = ((tmp = item["weight_grams"].to_f) > 0 ? ((tmp + 100) / 1000).round(1) : nil)
 
           # Запоминаем количество повторений одного и того же оригинального написания кат. номера
-          if catalog_number_orig.present? && catalog_number_orig != item["catalog_number"]
+          if catalog_number_orig.present? && catalog_number_orig != cn
             unless @formatted_data[cn][mf][:catalog_number_origs][catalog_number_orig]
               @formatted_data[cn][mf][:catalog_number_origs][catalog_number_orig] = 1
             else
@@ -316,7 +316,7 @@ module ProductsSearch
           end
 
           # Запоминаем количество повторений одного и того же оригинального производителя
-          if manufacturer_orig.present? && manufacturer_orig != item["manufacturer"]
+          if manufacturer_orig.present? && manufacturer_orig != mf
             unless @formatted_data[cn][mf][:manufacturer_origs][manufacturer_orig]
               @formatted_data[cn][mf][:manufacturer_origs][manufacturer_orig] = 1
             else

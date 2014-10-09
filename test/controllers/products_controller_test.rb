@@ -119,6 +119,16 @@ class ProductsControllerTest < ActionController::TestCase
     assert_match '2 - 40 руб.', response.body
   end
 
+  test 'Деталь 838383 внесена как 838383 и 83-83.83 с производителями ОРИГИНАЛ и СИНОНИМ, на сервере прайсов должны слиться' do
+    get :new, catalog_number: 838383
+    assert_select "div[id='ОРИГИНАЛ']" do
+      assert_select 'p.other-names', 'НАЗВАНИЕ СИНОНИМА, НАЗВАНИЕ ОРИГИНАЛА'
+      assert_select 'p.other-brands', 'СИНОНИМ'
+      assert_select 'p.other-catalog-numbers', '83-83.83'
+    end
+  end
+
+
   test 'Ссылки' do
     skip
     # Протестировать ссылки на замены, купить и т.д.
