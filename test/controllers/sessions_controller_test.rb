@@ -84,12 +84,12 @@ class SessionsControllerTest < ActionController::TestCase
   test 'Если пользователь уже вошел на сайт, то при попытке запроса страниц, у которых only_not_authenticated мы должны увидеть уведомление, что вход уже осуществлен для ролей admin, manager, user' do
     cookies['auth_token'] = somebodies(:stan).auth_token
     get :show
-    assert_equal 'Вы уже вошли на сайт.', flash[:attention]
+    assert_equal 'Вы уже вошли на сайт', flash[:attention]
   end
 
   test 'И наоборот при попытке доступа не аутентифицированным пользователем к страницам, у которых only_authenticated мы должны увидеть уведомление, о необходимости входа для ролей guest' do
     delete :destroy
-    assert_equal 'Пожалуйста войдите на сайт.', flash[:attention]
+    assert_equal 'Пожалуйста войдите на сайт', flash[:attention]
   end
 
   test 'Если гость вошел под пользовательской учетной записью или восстановил пароль, то необходимо передать данные (профили, заказы и т.д.) пользователю.' do
