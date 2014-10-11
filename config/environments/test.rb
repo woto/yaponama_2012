@@ -40,4 +40,6 @@ Rails.application.configure do
   config.assets.debug = true
 
   config.assets.prefix = "/assets-test"
+
+  config.active_support.test_order = :random
 end

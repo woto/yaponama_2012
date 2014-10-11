@@ -1,0 +1,17 @@
+one:
+  from_spare_info_id: 
+  to_spare_info_id: 
+  from_cached_spare_info:
+  to_cached_spare_info:
+  comment: MyString
+  source: MyString
+  wrong:
+
+two:
+  from_spare_info_id: 
+  to_spare_info_id: 
+  from_cached_spare_info:
+  to_cached_spare_info:
+  comment: MyString
+  source: MyString
+  wrong:

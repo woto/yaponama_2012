@@ -7,7 +7,7 @@ class Admin::ProductsControllerTest < ActionController::TestCase
   test 'Продавец должен видеть кнопку Форма' do
     cookies['auth_token'] = somebodies(:first_admin).auth_token
     get :new, product_id: products(:sending1), user_id: somebodies(:sending1)
-    assert_select 'a[href=#modal_form]', true
+    assert_select "a[href='#modal_form']"
   end
   
   test 'Тестируем добавление администратором товара пользователю с еще не существующим брендом.' do
@@ -41,7 +41,7 @@ class Admin::ProductsControllerTest < ActionController::TestCase
     assert_equal 'new', product.catalog_number, 'Добавленный товар имеет неверный каталожный номер'
     assert_equal 'incart', product.status, 'Добавленный товар имеет неверный статус'
     assert_equal brand, product.brand, 'Ассоциация у добавленного товара parent_brand не равна созданной автоматически созданной модели brand'
-    assert_equal 'new', product.cached_brand, 'Кешированное значение бренда у добавленного товара неверное'
+    assert_equal 'NEW', product.cached_brand, 'Кешированное значение бренда у добавленного товара неверное'
     
     assert_response :redirect, 'Редирект не произошел'
     #assert_redirected_to admin_user_product_path(@user, product, :return_path => 'http://ya.ru'), 'Редирект произошел не неверный адрес'

@@ -290,3 +290,6 @@ https://github.com/newmen/sms24x7
 
 ==================================================================
 
+to_cached_spare_info и from_cached_spare_info объединить (они практически идентичные)
+from_spare_info_attributes и to_spare_info_attributes
+

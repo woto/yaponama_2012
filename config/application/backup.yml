@@ -1,0 +1,21 @@
+defaults: &defaults
+  tables:
+  - bots
+  - brands
+  - models
+  - generations
+  - modifications
+  - faqs
+  - spare_catalogs
+  - spare_infos
+  - spare_replacements
+  - spare_applicabilities
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

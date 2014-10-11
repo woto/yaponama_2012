@@ -1,17 +1,23 @@
+namespace :catalog do
+
+  desc 'egrgroup_ru_import'
+  task :egrgroup_ru_import => :environment do
+    EgrgroupRuImport.egrgroup_ru_import
+  end
+
+  desc 'febest_com_ua_import'
+  task :febest_com_ua_import => :environment do
+    FebestComUaImport.febest_com_ua_import
+  end
+
+
+end
+
 namespace :app do
 
   desc 'Прогон по прайсу. В данном случае надо чтобы инициировалась отправка данных spare_catalogs'
   task :progon, [:arg1] => [:environment] do |t, args|
-    require 'csv'
-
-    file = open(args[:arg1])
-
-    file.each_line do |line|
-      row = CSV.parse(line)[0]
-      puts row
-      open("http://www.avtorif.ru/user/products/new?catalog_number=#{CGI::escape(row[0].to_s)}")
-    end
-
+    Progon.progon args[:arg1]
   end
 
   desc 'Проценка вызов происходит так: rake "app:protcenka[a]. Сравнение с прайсами, у которых visible_for_stock"'

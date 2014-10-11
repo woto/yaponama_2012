@@ -30,7 +30,8 @@ module Yaponama2012
     config.autoload_paths += %W(
       #{config.root}/extras
       #{config.root}/app/workers
-      #{config.root}/rake)
+      #{config.root}/rake
+      #{config.root}/catalog)
 
     #config.autoload_paths += %W(#{config.root}/delivery)
 
@@ -587,5 +588,6 @@ module Yaponama2012
       "#{html_tag}".html_safe 
     }
 
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

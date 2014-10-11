@@ -10,6 +10,7 @@ abs:
   content:
   phantom: false
   creator: first_admin
+  is_brand: false
 
 audi:
   name: AUDI
@@ -104,6 +105,12 @@ bando:
   content: 
   phantom: false
   creator: first_admin
+  is_brand: false
+
+bnd:
+  name: БАНДО
+  brand: bando
+  is_brand: false
 
 toyota:
   name: TOYOTA
@@ -177,4 +184,3 @@ receiving1:
   rating: 1000
   phantom: false
   creator: receiving1
-

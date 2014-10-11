@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class Phone < ActiveRecord::Base
 
   include HiddenRecreate
@@ -42,7 +40,7 @@ class Phone < ActiveRecord::Base
   end
 
   def deliver_confirmation
-    ConfirmMailer.phone(self).deliver
+    ConfirmMailer.phone(self).deliver_now
   end
 
   def to_label

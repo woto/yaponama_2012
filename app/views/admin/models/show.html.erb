@@ -1,9 +1,13 @@
-<% title_show %>
+<%= b1 do %>
 
-<%= breadcrumb true do |b| %>
-  <%= b.item @meta_title %>
+  <% @meta_title = "Просмотр модели #{@resource.to_label}" %>
+
+  <%= breadcrumb true do |b| %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= page_header %>
+
+  <%= render 'smart_show' %>
+
 <% end %>
-
-<%= title_show %>
-
-<%= render 'smart_show' %>

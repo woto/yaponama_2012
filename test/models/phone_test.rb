@@ -72,7 +72,7 @@ class PhoneTest < ActiveSupport::TestCase
     p2 = phones(:otto)
     p2.confirmed = true
     p2.save!
-    assert !Phone.exists?(p1)
+    assert !Phone.exists?(p1.id)
   end
 
   test 'При создании нового номера телефона должен генерироваться confirmation_token (Если не confirmed)' do

@@ -5,7 +5,7 @@ module Admin::Admined
   extend ActiveSupport::Concern
 
   included do
-
+    skip_before_action :set_grid, only: [:new, :create, :edit, :update, :show, :destroy, :search]
     before_action :prepend_view_paths
     before_action :only_authenticated
     #before_action :set_supplier

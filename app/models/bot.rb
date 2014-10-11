@@ -1,6 +1,6 @@
 class Bot < ActiveRecord::Base
   include BelongsToCreator
-  include ActiveRecord::ConnectionAdapters::PostgreSQLColumn::Cast
+  #include ActiveRecord::ConnectionAdapters::PostgreSQLColumn::Cast
 
   validate :inet do |record|
     if inet.present?

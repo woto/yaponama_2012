@@ -11,7 +11,7 @@ class Brand < ActiveRecord::Base
 
   validates :name, :presence => true, uniqueness:  { case_sensitive: false }
 
-  has_many :brands, :inverse_of => :brand
+  has_many :brands, :inverse_of => :brand, :dependent => :destroy
   has_many :cars, :inverse_of => :brand
   has_many :models, :inverse_of => :brand, :dependent => :destroy
 

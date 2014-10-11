@@ -33,26 +33,26 @@ class BrandsControllerTest < ActionController::TestCase
 
   # Проверяем работу is_brand
   #
-  test 'Если мы передаем флаг is_brand и TOYOTA, то мы находим TOYOTA' do
-    get :search, name: 'TOYOTA', is_brand: true, format: :json
+  test 'Если мы передаем флаг is_brand 1 и TOYOTA, то мы находим TOYOTA' do
+    get :search, name: 'TOYOTA', is_brand: '1', format: :json
     body = JSON.parse(response.body)
     assert_equal 'TOYOTA', body.first['name']
   end
 
-  test 'Если мы передаем флаг is_brand и TY, то мы находим TOYOTA' do
-    get :search, name: 'TOYOTA', is_brand: true, format: :json
+  test 'Если мы передаем флаг is_brand 1 и TY, то мы находим TOYOTA' do
+    get :search, name: 'TOYOTA', is_brand: '1', format: :json
     body = JSON.parse(response.body)
     assert_equal 'TOYOTA', body.first['name']
   end
 
-  test 'Если мы передаем флаг is_brand и BANDO, то мы не находим BANDO' do
-    get :search, name: 'BANDO', is_brand: true, format: :json
+  test 'Если мы передаем флаг is_brand 1 и BANDO, то мы не находим BANDO' do
+    get :search, name: 'BANDO', is_brand: '1', format: :json
     body = JSON.parse(response.body)
     assert_empty body
   end
 
-  test 'Если мы передаем флаг is_brand и БАНДО, то мы не находим BANDO' do
-    get :search, name: 'БАНДО', is_brand: true, format: :json
+  test 'Если мы передаем флаг is_brand 1 и БАНДО, то мы не находим BANDO' do
+    get :search, name: 'БАНДО', is_brand: '1', format: :json
     body = JSON.parse(response.body)
     assert_empty body
   end

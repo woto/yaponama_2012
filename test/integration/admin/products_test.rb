@@ -12,7 +12,7 @@ class Admin::ProductsTest < ActionDispatch::IntegrationTest
     assert_select "#catalog_number_product_#{id}" do |elements|
       elements.each do |el|
         assert_match /2102/, el.to_s
-        assert_select "i[class=?]", /.*asterisk.*/
+        assert_select "i:match('class', ?)", /.*asterisk.*/
       end
     end
   end

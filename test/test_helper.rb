@@ -1,10 +1,10 @@
-# encoding: utf-8
-#
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
 require 'capybara/poltergeist'
+require 'capybara/dsl'
+require "minitest/autorun"
 
 #Capybara.register_driver :poltergeist do |app|
 #  Capybara::Poltergeist::Driver.new(app, {
@@ -45,6 +45,8 @@ Capybara.default_driver = :selenium
 #Capybara.default_driver = :poltergeist
 #Capybara.javascript_driver = :poltergeist
 Capybara.default_wait_time = 20
+
+Selenium::WebDriver::Firefox::Binary.path="/home/woto/firefox/firefox"
 
 
 class ActionDispatch::IntegrationTest

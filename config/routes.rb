@@ -45,6 +45,7 @@ Yaponama2012::Application.routes.draw do
     resources :spare_catalogs, concerns: [:gridable, :searchable]
     resources :bots, concerns: [:gridable]
     resources :spare_infos, concerns: [:gridable, :transactionable, :searchable]
+    resources :spare_replacements, concerns: [:gridable]
   end
 
   concern :only_admin do
@@ -104,10 +105,10 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :gridable do
-    match 'filter', :via => [:get, :post], :on => :collection, to: :index
-    match 'info', :via => [:get, :post], :on => :member, to: :info
-    match 'filters', :via => [:get, :post], :on => :collection, to: :filters
-    match 'columns', :via => [:get, :post], :on => :collection, to: :columns
+    match 'filter', :via => [:get, :post], :on => :collection, action: :index
+    match 'info', :via => [:get, :post], :on => :member, action: :info
+    match 'filters', :via => [:get, :post], :on => :collection, action: :filters
+    match 'columns', :via => [:get, :post], :on => :collection, action: :columns
     concerns :fast_editable
   end
 
@@ -296,8 +297,8 @@ Yaponama2012::Application.routes.draw do
       concerns :complex_orders
 
       concerns :cashable
-      #get :password, to: "passwords#edit"
-      #patch :password, to: "passwords#update"
+      #get :password, action: "passwords#edit"
+      #patch :password, action: "passwords#update"
       resource :password, :only => [:edit, :update]
 
       concerns :legal_or_personal
@@ -339,11 +340,11 @@ Yaponama2012::Application.routes.draw do
     concerns :complex_orders
     concerns :legal_or_personal
     resource :password, :only => [:edit, :update]
-    #get :password, :on => :member, to: "passwords#edit"
-    #patch :password, :on => :member, to: "passwords#update"
+    #get :password, :on => :member, action: "passwords#edit"
+    #patch :password, :on => :member, action: "passwords#update"
     delete :logout_from_all_places
     concerns :talkable
-    post 'pretype', to: 'users#update'
+    post 'pretype', action: 'users#update'
   end
   resources :uploads do
     member do

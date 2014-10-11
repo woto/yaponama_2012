@@ -1,10 +1,6 @@
-# encoding: utf-8
-#
 class Admin::GenerationsController < GenerationsController
-  include Admin::Admined
   include Grid::Generation
-
-  skip_before_action :set_grid, :only => [:new, :edit, :update, :create, :destroy, :show, :search]
+  include Admin::Admined
 
   def new_resource
     super

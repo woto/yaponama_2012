@@ -12,7 +12,7 @@ class ProductsTest < ActionDispatch::IntegrationTest
     assert_select "#catalog_number_product_#{id}" do |elements|
       elements.each do |el|
         refute_match /2102/, el.to_s
-        assert_select "i[class=?]", /.*asterisk.*/
+        assert_select "i:match('class', ?)", /.*asterisk.*/
       end
     end
   end
@@ -40,8 +40,8 @@ class ProductsTest < ActionDispatch::IntegrationTest
     primary_key = request['primary_key']
     third = products(:anton_third).id
 
-    assert_select "#id_product_#{third}" do
-      assert_select 'a[data-poload=?]', Regexp.new(Regexp.quote("/user/products/#{third}/info?primary_key=#{primary_key}&amp\;return_path=%2Fuser%2Fproducts%2Ffilter%3Fprimary_key%3D#{primary_key}"))
+    assert_select "#id_product_#{third}" do |element|
+      assert_select "a:match('data-poload', ?)", Regexp.new(Regexp.quote("/user/products/#{third}/info?primary_key=#{primary_key}&return_path=%2Fuser%2Fproducts%2Ffilter%3Fprimary_key%3D#{primary_key}"))
     end
   end
 

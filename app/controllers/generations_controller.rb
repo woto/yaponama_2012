@@ -1,7 +1,5 @@
 class GenerationsController < ApplicationController
 
-  respond_to :json
-
   skip_before_filter :only_authenticated, :only => :search
   skip_before_action :find_resource, :only => :search
 
@@ -20,7 +18,9 @@ class GenerationsController < ApplicationController
 
     @generations = @generations.order(generation_t[:name]).page params[:page]
 
-    respond_with @generations
+    respond_to do |format|
+      format.json { render json: @generations }
+    end
   end
 
   private

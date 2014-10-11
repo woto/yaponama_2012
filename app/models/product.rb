@@ -31,6 +31,12 @@ class Product < ActiveRecord::Base
   belongs_to :brand
   validates :brand, :presence => true
 
+  validate :brand do
+    if brand && brand.brand.present?
+      errors.add(:brand, 'Нельзя использовать алиас в качестве связки')
+    end
+  end
+
   validates :buy_cost, :numericality => { :greater_than => 0}
   validates :sell_cost, :numericality => { :greater_than => 0}
 

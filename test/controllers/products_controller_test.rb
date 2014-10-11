@@ -50,7 +50,7 @@ class ProductsControllerTest < ActionController::TestCase
 
   test 'Кнопка Форма должна отсутствовать на странице редактирования' do
     get :edit, id: products(:sending1)
-    assert_select 'a[href=#modal_form]', false
+    assert_select "a[href='#modal_form']", false
   end
 
   test 'Урл формы должен быть правильный на странице редактирования' do
@@ -87,12 +87,12 @@ class ProductsControllerTest < ActionController::TestCase
 
   test 'Перезаказываемый товар должен присутствовать на странице перезаказа' do
     get :new, product_id: products(:sending1)
-    assert_select '#product_id[value=?]', products(:sending1).id
+    assert_select '#product_id[value=?]', products(:sending1).id.to_s
   end
 
   test 'Кнопка Форма должна отсутствовать на странице перезаказа' do
     get :new, product_id: products(:sending1)
-    assert_select 'a[href=#modal_form]', false
+    assert_select "a[href='#modal_form']", false
   end
 
   test 'URL формы должен быть правильный на странице перезаказа' do

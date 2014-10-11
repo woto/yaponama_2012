@@ -1,10 +1,7 @@
-# encoding: utf-8
-#
 module GridConcern
   extend ActiveSupport::Concern
 
   included do
-
     skip_before_filter :find_resource, :only => [:columns, :filters]
 
     before_action :set_grid
@@ -12,7 +9,6 @@ module GridConcern
     private
 
     def set_grid
-
       # Считываем сохраненный ранее grid
       old_grid = nil
       if params[:primary_key].present?

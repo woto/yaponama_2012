@@ -1,7 +1,5 @@
 class BrandsController < ApplicationController
 
-  respond_to :json, :js
-
   skip_before_filter :only_authenticated, :only => :search
   skip_before_action :find_resource, :only => :search
 
@@ -19,13 +17,16 @@ class BrandsController < ApplicationController
         .references(:brands_brands)
     end
 
-    if params[:is_brand]
+    if params[:is_brand] == '1'
       @resources = @resources.where(is_brand: true)
     end
 
     @resources = @resources.order(:name).page params[:page]
 
-    respond_with @resources
+    respond_to do |format|
+      format.js
+      format.json { render json: @resources }
+    end
   end
 
   private

@@ -5,8 +5,6 @@ class Admin::SuppliersController < SuppliersController
   include Grid::Supplier
   #include GetUserFromResourceDummy
 
-  skip_before_filter :set_grid, :only => [:new, :create, :edit, :update, :show, :destroy]
-
   def create_resource
     @resource = @resource_class.new(resource_params)
     @resource.build_account

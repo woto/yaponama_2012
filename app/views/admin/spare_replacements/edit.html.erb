@@ -1,0 +1,13 @@
+<%= b1 do %>
+
+  <% @meta_title = "Редактирование #{@resource.to_label}" %>
+
+  <%= breadcrumb true do |b| %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= page_header %>
+
+  <%= render :partial => "form" %>
+
+<% end %>

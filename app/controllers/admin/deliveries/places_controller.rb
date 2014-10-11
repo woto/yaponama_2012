@@ -1,10 +1,6 @@
-# encoding: utf-8
-#
 class Admin::Deliveries::PlacesController < Deliveries::PlacesController
-  include Admin::Admined
   include Grid::Place
-
-  skip_before_filter :set_grid, :only => [:edit, :update, :new, :create, :show, :destroy]
+  include Admin::Admined
 
   private
 

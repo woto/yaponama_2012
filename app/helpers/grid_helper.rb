@@ -134,7 +134,8 @@ module GridHelper
               'Нет'
             end
           else 
-            raise "true/false тип boolean не выставлен #{@resource_class}. #{column_name}"
+            # TODO
+            #raise "true/false тип boolean не выставлен #{@resource_class}. #{column_name}"
           end
         when *['catalog_number']
           res = "".html_safe

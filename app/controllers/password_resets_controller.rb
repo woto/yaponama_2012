@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class PasswordResetsController < ApplicationController
 
   include FindResourceDummy
@@ -25,9 +23,9 @@ class PasswordResetsController < ApplicationController
 
         case @password_reset.with
         when 'email'
-          PasswordResetMailer.email(@password_reset.value, somebody.password_reset_token).deliver
+          PasswordResetMailer.email(@password_reset.value, somebody.password_reset_token).deliver_now
         when 'phone'
-          PasswordResetMailer.phone(@password_reset.value, somebody.password_reset_token).deliver
+          PasswordResetMailer.phone(@password_reset.value, somebody.password_reset_token).deliver_now
         end
 
         redirect_to pin_password_reset_path(

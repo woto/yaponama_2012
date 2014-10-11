@@ -5,7 +5,7 @@ class EgrgroupRuImport
       path = File.join(Rails.root, 'catalog', 'egrgroup_ru.csv')
       CSV.foreach(path) do |row|
 
-        if !row[1].nil? && !row[2].nil? && !row[3].nil? && !row[4].nil? && !row[5].nil? && !row[6].nil? && !row[7].nil?
+        if !row[1].blank? && !row[2].blank? && !row[3].blank? && !row[4].blank? && !row[5].blank? && !row[6].blank? && !row[7].blank?
 
           c9 = row[1]
           b9 = row[3]

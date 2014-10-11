@@ -1,4 +1,4 @@
-id,brand_id,cached_brand,name,content,creator_id,phantom,created_at,updated_at,slang,from,to
+id,brand_id,cached_brand,name,content,creator_id,phantom,created_at,updated_at,from,to,slang
 1,3,BMW,1 series,,,f,2014-02-07 12:04:33.700932,2014-02-07 12:04:33.700932,,,
 2,3,BMW,1 series Convertible,,,f,2014-02-07 12:04:33.780344,2014-02-07 12:04:33.780344,,,
 3,3,BMW,1 series Coupe,,,f,2014-02-07 12:04:33.799054,2014-02-07 12:04:33.799054,,,

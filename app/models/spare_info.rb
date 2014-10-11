@@ -7,6 +7,7 @@ class SpareInfo < ActiveRecord::Base
   include BrandAttributes
   include SpareCatalogAttributes
 
+  has_many :spare_replacements, foreign_key: :from_spare_info_id
   has_many :spare_applicabilities
 
   def to_label

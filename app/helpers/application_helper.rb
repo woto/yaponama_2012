@@ -16,10 +16,6 @@ module ApplicationHelper
 
   def brand_rating brand
 
-    if brand.brand.present?
-      return brand_rating brand.brand
-    end
-
     value = ( brand.try(:[], :rating).to_i || 0 ) / 2000.0
     content_tag(:div, class: "stars") do
 
@@ -49,10 +45,6 @@ module ApplicationHelper
 
   def brand_preview brand
 
-    if brand.brand.present?
-      return brand_preview brand.brand
-    end
-
     if brand.preview.present?
       output = ''
       output << h(brand.preview)
@@ -65,10 +57,6 @@ module ApplicationHelper
   end
 
   def brands_decorator path, brand, options
-
-    if brand.brand.present?
-      return raw brands_decorator(path, brand.brand, options)
-    end
 
     title = ""
     if options[:title] == true

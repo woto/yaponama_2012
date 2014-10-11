@@ -29,6 +29,7 @@ $(document).on 'page:change', ->
       params = 
         page: options.page
         name: options.term
+        is_brand: $(options.element).data('is-brand')
 
       zzz = undefined
       zzz = results: []

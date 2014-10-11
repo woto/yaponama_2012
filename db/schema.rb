@@ -11,10 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 99999999999999) do
+ActiveRecord::Schema.define(version: 20141011053405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
+  enable_extension "citext"
+  enable_extension "uuid-ossp"
 
   create_table "account_transactions", force: true do |t|
     t.integer  "account_id"
@@ -44,90 +47,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
 
   add_index "accounts", ["somebody_id"], name: "index_accounts_on_somebody_id", using: :btree
 
-  create_table "admin_site_settings", force: true do |t|
-    t.string   "from_email_address"
-    t.string   "environment"
-    t.string   "sms_notify_method"
-    t.boolean  "send_request_from_search_page"
-    t.integer  "price_request_cache_with_replacements_in_seconds"
-    t.integer  "price_request_cache_without_replacements_in_seconds"
-    t.boolean  "request_emex"
-    t.float    "emex_income_rate"
-    t.float    "avtorif_income_rate"
-    t.float    "retail_rate"
-    t.string   "robokassa_integration_mode"
-    t.string   "robokassa_pass_1"
-    t.string   "robokassa_pass_2"
-    t.string   "robokassa_user"
-    t.string   "google_maps_key"
-    t.string   "travel_mode"
-    t.float    "initial_map_lat"
-    t.float    "initial_map_lng"
-    t.integer  "initial_map_zoom"
-    t.float    "delivery_minute_cost"
-    t.string   "warehouse_address"
-    t.boolean  "automatic_calculate_active"
-    t.float    "max_automatic_calculated_cost"
-    t.string   "checkout_account"
-    t.string   "checkout_bank"
-    t.string   "checkout_bik"
-    t.string   "checkout_correspondent"
-    t.string   "checkout_inn"
-    t.string   "checkout_recipient"
-    t.text     "counter_yandex"
-    t.text     "counter_mail"
-    t.text     "counter_rambler"
-    t.text     "counter_google"
-    t.text     "counter_openstat"
-    t.text     "counter_liveinternet"
-    t.float    "default_somebody_prepayment"
-    t.float    "default_somebody_discount"
-    t.string   "default_somebody_order_rule"
-    t.string   "avisosms_username"
-    t.string   "avisosms_password"
-    t.string   "avisosms_source_address"
-    t.string   "avisosms_delivery_report"
-    t.string   "avisosms_flash_message"
-    t.string   "avisosms_validity_period"
-    t.string   "avisosms_email_address"
-    t.string   "site_address"
-    t.string   "site_port"
-    t.string   "redis_address"
-    t.string   "redis_port"
-    t.string   "realtime_address"
-    t.string   "realtime_port"
-    t.string   "juggernaut_address"
-    t.string   "juggernaut_port"
-    t.string   "price_address"
-    t.string   "price_port"
-    t.string   "get_image_data_address"
-    t.string   "get_image_data_port"
-    t.string   "google_oauth2_key"
-    t.string   "google_oauth2_secret"
-    t.string   "facebook_key"
-    t.string   "facebook_secret"
-    t.string   "yandex_key"
-    t.string   "yandex_secret"
-    t.string   "twitter_key"
-    t.string   "twitter_secret"
-    t.string   "vkontakte_key"
-    t.string   "vkontakte_secret"
-    t.string   "odnoklassniki_key"
-    t.string   "odnoklassniki_secret"
-    t.string   "mailru_key"
-    t.string   "mailru_secret"
-    t.string   "default_time_zone_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "mail_delivery_method"
-    t.string   "smtp_address"
-    t.integer  "smtp_port"
-    t.string   "smtp_user_name"
-    t.string   "smtp_password"
-    t.string   "smtp_authentication"
-    t.boolean  "smtp_enable_starttls_auto"
-  end
-
   create_table "auths", force: true do |t|
     t.string   "provider"
     t.string   "uid"
@@ -138,27 +57,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   end
 
   add_index "auths", ["somebody_id"], name: "index_auths_on_somebody_id", using: :btree
-
-  create_table "block_transactions", force: true do |t|
-    t.integer  "block_id"
-    t.string   "operation"
-    t.integer  "creator_id"
-    t.string   "name_before"
-    t.string   "name_after"
-    t.text     "content_before"
-    t.text     "content_after"
-    t.datetime "created_at"
-  end
-
-  add_index "block_transactions", ["block_id"], name: "index_block_transactions_on_block_id", using: :btree
-  add_index "block_transactions", ["creator_id"], name: "index_block_transactions_on_creator_id", using: :btree
-
-  create_table "blocks", force: true do |t|
-    t.string   "name"
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "bots", force: true do |t|
     t.string   "title"
@@ -211,7 +109,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "brand_transactions", ["creator_id"], name: "index_brand_transactions_on_creator_id", using: :btree
 
   create_table "brands", force: true do |t|
-    t.string   "name"
+    t.text     "name"
     t.integer  "brand_id"
     t.string   "cached_brand"
     t.string   "image"
@@ -353,18 +251,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "cars", ["model_id"], name: "index_cars_on_model_id", using: :btree
   add_index "cars", ["modification_id"], name: "index_cars_on_modification_id", using: :btree
   add_index "cars", ["somebody_id"], name: "index_cars_on_somebody_id", using: :btree
-
-  create_table "comments", force: true do |t|
-    t.integer  "creator_id"
-    t.text     "content"
-    t.integer  "commentable_id"
-    t.string   "commentable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "ancestry"
-  end
-
-  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
 
   create_table "companies", force: true do |t|
     t.string   "ownership"
@@ -622,7 +508,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   end
 
   create_table "generations", force: true do |t|
-    t.string   "name"
+    t.text     "name"
     t.text     "content"
     t.integer  "model_id"
     t.string   "cached_model"
@@ -665,22 +551,22 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   create_table "models", force: true do |t|
     t.integer  "brand_id"
     t.string   "cached_brand"
-    t.string   "name"
+    t.text     "name"
     t.text     "content"
     t.integer  "creator_id"
     t.boolean  "phantom"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slang"
     t.date     "from"
     t.date     "to"
+    t.string   "slang"
   end
 
   add_index "models", ["brand_id"], name: "index_models_on_brand_id", using: :btree
   add_index "models", ["creator_id"], name: "index_models_on_creator_id", using: :btree
 
   create_table "modifications", force: true do |t|
-    t.string   "name"
+    t.text     "name"
     t.text     "content"
     t.integer  "generation_id"
     t.string   "cached_generation"
@@ -1209,8 +1095,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "accept_language"
     t.string   "user_agent"
     t.integer  "cached_russian_time_zone_auto_id"
-    t.integer  "russian_time_zone_manual_id"
-    t.boolean  "use_auto_russian_time_zone",                               default: true
     t.inet     "remote_ip"
     t.string   "creation_reason"
     t.text     "notes"
@@ -1219,8 +1103,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.boolean  "phantom",                                                  default: false
     t.boolean  "logout_from_other_places",                                 default: true
     t.text     "chat"
-    t.integer  "place_id"
-    t.string   "post"
     t.integer  "profile_id"
     t.text     "cached_profile"
     t.decimal  "cached_debit",                     precision: 8, scale: 2, default: 0.0
@@ -1276,10 +1158,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "user_agent_after"
     t.integer  "cached_russian_time_zone_auto_id_before"
     t.integer  "cached_russian_time_zone_auto_id_after"
-    t.integer  "russian_time_zone_manual_id_before"
-    t.integer  "russian_time_zone_manual_id_after"
-    t.boolean  "use_auto_russian_time_zone_before"
-    t.boolean  "use_auto_russian_time_zone_after"
     t.inet     "remote_ip_before"
     t.inet     "remote_ip_after"
     t.string   "creation_reason_before"
@@ -1296,10 +1174,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.boolean  "online_after"
     t.text     "chat_before"
     t.text     "chat_after"
-    t.integer  "place_id_before"
-    t.integer  "place_id_after"
-    t.string   "post_before"
-    t.string   "post_after"
     t.integer  "profile_id_before"
     t.integer  "profile_id_after"
     t.text     "cached_profile_before"
@@ -1390,6 +1264,21 @@ ActiveRecord::Schema.define(version: 99999999999999) do
 
   add_index "spare_infos", ["brand_id"], name: "index_spare_infos_on_brand_id", using: :btree
   add_index "spare_infos", ["spare_catalog_id"], name: "index_spare_infos_on_spare_catalog_id", using: :btree
+
+  create_table "spare_replacements", force: true do |t|
+    t.integer  "from_spare_info_id"
+    t.integer  "to_spare_info_id"
+    t.string   "from_cached_spare_info"
+    t.string   "to_cached_spare_info"
+    t.string   "comment"
+    t.string   "source"
+    t.boolean  "wrong"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "spare_replacements", ["from_spare_info_id"], name: "index_spare_replacements_on_from_spare_info_id", using: :btree
+  add_index "spare_replacements", ["to_spare_info_id"], name: "index_spare_replacements_on_to_spare_info_id", using: :btree
 
   create_table "stats", force: true do |t|
     t.text     "location"

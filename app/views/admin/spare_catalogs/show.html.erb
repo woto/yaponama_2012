@@ -1,24 +1,60 @@
-<% title_show %>
+<%= b1 do %>
 
-<%= breadcrumb true do |b| %>
-  <%= b.item @meta_title %>
+  <% @meta_title = "Просмотр категории товаров #{@resource.to_label}" %>
+
+  <%= breadcrumb true do |b| %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= page_header %>
+
+  <dl>
+    <dt>
+      <%= SpareCatalog.human_attribute_name :name %>
+    </dt>
+    <dd>
+      <%= @resource.name %>
+    </dd>
+  </dl>
+
+  <dl>
+    <dt>
+      <%= SpareCatalog.human_attribute_name :content %>
+    </dt>
+    <dd>
+      <%= @resource.content %>
+    </dd>
+  </dl>
+
+
+  <dl>
+    <dt>
+      <%= SpareCatalog.human_attribute_name :intro %>
+    </dt>
+    <dd>
+      <%== @resource.intro %>
+    </dd>
+  </dl>
+
+  <dl>
+    <dt>
+      <%= SpareCatalog.human_attribute_name :page %>
+    </dt>
+    <dd>
+      <%== @resource.page %>
+    </dd>
+  </dl>
+
+  <br />
+  <br />
+
+  <%= link_to url_for(action: :new, return_path: request.fullpath), class: "btn btn-primary" do %>
+    <%= icon 'plus' %>
+  <% end %>
+
+  <br />
+  <br />
+
+  <%= render 'smart_show' %>
+
 <% end %>
-
-<%= title_show %>
-
-<h3>
-  <%= @resource.name %>
-</h3>
-
-<h3>
-  <%= @resource.content %>
-</h3>
-
-<%= link_to url_for(action: :new, return_path: request.fullpath), class: "btn btn-primary" do %>
-  <%= icon 'plus' %>
-<% end %>
-
-<br />
-<br />
-
-<%= render 'smart_show' %>

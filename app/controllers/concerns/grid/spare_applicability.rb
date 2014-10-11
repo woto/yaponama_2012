@@ -1,4 +1,5 @@
 module Grid::SpareApplicability
+
   extend ActiveSupport::Concern
   include ::AbstractGridable
 

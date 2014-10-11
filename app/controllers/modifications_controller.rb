@@ -1,7 +1,5 @@
 class ModificationsController < ApplicationController
 
-  respond_to :json
-
   skip_before_filter :only_authenticated, :only => :search
   skip_before_action :find_resource, :only => :search
 
@@ -20,7 +18,9 @@ class ModificationsController < ApplicationController
 
     @modifications = @modifications.order(modification_t[:name]).page params[:page]
 
-    respond_with @modifications
+    respond_to do |format|
+      format.json { render json: @modifications }
+    end
   end
 
   private

@@ -55,7 +55,7 @@ class EmailTest < ActiveSupport::TestCase
     ea2 = emails(:otto)
     ea2.confirmed = true
     ea2.save!
-    assert !Email.exists?(ea1)
+    assert !Email.exists?(ea1.id)
   end
 
   test 'Проверка validators/email_validator' do

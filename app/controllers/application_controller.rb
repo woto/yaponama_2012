@@ -74,9 +74,9 @@ class ApplicationController < ActionController::Base
 
   def show
     respond_to do |format|
-      format.html {render}
-      format.json {render}
-      format.js {render}
+      format.html
+      format.json { render json: @resource }
+      format.js
     end
   end
 
@@ -110,10 +110,15 @@ class ApplicationController < ActionController::Base
   def destroy
     respond_to do |format|
       if @resource.destroy
-        format.html { redirect_to url_for(params[:return_path]), attention: "#{I18n.t(@resource_class)} \"#{@resource.to_label}\" Был успешно удален" }
+        attention = %Q(#{I18n.t(@resource_class)} "#{@resource.to_label}" Был успешно удален)
+        if params[:return_path].present?
+          format.html { redirect_to url_for(params[:return_path]), attention: attention }
+        else
+          format.html { redirect_to url_for(action: :index), attention: attention }
+        end
         format.json { head :no_content }
       else
-        format.html { redirect_to url_for(:controller => :users, :action => :show), attention: "Невозможно удалить." }
+        format.html { redirect_to url_for(:controller => :users, :action => :show), attention: "Невозможно удалить" }
       end
     end
   end
@@ -274,13 +279,13 @@ class ApplicationController < ActionController::Base
 
   def only_not_authenticated
     if ["admin", "manager", "user"].include? current_user.role
-      redirect_to root_path, :attention => "Вы уже вошли на сайт." and return
+      redirect_to root_path, :attention => "Вы уже вошли на сайт" and return
     end
   end
 
   def only_authenticated
     if ['guest'].include? current_user.role
-      redirect_to root_path, :attention => "Пожалуйста войдите на сайт." and return
+      redirect_to root_path, :attention => "Пожалуйста войдите на сайт" and return
     end
   end
 

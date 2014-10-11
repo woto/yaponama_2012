@@ -1,4 +1,4 @@
-1:
+sa_1:
   spare_info: nissan_2102
   brand: mitsubishi
   model: galant
@@ -10,7 +10,7 @@
   cached_modification: CN седан 4-дв. 2.0 AT (160 л. с.)
   cached_spare_info: 2102 (NISSAN)
 
-2:
+sa_2:
   spare_info: nissan_2102
   brand: toyota
   model: celica_camry
@@ -18,7 +18,7 @@
   cached_model: Celica Camry
   cached_spare_info: 2102 (NISSAN)
 
-3:
+sa_3:
   spare_info: kia_2102
   brand: toyota
   model: camry_gracia
@@ -30,7 +30,7 @@
   cached_modification: 2.2 л, бензин, 140 л.с., АКПП, передний привод
   cached_spare_info: 2102 (KIA)
 
-4:
+sa_4:
   spare_info: kia_2102
   brand: toyota
   model: camry
@@ -42,7 +42,7 @@
   cached_modification: "Седан - 2.2 AT Overdrive (130 л. с.)"
   cached_spare_info: 2102 (KIA)
 
-5:
+sa_5:
   spare_info: kia_2102
   brand: toyota
   model: camry
@@ -54,7 +54,7 @@
   cached_modification: 2.0 AT (148 л. с.) стандарт
   cached_spare_info: 2102 (KIA)
 
-6:
+sa_6:
   spare_info: toyota_3310
   brand: mitsubishi
   model: galant
@@ -64,7 +64,7 @@
   cached_generation: 2008 - 2013, 9 поколение [2-й рестайлинг]
   cached_spare_info: 3310 (TOYOTA)
 
-7:
+sa_7:
   spare_info: toyota_3310
   brand: mitsubishi
   model: lancer_ralliart
@@ -72,7 +72,7 @@
   cached_model: Lancer Ralliart
   cached_spare_info: 3310 (TOYOTA)
 
-8:
+sa_8:
   spare_info: toyota_3310
   brand: toyota
   model: celica_camry
@@ -80,7 +80,7 @@
   cached_model: Celica Camry
   cached_spare_info: 3310 (TOYOTA)
 
-9:
+sa_9:
   spare_info: toyota_3310
   brand: toyota
   model: camry
@@ -92,7 +92,7 @@
   cached_modification: 2.5 AT (181 л. с.) комфорт
   cached_spare_info: 3310 (TOYOTA)
 
-10:
+sa_10:
   spare_info: toyota_3310
   brand: toyota
   model: camry
@@ -102,7 +102,7 @@
   cached_generation: Camry (V10) (1982)
   cached_spare_info: 3310 (TOYOTA)
 
-11:
+sa_11:
   spare_info: infiniti_3310
   brand: mitsubishi
   model: lancer
@@ -110,7 +110,7 @@
   cached_model: Lancer
   cached_spare_info: 3310 (INFINITI)
 
-12:
+sa_12:
   spare_info: infiniti_3310
   brand: mitsubishi
   model: lancer_ralliart
@@ -120,7 +120,7 @@
   cached_generation: Lancer Ralliart (2008)
   cached_spare_info: 3310 (INFINITI)
 
-13:
+sa_13:
   spare_info: infiniti_3310
   brand: toyota
   model: celica_camry
@@ -128,7 +128,7 @@
   cached_model: Celica Camry
   cached_spare_info: 3310 (INFINITI)
 
-14:
+sa_14:
   spare_info: infiniti_3310
   brand: mitsubishi
   model: galant

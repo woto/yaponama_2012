@@ -8,5 +8,13 @@ class BrandTest < ActiveSupport::TestCase
     refute brand.valid?
   end
 
+  test 'При удалении бренда, который выставлен в качестве родителя других брендов. Другие бренды удаляются' do
+    skip
+  end
+
+  test 'Связка Синоним -> Производитель, запретить создание дополнительных вложений' do
+    skip
+  end
+
 end
 

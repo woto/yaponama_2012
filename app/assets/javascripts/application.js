@@ -26,9 +26,6 @@
 //= require jquery.maskedinput/dist/jquery.maskedinput.min
 //= require jquery.remotipart
 //
-// require headroom.js/dist/headroom
-// require headroom.js/dist/jQuery.headroom
-//
 //= require pickadate.js/lib/picker
 //= require pickadate.js/lib/picker.date
 //= require pickadate.js/lib/picker.time
@@ -91,7 +88,6 @@
 //= require slide_top
 //= require payments
 //= require map
-//= require navbar
 //= require assa
 //= require spare_catalog
 //= require spare_info

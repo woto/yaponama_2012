@@ -1,2 +1,13 @@
-<%= debug @resource %>
-<%= link_to 'назад', params[:return_path] %>
+<%= b1 do %>
+
+  <% @meta_title = "Просмотр модификации #{@resource.to_label}" %>
+
+  <%= breadcrumb true do |b| %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= page_header %>
+
+  <%= render 'smart_show' %>
+
+<% end %>

@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class Email < ActiveRecord::Base
   include HiddenRecreate
   include BelongsToProfile
@@ -38,7 +36,7 @@ class Email < ActiveRecord::Base
   end
 
   def deliver_confirmation
-    ConfirmMailer.email(self).deliver
+    ConfirmMailer.email(self).deliver_now
   end
 
   def to_label

@@ -6,7 +6,7 @@ module FastEditable
 
   included do
 
-    skip_before_filter :set_grid, only: [:fast_update, :fast_edit]
+    skip_before_action :set_grid, only: [:fast_update, :fast_edit]
 
     def fast_edit
       render layout: false

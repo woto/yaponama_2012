@@ -29,7 +29,7 @@ class BuyButtonTest < ActionDispatch::IntegrationTest
 
   def common
 
-    first("a[data-catalog-number='1111111111'][data-manufacturer='ПРОИЗВОДИТ']").click
+    first("a[data-catalog-number='1111111111'][data-manufacturer='ПРОИЗВОДИТ'][data-cost='26']").click
     fill_in 'product_quantity_ordered', with: 'invalid'
     click_button 'Добавить в корзину'
 
