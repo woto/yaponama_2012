@@ -293,3 +293,13 @@ https://github.com/newmen/sms24x7
 to_cached_spare_info и from_cached_spare_info объединить (они практически идентичные)
 from_spare_info_attributes и to_spare_info_attributes
 
+
+  test 'Запрашивая /MC нас должно редиректнуть на mitsubishi' do
+    skip
+  end
+
+  test 'Запрашиваия /brands/411445140-ms/parts нас должно редиректнуть на mitsubishi' do
+    skip
+  end
+
+Что происходит с описаниями/заменами производителя, которому назначили родителя?

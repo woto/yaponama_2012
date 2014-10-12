@@ -427,7 +427,7 @@ Yaponama2012::Application.routes.draw do
 
   # TODO Удалить как поисковые роботы перестроятся
   get "*brand", constraints: BrandRedirector.new, to: redirect{|params, req|
-    brand = Brand.find_by(name: params[:brand].gsub('+', ' '))
+    brand = BrandMate.find_canonical(params[:brand].gsub('+', ' '))
     if req.params[:page].present?
       page = "?page=#{req.params[:page]}"
     end
