@@ -336,6 +336,36 @@ module ProductsSearch
         end
         plog.debug '/Большой цикл обработки JSON'
 
+        # Сортируем в конце по цене
+        plog.debug 'Сортировка по цене'
+        @formatted_data = @formatted_data.map do |catalog_number, cn_scope|
+          [ catalog_number,
+            (cn_scope.sort do |a, b|
+
+            # На самом деле это не очень хорошо - обращаться к 
+            # родителю, поэтому нужно закешировать
+
+            if a[1][:brand].brand_id?
+              k = a[1][:brand].brand
+            else
+              k = a[1][:brand]
+            end
+
+            if b[1][:brand].brand_id?
+              l = b[1][:brand].brand
+            else
+              l = b[1][:brand]
+            end
+
+            -(k.try(:[], :rating).try(:to_i) || 0) <=> -(l.try(:[], :rating).try(:to_i) || 0)
+            end).map do |manufacturer, mf_scope|
+              [manufacturer, mf_scope.merge(:offers => mf_scope[:offers].sort do |c, d|
+                c[:retail_cost] <=> d[:retail_cost]
+              end)]
+           end
+          ]
+        end
+        plog.debug '/Сортировка по цене'
 
         # Получаем общее для связки каталожный номер + производитель имя
         @formatted_data.each do |catalog_number, cn_scope|
