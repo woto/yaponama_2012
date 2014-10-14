@@ -1,5 +1,5 @@
 defaults: &defaults
-  suppress_exceptions: true
+  suppress_exceptions: false
 
 development:
   <<: *defaults
@@ -9,4 +9,4 @@ test:
 
 production:
   <<: *defaults
-  suppress_exceptions: false
+  suppress_exceptions: true
