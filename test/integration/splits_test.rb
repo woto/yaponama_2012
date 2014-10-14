@@ -30,14 +30,24 @@ class SplitsTest < ActionDispatch::IntegrationTest
     visit "/admin/users/#{ivan.id}/products"
     find("#id_product_#{products(:ivan3).id} > a").click
     click_link 'Разбить на партии'
-    fill_in 'split[quantity]', with: 10
+    page.document.synchronize do
+      fill_in 'split_quantity', with: '10'
+      if has_field?('split_quantity', :with => '10', visible: false)
+      else
+        nil
+      end
+    end
     click_button 'Разбить'
-    assert has_text? 'может иметь значение меньшее чем 6'
-    #assert has_css? '.bootbox' # тут какая-то дурацкая проблема регулярно возникает
-    fill_in 'split[quantity]', with: 2
+    has_text? 'может иметь значение меньшее чем 6'
+    page.document.synchronize do
+      fill_in 'split_quantity', with: '2'
+      if has_field?('split_quantity', :with => '2', visible: false)
+      else
+        nil
+      end
+    end
     click_button 'Разбить'
-    #assert has_no_css? '.bootbox'
-    assert has_text? 'Товар успешно разбит на партии. Пожалуйста обновите страницу чтобы увидеть результат операции.'
+    has_text? 'Товар успешно разбит на партии. Пожалуйста обновите страницу чтобы увидеть результат операции.'
   end
 
 end

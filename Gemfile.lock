@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: dc07b69f62c2deac3445ab5a36e1df3f54391204
+  revision: 67ce18b49a660da9175156791b2e1cb788ae360d
   specs:
     capybara (2.4.1)
       mime-types (>= 1.16)
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/jonleighton/poltergeist.git
-  revision: 7c832a8cd2c23f81a88f81e22b82230ea179135a
+  revision: df101eb04d6af3869274d81d21ad45531e5a33c8
   specs:
     poltergeist (1.5.1)
       capybara (~> 2.4)
@@ -27,8 +27,22 @@ GIT
       websocket-driver (>= 0.2.0)
 
 GIT
-  remote: git://github.com/rails/rails.git
-  revision: 51278579477eb7ee20fe2aba53b4b13203791b22
+  remote: git://github.com/rails/arel.git
+  revision: cdae8216f582e035370b84edd236af7d22702e75
+  specs:
+    arel (6.0.0.beta1.20140817224534)
+
+GIT
+  remote: git://github.com/woto/ipgeobase.git
+  revision: 07dc8b283d6f932443dd918182ca5ec1273b3cba
+  specs:
+    ipgeobase (0.0.1)
+      ancestry
+
+GIT
+  remote: git://github.com/y-yagi/rails.git
+  revision: fb9a339bfc8cd91aa1e8d7677781055474522fdc
+  branch: fix_nested_fixtures
   specs:
     actionmailer (4.2.0.beta2)
       actionpack (= 4.2.0.beta2)
@@ -83,13 +97,6 @@ GIT
       thor (>= 0.18.1, < 2.0)
 
 GIT
-  remote: git://github.com/woto/ipgeobase.git
-  revision: 07dc8b283d6f932443dd918182ca5ec1273b3cba
-  specs:
-    ipgeobase (0.0.1)
-      ancestry
-
-GIT
   remote: https://github.com/Shopify/active_merchant
   revision: b14e285774e599697653325c471e1c85a7163d64
   ref: b14e285774e599697653325c471e1c85a7163d64
@@ -111,7 +118,7 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: 84378b307cccff3b6e1d3040c5f4f32985f1aba7
+  revision: b5eccd67dc9769d580ef03934d73c63b1735b259
   specs:
     simple_form (3.1.0.rc2)
       actionpack (~> 4.0)
@@ -125,7 +132,6 @@ GEM
       i18n
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
-    arel (6.0.0.beta1)
     autoprefixer-rails (3.1.1.20141001)
       execjs
     bcrypt (3.1.7)
@@ -331,6 +337,7 @@ PLATFORMS
 DEPENDENCIES
   activemerchant!
   ancestry
+  arel!
   autoprefixer-rails
   bcrypt (~> 3.1.7)
   bootstrap-sass

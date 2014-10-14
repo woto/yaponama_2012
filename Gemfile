@@ -3,7 +3,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 #gem 'rails', '4.2.0.beta2'
 #gem 'rails', '4.1.5'
-gem 'rails', github: 'rails/rails'
+#gem 'rails', github: 'rails/rails'
+gem 'rails', github: 'y-yagi/rails', branch: 'fix_nested_fixtures'
+gem 'arel', github: 'rails/arel'
 
 gem 'pg'
 
