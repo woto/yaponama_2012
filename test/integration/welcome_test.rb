@@ -7,6 +7,5 @@ class TimeTest < ActionDispatch::IntegrationTest
     fill_in 'name', with: 'A'
     assert has_text? 'ACURA'
     assert has_no_text? 'A.B.S.'
-    save_screenshot '1.png', full: true
   end
 end

@@ -436,7 +436,7 @@ Yaponama2012::Application.routes.draw do
 
   get "*path" => "pages#show", :constraints => PageConstraint.new, format: false
 
-  unless Rails.application.config.consider_all_requests_local
+  if Rails.application.config_for('application/common')['suppress_exceptions']
     get "*error", :to => "application#render_404", format: false
   end
 

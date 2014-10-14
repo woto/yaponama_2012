@@ -30,7 +30,7 @@ class ProductsControllerTest < ActionController::TestCase
 
   test 'Не нашли результаты поиска на странице редактирования' do
     get :edit, id: products(:sending1)
-    assert_select '.page-header', '11, 111, 1111, 11111, PARMA 1'
+    assert_select '.page-header', 'NISSAN, TOYOTA, 11111, 1111, 111 1'
   end
 
   test 'Должен быть введен изначальный кат. ном. на странице редактирования' do
@@ -72,7 +72,7 @@ class ProductsControllerTest < ActionController::TestCase
 
   test 'Не нашли результаты поиска на странице перезаказа' do
     get :new, product_id: products(:sending1)
-    assert_select '.page-header', '11, 111, 1111, 11111, PARMA 1'
+    assert_select '.page-header', 'NISSAN, TOYOTA, 11111, 1111, 111 1'
   end
 
   test 'Должен быть введен изначальный кат. ном. на странице перезаказа' do

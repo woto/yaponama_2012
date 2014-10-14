@@ -5,7 +5,7 @@ module ErrorHandling
 
     skip_before_action :find_resource, only: [:render_404, :render_500]
 
-    unless Rails.application.config.consider_all_requests_local
+    if Rails.application.config_for('application/common')['suppress_exceptions']
       rescue_from Exception, :with => :render_500
       rescue_from ActionController::RoutingError, :with => :render_404
       rescue_from ActionController::UnknownController, :with => :render_404

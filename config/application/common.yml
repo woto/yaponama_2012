@@ -1,0 +1,12 @@
+defaults: &defaults
+  suppress_exceptions: true
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  suppress_exceptions: false
