@@ -9,7 +9,7 @@ class Bot < ActiveRecord::Base
   end
 
   def to_label
-    "#{title} #{user_agent} #{inet} #{comment}"
+    "#{title} #{user_agent} #{to_inet(inet)} #{comment}"
   end
 
   after_save do
@@ -17,7 +17,7 @@ class Bot < ActiveRecord::Base
     removing_bot
 
     if inet.present?
-      Somebody.where("remote_ip <<= ?", inet).update_all(bot: true)
+      Somebody.where("remote_ip <<= ?", to_inet(inet)).update_all(bot: true)
     end
 
     if user_agent.present?
@@ -30,21 +30,16 @@ class Bot < ActiveRecord::Base
     removing_bot
   end
 
-  def inet
-    cidr_to_string self[:inet]
+  def to_inet(value)
+    "#{value.to_s}/#{value.instance_variable_get(:@mask_addr).to_s(2).count('1')}" if value
   end
-
-  def inet_was
-    cidr_to_string self[:inet_was]
-  end
-
 
   private
 
   def removing_bot
 
     if inet_was.present?
-      Somebody.where("remote_ip <<= ?", inet_was).update_all(bot: false)
+      Somebody.where("remote_ip <<= ?", to_inet(inet_was)).update_all(bot: false)
     end
 
     if user_agent_was.present?

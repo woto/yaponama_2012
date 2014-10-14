@@ -46,7 +46,7 @@ module GridHelper
   def grid_item_decorator(item, column_name)
 
       #Rails.cache.fetch([item, column_name, admin_zone?]) do
- 
+
       if (m = item.respond_to?(column_name.to_sym))
         m = item.method(column_name.to_sym)
         val = m.call
@@ -55,7 +55,7 @@ module GridHelper
       content_tag_for(:span, item, column_name, :class => column_name) do
         case column_name
         when 'inet'
-          val
+          item.to_inet(val)
         # READ ONLY
         when *['content', 'preview', 'user_agent', 'accept_language', 'path', 'title', 'cached_location', 'first_referrer', 'cached_referrer']
           new_val = truncate(val, length: 40)
