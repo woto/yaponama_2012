@@ -21,6 +21,12 @@ class Brand < ActiveRecord::Base
   #has_many :for_cached_spare_infos, through: :spare_infos, class_name: "SpareApplicability", :source => :spare_applicabilities
 
   validate do
+    if brand.try(:brand).present?
+      errors[:base] << 'Нельзя прикрепить синоним к бренду, который в свою очередь сам является синонимом'
+    end
+  end
+
+  validate do
     if brand == self
       errors[:brand] << 'Нельзя указывать в качестве родительского производителя себя'
     end
@@ -39,7 +45,7 @@ class Brand < ActiveRecord::Base
   before_validation :upcase_name
 
   def upcase_name
-    self.name = name.upcase
+    self.name = name.to_s.mb_chars.upcase
   end
 
   after_save :update_all_cached_brand
