@@ -342,3 +342,19 @@ wrong_cached_russian_time_zone_auto_id_2:
   cached_russian_time_zone_auto_id: 5
   order_rule: all
   logout_from_other_places: true
+
+michael:
+  type: User
+  creator: otto
+  auth_token: XOZvckysZX9Kc0zwEEeI8P
+  creation_reason: fixtures
+  role: user
+  discount: 0
+  prepayment: 50
+  order_rule: all
+  logout_from_other_places: false
+  # password: 234234
+  password_digest: $2a$10$IiL09DPiy.KiDrdtc4yMB.Jj0/GFjVKgm3LYK0s6dgnldamIJlljO
+  cached_russian_time_zone_auto_id: 9
+  profile: stan
+  cached_profile: '{"names":[{"surname":"","name":"Michael","patronymic":""}],"phones":[{"value":"+7 (234) 234-23-23"}],"emails":[],"passports":[]}'

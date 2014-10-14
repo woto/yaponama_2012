@@ -99,7 +99,7 @@ class OrdersController < ApplicationController
   def transactions
 
     if params[:id]
-      @order = Order.find_by_token(params[:id])
+      @order = Order.finder(params[:id])
       @transactions = @order.order_transactions
     else
       if @user
@@ -120,10 +120,6 @@ class OrdersController < ApplicationController
 
   def set_resource_class
     @resource_class = Order
-  end
-
-  def find_resource
-    @resource = @resource_class.find_by_token(params[:id])
   end
 
 end

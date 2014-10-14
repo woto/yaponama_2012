@@ -43,3 +43,26 @@ receiving1:
   notes_invisible: ''
   somebody: receiving1
   creator: receiving1
+
+michael:
+  postal_address_id: 
+  company_id: 
+  delivery_cost: '0.00'
+  status: open
+  delivery_place_id: 
+  delivery_variant: first
+  delivery_option_id: 
+  profile: michael
+  cached_profile: '{"names":[{"surname":"","name":"Michael","patronymic":""}],"phones":[{"value":"+7 (234) 234-23-23"}],"emails":[],"passports":[]}'
+  full_prepayment_required: 
+  legal: 
+  phantom: f
+  token: 404-14-104
+  track_number: 
+  created_at: '2014-10-14 05:30:38.949126'
+  updated_at: '2014-10-14 05:31:41.598614'
+  creation_reason: 
+  notes: ''
+  notes_invisible: ''
+  somebody: michael
+  creator: michael

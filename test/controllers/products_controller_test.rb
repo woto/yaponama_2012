@@ -128,7 +128,6 @@ class ProductsControllerTest < ActionController::TestCase
     end
   end
 
-
   test 'Ссылки' do
     skip
     # Протестировать ссылки на замены, купить и т.д.

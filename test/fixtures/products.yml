@@ -1066,3 +1066,30 @@ receiving1:
   notes_invisible:
   somebody: receiving1
   creator: receiving1
+
+michael:
+  catalog_number: '1111111111'
+  brand: michael
+  cached_brand: "ПРОИЗВОДИТ"
+  cached_order: 404-14-104
+  short_name: "НАЗВАНИЕ 1"
+  long_name: "НАЗВАНИЕ 1, НАЗВАНИЕ 2"
+  quantity_ordered: '1'
+  quantity_available: '10'
+  min_days: '1'
+  max_days: '1'
+  buy_cost: '23.00'
+  sell_cost: '26.00'
+  hide_catalog_number: f
+  status: inorder
+  probability: '55'
+  product_id: 
+  order: michael
+  supplier_id: 
+  created_at: '2014-10-14 05:30:18.875194'
+  updated_at: '2014-10-14 05:30:38.959572'
+  creation_reason: 
+  notes: ''
+  notes_invisible: ''
+  somebody: michael
+  creator: michael

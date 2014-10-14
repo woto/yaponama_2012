@@ -26,12 +26,12 @@ module Grid::Order
 
       columns_hash['postal_address_id'] = {
         :type => :belongs_to,
-        :belongs_to => PostalAddress,
+        :belongs_to => ::PostalAddress,
       }
 
       columns_hash['company_id'] = {
         :type => :belongs_to,
-        :belongs_to => Company,
+        :belongs_to => ::Company,
       }
 
       columns_hash['delivery_cost'] = {

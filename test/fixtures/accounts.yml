@@ -130,3 +130,8 @@ wrong_cached_russian_time_zone_auto_id_2:
   debit: 0.0
   credit: 0.0
   somebody: wrong_cached_russian_time_zone_auto_id_2
+
+michael:
+  debit: 0.0
+  credit: 0.0
+  somebody: michael

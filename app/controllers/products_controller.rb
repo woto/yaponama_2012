@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
   before_action do
     catch :return do
       if params[:order_id]
-        @resource = Order.find_by_token(params[:order_id])
+        @resource = Order.finder(params[:order_id])
         
         if @resource.delivery_variant_id.blank?
           redirect_to polymorphic_path([:edit, *jaba3, :delivery], {id: @resource, return_path: params[:return_path]})

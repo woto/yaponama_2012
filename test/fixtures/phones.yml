@@ -171,3 +171,12 @@ receiving1:
   value: receiving1
   mobile : false
   creation_reason: fixtures
+
+michael:
+  value: +7 (234) 234-23-23
+  mobile: true
+  confirmation_token: 3921
+  profile: michael
+  somebody: michael
+  confirmed: true
+  creation_reason: fixtures

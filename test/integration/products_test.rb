@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 require 'test_helper'
 
 class ProductsTest < ActionDispatch::IntegrationTest
@@ -43,6 +41,21 @@ class ProductsTest < ActionDispatch::IntegrationTest
     assert_select "#id_product_#{third}" do |element|
       assert_select "a:match('data-poload', ?)", Regexp.new(Regexp.quote("/user/products/#{third}/info?primary_key=#{primary_key}&return_path=%2Fuser%2Fproducts%2Ffilter%3Fprimary_key%3D#{primary_key}"))
     end
+  end
+
+  test 'Просматриваем страницу заказа' do
+    get_via_redirect '/user/orders/404-14-104/products/'
+    assert_select 'title', 'Просмотр заказа № 404-14-104'
+  end
+
+  test 'Просматриваем страницу изменения способа доставки' do
+    get_via_redirect '/user/orders/404-14-104/delivery/edit'
+    assert_select 'title', 'Выбор способа доставки'
+  end
+
+  test '(Как бы) Кликаем на info кнопке заказа' do
+    get_via_redirect '/user/orders/404-14-104/info'
+    assert_template 'application/info'
   end
 
 end

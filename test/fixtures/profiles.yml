@@ -157,3 +157,11 @@ alena:
   cached_phones: '[]'
   cached_emails: '[{"value":"alena@example.com"}]'
   cached_passports: '[]'
+
+michael:
+  somebody: michael
+  creation_reason: fixtures
+  cached_names: '[{"surname":"","name":"Michael","patronymic":""}]'
+  cached_phones: '[{"value":"+7 (234) 234-23-23"}]'
+  cached_emails: '[]'
+  cached_passports: '[]'

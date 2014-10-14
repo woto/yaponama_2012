@@ -184,3 +184,19 @@ receiving1:
   rating: 1000
   phantom: false
   creator: receiving1
+
+proizvodit:
+  name: "ПРОИЗВОДИТ"
+  brand_id: 
+  cached_brand: 
+  image: 
+  rating: 
+  content: 
+  creator: michael
+  phantom: 
+  is_brand: 
+  created_at: '2014-10-14 05:30:08.54426'
+  updated_at: '2014-10-14 05:30:08.54426'
+  preview: 
+  slang: 
+  default_display: 

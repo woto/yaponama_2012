@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 require 'test_helper'
 
 class Admin::ProductsTest < ActionDispatch::IntegrationTest
@@ -39,5 +37,10 @@ class Admin::ProductsTest < ActionDispatch::IntegrationTest
     assert_select 'li', :text => 'Разбить на партии', :count => 0
   end
 
+  test '(Как бы) Кликаем на info кнопке заказа' do
+    cookies['auth_token'] = somebodies(:first_admin).auth_token
+    get_via_redirect '/admin/orders/404-14-104/info'
+    assert_template 'application/info'
+  end
 
 end
