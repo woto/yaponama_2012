@@ -6,6 +6,7 @@ development:
 
 test:
   <<: *defaults
+  suppress_exceptions: true
 
 production:
   <<: *defaults
