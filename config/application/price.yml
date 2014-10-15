@@ -1,5 +1,5 @@
 defaults: &defaults
-  host: 'localhost'
+  host: '192.168.0.253'
   port: '3001'
 
   price_request_cache_with_replacements_in_seconds: 1
@@ -13,7 +13,7 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  host: localhost
+  host: 192.168.0.253
   port: 3001
 
 test:
