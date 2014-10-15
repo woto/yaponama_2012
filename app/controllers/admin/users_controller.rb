@@ -21,7 +21,7 @@ class Admin::UsersController < UsersController
   end
 
   def create_resource
-    @resource = @resource_class.new(CONFIG.user['default'].merge( resource_params || {} ))
+    @resource = @resource_class.new(Rails.application.config_for('application/user')['default'].merge( resource_params || {} ))
     @resource.build_account
   end
 

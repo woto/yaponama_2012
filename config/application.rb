@@ -10,18 +10,6 @@ Bundler.require(*Rails.groups(assets: %w(development test)))
 module Yaponama2012
   class Application < Rails::Application
 
-
-    ::CONFIG = OpenStruct.new
-
-    Dir["#{Rails.root}/config/application/*"].each do |full_name|
-      begin
-        basename = File.basename(full_name, '.yml')
-        ::CONFIG[basename] = YAML.load_file(full_name)[Rails.env]
-      rescue
-        raise full_name
-      end
-    end
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

@@ -1,5 +1,5 @@
-<% @meta_title = CONFIG.block['welcome/index']['title'] %>
-<% @meta_description = CONFIG.block['welcome/index']['description'] %>
+<% @meta_title = Rails.application.config_for('application/block')['welcome/index']['title'] %>
+<% @meta_description = Rails.application.config_for('application/block')['welcome/index']['description'] %>
 
 
 <%= content_tag :div, "smoothScrollingDuration" => "100", "data-smooth-scrolling" => "off", "data-0" => "background-position: -300px -430px", "data-top-bottom" => "background-position: -300px -230px", style: "padding: 80px 0px; background: #5A5A5A url('#{asset_url 'parts.jpg'}') 0px 0px;" do %>
@@ -10,7 +10,7 @@
 
       <div class="col-md-6 col-lg-offset-1 col-lg-5">
         <h1 style="color: white; margin-bottom: 40px; font-size: 36px;" class="text-left shadowed">Добро пожаловать!</h1>
-        <h4 style="color: white; line-height: 190%" class="text-justify shadowed"><%= CONFIG.block['welcome/index']['description'] %></h4>
+        <h4 style="color: white; line-height: 190%" class="text-justify shadowed"><%= Rails.application.config_for('application/block')['welcome/index']['description'] %></h4>
       </div>
 
       <div class="col-md-6 col-lg-5">

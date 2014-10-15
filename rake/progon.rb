@@ -6,7 +6,7 @@ class Progon
     file.each_line do |line|
       row = CSV.parse(line)[0]
       puts row
-      open("http://#{CONFIG.site['host']}:#{CONFIG.site['port']}/user/products/new?catalog_number=#{CGI::escape(row[0].to_s)}")
+      open("http://#{Rails.application.config_for('application/site')['host']}:#{Rails.application.config_for('application/site')['port']}/user/products/new?catalog_number=#{CGI::escape(row[0].to_s)}")
     end
   end
 end

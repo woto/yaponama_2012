@@ -33,7 +33,7 @@ $font-size-h6:            ceil(($font-size-base * 0.85));
 
 /////////////////////
 
-<% if CONFIG.site['host'] == 'zapstok.ru' %>
+<% if Rails.application.config_for('application/site')['host'] == 'zapstok.ru' %>
 @import "bootswatch/spacelab/variables";
 <% end %>
 
@@ -41,7 +41,7 @@ $font-size-h6:            ceil(($font-size-base * 0.85));
 @import 'bootstrap';
 @import 'bootstrap-sprockets';
 
-<% if CONFIG.site['host'] == '192.168.0.253' %>
+<% if Rails.application.config_for('application/site')['host'] == '192.168.0.253' %>
 //@import "bootswatch/spacelab/bootswatch";
 <% end %>
 

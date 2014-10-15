@@ -247,7 +247,7 @@ class ApplicationController < ActionController::Base
         end
       else
         @current_user = User.new
-        @current_user.assign_attributes(CONFIG.user['default'])
+        @current_user.assign_attributes(Rails.application.config_for('application/user')['default'])
         @current_user.code_1 = 'session'
         @current_user.build_account
         @current_user.phantom = false
@@ -268,7 +268,7 @@ class ApplicationController < ActionController::Base
     else
       # Несмотря на то, что такая временная зона может и есть, в России её нет.
       # Поэтому для других стран пусть показвается дефолтной выбранное в настройках сайта (т.е. локальное для этого места)
-      CONFIG.time['zone_id']
+      Rails.application.config_for('application/time')['zone_id']
     end
 
     Time.use_zone(tz) {

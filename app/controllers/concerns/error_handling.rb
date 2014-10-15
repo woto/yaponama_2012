@@ -23,7 +23,7 @@ module ErrorHandling
     Rails.logger.error(exception)
     respond_to do |format|
       format.html { render 'error_404', :status => 404 }
-      format.js { render js: "alert('Возникла непредвиденная ошибка на сайте #{CONFIG.site['host']}, поробуйте перезагрузить страницу или связаться с разработчиками сайта.');" }
+      format.js { render js: "alert('Возникла непредвиденная ошибка на сайте #{Rails.application.config_for('application/site')['host']}, поробуйте перезагрузить страницу или связаться с разработчиками сайта.');" }
     end
   end
 
@@ -32,7 +32,7 @@ module ErrorHandling
     Rails.logger.error(exception)
     respond_to do |format|
       format.html { render 'error_500', :status => 500 }
-      format.js { render js: "alert('Возникла непредвиденная ошибка на сайте #{CONFIG.site['host']}, поробуйте перезагрузить страницу или связаться с разработчиками сайта.');" }
+      format.js { render js: "alert('Возникла непредвиденная ошибка на сайте #{Rails.application.config_for('application/site')['host']}, поробуйте перезагрузить страницу или связаться с разработчиками сайта.');" }
     end
   end
 

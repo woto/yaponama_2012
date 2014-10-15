@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
-Sitemap: http://www.<%= "#{CONFIG.site['host']}" %>/sitemap.xml.gz
-Host: www.<%= "#{CONFIG.site['host']}" %>
+Sitemap: http://www.<%= "#{Rails.application.config_for('application/site')['host']}" %>/sitemap.xml.gz
+Host: www.<%= "#{Rails.application.config_for('application/site')['host']}" %>

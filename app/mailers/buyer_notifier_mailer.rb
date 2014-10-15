@@ -2,7 +2,7 @@ class BuyerNotifierMailer < ApplicationMailer
 
   def email(talk, email)
     @talk = talk
-    mail to: email, subject: "Новое сообщение на сайте www.#{CONFIG.site['host']}"
+    mail to: email, subject: "Новое сообщение на сайте www.#{Rails.application.config_for('application/site')['host']}"
   end
 
   def phone(talk, phone)

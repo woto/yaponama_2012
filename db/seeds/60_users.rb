@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 user = User.new
-user.assign_attributes( CONFIG.user['default'] )
+user.assign_attributes( Rails.application.config_for('application/user')['default'] )
 user.logout_from_other_places = false
 user.role = "admin"
 user.password = '1111111111'

@@ -15,7 +15,7 @@ class FebestComUaImport
           cached = '&cached=0'
 
           #binding.pry
-          price_request_url = "http://#{CONFIG.price['host']}:#{CONFIG.price['port']}/prices/search?catalog_number=#{CGI::escape(c9)}&manufacturer=#{CGI::escape(b9 || '')}&replacements=#{r9}#{request_emex}&format=json&for_shop=1#{cached}"
+          price_request_url = "http://#{Rails.application.config_for('application/price')['host']}:#{Rails.application.config_for('application/price')['port']}/prices/search?catalog_number=#{CGI::escape(c9)}&manufacturer=#{CGI::escape(b9 || '')}&replacements=#{r9}#{request_emex}&format=json&for_shop=1#{cached}"
 
           parsed_price_request_url = URI.parse(price_request_url)
           resp = Net::HTTP.get_response(parsed_price_request_url)

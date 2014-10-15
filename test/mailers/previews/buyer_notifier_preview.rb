@@ -1,7 +1,7 @@
 class BuyerNotifierPreview < ActionMailer::Preview
 
   def email
-    BuyerNotifierMailer.email(Talk.last, CONFIG.mail['from'])
+    BuyerNotifierMailer.email(Talk.last, Rails.application.config_for('application/mail')['from'])
   end
 
   def phone

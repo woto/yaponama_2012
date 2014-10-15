@@ -9,9 +9,9 @@ class Admin::Deliveries::PlacesController < Deliveries::PlacesController
 
       @resource.variants.new
 
-      @resource.zoom = CONFIG.map['initial_zoom']
-      @resource.lat = CONFIG.map['initial_lat']
-      @resource.lng = CONFIG.map['initial_lng']
+      @resource.zoom = Rails.application.config_for('application/map')['initial_zoom']
+      @resource.lat = Rails.application.config_for('application/map')['initial_lat']
+      @resource.lng = Rails.application.config_for('application/map')['initial_lng']
       @resource.z_index = 100
 
       ['active', 'inactive'].each do |style|
