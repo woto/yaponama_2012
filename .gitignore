@@ -25,8 +25,4 @@
 node_modules
 /system/parts_info
 
-/db/sphinx
 dump.rdb
-
-realtime/realtime.js
-
