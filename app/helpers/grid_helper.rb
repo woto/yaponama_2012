@@ -57,7 +57,7 @@ module GridHelper
         when 'inet'
           item.to_inet(val)
         # READ ONLY
-        when *['content', 'preview', 'user_agent', 'accept_language', 'path', 'title', 'cached_location', 'first_referrer', 'cached_referrer']
+        when *['content', 'preview', 'user_agent', 'accept_language', 'path', 'title', 'first_referrer', 'cached_referrer']
           new_val = truncate(val, length: 40)
           content_tag :span, (new_val != val ? {data: { title: val }, rel: 'tooltip'} : {} ) do
             truncate val, length: 40
