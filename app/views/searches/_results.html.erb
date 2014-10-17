@@ -113,7 +113,9 @@
                 </div>
 
                 <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-                <p>А так же рекомендуем посмотреть <%= link_to  "аналоги и замены, \"#{catalog_number} - #{manufacturer}\"", polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource, :catalog_number => catalog_number, :manufacturer => manufacturer, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством. </p>
+                <% if false %>
+                  <p>А так же рекомендуем посмотреть <%= link_to  "аналоги и замены, \"#{catalog_number} - #{manufacturer}\"", polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource, :catalog_number => catalog_number, :manufacturer => manufacturer, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %>, т.к. возможно существуют детали по более низкой цене и не хуже качеством. </p>
+                <% end %>
 
                 <% if mf_scope[:info][:own][:data].present? && mf_scope[:info][:own][:data][:cached_spare_catalog].present? %>
                   <% zzz = mf_scope[:info][:own][:data][:cached_spare_catalog] %>
