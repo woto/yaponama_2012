@@ -23,7 +23,7 @@ module ProductsSearch
       #  end
 
       income_cost = item['income_cost']
-      retails_cost = item['retail_cost']
+      retail_cost = item['retail_cost']
       #retail_cost = Rails.application.config_for('application/price')['retail_rate'] * income_cost
 
       # Скидка
