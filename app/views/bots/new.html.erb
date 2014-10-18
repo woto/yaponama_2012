@@ -1,15 +1,13 @@
-<% b1 do %>
+<%= b1 do %>
 
-  <%= row class: 'top-space' do %>
-    <% title_new %>
+  <% title_new %>
 
-    <%= breadcrumb true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
-
-    <%= title_new %>
-
-    <%= render 'form' %>
+  <%= breadcrumb true do |b| %>
+    <%= b.item @meta_title %>
   <% end %>
+
+  <%= title_new %>
+
+  <%= render 'form' %>
 
 <% end %>
