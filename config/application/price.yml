@@ -6,9 +6,6 @@ defaults: &defaults
   price_request_cache_without_replacements_in_seconds: 1
 
   request_emex: false
-  emex_income_rate: 1.05 # Наценка 5%
-  avtorif_income_rate: 0.8002 # Скидка 19.98%
-  retail_rate: 1.15
   send_request_from_search_page: true
 
 development:
@@ -28,7 +25,3 @@ production:
 
   price_request_cache_with_replacements_in_seconds: 7776000 # 3 мес.
   price_request_cache_without_replacements_in_seconds: 3600 #  1 час.
-
-  avtorif_income_rate: 1
-  emex_income_rate: 1
-  retail_rate: 1
