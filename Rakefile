@@ -7,14 +7,14 @@ Yaponama2012::Application.load_tasks
 
 namespace :test do
   desc "Run tests for rake"
-  Rake::TestTask.new(:rake) do |t|
+  Rails::TestTask.new(:rake) do |t|
     t.libs << "test"
     t.pattern = 'test/rake/**/*_test.rb'
   end
 end
 
 namespace :catalog do
-  Rake::TestTask.new(:egrgroup_ru_grab) do |t|
+  Rails::TestTask.new(:egrgroup_ru_grab) do |t|
     t.libs << "test"
     t.pattern = 'catalog/egrgroup_ru_grab.rb'
   end
