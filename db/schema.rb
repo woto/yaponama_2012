@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 20141011053405) do
   add_index "brand_transactions", ["creator_id"], name: "index_brand_transactions_on_creator_id", using: :btree
 
   create_table "brands", force: true do |t|
-    t.text     "name"
+    t.citext   "name"
     t.integer  "brand_id"
     t.string   "cached_brand"
     t.string   "image"
@@ -508,7 +508,7 @@ ActiveRecord::Schema.define(version: 20141011053405) do
   end
 
   create_table "generations", force: true do |t|
-    t.text     "name"
+    t.citext   "name"
     t.text     "content"
     t.integer  "model_id"
     t.string   "cached_model"
@@ -551,7 +551,7 @@ ActiveRecord::Schema.define(version: 20141011053405) do
   create_table "models", force: true do |t|
     t.integer  "brand_id"
     t.string   "cached_brand"
-    t.text     "name"
+    t.citext   "name"
     t.text     "content"
     t.integer  "creator_id"
     t.boolean  "phantom"
@@ -566,7 +566,7 @@ ActiveRecord::Schema.define(version: 20141011053405) do
   add_index "models", ["creator_id"], name: "index_models_on_creator_id", using: :btree
 
   create_table "modifications", force: true do |t|
-    t.text     "name"
+    t.citext   "name"
     t.text     "content"
     t.integer  "generation_id"
     t.string   "cached_generation"
@@ -715,6 +715,7 @@ ActiveRecord::Schema.define(version: 20141011053405) do
   add_index "orders", ["postal_address_id"], name: "index_orders_on_postal_address_id", using: :btree
   add_index "orders", ["profile_id"], name: "index_orders_on_profile_id", using: :btree
   add_index "orders", ["somebody_id"], name: "index_orders_on_somebody_id", using: :btree
+  add_index "orders", ["token"], name: "index_orders_on_token", using: :btree
 
   create_table "page_transactions", force: true do |t|
     t.integer  "page_id"
