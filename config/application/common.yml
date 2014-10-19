@@ -1,13 +1,14 @@
 defaults: &defaults
-  suppress_exceptions: false
+  suppress_exceptions: true
+  send_pings: true
 
 development:
   <<: *defaults
+  suppress_exceptions: false
+  send_pings: false
 
 test:
   <<: *defaults
-  suppress_exceptions: true
 
 production:
   <<: *defaults
-  suppress_exceptions: true

@@ -213,6 +213,8 @@
         <dl> 
           <dt> #pings_path </dt>
           <dd id="pings_path"> <%= polymorphic_path([*jaba3, :pings]) %> </dd>
+          <dt> #send_pings </dt>
+          <dd id="send_pings"><%= Rails.application.config_for('application/common')['send_pings'] %></dd>
         </dl>
       <% end %>
     <% end %>
