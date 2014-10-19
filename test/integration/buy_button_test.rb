@@ -29,7 +29,7 @@ class BuyButtonTest < ActionDispatch::IntegrationTest
 
   def common
 
-    first("a[data-catalog-number='1111111111'][data-manufacturer='ПРОИЗВОДИТ'][data-cost='26']").click
+    first("a[data-catalog-number='1111111111'][data-manufacturer='ПРОИЗВОДИТ'][data-cost='11']").click
     fill_in 'product_quantity_ordered', with: 'invalid'
     click_button 'Добавить в корзину'
 
@@ -42,13 +42,13 @@ class BuyButtonTest < ActionDispatch::IntegrationTest
     product = Product.last
 
     assert_equal '1111111111', product.catalog_number
-    assert_equal 26, product.sell_cost.to_f
+    assert_equal 11, product.sell_cost.to_f
     assert_equal 10, product.quantity_available
     assert_equal 1, product.min_days
     assert_equal 1, product.max_days
     assert_equal 55, product.probability
     assert_equal 'ПРОИЗВОДИТ', product.cached_brand
-    assert_equal 23, product.buy_cost.to_f
+    assert_equal 7, product.buy_cost.to_f
     assert_equal 'НАЗВАНИЕ 1', product.short_name
     assert_equal 'НАЗВАНИЕ 1, НАЗВАНИЕ 2', product.long_name
     assert_equal 2, product.quantity_ordered

@@ -1,21 +1,5 @@
 defaults: &defaults
   delivery_method:           smtp
-  from:                      Отправитель <robot@example.com>
-  smtp_settings:
-    :address:                smtp.example.com
-    :port:                   25
-    :user_name:              robot@example.com
-
-development:
-  <<: *defaults
-
-test:
-  <<: *defaults
-  delivery_method: 'test'
-
-production:
-  <<: *defaults
-  delivery_method:           smtp
   from:                      Авториф <info@avtorif.ru>
   smtp_settings:
     :address:                smtp.yandex.ru
@@ -25,3 +9,14 @@ production:
     :authentication:         plain
     :enable_starttls_auto:   true
     :ssl:                    true
+
+development:
+  <<: *defaults
+  delivery_method: 'test'
+
+test:
+  <<: *defaults
+  delivery_method: 'test'
+
+production:
+  <<: *defaults

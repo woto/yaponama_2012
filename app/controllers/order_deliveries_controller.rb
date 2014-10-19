@@ -12,8 +12,8 @@ class OrderDeliveriesController < ApplicationController
   #end
 
   def show
-    super
     ugly_address
+    super
   end
 
   private

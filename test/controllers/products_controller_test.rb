@@ -111,12 +111,12 @@ class ProductsControllerTest < ActionController::TestCase
 
   test 'Ищем замены 2 с производителем TOYOTA, находим только 2 - TOYOTA' do
     get :new, catalog_number: 2, manufacturer: 'TOYOTA', replacements: '1'
-    assert_match '2 - 2 руб.', response.body
+    assert_match '1 - 1 руб.', response.body
   end
 
   test 'Ищем замены 2 без производителя, находим и TOYOTA и TY сгруппированным' do
     get :new, catalog_number: 2, replacements: '1'
-    assert_match '2 - 40 руб.', response.body
+    assert_match '1 - 17 руб.', response.body
   end
 
   test 'Деталь 838383 внесена как 838383 и 83-83.83 с производителями ОРИГИНАЛ и СИНОНИМ, на сервере прайсов должны слиться' do
