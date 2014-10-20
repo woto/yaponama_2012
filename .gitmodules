@@ -1,6 +1,3 @@
-[submodule "system/submodules/ckeditor-dev"]
-	path = system/submodules/ckeditor-dev
-	url = https://github.com/woto/ckeditor-dev.git
 [submodule "system/submodules/CKEditor-oEmbed-Plugin"]
 	path = system/submodules/CKEditor-oEmbed-Plugin
 	url = https://github.com/w8tcha/CKEditor-oEmbed-Plugin.git
