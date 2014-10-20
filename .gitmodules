@@ -109,3 +109,7 @@
 [submodule "system/submodules/fastclick"]
 	path = system/submodules/fastclick
 	url = https://github.com/ftlabs/fastclick
+[submodule "system/submodules/ckeditor-dev"]
+	path = system/submodules/ckeditor-dev
+	url = git://github.com/ckeditor/ckeditor-dev.git
+	branch = master
