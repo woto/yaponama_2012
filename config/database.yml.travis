@@ -1,0 +1,4 @@
+test:
+  adapter: postgresql
+  database: yaponama_2012_test
+  username: postgres
