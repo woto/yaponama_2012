@@ -46,7 +46,7 @@ Capybara.default_driver = :selenium
 #Capybara.javascript_driver = :poltergeist
 Capybara.default_wait_time = 20
 
-Selenium::WebDriver::Firefox::Binary.path="/home/woto/firefox/firefox"
+#Selenium::WebDriver::Firefox::Binary.path="/home/woto/firefox/firefox"
 
 
 class ActionDispatch::IntegrationTest
