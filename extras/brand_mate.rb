@@ -29,7 +29,7 @@ class BrandMate
     private
 
     def find_params(name)
-      { name: name.mb_chars.upcase }
+      { name: (name || "ОРИГИНАЛ").mb_chars.upcase }
     end
   end
 end

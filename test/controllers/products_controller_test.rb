@@ -128,6 +128,11 @@ class ProductsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'Если сервер прайсов отдает нам деталь без производителя, то не должно быть 500 ошибки. Производитель должен подмениться на ОРИГИНАЛ' do
+    get :new, catalog_number: '543385'
+    assert_select "div[id='ОРИГИНАЛ']"
+  end
+
   test 'Ссылки' do
     skip
     # Протестировать ссылки на замены, купить и т.д.
