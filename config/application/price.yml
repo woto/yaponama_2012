@@ -1,5 +1,5 @@
 defaults: &defaults
-  host: 192.168.0.253
+  host: 192.168.1.253
   port: 3001
 
   price_request_cache_with_replacements_in_seconds: 1
