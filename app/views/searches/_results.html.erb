@@ -272,7 +272,7 @@
   <% end %>
 
   <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-  <h3 class="top-space-lg bottom-space-lg">Вы так же можете попробовать посмотреть <%= link_to "замены номера #{@c9} без указания производителя", polymorphic_path([new_or_edit, *jaba3,  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %>.</h3>
+  <h3 class="top-space-lg bottom-space-lg">Вы так же можете попробовать посмотреть <%= link_to "аналоги и замены номера #{@c9}", polymorphic_path([new_or_edit, *jaba3,  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %></h3>
 
 <% end %>
     <% end %>
