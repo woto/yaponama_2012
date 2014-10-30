@@ -33,11 +33,10 @@
 
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag "application", "data-turbolinks-track" => true, :media => "all" %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true, :async => true %>
 
     <!--[if lt IE 9]>
-      <%= javascript_include_tag 'ltie9' %>
+      <%= javascript_include_tag 'ltie9', :async => true %>
     <![endif]-->
 
     <%= favicon_link_tag '/favicon.ico' %>
