@@ -380,7 +380,7 @@ module ProductsSearch
         # Title
         @meta_title = ''
         if r9.present?
-          @meta_title << "Замены #{c9} "
+          @meta_title << "Замены и аналоги #{c9} "
           @meta_title << "#{b9} " if b9
         else
           # Каталожник тут всегда будет 1? TODO
