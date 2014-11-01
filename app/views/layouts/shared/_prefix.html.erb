@@ -28,7 +28,7 @@
     <% end %>
 
     <% if @meta_canonical.present? %>
-      <link rel="canonical" href="<%= @meta_canonical %>" />
+      <link rel="canonical" href="<%== @meta_canonical %>" />
     <% end %>
 
     <%= csrf_meta_tags %>
