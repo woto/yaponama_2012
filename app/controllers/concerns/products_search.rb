@@ -405,6 +405,10 @@ module ProductsSearch
         @meta_description << ". Удобная оплата. Отправка в регионы, доставка по Москве, самовывоз м. Динамо, Аэропорт."
         # /Description
 
+        # Canonical
+        @meta_canonical = new_user_product_path(catalog_number: c9, replacements: r9)
+        # /Canonical
+
         plog.debug '/Заполняем метаданные'
       end
 

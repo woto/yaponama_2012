@@ -58,4 +58,12 @@ class ProductsTest < ActionDispatch::IntegrationTest
     assert_template 'application/info'
   end
 
+  test 'Проверяем meta_canonical' do
+    get '/user/products/new?catalog_number=2102&return_path=%2FMITSUBISHI'
+    assert_select "link[rel=canonical][href='/user/products/new?catalog_number=2102']"
+
+    get '/user/products/new?catalog_number=2102&replacements=1&return_path=%2Fru%2Fcontacts%2Fmoscow'
+    assert_select "link[rel=canonical][href='/user/products/new?catalog_number=2102&replacements=1']"
+  end
+
 end
