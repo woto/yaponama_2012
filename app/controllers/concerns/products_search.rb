@@ -402,7 +402,7 @@ module ProductsSearch
         else
           @meta_description << titles[0].to_s.mb_chars.capitalize
         end
-        @meta_description << ". Удобная оплата. Отправка в регионы, доставка по Москве, самовывоз м. Динамо, Аэропорт."
+        @meta_description << ". Удобная оплата. Отправка в регионы, доставка по Москве, самовывоз Рязанский и Ленинградский проспект."
         # /Description
 
         # Canonical
