@@ -116,8 +116,6 @@ gem 'ancestry'
 #gem 'omniauth-odnoklassniki'
 #gem 'omniauth-mailru'
 
-# Необходима версия 2.6.0 чтобы не резался многострочный заголовок
-#gem 'mail', github: 'mikel/mail'
 gem 'htmlentities'
 gem 'dalli'
 gem 'puma'
