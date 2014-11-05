@@ -326,6 +326,7 @@ class ApplicationController < ActionController::Base
   end
 
   def update_resource
+    #binding.pry
     @resource.assign_attributes(resource_params)
   end
 
