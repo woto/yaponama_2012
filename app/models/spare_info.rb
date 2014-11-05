@@ -8,7 +8,8 @@ class SpareInfo < ActiveRecord::Base
   include SpareCatalogAttributes
   include CachedSpareCatalog
 
-  has_many :spare_replacements, foreign_key: :from_spare_info_id
+  has_many :from_spare_replacements, foreign_key: :from_spare_info_id, class_name: SpareReplacement
+  has_many :to_spare_replacements, foreign_key: :to_spare_info_id, class_name: SpareReplacement
   has_many :spare_applicabilities
 
   def to_label
@@ -24,8 +25,7 @@ class SpareInfo < ActiveRecord::Base
   validates :spare_catalog, :presence => true
 
   before_save do
-    self.name = "#{catalog_number} - #{cached_brand}"
-    #self.cached_spare_catalog = SpareCatalog.find(spare_catalog_id).name
+    self.name = to_label
   end
 
   #scope :by_brand, ->(id) {
@@ -56,5 +56,40 @@ class SpareInfo < ActiveRecord::Base
     #joins(:spare_applicabilities).
     where(spare_catalog_id: id.to_i)
   }
+
+  after_update :rebuild
+
+  def rebuild
+
+    # Делать это нужно только если изменились данные, влияющие на формирование
+    # cached_spare_info (каталожник, производитель) - spare_info#to_label
+    # В противном случае при изменении SpareCatalog тут будет много лишних обновлений
+    # Категория изменилась, потянула за собой изменение cached_spare_catalog у всех
+    # зависимых spare_infos, а эти spare_infos еще потянут замены и применимость
+
+    if changes[:name] #changes[:catalog_number] || changes[:cached_brand]
+
+      # По образу brand
+      clear_changes_information
+
+      # Обновляем cached_spare_info замены
+      from_spare_replacements.each do |replacement|
+        replacement.save
+      end
+
+      to_spare_replacements.each do |replacement|
+        replacement.save
+      end
+      # /Обновляем cached_spare_info замены
+
+      # Обновляем cached_spare_info применимость
+      spare_applicabilities.each do |spare_applicability|
+        spare_applicability.save
+      end
+      # /Обновляем cached_spare_info применимость
+
+    end
+
+  end
 
 end

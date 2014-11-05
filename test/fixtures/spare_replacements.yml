@@ -16,3 +16,13 @@ ki_2103_ns_3310:
   comment: MyString
   source: MyString
   wrong:
+
+
+ns_3310_ki_2103:
+  from_spare_info: ns_3310
+  to_spare_info: ki_2103
+  from_cached_spare_info: 3310 (NS)
+  to_cached_spare_info: 2103 (KI)
+  comment: MyString
+  source: MyString
+  wrong:
