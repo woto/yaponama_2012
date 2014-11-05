@@ -3,7 +3,7 @@
 <%= b1 do %>
 
   <ol class="breadcrumb">
-    <%= b.item('Категории', categories_path) %>
+    <%= b.item('Запчасти', categories_path) %>
     <%= b.item(@resource.name, category_brands_path(params[:category_id])) %>
     <%= b.item(@brand.name, category_brand_path(params[:category_id], @brand.to_param)) %>
     <%= b.item(@model.name) %>
