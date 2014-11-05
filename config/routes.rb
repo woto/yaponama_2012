@@ -17,6 +17,13 @@ end
 
 Yaponama2012::Application.routes.draw do
 
+
+  # /catalogs/brands/дочерний_id -> /catalogs/brands/родительский_id
+  get "/catalogs/brands/:id", constraints: lambda{|params, env| Brand.find(params[:id]).brand_id?}, to: redirect{|params, request|
+    query_string = "?#{request.query_string}" if request.query_string.present?
+    "/catalogs/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
+  }
+
   concern :bmgm do
     resources :brands
     resources :models
