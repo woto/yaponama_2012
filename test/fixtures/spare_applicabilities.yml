@@ -135,3 +135,27 @@ sa_14:
   cached_brand: MITSUBISHI
   cached_model: Galant
   cached_spare_info: 2102 (NISSAN)
+
+sa_15:
+  spare_info: ki_2102
+  brand: mitsubishi
+  model: lancer
+  cached_brand: MITSUBISHI
+  cached_model: Lancer
+  cached_spare_info: 2102 (KI)
+
+sa_16:
+  spare_info: ki_2103
+  brand: mitsubishi
+  model: lancer
+  cached_brand: MITSUBISHI
+  cached_model: Lancer
+  cached_spare_info: 2103 (KI)
+
+sa_17:
+  spare_info: ki_2103
+  brand: ki
+  model: cerato_ki
+  cached_brand: KI
+  cached_model: Cerato
+  cached_spare_info: 2103 (KI)

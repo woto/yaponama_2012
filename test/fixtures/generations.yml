@@ -34,3 +34,13 @@ lancer_ralliart_2008:
   name: Lancer Ralliart (2008)
   model: lancer_ralliart 
   cached_model: Lancer Ralliart
+
+cerato_2009_2013:
+  name: 2009-2013
+  model: cerato_kia
+  cached_model: Cerato
+
+cerato_march_2013:
+  name: март 2013 -
+  model: cerato_ki
+  cached_model: Cerato
