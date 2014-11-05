@@ -1,9 +1,9 @@
 class SpareReplacement < ActiveRecord::Base
+  include FromSpareInfoAttributes
   include FromCachedSpareInfo
+  include ToSpareInfoAttributes
   include ToCachedSpareInfo
 
-  include FromSpareInfoAttributes
-  include ToSpareInfoAttributes
 
   validates :from_spare_info, :to_spare_info, presence: true
 

@@ -4,8 +4,8 @@ class Brand < ActiveRecord::Base
   include Selectable
   include Transactionable
   include BelongsToCreator
-  include CachedBrand
   include BrandAttributes
+  include CachedBrand
 
   mount_uploader :image, BrandUploader
 

@@ -9,8 +9,8 @@ class Product < ActiveRecord::Base
   include Selectable
   include Code_1AttrAccessorAndValidation
   include SetCreationReasonBasedOnCode_1
-  include CachedBrand
   include BrandAttributes
+  include CachedBrand
 
   # Продукты по которым ожидается движение
   scope :active, -> { where("products.status IN (?)", ["ordered", "pre_supplier", "post_supplier", "stock"]) }

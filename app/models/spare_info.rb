@@ -2,10 +2,11 @@
 #
 class SpareInfo < ActiveRecord::Base
   include Selectable
-  include CachedBrand
-  include CachedSpareCatalog
+
   include BrandAttributes
+  include CachedBrand
   include SpareCatalogAttributes
+  include CachedSpareCatalog
 
   has_many :spare_replacements, foreign_key: :from_spare_info_id
   has_many :spare_applicabilities
