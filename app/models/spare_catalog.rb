@@ -29,4 +29,14 @@ class SpareCatalog < ActiveRecord::Base
     "#{id}-#{name.parameterize}"
   end
 
+  after_save :rebuild
+
+  def rebuild
+    # Сделано по образу brand
+    if changes[:name]
+      clear_changes_information
+      spare_infos.each {|spare_info| spare_info.save}
+    end
+  end
+
 end
