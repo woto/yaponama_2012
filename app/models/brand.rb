@@ -12,13 +12,11 @@ class Brand < ActiveRecord::Base
   validates :name, :presence => true, uniqueness:  { case_sensitive: false }
 
   has_many :brands, :inverse_of => :brand, :dependent => :destroy
-  has_many :cars, :inverse_of => :brand
+  has_many :cars, :inverse_of => :brand, :dependent => :destroy
   has_many :models, :inverse_of => :brand, :dependent => :destroy
-
   has_many :spare_infos
   has_many :spare_applicabilities
-  #has_many :spare_infos, through: :spare_applicabilities
-  #has_many :for_cached_spare_infos, through: :spare_infos, class_name: "SpareApplicability", :source => :spare_applicabilities
+  has_many :products
 
   validate do
     if brand.try(:brand).present?
@@ -31,8 +29,6 @@ class Brand < ActiveRecord::Base
       errors[:brand] << 'Нельзя указывать в качестве родительского производителя себя'
     end
   end
-
-  has_many :products
 
   def to_label
     name
@@ -48,24 +44,46 @@ class Brand < ActiveRecord::Base
     self.name = name.to_s.mb_chars.upcase
   end
 
-  after_save :update_all_cached_brand
+  after_update :rebuild
 
-  def update_all_cached_brand
+  def rebuild
 
-    # TODO Переделать это как-нибудь более правильным способом.
-    # Пока через ассоциацию почему-то не получилось
-    # А это вообще возможно без сложного SQL запроса?
-    spare_infos.each do |spare_info|
-      spare_info.spare_applicabilities.update_all(cached_spare_info: "#{spare_info.catalog_number} (#{name})")
+    # Стоит не забывать, что если такая деталь уже есть (например делаем у KI родителем производителя KIA).
+    # И есть в обоих случаях деталь 2102 (KI) и 2102 (KIA). То валидация на уникальность в Описаниях не пропустит.
+    # В связи с этим Замены и Применимость так же останутся в лимбе.
+
+    # Мы вызываем сохранение кешированных версий ассоциаций, где имеется brand, из-за того, что там
+    # практически везде используется accepts_nested_attributes_for, который пытается сохранить бренд
+    # исходя из того, что в нем присутствуют изменения мы прилетаем сюда и в конце как правило вылетаем 
+    # по stack overflow, поэтому используем #clear_changes_information
+
+    # Если изменения в name
+    if changes[:name]
+
+      clear_changes_information
+
+      spare_infos.each {|s| s.save}
+      cars.each {|c| c.save}
+      models.each {|m| m.save}
+      products.each {|p| p.save}
+      spare_applicabilities.each{|s| s.save}
+      brands.each {|b| b.save}
+
+    # Иначе если изменения в brand_id
+    # и выставили родительский бренд
+    elsif changes[:brand_id] && !brand.nil?
+
+      clear_changes_information
+
+      spare_infos.each {|s| s.update(brand: brand)}
+      cars.each {|c| c.update(brand: brand)}
+      models.each {|m| m.update(brand: brand)}
+      products.each {|p| p.update(brand: brand)}
+      spare_applicabilities.each{|s| s.update(brand: brand)}
+      brands.each {|b| b.update(brand: brand)}
+
     end
-    #for_cached_spare_infos.touch.update_all(cached_spare_info: "#{catalog_number} (#{name})")
 
-    spare_applicabilities.update_all(cached_brand: name)
-    products.update_all(cached_brand: name)
-    cars.update_all(cached_brand: name)
-    brands.update_all(cached_brand: name)
-    spare_infos.update_all(cached_brand: name)
-    models.update_all(cached_brand: name)
   end
 
 end
