@@ -237,10 +237,9 @@ module ProductsSearch
                 :max_cost => nil,
                 :offers => [],
                 :brand => canonical_brand,
-                :info => item_status(item['catalog_number'], mf),
                 # image_url у всех одинаковый по определению, т.к. берется из price_catalogs
                 # несмотря на то, что на сервере прайсов заполняется по образу weights
-                :image_url => item["image_url"]
+                #:image_url => item["image_url"]
               }
 
             end
@@ -351,12 +350,30 @@ module ProductsSearch
         end
         plog.debug '/Сортировка по рейтингам брендов'
 
-        # Получаем общее для связки каталожный номер + производитель имя
+        plog.debug 'Получаем сведения с текущей базы'
         @formatted_data.each do |catalog_number, cn_scope|
           cn_scope.each do |manufacturer, mf_scope|
             mf_scope[:title] = (mf_scope[:titles].sort_by{|a, b| -b} + ([["", 0]]))[0][0]
+            info = SpareInfo.where(:catalog_number => catalog_number, :cached_brand => manufacturer).first
+            # Если такой SpareInfo имеется, то все последующие данные получаем через него
+            if info.present?
+              mf_scope[:info] = info
+              mf_scope[:replacements] = info.from_spare_replacements
+              mf_scope[:applicabilities] = info.spare_applicabilities
+              catalog = info.spare_catalog
+            # Если категория получена с сервера прайсов
+            #elsif mf_scope["image_url"].present?
+            #  catalog = SpareCatalog.find_by(name: mf_scope["image_url"])
+            # Если категори получена из названий
+            else
+              guessed = SpareApplicabilityMate.guess_spare_catalog(mf_scope[:titles], catalog_number, manufacturer)
+              catalog = SpareCatalog.find_by(name: guessed)
+            end
+
+            mf_scope[:catalog] = catalog
           end
         end
+        plog.debug '/Получаем сведения с текущей базы'
 
       end
 

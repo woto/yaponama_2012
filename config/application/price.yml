@@ -10,6 +10,10 @@ defaults: &defaults
 
 development:
   <<: *defaults
+  #host: 192.168.1.253
+  #port: 3001
+  host: avtorif.ru
+  port: 85
 
 test:
   <<: *defaults

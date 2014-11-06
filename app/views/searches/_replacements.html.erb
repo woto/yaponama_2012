@@ -33,7 +33,7 @@
                 <td>
                   <span class="visible-xs"> Информация: </span>
                   <% # Если есть хотя бы какая-то информация, то показываем, что есть информация %>
-                  <% if mf_scope[:info].any?{|key, value| value[:status] == 'avaliable'} %>
+                  <% if mf_scope[:info].present? %>
                     <%= icon 'info-circle fa-lg' %>
                   <% end %>
                 </td>
