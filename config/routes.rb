@@ -24,6 +24,18 @@ Yaponama2012::Application.routes.draw do
     "/catalogs/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
   }
 
+  # /brands/дочерний_id/parts -> /brands/родительский_id/parts
+  get "/brands/:id/parts", constraints: lambda{|params, env| Brand.find(params[:id]).brand_id?}, to: redirect{|params, request|
+    query_string = "?#{request.query_string}" if request.query_string.present?
+    "/brands/#{Brand.find(params[:id]).brand.to_param}/parts#{query_string}"
+  }
+
+  # /categories/категория/brands/дочерний_id -> /categories/категория/brands/родительский_id
+  get "/categories/:category_id/brands/:id", constraints: lambda{|params, env| Brand.find(params[:id]).brand_id?}, to: redirect{|params, request|
+    query_string = "?#{request.query_string}" if request.query_string.present?
+    "/categories/#{params[:category_id]}/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
+  }
+
   concern :bmgm do
     resources :brands
     resources :models
