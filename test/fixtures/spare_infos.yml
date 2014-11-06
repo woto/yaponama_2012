@@ -55,3 +55,11 @@ ki_2103:
     name: 2103 (KI)
     cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
     spare_catalog: bamper_zadniy
+
+ms_2103:
+    catalog_number: '2103'
+    brand: ms
+    cached_brand: MS
+    name: 2103 (MS)
+    cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
+    spare_catalog: bamper_zadniy
