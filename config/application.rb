@@ -16,7 +16,6 @@ module Yaponama2012
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(
-      #{config.root}/extras
       #{config.root}/app/workers
       #{config.root}/rake
       #{config.root}/catalog)
