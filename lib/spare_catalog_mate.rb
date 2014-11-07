@@ -1,4 +1,4 @@
-class SpareApplicabilityMate
+class SpareCatalogMate
 
   class << self
 
