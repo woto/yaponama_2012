@@ -181,17 +181,23 @@
 
                 <% if @current_user.seller? %>
                   <% if mf_scope[:info].present? %>
+
+                    <%# Описание %>
                     <%= link_to icon('file-text-o'), edit_admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-default" %>
+
+                    <%# Категория %>
+                    <% if mf_scope[:catalog].present? %>
+                      <%= link_to icon('gears'), edit_admin_spare_catalog_path(mf_scope[:catalog], :return_path => request.fullpath), :class => "btn btn-default" %>
+                    <% end %>
+
+                    <%# Замены %>
+                    <%= link_to icon('random'), new_admin_spare_replacement_path(spare_replacement: {from_spare_info_attributes: { name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-default" %>
+
+                    <%# Применимость %>
+                    <%= link_to icon('automobile'), new_admin_spare_applicability_path(spare_applicability: {spare_info_attributes: {name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-default" %>
                   <% else %>
                     <%= link_to icon('file-text-o'), new_admin_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath), :class => "btn btn-default" %>
                   <% end %>
-
-                  <% if mf_scope[:catalog].present? %>
-                    <%= link_to icon('gears'), edit_admin_spare_catalog_path(mf_scope[:catalog], :return_path => request.fullpath), :class => "btn btn-default" %>
-                  <% end %>
-
-                  <%= link_to icon('random'), '#', :class => "btn btn-default" %>
-                  <%= link_to icon('automobile'), '#', :class => "btn btn-default" %>
                 <% end %>
 
 
