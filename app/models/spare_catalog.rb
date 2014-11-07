@@ -7,7 +7,7 @@ class SpareCatalog < ActiveRecord::Base
 
   before_save do
     name = self.name.mb_chars
-    content = self.content.mb_chars
+    content = self.content.to_s.mb_chars
 
     name = name.upcase
     content = content.upcase
