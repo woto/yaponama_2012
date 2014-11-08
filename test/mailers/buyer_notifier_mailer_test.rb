@@ -10,7 +10,7 @@ class BuyerNotifierMailerTest < ActionMailer::TestCase
     delivery = ActionMailer::Base.deliveries.last
     assert_equal "Новое сообщение на сайте www.test.host", delivery.subject
     assert_equal ['asfkjh@dfafdjka.ru'], delivery.to
-    assert_equal ['info@avtorif.ru'], delivery.from
+    assert_equal ['john_doe@example.com'], delivery.from
     assert_match 'Тут сделать сначала правильное заполнение письма, а потом протестировать', delivery.body.encoded
   end
 
@@ -23,7 +23,7 @@ class BuyerNotifierMailerTest < ActionMailer::TestCase
     delivery = ActionMailer::Base.deliveries.last
     assert_equal "+71234567890", delivery.subject
     assert_equal ['b049fb236f62a7f78166@avisosms.ru'], delivery.to
-    assert_equal ['info@avtorif.ru'], delivery.from
+    assert_equal ['john_doe@example.com'], delivery.from
     assert_match 'Тут сделать сначала правильное заполнение письма, а потом протестировать', delivery.body.encoded
   end
 
