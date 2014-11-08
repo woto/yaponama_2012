@@ -577,5 +577,16 @@ module Yaponama2012
     }
 
     config.active_record.raise_in_transactional_callbacks = true
+
+    def config_for name
+      require 'socket'
+      if Rails.env.production?
+        super(name)[Socket.gethostname]
+      else
+        super(name)
+      end
+    end
+
+
   end
 end
