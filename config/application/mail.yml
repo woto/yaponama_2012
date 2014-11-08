@@ -1,14 +1,14 @@
 defaults: &defaults
   delivery_method:           smtp
-  from:                      Авториф <info@avtorif.ru>
+  from:                      John Doe <john_doe@example.com>
   smtp_settings:
-    :address:                smtp.yandex.ru
-    :port:                   465
-    :user_name:              info@avtorif.ru
-    :password:               ASD123qwe
+    :address:                smtp.example.com
+    :port:                   25
+    :user_name:              user_name
+    :password:               password
     :authentication:         plain
-    :enable_starttls_auto:   true
-    :ssl:                    true
+    :enable_starttls_auto:   false
+    :ssl:                    false
 
 development:
   <<: *defaults
@@ -19,4 +19,27 @@ test:
   delivery_method: 'test'
 
 production:
-  <<: *defaults
+  avtorif.ru:
+    <<: *defaults
+    delivery_method:           smtp
+    from:                      Авториф <info@avtorif.ru>
+    smtp_settings:
+      :address:                smtp.yandex.ru
+      :port:                   465
+      :user_name:              info@avtorif.ru
+      :password:               ASD123qwe
+      :authentication:         plain
+      :enable_starttls_auto:   true
+      :ssl:                    true
+  zapstok.ru:
+    <<: *defaults
+    delivery_method:           smtp
+    from:                      Запсток <info@zapstok.ru>
+    smtp_settings:
+      :address:                smtp.yandex.ru
+      :port:                   465
+      :user_name:              info@zapstok.ru
+      :password:               kotspaz
+      :authentication:         plain
+      :enable_starttls_auto:   true
+      :ssl:                    true
