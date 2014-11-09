@@ -6,5 +6,16 @@ class CreateSpareCatalogTokens < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    reversible do |dir|
+      dir.up do
+        SpareCatalog.all.each do |sc|
+          sc.name.scan(/[[:word:]]+/).select{|word| word.length >= 3 }.each do |token|
+            sc.spare_catalog_tokens.create(name: token)
+          end
+        end
+      end
+    end
+
   end
 end
