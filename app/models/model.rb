@@ -14,7 +14,7 @@ class Model < ActiveRecord::Base
 
   has_many :cars, :inverse_of => :generation
 
-  has_many :spare_applicabilities
+  has_many :spare_applicabilities, dependent: :destroy
 
   def to_label
     name
