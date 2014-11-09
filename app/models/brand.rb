@@ -14,8 +14,8 @@ class Brand < ActiveRecord::Base
   has_many :brands, :inverse_of => :brand, :dependent => :destroy
   has_many :cars, :inverse_of => :brand, :dependent => :destroy
   has_many :models, :inverse_of => :brand, :dependent => :destroy
-  has_many :spare_infos
-  has_many :spare_applicabilities
+  has_many :spare_infos, dependent: :destroy
+  has_many :spare_applicabilities, dependent: :destroy
   has_many :products
 
   validate do

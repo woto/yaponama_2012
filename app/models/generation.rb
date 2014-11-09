@@ -14,7 +14,7 @@ class Generation < ActiveRecord::Base
 
   has_many :modifications, :inverse_of => :generation, :dependent => :destroy
 
-  has_many :spare_applicabilities
+  has_many :spare_applicabilities, dependent: :destroy
 
   def to_label
     name
