@@ -354,7 +354,10 @@ module ProductsSearch
         @formatted_data.each do |catalog_number, cn_scope|
           cn_scope.each do |manufacturer, mf_scope|
             mf_scope[:title] = (mf_scope[:titles].sort_by{|a, b| -b} + ([["", 0]]))[0][0]
+
+
             info = SpareInfo.where(:catalog_number => catalog_number, :cached_brand => manufacturer).first
+
             # Если такой SpareInfo имеется, то все последующие данные получаем через него
             if info.present?
               mf_scope[:info] = info
@@ -366,8 +369,15 @@ module ProductsSearch
             #  catalog = SpareCatalog.find_by(name: mf_scope["image_url"])
             # Если категори получена из названий
             else
-              guessed = SpareApplicabilityMate.guess_spare_catalog(mf_scope[:titles], catalog_number, manufacturer)
-              catalog = SpareCatalog.find_by(name: guessed)
+              plog.debug 'Ищем категорию'
+              catalog = SpareCatalog.
+                joins(:spare_catalog_tokens).
+                where("? LIKE '%' || spare_catalog_tokens.name || '%'", mf_scope[:titles].keys.join(' ')).
+                references(:spare_catalog_tokens).group('spare_catalogs.id').
+                order('count(spare_catalogs.id) DESC').
+                select('spare_catalogs.*, count(spare_catalogs.id) as occurrences').
+                limit(1).first
+              plog.debug '/Ищем категорию'
             end
 
             mf_scope[:catalog] = catalog

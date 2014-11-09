@@ -19,16 +19,6 @@
 
   <dl>
     <dt>
-      <%= SpareCatalog.human_attribute_name :content %>
-    </dt>
-    <dd>
-      <%= @resource.content %>
-    </dd>
-  </dl>
-
-
-  <dl>
-    <dt>
       <%= SpareCatalog.human_attribute_name :intro %>
     </dt>
     <dd>
@@ -44,6 +34,23 @@
       <%== @resource.page %>
     </dd>
   </dl>
+
+  <dl>
+    <dt>
+    <%= SpareCatalog.human_attribute_name :spare_catalog_tokens %>
+    </dt>
+    <dd>
+      <ul class="list-unstyled">
+        <% @resource.spare_catalog_tokens.each do |token| %>
+          <li>
+            <%= token.name %>
+          </li>
+        <% end %>
+      </ul>
+    </dd>
+  </dl>
+
+
 
   <br />
   <br />

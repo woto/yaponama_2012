@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141011053405) do
+ActiveRecord::Schema.define(version: 20141107161606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1242,9 +1242,17 @@ ActiveRecord::Schema.define(version: 20141011053405) do
   add_index "spare_applicabilities", ["modification_id"], name: "index_spare_applicabilities_on_modification_id", using: :btree
   add_index "spare_applicabilities", ["spare_info_id"], name: "index_spare_applicabilities_on_spare_info_id", using: :btree
 
+  create_table "spare_catalog_tokens", force: true do |t|
+    t.integer  "spare_catalog_id"
+    t.string   "name"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "spare_catalog_tokens", ["spare_catalog_id"], name: "index_spare_catalog_tokens_on_spare_catalog_id", using: :btree
+
   create_table "spare_catalogs", force: true do |t|
     t.string   "name"
-    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "intro"

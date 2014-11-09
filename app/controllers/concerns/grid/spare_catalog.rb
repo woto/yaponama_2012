@@ -18,10 +18,6 @@ module Grid::SpareCatalog
         :type => :string,
       }
 
-      columns_hash['content'] = {
-        :type => :string,
-      }
-
       columns_hash['intro'] = {
         :type => :string,
       }
@@ -44,7 +40,6 @@ module Grid::SpareCatalog
       @grid.visible_checkbox = '1'
       @grid.visible_id = '1'
       @grid.visible_name = '1'
-      @grid.visible_content = '1'
       @grid.visible_intro = '1'
       @grid.visible_page = '1'
       @grid.visible_updated_at = '1'

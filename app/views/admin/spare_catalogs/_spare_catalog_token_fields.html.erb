@@ -1,0 +1,12 @@
+<%= f.nested_fields do %>
+
+  <%= f.destroyable do %>
+
+    <%= f.standard_remove %>
+
+    <%= f.twbs_text_field :name %>
+
+  <% end %>
+
+<% end %>
+

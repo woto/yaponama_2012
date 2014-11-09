@@ -1,23 +1,16 @@
 class SpareCatalog < ActiveRecord::Base
 
   has_many :spare_infos
-  has_many :spare_applicabilities, through: :spare_infos
+  #has_many :spare_applicabilities, through: :spare_infos
+  has_many :spare_catalog_tokens, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
 
+  accepts_nested_attributes_for :spare_catalog_tokens, allow_destroy: true
+
   before_save do
     name = self.name.mb_chars
-    content = self.content.to_s.mb_chars
-
     name = name.upcase
-    content = content.upcase
-
-    #name = name.gsub('Ё', 'Е')
-    content = content.gsub('Ё', 'Е')
-
-    content = content.gsub(/[^[:word:]\s]/, ' ')
-
-    self.content = content
     self.name = name
   end
 

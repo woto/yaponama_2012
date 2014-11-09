@@ -22,6 +22,12 @@ ru:
         catalog_number: Каталожный номер
         #brand: Производитель
         content: Содержание
+      spare_catalog:
+        name: Название категории
+        intro: Вступление
+        page: Подробное описание
+      spare_catalog_token:
+        name: Токен
       page:
         description: Описание SEO
         keywords: Ключевые слова SEO

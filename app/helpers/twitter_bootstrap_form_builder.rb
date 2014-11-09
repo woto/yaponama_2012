@@ -46,7 +46,8 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
     @template.link_to_remove_association( 
       @template.icon('times'),
       self, 
-      :class => "ignoredirty pull-right btn btn-unstyled btn-xs",
+      :style => "border-bottom: none;",
+      :class => "pull-right btn btn-unstyled btn-xs",
       data: { confirm: 'Действительно хотите удалить?' }
     )
   end
