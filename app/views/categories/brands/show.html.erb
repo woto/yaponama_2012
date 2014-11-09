@@ -18,4 +18,11 @@
     <% end %>
   </ol>
 
+  <% if @current_user.seller? %>
+    <%= link_to edit_admin_brand_path(@brand, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
+      <%= icon 'edit' %>
+      Редактировать
+    <% end %>
+  <% end %>
+
 <% end %>

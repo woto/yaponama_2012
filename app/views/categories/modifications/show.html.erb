@@ -16,4 +16,11 @@
 
   <%= render 'best_parts_list' %>
 
+  <% if @current_user.seller? %>
+    <%= link_to edit_admin_modification_path(@modification, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
+      <%= icon 'edit' %>
+      Редактировать
+    <% end %>
+  <% end %>
+
 <% end %>
