@@ -1,0 +1,7 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+<ShortName><%= Rails.application.config_for('application/block')['name'] %></ShortName>
+  <Description>Поиск автозапчастей на <%= Rails.application.config_for('application/block')['name'] %></Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon"><%= image_path('/favicon.ico') %></Image>
+  <Url type="text/html" method="get" template="http://www.<%= Rails.application.config_for('application/site')['host'] %>/user/products/new?catalog_number={searchTerms}"/>
+</OpenSearchDescription>

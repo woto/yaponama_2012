@@ -412,6 +412,9 @@ Yaponama2012::Application.routes.draw do
   # ROBOTS.TXT
   get 'robots.txt' => "robots_txt#index"
 
+  # OPENSEARCH.XML
+  get 'opensearch.xml' => "opensearch_xml#index"
+
   # STATS
   resources :stats, :only => [:create]
 
