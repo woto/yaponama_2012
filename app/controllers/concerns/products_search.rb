@@ -6,35 +6,6 @@ module ProductsSearch
 
   included do
 
-    def initialize
-      @status = { :offers => false }
-      super
-    end
-
-
-    def set_retail_cost item
-      #income_cost = case
-      #  when item["supplier_title"] == "emex"
-      #    Rails.application.config_for('application/price')['emex_income_rate'] * item["income_cost"]
-      #  when item["supplier_title"] == "АВТОРИФ"
-      #    item["income_cost"]
-      #  else
-      #    Rails.application.config_for('application/price')['avtorif_income_rate'] * item["retail_cost"]
-      #  end
-
-      income_cost = item['income_cost']
-      retail_cost = item['retail_cost']
-      #retail_cost = Rails.application.config_for('application/price')['retail_rate'] * income_cost
-
-      # Скидка
-      if current_user
-        retail_cost = retail_cost - (retail_cost * current_user["discount"] / 100)
-      end
-
-      item["retail_cost"] = retail_cost.round
-      item["income_cost"] = income_cost.round
-    end
-
     private
 
     def search c9, b9, r9
