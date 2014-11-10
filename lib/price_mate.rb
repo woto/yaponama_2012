@@ -72,20 +72,20 @@ class PriceMate
           mf_scope[:info] = info
           mf_scope[:replacements] = info.from_spare_replacements
           mf_scope[:applicabilities] = info.spare_applicabilities
-        #  catalog = info.spare_catalog
-        ## Если категория получена с сервера прайсов
-        ##elsif mf_scope["image_url"].present?
-        ##  catalog = SpareCatalog.find_by(name: mf_scope["image_url"])
-        ## Если категори получена из названий
-        #else
-        end
+          catalog = info.spare_catalog
+        # Если категория получена с сервера прайсов
+        #elsif mf_scope["image_url"].present?
+        #  catalog = SpareCatalog.find_by(name: mf_scope["image_url"])
+        # Если категори получена из названий
+        else
           catalog = SpareCatalog.
             joins(:spare_catalog_tokens).
             where("? LIKE '%' || spare_catalog_tokens.name || '%'", mf_scope[:titles].keys.join(' ')).
             references(:spare_catalog_tokens).group('spare_catalogs.id').
             order('sum(spare_catalog_tokens.weight) DESC').
-            select('spare_catalogs.*, sum(spare_catalog_tokens.weight) as priority').
+            select('spare_catalogs.*').
             limit(1).first
+        end
 
         mf_scope[:catalog] = catalog
       end

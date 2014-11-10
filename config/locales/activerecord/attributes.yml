@@ -28,6 +28,7 @@ ru:
         page: Подробное описание
       spare_catalog_token:
         name: Токен
+        weight: Вес токена
       page:
         description: Описание SEO
         keywords: Ключевые слова SEO

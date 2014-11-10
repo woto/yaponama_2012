@@ -2,11 +2,24 @@
 
   <%= f.destroyable do %>
 
-    <%= f.standard_remove %>
+    <%= panel 'primary' do |p| %>
 
-    <%= f.twbs_text_field :name %>
+      <%= p.heading do %>
+        <%= p.title do %>
+          &nbsp;
+          <%= f.standard_remove %>
+        <% end %>
+      <% end %>
+
+      <%= p.body do %>
+
+        <%= f.twbs_text_field :name %>
+        <%= f.twbs_text_field :weight %>
+
+      <% end %>
+
+    <% end %>
 
   <% end %>
 
 <% end %>
-
