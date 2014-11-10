@@ -156,23 +156,6 @@ module ProductsSearch
 
         titles = @formatted_data.map{|k, v| v.map{|kk, vv| vv[:titles]}}.map{|kkk| kkk.map{|kkkk| kkkk.to_a}}.flatten(2).sort{|kkkkk, vvvvv| kkkkk[1] <=> vvvvv[1]}.reverse.map{|kkkkk| kkkkk[0]}.uniq
 
-        # Title
-        @meta_title = ''
-        if r9.present?
-          @meta_title << "Замены и аналоги #{c9} "
-          @meta_title << "#{b9} " if b9
-        else
-          # Каталожник тут всегда будет 1? TODO
-          @meta_title << @formatted_data.map{|k, v| k}.flatten.uniq.reject{|kk| kk.size < 2}[0, 2].join(', ')
-          # Производители
-          @meta_title << " "
-          @meta_title << @formatted_data.map{|k, v| v.map{|kk, vv| kk}}.flatten.uniq.reject{|kk| kk.size < 2}[0, 5].join(', ')
-          @meta_title << " "
-        end
-        @meta_title << titles[0].to_s.mb_chars.capitalize
-        
-        # /Title
-        
         # Description
         @meta_description = ''
         # Названия
@@ -183,6 +166,9 @@ module ProductsSearch
         end
         @meta_description << ". Удобная оплата. Отправка в регионы, доставка по Москве, самовывоз Рязанский и Ленинградский проспект."
         # /Description
+        plog.debug 'Title'
+        @meta_title = PriceMate.meta_title r9, titles, @formatted_data
+        plog.debug '/Title'
 
         # Canonical
         @meta_canonical = new_user_product_path(catalog_number: c9, replacements: r9)
