@@ -23,9 +23,8 @@ module ProductsSearch
 
       if c9.present?
 
-        request_emex = ''
         if Rails.application.config_for('application/price')['request_emex']
-          request_emex = "&ext_ws=1"
+          e8 = true
         end
 
         price_request_cache_key = "#{c9}-#{b9}-#{r9}"
@@ -37,30 +36,18 @@ module ProductsSearch
         else
           plog.debug "Кеш не найден"
 
-          price_request_url = "http://#{Rails.application.config_for('application/price')['host']}:#{Rails.application.config_for('application/price')['port']}/prices/search?catalog_number=#{c9}&manufacturer=#{CGI::escape(b9 || '')}&replacements=#{r9}#{request_emex}&format=json&for_site=1#{cached}"
-
-          parsed_price_request_url = URI.parse(price_request_url)
-
+          plog.debug "Запрос к серверу прайсов"
           begin
-            require 'net/http'
-            plog.debug "Запрос к серверу прайсов"
-            #binding.pry
-            resp = Net::HTTP.get_response(parsed_price_request_url)
-            plog.debug "/Запрос к серверу прайсов"
+            @parsed_json = ::PriceMate.search(c9, b9, r9, e8, false)
           rescue Exception => e
             response.headers["Retry-After"] = (Time.now + 1.day).httpdate.to_s
-            # @show_sidebar = true
-            # TODO Не знаю почему, но для мобильной версии сделать не удалось (... .erb пробовал)
-            # render :template => "/shared/503", :status => 503 and return
             render :status => 503 and return
           end
+          plog.debug "/Запрос к серверу прайсов"
 
-          #binding.pry
-          @parsed_json = ActiveSupport::JSON.decode(resp.body)
           plog.debug 'Большой цикл очистки JSON'
           @parsed_json = ::PriceMate.clear(@parsed_json)
           plog.debug '/Большой цикл очистки JSON'
-
 
           if r9
             expires_in = Rails.application.config_for('application/price')['price_request_cache_with_replacements_in_seconds']

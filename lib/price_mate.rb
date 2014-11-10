@@ -131,12 +131,14 @@ class PriceMate
   end
 
 
-  def self.price_mate catalog_number, manufacturer, replacements, emex, cached
+  def self.search catalog_number, manufacturer, replacements, emex, cached
+    catalog_number = CGI::escape(catalog_number)
+    manufacturer = CGI::escape(manufacturer || '')
     replacements = true_or_false(catalog_number)
     emex = "&ext_ws=#{true_or_false(emex)}"
-    emex = "&cached=#{true_or_false(cached)}"
+    cached = "&cached=#{true_or_false(cached)}"
 
-    price_request_url = "http://#{Rails.application.config_for('application/price')['host']}:#{Rails.application.config_for('application/price')['port']}/prices/search?catalog_number=#{CGI::escape(catalog_number)}&manufacturer=#{CGI::escape(manufacturer || '')}&replacements=#{replacements}#{emex}&format=json&for_site=1#{cached}"
+    price_request_url = "http://#{Rails.application.config_for('application/price')['host']}:#{Rails.application.config_for('application/price')['port']}/prices/search?catalog_number=#{catalog_number}&manufacturer=#{manufacturer}&replacements=#{replacements}#{emex}&format=json&for_site=1#{cached}"
 
     parsed_price_request_url = URI.parse(price_request_url)
     resp = Net::HTTP.get_response(parsed_price_request_url)
