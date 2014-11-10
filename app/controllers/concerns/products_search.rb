@@ -144,9 +144,10 @@ module ProductsSearch
 
       @meta_title = "Поиск запчастей по номеру"
 
-      unless @status[:offers]
+      if @formatted_data.blank?
         render :status => 404 and return
       else
+
         plog.debug 'Заполняем метаданные'
 
 
@@ -160,15 +161,16 @@ module ProductsSearch
         @meta_title = PriceMate.meta_title r9, titles, @formatted_data
         plog.debug '/Title'
 
-        # Canonical
         plog.debug 'Description'
         @meta_description = PriceMate.meta_description titles
         plog.debug '/Description'
 
+        plog.debug 'Canonical'
         @meta_canonical = new_user_product_path(catalog_number: c9, replacements: r9)
-        # /Canonical
+        plog.debug '/Canonical'
 
         plog.debug '/Заполняем метаданные'
+
       end
 
       true
