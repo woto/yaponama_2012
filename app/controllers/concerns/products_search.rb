@@ -23,12 +23,6 @@ module ProductsSearch
 
       if c9.present?
 
-        # Нужно для того чтобы если например набрали исключительно из символов, которые не попадают в допустимые и образуется пустая строка
-        c9 = c9.gsub(/[^a-zA-Z0-9]/, '').upcase
-        if c9.blank?
-          render :status => 410 and return
-        end
-
         request_emex = ''
         if Rails.application.config_for('application/price')['request_emex']
           request_emex = "&ext_ws=1"
