@@ -149,13 +149,10 @@ module ProductsSearch
       else
         plog.debug 'Заполняем метаданные'
 
-        # Keywords
-        keywords = Hash.new {|hash,key| hash[key] = 0}
-        @formatted_data.map{|k, v| v.map{|kk, vv| vv[:titles].map{|kkk, vvv| kkk}}}.flatten.join(', ').split(/[, ]/).reject{|kkk| kkk.size < 2}.each { |word| keywords[word] += 1 }
-        keywords = keywords.sort{|k, v| k[1] <=> v[1]}.reverse
-        keywords = keywords[0, (keywords.size/4.0).round]
-        @meta_keywords = keywords.map{|k, v| k}.join(', ')
-        # /Keywords
+
+        plog.debug 'Keywords'
+        @meta_keywords = PriceMate.meta_keywords @formatted_data
+        plog.debug '/Keywords'
 
         titles = @formatted_data.map{|k, v| v.map{|kk, vv| vv[:titles]}}.map{|kkk| kkk.map{|kkkk| kkkk.to_a}}.flatten(2).sort{|kkkkk, vvvvv| kkkkk[1] <=> vvvvv[1]}.reverse.map{|kkkkk| kkkkk[0]}.uniq
 
