@@ -8,10 +8,8 @@ class SpareCatalog < ActiveRecord::Base
 
   accepts_nested_attributes_for :spare_catalog_tokens, allow_destroy: true
 
-  before_save do
-    name = self.name.mb_chars
-    name = name.upcase
-    self.name = name
+  before_validation do
+    self.name = name.mb_chars.upcase
   end
 
   def to_label
