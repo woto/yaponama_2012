@@ -93,29 +93,6 @@ class PriceMate
     formatted_data
   end
 
-  def self.set_retail_cost item
-    #income_cost = case
-    #  when item["supplier_title"] == "emex"
-    #    Rails.application.config_for('application/price')['emex_income_rate'] * item["income_cost"]
-    #  when item["supplier_title"] == "АВТОРИФ"
-    #    item["income_cost"]
-    #  else
-    #    Rails.application.config_for('application/price')['avtorif_income_rate'] * item["retail_cost"]
-    #  end
-
-    income_cost = item['income_cost']
-    retail_cost = item['retail_cost']
-    #retail_cost = Rails.application.config_for('application/price')['retail_rate'] * income_cost
-
-    # Скидка
-    #if current_user
-    #  retail_cost = retail_cost - (retail_cost * current_user["discount"] / 100)
-    #end
-
-    item["retail_cost"] = retail_cost.round
-    item["income_cost"] = income_cost.round
-  end
-
   def self.meta_keywords formatted_data
     keywords = Hash.new {|hash,key| hash[key] = 0}
     formatted_data.map{|k, v| v.map{|kk, vv| vv[:titles].map{|kkk, vvv| kkk}}}.flatten.join(', ').split(/[, ]/).reject{|kkk| kkk.size < 2}.each { |word| keywords[word] += 1 }
@@ -181,7 +158,6 @@ class PriceMate
       counter[h] += 1
 
       if counter[h] <= 5
-        set_retail_cost item
 
         # Если нет такого каталожника, создаем
         unless formatted_data.include?(cn)
