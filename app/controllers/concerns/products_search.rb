@@ -269,18 +269,7 @@ module ProductsSearch
         end
         plog.debug '/Большой цикл обработки JSON'
 
-        # TODO Случайно обнаружил, что блок, занимающийся сортировкой брендов по рейтингу я успешно удалил.
-        # Вернул. Но этот блок в оригинале сортирует еще и цены. Поэтому немного подредактировал в надежде 
-        # на то, что с ценами у меня все нормально (я ранее делал сортировку чтобы наши магазины поднимались наверх)
-        plog.debug 'Сортировка по рейтингам брендов'
-        @formatted_data = @formatted_data.map do |catalog_number, cn_scope|
-          [ catalog_number, (cn_scope.sort do |a, b|
-            k = a[1][:brand]
-            l = b[1][:brand]
-            -(k.try(:[], :rating).try(:to_i) || 0) <=> -(l.try(:[], :rating).try(:to_i) || 0)
-          end)]
-        end
-        plog.debug '/Сортировка по рейтингам брендов'
+        @formatted_data = PriceMate.sort_by_brand_rating @formatted_data
 
         plog.debug 'Получаем сведения с текущей базы'
         @formatted_data = PriceMate.database @formatted_data
