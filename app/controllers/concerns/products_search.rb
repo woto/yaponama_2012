@@ -43,22 +43,6 @@ module ProductsSearch
         else
           plog.debug "Кеш не найден"
 
-          # TODO Что сделать с ситуцией. Если зашел робот, на сервере прайсов создалась кешированная версия, через день зашел пользователь,
-          # все нормально. Я очистил тут кеш, зашел робот, взял кешированную версию (не запросил заново!) следом зашел пользователь и увидел 
-          # самую первую версию. 
-          #
-          # Если поисковые системы, то согласны взять и закешированную версию
-          #require 'netaddr'
-          #cached = ''
-          #APP_CONFIG['cached_ip'].each do |cidr_string|
-          #  cidr = NetAddr::CIDR.create(cidr_string)
-          #  if cidr.contains? request.remote_ip or cidr == request.remote_ip
-          #    cached = '&cached=1'
-          #    break
-          #  end
-          #end
-          cached = '&cached=0'
-
           price_request_url = "http://#{Rails.application.config_for('application/price')['host']}:#{Rails.application.config_for('application/price')['port']}/prices/search?catalog_number=#{c9}&manufacturer=#{CGI::escape(b9 || '')}&replacements=#{r9}#{request_emex}&format=json&for_site=1#{cached}"
 
           parsed_price_request_url = URI.parse(price_request_url)
