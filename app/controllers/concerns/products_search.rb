@@ -156,21 +156,15 @@ module ProductsSearch
 
         titles = @formatted_data.map{|k, v| v.map{|kk, vv| vv[:titles]}}.map{|kkk| kkk.map{|kkkk| kkkk.to_a}}.flatten(2).sort{|kkkkk, vvvvv| kkkkk[1] <=> vvvvv[1]}.reverse.map{|kkkkk| kkkkk[0]}.uniq
 
-        # Description
-        @meta_description = ''
-        # Названия
-        if titles.size > 1
-          @meta_description << titles[1, 3].join(', ').mb_chars.capitalize
-        else
-          @meta_description << titles[0].to_s.mb_chars.capitalize
-        end
-        @meta_description << ". Удобная оплата. Отправка в регионы, доставка по Москве, самовывоз Рязанский и Ленинградский проспект."
-        # /Description
         plog.debug 'Title'
         @meta_title = PriceMate.meta_title r9, titles, @formatted_data
         plog.debug '/Title'
 
         # Canonical
+        plog.debug 'Description'
+        @meta_description = PriceMate.meta_description titles
+        plog.debug '/Description'
+
         @meta_canonical = new_user_product_path(catalog_number: c9, replacements: r9)
         # /Canonical
 
