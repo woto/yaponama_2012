@@ -1,6 +1,6 @@
   <%= row class: 'top-space bottom-space' do %>
 
-    <%= content_tag :div, class: 'col-md-2 col-md-push-10' do %>
+    <%= content_tag :div, class: 'col-md-2 col-md-push-10 text-xs' do %>
       <div class="list-group">
         <% @formatted_data.map{|k, v| v.map{|k, v| k}}[0].each do |brand| %>
           <a href="#<%=brand %>" class="list-group-item"><%=brand %></a>
