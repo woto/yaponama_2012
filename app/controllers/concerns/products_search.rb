@@ -16,10 +16,11 @@ module ProductsSearch
 
       plog = Logger.new Rails.root.join('log', 'prices.log')
       plog.formatter = Logger::Formatter.new
-
       plog.debug "-----------------------------"
 
       @parsed_json = { "result_prices" => [] }
+
+      @meta_title = "Поиск запчастей по номеру"
 
       if c9.present?
 
@@ -77,8 +78,6 @@ module ProductsSearch
         plog.debug '/Получаем сведения с текущей базы'
 
       end
-
-      @meta_title = "Поиск запчастей по номеру"
 
       if @formatted_data.blank?
         render :status => 404 and return
