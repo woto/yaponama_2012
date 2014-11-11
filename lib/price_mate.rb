@@ -10,7 +10,7 @@ class PriceMate
   end
 
   def self.guess_spare_catalog catalog_number, manufacturer, replacements, emex, cached
-    @parsed_json = ::PriceMate.price_mate(catalog_number, manufacturer, replacements, emex, cached)
+    @parsed_json = ::PriceMate.search(catalog_number, manufacturer, replacements, emex, cached)
     @parsed_json = ::PriceMate.clear(@parsed_json)
     @formatted_data = PriceMate.process @parsed_json
     @formatted_data = PriceMate.database @formatted_data

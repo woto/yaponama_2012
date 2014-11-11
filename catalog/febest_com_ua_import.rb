@@ -8,26 +8,32 @@ class FebestComUaImport
     CSV.foreach(path) do |row|
       if row[0].present? && row[1].present? && row[3].present? && row[7].present?
 
-          c9 = row[0]
-          b9 = 'FEBEST'
-          r9 = '0'
-          request_emex = '&ext_ws=0'
-          cached = '&cached=0'
+          f = PriceMate.search row[0], 'FEBEST', false, false, false
 
-          #binding.pry
-          price_request_url = "http://#{Rails.application.config_for('application/price')['host']}:#{Rails.application.config_for('application/price')['port']}/prices/search?catalog_number=#{CGI::escape(c9)}&manufacturer=#{CGI::escape(b9 || '')}&replacements=#{r9}#{request_emex}&format=json&for_site=1#{cached}"
+          if f["result_prices"].present?
 
-          parsed_price_request_url = URI.parse(price_request_url)
-          resp = Net::HTTP.get_response(parsed_price_request_url)
-          @parsed_json = ActiveSupport::JSON.decode(resp.body)
-          puts "not found #{row}"
-          if @parsed_json["result_prices"].present?
             puts "found #{row}"
             brand = BrandMate.find_or_create_canonical!(row[6])
-            fr = SpareInfo.find_or_initialize_by(:catalog_number => row[0].gsub(/[^a-z0-9]/i, ''), :brand => febest, content: row[1])
-            fr.save!
-            to = SpareInfo.find_or_initialize_by(:catalog_number => row[7].gsub(/[^a-z0-9]/i, ''), :brand => brand, content: row[1])
-            to.save!
+            fr = SpareInfo.find_or_initialize_by(:catalog_number => row[0].gsub(/[^a-z0-9]/i, ''), :brand => febest)
+            fr.assign_attributes(
+              :spare_catalog => PriceMate.guess_spare_catalog(row[0], febest.name, false, false, false),
+              :content => row[1]
+            )
+            begin
+              fr.save!
+            rescue
+              binding.pry
+            end
+            to = SpareInfo.find_or_initialize_by(:catalog_number => row[7].gsub(/[^a-z0-9]/i, ''), :brand => brand)
+            to.assign_attributes(
+              :spare_catalog => PriceMate.guess_spare_catalog(row[7], brand.name, false, false, false),
+              :content => row[1]
+            )
+            begin
+              to.save!
+            rescue
+              binding.pry
+            end
             unless (model_from_csv = row[3].match(/\b(.+?)\b/)).nil?
               model = brand.models.find_or_create_by!(name: model_from_csv[0].mb_chars.upcase)
               generation = model.generations.find_or_create_by!(name: row[3])
