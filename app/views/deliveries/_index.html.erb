@@ -59,44 +59,20 @@
                 <div class="panel-heading delivery_zone">
                   <%# Картографические данные области %>
                   <div class="hidden">
-                    <div class="vertices">
-                      <%= delivery_zone.vertices %>
-                    </div>
-                    <div class="lat">
-                      <%= delivery_zone.lat %>
-                    </div>
-                    <div class="lng">
-                      <%= delivery_zone.lng %>
-                    </div>
-                    <div class="zoom">
-                      <%= delivery_zone.zoom %>
-                    </div>
-                    <div class="display_marker">
-                      <%= delivery_zone.display_marker %>
-                    </div>
-                    <div class="z_index">
-                      <%= delivery_zone.z_index %>
-                    </div>
-                    <div class="realize">
-                      <%= delivery_zone.realize %>
-                    </div>
+                    <div class="vertices"><%= delivery_zone.vertices %></div>
+                    <div class="lat"><%= delivery_zone.lat %></div>
+                    <div class="lng"><%= delivery_zone.lng %></div>
+                    <div class="zoom"><%= delivery_zone.zoom %></div>
+                    <div class="display_marker"><%= delivery_zone.display_marker %></div>
+                    <div class="z_index"><%= delivery_zone.z_index %></div>
+                    <div class="realize"><%= delivery_zone.realize %></div>
                     <% ['active', 'inactive'].each do |style| %>
                       <div class="<%= style %>">
-                        <div class="fill_color">
-                          <%= delivery_zone["#{style}_fill_color"] %>
-                        </div>
-                        <div class="fill_opacity">
-                          <%= delivery_zone["#{style}_fill_opacity"] %>
-                        </div>
-                        <div class="stroke_color">
-                          <%= delivery_zone["#{style}_stroke_color"] %>
-                        </div>
-                        <div class="stroke_opacity">
-                          <%= delivery_zone["#{style}_stroke_opacity"] %>
-                        </div>
-                        <div class="stroke_weight">
-                          <%= delivery_zone["#{style}_stroke_weight"] %>
-                        </div>
+                        <div class="fill_color"><%= delivery_zone["#{style}_fill_color"] %></div>
+                        <div class="fill_opacity"><%= delivery_zone["#{style}_fill_opacity"] %></div>
+                        <div class="stroke_color"><%= delivery_zone["#{style}_stroke_color"] %></div>
+                        <div class="stroke_opacity"><%= delivery_zone["#{style}_stroke_opacity"] %></div>
+                        <div class="stroke_weight"><%= delivery_zone["#{style}_stroke_weight"] %></div>
                       </div>
                     <% end %>
                   </div>
