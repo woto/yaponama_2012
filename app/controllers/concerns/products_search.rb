@@ -93,7 +93,7 @@ module ProductsSearch
         titles = @formatted_data.map{|k, v| v.map{|kk, vv| vv[:titles]}}.map{|kkk| kkk.map{|kkkk| kkkk.to_a}}.flatten(2).sort{|kkkkk, vvvvv| kkkkk[1] <=> vvvvv[1]}.reverse.map{|kkkkk| kkkkk[0]}.uniq
 
         plog.debug 'Title'
-        @meta_title = PriceMate.meta_title r9, titles, @formatted_data
+        @meta_title = PriceMate.meta_title c9, b9, r9, titles, @formatted_data
         plog.debug '/Title'
 
         plog.debug 'Description'

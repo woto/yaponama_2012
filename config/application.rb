@@ -587,6 +587,7 @@ module Yaponama2012
       end
     end
 
+    config.active_job.queue_adapter = :sidekiq
 
   end
 end

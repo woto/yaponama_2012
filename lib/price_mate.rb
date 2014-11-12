@@ -1,5 +1,17 @@
 class PriceMate
 
+  def self.catalog_number catalog_number
+    catalog_number.to_s.mb_chars.upcase.gsub(/[^A-Z0-9]/i, '')
+  end
+
+  def self.manufacturer manufacturer
+    manufacturer.to_s.mb_chars.upcase
+  end
+
+  def self.spare_catalog
+    SpareCatalog.find_or_create_by(name: 'НЕ РАЗОБРАННЫЕ')
+  end
+
   def self.true_or_false value
     case value
     when nil, false, '0', 0
@@ -7,31 +19,6 @@ class PriceMate
     when true, 1
       '1'
     end
-  end
-
-  def self.guess_spare_catalog catalog_number, manufacturer, replacements, emex, cached
-    @parsed_json = ::PriceMate.search(catalog_number, manufacturer, replacements, emex, cached)
-    @parsed_json = ::PriceMate.clear(@parsed_json)
-    @formatted_data = PriceMate.process @parsed_json
-    @formatted_data = PriceMate.database @formatted_data
-
-    if @formatted_data.length == 1
-
-      if @formatted_data.first.last.length == 1
-        spare_catalog = @formatted_data.first.last.first.last[:catalog]
-      elsif @formatted_data.first.last.length > 1
-        raise 'Более 1 производителя в результатах поиска'
-      elsif @formatted_data.first.last.length == 0
-        # nothing
-      end
-
-    elsif @formatted_data.length > 1
-      raise 'Более 1 артикула в результатах поиска'
-    elsif @formatted_data.length == 0
-      # nothing
-    end
-
-    spare_catalog || SpareCatalog.find_or_create_by!(name: 'НЕ РАЗОБРАННЫЕ')
   end
 
   def self.sort_by_brand_rating formatted_data
@@ -67,6 +54,7 @@ class PriceMate
       cn_scope.each do |manufacturer, mf_scope|
         mf_scope[:title] = (mf_scope[:titles].sort_by{|a, b| -b} + ([["", 0]]))[0][0]
         info = SpareInfo.where(:catalog_number => catalog_number, :cached_brand => manufacturer).first
+
         # Если такой SpareInfo имеется, то все последующие данные получаем через него
         if info.present?
           mf_scope[:info] = info
@@ -77,15 +65,17 @@ class PriceMate
         #elsif mf_scope["image_url"].present?
         #  catalog = SpareCatalog.find_by(name: mf_scope["image_url"])
         # Если категори получена из названий
-        else
-          catalog = SpareCatalog.
-            joins(:spare_catalog_tokens).
-            where("? LIKE '%' || spare_catalog_tokens.name || '%'", mf_scope[:titles].keys.join(' ')).
-            references(:spare_catalog_tokens).group('spare_catalogs.id').
-            order('sum(spare_catalog_tokens.weight) DESC').
-            select('spare_catalogs.*').
-            limit(1).first
         end
+
+        catalog = SpareCatalog.
+          joins(:spare_catalog_tokens).
+          where("? LIKE '%' || spare_catalog_tokens.name || '%'", mf_scope[:titles].keys.join(' ')).
+          references(:spare_catalog_tokens).group('spare_catalogs.id').
+          order('sum(spare_catalog_tokens.weight) DESC').
+          select('spare_catalogs.*').
+          limit(1).first
+        SpareCatalogJob.perform_later(catalog_number, mf_scope[:brand], catalog)
+
 
         mf_scope[:catalog] = catalog
       end
@@ -101,7 +91,7 @@ class PriceMate
     keywords.map{|k, v| k}.join(', ')
   end
 
-  def self.meta_title r9, titles, formatted_data
+  def self.meta_title c9, r9, b9, titles, formatted_data
     meta_title = ''
     if r9.present?
       meta_title << "Замены и аналоги #{c9} "
@@ -132,8 +122,8 @@ class PriceMate
 
 
   def self.search catalog_number, manufacturer, replacements, emex, cached
-    catalog_number = CGI::escape(catalog_number)
-    manufacturer = CGI::escape(manufacturer || '')
+    catalog_number = CGI::escape(PriceMate.catalog_number(catalog_number))
+    manufacturer = CGI::escape(PriceMate.manufacturer(manufacturer) || '')
     replacements = true_or_false(catalog_number)
     emex = "&ext_ws=#{true_or_false(emex)}"
     cached = "&cached=#{true_or_false(cached)}"
@@ -190,47 +180,39 @@ class PriceMate
 
         techs = ["supplier_title", "supplier_title_full", "price_logo_emex", "job_title", "supplier_title_en", "income_cost"]
 
-        formatted_data[cn][mf][:offers].push({
+        offer = {
           :country => item["job_import_job_country_short"],
           :min_days => [ item["job_import_job_delivery_days_declared"], item["job_import_job_delivery_days_average"] ].compact.min,
           :max_days => [ item["job_import_job_delivery_days_declared"], item["job_import_job_delivery_days_average"] ].compact.max,
           :probability => item["success_percent"],
-          :retail_cost => item["retail_cost"],
+          :retail_cost => item["retail_cost"].to_f.round,
           :count => item["count"],
           :title => '',
           :delivery => item["job_import_job_delivery_summary"],
-          :income_cost => item["income_cost"],
+          :income_cost => item["income_cost"].to_f.round,
           :tech => techs.map{|tech| item[tech].to_s}.reject(&:blank?).join(', ')
-        })
+        }
+
+        formatted_data[cn][mf][:offers].push(offer)
 
         # Мин. кол-во дней
         comparsion = formatted_data[cn][mf][:min_days].nil? ? [] : [formatted_data[cn][mf][:min_days]]
-        if item["job_import_job_delivery_days_average"].present?
-          comparsion.push item["job_import_job_delivery_days_average"]
-        end
-        if item["job_import_job_delivery_days_declared"].present?
-          comparsion.push item["job_import_job_delivery_days_declared"]
-        end
+        comparsion.push offer[:min_days]
         formatted_data[cn][mf][:min_days] = comparsion.min
 
         # Макс. кол-во дней
         comparsion = formatted_data[cn][mf][:max_days].nil? ? [] : [formatted_data[cn][mf][:max_days]]
-        if item["job_import_job_delivery_days_average"].present?
-          comparsion.push item["job_import_job_delivery_days_average"]
-        end
-        if item["job_import_job_delivery_days_declared"].present?
-          comparsion.push item["job_import_job_delivery_days_declared"]
-        end
+        comparsion.push offer[:max_days]
         formatted_data[cn][mf][:max_days] = comparsion.max
 
         # Мин. цена
         comparsion = formatted_data[cn][mf][:min_cost].nil? ? [] : [formatted_data[cn][mf][:min_cost]]
-        comparsion.push item["retail_cost"]
+        comparsion.push offer[:retail_cost]
         formatted_data[cn][mf][:min_cost] = comparsion.min
 
         # Макс. цена
         comparsion = formatted_data[cn][mf][:max_cost].nil? ? [] : [formatted_data[cn][mf][:max_cost]]
-        comparsion.push item["retail_cost"]
+        comparsion.push offer[:retail_cost]
         formatted_data[cn][mf][:max_cost] = comparsion.max
 
       end

@@ -8,7 +8,8 @@ class Products::InorderController < ApplicationController
     raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
     begin
 
-      Rails.application.routes.recognize_path params[:return_path]
+      # TODO Отвалилось возможно в связи с переходом с Rails 4.2.0 beta2 на beta4
+      #Rails.application.routes.recognize_path params[:return_path]
       @items = @items.selected(@grid.item_ids)
       any_checked_validation
       products_belongs_to_one_user_validation!

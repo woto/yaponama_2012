@@ -13,7 +13,10 @@ class SpareInfo < ActiveRecord::Base
   has_many :spare_applicabilities, dependent: :destroy
 
   def to_label
-    "#{catalog_number} (#{cached_brand})"
+    # TODO ранее тут был cached_brand. И в общем все работало, за исключением того, что допустим я создаю spare_info,
+    # но валидация не проходит. А т.к. cached_brand заполняется в before_save (и до него доходит), то при выводе ошибки
+    # через to_label cached_brand пустой. Как вариант можно изменить заполнение cached_brand с before_save на before_validation
+    "#{catalog_number} (#{brand.to_label})"
   end
 
   validates :catalog_number, :presence => true, uniqueness:  { case_sensitive: false, :scope => :brand_id }

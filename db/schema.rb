@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110045739) do
+ActiveRecord::Schema.define(version: 20141111210807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1234,6 +1234,8 @@ ActiveRecord::Schema.define(version: 20141110045739) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cached_spare_info"
+    t.text     "notes"
+    t.text     "notes_invisible"
   end
 
   add_index "spare_applicabilities", ["brand_id"], name: "index_spare_applicabilities_on_brand_id", using: :btree
@@ -1270,6 +1272,8 @@ ActiveRecord::Schema.define(version: 20141110045739) do
     t.string   "name"
     t.string   "cached_spare_catalog"
     t.integer  "spare_catalog_id"
+    t.text     "notes"
+    t.text     "notes_invisible"
   end
 
   add_index "spare_infos", ["brand_id"], name: "index_spare_infos_on_brand_id", using: :btree
@@ -1280,11 +1284,11 @@ ActiveRecord::Schema.define(version: 20141110045739) do
     t.integer  "to_spare_info_id"
     t.string   "from_cached_spare_info"
     t.string   "to_cached_spare_info"
-    t.string   "comment"
-    t.string   "source"
     t.boolean  "wrong"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "notes"
+    t.text     "notes_invisible"
   end
 
   add_index "spare_replacements", ["from_spare_info_id"], name: "index_spare_replacements_on_from_spare_info_id", using: :btree
