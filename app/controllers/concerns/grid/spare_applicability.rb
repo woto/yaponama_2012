@@ -31,6 +31,13 @@ module Grid::SpareApplicability
         :type => :string,
       }
 
+      columns_hash['notes'] = {
+        :type => :string,
+      }
+      columns_hash['notes_invisible'] = {
+        :type => :string,
+      }
+
       columns_hash['created_at'] = {
         :type => :date,
       }
@@ -48,6 +55,8 @@ module Grid::SpareApplicability
       @grid.visible_cached_model = '1'
       @grid.visible_cached_generation = '1'
       @grid.visible_cached_modification = '1'
+      @grid.visible_notes = '1'
+      @grid.visible_notes_invisible = '1'
       @grid.visible_updated_at = '1'
     end
 
