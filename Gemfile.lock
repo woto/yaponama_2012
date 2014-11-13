@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/jonleighton/poltergeist.git
-  revision: df101eb04d6af3869274d81d21ad45531e5a33c8
+  revision: 65f0c462f60cf6aaac5ddd3997a872e2b234efdb
   specs:
     poltergeist (1.5.1)
       capybara (~> 2.4)
@@ -28,13 +28,13 @@ GIT
 
 GIT
   remote: git://github.com/rails/arel.git
-  revision: b364cb1083f4e9d7a9e313e5de1174046bcfcbd4
+  revision: 5035526b534a5d7c9d95eb6b66ade349c3a947f0
   specs:
     arel (6.0.0.beta2)
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: badd616cc931dc64de2540d734f5e01000262c0f
+  revision: 6ff78469cd70ce821dd1455f3607780863f5a9d7
   specs:
     actionmailer (4.2.0.beta4)
       actionpack (= 4.2.0.beta4)
@@ -136,7 +136,7 @@ GEM
     bcrypt (3.1.9)
     binding_of_caller (0.7.3.pre1)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.0.1)
+    bootstrap-sass (3.3.1.0)
       sass (~> 3.2)
     bootswatch-rails (3.2.4)
       railties (>= 3.1)
@@ -188,26 +188,26 @@ GEM
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    less (2.5.1)
+    less (2.6.0)
       commonjs (~> 0.2.7)
-    less-rails (2.5.0)
+    less-rails (2.6.0)
       actionpack (>= 3.1)
-      less (~> 2.5.0)
+      less (~> 2.6.0)
     libv8 (3.16.14.7)
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
-    mail (2.6.1)
+    mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.4.3)
-    mini_portile (0.6.0)
-    minitest (5.4.2)
+    mini_portile (0.6.1)
+    minitest (5.4.3)
     money (6.4.0)
       i18n (>= 0.6.4, <= 0.7.0.beta1)
     multi_json (1.10.1)
     nbayes (0.1.1)
-    nokogiri (1.6.3.1)
-      mini_portile (= 0.6.0)
+    nokogiri (1.6.4.1)
+      mini_portile (~> 0.6.0)
     nokogumbo (1.1.12)
       nokogiri
     pg (0.17.1)
@@ -269,7 +269,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    selenium-webdriver (2.43.0)
+    selenium-webdriver (2.44.0)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
@@ -315,7 +315,7 @@ GEM
     thread_safe (0.3.4)
     tilt (1.4.1)
     timers (1.1.0)
-    turbolinks (2.5.1)
+    turbolinks (2.5.2)
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -328,7 +328,7 @@ GEM
       railties (~> 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     websocket (1.2.1)
-    websocket-driver (0.3.5)
+    websocket-driver (0.4.0)
     whenever (0.9.4)
       chronic (>= 0.6.3)
     xpath (2.0.0)
