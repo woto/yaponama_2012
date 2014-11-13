@@ -44,3 +44,13 @@ cerato_march_2013:
   name: март 2013 -
   model: cerato_ki
   cached_model: Cerato
+
+generation1:
+  name: Generation
+  model: model1
+  cached_model: Model
+
+generation2:
+  name: Generation
+  model: model2
+  cached_model: Model

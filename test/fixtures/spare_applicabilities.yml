@@ -159,3 +159,25 @@ sa_17:
   cached_brand: KI
   cached_model: Cerato
   cached_spare_info: 2103 (KI)
+
+brand1_model1_generation1_modification1:
+  spare_info: spare_info1
+  brand: brand1
+  model: model1
+  generation: generation1
+  modification: modification1
+  cached_brand: BRAND1
+  cached_model: Model
+  cached_generation: Generation
+  cached_modification: Modification
+
+brand2_model2_generation2_modification2:
+  spare_info: spare_info2
+  brand: brand2
+  model: model2
+  generation: generation2
+  modification: modification2
+  cached_brand: BRAND2
+  cached_model: Model
+  cached_generation: Generation
+  cached_modification: Modification

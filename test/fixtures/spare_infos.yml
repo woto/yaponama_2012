@@ -63,3 +63,17 @@ ms_2103:
     name: 2103 (MS)
     cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
     spare_catalog: bamper_zadniy
+
+spare_info1:
+    catalog_number: SPARE_INFO1
+    brand: brand1
+    spare_catalog: shatun
+    cached_brand: BRAND1
+    cached_spare_catalog: ШАТУН
+
+spare_info2:
+    catalog_number: SPARE_INFO2
+    brand: brand2
+    spare_catalog: shatun
+    cached_brand: BRAND2
+    cached_spare_catalog: ШАТУН
