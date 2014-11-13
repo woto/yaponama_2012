@@ -4,8 +4,8 @@
   <%= page_header %>
 
   <ol id="categories-brands">
-    <% @spare_infos.each do |spare_info| %>
-      <li> <%= link_to spare_info.spare_catalog.name, category_brands_path(spare_info.spare_catalog) %> </li>
+    <% @categories.each do |category| %>
+      <li> <%= link_to category.cached_spare_catalog, category_brands_path(category.to_category_param) %> </li>
     <% end %>
   </ol>
 

@@ -19,6 +19,10 @@ class SpareInfo < ActiveRecord::Base
     "#{catalog_number} (#{brand.to_label})"
   end
 
+  def to_category_param
+    "#{spare_catalog_id}-#{cached_spare_catalog.parameterize}"
+  end
+
   validates :catalog_number, :presence => true, uniqueness:  { case_sensitive: false, :scope => :brand_id }
 
   validates :spare_catalog, :presence => true
