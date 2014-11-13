@@ -62,7 +62,7 @@ class SpareApplicability < ActiveRecord::Base
   scope :by_generation, ->(id) {
     where(generation_id: id.to_i).
     order(:cached_modification).
-    where.not(cached_modification: nil).
+    where.not(modification_id: nil).
     select(:modification_id, :cached_brand, :cached_model, :cached_generation, :cached_modification).
     distinct
   }
