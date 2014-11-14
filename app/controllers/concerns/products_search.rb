@@ -101,7 +101,7 @@ module ProductsSearch
         plog.debug '/Description'
 
         plog.debug 'Canonical'
-        @meta_canonical = new_user_product_path(catalog_number: c9, replacements: r9)
+        @meta_canonical = new_user_product_url(catalog_number: c9, replacements: r9)
         plog.debug '/Canonical'
 
         plog.debug '/Заполняем метаданные'

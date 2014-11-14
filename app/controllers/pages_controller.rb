@@ -15,7 +15,6 @@ class PagesController < ApplicationController
     end
 
     @meta_title = @resource.title
-    @meta_canonical = '/' + @resource.path
     @meta_description = @resource.description
     @meta_keywords = @resource.keywords
     @meta_robots = @resource.robots
