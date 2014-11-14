@@ -31,30 +31,32 @@ module Yaponama2012
 
     # Offset Russian Time Zones in UTC
     config.russian_time_zones = {
-      "3"  => 'Калининградское время', 
-      "4"  => 'Московское время', 
-      "6"  => 'Екатеринбургское время', 
-      "7"  => 'Омское время', 
-      "8"  => 'Красноярское время',
-      "9"  => 'Иркутское время', 
-      "10" => 'Якутское время', 
-      "11" => 'Владивостокское время', 
-      "12" => 'Магаданское время',
+      "2"  => 'Калининградское время',
+      "3"  => 'Московское время',
+      "4"  => 'Самарское время',
+      "5"  => 'Екатеринбургское время',
+      "6"  => 'Омское время',
+      "7"  => 'Красноярское время',
+      "8"  => 'Иркутское время',
+      "9"  => 'Якутское время',
+      "10" => 'Владивостокское время',
+      "11" => 'Среднеколымское время',
+      "12" => 'Камчатское время',
     }
 
     config.payment_systems = {
       "BANKOCEAN2R"          => { title: "Банковской картой", system: 'robokassa', blocks: ['payment-payer']},
       "Qiwi29OceanR"         => { title: "QIWI", system: 'robokassa', blocks: ['payment-payer']},
-      "YandexMerchantOceanR" => { title: "Яндекс.Деньги", system: 'robokassa', blocks: ['payment-payer']},
+      "YandexMerchantR"      => { title: "Яндекс.Деньги", system: 'robokassa', blocks: ['payment-payer']},
       "WMRM"                 => { title: "WMR", system: 'robokassa', blocks: ['payment-payer']},
       "RapidaOceanSvyaznoyR" => { title: "Через Связной", system: 'robokassa', blocks: ['payment-payer']},
       "RapidaOceanEurosetR"  => { title: "Через Евросеть", system: 'robokassa', blocks: ['payment-payer']},
       "MegafonR"             => { title: "Мегафон", system: 'robokassa', blocks: ['payment-payer']},
-      "MobicomMtsR"          => { title: "МТС", system: 'robokassa', blocks: ['payment-payer']},
+      "MtsR"                 => { title: "МТС", system: 'robokassa', blocks: ['payment-payer']},
       "MobicomBeelineR"      => { title: "Билайн", system: 'robokassa', blocks: ['payment-payer']},
       "Sberbank"             => { title: "Сбербанк", system: 'sberbank', blocks: ['payment-payer', 'payment-payer-address']}
     }
-    
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
@@ -586,8 +588,6 @@ module Yaponama2012
         super(name)
       end
     end
-
-    config.active_job.queue_adapter = :sidekiq
 
   end
 end
