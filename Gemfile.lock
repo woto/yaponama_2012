@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/jonleighton/poltergeist.git
-  revision: 65f0c462f60cf6aaac5ddd3997a872e2b234efdb
+  revision: f394c984af7e6db72f284900b59c715975cb0621
   specs:
     poltergeist (1.5.1)
       capybara (~> 2.4)
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 6ff78469cd70ce821dd1455f3607780863f5a9d7
+  revision: 1c610eed9485529376baf85659d91ac29655014d
   specs:
     actionmailer (4.2.0.beta4)
       actionpack (= 4.2.0.beta4)
@@ -96,20 +96,6 @@ GIT
       ancestry
 
 GIT
-  remote: https://github.com/Shopify/active_merchant
-  revision: b14e285774e599697653325c471e1c85a7163d64
-  ref: b14e285774e599697653325c471e1c85a7163d64
-  specs:
-    activemerchant (1.24.0)
-      active_utils (>= 1.0.2)
-      activesupport (>= 2.3.11)
-      builder (>= 2.0.0)
-      i18n
-      json (>= 1.5.1)
-      money
-      nokogiri
-
-GIT
   remote: https://github.com/nathanvda/cocoon
   revision: 02099b54a1f62edfefaf74669840cb321f3c01ac
   specs:
@@ -131,7 +117,7 @@ GEM
       i18n
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
-    autoprefixer-rails (3.1.2.20141016)
+    autoprefixer-rails (4.0.0)
       execjs
     bcrypt (3.1.9)
     binding_of_caller (0.7.3.pre1)
@@ -210,6 +196,14 @@ GEM
       mini_portile (~> 0.6.0)
     nokogumbo (1.1.12)
       nokogiri
+    offsite_payments (2.0.1)
+      active_utils (~> 2.2.0)
+      activesupport (>= 3.2.14, < 5.0.0)
+      builder (>= 2.1.2, < 4.0.0)
+      i18n (~> 0.5)
+      json (~> 1.7)
+      money (< 7.0.0)
+      nokogiri (~> 1.4)
     pg (0.17.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -340,7 +334,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activemerchant!
   ancestry
   arel!
   autoprefixer-rails
@@ -364,6 +357,7 @@ DEPENDENCIES
   kaminari
   less-rails
   nbayes
+  offsite_payments
   pg
   poltergeist!
   pry
