@@ -119,7 +119,7 @@
                     <% (1..3).each do |n| %>
                       <% if delivery_zone.instance_eval("email#{n}").present? %>
                         <%= icon 'envelope' %>
-                        <a href="mailto:#{delivery_zone.instance_eval("email#{n}") }"><span itemprop="email">#{delivery_zone.instance_eval("email#{n}") }</span></a><br />
+                        <a href="mailto:<%= delivery_zone.instance_eval("email#{n}") %>"><span itemprop="email"><%= delivery_zone.instance_eval("email#{n}") %></span></a><br />
                       <% end %>
                     <% end %>
 
