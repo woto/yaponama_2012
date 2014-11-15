@@ -13,12 +13,17 @@ class PagesControllerTest < ActionController::TestCase
     assert_equal 301, response.status
   end
 
+  test 'Проверка редиректа на страницу этого же сайта' do
+    get :show, :path => '3/3'
+    assert_redirected_to '/4/4'
+    assert_equal 301, response.status
+  end
+
   test 'Проверка тестовой страницы' do
 
     get :show, :path => '1/1'
 
     assert_select 'title', 'title'
-    assert_select('link[rel="canonical"][href="/1/1"]')
     assert_select('meta[name="description"][content="description"]')
     assert_select('meta[name="keywords"][content="keywords"]')
     assert_select('meta[name="robots"][content="robots"]')

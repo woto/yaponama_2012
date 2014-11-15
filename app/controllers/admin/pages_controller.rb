@@ -74,4 +74,8 @@ class Admin::PagesController < PagesController
     @resource_class = Page
   end
 
+  def find_resource
+    @resource = @resource_class.finder(params[:id])
+  end
+
 end

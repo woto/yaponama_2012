@@ -35,6 +35,7 @@ ru:
         robots: Запрет индексации и следования
         title: Заголовок
         path: Путь
+        redirect_url: Переадресация
         content: Содержание
       deliveries/place:
         postal_address_required: Требуется указание адреса доставки

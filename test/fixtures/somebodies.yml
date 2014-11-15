@@ -339,7 +339,7 @@ wrong_cached_russian_time_zone_auto_id_2:
   prepayment: 100
   role: guest
   auth_token: F0w8aF28eoqmbOYW9HSRBE
-  cached_russian_time_zone_auto_id: 5
+  cached_russian_time_zone_auto_id: 1
   order_rule: all
   logout_from_other_places: true
 

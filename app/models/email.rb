@@ -36,7 +36,7 @@ class Email < ActiveRecord::Base
   end
 
   def deliver_confirmation
-    ConfirmMailer.email(self).deliver_now
+    ConfirmMailer.email(self).deliver_later
   end
 
   def to_label

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111210807) do
+ActiveRecord::Schema.define(version: 20141115055924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -738,8 +738,8 @@ ActiveRecord::Schema.define(version: 20141111210807) do
     t.boolean  "phantom_before"
     t.boolean  "phantom_after"
     t.datetime "created_at"
-    t.string   "url_before"
-    t.string   "url_after"
+    t.string   "redirect_url_before"
+    t.string   "redirect_url_after"
   end
 
   add_index "page_transactions", ["creator_id"], name: "index_page_transactions_on_creator_id", using: :btree
@@ -757,7 +757,7 @@ ActiveRecord::Schema.define(version: 20141111210807) do
     t.boolean  "phantom"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "url"
+    t.string   "redirect_url"
   end
 
   create_table "pages_uploads", id: false, force: true do |t|

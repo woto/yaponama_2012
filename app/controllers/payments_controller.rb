@@ -2,7 +2,6 @@ class PaymentsController < ApplicationController
 
   layout false, only: ['print']
 
-
   private
 
     def set_resource_class

@@ -12,7 +12,7 @@
 
               <address style="margin-bottom: 0">
                 <strong style="color: #eee; margin-bottom: 5px; display: inline-block; font-family: 'trebuchet ms','helvetica cy',sans-serif; text-transform: uppercase"><span> <%= link_to(dp.name, deliveries_path, style: "color: white") %> </span></strong>
-
+                <br />
                 <span><%= dp.address_locality %></span>
                 <span><%= dp.postal_code %></span>
                 <% if dp.postal_code.present? %>
@@ -24,14 +24,14 @@
                 <% end %>
                 <% (1..5).each do |n| %>
                   <% if dp.instance_eval("phone#{n}").present? %>
-                    <%= icon 'phone-square' %>
+                    <%= icon 'phone-square' %>&nbsp;&nbsp;
                     <span><%= dp.instance_eval("phone#{n}") %></span><br />
                   <% end %>
                 <% end %>
                 <% (1..3).each do |n| %>
                   <% if dp.instance_eval("email#{n}").present? %>
-                    <%= icon 'envelope' %>
-                    <a href="mailto:<%= dp.instance_eval("email#{n}") %>"><span><%= dp.instance_eval("email#{n}") %></span></a><br />
+                    <%= icon 'envelope' %>&nbsp;&nbsp;
+                    <a href="mailto:<%= dp.instance_eval("email#{n}") %>"><span style="color: #DDD"><%= dp.instance_eval("email#{n}") %></span></a><br />
                   <% end %>
                 <% end %>
               </address>

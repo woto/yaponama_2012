@@ -23,9 +23,9 @@ class PasswordResetsController < ApplicationController
 
         case @password_reset.with
         when 'email'
-          PasswordResetMailer.email(@password_reset.value, somebody.password_reset_token).deliver_now
+          PasswordResetMailer.email(@password_reset.value, somebody.password_reset_token).deliver_later
         when 'phone'
-          PasswordResetMailer.phone(@password_reset.value, somebody.password_reset_token).deliver_now
+          PasswordResetMailer.phone(@password_reset.value, somebody.password_reset_token).deliver_later
         end
 
         redirect_to pin_password_reset_path(
