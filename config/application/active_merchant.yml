@@ -1,8 +1,8 @@
 defaults: &defaults
   integration_mode: :test
-  pass_1:           password
-  pass_2:           password
-  user:             login
+  user:             avtorif
+  pass1:            vjqgfhjkm1
+  pass2:            vjqgfhjkm2
 
 development:
   <<: *defaults

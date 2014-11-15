@@ -418,6 +418,10 @@ Yaponama2012::Application.routes.draw do
   # STATS
   resources :stats, :only => [:create]
 
+  post 'robokassa/result' => 'robokassa#result'
+  post 'robokassa/success' => 'robokassa#success'
+  post 'robokassa/fail' => 'robokassa#fail'
+
   concerns :global_and_admin
 
 
