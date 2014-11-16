@@ -2,3 +2,8 @@ User-Agent: *
 Allow: /
 Sitemap: http://www.<%= "#{Rails.application.config_for('application/site')['host']}" %>/sitemap.xml.gz
 Host: www.<%= "#{Rails.application.config_for('application/site')['host']}" %>
+
+<% @blocked_bots.each do |bot| %>
+User-agent: <%= bot.user_agent %>
+Disallow: /
+<% end %>

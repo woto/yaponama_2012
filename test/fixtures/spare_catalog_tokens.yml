@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  spare_catalog_id: 
+  name: MyString
+
+two:
+  spare_catalog_id: 
+  name: MyString

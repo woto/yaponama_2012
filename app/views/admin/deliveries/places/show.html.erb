@@ -1,17 +1,13 @@
-<div class="container">
+<%= b1 do %>
 
-  <%= row class: 'top-space' do %>
+  <% @meta_title = "Просмотр #{@resource.to_label}" %>
 
-    <% title_show %>
-
-    <%= breadcrumb true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
-
-    <%= title_show %>
-
-    <%= render 'smart_show' %>
-
+  <%= breadcrumb true do |b| %>
+    <%= b.item @meta_title %>
   <% end %>
 
-</div>
+  <%= page_header %>
+
+  <%= render 'smart_show' %>
+
+<% end %>

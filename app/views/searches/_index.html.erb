@@ -1,4 +1,4 @@
-<% if @status[:offers] %>
+<% if @formatted_data.present? %>
 
   <% if @r9 == '1' %>
     <%= render :partial => "/searches/replacements" %>

@@ -1,0 +1,2 @@
+class RobokassaError < StandardError
+end

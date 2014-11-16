@@ -5,7 +5,7 @@
     <div class="navbar-header">
 
       <a class="navbar-brand" href="/">
-        <%= image_tag "logo.png" %>
+        <%= image_tag "logo.png", alt: Rails.application.config_for('application/block')['name'] %>
       </a>
 
       <button class="navbar-toggle ignoredirty" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -98,11 +98,11 @@
           <% end %>
 
           <%= content_tag :li, class: highlight_active2(/\/catalogs/) do %>
-            <%= link_to "Каталог", catalogs_path %>
+            <%= link_to "Каталоги", catalogs_path %>
           <% end %>
 
           <%= content_tag :li, class: highlight_active2(/\/categories/) do %>
-            <%= link_to "Категории", categories_path %>
+            <%= link_to "Запчасти", categories_path %>
           <% end %>
 
           <%= content_tag :li, class: highlight_active2(/\/faqs/) do %>

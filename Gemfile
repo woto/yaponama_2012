@@ -88,7 +88,7 @@ gem 'sitemap_generator'
 #gem 'fastercsv'
 #gem 'yandex_mystem'
 gem 'ipgeobase', :git => 'git://github.com/woto/ipgeobase.git'
-gem 'activemerchant', :require => 'active_merchant', :git => 'https://github.com/Shopify/active_merchant', :ref => 'b14e285774e599697653325c471e1c85a7163d64'
+gem 'offsite_payments'
 
 #gem "hiredis", "~> 0.3.1"
 #gem "redis", "~> 2.2.0", :require => ["redis/connection/hiredis", "redis"]
@@ -116,8 +116,6 @@ gem 'ancestry'
 #gem 'omniauth-odnoklassniki'
 #gem 'omniauth-mailru'
 
-# Необходима версия 2.6.0 чтобы не резался многострочный заголовок
-#gem 'mail', github: 'mikel/mail'
 gem 'htmlentities'
 gem 'dalli'
 gem 'puma'
@@ -135,5 +133,7 @@ gem 'bootswatch-rails'
 gem 'font-awesome-sass'
 gem 'read_only'
 gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
+gem 'sinatra', '>= 1.3.0', :require => nil
+
 
 #gem 'mysql2'

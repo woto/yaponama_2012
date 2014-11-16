@@ -1,11 +1,12 @@
 class SpareReplacement < ActiveRecord::Base
+  include FromSpareInfoAttributes
   include FromCachedSpareInfo
+  include ToSpareInfoAttributes
   include ToCachedSpareInfo
 
-  include FromSpareInfoAttributes
-  include ToSpareInfoAttributes
-
   validates :from_spare_info, :to_spare_info, presence: true
+
+  validates :from_spare_info, uniqueness: { scope: [:to_spare_info] }
 
   validate :to_spare_info do
     errors.add(:to_spare_info, 'Товары идентичны, выберите другой') if to_spare_info == from_spare_info

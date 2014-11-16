@@ -3,7 +3,7 @@
 <%= b1 do %>
 
   <ol class="breadcrumb">
-    <%= b.item('Каталог', catalogs_path) %>
+    <%= b.item('Каталоги', catalogs_path) %>
     <%= b.item(@brand.name, catalogs_brand_path(@brand)) %>
     <%= b.item(@model.name) %>
   </ol>
@@ -23,6 +23,13 @@
   <% if @model.content.present? %>
     <hr />
     <div id="catalogs-model-content"><%== @model.content %></div>
+  <% end %>
+
+  <% if @current_user.seller? %>
+    <%= link_to edit_admin_model_path(@model, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
+      <%= icon 'edit' %>
+      Редактировать
+    <% end %>
   <% end %>
 
 <% end %>

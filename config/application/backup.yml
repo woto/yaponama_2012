@@ -8,6 +8,7 @@ defaults: &defaults
   - modifications
   - faqs
   - spare_catalogs
+  - spare_catalog_tokens
   - spare_infos
   - spare_replacements
   - spare_applicabilities
@@ -19,4 +20,7 @@ test:
   <<: *defaults
 
 production:
-  <<: *defaults
+  avtorif.ru:
+    <<: *defaults
+  zapstok.ru:
+    <<: *defaults

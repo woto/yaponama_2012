@@ -1,23 +1,28 @@
 defaults: &defaults
-  host: 192.168.1.253
-  port: 3001
+  host: localhost
+  port: 85
 
-  price_request_cache_with_replacements_in_seconds: 1
-  price_request_cache_without_replacements_in_seconds: 1
+  price_request_cache_with_replacements_in_seconds: 7776000 # 3 мес.
+  price_request_cache_without_replacements_in_seconds: 3600 #  1 час.
 
   request_emex: false
   send_request_from_search_page: true
 
 development:
   <<: *defaults
+  host: 192.168.1.253
+  port: 3001
+
+  price_request_cache_with_replacements_in_seconds: 1
+  price_request_cache_without_replacements_in_seconds: 1
 
 test:
   <<: *defaults
+  host: 192.168.1.253
+  port: 3001
 
 production:
-  <<: *defaults
-  host: avtorif.ru
-  port: 85
-
-  price_request_cache_with_replacements_in_seconds: 7776000 # 3 мес.
-  price_request_cache_without_replacements_in_seconds: 3600 #  1 час.
+  avtorif.ru:
+    <<: *defaults
+  zapstok.ru:
+    <<: *defaults

@@ -3,7 +3,7 @@
 <%= b1 do %>
 
   <ol class="breadcrumb">
-    <%= b.item('Каталог', catalogs_path) %>
+    <%= b.item('Каталоги', catalogs_path) %>
     <%= b.item(@brand.name) %>
   </ol>
 
@@ -24,5 +24,14 @@
 
   <div id="catalogs-brand-preview"><%==  @brand.preview %></div>
   <div id="catalogs-brand-content"><%== @brand.content %></div>
+
+  <br />
+
+  <% if @current_user.seller? %>
+    <%= link_to edit_admin_brand_path(@brand, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
+      <%= icon 'edit' %>
+      Редактировать
+    <% end %>
+  <% end %>
 
 <% end %>

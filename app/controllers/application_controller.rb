@@ -169,22 +169,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def item_status(catalog_number, manufacturer)
-    status = {
-      :own => {:status => 'unavaliable', :data => nil},
-    }
-
-    # Наши данные
-    spare_info = SpareInfo.where(:catalog_number => catalog_number, :cached_brand => manufacturer).first
-
-    if spare_info.present?
-      status[:own][:status] = 'avaliable'
-      status[:own][:data] = spare_info
-    end
-
-    return status
-  end
-
   def admin_zone?
     params[:controller].partition('/').first == 'admin'
   end
@@ -326,6 +310,7 @@ class ApplicationController < ActionController::Base
   end
 
   def update_resource
+    #binding.pry
     @resource.assign_attributes(resource_params)
   end
 

@@ -10,12 +10,11 @@ class PagesController < ApplicationController
 
   def show
 
-    if @resource.url?
-      redirect_to @resource.url, status: 301
+    if @resource.redirect_url?
+      redirect_to @resource.redirect_url, status: 301
     end
 
     @meta_title = @resource.title
-    @meta_canonical = '/' + @resource.path
     @meta_description = @resource.description
     @meta_keywords = @resource.keywords
     @meta_robots = @resource.robots

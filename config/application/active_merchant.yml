@@ -1,8 +1,8 @@
 defaults: &defaults
-  integration_mode: 'production'
-  pass_1:           'password'
-  pass_2:           'password'
-  user:             'login'
+  integration_mode: :test
+  user:             avtorif
+  pass1:            vjqgfhjkm1
+  pass2:            vjqgfhjkm2
 
 development:
   <<: *defaults
@@ -11,4 +11,9 @@ test:
   <<: *defaults
 
 production:
-  <<: *defaults
+  avtorif.ru:
+    <<: *defaults
+    integration_mode: :production
+  zapstok.ru:
+    <<: *defaults
+    :integration_mode: :production

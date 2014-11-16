@@ -17,6 +17,25 @@ end
 
 Yaponama2012::Application.routes.draw do
 
+
+  # /catalogs/brands/дочерний_id -> /catalogs/brands/родительский_id
+  get "/catalogs/brands/:id", constraints: lambda{|params, env| Brand.find(params[:id]).brand_id?}, to: redirect{|params, request|
+    query_string = "?#{request.query_string}" if request.query_string.present?
+    "/catalogs/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
+  }
+
+  # /brands/дочерний_id/parts -> /brands/родительский_id/parts
+  get "/brands/:id/parts", constraints: lambda{|params, env| Brand.find(params[:id]).brand_id?}, to: redirect{|params, request|
+    query_string = "?#{request.query_string}" if request.query_string.present?
+    "/brands/#{Brand.find(params[:id]).brand.to_param}/parts#{query_string}"
+  }
+
+  # /categories/категория/brands/дочерний_id -> /categories/категория/brands/родительский_id
+  get "/categories/:category_id/brands/:id", constraints: lambda{|params, env| Brand.find(params[:id]).brand_id?}, to: redirect{|params, request|
+    query_string = "?#{request.query_string}" if request.query_string.present?
+    "/categories/#{params[:category_id]}/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
+  }
+
   concern :bmgm do
     resources :brands
     resources :models
@@ -393,8 +412,15 @@ Yaponama2012::Application.routes.draw do
   # ROBOTS.TXT
   get 'robots.txt' => "robots_txt#index"
 
+  # OPENSEARCH.XML
+  get 'opensearch.xml' => "opensearch_xml#index"
+
   # STATS
   resources :stats, :only => [:create]
+
+  post 'robokassa/result' => 'robokassa#result'
+  post 'robokassa/success' => 'robokassa#success'
+  post 'robokassa/fail' => 'robokassa#fail'
 
   concerns :global_and_admin
 
@@ -435,6 +461,9 @@ Yaponama2012::Application.routes.draw do
   }
 
   get "*path" => "pages#show", :constraints => PageConstraint.new, format: false
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 
   if Rails.application.config_for('application/common')['suppress_exceptions']
     get "*error", :to => "application#render_404", format: false

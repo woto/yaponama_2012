@@ -12,17 +12,17 @@ class Page < ActiveRecord::Base
   before_validation :normalize
 
   validates :path, presence: true, uniqueness: {case_sensitive: false}
-  validates :url, uniqueness: {case_sensitive: false}
-
+  validates :redirect_url, uniqueness: {case_sensitive: false}
+  validates :redirect_url, format: { with: /\A\/|http:\/\/|https:\/\// }
 
   has_and_belongs_to_many :uploads
 
   def normalize
 
-    self.path = self.path.gsub(/^\/+/, '')
-    self.path = self.path.gsub(/\/+$/, '')
-    self.path = self.path.gsub(/^\s+/, '')
-    self.path = self.path.gsub(/\s+$/, '')
+    self.path = self.path.gsub(/\A\/+/, '')
+    self.path = self.path.gsub(/\/+\z/, '')
+    self.path = self.path.gsub(/\A\s+/, '')
+    self.path = self.path.gsub(/\s+\z/, '')
 
     if self.path.length <= 0
       errors.add(:path, "не может быть пустым.")

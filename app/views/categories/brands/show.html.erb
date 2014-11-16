@@ -3,7 +3,7 @@
 <%= b1 do %>
 
   <ol class="breadcrumb">
-    <%= b.item('Категории', categories_path) %>
+    <%= b.item('Запчасти', categories_path) %>
     <%= b.item(@resource.name, category_brands_path(params[:category_id])) %>
     <%= b.item(@brand.name) %>
   </ol>
@@ -17,5 +17,12 @@
       <li> <%= link_to model.cached_model, category_model_path(params[:category_id], model.to_model_param) %> </li>
     <% end %>
   </ol>
+
+  <% if @current_user.seller? %>
+    <%= link_to edit_admin_brand_path(@brand, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
+      <%= icon 'edit' %>
+      Редактировать
+    <% end %>
+  <% end %>
 
 <% end %>

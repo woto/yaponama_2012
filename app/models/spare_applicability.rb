@@ -1,16 +1,15 @@
 class SpareApplicability < ActiveRecord::Base
 
-  include CachedBrand
-  include CachedModel
-  include CachedGeneration
-  include CachedModification
-  include CachedSpareInfo
-
   include BrandAttributes
+  include CachedBrand
   include ModelAttributes
+  include CachedModel
   include GenerationAttributes
+  include CachedGeneration
   include ModificationAttributes
+  include CachedModification
   include SpareInfoAttributes
+  include CachedSpareInfo
 
   validates :spare_info, presence: true
   validates :brand, presence: true
@@ -63,7 +62,7 @@ class SpareApplicability < ActiveRecord::Base
   scope :by_generation, ->(id) {
     where(generation_id: id.to_i).
     order(:cached_modification).
-    where.not(cached_modification: nil).
+    where.not(modification_id: nil).
     select(:modification_id, :cached_brand, :cached_model, :cached_generation, :cached_modification).
     distinct
   }

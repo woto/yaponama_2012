@@ -18,7 +18,18 @@ module Grid::SpareInfo
         :type => :string,
       }
 
+      columns_hash['cached_spare_catalog'] = {
+        :type => :string,
+      }
+
       columns_hash['content'] = {
+        :type => :string,
+      }
+
+      columns_hash['notes'] = {
+        :type => :string,
+      }
+      columns_hash['notes_invisible'] = {
         :type => :string,
       }
 
@@ -32,7 +43,10 @@ module Grid::SpareInfo
       @grid.visible_id = '1'
       @grid.visible_catalog_number = '1'
       @grid.visible_cached_brand = '1'
+      @grid.visible_cached_spare_catalog = '1'
       @grid.visible_content = '1'
+      @grid.visible_notes = '1'
+      @grid.visible_notes_invisible = '1'
       @grid.visible_created_at = '1'
       @grid.visible_updated_at = '1'
     end

@@ -151,6 +151,9 @@ nissan:
   phantom: false
   creator: stan
 
+ns:
+  name: NS
+
 kia:
   name: KIA
   image: kia.png
@@ -159,6 +162,10 @@ kia:
   content: Корейская поделка
   creator: mike
   default_display: true
+  is_brand: true
+
+ki:
+  name: KI
   is_brand: true
 
 hyundai:
@@ -200,3 +207,11 @@ proizvodit:
   preview: 
   slang: 
   default_display: 
+
+brand1:
+  name: BRAND1
+  is_brand: true
+
+brand2:
+  name: BRAND2
+  is_brand: true

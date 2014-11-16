@@ -22,12 +22,20 @@ ru:
         catalog_number: Каталожный номер
         #brand: Производитель
         content: Содержание
+      spare_catalog:
+        name: Название категории
+        intro: Вступление
+        page: Подробное описание
+      spare_catalog_token:
+        name: Токен
+        weight: Вес токена
       page:
         description: Описание SEO
         keywords: Ключевые слова SEO
         robots: Запрет индексации и следования
         title: Заголовок
         path: Путь
+        redirect_url: Переадресация
         content: Содержание
       deliveries/place:
         postal_address_required: Требуется указание адреса доставки

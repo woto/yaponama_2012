@@ -38,20 +38,40 @@ camry_hybrid:
   name: Camry Hybrid
 
 galant:
-    brand: mitsubishi
-    cached_brand: MITSUBISHI
-    name: Galant
-    content: "<p>Описание Галанта.</p>\r\n"
-    from: 1969-01-01
-    to: 2013-01-01
-    slang: "Галант"
+  brand: mitsubishi
+  cached_brand: MITSUBISHI
+  name: Galant
+  content: "<p>Описание Галанта.</p>\r\n"
+  from: 1969-01-01
+  to: 2013-01-01
+  slang: "Галант"
 
 lancer:
-    brand: mitsubishi
-    cached_brand: MITSUBISHI
-    name: Lancer
+  brand: mitsubishi
+  cached_brand: MITSUBISHI
+  name: Lancer
 
 lancer_ralliart:
-    brand: mitsubishi
-    cached_brand: MITSUBISHI
-    name: Lancer Ralliart
+  brand: mitsubishi
+  cached_brand: MITSUBISHI
+  name: Lancer Ralliart
+
+cerato_ki:
+  brand: ki
+  cached_brand: KI
+  name: Cerato (от KI)
+
+cerato_kia:
+  brand: kia
+  cached_brand: KIA
+  name: Cerato (от KIA)
+
+model1:
+  brand: brand1
+  name: Model
+  cached_brand: BRAND1
+
+model2:
+  brand: brand2
+  name: Model
+  cached_brand: BRAND2

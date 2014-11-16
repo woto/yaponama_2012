@@ -1,0 +1,21 @@
+<p>Уважаемый покупатель, прием средств осуществляется через платежную систему Робокасса. После успешной оплаты вы будете переадресованы на сайт магазина.</p>
+
+<br />
+
+<%= image_tag "robokassa.png" %>
+
+<br />
+<br />
+<br />
+<br />
+
+<% payment_service_for @resource.id,
+  Rails.application.config_for('application/active_merchant')['user'],
+  :amount => @resource.amount,
+  :secret => Rails.application.config_for('application/active_merchant')['pass1'],
+  :service => :robokassa,
+  :currency => @resource.payment_type do |service| %>
+    <% service.description truncate(@resource.payment_destination, :length => 100, :omission => '...') %>
+    <% service.email @resource.try(:profile).try(:emails).try(:first).try(:to_label) %>
+    <%= submit_tag 'Перейти к оплате', :class => "btn btn-primary btn-lg" %>
+  <% end %>

@@ -5,6 +5,14 @@ class Car < ActiveRecord::Base
   include BelongsToCreator
   include Transactionable
   include Selectable
+  include BrandAttributes
+  include CachedBrand
+  include ModelAttributes
+  include CachedModel
+  include GenerationAttributes
+  include CachedGeneration
+  include ModificationAttributes
+  include CachedModification
 
   read_only :creation_reason
 
@@ -14,18 +22,9 @@ class Car < ActiveRecord::Base
 
   validates :god, :dverey, :numericality => { :only_integer => true }, :allow_blank => true
 
-  include CachedBrand
-  include CachedModel
-  include CachedGeneration
-  include CachedModification
-
   validates :brand, presence: true, associated: true
   validates :model, presence: true, associated: true
 
-  include BrandAttributes
-  include ModelAttributes
-  include GenerationAttributes
-  include ModificationAttributes
 
   def to_label
     res = []

@@ -1,17 +1,22 @@
-one:
-  from_spare_info_id: 
-  to_spare_info_id: 
-  from_cached_spare_info:
-  to_cached_spare_info:
-  comment: MyString
-  source: MyString
-  wrong:
+kia_2102_toyota_3310:
+  from_spare_info: kia_2102
+  to_spare_info: toyota_3310
+  from_cached_spare_info: 2102 (KIA)
+  to_cached_spare_info: 3310 (TOYOTA)
+  wrong: false
 
-two:
-  from_spare_info_id: 
-  to_spare_info_id: 
-  from_cached_spare_info:
-  to_cached_spare_info:
-  comment: MyString
-  source: MyString
-  wrong:
+
+ki_2103_ns_3310:
+  from_spare_info: ki_2103
+  to_spare_info: ns_3310
+  from_cached_spare_info: 2103 (KI)
+  to_cached_spare_info: 3310 (NS)
+  wrong: false
+
+
+ns_3310_ki_2103:
+  from_spare_info: ns_3310
+  to_spare_info: ki_2103
+  from_cached_spare_info: 3310 (NS)
+  to_cached_spare_info: 2103 (KI)
+  wrong: false

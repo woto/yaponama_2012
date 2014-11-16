@@ -11,4 +11,8 @@ first:
 
 second:
   path: 2/2
-  url: http://ya.ru
+  redirect_url: http://ya.ru
+
+third:
+  path: 3/3
+  redirect_url: /4/4

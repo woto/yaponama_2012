@@ -1,17 +1,16 @@
 rulevaya_tyga:
   name: "РУЛЕВАЯ ТЯГА"
-  content: "РУЛЕВАЯ ТЯГА"
 
 sailentblock:
   name: "САЙЛЕНТБЛОК"
-  content: "САЙЛЕНТБЛОК"
 
 bamper_zadniy:
   name: "БАМПЕР ЗАДНИЙ"
-  content: "БАМПЕР ЗАДНИЙ"
 
 pylnik_rulevoi_reiki:
   name: "ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ"
-  content: "ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ"
   intro: "<p>Короткое описание что такое пыльник рулевой тяги.</p>\r\n"
   page: "<p>Подробное описание что такое пыльник рулевой тяги.</p>\r\n"
+
+shatun:
+  name: ШАТУН

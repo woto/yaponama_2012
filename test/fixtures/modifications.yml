@@ -34,3 +34,13 @@ mitsubishi_galant_9_2_cn_sedan:
   content: "<p>Описание модификации CN седана 4-х дверного.</p>\r\n"
   generation: galant_9_2
   cached_generation: 2008 - 2013, 9 поколение [2-й рестайлинг]
+
+modification1:
+  name: Modification
+  generation: generation1
+  cached_generation: Generation
+
+modification2:
+  name: Modification
+  generation: generation2
+  cached_generation: Generation

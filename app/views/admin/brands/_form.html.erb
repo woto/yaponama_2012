@@ -1,4 +1,4 @@
-<%= twbs_form_for [:admin, @resource] do |f| %>
+<%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
 
   <%= row do %>
 

@@ -40,7 +40,7 @@ class Phone < ActiveRecord::Base
   end
 
   def deliver_confirmation
-    ConfirmMailer.phone(self).deliver_now
+    ConfirmMailer.phone(self).deliver_later
   end
 
   def to_label

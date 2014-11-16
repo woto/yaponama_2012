@@ -64,13 +64,10 @@ module GridHelper
           end
         # EDITABLE
         when *['name', 'short_name', 'long_name']
-          new_val = truncate(val, length: 20)
-          content_tag :span, (new_val != val ? {data: { title: val }, rel: 'tooltip'} : {} ) do
-            if admin_zone?
-              link_to_fast_edit(new_val, item, column_name)
-            else
-              new_val
-            end
+          if admin_zone?
+            link_to_fast_edit(val, item, column_name)
+          else
+            val
           end
         when *['id', 'token']
           link_to item[column_name], '#', data: {html: true, title: 'Информация об элементе', placement: 'right', :"poload" => polymorphic_path([:info, (admin_zone? ? :admin : :user), item], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status] ) }, class: "btn btn-primary btn-xs ignoredirty", style: "min-width: 30px"

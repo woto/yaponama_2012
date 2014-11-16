@@ -39,9 +39,8 @@ end
 
 namespace :app do
 
-  desc 'Прогон по прайсу. В данном случае надо чтобы инициировалась отправка данных spare_catalogs'
-  task :progon, [:arg1] => [:environment] do |t, args|
-    Progon.progon args[:arg1]
+  task :update_spare_catalog => :environment do
+    UpdateSpareCatalog.update_spare_catalog
   end
 
   desc 'Проценка вызов происходит так: rake "app:protcenka[a]. Сравнение с прайсами, у которых visible_for_stock"'
@@ -49,12 +48,9 @@ namespace :app do
     Protcenka.protcenka t, args
   end
 
-  desc 'Скачиваем наши прайсы чтобы заполнить ими spare_infos'
-  task :our_spare_infos, [:args] => [:environment] do |t, args|
-    # TODO дописать
-    #OurSpareInfos.our_spare_infos args
+  task :import_spare_info, 100.times.map { |i| "arg#{i}".to_sym } => [:environment] do |t, args|
+    ImportSpareInfo.import_spare_info args
   end
-
 
   desc 'Отправляем не полученное сообщение на почту/телефон'
   task :talk_notifier => :environment  do

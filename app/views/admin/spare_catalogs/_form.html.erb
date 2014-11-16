@@ -6,7 +6,13 @@
 
       <%= f.twbs_select2 :name, rel: 'select2-spare_catalog' %>
 
-      <%= f.twbs_text_area :content, rows: 4 %>
+      <%= f.simple_fields_for :spare_catalog_tokens do |sct| %>
+        <%= render 'spare_catalog_token_fields', :f => sct %>
+      <% end %>
+
+      <%= f.form_group do %>
+        <%= link_to_add_association 'Добавить токен', f, :spare_catalog_tokens, class: "btn btn-default"  %>
+      <% end %>
 
     <% end %>
 

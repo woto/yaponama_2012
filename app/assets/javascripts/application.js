@@ -55,9 +55,6 @@
 //= require select2
 //= require brand_model
 
-//= require jasmine_examples/Player
-//= require jasmine_examples/Song
-
 //= require 'vin_or_frame'
 //= require 'buy_button'
 //= require 'modal_form'

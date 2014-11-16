@@ -17,10 +17,7 @@
 <% if @talk.creator.profiles.any? %>
   <h3>Контакты:</h3>
   <% @talk.creator.profiles.each do |profile| %>
-    Имя: <%= profile.names.map{|name| name.to_label}.join(', ') %><br />
-    Телефон: <%= profile.phones.map{|phone| phone.to_label}.join(', ') %><br />
-    E-mail: <%= profile.emails.map{|email| email.to_label}.join(', ') %><br />
-    Паспорт: <%= profile.passports.map{|passport| passport.to_label}.join(', ') %><br />
+    <%= render 'profile', profile: profile %>
   <% end %>
 <% end %>
 
