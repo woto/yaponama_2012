@@ -274,13 +274,8 @@ class Product < ActiveRecord::Base
     "#{catalog_number} (#{cached_brand})"
   end
 
-
-
-
-
-
-
-
-
+  after_create if: "status == 'incart'" do
+    SellerNotifierMailer.incart(self).deliver_later
+  end
 
 end

@@ -4,11 +4,16 @@ class SellerNotifierMailer < ApplicationMailer
 
   def email(talk)
     @talk = talk
-    mail subject: "Новое сообщение на сайте www.#{Rails.application.config_for('application/site')['host']} от #{@talk.somebody.to_label}"
+    mail subject: "www.#{Rails.application.config_for('application/site')['host']}, новое сообщение от #{@talk.somebody.to_label}"
+  end
+
+  def incart product
+    @product = product
+    mail subject: "www.#{Rails.application.config_for('application/site')['host']}, пользователь #{@product.creator.to_label} поместил товар #{@product.to_label} в корзину"
   end
 
   def payment payment
     @payment = payment
-    mail subject: "Поступила оплата на сайте www.#{Rails.application.config_for('application/site')['host']} от #{@payment.somebody.to_label} на сумму #{number_to_currency(@payment.amount)}"
+    mail subject: "www.#{Rails.application.config_for('application/site')['host']}, поступила оплата от #{@payment.somebody.to_label} на сумму #{number_to_currency(@payment.amount)}"
   end
 end

@@ -23,9 +23,11 @@ class Products::InorderController < ApplicationController
 
 
   def index
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
   end
 
   def order
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
     # Если выбрали новый заказ
     if params[:id] == '-1'
       @order = @user.orders.create
@@ -47,6 +49,7 @@ class Products::InorderController < ApplicationController
   end
 
   def delivery
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
     @order = Order.find(params[:id])
     if request.patch?
     else
@@ -55,6 +58,7 @@ class Products::InorderController < ApplicationController
   end
 
   def legal
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
     @order = Order.find(params[:id])
     if request.patch?
       respond_to do |format|
@@ -108,30 +112,39 @@ class Products::InorderController < ApplicationController
   end
 
   def postal_address
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
   end
 
   def name
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
   end
 
   def phone
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
   end
 
   def email
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
   end
   
   def metro
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
   end
 
   def shop
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
   end
 
   def company
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
   end
 
   def delivery_cost
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
   end
 
   def action
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
     if request.post?
       ActiveRecord::Base.transaction do
         @order = Order.new(order_params)
@@ -150,6 +163,7 @@ class Products::InorderController < ApplicationController
   end
 
   def order_params
+    raise 'ЭТО УЖЕ НЕ ИСПОЛЬЗУЕТСЯ!!! todo todo TODO'
     params[:order].permit!
   end
 
