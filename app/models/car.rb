@@ -25,6 +25,12 @@ class Car < ActiveRecord::Base
   validates :brand, presence: true, associated: true
   validates :model, presence: true, associated: true
 
+  # TODO Написать для этого тест(?!)
+  validate do
+    if brand.try(:brand).present?
+      errors[:base] << 'Нельзя указывать в качестве производителя синоним'
+    end
+  end
 
   def to_label
     res = []

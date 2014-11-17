@@ -18,9 +18,10 @@ class Brand < ActiveRecord::Base
   has_many :spare_applicabilities, dependent: :destroy
   has_many :products
 
+  # TODO Написать для этого тест(?!)
   validate do
     if brand.try(:brand).present?
-      errors[:base] << 'Нельзя прикрепить синоним к бренду, который в свою очередь сам является синонимом'
+      errors[:base] << 'Нельзя указывать в качестве производителя синоним'
     end
   end
 

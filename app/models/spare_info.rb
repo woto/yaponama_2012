@@ -95,4 +95,11 @@ class SpareInfo < ActiveRecord::Base
 
   end
 
+  # TODO Написать для этого тест(?!)
+  validate do
+    if brand.try(:brand).present?
+      errors[:base] << 'Нельзя указывать в качестве производителя синоним'
+    end
+  end
+
 end
