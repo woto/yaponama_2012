@@ -43,6 +43,10 @@ namespace :app do
     UpdateSpareCatalog.update_spare_catalog
   end
 
+  task :update_brand => :environment do
+    UpdateBrand.update_brand
+  end
+
   desc 'Проценка вызов происходит так: rake "app:protcenka[a]. Сравнение с прайсами, у которых visible_for_stock"'
   task :protcenka, [:arg1] => [:environment] do |t, args|
     Protcenka.protcenka t, args
