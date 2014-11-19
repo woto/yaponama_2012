@@ -6,4 +6,7 @@
   $('#talk-log').replaceWith("<%= j render 'talks/log' %>");
   App.talk_show();
 
+  var audio = new Audio("<%= audio_path "notify.mp3" %>");
+  audio.play();
+
 }).call(this);
