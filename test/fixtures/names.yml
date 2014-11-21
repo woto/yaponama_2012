@@ -78,16 +78,22 @@ guest_with_profile:
   somebody: guest_with_profile
   creation_reason: fixtures
 
+guest_with_profile2:
+  name: Гость с профилем
+  profile: guest_with_profile2
+  somebody: guest_with_profile2
+  creation_reason: fixtures
+
 guest_with_profile3:
   name: Ыфывоа
   profile: guest_with_profile3
   somebody: guest_with_profile3
   creation_reason: fixtures
 
-guest_with_profile2:
-  name: Гость с профилем
-  profile: guest_with_profile2
-  somebody: guest_with_profile2
+guest_with_profile4:
+  name: Гость с профилем4
+  profile: guest_with_profile4
+  somebody: guest_with_profile4
   creation_reason: fixtures
 
 ivan:

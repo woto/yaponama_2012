@@ -150,9 +150,9 @@ App.talk_hide = ->
 
 # Инициализация, проверяем cookie talk и на основе него
 # решаем что показать, а что скрыть (окно чата и кнопка
-# службы поддержки). Если cookie = talk пустой, то показываем
+# службы поддержки). Если cookie = talk пустой, то не показываем
 App.talk_init = ->
-  if $.cookie('talk') == '1' || !($.cookie('talk')?)
+  if $.cookie('talk') == '1'
     App.talk_show()
   else
     App.talk_hide()

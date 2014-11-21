@@ -7,6 +7,8 @@ class TalkAttentionTest < ActionDispatch::IntegrationTest
   test 'После написания сообщения гостем, который указал email и телефон должна показаться attention с просьбой подтверждения' do
     Capybara.reset!
     visit '/'
+    create_cookie "talk", "1"
+    visit '/'
     fill_in 'talk[somebody_attributes][profile_attributes][names_attributes][0][name]', with: 'Мокшузь'
     fill_in 'talk[somebody_attributes][profile_attributes][emails_attributes][0][value]', with: 'dormds@ivme.ie'
     page.execute_script "$('[name=\"talk[somebody_attributes][profile_attributes][phones_attributes][0][value]\"]').val('+7 (482) 039-28-31')"

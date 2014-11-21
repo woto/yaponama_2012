@@ -8,13 +8,19 @@ class TalkReadTest < ActionDispatch::IntegrationTest
     Capybara.reset!
 
     Capybara.session_name = :first
-    auth('+7 (444) 444-44-44', '4444444444')
+    visit '/'
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:mark).auth_token
+    visit '/'
     fill_in 'talk[text]', with: 'Текст сообщения 2349843587234908'
     click_button 'talk-submit'
     assert has_text? 'Текст сообщения 2349843587234908'
 
     Capybara.session_name = :second
-    auth('+7 (444) 444-44-44', '4444444444')
+    visit '/'
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:mark).auth_token
+    visit '/'
     assert has_text? 'Текст сообщения 2349843587234908'
     talk = Talk.where(text: 'Текст сообщения 2349843587234908').first
     assert_equal false, talk.read
@@ -24,7 +30,10 @@ class TalkReadTest < ActionDispatch::IntegrationTest
     Capybara.reset!
 
     Capybara.session_name = :first
-    auth('+7 (111) 111-11-11', '1111111111')
+    visit '/'
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:first_admin).auth_token
+    visit '/'
     otto = somebodies(:otto)
     visit "/admin/users/#{otto.id}"
     fill_in 'talk[text]', with: 'Текст сообщения 23489232134438294505'
@@ -32,7 +41,10 @@ class TalkReadTest < ActionDispatch::IntegrationTest
     assert has_text? 'Текст сообщения 23489232134438294505'
 
     Capybara.session_name = :second
-    auth('+7 (111) 111-11-11', '1111111111')
+    visit '/'
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:first_admin).auth_token
+    visit '/'
     otto = somebodies(:otto)
     visit "/admin/users/#{otto.id}"
     assert has_text? 'Текст сообщения 23489232134438294505'
@@ -40,7 +52,10 @@ class TalkReadTest < ActionDispatch::IntegrationTest
     assert_equal false, talk.read
 
     Capybara.session_name = :third
-    auth('+7 (000) 000-00-00', '0000000000')
+    visit '/'
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:sidor).auth_token
+    visit '/'
     otto = somebodies(:otto)
     visit "/admin/users/#{otto.id}"
     assert has_text? 'Текст сообщения 23489232134438294505'
@@ -56,7 +71,10 @@ class TalkReadTest < ActionDispatch::IntegrationTest
     Capybara.reset!
 
     Capybara.session_name = :first
-    auth('+7 (111) 111-11-11', '1111111111')
+    visit '/'
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:first_admin).auth_token
+    visit '/'
     otto = somebodies(:otto)
     visit "/admin/users/#{otto.id}"
     fill_in 'talk[text]', with: 'Текст сообщения 423748924375089273146438'
@@ -64,7 +82,10 @@ class TalkReadTest < ActionDispatch::IntegrationTest
     assert has_text? 'Текст сообщения 423748924375089273146438'
 
     Capybara.session_name = :second
-    auth('+7 (555) 555-55-55', '5555555555')
+    visit '/'
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:otto).auth_token
+    visit '/'
     assert has_text?('Текст сообщения 423748924375089273146438', wait: 10)
 
     talk = Talk.where(text: 'Текст сообщения 423748924375089273146438').first
@@ -75,10 +96,16 @@ class TalkReadTest < ActionDispatch::IntegrationTest
     Capybara.reset!
 
     Capybara.session_name = :first
-    auth('+7 (555) 555-55-55', '5555555555')
+    visit '/'
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:otto).auth_token
+    visit '/'
 
     Capybara.session_name = :second
-    auth('+7 (111) 111-11-11', '1111111111')
+    visit '/'
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:first_admin).auth_token
+    visit '/'
     otto = somebodies(:otto)
     visit "/admin/users/#{otto.id}"
     fill_in 'talk[text]', with: 'Текст сообщения 129375238495712345432871234'

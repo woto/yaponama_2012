@@ -7,6 +7,8 @@ class TalkTest < ActionDispatch::IntegrationTest
   test 'Пишем гостем указываем новые контактные данные' do
     Capybara.reset!
     visit '/'
+    create_cookie "talk", "1"
+    visit '/'
     fill_in 'talk[somebody_attributes][profile_attributes][names_attributes][0][name]', with: 'Имя'
     fill_in 'talk[somebody_attributes][profile_attributes][emails_attributes][0][value]', with: 'email@example.com'
     page.execute_script "$('[name=\"talk[somebody_attributes][profile_attributes][phones_attributes][0][value]\"]').val('+7 (123) 324-52-34')"
@@ -22,6 +24,8 @@ class TalkTest < ActionDispatch::IntegrationTest
   test 'Пишем гостем не заполняем ничего' do
     Capybara.reset!
     visit '/'
+    create_cookie "talk", "1"
+    visit '/'
     click_button 'talk-submit'
     assert has_text? "укажите телефон и/или email"
     name = find_field('talk[somebody_attributes][profile_attributes][names_attributes][0][name]').find(:xpath,".//..")
@@ -33,6 +37,8 @@ class TalkTest < ActionDispatch::IntegrationTest
   test 'Пишем гостем, заполняем только имя и сообщение' do
     Capybara.reset!
     visit '/'
+    create_cookie "talk", "1"
+    visit '/'
 
     fill_in 'talk[somebody_attributes][profile_attributes][names_attributes][0][name]', with: 'Имя'
     fill_in 'talk[text]', with: 'Текст сообщения 23844539023747432047'
@@ -42,6 +48,8 @@ class TalkTest < ActionDispatch::IntegrationTest
 
   test 'Пишем гостем, указываем только email' do
     Capybara.reset!
+    visit '/'
+    create_cookie "talk", "1"
     visit '/'
     fill_in 'talk[somebody_attributes][profile_attributes][names_attributes][0][name]', with: 'Имя'
     fill_in 'talk[somebody_attributes][profile_attributes][emails_attributes][0][value]', with: 'email@example.com'
@@ -53,6 +61,8 @@ class TalkTest < ActionDispatch::IntegrationTest
   test 'Пишем гостем, указываем только phone' do
     Capybara.reset!
     visit '/'
+    create_cookie "talk", "1"
+    visit '/'
     fill_in 'talk[somebody_attributes][profile_attributes][names_attributes][0][name]', with: 'Имя'
     page.execute_script "$('[name=\"talk[somebody_attributes][profile_attributes][phones_attributes][0][value]\"]').val('+7 (123) 324-52-34')"
     fill_in 'talk[text]', with: 'Текст сообщения 2938423443'
@@ -63,7 +73,9 @@ class TalkTest < ActionDispatch::IntegrationTest
   test 'Пишем гостем, у которого уже заполнены контактные данные (email).' do
     Capybara.reset!
     visit '/'
-    create_cookie "auth_token", "8e9beU3E20YWHmF1RBSwFa"
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:guest_with_profile).auth_token
+    visit '/'
     fill_in 'talk[text]', with: 'Текст сообщения 234898723094875234234641'
     click_button 'talk-submit'
     assert has_text? 'Текст сообщения 234898723094875234234641'
@@ -73,13 +85,17 @@ class TalkTest < ActionDispatch::IntegrationTest
     #flunk 'aaa'
     Capybara.reset!
     visit '/'
-    create_cookie "auth_token", "8e9beU3E20YWHmF1RBSwFa"
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:guest_with_profile).auth_token
+    visit '/'
   end
 
   test 'Пишем гостем, у которого уже заполнены контактные данные (email). И меняем их на свободные' do
     Capybara.reset!
     visit '/'
-    create_cookie "auth_token", "8e9beU3E20YWHmF1RBSwFa"
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:guest_with_profile4).auth_token
+    visit '/'
     fill_in 'talk[somebody_attributes][profile_attributes][emails_attributes][0][value]', with: 'some_new_email_34234593@example.com'
     fill_in 'talk[text]', with: 'Текст сообщения 82348943289234'
     click_button 'talk-submit'
@@ -89,13 +105,17 @@ class TalkTest < ActionDispatch::IntegrationTest
   test 'Пишем гостем, у которого уже заполнены контактные данные (phone). И меняем их на свободные' do
     Capybara.reset!
     visit '/'
-    create_cookie "auth_token", "8e9beU3E20YWHmF1RBSwFa"
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:guest_with_profile).auth_token
+    visit '/'
   end
 
   test 'Пишем гостем, у которого уже заполнены контактные данные (email). И меняем их на занятые' do
     Capybara.reset!
     visit '/'
-    create_cookie "auth_token", "8e9beU3E20YWHmF1RBSwFa"
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:guest_with_profile).auth_token
+    visit '/'
     fill_in 'talk[somebody_attributes][profile_attributes][emails_attributes][0][value]', with: 'mark@example.com'
     fill_in 'talk[text]', with: 'Текст сообщения'
     click_button 'talk-submit'
@@ -107,12 +127,16 @@ class TalkTest < ActionDispatch::IntegrationTest
   test 'Пишем гостем, у которого уже заполнены контактные данные (phone). И меняем их на занятые' do
     Capybara.reset!
     visit '/'
-    create_cookie "auth_token", "8e9beU3E20YWHmF1RBSwFa"
+    create_cookie "auth_token", somebodies(:guest_with_profile).auth_token
+    create_cookie "talk", "1"
+    visit '/'
   end
 
   test 'Пишем зарегистрированным пользователем' do
     Capybara.reset!
-    auth('+7 (123) 123-12-31', '1231231231')
+    visit '/'
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:first_user).auth_token
     visit '/'
     fill_in 'talk[text]', with: 'Текст сообщения 2349823457983475'
     click_button 'talk-submit'
@@ -124,11 +148,15 @@ class TalkTest < ActionDispatch::IntegrationTest
 
     Capybara.session_name = :first
     visit '/'
-    auth('+7 (444) 444-44-44', '4444444444')
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:mark).auth_token
+    visit '/'
 
     Capybara.session_name = :second
     visit '/'
-    auth('+7 (444) 444-44-44', '4444444444')
+    create_cookie "talk", "1"
+    create_cookie "auth_token", somebodies(:mark).auth_token
+    visit '/'
 
     Capybara.session_name = :first
     fill_in 'talk[text]', with: 'Текст сообщения 2349823457983475'
@@ -141,6 +169,8 @@ class TalkTest < ActionDispatch::IntegrationTest
 
   test 'Если мы заполнили только телефон, то e-mail не должен добавиться в базу' do
     Capybara.reset!
+    visit '/'
+    create_cookie "talk", "1"
     visit '/'
     fill_in 'talk[somebody_attributes][profile_attributes][names_attributes][0][name]', with: 'Имя'
     page.execute_script "$('[name=\"talk[somebody_attributes][profile_attributes][phones_attributes][0][value]\"]').val('+7 (193) 332-91-34')"
@@ -156,6 +186,8 @@ class TalkTest < ActionDispatch::IntegrationTest
 
   test 'Если email содержит ошибки, то rejected телефон должен досоздаться' do
     Capybara.reset!
+    visit '/'
+    create_cookie "talk", "1"
     visit '/'
     fill_in 'talk[somebody_attributes][profile_attributes][names_attributes][0][name]', with: 'Имя'
     fill_in 'talk[somebody_attributes][profile_attributes][emails_attributes][0][value]', with: 'email'

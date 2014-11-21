@@ -58,6 +58,14 @@ guest_with_profile3:
   creation_reason: fixtures
   confirmation_token: diwu
 
+guest_with_profile4:
+  value: guest_with_profile4@example.com
+  profile: guest_with_profile4
+  somebody: guest_with_profile4
+  confirmed: false
+  creation_reason: fixtures
+  confirmation_token: 8989
+
 ivan:
   value: six@example.com
   profile: ivan

@@ -110,6 +110,14 @@ guest_with_profile3:
   cached_emails: '[{"value":"wefhs@iewiw.jp"}]'
   cached_passports: '[]'
 
+guest_with_profile4:
+  somebody: guest_with_profile4
+  creation_reason: fixtures
+  cached_names: '[{"surname":"","name":"Гость с профилем4","patronymic":""}]'
+  cached_phones: '[{"value":""}]'
+  cached_emails: '[{"value":"guest_with_profile4@example.com"}]'
+  cached_passports: '[]'
+
 ivan:
   somebody: ivan
   creation_reason: fixtures
