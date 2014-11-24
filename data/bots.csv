@@ -94,3 +94,24 @@ id,title,comment,user_agent,inet,phantom,creator_id,created_at,updated_at,block
 356,"",,Google Web Preview,,f,2708406,2014-11-07 03:56:17.756302,2014-11-07 03:56:17.756302,f
 357,"",,Mediapartners-Google,,f,2708406,2014-11-07 03:56:30.603806,2014-11-07 03:56:30.603806,f
 358,"",,Yandex/1.01.001 (compatible; Win16; I),,f,2708406,2014-11-17 06:02:45.235993,2014-11-17 06:02:45.235993,f
+359,"",,nutch-1.4/Nutch-1.4,,f,2708406,2014-11-22 13:53:04.482947,2014-11-22 13:53:04.482947,f
+360,"",,WebIndex,,f,2708406,2014-11-22 13:53:19.820645,2014-11-22 13:53:19.820645,f
+361,"",,Mozilla/5.0 (compatible; SISTRIX Crawler; http://crawler.sistrix.net/),,f,2708406,2014-11-22 13:54:04.620816,2014-11-22 13:54:04.620816,f
+362,"",,Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0); 360Spider,,f,2708406,2014-11-22 13:57:41.192304,2014-11-22 13:57:41.192304,f
+363,"",,ia_archiver (+http://www.alexa.com/site/help/webmasters; crawler@alexa.com),,f,2708406,2014-11-22 13:57:58.509471,2014-11-22 13:57:58.509471,f
+364,"",,Sogou web spider/4.0(+http://www.sogou.com/docs/help/webmasters.htm#07),,f,2708406,2014-11-22 13:58:11.561942,2014-11-22 13:58:11.561942,f
+365,"",,Mozilla/5.0 (compatible; GrapeshotCrawler/2.0; +http://www.grapeshot.co.uk/crawler.php),,f,2708406,2014-11-22 13:59:16.281822,2014-11-22 13:59:16.281822,f
+366,"",,python-requests/1.2.0 CPython/2.7.4 Linux/3.8.0-33-generic,,f,2708406,2014-11-22 14:00:32.473718,2014-11-22 14:00:32.473718,f
+367,"",,Python-urllib/2.7,,f,2708406,2014-11-22 14:00:42.874618,2014-11-22 14:00:42.874618,f
+368,"",,Python-urllib/1.17,,f,2708406,2014-11-22 14:00:57.553005,2014-11-22 14:00:57.553005,f
+369,"",,python-requests/1.2.0 CPython/2.7.3 Linux/3.8.0-33-generic,,f,2708406,2014-11-22 14:01:17.085744,2014-11-22 14:01:17.085744,f
+370,"",,netEstate NE Crawler (+http://www.website-datenbank.de/),,f,2708406,2014-11-22 14:01:32.487785,2014-11-22 14:01:32.487785,f
+371,"",,Riddler (http://riddler.io/about.html),,f,2708406,2014-11-22 14:02:45.338358,2014-11-22 14:02:45.338358,f
+372,"",,"rogerbot/1.0 (http://moz.com/help/pro/what-is-rogerbot-, rogerbot-wherecat@moz.com)",,f,2708406,2014-11-22 14:03:02.640639,2014-11-22 14:03:02.640639,f
+373,"",,Wegtam Crawler/Nutch-1.9-SNAPSHOT,,f,2708406,2014-11-22 14:03:21.41777,2014-11-22 14:03:21.41777,f
+374,"",,seebot/1.0.0 (http://www.seegnify.com/bot),,f,2708406,2014-11-22 14:03:37.536301,2014-11-22 14:03:37.536301,f
+375,"",,"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1; 360Spider",,f,2708406,2014-11-22 14:04:16.312728,2014-11-22 14:04:16.312728,f
+376,"",,Mozilla/5.0 (compatible; SiteExplorer/1.0b; +http://siteexplorer.info/),,f,2708406,2014-11-22 14:05:15.690273,2014-11-22 14:05:15.690273,f
+377,"",,Mozilla/5.0 (compatible; Ezooms/1.0; help@moz.com),,f,2708406,2014-11-22 14:05:42.860208,2014-11-22 14:05:42.860208,f
+378,"",,Apache-HttpClient/4.3 (java 1.5),,f,2708406,2014-11-22 14:06:28.541159,2014-11-22 14:06:28.541159,f
+379,"",,Jakarta Commons-HttpClient/3.1,,f,2708406,2014-11-22 14:06:35.852858,2014-11-22 14:06:35.852858,f
