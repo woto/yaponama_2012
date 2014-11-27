@@ -1,7 +1,6 @@
 #http://8xx8.ru/blog/2012/12/10/katalogh-lib-v-rails/
 #http://stackoverflow.com/questions/18894060/rails-and-minitest-add-additional-folder
 
-
 # rake test:rake
 namespace :test do
   desc "Run tests for rake"
@@ -18,22 +17,28 @@ test_task.enhance { lib_task.invoke }
 
 namespace :catalog do
 
-  # rake catalog:egrgroup_ru_grab
-  Rails::TestTask.new(:egrgroup_ru_grab) do |t|
-    t.libs << "test"
-    t.pattern = 'catalog/egrgroup_ru_grab.rb'
+  Dir.glob('catalog/*grab*').each do |file|
+    lowcase = file.scan(/(?<=catalog\/).*(?=\_grab.rb)/)[0]
+    upcase = lowcase.classify
+    eval <<-EOL
+      desc '#{lowcase}_grab'
+      task :#{lowcase}_grab => :environment do
+        #{upcase}Grab.#{lowcase}_grab
+      end
+    EOL
   end
 
-  # rake catalog:egrgroup_ru_import
-  desc 'egrgroup_ru_import'
-  task :egrgroup_ru_import => :environment do
-    EgrgroupRuImport.egrgroup_ru_import
+  Dir.glob('catalog/*import*').each do |file|
+    lowcase = file.scan(/(?<=catalog\/).*(?=\_import.rb)/)[0]
+    upcase = lowcase.classify
+    eval <<-EOL
+      desc '#{lowcase}_import'
+      task :#{lowcase}_import => :environment do
+        #{upcase}Import.#{lowcase}_import
+      end
+    EOL
   end
 
-  desc 'febest_com_ua_import'
-  task :febest_com_ua_import => :environment do
-    FebestComUaImport.febest_com_ua_import
-  end
 end
 
 
