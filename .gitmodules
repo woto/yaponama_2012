@@ -116,3 +116,6 @@
 [submodule "system/submodules/bosch_automotive_catalog_com"]
 	path = system/submodules/bosch_automotive_catalog_com
 	url = https://github.com/woto/bosch_automotive_catalog_com
+[submodule "system/submodules/varta_automotive_ru"]
+	path = system/submodules/varta_automotive_ru
+	url = https://github.com/woto/varta_automotive_ru
