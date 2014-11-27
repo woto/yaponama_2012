@@ -113,3 +113,6 @@
 	path = system/submodules/ckeditor-dev
 	url = git://github.com/ckeditor/ckeditor-dev.git
 	branch = master
+[submodule "system/submodules/bosch_automotive_catalog_com"]
+	path = system/submodules/bosch_automotive_catalog_com
+	url = https://github.com/woto/bosch_automotive_catalog_com
