@@ -16,7 +16,7 @@ class PriceMate
     case value
     when nil, false, '0', 0
       '0'
-    when true, 1
+    when true, 1, '1'
       '1'
     end
   end
@@ -91,7 +91,7 @@ class PriceMate
     keywords.map{|k, v| k}.join(', ')
   end
 
-  def self.meta_title c9, r9, b9, titles, formatted_data
+  def self.meta_title c9, b9, r9, titles, formatted_data
     meta_title = ''
     if r9.present?
       meta_title << "Замены и аналоги #{c9} "
@@ -124,7 +124,7 @@ class PriceMate
   def self.search catalog_number, manufacturer, replacements, emex, cached
     catalog_number = CGI::escape(PriceMate.catalog_number(catalog_number))
     manufacturer = CGI::escape(PriceMate.manufacturer(manufacturer) || '')
-    replacements = true_or_false(catalog_number)
+    replacements = true_or_false(replacements)
     emex = "&ext_ws=#{true_or_false(emex)}"
     cached = "&cached=#{true_or_false(cached)}"
 
