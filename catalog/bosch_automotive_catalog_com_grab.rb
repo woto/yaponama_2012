@@ -3,27 +3,28 @@ require '_capybara'
 class BoschAutomotiveCatalogComGrab < ActionDispatch::IntegrationTest
 
   def self.bosch_automotive_catalog_com_grab
-    agent = Mechanize.new
     bosch = BrandMate.find_canonical("BOSCH")
-
     SpareInfo.where(brand: bosch).order("RANDOM()").each do |si|
       begin
         visit "http://www.bosch-automotive-catalog.com/ru/product-detail/-/product/#{si.catalog_number}"
         spare_dir = File.join(Rails.root, 'catalog', 'bosch_automotive_catalog_com', si.catalog_number)
 
         all('.bordercontainer img', visible: false).each_with_index do |image, index|
+          #binding.pry
           image_url = image['src']
           unless [/zoom\.gif/, /no-image-362x362\.jpg/].any?{|regex| image_url.match(regex)}
             images_dir = File.join(spare_dir, 'images')
             FileUtils.mkdir_p images_dir
             image_dir = File.join(images_dir, index.to_s)
-            begin
+            #begin
+              agent = Mechanize.new
               downloaded_image = agent.get(image_url)
-              raise Exception if downloaded_image.content.size <= 1000
-            rescue
-              puts "retry #{image_url}"
-              retry
-            end
+              #raise Exception if downloaded_image.content.size <= 1000
+            #rescue
+              #binding.pry
+              #puts "retry #{image_url}"
+              #retry
+            #end
             downloaded_image.save!(File.join(image_dir, downloaded_image.filename))
           end
         end
@@ -57,7 +58,7 @@ class BoschAutomotiveCatalogComGrab < ActionDispatch::IntegrationTest
         puts e.backtrace.join("\n")
         #binding.pry
       ensure
-        sleep 10
+        #sleep 10
       end
     end
   end

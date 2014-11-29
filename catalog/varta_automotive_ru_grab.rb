@@ -29,10 +29,10 @@ class VartaAutomotiveRuGrab < ActionDispatch::IntegrationTest
         FileUtils.mkdir_p etn_dir
 
         agent = Mechanize.new
-
         downloaded_image = agent.get(image_url)
         downloaded_image.save! File.join(etn_dir, downloaded_image.filename)
 
+        agent = Mechanize.new
         downloaded_description = agent.get(description_url)
         downloaded_description.save! File.join(etn_dir, downloaded_description.filename)
 
@@ -44,16 +44,19 @@ class VartaAutomotiveRuGrab < ActionDispatch::IntegrationTest
         end
 
         if image = first('.terminal_types ~ .imgFile img')
+          agent = Mechanize.new
           downloaded_image = agent.get(image['src'])
           downloaded_image.save! File.join(etn_dir, "terminal_types", downloaded_image.filename)
         end
 
         if image = first('.layout ~ .imgFile img')
+          agent = Mechanize.new
           downloaded_image = agent.get(image['src'])
           downloaded_image.save! File.join(etn_dir, "layout", downloaded_image.filename)
         end
 
         if image = first('.base_hold_down ~ .imgFile img')
+          agent = Mechanize.new
           downloaded_image = agent.get(image['src'])
           downloaded_image.save! File.join(etn_dir, "base_hold_down", downloaded_image.filename)
         end
