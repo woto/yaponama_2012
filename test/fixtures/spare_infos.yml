@@ -1,80 +1,80 @@
 infiniti_3310:
-    catalog_number: '3310'
-    brand: infiniti
-    cached_brand: INFINITI
-    content: "<p>Описание категории: Пыльник Рулевой Рейки.</p>\r\n"
-    name: 3310 (INFINITI)
-    cached_spare_catalog: "ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ"
-    spare_catalog: pylnik_rulevoi_reiki
+  catalog_number: '3310'
+  brand: infiniti
+  cached_brand: INFINITI
+  content: "<p>Описание категории: Пыльник Рулевой Рейки.</p>\r\n"
+  name: 3310 (INFINITI)
+  cached_spare_catalog: "ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ"
+  spare_catalog: pylnik_rulevoi_reiki
 
 toyota_3310:
-    catalog_number: '3310'
-    brand: toyota
-    cached_brand: TOYOTA
-    content: "<p>Описание категории рулевая тяга.</p>\r\n"
-    name: 3310 (TOYOTA)
-    cached_spare_catalog: "РУЛЕВАЯ ТЯГА"
-    spare_catalog: rulevaya_tyga
+  catalog_number: '3310'
+  brand: toyota
+  cached_brand: TOYOTA
+  content: "<p>Описание категории рулевая тяга.</p>\r\n"
+  name: 3310 (TOYOTA)
+  cached_spare_catalog: "РУЛЕВАЯ ТЯГА"
+  spare_catalog: rulevaya_tyga
 
 ns_3310:
-    catalog_number: '3310'
-    brand: ns
-    cached_brand: NS
-    name: 3310 (NS)
-    cached_spare_catalog: "РУЛЕВАЯ ТЯГА"
-    spare_catalog: rulevaya_tyga
+  catalog_number: '3310'
+  brand: ns
+  cached_brand: NS
+  name: 3310 (NS)
+  cached_spare_catalog: "РУЛЕВАЯ ТЯГА"
+  spare_catalog: rulevaya_tyga
 
 nissan_2102:
-    catalog_number: '2102'
-    brand: nissan
-    cached_brand: NISSAN
-    name: 2102 (NISSAN)
-    cached_spare_catalog: "САЙЛЕНТБЛОК"
-    spare_catalog: sailentblock
+  catalog_number: '2102'
+  brand: nissan
+  cached_brand: NISSAN
+  name: 2102 (NISSAN)
+  cached_spare_catalog: "САЙЛЕНТБЛОК"
+  spare_catalog: sailentblock
 
 kia_2102:
-    catalog_number: '2102'
-    brand: kia
-    cached_brand: KIA
-    name: 2102 (KIA)
-    cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
-    spare_catalog: bamper_zadniy
+  catalog_number: '2102'
+  brand: kia
+  cached_brand: KIA
+  name: 2102 (KIA)
+  cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
+  spare_catalog: bamper_zadniy
 
 ki_2102:
-    catalog_number: '2102'
-    brand: ki
-    cached_brand: KI
-    name: 2102 (KI)
-    cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
-    spare_catalog: bamper_zadniy
+  catalog_number: '2102'
+  brand: ki
+  cached_brand: KI
+  name: 2102 (KI)
+  cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
+  spare_catalog: bamper_zadniy
 
 ki_2103:
-    catalog_number: '2103'
-    brand: ki
-    cached_brand: KI
-    name: 2103 (KI)
-    cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
-    spare_catalog: bamper_zadniy
+  catalog_number: '2103'
+  brand: ki
+  cached_brand: KI
+  name: 2103 (KI)
+  cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
+  spare_catalog: bamper_zadniy
 
 ms_2103:
-    catalog_number: '2103'
-    brand: ms
-    cached_brand: MS
-    name: 2103 (MS)
-    cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
-    spare_catalog: bamper_zadniy
+  catalog_number: '2103'
+  brand: ms
+  cached_brand: MS
+  name: 2103 (MS)
+  cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
+  spare_catalog: bamper_zadniy
 
 spare_info1:
-    catalog_number: SPARE_INFO1
-    brand: brand1
-    spare_catalog: shatun
-    cached_brand: BRAND1
-    cached_spare_catalog: ШАТУН
+  catalog_number: SPARE_INFO1
+  brand: brand1
+  spare_catalog: shatun
+  cached_brand: BRAND1
+  cached_spare_catalog: ШАТУН
 
 spare_info2:
-    catalog_number: SPARE_INFO2
-    brand: brand2
-    spare_catalog: shatun
-    cached_brand: BRAND2
-    cached_spare_catalog: ШАТУН
-    image1: '1.png'
+  catalog_number: SPARE_INFO2
+  brand: brand2
+  spare_catalog: shatun
+  cached_brand: BRAND2
+  cached_spare_catalog: ШАТУН
+  image1: '1.png'
