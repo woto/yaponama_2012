@@ -66,4 +66,32 @@ class ProductsTest < ActionDispatch::IntegrationTest
     assert_select "link[rel=canonical][href='http://www.example.com/user/products/new?catalog_number=2102&replacements=1']"
   end
 
+
+  test 'Если мы посылаем запрос с If-Modified-Since с датой позже полученной ранее Last-Modified, то должен отдаться 304' do
+    get new_user_product_path(catalog_number: '2103')
+    assert_response 200
+
+    get new_user_product_path(catalog_number: '2103'), {}, {'If-Modified-Since' => (Time.parse(@response.headers['Last-Modified']) + 1.second).httpdate.to_s}
+    assert_response 304
+  end
+
+  test 'Если мы посылаем запрос с не акутальной If-Modified-Since, то должен отдаться 200' do
+    get new_user_product_path(catalog_number: '2103'), {}, {'If-Modified-Since' => (Time.new - 1.year).httpdate.to_s}
+    assert_response 200
+  end
+
+
+  test 'Если мы посылаем запрос с :etag который нам уже известен, то должен отдаться 304' do
+    get new_user_product_path(catalog_number: '2103')
+
+    get new_user_product_path(catalog_number: '2103'), {}, {'If-None-Match' => @response.headers['ETag']}
+    assert_response 304
+  end
+
+  test 'Если мы посылаем запрос с не актуальным :etag, то должен отдаться 200' do
+    get new_user_product_path(catalog_number: '2103'), {}, {'If-None-Match' => '123'}
+    assert_response 200
+  end
+
+
 end

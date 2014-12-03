@@ -63,6 +63,10 @@ module ProductsSearch
           plog.debug 'Кеш записан'
         end
 
+        require 'digest/md5'
+        etag = Digest::MD5.hexdigest(@parsed_json.to_s)
+        fresh_when :last_modified => File.mtime(File.join(Rails.root, 'tmp')), :etag => etag
+
         #debugger
 
         plog.debug 'Большой цикл обработки JSON'
