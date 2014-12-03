@@ -44,6 +44,10 @@ end
 
 namespace :app do
 
+  task :destroy_old_bots => :environment do
+    DestroyOldBots.destroy_old_bots
+  end
+
   task :update_spare_catalog => :environment do
     UpdateSpareCatalog.update_spare_catalog
   end

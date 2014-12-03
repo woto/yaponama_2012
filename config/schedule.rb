@@ -48,4 +48,8 @@
   rake "sitemap:refresh"
  end
 
+ every 1.day do
+  rake "app:destroy_old_bots"
+ end
+
 # Learn more: http://github.com/javan/whenever
