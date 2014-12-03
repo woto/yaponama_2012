@@ -79,7 +79,7 @@ gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'cocoon', :git => 'https://github.com/nathanvda/cocoon'
 gem 'kaminari'
 gem 'carrierwave'
-gem 'rmagick'
+gem 'mini_magick'
 gem 'sanitize'
 gem 'slim-rails'
 gem "cancan"

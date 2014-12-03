@@ -16,6 +16,26 @@ module Grid::Place
         :type => :string,
       }
 
+      columns_hash['image1'] = {
+        :type => :string,
+      }
+
+      columns_hash['image2'] = {
+        :type => :string,
+      }
+
+      columns_hash['image3'] = {
+        :type => :string,
+      }
+
+      columns_hash['image4'] = {
+        :type => :string,
+      }
+
+      columns_hash['image5'] = {
+        :type => :string,
+      }
+
     end
 
     def set_preferable_columns

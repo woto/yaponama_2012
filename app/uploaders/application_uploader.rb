@@ -1,7 +1,5 @@
-# encoding: utf-8
-#
 class ApplicationUploader < CarrierWave::Uploader::Base
-  include CarrierWave::RMagick
+  include CarrierWave::MiniMagick
   include CarrierWave::MimeTypes
 
   # Include RMagick or MiniMagick support:
@@ -53,5 +51,19 @@ class ApplicationUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  process :set_content_type
+
+  version :fit_thumb, if: :image? do
+    process :resize_to_fit => [200, 200]
+  end
+
+  version :fill_thumb, if: :image? do
+    process :resize_to_fill => [200, 200]
+  end
+
+  def image?(upload)
+    upload.content_type.include? 'image'
+  end
 
 end
