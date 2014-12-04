@@ -36,7 +36,8 @@
 //= require skrollr
 //
 //= require bootbox/bootbox
-
+//
+//= require noUiSlider/distribute/jquery.nouislider.all.min
 
 // APPLICATION
 //

@@ -119,3 +119,6 @@
 [submodule "system/submodules/varta_automotive_ru"]
 	path = system/submodules/varta_automotive_ru
 	url = https://github.com/woto/varta_automotive_ru
+[submodule "system/submodules/noUiSlider"]
+	path = system/submodules/noUiSlider
+	url = https://github.com/leongersen/noUiSlider/
