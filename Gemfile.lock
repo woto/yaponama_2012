@@ -1,4 +1,15 @@
 GIT
+  remote: git://github.com/activerecord-hackery/ransack.git
+  revision: a5910759761cbe30b73a54806ff22f9a701f14ed
+  specs:
+    ransack (1.5.1)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.1)
+
+GIT
   remote: git://github.com/jnicklas/capybara.git
   revision: 4161bbc560631e61e611d59bf797eeb59a6b1021
   specs:
@@ -152,6 +163,8 @@ GEM
     crass (0.2.1)
     dalli (2.7.2)
     debug_inspector (0.0.2)
+    domain_name (0.5.22)
+      unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
     execjs (2.2.2)
     ffi (1.9.6)
@@ -162,6 +175,8 @@ GEM
     hike (1.2.3)
     hiredis (0.4.5)
     htmlentities (4.3.2)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     i18n (0.7.0.beta1)
     interception (0.5)
     jbuilder (2.2.4)
@@ -184,18 +199,31 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    mechanize (2.7.3)
+      domain_name (~> 0.5, >= 0.5.1)
+      http-cookie (~> 1.0)
+      mime-types (~> 2.0)
+      net-http-digest_auth (~> 1.1, >= 1.1.1)
+      net-http-persistent (~> 2.5, >= 2.5.2)
+      nokogiri (~> 1.4)
+      ntlm-http (~> 0.1, >= 0.1.1)
+      webrobots (>= 0.0.9, < 0.2)
     method_source (0.8.2)
     mime-types (2.4.3)
+    mini_magick (4.0.1)
     mini_portile (0.6.1)
     minitest (5.4.3)
     money (6.4.0)
       i18n (>= 0.6.4, <= 0.7.0.beta1)
     multi_json (1.10.1)
     nbayes (0.1.1)
+    net-http-digest_auth (1.4)
+    net-http-persistent (2.9.4)
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
     nokogumbo (1.1.12)
       nokogiri
+    ntlm-http (0.1.1)
     offsite_payments (2.0.1)
       active_utils (~> 2.2.0)
       activesupport (>= 3.2.14, < 5.0.0)
@@ -205,6 +233,8 @@ GEM
       money (< 7.0.0)
       nokogiri (~> 1.4)
     pg (0.17.1)
+    polyamorous (1.1.0)
+      activerecord (>= 3.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -248,7 +278,6 @@ GEM
       redis (~> 3.0, >= 3.0.4)
     ref (1.0.5)
     remotipart (1.2.1)
-    rmagick (2.13.3)
     rubyzip (1.1.6)
     sanitize (3.0.3)
       crass (~> 0.2.0)
@@ -316,11 +345,15 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.6)
     web-console (2.0.0.beta4)
       activemodel (~> 4.0)
       binding_of_caller (= 0.7.3.pre1)
       railties (~> 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    webrobots (0.1.1)
     websocket (1.2.1)
     websocket-driver (0.4.0)
     whenever (0.9.4)
@@ -356,6 +389,8 @@ DEPENDENCIES
   json
   kaminari
   less-rails
+  mechanize
+  mini_magick
   nbayes
   offsite_payments
   pg
@@ -370,10 +405,10 @@ DEPENDENCIES
   rails!
   rails-html-sanitizer (~> 1.0)
   rails-i18n (~> 4.0.0)
+  ransack!
   read_only
   redis (~> 3.0.1)
   remotipart
-  rmagick
   sanitize
   sass-rails (~> 5.0.0.beta1)
   sdoc (~> 0.4.0)
