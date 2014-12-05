@@ -1,0 +1,17 @@
+<div class="text-center">
+  <% (1..5).each do |n| %>
+    <% if info.instance_eval("image#{n}").present? %>
+      <%= link_to info.instance_eval("image#{n}.url"), target: '_blank', class: 'image-view' do %>
+        <%= image_tag info.instance_eval("image#{n}.fill_thumb.url"), alt: "#{info.to_label}", style: "border: 1px solid #DEDEDE", class: 'bottom-space' %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+<% (1..5).each do |n| %>
+  <% if info.instance_eval("file#{n}").present? %>
+    <%= link_to info.instance_eval("file#{n}.url"), target: '_blank' do %>
+      <%= info.instance_eval("file#{n}.file.filename") %>
+    <% end %>
+    <br />
+  <% end %>
+<% end %>

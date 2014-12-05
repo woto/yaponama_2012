@@ -55,6 +55,9 @@ ki_2103:
   name: 2103 (KI)
   cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
   spare_catalog: bamper_zadniy
+  image1: '1.png'
+  file1: '1.bin'
+  hstore: '"Свойство1"=>"Значение1", "Свойство2"=>"Значение2"'
 
 ms_2103:
   catalog_number: '2103'
@@ -77,4 +80,3 @@ spare_info2:
   spare_catalog: shatun
   cached_brand: BRAND2
   cached_spare_catalog: ШАТУН
-  image1: '1.png'

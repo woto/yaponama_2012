@@ -138,4 +138,19 @@ class ProductsControllerTest < ActionController::TestCase
     # Протестировать ссылки на замены, купить и т.д.
   end
 
+  test 'Если spare_info имеет заполненный hstore, то он должен отобразиться в виде таблицы' do
+    get :new, catalog_number: '2103'
+    assert_select ".spare-info table", html: /.*Свойство1.*Значение1/m
+  end
+
+  test 'Если spare_info имеет image1, то она должна отобразиться' do
+    get :new, catalog_number: '2103'
+    assert_select "[alt='2103 (KI)']"
+  end
+
+  test 'Если spare_info имеет file1, то должна отобразиться ссылка на его скачивание' do
+    get :new, catalog_number: '2103'
+    assert_select "a", text: '1.bin'
+  end
+
 end
