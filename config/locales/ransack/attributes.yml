@@ -1,0 +1,6 @@
+ru:
+  ransack:
+    attributes:
+      active_record/base:
+        spare_info_cached_brand: Производитель
+        places_name: Есть в магазине
