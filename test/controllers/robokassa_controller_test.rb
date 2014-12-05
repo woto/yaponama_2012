@@ -31,7 +31,7 @@ class RobokassaControllerTest < ActionController::TestCase
     assert_equal 111, accounts(:first_user).reload.debit.to_i
     assert assigns(:cash).valid?
     delivery = ActionMailer::Base.deliveries.last
-    assert_equal "www.test.host, поступила оплата от Пользователь на сумму 111,00 руб.", delivery.subject
+    assert_equal "Пользователь внес оплату на сумму 111,00 руб., www.test.host", delivery.subject
     assert_equal ["john_doe@example.com"], delivery.to
     assert_equal ["john_doe@example.com"], delivery.from
   end
