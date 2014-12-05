@@ -3,7 +3,7 @@ require 'csv'
 require 'mechanize'
 require 'fileutils'
 
-class VartaAutomotiveRuGrab < ActionDispatch::IntegrationTest
+class VartaAutomotiveRuGrab
 
   def self.varta_automotive_ru_grab
     dir = 'varta_automotive_ru'
@@ -30,7 +30,7 @@ class VartaAutomotiveRuGrab < ActionDispatch::IntegrationTest
 
         agent = Mechanize.new
         downloaded_image = agent.get(image_url)
-        downloaded_image.save! File.join(etn_dir, downloaded_image.filename)
+        downloaded_image.save! File.join(etn_dir, 'main', downloaded_image.filename)
 
         agent = Mechanize.new
         downloaded_description = agent.get(description_url)
