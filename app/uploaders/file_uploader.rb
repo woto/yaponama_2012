@@ -1,4 +1,4 @@
-class FileUploader < CarrierWave::Uploader::Base
+class FileUploader < ApplicationUploader
 
   before :cache, :save_file_name
 
