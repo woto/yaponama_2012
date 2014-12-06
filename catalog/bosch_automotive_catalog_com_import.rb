@@ -21,10 +21,14 @@ class BoschAutomotiveCatalogComImport
         opts_hash[key] = line if index.odd?
       end
 
-      spare_info = SpareInfo.create!({ catalog_number: PriceMate.catalog_number(catalog_number),
+      spare_catalog_hash = {spare_catalog: PriceMate.spare_catalog}
+
+      spare_info = SpareInfo.find_or_initialize_by({
+        catalog_number: PriceMate.catalog_number(catalog_number),
         brand: bosch,
-        spare_catalog: PriceMate.spare_catalog
-      }.merge(images_hash).merge(hstore: opts_hash))
+      })
+      spare_info.assign_attributes(images_hash.merge(hstore: opts_hash).merge(spare_catalog_hash))
+      spare_info.save!
 
       case opts_hash['Наименование']
       when /аккумулятор/

@@ -22,6 +22,46 @@ module Grid::SpareInfo
         :type => :string,
       }
 
+      columns_hash['image1'] = {
+        :type => :string,
+      }
+
+      columns_hash['image2'] = {
+        :type => :string,
+      }
+
+      columns_hash['image3'] = {
+        :type => :string,
+      }
+
+      columns_hash['image4'] = {
+        :type => :string,
+      }
+
+      columns_hash['image5'] = {
+        :type => :string,
+      }
+
+      columns_hash['file1'] = {
+        :type => :string,
+      }
+
+      columns_hash['file2'] = {
+        :type => :string,
+      }
+
+      columns_hash['file3'] = {
+        :type => :string,
+      }
+
+      columns_hash['file4'] = {
+        :type => :string,
+      }
+
+      columns_hash['file5'] = {
+        :type => :string,
+      }
+
       columns_hash['content'] = {
         :type => :string,
       }
@@ -44,6 +84,7 @@ module Grid::SpareInfo
       @grid.visible_catalog_number = '1'
       @grid.visible_cached_brand = '1'
       @grid.visible_cached_spare_catalog = '1'
+      @grid.visible_image1 = '1'
       @grid.visible_content = '1'
       @grid.visible_notes = '1'
       @grid.visible_notes_invisible = '1'

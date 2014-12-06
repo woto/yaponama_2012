@@ -5,6 +5,7 @@
     <%= c1 do %>
 
       <%= f.twbs_text_field :title %>
+      <%= render 'image_form', f:f, name: "image" %>
 
     <% end %>
 
@@ -15,9 +16,6 @@
     <div class="col-md-12">
 
         <%= f.twbs_text_area :content, class: 'ckeditor-extended' %>
-
-        <%= f.twbs_file_field :image %>
-
         <%= f.twbs_submit %>
 
     </div>

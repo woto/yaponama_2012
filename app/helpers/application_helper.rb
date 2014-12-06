@@ -66,7 +66,7 @@ module ApplicationHelper
     # TODO Это странно, но при первой загрузке все ок, а в дальнешем 
     # (видимо из-за Turbolinks) относительный url(/...) перестает работать 
     if brand.image.present?
-      image = asset_url(brand.image.url.to_s)
+      image = asset_url(brand.image.fit_thumb.url.to_s)
     else
       image = asset_url('no_brand.png')
     end

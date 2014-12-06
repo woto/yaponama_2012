@@ -32,7 +32,7 @@
     br
     div style="background: url(http://webucateus.com/desktop/wp-content/themes/desk-mess01/images/grid.png); width: 300px "
       div style="border: 1px solid red; padding: 100px" id="thumb"
-        = image_tag @resource.image.thumb, :id => "thumb", :style => "border: 1px solid red", :class => "img-crop"
+        = image_tag @resource.image.fit_thumb, :id => "thumb", :style => "border: 1px solid red", :class => "img-crop"
   p
     strong= model_class.human_attribute_name(:rating) + ':'
     br

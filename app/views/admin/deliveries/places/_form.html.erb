@@ -59,13 +59,10 @@
         <%= f.twbs_text_field :address_locality %>
         <%= f.twbs_text_field :postal_code %>
         <%= f.twbs_text_field :street_address %>
+        <%= f.twbs_text_field :price_url %>
 
         <% (1..5).each do |n| %>
-          <%= f.twbs_file_field "image#{n}" %> <br />
-          <%= f.text_field "remote_image#{n}_url" %> <br /><br />
-          <%= image_tag instance_eval("f.object.image#{n}.fit_thumb") if instance_eval("f.object.image#{n}").present? %> <br />
-          <%= f.twbs_check_box "remove_image#{n}" %>
-          <hr />
+          <%= render 'image_form', f:f, name: "image#{n}" %>
         <% end %>
 
         <%= panel 'default' do |p| %>

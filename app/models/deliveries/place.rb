@@ -11,6 +11,7 @@ class Deliveries::Place < ActiveRecord::Base
   validates :variants, :length => { :minimum => 1 }, if: -> { realize }
 
   has_many :users
+  has_many :warehouses, class_name: "Warehouse"
 
   #belongs_to :option
 

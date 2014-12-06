@@ -26,6 +26,6 @@
 <% end %>
 
 
-<%= twbs_form_for @resource, url: polymorphic_path([*jaba3, @resource], :return_path => params[:return_path], :skip => true, :modal => true), class: 'product bottom-space-lg', :remote => true do |f| %>
+<%= twbs_form_for @resource, url: polymorphic_path([*jaba3, @resource], :return_path => params[:return_path], :skip => true, :modal => true), class: 'product', :remote => true do |f| %>
   <%= render 'modal_form', f: f %>
 <% end %>

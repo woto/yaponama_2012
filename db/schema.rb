@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141115055924) do
+ActiveRecord::Schema.define(version: 20141205160245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 20141115055924) do
     t.text     "preview"
     t.string   "slang"
     t.boolean  "default_display"
+    t.string   "opts",            default: [], array: true
   end
 
   add_index "brands", ["brand_id"], name: "index_brands_on_brand_id", using: :btree
@@ -396,6 +397,9 @@ ActiveRecord::Schema.define(version: 20141115055924) do
     t.string   "email1"
     t.string   "email2"
     t.string   "email3"
+    t.string   "image4"
+    t.string   "image5"
+    t.string   "price_url"
   end
 
   create_table "deliveries_variants", force: true do |t|
@@ -624,6 +628,25 @@ ActiveRecord::Schema.define(version: 20141115055924) do
   add_index "names", ["creator_id"], name: "index_names_on_creator_id", using: :btree
   add_index "names", ["profile_id"], name: "index_names_on_profile_id", using: :btree
   add_index "names", ["somebody_id"], name: "index_names_on_somebody_id", using: :btree
+
+  create_table "opts_accumulators", force: true do |t|
+    t.integer  "voltage"
+    t.integer  "battery_capacity"
+    t.integer  "cold_cranking_amps"
+    t.integer  "length"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "base_hold_down"
+    t.string   "layout"
+    t.string   "terminal_types"
+    t.string   "case_size"
+    t.float    "weight_filled"
+    t.integer  "spare_info_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "opts_accumulators", ["spare_info_id"], name: "index_opts_accumulators_on_spare_info_id", using: :btree
 
   create_table "order_deliveries", force: true do |t|
     t.integer  "creator_id"
@@ -1260,6 +1283,7 @@ ActiveRecord::Schema.define(version: 20141115055924) do
     t.datetime "updated_at"
     t.text     "intro"
     t.text     "page"
+    t.string   "opt"
   end
 
   create_table "spare_infos", force: true do |t|
@@ -1274,6 +1298,23 @@ ActiveRecord::Schema.define(version: 20141115055924) do
     t.integer  "spare_catalog_id"
     t.text     "notes"
     t.text     "notes_invisible"
+    t.string   "image1"
+    t.string   "image2"
+    t.string   "image3"
+    t.string   "image4"
+    t.string   "image5"
+    t.string   "image6"
+    t.string   "image7"
+    t.string   "image8"
+    t.string   "file1"
+    t.string   "file2"
+    t.string   "file3"
+    t.string   "file4"
+    t.string   "file5"
+    t.string   "file6"
+    t.string   "file7"
+    t.string   "file8"
+    t.hstore   "hstore"
   end
 
   add_index "spare_infos", ["brand_id"], name: "index_spare_infos_on_brand_id", using: :btree
@@ -1368,5 +1409,17 @@ ActiveRecord::Schema.define(version: 20141115055924) do
   end
 
   add_index "uploads", ["somebody_id"], name: "index_uploads_on_somebody_id", using: :btree
+
+  create_table "warehouses", force: true do |t|
+    t.integer  "spare_info_id"
+    t.integer  "count"
+    t.integer  "price"
+    t.integer  "place_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "warehouses", ["place_id"], name: "index_warehouses_on_place_id", using: :btree
+  add_index "warehouses", ["spare_info_id"], name: "index_warehouses_on_spare_info_id", using: :btree
 
 end

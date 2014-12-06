@@ -97,8 +97,7 @@ class Somebody < ActiveRecord::Base
   end
 
   def to_label
-    
-    if (full_name = [surname, name]).any?
+    if (full_name = [surname, name].reject(&:blank?)).any?
       full_name.join(' ')
     else
       "Посетитель: № #{pretty_id}"

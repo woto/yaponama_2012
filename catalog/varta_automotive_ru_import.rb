@@ -22,10 +22,15 @@ class VartaAutomotiveRuImport
         opts_hash[key] = line if index.odd?
       end
 
-      spare_info = SpareInfo.create({ catalog_number: PriceMate.catalog_number(catalog_number),
-        brand: varta,
-        spare_catalog: PriceMate.spare_catalog
-      }.merge(images_hash).merge(hstore: opts_hash))
+      spare_catalog_hash = {spare_catalog: PriceMate.spare_catalog}
+
+      spare_info = SpareInfo.find_or_initialize_by({
+        catalog_number: PriceMate.catalog_number(catalog_number),
+        brand: varta
+      })
+
+      spare_info.assign_attributes(images_hash.merge(hstore: opts_hash).merge(spare_catalog_hash))
+      spare_info.save!
 
       accumulator_hash = {}
       accumulator_hash['voltage'] = opts_hash.delete 'Напряжение:'
@@ -34,7 +39,7 @@ class VartaAutomotiveRuImport
       accumulator_hash['length'] = opts_hash.delete 'Продолжительность:'
       accumulator_hash['width'] = opts_hash.delete 'Ширина:'
       accumulator_hash['height'] = opts_hash.delete 'Высота:'
-      spare_info.create_accumulator(accumulator_hash)
+      spare_info.create_accumulator!(accumulator_hash)
     end
   end
 end

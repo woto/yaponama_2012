@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Voltage:</strong>
+  <%= @opts_accumulator.voltage %>
+</p>
+
+<p>
+  <strong>Battery capacity:</strong>
+  <%= @opts_accumulator.battery_capacity %>
+</p>
+
+<p>
+  <strong>Cold cranking amps:</strong>
+  <%= @opts_accumulator.cold_cranking_amps %>
+</p>
+
+<p>
+  <strong>Length:</strong>
+  <%= @opts_accumulator.length %>
+</p>
+
+<p>
+  <strong>Width:</strong>
+  <%= @opts_accumulator.width %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @opts_accumulator.height %>
+</p>
+
+<p>
+  <strong>Base hold down:</strong>
+  <%= @opts_accumulator.base_hold_down %>
+</p>
+
+<p>
+  <strong>Layout:</strong>
+  <%= @opts_accumulator.layout %>
+</p>
+
+<p>
+  <strong>Terminal types:</strong>
+  <%= @opts_accumulator.terminal_types %>
+</p>
+
+<p>
+  <strong>Case size:</strong>
+  <%= @opts_accumulator.case_size %>
+</p>
+
+<p>
+  <strong>Weight filled:</strong>
+  <%= @opts_accumulator.weight_filled %>
+</p>
+
+<p>
+  <strong>Spare info:</strong>
+  <%= @opts_accumulator.spare_info %>
+</p>
+
+<%= link_to 'Edit', edit_opts_accumulator_path(@opts_accumulator) %> |
+<%= link_to 'Back', opts_accumulators_path %>

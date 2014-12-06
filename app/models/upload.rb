@@ -29,7 +29,7 @@ class Upload < ActiveRecord::Base
       "name" => read_attribute(:upload),
       "size" => upload.size,
       "url" => upload.url,
-      "thumbnail_url" => upload.thumb.url,
+      "thumbnail_url" => upload.fill_thumb.url,
       "delete_url" => upload_path(self),
       "delete_type" => "DELETE",
       "crop_url" => crop_upload_path(self),

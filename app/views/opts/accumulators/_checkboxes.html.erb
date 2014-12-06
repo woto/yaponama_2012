@@ -1,0 +1,23 @@
+<div rel="collapse-next" class="collapse-reset-checkboxes">
+  <%= render 'name', f: f, name: name %>
+  <%= render 'question', name: name, tabindex: tabindex %>
+</div>
+
+<% css_class = "collapse" %>
+<% if params[:q].present? %>
+  <% if params[:q]["#{name}_eq_any"].present? && ( params[:q]["#{name}_eq_any"] & checkboxes.map{|ch| ch[:value].to_s} ) %>
+    <% css_class = "collapse in" %>
+  <% end %>
+<% end %>
+
+<div class="bottom-space-sm <%= css_class %>">
+  <% checkboxes.each do |checkbox| %>
+    <div class="checkbox" style="margin-top: 0; margin-bottom: 5px">
+      <label>
+        <% is_checked = params[:q] && params[:q]["#{name}_eq_any"].is_a?(Array) && params[:q]["#{name}_eq_any"].include?(checkbox[:value].to_s) %>
+        <%= check_box_tag("q[#{name}_eq_any][]", checkbox[:value], is_checked, class: 'element' ) %>
+          <%= checkbox[:label] %>
+      </label>
+    </div>
+  <% end %>
+</div>

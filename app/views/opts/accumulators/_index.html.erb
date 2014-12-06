@@ -1,0 +1,126 @@
+<% @meta_title = 'Автомобильные аккумуляторы' %>
+<%= page_header %>
+<%= row do %>
+  <div class="col-md-4 col-md-push-8 col-lg-3 col-lg-push-9">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Выбор свойств</h3>
+      </div>
+      <div class="panel-body">
+    <%= search_form_for @q, url: accumulators_path, remote: true  do |f| %>
+
+      <%= render 'checkboxes', f:f, name: 'places_id', checkboxes: Deliveries::Place.where(active: true, display_marker: true).map{|obj| {label: obj.name, value: obj.id}}, tabindex: '0' %>
+      <%= render 'checkboxes', f:f, name: 'spare_info_brand_id', checkboxes: Brand.where("'accumulators' = ANY(opts)").map{|obj| {label: obj.name, value: obj.id}}, tabindex: '0' %>
+      <%= render 'checkboxes', f:f, name: 'terminal_types', checkboxes: Rails.application.config_for('application/accumulators')['terminal_types']['checkboxes'], tabindex: '0' %>
+      <%= render 'checkboxes', f:f, name: 'base_hold_down', checkboxes: Rails.application.config_for('application/accumulators')['base_hold_down']['checkboxes'], tabindex: '0' %>
+      <%= render 'checkboxes', f:f, name: 'layout', checkboxes: Rails.application.config_for('application/accumulators')['layout']['checkboxes'], tabindex: '0' %>
+      <%= render 'checkboxes', f:f, name: 'voltage', checkboxes: Rails.application.config_for('application/accumulators')['voltage']['checkboxes'], tabindex: '0' %>
+      <%= render 'range', f:f, name: 'battery_capacity', tabindex: '1', min: '30', max: '250', step: '5' %>
+      <%= render 'range', f:f, name: 'cold_cranking_amps', tabindex: '2', min: '100', max: '1000', step: '5' %>
+      <%= render 'range', f:f, name: 'length', tabindex: '3', min: '0', max: '600', step: '5' %>
+      <%= render 'range', f:f, name: 'width', tabindex: '4', min: '0', max: '300', step: '5' %>
+      <%= render 'range', f:f, name: 'height', tabindex: '5', min: '0', max: '300', step: '5' %>
+
+      <%= f.submit 'Обновить', class: 'btn btn-success top-space-md' %>
+    <% end %>
+    </div>
+    </div>
+  </div>
+  <div class="col-md-8 col-md-pull-4 col-lg-9 col-lg-pull-3">
+
+    <% @accumulators.each do |accumulator| %>
+
+      <%= panel 'primary' do |p| %>
+        <%= p.heading do %>
+          <%= p.title do %>
+
+            <%= link_to "ЗАПЧАСТИ", categories_path %> <%= icon 'angle-right' %>
+            <%= link_to accumulator.spare_info.spare_catalog.name, category_brands_path(accumulator.spare_info.spare_catalog) %> <%= icon 'angle-right' %>
+            <%= link_to accumulator.spare_info.to_label, new_user_product_path(catalog_number: accumulator.spare_info.catalog_number) %>
+
+          <% end %>
+        <% end %>
+        <%= p.body do %>
+          <%= row do %>
+            <div class="col-sm-3 text-center">
+              <%= image_tag accumulator.spare_info.image1.fill_thumb, class: 'img-thumbnail center-block img-responsive' %>
+              <h4 class="top-space bottom-space"><%= accumulator.spare_info.warehouses.map{|wh| number_to_currency(wh.price)}.join(', ') %></h4>
+              <%= link_to "Купить", "#", class: "btn btn-lg btn-success bottom-space" %>
+              <%# @resource_class.human_attribute_name(:spare_info) %>
+              <%# accumulator.spare_info %>
+              <%# link_to 'Show', accumulator %>
+              <%# link_to 'Edit', edit_accumulator_path(accumulator) %>
+              <%# link_to 'Destroy', accumulator, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+            <div class="col-sm-9">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <tr>
+                    <td> <%= @resource_class.human_attribute_name(:voltage) %> </td>
+                    <td> <%= accumulator.voltage %> В </td>
+                    <td> <%= @resource_class.human_attribute_name(:battery_capacity) %> </td>
+                    <td> <%= accumulator.battery_capacity %> А·ч </td>
+                  </tr>
+
+                  <tr>
+                    <td> <%= @resource_class.human_attribute_name(:cold_cranking_amps) %> </td>
+                    <td> <%= accumulator.cold_cranking_amps %> А </td>
+                    <td> <%= @resource_class.human_attribute_name(:length) %> </td>
+                    <td> <%= accumulator.length %> мм </td>
+                  </tr>
+
+                  <tr>
+                    <td> <%= @resource_class.human_attribute_name(:base_hold_down) %> </td>
+                    <td> <%= accumulator.base_hold_down %> </td>
+                    <td> <%= @resource_class.human_attribute_name(:layout) %> </td>
+                    <td> <%= accumulator.layout %> </td>
+                  </tr>
+
+                  <tr>
+                    <td> <%= @resource_class.human_attribute_name(:terminal_types) %> </td>
+                    <td> <%= accumulator.terminal_types %> </td>
+                    <td> </td>
+                    <td> </td>
+                  </tr>
+
+                  <tr>
+                    <td> <%= @resource_class.human_attribute_name(:weight_filled) %> </td>
+                    <td> <%= accumulator.weight_filled %> </td>
+                    <td> <%= @resource_class.human_attribute_name(:width) %> </td>
+                    <td> <%= accumulator.width %> мм </td>
+                  </tr>
+
+                  <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> <%= @resource_class.human_attribute_name(:height) %> </td>
+                    <td> <%= accumulator.height %> мм </td>
+                  </tr>
+
+                </table>
+              </div>
+            </div>
+          <% end %>
+          <%= row do %>
+            <div class="col-xs-12">
+              <%# render 'spare_info_hstore', info: accumulator.spare_info %>
+              <%# render 'spare_info_files', info: accumulator.spare_info %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <div class="top-space bottom-space">
+      <%= paginate @accumulators %>
+    </div>
+
+    <% if false %>
+    <%= link_to 'New Accumulator', new_accumulator_path %>
+    Масса (в незалитом виде)
+    Размер корпуса
+    <% end %>
+
+  </div>
+<% end %>

@@ -8,4 +8,5 @@ class CategoriesController < ApplicationController
       distinct
   end
 
+
 end

@@ -2,5 +2,5 @@ ru:
   ransack:
     attributes:
       active_record/base:
-        spare_info_cached_brand: Производитель
-        places_name: Есть в магазине
+        spare_info_brand_id: Производитель
+        places_id: Есть в магазине

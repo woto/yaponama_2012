@@ -6,6 +6,8 @@
 
       <%= f.twbs_select2 :name, rel: 'select2-spare_catalog' %>
 
+      <%= f.twbs_select :opt, Rails.application.config_for('application/opts')['opts'], include_blank: true %>
+
       <%= f.simple_fields_for :spare_catalog_tokens do |sct| %>
         <%= render 'spare_catalog_token_fields', :f => sct %>
       <% end %>

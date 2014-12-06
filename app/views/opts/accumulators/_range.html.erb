@@ -1,0 +1,62 @@
+<div rel="collapse-next" class="collapse-reset-range">
+  <%= render 'name', f: f, name: name %>
+  <%= render 'question', name: name, tabindex: tabindex %>
+</div>
+
+<% css_class = "collapse" %>
+<% if params[:q].present? %>
+  <% if (params[:q]["#{name}_lt"].present? && params[:q]["#{name}_lt"] != max ) || ( params[:q]["#{name}_gt"].present? && params[:q]["#{name}_gt"] != min ) %>
+    <% css_class = "collapse in" %>
+  <% end %>
+<% end %>
+
+<div class="bottom-space-md <%=css_class %>">
+  <div class="row bottom-space-md top-space-xs">
+    <div class="col-xs-6">
+      <%= f.search_field "#{name}_gt", data:{default: min}, class: 'form-control' %>
+    </div>
+    <div class="col-xs-6">
+      <%= f.search_field "#{name}_lt", data:{default: max}, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+
+      <script>
+          $(function(){
+            $('#<%= name %>_slider').noUiSlider({
+              start: [ <%= (params[:q] && params[:q]["#{name}_gt"]) || min %>, <%= (params[:q] && params[:q]["#{name}_lt"]) || max %> ],
+              step: <%= step %>,
+              range: {
+                'min': <%= min %>,
+                'max': <%= max %>
+              },
+              format: wNumb({
+                decimals: 0,
+                prefix: ''
+              })
+            });
+
+            $("#<%= name %>_slider").Link('lower').to($("#q_<%= name %>_gt"));
+            $("#<%= name %>_slider").Link('upper').to($("#q_<%= name %>_lt"));
+
+            //// Generate a hidden input element
+            //element.Link('inputs').to('price', null, {
+            //  to: function ( value ) {
+            //    // format value
+            //  },
+            //  from: function ( value ) {
+            //    // decode value
+            //  }
+            //});
+
+          //  $("#<%= name %>_slider").on("slide", function(event) {
+          //    $("#q_<%= name %>_gt").val(event.value[0]);
+          //    $("#q_<%= name %>_lt").val(event.value[1]);
+        });
+      </script>
+
+      <div id="<%= "#{name}_slider" %>" class="element"></div>
+    </div>
+  </div>
+</div>

@@ -14,9 +14,11 @@
         <% end %>
       <% end %>
 
+      <%= f.twbs_collection_check_boxes 'opts', Rails.application.config_for('application/opts')['opts'], :to_s, :to_s %>
+
       <%= f.twbs_text_field :slang %>
 
-      <%= f.twbs_file_field :image %>
+      <%= render 'image_form', f:f, name: 'image' %>
       <%= f.twbs_text_field :rating %>
       <%= f.twbs_check_box :is_brand %>
       <%= f.twbs_check_box :default_display %>

@@ -10,6 +10,17 @@
   <div id="brand-preview"><%==  @brand.preview %></div>
   <div id="brand-content"><%== @brand.content %></div>
 
+  <h2>Основные направления деятельности компании <%= @brand.name %></h2>
+  <ul>
+    <% @brand.opts.each do |opt| %>
+      <li>
+      <%= link_to "Каталог #{t opt} компании #{@brand.name}", polymorphic_path(opt, q: {spare_info_brand_id_eq_any: {"" => "#{@brand.id}"}}) %>
+      </li>
+    <% end %>
+  </ul>
+
+  <hr />
+
   <ul>
     <% @spare_infos.each do |spare_info| %>
       <li>

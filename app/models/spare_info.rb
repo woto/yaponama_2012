@@ -11,6 +11,17 @@ class SpareInfo < ActiveRecord::Base
   has_many :from_spare_replacements, foreign_key: :from_spare_info_id, class_name: SpareReplacement, dependent: :destroy
   has_many :to_spare_replacements, foreign_key: :to_spare_info_id, class_name: SpareReplacement, dependent: :destroy
   has_many :spare_applicabilities, dependent: :destroy
+  has_many :warehouses, dependent: :destroy
+
+  (1..5).each do |n|
+    mount_uploader "image#{n}", ApplicationUploader
+  end
+
+  (1..5).each do |n|
+    mount_uploader "file#{n}", ApplicationUploader
+  end
+
+  has_one :accumulator, class_name: 'Opts::Accumulator', dependent: :destroy
 
   def to_label
     # TODO ранее тут был cached_brand. И в общем все работало, за исключением того, что допустим я создаю spare_info,

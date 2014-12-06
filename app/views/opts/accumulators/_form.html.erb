@@ -1,0 +1,22 @@
+<%= simple_form_for(@opts_accumulator) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :voltage %>
+    <%= f.input :battery_capacity %>
+    <%= f.input :cold_cranking_amps %>
+    <%= f.input :length %>
+    <%= f.input :width %>
+    <%= f.input :height %>
+    <%= f.input :base_hold_down %>
+    <%= f.input :layout %>
+    <%= f.input :terminal_types %>
+    <%= f.input :case_size %>
+    <%= f.input :weight_filled %>
+    <%= f.association :spare_info %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

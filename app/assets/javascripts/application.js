@@ -39,6 +39,10 @@
 //
 //= require noUiSlider/distribute/jquery.nouislider.all.min
 
+// COMPONENTS
+//
+//= require opts
+
 // APPLICATION
 //
 //= require common

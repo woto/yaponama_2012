@@ -209,6 +209,11 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
     @template.render "twbs_collection_radio_buttons_#{variation}", f: self, method: method, collection: collection, value_method: value_method, text_method: text_method, options: options, html_options: html_options, block: block, extra: extra
   end
 
+  def twbs_collection_check_boxes(method, collection, value_method, text_method, options = {}, html_options = {}, &block)
+    # TODO переопределить под бутстрап
+    @template.collection_check_boxes(@object_name, method, collection, value_method, text_method, objectify_options(options), @default_options.merge(html_options), &block)
+  end
+
   def twbs_check_box(method, options = {}, checked_value = '1', unchecked_value = '0')
     extra = common_options method, options
     #@template.render 'twbs_check_box', f: self, method: method, options: options, checked_value: checked_value, unchecked_value: unchecked_value, extra: extra

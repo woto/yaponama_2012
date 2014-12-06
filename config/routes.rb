@@ -17,6 +17,9 @@ end
 
 Yaponama2012::Application.routes.draw do
 
+  scope module: 'opts' do
+    resources :accumulators
+  end
 
   # /catalogs/brands/дочерний_id -> /catalogs/brands/родительский_id
   get "/catalogs/brands/:id", constraints: lambda{|params, env| Brand.find(params[:id]).brand_id?}, to: redirect{|params, request|

@@ -1,0 +1,6 @@
+<% title = Rails.application.config_for('application/accumulators').try(:[], name).try(:[], 'title') %>
+<% content = Rails.application.config_for('application/accumulators').try(:[], name).try(:[], 'content') %>
+
+<% if title.present? || content.present? %>
+  <a href="#" tabindex="<%= tabindex %>" class="btn btn-xs btn-info" role="button" rel="popover" data-toggle="popover" data-trigger="focus" title="<%= title %>" data-content="<%= content %>"><%= icon 'question' %></a>
+<% end %>

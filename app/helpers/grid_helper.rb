@@ -239,8 +239,10 @@ module GridHelper
           Rails.configuration.genders[val]
         when *['data_vidachi', 'data_rozhdeniya']
           l(val, :format => :long)
-        when *['image']
-          image_tag val
+        when *['image', 'image1', 'image2', 'image3', 'image4', 'image5']
+          image_tag val.fit_thumb if val.present?
+        when *['file', 'file1', 'file2', 'file3', 'file4', 'file5']
+          link_to val.file.filename, val.url if val.present?
         when *['created_at', 'updated_at', 'password_reset_sent_at', 'confirmation_datetime']
           if val.present?
             l(val, :format => :short)

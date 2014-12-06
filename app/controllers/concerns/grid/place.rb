@@ -15,7 +15,9 @@ module Grid::Place
       columns_hash['name'] = {
         :type => :string,
       }
-
+      columns_hash['price_url'] = {
+        :type => :string,
+      }
       columns_hash['image1'] = {
         :type => :string,
       }
@@ -35,12 +37,13 @@ module Grid::Place
       columns_hash['image5'] = {
         :type => :string,
       }
-
     end
 
     def set_preferable_columns
       @grid.visible_id = '1'
       @grid.visible_name = '1'
+      @grid.visible_price_url = '1'
+      @grid.visible_image1 = '1'
     end
 
   end

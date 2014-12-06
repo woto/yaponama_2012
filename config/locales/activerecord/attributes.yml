@@ -1,6 +1,18 @@
 ru:
   activerecord:
     attributes:
+      opts/accumulator:
+        voltage: Напряжение
+        battery_capacity: Емкость
+        cold_cranking_amps: Пусковой ток
+        length: Длина
+        width: Ширина
+        height: Высота
+        base_hold_down: Крепление
+        layout: Полярность
+        terminal_types: Токовыводы
+        case_size: Размер
+        weight_filled: Масса
       somebody/profile:
         phones: Мобильный телефон
         emails: E-mail
