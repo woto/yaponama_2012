@@ -1,0 +1,14 @@
+<%= panel 'default' do |p| %>
+  <%= p.heading do %>
+    <%= p.title do %>
+      Файл <%= name %>
+    <% end %>
+  <% end %>
+  <%= p.body do %>
+    <%= f.twbs_file_field "#{name}" %>
+    <%= f.twbs_text_field "remote_#{name}_url" %>
+    <%= link_to(instance_eval("f.object.#{name}.file.filename"), instance_eval("f.object.#{name}.url")) if instance_eval("f.object.#{name}").present? %>
+    <%= f.twbs_check_box "remove_#{name}" %>
+    <%= f.twbs_hidden_field "#{name}_cache" %>
+  <% end %>
+<% end %>

@@ -1,0 +1,14 @@
+<%= panel 'default' do |p| %>
+  <%= p.heading do %>
+    <%= p.title do %>
+      Изображение <%= name %>
+    <% end %>
+  <% end %>
+  <%= p.body do %>
+    <%= f.twbs_file_field "#{name}" %>
+    <%= f.twbs_text_field "remote_#{name}_url" %>
+    <%= image_tag instance_eval("f.object.#{name}.fit_thumb") if instance_eval("f.object.#{name}").present? %>
+    <%= f.twbs_check_box "remove_#{name}" %>
+    <%= f.twbs_hidden_field "#{name}_cache" %>
+  <% end %>
+<% end %>
