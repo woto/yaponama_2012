@@ -105,10 +105,10 @@ class PriceMate
       meta_title << " "
     end
     meta_title << titles[0].to_s.mb_chars.capitalize
+    meta_title.truncate(60)
   end
 
   def self.meta_description titles
-
     meta_description = ''
     # Названия
     if titles.size > 1
@@ -136,7 +136,6 @@ class PriceMate
   end
 
   def self.process parsed_json
-
     counter = Hash.new{|h, k| h[k] = 0}
     formatted_data = {}
 
