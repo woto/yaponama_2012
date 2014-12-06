@@ -1,0 +1,15 @@
+defaults: &defaults
+  opts:
+    - accumulators
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  avtorif.ru:
+    <<: *defaults
+  zapstok.ru:
+    <<: *defaults
