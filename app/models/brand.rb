@@ -2,7 +2,6 @@
 #
 class Brand < ActiveRecord::Base
   include Selectable
-  include Transactionable
   include BelongsToCreator
   include BrandAttributes
   include CachedBrand
