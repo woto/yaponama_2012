@@ -12,7 +12,7 @@
 
   <ol id="category-brands">
     <% @brands.each do |brand| %>
-      <li> <%= link_to brand.cached_brand, category_brand_path(params[:category_id], brand.to_brand_param) %> </li>
+      <li> <%= link_to "#{@resource.name} НА #{brand.cached_brand}", category_brand_path(params[:category_id], brand.to_brand_param) %> </li>
     <% end %>
   </ol>
 

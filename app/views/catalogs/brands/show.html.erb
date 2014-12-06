@@ -7,7 +7,7 @@
     <%= b.item(@brand.name) %>
   </ol>
 
-  <% @meta_title = "#{@brand.name}" %>
+  <% @meta_title = "ЗАПЧАСТИ НА #{@brand.name}" %>
   <% @meta_title_lead = image_tag @brand.image_url %>
   <% @meta_title_small = "(рус. #{@brand.slang})" if @brand.slang.present? %>
   <%= page_header %>
@@ -16,7 +16,7 @@
 
   <ol id="catalogs-brand-models">
     <% @models.each do |model| %>
-      <li> <%= link_to model.cached_model, catalogs_model_path(model.to_model_param) %> </li>
+      <li> <%= link_to "ЗАПЧАСТИ НА #{@brand.name} #{model.cached_model}", catalogs_model_path(model.to_model_param) %> </li>
     <% end %>
   </ol>
 

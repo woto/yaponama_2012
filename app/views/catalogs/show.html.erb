@@ -5,7 +5,7 @@
 
   <ol id="catalogs-brands">
     <% @brands.each do |brand| %>
-      <li> <%= link_to brand.cached_brand, catalogs_brand_path(brand.to_brand_param) %> </li>
+      <li> <%= link_to "ЗАПЧАСТИ НА #{brand.cached_brand}", catalogs_brand_path(brand.to_brand_param) %> </li>
     <% end %>
   </ol>
 

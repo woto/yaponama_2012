@@ -8,7 +8,7 @@ class Catalogs::GenerationsControllerTest < ActionController::TestCase
     assert_select '.breadcrumb', /^Каталог.*MITSUBISHI.*Galant.*2008 - 2013, 9 поколение \[2-й рестайлинг\]$/m
     assert_select '#catalogs-generation-modifications', 'CN седан 4-дв. 2.0 AT (160 л. с.)'
     assert_select '#catalogs-generation-content', 'Описание 9-ого поколения, 2-ого рестайлинга'
-    assert_select '#best-parts-list', '3310 (TOYOTA) РУЛЕВАЯ ТЯГА'
+    assert_select '#best-parts-list', '3310 (TOYOTA) РУЛЕВАЯ ТЯГА НА MITSUBISHI Galant 2008 - 2013, 9 поколение [2-й рестайлинг]'
   end
 
 end

@@ -8,13 +8,13 @@
     <%= b.item(@model.name) %>
   </ol>
 
-  <% @meta_title = "#{@brand.name} #{@model.name}" %>
+  <% @meta_title = "ЗАПЧАСТИ НА #{@brand.name} #{@model.name}" %>
   <% @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present? %>
   <%= page_header %>
 
   <ol id="catalogs-model-generations">
     <% @generations.each do |generation| %>
-      <li> <%= link_to generation.cached_generation, catalogs_generation_path(generation.to_generation_param) %> </li>
+      <li> <%= link_to "ЗАПЧАСТИ НА #{@brand.name} #{@model.name} #{generation.cached_generation}", catalogs_generation_path(generation.to_generation_param) %> </li>
     <% end %>
   </ol>
 

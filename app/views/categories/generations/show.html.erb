@@ -10,12 +10,12 @@
     <%= b.item(@generation.name) %>
   </ol>
 
-  <% @meta_title = "#{@resource.name} #{@brand.name} #{@model.name} #{@generation.name}" %>
+  <% @meta_title = "#{@resource.name} НА #{@brand.name} #{@model.name} #{@generation.name}" %>
   <%= page_header %>
 
   <ol id="category-modifications">
     <% @modifications.each do |modification| %>
-      <li> <%= link_to modification.cached_modification, category_modification_path(params[:category_id], modification.to_modification_param) %> </li>
+      <li> <%= link_to "#{@resource.name} НА #{@brand.name} #{@model.name} #{@generation.name} #{modification.cached_modification}", category_modification_path(params[:category_id], modification.to_modification_param) %> </li>
     <% end %>
   </ol>
 

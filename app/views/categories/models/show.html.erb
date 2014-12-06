@@ -9,13 +9,13 @@
     <%= b.item(@model.name) %>
   </ol>
 
-  <% @meta_title = "#{@resource.name} #{@brand.name} #{@model.name}" %>
+  <% @meta_title = "#{@resource.name} НА #{@brand.name} #{@model.name}" %>
   <% @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present? %>
   <%= page_header %>
 
   <ol id="category-generations">
     <% @generations.each do |generation| %>
-      <li> <%= link_to generation.cached_generation, category_generation_path(params[:category_id], generation.to_generation_param) %> </li>
+      <li> <%= link_to "#{@resource.name} НА #{@brand.name} #{@model.name} #{generation.cached_generation}", category_generation_path(params[:category_id], generation.to_generation_param) %> </li>
     <% end %>
   </ol>
 

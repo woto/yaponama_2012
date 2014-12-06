@@ -10,7 +10,7 @@
   <div id="best-parts-list">
     <% @parts.each do |spare_info| %>
       <div>
-        <%= link_to "#{spare_info.catalog_number} (#{spare_info.cached_brand}) #{spare_info.cached_spare_catalog}", new_user_product_path(catalog_number: spare_info.catalog_number, anchor: spare_info.cached_brand) %>
+        <%= link_to "#{spare_info.catalog_number} (#{spare_info.cached_brand}) #{spare_info.cached_spare_catalog} НА #{@brand.name} #{@model.name} #{@generation.try(:name)} #{@modification.try(:name)}", new_user_product_path(catalog_number: spare_info.catalog_number, anchor: spare_info.cached_brand) %>
         <%=  %>
       </div>
     <% end %>
