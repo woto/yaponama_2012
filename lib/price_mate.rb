@@ -265,7 +265,7 @@ class PriceMate
   end
 
   def self.clear parsed_json
-    parsed_json.delete("result_replacements")
+    #parsed_json.delete("result_replacements")
     parsed_json.delete("result_message")
     parsed_json["result_prices"].each do |item|
       item.delete "ij_income_rate"

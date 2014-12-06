@@ -1,4 +1,4 @@
-  <%= row class: 'top-space bottom-space' do %>
+  <%= row class: 'bottom-space' do %>
 
     <%= content_tag :div, class: 'col-md-2 col-md-push-10 text-xs' do %>
       <div class="list-group">
@@ -29,7 +29,7 @@
                 <% if mf_scope[:catalog] %>
                   <%= link_to mf_scope[:catalog].name, category_brands_path(mf_scope[:catalog]) %> <%= icon 'angle-right' %>
                 <% end %>
-                <%= link_to("#{catalog_number} (#{manufacturer})", "##{manufacturer}", style: 'color: white') %>
+                <%= link_to("#{catalog_number} (#{manufacturer})", "##{manufacturer}") %>
               </span>
 
             <% end %>
@@ -211,8 +211,10 @@
 
   <% end %>
 
-  <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-  <h3 class="top-space-lg bottom-space-lg">Вы так же можете попробовать посмотреть <%= link_to "аналоги и замены номера #{@c9}", polymorphic_path([new_or_edit, *jaba3,  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %></h3>
+  <% if @replacements.map{|obj| obj['replacements'].map{|obj2| obj2['catalog_number']}}.flatten.length > 1 %>
+    <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
+    <h3 class="top-space-lg bottom-space-lg">Вы так же можете попробовать посмотреть <%= link_to "аналоги и замены номера #{@c9}", polymorphic_path([new_or_edit, *jaba3,  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %></h3>
+  <% end %>
 
 <% end %>
     <% end %>

@@ -63,15 +63,17 @@ module ProductsSearch
           plog.debug 'Кеш записан'
         end
 
-        require 'digest/md5'
-        etag = Digest::MD5.hexdigest(@parsed_json.to_s)
-        fresh_when :last_modified => File.mtime(File.join(Rails.root, 'tmp')), :etag => etag
-
-        #debugger
+        unless Rails.env.development?
+          require 'digest/md5'
+          etag = Digest::MD5.hexdigest(@parsed_json.to_s)
+          fresh_when :last_modified => File.mtime(File.join(Rails.root, 'tmp')), :etag => etag
+        end
 
         plog.debug 'Большой цикл обработки JSON'
         @formatted_data = PriceMate.process @parsed_json
         plog.debug '/Большой цикл обработки JSON'
+
+        @replacements = @parsed_json['result_replacements']
 
         plog.debug 'Сортировка по рейтингам брендов'
         @formatted_data = PriceMate.sort_by_brand_rating @formatted_data
@@ -107,6 +109,12 @@ module ProductsSearch
         plog.debug 'Canonical'
         @meta_canonical = new_user_product_url(catalog_number: c9, replacements: r9)
         plog.debug '/Canonical'
+
+        plog.debug 'Robots'
+        if @replacements.map{|obj| obj['catalog_number']}.uniq.length <= 1 && r9
+          @meta_robots = 'noindex, nofollow'
+        end
+        plog.debug '/Robots'
 
         plog.debug '/Заполняем метаданные'
 
