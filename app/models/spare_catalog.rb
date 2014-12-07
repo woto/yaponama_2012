@@ -12,6 +12,15 @@ class SpareCatalog < ActiveRecord::Base
     self.name = name.mb_chars.upcase
   end
 
+  before_destroy do
+    spare_catalog = PriceMate.spare_catalog
+    if spare_infos.exists?
+      spare_infos.each do |si|
+        si.update(spare_catalog: spare_catalog)
+      end
+    end
+  end
+
   def to_label
     name
   end
