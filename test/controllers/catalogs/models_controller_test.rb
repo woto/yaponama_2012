@@ -8,7 +8,7 @@ class Catalogs::ModelsControllerTest < ActionController::TestCase
     assert_select '.breadcrumb', /^Каталог.*MITSUBISHI.*Galant$/m
     assert_select '#catalogs-model-generations', 'ЗАПЧАСТИ НА MITSUBISHI Galant 2008 - 2013, 9 поколение [2-й рестайлинг]'
     assert_select '#catalogs-model-content', 'Описание Галанта.'
-    assert_select '#best-parts-list', '3310 (INFINITI) ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ НА MITSUBISHI Galant'
+    assert_select '#best-parts-list', /3310 \(INFINITI\) ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ НА MITSUBISHI Galant.*3310 \(TOYOTA\) РУЛЕВАЯ ТЯГА НА MITSUBISHI Galant.*2102 \(NISSAN\) САЙЛЕНТБЛОК НА MITSUBISHI Galant.*/m
   end
 
 end
