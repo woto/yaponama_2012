@@ -563,6 +563,12 @@ module Yaponama2012
       .select{ |k, v| v["privileged"] == false }
       .keys
 
+    config.replacements_statuses = {
+      new_number:   0,
+      old_number:   1,
+      same_number:  2,
+      replacement:  3
+    }
 
 
     #config.avisosms = {

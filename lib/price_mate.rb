@@ -58,7 +58,7 @@ class PriceMate
         # Если такой SpareInfo имеется, то все последующие данные получаем через него
         if info.present?
           mf_scope[:info] = info
-          mf_scope[:replacements] = info.from_spare_replacements
+          mf_scope[:replacements] = info.from_spare_replacements.where(wrong: false)
           mf_scope[:applicabilities] = info.spare_applicabilities
           catalog = info.spare_catalog
         # Если категория получена с сервера прайсов
