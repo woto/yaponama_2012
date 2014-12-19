@@ -7,12 +7,13 @@ class CreateOptsAccumulators < ActiveRecord::Migration
       t.integer :length
       t.integer :width
       t.integer :height
-      t.string :base_hold_down
-      t.string :layout
-      t.string :terminal_types
-      t.string :case_size
-      t.float :weight_filled
+      t.integer :base_hold_down
+      t.integer :layout
+      t.integer :terminal_types
+      t.integer :case_size
+      t.integer :weight_filled
       t.references :spare_info, index: true
+      t.references :creator, index: true
 
       t.timestamps null: false
     end

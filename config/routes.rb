@@ -17,10 +17,6 @@ end
 
 Yaponama2012::Application.routes.draw do
 
-  scope module: 'opts' do
-    resources :accumulators
-  end
-
   # /catalogs/brands/дочерний_id -> /catalogs/brands/родительский_id
   get "/catalogs/brands/:id", constraints: lambda{|params, env| Brand.find(params[:id]).brand_id?}, to: redirect{|params, request|
     query_string = "?#{request.query_string}" if request.query_string.present?
@@ -71,6 +67,10 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :only_admin do
+    namespace :opts do
+      resources :accumulators, concerns: [:gridable]
+    end
+
     resources :galleries, concerns: [:gridable]
   end
 

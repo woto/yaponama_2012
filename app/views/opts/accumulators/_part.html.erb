@@ -1,0 +1,67 @@
+<%= panel 'primary' do |p| %>
+  <%= p.heading do %>
+    <%= p.title do %>
+
+      <%= link_to "ЗАПЧАСТИ", categories_path %> <%= icon 'angle-right' %>
+      <%= link_to part.spare_catalog.name, category_path(part.spare_catalog) %> <%= icon 'angle-right' %>
+      <%= link_to part.to_label, new_user_product_path(catalog_number: part.catalog_number) %>
+
+    <% end %>
+  <% end %>
+  <%= p.body do %>
+    <%= row do %>
+      <div class="col-sm-3 text-center">
+        <%= image_tag part.image1.fill_thumb, class: 'img-thumbnail center-block img-responsive' %>
+        <h4 class="top-space bottom-space"><%= part.warehouses.map{|wh| number_to_currency(wh.price)}.join(', ') %></h4>
+        <%= link_to "Купить", "#", class: "btn btn-lg btn-success bottom-space" %>
+        <%# resource_class.human_attribute_name(:spare_info) %>
+        <%# accumulator.spare_info %>
+        <%# link_to 'Show', accumulator %>
+        <%# link_to 'Edit', edit_accumulator_path(accumulator) %>
+        <%# link_to 'Destroy', accumulator, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+      <div class="col-sm-9">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <tr>
+              <td> <%= resource_class.human_attribute_name(:voltage) %> </td>
+              <td> <%= opts_checkbox 'voltage', part, resource_class %> </td>
+              <td> <%= resource_class.human_attribute_name(:battery_capacity) %> </td>
+              <td> <%= part.accumulator.battery_capacity %> А·ч </td>
+            </tr>
+
+            <tr>
+              <td> <%= resource_class.human_attribute_name(:cold_cranking_amps) %> </td>
+              <td> <%= part.accumulator.cold_cranking_amps %> А </td>
+              <td> <%= resource_class.human_attribute_name(:layout) %> </td>
+              <td> <%= opts_checkbox 'layout', part, resource_class %> </td>
+            </tr>
+
+            <tr>
+              <td> <%= resource_class.human_attribute_name(:base_hold_down) %> </td>
+              <td> <%= opts_checkbox 'base_hold_down', part, resource_class %> </td>
+              <td> <%= resource_class.human_attribute_name(:length) %> </td>
+              <td> <%= part.accumulator.length %> мм </td>
+            </tr>
+
+            <tr>
+              <td> <%= resource_class.human_attribute_name(:terminal_types) %> </td>
+              <td> <%= opts_checkbox 'terminal_types', part, resource_class %> </td>
+              <td> <%= resource_class.human_attribute_name(:width) %> </td>
+              <td> <%= part.accumulator.width %> мм </td>
+            </tr>
+
+            <tr>
+              <td> <%= SpareInfo.human_attribute_name(:cached_brand) %> </td>
+              <td> <%= part.cached_brand %> </td>
+              <td> <%= resource_class.human_attribute_name(:height) %> </td>
+              <td> <%= part.accumulator.height %> мм </td>
+            </tr>
+
+
+          </table>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

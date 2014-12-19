@@ -131,7 +131,6 @@
                       <%== mf_scope[:info].content %>
                       <%= render 'spare_info_hstore', info: mf_scope[:info] %>
                       <%= render 'spare_info_files', info: mf_scope[:info] %>
-
                     </div>
                   <% end %>
                 </div>
@@ -144,13 +143,19 @@
                   <% end %>
                 </div>
 
+
+                <% if mf_scope[:catalog].presence && mf_scope[:catalog].opt.presence && mf_scope[:info].presence %>
+                  <%= render 'opts/accumulators/part', part: mf_scope[:info], resource_class: "Opts::#{mf_scope[:catalog].opt.classify}".constantize %>
+                <% end %>
+
+
                 <div class="spare-replacements">
                   <% if mf_scope[:replacements].present? %>
-                    <div class="bottom-space">
+                    <ul class="bottom-space">
                       <% mf_scope[:replacements].each do |replacement| %>
-                        <%= replacement.to_spare_info.to_label %>
+                        <li><%= replacement.to_spare_info.to_label %> <%= replacement.status %></li>
                       <% end %>
-                    </div>
+                    </ul>
                   <% end %>
                 </div>
 
@@ -165,6 +170,9 @@
                             <th>Модель</th>
                             <th>Поколение</th>
                             <th>Модификация</th>
+                            <% if current_user.seller? %>
+                              <th></th>
+                            <% end %>
                           </tr>
                         </thead>
                         <tbody>
@@ -174,6 +182,13 @@
                               <td><%= link_to spare_applicability.cached_model, catalogs_model_path(spare_applicability.to_model_param) if spare_applicability.cached_model %></td>
                               <td><%= link_to spare_applicability.cached_generation, catalogs_generation_path(spare_applicability.to_generation_param) if spare_applicability.cached_generation %></td>
                               <td><%= link_to spare_applicability.cached_modification, catalogs_modification_path(spare_applicability.to_modification_param) if spare_applicability.cached_modification %></td>
+                              <% if current_user.seller? %>
+                                <td>
+                                  <%= link_to edit_admin_spare_applicability_path(spare_applicability, return_path: request.fullpath), class: 'btn btn-warning' do %>
+                                    <%= icon 'edit' %>
+                                  <% end %>
+                                </td>
+                              <% end %>
                             </tr>
                           <% end %>
                         </tbody>

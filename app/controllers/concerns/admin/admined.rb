@@ -63,6 +63,10 @@ module Admin::Admined
       #end
     end
 
+    def find_resource
+      @resource = @resource_class.finder(params[:id])
+    end
+
   end
 
 end

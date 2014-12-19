@@ -95,7 +95,6 @@ class ApplicationController < ActionController::Base
   end
 
   def update
-    #binding.pry
     respond_to do |format|
       if @resource.save
         format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path]) }

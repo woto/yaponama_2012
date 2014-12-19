@@ -565,4 +565,9 @@ module ApplicationHelper
     end
   end
 
+  def opts_checkbox name, part, resource_class
+    Rails.application.config_for("application/#{resource_class.name.underscore}")["#{resource_class.name.demodulize.underscore}_#{name}"]['checkboxes'].find{|hash| hash[:value].to_i == instance_eval("part.#{resource_class.name.demodulize.underscore}.#{name}.to_i")}[:label] + " " +
+    Rails.application.config_for("application/#{resource_class.name.underscore}")["#{resource_class.name.demodulize.underscore}_#{name}"]['si'].to_s
+  end
+
 end

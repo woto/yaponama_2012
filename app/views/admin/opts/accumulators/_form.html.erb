@@ -1,0 +1,32 @@
+<%= simple_form_for(@resource, url: polymorphic_path([:admin, @resource], return_path: params[:return_path])) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+    <%= row do %>
+
+      <%= c1 do %>
+
+        <%= f.input :voltage, as: :opts_checkboxes_select %>
+        <%= f.input :battery_capacity %>
+        <%= f.input :cold_cranking_amps %>
+        <%= f.input :length %>
+        <%= f.input :width %>
+        <%= f.input :height %>
+        <%= f.input :base_hold_down, as: :opts_checkboxes_select %>
+        <%= f.input :layout, as: :opts_checkboxes_select %>
+        <%= f.input :terminal_types, as: :opts_checkboxes_select %>
+        <%= f.input :case_size %>
+        <%= f.input :weight_filled %>
+        <%# f.association :spare_info %>
+
+      <% end %>
+
+    <% end %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

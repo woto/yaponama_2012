@@ -8,6 +8,7 @@ class Catalogs::ModelsController < ApplicationController
 
     @generations = SpareApplicability.by_model(params[:id])
     @parts = SpareInfo.by_model(params[:id])
+    @parts = @parts.page(params[:page]).per(params[:per])
   end
 
 end

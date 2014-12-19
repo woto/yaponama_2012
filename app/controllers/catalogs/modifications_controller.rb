@@ -9,6 +9,7 @@ class Catalogs::ModificationsController < ApplicationController
     @brand = @model.brand
 
     @parts = SpareInfo.by_modification(params[:id])
+    @parts = @parts.page(params[:page]).per(params[:per])
   end
 
 end

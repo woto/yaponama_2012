@@ -1,6 +1,13 @@
+<% range = Rails.application.config_for("application/#{@resource_class.name.underscore}")[name]['range'] %>
+<% min = range[:min] %>
+<% max = range[:max] %>
+<% step = range[:step] %>
+
 <div rel="collapse-next" class="collapse-reset-range">
-  <%= render 'name', f: f, name: name %>
-  <%= render 'question', name: name, tabindex: tabindex %>
+  <%= render 'opts/name', f: f, name: name %>
+  <% if Rails.application.config_for("application/#{@resource_class.name.underscore}")[name]['question'] %>
+    <%= render('opts/question', name: name, tabindex: tabindex)  %>
+  <% end %>
 </div>
 
 <% css_class = "collapse" %>
@@ -24,8 +31,8 @@
 
       <script>
           $(function(){
-            $('#<%= name %>_slider').noUiSlider({
-              start: [ <%= (params[:q] && params[:q]["#{name}_gt"]) || min %>, <%= (params[:q] && params[:q]["#{name}_lt"]) || max %> ],
+              $('#<%= name %>_slider').noUiSlider({
+start: [ <%= (params[:q] && params[:q]["#{name}_gt"]) || min %>, <%= (params[:q] && params[:q]["#{name}_lt"]) || max %> ],
               step: <%= step %>,
               range: {
                 'min': <%= min %>,
@@ -39,20 +46,6 @@
 
             $("#<%= name %>_slider").Link('lower').to($("#q_<%= name %>_gt"));
             $("#<%= name %>_slider").Link('upper').to($("#q_<%= name %>_lt"));
-
-            //// Generate a hidden input element
-            //element.Link('inputs').to('price', null, {
-            //  to: function ( value ) {
-            //    // format value
-            //  },
-            //  from: function ( value ) {
-            //    // decode value
-            //  }
-            //});
-
-          //  $("#<%= name %>_slider").on("slide", function(event) {
-          //    $("#q_<%= name %>_gt").val(event.value[0]);
-          //    $("#q_<%= name %>_lt").val(event.value[1]);
         });
       </script>
 

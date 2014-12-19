@@ -95,7 +95,15 @@
             <li role="presentation" class="dropdown-header">Товары</li>
             <li> <%= link_to "Описания", admin_spare_infos_path %> </li>
             <li> <%= link_to "Применимость", admin_spare_applicabilities_path %> </li>
-            <li> <%= link_to "Категории", admin_spare_catalogs_path %> </li>
+            <li> <%= link_to "Каталогизатор", admin_spare_catalogs_path %> </li>
+            <%= dd.submenu do %>
+              <%= dd.toggle do %>
+                Категории
+              <% end %>
+              <%= dd.menu do %>
+                <li> <%= link_to 'Аккумуляторы', admin_opts_accumulators_path %> </li>
+              <% end %>
+            <% end %>
             <li> <%= link_to "Замены", admin_spare_replacements_path %> </li>
             <%= divider %>
             <li> <%= link_to "Статические страницы", admin_pages_path %> </li>

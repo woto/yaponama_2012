@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141205160245) do
+ActiveRecord::Schema.define(version: 20141216044524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -636,17 +636,29 @@ ActiveRecord::Schema.define(version: 20141205160245) do
     t.integer  "length"
     t.integer  "width"
     t.integer  "height"
-    t.string   "base_hold_down"
-    t.string   "layout"
-    t.string   "terminal_types"
-    t.string   "case_size"
-    t.float    "weight_filled"
+    t.integer  "base_hold_down"
+    t.integer  "layout"
+    t.integer  "terminal_types"
+    t.integer  "case_size"
+    t.integer  "weight_filled"
     t.integer  "spare_info_id"
+    t.integer  "creator_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
 
+  add_index "opts_accumulators", ["creator_id"], name: "index_opts_accumulators_on_creator_id", using: :btree
   add_index "opts_accumulators", ["spare_info_id"], name: "index_opts_accumulators_on_spare_info_id", using: :btree
+
+  create_table "opts_temps", force: true do |t|
+    t.integer  "x"
+    t.string   "y"
+    t.integer  "spare_info_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "opts_temps", ["spare_info_id"], name: "index_opts_temps_on_spare_info_id", using: :btree
 
   create_table "order_deliveries", force: true do |t|
     t.integer  "creator_id"
@@ -1330,6 +1342,7 @@ ActiveRecord::Schema.define(version: 20141205160245) do
     t.datetime "updated_at"
     t.text     "notes"
     t.text     "notes_invisible"
+    t.integer  "status"
   end
 
   add_index "spare_replacements", ["from_spare_info_id"], name: "index_spare_replacements_on_from_spare_info_id", using: :btree

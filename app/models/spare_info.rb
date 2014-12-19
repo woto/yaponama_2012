@@ -42,33 +42,48 @@ class SpareInfo < ActiveRecord::Base
     self.name = to_label
   end
 
-  #scope :by_brand, ->(id) {
-  #  joins(:spare_applicabilities).
-  #  order(:cached_spare_catalog).
-  #  where(spare_applicabilities: {brand_id: id.to_i, model_id: nil})
-  #}
+  # Используется в
+  # CategoriesController#index
+  scope :by, ->{
+    joins(:spare_applicabilities).
+    order(:cached_spare_catalog).
+    select(:spare_catalog_id, :cached_spare_catalog).
+    distinct
+  }
+
+  scope :by_brand, ->(id) {
+    joins(:spare_applicabilities).
+    order(:cached_spare_catalog).
+    where(spare_applicabilities: {brand_id: id.to_i}).
+    distinct
+  }
 
   scope :by_model, ->(id) {
     joins(:spare_applicabilities).
-    #order(:cached_spare_catalog).
-    where(spare_applicabilities: {model_id: id.to_i, generation_id: nil})
+    order(:cached_spare_catalog).
+    where(spare_applicabilities: {model_id: id.to_i}).
+    distinct
   }
 
   scope :by_generation, ->(id) {
     joins(:spare_applicabilities).
-    #order(:cached_spare_catalog).
-    where(spare_applicabilities: {generation_id: id.to_i, modification_id: nil})
+    order(:cached_spare_catalog).
+    where(spare_applicabilities: {generation_id: id.to_i}).
+    distinct
   }
 
   scope :by_modification, ->(id) {
     joins(:spare_applicabilities).
-    #order(:cached_spare_catalog).
-    where(spare_applicabilities: {modification_id: id.to_i})
+    order(:cached_spare_catalog).
+    where(spare_applicabilities: {modification_id: id.to_i}).
+    distinct
   }
 
   scope :by_category, ->(id) {
-    #joins(:spare_applicabilities).
-    where(spare_catalog_id: id.to_i)
+    joins(:spare_applicabilities).
+    order(:cached_spare_catalog).
+    where(spare_catalog_id: id.to_i).
+    distinct
   }
 
   after_update :rebuild

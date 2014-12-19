@@ -3,4 +3,16 @@ ru:
     attributes:
       active_record/base:
         spare_info_brand_id: Производитель
-        places_id: Есть в магазине
+        places_id: Наличие в магазине
+      spare_info:
+        accumulator_voltage: Напряжение
+        accumulator_battery_capacity: Емкость
+        accumulator_cold_cranking_amps: Пусковой ток
+        accumulator_length: Длина
+        accumulator_width: Ширина
+        accumulator_height: Высота
+        accumulator_base_hold_down: Крепление
+        accumulator_layout: Полярность
+        accumulator_terminal_types: Токовыводы
+        accumulator_case_size: Размер
+        accumulator_weight_filled: Масса

@@ -1,0 +1,3 @@
+<% si = Rails.application.config_for("application/#{@resource_class.name.underscore}").try(:[], name).try(:[], 'si') %>
+<% si.prepend ", " if si.present? %>
+<span class="text-info" style="cursor: pointer" data-toggle="collapse-next"><%= icon 'chevron-circle-right' %> <%= f.label name, style: 'cursor: pointer' %><%= si %></span>

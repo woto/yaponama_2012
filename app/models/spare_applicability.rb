@@ -37,6 +37,9 @@ class SpareApplicability < ActiveRecord::Base
     "#{modification_id}-#{cached_modification.parameterize}"
   end
 
+  # Используется в
+  # Catalogscontroller#show
+  # Categoriescontroller#show
   scope :by, ->{
     order(:cached_brand).
     select(:brand_id, :cached_brand).
@@ -46,7 +49,7 @@ class SpareApplicability < ActiveRecord::Base
   scope :by_brand, ->(id) {
     where(brand_id: id.to_i).
     order(:cached_model).
-    #where.not(model_id: nil).
+    where.not(model_id: nil).
     select(:model_id, :cached_brand, :cached_model).
     distinct
   }

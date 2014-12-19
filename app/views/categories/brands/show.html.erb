@@ -1,10 +1,10 @@
-<% b = Breadcrumb.new(self) %>
+<%= somebody_tabs do %>
 
-<%= b1 do %>
+  <% b = Breadcrumb.new(self) %>
 
   <ol class="breadcrumb">
     <%= b.item('Запчасти', categories_path) %>
-    <%= b.item(@resource.name, category_brands_path(params[:category_id])) %>
+    <%= b.item(@resource.name, category_path(params[:category_id])) %>
     <%= b.item(@brand.name) %>
   </ol>
 
@@ -17,6 +17,12 @@
       <li> <%= link_to "#{@resource.name} НА #{@brand.name} #{model.cached_model}", category_model_path(params[:category_id], model.to_model_param) %> </li>
     <% end %>
   </ol>
+
+  <% if @resource_class %>
+    <%= render partial: "#{@resource_class.name.underscore.pluralize}/index", layout: 'paginator'  %>
+  <% else %>
+    <%= render partial: 'best_parts_list', layout: 'paginator'  %>
+  <% end %>
 
   <% if @current_user.seller? %>
     <%= link_to edit_admin_brand_path(@brand, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>

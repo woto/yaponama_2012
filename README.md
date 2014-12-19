@@ -679,3 +679,13 @@ TOYOTA
     #get "/n/:category/:brand/:model/:generation", constraints: CategoriesConstraint.new, category: /.*/, brand: /.*/, model: /.*/, generation: /.*/, to: "categories#show"
     #get "/n/:category/:brand/:model/:generation/:modification", constraints: CategoriesConstraint.new, category: /.*/, brand: /.*/, model: /.*/, generation: /.*/, modification: /.*/, to: "categories#show"
 
+
+
+
+
+
+toyotacarmine
+auto2
+autosup
+plentycar
+stap

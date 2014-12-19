@@ -1,6 +1,5 @@
-<% b = Breadcrumb.new(self) %>
-
-<%= b1 do %>
+<%= somebody_tabs do %>
+  <% b = Breadcrumb.new(self) %>
 
   <ol class="breadcrumb">
     <%= b.item('Каталоги', catalogs_path) %>
@@ -10,10 +9,10 @@
     <%= b.item(@modification.name) %>
   </ol>
 
-  <% @meta_title = "#{@brand.name} #{@model.name} #{@generation.name} #{@modification.name}" %>
+  <% @meta_title = "ЗАПЧАСТИ НА #{@brand.name} #{@model.name} #{@generation.name} #{@modification.name}" %>
   <%= page_header %>
 
-  <%= render 'best_parts_list' %>
+  <%= render partial: 'best_parts_list', layout: 'paginator'  %>
 
   <% if @modification.content.present? %>
     <hr />

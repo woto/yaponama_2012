@@ -1,20 +1,23 @@
-<% b = Breadcrumb.new(self) %>
-
-<%= b1 do %>
+<%= somebody_tabs do %>
+  <% b = Breadcrumb.new(self) %>
 
   <ol class="breadcrumb">
     <%= b.item('Запчасти', categories_path) %>
-    <%= b.item(@resource.name, category_brands_path(params[:category_id])) %>
+    <%= b.item(@resource.name, category_path(params[:category_id])) %>
     <%= b.item(@brand.name, category_brand_path(params[:category_id], @brand.to_param)) %>
     <%= b.item(@model.name, category_model_path(params[:category_id], @model.to_param)) %>
-    <%= b.item(@generation.name, category_model_path(params[:category_id], @generation.to_param)) %>
+    <%= b.item(@generation.name, category_generation_path(params[:category_id], @generation.to_param)) %>
     <%= b.item(@modification.name) %>
   </ol>
 
-  <% @meta_title = "#{@resource.name} #{@brand.name} #{@model.name} #{@generation.name} #{@modification.name}" %>
+  <% @meta_title = "#{@resource.name} НА #{@brand.name} #{@model.name} #{@generation.name} #{@modification.name}" %>
   <%= page_header %>
 
-  <%= render 'best_parts_list' %>
+  <% if @resource_class %>
+    <%= render partial: "#{@resource_class.name.underscore.pluralize}/index", layout: 'paginator'  %>
+  <% else %>
+    <%= render partial: 'best_parts_list', layout: 'paginator'  %>
+  <% end %>
 
   <% if @current_user.seller? %>
     <%= link_to edit_admin_modification_path(@modification, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>

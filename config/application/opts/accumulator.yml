@@ -1,0 +1,79 @@
+defaults: &defaults
+  accumulator_voltage:
+    si: В
+    checkboxes:
+      - :value: '0'
+        :label: '6'
+      - :value: '1'
+        :label: '12'
+  accumulator_battery_capacity:
+    si: А·ч
+    range:
+      :min: '30'
+      :max: '250'
+      :step: '5'
+  accumulator_cold_cranking_amps:
+    si: А
+    question: Ток холодной прокрутки
+    range:
+      :min: '100'
+      :max: '1000'
+      :step: '5'
+  accumulator_length:
+    si: мм
+    range:
+      :min: '0'
+      :max: '600'
+      :step: '5'
+  accumulator_width:
+    si: мм
+    range:
+      :min: '0'
+      :max: '300'
+      :step: '5'
+  accumulator_height:
+    si: мм
+    range:
+      :min: '0'
+      :max: '300'
+      :step: '5'
+  accumulator_base_hold_down:
+    question: Нижняя пластина
+    checkboxes:
+      - :value: '0'
+        :label: 'B00'
+      - :value: '1'
+        :label: 'B01'
+      - :value: '3'
+        :label: 'B03'
+      - :value: '13'
+        :label: 'B13'
+  accumulator_layout:
+    checkboxes:
+      - :value: '0'
+        :label: "[+ -] ПРЯМАЯ"
+      - :value: '1'
+        :label: "[- +] ОБРАТНАЯ"
+      - :value: '2'
+        :label: "УНИВЕРСАЛЬНАЯ"
+  accumulator_terminal_types:
+    question: Клеммы
+    checkboxes:
+      - :value: '1'
+        :label: 'T1'
+      - :value: '3'
+        :label: 'T3'
+      - :value: '13'
+        :label: 'T13'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  avtorif.ru:
+    <<: *defaults
+  zapstok.ru:
+    <<: *defaults

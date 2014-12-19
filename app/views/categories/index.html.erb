@@ -1,11 +1,11 @@
-<%= b1 do %>
+<%= somebody_tabs do %>
 
   <% @meta_title = "Запчасти" %>
   <%= page_header %>
 
   <ol id="categories-brands">
     <% @categories.each do |category| %>
-      <li> <%= link_to category.cached_spare_catalog, category_brands_path(category.to_category_param) %> </li>
+      <li> <%= link_to category.cached_spare_catalog, category_path(category.to_category_param) %> </li>
     <% end %>
   </ol>
 

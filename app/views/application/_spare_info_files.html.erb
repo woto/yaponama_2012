@@ -2,7 +2,7 @@
   <% (1..5).each do |n| %>
     <% if info.instance_eval("image#{n}").present? %>
       <%= link_to info.instance_eval("image#{n}.url"), target: '_blank', class: 'image-view' do %>
-        <%= image_tag info.instance_eval("image#{n}.fill_thumb.url"), alt: "#{info.to_label}", style: "border: 1px solid #DEDEDE", class: 'bottom-space' %>
+        <%= image_tag info.instance_eval("image#{n}.fill_thumb.url"), alt: "#{info.to_label}", class: 'bottom-space img-thumbnail' %>
       <% end %>
     <% end %>
   <% end %>

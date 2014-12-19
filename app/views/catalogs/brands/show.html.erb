@@ -1,6 +1,5 @@
-<% b = Breadcrumb.new(self) %>
-
-<%= b1 do %>
+<%= somebody_tabs do %>
+  <% b = Breadcrumb.new(self) %>
 
   <ol class="breadcrumb">
     <%= b.item('Каталоги', catalogs_path) %>
@@ -21,6 +20,8 @@
   </ol>
 
   <hr />
+
+  <%= render partial: 'best_parts_list', layout: 'paginator'  %>
 
   <div id="catalogs-brand-preview"><%==  @brand.preview %></div>
   <div id="catalogs-brand-content"><%== @brand.content %></div>
