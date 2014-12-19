@@ -203,6 +203,7 @@
 
                     <%# Описание %>
                     <%= link_to icon('file-text-o'), edit_admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-warning" %>
+                    <%= link_to icon('file-text-o'), admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-danger", method: :delete, data: {confirm: 'Уверены, что хотите удалить?'} %>
 
                     <%# Замены %>
                     <%= link_to icon('random'), new_admin_spare_replacement_path(spare_replacement: {from_spare_info_attributes: { name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-warning" %>
