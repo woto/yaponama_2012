@@ -93,12 +93,19 @@ ru:
       model:
         name: Название модели
         #parent_brand_id: Бренд
+        from: С даты
+        to: По дату
+        slang: Сленговое название
       generation:
         model_id: Модель
         name: Название поколения
+        from: С даты
+        to: По дату
       modification:
         name: Название модификации
         generation_id: Поколение
+        from: С даты
+        to: По дату
       postal_address:
         stand_alone_house: Отдельно стоящее здание
         comment: Комментарий к адресу

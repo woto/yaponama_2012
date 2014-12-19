@@ -1,23 +1,16 @@
-<%= row do %>
+<%= simple_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
 
-  <div class="col-sm-5">
-
-    <%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
-
-      <%= f.twbs_hidden_field :model_id %>
-
-      <%= f.twbs_text_field :name %>
-
-      <%= f.twbs_date_select :from %>
-
-      <%= f.twbs_date_select :to %>
-
-      <%= f.twbs_text_area :content, :class => "ckeditor-extended" %>
-
-      <%= f.twbs_submit %>
-
+  <%= row do %>
+    <%= c1 do %>
+      <%= f.error_notification %>
+      <%= f.input :model_id, as: :hidden %>
+      <%= f.input :name %>
+      <%= f.input :from, as: :cars_date %>
+      <%= f.input :to, as: :cars_date %>
     <% end %>
+  <% end %>
 
-  </div>
+  <%= f.input :content, input_html: {class: "ckeditor-extended"}, as: :text %>
+  <%= f.buttons %>
 
 <% end %>
