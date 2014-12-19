@@ -12,6 +12,7 @@ defaults: &defaults
   - spare_infos
   - spare_replacements
   - spare_applicabilities
+  - opts_accumulators
 
 development:
   <<: *defaults
