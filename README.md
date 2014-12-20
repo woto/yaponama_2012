@@ -689,3 +689,7 @@ auto2
 autosup
 plentycar
 stap
+carnovato
+blamper
+catalog.am
+catalog.drom
