@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/activerecord-hackery/ransack.git
-  revision: a5910759761cbe30b73a54806ff22f9a701f14ed
+  revision: 9b0f7ccf0189239e039e3a4c1e73b996e1859f70
   specs:
     ransack (1.5.1)
       actionpack (>= 3.0)
@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: 4161bbc560631e61e611d59bf797eeb59a6b1021
+  revision: 1a493e33b86042bee8e7c31136140b0fbd273111
   specs:
     capybara (2.4.1)
       mime-types (>= 1.16)
@@ -22,82 +22,20 @@ GIT
 
 GIT
   remote: git://github.com/joliss/jquery-ui-rails.git
-  revision: 3b2a5ff0bbc202bb90537150017c91966f18d44e
+  revision: 037b408e3a2b916c722413c57660870960303e4b
   specs:
-    jquery-ui-rails (5.0.2)
+    jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
 
 GIT
   remote: git://github.com/jonleighton/poltergeist.git
-  revision: f394c984af7e6db72f284900b59c715975cb0621
+  revision: 3aec468f9f0f93570b6c58bfd7f67e4cf1a9d360
   specs:
     poltergeist (1.5.1)
       capybara (~> 2.4)
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
-
-GIT
-  remote: git://github.com/rails/arel.git
-  revision: 5035526b534a5d7c9d95eb6b66ade349c3a947f0
-  specs:
-    arel (6.0.0.beta2)
-
-GIT
-  remote: git://github.com/rails/rails.git
-  revision: 1c610eed9485529376baf85659d91ac29655014d
-  specs:
-    actionmailer (4.2.0.beta4)
-      actionpack (= 4.2.0.beta4)
-      actionview (= 4.2.0.beta4)
-      activejob (= 4.2.0.beta4)
-      mail (~> 2.5, >= 2.5.4)
-      rails-dom-testing (~> 1.0, >= 1.0.4)
-    actionpack (4.2.0.beta4)
-      actionview (= 4.2.0.beta4)
-      activesupport (= 4.2.0.beta4)
-      rack (~> 1.6.0.beta)
-      rack-test (~> 0.6.2)
-      rails-dom-testing (~> 1.0, >= 1.0.4)
-      rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    actionview (4.2.0.beta4)
-      activesupport (= 4.2.0.beta4)
-      builder (~> 3.1)
-      erubis (~> 2.7.0)
-      rails-dom-testing (~> 1.0, >= 1.0.4)
-      rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    activejob (4.2.0.beta4)
-      activesupport (= 4.2.0.beta4)
-      globalid (>= 0.3.0)
-    activemodel (4.2.0.beta4)
-      activesupport (= 4.2.0.beta4)
-      builder (~> 3.1)
-    activerecord (4.2.0.beta4)
-      activemodel (= 4.2.0.beta4)
-      activesupport (= 4.2.0.beta4)
-      arel (>= 6.0.0.beta2, < 6.1)
-    activesupport (4.2.0.beta4)
-      i18n (>= 0.7.0.beta1, < 0.8)
-      json (~> 1.7, >= 1.7.7)
-      minitest (~> 5.1)
-      thread_safe (~> 0.1)
-      tzinfo (~> 1.1)
-    rails (4.2.0.beta4)
-      actionmailer (= 4.2.0.beta4)
-      actionpack (= 4.2.0.beta4)
-      actionview (= 4.2.0.beta4)
-      activejob (= 4.2.0.beta4)
-      activemodel (= 4.2.0.beta4)
-      activerecord (= 4.2.0.beta4)
-      activesupport (= 4.2.0.beta4)
-      bundler (>= 1.3.0, < 2.0)
-      railties (= 4.2.0.beta4)
-      sprockets-rails (~> 3.0.0.beta1)
-    railties (4.2.0.beta4)
-      actionpack (= 4.2.0.beta4)
-      activesupport (= 4.2.0.beta4)
-      rake (>= 0.8.7)
-      thor (>= 0.18.1, < 2.0)
 
 GIT
   remote: git://github.com/woto/ipgeobase.git
@@ -112,58 +50,92 @@ GIT
   specs:
     cocoon (1.2.6)
 
-GIT
-  remote: https://github.com/plataformatec/simple_form.git
-  revision: 932619c180f90c5aebbb23f4d92fa254b430c775
-  specs:
-    simple_form (3.1.0.rc2)
-      actionpack (~> 4.0)
-      activemodel (~> 4.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
+    actionmailer (4.2.0)
+      actionpack (= 4.2.0)
+      actionview (= 4.2.0)
+      activejob (= 4.2.0)
+      mail (~> 2.5, >= 2.5.4)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+    actionpack (4.2.0)
+      actionview (= 4.2.0)
+      activesupport (= 4.2.0)
+      rack (~> 1.6.0)
+      rack-test (~> 0.6.2)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    actionview (4.2.0)
+      activesupport (= 4.2.0)
+      builder (~> 3.1)
+      erubis (~> 2.7.0)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.1)
     active_utils (2.2.3)
       activesupport (>= 2.3.11)
       i18n
+    activejob (4.2.0)
+      activesupport (= 4.2.0)
+      globalid (>= 0.3.0)
+    activemodel (4.2.0)
+      activesupport (= 4.2.0)
+      builder (~> 3.1)
+    activerecord (4.2.0)
+      activemodel (= 4.2.0)
+      activesupport (= 4.2.0)
+      arel (~> 6.0)
+    activesupport (4.2.0)
+      i18n (~> 0.7)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.3, >= 0.3.4)
+      tzinfo (~> 1.1)
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
-    autoprefixer-rails (4.0.0)
+    arel (6.0.0)
+    autoprefixer-rails (4.0.2.2)
       execjs
     bcrypt (3.1.9)
-    binding_of_caller (0.7.3.pre1)
+    binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.1.0)
       sass (~> 3.2)
     bootswatch-rails (3.2.4)
       railties (>= 3.1)
     builder (3.2.2)
+    byebug (3.5.1)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+      slop (~> 3.6)
     cancan (1.6.10)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
-    celluloid (0.15.2)
-      timers (~> 1.1.0)
+    celluloid (0.16.0)
+      timers (~> 4.0.0)
     childprocess (0.5.5)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     cliver (0.3.2)
     coderay (1.1.0)
-    coffee-rails (4.0.1)
+    coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
     coffee-script (2.3.0)
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    columnize (0.9.0)
     commonjs (0.2.7)
-    connection_pool (2.0.0)
-    crass (0.2.1)
+    connection_pool (2.1.0)
+    crass (1.0.1)
     dalli (2.7.2)
     debug_inspector (0.0.2)
-    domain_name (0.5.22)
+    debugger-linecache (1.2.0)
+    domain_name (0.5.23)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
     execjs (2.2.2)
@@ -174,16 +146,18 @@ GEM
       activesupport (>= 4.1.0)
     hike (1.2.3)
     hiredis (0.4.5)
-    htmlentities (4.3.2)
+    hitimes (1.2.2)
+    htmlentities (4.3.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
-    i18n (0.7.0.beta1)
+    i18n (0.7.0)
     interception (0.5)
-    jbuilder (2.2.4)
+    jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
-    jquery-rails (3.1.2)
-      railties (>= 3.0, < 5.0)
+    jquery-rails (4.0.2)
+      rails-dom-testing (~> 1.0)
+      railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     kaminari (0.16.1)
@@ -212,16 +186,16 @@ GEM
     mime-types (2.4.3)
     mini_magick (4.0.1)
     mini_portile (0.6.1)
-    minitest (5.4.3)
-    money (6.4.0)
-      i18n (>= 0.6.4, <= 0.7.0.beta1)
+    minitest (5.5.0)
+    money (6.5.0)
+      i18n (>= 0.6.4, <= 0.7.0)
     multi_json (1.10.1)
     nbayes (0.1.1)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
-    nokogiri (1.6.4.1)
+    nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
-    nokogumbo (1.1.12)
+    nokogumbo (1.2.0)
       nokogiri
     ntlm-http (0.1.1)
     offsite_payments (2.0.1)
@@ -250,17 +224,28 @@ GEM
     pry-stack_explorer (0.4.9.1)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
-    puma (2.9.2)
+    puma (2.10.2)
       rack (>= 1.1, < 2.0)
-    rack (1.6.0.beta)
+    rack (1.6.0)
     rack-protection (1.5.3)
       rack
     rack-rewrite (1.5.0)
     rack-test (0.6.2)
       rack (>= 1.0)
+    rails (4.2.0)
+      actionmailer (= 4.2.0)
+      actionpack (= 4.2.0)
+      actionview (= 4.2.0)
+      activejob (= 4.2.0)
+      activemodel (= 4.2.0)
+      activerecord (= 4.2.0)
+      activesupport (= 4.2.0)
+      bundler (>= 1.3.0, < 2.0)
+      railties (= 4.2.0)
+      sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.4)
+    rails-dom-testing (1.0.5)
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
@@ -269,8 +254,13 @@ GEM
     rails-i18n (4.0.3)
       i18n (~> 0.6)
       railties (~> 4.0)
-    rake (10.3.2)
-    rdoc (4.1.2)
+    railties (4.2.0)
+      actionpack (= 4.2.0)
+      activesupport (= 4.2.0)
+      rake (>= 0.8.7)
+      thor (>= 0.18.1, < 2.0)
+    rake (10.4.2)
+    rdoc (4.2.0)
       json (~> 1.4)
     read_only (0.0.3)
     redis (3.0.7)
@@ -279,16 +269,17 @@ GEM
     ref (1.0.5)
     remotipart (1.2.1)
     rubyzip (1.1.6)
-    sanitize (3.0.3)
-      crass (~> 0.2.0)
+    sanitize (3.1.0)
+      crass (~> 1.0.1)
       nokogiri (>= 1.4.4)
-      nokogumbo (= 1.1.12)
-    sass (3.4.7)
-    sass-rails (5.0.0.beta1)
+      nokogumbo (= 1.2.0)
+    sass (3.4.9)
+    sass-rails (5.0.0)
       railties (>= 4.0.0, < 5.0)
-      sass (~> 3.2)
-      sprockets (~> 2.12)
+      sass (~> 3.1)
+      sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+      tilt (~> 1.1)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -299,63 +290,70 @@ GEM
       websocket (~> 1.0)
     show_me_the_cookies (2.5.0)
       capybara (~> 2.0)
-    sidekiq (3.2.6)
-      celluloid (= 0.15.2)
+    sidekiq (3.3.0)
+      celluloid (>= 0.16.0)
       connection_pool (>= 2.0.0)
       json
       redis (>= 3.0.6)
       redis-namespace (>= 1.3.1)
+    simple_form (3.1.0)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
     sitemap_generator (5.0.5)
       builder
-    slim (2.1.0)
-      temple (~> 0.6.9)
+    slim (3.0.1)
+      temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
-    slim-rails (2.1.5)
-      actionpack (>= 3.0, < 4.2)
-      activesupport (>= 3.0, < 4.2)
-      railties (>= 3.0, < 4.2)
-      slim (~> 2.0)
+    slim-rails (3.0.1)
+      actionmailer (>= 3.1, < 5.0)
+      actionpack (>= 3.1, < 5.0)
+      activesupport (>= 3.1, < 5.0)
+      railties (>= 3.1, < 5.0)
+      slim (~> 3.0)
     slop (3.6.0)
-    spring (1.1.3)
+    spring (1.2.0)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (3.0.0.beta1)
-      actionpack (>= 4.0)
-      activesupport (>= 4.0)
-      sprockets (~> 2.8)
-    temple (0.6.10)
+    sprockets-rails (2.2.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      sprockets (>= 2.8, < 4.0)
+    temple (0.7.4)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
-    timers (1.1.0)
-    turbolinks (2.5.2)
+    timers (4.0.1)
+      hitimes
+    turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.5.3)
+    uglifier (2.6.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.6)
-    web-console (2.0.0.beta4)
+    web-console (2.0.0)
       activemodel (~> 4.0)
-      binding_of_caller (= 0.7.3.pre1)
+      binding_of_caller (>= 0.7.2)
       railties (~> 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     webrobots (0.1.1)
     websocket (1.2.1)
-    websocket-driver (0.4.0)
+    websocket-driver (0.5.1)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.1)
     whenever (0.9.4)
       chronic (>= 0.6.3)
     xpath (2.0.0)
@@ -368,16 +366,16 @@ PLATFORMS
 
 DEPENDENCIES
   ancestry
-  arel!
   autoprefixer-rails
   bcrypt (~> 3.1.7)
   bootstrap-sass
   bootswatch-rails
+  byebug
   cancan
   capybara!
   carrierwave
   cocoon!
-  coffee-rails (~> 4.0.0)
+  coffee-rails (~> 4.1.0)
   dalli
   font-awesome-sass
   hiredis (~> 0.4.5)
@@ -402,7 +400,7 @@ DEPENDENCIES
   pry-stack_explorer
   puma
   rack-rewrite
-  rails!
+  rails (= 4.2.0)
   rails-html-sanitizer (~> 1.0)
   rails-i18n (~> 4.0.0)
   ransack!
@@ -410,12 +408,12 @@ DEPENDENCIES
   redis (~> 3.0.1)
   remotipart
   sanitize
-  sass-rails (~> 5.0.0.beta1)
+  sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   selenium-webdriver
   show_me_the_cookies
   sidekiq
-  simple_form!
+  simple_form
   sinatra (>= 1.3.0)
   sitemap_generator
   slim-rails
@@ -423,6 +421,6 @@ DEPENDENCIES
   therubyracer
   turbolinks
   uglifier (>= 1.3.0)
-  web-console (~> 2.0.0.beta2)
+  web-console (~> 2.0)
   whenever
   yui-compressor

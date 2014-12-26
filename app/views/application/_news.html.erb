@@ -1,0 +1,8 @@
+<h4> <%= link_to "#{icon('bullhorn')} Новости компании".html_safe, news_index_path %> </h4>
+<% News.order(id: :desc).limit(3).each do |news| %>
+  <div class="bottom-space">
+    <span class="text-muted text-xs"> <%= l news.date, format: :news %> </span>
+    <span class="text-lg"> <%= news.title %>. <%= link_to 'Подробнее...', news_path(news) %> </span>
+  </div>
+<% end %>
+<hr />

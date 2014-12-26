@@ -80,19 +80,3 @@
   <%# Муть какая-то, если слить в одну строку, то пробела не будет, иначе как - не знаю %>
   <%- @somebody.auths.each do |auth| -%><li><%= render "application/auth/logged_in", auth: auth %></li><%- end -%>
 </ul>
-
-<hr />
-
-<ul class="list-unstyled text-muted text-xs" style="word-wrap: break-word">
-  <li>Населенный пункт: <%= @somebody.ipgeobase_name %></li>
-  <li>Регион: <%= @somebody.ipgeobase_names_depth_cache %></li>
-  <li>Версия браузера: <%= @somebody.user_agent %></li>
-  <li>Язы браузера: <%= @somebody.accept_language %></li>
-  <li>Часовой пояс: <%= @somebody.cached_russian_time_zone_auto_id %></li>
-  <li>IP адрес: <%= @somebody.remote_ip %></li>
-  <li>Просмотров страниц: <%= @somebody.stats_count %></li>
-  <li>Текущее расположение: <%= @somebody.cached_location %></li>
-  <li>Заголовок страницы: <%= @somebody.cached_title %></li>
-  <li>Пришел со страницы: <%= @somebody.cached_referrer %></li>
-  <li>Откуда пришел впервые: <%= @somebody.first_referrer %></li>
-</ul>

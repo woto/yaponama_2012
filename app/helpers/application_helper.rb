@@ -178,14 +178,17 @@ module ApplicationHelper
               end.join.html_safe
             end +
             "</div><div class='col-md-12 hidden-xs hidden-sm'><hr /></div><div class='col-xs-6 col-md-12 bottom-space'>".html_safe +
+            (render('application/news')) +
             (render 'profileables/right') +
+            (render('application/spy') if current_user.seller?) +
             "</div></div>".html_safe
           end
         end
       elsif !admin_zone?
         content_tag(:div, :class => 'col-md-2 col-md-pull-10 text-sm') do
           content_tag :div, id: 'sidebar' do
-            render 'application/right'
+            render('application/news') +
+            render('application/right')
           end
         end
       end
@@ -339,8 +342,9 @@ module ApplicationHelper
       if flag
         if ['new', 'edit', 'show'].include? params[:action]
           str3 = capture do 
+            add = :index if ActiveSupport::Inflector.pluralize(@resource_class.to_s.underscore).eql? @resource_class.to_s.underscore
             Breadcrumb.new(self).item(t("helpers.titles.#{@resource_class.to_s.underscore}.index"), 
-                                      polymorphic_path([*jaba3, @resource_class.to_s.underscore.parameterize.underscore.pluralize]))
+                                      polymorphic_path([*jaba3, @resource_class.to_s.underscore.parameterize.underscore.pluralize, add]))
           end
           #polymorphic_path([*jaba3, params['controller'].camelize.demodulize.underscore.to_sym])
           #t("helpers.titles.#{params['controller'].camelize.demodulize.underscore.singularize}.index")

@@ -1,0 +1,22 @@
+<%= b1 do %>
+
+  <% @meta_title = @resource.path %>
+
+  <%= breadcrumb true do |b| %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= page_header %>
+
+  <%= link_to "Публичный просмотр", news_path(@resource), class: "btn btn-primary", target: "_blank" %>
+
+  <%= link_to url_for(action: :new, return_path: request.fullpath), class: "btn btn-primary" do %>
+    <%= icon 'plus' %>
+  <% end %>
+
+  <br />
+  <br />
+
+  <%= render 'smart_show' %>
+
+<% end %>

@@ -5,8 +5,8 @@
       <%= f.input :brand_id, as: :hidden %>
       <%= f.input :name %>
       <%= f.input :slang %>
-      <%= f.input :from, as: :cars_date %>
-      <%= f.input :to, as: :cars_date %>
+      <%= f.input :from, as: :cars_date, wrapper: :date_wrapper %>
+      <%= f.input :to, as: :cars_date, wrapper: :date_wrapper %>
     <% end %>
   <% end %>
   <%= f.input :content, label: false, input_html: {class: "ckeditor-extended"} %>

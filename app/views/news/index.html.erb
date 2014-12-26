@@ -1,0 +1,23 @@
+<%= somebody_tabs do %>
+
+  <%= row do %>
+    <%= c2 do %>
+
+      <% @meta_title = 'Новости' %>
+      <%= page_header %>
+
+      <% @news.each do |item| %>
+
+        <span class="pull-right top-space"> <%= l item.date, format: :short %> </span>
+        <h3 style="display: inline-block">
+          <%= link_to item.title, news_path(item) %>
+        </h3>
+
+        <div class="clearfix bottom-space">
+          <%== item.intro %>
+        </div>
+
+      <% end %>
+    <% end %>
+	<% end %>
+<% end %>
