@@ -49,6 +49,12 @@ ru:
         path: Путь
         redirect_url: Переадресация
         content: Содержание
+      news:
+        title: Заголовок
+        path: Путь
+        intro: Вступление
+        body: Содержание
+        date: Дата
       deliveries/place:
         postal_address_required: Требуется указание адреса доставки
         full_prepayment_required: Требуется полная предоплата

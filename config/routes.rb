@@ -59,6 +59,7 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :global_and_admin do
+    resources :news, concerns: [:gridable]
     resources :faqs, concerns: [:transactionable, :gridable]
     resources :spare_catalogs, concerns: [:gridable, :searchable]
     resources :bots, concerns: [:gridable]

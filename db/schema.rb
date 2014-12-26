@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141216044524) do
+ActiveRecord::Schema.define(version: 20141225203624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -628,6 +628,17 @@ ActiveRecord::Schema.define(version: 20141216044524) do
   add_index "names", ["creator_id"], name: "index_names_on_creator_id", using: :btree
   add_index "names", ["profile_id"], name: "index_names_on_profile_id", using: :btree
   add_index "names", ["somebody_id"], name: "index_names_on_somebody_id", using: :btree
+
+  create_table "news", force: true do |t|
+    t.string   "title"
+    t.string   "path"
+    t.text     "intro"
+    t.text     "body"
+    t.datetime "date"
+    t.integer  "creator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "opts_accumulators", force: true do |t|
     t.integer  "voltage"

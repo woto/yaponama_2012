@@ -1,0 +1,19 @@
+<%= somebody_tabs do %>
+
+  <% b = Breadcrumb.new(self) %>
+
+  <ol class="breadcrumb">
+    <%= b.item('Новости', news_index_path) %>
+    <%= b.item(@resource.title) %>
+  </ol>
+
+  <% @meta_title = @resource.title %>
+  <%= page_header %>
+
+  <div>
+    <%= @resource.body %>
+  </div>
+
+  <%= link_to 'Редактировать', edit_news_path(@resource), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' %>
+
+<% end %>

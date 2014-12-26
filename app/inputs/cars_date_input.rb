@@ -1,7 +1,12 @@
-class CarsDateInput < SimpleForm::Inputs::Base
-  def input(wrapper_options = nil)
-    template.content_tag :div do
-      @builder.date_select attribute_name, {add_month_numbers: true, discard_day: true, start_year: 1990, end_year: Date.today.year, include_blank: true}, {class: 'form-control datetime'}
+class CarsDateInput < SimpleForm::Inputs::DateTimeInput
+  def options
+    @input_type = :date
+    super.tap do |options|
+      options[:add_month_numbers] = true
+      options[:discard_day] = true
+      options[:start_year] = 1990
+      options[:end_year] = Date.today.year
+      options[:include_blank] = true
     end
   end
 end

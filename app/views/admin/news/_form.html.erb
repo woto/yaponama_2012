@@ -1,0 +1,13 @@
+<%= simple_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
+  <%= row do %>
+    <%= c1 do %>
+      <%= f.error_notification %>
+      <%= f.input :title %>
+      <%= f.input :path %>
+      <%= f.input :date, wrapper: :date_wrapper, start_year: 2000 %>
+    <% end %>
+  <% end %>
+  <%= f.input :intro, input_html: {class: "ckeditor-extended"} %>
+  <%= f.input :body, input_html: {class: "ckeditor-extended"} %>
+  <%= f.buttons %>
+<% end %>
