@@ -2,8 +2,9 @@
 #
 class Dropdown < AbstractBootstrap
 
-  def toggle
-    @template.link_to "#", class: "dropdown-toggle ignoredirty", data: { toggle: "dropdown" } do
+  def toggle options={}
+    options[:class] = ['dropdown-toggle', options[:class] ].compact
+    @template.link_to "#", {data: { toggle: "dropdown" }}.merge(options) do
       yield
     end
   end

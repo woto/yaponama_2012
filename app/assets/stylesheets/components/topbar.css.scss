@@ -72,3 +72,26 @@
   }
 }
 
+/////////////////////
+
+.open > #toggle-phone {
+  color: $link-hover-color;
+}
+
+#toggle-phone {
+  color: $link-color;
+  &:hover, &:focus, &:active {
+    color: $link-hover-color;
+  }
+  @extend .btn;
+  @extend .btn-default;
+  margin-top: 8px;
+  margin-right: 15px;
+}
+
+#dropdown-phone > .dropdown-menu > li > a {
+  color: $link-color;
+  &:hover, &:focus {
+    color: $link-hover-color;
+  }
+}
