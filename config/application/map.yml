@@ -2,12 +2,12 @@ defaults: &defaults
   initial_zoom:                   9
   initial_lat:                    55.7304426143438
   initial_lng:                    37.63272449798592
-  warehouse_address:              'г. Москва, Рязанский проспект, д. 53'
-  delivery_minute_cost:           16
+  warehouse_address:              'г. Москва, ул. 8 марта, д. 8, корп. 2'
+  delivery_minute_cost:           10
   google_maps_key:                'AIzaSyBDWdW4KtQCWa1y4aHIqKIEI77v5emnlEs'
-  travel_mode:                    'DRIVING'   # DRIVING, TRANSIT
+  travel_mode:                    'TRANSIT'   # DRIVING, TRANSIT
   automatic_calculate_active:     true
-  max_automatic_calculated_cost:  600
+  max_automatic_calculated_cost:  500
 
 development:
   <<: *defaults

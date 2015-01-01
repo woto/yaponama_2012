@@ -13,6 +13,8 @@ defaults: &defaults
   - spare_replacements
   - spare_applicabilities
   - opts_accumulators
+  - pages
+  - news
 
 development:
   <<: *defaults
