@@ -66,23 +66,21 @@
   padding-top: 5px;
   padding-bottom: 5px;
 
-  img {
-    height: 38px;
-    width: 186px;
+  #crop-navbar-brand {
+    overflow: hidden;
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      width: 48px;
+    }
+    @media (min-width: $screen-lg-min) {
+      width: 196px;
+    }
   }
+
 }
 
 /////////////////////
 
-.open > #toggle-phone {
-  color: $link-hover-color;
-}
-
 #toggle-phone {
-  color: $link-color;
-  &:hover, &:focus, &:active {
-    color: $link-hover-color;
-  }
   @extend .btn;
   @extend .btn-default;
   margin-top: 8px;
