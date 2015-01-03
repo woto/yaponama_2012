@@ -8,8 +8,9 @@ $(document).on 'page:update', ->
 
     $("#clientMapOuter").affix offset:
       top: ->
-        121
-      #  # Это число так же фигурирует в js
+        x = $('#myTab').offset().top + $('#myTab').height() + 20 - 5
+        $('#clientMapOuter').css('marginTop', -x + 'px')
+        x
       bottom: ->
         $(document).height() - $("#level").offset().top + 20
 

@@ -1,15 +1,9 @@
-#clientMapOuter.affix {
-  position: fixed;
-   margin-top: -121px;
-  // Это число так же фигурирует в js
-}
-
 .affix-top {
-  //position: fixed;
-  position: relative;
+  margin-top: 0 !important;
 }
 
 .affix-bottom {
+  margin-top: 0 !important;
   position: absolute;
 }
 
