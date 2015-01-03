@@ -57,6 +57,8 @@
 //= require catch_enter
 //= require submenu
 
+//= require callbacks
+
 //= require select2
 //= require brand_model
 

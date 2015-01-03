@@ -34,22 +34,20 @@
           <% end %>
           <%= dd.menu do %>
             <%= content_tag :li do %>
-              <li class="dropdown-header">Тут мы собрали ответы на наиболее часто<br/>задаваемые вопросы нашими покупателями.</li>
+              <li class="dropdown-header">Оставьте номер телефона и вам перезвонит<br />первый освободившийся менеджер.</li>
               <li>
-                <%= link_to "Часто задаваемые вопросы", faqs_path, class: 'link' %>
+                <%= link_to "Обратный звонок", '#', class: 'link', id: 'callback-link' %>
               </li>
               <li class="divider"></li>
               <li class="dropdown-header">Если вам необходимо передать номера<br /> деталей, фотографию, VIN код и тд, <br />то рекомендуем воспользоваться чатом.</li>
               <li>
-                <%= link_to "Консультант Онлайн", '#', class: 'talk-show link' %>
+                <%= link_to "Онлайн консультант", '#', class: 'talk-show link' %>
               </li>
-              <% if false %>
               <li class="divider"></li>
-              <li class="dropdown-header">Оставьте номер телефона и вам перезвонит<br />первый освободившийся менеджер.</li>
+              <li class="dropdown-header">Тут мы собрали ответы на наиболее часто<br/>задаваемые вопросы нашими покупателями.</li>
               <li>
-                <%= link_to "Обратный звонок", callback_path, class: 'link' %>
+                <%= link_to "Часто задаваемые вопросы", faqs_path, class: 'link' %>
               </li>
-              <% end %>
             <% end %>
           <% end %>
         <% end %>

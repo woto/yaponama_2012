@@ -87,7 +87,7 @@
   margin-right: 15px;
 }
 
-#dropdown-phone > .dropdown-menu > li > a {
+#dropdown-phone .link {
   color: $link-color;
   &:hover, &:focus {
     color: $link-hover-color;

@@ -448,6 +448,8 @@ Yaponama2012::Application.routes.draw do
     resources :parts
   end
 
+  resources :callbacks, only: [:show, :create]
+
   ## TODO Для перехвата /searches/2102/KURYAKYN
   #resources :searches do
   #  #get 'search', :on => :collection, :as => 'search', :to => 'searches#index'
@@ -473,5 +475,4 @@ Yaponama2012::Application.routes.draw do
     get "*error", :to => "application#render_404", format: false
   end
 
-  get 'callback' => 'welcome#index'
 end

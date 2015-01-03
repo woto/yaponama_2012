@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141225203624) do
+ActiveRecord::Schema.define(version: 20150102231134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   enable_extension "citext"
   enable_extension "uuid-ossp"
 
-  create_table "account_transactions", force: true do |t|
+  create_table "account_transactions", force: :cascade do |t|
     t.integer  "account_id"
     t.integer  "creator_id"
     t.integer  "product_transaction_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "account_transactions", ["creator_id"], name: "index_account_transactions_on_creator_id", using: :btree
   add_index "account_transactions", ["product_transaction_id"], name: "index_account_transactions_on_product_transaction_id", using: :btree
 
-  create_table "accounts", force: true do |t|
+  create_table "accounts", force: :cascade do |t|
     t.decimal  "debit",       precision: 8, scale: 2, default: 0.0
     t.decimal  "credit",      precision: 8, scale: 2, default: 0.0
     t.integer  "somebody_id"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
 
   add_index "accounts", ["somebody_id"], name: "index_accounts_on_somebody_id", using: :btree
 
-  create_table "auths", force: true do |t|
+  create_table "auths", force: :cascade do |t|
     t.string   "provider"
     t.string   "uid"
     t.integer  "somebody_id"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
 
   add_index "auths", ["somebody_id"], name: "index_auths_on_somebody_id", using: :btree
 
-  create_table "bots", force: true do |t|
+  create_table "bots", force: :cascade do |t|
     t.string   "title"
     t.string   "comment"
     t.string   "user_agent"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
     t.boolean  "block",      default: false
   end
 
-  create_table "brand_transactions", force: true do |t|
+  create_table "brand_transactions", force: :cascade do |t|
     t.integer  "brand_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "brand_transactions", ["brand_id"], name: "index_brand_transactions_on_brand_id", using: :btree
   add_index "brand_transactions", ["creator_id"], name: "index_brand_transactions_on_creator_id", using: :btree
 
-  create_table "brands", force: true do |t|
+  create_table "brands", force: :cascade do |t|
     t.citext   "name"
     t.integer  "brand_id"
     t.string   "cached_brand"
@@ -129,7 +129,17 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "brands", ["brand_id"], name: "index_brands_on_brand_id", using: :btree
   add_index "brands", ["creator_id"], name: "index_brands_on_creator_id", using: :btree
 
-  create_table "calls", force: true do |t|
+  create_table "callbacks", force: :cascade do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.integer  "somebody_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "callbacks", ["somebody_id"], name: "index_callbacks_on_somebody_id", using: :btree
+
+  create_table "calls", force: :cascade do |t|
     t.integer  "phone_id"
     t.integer  "somebody_id"
     t.string   "file"
@@ -140,7 +150,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "calls", ["phone_id"], name: "index_calls_on_phone_id", using: :btree
   add_index "calls", ["somebody_id"], name: "index_calls_on_somebody_id", using: :btree
 
-  create_table "car_transactions", force: true do |t|
+  create_table "car_transactions", force: :cascade do |t|
     t.integer  "car_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -210,7 +220,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "car_transactions", ["car_id"], name: "index_car_transactions_on_car_id", using: :btree
   add_index "car_transactions", ["creator_id"], name: "index_car_transactions_on_creator_id", using: :btree
 
-  create_table "cars", force: true do |t|
+  create_table "cars", force: :cascade do |t|
     t.integer  "god"
     t.string   "period"
     t.integer  "brand_id"
@@ -253,7 +263,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "cars", ["modification_id"], name: "index_cars_on_modification_id", using: :btree
   add_index "cars", ["somebody_id"], name: "index_cars_on_somebody_id", using: :btree
 
-  create_table "companies", force: true do |t|
+  create_table "companies", force: :cascade do |t|
     t.string   "ownership"
     t.string   "name"
     t.string   "inn"
@@ -284,7 +294,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "companies", ["legal_address_id"], name: "index_companies_on_legal_address_id", using: :btree
   add_index "companies", ["somebody_id"], name: "index_companies_on_somebody_id", using: :btree
 
-  create_table "company_transactions", force: true do |t|
+  create_table "company_transactions", force: :cascade do |t|
     t.integer  "company_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -334,7 +344,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "company_transactions", ["company_id"], name: "index_company_transactions_on_company_id", using: :btree
   add_index "company_transactions", ["creator_id"], name: "index_company_transactions_on_creator_id", using: :btree
 
-  create_table "delayed_jobs", force: true do |t|
+  create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0
     t.integer  "attempts",   default: 0
     t.text     "handler"
@@ -350,7 +360,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "deliveries_options", force: true do |t|
+  create_table "deliveries_options", force: :cascade do |t|
     t.string   "name"
     t.boolean  "full_prepayment_required"
     t.boolean  "postal_address_required"
@@ -359,7 +369,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
     t.datetime "updated_at"
   end
 
-  create_table "deliveries_places", force: true do |t|
+  create_table "deliveries_places", force: :cascade do |t|
     t.string   "name"
     t.text     "content"
     t.text     "vertices"
@@ -402,7 +412,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
     t.string   "price_url"
   end
 
-  create_table "deliveries_variants", force: true do |t|
+  create_table "deliveries_variants", force: :cascade do |t|
     t.integer  "place_id"
     t.integer  "option_id"
     t.boolean  "active"
@@ -414,7 +424,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
     t.datetime "updated_at"
   end
 
-  create_table "email_transactions", force: true do |t|
+  create_table "email_transactions", force: :cascade do |t|
     t.integer  "email_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -442,7 +452,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "email_transactions", ["creator_id"], name: "index_email_transactions_on_creator_id", using: :btree
   add_index "email_transactions", ["email_id"], name: "index_email_transactions_on_email_id", using: :btree
 
-  create_table "emails", force: true do |t|
+  create_table "emails", force: :cascade do |t|
     t.string   "value"
     t.integer  "profile_id"
     t.datetime "created_at"
@@ -461,7 +471,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "emails", ["profile_id"], name: "index_emails_on_profile_id", using: :btree
   add_index "emails", ["somebody_id"], name: "index_emails_on_somebody_id", using: :btree
 
-  create_table "faq_transactions", force: true do |t|
+  create_table "faq_transactions", force: :cascade do |t|
     t.integer  "faq_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -485,7 +495,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "faq_transactions", ["creator_id"], name: "index_faq_transactions_on_creator_id", using: :btree
   add_index "faq_transactions", ["faq_id"], name: "index_faq_transactions_on_faq_id", using: :btree
 
-  create_table "faqs", force: true do |t|
+  create_table "faqs", force: :cascade do |t|
     t.text     "question"
     t.text     "answer"
     t.boolean  "phantom",         default: false
@@ -501,7 +511,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "faqs", ["creator_id"], name: "index_faqs_on_creator_id", using: :btree
   add_index "faqs", ["somebody_id"], name: "index_faqs_on_somebody_id", using: :btree
 
-  create_table "galleries", force: true do |t|
+  create_table "galleries", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
     t.string   "image"
@@ -511,7 +521,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
     t.datetime "updated_at"
   end
 
-  create_table "generations", force: true do |t|
+  create_table "generations", force: :cascade do |t|
     t.citext   "name"
     t.text     "content"
     t.integer  "model_id"
@@ -527,7 +537,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "generations", ["creator_id"], name: "index_generations_on_creator_id", using: :btree
   add_index "generations", ["model_id"], name: "index_generations_on_model_id", using: :btree
 
-  create_table "ipgeobase_ips", id: false, force: true do |t|
+  create_table "ipgeobase_ips", id: false, force: :cascade do |t|
     t.integer "start_ip",  limit: 8
     t.integer "end_ip",    limit: 8
     t.integer "region_id"
@@ -536,7 +546,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "ipgeobase_ips", ["region_id"], name: "index_ipgeobase_ips_on_region_id", using: :btree
   add_index "ipgeobase_ips", ["start_ip"], name: "index_ipgeobase_ips_on_start_ip", using: :btree
 
-  create_table "ipgeobase_regions", force: true do |t|
+  create_table "ipgeobase_regions", force: :cascade do |t|
     t.string   "name"
     t.string   "ancestry"
     t.text     "names_depth_cache"
@@ -547,12 +557,12 @@ ActiveRecord::Schema.define(version: 20141225203624) do
 
   add_index "ipgeobase_regions", ["ancestry"], name: "index_ipgeobase_regions_on_ancestry", using: :btree
 
-  create_table "metro", force: true do |t|
+  create_table "metro", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "models", force: true do |t|
+  create_table "models", force: :cascade do |t|
     t.integer  "brand_id"
     t.string   "cached_brand"
     t.citext   "name"
@@ -569,7 +579,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "models", ["brand_id"], name: "index_models_on_brand_id", using: :btree
   add_index "models", ["creator_id"], name: "index_models_on_creator_id", using: :btree
 
-  create_table "modifications", force: true do |t|
+  create_table "modifications", force: :cascade do |t|
     t.citext   "name"
     t.text     "content"
     t.integer  "generation_id"
@@ -585,7 +595,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "modifications", ["creator_id"], name: "index_modifications_on_creator_id", using: :btree
   add_index "modifications", ["generation_id"], name: "index_modifications_on_generation_id", using: :btree
 
-  create_table "name_transactions", force: true do |t|
+  create_table "name_transactions", force: :cascade do |t|
     t.integer  "name_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -611,7 +621,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "name_transactions", ["creator_id"], name: "index_name_transactions_on_creator_id", using: :btree
   add_index "name_transactions", ["name_id"], name: "index_name_transactions_on_name_id", using: :btree
 
-  create_table "names", force: true do |t|
+  create_table "names", force: :cascade do |t|
     t.string   "surname"
     t.string   "name"
     t.string   "patronymic"
@@ -629,7 +639,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "names", ["profile_id"], name: "index_names_on_profile_id", using: :btree
   add_index "names", ["somebody_id"], name: "index_names_on_somebody_id", using: :btree
 
-  create_table "news", force: true do |t|
+  create_table "news", force: :cascade do |t|
     t.string   "title"
     t.string   "path"
     t.text     "intro"
@@ -640,7 +650,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "opts_accumulators", force: true do |t|
+  create_table "opts_accumulators", force: :cascade do |t|
     t.integer  "voltage"
     t.integer  "battery_capacity"
     t.integer  "cold_cranking_amps"
@@ -661,7 +671,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "opts_accumulators", ["creator_id"], name: "index_opts_accumulators_on_creator_id", using: :btree
   add_index "opts_accumulators", ["spare_info_id"], name: "index_opts_accumulators_on_spare_info_id", using: :btree
 
-  create_table "opts_temps", force: true do |t|
+  create_table "opts_temps", force: :cascade do |t|
     t.integer  "x"
     t.string   "y"
     t.integer  "spare_info_id"
@@ -671,7 +681,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
 
   add_index "opts_temps", ["spare_info_id"], name: "index_opts_temps_on_spare_info_id", using: :btree
 
-  create_table "order_deliveries", force: true do |t|
+  create_table "order_deliveries", force: :cascade do |t|
     t.integer  "creator_id"
     t.integer  "somebody_id"
     t.integer  "postal_address_id"
@@ -683,7 +693,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "order_deliveries", ["postal_address_id"], name: "index_order_deliveries_on_postal_address_id", using: :btree
   add_index "order_deliveries", ["somebody_id"], name: "index_order_deliveries_on_somebody_id", using: :btree
 
-  create_table "order_transactions", force: true do |t|
+  create_table "order_transactions", force: :cascade do |t|
     t.integer  "order_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -729,7 +739,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "order_transactions", ["creator_id"], name: "index_order_transactions_on_creator_id", using: :btree
   add_index "order_transactions", ["order_id"], name: "index_order_transactions_on_order_id", using: :btree
 
-  create_table "orders", force: true do |t|
+  create_table "orders", force: :cascade do |t|
     t.integer  "postal_address_id"
     t.integer  "company_id"
     t.decimal  "delivery_cost",            precision: 8, scale: 2, default: 0.0
@@ -763,7 +773,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "orders", ["somebody_id"], name: "index_orders_on_somebody_id", using: :btree
   add_index "orders", ["token"], name: "index_orders_on_token", using: :btree
 
-  create_table "page_transactions", force: true do |t|
+  create_table "page_transactions", force: :cascade do |t|
     t.integer  "page_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -791,7 +801,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "page_transactions", ["creator_id"], name: "index_page_transactions_on_creator_id", using: :btree
   add_index "page_transactions", ["page_id"], name: "index_page_transactions_on_page_id", using: :btree
 
-  create_table "pages", force: true do |t|
+  create_table "pages", force: :cascade do |t|
     t.string   "path"
     t.text     "content"
     t.text     "keywords"
@@ -806,12 +816,12 @@ ActiveRecord::Schema.define(version: 20141225203624) do
     t.string   "redirect_url"
   end
 
-  create_table "pages_uploads", id: false, force: true do |t|
+  create_table "pages_uploads", id: false, force: :cascade do |t|
     t.integer "page_id"
     t.integer "upload_id"
   end
 
-  create_table "passport_transactions", force: true do |t|
+  create_table "passport_transactions", force: :cascade do |t|
     t.integer  "passport_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -847,7 +857,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "passport_transactions", ["creator_id"], name: "index_passport_transactions_on_creator_id", using: :btree
   add_index "passport_transactions", ["passport_id"], name: "index_passport_transactions_on_passport_id", using: :btree
 
-  create_table "passports", force: true do |t|
+  create_table "passports", force: :cascade do |t|
     t.string   "seriya"
     t.string   "nomer"
     t.string   "passport_vidan"
@@ -870,7 +880,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "passports", ["profile_id"], name: "index_passports_on_profile_id", using: :btree
   add_index "passports", ["somebody_id"], name: "index_passports_on_somebody_id", using: :btree
 
-  create_table "payments", force: true do |t|
+  create_table "payments", force: :cascade do |t|
     t.integer  "amount"
     t.integer  "creator_id"
     t.integer  "somebody_id"
@@ -886,7 +896,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "payments", ["profile_id"], name: "index_payments_on_profile_id", using: :btree
   add_index "payments", ["somebody_id"], name: "index_payments_on_somebody_id", using: :btree
 
-  create_table "phone_transactions", force: true do |t|
+  create_table "phone_transactions", force: :cascade do |t|
     t.integer  "phone_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -916,7 +926,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "phone_transactions", ["creator_id"], name: "index_phone_transactions_on_creator_id", using: :btree
   add_index "phone_transactions", ["phone_id"], name: "index_phone_transactions_on_phone_id", using: :btree
 
-  create_table "phones", force: true do |t|
+  create_table "phones", force: :cascade do |t|
     t.string   "value"
     t.boolean  "mobile"
     t.integer  "profile_id"
@@ -936,7 +946,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "phones", ["profile_id"], name: "index_phones_on_profile_id", using: :btree
   add_index "phones", ["somebody_id"], name: "index_phones_on_somebody_id", using: :btree
 
-  create_table "postal_address_transactions", force: true do |t|
+  create_table "postal_address_transactions", force: :cascade do |t|
     t.integer  "postal_address_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -968,7 +978,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "postal_address_transactions", ["creator_id"], name: "index_postal_address_transactions_on_creator_id", using: :btree
   add_index "postal_address_transactions", ["postal_address_id"], name: "index_postal_address_transactions_on_postal_address_id", using: :btree
 
-  create_table "postal_addresses", force: true do |t|
+  create_table "postal_addresses", force: :cascade do |t|
     t.string   "postcode"
     t.string   "region"
     t.string   "city"
@@ -988,7 +998,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "postal_addresses", ["creator_id"], name: "index_postal_addresses_on_creator_id", using: :btree
   add_index "postal_addresses", ["somebody_id"], name: "index_postal_addresses_on_somebody_id", using: :btree
 
-  create_table "product_transactions", force: true do |t|
+  create_table "product_transactions", force: :cascade do |t|
     t.integer  "product_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -1042,7 +1052,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "product_transactions", ["creator_id"], name: "index_product_transactions_on_creator_id", using: :btree
   add_index "product_transactions", ["product_id"], name: "index_product_transactions_on_product_id", using: :btree
 
-  create_table "products", force: true do |t|
+  create_table "products", force: :cascade do |t|
     t.string   "catalog_number"
     t.integer  "brand_id"
     t.string   "cached_brand"
@@ -1076,7 +1086,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "products", ["somebody_id"], name: "index_products_on_somebody_id", using: :btree
   add_index "products", ["supplier_id"], name: "index_products_on_supplier_id", using: :btree
 
-  create_table "profile_transactions", force: true do |t|
+  create_table "profile_transactions", force: :cascade do |t|
     t.integer  "profile_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -1102,7 +1112,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "profile_transactions", ["creator_id"], name: "index_profile_transactions_on_creator_id", using: :btree
   add_index "profile_transactions", ["profile_id"], name: "index_profile_transactions_on_profile_id", using: :btree
 
-  create_table "profiles", force: true do |t|
+  create_table "profiles", force: :cascade do |t|
     t.text     "cached_names"
     t.text     "cached_phones"
     t.text     "cached_emails"
@@ -1119,7 +1129,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "profiles", ["creator_id"], name: "index_profiles_on_creator_id", using: :btree
   add_index "profiles", ["somebody_id"], name: "index_profiles_on_somebody_id", using: :btree
 
-  create_table "sessions", force: true do |t|
+  create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false
     t.text     "data"
     t.datetime "created_at"
@@ -1129,7 +1139,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
-  create_table "somebodies", force: true do |t|
+  create_table "somebodies", force: :cascade do |t|
     t.decimal  "discount",                         precision: 8, scale: 2
     t.decimal  "prepayment",                       precision: 8, scale: 2
     t.string   "role"
@@ -1177,7 +1187,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "somebodies", ["creator_id"], name: "index_somebodies_on_creator_id", using: :btree
   add_index "somebodies", ["type", "auth_token"], name: "index_somebodies_on_type_and_auth_token", unique: true, using: :btree
 
-  create_table "somebody_transactions", force: true do |t|
+  create_table "somebody_transactions", force: :cascade do |t|
     t.integer  "somebody_id"
     t.string   "operation"
     t.integer  "creator_id"
@@ -1267,7 +1277,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "somebody_transactions", ["creator_id"], name: "index_somebody_transactions_on_creator_id", using: :btree
   add_index "somebody_transactions", ["somebody_id"], name: "index_somebody_transactions_on_somebody_id", using: :btree
 
-  create_table "spare_applicabilities", force: true do |t|
+  create_table "spare_applicabilities", force: :cascade do |t|
     t.integer  "spare_info_id"
     t.integer  "brand_id"
     t.integer  "model_id"
@@ -1290,7 +1300,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "spare_applicabilities", ["modification_id"], name: "index_spare_applicabilities_on_modification_id", using: :btree
   add_index "spare_applicabilities", ["spare_info_id"], name: "index_spare_applicabilities_on_spare_info_id", using: :btree
 
-  create_table "spare_catalog_tokens", force: true do |t|
+  create_table "spare_catalog_tokens", force: :cascade do |t|
     t.integer  "spare_catalog_id"
     t.string   "name"
     t.datetime "created_at",                   null: false
@@ -1300,7 +1310,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
 
   add_index "spare_catalog_tokens", ["spare_catalog_id"], name: "index_spare_catalog_tokens_on_spare_catalog_id", using: :btree
 
-  create_table "spare_catalogs", force: true do |t|
+  create_table "spare_catalogs", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -1309,7 +1319,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
     t.string   "opt"
   end
 
-  create_table "spare_infos", force: true do |t|
+  create_table "spare_infos", force: :cascade do |t|
     t.string   "catalog_number"
     t.integer  "brand_id"
     t.string   "cached_brand"
@@ -1343,7 +1353,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "spare_infos", ["brand_id"], name: "index_spare_infos_on_brand_id", using: :btree
   add_index "spare_infos", ["spare_catalog_id"], name: "index_spare_infos_on_spare_catalog_id", using: :btree
 
-  create_table "spare_replacements", force: true do |t|
+  create_table "spare_replacements", force: :cascade do |t|
     t.integer  "from_spare_info_id"
     t.integer  "to_spare_info_id"
     t.string   "from_cached_spare_info"
@@ -1359,7 +1369,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "spare_replacements", ["from_spare_info_id"], name: "index_spare_replacements_on_from_spare_info_id", using: :btree
   add_index "spare_replacements", ["to_spare_info_id"], name: "index_spare_replacements_on_to_spare_info_id", using: :btree
 
-  create_table "stats", force: true do |t|
+  create_table "stats", force: :cascade do |t|
     t.text     "location"
     t.string   "title"
     t.text     "referrer"
@@ -1376,7 +1386,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
 
   add_index "stats", ["somebody_id"], name: "index_stats_on_somebody_id", using: :btree
 
-  create_table "suppliers", force: true do |t|
+  create_table "suppliers", force: :cascade do |t|
     t.integer  "creator_id"
     t.decimal  "debit",      precision: 8, scale: 2, default: 0.0
     t.decimal  "credit",     precision: 8, scale: 2, default: 0.0
@@ -1386,7 +1396,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
 
   add_index "suppliers", ["creator_id"], name: "index_suppliers_on_creator_id", using: :btree
 
-  create_table "talks", force: true do |t|
+  create_table "talks", force: :cascade do |t|
     t.boolean  "read",            default: false
     t.boolean  "received",        default: false
     t.text     "cached_talk"
@@ -1406,7 +1416,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "talks", ["creator_id"], name: "index_talks_on_creator_id", using: :btree
   add_index "talks", ["somebody_id"], name: "index_talks_on_somebody_id", using: :btree
 
-  create_table "tests", force: true do |t|
+  create_table "tests", force: :cascade do |t|
     t.binary   "binary"
     t.boolean  "boolean"
     t.date     "date"
@@ -1422,7 +1432,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
     t.datetime "updated_at"
   end
 
-  create_table "uploads", force: true do |t|
+  create_table "uploads", force: :cascade do |t|
     t.string   "upload"
     t.string   "content_type"
     t.integer  "file_size"
@@ -1434,7 +1444,7 @@ ActiveRecord::Schema.define(version: 20141225203624) do
 
   add_index "uploads", ["somebody_id"], name: "index_uploads_on_somebody_id", using: :btree
 
-  create_table "warehouses", force: true do |t|
+  create_table "warehouses", force: :cascade do |t|
     t.integer  "spare_info_id"
     t.integer  "count"
     t.integer  "price"
@@ -1446,4 +1456,5 @@ ActiveRecord::Schema.define(version: 20141225203624) do
   add_index "warehouses", ["place_id"], name: "index_warehouses_on_place_id", using: :btree
   add_index "warehouses", ["spare_info_id"], name: "index_warehouses_on_spare_info_id", using: :btree
 
+  add_foreign_key "callbacks", "somebodies"
 end
