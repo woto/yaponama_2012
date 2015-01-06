@@ -1,6 +1,12 @@
+<% if false %>
 <div class="top-space bottom-space">
   <%= paginate @parts %>
 </div>
+<% end %>
+
+<%= content_for :head do %>
+  <%= rel_next_prev_link_tags @parts %>
+<% end %>
 
 <%= yield %>
 

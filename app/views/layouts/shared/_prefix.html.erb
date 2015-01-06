@@ -31,6 +31,8 @@
       <link rel="canonical" href="<%== @meta_canonical %>" />
     <% end %>
 
+    <%= yield :head %>
+
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag "application", "data-turbolinks-track" => true, :media => "all" %>
