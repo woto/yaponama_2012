@@ -7,13 +7,20 @@
     <%= b.item(@resource.title) %>
   </ol>
 
+  <span class="pull-right text-sm text-muted top-space-xs"><%= l @resource.date, format: :news %></span>
   <% @meta_title = @resource.title %>
   <%= page_header %>
 
-  <div>
-    <%= @resource.body %>
+
+  <div class="clearfix">
+    <%== @resource.body %>
   </div>
 
-  <%= link_to 'Редактировать', edit_news_path(@resource), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' %>
+  <% if @current_user.seller? %>
+    <%= link_to edit_admin_news_path(@resource, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
+      <%= icon 'edit' %>
+      Редактировать
+    <% end %>
+  <% end %>
 
 <% end %>
