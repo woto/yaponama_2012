@@ -69,6 +69,10 @@ namespace :app do
     ImportSpareInfo.import_spare_info args
   end
 
+  task :update_spare_info => [:environment] do |t, args|
+    UpdateSpareInfo.update_spare_info
+  end
+
   desc 'Отправляем не полученное сообщение на почту/телефон'
   task :talk_notifier => :environment  do
     while true do
