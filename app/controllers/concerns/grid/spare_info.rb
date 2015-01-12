@@ -67,7 +67,7 @@ module Grid::SpareInfo
       }
 
       columns_hash['shows'] = {
-        :type => :integer,
+        :type => :number,
       }
 
       columns_hash['notes'] = {

@@ -60,6 +60,10 @@ namespace :app do
     UpdateBrand.update_brand
   end
 
+  task :create_new_wordstat_report_spare_info => :environment do
+    CreateNewWordstatReportSpareInfo.create_new_wordstat_report_spare_info
+  end
+
   desc 'Проценка вызов происходит так: rake "app:protcenka[a]. Сравнение с прайсами, у которых visible_for_stock"'
   task :protcenka, [:arg1] => [:environment] do |t, args|
     Protcenka.protcenka t, args
