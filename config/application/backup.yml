@@ -15,6 +15,7 @@ defaults: &defaults
   - opts_accumulators
   - pages
   - news
+  - warehouses
 
 development:
   <<: *defaults
