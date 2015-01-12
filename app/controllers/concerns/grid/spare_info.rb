@@ -66,6 +66,10 @@ module Grid::SpareInfo
         :type => :string,
       }
 
+      columns_hash['shows'] = {
+        :type => :integer,
+      }
+
       columns_hash['notes'] = {
         :type => :string,
       }
@@ -86,6 +90,7 @@ module Grid::SpareInfo
       @grid.visible_cached_spare_catalog = '1'
       @grid.visible_image1 = '1'
       @grid.visible_content = '1'
+      @grid.visible_shows = '1'
       @grid.visible_notes = '1'
       @grid.visible_notes_invisible = '1'
       @grid.visible_created_at = '1'
