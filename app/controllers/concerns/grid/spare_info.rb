@@ -22,45 +22,17 @@ module Grid::SpareInfo
         :type => :string,
       }
 
-      columns_hash['image1'] = {
-        :type => :string,
-      }
+      (1..8).each do |i|
+        columns_hash["image#{i}"] = {
+          :type => :string,
+        }
+      end
 
-      columns_hash['image2'] = {
-        :type => :string,
-      }
-
-      columns_hash['image3'] = {
-        :type => :string,
-      }
-
-      columns_hash['image4'] = {
-        :type => :string,
-      }
-
-      columns_hash['image5'] = {
-        :type => :string,
-      }
-
-      columns_hash['file1'] = {
-        :type => :string,
-      }
-
-      columns_hash['file2'] = {
-        :type => :string,
-      }
-
-      columns_hash['file3'] = {
-        :type => :string,
-      }
-
-      columns_hash['file4'] = {
-        :type => :string,
-      }
-
-      columns_hash['file5'] = {
-        :type => :string,
-      }
+      (1..8).each do |i|
+        columns_hash["file#{i}"] = {
+          :type => :string,
+        }
+      end
 
       columns_hash['content'] = {
         :type => :string,

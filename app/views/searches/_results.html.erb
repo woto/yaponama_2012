@@ -43,7 +43,7 @@
                   <small> <%= catalog_number %> </small>
                 </h4>
 
-                <img src="http://www.rk-an.ru/images/empty_photo.jpg" alt="Изображение отстутствует" class="img-thumbnail center-block bottom-space-lg top-space" style="background: #FAFAFA;">
+                <%= render 'spare_info_images', info: mf_scope[:info] %>
 
                 <div class="brands" style="clear: both; display: block; margin: 0 auto; width: 96px; height: 100px"> 
                   <%= brands_decorator lambda{|brand| brand_parts_path brand}, mf_scope[:brand], {:title => false} %>

@@ -21,11 +21,11 @@
         <% end %>
       <% end %>
 
-      <% (1..5).each do |n| %>
+      <% (1..8).each do |n| %>
         <%= render 'image_form', f:f, name: "image#{n}" %>
       <% end %>
 
-      <% (1..5).each do |n| %>
+      <% (1..8).each do |n| %>
         <%= render 'file_form', f:f, name: "file#{n}" %>
       <% end %>
 

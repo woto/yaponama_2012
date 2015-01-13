@@ -13,11 +13,11 @@ class SpareInfo < ActiveRecord::Base
   has_many :spare_applicabilities, dependent: :destroy
   has_many :warehouses, dependent: :destroy
 
-  (1..5).each do |n|
+  (1..8).each do |n|
     mount_uploader "image#{n}", ApplicationUploader
   end
 
-  (1..5).each do |n|
+  (1..8).each do |n|
     mount_uploader "file#{n}", ApplicationUploader
   end
 

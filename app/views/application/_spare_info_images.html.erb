@@ -1,0 +1,50 @@
+<style>
+
+  ol.carousel-indicators {
+    bottom: 0;
+  }
+
+  ol.carousel-indicators li {
+    border: 1px solid #000;
+    margin: 4px;
+    height: 16px;
+    width: 16px;
+    background-color: #e7e7e7;
+  }
+
+  ol.carousel-indicators li.active {
+    margin: 3px;
+    height: 18px;
+    width: 18px;
+    background-color: #337ab7;
+  }
+
+</style>
+
+
+<% if info && info.instance_eval("image1").present? %>
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <% (1..8).each do |n| %>
+        <% if info.instance_eval("image#{n}").present? %>
+          <li data-target="#carousel-example-generic" data-slide-to="<%= n-1 %>" class="<%= 'active' if n-1 == 0 %>"></li>
+        <% end %>
+      <% end %>
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <% (1..8).each do |n| %>
+        <% if info.instance_eval("image#{n}").present? %>
+          <div class="item <%= 'active' if n-1 == 0 %>">
+            <%= link_to info.instance_eval("image#{n}.url"), target: '_blank', class: 'image-view' do %>
+              <%= image_tag info.instance_eval("image#{n}.fill_thumb.url"), alt: "#{info.to_label}", class: 'img-rounded center-block text-center' %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <img src="http://www.rk-an.ru/images/empty_photo.jpg" alt="Изображение отстутствует" class="img-thumbnail center-block bottom-space-lg top-space" style="background: #FAFAFA;">
+<% end %>
