@@ -38,7 +38,7 @@
           <%= p.body do %>
 
             <%= row do %>
-              <div class="col-md-3">
+              <div class="col-sm-4">
 
                 <h4 style="text-align: center">
                   <span itemprop="brand"><%= manufacturer %></span>
@@ -46,6 +46,8 @@
                   <br />
                   <small> <%= catalog_number %> </small>
                 </h4>
+
+                <img src="http://www.rk-an.ru/images/empty_photo.jpg" alt="Изображение отстутствует" class="img-thumbnail center-block bottom-space-lg top-space" style="background: #FAFAFA;">
 
                 <div class="brands" style="clear: both; display: block; margin: 0 auto; width: 96px; height: 100px"> 
                   <%= brands_decorator lambda{|brand| brand_parts_path brand}, mf_scope[:brand], {:title => false} %>
@@ -61,7 +63,7 @@
 
               </div>
 
-              <div class="col-md-9">
+              <div class="col-sm-8">
 
                 <div itemprop="description">
                   <% if mf_scope[:titles].size > 0 %>
