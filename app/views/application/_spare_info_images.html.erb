@@ -25,20 +25,22 @@
 <% if info && info.instance_eval("image1").present? %>
   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <% (1..8).each do |n| %>
-        <% if info.instance_eval("image#{n}").present? %>
-          <li data-target="#carousel-example-generic" data-slide-to="<%= n-1 %>" class="<%= 'active' if n-1 == 0 %>"></li>
+    <% if info.instance_eval("image2").present? %>
+      <ol class="carousel-indicators">
+        <% (1..8).each do |n| %>
+          <% if info.instance_eval("image#{n}").present? %>
+            <li data-target="#carousel-example-generic" data-slide-to="<%= n-1 %>" class="<%= 'active' if n-1 == 0 %>"></li>
+          <% end %>
         <% end %>
-      <% end %>
-    </ol>
+      </ol>
+    <% end %>
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <% (1..8).each do |n| %>
         <% if info.instance_eval("image#{n}").present? %>
           <div class="item <%= 'active' if n-1 == 0 %>">
             <%= link_to info.instance_eval("image#{n}.url"), target: '_blank', class: 'image-view' do %>
-              <%= image_tag info.instance_eval("image#{n}.fill_thumb.url"), alt: "#{info.to_label}", class: 'img-rounded center-block text-center' %>
+              <%= image_tag info.instance_eval("image#{n}.fill_thumb.url"), alt: "#{info.to_label}", class: 'img-thumbnail center-block text-center' %>
             <% end %>
           </div>
         <% end %>
