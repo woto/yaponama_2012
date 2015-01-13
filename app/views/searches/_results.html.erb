@@ -1,15 +1,11 @@
-  <%= row class: 'bottom-space' do %>
-
-    <%= content_tag :div, class: 'col-md-2 col-md-push-10 text-xs' do %>
-      <div class="list-group">
-        <% @formatted_data.map{|k, v| v.map{|k, v| k}}[0].each do |brand| %>
-          <a href="#<%=brand %>" class="list-group-item"><%=brand %></a>
-        <% end %>
-      </div>
-    <% end %>
-
-    <%= content_tag :div, class: 'col-md-10 col-md-pull-2' do %>
-
+  <% content_for :sidebar do %>
+    <div class="list-group top-space-lg bottom-space-lg">
+      <% @formatted_data.map{|k, v| v.map{|k, v| k}}[0].each do |brand| %>
+        <a href="#<%=brand %>" class="list-group-item"><%=brand %></a>
+      <% end %>
+    </div>
+    <hr />
+  <% end %>
 
   <div id="is_search"></div>
 
@@ -236,6 +232,3 @@
     <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
     <h3 class="top-space-lg bottom-space-lg">Вы так же можете попробовать посмотреть <%= link_to "аналоги и замены номера #{@c9}", polymorphic_path([new_or_edit, *jaba3,  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %></h3>
   <% end %>
-
-<% end %>
-    <% end %>
