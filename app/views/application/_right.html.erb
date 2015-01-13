@@ -1,31 +1,32 @@
 <div class="hidden-xs hidden-sm bottom-space-lg top-space-sm">
 
-  <p class="text-center bottom-space">
-    <%= link_to "/deliveries" do %>
-      <%= icon 'building-o fa-3x bottom-space-sm' %>
-      <br />
-      <strong>Магазины в Москве, доставка по городу и всей России</strong>
+  <div class="bottom-space-lg text-success">
+    <% Deliveries::Place.where(display_marker: true, active: true).each do |dp| %>
+      <address>
+        <strong style="margin-bottom: 5px; display: inline-block; font-family: 'trebuchet ms','helvetica cy',sans-serif; text-transform: uppercase"><span> <%= link_to(dp.name, deliveries_path) %> </span></strong>
+        <br />
+        <span><%= dp.postal_code %></span>
+        <% if dp.postal_code.present? %>
+          <br />
+        <% end %>
+        <span><%= dp.street_address %></span>
+        <% if dp.street_address.present? %>
+          <br />
+        <% end %>
+        <% (1..5).each do |n| %>
+          <% if dp.instance_eval("phone#{n}").present? %>
+            <%= icon 'phone-square' %>&nbsp;&nbsp;
+            <span><%= dp.instance_eval("phone#{n}") %></span><br />
+          <% end %>
+        <% end %>
+        <% (1..3).each do |n| %>
+          <% if dp.instance_eval("email#{n}").present? %>
+            <%= icon 'envelope' %>&nbsp;&nbsp;
+            <a href="mailto:<%= dp.instance_eval("email#{n}") %>"><span style="color: #DDD"><%= dp.instance_eval("email#{n}") %></span></a><br />
+          <% end %>
+        <% end %>
+      </address>
     <% end %>
-  </p>
-
-  <hr />
-
-  <p class="text-center bottom-space">
-    <%= link_to new_user_payment_path do %>
-      <%= icon 'rub fa-3x bottom-space-sm' %>
-      <br />
-      <strong>Все популярные способы оплаты</strong>
-    <% end %>
-  </p>
-
-  <hr />
-
-  <p class="text-center bottom-space">
-    <%= link_to '#', class: 'talk-show' do %>
-      <%= icon 'users fa-3x bottom-space-sm' %>
-      <br />
-      <strong>Онлайн служба поддержки</strong>
-    <% end %>
-  </p>
+  </div>
 
 </div>
