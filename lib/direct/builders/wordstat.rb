@@ -14,7 +14,7 @@ module Direct::Builders::Wordstat
             phrase.array! @phrases
           end
           param.GeoID do |geo_id|
-            geo_id.array! [213]
+            geo_id.array! [3]
           end
         end
       end
