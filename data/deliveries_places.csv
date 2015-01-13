@@ -1,0 +1,60 @@
+id,name,content,vertices,active_fill_color,active_fill_opacity,active_stroke_color,active_stroke_opacity,active_stroke_weight,inactive_fill_color,inactive_fill_opacity,inactive_stroke_color,inactive_stroke_opacity,inactive_stroke_weight,realize,active,lat,lng,zoom,z_index,display_marker,created_at,updated_at,phone1,phone2,phone3,phone4,phone5,postal_address,image1,image2,image3,address_locality,postal_code,street_address,email1,email2,email3,image4,image5,price_url
+1,Магазин на Рязанском проспекте,"<table border=""0"" cellpadding=""1"" cellspacing=""1"" style=""width: 100%;"">
+	<tbody>
+		<tr>
+			<td>Понедельник - пятница</td>
+			<td>10:00&nbsp;- 20:00</td>
+		</tr>
+		<tr>
+			<td>Суббота</td>
+			<td>10:00&nbsp;- 17:00</td>
+		</tr>
+		<tr>
+			<td>Воскресенье</td>
+			<td>10:00 - 16:00</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+",evbsI_koeF\`@hBmHc@g@,#000000,0.5,#000000,0.5,0.5,#000000,0.5,#000000,0.5,0.5,t,t,55.724306,37.7677180000001,16,100,t,2014-02-08 15:24:23.516189,2015-01-12 17:09:21.660351,+7 (495) 787-90-65,"","","","",,ryazanka_6.JPG,ryazanka_4.JPG,ryazanka_5.JPG,Москва,"","Рязанский проспект, д. 53","","","",,,http://www.avtorif.ru:85/suppliers/156/price_settings/263/download
+2,Магазин на Щёлковском шоссе,"<table border=""0"" cellpadding=""1"" cellspacing=""1"" style=""width: 100%;"">
+	<tbody>
+		<tr>
+			<td>Понедельник - пятница</td>
+			<td>09:00 - 20:00</td>
+		</tr>
+		<tr>
+			<td>Суббота</td>
+			<td>10:00 - 18:00</td>
+		</tr>
+		<tr>
+			<td>Воскресенье</td>
+			<td>10:00 - 17:00</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+",spssIg`reFvAEDxC\?CkEwBJ,#000000,0.3,#000000,0.3,0.3,#000000,0.3,#000000,0.3,0.3,t,t,55.8104297513216,37.7806927134918,16,100,t,2014-03-19 10:30:20.721507,2015-01-12 17:09:05.133452, +7 (495) 213-80-23,"","","","",,33.jpg,11.jpg,22.jpg,Москва,"","Щёлковское шоссе, д. 29","","","",,,http://www.avtorif.ru:85/suppliers/156/price_settings/264/download
+3,Магазин на Ленинградке (Магазин временно не работает),"<table border=""0"" cellpadding=""1"" cellspacing=""1"" style=""width:100%"">
+	<tbody>
+		<tr>
+			<td>Понедельник - пятница</td>
+			<td>09:00&nbsp;- 20:00</td>
+		</tr>
+		<tr>
+			<td>Суббота</td>
+			<td>10:00&nbsp;- 18:00</td>
+		</tr>
+		<tr>
+			<td>Воскресенье</td>
+			<td>Выходной</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p><strong>* у нас используется цифровая АТС, поэтому при звонке по указанному номеру телефона некоторое время может отсутствовать гудок.</strong></p>
+",gassI}j|cFbBrGz@b@d@sE]KmAwAQw@,#000000,0.5,#000000,0.5,0.5,#000000,0.5,#000000,0.5,0.5,t,f,55.807818554314,37.5053139140167,16,100,t,2014-08-27 22:18:27.012271,2014-12-24 17:07:20.690806, +7 (495) 213-93-71,"","","","",,2d3sj0rrp6sk8gok080sk04c0.jpg,2ut0vbd3f10k4sk4goc400c4w.jpg,860b8d2eda2629c701bd179384ed1dbe17cb157690d4f45c197f7f753e895159.jpg,Москва,"","Ленинградское шоссе, д. 1","","","",,,""
