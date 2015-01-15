@@ -38,12 +38,21 @@
             <%= row do %>
               <div class="col-sm-4">
 
-                <h4 style="text-align: center">
-                  <span itemprop="brand"><%= manufacturer %></span>
+                <div style="text-align: center">
 
-                  <br />
-                  <small> <%= catalog_number %> </small>
-                </h4>
+                  <h4 class="bottom-space-none" itemprop="brand"><%= link_to manufacturer, brand_parts_path(mf_scope[:brand]) %></h4>
+
+                  <% if mf_scope[:manufacturer_origs].size > 0 %>
+                    <p class="other-brands text-muted text-xs"><%= raw mf_scope[:manufacturer_origs].keys.map{|val| h(val)}.join(', ') %></p>
+                  <% end %>
+
+                  <h4 class="bottom-space-none text-warning"> <%= catalog_number %> </h4>
+
+                  <% if mf_scope[:catalog_number_origs].size > 0 %>
+                    <p class="other-catalog-numbers text-muted text-xs"><%= raw mf_scope[:catalog_number_origs].keys.map{|val| h(val)}.join(', ') %></p>
+                  <% end %>
+
+                </div>
 
                 <%= render 'spare_info_images', info: mf_scope[:info] %>
 
@@ -63,25 +72,6 @@
 
               <div class="col-sm-8">
 
-                <div itemprop="description">
-                  <% if mf_scope[:titles].size > 0 %>
-                    <em>Прочие названия детали:</em><br />
-                    <% long_name = mf_scope[:titles].keys.map{|val| h(val)}.join(', ') %>
-                    <p class="other-names"><%= raw long_name %></p>
-                  <% end %>
-                  <% if mf_scope[:manufacturer_origs].size > 0 %>
-                    <em>Прочие написания производителя детали:</em><br />
-                    <p class="other-brands"><%= raw mf_scope[:manufacturer_origs].keys.map{|val| h(val)}.join(', ') %></p>
-                  <% end %>
-                  <% if mf_scope[:catalog_number_origs].size > 0 %>
-                    <em>Прочие написания артикула детали:</em><br />
-                    <p class="other-catalog-numbers"><%= raw mf_scope[:catalog_number_origs].keys.map{|val| h(val)}.join(', ') %></p>
-                  <% end %>
-                  <% if mf_scope[:weights].size > 0 %>
-                    <em>Веса:</em>
-                    <p style="word-wrap: break-word;"><%= raw mf_scope[:weights].keys.map{|val| h("#{val} кг.")}.join(', ') %></p>
-                  <% end %>
-                </div>
 
                 <span class="hidden">
                   <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
