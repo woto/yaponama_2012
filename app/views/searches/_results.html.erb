@@ -20,7 +20,9 @@
           <% short_name = mf_scope[:title] %>
           <%= p.heading do %>
             <%= p.title do %>
+              <span>
               <%= link_to "ЗАПЧАСТИ", categories_path %> <%= icon 'angle-right' %>
+              </span>
               <span itemprop="name">
                 <% if mf_scope[:catalog] %>
                   <%= link_to mf_scope[:catalog].name, category_brands_path(mf_scope[:catalog]) %> <%= icon 'angle-right' %>
