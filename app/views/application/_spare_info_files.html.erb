@@ -1,8 +1,14 @@
-<% (1..5).each do |n| %>
-  <% if info.instance_eval("file#{n}").present? %>
-    <%= link_to info.instance_eval("file#{n}.url"), target: '_blank' do %>
-      <%= info.instance_eval("file#{n}.file.filename") %>
+<% if info.instance_eval("file1").present? %>
+  <h3>Прикрепленные файлы</h3>
+  <ul>
+    <% (1..5).each do |n| %>
+      <% if info.instance_eval("file#{n}").present? %>
+        <li>
+          <%= link_to info.instance_eval("file#{n}.url"), target: '_blank' do %>
+            <%= info.instance_eval("file#{n}.file.filename") %>
+          <% end %>
+        </li>
+      <% end %>
     <% end %>
-    <br />
-  <% end %>
+  </ul>
 <% end %>
