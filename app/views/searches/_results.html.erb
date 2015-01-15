@@ -69,21 +69,29 @@
                   <%= link_to "Купить в 1 клик", '#', class: 'btn btn-lg btn-success bottom-space-lg top-space-lg center-block callback-link', style: 'max-width: 200px' %>
                 <% end %>
 
+                <% if false %>
                 <div class="brand-preview text-xs text-justify">
                   <%= brand_preview mf_scope[:brand] %>
                 </div>
+                <% end %>
 
               </div>
 
               <div class="col-sm-8">
 
+              <% long_name = mf_scope[:titles].keys.map{|val| h(val)}.join(', ') %>
 
-                <span class="hidden">
-                  <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
-                    <meta itemprop="priceCurrency" content="RUB" />
-                    Не устраивают цена или срок доставки? Взгляните на <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> лучших предложений от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
-                  </div>
-                </span>
+                <% unless can_we_sold_this %>
+                  <h4 class="text-warning">К сожалению этого товара нет в наличии.</h4>
+                <% else %>
+
+                <div class="spare-catalog">
+                  <% if mf_scope[:catalog].present? %>
+                    <div class="text-muted">
+                      <%== mf_scope[:catalog].intro %>
+                    </div>
+                  <% end %>
+                </div>
 
                 <div class="text-lg table-responsive" rel="offers">
                   <table class="table">
@@ -121,6 +129,15 @@
                   </table>
                 </div>
 
+                <span class="hidden">
+                  <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+                    <meta itemprop="priceCurrency" content="RUB" />
+                    Не устраивают цена или срок доставки? Взгляните на <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> лучших предложений от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
+                  </div>
+                </span>
+
+                <% end %>
+
                 <div class="spare-info">
                   <% if mf_scope[:info].present? %>
                     <div class="bottom-space">
@@ -131,16 +148,18 @@
                   <% end %>
                 </div>
 
-                <div class="spare-catalog">
-                  <% if mf_scope[:catalog].present? %>
-                    <div class="bottom-space text-muted">
-                      <%== mf_scope[:catalog].intro %>
-                    </div>
+                <div itemprop="description">
+                  <% if mf_scope[:titles].size > 0 %>
+                    <p class="text-xs text-muted" style="word-wrap: break-word"><%= raw long_name %>.
+                      <% if mf_scope[:weights].size > 0 %>
+                        Сколько весит <%= catalog_number %>? Масса: <%= raw mf_scope[:weights].keys.map{|val| h("#{val} кг.")}.join(', ') %>
+                      <% end %>
+                    </p>
                   <% end %>
                 </div>
 
 
-                <% if mf_scope[:catalog].presence && mf_scope[:catalog].opt.presence && mf_scope[:info].presence %>
+                <% if mf_scope[:catalog].presence && mf_scope[:catalog].opt.presence && mf_scope[:info].presence && instance_eval("#{mf_scope[:info]}.#{mf_scope[:catalog].opt}") %>
                   <%= render 'opts/accumulators/part', part: mf_scope[:info], resource_class: "Opts::#{mf_scope[:catalog].opt.classify}".constantize %>
                 <% end %>
 
@@ -165,7 +184,7 @@
                             <th>Производитель</th>
                             <th>Модель</th>
                             <th>Поколение</th>
-                            <th>Модификация</th>
+                            <th></th>
                             <% if current_user.seller? %>
                               <th></th>
                             <% end %>
@@ -192,6 +211,7 @@
                     </div>
                   <% end %>
                 </div>
+
 
 
                 <% if @current_user.seller? %>
