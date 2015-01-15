@@ -56,13 +56,22 @@
 
                 <%= render 'spare_info_images', info: mf_scope[:info] %>
 
+
+                <% if false %>
                 <div class="brands" style="clear: both; display: block; margin: 0 auto; width: 96px; height: 100px"> 
                   <%= brands_decorator lambda{|brand| brand_parts_path brand}, mf_scope[:brand], {:title => false} %>
                 </div>
+                <% end %>
 
                 <div class="stars top-space-sm bottom-space-lg clearfix text-center" style="color: #ffcc33">
                   <%= brand_rating mf_scope[:brand] %>
                 </div>
+
+                <% can_we_sold_this = mf_scope[:offers].present? && mf_scope[:offers].any?{|offer| offer[:probability] > 0} %>
+
+                <% if can_we_sold_this %>
+                  <%= link_to "Купить в 1 клик", '#', class: 'btn btn-lg btn-success bottom-space-lg top-space-lg center-block callback-link', style: 'max-width: 200px' %>
+                <% end %>
 
                 <div class="brand-preview text-xs text-justify">
                   <%= brand_preview mf_scope[:brand] %>
