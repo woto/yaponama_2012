@@ -1,0 +1,40 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <tr>
+      <td> <%= resource_class.human_attribute_name(:voltage) %> </td>
+      <td> <%= opts_checkbox 'voltage', part, resource_class %> </td>
+      <td> <%= resource_class.human_attribute_name(:battery_capacity) %> </td>
+      <td> <%= part.accumulator.battery_capacity %> А·ч </td>
+    </tr>
+
+    <tr>
+      <td> <%= resource_class.human_attribute_name(:cold_cranking_amps) %> </td>
+      <td> <%= part.accumulator.cold_cranking_amps %> А </td>
+      <td> <%= resource_class.human_attribute_name(:layout) %> </td>
+      <td> <%= opts_checkbox 'layout', part, resource_class %> </td>
+    </tr>
+
+    <tr>
+      <td> <%= resource_class.human_attribute_name(:base_hold_down) %> </td>
+      <td> <%= opts_checkbox 'base_hold_down', part, resource_class %> </td>
+      <td> <%= resource_class.human_attribute_name(:length) %> </td>
+      <td> <%= part.accumulator.length %> мм </td>
+    </tr>
+
+    <tr>
+      <td> <%= resource_class.human_attribute_name(:terminal_types) %> </td>
+      <td> <%= opts_checkbox 'terminal_types', part, resource_class %> </td>
+      <td> <%= resource_class.human_attribute_name(:width) %> </td>
+      <td> <%= part.accumulator.width %> мм </td>
+    </tr>
+
+    <tr>
+      <td> <%= SpareInfo.human_attribute_name(:cached_brand) %> </td>
+      <td> <%= part.cached_brand %> </td>
+      <td> <%= resource_class.human_attribute_name(:height) %> </td>
+      <td> <%= part.accumulator.height %> мм </td>
+    </tr>
+
+
+  </table>
+</div>
