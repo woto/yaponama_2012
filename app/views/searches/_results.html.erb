@@ -157,16 +157,8 @@
                   <%= render 'opts/accumulators/part', part: mf_scope[:info], resource_class: "Opts::#{mf_scope[:catalog].opt.classify}".constantize %>
                 <% end %>
 
+                <%= render 'spare_info_replacements', info: mf_scope[:info] %>
 
-                <div class="spare-replacements">
-                  <% if mf_scope[:replacements].present? %>
-                    <ul class="bottom-space">
-                      <% mf_scope[:replacements].each do |replacement| %>
-                        <li><%= replacement.to_spare_info.to_label %> <%= replacement.status %></li>
-                      <% end %>
-                    </ul>
-                  <% end %>
-                </div>
 
 
             3
