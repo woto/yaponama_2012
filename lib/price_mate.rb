@@ -59,7 +59,6 @@ class PriceMate
         if info.present?
           mf_scope[:info] = info
           mf_scope[:replacements] = info.from_spare_replacements.where(wrong: false)
-          mf_scope[:applicabilities] = info.spare_applicabilities
           catalog = info.spare_catalog
         # Если категория получена с сервера прайсов
         #elsif mf_scope["image_url"].present?
