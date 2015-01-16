@@ -73,9 +73,6 @@ class PriceMate
           select('spare_catalogs.*').
           limit(1).first
         SpareCatalogJob.perform_later(catalog_number, mf_scope[:brand], catalog)
-
-
-        mf_scope[:catalog] = catalog
       end
     end
     formatted_data

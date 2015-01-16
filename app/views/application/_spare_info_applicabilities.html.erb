@@ -1,4 +1,4 @@
-<% if info.spare_applicabilities.exists? %>
+<% if info && (applicabilities = info.spare_applicabilities.order(:cached_brand, :cached_model, :cached_generation, :cached_modification)).exists? %>
   <div class="bottom-space table-responsive">
     <table class="table table-striped">
       <thead>
@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <% info.spare_applicabilities.order(:cached_brand, :cached_model, :cached_generation, :cached_modification).each do |spare_applicability| %>
+        <% applicabilities.each do |spare_applicability| %>
           <tr>
             <td><%= link_to spare_applicability.cached_brand, catalogs_brand_path(spare_applicability.to_brand_param) if spare_applicability.cached_brand %></td>
             <td><%= link_to spare_applicability.cached_model, catalogs_model_path(spare_applicability.to_model_param) if spare_applicability.cached_model %></td>

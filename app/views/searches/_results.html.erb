@@ -85,13 +85,7 @@
                   <h4 class="text-warning">К сожалению этого товара нет в наличии.</h4>
                 <% else %>
 
-                <div class="spare-catalog">
-                  <% if mf_scope[:catalog].present? %>
-                    <div class="text-muted">
-                      <%== mf_scope[:catalog].intro %>
-                    </div>
-                  <% end %>
-                </div>
+                <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
 
                 <div class="text-lg table-responsive" rel="offers">
                   <table class="table">
@@ -153,10 +147,9 @@
                 </div>
 
 
-                <% if mf_scope[:catalog].presence && mf_scope[:catalog].opt.presence && mf_scope[:info].presence && instance_eval("#{mf_scope[:info]}.#{mf_scope[:catalog].opt}") %>
-                  <%= render 'opts/accumulators/part', part: mf_scope[:info], resource_class: "Opts::#{mf_scope[:catalog].opt.classify}".constantize %>
                 <% end %>
 
+                <%= render 'spare_info_chars', info: mf_scope[:info] %>
                 <%= render 'spare_info_replacements', info: mf_scope[:info] %>
 
 

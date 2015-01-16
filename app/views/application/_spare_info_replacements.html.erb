@@ -1,5 +1,5 @@
 <div class="spare-info-replacements">
-  <% if (replacements = info.from_spare_replacements.where(wrong: false)).exists? %>
+  <% if info && (replacements = info.from_spare_replacements.where(wrong: false)).exists? %>
     <ul class="bottom-space">
       <% replacements.each do |replacement| %>
         <li><%= replacement.to_spare_info.to_label %> <%= replacement.status %></li>
