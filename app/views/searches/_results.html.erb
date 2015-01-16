@@ -138,15 +138,9 @@
 
                 <% end %>
 
-                <div class="spare-info">
-                  <% if mf_scope[:info].present? %>
-                    <div class="bottom-space">
-                      <%== mf_scope[:info].content %>
-                      <%= render 'spare_info_hstore', info: mf_scope[:info] %>
-                      <%= render 'spare_info_files', info: mf_scope[:info] %>
-                    </div>
-                  <% end %>
-                </div>
+                  <%= render 'spare_info_content', info: mf_scope[:info] %>
+                  <%= render 'spare_info_hstore', info: mf_scope[:info] %>
+                  <%= render 'spare_info_files', info: mf_scope[:info] %>
 
                 <div itemprop="description">
                   <% if mf_scope[:titles].size > 0 %>
