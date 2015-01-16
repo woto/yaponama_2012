@@ -1,4 +1,4 @@
-<% if info.instance_eval("file1").present? %>
+<% if info && info.instance_eval("file1").present? %>
   <h3>Прикрепленные файлы</h3>
   <ul>
     <% (1..5).each do |n| %>

@@ -1,4 +1,4 @@
-<% if info.hstore? %>
+<% if info && info.hstore? %>
   <h3>Прочие характеристики</h3>
   <div class="table-responsive">
     <table class="table table-striped table-striped">
@@ -15,4 +15,3 @@
     </table>
   </div>
 <% end %>
-
