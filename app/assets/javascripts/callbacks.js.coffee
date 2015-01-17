@@ -17,7 +17,8 @@ form = '''
   </form>
 '''
 
-$(document).on "click", "#callback-link", (e) ->
+$(document).on "click", ".callback-link", (e) ->
+  e.preventDefault()
   bootbox.dialog
     message: form
     title: 'Заказ обрабтного звонка'
