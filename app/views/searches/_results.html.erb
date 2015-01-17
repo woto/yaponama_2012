@@ -79,62 +79,61 @@
 
               <div class="col-sm-8">
 
-              <% long_name = mf_scope[:titles].keys.map{|val| h(val)}.join(', ') %>
+                <% long_name = mf_scope[:titles].keys.map{|val| h(val)}.join(', ') %>
 
                 <% unless can_we_sold_this %>
                   <h4 class="text-warning">К сожалению этого товара нет в наличии.</h4>
                 <% else %>
 
-                <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
+                  <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
 
-                <div class="text-lg table-responsive" rel="offers">
-                  <table class="table">
+                  <div class="text-lg table-responsive" rel="offers">
+                    <table class="table">
 
-                    <thead>
-                      <tr>
-                        <th> <b href="#" rel="tooltip" title="Расположение склада поставщика">Магазин</b></th>
-                        <!-- <th> <b href="#" rel="tooltip" title="Минимальный срок поставки на наш склад">Мин.<br />срок</b></th> -->
-                        <th> <b href="#" rel="tooltip" title="Максимальный срок поставки на наш склад">Ожидание</b></th>
-                        <th> <b href="#" rel="tooltip" title="Количество на складе поставщика">В&nbsp;наличии</b></th>
-                        <th> <b href="#" rel="tooltip" title="Зайдите на сайт под своим аккаунтом, чтобы увидеть вашу цену со скидками, если таковые имеются">Цена</b></th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <% mf_scope[:offers].each do |offer| %>
-                        <%# Это очень не хороший способ Что будет если у всех предложений будет 0?! Upd. А ничего просто не будет предложений с ценами. TODO!%>
-                        <%# Но пока выйти из ситуации по легкому по-другому не получится. А забивать сюда заоблочные цены и сроки херово для представления покупателю %>
-                        <% next if offer[:probability] == 0 %>
-                        <% offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 ? presence = true : presence = false %>
-                        <tr class="<%= presence ? 'active' : '' %>">
-                          <td> <%= raw country_decorator offer[:country] %> </td>
-                          <!-- <td> <%= raw days_decorator offer[:min_days] %> </td> -->
-                          <td> <%= raw days_decorator offer[:max_days] %> </td>
-                          <td> <%= raw count_decorator offer[:count] %> </td>
-                          <td>
-                            <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, rel: "tooltip", title: (offer[:tech] if current_user.seller?), class: "btn btn-#{presence ? 'success' : 'success'} buy-button", style: 'min-width: 150px' do %>
-                              Купить <%= number_to_currency(offer[:retail_cost], precision: 0) %>
-                            <% end %>
-                          </td>
+                      <thead>
+                        <tr>
+                          <th> <b href="#" rel="tooltip" title="Расположение склада поставщика">Магазин</b></th>
+                          <!-- <th> <b href="#" rel="tooltip" title="Минимальный срок поставки на наш склад">Мин.<br />срок</b></th> -->
+                          <th> <b href="#" rel="tooltip" title="Максимальный срок поставки на наш склад">Ожидание</b></th>
+                          <th> <b href="#" rel="tooltip" title="Количество на складе поставщика">В&nbsp;наличии</b></th>
+                          <th> <b href="#" rel="tooltip" title="Зайдите на сайт под своим аккаунтом, чтобы увидеть вашу цену со скидками, если таковые имеются">Цена</b></th>
                         </tr>
-                      <% end %>
-                    </tbody>
+                      </thead>
 
-                  </table>
-                </div>
-
-                <span class="hidden">
-                  <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
-                    <meta itemprop="priceCurrency" content="RUB" />
-                    Не устраивают цена или срок доставки? Взгляните на <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> лучших предложений от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
+                      <tbody>
+                        <% mf_scope[:offers].each do |offer| %>
+                          <%# Это очень не хороший способ Что будет если у всех предложений будет 0?! Upd. А ничего просто не будет предложений с ценами. TODO!%>
+                          <%# Но пока выйти из ситуации по легкому по-другому не получится. А забивать сюда заоблочные цены и сроки херово для представления покупателю %>
+                          <% next if offer[:probability] == 0 %>
+                          <% offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 ? presence = true : presence = false %>
+                          <tr class="<%= presence ? 'active' : '' %>">
+                            <td> <%= raw country_decorator offer[:country] %> </td>
+                            <!-- <td> <%= raw days_decorator offer[:min_days] %> </td> -->
+                            <td> <%= raw days_decorator offer[:max_days] %> </td>
+                            <td> <%= raw count_decorator offer[:count] %> </td>
+                            <td>
+                              <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, rel: "tooltip", title: (offer[:tech] if current_user.seller?), class: "btn btn-#{presence ? 'success' : 'success'} buy-button", style: 'min-width: 150px' do %>
+                                Купить <%= number_to_currency(offer[:retail_cost], precision: 0) %>
+                              <% end %>
+                            </td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
                   </div>
-                </span>
+
+                  <span class="hidden">
+                    <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+                      <meta itemprop="priceCurrency" content="RUB" />
+                      Не устраивают цена или срок доставки? Взгляните на <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> лучших предложений от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
+                    </div>
+                  </span>
 
                 <% end %>
 
-                  <%= render 'spare_info_content', info: mf_scope[:info] %>
-                  <%= render 'spare_info_hstore', info: mf_scope[:info] %>
-                  <%= render 'spare_info_files', info: mf_scope[:info] %>
+                <%= render 'spare_info_content', info: mf_scope[:info] %>
+                <%= render 'spare_info_hstore', info: mf_scope[:info] %>
+                <%= render 'spare_info_files', info: mf_scope[:info] %>
 
                 <div itemprop="description">
                   <% if mf_scope[:titles].size > 0 %>
@@ -147,30 +146,9 @@
                 </div>
 
 
-                <% end %>
-
                 <%= render 'spare_info_chars', info: mf_scope[:info] %>
                 <%= render 'spare_info_replacements', info: mf_scope[:info] %>
-
-
-
-            3
-            3
-            3
-            3
-            3
-            3
-
-            <%= render 'spare_info_applicabilities', info: mf_scope[:info] %>
-
-                4
-                4
-                4
-                4
-                4
-                4
-                4
-
+                <%= render 'spare_info_applicabilities', info: mf_scope[:info] %>
 
 
                 <% if @current_user.seller? %>
@@ -189,20 +167,12 @@
                     <%= link_to icon('file-text-o'), new_admin_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath), :class => "btn btn-warning" %>
                   <% end %>
                 <% end %>
-
-
               </div>
-
             <% end %>
-
           <% end %>
-
         <% end %>
-
       </div>
-
     <% end %>
-
   <% end %>
 
   <% if @replacements.map{|obj| obj['replacements'].map{|obj2| obj2['catalog_number']}}.flatten.length >= 1 %>
