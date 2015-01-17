@@ -1,6 +1,7 @@
 <% if info && (applicabilities = info.spare_applicabilities.order(:cached_brand, :cached_model, :cached_generation, :cached_modification)).exists? %>
-  <div class="bottom-space table-responsive">
-    <table class="table table-striped">
+  <h3 class="top-space-lg">Применимость</h3>
+  <div class="table-responsive">
+    <table class="table table-striped bottom-space-none">
       <thead>
         <tr>
           <th>Производитель</th>
