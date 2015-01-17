@@ -1,10 +1,8 @@
-<div class="spare-info-replacements">
-  <% if info && (replacements = info.from_spare_replacements.where(wrong: false)).exists? %>
-    <h3 class="top-space-lg">Замены и аналоги</h3>
-    <ul>
-      <% replacements.each do |replacement| %>
-        <li><%= replacement.to_spare_info.to_label %> <%= replacement.status %></li>
-      <% end %>
-    </ul>
-  <% end %>
-</div>
+<% if info && (replacements = info.from_spare_replacements.where(wrong: false)).exists? %>
+  <h3 class="top-space-lg">Замены и аналоги</h3>
+  <ul>
+    <% replacements.each do |replacement| %>
+      <li><%= replacement.to_spare_info.to_label %> <%= replacement.status %></li>
+    <% end %>
+  </ul>
+<% end %>
