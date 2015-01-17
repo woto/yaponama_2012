@@ -1,5 +1,5 @@
 <% if info && info.instance_eval("file1").present? %>
-  <h3>Прикрепленные файлы</h3>
+  <h3 class="top-space-lg">Прикрепленные файлы</h3>
   <ul>
     <% (1..5).each do |n| %>
       <% if info.instance_eval("file#{n}").present? %>
