@@ -23,7 +23,7 @@
 
 
 <% if info && info.instance_eval("image1").present? %>
-  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <div id="carousel-example-generic" class="carousel slide top-space-xs bottom-space-xs" data-ride="carousel">
     <!-- Indicators -->
     <% if info.instance_eval("image2").present? %>
       <ol class="carousel-indicators">
@@ -40,7 +40,7 @@
         <% if info.instance_eval("image#{n}").present? %>
           <div class="item <%= 'active' if n-1 == 0 %>">
             <%= link_to info.instance_eval("image#{n}.url"), target: '_blank', class: 'image-view' do %>
-              <%= image_tag info.instance_eval("image#{n}.fill_thumb.url"), alt: "#{info.to_label}", class: 'img-thumbnail center-block text-center' %>
+              <%= image_tag info.instance_eval("image#{n}.fill_thumb.url"), alt: "#{info.to_label}", class: 'center-block text-center' %>
             <% end %>
           </div>
         <% end %>
