@@ -1,6 +1,4 @@
 <% if info && info.spare_catalog && info.spare_catalog.opt %>
-  <% content_for :content do %>
-    <h3 class="top-space-lg">Характеристики товара</h3>
-    <%= render "opts/#{info.spare_catalog.opt.pluralize}/chars", part: info, resource_class: "Opts::#{info.spare_catalog.opt.classify}".constantize %>
-  <% end %>
+  <h3 class="top-space-lg">Характеристики товара</h3>
+  <%= render "opts/#{info.spare_catalog.opt.pluralize}/chars", part: info, resource_class: "Opts::#{info.spare_catalog.opt.classify}".constantize %>
 <% end %>
