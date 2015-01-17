@@ -13,6 +13,8 @@
 
     <% cn_scope.each_with_index do |(manufacturer, mf_scope), i| %>
 
+      <% long_name = mf_scope[:titles].keys.map{|val| h(val)}.join(', ') %>
+
       <div id="<%= manufacturer %>" itemscope itemtype="http://schema.org/Product">
 
         <%= panel 'primary' do |p| %>
@@ -79,14 +81,11 @@
 
               <div class="col-sm-8">
 
-                <% long_name = mf_scope[:titles].keys.map{|val| h(val)}.join(', ') %>
+                <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
 
                 <% unless can_we_sold_this %>
                   <h4 class="text-warning">К сожалению этого товара нет в наличии.</h4>
                 <% else %>
-
-                  <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
-
                   <div class="text-lg table-responsive" rel="offers">
                     <table class="table">
 
@@ -130,45 +129,49 @@
                   </span>
 
                 <% end %>
-
-                <%= render 'spare_info_content', info: mf_scope[:info] %>
-                <%= render 'spare_info_hstore', info: mf_scope[:info] %>
-                <%= render 'spare_info_files', info: mf_scope[:info] %>
-
-                <div itemprop="description">
-                  <% if mf_scope[:titles].size > 0 %>
-                    <p class="text-xs text-muted" style="word-wrap: break-word"><%= raw long_name %>.
-                      <% if mf_scope[:weights].size > 0 %>
-                        Сколько весит <%= catalog_number %>? Масса: <%= raw mf_scope[:weights].keys.map{|val| h("#{val} кг.")}.join(', ') %>
-                      <% end %>
-                    </p>
-                  <% end %>
-                </div>
-
-
-                <%= render 'spare_info_chars', info: mf_scope[:info] %>
-                <%= render 'spare_info_replacements', info: mf_scope[:info] %>
-                <%= render 'spare_info_applicabilities', info: mf_scope[:info] %>
-
-
-                <% if @current_user.seller? %>
-                  <% if mf_scope[:info].present? %>
-
-                    <%# Описание %>
-                    <%= link_to icon('file-text-o'), edit_admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-warning" %>
-                    <%= link_to icon('file-text-o'), admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-danger", method: :delete, data: {confirm: 'Уверены, что хотите удалить?'} %>
-
-                    <%# Замены %>
-                    <%= link_to icon('random'), new_admin_spare_replacement_path(spare_replacement: {from_spare_info_attributes: { name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-warning" %>
-
-                    <%# Применимость %>
-                    <%= link_to icon('automobile'), new_admin_spare_applicability_path(spare_applicability: {spare_info_attributes: {name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-warning" %>
-                  <% else %>
-                    <%= link_to icon('file-text-o'), new_admin_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath), :class => "btn btn-warning" %>
-                  <% end %>
-                <% end %>
               </div>
             <% end %>
+
+
+            <%= render 'spare_info_content', info: mf_scope[:info] %>
+            <%= render 'spare_info_hstore', info: mf_scope[:info] %>
+            <%= render 'spare_info_files', info: mf_scope[:info] %>
+
+            <div itemprop="description">
+              <% if long_name.present? %>
+                <h3>Названия запчасти у поставщиков</h3>
+                <p style="word-wrap: break-word"><%== long_name %></p>
+              <% end %>
+            </div>
+
+            <% if mf_scope[:weights].size > 0 %>
+              <h3>Сколько весит</h3>
+              Масса: <%= raw mf_scope[:weights].keys.map{|val| h("#{val} кг.")}.join(', ') %>
+            <% end %>
+
+
+            <%= render 'spare_info_chars', info: mf_scope[:info] %>
+            <%= render 'spare_info_replacements', info: mf_scope[:info] %>
+            <%= render 'spare_info_applicabilities', info: mf_scope[:info] %>
+
+
+            <% if @current_user.seller? %>
+              <h3>Администрирование</h3>
+              <% if mf_scope[:info].present? %>
+                <%# Описание %>
+                <%= link_to icon('file-text-o'), edit_admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-warning" %>
+                <%= link_to icon('file-text-o'), admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-danger", method: :delete, data: {confirm: 'Уверены, что хотите удалить?'} %>
+
+                <%# Замены %>
+                <%= link_to icon('random'), new_admin_spare_replacement_path(spare_replacement: {from_spare_info_attributes: { name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-warning" %>
+
+                <%# Применимость %>
+                <%= link_to icon('automobile'), new_admin_spare_applicability_path(spare_applicability: {spare_info_attributes: {name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-warning" %>
+              <% else %>
+                <%= link_to icon('file-text-o'), new_admin_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath), :class => "btn btn-warning" %>
+              <% end %>
+            <% end %>
+
           <% end %>
         <% end %>
       </div>
