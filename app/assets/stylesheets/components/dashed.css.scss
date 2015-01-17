@@ -1,18 +1,4 @@
-.panel-primary > .panel-heading > .panel-title a {
-  text-decoration: none;
-  border-bottom: dashed white 1px;
-  cursor: pointer;
-  color: white !important;
-
-  &:hover,
-  &:focus {
-    color: white !important;
-    text-decoration: none;
-  }
-}
-
 .dashed {
-
   text-decoration: none;
   border-bottom: dashed $link-color 1px;
   cursor: pointer;
@@ -23,7 +9,6 @@
     color: $link-hover-color !important;
     text-decoration: none;
   }
-
 }
 
 table .dashed {
