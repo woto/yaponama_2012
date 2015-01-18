@@ -1,15 +1,15 @@
 form = '''
   <form id='callback_form' data-remote='true' action='/callbacks' method='post' class="form-horizontal">
     <div class="form-group">
-      <label for="callback_name" class="col-sm-3 control-label">Имя</label>
-      <div class="col-sm-6">
+      <label for="callback_name" class="col-sm-6 control-label">Имя</label>
+      <div class="col-sm-12">
         <input type="text" name="callback[name]" class="form-control" id="callback_name">
         <span class="help-block">Представьтесь пожалуйста</span>
       </div>
     </div>
     <div class="form-group">
-      <label for="callback_phone" class="col-sm-3 control-label">Телефон</label>
-      <div class="col-sm-6">
+      <label for="callback_phone" class="col-sm-6 control-label">Телефон</label>
+      <div class="col-sm-12">
         <input type="text" name="callback[phone]" class="form-control" id="callback_phone">
         <span class="help-block">Укажите контактный телефон для связи</span>
       </div>
