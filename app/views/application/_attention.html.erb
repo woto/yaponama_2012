@@ -1,3 +1,13 @@
 <% content_for :attention do %>
   <%= flash[:attention] %>
+
+  <% if (news_list = News.where(attention: true).order(date: :desc)).any? %>
+    <% if false %><h4> <%= link_to "#{icon('bullhorn')} Обратите внимание!".html_safe, news_index_path %> </h4> <% end %>
+    <% news_list.each do |news| %>
+      <div>
+        <span> <%= link_to(news.title,  news_path(news), class: 'alert-link') %> </span>
+      </div>
+    <% end %>
+  <% end %>
+
 <% end %>

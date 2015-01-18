@@ -178,7 +178,6 @@ module ApplicationHelper
               end.join.html_safe
             end +
             "</div><div class='col-md-24 hidden-xs hidden-sm'><hr /></div><div class='col-xs-12 col-md-24 bottom-space'>".html_safe +
-            (render('application/news')) +
             (render 'profileables/right') +
             (render('application/spy') if current_user.seller?) +
             "</div></div>".html_safe
@@ -187,7 +186,6 @@ module ApplicationHelper
       elsif !admin_zone?
         content_tag(:div, :class => 'col-md-4 col-md-pull-20 text-sm') do
           content_tag :div, id: 'sidebar' do
-            render('application/news') +
             render('application/right')
           end
         end

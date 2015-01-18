@@ -28,6 +28,10 @@ module Grid::News
           :type => :string,
         }
 
+        columns_hash['attention'] = {
+          :type => :boolean
+        }
+
       end
 
     end
@@ -38,6 +42,7 @@ module Grid::News
       @grid.visible_path = '1'
       @grid.visible_title = '1'
       @grid.visible_intro = '1'
+      @grid.visible_attention = '1'
       @grid.visible_creator_id = '1'
       @grid.visible_updated_at = '1'
     end
@@ -45,4 +50,3 @@ module Grid::News
   end
 
 end
-
