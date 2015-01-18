@@ -19,15 +19,15 @@
 
 <div class="bottom-space-md <%=css_class %>">
   <div class="row bottom-space-md top-space-xs">
-    <div class="col-xs-6">
+    <div class="col-xs-12">
       <%= f.search_field "#{name}_gt", data:{default: min}, class: 'form-control' %>
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs-12">
       <%= f.search_field "#{name}_lt", data:{default: max}, class: 'form-control' %>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
+    <div class="col-xs-20 col-xs-offset-2">
 
       <script>
           $(function(){
