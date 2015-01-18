@@ -18,30 +18,20 @@ module Grid::Place
       columns_hash['price_url'] = {
         :type => :string,
       }
-      columns_hash['image1'] = {
+      columns_hash['metro'] = {
         :type => :string,
       }
-
-      columns_hash['image2'] = {
-        :type => :string,
-      }
-
-      columns_hash['image3'] = {
-        :type => :string,
-      }
-
-      columns_hash['image4'] = {
-        :type => :string,
-      }
-
-      columns_hash['image5'] = {
-        :type => :string,
-      }
+      (1..5).each do |i|
+        columns_hash["image#{i}"] = {
+          :type => :string,
+        }
+      end
     end
 
     def set_preferable_columns
       @grid.visible_id = '1'
       @grid.visible_name = '1'
+      @grid.visible_metro = '1'
       @grid.visible_price_url = '1'
       @grid.visible_image1 = '1'
     end
