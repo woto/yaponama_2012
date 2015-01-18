@@ -138,9 +138,10 @@
               <% end %>
 
               <% characteristics = capture do %>
-                <%= render 'spare_info_content', info: mf_scope[:info] %>
+                <%= render 'spare_info_chars', info: mf_scope[:info] %>
                 <%= render 'spare_info_hstore', info: mf_scope[:info] %>
                 <%= render 'spare_info_files', info: mf_scope[:info] %>
+                <%= render 'spare_info_content', info: mf_scope[:info] %>
                 <div itemprop="description">
                   <% if long_name.present? %>
                     <h3>Названия запчасти у поставщиков</h3>
@@ -151,7 +152,6 @@
                   <h3>Сколько весит</h3>
                   Масса: <%= raw mf_scope[:weights].keys.map{|val| h("#{val} кг.")}.join(', ') %>
                 <% end %>
-                <%= render 'spare_info_chars', info: mf_scope[:info] %>
               <% end %>
 
               <% replacements = capture do %>
@@ -167,30 +167,30 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                   <% if characteristics.present? %>
-                    <li role="presentation" class="active"><a href="#characteristics" aria-controls="characteristics" role="tab" data-toggle="tab">Характеристики</a></li>
+                    <li role="presentation" class="active"><a href="#characteristics-<%= mf_scope[:brand].to_label.parameterize %>" aria-controls="characteristics-<%= mf_scope[:brand].to_label.parameterize %>" role="tab" data-toggle="tab">Характеристики</a></li>
                   <% end %>
                   <% if replacements.present? %>
-                    <li role="presentation"><a href="#replacements" aria-controls="replacements" role="tab" data-toggle="tab">Замены</a></li>
+                    <li role="presentation"><a href="#replacements-<%= mf_scope[:brand].to_label.parameterize %>" aria-controls="replacements-<%= mf_scope[:brand].to_label.parameterize %>" role="tab" data-toggle="tab">Замены</a></li>
                   <% end %>
                   <% if applicabilities.present? %>
-                    <li role="presentation"><a href="#applicabilities" aria-controls="applicabilities" role="tab" data-toggle="tab">Применимость</a></li>
+                    <li role="presentation"><a href="#applicabilities-<%= mf_scope[:brand].to_label.parameterize %>" aria-controls="applicabilities-<%= mf_scope[:brand].to_label.parameterize %>" role="tab" data-toggle="tab">Применимость</a></li>
                   <% end %>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <% if characteristics.present? %>
-                    <div role="tabpanel" class="tab-pane active" id="characteristics">
+                    <div role="tabpanel" class="tab-pane active" id="characteristics-<%= mf_scope[:brand].to_label.parameterize %>">
                       <%= characteristics %>
                     </div>
                   <% end %>
                   <% if replacements.present? %>
-                    <div role="tabpanel" class="tab-pane" id="replacements">
+                    <div role="tabpanel" class="tab-pane" id="replacements-<%= mf_scope[:brand].to_label.parameterize %>">
                       <%= replacements %>
                     </div>
                   <% end %>
                   <% if applicabilities.present? %>
-                    <div role="tabpanel" class="tab-pane" id="applicabilities">
+                    <div role="tabpanel" class="tab-pane" id="applicabilities-<%= mf_scope[:brand].to_label.parameterize %>">
                       <%= applicabilities %>
                     </div>
                   <% end %>
