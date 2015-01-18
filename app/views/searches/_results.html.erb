@@ -1,224 +1,231 @@
-  <% content_for :sidebar do %>
-    <div class="list-group top-space-lg bottom-space-lg">
+<div id="is_search"></div>
+
+<%= row do %>
+
+  <div class="col-lg-4 col-md-5">
+    <div class="list-group bottom-space-lg">
       <% @formatted_data.map{|k, v| v.map{|k, v| k}}[0].each do |brand| %>
         <a href="#<%=brand %>" class="list-group-item"><%=brand %></a>
       <% end %>
     </div>
-    <hr />
-  <% end %>
 
-  <div id="is_search"></div>
+    <%= render 'sidebar' %>
+  </div>
 
-  <% @formatted_data.each do |catalog_number, cn_scope| %>
+  <div class="col-lg-20 col-md-19">
 
-    <% cn_scope.each_with_index do |(manufacturer, mf_scope), i| %>
+    <% @formatted_data.each do |catalog_number, cn_scope| %>
 
-      <% long_name = mf_scope[:titles].keys.map{|val| h(val)}.join(', ') %>
+      <% cn_scope.each_with_index do |(manufacturer, mf_scope), i| %>
 
-      <div id="<%= manufacturer %>" itemscope itemtype="http://schema.org/Product">
+        <% long_name = mf_scope[:titles].keys.map{|val| h(val)}.join(', ') %>
 
-        <%= panel 'primary' do |p| %>
+        <div id="<%= manufacturer %>" itemscope itemtype="http://schema.org/Product">
 
-          <% short_name = mf_scope[:title] %>
-          <%= p.heading do %>
-            <%= p.title itemprop: 'name' do %>
-              <%= link_to "ЗАПЧАСТИ", categories_path %> <%= icon 'angle-right' %>
-              <% if mf_scope[:catalog] %>
-                <%= link_to mf_scope[:catalog].name, category_brands_path(mf_scope[:catalog]) %> <%= icon 'angle-right' %>
+          <%= panel 'primary' do |p| %>
+
+            <% short_name = mf_scope[:title] %>
+            <%= p.heading do %>
+              <%= p.title itemprop: 'name' do %>
+                <%= link_to "ЗАПЧАСТИ", categories_path %> <%= icon 'angle-right' %>
+                <% if mf_scope[:catalog] %>
+                  <%= link_to mf_scope[:catalog].name, category_brands_path(mf_scope[:catalog]) %> <%= icon 'angle-right' %>
+                <% end %>
+                <%= link_to("#{catalog_number} (#{manufacturer})", "##{manufacturer}") %>
+
               <% end %>
-              <%= link_to("#{catalog_number} (#{manufacturer})", "##{manufacturer}") %>
-
             <% end %>
-          <% end %>
 
-          <%= p.body do %>
+            <%= p.body do %>
 
-            <%= row do %>
-              <div class="col-sm-8">
+              <%= row do %>
+                <div class="col-sm-8">
 
-                <div style="text-align: center">
+                  <div style="text-align: center">
 
-                  <h4 class="bottom-space-none" itemprop="brand"><%= link_to manufacturer, brand_parts_path(mf_scope[:brand]) %></h4>
+                    <h4 class="bottom-space-none" itemprop="brand"><%= link_to manufacturer, brand_parts_path(mf_scope[:brand]) %></h4>
 
-                  <% if mf_scope[:manufacturer_origs].size > 0 %>
-                    <p class="other-brands text-muted text-xs"><%= raw mf_scope[:manufacturer_origs].keys.map{|val| h(val)}.join(', ') %></p>
+                    <% if mf_scope[:manufacturer_origs].size > 0 %>
+                      <p class="other-brands text-muted text-xs"><%= raw mf_scope[:manufacturer_origs].keys.map{|val| h(val)}.join(', ') %></p>
+                    <% end %>
+
+                    <h4 class="bottom-space-none text-warning"> <%= catalog_number %> </h4>
+
+                    <% if mf_scope[:catalog_number_origs].size > 0 %>
+                      <p class="other-catalog-numbers text-muted text-xs"><%= raw mf_scope[:catalog_number_origs].keys.map{|val| h(val)}.join(', ') %></p>
+                    <% end %>
+
+                  </div>
+
+                  <%= render 'spare_info_images', info: mf_scope[:info] %>
+
+
+                  <% if false %>
+                  <div class="brands" style="clear: both; display: block; margin: 0 auto; width: 96px; height: 100px"> 
+                    <%= brands_decorator lambda{|brand| brand_parts_path brand}, mf_scope[:brand], {:title => false} %>
+                  </div>
                   <% end %>
 
-                  <h4 class="bottom-space-none text-warning"> <%= catalog_number %> </h4>
+                  <div class="stars top-space-sm bottom-space-lg clearfix text-center">
+                    <%= brand_rating mf_scope[:brand] %>
+                  </div>
 
-                  <% if mf_scope[:catalog_number_origs].size > 0 %>
-                    <p class="other-catalog-numbers text-muted text-xs"><%= raw mf_scope[:catalog_number_origs].keys.map{|val| h(val)}.join(', ') %></p>
+                  <% can_we_sold_this = mf_scope[:offers].present? && mf_scope[:offers].any?{|offer| offer[:probability] > 0} %>
+
+                  <% if can_we_sold_this %>
+                    <%= link_to "Купить в 1 клик", '#', class: 'btn btn-lg btn-success bottom-space-lg top-space-lg center-block callback-link', style: 'max-width: 200px' %>
+                  <% end %>
+
+                  <% if false %>
+                  <div class="brand-preview text-xs text-justify">
+                    <%= brand_preview mf_scope[:brand] %>
+                  </div>
                   <% end %>
 
                 </div>
 
-                <%= render 'spare_info_images', info: mf_scope[:info] %>
+                <div class="col-sm-16">
 
+                  <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
 
-                <% if false %>
-                <div class="brands" style="clear: both; display: block; margin: 0 auto; width: 96px; height: 100px"> 
-                  <%= brands_decorator lambda{|brand| brand_parts_path brand}, mf_scope[:brand], {:title => false} %>
-                </div>
-                <% end %>
+                  <% unless can_we_sold_this %>
+                    <h4 class="text-warning">К сожалению этого товара нет в наличии.</h4>
+                  <% else %>
+                    <div class="text-lg table-responsive" rel="offers">
+                      <table class="table">
 
-                <div class="stars top-space-sm bottom-space-lg clearfix text-center">
-                  <%= brand_rating mf_scope[:brand] %>
-                </div>
-
-                <% can_we_sold_this = mf_scope[:offers].present? && mf_scope[:offers].any?{|offer| offer[:probability] > 0} %>
-
-                <% if can_we_sold_this %>
-                  <%= link_to "Купить в 1 клик", '#', class: 'btn btn-lg btn-success bottom-space-lg top-space-lg center-block callback-link', style: 'max-width: 200px' %>
-                <% end %>
-
-                <% if false %>
-                <div class="brand-preview text-xs text-justify">
-                  <%= brand_preview mf_scope[:brand] %>
-                </div>
-                <% end %>
-
-              </div>
-
-              <div class="col-sm-16">
-
-                <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
-
-                <% unless can_we_sold_this %>
-                  <h4 class="text-warning">К сожалению этого товара нет в наличии.</h4>
-                <% else %>
-                  <div class="text-lg table-responsive" rel="offers">
-                    <table class="table">
-
-                      <thead>
-                        <tr>
-                          <th> <b href="#" rel="tooltip" title="Расположение склада поставщика">Магазин</b></th>
-                          <!-- <th> <b href="#" rel="tooltip" title="Минимальный срок поставки на наш склад">Мин.<br />срок</b></th> -->
-                          <th> <b href="#" rel="tooltip" title="Максимальный срок поставки на наш склад">Ожидание</b></th>
-                          <th> <b href="#" rel="tooltip" title="Количество на складе поставщика">В&nbsp;наличии</b></th>
-                          <th> <b href="#" rel="tooltip" title="Зайдите на сайт под своим аккаунтом, чтобы увидеть вашу цену со скидками, если таковые имеются">Цена</b></th>
-                        </tr>
-                      </thead>
-
-                      <tbody>
-                        <% mf_scope[:offers].each do |offer| %>
-                          <%# Это очень не хороший способ Что будет если у всех предложений будет 0?! Upd. А ничего просто не будет предложений с ценами. TODO!%>
-                          <%# Но пока выйти из ситуации по легкому по-другому не получится. А забивать сюда заоблочные цены и сроки херово для представления покупателю %>
-                          <% next if offer[:probability] == 0 %>
-                          <% offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 ? presence = true : presence = false %>
-                          <tr class="<%= presence ? 'active' : '' %>">
-                            <td> <%= raw country_decorator offer[:country] %> </td>
-                            <!-- <td> <%= raw days_decorator offer[:min_days] %> </td> -->
-                            <td> <%= raw days_decorator offer[:max_days] %> </td>
-                            <td> <%= raw count_decorator offer[:count] %> </td>
-                            <td>
-                              <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, rel: "tooltip", title: (offer[:tech] if current_user.seller?), class: "btn btn-#{presence ? 'success' : 'success'} buy-button", style: 'min-width: 150px' do %>
-                                Купить <%= number_to_currency(offer[:retail_cost], precision: 0) %>
-                              <% end %>
-                            </td>
+                        <thead>
+                          <tr>
+                            <th> <b href="#" rel="tooltip" title="Расположение склада поставщика">Магазин</b></th>
+                            <!-- <th> <b href="#" rel="tooltip" title="Минимальный срок поставки на наш склад">Мин.<br />срок</b></th> -->
+                            <th> <b href="#" rel="tooltip" title="Максимальный срок поставки на наш склад">Ожидание</b></th>
+                            <th> <b href="#" rel="tooltip" title="Количество на складе поставщика">В&nbsp;наличии</b></th>
+                            <th> <b href="#" rel="tooltip" title="Зайдите на сайт под своим аккаунтом, чтобы увидеть вашу цену со скидками, если таковые имеются">Цена</b></th>
                           </tr>
-                        <% end %>
-                      </tbody>
-                    </table>
-                  </div>
+                        </thead>
 
-                  <span class="hidden">
-                    <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
-                      <meta itemprop="priceCurrency" content="RUB" />
-                      Не устраивают цена или срок доставки? Взгляните на <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> лучших предложений от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
+                        <tbody>
+                          <% mf_scope[:offers].each do |offer| %>
+                            <%# Это очень не хороший способ Что будет если у всех предложений будет 0?! Upd. А ничего просто не будет предложений с ценами. TODO!%>
+                            <%# Но пока выйти из ситуации по легкому по-другому не получится. А забивать сюда заоблочные цены и сроки херово для представления покупателю %>
+                            <% next if offer[:probability] == 0 %>
+                            <% offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 ? presence = true : presence = false %>
+                            <tr class="<%= presence ? 'active' : '' %>">
+                              <td> <%= raw country_decorator offer[:country] %> </td>
+                              <!-- <td> <%= raw days_decorator offer[:min_days] %> </td> -->
+                              <td> <%= raw days_decorator offer[:max_days] %> </td>
+                              <td> <%= raw count_decorator offer[:count] %> </td>
+                              <td>
+                                <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, rel: "tooltip", title: (offer[:tech] if current_user.seller?), class: "btn btn-#{presence ? 'success' : 'success'} buy-button", style: 'min-width: 150px' do %>
+                                  Купить <%= number_to_currency(offer[:retail_cost], precision: 0) %>
+                                <% end %>
+                              </td>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
                     </div>
-                  </span>
 
-                <% end %>
-              </div>
-            <% end %>
+                    <span class="hidden">
+                      <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+                        <meta itemprop="priceCurrency" content="RUB" />
+                        Не устраивают цена или срок доставки? Взгляните на <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> лучших предложений от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
+                      </div>
+                    </span>
 
-            <% characteristics = capture do %>
-              <%= render 'spare_info_content', info: mf_scope[:info] %>
-              <%= render 'spare_info_hstore', info: mf_scope[:info] %>
-              <%= render 'spare_info_files', info: mf_scope[:info] %>
-              <div itemprop="description">
-                <% if long_name.present? %>
-                  <h3>Названия запчасти у поставщиков</h3>
-                  <p style="word-wrap: break-word"><%== long_name %></p>
-                <% end %>
-              </div>
-              <% if mf_scope[:weights].size > 0 %>
-                <h3>Сколько весит</h3>
-                Масса: <%= raw mf_scope[:weights].keys.map{|val| h("#{val} кг.")}.join(', ') %>
+                  <% end %>
+                </div>
               <% end %>
-              <%= render 'spare_info_chars', info: mf_scope[:info] %>
-            <% end %>
 
-            <% replacements = capture do %>
-              <%= render 'spare_info_replacements', info: mf_scope[:info] %>
-            <% end %>
+              <% characteristics = capture do %>
+                <%= render 'spare_info_content', info: mf_scope[:info] %>
+                <%= render 'spare_info_hstore', info: mf_scope[:info] %>
+                <%= render 'spare_info_files', info: mf_scope[:info] %>
+                <div itemprop="description">
+                  <% if long_name.present? %>
+                    <h3>Названия запчасти у поставщиков</h3>
+                    <p style="word-wrap: break-word"><%== long_name %></p>
+                  <% end %>
+                </div>
+                <% if mf_scope[:weights].size > 0 %>
+                  <h3>Сколько весит</h3>
+                  Масса: <%= raw mf_scope[:weights].keys.map{|val| h("#{val} кг.")}.join(', ') %>
+                <% end %>
+                <%= render 'spare_info_chars', info: mf_scope[:info] %>
+              <% end %>
 
-            <% applicabilities = capture do %>
-              <%= render 'spare_info_applicabilities', info: mf_scope[:info] %>
-            <% end %>
+              <% replacements = capture do %>
+                <%= render 'spare_info_replacements', info: mf_scope[:info] %>
+              <% end %>
 
-            <div role="tabpanel">
+              <% applicabilities = capture do %>
+                <%= render 'spare_info_applicabilities', info: mf_scope[:info] %>
+              <% end %>
 
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs" role="tablist">
-                <% if characteristics.present? %>
-                  <li role="presentation" class="active"><a href="#characteristics" aria-controls="characteristics" role="tab" data-toggle="tab">Характеристики</a></li>
-                <% end %>
-                <% if replacements.present? %>
-                  <li role="presentation"><a href="#replacements" aria-controls="replacements" role="tab" data-toggle="tab">Замены</a></li>
-                <% end %>
-                <% if applicabilities.present? %>
-                  <li role="presentation"><a href="#applicabilities" aria-controls="applicabilities" role="tab" data-toggle="tab">Применимость</a></li>
-                <% end %>
-              </ul>
+              <div role="tabpanel">
 
-              <!-- Tab panes -->
-              <div class="tab-content">
-                <% if characteristics.present? %>
-                  <div role="tabpanel" class="tab-pane active" id="characteristics">
-                    <%= characteristics %>
-                  </div>
-                <% end %>
-                <% if replacements.present? %>
-                  <div role="tabpanel" class="tab-pane" id="replacements">
-                    <%= replacements %>
-                  </div>
-                <% end %>
-                <% if applicabilities.present? %>
-                  <div role="tabpanel" class="tab-pane" id="applicabilities">
-                    <%= applicabilities %>
-                  </div>
-                <% end %>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <% if characteristics.present? %>
+                    <li role="presentation" class="active"><a href="#characteristics" aria-controls="characteristics" role="tab" data-toggle="tab">Характеристики</a></li>
+                  <% end %>
+                  <% if replacements.present? %>
+                    <li role="presentation"><a href="#replacements" aria-controls="replacements" role="tab" data-toggle="tab">Замены</a></li>
+                  <% end %>
+                  <% if applicabilities.present? %>
+                    <li role="presentation"><a href="#applicabilities" aria-controls="applicabilities" role="tab" data-toggle="tab">Применимость</a></li>
+                  <% end %>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <% if characteristics.present? %>
+                    <div role="tabpanel" class="tab-pane active" id="characteristics">
+                      <%= characteristics %>
+                    </div>
+                  <% end %>
+                  <% if replacements.present? %>
+                    <div role="tabpanel" class="tab-pane" id="replacements">
+                      <%= replacements %>
+                    </div>
+                  <% end %>
+                  <% if applicabilities.present? %>
+                    <div role="tabpanel" class="tab-pane" id="applicabilities">
+                      <%= applicabilities %>
+                    </div>
+                  <% end %>
+                </div>
+
               </div>
 
-            </div>
+              <% if @current_user.seller? %>
+                <div class="top-space-lg">
+                  <% if mf_scope[:info].present? %>
+                    <%# Описание %>
+                    <%= link_to icon('file-text-o'), edit_admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-warning" %>
+                    <%= link_to icon('file-text-o'), admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-danger", method: :delete, data: {confirm: 'Уверены, что хотите удалить?'} %>
 
-            <% if @current_user.seller? %>
-              <div class="top-space-lg">
-                <% if mf_scope[:info].present? %>
-                  <%# Описание %>
-                  <%= link_to icon('file-text-o'), edit_admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-warning" %>
-                  <%= link_to icon('file-text-o'), admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-danger", method: :delete, data: {confirm: 'Уверены, что хотите удалить?'} %>
+                    <%# Замены %>
+                    <%= link_to icon('random'), new_admin_spare_replacement_path(spare_replacement: {from_spare_info_attributes: { name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-warning" %>
 
-                  <%# Замены %>
-                  <%= link_to icon('random'), new_admin_spare_replacement_path(spare_replacement: {from_spare_info_attributes: { name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-warning" %>
+                    <%# Применимость %>
+                    <%= link_to icon('automobile'), new_admin_spare_applicability_path(spare_applicability: {spare_info_attributes: {name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-warning" %>
+                  <% else %>
+                    <%= link_to icon('file-text-o'), new_admin_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath), :class => "btn btn-warning" %>
+                  <% end %>
+                </div>
+              <% end %>
 
-                  <%# Применимость %>
-                  <%= link_to icon('automobile'), new_admin_spare_applicability_path(spare_applicability: {spare_info_attributes: {name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-warning" %>
-                <% else %>
-                  <%= link_to icon('file-text-o'), new_admin_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath), :class => "btn btn-warning" %>
-                <% end %>
-              </div>
+
+
+
             <% end %>
-
-
-
-
           <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
+<% end %>
 
   <% if @replacements.map{|obj| obj['replacements'].map{|obj2| obj2['catalog_number']}}.flatten.length >= 1 %>
     <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
