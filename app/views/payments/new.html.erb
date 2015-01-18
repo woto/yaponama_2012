@@ -1,80 +1,76 @@
 <%= somebody_tabs do %>
 
   <%= row do %>
-    <div class="col-lg-12">
+    <%= c1 do %>
       <% @meta_title = "Способы оплаты" %>
       <% @meta_title_lead = 'Если вы не пользуетесь электронными деньгами, то можете выбрать вариант оплаты Сбербанк и оплатить наличными в ближайшем отделении банка.' %>
       <%= page_header %>
-    </div>
+    <% end %>
   <% end %>
 
 
-      <%= twbs_form_for @resource, url: user_payments_path do |f| %>
+    <%= twbs_form_for @resource, url: user_payments_path do |f| %>
 
-        <%= row do %>
+      <%= row do %>
+        <%= c1 do %>
 
-          <div class="col-lg-12">
+          <%= f.error_notification %>
 
-            <%= f.error_notification %>
+          <%= f.form_group :payment_type, class: 'clearfix' do %>
 
-            <%= f.form_group :payment_type, class: 'clearfix' do %>
-
-              <div class="pull-left">
-                <% Rails.configuration.payment_systems.each do |k, v| %>
-                  <%= f.label :payment_type, value: k, class: 'payment' do %>
-                    <%= f.radio_button :payment_type, k, data: v, rel: 'radio' %>
-                    <%= image_tag "payment/#{k}.gif", alt: k %>
-                  <% end %>
-                <% end %>
-              </div>
-
-              <%= f.error :payment_type %>
-
-            <% end %>
-
-          </div>
-
-        <% end %>
-
-        <%= row do %>
-
-          <%= c1 do %>
-
-            <div id="payment-details"></div>
-
-            <%= f.twbs_text_field :amount %>
-
-            <%= panel 'primary', id: 'payment-payer', class: 'payment-block' do |p| %>
-              <%= p.heading do %>
-                <%= p.title do %>
-                  Плательщик
+            <div class="pull-left">
+              <% Rails.configuration.payment_systems.each do |k, v| %>
+                <%= f.label :payment_type, value: k, class: 'payment' do %>
+                  <%= f.radio_button :payment_type, k, data: v, rel: 'radio' %>
+                  <%= image_tag "payment/#{k}.gif", alt: k %>
                 <% end %>
               <% end %>
-              <%= p.body do %>
-                <% render 'profiles', f:f %>
-              <% end %>
-            <% end %>
+            </div>
 
-            <%= panel 'primary', id: 'payment-payer-address', class: 'payment-block' do |p| %>
-              <%= p.heading do %>
-                <%= p.title do %>
-                  Адрес плательщика
-                <% end %>
-              <% end %>
-              <%= p.body do %>
-                <% render 'postal_addresses', f:f %>
-              <% end %>
-            <% end %>
-
-            <%= f.twbs_submit 'Оплатить' %>
-
-            <%= f.twbs_hidden_field :somebody_id %>
+            <%= f.error :payment_type %>
 
           <% end %>
 
         <% end %>
-
       <% end %>
 
 
+      <%= row do %>
+        <%= c1 do %>
+
+          <div id="payment-details"></div>
+
+          <%= f.twbs_text_field :amount %>
+
+          <%= panel 'primary', id: 'payment-payer', class: 'payment-block' do |p| %>
+            <%= p.heading do %>
+              <%= p.title do %>
+                Плательщик
+              <% end %>
+            <% end %>
+            <%= p.body do %>
+              <% render 'profiles', f:f %>
+            <% end %>
+          <% end %>
+
+          <%= panel 'primary', id: 'payment-payer-address', class: 'payment-block' do |p| %>
+            <%= p.heading do %>
+              <%= p.title do %>
+                Адрес плательщика
+              <% end %>
+            <% end %>
+            <%= p.body do %>
+              <% render 'postal_addresses', f:f %>
+            <% end %>
+          <% end %>
+
+          <%= f.twbs_submit 'Оплатить' %>
+
+          <%= f.twbs_hidden_field :somebody_id %>
+
+
+        <% end %>
+      <% end %>
+
+    <% end %>
 <% end %>
