@@ -1,25 +1,28 @@
 <%= somebody_tabs do %>
+  <%= row do %>
+    <%= c1 do %>
 
-  <% @meta_title = 'Новости' %>
-  <%= page_header %>
+      <% @meta_title = 'Новости' %>
+      <%= page_header %>
 
-  <% @news.each do |item| %>
+      <% @news.each do |item| %>
 
-    <span class="pull-right text-sm text-muted top-space-xs"><%= l item.date, format: :news %></span>
-    <h2 class="top-space-none">
-      <%= link_to item.title, news_path(item) %>
-    </h2>
+        <span class="pull-right text-sm text-muted top-space-xs"><%= l item.date, format: :news %></span>
+        <h2 class="top-space-none">
+          <%= link_to item.title, news_path(item) %>
+        </h2>
 
-    <div class="clearfix">
-      <%== item.intro %>
-    </div>
-    <hr class="bottom-space top-space" />
+        <div class="clearfix">
+          <%== item.intro %>
+        </div>
+        <hr class="bottom-space top-space" />
 
+      <% end %>
+
+      <div class="top-space-lg bottom-space-lg">
+        <%= paginate @news %>
+      </div>
+
+    <% end %>
   <% end %>
-
-  <div class="top-space-lg bottom-space-lg">
-    <%= paginate @news %>
-  </div>
-
-
 <% end %>
