@@ -8,13 +8,13 @@
 
     <%= row do %>
 
-      <div class="col-md-6 col-lg-offset-1 col-lg-5">
+      <div class="col-md-12 col-lg-offset-2 col-lg-10">
         <h1 style="color: white; margin-bottom: 40px; font-size: 36px;" class="text-left shadowed">Добро пожаловать!</h1>
         <h4 style="color: white; line-height: 190%" class="text-justify shadowed"><%= Rails.application.config_for('application/block')['welcome/index']['description'] %></h4>
       </div>
 
-      <div class="col-md-6 col-lg-5">
-        <div class="col-lg-10 col-lg-offset-1 top-space-lg bottom-space-lg">
+      <div class="col-md-12 col-lg-10">
+        <div class="col-lg-20 col-lg-offset-2 top-space-lg bottom-space-lg">
           <%= form_tag polymorphic_path([:new, *jaba3, :product]), remote: true, :method => :get, class: 'bottom-space-lg' do %>
             <div class="input-group">
               <input type="text" name="catalog_number" class="form-control input-lg" placeholder="Артикул детали">
@@ -39,14 +39,14 @@
 
     <%= row do %>
 
-      <div class="col-md-5 col-lg-offset-1 col-lg-4">
+      <div class="col-md-10 col-lg-offset-2 col-lg-8">
         <h1 style="margin-bottom: 40px; font-size: 36px">Каталоги</h1>
         <h4 class="text-justify" style="line-height: 190%">Если вы не знаете артикула детали и разбираетесь в устройстве автомобиля, то можете самостоятельно подобрать себе необходимую деталь. По вашему запросу менеджер проверит совместимость заказанных деталей с вашим автомобилем.</h4>
       </div>
-      <div class="col-md-7 col-lg-6">
+      <div class="col-md-14 col-lg-12">
         <div id="brands">
           <%= row do %>
-            <div class="col-lg-10 col-lg-offset-1 top-space-lg">
+            <div class="col-lg-20 col-lg-offset-2 top-space-lg">
               <%= form_tag search_brands_path, remote: true, id: 'brands-fast-search-form', method: 'get' do %>
                 <div class="input-group input-group-lg">
                   <span class="input-group-addon"><%= icon 'search' %></span>
@@ -76,7 +76,7 @@
 
     <%= row do %>
 
-      <div class="col-lg-12" style="position: relative">
+      <div class="col-lg-24" style="position: relative">
         <% Faq.all.each do |faq| %>
           <p data-top="top:<%= -Random.rand(600) %>px" data-bottom="top:<%=Random.rand(600)%>px" class="text-muted unselectable" style="color: #555; font-size: <%= 20 + Random.rand(20) %>px; font-weight: bold; position: absolute; top: <%= Random.rand(340) - 40 %>px ; left: <%= Random.rand(800) - 100 %>px; padding: 0; display: block; white-space: nowrap"><%= faq.question %></p>
         <% end %>
@@ -99,19 +99,19 @@
 
     <%= row do %>
 
-      <div class="col-md-6 col-lg-offset-1 col-lg-5 bottom-space-lg">
+      <div class="col-md-12 col-lg-offset-2 col-lg-10 bottom-space-lg">
         <h1 style="margin-bottom: 40px; font-size: 36px; color: white">Онлайн консультант</h1>
         <h4 class="text-justify" style="line-height: 190%; color: white">Нет желания, опыта или времени разбираться в премудростях автомобиля и запчастях? Обратитесь в нашу службу поддержки и вам обязательно помогут наши специалисты. </h4>
 
         <%= row class: 'top-space-lg' do %>
-          <div class="col-sm-7 col-md-12">
+          <div class="col-sm-14 col-md-24">
             <%= render 'support_buttons' %>
           </div>
         <% end %>
 
       </div>
 
-      <div class="col-md-6 col-lg-5">
+      <div class="col-md-12 col-lg-10">
 
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
