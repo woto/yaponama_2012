@@ -1,4 +1,4 @@
-<% if info && info.spare_catalog && info.spare_catalog.opt %>
+<% if info && info.spare_catalog && info.spare_catalog.opt && info.instance_eval(info.spare_catalog.opt) %>
   <h3 class="top-space-lg">Характеристики товара</h3>
   <%= render "opts/#{info.spare_catalog.opt.pluralize}/chars", part: info, resource_class: "Opts::#{info.spare_catalog.opt.classify}".constantize %>
 <% end %>
