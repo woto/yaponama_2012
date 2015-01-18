@@ -130,7 +130,7 @@ label.required:after {
 /////////////////////
 
 .page-header {
-  margin-top: 10px;
+  margin-top: 0;
   margin-bottom: 15px;
   border-bottom: none;
   h1 {
@@ -218,6 +218,10 @@ input[type=radio]:checked + img{
 .breadcrumb > li + li:before {
   font-family: "FontAwesome";
   content: "\f0da";
+}
+
+.breadcrumb {
+  @extend .bottom-space-lg;
 }
 
 /////////////////////
