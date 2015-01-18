@@ -16,6 +16,9 @@
     <li><h4><%= link_to 'История изменения настроек', transactions_admin_user_path(@resource, return_path: request.fullpath) %></h4></li>
   </ul>
 
+  <%= render 'profileables/right' %>
+  <%= render 'application/spy' %>
+
   <%= render 'smart_show' %>
 
 <% end %>

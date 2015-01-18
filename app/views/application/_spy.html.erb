@@ -1,16 +1,17 @@
 <hr />
 
-<ul class="list-unstyled text-muted text-xs" style="word-wrap: break-word">
-  <li>Населенный пункт: <%= @somebody.ipgeobase_name %></li>
-  <li>Регион: <%= @somebody.ipgeobase_names_depth_cache %></li>
-  <li>Версия браузера: <%= @somebody.user_agent %></li>
-  <li>Язы браузера: <%= @somebody.accept_language %></li>
-  <li>Часовой пояс: <%= @somebody.cached_russian_time_zone_auto_id %></li>
-  <li>IP адрес: <%= @somebody.remote_ip %></li>
-  <li>Просмотров страниц: <%= @somebody.stats_count %></li>
-  <li>Текущее расположение: <%= @somebody.cached_location %></li>
-  <li>Заголовок страницы: <%= @somebody.cached_title %></li>
-  <li>Пришел со страницы: <%= @somebody.cached_referrer %></li>
-  <li>Откуда пришел впервые: <%= @somebody.first_referrer %></li>
+<h3> Информация о покупателе </h3>
+<ul class="list-unstyled text-muted bottom-space-lg" style="word-wrap: break-word">
+  <% if @somebody.ipgeobase_name? %><li>Населенный пункт: <%= @somebody.ipgeobase_name %></li><% end %>
+  <% if @somebody.ipgeobase_names_depth_cache? %><li>Регион: <%= @somebody.ipgeobase_names_depth_cache %></li><% end %>
+  <% if @somebody.user_agent? %><li>Версия браузера: <%= @somebody.user_agent %></li><% end %>
+  <% if @somebody.accept_language? %><li>Язы браузера: <%= @somebody.accept_language %></li><% end %>
+  <% if @somebody.cached_russian_time_zone_auto_id? %><li>Часовой пояс: <%= @somebody.cached_russian_time_zone_auto_id %></li><% end %>
+  <% if @somebody.remote_ip? %><li>IP адрес: <%= @somebody.remote_ip %></li><% end %>
+  <% if @somebody.stats_count? %><li>Просмотров страниц: <%= @somebody.stats_count %></li><% end %>
+  <% if @somebody.cached_location? %><li>Текущее расположение: <a href="<%= @somebody.cached_location %>"><%= @somebody.cached_location %></a></li><% end %>
+  <% if @somebody.cached_title? %><li>Заголовок страницы: <%= @somebody.cached_title %></li><% end %>
+  <% if @somebody.cached_referrer? %><li>Пришел со страницы: <a href="<%= @somebody.cached_referrer %>"><%= @somebody.cached_referrer %></a></li><% end %>
+  <% if @somebody.first_referrer? %><li>Откуда пришел впервые: <a href="<%= @somebody.first_referrer %>"><%= @somebody.first_referrer %></a></li><% end %>
 </ul>
 
