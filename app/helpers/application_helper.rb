@@ -120,7 +120,7 @@ module ApplicationHelper
 
       res << 
 
-      if (admin_zone? || current_user.role != 'guest') && @somebody
+      if @somebody
 
         content_tag(:div, :class => 'col-md-1 col-md-pull-23 col-lg-1 col-lg-pull-23') do
 
@@ -179,12 +179,6 @@ module ApplicationHelper
             end +
             "</div><div class='col-md-24 hidden-xs hidden-sm'><hr /></div><div class='col-xs-12 col-md-24 bottom-space'>".html_safe +
             "</div></div>".html_safe
-          end
-        end
-      elsif !admin_zone?
-        content_tag(:div, :class => 'col-md-1 col-md-pull-23 col-lg-1 col-lg-pull-23') do
-          content_tag :div, id: 'sidebar' do
-            render('application/right')
           end
         end
       end
