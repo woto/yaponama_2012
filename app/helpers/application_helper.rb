@@ -97,7 +97,7 @@ module ApplicationHelper
   def somebody_tabs(&block)
 
     res = ''.html_safe
-    css_class = 'col-md-12'
+    css_class = 'col-md-24'
 
     container do
 
@@ -107,7 +107,7 @@ module ApplicationHelper
       res = ''.html_safe
 
       if (admin_zone? && @somebody) || !admin_zone?
-        css_class = 'col-md-10 col-md-push-2'
+        css_class = 'col-md-20 col-md-push-4'
       end
 
       res <<
@@ -122,11 +122,11 @@ module ApplicationHelper
 
       if (admin_zone? || current_user.role != 'guest') && @somebody
 
-        content_tag(:div, :class => 'col-md-2 col-md-pull-10 text-sm') do
+        content_tag(:div, :class => 'col-md-4 col-md-pull-20 text-sm') do
 
           content_tag :div, id: 'sidebar' do
 
-            "<div class='row'><div class='col-md-12 visible-xs-block visible-sm-block'><hr /></div><div class='col-xs-6 col-md-12'>".html_safe +
+            "<div class='row'><div class='col-md-24 visible-xs-block visible-sm-block'><hr /></div><div class='col-xs-12 col-md-24'>".html_safe +
             content_tag(:ul, :class => 'nav nav-pills nav-stacked') do
               aaa = _build_dropdowns('product', 'products', Rails.configuration.products_status, Rails.configuration.products_menu, @somebody)
 
@@ -177,7 +177,7 @@ module ApplicationHelper
 
               end.join.html_safe
             end +
-            "</div><div class='col-md-12 hidden-xs hidden-sm'><hr /></div><div class='col-xs-6 col-md-12 bottom-space'>".html_safe +
+            "</div><div class='col-md-24 hidden-xs hidden-sm'><hr /></div><div class='col-xs-12 col-md-24 bottom-space'>".html_safe +
             (render('application/news')) +
             (render 'profileables/right') +
             (render('application/spy') if current_user.seller?) +
@@ -185,7 +185,7 @@ module ApplicationHelper
           end
         end
       elsif !admin_zone?
-        content_tag(:div, :class => 'col-md-2 col-md-pull-10 text-sm') do
+        content_tag(:div, :class => 'col-md-4 col-md-pull-20 text-sm') do
           content_tag :div, id: 'sidebar' do
             render('application/news') +
             render('application/right')
@@ -530,21 +530,21 @@ module ApplicationHelper
   end
 
   def c0 options={}
-    options[:class] = ['col-lg-6 col-md-7 col-sm-8', options[:class] ].compact
+    options[:class] = ['col-lg-12 col-md-14 col-sm-16', options[:class] ].compact
     content_tag :div, options do
       yield
     end
   end
 
   def c1 options={}
-    options[:class] = ['col-lg-7 col-md-8 col-sm-9', options[:class] ].compact
+    options[:class] = ['col-lg-14 col-md-16 col-sm-18', options[:class] ].compact
     content_tag :div, options do
       yield
     end
   end
 
   def c2 options={}
-    options[:class] = ['col-lg-10 col-md-11 col-sm-12', options[:class] ].compact
+    options[:class] = ['col-lg-20 col-md-22 col-sm-24', options[:class] ].compact
     content_tag :div, options do
       yield
     end
@@ -555,7 +555,7 @@ module ApplicationHelper
   def b1
     container do
       row class: 'top-space bottom-space' do
-        content_tag :div, class: 'col-lg-12' do
+        content_tag :div, class: 'col-lg-24' do
           yield
         end
       end
