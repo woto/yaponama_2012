@@ -126,7 +126,7 @@ module ApplicationHelper
 
           content_tag :div, id: 'sidebar' do
 
-            "<div class='row'><div class='col-md-24 visible-xs-block visible-sm-block'><hr /></div><div class='col-xs-12 col-md-24'>".html_safe +
+            "<div class='row'><div class='col-xs-12'>".html_safe +
             content_tag(:ul, class: 'list-unstyled') do
               aaa = _build_dropdowns('product', 'products', Rails.configuration.products_status, Rails.configuration.products_menu, @somebody)
 
@@ -177,7 +177,6 @@ module ApplicationHelper
 
               end.join.html_safe
             end +
-            "</div><div class='col-md-24 hidden-xs hidden-sm'><hr /></div><div class='col-xs-12 col-md-24 bottom-space'>".html_safe +
             "</div></div>".html_safe
           end
         end
