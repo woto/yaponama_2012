@@ -48,7 +48,7 @@
 
       <div class="row">
 
-        <div class="col-sm-6 bottom-space">
+        <div class="col-sm-12 bottom-space">
 
           <h3 class="top-space-none bottom-space-none">Магазины</h3>
           <p class="text-sm top-space-none text-muted bottom-space">Выберите магазин из списка или на карте.</p>
@@ -131,7 +131,7 @@
                       <div class="row">
                         <% (1..5).each do |n| %>
                           <% if delivery_zone.instance_eval("image#{n}").present? %>
-                            <div class="col-xs-6 col-md-4">
+                            <div class="col-xs-12 col-md-8">
                               <%= link_to delivery_zone.instance_eval("image#{n}.url"), target: '_blank', class: 'thumbnail image-view' do %>
                                 <%= image_tag delivery_zone.instance_eval("image#{n}.fill_thumb.url") %>
                               <% end %>
@@ -183,7 +183,7 @@
 
         </div>
 
-        <div class="col-sm-6 hidden-xs">
+        <div class="col-sm-12 hidden-xs">
           <div id="clientMapOuter">
             <div id="clientMap"></div>
             <div class="text-xs text-muted text-right top-space-xs">Точность отображения найденного адреса - до квартала</div>
