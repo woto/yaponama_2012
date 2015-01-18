@@ -1,7 +1,7 @@
 <%= somebody_tabs do %>
 
   <%= row do %>
-    <%= c1 do %>
+    <%= c2 do %>
       <% @meta_title = "Способы оплаты" %>
       <% @meta_title_lead = 'Если вы не пользуетесь электронными деньгами, то можете выбрать вариант оплаты Сбербанк и оплатить наличными в ближайшем отделении банка.' %>
       <%= page_header %>
@@ -12,7 +12,7 @@
     <%= twbs_form_for @resource, url: user_payments_path do |f| %>
 
       <%= row do %>
-        <%= c1 do %>
+        <%= c2 do %>
 
           <%= f.error_notification %>
 
@@ -36,7 +36,7 @@
 
 
       <%= row do %>
-        <%= c1 do %>
+        <%= c2 do %>
 
           <div id="payment-details"></div>
 

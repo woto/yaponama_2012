@@ -1,8 +1,13 @@
 <%= row id: "new_grid" do %>
 
   <div class="col-md-6 col-lg-5">
-    <div class="panel panel-primary">
-      <div class="panel-body">
+    <%= panel 'primary' do |p| %>
+      <%= p.heading do %>
+        <%= p.title do %>
+          Поиск по свойствам
+        <% end %>
+      <% end %>
+      <%= p.body do %>
         <%= search_form_for @q, url: url_for, remote: true  do |f| %>
           <%= render 'opts/checkboxes', f:f, name: 'spare_info_brand_id', checkboxes: Brand.where("'accumulators' = ANY(opts)").map{|obj| {label: obj.name, value: obj.id}}, tabindex: '0' %>
           <%= render 'opts/checkboxes', f:f, name: 'accumulator_layout', tabindex: '0' %>
@@ -16,8 +21,8 @@
           <%= render 'opts/checkboxes', f:f, name: 'places_id', checkboxes: Deliveries::Place.where(active: true, display_marker: true).map{|obj| {label: obj.name, value: obj.id}}, tabindex: '0' %>
           <%= f.submit 'Обновить', class: 'btn btn-success top-space-md' %>
         <% end %>
-      </div>
-    </div>
+      <% end %>
+    <% end %>
     <%= render 'sidebar' %>
   </div>
 
