@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top headroom" role="navigation" style="margin-bottom: 0">
+<nav id="nav-first" class="navbar navbar-default navbar-static-top headroom" role="navigation">
 
   <div class="container">
 
@@ -33,7 +33,6 @@
             8 (495) 213-80-23
           <% end %>
           <%= dd.menu do %>
-            <%= content_tag :li do %>
               <li class="dropdown-header">Оставьте номер телефона и вам перезвонит<br />первый освободившийся менеджер.</li>
               <li>
                 <%= link_to "Обратный звонок", '#', class: 'link callback-link' %>
@@ -48,7 +47,6 @@
               <li>
                 <%= link_to "Часто задаваемые вопросы", faqs_path, class: 'link' %>
               </li>
-            <% end %>
           <% end %>
         <% end %>
 
@@ -96,11 +94,8 @@
   </div> <!-- /.container -->
 
   <div id="nav-second" class="navbar-inverse">
-
     <div class="container">
-
       <div class="collapse navbar-collapse navbar-responsive-collapse">
-
         <ul class="nav navbar-nav">
 
           <%= content_tag :li, class: highlight_active2(/\/news/) do %>
@@ -116,11 +111,7 @@
           <% end %>
 
           <%= content_tag :li, class: highlight_active([:controller => "/deliveries"]) do %>
-            <%= link_to "Магазины", deliveries_path %>
-          <% end %>
-
-          <%= content_tag :li, class: highlight_active2(/\/service/) do %>
-            <%= link_to "СТО", '/service' %>
+            <%= link_to "Доставка", deliveries_path %>
           <% end %>
 
           <%= content_tag :li, class: highlight_active2(/\/catalogs/) do %>
@@ -130,6 +121,8 @@
           <%= content_tag :li, class: highlight_active2(/\/categories/) do %>
             <%= link_to "Запчасти", categories_path %>
           <% end %>
+
+          <li><%= link_to "Частые вопросы", faqs_path %></li>
 
         </ul>
 
