@@ -12,8 +12,7 @@ class Page < ActiveRecord::Base
   before_validation :normalize
 
   validates :path, presence: true, uniqueness: {case_sensitive: false}
-  validates :redirect_url, uniqueness: {case_sensitive: false}, if: ->(x){x.present?}
-  validates :redirect_url, format: { with: /\A\/|http:\/\/|https:\/\// }, if: ->(x){x.present?}
+  validates :redirect_url, format: { with: /\A\/|http:\/\/|https:\/\// }, allow_nil: true, allow_blank: true
 
   has_and_belongs_to_many :uploads
 
