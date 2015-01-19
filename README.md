@@ -1,4 +1,5 @@
 Yaponama 2012
+
 =============
 
 Изменение закупочной и продажной цен и количества в различных статусах.
@@ -681,19 +682,7 @@ TOYOTA
 
 
 
+rails g migration AddFieldsToModifications grade:string body:integer power:integer fuel:integer transmission:integer doors:integer generation:string engine:string displacement:integer steering:integer
 
-
-
-toyotacarmine
-auto2
-autosup
-plentycar
-stap
-carnovato
-blamper
-catalog.am
-catalog.drom
-
-➜  yaponama_2012 git:(master) ✗ rails g migration AddFieldsToModifications generation:integer engine:string body:string grade:string options:string ca
-➜  yaponama_2012 git:(master) ✗ rails g migration AddBodyToModifications body:integer power:integer fuel:integer transmission:integer doors:integer generation:string engine:string displacement:integer steering:integerWrite failed: Broken pipe
+----------------
 
