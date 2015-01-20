@@ -7,7 +7,6 @@ class Brand < ActiveRecord::Base
   include CachedBrand
 
   mount_uploader :image, BrandUploader
-  mount_uploader :new_image, NewBrandUploader
 
   validates :name, :presence => true, uniqueness:  { case_sensitive: false }
 
