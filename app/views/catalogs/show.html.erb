@@ -1,12 +1,17 @@
 <%= somebody_tabs do %>
+  <% @meta_title = 'Каталоги автозапчастей' %>
+  <% @meta_title_lead = 'Выберите интересующую вас марку автомобиля' %>
+  <%# TODO временный хак для более симпатичного отображения, потом когда с картинками разберусь, исправить. %>
+  <div style="margin-bottom: -20px">
+    <%= page_header %>
+  </div>
 
-  <% @meta_title = 'Каталоги' %>
-  <%= page_header %>
-
-  <ol id="catalogs-brands">
-    <% @brands.each do |brand| %>
-      <li> <%= link_to "ЗАПЧАСТИ НА #{brand.cached_brand}", catalogs_brand_path(brand.to_brand_param) %> </li>
-    <% end %>
-  </ol>
-
+  <% if @spare_applicabilities.exists? %>
+    <div class="brands bottom-space-lg clearfix">
+      <% @spare_applicabilities.each do |spare_applicability| %>
+          <%= brands_decorator(lambda{|brand| catalogs_brand_path(brand)}, spare_applicability.brand, {:title => true}) %>
+          <% if false %><li><%= link_to "ЗАПЧАСТИ НА #{spare_applicability.cached_brand}", catalogs_brand_path(spare_applicability.to_brand_param) %></li><% end %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
