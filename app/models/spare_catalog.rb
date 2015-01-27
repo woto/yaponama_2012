@@ -12,6 +12,22 @@ class SpareCatalog < ActiveRecord::Base
     self.name = name.mb_chars.upcase
   end
 
+  # Когда редактируется категория, и прилетает пустой opt (выбор принадлежности к какой-нибудь
+  # особой категории, напр. accumulator), то поле nil перезаписывается на "". Это нежелательное
+  # поведение. Так же как вариант можено было бы в коде применять не @spare_catalog.opt, а @spare_catalog.opt?
+  # но остановился на сбросе в nil.
+  before_save do
+    self.opt = nil if opt.blank?
+  end
+
+  # Если имя изменили, то фактически это становится новая/другая категория, поэтому количество звпросов 
+  # в месяц по Яндексу необходимо сбросить.
+  before_save do
+    if name_was != name
+      self.shows = nil
+    end
+  end
+
   before_destroy do
     spare_catalog = PriceMate.spare_catalog
     if spare_infos.exists?
