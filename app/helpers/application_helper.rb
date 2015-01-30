@@ -65,6 +65,7 @@ module ApplicationHelper
 
     # TODO Это странно, но при первой загрузке все ок, а в дальнешем 
     # (видимо из-за Turbolinks) относительный url(/...) перестает работать 
+    # TODO туту был и будет fit_thumb_...?
     if brand.image.present?
       image = asset_url(brand.image.url.to_s)
     else
@@ -386,7 +387,7 @@ module ApplicationHelper
 
   def page_header
     content_tag :div, class: 'page-header' do
-      [content_tag(:h1, class: 'bottom-space-none') do
+      [content_tag(:h1, class: 'bottom-space-xs') do
         h(@meta_title) +
         " " +
         content_tag(:small) do

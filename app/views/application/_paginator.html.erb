@@ -1,15 +1,15 @@
 <% if false %>
 <div class="top-space bottom-space">
-  <%= paginate @parts %>
+  <%= paginate @spare_infos %>
 </div>
 <% end %>
 
 <%= content_for :head do %>
-  <%= rel_next_prev_link_tags @parts %>
+  <%= rel_next_prev_link_tags @spare_infos %>
 <% end %>
 
 <%= yield %>
 
 <div class="top-space bottom-space">
-  <%= paginate @parts %>
+  <%= paginate @spare_infos %>
 </div>

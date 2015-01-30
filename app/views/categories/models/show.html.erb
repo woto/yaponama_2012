@@ -1,25 +1,48 @@
 <%= somebody_tabs do %>
+
   <% b = Breadcrumb.new(self) %>
 
   <ol class="breadcrumb">
+    <% if @resource.opt %>
     <%= b.item('Запчасти', categories_path) %>
     <%= b.item(@resource.name, category_path(params[:category_id])) %>
     <%= b.item(@brand.name, category_brand_path(params[:category_id], @brand.to_param)) %>
     <%= b.item(@model.name) %>
+    <% else %>
+    <%= b.item('Каталоги', catalogs_path) %>
+    <%= b.item(@brand.name, catalogs_brand_path(@brand)) %>
+    <%= b.item(@model.name, catalogs_model_path(@model)) %>
+    <%= b.item(@resource.name) %>
+    <% end %>
   </ol>
+
+  <%= image_tag @brand.image_url, class: 'pull-right', style: 'margin-top: -30px;' %>
 
   <% @meta_title = "#{@resource.name} НА #{@brand.name} #{@model.name}" %>
   <% @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present? %>
   <%= page_header %>
 
-  <ol id="category-generations">
-    <% @generations.each do |generation| %>
-      <li> <%= link_to "#{@resource.name} НА #{@brand.name} #{@model.name} #{generation.cached_generation}", category_generation_path(params[:category_id], generation.to_generation_param) %> </li>
+  <div class="clearfix"></div>
+
+  <% if @spare_applicabilities.exists? %>
+    <%= panel 'info', class: 'by-car' do |p| %>
+      <%= p.heading do %>
+        <%= p.title do %>
+          Подбор <%= @resource.name %> для <%= @brand.name %> <%= @model.name %>
+        <% end %>
+      <% end %>
+      <%= p.body do %>
+        <ol id="category-generations">
+          <% @spare_applicabilities.each do |spare_applicability| %>
+            <li> <%= link_to spare_applicability.cached_generation, category_generation_path(params[:category_id], spare_applicability.to_generation_param) %> </li>
+          <% end %>
+        </ol>
+      <% end %>
     <% end %>
-  </ol>
+  <% end %>
 
   <% if @resource_class %>
-    <%= render partial: "#{@resource_class.name.underscore.pluralize}/index", layout: 'paginator'  %>
+    <%= render partial: "#{@resource_class.name.underscore.pluralize}/index" %>
   <% else %>
     <%= render partial: 'best_parts_list', layout: 'paginator'  %>
   <% end %>

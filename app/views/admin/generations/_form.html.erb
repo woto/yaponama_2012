@@ -5,6 +5,7 @@
       <%= f.error_notification %>
       <%= f.input :model_id, as: :hidden %>
       <%= f.input :name %>
+      <%= f.input :preview, input_html: {rows: 4} %>
       <%= f.input :from, as: :cars_date, wrapper: :date_wrapper %>
       <%= f.input :to, as: :cars_date, wrapper: :date_wrapper %>
     <% end %>

@@ -8,24 +8,28 @@
   </ol>
 
   <% @meta_title = @resource.name %>
+  <% @meta_title_lead = @resource.intro %>
   <%= page_header %>
 
-  <ol id="category-brands">
-    <% @brands.each do |brand| %>
-      <li> <%= link_to "#{@resource.name} НА #{brand.cached_brand}", category_brand_path(params[:id], brand.to_brand_param) %> </li>
+  <% if @spare_infos.exists? %>
+    <%= panel 'info', class: 'by-car' do |p| %>
+      <%= p.heading do %>
+        <%= p.title do %>
+          Подбор <%= @resource.name %> по автомобилю
+        <% end %>
+      <% end %>
+      <%= p.body do %>
+        <ol id="category-brands">
+          <% @spare_applicabilities.each do |spare_applicability| %>
+            <li> <%= link_to spare_applicability.cached_brand, category_brand_path(params[:id], spare_applicability.to_brand_param) %> </li>
+          <% end %>
+        </ol>
+      <% end %>
     <% end %>
-  </ol>
-
-  <% if @resource_class %>
-    <%= render partial: "#{@resource_class.name.underscore.pluralize}/index", layout: 'paginator' %>
-  <% else %>
-    <%= render partial: 'best_parts_list', layout: 'paginator' %>
   <% end %>
 
-  <hr />
-
-  <% if false %>
-    <div id="category-intro"><%==  @resource.intro %></div>
+  <% if @resource_class %>
+    <%= render partial: "#{@resource_class.name.underscore.pluralize}/index" %>
   <% end %>
 
   <div id="category-page"><%== @resource.page %></div>

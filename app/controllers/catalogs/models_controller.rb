@@ -6,9 +6,7 @@ class Catalogs::ModelsController < ApplicationController
     @model = Model.find(params[:id])
     @brand = @model.brand
 
-    @generations = SpareApplicability.by_model(params[:id])
-    @parts = SpareInfo.by_model(params[:id])
-    @parts = @parts.page(params[:page]).per(params[:per])
+    @spare_infos = SpareInfo.by_model(params[:id]).by
   end
 
 end

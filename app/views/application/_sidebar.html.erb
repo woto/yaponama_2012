@@ -1,4 +1,4 @@
-<div class="text-sm text-success bottom-space-lg top-space-lg">
+<div class="text-sm text-success bottom-space-lg top-space-lg hidden-xs">
   <% Deliveries::Place.where(display_marker: true, active: true).each do |dp| %>
     <address>
       <strong><span> <%= link_to('Магазин', deliveries_path) %> </span></strong>

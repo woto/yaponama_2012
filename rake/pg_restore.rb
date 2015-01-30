@@ -1,6 +1,6 @@
 class PgRestore
   def self.pg_restore
-	  ActiveRecord::Base.establish_connection
+    ActiveRecord::Base.establish_connection
     table_names = Rails.application.config_for('application/backup')['tables']
     table_names.each do |table_name|
       table_path = File.join(Rails.root, 'data', "#{table_name}.csv")

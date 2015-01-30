@@ -1,40 +1,32 @@
-<%= b1 do %>
+<%= somebody_tabs do %>
+
+  <%= image_tag @brand.image_url, class: 'pull-right', style: 'margin-top: -30px;' %>
 
   <% @meta_title = "Производитель запчастей #{@brand.name}" %>
-  <% @meta_title_lead = image_tag @brand.image_url %>
+  <% @meta_title_lead = @brand.preview %>
   <% @meta_title_small = "(рус. #{@brand.slang})" if @brand.slang.present? %>
   <%= page_header %>
 
-  <hr />
-
-  <div id="brand-preview"><%==  @brand.preview %></div>
-  <div id="brand-content"><%== @brand.content %></div>
+  <div class="clearfix"></div>
 
   <h2>Основные направления деятельности компании <%= @brand.name %></h2>
   <ul>
     <% @brand.opts.each do |opt| %>
-      <li>
-      <%= link_to "Каталог #{t opt} компании #{@brand.name}", polymorphic_path(opt, q: {spare_info_brand_id_eq_any: {"" => "#{@brand.id}"}}) %>
-      </li>
+      <%# TODO Посмотреть потом почему тут пустой иногда бывает %>
+      <% if opt.present? %>
+        <li>
+        <%= link_to "Каталог #{t opt} компании #{@brand.name}", category_path(SpareCatalog.find_by(opt: opt), q: {spare_info_brand_id_eq_any: {"" => "#{@brand.id}"}}) %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 
-  <hr />
+  <% @parts = @spare_infos %>
+  <%= render partial: 'best_parts_list', layout: 'paginator'  %>
 
-  <ul>
-    <% @spare_infos.each do |spare_info| %>
-      <li>
-        <%= link_to polymorphic_path([:new, *jaba3, :product], :catalog_number => spare_info.catalog_number, :anchor => spare_info.cached_brand ) do %> 
-          <%= spare_info.catalog_number %> (<%= spare_info.cached_brand %>) <%= spare_info.cached_spare_catalog %>
-        <% end %>
-        <%== spare_info.content %>
-      </li>
-    <% end %>
-  </ul>
-
-  <br/ >
-  <%= paginate @spare_infos %>
-  <br />
+  <%# TODO тут должен быть дополнительный preview и content? Например NISSAN, выпускает и автомобили, и запчасти%>
+  <div id="brand-preview"><%== @brand.preview %></div>
+  <div id="brand-content"><%== @brand.content %></div>
 
   <% if @current_user.seller? %>
     <%= link_to edit_admin_brand_path(@brand, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>

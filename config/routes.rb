@@ -35,22 +35,19 @@ Yaponama2012::Application.routes.draw do
     "/categories/#{params[:category_id]}/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
   }
 
-  concern :bmgm do
-    resources :brands
-    resources :models
-    resources :generations
-    resources :modifications
-  end
-
   resource :catalogs do
     scope module: 'catalogs' do
-      concerns :bmgm
+      resources :brands
+      resources :models
     end
   end
 
   resources :categories do
     scope module: 'categories' do
-      concerns :bmgm
+      resources :brands
+      resources :models
+      resources :generations
+      resources :modifications
     end
   end
 

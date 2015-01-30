@@ -3,10 +3,22 @@
   <% @meta_title = "Запчасти" %>
   <%= page_header %>
 
-  <ol id="categories-brands">
-    <% @categories.each do |category| %>
-      <li> <%= link_to category.cached_spare_catalog, category_path(category.to_category_param) %> </li>
+  <% if @spare_infos.exists? %>
+    <%= panel 'info', class: 'by-car' do |p| %>
+      <%= p.heading do %>
+        <%= p.title do %>
+          Выберите группу запчастей
+        <% end %>
+      <% end %>
+      <%= p.body do %>
+        <ol id="categories">
+          <% @spare_infos.each do |spare_info| %>
+            <li> <%= link_to spare_info.cached_spare_catalog, category_path(spare_info.to_category_param) %> </li>
+          <% end %>
+        </ol>
+      <% end %>
     <% end %>
-  </ol>
+  <% end %>
+
 
 <% end %>

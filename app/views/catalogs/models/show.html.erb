@@ -1,4 +1,5 @@
 <%= somebody_tabs do %>
+
   <% b = Breadcrumb.new(self) %>
 
   <ol class="breadcrumb">
@@ -7,21 +8,34 @@
     <%= b.item(@model.name) %>
   </ol>
 
+  <%= image_tag @brand.image_url, class: 'pull-right', style: 'margin-top: -30px;' %>
+
   <% @meta_title = "ЗАПЧАСТИ НА #{@brand.name} #{@model.name}" %>
   <% @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present? %>
+  <% @meta_title_lead = @model.preview %>
   <%= page_header %>
 
-  <ol id="catalogs-model-generations">
-    <% @generations.each do |generation| %>
-      <li> <%= link_to "ЗАПЧАСТИ НА #{@brand.name} #{@model.name} #{generation.cached_generation}", catalogs_generation_path(generation.to_generation_param) %> </li>
-    <% end %>
-  </ol>
+  <div class="clearfix"></div>
 
-  <%= render partial: 'best_parts_list', layout: 'paginator'  %>
+  <% if @spare_infos.exists? %>
+    <%= panel 'info', class: 'by-car' do |p| %>
+      <%= p.heading do %>
+        <%= p.title do %>
+          Выберите группу запчастей <%= @brand.name %> <%= @model.name %>
+        <% end %>
+      <% end %>
+      <%= p.body do %>
+        <ol id="catalog-spare-catalogs">
+          <% @spare_infos.each do |spare_info| %>
+            <li> <%= link_to spare_info.cached_spare_catalog, category_model_path(spare_info.to_category_param, @model) %> </li>
+          <% end %>
+        </ol>
+      <% end %>
+    <% end %>
+  <% end %>
 
   <% if @model.content.present? %>
-    <hr />
-    <div id="catalogs-model-content"><%== @model.content %></div>
+    <div id="model-content"><%== @model.content %></div>
   <% end %>
 
   <% if @current_user.seller? %>
@@ -30,5 +44,4 @@
       Редактировать
     <% end %>
   <% end %>
-
 <% end %>

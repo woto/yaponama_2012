@@ -1,5 +1,7 @@
 class SpareCatalog < ActiveRecord::Base
 
+  # TODO При удалении выставлять значение по-умолчанию
+  # у связанных spare_infos
   has_many :spare_infos
   #has_many :spare_applicabilities, through: :spare_infos
   has_many :spare_catalog_tokens, dependent: :destroy

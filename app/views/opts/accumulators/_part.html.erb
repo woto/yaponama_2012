@@ -1,4 +1,4 @@
-<%= panel 'primary' do |p| %>
+<%= panel 'default' do |p| %>
   <%= p.heading do %>
     <%= p.title do %>
 
@@ -10,7 +10,7 @@
   <% end %>
   <%= p.body do %>
     <%= row do %>
-      <div class="col-sm-8 text-center">
+      <div class="col-md-8 text-center">
         <%= render 'spare_info_images', info: part %>
         <h4 class="top-space bottom-space"><%= part.warehouses.map{|wh| number_to_currency(wh.price)}.join(', ') %></h4>
         <%= link_to "Купить", "#", class: "btn btn-lg btn-success bottom-space" %>
@@ -20,7 +20,7 @@
         <%# link_to 'Edit', edit_accumulator_path(accumulator) %>
         <%# link_to 'Destroy', accumulator, method: :delete, data: { confirm: 'Are you sure?' } %>
       </div>
-      <div class="col-sm-16">
+      <div class="col-md-16">
         <%= render "#{resource_class.name.underscore.pluralize}/chars", part: part, resource_class: resource_class %>
       </div>
     <% end %>

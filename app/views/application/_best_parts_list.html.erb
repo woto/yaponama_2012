@@ -1,14 +1,45 @@
-<% if @parts.present? %>
-  <div id="best-parts-list">
-    <% @parts.each do |spare_info| %>
-      <div>
-        <% brand = "НА #{@brand.try(:name)}" if @brand %>
-        <% model = @model.try(:name) %>
-        <% generation = @generation.try(:name) %>
-        <% modification = @modification.try(:name) %>
-        <%= link_to "#{spare_info.to_label} #{spare_info.cached_spare_catalog} #{brand} #{model} #{generation} #{modification}", new_user_product_path(catalog_number: spare_info.catalog_number, anchor: spare_info.cached_brand) %>
-      </div>
-    <% end %>
+<% if @spare_infos.present? %>
+  <div class="table-responsive top-space-lg">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Каталожный номер</th>
+          <th>Производитель</th>
+          <th>Название запчасти</th>
+          <th>Магазин</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @spare_infos.each do |spare_info| %>
+          <tr>
+            <td>
+              <%= spare_info.catalog_number %>
+            </td>
+            <td>
+              <%= spare_info.cached_brand %>
+            </td>
+            <td> 
+              <%= spare_info.cached_spare_catalog %>
+            </td>
+            <td>
+              <%= link_to new_user_product_path(catalog_number: spare_info.catalog_number, anchor: spare_info.cached_brand) do %>
+                <% if spare_info.warehouses.exists? %>
+                  <% spare_info.warehouses.each do |w| %>
+                    <ul class="list-unstyled">
+                      <li><%= w.place.to_label %></li>
+                      <li>В наличии <%= w.count %> шт.</li>
+                      <li><%= number_to_currency w.price %></li>
+                    </ul>
+                  <% end %>
+                <% else %>
+                  Посмотреть цены
+                <% end %>
+              <% end %>
+            </td>
+          </td>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 <% else %>
   <% @meta_robots = 'noindex' %>

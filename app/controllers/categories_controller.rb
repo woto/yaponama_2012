@@ -1,16 +1,16 @@
 class CategoriesController < ApplicationController
 
   def index
-    @categories = SpareInfo.by
+    @spare_infos = SpareInfo.by
   end
 
   def show
-    @brands = SpareApplicability.by.by_category(params[:id])
+    @spare_applicabilities = SpareApplicability.by.by_category(params[:id])
 
     @q = SpareInfo.search(params[:q])
-    @parts = @q.result(distinct: true)
-    @parts = @parts.by_category(params[:id])
-    @parts = @parts.page(params[:page]).per(params[:per])
+    @spare_infos = @q.result(distinct: true)
+    @spare_infos = @spare_infos.by_category(params[:id])
+    @spare_infos = @spare_infos.page(params[:page]).per(params[:per])
   end
 
   private

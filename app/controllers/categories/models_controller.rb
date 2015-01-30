@@ -4,12 +4,12 @@ class Categories::ModelsController < ApplicationController
     @model = Model.find(params[:id])
     @brand = @model.brand
 
-    @generations = SpareApplicability.by_model(params[:id]).by_category(params[:category_id])
+    @spare_applicabilities = SpareApplicability.by_model(params[:id]).by_category(params[:category_id])
 
     @q = SpareInfo.search(params[:q])
-    @parts = @q.result(distinct: true)
-    @parts = @parts.by_model(params[:id]).by_category(params[:category_id])
-    @parts = @parts.page(params[:page]).per(params[:per])
+    @spare_infos = @q.result(distinct: true)
+    @spare_infos = @spare_infos.by_model(params[:id]).by_category(params[:category_id])
+    @spare_infos = @spare_infos.page(params[:page]).per(params[:per])
   end
 
 

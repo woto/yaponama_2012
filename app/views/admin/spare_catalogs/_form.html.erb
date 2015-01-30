@@ -16,17 +16,14 @@
         <%= link_to_add_association 'Добавить токен', f, :spare_catalog_tokens, class: "btn btn-default"  %>
       <% end %>
 
+      <%= f.twbs_text_area :intro, rows: 4 %>
+
     <% end %>
 
   <% end %>
 
-  <%= row do %>
-    <div class="col-md-12">
-      <%= f.twbs_text_area :intro, class: 'ckeditor-extended' %>
-      <%= f.twbs_text_area :page, class: 'ckeditor-extended' %>
-      <%= f.twbs_submit %>
-    </div>
-  <% end %>
+  <%= f.twbs_text_area :page, class: 'ckeditor-extended' %>
+  <%= f.twbs_submit %>
 
 <% end %>
 

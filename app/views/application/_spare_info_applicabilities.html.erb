@@ -18,8 +18,8 @@
           <tr>
             <td><%= link_to spare_applicability.cached_brand, catalogs_brand_path(spare_applicability.to_brand_param) if spare_applicability.cached_brand %></td>
             <td><%= link_to spare_applicability.cached_model, catalogs_model_path(spare_applicability.to_model_param) if spare_applicability.cached_model %></td>
-            <td><%= link_to spare_applicability.cached_generation, catalogs_generation_path(spare_applicability.to_generation_param) if spare_applicability.cached_generation %></td>
-            <td><%= link_to spare_applicability.cached_modification, catalogs_modification_path(spare_applicability.to_modification_param) if spare_applicability.cached_modification %></td>
+            <td><%= spare_applicability.cached_generation if spare_applicability.cached_generation %></td>
+            <td><%= spare_applicability.cached_modification if spare_applicability.cached_modification %></td>
             <% if current_user.seller? %>
               <td>
                 <%= link_to edit_admin_spare_applicability_path(spare_applicability, return_path: request.fullpath), class: 'btn btn-warning' do %>

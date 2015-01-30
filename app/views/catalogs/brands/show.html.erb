@@ -1,4 +1,5 @@
 <%= somebody_tabs do %>
+
   <% b = Breadcrumb.new(self) %>
 
   <ol class="breadcrumb">
@@ -6,25 +7,35 @@
     <%= b.item(@brand.name) %>
   </ol>
 
+  <%= image_tag @brand.image_url, class: 'pull-right', style: 'margin-top: -30px;' %>
+
   <% @meta_title = "ЗАПЧАСТИ НА #{@brand.name}" %>
-  <% @meta_title_lead = image_tag @brand.image_url %>
+  <% @meta_title_lead = @brand.preview %>
   <% @meta_title_small = "(рус. #{@brand.slang})" if @brand.slang.present? %>
   <%= page_header %>
 
-  <hr />
+  <div class="clearfix"></div>
 
-  <ol id="catalogs-brand-models">
-    <% @models.each do |model| %>
-      <li> <%= link_to "ЗАПЧАСТИ НА #{@brand.name} #{model.cached_model}", catalogs_model_path(model.to_model_param) %> </li>
+  <% if @spare_applicabilities.exists? %>
+    <%= panel 'info', class: 'by-car' do |p| %>
+      <%= p.heading do %>
+        <%= p.title do %>
+          Выберите модель автомобиля <%= @brand.name %>
+        <% end %>
+      <% end %>
+      <%= p.body do %>
+        <ol id="catalog-models">
+          <% @spare_applicabilities.each do |spare_applicability| %>
+            <li> <%= link_to spare_applicability.cached_model, catalogs_model_path(spare_applicability.to_model_param) %> </li>
+          <% end %>
+        </ol>
+      <% end %>
     <% end %>
-  </ol>
+  <% end %>
 
-  <hr />
-
-  <%= render partial: 'best_parts_list', layout: 'paginator'  %>
-
-  <div id="catalogs-brand-preview"><%==  @brand.preview %></div>
-  <div id="catalogs-brand-content"><%== @brand.content %></div>
+  <% if @brand.content.present? %>
+    <div id="brand-content"><%== @brand.content %></div>
+  <% end %>
 
   <br />
 
@@ -34,5 +45,4 @@
       Редактировать
     <% end %>
   <% end %>
-
 <% end %>

@@ -131,8 +131,9 @@ label.required:after {
 
 .page-header {
   margin-top: 0;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   border-bottom: none;
+  padding-bottom: 0;
   h1 {
     margin-top: 0;
     //font-size: 28px;
@@ -183,7 +184,7 @@ label.required:after {
 /////////////////////
 
 #main {
-  //@extend .bottom-space-lg;
+  @extend .bottom-space-lg;
   //margin-bottom: 50px;
 }
 
@@ -221,7 +222,8 @@ input[type=radio]:checked + img{
 }
 
 .breadcrumb {
-  @extend .bottom-space-lg;
+  @extend .text-sm;
+  @extend .bottom-space;
 }
 
 /////////////////////
@@ -271,11 +273,29 @@ input[type=radio]:checked + img{
 
 /////////////////////
 
-#catalog-brands, #catalog-models, #catalog-generations, #catalog-modifications, #category, #category-brands, #category-models, #category-generations, #category-modifications {
-  -moz-column-count: 2; 
-  -moz-column-gap: 10px; 
-  -webkit-column-count: 2; 
-  -webkit-column-gap: 10px; 
-  column-count: 2; 
-  column-gap: 10px;
+.by-car {
+  background-color: #FAFAFA;
 }
+
+#catalog-brands, #catalog-models, #catalog-spare-catalogs, #categories, #category-brands, #category-models, #category-generations, #category-modifications {
+
+  @extend .list-unstyled;
+
+  @media (max-width: $screen-xs-max) { @include content-columns(1); }
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) { @include content-columns(2); }
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) { @include content-columns(2); }
+  @media (min-width: $screen-lg-min) { @include content-columns(3) }
+
+  font-size: 16px;
+
+  li {
+    padding: 8px;
+    margin: 4px;
+    display: inline-block;
+    width: calc(100% - 10px);
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    background-color: white;
+  }
+
+}
+

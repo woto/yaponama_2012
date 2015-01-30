@@ -2,7 +2,7 @@
 
 <%= row do %>
 
-  <div class="col-lg-4 col-md-5">
+  <div class="col-lg-4 col-md-5 col-sm-6">
     <div class="list-group bottom-space-lg">
       <% @formatted_data.map{|k, v| v.map{|k, v| k}}[0].each do |brand| %>
         <a href="#<%=brand %>" class="list-group-item"><%=brand %></a>
@@ -12,7 +12,7 @@
     <%= render 'sidebar' %>
   </div>
 
-  <div class="col-lg-20 col-md-19">
+  <div class="col-lg-20 col-md-19 col-sm-18">
 
     <% @formatted_data.each do |catalog_number, cn_scope| %>
 
@@ -22,7 +22,7 @@
 
         <div id="<%= manufacturer %>" itemscope itemtype="http://schema.org/Product">
 
-          <%= panel 'primary' do |p| %>
+          <%= panel 'default' do |p| %>
 
             <% short_name = mf_scope[:title] %>
             <%= p.heading do %>
@@ -39,7 +39,7 @@
             <%= p.body do %>
 
               <%= row do %>
-                <div class="col-sm-8">
+                <div class="col-md-8">
 
                   <div style="text-align: center">
 
@@ -84,7 +84,7 @@
 
                 </div>
 
-                <div class="col-sm-16">
+                <div class="col-md-16">
 
                   <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
 

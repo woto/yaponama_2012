@@ -8,20 +8,31 @@
     <%= b.item(@brand.name) %>
   </ol>
 
+  <%= image_tag @brand.image_url, class: 'pull-right', style: 'margin-top: -30px;' %>
+
   <% @meta_title = "#{@resource.name} НА #{@brand.name}" %>
   <% @meta_title_small = "(рус. #{@brand.slang})" if @brand.slang.present? %>
   <%= page_header %>
 
-  <ol id="category-models">
-    <% @models.each do |model| %>
-      <li> <%= link_to "#{@resource.name} НА #{@brand.name} #{model.cached_model}", category_model_path(params[:category_id], model.to_model_param) %> </li>
+  <% if @spare_applicabilities.exists? %>
+    <%= panel 'info', class: 'by-car' do |p| %>
+      <%= p.heading do %>
+        <%= p.title do %>
+          Подбор <%= @resource.name %> для <%= @brand.name %>
+        <% end %>
+      <% end %>
+      <%= p.body do %>
+        <ol id="category-models">
+          <% @spare_applicabilities.each do |spare_applicability| %>
+            <li> <%= link_to spare_applicability.cached_model, category_model_path(params[:category_id], spare_applicability.to_model_param) %> </li>
+          <% end %>
+        </ol>
+      <% end %>
     <% end %>
-  </ol>
+  <% end %>
 
   <% if @resource_class %>
-    <%= render partial: "#{@resource_class.name.underscore.pluralize}/index", layout: 'paginator'  %>
-  <% else %>
-    <%= render partial: 'best_parts_list', layout: 'paginator'  %>
+    <%= render partial: "#{@resource_class.name.underscore.pluralize}/index" %>
   <% end %>
 
   <% if @current_user.seller? %>

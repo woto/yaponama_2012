@@ -1,7 +1,7 @@
 <%= row id: "new_grid" do %>
 
-  <div class="col-md-6 col-lg-5">
-    <%= panel 'primary' do |p| %>
+  <div class="col-sm-7 col-md-6 col-lg-5">
+    <%= panel 'info' do |p| %>
       <%= p.heading do %>
         <%= p.title do %>
           Поиск по свойствам
@@ -26,16 +26,16 @@
     <%= render 'sidebar' %>
   </div>
 
-  <div class="col-md-18 col-lg-19">
+  <div class="col-sm-17 col-md-18 col-lg-19">
 
     <div id="items-progress"> </div>
 
-    <% @parts.each do |part| %>
-      <%= render "#{@resource_class.name.underscore.pluralize}/part", part: part, resource_class: @resource_class %>
+    <% @spare_infos.each do |spare_info| %>
+      <%= render "#{@resource_class.name.underscore.pluralize}/part", part: spare_info, resource_class: @resource_class %>
     <% end %>
 
     <div class="top-space bottom-space">
-      <%= paginate @parts %>
+      <%= paginate @spare_infos %>
     </div>
 
     <% if false %>

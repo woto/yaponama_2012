@@ -14,3 +14,10 @@ pylnik_rulevoi_reiki:
 
 shatun:
   name: ШАТУН
+
+akb:
+  name: БАТАРЕЯ АККУМУЛЯТОРНАЯ
+  intro: Вступление к аккумуляторной батарее
+  page: Текст страницы аккумуляторной батареи
+  opt: accumulator
+  shows: 33577
