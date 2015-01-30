@@ -8,12 +8,38 @@
 
   <%= page_header %>
 
-  <%= link_to url_for(action: :new, return_path: request.fullpath), class: "btn btn-primary" do %>
+  <%= link_to url_for(action: :new, spare_applicability: {spare_info_attributes: {name: @resource.spare_info.name}}, return_path: request.fullpath), class: "btn btn-primary" do %>
     <%= icon 'plus' %>
+    Добавить применимость для этой же запчасти
   <% end %>
 
   <br />
   <br />
+
+  <%= link_to url_for(action: :new, spare_applicability: {spare_info_attributes: {name: @resource.spare_info.name}, brand_attributes: {name: @resource.cached_brand}}, return_path: request.fullpath), class: "btn btn-primary" do %>
+    <%= icon 'plus' %>
+    Добавить применимость для этого же бренда
+  <% end %>
+
+  <br />
+  <br />
+
+  <%= link_to url_for(action: :new, spare_applicability: {spare_info_attributes: {name: @resource.spare_info.name}, brand_attributes: {name: @resource.cached_brand}, model_attributes: {name: @resource.cached_model}}, return_path: request.fullpath), class: "btn btn-primary" do %>
+    <%= icon 'plus' %>
+    Добавить применимость для этой же модели
+  <% end %>
+
+  <br />
+  <br />
+
+  <%= link_to url_for(action: :new, spare_applicability: {spare_info_attributes: {name: @resource.spare_info.name}, brand_attributes: {name: @resource.cached_brand}, model_attributes: {name: @resource.cached_model}, generation_attributes: {name: @resource.cached_generation}}, return_path: request.fullpath), class: "btn btn-primary" do %>
+    <%= icon 'plus' %>
+    Добавить применимость для этого же поколения
+  <% end %>
+
+  <br />
+  <br />
+
 
   <%= render 'smart_show' %>
 
