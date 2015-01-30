@@ -1,21 +1,13 @@
-<%= container do %>
+<%= b1 do %>
 
-  <%= row class: 'top-space' do %>
+  <% title_new %>
 
-    <div class="col-lg-12">
-
-      <% title_new %>
-
-      <%= breadcrumb true do |b| %>
-        <%= b.item @meta_title %>
-      <% end %>
-
-      <%= title_new %>
-
-      <%= render 'form' %>
-
-    </div>
-
+  <%= breadcrumb true do |b| %>
+    <%= b.item @meta_title %>
   <% end %>
+
+  <%= title_new %>
+
+  <%= render 'form' %>
 
 <% end %>
