@@ -205,6 +205,7 @@
                   <% else %>
                     <%= link_to icon('file-text-o'), new_admin_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath), :class => "btn btn-warning" %>
                   <% end %>
+                  <%= link_to icon('building'), edit_admin_brand_path(mf_scope[:brand], :return_path => request.fullpath), :class => "btn btn-warning" %>
                 </div>
               <% end %>
 
