@@ -10,6 +10,7 @@ module GenerationAttributes
     accepts_nested_attributes_for :generation
 
     def generation_attributes=(attr)
+      #binding.pry
       if attr["name"].present? && model.present?
         generation = model.generations.where(name: attr["name"]).first
         if generation.present?

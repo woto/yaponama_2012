@@ -297,6 +297,7 @@ class ApplicationController < ActionController::Base
   end
 
   def new_resource
+    #binding.pry
     @resource = @resource_class.new resource_params
   end
 

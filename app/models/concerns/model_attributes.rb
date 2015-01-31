@@ -10,6 +10,7 @@ module ModelAttributes
     accepts_nested_attributes_for :model
 
     def model_attributes=(attr)
+      #binding.pry
       if attr["name"].present? && brand.present?
         model = brand.models.where(name: attr["name"]).first
         if model.present?
