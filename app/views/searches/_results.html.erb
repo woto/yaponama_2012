@@ -70,11 +70,7 @@
                     <%= brand_rating mf_scope[:brand] %>
                   </div>
 
-                  <% can_we_sold_this = mf_scope[:offers].present? && mf_scope[:offers].any?{|offer| offer[:probability] > 0} %>
-
-                  <% if can_we_sold_this %>
-                    <%= link_to "Купить в 1 клик", '#', class: 'btn btn-lg btn-success bottom-space-lg top-space-lg center-block callback-link', style: 'max-width: 200px' %>
-                  <% end %>
+                  <%= link_to "Купить в 1 клик", '#', class: 'btn btn-lg btn-success bottom-space-lg top-space-lg center-block callback-link', style: 'max-width: 200px' %>
 
                   <% if false %>
                   <div class="brand-preview text-xs text-justify">
@@ -88,9 +84,6 @@
 
                   <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
 
-                  <% unless can_we_sold_this %>
-                    <h4 class="text-warning">К сожалению этого товара нет в наличии.</h4>
-                  <% else %>
                     <div class="text-lg table-responsive" rel="offers">
                       <table class="table">
 

@@ -188,27 +188,30 @@ class PriceMate
           :tech => techs.map{|tech| item[tech].to_s}.reject(&:blank?).join(', ')
         }
 
-        formatted_data[cn][mf][:offers].push(offer)
+        if offer[:probability] > 0
 
-        # Мин. кол-во дней
-        comparsion = formatted_data[cn][mf][:min_days].nil? ? [] : [formatted_data[cn][mf][:min_days]]
-        comparsion.push offer[:min_days]
-        formatted_data[cn][mf][:min_days] = comparsion.min
+          formatted_data[cn][mf][:offers].push(offer)
 
-        # Макс. кол-во дней
-        comparsion = formatted_data[cn][mf][:max_days].nil? ? [] : [formatted_data[cn][mf][:max_days]]
-        comparsion.push offer[:max_days]
-        formatted_data[cn][mf][:max_days] = comparsion.max
+          # Мин. кол-во дней
+          comparsion = formatted_data[cn][mf][:min_days].nil? ? [] : [formatted_data[cn][mf][:min_days]]
+          comparsion.push offer[:min_days]
+          formatted_data[cn][mf][:min_days] = comparsion.min
 
-        # Мин. цена
-        comparsion = formatted_data[cn][mf][:min_cost].nil? ? [] : [formatted_data[cn][mf][:min_cost]]
-        comparsion.push offer[:retail_cost]
-        formatted_data[cn][mf][:min_cost] = comparsion.min
+          # Макс. кол-во дней
+          comparsion = formatted_data[cn][mf][:max_days].nil? ? [] : [formatted_data[cn][mf][:max_days]]
+          comparsion.push offer[:max_days]
+          formatted_data[cn][mf][:max_days] = comparsion.max
 
-        # Макс. цена
-        comparsion = formatted_data[cn][mf][:max_cost].nil? ? [] : [formatted_data[cn][mf][:max_cost]]
-        comparsion.push offer[:retail_cost]
-        formatted_data[cn][mf][:max_cost] = comparsion.max
+          # Мин. цена
+          comparsion = formatted_data[cn][mf][:min_cost].nil? ? [] : [formatted_data[cn][mf][:min_cost]]
+          comparsion.push offer[:retail_cost]
+          formatted_data[cn][mf][:min_cost] = comparsion.min
+
+          # Макс. цена
+          comparsion = formatted_data[cn][mf][:max_cost].nil? ? [] : [formatted_data[cn][mf][:max_cost]]
+          comparsion.push offer[:retail_cost]
+          formatted_data[cn][mf][:max_cost] = comparsion.max
+        end
 
       end
 
@@ -254,6 +257,14 @@ class PriceMate
         end
       end
 
+    end
+
+
+    formatted_data.each do |catalog_number, cn_scope|
+      cn_scope.each do |manufacturer, mf_scope|
+        formatted_data[catalog_number].delete(manufacturer) unless mf_scope[:offers].any?
+      end
+      formatted_data.delete(catalog_number) unless cn_scope.any?
     end
 
     formatted_data
