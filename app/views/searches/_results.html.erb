@@ -84,8 +84,9 @@
 
                   <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
 
-                    <div class="text-lg table-responsive" rel="offers">
-                      <table class="table">
+                    <div data-expandable-table>
+                    <div class="text-lg bottom-space table-responsive">
+                      <table class="table bottom-space-none table-hover">
 
                         <thead>
                           <tr>
@@ -98,12 +99,19 @@
                         </thead>
 
                         <tbody>
+                          <% shown_once = false %>
                           <% mf_scope[:offers].each do |offer| %>
-                            <%# Это очень не хороший способ Что будет если у всех предложений будет 0?! Upd. А ничего просто не будет предложений с ценами. TODO!%>
-                            <%# Но пока выйти из ситуации по легкому по-другому не получится. А забивать сюда заоблочные цены и сроки херово для представления покупателю %>
-                            <% next if offer[:probability] == 0 %>
-                            <% offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 ? presence = true : presence = false %>
-                            <tr class="<%= presence ? 'active' : '' %>">
+                            <% if offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 %>
+                              <% presence = true %>
+                            <% else %>
+                              <% if shown_once == false %>
+                                <% presence = true %>
+                                <% shown_once = true %>
+                              <% else %>
+                                <% presence = false %>
+                              <% end %>
+                            <% end %>
+                            <tr class="<%= presence ? 'active' : 'hidden' %>">
                               <td> <%= raw country_decorator offer[:country] %> </td>
                               <!-- <td> <%= raw days_decorator offer[:min_days] %> </td> -->
                               <td> <%= raw days_decorator offer[:max_days] %> </td>
@@ -119,12 +127,13 @@
                       </table>
                     </div>
 
-                    <span class="hidden">
-                      <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
-                        <meta itemprop="priceCurrency" content="RUB" />
-                        Не устраивают цена или срок доставки? Взгляните на <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> лучших предложений от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
-                      </div>
-                    </span>
+                    <div class="text-sm" itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+                      <meta itemprop="priceCurrency" content="RUB" />
+                      <a href="#" class="text-muted dashed" data-expandable-link>
+                        Не устраивает цена или нужно быстрее? Взгляните на все <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> предложений от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span> и сроками от <%= mf_scope[:min_days] %> до <%= mf_scope[:max_days] %> дней.
+                      </a>
+                    </div>
+                    </div>
 
                 </div>
               <% end %>

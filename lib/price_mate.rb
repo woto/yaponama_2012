@@ -144,7 +144,8 @@ class PriceMate
       h = cn + " - " + mf
       counter[h] += 1
 
-      if counter[h] <= 3
+      #if counter[h] <= 5
+      if true
 
         # Если нет такого каталожника, создаем
         unless formatted_data.include?(cn)

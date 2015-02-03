@@ -166,3 +166,11 @@ App.throttled = _.throttle(->
 
 $(document).on 'input', '.brands-fast-search-input', ->
   App.throttled()
+
+###########
+
+$(document).on 'click', '[data-expandable-link]', (event) ->
+  event.preventDefault()
+  table = $(event.target).closest('[data-expandable-table]')
+  $(event.target).hide()
+  $(table).find('tr').removeClass('hidden')
