@@ -61,6 +61,9 @@
 
   <br />
   <br />
+  <%= link_to("Публичный просмотр", polymorphic_path([:category_brands], category_id: @resource), target: "_blank", class: 'btn btn-primary') %>
+  <br />
+  <br />
 
   <%= render 'smart_show' %>
 
