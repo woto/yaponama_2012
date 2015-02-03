@@ -43,7 +43,8 @@ class PriceMate
       parsed_json["result_prices"].sort_by do |a|
 
         days = (((a["job_import_job_delivery_days_average"].present? ? a["job_import_job_delivery_days_average"] : a["job_import_job_delivery_days_declared"]).to_f + a["job_import_job_delivery_days_declared"].to_f)/2 )
-        days/5 +  a["price_goodness"].to_f - a["success_percent"]/10
+        a["price_goodness"].to_f + days/90.0 - a["success_percent"]/200.0
+
       end
 
     parsed_json

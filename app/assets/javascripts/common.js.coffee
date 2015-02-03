@@ -169,6 +169,14 @@ $(document).on 'input', '.brands-fast-search-input', ->
 
 ###########
 
+# Обработка кликов на объекте и переход по ссылке, которую находим внутри
+$(document).on 'click', '[data-clickable-object]', (event) ->
+  clickable = $(event.currentTarget).find('[data-clickable-href]')
+  if event.target != clickable[0]
+    $(clickable)[0].click()
+
+###########
+
 $(document).on 'click', '[data-expandable-link]', (event) ->
   event.preventDefault()
   table = $(event.target).closest('[data-expandable-table]')

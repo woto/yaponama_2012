@@ -56,7 +56,7 @@
           <div class="panel-group" id="deliveries-accordion">
             <% Deliveries::Place.where(active: true).order(z_index: :desc).each do |delivery_zone| %>
               <div class="panel accordion-group panel-primary <%= delivery_zone.display_marker? ? '' : 'hidden' %>">
-                <div class="panel-heading delivery_zone">
+                <div class="panel-heading delivery_zone" data-clickable-object>
                   <%# Картографические данные области %>
                   <div class="hidden">
                     <div class="vertices"><%= delivery_zone.vertices %></div>
@@ -78,8 +78,9 @@
                   </div>
                   <% shop_id = delivery_zone.name.parameterize %>
                   <h4 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#deliveries-accordion" href="#<%= shop_id %>">
+                    <a class="accordion-toggle" data-toggle="collapse" data-clickable-href data-parent="#deliveries-accordion" href="#<%= shop_id %>">
                       <%= delivery_zone.name %>
+                      <%= icon 'caret-down pull-right' %>
                     </a>
                   </h4>
                 </div>

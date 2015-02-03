@@ -22,7 +22,7 @@
 
         <div id="<%= manufacturer %>" itemscope itemtype="http://schema.org/Product">
 
-          <%= panel 'default' do |p| %>
+          <%= panel 'primary' do |p| %>
 
             <% short_name = mf_scope[:title] %>
             <%= p.heading do %>
@@ -70,7 +70,7 @@
                     <%= brand_rating mf_scope[:brand] %>
                   </div>
 
-                  <%= link_to "Купить в 1 клик", '#', class: 'btn btn-lg btn-success bottom-space-lg top-space-lg center-block callback-link', style: 'max-width: 200px' %>
+                  <%= link_to "Купить в 1 клик", '#', class: 'btn btn-lg btn-success bottom-space top-space-lg center-block callback-link', style: 'max-width: 200px' %>
 
                   <% if false %>
                   <div class="brand-preview text-xs text-justify">
@@ -117,7 +117,7 @@
                               <td> <%= raw days_decorator offer[:max_days] %> </td>
                               <td> <%= raw count_decorator offer[:count] %> </td>
                               <td>
-                                <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, rel: "tooltip", title: (offer[:tech] if current_user.seller?), class: "btn btn-#{presence ? 'success' : 'success'} buy-button", style: 'min-width: 150px' do %>
+                                <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, rel: "tooltip", title: (offer[:tech] if current_user.seller?), class: "btn btn-#{presence ? 'success' : 'success'} buy-button" do %>
                                   Купить <%= number_to_currency(offer[:retail_cost], precision: 0) %>
                                 <% end %>
                               </td>
@@ -163,7 +163,7 @@
                 <%= render 'spare_info_applicabilities', info: mf_scope[:info] %>
               <% end %>
 
-              <div role="tabpanel">
+              <div role="tabpanel" class="top-space">
 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
@@ -216,6 +216,7 @@
                   <% end %>
                   <%= link_to icon('building'), edit_admin_brand_path(mf_scope[:brand], :return_path => request.fullpath), :class => "btn btn-warning" %>
                 </div>
+
               <% end %>
 
 
@@ -230,7 +231,7 @@
     <% replacements_link = capture do %>
       <% if @replacements.map{|obj| obj['replacements'].map{|obj2| obj2['catalog_number']}}.flatten.length >= 1 %>
         <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-        <h5>Вы так же можете посмотреть <%= link_to "аналоги и замены номера #{@c9}", polymorphic_path([new_or_edit, *jaba3,  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %>.</h5>
+        <h5>Возможно вас так же могут заинтересовать <%= link_to "аналоги и замены номера #{@c9}", polymorphic_path([new_or_edit, *jaba3,  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %>.</h5>
       <% end %>
     <% end %>
 

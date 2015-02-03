@@ -7,10 +7,11 @@
       <div class="panel-group" id="faqs">
         <% Faq.all.each do |faq| %>
           <%= panel 'primary' do |p| %>
-            <%= p.heading do %>
+            <%= p.heading :"data-clickable-object" => '' do %>
               <%= p.title do %>
-                <a data-toggle="collapse" data-parent="#faqs" href="#faq-<%= faq.id %>">
+                <a data-toggle="collapse" data-clickable-href data-parent="#faqs" href="#faq-<%= faq.id %>">
                   <%= faq.question %>
+                  <%= icon 'caret-down pull-right' %>
                 </a>
               <% end %>
             <% end %>
