@@ -21,7 +21,7 @@
       <%= p.body do %>
         <ol id="category-brands">
           <% @spare_applicabilities.each do |spare_applicability| %>
-            <li> <%= link_to spare_applicability.cached_brand, category_brand_path(params[:id], spare_applicability.to_brand_param) %> </li>
+            <li data-clickable-object> <%= link_to spare_applicability.cached_brand, category_brand_path(params[:id], spare_applicability.to_brand_param), 'data-clickable-href' => '' %> </li>
           <% end %>
         </ol>
       <% end %>
