@@ -48,6 +48,12 @@ namespace :app do
     DestroyOldBots.destroy_old_bots
   end
 
+  task :destroy_old_spare_infos => :environment do
+    DestroyOldSpareInfos.destroy_old_spare_infos
+  end
+
+
+
   task :download_warehouse => :environment do
     DownloadWarehouse.download_warehouse
   end
