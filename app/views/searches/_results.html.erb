@@ -43,7 +43,7 @@
 
                   <div style="text-align: center">
 
-                    <h4 class="bottom-space-none" itemprop="brand"><%= link_to manufacturer, brand_parts_path(mf_scope[:brand]) %></h4>
+                    <h4 class="bottom-space-none" itemprop="brand"><%= manufacturer %></h4>
 
                     <% if mf_scope[:manufacturer_origs].size > 0 %>
                       <p class="other-brands text-muted text-xs"><%= raw mf_scope[:manufacturer_origs].keys.map{|val| h(val)}.join(', ') %></p>
@@ -59,24 +59,11 @@
 
                   <%= render 'spare_info_images', info: mf_scope[:info] %>
 
-
-                  <% if false %>
-                  <div class="brands" style="clear: both; display: block; margin: 0 auto; width: 96px; height: 100px"> 
-                    <%= brands_decorator lambda{|brand| brand_parts_path brand}, mf_scope[:brand], {:title => false} %>
-                  </div>
-                  <% end %>
-
                   <div class="stars top-space-sm bottom-space-lg clearfix text-center">
                     <%= brand_rating mf_scope[:brand] %>
                   </div>
 
                   <%= link_to "Купить в 1 клик", '#', class: 'btn btn-lg btn-success bottom-space top-space-lg center-block callback-link', style: 'max-width: 200px' %>
-
-                  <% if false %>
-                  <div class="brand-preview text-xs text-justify">
-                    <%= brand_preview mf_scope[:brand] %>
-                  </div>
-                  <% end %>
 
                 </div>
 
@@ -163,6 +150,18 @@
                 <%= render 'spare_info_applicabilities', info: mf_scope[:info] %>
               <% end %>
 
+              <% brand = capture do %>
+                <% if mf_scope[:brand].preview.present? %>
+                  <div class="brand-preview text-justify">
+                    <%= brand_preview mf_scope[:brand] %>
+                  </div>
+                  <div class="brands" style="clear: both; display: block; margin: 0 auto; width: 96px; height: 100px"> 
+                    <%= brands_decorator lambda{|brand| brand_parts_path brand}, mf_scope[:brand], {:title => true} %>
+                  </div>
+                  <% if false %><%= link_to manufacturer, brand_parts_path(mf_scope[:brand]) %><% end %>
+                <% end %>
+              <% end %>
+
               <div role="tabpanel" class="top-space">
 
                 <!-- Nav tabs -->
@@ -175,6 +174,9 @@
                   <% end %>
                   <% if applicabilities.present? %>
                     <li role="presentation"><a href="#applicabilities-<%= mf_scope[:brand].to_label.parameterize %>" aria-controls="applicabilities-<%= mf_scope[:brand].to_label.parameterize %>" role="tab" data-toggle="tab">Применимость</a></li>
+                  <% end %>
+                  <% if brand.present? %>
+                    <li role="presentation"><a href="#brand-<%= mf_scope[:brand].to_label.parameterize %>" aria-controls="brand-<%= mf_scope[:brand].to_label.parameterize %>" role="tab" data-toggle="tab">Производитель</a></li>
                   <% end %>
                 </ul>
 
@@ -193,6 +195,11 @@
                   <% if applicabilities.present? %>
                     <div role="tabpanel" class="tab-pane" id="applicabilities-<%= mf_scope[:brand].to_label.parameterize %>">
                       <%= applicabilities %>
+                    </div>
+                  <% end %>
+                  <% if brand.present? %>
+                    <div role="tabpanel" class="tab-pane" id="brand-<%= mf_scope[:brand].to_label.parameterize %>">
+                      <%= brand %>
                     </div>
                   <% end %>
                 </div>

@@ -155,6 +155,28 @@
 
         <%= dropdown do |dd| %>
           <%= dd.toggle do %>
+            <%= icon 'envelope' %>
+              <span class="hidden-sm">
+                Почта
+              </span>
+            <%= caret %>
+          <% end %>
+          <%= dd.menu do %>
+            <li class="dropdown-header">
+              Логин: info@avtorif.ru<br />Пароль: ASD123qwe
+            </li>
+            <%= divider %>
+            <li>
+              <%= link_to 'http://mail.avtorif.ru', target: '_blank' do %>
+                Перейти в почту
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+
+
+        <%= dropdown do |dd| %>
+          <%= dd.toggle do %>
             <%= icon 'user' %>
             <% if current_user.role != 'guest' %>
               <span class="hidden-sm">

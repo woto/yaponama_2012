@@ -14,11 +14,13 @@
   <% @meta_title_small = "(рус. #{@brand.slang})" if @brand.slang.present? %>
   <%= page_header %>
 
+  <div class="clearfix"></div>
+
   <% if @spare_applicabilities.exists? %>
     <%= panel 'info', class: 'by-car' do |p| %>
       <%= p.heading do %>
         <%= p.title do %>
-          Подбор <%= @resource.name %> для <%= @brand.name %>
+          Подбор <%= @resource.name %> по автомобилю
         <% end %>
       <% end %>
       <%= p.body do %>

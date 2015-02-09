@@ -12,7 +12,7 @@ class CreateNewWordstatReportSpareCatalog
       limit = 10
 
       1.upto(5) do |i|
-        phrases = SpareCatalog.where(shows: nil).order(:created_at => :desc).limit(limit).offset(offset).pluck(:name)
+        phrases = SpareCatalog.where(shows: nil).where('name NOT LIKE ?', '%/%').where('name NOT LIKE ?', '%,%').where('name NOT LIKE ?', '%-%').order(:created_at => :desc).limit(limit).offset(offset).pluck(:name)
         Direct::Posters::Wordstat::CreateNewWordstatReport.new(phrases).post
         offset += limit
       end

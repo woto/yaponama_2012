@@ -18,4 +18,14 @@ class Admin::NewsController < NewsController
   def edit
     super
   end
+
+  # Не очень хорошо получилось. TODO, возможно метод #index нужно вынести в admin
+  # или общий модуль для фронтенда и бекенда
+  def index
+    respond_to do |format|
+      format.html
+      format.js { render 'grid_filter' }
+    end
+  end
+
 end

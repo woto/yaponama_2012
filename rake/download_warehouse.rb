@@ -4,7 +4,7 @@ require 'csv'
 class DownloadWarehouse
 
   def self.download_warehouse
-    Deliveries::Place.where.not(price_url: nil).each do |place|
+    Deliveries::Place.where(active: true).each do |place|
       place.warehouses.delete_all
       open(place.price_url) do |f|
         CSV.parse(f.read) do |row|

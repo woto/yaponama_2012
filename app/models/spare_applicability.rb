@@ -15,7 +15,7 @@ class SpareApplicability < ActiveRecord::Base
   validates :brand, presence: true
   validates :model, presence: true
 
-  validates :spare_info, uniqueness: { scope: [:brand_id, :model_id, :generation_id] }
+  validates :spare_info, uniqueness: { scope: [:brand_id, :model_id, :generation_id, :modification_id] }
 
   def to_label
     "#{cached_spare_info} - #{cached_brand} - #{cached_model} - #{cached_generation} - #{cached_modification}"

@@ -4,4 +4,8 @@ class News < ActiveRecord::Base
   def to_param
     "#{id}-#{path.parameterize}"
   end
+
+  def to_label
+    title
+  end
 end

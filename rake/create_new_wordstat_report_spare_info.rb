@@ -12,7 +12,7 @@ class CreateNewWordstatReportSpareInfo
       limit = 10
 
       1.upto(5) do |i|
-        phrases = SpareInfo.joins(:warehouses).where(shows: nil).order(:updated_at => :desc).limit(limit).offset(offset).pluck(:catalog_number)
+        phrases = SpareInfo.where(shows: nil).where(cached_brand: 'TOYOTA').order(:created_at => :desc).limit(limit).offset(offset).pluck(:catalog_number)
         Direct::Posters::Wordstat::CreateNewWordstatReport.new(phrases).post
         offset += limit
       end
@@ -26,10 +26,12 @@ class CreateNewWordstatReportSpareInfo
       report_ids.each do |report_id|
         reports = Direct::Posters::Wordstat::GetWordstatReport.new(report_id).post
         reports.each do |report|
-          spare_info = SpareInfo.find_by(catalog_number: report['Phrase'])
-          report['SearchedWith'].each do |keyword| 
+          spare_infos = SpareInfo.where(catalog_number: report['Phrase'])
+          report['SearchedWith'].each do |keyword|
             if keyword['Phrase'] == report['Phrase']
-              spare_info.update!(shows: keyword['Shows'])
+              spare_infos.each do |spare_info|
+                spare_info.update!(shows: keyword['Shows'])
+              end
             end
           end
         end

@@ -1,6 +1,8 @@
 class Direct::Posters::Base
+  LOGGER = Logger.new(STDOUT)
+
   def post
-    puts @body
+    LOGGER.info @body
     uri = URI.parse('https://api-sandbox.direct.yandex.ru/v4/json/')
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true

@@ -45,7 +45,7 @@ class BoschAutomotiveCatalogComImport
         height = opts_hash.delete('Высота с полюсом')
         accumulator_hash['height'] = height.to_i
         voltage = opts_hash.delete('Напряжение аккум. батареи')
-        accumulator_hash['voltage'] = Rails.application.config_for('application/opts/accumulator')['voltage']['checkboxes'].find{|hash| hash[:label].to_i == voltage.to_i}[:value]
+        accumulator_hash['voltage'] = Rails.application.config_for('application/opts/accumulator')['accumulator_voltage']['checkboxes'].find{|hash| hash[:label].to_i == voltage.to_i}[:value]
         battery_capacity = opts_hash.delete('Ном. емкость')
         accumulator_hash['battery_capacity'] = battery_capacity.to_i
         cold_cranking_amps = opts_hash.delete 'Исп. ток н.т.(EN 60095-1)'
@@ -111,7 +111,7 @@ class BoschAutomotiveCatalogComImport
         end
 
         spare_replacement = SpareReplacement.where(from_spare_info: spare_info, to_spare_info: to_spare_info).first_or_initialize
-        spare_replacement.assign_attributes(status: 'same_number', notes_invisible: 'bosch_automotive_catalog_com_import')
+        spare_replacement.assign_attributes(status: 'same_number', notes_invisible: 'bosch_automotive_catalog_com_import', wrong: false)
         unless spare_replacement.save
           binding.pry
         end

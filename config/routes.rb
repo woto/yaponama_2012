@@ -35,6 +35,10 @@ Yaponama2012::Application.routes.draw do
     "/categories/#{params[:category_id]}/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
   }
 
+  concern :paginatable do
+      get '(page/:page)', :action => :index, :on => :collection, :as => ''
+  end
+
   resource :catalogs do
     scope module: 'catalogs' do
       resources :brands
@@ -56,7 +60,6 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :global_and_admin do
-    resources :news, concerns: [:gridable]
     resources :faqs, concerns: [:transactionable, :gridable]
     resources :spare_catalogs, concerns: [:gridable, :searchable]
     resources :bots, concerns: [:gridable]
@@ -65,11 +68,16 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :only_admin do
+    resources :news, concerns: [:gridable]
     namespace :opts do
       resources :accumulators, concerns: [:gridable]
     end
 
     resources :galleries, concerns: [:gridable]
+  end
+
+  concern :only_global do
+    resources :news, concerns: [:paginatable]
   end
 
   concern :somebody_and_admin_somebody do
@@ -424,6 +432,7 @@ Yaponama2012::Application.routes.draw do
   post 'robokassa/fail' => 'robokassa#fail'
 
   concerns :global_and_admin
+  concerns :only_global
 
 
   # СОМНИТЕЛЬНЫЕ МАРШРУТЫ

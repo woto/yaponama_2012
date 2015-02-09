@@ -46,11 +46,12 @@ module ApplicationHelper
   def brand_preview brand
 
     if brand.preview.present?
-      output = ''
+      output = '<div class="top-space">'
       output << h(brand.preview)
       output << ' '
       link = "/#{CGI.escape(brand.name)}"
       output << link_to('подробнее...', link)
+      output << "</div>"
       output.html_safe
     end
 
