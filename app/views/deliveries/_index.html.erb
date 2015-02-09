@@ -55,7 +55,7 @@
 
           <div class="panel-group" id="deliveries-accordion">
             <% Deliveries::Place.where(active: true).order(z_index: :desc).each do |delivery_zone| %>
-              <div class="panel accordion-group panel-primary <%= delivery_zone.display_marker? ? '' : 'hidden' %>">
+              <div itemscope itemtype="http://schema.org/Organization" class="panel accordion-group panel-primary <%= delivery_zone.display_marker? ? '' : 'hidden' %>">
                 <div class="panel-heading delivery_zone" data-clickable-object>
                   <%# Картографические данные области %>
                   <div class="hidden">
@@ -79,21 +79,21 @@
                   <% shop_id = delivery_zone.name.parameterize %>
                   <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-clickable-href data-parent="#deliveries-accordion" href="#<%= shop_id %>">
-                      <%= delivery_zone.name %>
+                      <span itemprop="name"><%= delivery_zone.name %></span>
                       <%= icon 'caret-down pull-right' %>
                     </a>
                   </h4>
                 </div>
                 <div id="<%= shop_id %>" class="panel-collapse collapse" data-parent="#deliveries-accordion">
-                  <div class="panel-body">
+                  <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress" class="panel-body">
                     <strong>
-                      <span>
+                      <span itemprop="addressLocality">
                         <%= delivery_zone.address_locality %>
                       </span>
                       <% if delivery_zone.address_locality.present? %>
                         , 
                       <% end %>
-                      <span>
+                      <span itemprop="postalCode">
                         <%= delivery_zone.postal_code %>
                       </span>
                       <% if delivery_zone.postal_code.present? %>
@@ -110,7 +110,7 @@
                     <% (1..5).each do |n| %>
                       <% if delivery_zone.instance_eval("phone#{n}").present? %>
                         <%= icon 'phone-square' %>
-                        <span itemprop="phone">
+                        <span itemprop="telephone">
                           <%= delivery_zone.instance_eval("phone#{n}") %>
                         </span>
                         <br />
