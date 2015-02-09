@@ -179,6 +179,6 @@ $(document).on 'click', '[data-clickable-object]', (event) ->
 
 $(document).on 'click', '[data-expandable-link]', (event) ->
   event.preventDefault()
-  table = $(event.target).closest('[data-expandable-table]')
-  $(event.target).hide()
+  table = $(event.currentTarget).closest('[data-expandable-table]')
+  $(event.currentTarget).hide()
   $(table).find('tr').removeClass('hidden')
