@@ -8,6 +8,9 @@ class SpareInfo < ActiveRecord::Base
   include SpareCatalogAttributes
   include CachedSpareCatalog
 
+  has_many :warehouses
+  has_many :places, :through => :warehouses
+
   has_many :from_spare_replacements, foreign_key: :from_spare_info_id, class_name: SpareReplacement, dependent: :destroy
   has_many :to_spare_replacements, foreign_key: :to_spare_info_id, class_name: SpareReplacement, dependent: :destroy
   has_many :spare_applicabilities, dependent: :destroy
