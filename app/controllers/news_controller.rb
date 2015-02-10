@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
   def index
-    @news = News.order(date: :desc).page(params[:page])
+    @news = News.order(date: :desc).page(params[:page]).per(params[:per])
   end
 
   private

@@ -21,7 +21,7 @@
         <%# link_to 'Destroy', accumulator, method: :delete, data: { confirm: 'Are you sure?' } %>
       </div>
       <div class="col-md-16">
-        <%= render "#{resource_class.name.underscore.pluralize}/chars", part: part, resource_class: resource_class %>
+        <%= render "#{resource_class.name.underscore.pluralize}/chars", part: part, resource_class: resource_class if part.accumulator %>
       </div>
     <% end %>
   <% end %>

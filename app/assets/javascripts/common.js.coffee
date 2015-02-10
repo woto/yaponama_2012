@@ -173,6 +173,7 @@ $(document).on 'input', '.brands-fast-search-input', ->
 $(document).on 'click', '[data-clickable-object]', (event) ->
   clickable = $(event.currentTarget).find('[data-clickable-href]')
   if event.target != clickable[0]
+    event.preventDefault()
     $(clickable)[0].click()
 
 ###########

@@ -49,8 +49,7 @@ module ApplicationHelper
       output = '<div class="top-space">'
       output << h(brand.preview)
       output << ' '
-      link = "/#{CGI.escape(brand.name)}"
-      output << link_to('подробнее...', link)
+      output << link_to('подробнее...', brand)
       output << "</div>"
       output.html_safe
     end

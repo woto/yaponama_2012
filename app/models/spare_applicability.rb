@@ -37,43 +37,39 @@ class SpareApplicability < ActiveRecord::Base
     "#{modification_id}-#{cached_modification.parameterize}"
   end
 
-  # Используется в
-  # Catalogscontroller#show
-  # Categoriescontroller#show
   scope :by, ->{
     order(:cached_brand).
-    select(:brand_id, :cached_brand).
-    distinct
+    select("spare_applicabilities.brand_id, spare_applicabilities.cached_brand, count(spare_applicabilities.id) as count").
+    group("spare_applicabilities.brand_id, spare_applicabilities.cached_brand")
   }
 
   scope :by_brand, ->(id) {
     where(brand_id: id.to_i).
     order(:cached_model).
     where.not(model_id: nil).
-    select(:model_id, :cached_brand, :cached_model).
-    distinct
+    select("spare_applicabilities.model_id, spare_applicabilities.cached_model, spare_applicabilities.cached_brand, count(spare_applicabilities.id)").
+    group("spare_applicabilities.model_id, spare_applicabilities.cached_model, spare_applicabilities.cached_brand")
   }
 
   scope :by_model, ->(id) {
     where(model_id: id.to_i).
     order(:cached_generation).
     where.not(generation_id: nil).
-    select(:generation_id, :cached_brand, :cached_model, :cached_generation).
-    distinct
+    select("spare_applicabilities.generation_id, spare_applicabilities.cached_generation, spare_applicabilities.cached_model, spare_applicabilities.cached_brand, count(spare_applicabilities.id)").
+    group("spare_applicabilities.generation_id, spare_applicabilities.cached_generation, spare_applicabilities.cached_model, spare_applicabilities.cached_brand")
   }
 
   scope :by_generation, ->(id) {
     where(generation_id: id.to_i).
     order(:cached_modification).
     where.not(modification_id: nil).
-    select(:modification_id, :cached_brand, :cached_model, :cached_generation, :cached_modification).
-    distinct
+    select("spare_applicabilities.modification_id, spare_applicabilities.cached_modification, spare_applicabilities.cached_generation, spare_applicabilities.cached_model, spare_applicabilities.cached_brand, count(spare_applicabilities.id)").
+    group("spare_applicabilities.modification_id, spare_applicabilities.cached_modification, spare_applicabilities.cached_generation, spare_applicabilities.cached_model, spare_applicabilities.cached_brand")
   }
 
   scope :by_category, ->(id) {
     joins(:spare_info).
-    where(spare_infos: {spare_catalog_id: id.to_i}).
-    distinct
+    where(spare_infos: {spare_catalog_id: id.to_i})
   }
 
   # TODO Написать для этого тест(?!)

@@ -9,20 +9,23 @@
 
   <div class="clearfix"></div>
 
-  <h2>Основные направления деятельности компании <%= @brand.name %></h2>
-  <ul>
-    <% @brand.opts.each do |opt| %>
-      <%# TODO Посмотреть потом почему тут пустой иногда бывает %>
-      <% if opt.present? %>
-        <li>
-        <%= link_to "Каталог #{t opt} компании #{@brand.name}", category_path(SpareCatalog.find_by(opt: opt), q: {spare_info_brand_id_eq_any: {"" => "#{@brand.id}"}}) %>
-        </li>
+  <% if @spare_infos.exists? %>
+    <%= panel 'info', class: 'by-car' do |p| %>
+      <%= p.heading do %>
+        <%= p.title do %>
+          Выберите группу запчастей
+        <% end %>
+      <% end %>
+      <%= p.body do %>
+    <ol id="catalog-spare-catalogs">
+      <% @spare_infos.each do |spare_info| %>
+        <li data-clickable-object> <%= link_to safe_join([content_tag(:strong, spare_info.cached_spare_catalog)]), category_path(spare_info.to_category_param, "q[brand_id_eq_any][]" => @brand.id), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_info.count}&nbsp;шт.)</small>".html_safe %></li>
+      <% end %>
+    </ol>
       <% end %>
     <% end %>
-  </ul>
 
-  <% @parts = @spare_infos %>
-  <%= render partial: 'best_parts_list', layout: 'paginator'  %>
+  <% end %>
 
   <%# TODO тут должен быть дополнительный preview и content? Например NISSAN, выпускает и автомобили, и запчасти%>
   <div id="brand-preview"><%== @brand.preview %></div>

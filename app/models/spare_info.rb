@@ -45,13 +45,11 @@ class SpareInfo < ActiveRecord::Base
     self.name = to_label
   end
 
-  # Используется в
-  # CategoriesController#index
   scope :by, ->{
     joins(:spare_applicabilities).
     order(:cached_spare_catalog).
-    select(:spare_catalog_id, :cached_spare_catalog).
-    distinct
+    select("spare_infos.spare_catalog_id, spare_infos.cached_spare_catalog, count(spare_infos.id) as count").
+    group("spare_infos.spare_catalog_id, spare_infos.cached_spare_catalog")
   }
 
   scope :by_brand, ->(id) {

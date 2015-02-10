@@ -1,0 +1,12 @@
+<%= somebody_tabs do %>
+  <% @meta_title = 'Производители запчастей' %>
+  <div style="margin-bottom: -20px">
+    <%= page_header %>
+  </div>
+
+  <div class="brands clearfix bottom-space-lg">
+    <% @resources.each do |resource| %>
+      <%= brands_decorator(lambda{|brand| brand_path(brand)}, resource, {:title => true}) %>
+    <% end %>
+  </div>
+<% end %>

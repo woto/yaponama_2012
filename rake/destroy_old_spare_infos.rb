@@ -1,12 +1,15 @@
 class DestroyOldSpareInfos
+
+  LOGGER = Logger.new(STDOUT)
+
   def self.destroy_old_spare_infos
-    logger = Logger.new(STDOUT)
     SpareInfo.find_each do |spare_info|
-      logger.info "probing #{spare_info.to_label}"
-      result = PriceMate.search(spare_info.catalog_number, nil, false, false, true)
+      #LOGGER.info "probing #{spare_info.to_label}"
+      #TODO обуздать spare_info.cached_brand
+      result = PriceMate.search(spare_info.catalog_number, spare_info.cached_brand, false, false, true)
       if result['result_prices'].size <= 5
-        logger.info "destory #{spare_info.to_label}"
-        spare_info.destroy
+        LOGGER.info "destory #{spare_info.to_label}"
+        #spare_info.destroy
       end
     end
   end

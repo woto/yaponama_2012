@@ -156,7 +156,7 @@
                     <%= brand_preview mf_scope[:brand] %>
                   </div>
                   <div class="brands" style="clear: both; display: block; margin: 0 auto; width: 96px; height: 100px"> 
-                    <%= brands_decorator lambda{|brand| brand_parts_path brand}, mf_scope[:brand], {:title => true} %>
+                    <%= brands_decorator lambda{|brand| brand_path brand}, mf_scope[:brand], {:title => true} %>
                   </div>
                   <% if false %><%= link_to manufacturer, brand_parts_path(mf_scope[:brand]) %><% end %>
                 <% end %>

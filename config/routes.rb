@@ -23,10 +23,10 @@ Yaponama2012::Application.routes.draw do
     "/catalogs/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
   }
 
-  # /brands/дочерний_id/parts -> /brands/родительский_id/parts
-  get "/brands/:id/parts", constraints: lambda{|params, env| Brand.find(params[:id]).brand_id?}, to: redirect{|params, request|
+  # /brands/дочерний_id -> /brands/родительский_id
+  get "/brands/:id", constraints: lambda{|params, env| params[:id] != 'search' && Brand.find(params[:id]).brand_id?}, to: redirect{|params, request|
     query_string = "?#{request.query_string}" if request.query_string.present?
-    "/brands/#{Brand.find(params[:id]).brand.to_param}/parts#{query_string}"
+    "/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
   }
 
   # /categories/категория/brands/дочерний_id -> /categories/категория/brands/родительский_id
@@ -35,8 +35,12 @@ Yaponama2012::Application.routes.draw do
     "/categories/#{params[:category_id]}/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
   }
 
-  concern :paginatable do
-      get '(page/:page)', :action => :index, :on => :collection, :as => ''
+  concern :paginatable_index do
+      get '(page/:page)', :action => :index, :on => :collection
+  end
+
+  concern :paginatable_show do
+      get '(page/:page)', :action => :show, :on => :member
   end
 
   resource :catalogs do
@@ -46,12 +50,12 @@ Yaponama2012::Application.routes.draw do
     end
   end
 
-  resources :categories do
+  resources :categories, concerns: [:paginatable_show] do
     scope module: 'categories' do
-      resources :brands
-      resources :models
-      resources :generations
-      resources :modifications
+      resources :brands, concerns: [:paginatable_show]
+      resources :models, concerns: [:paginatable_show]
+      resources :generations, concerns: [:paginatable_show]
+      resources :modifications, concerns: [:paginatable_show]
     end
   end
 
@@ -77,7 +81,7 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :only_global do
-    resources :news, concerns: [:paginatable]
+    resources :news, concerns: [:paginatable_index]
   end
 
   concern :somebody_and_admin_somebody do
@@ -450,9 +454,7 @@ Yaponama2012::Application.routes.draw do
 
   concerns :cars_searchable
 
-  resources :brands do
-    resources :parts
-  end
+  resources :brands
 
   resources :callbacks, only: [:show, :create]
 
@@ -466,10 +468,7 @@ Yaponama2012::Application.routes.draw do
   # TODO Удалить как поисковые роботы перестроятся
   get "*brand", constraints: BrandRedirector.new, to: redirect{|params, req|
     brand = BrandMate.find_canonical(params[:brand].gsub('+', ' '))
-    if req.params[:page].present?
-      page = "?page=#{req.params[:page]}"
-    end
-    "/brands/#{brand.to_param}/parts#{page}"
+    "/brands/#{brand.to_param}"
   }
 
   get "*path" => "pages#show", :constraints => PageConstraint.new, format: false

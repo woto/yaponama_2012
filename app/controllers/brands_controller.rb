@@ -29,6 +29,19 @@ class BrandsController < ApplicationController
     end
   end
 
+  def index
+    @resources = Brand.
+      joins(:spare_infos => :spare_applicabilities).
+      select("brands.id, brands.name, brands.image, count(spare_infos.id) as count").
+      order("brands.name").
+      group("brands.id, brands.name")
+  end
+
+  def show
+    @brand = Brand.find(params[:id])
+    @spare_infos = @brand.spare_infos.by
+  end
+
   private
 
   def set_resource_class

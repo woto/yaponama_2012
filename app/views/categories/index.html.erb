@@ -13,7 +13,7 @@
       <%= p.body do %>
         <ol id="categories">
           <% @spare_infos.each do |spare_info| %>
-            <li data-clickable-object> <%= link_to spare_info.cached_spare_catalog, category_path(spare_info.to_category_param), 'data-clickable-href' => '' %> </li>
+            <li data-clickable-object> <%= link_to content_tag(:strong, spare_info.cached_spare_catalog), category_path(spare_info.to_category_param), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_info.count}&nbsp;шт.)</small>".html_safe %></li>
           <% end %>
         </ol>
       <% end %>

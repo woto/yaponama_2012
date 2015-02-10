@@ -220,7 +220,7 @@ input[type=radio]:checked + img{
 }
 
 .breadcrumb {
-  @extend .bottom-space;
+  @extend .bottom-space-lg;
 }
 
 /////////////////////
@@ -279,11 +279,9 @@ input[type=radio]:checked + img{
   @extend .list-unstyled;
 
   @media (max-width: $screen-xs-max) { @include content-columns(1); }
-  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) { @include content-columns(2); }
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) { @include content-columns(1); }
   @media (min-width: $screen-md-min) and (max-width: $screen-md-max) { @include content-columns(2); }
   @media (min-width: $screen-lg-min) { @include content-columns(3) }
-
-  font-size: 16px;
 
   li {
     padding: 8px;

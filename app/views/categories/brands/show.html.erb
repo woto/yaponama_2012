@@ -26,7 +26,7 @@
       <%= p.body do %>
         <ol id="category-models">
           <% @spare_applicabilities.each do |spare_applicability| %>
-            <li data-clickable-object> <%= link_to spare_applicability.cached_model, category_model_path(params[:category_id], spare_applicability.to_model_param), 'data-clickable-href' => '' %> </li>
+            <li data-clickable-object> <%= link_to safe_join([@resource.name, " НА ", @brand.name, " ", content_tag(:strong, spare_applicability.cached_model)]), category_model_path(params[:category_id], spare_applicability.to_model_param), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_applicability.count}&nbsp;шт.)</small>".html_safe %></li>
           <% end %>
         </ol>
       <% end %>
@@ -35,6 +35,8 @@
 
   <% if @resource_class %>
     <%= render partial: "#{@resource_class.name.underscore.pluralize}/index" %>
+  <% else %>
+    <%= render partial: 'best_parts_list', layout: 'paginator'  %>
   <% end %>
 
   <% if @current_user.seller? %>
