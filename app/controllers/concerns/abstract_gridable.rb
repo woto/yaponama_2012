@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 module AbstractGridable
   extend ActiveSupport::Concern
   include ::GridCommonColumns
@@ -7,6 +5,13 @@ module AbstractGridable
 
   included do
     before_action :set_grid_class
+
+    def index
+      respond_to do |format|
+        format.html
+        format.js { render 'grid_filter' }
+      end
+    end
 
     def additional_conditions
       # @items = @items.includes(:somebody)

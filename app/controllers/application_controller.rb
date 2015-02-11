@@ -59,13 +59,6 @@ class ApplicationController < ActionController::Base
     render "grid_modal_filters", :layout => false
   end
 
-  def index
-    respond_to do |format|
-      format.html
-      format.js { render 'grid_filter' }
-    end
-  end
-
   def new
   end
 

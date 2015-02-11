@@ -13,7 +13,7 @@
 
     = row class: 'bottom-space' do
 
-      .col-sm-4
+      .col-sm-8
 
         = panel 'primary' do |p|
 
@@ -26,7 +26,7 @@
           = p.body do
             = parsed_cached_profile(@resource.cached_profile)
 
-      .col-sm-4
+      .col-sm-8
 
         = panel 'primary' do |p|
 
@@ -47,7 +47,7 @@
                 ' Стоимость доставки: 
                 = number_to_currency @resource.delivery_cost
 
-      .col-sm-4
+      .col-sm-8
                             
         p Статус заказа: <span class='label label-#{@resource.status}'>#{Rails.configuration.orders_status[@resource.status].try(:[], 'title')} </span>
         p.text-muted.text-sm Вы просматриваете #{Rails.configuration.orders_status[@resource.status]['hint']}

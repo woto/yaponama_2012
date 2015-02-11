@@ -1,5 +1,3 @@
-<div class="container">
-  
   <%= somebody_tabs do %>
 
     <% if false %>
@@ -23,7 +21,7 @@
     <%= twbs_form_for @ic, url: smart_route({:prefix => [:inorder_action], :postfix => [:products]}, jaba) do |f| %>
 
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <% orders = @somebody.orders.where(:status => :open).load.collect { |o| [o.to_label, o.id] } %>
           <% orders << ['Новый заказ', '-1'] %>
           <%= f.twbs_select(:order_id, orders, {hint: 'Создайте новый заказ или выберите уже сделанный ранее.', label: 'Заказ'} ) %>
@@ -52,5 +50,3 @@
 
 
   <% end %>
-
-</div>
