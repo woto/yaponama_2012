@@ -649,6 +649,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.datetime "updated_at"
     t.date     "from"
     t.date     "to"
+    t.text     "preview"
   end
 
   add_index "generations", ["creator_id"], name: "index_generations_on_creator_id", using: :btree
@@ -691,6 +692,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "slang",        limit: 255
     t.date     "from"
     t.date     "to"
+    t.text     "preview"
   end
 
   add_index "models", ["brand_id"], name: "index_models_on_brand_id", using: :btree
