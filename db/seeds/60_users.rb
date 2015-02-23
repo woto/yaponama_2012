@@ -18,4 +18,4 @@ profile.emails.new( {:value => 'admin@example.com', :confirmed => true} )
 
 user.save!
 
-product = user.products.create!(creator: user, catalog_number: 'TIME', brand: Brand.new(name: 'TIME'), buy_cost: rand(400..3000), sell_cost: rand(500..4000), quantity_ordered: rand(1..4), code_1: 'fixtures', hide_catalog_number: false, min_days: 1, max_days: 2)
+product = user.products.create!(creator: user, catalog_number: 'TIME', brand: BrandMate.find_or_create_company('TIME'), buy_cost: rand(400..3000), sell_cost: rand(500..4000), quantity_ordered: rand(1..4), code_1: 'fixtures', hide_catalog_number: false, min_days: 1, max_days: 2)

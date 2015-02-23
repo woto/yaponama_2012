@@ -18,19 +18,19 @@ end
 Yaponama2012::Application.routes.draw do
 
   # /catalogs/brands/дочерний_id -> /catalogs/brands/родительский_id
-  get "/catalogs/brands/:id", constraints: lambda{|params, env| Brand.find(params[:id]).brand_id?}, to: redirect{|params, request|
+  get "/catalogs/brands/:id", constraints: lambda{|params, env| (brand = Brand.find(params[:id])).present? && brand.brand && !brand.conglomerate? }, to: redirect{|params, request|
     query_string = "?#{request.query_string}" if request.query_string.present?
     "/catalogs/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
   }
 
   # /brands/дочерний_id -> /brands/родительский_id
-  get "/brands/:id", constraints: lambda{|params, env| params[:id] != 'search' && Brand.find(params[:id]).brand_id?}, to: redirect{|params, request|
+  get "/brands/:id", constraints: lambda{|params, env| params[:id] != 'search' && (brand = Brand.find(params[:id])).present? && brand.brand }, to: redirect{|params, request|
     query_string = "?#{request.query_string}" if request.query_string.present?
     "/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
   }
 
   # /categories/категория/brands/дочерний_id -> /categories/категория/brands/родительский_id
-  get "/categories/:category_id/brands/:id", constraints: lambda{|params, env| Brand.find(params[:id]).brand_id?}, to: redirect{|params, request|
+  get "/categories/:category_id/brands/:id", constraints: lambda{|params, env| (brand = Brand.find(params[:id])).present? && brand.brand && !brand.conglomerate? }, to: redirect{|params, request|
     query_string = "?#{request.query_string}" if request.query_string.present?
     "/categories/#{params[:category_id]}/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
   }
@@ -467,7 +467,7 @@ Yaponama2012::Application.routes.draw do
 
   # TODO Удалить как поисковые роботы перестроятся
   get "*brand", constraints: BrandRedirector.new, to: redirect{|params, req|
-    brand = BrandMate.find_canonical(params[:brand].gsub('+', ' '))
+    brand = BrandMate.find_conglomerate((params[:brand]).gsub('+', ' '))
     "/brands/#{brand.to_param}"
   }
 

@@ -16,12 +16,12 @@ class Model < ActiveRecord::Base
 
   has_many :spare_applicabilities, dependent: :destroy
 
-  # TODO Написать для этого тест(?!)
-  validate do
-    if brand.try(:brand).present?
-      errors[:base] << 'Нельзя указывать в качестве производителя синоним'
-    end
-  end
+  ## TODO Написать для этого тест(?!)
+  #validate do
+  #  if brand.try(:brand).present?
+  #    errors[:base] << 'Нельзя указывать в качестве производителя синоним'
+  #  end
+  #end
 
   def to_label
     name

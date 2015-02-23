@@ -133,9 +133,18 @@ mitsubishi:
   rating: 950
   phantom: true
   creator: otto
-  slang: Митсубиси, Митсубиши
   preview: Вступление
   content: Описание
+
+mitsubishi_slang_1:
+  name: Митсубиси
+  brand: mitsubishi
+  sign: slang
+
+mitsubishi_slang_2:
+  name: Митсубиши
+  brand: mitsubishi
+  sign: slang
 
 ms:
   name: MS
@@ -205,7 +214,6 @@ proizvodit:
   created_at: '2014-10-14 05:30:08.54426'
   updated_at: '2014-10-14 05:30:08.54426'
   preview: 
-  slang: 
   default_display: 
 
 brand1:
