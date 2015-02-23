@@ -11,7 +11,7 @@
 
   <% @meta_title = "ЗАПЧАСТИ НА #{@brand.name}" %>
   <% @meta_title_lead = @brand.preview %>
-  <% @meta_title_small = "(рус. #{@brand.slang})" if @brand.slang.present? %>
+  <% @meta_title_small = "(рус. #{@brand.brands.slang.pluck(:name).join(', ')})" if @brand.brands.slang.exists? %>
   <%= page_header %>
 
   <div class="clearfix"></div>

@@ -37,6 +37,7 @@ class SpareInfo < ActiveRecord::Base
     "#{spare_catalog_id}-#{cached_spare_catalog.parameterize}"
   end
 
+  validates :brand, :presence => true
   validates :catalog_number, :presence => true, uniqueness:  { case_sensitive: false, :scope => :brand_id }
 
   validates :spare_catalog, :presence => true
@@ -122,11 +123,11 @@ class SpareInfo < ActiveRecord::Base
 
   end
 
-  # TODO Написать для этого тест(?!)
-  validate do
-    if brand.try(:brand).present?
-      errors[:base] << 'Нельзя указывать в качестве производителя синоним'
-    end
-  end
+  ## TODO Написать для этого тест(?!)
+  #validate do
+  #  if brand.try(:brand).present?
+  #    errors[:base] << 'Нельзя указывать в качестве производителя синоним'
+  #  end
+  #end
 
 end

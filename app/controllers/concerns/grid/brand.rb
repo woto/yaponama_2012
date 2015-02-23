@@ -18,10 +18,6 @@ module Grid::Brand
           :type => :string,
         }
 
-        columns_hash['slang'] = {
-          :type => :string,
-        }
-
         columns_hash['image'] = {
           :type => :string,
         }
@@ -59,7 +55,6 @@ module Grid::Brand
       @grid.visible_default_display = '1'
       @grid.visible_cached_brand = '1'
       @grid.visible_name = '1'
-      @grid.visible_slang = '1'
       @grid.visible_image = '1'
       @grid.visible_rating = '1'
       @grid.visible_created_at = '1'

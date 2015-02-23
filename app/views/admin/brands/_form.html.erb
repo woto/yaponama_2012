@@ -13,10 +13,9 @@
           <%= f.error(:brand) %>
         <% end %>
       <% end %>
+      <%= f.twbs_collection_select :sign, Brand.signs, :first, :first, include_blank: true %>
 
       <%= f.twbs_collection_check_boxes 'opts', Rails.application.config_for('application/opts')['opts'], :to_s, :to_s %>
-
-      <%= f.twbs_text_field :slang %>
 
       <%= render 'image_form', f:f, name: 'image' %>
       <%= f.twbs_text_field :rating %>

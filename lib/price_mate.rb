@@ -8,10 +8,6 @@ class PriceMate
     manufacturer.to_s.mb_chars.upcase
   end
 
-  def self.spare_catalog
-    SpareCatalog.find_or_create_by(name: 'НЕ РАЗОБРАННЫЕ')
-  end
-
   def self.true_or_false value
     case value
     when nil, false, '0', 0
@@ -139,7 +135,7 @@ class PriceMate
     parsed_json["result_prices"].each do |item|
 
       cn = item["catalog_number"].to_s
-      canonical_brand = BrandMate.find_or_create_canonical!(item["manufacturer"])
+      canonical_brand = BrandMate.find_or_create_conglomerate item["manufacturer"]
       mf = canonical_brand.name.to_s
 
       h = cn + " - " + mf

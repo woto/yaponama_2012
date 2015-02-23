@@ -6,19 +6,26 @@ class BrandsController < ApplicationController
   def search
     brand_t = Brand.arel_table
 
-    @resources = Brand.where(brand_id: nil)
+    @resources = Brand
+    @resources = Brand.where("brands.brand_id IS NULL OR brands.sign = #{Brand.signs[:conglomerate]}")
 
     if params[:name].present?
       b = Arel::Table.new Brand.reflect_on_association(:brands)
+      b2 = Arel::Table.new Brand.reflect_on_association(:brands)
       b.table_alias = 'brands_brands'
+      b2.table_alias = 'brands_brands_2'
       @resources = @resources.where(brand_t[:name]. matches("#{params[:name]}%")
-                                    .or(b[:name].matches("#{params[:name]}%")))
-        .includes(:brands)
+                                    .or(b[:name].matches("#{params[:name]}%"))
+                                    .or(b2[:name].matches("#{params[:name]}%")))
+        .includes(:brands => :brands)
         .references(:brands_brands)
+        .references(:brands_brands_2)
     end
 
     if params[:is_brand] == '1'
       @resources = @resources.where(is_brand: true)
+    else
+      @resources = @resources.where()
     end
 
     @resources = @resources.order(:name).page params[:page]

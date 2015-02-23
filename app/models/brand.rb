@@ -6,6 +6,8 @@ class Brand < ActiveRecord::Base
   include BrandAttributes
   include CachedBrand
 
+  enum sign: [:slang, :synonym, :conglomerate]
+
   mount_uploader :image, BrandUploader
 
   validates :name, :presence => true, uniqueness:  { case_sensitive: false }
@@ -17,12 +19,12 @@ class Brand < ActiveRecord::Base
   has_many :spare_applicabilities, dependent: :destroy
   has_many :products
 
-  # TODO Написать для этого тест(?!)
-  validate do
-    if brand.try(:brand).present?
-      errors[:base] << 'Нельзя указывать в качестве производителя синоним'
-    end
-  end
+  ## TODO Написать для этого тест(?!)
+  #validate do
+  #  if brand.try(:brand).present?
+  #    errors[:base] << 'Нельзя указывать в качестве производителя синоним'
+  #  end
+  #end
 
   validate do
     if brand == self
@@ -76,11 +78,11 @@ class Brand < ActiveRecord::Base
       clear_changes_information
 
       spare_infos.each {|s| s.update(brand: brand)}
-      cars.each {|c| c.update(brand: brand)}
-      models.each {|m| m.update(brand: brand)}
+      cars.each {|c| c.update(brand: brand)} unless conglomerate?
+      models.each {|m| m.update(brand: brand)} unless conglomerate?
       products.each {|p| p.update(brand: brand)}
-      spare_applicabilities.each{|s| s.update(brand: brand)}
-      brands.each {|b| b.update(brand: brand)}
+      spare_applicabilities.each{|s| s.update(brand: brand)} unless conglomerate?
+      brands.each {|b| b.update(brand: brand)} unless conglomerate?
 
     end
 
