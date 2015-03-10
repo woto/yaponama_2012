@@ -1,0 +1,126 @@
+<div class="container">
+   <div class="row">
+     <div class="col-lg-24">
+
+       <div class="well top-space-lg">
+       <%= search_form_for @q, url: manage_phrases_path do |f| %>
+
+         <%= f.label :catalog_number %>
+         <%= f.search_field :catalog_number_cont %>
+
+         <%= f.label :catalog_number_string %>
+         <%= f.search_field(:catalog_number_string_length_gt) %>
+         <br />
+
+         <%= f.label :phrase %>
+         <%= f.search_field :phrase_cont %>
+         <br />
+
+         <%= f.label :spare_info_id %>
+         <%= f.search_field :spare_info_id_eq %>
+         <br />
+
+         <%= f.label :yandex_shows %>
+         <%= f.search_field :yandex_shows_gt %>
+         -
+         <%= f.search_field :yandex_shows_lt %>
+         <% predicate = 'yandex_shows_not_null' %>
+         <% value = '1' %>
+         <%= check_box_tag "q[#{predicate}]", value, params.try(:[],:q).try(:[],predicate).try(:include?, value), id: "q_#{predicate}_#{value}" %>
+         <br />
+
+         <%= f.label :yandex_banner_updated_at %>
+         <%= f.search_field :yandex_banner_updated_at_gt %>
+         -
+         <%= f.search_field :yandex_banner_updated_at_lt %>
+         <% predicate = 'yandex_banner_updated_at_not_null' %>
+         <% value = '1' %>
+         <%= check_box_tag "q[#{predicate}]", value, params.try(:[],:q).try(:[],predicate).try(:include?, value), id: "q_#{predicate}_#{value}" %>
+         <br />
+
+         <%= f.label :yandex_wordstat_updated_at %>
+         <%= f.search_field :yandex_wordstat_updated_at_gt %>
+         -
+         <%= f.search_field :yandex_wordstat_updated_at_lt %>
+         <% predicate = 'yandex_wordstat_updated_at_not_null' %>
+         <% value = '1' %>
+         <%= check_box_tag "q[#{predicate}]", value, params.try(:[],:q).try(:[],predicate).try(:include?, value), id: "q_#{predicate}_#{value}" %>
+         <br />
+
+         <%= f.label :updated_at %>
+         <%= f.search_field :updated_at_gt %>
+         -
+         <%= f.search_field :updated_at_lt %>
+         <br />
+
+         <%= f.label :created_at %>
+         <%= f.search_field :created_at_gt %>
+         -
+         <%= f.search_field :created_at_lt %>
+         <br />
+
+         <%= f.label :publish_true %>
+         <% predicate = 'publish_true' %>
+         <% value = '1' %>
+         <%= check_box_tag "q[#{predicate}]", value, params.try(:[],:q).try(:[],predicate).try(:include?, value), id: "q_#{predicate}_#{value}" %>
+
+         <%= f.label :publish_not_true %>
+         <% predicate = 'publish_not_true' %>
+         <% value = '1' %>
+         <%= check_box_tag "q[#{predicate}]", value, params.try(:[],:q).try(:[],predicate).try(:include?, value), id: "q_#{predicate}_#{value}" %>
+
+         <div class='top-space'>
+           <%= f.submit 'Поиск', class: 'btn btn-primary' %>
+           <%= link_to 'Сбросить условия', manage_phrases_path, class: 'btn btn-default' %>
+
+         </div>
+
+       <% end %>
+       </div>
+
+       <div class="top-space-lg">
+         <%= paginate @phrases %>
+       </div>
+
+       <div class="top-space-lg">
+         <div class="table-responsive">
+           <table class="table">
+             <th> <%= sort_link(@q, :id) %> </td>
+             <th> <%= sort_link(@q, :spare_info_id) %> </td>
+             <th> <%= sort_link(@q, :catalog_number) %> </td>
+             <th> <%= sort_link(@q, :phrase) %> </td>
+             <th> <%= sort_link(@q, :yandex_campaign_id) %> </td>
+             <th> <%= sort_link(@q, :yandex_banner_id) %> </td>
+             <th> <%= sort_link(@q, :yandex_banner_updated_at) %> </td>
+             <th> <%= sort_link(@q, :yandex_wordstat_updated_at) %> </td>
+             <th> <%= sort_link(@q, :yandex_shows) %> </td>
+             <th> <%= sort_link(@q, :created_at) %> </td>
+             <th> <%= sort_link(@q, :updated_at) %> </td>
+             <th> <%= sort_link(@q, :publish) %> </td>
+             <% @phrases.each do |phrase| %>
+               <tr>
+                 <td><%= phrase.id %></td>
+                 <td><%= link_to phrase.spare_info_id, admin_spare_info_path(phrase.spare_info_id) %></td>
+                 <td><%= phrase.catalog_number %></td>
+                 <td><%= phrase.phrase %></td>
+                 <td><%= phrase.yandex_campaign_id %></td>
+                 <td><%= phrase.yandex_banner_id %></td>
+                 <td><%= phrase.yandex_banner_updated_at %></td>
+                 <td><%= phrase.yandex_wordstat_updated_at %></td>
+                 <td><%= phrase.yandex_shows %></td>
+                 <td><%= phrase.created_at %></td>
+                 <td><%= phrase.updated_at %></td>
+                 <td><%= phrase.publish %></td>
+               </tr>
+             <% end %>
+           </table>
+         </div>
+       </div>
+
+       <div class="bottom-space-lg">
+         <%= paginate @phrases %>
+       </div>
+
+     </div>
+  </div>
+</div>

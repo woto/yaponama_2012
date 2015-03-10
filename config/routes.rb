@@ -254,6 +254,10 @@ Yaponama2012::Application.routes.draw do
     end
   end
 
+  namespace :manage do
+    resources :phrases
+  end
+
   namespace :admin do
     concerns :global_and_admin
     concerns :only_admin
