@@ -1,15 +1,4 @@
 GIT
-  remote: git://github.com/activerecord-hackery/ransack.git
-  revision: 9b0f7ccf0189239e039e3a4c1e73b996e1859f70
-  specs:
-    ransack (1.5.1)
-      actionpack (>= 3.0)
-      activerecord (>= 3.0)
-      activesupport (>= 3.0)
-      i18n
-      polyamorous (~> 1.1)
-
-GIT
   remote: git://github.com/jnicklas/capybara.git
   revision: 1a493e33b86042bee8e7c31136140b0fbd273111
   specs:
@@ -260,6 +249,12 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    ransack (1.6.3)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.1)
     rdoc (4.2.0)
       json (~> 1.4)
     read_only (0.0.3)
@@ -403,7 +398,7 @@ DEPENDENCIES
   rails (= 4.2.0)
   rails-html-sanitizer (~> 1.0)
   rails-i18n (~> 4.0.0)
-  ransack!
+  ransack
   read_only
   redis (~> 3.0.1)
   remotipart

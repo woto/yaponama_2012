@@ -133,7 +133,8 @@ gem 'font-awesome-sass'
 gem 'read_only'
 gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 gem 'sinatra', '>= 1.3.0', :require => nil
-gem 'ransack', github: 'activerecord-hackery/ransack'
+gem 'ransack' # added 04.03.2015
+#gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'mechanize'
 
 
