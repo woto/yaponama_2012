@@ -39,6 +39,7 @@ class PriceMate
       parsed_json["result_prices"].sort_by do |a|
 
         days = (((a["job_import_job_delivery_days_average"].present? ? a["job_import_job_delivery_days_average"] : a["job_import_job_delivery_days_declared"]).to_f + a["job_import_job_delivery_days_declared"].to_f)/2 )
+        #binding.pry
         a["price_goodness"].to_f + days/90.0 - a["success_percent"]/200.0
 
       end
@@ -68,8 +69,11 @@ class PriceMate
           references(:spare_catalog_tokens).group('spare_catalogs.id').
           order('sum(spare_catalog_tokens.weight) DESC').
           select('spare_catalogs.*').
-          limit(1).first
-        SpareCatalogJob.perform_later(catalog_number, mf_scope[:brand], catalog)
+          limit(1).first || Defaults.spare_catalog
+
+        if info.present?
+          SpareInfoJob.perform_later(info, catalog, mf_scope[:catalog_number_origs].keys, mf_scope[:titles].keys, mf_scope[:min_days], mf_scope[:min_cost], mf_scope[:offers].size)
+        end
         mf_scope[:catalog] = catalog
       end
     end
