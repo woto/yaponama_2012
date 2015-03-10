@@ -44,6 +44,19 @@ end
 
 namespace :app do
 
+  desc 'Открываем поочередно страницы нашего сайта'
+  task :progon => :environment do
+    while true do
+      Progon.progon
+      puts Time.zone.now
+      sleep 1
+    end
+  end
+
+  task :y => :environment do
+    Y.y
+  end
+
   task :destroy_old_bots => :environment do
     DestroyOldBots.destroy_old_bots
   end
