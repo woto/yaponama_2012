@@ -10,6 +10,7 @@ class SpareInfo < ActiveRecord::Base
 
   has_many :warehouses
   has_many :places, :through => :warehouses
+  has_many :spare_info_phrases, dependent: :destroy
 
   has_many :from_spare_replacements, foreign_key: :from_spare_info_id, class_name: SpareReplacement, dependent: :destroy
   has_many :to_spare_replacements, foreign_key: :to_spare_info_id, class_name: SpareReplacement, dependent: :destroy

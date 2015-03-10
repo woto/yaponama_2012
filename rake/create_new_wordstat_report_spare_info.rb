@@ -1,19 +1,31 @@
 class CreateNewWordstatReportSpareInfo
 
   def self.create_new_wordstat_report_spare_info
-    report_ids = Direct::Posters::Wordstat::GetWordstatReportList.new.post
+
+    #debug_counter = 0
+
+    report_ids = YandexDirect.new(:GetWordstatReportList).send.done_reports
     report_ids.each do |report_id|
-      Direct::Posters::Wordstat::DeleteWordstatReport.new(report_id).post
+      YandexDirect.new(:DeleteWordstatReport, {:param => report_id}).send
     end
 
     loop do
-      i = 0
       offset = 0
       limit = 10
 
       1.upto(5) do |i|
-        phrases = SpareInfo.where(shows: nil).where(cached_brand: 'TOYOTA').order(:created_at => :desc).limit(limit).offset(offset).pluck(:catalog_number)
-        Direct::Posters::Wordstat::CreateNewWordstatReport.new(phrases).post
+        phrases = SpareInfoPhrase.
+          where(:yandex_shows => nil).
+          where("LENGTH(phrase) >= ?", 10).
+          limit(limit).
+          offset(offset).
+          pluck(:phrase)
+
+        #debug_counter += phrases.count
+        #puts 'debug_counter'
+        #puts debug_counter
+
+        YandexDirect.new(:CreateNewWordstatReport, {:param => {"Phrases" => phrases}}).send
         offset += limit
       end
 
@@ -21,21 +33,21 @@ class CreateNewWordstatReportSpareInfo
       begin
         i += 5
         sleep i
-      end until (report_ids = Direct::Posters::Wordstat::GetWordstatReportList.new.post).size == 5
+      end until (report_ids = YandexDirect.new(:GetWordstatReportList).send.done_reports).size == 5
 
       report_ids.each do |report_id|
-        reports = Direct::Posters::Wordstat::GetWordstatReport.new(report_id).post
+        reports = YandexDirect.new(:GetWordstatReport, {:param => report_id}).send.data
         reports.each do |report|
-          spare_infos = SpareInfo.where(catalog_number: report['Phrase'])
+          spare_info_phrases = SpareInfoPhrase.where(:phrase => report['Phrase'])
           report['SearchedWith'].each do |keyword|
             if keyword['Phrase'] == report['Phrase']
-              spare_infos.each do |spare_info|
-                spare_info.update!(shows: keyword['Shows'])
+              spare_info_phrases.each do |spare_info_phrase|
+                spare_info_phrase.update!(:yandex_shows => keyword['Shows'], :yandex_wordstat_updated_at => Time.zone.now)
               end
             end
           end
         end
-        Direct::Posters::Wordstat::DeleteWordstatReport.new(report_id).post
+        YandexDirect.new(:DeleteWordstatReport, {:param => report_id}).send
       end
 
     end

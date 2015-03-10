@@ -91,7 +91,7 @@ class Y
       "Title" => "#{spare_info_phrase.spare_info.cached_brand} - #{spare_info_phrase.catalog_number}",
       "Text" => "#{spare_info_phrase.spare_info.cached_spare_catalog} #{ActionController::Base.helpers.number_to_currency(spare_info_phrase.spare_info.min_cost, :precision => 0, :delimiter => '')} от #{spare_info_phrase.spare_info.min_days} дн.",
       "Href" => "http://www.avtorif.ru/user/products/new?catalog_number=#{spare_info_phrase.spare_info.catalog_number}",
-      "Geo" => "1",
+      "Geo" => "213",
       "ContactInfo" => {
          "Country" => "Россия",
          "CountryCode" => "+7",
@@ -108,7 +108,7 @@ class Y
       "Phrases" => [{
         "PhraseID" => phrase_id,
         "Phrase" => spare_info_phrase.phrase,
-        "Price" => 5,
+        "Price" => 7,
         "Currency" => "RUB"
       }]
     }

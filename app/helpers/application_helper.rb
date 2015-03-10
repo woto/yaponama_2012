@@ -80,7 +80,7 @@ module ApplicationHelper
     title ||= column_name.titleize
     direction = column_name.to_s == @grid.sort_column && @grid.sort_direction == 'asc' ? 'desc' : 'asc'
     css_class =  "text-warning" if column_name == @grid.sort_column
-    link_to url_for(params.merge(:sort_column => column_name, :sort_direction => direction)), options.merge({id: "sort_#{column_name}",  :class => "ignoredirty #{css_class}", :remote => true}) do
+    link_to url_for(params.merge(:sort_column => column_name, :sort_direction => direction)), options.merge({id: "sort_#{column_name}",  :class => "ignoredirty #{css_class}", :remote => true, :rel => 'nofollow'}) do
       if column_name.to_s == @grid.sort_column
         if @grid.sort_direction == 'asc'
           icon('sort-desc') + '&nbsp;'.html_safe 
