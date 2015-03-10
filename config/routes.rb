@@ -17,6 +17,9 @@ end
 
 Yaponama2012::Application.routes.draw do
 
+  # /brands/id/parts -> /brands/id
+  get "/brands/:id/parts", to: redirect('/brands/%{id}')
+
   # /catalogs/brands/дочерний_id -> /catalogs/brands/родительский_id
   get "/catalogs/brands/:id", constraints: lambda{|params, env| (brand = Brand.find(params[:id])).present? && brand.brand && !brand.conglomerate? }, to: redirect{|params, request|
     query_string = "?#{request.query_string}" if request.query_string.present?

@@ -27,7 +27,7 @@
             <% short_name = mf_scope[:title] %>
             <%= p.heading do %>
               <%= p.title itemprop: 'name' do %>
-                <%= link_to "ЗАПЧАСТИ", categories_path %> <%= icon 'angle-right' %>
+                <%= link_to "Запчасти", categories_path %> <%= icon 'angle-right' %>
                 <% if mf_scope[:catalog] %>
                   <%= link_to mf_scope[:catalog].name, category_brands_path(mf_scope[:catalog]) %> <%= icon 'angle-right' %>
                 <% end %>
@@ -117,7 +117,9 @@
                     <div class="text-sm" itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
                       <meta itemprop="priceCurrency" content="RUB" />
                       <a href="#" class="text-muted dashed" data-expandable-link>
-                        Не устраивает цена или нужно быстрее? Взгляните на все <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> предложений от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span> и сроками от <%= mf_scope[:min_days] %> до <%= mf_scope[:max_days] %> дней.
+                        <span class="<%= 'hidden' if mf_scope[:offers].size == 1 %>">
+                          Не устраивает цена или нужно быстрее? Взгляните на все <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> <%= I18n.translate :offers, count: mf_scope[:offers].size %> от наших поставщиков с ценами от <strong itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></strong> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span> и сроками от <%= mf_scope[:min_days] %> до <%= mf_scope[:max_days] %> дней.
+                        </span>
                       </a>
                     </div>
                     </div>

@@ -20,7 +20,7 @@
 
   <%= image_tag @brand.image_url, class: 'pull-right', style: 'margin-top: -30px;' %>
 
-  <% @meta_title = "#{@resource.name} НА #{@brand.name} #{@model.name} #{@generation.name}" %>
+  <% @meta_title = "#{@resource.name} на #{@brand.name} #{@model.name} #{@generation.name}" %>
   <%= page_header %>
 
   <div class="clearfix"></div>
@@ -35,7 +35,7 @@
       <%= p.body do %>
         <ol id="category-modifications">
           <% @spare_applicabilities.each do |spare_applicability| %>
-            <li data-clickable-object> <%= link_to safe_join([@resource.name, " НА ", @brand.name, " ", @model.name, " ", @generation.name, " ", content_tag(:strong, spare_applicability.cached_modification)]), category_modification_path(params[:category_id], spare_applicability.to_modification_param), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_applicability.count}&nbsp;шт.)</small>".html_safe %></li>
+            <li data-clickable-object> <%= link_to safe_join([@resource.name, " на ", @brand.name, " ", @model.name, " ", @generation.name, " ", content_tag(:strong, spare_applicability.cached_modification)]), category_modification_path(params[:category_id], spare_applicability.to_modification_param), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_applicability.count}&nbsp;шт.)</small>".html_safe %></li>
           <% end %>
         </ol>
       <% end %>

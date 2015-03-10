@@ -10,7 +10,7 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  host: avtorif.ru
+  host: localhost
   port: 85
 
   price_request_cache_with_replacements_in_seconds: 1

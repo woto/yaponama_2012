@@ -10,7 +10,7 @@
     <div class="brands bottom-space-lg clearfix">
       <% @spare_applicabilities.each do |spare_applicability| %>
           <%= brands_decorator(lambda{|brand| catalogs_brand_path(brand)}, spare_applicability.brand, {:title => true}) %>
-          <% if false %><li><%= link_to "ЗАПЧАСТИ НА #{spare_applicability.cached_brand}", catalogs_brand_path(spare_applicability.to_brand_param) %></li><% end %>
+          <% if false %><li><%= link_to "Запчасти на #{spare_applicability.cached_brand}", catalogs_brand_path(spare_applicability.to_brand_param) %></li><% end %>
       <% end %>
     </div>
   <% end %>

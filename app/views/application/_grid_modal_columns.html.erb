@@ -19,7 +19,7 @@
 
     <div class="row">
       <% full_grid.each do |chunks| %>
-        <div class="col-xs-6">
+        <div class="col-xs-12">
           <% chunks.each do |column_name, column_settings| %>
             <%= f.twbs_check_box :"visible_#{column_name}", label: @resource_class.human_attribute_name(column_name) %>
           <% end %>

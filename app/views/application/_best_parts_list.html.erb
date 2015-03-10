@@ -3,10 +3,9 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Каталожный номер</th>
+          <th>Артикул</th>
           <th>Производитель</th>
           <th>Название запчасти</th>
-          <th>Магазин</th>
         </tr>
       </thead>
       <tbody>
@@ -14,29 +13,36 @@
           <tr>
             <td>
               <%= spare_info.catalog_number %>
+              <br />
+              <small class="text-muted"><%= spare_info.spare_info_phrases.pluck("catalog_number").join(', ') %></small>
+            </td>
             </td>
             <td>
               <%= spare_info.cached_brand %>
             </td>
-            <td> 
-              <%= spare_info.cached_spare_catalog %>
-            </td>
-            <td>
+            <td style="word-break: break-all"> 
+              <small class="text-muted"><%= spare_info.titles.join( ', ') %></small>
               <%= link_to new_user_product_path(catalog_number: spare_info.catalog_number, anchor: spare_info.cached_brand) do %>
                 <% if spare_info.warehouses.exists? %>
                   <% spare_info.warehouses.each do |w| %>
-                    <ul class="list-unstyled">
+                    <ul class="list-unstyled top-space-xs">
                       <li><%= w.place.to_label %></li>
                       <li>В наличии <%= w.count %> шт.</li>
                       <li><%= number_to_currency w.price %></li>
                     </ul>
                   <% end %>
                 <% else %>
-                  Посмотреть цены
+                  <ul class="list-unstyled top-space-xs">
+                    <li>Посмотреть цены</li>
+                  </ul>
                 <% end %>
               <% end %>
+              <small class="text-muted">
+                Под заказ
+                <%= "#{spare_info.offers} #{I18n.translate :offers, count: spare_info.offers}" if spare_info.offers %> <%= "от #{spare_info.min_days} дн." if spare_info.min_days %><%= ", от #{number_to_currency(spare_info.min_cost, :precision => 0, :delimiter => '')}" if spare_info.min_cost %>
+              </small>
             </td>
-          </td>
+          </tr>
         <% end %>
       </tbody>
     </table>

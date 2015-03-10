@@ -21,7 +21,7 @@
       <%= p.body do %>
         <ol id="category-brands">
           <% @spare_applicabilities.each do |spare_applicability| %>
-            <li data-clickable-object> <%= link_to safe_join([@resource.name, " НА ", content_tag(:strong, spare_applicability.cached_brand)]), category_brand_path(params[:id], spare_applicability.to_brand_param), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_applicability.count}&nbsp;шт.)</small>".html_safe %></li>
+            <li data-clickable-object> <%= link_to safe_join([@resource.name, " на ", content_tag(:strong, spare_applicability.cached_brand)]), category_brand_path(params[:id], spare_applicability.to_brand_param), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_applicability.count}&nbsp;шт.)</small>".html_safe %></li>
           <% end %>
         </ol>
       <% end %>

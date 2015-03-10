@@ -18,7 +18,7 @@
 
   <%= image_tag @brand.image_url, class: 'pull-right', style: 'margin-top: -30px;' %>
 
-  <% @meta_title = "#{@resource.name} НА #{@brand.name} #{@model.name}" %>
+  <% @meta_title = "#{@resource.name} на #{@brand.name} #{@model.name}" %>
   <% @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present? %>
   <%= page_header %>
 
@@ -34,7 +34,7 @@
       <%= p.body do %>
         <ol id="category-generations">
           <% @spare_applicabilities.each do |spare_applicability| %>
-            <li data-clickable-object> <%= link_to safe_join([@resource.name, " НА ", @brand.name, " ", @model.name, " ", content_tag(:strong, spare_applicability.cached_generation)]), category_generation_path(params[:category_id], spare_applicability.to_generation_param), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_applicability.count}&nbsp;шт.)</small>".html_safe %> </li>
+            <li data-clickable-object> <%= link_to safe_join([@resource.name, " на ", @brand.name, " ", @model.name, " ", content_tag(:strong, spare_applicability.cached_generation)]), category_generation_path(params[:category_id], spare_applicability.to_generation_param), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_applicability.count}&nbsp;шт.)</small>".html_safe %> </li>
           <% end %>
         </ol>
       <% end %>

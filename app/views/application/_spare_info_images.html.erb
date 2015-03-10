@@ -48,5 +48,5 @@
     </div>
   </div>
 <% else %>
-  <img src="http://www.rk-an.ru/images/empty_photo.jpg" alt="Изображение отстутствует" class="img-thumbnail center-block bottom-space-lg top-space" style="background: #FAFAFA;">
+  <%= image_tag 'no_photo.jpg', alt: "Изображение отстутствует", class: "img-thumbnail center-block bottom-space-lg top-space", style: "background: #FAFAFA;" %>
 <% end %>

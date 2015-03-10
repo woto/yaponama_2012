@@ -1,4 +1,9 @@
 ru:
+  offers:
+    one: предложение
+    few: предложения
+    many: предложений
+    other: предложения
   accumulators: аккумуляторов
   date:
     abbr_day_names:
