@@ -38,15 +38,32 @@ module Grid::SpareInfo
         :type => :string,
       }
 
-      columns_hash['shows'] = {
+      columns_hash['offers'] = {
+        :type => :number,
+      }
+
+      columns_hash['titles'] = {
+        :type => :string,
+      }
+
+      columns_hash['min_days'] = {
+        :type => :number,
+      }
+
+      columns_hash['min_cost'] = {
         :type => :number,
       }
 
       columns_hash['notes'] = {
         :type => :string,
       }
+
       columns_hash['notes_invisible'] = {
         :type => :string,
+      }
+
+      columns_hash['aggregated_content_updated_at'] = {
+        :type => :date,
       }
 
       created_at(columns_hash)
@@ -57,12 +74,14 @@ module Grid::SpareInfo
 
     def set_preferable_columns
       @grid.visible_id = '1'
+      @grid.visible_offers = '1'
+      @grid.visible_min_days = '1'
+      @grid.visible_min_cost = '1'
       @grid.visible_catalog_number = '1'
       @grid.visible_cached_brand = '1'
       @grid.visible_cached_spare_catalog = '1'
       @grid.visible_image1 = '1'
       @grid.visible_content = '1'
-      @grid.visible_shows = '1'
       @grid.visible_notes = '1'
       @grid.visible_notes_invisible = '1'
       @grid.visible_created_at = '1'

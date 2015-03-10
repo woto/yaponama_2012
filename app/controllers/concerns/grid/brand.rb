@@ -34,6 +34,10 @@ module Grid::Brand
           :type => :boolean,
         }
 
+        columns_hash['sign'] = {
+          :type => :number,
+        }
+
         columns_hash['content'] = {
           :type => :string,
         }
@@ -53,6 +57,7 @@ module Grid::Brand
       @grid.visible_preview = '1'
       @grid.visible_is_brand = '1'
       @grid.visible_default_display = '1'
+      @grid.visible_sign = '1'
       @grid.visible_cached_brand = '1'
       @grid.visible_name = '1'
       @grid.visible_image = '1'
