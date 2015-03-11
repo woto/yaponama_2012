@@ -7,12 +7,13 @@ class SpareCatalog < ActiveRecord::Base
   has_many :spare_catalog_tokens, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
+  validates :name, length: {maximum: 50}
 
   accepts_nested_attributes_for :spare_catalog_tokens, allow_destroy: true
 
-  before_validation do
-    self.name = name.mb_chars.upcase
-  end
+  #before_validation do
+  #  self.name = name.mb_chars.upcase
+  #end
 
   # Когда редактируется категория, и прилетает пустой opt (выбор принадлежности к какой-нибудь
   # особой категории, напр. accumulator), то поле nil перезаписывается на "". Это нежелательное
@@ -31,7 +32,7 @@ class SpareCatalog < ActiveRecord::Base
   end
 
   before_destroy do
-    spare_catalog = PriceMate.spare_catalog
+    spare_catalog = Defaults.spare_catalog
     if spare_infos.exists?
       spare_infos.each do |si|
         si.update(spare_catalog: spare_catalog)
