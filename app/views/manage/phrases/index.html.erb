@@ -64,8 +64,8 @@
          <% value = '1' %>
          <%= check_box_tag "q[#{predicate}]", value, params.try(:[],:q).try(:[],predicate).try(:include?, value), id: "q_#{predicate}_#{value}" %>
 
-         <%= f.label :publish_not_true %>
-         <% predicate = 'publish_not_true' %>
+         <%= f.label :publish_null %>
+         <% predicate = 'publish_null' %>
          <% value = '1' %>
          <%= check_box_tag "q[#{predicate}]", value, params.try(:[],:q).try(:[],predicate).try(:include?, value), id: "q_#{predicate}_#{value}" %>
 

@@ -28,6 +28,7 @@ class YandexDirect
     LOGGER.info "RECV: #{@response}"
     if @response.key? 'error_code'
       binding.pry
+      raise 'EXIT'
     end
     self
   end

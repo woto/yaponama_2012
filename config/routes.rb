@@ -17,6 +17,8 @@ end
 
 Yaponama2012::Application.routes.draw do
 
+  resources :polls
+
   # /brands/id/parts -> /brands/id
   get "/brands/:id/parts", to: redirect('/brands/%{id}')
 

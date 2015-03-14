@@ -108,7 +108,7 @@ class Y
       "Phrases" => [{
         "PhraseID" => phrase_id,
         "Phrase" => spare_info_phrase.phrase,
-        "Price" => 7,
+        "Price" => 2,
         "Currency" => "RUB"
       }]
     }

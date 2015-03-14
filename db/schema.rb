@@ -1055,6 +1055,16 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "phones", ["profile_id"], name: "index_phones_on_profile_id", using: :btree
   add_index "phones", ["somebody_id"], name: "index_phones_on_somebody_id", using: :btree
 
+  create_table "polls", force: :cascade do |t|
+    t.integer  "price"
+    t.integer  "awaiting"
+    t.integer  "reach"
+    t.text     "comment"
+    t.inet     "remote_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "postal_address_transactions", force: :cascade do |t|
     t.integer  "postal_address_id"
     t.string   "operation",                limit: 255

@@ -1,0 +1,51 @@
+<%= panel 'warning', id: 'poll-panel' do |p| %>
+
+  <%= p.heading "data-clickable-object" => '' do %>
+    <%= p.title do %>
+      <a data-toggle="collapse" data-clickable-href data-parent="#poll-panel" href="#poll-body">
+        Уделите нам 15 секунд, примите участие в опросе!
+        <%= icon 'caret-down pull-right' %>
+      </a>
+    <% end %>
+  <% end %>
+
+  <%= p.collapse id: 'poll-body' do %>
+    <%= p.body do %>
+      <style>
+        .poll .radio {
+          margin-top: 2px;
+          margin-bottom: 2px;
+        }
+
+        .poll .radio input[type="radio"], .poll .radio input[type="checkbox"] {
+          margin: 0 0 0 -20px;
+        }
+
+        .poll .form-group {
+          margin-bottom: 10px;
+        }
+      </style>
+
+      <div class="poll">
+        <% @poll = Poll.new %>
+        <div class="text-sm">
+          <%= simple_form_for(@poll, :remote => true) do |f| %>
+            <%= f.error_notification %>
+
+            <div class="form-inputs">
+              <%= f.input :price, :as => :radio_buttons, collection: [['Да.', 'cheap'], ['Немного завышена.', 'normal'], ['Сильно завышена.', 'expensive']], label: 'Устраивает ли вас цена?' %>
+              <%= f.input :awaiting, :as => :radio_buttons, collection: [['Прямо сегодня.', 'warehouse'], ['Я готов подождать несколько дней, при этом немного сэкономив.', 'few_days'], ['Я готов подождать до двух недель, но получить по самой низкой цене.', 'min_price']], label: 'Как быстро вам нужно?'%>
+              <%= f.input :reach, :as => :radio_buttons, collection:[['Службой доставки.', 'moscow_delivery'], ['Забрать самостоятельно если находится в пешей доступности по Москве.', 'pickups'], ['Мне необходима доставка в мой город.', 'russia']], label: 'Как вам удобней получить?' %>
+              <%= f.input :comment, label: 'Есть что добавить?' %>
+            </div>
+
+            <div class="form-actions">
+              <%= f.button :submit, 'Проголосовать', class: 'btn btn-warning' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
