@@ -15,7 +15,11 @@ class CreateNewWordstatReportSpareInfo
 
       1.upto(5) do |i|
         phrases = SpareInfoPhrase.
+          joins(:spare_info).
+          where("min_cost > ?", 500).
+          where("min_cost < ?", 15000).
           where(:yandex_shows => nil).
+          where(:publish => nil).
           where("LENGTH(phrase) >= ?", 10).
           limit(limit).
           offset(offset).
