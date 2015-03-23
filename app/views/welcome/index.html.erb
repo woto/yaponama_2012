@@ -77,8 +77,8 @@
     <%= row do %>
 
       <div class="col-lg-24" style="position: relative">
-        <% Faq.all.each do |faq| %>
-          <p data-top="top:<%= -Random.rand(600) %>px" data-bottom="top:<%=Random.rand(600)%>px" class="text-muted unselectable" style="color: #555; font-size: <%= 20 + Random.rand(20) %>px; font-weight: bold; position: absolute; top: <%= Random.rand(340) - 40 %>px ; left: <%= Random.rand(800) - 100 %>px; padding: 0; display: block; white-space: nowrap"><%= faq.question %></p>
+        <% @topics.each do |topic| %>
+          <p data-top="top:<%= -Random.rand(600) %>px" data-bottom="top:<%=Random.rand(600)%>px" class="text-muted unselectable" style="color: #555; font-size: <%= 20 + Random.rand(20) %>px; font-weight: bold; position: absolute; top: <%= Random.rand(340) - 40 %>px ; left: <%= Random.rand(800) - 100 %>px; padding: 0; display: block; white-space: nowrap"><%= topic['title'] %></p>
         <% end %>
 
         <div style="top: 120px; position: absolute; left: 0; right: 0; width: 300px" class="center-block">

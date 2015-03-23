@@ -1,11 +1,11 @@
 class PasswordResetPreview < ActionMailer::Preview
 
   def email
-    PasswordResetMailer.email(Email.last.value, Email.last.somebody.password_reset_token)
+    PasswordResetMailer.email(Email.order(:updated_at).last.value, Email.order(:updated_at).last.somebody.password_reset_token)
   end
 
   def phone
-    PasswordResetMailer.phone(Phone.last.value, Phone.last.somebody.password_reset_token)
+    PasswordResetMailer.phone(Phone.order(:updated_at).last.value, Phone.order(:updated_at).last.somebody.password_reset_token)
   end
 
 end

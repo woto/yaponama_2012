@@ -1,11 +1,11 @@
 class ConfirmPreview < ActionMailer::Preview
 
   def email
-    ConfirmMailer.email(Email.last)
+    ConfirmMailer.email(Email.order(:updated_at).last)
   end
 
   def phone
-    ConfirmMailer.phone(Phone.last)
+    ConfirmMailer.phone(Phone.order(:updated_at).last)
   end
 
 end
