@@ -105,15 +105,16 @@ gem 'ancestry'
 #
 #gem 'charlock_holmes'
 
-#gem 'omniauth'
-#gem 'omniauth-google-oauth2'
-#gem 'omniauth-facebook'
-#gem 'omniauth-twitter'
-#
-#gem 'omniauth-yandex'
-#gem 'omniauth-vkontakte'
-#gem 'omniauth-odnoklassniki'
-#gem 'omniauth-mailru'
+gem 'omniauth'                # added 15.03.2015
+gem 'omniauth-google-oauth2'  # added 15.03.2015
+gem 'omniauth-facebook'       # added 15.03.2015
+gem 'omniauth-twitter'        # added 15.03.2015
+
+gem 'omniauth-yandex'         # added 15.03.2015
+gem 'omniauth-vkontakte'      # added 15.03.2015
+gem 'omniauth-odnoklassniki'  # added 15.03.2015
+gem 'omniauth-mailru'         # added 15.03.2015
+gem 'omniauth-github'         # added 15.03.2015
 
 gem 'htmlentities'
 gem 'dalli'
@@ -137,5 +138,7 @@ gem 'ransack' # added 04.03.2015
 #gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'mechanize'
 
+
+gem 'discourse_api', github: 'discourse/discourse_api' # added 22.03.2015
 
 #gem 'mysql2'

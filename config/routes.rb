@@ -69,7 +69,6 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :global_and_admin do
-    resources :faqs, concerns: [:transactionable, :gridable]
     resources :spare_catalogs, concerns: [:gridable, :searchable]
     resources :bots, concerns: [:gridable]
     resources :spare_infos, concerns: [:gridable, :transactionable, :searchable]
@@ -77,7 +76,6 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :only_admin do
-    resources :news, concerns: [:gridable]
     namespace :opts do
       resources :accumulators, concerns: [:gridable]
     end
@@ -86,7 +84,8 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :only_global do
-    resources :news, concerns: [:paginatable_index]
+    resources :faqs, only: [:index]
+    resources :news, only: [:index]
   end
 
   concern :somebody_and_admin_somebody do

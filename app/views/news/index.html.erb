@@ -1,27 +1,26 @@
 <%= somebody_tabs do %>
   <%= row do %>
-    <%= c1 do %>
+    <%= c2 do %>
 
       <% @meta_title = 'Новости' %>
+      <% @meta_title_lead = "На данной странице мы публикуем новости нашей компании. Вы можете прокомментировать, подписаться или ознакомиться с предыдущими новостями на <a href='http://forum.avtorif.ru/c/kompaniya/novosti'>нашем форуме, в разделе новости</a>.".html_safe %>
       <%= page_header %>
 
-      <% @news.each do |item| %>
+      <% @topics.each do |topic| %>
 
-        <span class="pull-right text-sm text-muted top-space-xs"><%= l item.date, format: :news %></span>
-        <h2 class="top-space-none">
-          <%= link_to item.title, news_path(item) %>
-        </h2>
+        <div class="bottom-space-lg">
+          <span class="pull-right text-sm text-muted top-space-xs"><%= l Time.zone.parse(topic['created_at']), format: :news %></span>
+          <h2 class="top-space-none">
+            <%= link_to topic['title'], "http://forum.avtorif.ru/t/#{topic['slug']}/#{topic['id']}" %>
+          </h2>
 
-        <div class="clearfix">
-          <%== item.intro %>
+          <div class="clearfix">
+            <%# TODO не делать постоянно запросы. Закешировать %>
+            <%== $discourse.topic(topic['id'])['post_stream']['posts'][0]['cooked'] %>
+          </div>
         </div>
-        <hr class="bottom-space top-space" />
 
       <% end %>
-
-      <div class="top-space-lg bottom-space-lg">
-        <%= paginate @news %>
-      </div>
 
     <% end %>
   <% end %>

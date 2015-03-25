@@ -1,7 +1,7 @@
 class Defaults
 
   def self.spare_catalog
-    SpareCatalog.find_or_create_by(name: 'Не разобранные')
+    SpareCatalog.find_or_create_by!(name: 'Не разобранные')
   end
 
   def self.brand
