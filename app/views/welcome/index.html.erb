@@ -167,3 +167,64 @@
   </div>
 
 <% end %>
+
+<%= content_tag :div, style: "padding: 60px 0;" do %>
+
+  <h1 class="text-center">Наши партнеры</h1>
+
+  <%= container do %>
+
+      <div id="welcome-partners" class="carousel slide" data-ride="carousel">
+
+        <%= row do %>
+          <div class="col-md-7 col-lg-offset-2 col-lg-6">
+            <div style="width: 268px" class="bottom-space-xs text-right">
+              <a class="btn btn-default btn-xs" href="#welcome-partners" role="button" data-slide="prev">
+                <%= icon "chevron-circle-left", "aria-hidden" => "true" %>
+                <span class="sr-only">Предыдущий партнер</span>
+              </a>
+              <a class="btn btn-default btn-xs" href="#welcome-partners" role="button" data-slide="next">
+                <%= icon "chevron-circle-right", "aria-hidden" => "true" %>
+                <span class="sr-only">Следующий партнер</span>
+              </a>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <%= row do %>
+              <div class="col-md-7 col-lg-offset-2 col-lg-6">
+                <%= image_tag "partners/rostyre.ru/banner.jpg", class: 'thumbnail' %>
+              </div>
+              <div class="col-md-17 col-lg-14">
+                <p>ООО "Ростаер" (LCC "Rostyre") уже в течение нескольких лет специализируется на импорте и продажах в РФ широкой номенклатуры грузовых пневматических шин, изготовленных в Китайской Народной Республике на совместных предприятиях с лидерами мирового производства этой высокотехнологической продукции. <a href="rostyre.ru">Перейти на сайт компании "Ростаер".</a></p>
+              </div>
+            <% end %>
+          </div>
+          <div class="item">
+            <%= row do %>
+              <div class="col-md-7 col-lg-offset-2 col-lg-6">
+                <%= image_tag "partners/kstools.su/kstserviceban.gif", class: 'thumbnail' %>
+              </div>
+              <div class="col-md-17 col-lg-14">
+                <p>Компания ООО "КСТ сервис" официальный дистрибьютор Немецкого Профессионального Инструмента "KS Tools". <a href="www.kstools.su">Перейти на сайт компании "КСТ сервис".</a></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+
+      </div>
+
+    <% end %>
+
+<% end %>
+
+
+<script type="text/javascript">
+  $('#welcome-partners a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  });
+</script>
