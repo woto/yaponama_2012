@@ -105,13 +105,4 @@ namespace :app do
     end
   end
 
-  desc 'pg_dump'
-  task :pg_dump => :environment do
-    PgDump.pg_dump
-  end
-
-  desc 'pg_restore'
-  task :pg_restore => :environment do
-    PgRestore.pg_restore
-  end
 end
