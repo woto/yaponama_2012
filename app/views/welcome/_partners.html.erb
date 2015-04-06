@@ -1,0 +1,35 @@
+<%= content_tag :div, style: "padding: 60px 0;" do %>
+
+  <%= container do %>
+
+    <h1 class="text-center bottom-space-lg top-space-none">Наши партнеры</h1>
+
+      <div id="welcome-partners" class="carousel slide" data-ride="carousel" data-interval="60000">
+
+        <%= row do %>
+          <div class="col-md-7 col-lg-offset-2 col-lg-6">
+            <div style="width: 268px" class="bottom-space-sm clearfix">
+              <a class="btn btn-default btn-sm pull-left" href="#welcome-partners" role="button" data-slide="prev">
+                <%= icon "chevron-circle-left", "aria-hidden" => "true" %>
+                Предыдущий
+              </a>
+              <a class="btn btn-default btn-sm pull-right" href="#welcome-partners" role="button" data-slide="next">
+                <%= icon "chevron-circle-right", "aria-hidden" => "true" %>
+                Следующий
+              </a>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="carousel-inner" role="listbox">
+          <%== partners do %>
+            <% partner 'partners/rostyre.ru/banner.jpg', 'ООО "Ростаер" (LCC "Rostyre") уже в течение нескольких лет специализируется на импорте и продажах в РФ широкой номенклатуры грузовых пневматических шин, изготовленных в Китайской Народной Республике на совместных предприятиях с лидерами мирового производства этой высокотехнологической продукции. <a href="http://www.rostyre.ru">Перейти на сайт компании "Ростаер".</a>' %>
+            <% partner 'partners/kstools.su/kstserviceban.gif', 'Компания ООО "КСТ сервис" официальный дистрибьютор Немецкого Профессионального Инструмента "KS Tools". <a href="http://www.kstools.su">Перейти на сайт компании "КСТ сервис".</a>' %>
+            <% partner 'partners/ingeneravto.ru/banner.png', 'ИнженерАвто специализируется на выполнении работ по техническому обслуживанию, диагностике и ремонту автомобилей. В том числе производит ремонт бензиновых и дизельных двигателей, топливных насосов высокого давления и форсунок включая системы Common Rail, механических и роботизированных коробок переключения передач, редукторов и других сложных агрегатов и механизмов. <a href="http://www.ingeneravto.ru">Перейти на сайт компании "ИнженерАвто".</a>' %>
+          <% end %>
+        </div>
+      </div>
+
+    <% end %>
+
+<% end %>

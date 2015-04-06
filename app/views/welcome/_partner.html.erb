@@ -1,0 +1,10 @@
+<div class="item <%= "active" if active %>">
+  <%= row do %>
+    <div class="col-md-7 col-lg-offset-2 col-lg-6">
+      <%= image_tag image, class: 'thumbnail' %>
+    </div>
+    <div class="col-md-17 col-lg-14">
+      <p><%== content %></p>
+    </div>
+  <% end %>
+</div>
