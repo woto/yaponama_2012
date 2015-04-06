@@ -122,3 +122,6 @@
 [submodule "system/submodules/noUiSlider"]
 	path = system/submodules/noUiSlider
 	url = https://github.com/leongersen/noUiSlider/
+[submodule "system/submodules/jquery-details"]
+	path = system/submodules/jquery-details
+	url = https://github.com/mathiasbynens/jquery-details
