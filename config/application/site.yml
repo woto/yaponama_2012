@@ -3,19 +3,23 @@ defaults: &defaults
 development:
   <<: *defaults
   host: '192.168.1.253'
-  port: '3002'
+  port: '80'
+  host_port: '192.168.1.253:80'
 
 test:
   <<: *defaults
   host: 'test.host'
   port: '80'
+  host_port: 'test.host'
 
 production:
   avtorif.ru:
     <<: *defaults
     host: 'avtorif.ru'
     port: '80'
+    host_port: 'avtorif.ru'
   zapstok.ru:
     <<: *defaults
     host: 'zapstok.ru'
     port: '80'
+    host_port: 'zapstok.ru'

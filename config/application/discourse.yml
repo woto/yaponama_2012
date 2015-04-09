@@ -1,7 +1,9 @@
 defaults: &defaults
-  url: 'http://forum.avtorif.ru'
+  host: '192.168.1.252'
+  port: '80'
+  host_port: '192.168.1.252'
   api_username: woto
-  api_key: 0b7e161b9c70e33b05eb5d2d818c48c06b5db1bf587b41c5df8baf123ccc2958
+  api_key: d6ea0420ccfdc50b42b84605965d2eaacfa3ab543b4ae5548f944480f15351c1
 
 development:
   <<: *defaults
@@ -12,6 +14,6 @@ test:
 production:
   avtorif.ru:
     <<: *defaults
+    host_port: 'http://forum.avtorif.ru'
   zapstok.ru:
     <<: *defaults
-

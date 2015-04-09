@@ -3,13 +3,15 @@
 <div id="modal-form-placeholder"> </div>
 <div id="modal-talk-holder"> </div>
 
-<% if Rails.application.config_for('application/counter')['enabled'] %>
-  <%== Rails.application.config_for('application/counter')['yandex'] %>
-  <%== Rails.application.config_for('application/counter')['mail'] %>
-  <%== Rails.application.config_for('application/counter')['rambler'] %>
-  <%== Rails.application.config_for('application/counter')['google'] %>
-  <%== Rails.application.config_for('application/counter')['openstat'] %>
-  <%== Rails.application.config_for('application/counter')['liveinternet'] %>
+<%= b1 do %>
+  <% if Rails.application.config_for('application/counter')['enabled'] %>
+    <%== Rails.application.config_for('application/counter')['yandex'] %>
+    <%== Rails.application.config_for('application/counter')['mail'] %>
+    <%== Rails.application.config_for('application/counter')['rambler'] %>
+    <%== Rails.application.config_for('application/counter')['google'] %>
+    <%== Rails.application.config_for('application/counter')['openstat'] %>
+    <%== Rails.application.config_for('application/counter')['liveinternet'] %>
+  <% end %>
 <% end %>
 
 <div class="panel-group hidden" id="accordion">
