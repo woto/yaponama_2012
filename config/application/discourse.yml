@@ -14,6 +14,7 @@ test:
 production:
   avtorif.ru:
     <<: *defaults
-    host_port: 'http://forum.avtorif.ru'
+    host_port: 'forum.avtorif.ru'
+    api_key: 0b7e161b9c70e33b05eb5d2d818c48c06b5db1bf587b41c5df8baf123ccc2958
   zapstok.ru:
     <<: *defaults
