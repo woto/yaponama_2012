@@ -118,7 +118,9 @@
             <%= link_to "Каталоги", catalogs_path %>
           <% end %>
 
-          <li><%= link_to "Частые вопросы", faqs_path %></li>
+          <%= content_tag :li, class: highlight_active2(/\/faqs/) do %>
+            <%= link_to "Частые вопросы", faqs_path %>
+          <% end %>
 
         </ul>
 
