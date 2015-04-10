@@ -7,6 +7,7 @@
 //= require turbolinks
 //= require cocoon
 //= require fastclick/lib/fastclick
+//= require discourse_static_assets
 
 
 // OTHER LIBRARIES
