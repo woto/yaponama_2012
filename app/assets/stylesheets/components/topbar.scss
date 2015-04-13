@@ -81,10 +81,12 @@
 /////////////////////
 
 #toggle-phone {
-  @extend .btn;
-  @extend .btn-default;
-  margin-top: 8px;
-  margin-right: 15px;
+  //@extend .btn;
+  //@extend .btn-default;
+  //margin-top: 8px;
+  //margin-left: 10px;
+  //margin-right: 10px;
+  //margin-right: 15px;
 }
 
 #dropdown-phone .link {
