@@ -30,10 +30,14 @@
         <%= dropdown id: 'dropdown-phone' do |dd| %>
           <%= dd.toggle id: 'toggle-phone' do %>
             <%= icon 'phone' %>
-            8 (495) 213-80-23
+            <span class="hidden-sm hidden-md">
+              Контакты
+            </span>
           <% end %>
           <%= dd.menu do %>
-              <li class="dropdown-header">Оставьте номер телефона и вам перезвонит<br />первый освободившийся менеджер.</li>
+              <%= render partial: 'navbar_shop', collection:  Deliveries::Place.where(display_marker: true, active: true).reverse, spacer_template: "navbar_divider" %>
+              <li class="divider"></li>
+              <li class="dropdown-header">Не можете дозвониться? Оставьте <br />номер телефона и мы вам перезвоним.</li>
               <li>
                 <%= link_to "Обратный звонок", '#', class: 'link callback-link' %>
               </li>
@@ -42,14 +46,8 @@
               <li>
                 <%= link_to "Онлайн консультант", '#', class: 'talk-show link' %>
               </li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Тут мы собрали ответы на наиболее часто<br/>задаваемые вопросы нашими покупателями.</li>
-              <li>
-                <%= link_to "Часто задаваемые вопросы", faqs_path, class: 'link' %>
-              </li>
           <% end %>
         <% end %>
-
         <li class="<%= highlight_active([:controller => '/products', :status => 'incart']) %>">
           <%= link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do %>
             <%= icon 'shopping-cart' %> 

@@ -1,0 +1,12 @@
+<li>
+  <a href="#">
+    <img style="margin-bottom: 3px;" src="http://www.avz.ru/assets/templates/imgs/mos_metro_logo_16.jpg"> <%= navbar_shop.metro %>
+    <br />
+    <% (1..5).each do |n| %>
+      <% if navbar_shop.instance_eval("phone#{n}").present? %>
+        <%= icon 'phone-square' %>&nbsp;
+        <span><%= navbar_shop.instance_eval("phone#{n}") %></span><br />
+      <% end %>
+    <% end %>
+  </a>
+</li>
