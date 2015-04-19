@@ -92,6 +92,11 @@ namespace :app do
     Protcenka.protcenka t, args
   end
 
+  desc 'Проставка значений brands_spare_catalogs'
+  task :fill_brands_spare_catalogs => :environment do
+    FillBrandsSpareCatalogs.fill_brands_spare_catalogs
+  end
+
   task :import_spare_info, 100.times.map { |i| "arg#{i}".to_sym } => [:environment] do |t, args|
     ImportSpareInfo.import_spare_info args
   end

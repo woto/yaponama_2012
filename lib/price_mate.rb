@@ -51,7 +51,7 @@ class PriceMate
     formatted_data.each do |catalog_number, cn_scope|
       cn_scope.each do |manufacturer, mf_scope|
         mf_scope[:title] = (mf_scope[:titles].sort_by{|a, b| -b} + ([["", 0]]))[0][0]
-        info = SpareInfo.where(:catalog_number => catalog_number, :cached_brand => manufacturer).first
+        info = SpareInfo.where(:catalog_number => catalog_number, :brand_id => mf_scope[:brand].id).first
 
         # Если такой SpareInfo имеется, то все последующие данные получаем через него
         if info.present?
