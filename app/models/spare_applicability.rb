@@ -1,15 +1,10 @@
 class SpareApplicability < ActiveRecord::Base
 
   include BrandAttributes
-  include CachedBrand
   include ModelAttributes
-  include CachedModel
   include GenerationAttributes
-  include CachedGeneration
   include ModificationAttributes
-  include CachedModification
   include SpareInfoAttributes
-  include CachedSpareInfo
 
   validates :spare_info, presence: true
   validates :brand, presence: true

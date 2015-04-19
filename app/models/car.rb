@@ -6,13 +6,9 @@ class Car < ActiveRecord::Base
   include Transactionable
   include Selectable
   include BrandAttributes
-  include CachedBrand
   include ModelAttributes
-  include CachedModel
   include GenerationAttributes
-  include CachedGeneration
   include ModificationAttributes
-  include CachedModification
 
   read_only :creation_reason
 

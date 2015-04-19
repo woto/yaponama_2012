@@ -3,7 +3,6 @@
 class Model < ActiveRecord::Base
   include Selectable
   include BelongsToCreator
-  include CachedBrand
 
   belongs_to :brand, :inverse_of => :models
   validates :brand, :presence => true
