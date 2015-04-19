@@ -4,9 +4,7 @@ class SpareInfo < ActiveRecord::Base
   include Selectable
 
   include BrandAttributes
-  include CachedBrand
   include SpareCatalogAttributes
-  include CachedSpareCatalog
 
   has_many :warehouses
   has_many :places, :through => :warehouses

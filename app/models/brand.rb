@@ -4,7 +4,6 @@ class Brand < ActiveRecord::Base
   include Selectable
   include BelongsToCreator
   include BrandAttributes
-  include CachedBrand
 
   enum sign: [:slang, :synonym, :conglomerate]
 
