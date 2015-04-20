@@ -291,8 +291,6 @@ module ApplicationHelper
 
   end
 
-  private
-
   def highlight_active(routes)
     begin
       if routes.map{|route| current_page?(route)}.any?
