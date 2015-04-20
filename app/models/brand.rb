@@ -40,12 +40,11 @@ class Brand < ActiveRecord::Base
     "#{id}-#{name.parameterize}"
   end
 
-  before_validation :upcase_name
+  #before_validation :upcase_name
 
-  def upcase_name
-    self.name = name.to_s.mb_chars.upcase
-  end
-
+  #def upcase_name
+  #  self.name = name.to_s.mb_chars.upcase
+  #end
   after_update :rebuild
 
   def rebuild
