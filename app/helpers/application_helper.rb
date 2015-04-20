@@ -185,7 +185,6 @@ module ApplicationHelper
 
     end].join.html_safe
 
-  end
 
   def page(&block)
     capture do
