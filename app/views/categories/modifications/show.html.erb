@@ -1,43 +1,49 @@
-<%= somebody_tabs do %>
+<% @discourse = {} %>
+<% @discourse[:category] = @resource.name %>
+<% @discourse[:brand] = @brand.name %>
+<% @discourse[:model] = @model.name %>
+<% @discourse[:generation] = @generation.name %>
+<% @discourse[:modification] = @modification.name %>
 
-  <% b = Breadcrumb.new(self) %>
+<%= page do |p| %>
 
-  <ol class="breadcrumb">
-    <% if @resource.opt %>
-    <%= b.item('Запчасти', categories_path) %>
-    <%= b.item(@resource.name, category_path(params[:category_id])) %>
-    <%= b.item(@brand.name, category_brand_path(params[:category_id], @brand.to_param)) %>
-    <%= b.item(@model.name, category_model_path(params[:category_id], @model.to_param)) %>
-    <%= b.item(@generation.name, category_generation_path(params[:category_id], @generation.to_param)) %>
-    <%= b.item(@modification.name) %>
-    <% else %>
-    <%= b.item('Каталоги', catalogs_path) %>
-    <%= b.item(@brand.name, catalogs_brand_path(@brand)) %>
-    <%= b.item(@model.name, catalogs_model_path(@model)) %>
-    <%= b.item(@resource.name, category_model_path(params[:category_id], @model.to_param)) %>
-    <%= b.item(@generation.name, category_generation_path(params[:category_id], @generation.to_param)) %>
-    <%= b.item(@modification.name) %>
-    <% end %>
-  </ol>
-
-  <%= image_tag @brand.image_url, class: 'pull-right', style: 'margin-top: -30px;' %>
-
-  <% @meta_title = "#{@resource.name} на #{@brand.name} #{@model.name} #{@generation.name} #{@modification.name}" %>
-  <%= page_header %>
-
-  <div class="clearfix"></div>
-
-  <% if @resource_class %>
-    <%= render partial: "#{@resource_class.name.underscore.pluralize}/index" %>
-  <% else %>
-    <%= render partial: 'best_parts_list', layout: 'paginator'  %>
-  <% end %>
-
-  <% if @current_user.seller? %>
-    <%= link_to edit_admin_modification_path(@modification, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
-      <%= icon 'edit' %>
-      Редактировать
+  <%= p.breadcrumb do %>
+    <%= breadcrumb false, exception=true do |b| %>
+      <% if @resource.opt %>
+        <%= b.item('Запчасти', categories_path) %>
+        <%= b.item(@resource.name, category_path(params[:category_id])) %>
+        <%= b.item(@brand.name, category_brand_path(params[:category_id], @brand.to_param)) %>
+        <%= b.item(@model.name, category_model_path(params[:category_id], @model.to_param)) %>
+        <%= b.item(@generation.name, category_generation_path(params[:category_id], @generation.to_param)) %>
+        <%= b.item(@modification.name) %>
+      <% else %>
+        <%= b.item('Каталоги', catalogs_path) %>
+        <%= b.item(@brand.name, catalogs_brand_path(@brand)) %>
+        <%= b.item(@model.name, catalogs_model_path(@model)) %>
+        <%= b.item(@resource.name, category_model_path(params[:category_id], @model.to_param)) %>
+        <%= b.item(@generation.name, category_generation_path(params[:category_id], @generation.to_param)) %>
+        <%= b.item(@modification.name) %>
+      <% end %>
     <% end %>
   <% end %>
 
+  <%= p.title do %>
+    <% @meta_title = "#{@resource.name} на #{@brand.name} #{@model.name} #{@generation.name} #{@modification.name}" %>
+    <% @meta_title_lead = "Подбор #{@resource.name} по автомобилю и характеристикам" %>
+    <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
+
+    <%= render 'tmp' %>
+
+    <% if @current_user.seller? %>
+      <%= link_to edit_admin_modification_path(@modification, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
+        <%= icon 'edit' %>
+        Редактировать
+      <% end %>
+    <% end %>
+
+  <% end %>
 <% end %>

@@ -30,7 +30,7 @@ class CategoriesController < ApplicationController
   def find_resource
     @resource = SpareCatalog.find(params[:id])
     if @resource.opt
-      @opt_class = "Opts::#{@resource.opt.camelize}".constantize
+      @resource_class = "Opts::#{@resource.opt.camelize}".constantize
     end
   end
 
