@@ -2,9 +2,6 @@
 
 <div rel="collapse-next" class="collapse-reset-checkboxes">
   <%= render 'opts/name', f: f, name: name %>
-  <% if Rails.application.config_for("application/#{@resource_class.name.underscore}").try(:[], name).try(:[], 'question') %>
-    <%= render('opts/question', name: name, tabindex: tabindex) %>
-  <% end %>
 </div>
 
 <% css_class = "collapse" %>
