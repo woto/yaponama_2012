@@ -1,24 +1,34 @@
-<%= somebody_tabs do %>
+<%= page do |p| %>
 
-  <% @meta_title = "Запчасти" %>
-  <%= page_header %>
-
-  <% if @spare_infos.exists? %>
-    <%= panel 'info', class: 'by-car' do |p| %>
-      <%= p.heading do %>
-        <%= p.title do %>
-          Выберите группу запчастей
-        <% end %>
-      <% end %>
-      <%= p.body do %>
-        <ol id="categories">
-          <% @spare_infos.each do |spare_info| %>
-            <li data-clickable-object> <%= link_to content_tag(:strong, spare_info.cached_spare_catalog), category_path(spare_info.to_category_param), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_info.count}&nbsp;шт.)</small>".html_safe %></li>
-          <% end %>
-        </ol>
-      <% end %>
+  <%= p.breadcrumb do %>
+    <%= breadcrumb false, exception=true do |b| %>
+      <%= b.item('Запчасти') %>
     <% end %>
   <% end %>
 
+  <%= p.title do %>
+    <% @meta_title = "Запчасти" %>
+    <% @meta_title_lead = "Выберите группу запчастей" %>
+    <%= page_header %>
+  <% end %>
 
+  <%= p.content do %>
+
+    <% if @spare_catalogs.exists? %>
+      <%= panel 'info', class: 'by-car' do |p| %>
+        <%= p.heading do %>
+          <%= p.title do %>
+            Выберите группу запчастей
+          <% end %>
+        <% end %>
+        <%= p.body do %>
+          <ol id="categories">
+            <% @spare_catalogs.each do |spare_catalog| %>
+              <li data-clickable-object> <%= link_to content_tag(:strong, spare_catalog.name), category_path(spare_catalog), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_catalog.count}&nbsp;шт.)</small>".html_safe %></li>
+            <% end %>
+          </ol>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>
