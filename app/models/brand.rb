@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class Brand < ActiveRecord::Base
   include ByCategoryConcern
   include Selectable

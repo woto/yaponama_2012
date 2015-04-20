@@ -40,44 +40,34 @@ class SpareInfo < ActiveRecord::Base
     self.name = to_label
   end
 
-  scope :by, ->{
-    joins(:spare_applicabilities).
-    order(:cached_spare_catalog).
-    select("spare_infos.spare_catalog_id, spare_infos.cached_spare_catalog, count(spare_infos.id) as count").
-    group("spare_infos.spare_catalog_id, spare_infos.cached_spare_catalog")
-  }
-
   scope :by_brand, ->(id) {
     joins(:spare_applicabilities).
-    order(:cached_spare_catalog).
     where(spare_applicabilities: {brand_id: id.to_i}).
     distinct
   }
 
   scope :by_model, ->(id) {
     joins(:spare_applicabilities).
-    order(:cached_spare_catalog).
     where(spare_applicabilities: {model_id: id.to_i}).
     distinct
   }
 
   scope :by_generation, ->(id) {
     joins(:spare_applicabilities).
-    order(:cached_spare_catalog).
     where(spare_applicabilities: {generation_id: id.to_i}).
     distinct
   }
 
   scope :by_modification, ->(id) {
     joins(:spare_applicabilities).
-    order(:cached_spare_catalog).
     where(spare_applicabilities: {modification_id: id.to_i}).
     distinct
   }
 
   scope :by_category, ->(id) {
     joins(:spare_applicabilities).
-    order(:cached_spare_catalog).
+    includes(:spare_catalog).
+    order("spare_catalogs.name").
     where(spare_catalog_id: id.to_i).
     distinct
   }

@@ -16,41 +16,6 @@ class SpareApplicability < ActiveRecord::Base
     "#{cached_spare_info} - #{cached_brand} - #{cached_model} - #{cached_generation} - #{cached_modification}"
   end
 
-  scope :by, ->{
-    order(:cached_brand).
-    select("spare_applicabilities.brand_id, spare_applicabilities.cached_brand, count(spare_applicabilities.id) as count").
-    group("spare_applicabilities.brand_id, spare_applicabilities.cached_brand")
-  }
-
-  scope :by_brand, ->(id) {
-    where(brand_id: id.to_i).
-    order(:cached_model).
-    where.not(model_id: nil).
-    select("spare_applicabilities.model_id, spare_applicabilities.cached_model, spare_applicabilities.cached_brand, count(spare_applicabilities.id)").
-    group("spare_applicabilities.model_id, spare_applicabilities.cached_model, spare_applicabilities.cached_brand")
-  }
-
-  scope :by_model, ->(id) {
-    where(model_id: id.to_i).
-    order(:cached_generation).
-    where.not(generation_id: nil).
-    select("spare_applicabilities.generation_id, spare_applicabilities.cached_generation, spare_applicabilities.cached_model, spare_applicabilities.cached_brand, count(spare_applicabilities.id)").
-    group("spare_applicabilities.generation_id, spare_applicabilities.cached_generation, spare_applicabilities.cached_model, spare_applicabilities.cached_brand")
-  }
-
-  scope :by_generation, ->(id) {
-    where(generation_id: id.to_i).
-    order(:cached_modification).
-    where.not(modification_id: nil).
-    select("spare_applicabilities.modification_id, spare_applicabilities.cached_modification, spare_applicabilities.cached_generation, spare_applicabilities.cached_model, spare_applicabilities.cached_brand, count(spare_applicabilities.id)").
-    group("spare_applicabilities.modification_id, spare_applicabilities.cached_modification, spare_applicabilities.cached_generation, spare_applicabilities.cached_model, spare_applicabilities.cached_brand")
-  }
-
-  scope :by_category, ->(id) {
-    joins(:spare_info).
-    where(spare_infos: {spare_catalog_id: id.to_i})
-  }
-
   ## TODO Написать для этого тест(?!)
   #validate do
   #  if brand.try(:brand).present?
