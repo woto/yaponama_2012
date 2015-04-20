@@ -16,22 +16,6 @@ class SpareApplicability < ActiveRecord::Base
     "#{cached_spare_info} - #{cached_brand} - #{cached_model} - #{cached_generation} - #{cached_modification}"
   end
 
-  def to_brand_param
-    "#{brand_id}-#{cached_brand.parameterize}"
-  end
-
-  def to_model_param
-    "#{model_id}-#{cached_model.parameterize}"
-  end
-
-  def to_generation_param
-    "#{generation_id}-#{cached_generation.parameterize}"
-  end
-
-  def to_modification_param
-    "#{modification_id}-#{cached_modification.parameterize}"
-  end
-
   scope :by, ->{
     order(:cached_brand).
     select("spare_applicabilities.brand_id, spare_applicabilities.cached_brand, count(spare_applicabilities.id) as count").
