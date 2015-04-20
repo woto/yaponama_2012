@@ -38,10 +38,6 @@
       <% @meta_robots = 'noindex' %>
     <% end %>
 
-    <%# TODO тут должен быть дополнительный preview и content? Например NISSAN, выпускает и автомобили, и запчасти%>
-    <div id="brand-preview"><%== @brand.preview %></div>
-    <div id="brand-content"><%== @brand.content %></div>
-
     <% if @current_user.seller? %>
       <%= link_to edit_admin_brand_path(@brand, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
         <%= icon 'edit' %>
