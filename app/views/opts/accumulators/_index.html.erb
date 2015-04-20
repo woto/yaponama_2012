@@ -1,48 +1,13 @@
-<%= row id: "new_grid" do %>
+<% @spare_infos.each do |spare_info| %>
+  <%= render "#{@resource_class.name.underscore.pluralize}/part", part: spare_info, resource_class: @resource_class %>
+<% end %>
 
-  <div class="col-sm-7 col-md-6 col-lg-5">
-    <%= panel 'info' do |p| %>
-      <%= p.heading do %>
-        <%= p.title do %>
-          Поиск по свойствам
-        <% end %>
-      <% end %>
-      <%= p.body do %>
-        <%= search_form_for @q, url: url_for, remote: true  do |f| %>
-          <%= render 'opts/checkboxes', f:f, name: 'brand_id', checkboxes: Brand.where("'accumulator' = ANY(opts)").map{|obj| {label: obj.name, value: obj.id}}, tabindex: '0' %>
-          <%= render 'opts/checkboxes', f:f, name: 'accumulator_layout', tabindex: '0' %>
-          <%= render 'opts/range', f:f, name: 'accumulator_battery_capacity', tabindex: '1' %>
-          <%= render 'opts/range', f:f, name: 'accumulator_cold_cranking_amps', tabindex: '2' %>
-          <%= render 'opts/range', f:f, name: 'accumulator_length', tabindex: '3' %>
-          <%= render 'opts/range', f:f, name: 'accumulator_width', tabindex: '4' %>
-          <%= render 'opts/range', f:f, name: 'accumulator_height', tabindex: '5' %>
-          <%= render 'opts/checkboxes', f:f, name: 'accumulator_base_hold_down', tabindex: '0' %>
-          <%= render 'opts/checkboxes', f:f, name: 'accumulator_terminal_types', tabindex: '0' %>
-          <%= render 'opts/checkboxes', f:f, name: 'places_id', checkboxes: Deliveries::Place.where(active: true, display_marker: true).map{|obj| {label: obj.name, value: obj.id}}, tabindex: '0' %>
-          <%= f.submit 'Обновить', class: 'btn btn-success top-space-md' %>
-        <% end %>
-      <% end %>
-    <% end %>
-    <%= render 'sidebar' %>
-  </div>
+<div class="top-space">
+  <%= paginate @spare_infos %>
+</div>
 
-  <div class="col-sm-17 col-md-18 col-lg-19">
-
-    <div id="items-progress"> </div>
-
-    <% @spare_infos.each do |spare_info| %>
-      <%= render "#{@resource_class.name.underscore.pluralize}/part", part: spare_info, resource_class: @resource_class %>
-    <% end %>
-
-    <div class="top-space bottom-space">
-      <%= paginate @spare_infos %>
-    </div>
-
-    <% if false %>
-    <%= link_to 'New Accumulator', new_accumulator_path %>
-    Масса (в незалитом виде)
-    Размер корпуса
-    <% end %>
-
-  </div>
+<% if false %>
+<%= link_to 'New Accumulator', new_accumulator_path %>
+Масса (в незалитом виде)
+Размер корпуса
 <% end %>
