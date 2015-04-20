@@ -29,7 +29,7 @@
           <%= p.body do %>
             <ol id="category-brands">
               <% @brands.each do |brand| %>
-                <li data-clickable-object> <%= link_to safe_join([hidden("#{@resource.name} на "), content_tag(:strong, brand.name)]), category_brand_path(params[:id], brand), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{brand.spare_applicabilities_count}&nbsp;шт.)</small>".html_safe %></li>
+                <li data-clickable-object> <%= link_to safe_join([hidden("#{@resource.name} на "), content_tag(:strong, brand.name)]), category_brand_path(params[:id], brand), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{brand.count}&nbsp;шт.)</small>".html_safe %></li>
               <% end %>
             </ol>
           <% end %>
