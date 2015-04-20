@@ -1,0 +1,32 @@
+<%= row class: 'top-space-lg' do %>
+
+  <div class="col-sm-7 col-md-7 col-lg-6">
+    <%= panel 'info' do |p| %>
+      <%= p.heading do %>
+        <%= p.title do %>
+          Поиск по свойствам
+        <% end %>
+      <% end %>
+      <%= p.body do %>
+        <%= search_form_for @q, url: url_for, class: 'top-space-none'  do |f| %>
+          <%= render 'opts/checkboxes', f:f, name: 'brand_id', checkboxes: @resource.brands.order("brands.name").map{|obj| {label: obj.name, value: obj.id}} %>
+          <%= render 'opts/checkboxes', f:f, name: 'places_id', checkboxes: Deliveries::Place.where(active: true, display_marker: true).map{|obj| {label: obj.name, value: obj.id}} %>
+          <% if @resource_class %>
+            <%= render partial: "#{@resource_class.name.underscore.pluralize}/tindex", locals: {f: f} %>
+          <% end %>
+          <%= f.submit 'Обновить', class: 'btn btn-success top-space-md' %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="col-sm-17 col-md-17 col-lg-18">
+    <% if @resource_class %>
+      <%= render partial: "#{@resource_class.name.underscore.pluralize}/index" %>
+    <% else %>
+      <%= render partial: 'best_parts_list', layout: 'paginator' %>
+    <% end %>
+  </div>
+
+<% end %>
+
