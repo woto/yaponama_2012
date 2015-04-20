@@ -22,10 +22,10 @@
   <% end %>
 
   <%= p.title do %>
-    <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
     <% @meta_title = "#{@resource.name} на #{@brand.name} #{@model.name}" %>
     <% @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present? %>
     <% @meta_title_lead = "Подбор #{@resource.name} по автомобилю и характеристикам" %>
+    <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
     <%= page_header %>
   <% end %>
 

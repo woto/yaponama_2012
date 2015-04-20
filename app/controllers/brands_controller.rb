@@ -50,7 +50,7 @@ class BrandsController < ApplicationController
       spare_infos.
       joins(:spare_applicabilities, :spare_catalog).
       order("spare_catalogs.name").
-      select("spare_catalogs.id, spare_catalogs.name, count(spare_applicabilities.id) as count").
+      select("spare_catalogs.id as spare_catalog_id, spare_catalogs.name spare_catalog_name, count(spare_applicabilities.id) as count").
       group("spare_catalogs.id")
   end
 
