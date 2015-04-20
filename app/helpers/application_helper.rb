@@ -185,8 +185,12 @@ module ApplicationHelper
 
     end].join.html_safe
 
-    end
+  end
 
+  def page(&block)
+    capture do
+      yield PageTemplate.new(self)
+    end
   end
 
   def render_menu item
