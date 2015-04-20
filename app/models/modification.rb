@@ -1,6 +1,7 @@
 # encoding: utf-8
 #
 class Modification < ActiveRecord::Base
+  include ByCategoryConcern
   include Selectable
   include BelongsToCreator
 
@@ -20,6 +21,5 @@ class Modification < ActiveRecord::Base
   def to_param
     "#{id}-#{name.parameterize}"
   end
-
 
 end

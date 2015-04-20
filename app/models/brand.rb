@@ -1,6 +1,7 @@
 # encoding: utf-8
 #
 class Brand < ActiveRecord::Base
+  include ByCategoryConcern
   include Selectable
   include BelongsToCreator
   include BrandAttributes
@@ -85,7 +86,6 @@ class Brand < ActiveRecord::Base
       brands.each {|b| b.update(brand: brand)} unless conglomerate?
 
     end
-
   end
 
 end

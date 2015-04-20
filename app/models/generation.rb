@@ -1,6 +1,7 @@
 # encoding: utf-8
 #
 class Generation < ActiveRecord::Base
+  include ByCategoryConcern
   include Selectable
   include BelongsToCreator
 
@@ -22,6 +23,5 @@ class Generation < ActiveRecord::Base
   def to_param
     "#{id}-#{name.parameterize}"
   end
-
 
 end
