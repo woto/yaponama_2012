@@ -1,40 +1,53 @@
-<%= somebody_tabs do %>
+<% @discourse = {} %>
+<% @discourse[:brand] = [@brand.name] %>
 
-  <%= image_tag @brand.image_url, class: 'pull-right', style: 'margin-top: -30px;' %>
+<%= page do |p| %>
 
-  <% @meta_title = "Производитель запчастей #{@brand.name}" %>
-  <% @meta_title_lead = @brand.preview %>
-  <% @meta_title_small = "(рус. #{@brand.brands.slang.pluck(:name).join(', ')})" if @brand.brands.slang.exists? %>
-  <%= page_header %>
+  <%= p.breadcrumb do %>
+    <%= breadcrumb false, exception=true do |b| %>
+      <%= b.item('Бренды', brands_path) %>
+      <%= b.item(@brand.name) %>
+    <% end %>
+  <% end %>
 
-  <div class="clearfix"></div>
+  <%= p.title do %>
+    <% @meta_title = "Производитель запчастей #{@brand.name}" %>
+    <% @meta_title_lead = "Выберите группу запчастей" %>
+    <% @meta_title_small = "(рус. #{@brand.brands.slang.pluck(:name).join(', ')})" if @brand.brands.slang.exists? %>
+    <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
+    <%= page_header %>
+  <% end %>
 
-  <% if @spare_infos.exists? %>
-    <%= panel 'info', class: 'by-car' do |p| %>
-      <%= p.heading do %>
-        <%= p.title do %>
-          Выберите группу запчастей
+  <%= p.content do %>
+    <% if @spare_infos.exists? %>
+      <%= panel 'info', class: 'by-car' do |p| %>
+        <%= p.heading do %>
+          <%= p.title do %>
+            Выберите группу запчастей
+          <% end %>
+        <% end %>
+        <%= p.body do %>
+      <ol id="catalog-spare-catalogs">
+        <% @spare_infos.each do |spare_info| %>
+          <li data-clickable-object> <%= link_to safe_join([content_tag(:strong, spare_info.spare_catalog_name), hidden(" #{@brand.name}")]), category_path(spare_info.spare_catalog_id, "q[brand_id_eq_any][]" => @brand.id), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_info.spare_applicabilities_count}&nbsp;шт.)</small>".html_safe %></li>
+        <% end %>
+      </ol>
         <% end %>
       <% end %>
-      <%= p.body do %>
-    <ol id="catalog-spare-catalogs">
-      <% @spare_infos.each do |spare_info| %>
-        <li data-clickable-object> <%= link_to safe_join([content_tag(:strong, spare_info.cached_spare_catalog)]), category_path(spare_info.to_category_param, "q[brand_id_eq_any][]" => @brand.id), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_info.count}&nbsp;шт.)</small>".html_safe %></li>
-      <% end %>
-    </ol>
+    <% else %>
+      <% @meta_robots = 'noindex' %>
+    <% end %>
+
+    <%# TODO тут должен быть дополнительный preview и content? Например NISSAN, выпускает и автомобили, и запчасти%>
+    <div id="brand-preview"><%== @brand.preview %></div>
+    <div id="brand-content"><%== @brand.content %></div>
+
+    <% if @current_user.seller? %>
+      <%= link_to edit_admin_brand_path(@brand, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
+        <%= icon 'edit' %>
+        Редактировать
       <% end %>
     <% end %>
+
   <% end %>
-
-  <%# TODO тут должен быть дополнительный preview и content? Например NISSAN, выпускает и автомобили, и запчасти%>
-  <div id="brand-preview"><%== @brand.preview %></div>
-  <div id="brand-content"><%== @brand.content %></div>
-
-  <% if @current_user.seller? %>
-    <%= link_to edit_admin_brand_path(@brand, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
-      <%= icon 'edit' %>
-      Редактировать
-    <% end %>
-  <% end %>
-
 <% end %>

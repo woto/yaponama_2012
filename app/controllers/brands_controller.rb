@@ -46,7 +46,12 @@ class BrandsController < ApplicationController
 
   def show
     @brand = Brand.find(params[:id])
-    @spare_infos = @brand.spare_infos.by
+    @spare_infos = @brand.
+      spare_infos.
+      joins(:spare_applicabilities, :spare_catalog).
+      order("spare_catalogs.name").
+      select("spare_catalogs.id as spare_catalog_id, spare_catalogs.name as spare_catalog_name, count(spare_applicabilities.id) as spare_applicabilities_count").
+      group("spare_catalogs.id")
   end
 
   private
