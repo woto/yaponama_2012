@@ -1,17 +1,24 @@
-<%= somebody_tabs do %>
-  <% @meta_title = 'Каталоги автозапчастей' %>
-  <% @meta_title_lead = 'Выберите интересующую вас марку автомобиля' %>
-  <%# TODO временный хак для более симпатичного отображения, потом когда с картинками разберусь, исправить. %>
-  <div style="margin-bottom: -20px">
-    <%= page_header %>
-  </div>
+<%= page do |p| %>
 
-  <% if @spare_applicabilities.exists? %>
-    <div class="brands bottom-space-lg clearfix">
-      <% @spare_applicabilities.each do |spare_applicability| %>
-          <%= brands_decorator(lambda{|brand| catalogs_brand_path(brand)}, spare_applicability.brand, {:title => true}) %>
-          <% if false %><li><%= link_to "Запчасти на #{spare_applicability.cached_brand}", catalogs_brand_path(spare_applicability.to_brand_param) %></li><% end %>
-      <% end %>
-    </div>
+  <%= p.breadcrumb do %>
+    <%= breadcrumb false, exception=true do |b| %>
+      <%= b.item('Каталоги') %>
+    <% end %>
+  <% end %>
+
+  <%= p.title do %>
+    <% @meta_title = 'Каталоги автозапчастей' %>
+    <% @meta_title_lead = 'Выберите интересующую вас марку автомобиля' %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
+    <% if @brands.exists? %>
+      <div class="brands bottom-space-lg clearfix">
+        <% @brands.each do |brand| %>
+          <%= brands_decorator(lambda{|brand| catalogs_brand_path(brand)}, brand, lambda{|brand| "#{hidden('Запчасти на ')}#{brand.name} <br><small class='text-muted'>(#{brand.count} шт.)</small>".html_safe}) %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 <% end %>
