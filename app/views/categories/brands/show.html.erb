@@ -1,49 +1,54 @@
-<%= somebody_tabs do %>
+<% @discourse = {} %>
+<% @discourse[:category] = @resource.name %>
+<% @discourse[:brand] = @brand.name %>
 
-  <% b = Breadcrumb.new(self) %>
+<%= page do |p| %>
 
-  <ol class="breadcrumb">
-    <%= b.item('Запчасти', categories_path) %>
-    <%= b.item(@resource.name, category_path(params[:category_id])) %>
-    <%= b.item(@brand.name) %>
-  </ol>
+  <%= p.breadcrumb do %>
+    <%= breadcrumb false, exception=true do |b| %>
+      <%= b.item('Запчасти', categories_path) %>
+      <%= b.item(@resource.name, category_path(params[:category_id])) %>
+      <%= b.item(@brand.name) %>
+    <% end %>
+  <% end %>
 
-  <%= image_tag @brand.image_url, class: 'pull-right', style: 'margin-top: -30px;' %>
 
-  <% @meta_title = "#{@resource.name} на #{@brand.name}" %>
-  <% @meta_title_small = "(рус. #{@brand.brands.slang.pluck(:name).join(', ')})" if @brand.brands.slang.exists? %>
-  <%= page_header %>
+  <%= p.title do %>
+    <% @meta_title = "#{@resource.name} на #{@brand.name}" %>
+    <% @meta_title_small = "(рус. #{@brand.brands.slang.pluck(:name).join(', ')})" if @brand.brands.slang.exists? %>
+    <% @meta_title_lead = "Подбор #{@resource.name} по автомобилю и характеристикам" %>
+    <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
+    <%= page_header %>
+  <% end %>
 
-  <div class="clearfix"></div>
-
-  <% if @spare_applicabilities.exists? %>
-    <%= panel 'info', class: 'by-car' do |p| %>
-      <%= p.heading do %>
-        <%= p.title do %>
-          Подбор <%= @resource.name %> по автомобилю
+  <%= p.content do %>
+    <% if @models.exists? %>
+      <%= panel 'info', class: 'by-car' do |p| %>
+        <%= p.heading do %>
+          <%= p.title do %>
+            <a data-toggle="collapse" href="#by-car-collapse">Подбор <%= @resource.name %> по автомобилю </a>
+          <% end %>
+        <% end %>
+        <%= content_tag :div, 'id' => 'by-car-collapse', 'class' => 'panel-collapse collapse' do %>
+          <%= p.body do %>
+            <ol id="category-models">
+              <% @models.each do |model| %>
+                <li data-clickable-object> <%= link_to safe_join([hidden("#{@resource.name} на #{@brand.name} "), content_tag(:strong, model.name)]), category_model_path(params[:category_id], model), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{model.count}&nbsp;шт.)</small>".html_safe %></li>
+              <% end %>
+            </ol>
+          <% end %>
         <% end %>
       <% end %>
-      <%= p.body do %>
-        <ol id="category-models">
-          <% @spare_applicabilities.each do |spare_applicability| %>
-            <li data-clickable-object> <%= link_to safe_join([@resource.name, " на ", @brand.name, " ", content_tag(:strong, spare_applicability.cached_model)]), category_model_path(params[:category_id], spare_applicability.to_model_param), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_applicability.count}&nbsp;шт.)</small>".html_safe %></li>
-          <% end %>
-        </ol>
+    <% end %>
+
+    <%= render 'tmp' %>
+
+    <% if @current_user.seller? %>
+      <%= link_to edit_admin_brand_path(@brand, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
+        <%= icon 'edit' %>
+        Редактировать
       <% end %>
     <% end %>
-  <% end %>
 
-  <% if @resource_class %>
-    <%= render partial: "#{@resource_class.name.underscore.pluralize}/index" %>
-  <% else %>
-    <%= render partial: 'best_parts_list', layout: 'paginator'  %>
   <% end %>
-
-  <% if @current_user.seller? %>
-    <%= link_to edit_admin_brand_path(@brand, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
-      <%= icon 'edit' %>
-      Редактировать
-    <% end %>
-  <% end %>
-
 <% end %>
