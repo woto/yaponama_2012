@@ -37,7 +37,7 @@ class BrandsController < ApplicationController
   end
 
   def index
-    @resources = Brand.
+    @brands = Brand.
       joins(:spare_infos => :spare_applicabilities).
       select("brands.id, brands.name, brands.image, count(spare_infos.id) as count").
       order("brands.name").
