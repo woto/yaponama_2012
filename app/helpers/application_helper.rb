@@ -560,4 +560,8 @@ module ApplicationHelper
     Rails.application.config_for("application/#{resource_class.name.underscore}")["#{resource_class.name.demodulize.underscore}_#{name}"]['si'].to_s
   end
 
+  def hidden str
+    content_tag :div, str, class: 'hidden' 
+  end
+
 end
