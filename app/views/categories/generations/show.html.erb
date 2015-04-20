@@ -1,58 +1,64 @@
-<%= somebody_tabs do %>
+<% @discourse = {} %>
+<% @discourse[:category] = @resource.name %>
+<% @discourse[:brand] = @brand.name %>
+<% @discourse[:model] = @model.name %>
+<% @discourse[:generation] = @generation.name %>
 
-  <% b = Breadcrumb.new(self) %>
+<%= page do |p| %>
 
-  <ol class="breadcrumb">
-    <% if @resource.opt %>
-    <%= b.item('Запчасти', categories_path) %>
-    <%= b.item(@resource.name, category_path(params[:category_id])) %>
-    <%= b.item(@brand.name, category_brand_path(params[:category_id], @brand.to_param)) %>
-    <%= b.item(@model.name, category_model_path(params[:category_id], @model.to_param)) %>
-    <%= b.item(@generation.name) %>
-    <% else %>
-    <%= b.item('Каталоги', catalogs_path) %>
-    <%= b.item(@brand.name, catalogs_brand_path(@brand)) %>
-    <%= b.item(@model.name, catalogs_model_path(@model)) %>
-    <%= b.item(@resource.name, category_model_path(params[:category_id], @model.to_param)) %>
-    <%= b.item(@generation.name) %>
+  <%= p.breadcrumb do %>
+    <%= breadcrumb false, exception=true do |b| %>
+      <% if @resource.opt %>
+        <%= b.item('Запчасти', categories_path) %>
+        <%= b.item(@resource.name, category_path(params[:category_id])) %>
+        <%= b.item(@brand.name, category_brand_path(params[:category_id], @brand.to_param)) %>
+        <%= b.item(@model.name, category_model_path(params[:category_id], @model.to_param)) %>
+        <%= b.item(@generation.name) %>
+      <% else %>
+        <%= b.item('Каталоги', catalogs_path) %>
+        <%= b.item(@brand.name, catalogs_brand_path(@brand)) %>
+        <%= b.item(@model.name, catalogs_model_path(@model)) %>
+        <%= b.item(@resource.name, category_model_path(params[:category_id], @model.to_param)) %>
+        <%= b.item(@generation.name) %>
+      <% end %>
     <% end %>
-  </ol>
+  <% end %>
 
-  <%= image_tag @brand.image_url, class: 'pull-right', style: 'margin-top: -30px;' %>
+  <%= p.title do %>
+    <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
+    <% @meta_title = "#{@resource.name} на #{@brand.name} #{@model.name} #{@generation.name}" %>
+    <% @meta_title_lead = "Подбор #{@resource.name} по автомобилю и характеристикам" %>
+    <%= page_header %>
+  <% end %>
 
-  <% @meta_title = "#{@resource.name} на #{@brand.name} #{@model.name} #{@generation.name}" %>
-  <%= page_header %>
-
-  <div class="clearfix"></div>
-
-  <% if @spare_applicabilities.exists? %>
-    <%= panel 'info', class: 'by-car' do |p| %>
-      <%= p.heading do %>
-        <%= p.title do %>
-          Подбор <%= @resource.name %> по автомобилю
+  <%= p.content do %>
+    <% if @modifications.exists? %>
+      <%= panel 'info', class: 'by-car' do |p| %>
+        <%= p.heading do %>
+          <%= p.title do %>
+            <a data-toggle="collapse" href="#by-car-collapse">Подбор <%= @resource.name %> по автомобилю </a>
+          <% end %>
+        <% end %>
+        <%= content_tag :div, 'id' => 'by-car-collapse', 'class' => 'panel-collapse collapse' do %>
+          <%= p.body do %>
+            <ol id="category-modifications">
+              <% @modifications.each do |modification| %>
+                <li data-clickable-object> <%= link_to safe_join([hidden("#{@resource.name} на #{@brand.name} #{@model.name} #{@generation.name} "), content_tag(:strong, modification.name)]), category_modification_path(params[:category_id], modification), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{modification.count}&nbsp;шт.)</small>".html_safe %></li>
+              <% end %>
+            </ol>
+          <% end %>
         <% end %>
       <% end %>
-      <%= p.body do %>
-        <ol id="category-modifications">
-          <% @spare_applicabilities.each do |spare_applicability| %>
-            <li data-clickable-object> <%= link_to safe_join([@resource.name, " на ", @brand.name, " ", @model.name, " ", @generation.name, " ", content_tag(:strong, spare_applicability.cached_modification)]), category_modification_path(params[:category_id], spare_applicability.to_modification_param), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_applicability.count}&nbsp;шт.)</small>".html_safe %></li>
-          <% end %>
-        </ol>
+    <% end %>
+
+    <%= render 'tmp' %>
+
+    <% if @current_user.seller? %>
+      <%= link_to edit_admin_generation_path(@generation, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
+        <%= icon 'edit' %>
+        Редактировать
       <% end %>
     <% end %>
-  <% end %>
 
-  <% if @resource_class %>
-    <%= render partial: "#{@resource_class.name.underscore.pluralize}/index" %>
-  <% else %>
-    <%= render partial: 'best_parts_list', layout: 'paginator'  %>
   <% end %>
-
-  <% if @current_user.seller? %>
-    <%= link_to edit_admin_generation_path(@generation, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
-      <%= icon 'edit' %>
-      Редактировать
-    <% end %>
-  <% end %>
-
 <% end %>
