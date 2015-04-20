@@ -1,5 +1,5 @@
 <% if @spare_infos.present? %>
-  <div class="table-responsive top-space-lg">
+  <div class="table-responsive">
     <table class="table table-striped">
       <thead>
         <tr>
@@ -18,11 +18,11 @@
             </td>
             </td>
             <td>
-              <%= spare_info.cached_brand %>
+              <%= spare_info.brand.name %>
             </td>
             <td style="word-break: break-all"> 
               <small class="text-muted"><%= spare_info.titles.join( ', ') %></small>
-              <%= link_to new_user_product_path(catalog_number: spare_info.catalog_number, anchor: spare_info.cached_brand) do %>
+              <%= link_to new_user_product_path(catalog_number: spare_info.catalog_number, anchor: spare_info.brand.name) do %>
                 <% if spare_info.warehouses.exists? %>
                   <% spare_info.warehouses.each do |w| %>
                     <ul class="list-unstyled top-space-xs">
