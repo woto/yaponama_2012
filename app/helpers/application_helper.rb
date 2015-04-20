@@ -56,12 +56,7 @@ module ApplicationHelper
 
   end
 
-  def brands_decorator path, brand, options
-
-    title = ""
-    if options[:title] == true
-      title = brand.name
-    end
+  def brands_decorator path, brand, title, options={}
 
     # TODO Это странно, но при первой загрузке все ок, а в дальнешем 
     # (видимо из-за Turbolinks) относительный url(/...) перестает работать 
@@ -72,7 +67,7 @@ module ApplicationHelper
       image = asset_url('no_brand.png')
     end
 
-    link_to(title, path.call(brand), :style => "background: url(#{image}) no-repeat scroll center center", :class => "brand brands-#{brand.name}")
+    link_to(title.call(brand), path.call(brand), :style => "background: url(#{image}) no-repeat scroll center center", :class => "brand brands-#{brand.name.parameterize}")
 
   end
 
