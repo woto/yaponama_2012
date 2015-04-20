@@ -1,5 +1,6 @@
 class SpareCatalog < ActiveRecord::Base
 
+  has_and_belongs_to_many :brands
   # TODO При удалении выставлять значение по-умолчанию
   # у связанных spare_infos
   has_many :spare_infos

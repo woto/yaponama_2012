@@ -11,6 +11,7 @@ class Brand < ActiveRecord::Base
 
   validates :name, :presence => true, uniqueness:  { case_sensitive: false }
 
+  has_and_belongs_to_many :spare_catalogs
   has_many :brands, :inverse_of => :brand, :dependent => :destroy
   has_many :cars, :inverse_of => :brand, :dependent => :destroy
   has_many :models, :inverse_of => :brand, :dependent => :destroy
