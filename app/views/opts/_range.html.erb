@@ -5,9 +5,6 @@
 
 <div rel="collapse-next" class="collapse-reset-range">
   <%= render 'opts/name', f: f, name: name %>
-  <% if Rails.application.config_for("application/#{@resource_class.name.underscore}")[name]['question'] %>
-    <%= render('opts/question', name: name, tabindex: tabindex)  %>
-  <% end %>
 </div>
 
 <% css_class = "collapse" %>
@@ -20,7 +17,7 @@
 <div class="bottom-space-md <%=css_class %>">
   <div class="row bottom-space-md top-space-xs">
     <div class="col-xs-12">
-      <%= f.search_field "#{name}_gt", data:{default: min}, class: 'form-control' %>
+      <%= f.search_field "#{name}_gt", data:{default: max}, class: 'form-control' %>
     </div>
     <div class="col-xs-12">
       <%= f.search_field "#{name}_lt", data:{default: max}, class: 'form-control' %>
