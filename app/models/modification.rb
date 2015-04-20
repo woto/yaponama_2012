@@ -3,7 +3,6 @@
 class Modification < ActiveRecord::Base
   include Selectable
   include BelongsToCreator
-  include CachedGeneration
 
   belongs_to :generation, :inverse_of => :modifications
   validates :generation, :presence => true
@@ -22,11 +21,5 @@ class Modification < ActiveRecord::Base
     "#{id}-#{name.parameterize}"
   end
 
-  after_save :update_all_cached_modification
-
-  def update_all_cached_modification
-    spare_applicabilities.update_all(cached_modification: name)
-    cars.update_all(cached_modification: name)
-  end
 
 end

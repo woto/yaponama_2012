@@ -30,12 +30,5 @@ class Model < ActiveRecord::Base
     "#{id}-#{name.parameterize}"
   end
 
-  after_save :update_all_cached_model
-
-  def update_all_cached_model
-    spare_applicabilities.update_all(cached_model: name)
-    cars.update_all(cached_model: name)
-    generations.update_all(cached_model: name)
-  end
 
 end

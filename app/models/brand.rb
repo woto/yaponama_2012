@@ -45,6 +45,7 @@ class Brand < ActiveRecord::Base
   #def upcase_name
   #  self.name = name.to_s.mb_chars.upcase
   #end
+
   after_update :rebuild
 
   def rebuild

@@ -3,7 +3,6 @@
 class Generation < ActiveRecord::Base
   include Selectable
   include BelongsToCreator
-  include CachedModel
 
   belongs_to :model, :inverse_of => :generations
   validates :model, :presence => true
@@ -24,12 +23,5 @@ class Generation < ActiveRecord::Base
     "#{id}-#{name.parameterize}"
   end
 
-  after_save :update_all_cached_generation
-
-  def update_all_cached_generation
-    spare_applicabilities.update_all(cached_generation: name)
-    cars.update_all(cached_generation: name)
-    modifications.update_all(cached_generation: name)
-  end
 
 end
