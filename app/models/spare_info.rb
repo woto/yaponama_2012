@@ -88,41 +88,6 @@ class SpareInfo < ActiveRecord::Base
     distinct
   }
 
-  after_update :rebuild
-
-  def rebuild
-
-    # Делать это нужно только если изменились данные, влияющие на формирование
-    # cached_spare_info (каталожник, производитель) - spare_info#to_label
-    # В противном случае при изменении SpareCatalog тут будет много лишних обновлений
-    # Категория изменилась, потянула за собой изменение cached_spare_catalog у всех
-    # зависимых spare_infos, а эти spare_infos еще потянут замены и применимость
-
-    if changes[:name] #changes[:catalog_number] || changes[:cached_brand]
-
-      # По образу brand
-      clear_changes_information
-
-      # Обновляем cached_spare_info замены
-      from_spare_replacements.each do |replacement|
-        replacement.save
-      end
-
-      to_spare_replacements.each do |replacement|
-        replacement.save
-      end
-      # /Обновляем cached_spare_info замены
-
-      # Обновляем cached_spare_info применимость
-      spare_applicabilities.each do |spare_applicability|
-        spare_applicability.save
-      end
-      # /Обновляем cached_spare_info применимость
-
-    end
-
-  end
-
   ## TODO Написать для этого тест(?!)
   #validate do
   #  if brand.try(:brand).present?
