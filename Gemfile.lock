@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/discourse/discourse_api.git
-  revision: b6f44058a8058decb98a990492b59ccf0ef3f850
+  revision: 6008b14963a3af49d3d9a4a7453b2323d8e9514b
   specs:
-    discourse_api (0.4.0)
+    discourse_api (0.4.1)
       dotenv (~> 1.0)
       faraday (= 0.9.0)
       faraday_middleware (~> 0.9)
@@ -35,6 +35,13 @@ GIT
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
+
+GIT
+  remote: git://github.com/woto/discourse_static_assets.git
+  revision: 3df03ae16821fc2605cb74165ac60c8fdc7536e4
+  specs:
+    discourse_static_assets (0.0.1)
+      rails (~> 4)
 
 GIT
   remote: git://github.com/woto/ipgeobase.git
@@ -433,6 +440,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   dalli
   discourse_api!
+  discourse_static_assets!
   font-awesome-sass
   hiredis (~> 0.4.5)
   htmlentities

@@ -230,13 +230,20 @@
 
               <% end %>
 
-
-
-
             <% end %>
           <% end %>
         </div>
       <% end %>
+
+      <% $discourse.search(catalog_number)['posts'].each do |post| %>
+        <%= panel 'default' do |p| %>
+          <%= p.body do %>
+            <%== post['cooked'] %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+
     <% end %>
 
     <% replacements_link = capture do %>
