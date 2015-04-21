@@ -380,4 +380,37 @@ class ApplicationController < ActionController::Base
     talk
   end
 
+
+  helper_method :get_news
+
+  def get_news
+
+    #Rails.cache.delete('news') if current_user.seller?
+
+    Rails.cache.fetch('news') do
+      topics = $discourse.category_latest_topics('kompaniya/novosti').
+        sort_by{|topic| topic['created_at']}.
+        reverse
+
+      topics = topics.select do |topic|
+        topic['post'] = $discourse.topic(topic['id'])['post_stream']['posts'][0]['cooked']
+      end
+    end
+  end
+
+  helper_method :get_faqs
+
+  def get_faqs
+
+    Rails.cache.fetch('faqs') do
+      topics = $discourse.category_latest_topics('kompaniya/chastye-voprosy').
+        sort_by{|topic| topic['created_at']}.
+        reverse
+
+      topics = topics.select do |topic|
+        topic['post'] = $discourse.topic(topic['id'])['post_stream']['posts'][0]['cooked']
+      end
+    end
+  end
+
 end

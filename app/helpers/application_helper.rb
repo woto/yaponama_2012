@@ -564,4 +564,10 @@ module ApplicationHelper
     content_tag :div, str, class: 'hidden' 
   end
 
+  def attentioned_news
+    get_news.
+      select{|topic| topic['pinned']}.
+      reject{|topic| topic['closed']}
+  end
+
 end
