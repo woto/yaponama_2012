@@ -4,7 +4,6 @@ defaults: &defaults
   host_port: '192.168.1.252'
   api_username: woto
   api_key: 00dd957fde6299d9cfe89b8245fd8a70bd7bcf17a0ec85e93c5896b41e4d5225
-  <<: *defaults
 
 development:
   <<: *defaults

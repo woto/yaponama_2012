@@ -1,27 +1,31 @@
-<%= somebody_tabs do %>
-  <%= row do %>
-    <%= c2 do %>
+<%= page do |p| %>
 
-      <% @meta_title = 'Новости' %>
-      <% @meta_title_lead = "На данной странице мы публикуем новости нашей компании. Вы можете прокомментировать, подписаться или ознакомиться с предыдущими новостями на <a href='http://forum.avtorif.ru/c/kompaniya/novosti'>нашем форуме, в разделе новости</a>.".html_safe %>
-      <%= page_header %>
-
-      <% @topics.each do |topic| %>
-
-        <div class="bottom-space-lg">
-          <span class="pull-right text-sm text-muted top-space-xs"><%= l Time.zone.parse(topic['created_at']), format: :news %></span>
-          <h2 class="top-space-none">
-            <%= link_to topic['title'], "http://forum.avtorif.ru/t/#{topic['slug']}/#{topic['id']}" %>
-          </h2>
-
-          <div class="clearfix">
-            <%# TODO не делать постоянно запросы. Закешировать %>
-            <%== $discourse.topic(topic['id'])['post_stream']['posts'][0]['cooked'] %>
-          </div>
-        </div>
-
-      <% end %>
-
+  <%= p.breadcrumb do %>
+    <%= breadcrumb false, exception=true do |b| %>
+      <%= b.item('Новости') %>
     <% end %>
   <% end %>
+
+  <%= p.title do %>
+    <% @meta_title = 'Новости' %>
+    <% @meta_title_lead = "На данной странице мы публикуем новости нашей компании. Вы можете прокомментировать, подписаться на рассылку или ознакомиться с предыдущими новостями на <a href='http://forum.avtorif.ru/c/kompaniya/novosti'>нашем форуме, в разделе новости</a>.".html_safe %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
+    <% @topics.each do |topic| %>
+      <div class="bottom-space-lg">
+        <span class="pull-right text-sm text-muted top-space-xs"><%= l Time.zone.parse(topic['created_at']), format: :news %></span>
+        <h2 class="top-space-none bottom-space">
+          <%= link_to topic['title'], "http://forum.avtorif.ru/t/#{topic['slug']}/#{topic['id']}" %>
+        </h2>
+
+        <div class="clearfix">
+          <%== topic['post'] %>
+        </div>
+      </div>
+      <hr class="top-space-lg bottom-space-lg">
+    <% end %>
+  <% end %>
+
 <% end %>
