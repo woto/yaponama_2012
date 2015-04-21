@@ -19,7 +19,7 @@
   <% end %>
 
   <%= p.content do %>
-    <% if @spare_infos.exists? %>
+    <% if @spare_catalogs.exists? %>
       <%= panel 'info', class: 'by-car' do |p| %>
         <%= p.heading do %>
           <%= p.title do %>
@@ -28,8 +28,8 @@
         <% end %>
         <%= p.body do %>
       <ol id="catalog-spare-catalogs">
-        <% @spare_infos.each do |spare_info| %>
-          <li data-clickable-object> <%= link_to safe_join([content_tag(:strong, spare_info.spare_catalog.name), hidden(" #{@brand.name}")]), category_path(spare_info.spare_catalog, "q[brand_id_eq_any][]" => @brand.id), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_info.count}&nbsp;шт.)</small>".html_safe %></li>
+        <% @spare_catalogs.each do |spare_catalog| %>
+          <li data-clickable-object> <%= link_to safe_join([content_tag(:strong, spare_catalog.name), hidden(" #{@brand.name}")]), category_path(spare_catalog, "q[brand_id_eq_any][]" => @brand.id), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_catalog.count}&nbsp;шт.)</small>".html_safe %></li>
         <% end %>
       </ol>
         <% end %>
