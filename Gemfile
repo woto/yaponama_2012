@@ -139,6 +139,8 @@ gem 'ransack' # added 04.03.2015
 gem 'mechanize'
 
 
+#gem 'discourse_api', path: '../discourse_api' # added 21.04.2015
+#gem 'discourse_api', github: 'woto/discourse_api' # added 22.03.2015
 gem 'discourse_api', github: 'discourse/discourse_api' # added 22.03.2015
 
 gem 'discourse_static_assets', github: 'woto/discourse_static_assets'
