@@ -37,6 +37,13 @@ GIT
       websocket-driver (>= 0.2.0)
 
 GIT
+  remote: git://github.com/woto/discourse_static_assets.git
+  revision: 3df03ae16821fc2605cb74165ac60c8fdc7536e4
+  specs:
+    discourse_static_assets (0.0.1)
+      rails (~> 4)
+
+GIT
   remote: git://github.com/woto/ipgeobase.git
   revision: 07dc8b283d6f932443dd918182ca5ec1273b3cba
   specs:
@@ -370,7 +377,7 @@ GEM
       railties (>= 3.1, < 5.0)
       slim (~> 3.0)
     slop (3.6.0)
-    spring (1.3.3)
+    spring (1.3.4)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -433,6 +440,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   dalli
   discourse_api!
+  discourse_static_assets!
   font-awesome-sass
   hiredis (~> 0.4.5)
   htmlentities
