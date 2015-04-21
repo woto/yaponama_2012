@@ -123,6 +123,8 @@ class Somebody < ActiveRecord::Base
 
   #attr_accessor :update_cached_profile
 
+  include CachedProfile
+
   include Code_1AttrAccessorAndValidation
   include SetCreationReasonBasedOnCode_1
 
