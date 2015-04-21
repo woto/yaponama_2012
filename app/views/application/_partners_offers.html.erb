@@ -1,0 +1,39 @@
+<script>
+
+  var catalog_number, ignore, ignore_str, request;
+
+  catalog_number = '<%= params['catalog_number'] %>';
+  ignore = [263, 264];
+
+  ignore_str = ignore.map(function(value, index) {
+    return '&ignore[]=' + value;
+  }).join('');
+
+  request = new XMLHttpRequest;
+
+  request.open('GET', 'http://partners.avtorif.ru/prices/search?catalog_number=' + catalog_number + ignore_str + '&format=json&for_shop=1', true);
+
+  request.onload = function() {
+    var el, html, json, row, _i, _len, _ref;
+    if (request.status >= 200 && request.status < 400) {
+      json = JSON.parse(request.responseText);
+      html = '';
+      _ref = json['result_prices'];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        row = _ref[_i];
+        html +=  "<div class='bottom-space-xs'>" + row['catalog_number_orig'] + " (" + row['manufacturer'] + ") по цене " + row['price_cost'] + ' руб., ' + row['job_import_job_country'] + "</div>";
+      }
+      el = document.querySelector('#partners');
+      if (html) {
+        el.innerHTML = '<hr /><h4 class="text-warning">Этот товар есть в наличии у наших партнеров в Москве!</h4>' + html + '<div class="text-sm text-muted bottom-space">Хотите чтобы ваши предложения тоже отображались в этом списке? Звоните, это бесплатно! +7 (926) 667-75-27</div>';
+      }
+    }
+  };
+
+  request.send();
+
+</script>
+
+<div class="container">
+  <div id="partners"> </div>
+</div>
