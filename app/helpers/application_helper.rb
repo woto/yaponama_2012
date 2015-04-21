@@ -564,4 +564,10 @@ module ApplicationHelper
     Rails.application.config_for("application/#{resource_class.name.underscore}")["#{resource_class.name.demodulize.underscore}_#{name}"]['si'].to_s
   end
 
+  def attentioned_news
+    get_news.
+      select{|topic| topic['pinned']}.
+      reject{|topic| topic['closed']}
+  end
+
 end

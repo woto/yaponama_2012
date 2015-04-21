@@ -10,13 +10,12 @@
 
         <div class="bottom-space-lg">
           <span class="pull-right text-sm text-muted top-space-xs"><%= l Time.zone.parse(topic['created_at']), format: :news %></span>
-          <h2 class="top-space-none">
+          <h2 class="top-space-none bottom-space">
             <%= link_to topic['title'], "http://forum.avtorif.ru/t/#{topic['slug']}/#{topic['id']}" %>
           </h2>
 
           <div class="clearfix">
-            <%# TODO не делать постоянно запросы. Закешировать %>
-            <%== $discourse.topic(topic['id'])['post_stream']['posts'][0]['cooked'] %>
+            <%== topic['post'] %>
           </div>
         </div>
 

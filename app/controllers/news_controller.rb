@@ -1,13 +1,10 @@
 class NewsController < ApplicationController
 
   def index
-    # TODO не делать постоянно запросы. Закешировать
-    @topics = $discourse.category_latest_topics('kompaniya/novosti').
+    @topics = get_news.
       reject{|topic| topic['pinned']}.
-      sort_by{|topic| topic['created_at']}.
-      reverse.
+      reject{|topic| topic['closed']}.
       take(5)
-    #@news = News.order(date: :desc).page(params[:page]).per(params[:per])
   end
 
 end

@@ -4,8 +4,7 @@ class WelcomeController < ApplicationController
   #layout 'lightweight'
 
   def index
-    # TODO Не делать постоянно запросы. Закешировать
-    @topics = $discourse.category_latest_topics 'kompaniya/chastye-voprosy'
+    @topics = get_faqs
   end
 
 end

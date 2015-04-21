@@ -18,8 +18,7 @@
             <% end %>
             <div id="faq-<%= topic['id'] %>" class="panel-collapse collapse">
               <div class="panel-body">
-                <%# TODO не делать постоянно запросы. Закешировать %>
-                <%== $discourse.topic(topic['id'])['post_stream']['posts'][0]['cooked'] %>
+                <%== topic['post'] %>
               </div>
             </div>
           <% end %>
