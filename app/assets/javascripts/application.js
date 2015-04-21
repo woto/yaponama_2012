@@ -43,6 +43,12 @@
 // COMPONENTS
 //
 //= require opts
+//
+//=========================
+// LIBS
+//
+//= require libs/jquery-details/jquery_details
+/////////////////////
 
 // APPLICATION
 //
@@ -100,3 +106,4 @@
 //= require image_view
 //
 //= require pings
+//
