@@ -1,8 +1,8 @@
 class FaqsController < ApplicationController
 
   def index
-    # TODO не делать постоянно запросы. Закешировать
-    @topics = $discourse.category_latest_topics('kompaniya/chastye-voprosy')
+    @topics = get_faqs.
+      reject{|topic| topic['closed']}
   end
 
 end

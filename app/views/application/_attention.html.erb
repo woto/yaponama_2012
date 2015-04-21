@@ -1,14 +1,19 @@
 <% content_for :attention do %>
   <%= flash[:attention] %>
 
-  <%# TODO не делать постоянно запросы. Закешировать %>
-  <% if (topics = $discourse.category_latest_topics('kompaniya/novosti').
-      select{|topic| topic['pinned']}.
-      reject{|topic| topic['closed']}).any? %>
-    <% topics.each do |topic| %>
+  <% attentioned_news.each do |topic| %>
+    <details>
+      <summary>
+        <b><%= topic['title'] %></b>
+      </summary>
       <div>
-        <span> <%= link_to topic['title'],  "http://forum.avtorif.ru/t/#{topic['slug']}/#{topic['id']}", class: 'alert-link' %> </span>
+        <%== topic['post'] %>
       </div>
+    </details>
+    <% if false %>
+    <div>
+      <span> <%= link_to topic['title'],  "http://forum.avtorif.ru/t/#{topic['slug']}/#{topic['id']}", class: 'alert-link' %> </span>
+    </div>
     <% end %>
   <% end %>
 
