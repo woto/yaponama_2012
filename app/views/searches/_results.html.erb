@@ -74,6 +74,9 @@
                   <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
 
                     <div data-expandable-table>
+
+                    <% shown_counter = 0 %>
+
                     <div class="text-lg bottom-space table-responsive">
                       <table class="table bottom-space-none table-hover">
 
@@ -88,25 +91,25 @@
                         </thead>
 
                         <tbody>
-                          <% shown_once = false %>
                           <% mf_scope[:offers].each do |offer| %>
                             <% if offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 %>
-                              <% presence = true %>
+                              <% shown_counter += 1 %>
+                              <% default_show = true %>
                             <% else %>
-                              <% if shown_once == false %>
-                                <% presence = true %>
-                                <% shown_once = true %>
+                              <% if shown_counter < 3 %>
+                                <% shown_counter += 1 %>
+                                <% default_show = true %>
                               <% else %>
-                                <% presence = false %>
+                                <% default_show = false %>
                               <% end %>
                             <% end %>
-                            <tr class="<%= presence ? 'active' : 'hidden' %>">
+                            <tr class="<%= default_show ? 'active' : 'hidden' %>">
                               <td> <%= raw country_decorator offer[:country] %> </td>
                               <!-- <td> <%= raw days_decorator offer[:min_days] %> </td> -->
                               <td> <%= raw days_decorator offer[:max_days] %> </td>
                               <td> <%= raw count_decorator offer[:count] %> </td>
                               <td>
-                                <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, rel: "tooltip", title: (offer[:tech] if current_user.seller?), class: "btn btn-#{presence ? 'success' : 'success'} buy-button" do %>
+                                <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, rel: "tooltip", title: (offer[:tech] if current_user.seller?), class: "btn btn-#{default_show ? 'success' : 'success'} buy-button" do %>
                                   Купить <%= number_to_currency(offer[:retail_cost], precision: 0) %>
                                 <% end %>
                               </td>
@@ -118,10 +121,10 @@
 
                     <div class="text-sm" itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
                       <meta itemprop="priceCurrency" content="RUB" />
-                      <a href="#" class="text-muted dashed" data-expandable-link>
-                        <span class="<%= 'hidden' if mf_scope[:offers].size == 1 %>">
-                          Не устраивает цена или нужно быстрее? Взгляните на все <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> <%= I18n.translate :offers, count: mf_scope[:offers].size %> от наших поставщиков с ценами от <strong itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></strong> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span> и сроками от <%= mf_scope[:min_days] %> до <%= mf_scope[:max_days] %> дней.
-                        </span>
+                      <a href="#" data-expandable-link>
+                        <%= alert "info #{'hidden' if mf_scope[:offers].size <= shown_counter}", false do %>
+                          Не устраивает цена или нужно быстрее? Взгляните на все <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> <%= I18n.translate :offers, count: mf_scope[:offers].size %> от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span> и сроками от <%= mf_scope[:min_days] %> до <%= mf_scope[:max_days] %> дней.
+                        <% end %>
                       </a>
                     </div>
                     </div>
