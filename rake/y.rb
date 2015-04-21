@@ -1,53 +1,58 @@
 class Y
 
   BANNERS_LIMIT = 1000
+  CREATE_CAMPAIGNS = true
+  UPDATE_CAMPAIGNS_IDS = []
 
   def self.y
 
-    # Обновляем имеющиеся объявления
-    short_campaigns_infos = YandexDirect.new(:GetCampaignsList).send.data
-    short_campaigns_infos.select do |short_campaign_info| 
-      short_campaign_info["Name"] =~ /Запчасти/
-    end.each do |short_campaign_info|
-      banner_infos = YandexDirect.new(:GetBanners, "param" => {"CampaignIDS" => [short_campaign_info["CampaignID"]], 
-                                                               "GetPhrases" => 'WithPrices'}).send.data
-      spare_info_phrases = []
-      banner_infos.map! do |banner_info|
-        spare_info_phrase = SpareInfoPhrase.find_by(:yandex_campaign_id => banner_info["CampaignID"], 
-                                                    :yandex_banner_id => banner_info["BannerID"])
-        spare_info_phrases << spare_info_phrase
-        phrase_id = banner_info["Phrases"][0]["PhraseID"]
-        _banner(spare_info_phrase.yandex_campaign_id, spare_info_phrase.yandex_banner_id, phrase_id, spare_info_phrase)
-      end
-      banners_ids = YandexDirect.new(:CreateOrUpdateBanners, "param" => banner_infos).send.data
-      spare_info_phrases.each_with_index do |spare_info, i|
-        spare_info.update!(:yandex_banner_updated_at => Time.zone.now)
+    if UPDATE_CAMPAIGNS_IDS.any?
+      # Обновляем имеющиеся объявления
+      UPDATE_CAMPAIGNS_IDS.each do |campaign_id|
+        banner_infos = YandexDirect.new(:GetBanners, "param" => {"CampaignIDS" => [campaign_id],
+                                                                 "GetPhrases" => 'WithPrices'}).send.data
+        spare_info_phrases = []
+        banner_infos.map! do |banner_info|
+          spare_info_phrase = SpareInfoPhrase.find_by(:yandex_campaign_id => banner_info["CampaignID"], 
+                                                      :yandex_banner_id => banner_info["BannerID"])
+          spare_info_phrases << spare_info_phrase
+          phrase_id = banner_info["Phrases"][0]["PhraseID"]
+          spare_info_phrase.update!(:yshows => banner_info["Phrases"][0]["Shows"],
+                                    :yclicks => banner_info["Phrases"][0]["Clicks"])
+          _banner(spare_info_phrase.yandex_campaign_id, spare_info_phrase.yandex_banner_id, phrase_id, spare_info_phrase)
+        end
+        banners_ids = YandexDirect.new(:CreateOrUpdateBanners, "param" => banner_infos).send.data
+        spare_info_phrases.each_with_index do |spare_info_phrase, i|
+          spare_info_phrase.update!(:yandex_banner_updated_at => Time.zone.now)
+        end
       end
     end
 
 
-    # Создаем новые объявления
-    loop do
+    if CREATE_CAMPAIGNS
+      # Создаем новые объявления
+      loop do
 
-      spare_info_phrases = SpareInfoPhrase.
-        where(:yandex_campaign_id => nil, :yandex_banner_id => nil, :publish => true).
-        order(:id).limit(BANNERS_LIMIT)
+        spare_info_phrases = SpareInfoPhrase.
+          where(:yandex_campaign_id => nil, :yandex_banner_id => nil, :publish => true).
+          order(:id).limit(BANNERS_LIMIT)
 
-      unless spare_info_phrases.count == BANNERS_LIMIT
-        break
-      else
-        campaign_id = _campaign.send.data
-        banners = []
-        spare_info_phrases.each do |spare_info_phrase|
-          banners << _banner(campaign_id, 0, 0, spare_info_phrase)
-        end
-        banners_ids = YandexDirect.new(:CreateOrUpdateBanners, "param" => banners).send.data
-        spare_info_phrases.each_with_index do |spare_info_phrase, i|
-          spare_info_phrase.update!(
-            :yandex_campaign_id => campaign_id, 
-            :yandex_banner_id => banners_ids[i], 
-            :yandex_banner_updated_at => Time.zone.now
-          )
+        unless spare_info_phrases.count == BANNERS_LIMIT
+          break
+        else
+          campaign_id = _campaign.send.data
+          banners = []
+          spare_info_phrases.each do |spare_info_phrase|
+            banners << _banner(campaign_id, 0, 0, spare_info_phrase)
+          end
+          banners_ids = YandexDirect.new(:CreateOrUpdateBanners, "param" => banners).send.data
+          spare_info_phrases.each_with_index do |spare_info_phrase, i|
+            spare_info_phrase.update!(
+              :yandex_campaign_id => campaign_id, 
+              :yandex_banner_id => banners_ids[i], 
+              :yandex_banner_updated_at => Time.zone.now
+            )
+          end
         end
       end
     end
