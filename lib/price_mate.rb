@@ -102,7 +102,7 @@ class PriceMate
       meta_title << " "
     end
     meta_title << titles[0].to_s.mb_chars.capitalize
-    meta_title.truncate(60)
+    meta_title.truncate(55)
   end
 
   def self.meta_description titles
@@ -145,7 +145,7 @@ class PriceMate
       h = cn + " - " + mf
       counter[h] += 1
 
-      #if counter[h] <= 5
+      #if counter[h] <= 10
       if true
 
         # Если нет такого каталожника, создаем

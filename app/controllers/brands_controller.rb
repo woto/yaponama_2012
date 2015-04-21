@@ -25,7 +25,7 @@ class BrandsController < ApplicationController
     if params[:is_brand] == '1'
       @resources = @resources.where(is_brand: true)
     else
-      @resources = @resources.where()
+      #@resources = @resources.where()
     end
 
     @resources = @resources.order(:name).page params[:page]

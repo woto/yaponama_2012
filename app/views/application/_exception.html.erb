@@ -5,7 +5,7 @@
   <% if @exception.present? %>
 
     <%= row do  %>
-      <div class="col-lg-12">
+      <div class="col-lg-24">
           <ul class="list-unstyled text-sm">
             <% @exception.backtrace.each do |item| %>
               <li><code> <%= item %> </code></li>
