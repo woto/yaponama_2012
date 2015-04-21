@@ -29,10 +29,7 @@
 
         <%= dropdown id: 'dropdown-phone' do |dd| %>
           <%= dd.toggle id: 'toggle-phone' do %>
-            <%= icon 'phone' %>
-            <span class="hidden-sm hidden-md">
-              Контакты
-            </span>
+            Контакты
           <% end %>
           <%= dd.menu do %>
               <%= render partial: 'navbar_shop', collection:  Deliveries::Place.where(display_marker: true, active: true).reverse, spacer_template: "navbar_divider" %>
