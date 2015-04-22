@@ -179,6 +179,8 @@ module ApplicationHelper
       end
 
     end].join.html_safe
+    end
+  end
 
 
   def page(&block)
