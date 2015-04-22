@@ -204,7 +204,6 @@ receiving1:
 proizvodit:
   name: "ПРОИЗВОДИТ"
   brand_id: 
-  cached_brand: 
   image: 
   rating: 
   content: 

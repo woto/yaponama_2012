@@ -7,50 +7,40 @@ luxury:
 camry_v10:
   name: Camry (V10) (1982)
   model: camry
-  cached_model: Camry
 
 camry_xv50:
   name: Camry (XV50) (2011)
   model: camry
-  cached_model: Camry
 
 camry_gracia_1996:
   name: Camry Gracia (1996)
   model: camry_gracia
-  cached_model: Camry Gracia
 
 camry_xv10:
   name: Camry (XV10) (1991)
   model: camry
-  cached_model: Camry
 
 galant_9_2:
   name: 2008 - 2013, 9 поколение [2-й рестайлинг]
   content: "<p>Описание 9-ого поколения, 2-ого рестайлинга</p>\r\n"
   model: galant
-  cached_model: Galant
 
 lancer_ralliart_2008:
   name: Lancer Ralliart (2008)
   model: lancer_ralliart 
-  cached_model: Lancer Ralliart
 
 cerato_2009_2013:
   name: 2009-2013
   model: cerato_kia
-  cached_model: Cerato
 
 cerato_march_2013:
   name: март 2013 -
   model: cerato_ki
-  cached_model: Cerato
 
 generation1:
   name: Generation
   model: model1
-  cached_model: Model
 
 generation2:
   name: Generation
   model: model2
-  cached_model: Model

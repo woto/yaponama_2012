@@ -18,28 +18,23 @@ receiving1:
 
 camry:
   brand: toyota
-  cached_brand: TOYOTA
   name: Camry
   content: ''
 
 camry_gracia:
   brand: toyota
-  cached_brand: TOYOTA
   name: Camry Gracia
 
 celica_camry:
   brand: toyota
-  cached_brand: TOYOTA
   name: Celica Camry
 
 camry_hybrid:
   brand: toyota
-  cached_brand: TOYOTA
   name: Camry Hybrid
 
 galant:
   brand: mitsubishi
-  cached_brand: MITSUBISHI
   name: Galant
   content: "<p>Описание Галанта.</p>\r\n"
   from: 1969-01-01
@@ -48,30 +43,24 @@ galant:
 
 lancer:
   brand: mitsubishi
-  cached_brand: MITSUBISHI
   name: Lancer
 
 lancer_ralliart:
   brand: mitsubishi
-  cached_brand: MITSUBISHI
   name: Lancer Ralliart
 
 cerato_ki:
   brand: ki
-  cached_brand: KI
   name: Cerato (от KI)
 
 cerato_kia:
   brand: kia
-  cached_brand: KIA
   name: Cerato (от KIA)
 
 model1:
   brand: brand1
   name: Model
-  cached_brand: BRAND1
 
 model2:
   brand: brand2
   name: Model
-  cached_brand: BRAND2

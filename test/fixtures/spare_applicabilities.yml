@@ -4,19 +4,11 @@ sa_1:
   model: galant
   generation: galant_9_2
   modification: mitsubishi_galant_9_2_cn_sedan
-  cached_brand: MITSUBISHI
-  cached_model: Galant
-  cached_generation: 2008 - 2013, 9 поколение [2-й рестайлинг]
-  cached_modification: CN седан 4-дв. 2.0 AT (160 л. с.)
-  cached_spare_info: 2102 (NISSAN)
 
 sa_2:
   spare_info: nissan_2102
   brand: toyota
   model: celica_camry
-  cached_brand: TOYOTA
-  cached_model: Celica Camry
-  cached_spare_info: 2102 (NISSAN)
 
 sa_3:
   spare_info: kia_2102
@@ -24,11 +16,6 @@ sa_3:
   model: camry_gracia
   generation: camry_gracia_1996
   modification: camry_gracia_2_2
-  cached_brand: TOYOTA
-  cached_model: Camry Gracia
-  cached_generation: Camry Gracia (1996)
-  cached_modification: 2.2 л, бензин, 140 л.с., АКПП, передний привод
-  cached_spare_info: 2102 (KIA)
 
 sa_4:
   spare_info: kia_2102
@@ -36,11 +23,6 @@ sa_4:
   model: camry
   generation: camry_xv10
   modification: camry_xv10_sedan
-  cached_brand: TOYOTA
-  cached_model: Camry
-  cached_generation: Camry (XV10) (1991)
-  cached_modification: "Седан - 2.2 AT Overdrive (130 л. с.)"
-  cached_spare_info: 2102 (KIA)
 
 sa_5:
   spare_info: kia_2102
@@ -48,37 +30,22 @@ sa_5:
   model: camry
   generation: camry_xv50
   modification: camry_xv50_standard
-  cached_brand: TOYOTA
-  cached_model: Camry
-  cached_generation: Camry (XV50) (2011)
-  cached_modification: 2.0 AT (148 л. с.) стандарт
-  cached_spare_info: 2102 (KIA)
 
 sa_6:
   spare_info: toyota_3310
   brand: mitsubishi
   model: galant
   generation: galant_9_2
-  cached_brand: MITSUBISHI
-  cached_model: Galant
-  cached_generation: 2008 - 2013, 9 поколение [2-й рестайлинг]
-  cached_spare_info: 3310 (TOYOTA)
 
 sa_7:
   spare_info: toyota_3310
   brand: mitsubishi
   model: lancer_ralliart
-  cached_brand: MITSUBISHI
-  cached_model: Lancer Ralliart
-  cached_spare_info: 3310 (TOYOTA)
 
 sa_8:
   spare_info: toyota_3310
   brand: toyota
   model: celica_camry
-  cached_brand: TOYOTA
-  cached_model: Celica Camry
-  cached_spare_info: 3310 (TOYOTA)
 
 sa_9:
   spare_info: toyota_3310
@@ -86,79 +53,48 @@ sa_9:
   model: camry
   generation: camry_xv50
   modification: camry_xv50_comfort
-  cached_brand: TOYOTA
-  cached_model: Camry
-  cached_generation: Camry (XV50) (2011)
-  cached_modification: 2.5 AT (181 л. с.) комфорт
-  cached_spare_info: 3310 (TOYOTA)
 
 sa_10:
   spare_info: toyota_3310
   brand: toyota
   model: camry
   generation: camry_v10
-  cached_brand: TOYOTA
-  cached_model: Camry
-  cached_generation: Camry (V10) (1982)
-  cached_spare_info: 3310 (TOYOTA)
 
 sa_11:
   spare_info: infiniti_3310
   brand: mitsubishi
   model: lancer
-  cached_brand: MITSUBISHI
-  cached_model: Lancer
-  cached_spare_info: 3310 (INFINITI)
 
 sa_12:
   spare_info: infiniti_3310
   brand: mitsubishi
   model: lancer_ralliart
   generation: lancer_ralliart_2008
-  cached_brand: MITSUBISHI
-  cached_model: Lancer Ralliart
-  cached_generation: Lancer Ralliart (2008)
-  cached_spare_info: 3310 (INFINITI)
 
 sa_13:
   spare_info: infiniti_3310
   brand: toyota
   model: celica_camry
-  cached_brand: TOYOTA
-  cached_model: Celica Camry
-  cached_spare_info: 3310 (INFINITI)
 
 sa_14:
   spare_info: infiniti_3310
   brand: mitsubishi
   model: galant
-  cached_brand: MITSUBISHI
-  cached_model: Galant
-  cached_spare_info: 2102 (NISSAN)
 
 sa_15:
   spare_info: ki_2102
   brand: mitsubishi
   model: lancer
-  cached_brand: MITSUBISHI
-  cached_model: Lancer
-  cached_spare_info: 2102 (KI)
 
 sa_16:
   spare_info: ki_2103
   brand: mitsubishi
   model: lancer
-  cached_brand: MITSUBISHI
-  cached_model: Lancer
-  cached_spare_info: 2103 (KI)
 
 sa_17:
   spare_info: ki_2103
   brand: ki
   model: cerato_ki
-  cached_brand: KI
-  cached_model: Cerato
-  cached_spare_info: 2103 (KI)
 
 brand1_model1_generation1_modification1:
   spare_info: spare_info1
@@ -166,10 +102,6 @@ brand1_model1_generation1_modification1:
   model: model1
   generation: generation1
   modification: modification1
-  cached_brand: BRAND1
-  cached_model: Model
-  cached_generation: Generation
-  cached_modification: Modification
 
 brand2_model2_generation2_modification2:
   spare_info: spare_info2
@@ -177,7 +109,3 @@ brand2_model2_generation2_modification2:
   model: model2
   generation: generation2
   modification: modification2
-  cached_brand: BRAND2
-  cached_model: Model
-  cached_generation: Generation
-  cached_modification: Modification
