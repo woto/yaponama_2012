@@ -67,6 +67,15 @@ ms_2103:
   cached_spare_catalog: "БАМПЕР ЗАДНИЙ"
   spare_catalog: bamper_zadniy
 
+bosch_s4004:
+  catalog_number: 's4004'
+  brand: bosch
+  cached_brand: Bosch
+  name: s4004 (Bosch)
+  cached_spare_catalog: Батарея аккумуляторная
+  spare_catalog: akb
+
+
 spare_info1:
   catalog_number: SPARE_INFO1
   brand: brand1

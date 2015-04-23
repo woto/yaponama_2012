@@ -1,0 +1,13 @@
+bosch_s4004:
+  voltage: 1 
+  battery_capacity: 70
+  cold_cranking_amps: 640
+  length: 278
+  width: 175
+  height: 190
+  base_hold_down: 13
+  layout: 0
+  terminal_types: 1
+  case_size: nil
+  weight_filled: nil
+  spare_info: bosch_s4004

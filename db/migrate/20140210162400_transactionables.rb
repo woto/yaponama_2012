@@ -1,6 +1,6 @@
 class Transactionables < ActiveRecord::Migration
   def self.up
-    [:phones, :names, :emails, :passports, :postal_addresses, :cars, :products, :companies, :accounts, :orders, :profiles, :pages, :somebodies, :brands, :faqs].each do |table_name|
+    [:phones, :names, :emails, :passports, :postal_addresses, :cars, :products, :companies, :accounts, :orders, :profiles, :pages, :somebodies, :brands].each do |table_name|
       create_table "#{table_name.to_s.singularize}_transactions".to_sym do |t|
 
         table_model = table_name.to_s.singularize.camelize.constantize

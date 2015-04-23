@@ -11,10 +11,10 @@ class CarsControllerTest < ActionController::TestCase
 
     post :create, :car => new_car, :return_path => '/user'
 
-    assert_equal 'NEW BRAND', Brand.last.name
-    assert_equal 'new model', Model.last.name
-    assert_equal 'new generation', Generation.last.name
-    assert_equal 'new modification', Modification.last.name
+    assert_equal 'New brand', Brand.last.name
+    assert_equal 'New model', Model.last.name
+    assert_equal 'New generation', Generation.last.name
+    assert_equal 'New modification', Modification.last.name
 
   end
 
