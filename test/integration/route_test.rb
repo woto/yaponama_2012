@@ -41,19 +41,15 @@ class RoutesTest < ActionDispatch::IntegrationTest
 
     get "/brands/#{ms.to_param}/parts"
     assert_response 301
-    assert_redirected_to "/brands/#{mitsubishi.to_param}/parts"
+    assert_redirected_to "/brands/#{mitsubishi.to_param}"
 
     get "/brands/#{ms.to_param}/parts?some=1"
     assert_response 301
-    assert_redirected_to "/brands/#{mitsubishi.to_param}/parts?some=1"
+    assert_redirected_to "/brands/#{mitsubishi.to_param}"
 
-    get "/brands/#{mitsubishi.to_param}/parts"
+    get "/brands/#{mitsubishi.to_param}"
     assert_response 200
-    assert_template "parts/index"
-
-    get "/brands/#{mitsubishi.to_param}/parts?some=1"
-    assert_response 200
-    assert_template "parts/index"
+    assert_template "brands/show"
 
   end
 

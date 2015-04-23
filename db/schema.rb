@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313035357) do
+ActiveRecord::Schema.define(version: 20150326194116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -472,46 +472,6 @@ ActiveRecord::Schema.define(version: 20150313035357) do
   add_index "emails", ["profile_id"], name: "index_emails_on_profile_id", using: :btree
   add_index "emails", ["somebody_id"], name: "index_emails_on_somebody_id", using: :btree
 
-  create_table "faq_transactions", force: :cascade do |t|
-    t.integer  "faq_id"
-    t.string   "operation"
-    t.integer  "creator_id"
-    t.text     "question_before"
-    t.text     "question_after"
-    t.text     "answer_before"
-    t.text     "answer_after"
-    t.boolean  "phantom_before"
-    t.boolean  "phantom_after"
-    t.string   "creation_reason_before"
-    t.string   "creation_reason_after"
-    t.text     "notes_before"
-    t.text     "notes_after"
-    t.text     "notes_invisible_before"
-    t.text     "notes_invisible_after"
-    t.integer  "somebody_id_before"
-    t.integer  "somebody_id_after"
-    t.datetime "created_at"
-  end
-
-  add_index "faq_transactions", ["creator_id"], name: "index_faq_transactions_on_creator_id", using: :btree
-  add_index "faq_transactions", ["faq_id"], name: "index_faq_transactions_on_faq_id", using: :btree
-
-  create_table "faqs", force: :cascade do |t|
-    t.text     "question"
-    t.text     "answer"
-    t.boolean  "phantom",         default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "creation_reason"
-    t.text     "notes",           default: ""
-    t.text     "notes_invisible", default: ""
-    t.integer  "somebody_id"
-    t.integer  "creator_id"
-  end
-
-  add_index "faqs", ["creator_id"], name: "index_faqs_on_creator_id", using: :btree
-  add_index "faqs", ["somebody_id"], name: "index_faqs_on_somebody_id", using: :btree
-
   create_table "galleries", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
@@ -641,18 +601,6 @@ ActiveRecord::Schema.define(version: 20150313035357) do
   add_index "names", ["creator_id"], name: "index_names_on_creator_id", using: :btree
   add_index "names", ["profile_id"], name: "index_names_on_profile_id", using: :btree
   add_index "names", ["somebody_id"], name: "index_names_on_somebody_id", using: :btree
-
-  create_table "news", force: :cascade do |t|
-    t.string   "title"
-    t.string   "path"
-    t.text     "intro"
-    t.text     "body"
-    t.datetime "date"
-    t.integer  "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean  "attention"
-  end
 
   create_table "opts_accumulators", force: :cascade do |t|
     t.integer  "voltage"
@@ -1336,6 +1284,8 @@ ActiveRecord::Schema.define(version: 20150313035357) do
     t.datetime "updated_at",                 null: false
     t.string   "phrase"
     t.boolean  "publish"
+    t.integer  "yclicks"
+    t.integer  "yshows"
   end
 
   add_index "spare_info_phrases", ["spare_info_id"], name: "index_spare_info_phrases_on_spare_info_id", using: :btree

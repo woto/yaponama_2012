@@ -387,10 +387,10 @@ module ApplicationHelper
     content_tag :div, class: 'page-header' do
       [content_tag(:h1, class: 'bottom-space-xs') do
         h(@meta_title) +
-        " " +
-        content_tag(:small) do
+        (" " if @meta_title_small) +
+        (content_tag(:small) do
           h(@meta_title_small)
-        end
+        end if @meta_title_small)
       end,
       content_tag(:div, class: 'text-muted text-sm') do
         h(@meta_title_lead) 

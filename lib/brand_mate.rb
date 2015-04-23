@@ -10,10 +10,26 @@ class BrandMate
       brand
     end
 
+    def find_conglomerate_by_id(id)
+      brand = Brand.find_by_id id
+      if brand && brand.brand_id?
+        brand = find_conglomerate_by_id brand.brand.id
+      end
+      brand
+    end
+
     def find_company(name)
       brand = Brand.find_by find_params(name)
       if brand && brand.brand_id? && !brand.conglomerate?
         brand = find_company brand.brand.name
+      end
+      brand
+    end
+
+    def find_company_by_id(id)
+      brand = Brand.find_by id
+      if brand && brand.brand_id? && !brand.conglomerate?
+        brand = find_company_by_id brand.brand.id
       end
       brand
     end

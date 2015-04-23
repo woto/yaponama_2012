@@ -19,8 +19,7 @@ class SpareCatalogTest < ActiveSupport::TestCase
     assert_equal sc, si.spare_catalog
     sc.destroy!
 
-    assert_equal PriceMate.spare_catalog, si.reload.spare_catalog
+    assert_equal Defaults.spare_catalog, si.reload.spare_catalog
   end
 
 end
-

@@ -17,8 +17,8 @@ class YandexDirect
     LOGGER.info "SEND: #{@request}"
     uri = URI.parse('https://api.direct.yandex.ru/live/v4/json/')
     http = Net::HTTP.new(uri.host, uri.port)
-    http.read_timeout = 1200
-    http.open_timeout = 1200
+    http.read_timeout = 2400
+    http.open_timeout = 2400
     http.use_ssl = true
     req = Net::HTTP::Post.new(uri.path, 'Content-Type' =>'application/json')
     req.body = @request.to_json

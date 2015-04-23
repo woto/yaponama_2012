@@ -18,6 +18,7 @@
 *.swp
 
 /public/sitemap*
+/public/data
 /public/assets-production
 /vendor/cache
 /vendor/bundle

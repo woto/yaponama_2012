@@ -19,8 +19,13 @@ Yaponama2012::Application.routes.draw do
 
   resources :polls
 
-  # /brands/id/parts -> /brands/id
-  get "/brands/:id/parts", to: redirect('/brands/%{id}')
+  # /brands/дочерний_id/parts -> /brands/родительский_id
+  get "/brands/:id/parts", to: redirect{ |params, request|
+    brand = BrandMate.find_conglomerate_by_id params[:id]
+    #http://192.168.1.251/brands/411445140/parts
+    Rails.application.routes.url_helpers.brand_path(brand)
+    #"/brands/#{brand.id}"
+  }
 
   # /catalogs/brands/дочерний_id -> /catalogs/brands/родительский_id
   get "/catalogs/brands/:id", constraints: lambda{|params, env| (brand = Brand.find(params[:id])).present? && brand.brand && !brand.conglomerate? }, to: redirect{|params, request|

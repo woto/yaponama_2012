@@ -112,6 +112,9 @@ bnd:
   brand: bando
   is_brand: false
 
+bosch:
+  name: Bosch
+
 toyota:
   name: TOYOTA
   rating: 1000

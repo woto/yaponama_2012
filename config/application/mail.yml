@@ -27,7 +27,7 @@ production:
       :address:                smtp.yandex.ru
       :port:                   465
       :user_name:              info@avtorif.ru
-      :password:               ASD123qwe
+      :password:               vjqgfhjkm
       :authentication:         plain
       :enable_starttls_auto:   true
       :ssl:                    true

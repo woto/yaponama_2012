@@ -13,7 +13,7 @@ test:
 production:
   avtorif.ru:
     <<: *defaults
-    integration_mode: :production
+    integration_mode: :test
   zapstok.ru:
     <<: *defaults
-    :integration_mode: :production
+    :integration_mode: :test

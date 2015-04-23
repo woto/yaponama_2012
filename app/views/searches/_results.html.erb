@@ -140,7 +140,7 @@
                 <div itemprop="description">
                   <% if long_name.present? %>
                     <h3>Названия запчасти у поставщиков</h3>
-                    <p style="word-wrap: break-word"><%== long_name %></p>
+                    <p class="other-names" style="word-wrap: break-word"><%== long_name %></p>
                   <% end %>
                 </div>
                 <% if mf_scope[:weights].size > 0 %>
@@ -238,14 +238,16 @@
         </div>
       <% end %>
 
-      <% $discourse.search(catalog_number)['posts'].each do |post| %>
-        <%= panel 'default' do |p| %>
-          <%= p.body do %>
-            <%== post['cooked'] %>
+      <% discourse_search_result = $discourse.search(catalog_number) %>
+      <% if discourse_search_result.key? 'posts' %>
+        <% $discourse.search(catalog_number)['posts'].each do |post| %>
+          <%= panel 'default' do |p| %>
+            <%= p.body do %>
+              <%== post['cooked'] %>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
-
 
     <% end %>
 
