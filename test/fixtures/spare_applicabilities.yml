@@ -11,11 +11,6 @@ sa_18:
   model: galant
   generation: galant_9_2
   modification: mitsubishi_galant_9_2_cn_sedan
-  cached_brand: MITSUBISHI
-  cached_model: Galant
-  cached_generation: 2008 - 2013, 9 поколение [2-й рестайлинг]
-  cached_modification: CN седан 4-дв. 2.0 AT (160 л. с.)
-  cached_spare_info: s4004 (Bosch)
 
 sa_2:
   spare_info: nissan_2102
