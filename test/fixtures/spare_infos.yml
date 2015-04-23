@@ -54,9 +54,7 @@ ms_2103:
 bosch_s4004:
   catalog_number: 's4004'
   brand: bosch
-  cached_brand: Bosch
   name: s4004 (Bosch)
-  cached_spare_catalog: Батарея аккумуляторная
   spare_catalog: akb
 
 
