@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.1'
 
 gem 'pg'
 
@@ -145,3 +145,6 @@ gem 'discourse_api', github: 'discourse/discourse_api' # added 22.03.2015
 
 gem 'discourse_static_assets', github: 'woto/discourse_static_assets'
 #gem 'mysql2'
+
+#gem 'ckpages', github: 'woto/ckpages'
+gem 'ckpages', path: '../ckpages'
