@@ -27,7 +27,7 @@ class BrandMate
     end
 
     def find_company_by_id(id)
-      brand = Brand.find_by id
+      brand = Brand.find_by_id id
       if brand && brand.brand_id? && !brand.conglomerate?
         brand = find_company_by_id brand.brand.id
       end
