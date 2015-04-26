@@ -41,7 +41,7 @@ class Admin::ProductsControllerTest < ActionController::TestCase
     assert_equal 'new', product.catalog_number, 'Добавленный товар имеет неверный каталожный номер'
     assert_equal 'incart', product.status, 'Добавленный товар имеет неверный статус'
     assert_equal brand, product.brand, 'Ассоциация у добавленного товара parent_brand не равна созданной автоматически созданной модели brand'
-    assert_equal 'New', product.cached_brand, 'Кешированное значение бренда у добавленного товара неверное'
+    assert_equal 'New', product.brand.to_label, 'Название бренда у добавленного товара неверное'
     
     assert_response :redirect, 'Редирект не произошел'
     #assert_redirected_to admin_user_product_path(@user, product, :return_path => 'http://ya.ru'), 'Редирект произошел не неверный адрес'

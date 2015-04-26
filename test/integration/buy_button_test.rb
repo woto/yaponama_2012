@@ -47,7 +47,7 @@ class BuyButtonTest < ActionDispatch::IntegrationTest
     assert_equal 1, product.min_days
     assert_equal 1, product.max_days
     assert_equal 55, product.probability
-    assert_equal 'ПРОИЗВОДИТ', product.cached_brand
+    assert_equal 'ПРОИЗВОДИТ', product.brand.to_label
     assert_equal 7, product.buy_cost.to_f
     assert_equal 'НАЗВАНИЕ 1', product.short_name
     assert_equal 'НАЗВАНИЕ 1, НАЗВАНИЕ 2', product.long_name

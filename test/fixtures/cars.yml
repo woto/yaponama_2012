@@ -1,11 +1,15 @@
 stan:
   somebody: stan
+  brand: mitsubishi
+  model: galant
   vin: 17171717171717171
   vin_or_frame: 'vin'
   creation_reason: 'fixtures'
 
 otto:
   somebody: otto
+  brand: mitsubishi
+  model: galant
   vin_or_frame: 'frame'
   frame: 123
   creation_reason: 'fixtures'

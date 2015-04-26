@@ -6,9 +6,9 @@ class SpareCatalogTest < ActiveSupport::TestCase
     si = spare_infos(:infiniti_3310)
     sc = spare_catalogs(:pylnik_rulevoi_reiki)
 
-    assert_equal "ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ", si.cached_spare_catalog
+    assert_equal "ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ", si.spare_catalog.to_label
     sc.update(name: "РУЛЕВОЙ РЕЙКИ ПЫЛЬНИК")
-    assert_equal "РУЛЕВОЙ РЕЙКИ ПЫЛЬНИК", si.reload.cached_spare_catalog
+    assert_equal "РУЛЕВОЙ РЕЙКИ ПЫЛЬНИК", si.reload.spare_catalog.to_label
 
   end
 

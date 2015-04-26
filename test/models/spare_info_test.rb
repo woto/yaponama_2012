@@ -7,9 +7,9 @@ class SpareInfoTest < ActiveSupport::TestCase
     assert_equal 'KI', si.brand.name
     assert_equal '2103', si.catalog_number
     assert_equal '2103 (KI)', si.name
-    assert_equal '2103 (KI)', spare_applicabilities(:sa_16).cached_spare_info
-    assert_equal '2103 (KI)', spare_replacements(:ki_2103_ns_3310).from_cached_spare_info
-    assert_equal '2103 (KI)', spare_replacements(:ns_3310_ki_2103).to_cached_spare_info
+    assert_equal '2103 (KI)', spare_applicabilities(:sa_16).spare_info.to_label
+    assert_equal '2103 (KI)', spare_replacements(:ki_2103_ns_3310).from_spare_info.to_label
+    assert_equal '2103 (KI)', spare_replacements(:ns_3310_ki_2103).to_spare_info.to_label
 
 
     si.assign_attributes({
@@ -27,9 +27,9 @@ class SpareInfoTest < ActiveSupport::TestCase
     assert_equal "КИА", si.brand.name
     assert_equal '02103', si.catalog_number
     assert_equal '02103 (КИА)', si.name
-    assert_equal '02103 (КИА)', spare_applicabilities(:sa_16).cached_spare_info
-    assert_equal '02103 (КИА)', spare_replacements(:ki_2103_ns_3310).from_cached_spare_info
-    assert_equal '02103 (КИА)', spare_replacements(:ns_3310_ki_2103).to_cached_spare_info
+    assert_equal '02103 (КИА)', spare_applicabilities(:sa_16).spare_info.to_label
+    assert_equal '02103 (КИА)', spare_replacements(:ki_2103_ns_3310).from_spare_info.to_label
+    assert_equal '02103 (КИА)', spare_replacements(:ns_3310_ki_2103).to_spare_info.to_label
 
   end
 
