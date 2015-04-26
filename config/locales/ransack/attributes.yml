@@ -2,7 +2,7 @@ ru:
   ransack:
     attributes:
       active_record/base:
-        spare_info_brand_id: Производитель
+        brand_id: Производитель
         places_id: Наличие в магазине
       spare_info:
         accumulator_voltage: Напряжение

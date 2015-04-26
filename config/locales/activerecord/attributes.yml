@@ -41,14 +41,6 @@ ru:
       spare_catalog_token:
         name: Токен
         weight: Вес токена
-      page:
-        description: Описание SEO
-        keywords: Ключевые слова SEO
-        robots: Запрет индексации и следования
-        title: Заголовок
-        path: Путь
-        redirect_url: Переадресация
-        content: Содержание
       news:
         title: Заголовок
         path: Путь
