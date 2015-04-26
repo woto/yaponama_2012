@@ -6,15 +6,6 @@ class BrandRedirector
 end
 
 
-class PageConstraint
-  def matches?(request)
-    path = request.original_fullpath.clone
-    path[0] = ''
-    @page = Page.where(:path => CGI::unescape(path))
-    @page.present?
-  end
-end
-
 Yaponama2012::Application.routes.draw do
 
   resources :polls
@@ -28,21 +19,21 @@ Yaponama2012::Application.routes.draw do
   }
 
   # /catalogs/brands/дочерний_id -> /catalogs/brands/родительский_id
-  get "/catalogs/brands/:id", constraints: lambda{|params, env| (brand = Brand.find(params[:id])).present? && brand.brand && !brand.conglomerate? }, to: redirect{|params, request|
+  get "/catalogs/brands/:id", constraints: lambda{|params, env| BrandMate.find_company_by_id(params[:id]).try(:id) != params[:id].to_i }, to: redirect{|params, request|
     query_string = "?#{request.query_string}" if request.query_string.present?
-    "/catalogs/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
+    "/catalogs/brands/#{BrandMate.find_company_by_id(params[:id]).to_param}#{query_string}"
   }
 
   # /brands/дочерний_id -> /brands/родительский_id
-  get "/brands/:id", constraints: lambda{|params, env| params[:id] != 'search' && (brand = Brand.find(params[:id])).present? && brand.brand }, to: redirect{|params, request|
+  get "/brands/:id", constraints: lambda{|params, env| params[:id] != 'search' && BrandMate.find_conglomerate_by_id(params[:id]).try(:id) != params[:id].to_i }, to: redirect{|params, request|
     query_string = "?#{request.query_string}" if request.query_string.present?
-    "/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
+    "/brands/#{BrandMate.find_conglomerate_by_id(params[:id]).to_param}#{query_string}"
   }
 
   # /categories/категория/brands/дочерний_id -> /categories/категория/brands/родительский_id
-  get "/categories/:category_id/brands/:id", constraints: lambda{|params, env| (brand = Brand.find(params[:id])).present? && brand.brand && !brand.conglomerate? }, to: redirect{|params, request|
+  get "/categories/:category_id/brands/:id", constraints: lambda{|params, env| BrandMate.find_company_by_id(params[:id]).try(:id) != params[:id].to_i }, to: redirect{|params, request|
     query_string = "?#{request.query_string}" if request.query_string.present?
-    "/categories/#{params[:category_id]}/brands/#{Brand.find(params[:id]).brand.to_param}#{query_string}"
+    "/categories/#{params[:category_id]}/brands/#{BrandMate.find_company_by_id(params[:id]).to_param}#{query_string}"
   }
 
   concern :paginatable_index do
@@ -293,13 +284,6 @@ Yaponama2012::Application.routes.draw do
 
     #get 'pages/new/:path' => "pages#new", :as => 'new_predefined_page', :constraints => {:path => /.*/}
 
-    resources :pages do
-      concerns :gridable
-      concerns :transactionable
-      collection do
-        get 'multiple_destroy'
-      end
-    end
 
     # ПОСЛЕ ЭТОЙ СТРОКИ ИДУТ НЕ ПОВТОРЯЮЩИЕСЯ МАРШРУТЫ ТОЛЬКО В АДМИНИСТРАТИВНОЙ ЧАСТИ САЙТА
 
@@ -484,13 +468,9 @@ Yaponama2012::Application.routes.draw do
     "/brands/#{brand.to_param}"
   }
 
-  get "*path" => "pages#show", :constraints => PageConstraint.new, format: false
-
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
-  if Rails.application.config_for('application/common')['suppress_exceptions']
-    get "*error", :to => "application#render_404", format: false
-  end
+  mount Ckpages::Engine => "/ckpages"
 
 end

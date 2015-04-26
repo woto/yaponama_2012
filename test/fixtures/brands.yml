@@ -225,3 +225,25 @@ brand1:
 brand2:
   name: BRAND2
   is_brand: true
+
+child1_synonym:
+  brand: child1_conglomerate
+  name: 'Synonym of Child 1'
+  is_brand: true
+  sign: <%= Brand.signs[:synonym] %>
+
+child1_conglomerate:
+  brand: child1_child2
+  name: 'Child 1'
+  is_brand: true
+  sign: <%= Brand.signs[:conglomerate] %>
+
+child2_conglomerate:
+  brand: child1_child2
+  name: 'Child 2'
+  is_brand: true
+  sign: <%= Brand.signs[:conglomerate] %>
+
+child1_child2:
+  name: 'Child 1 & Child 2'
+  is_brand: true
