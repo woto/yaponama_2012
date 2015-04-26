@@ -137,6 +137,8 @@ gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'ransack' # added 04.03.2015
 #gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'mechanize'
+gem 'pg_search' # added 19.04.2015
+
 
 
 #gem 'discourse_api', path: '../discourse_api' # added 21.04.2015
