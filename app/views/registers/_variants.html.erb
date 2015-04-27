@@ -1,12 +1,13 @@
-<% @meta_title = 'Регистрация' %>
-<% @meta_title_lead = 'Выберите удобный для вас способ регистрации' %>
-<%= page_header %>
+<h4 class="top-space-none">
+  <%= link_to "Регистрация с помощью e-mail адреса", edit_register_path(with: 'email') %>
+  <br>
+  <small>Вам будет необходимо указать работающий адрес электронной почты, на который мы отправим письмо, чтобы подтвердить регистрацию.</small>
+</h4>
 
-<ul class="list-unstyled bottom-space-lg">
-  <li>
-    <%= link_to "Регистрация с помощью e-mail адреса", edit_register_path(with: 'email'), class: 'lead' %>
-  </li>
-  <li>
-    <%= link_to "Регистрация с помощью мобильного телефона", edit_register_path(with: 'phone'), class: 'lead' %>
-  </li>
-</ul>
+<hr>
+
+<h4>
+    <%= link_to "Регистрация с помощью мобильного телефона", edit_register_path(with: 'phone') %>
+    <br>
+    <small>Вам будет необходимо указать работающий номер сотового телефона, на который мы отправим SMS, чтобы подтвердить регистрацию.</small>
+</h4>

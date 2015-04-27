@@ -1,15 +1,16 @@
-<%= somebody_tabs do %>
+<%= page do |p| %>
 
-  <%= row do %>
+  <%= p.breadcrumb do %>
+  <% end %>
 
-    <div class="col-sm-16 bottom-space-lg">
+  <%= p.title_sm do %>
+    <% @meta_title = 'Регистрация' %>
+    <% @meta_title_lead = 'Выберите удобный для вас способ регистрации' %>
+    <%= page_header %>
+  <% end %>
 
-      <%= render 'variants' %>
-
-    </div>
-
-    <%= render 'auth_right' %>
-
+  <%= p.content_sm do %>
+    <%= render 'variants' %>
   <% end %>
 
 <% end %>
