@@ -27,7 +27,7 @@
         <% end %>
         <%= content_tag :div, 'id' => 'by-car-collapse', 'class' => 'panel-collapse collapse' do %>
           <%= p.body do %>
-            <ol id="category-brands">
+            <ol id="categories-show-brands">
               <% @brands.each do |brand| %>
                 <li data-clickable-object> <%= link_to safe_join([hidden("#{@resource.name} на "), content_tag(:strong, brand.name)]), category_brand_path(params[:id], brand), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{brand.count}&nbsp;шт.)</small>".html_safe %></li>
               <% end %>

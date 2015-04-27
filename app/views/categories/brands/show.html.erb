@@ -31,7 +31,7 @@
         <% end %>
         <%= content_tag :div, 'id' => 'by-car-collapse', 'class' => 'panel-collapse collapse' do %>
           <%= p.body do %>
-            <ol id="category-models">
+            <ol id="categories-brands-show-models">
               <% @models.each do |model| %>
                 <li data-clickable-object> <%= link_to safe_join([hidden("#{@resource.name} на #{@brand.name} "), content_tag(:strong, model.name)]), category_model_path(params[:category_id], model), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{model.count}&nbsp;шт.)</small>".html_safe %></li>
               <% end %>

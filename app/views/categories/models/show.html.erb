@@ -39,7 +39,7 @@
         <% end %>
         <%= content_tag :div, 'id' => 'by-car-collapse', 'class' => 'panel-collapse collapse' do %>
           <%= p.body do %>
-            <ol id="category-generations">
+            <ol id="categories-models-show-generations">
               <% @generations.each do |generation| %>
                 <li data-clickable-object> <%= link_to safe_join([hidden("#{@resource.name} на #{@brand.name} #{@model.name} "), content_tag(:strong, generation.name)]), category_generation_path(params[:category_id], generation), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{generation.count}&nbsp;шт.)</small>".html_safe %> </li>
               <% end %>
