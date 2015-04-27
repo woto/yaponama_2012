@@ -27,7 +27,7 @@
           <% end %>
         <% end %>
         <%= p.body do %>
-          <ol id="catalog-models">
+          <ol id="catalogs-brands-show-models">
             <% @models.each do |model| %>
               <li data-clickable-object> <%= link_to safe_join([hidden("Запчасти на #{@brand.name} "), content_tag(:strong, model.name)]), catalogs_model_path(model), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{model.count}&nbsp;шт.)</small>".html_safe %></li>
             <% end %>

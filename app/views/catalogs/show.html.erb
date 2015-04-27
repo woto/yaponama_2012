@@ -14,7 +14,7 @@
 
   <%= p.content do %>
     <% if @brands.exists? %>
-      <div class="brands bottom-space-lg clearfix">
+      <div id="catalogs-show-brands" class="brands bottom-space-lg clearfix">
         <% @brands.each do |brand| %>
           <%= brands_decorator(lambda{|brand| catalogs_brand_path(brand)}, brand, lambda{|brand| "#{hidden('Запчасти на ')}#{brand.name} <br><small class='text-muted'>(#{brand.count} шт.)</small>".html_safe}) %>
         <% end %>
