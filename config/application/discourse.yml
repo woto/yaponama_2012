@@ -2,6 +2,8 @@ defaults: &defaults
   host: '192.168.1.252'
   port: '80'
   api_username: woto
+  #host_port: '192.168.1.252'
+  #api_key: 00dd957fde6299d9cfe89b8245fd8a70bd7bcf17a0ec85e93c5896b41e4d5225
   host_port: 'forum.avtorif.ru'
   api_key: 0b7e161b9c70e33b05eb5d2d818c48c06b5db1bf587b41c5df8baf123ccc2958
 

@@ -10,8 +10,8 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  host: localhost
-  port: 3001
+  host: avtorif.ru
+  port: 85
 
   price_request_cache_with_replacements_in_seconds: 1
   price_request_cache_without_replacements_in_seconds: 1

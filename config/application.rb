@@ -10,6 +10,8 @@ Bundler.require(*Rails.groups(assets: %w(development test)))
 module Yaponama2012
   class Application < Rails::Application
 
+    config.web_console.whitelisted_ips = '192.168.1.33'
+
     config.generators do |g|
       g.template_engine :erb
     end

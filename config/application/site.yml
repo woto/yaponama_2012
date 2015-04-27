@@ -4,7 +4,7 @@ development:
   <<: *defaults
   host: '192.168.1.253'
   port: '80'
-  host_port: '192.168.1.253:80'
+  host_port: '192.168.1.253'
 
 test:
   <<: *defaults
