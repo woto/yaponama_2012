@@ -1,14 +1,20 @@
-<%= somebody_tabs do %>
+<% @meta_title = "Смена пароля" %>
+<% @meta_title_lead = 'Придумайте себе новый пароль' %>
 
-  <% @meta_title = "Смена пароля" %>
-  <% @meta_title_lead = 'Придумайте себе новый пароль' %>
+<%= page do |p| %>
 
-  <%= breadcrumb false do |b| %>
-    <%= b.item @meta_title %>
+  <%= p.breadcrumb do %>
+    <%= breadcrumb false do |b| %>
+      <%= b.item @meta_title %>
+    <% end %>
   <% end %>
 
-  <%= page_header %>
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
 
-  <%= render 'form' %>
+  <%= p.content do %>
+    <%= render 'form' %>
+  <% end %>
 
 <% end %>

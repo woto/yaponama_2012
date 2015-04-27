@@ -1,18 +1,12 @@
-<%= row do %>
+<%= d0 do %>
+<%= twbs_form_for @resource, :url => url_for(:action => :update, return_path: params[:return_path]) do |f| %>
 
-  <%= c1 do %>
+  <%= f.error_notification %>
 
-    <%= twbs_form_for @resource, :url => url_for(:action => :update, return_path: params[:return_path]) do |f| %>
+  <%= f.twbs_password_field :password, placeholder: "Придумайте пароль не короче 6 символов" %>
+  <%= f.twbs_password_field :password_confirmation, placeholder: "Повторите ввод пароля" %>
 
-      <%= f.error_notification %>
+  <%= f.twbs_submit 'Сменить пароль' %>
 
-      <%= f.twbs_password_field :password, placeholder: "Придумайте пароль не короче 6 символов" %>
-      <%= f.twbs_password_field :password_confirmation, placeholder: "Повторите ввод пароля" %>
-
-      <%= f.twbs_submit 'Сменить пароль' %>
-
-    <% end %>
-
-  <% end %>
-
+<% end %>
 <% end %>
