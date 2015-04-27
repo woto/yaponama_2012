@@ -1,12 +1,13 @@
-<% @meta_title = 'Вход на сайт' %>
-<% @meta_title_lead = 'С помощью каких сведений войти на сайт?' %>
-<%= page_header %>
+<h4 class="top-space-none">
+  <%= link_to "Войти, указав e-mail адрес", login_with_path(with: 'email') %>
+  <br>
+  <small>Если вы уже зарегистрированы на нашем сайте и в качестве контактных данных указали адрес электронной почты</small>
+</h4>
 
-<ul class="list-unstyled bottom-space-lg">
-  <li>
-    <%= link_to "Войти, указав e-mail адрес", login_with_path(with: 'email'), class: 'lead' %>
-  </li>
-  <li>
-    <%= link_to "Войти, указав номер телефона", login_with_path(with: 'phone'), class: 'lead' %>
-  </li>
-</ul>
+<hr>
+
+<h4>
+  <%= link_to "Войти, указав номер телефона", login_with_path(with: 'phone') %>
+  <br>
+  <small>Если вы уже зарегистрированы на нашем сайте и в качестве контактных данных указали номер сотового телефона</small>
+</h4>

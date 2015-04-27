@@ -1,33 +1,27 @@
-<%= row do %>
+<%# Для Discourse SSO необходимо добавить , sso: params[:sso], sig: params[:sig] %>
 
-  <%= c2 do %>
+<%= twbs_form_for @session, url: login_with_path(with: params[:with]), :method => :post do |f| %>
 
-    <%= twbs_form_for @session, url: login_with_path(with: params[:with]), :method => :post do |f| %>
+  <%= f.error_notification %>
 
-      <%= f.error_notification %>
-
-      <% if params[:with] == 'email' %>
-        <%= f.twbs_text_field :value, label: 'E-mail', asterisk: true %>
-      <% end %>
-
-      <% if params[:with] == 'phone' %>
-        <%= f.phone :value, label: 'Телефон', asterisk: true %>
-      <% end %>
-
-      <%= f.twbs_password_field :password, asterisk: true %>
-
-      <div class="checkbox">
-        <label>
-          <%= hidden_field_tag :remember_me, 0 %>
-          <%= check_box_tag :remember_me, 1, params[:remember_me] == '1' || params[:remember_me].blank? ? true : false %>
-          Запомнить меня на этом компьютере
-        </label>
-      </div>
-
-      <%= f.twbs_submit %>
-
-    <% end %>
-
+  <% if params[:with] == 'email' %>
+    <%= f.twbs_text_field :value, label: 'E-mail', asterisk: true %>
   <% end %>
+
+  <% if params[:with] == 'phone' %>
+    <%= f.phone :value, label: 'Телефон', asterisk: true %>
+  <% end %>
+
+  <%= f.twbs_password_field :password, asterisk: true %>
+
+  <div class="checkbox">
+    <label>
+      <%= hidden_field_tag :remember_me, 0 %>
+      <%= check_box_tag :remember_me, 1, params[:remember_me] == '1' || params[:remember_me].blank? ? true : false %>
+      Запомнить меня на этом компьютере
+    </label>
+  </div>
+
+  <%= f.twbs_submit %>
 
 <% end %>
