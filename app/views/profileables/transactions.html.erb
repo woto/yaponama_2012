@@ -1,0 +1,15 @@
+<%= page do |p| %>
+
+  <%= p.breadcrumb do %>
+  <% end %>
+
+  <%= p.title do %>
+  <% end %>
+    
+  <%= p.content do %>
+    <% @transactions.each do |transaction| %>
+      <%= debug transaction %>
+    <% end %>
+  <% end %>
+
+<% end %>
