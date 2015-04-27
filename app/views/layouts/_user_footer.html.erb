@@ -1,5 +1,3 @@
-<hr class="top-space-none" />
-
 <% if false %>
 <%= b1 do %>
   <div id="discourse-comments"></div>
@@ -18,16 +16,32 @@
 <% end %>
 
 <% if false %>
-<%= b1 do %>
-  <h4>Поделиться ссылкой на эту страницу.</h4>
-  <div style="margin-left: -4px" class="bottom-space-sm">
-    <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-    <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir" data-yashareTheme="counter"></div>
-  </div>
+<%= page do |p| %>
+  <%= p.content do %>
+    <% result = $discourse.search(@meta_title) %>
+    <% result['posts'].each do |post| %>
+      <%= panel 'default' do |p| %>
+        <%= p.body do %>
+          <%== post['cooked'] %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>
 <% end %>
 
-<footer class="clearfix text-xs" style="padding-top: 30px; color: #555; background: #111;">
+
+<% if Rails.application.config_for('application/common')['share_buttons'] %>
+  <%= b1 do %>
+    <h4>Поделиться ссылкой на эту страницу.</h4>
+    <div style="margin-left: -4px" class="bottom-space-sm">
+      <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+      <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir" data-yashareTheme="counter"></div>
+    </div>
+  <% end %>
+<% end %>
+
+<footer class="clearfix text-xs" style="margin-top: 100px; padding-top: 30px; color: #555; background: #111;">
   <div class="container bottom-space">
     <span class="pull-right">© 1997–<%= Time.zone.now.year %> Авториф</span>
   </div>

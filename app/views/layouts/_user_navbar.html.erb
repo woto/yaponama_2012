@@ -45,6 +45,7 @@
               </li>
           <% end %>
         <% end %>
+
         <li class="<%= highlight_active([:controller => '/products', :status => 'incart']) %>">
           <%= link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do %>
             <%= icon 'shopping-cart' %> 
@@ -66,17 +67,17 @@
 
           <%= dd.menu do %>
             <% if current_user.role == 'guest' %>
-              <li> <%= link_to "Вход на сайт", login_path %> </li>
-              <li> <%= link_to "Регистрация", register_path %> </li>
+              <li> <%= link_to "Вход на сайт", main_app.login_path %> </li>
+              <li> <%= link_to "Регистрация", main_app.register_path %> </li>
               <%= divider %>
-              <li> <%= link_to "Забыли пароль?", password_reset_path %> </li>
+              <li> <%= link_to "Забыли пароль?", main_app.password_reset_path %> </li>
             <% else %>
               <% if ["admin", "manager"].include? current_user.role %>
-                <li> <%= link_to "Закрытая зона", admin_path %> </li>
+                <li> <%= link_to "Закрытая зона", main_app.admin_path %> </li>
                 <%= divider %>
               <% end %>
-              <li> <%= link_to "Личный кабинет", user_path %> </li>
-              <li> <%= link_to "Выход", logout_path, :method => :delete %> </li>
+              <li> <%= link_to "Личный кабинет", main_app.user_path %> </li>
+              <li> <%= link_to "Выход", main_app.logout_path, :method => :delete %> </li>
             <% end %>
           <% end %>
 
@@ -91,33 +92,41 @@
   <div id="nav-second" class="navbar-inverse">
     <div class="container">
       <div class="collapse navbar-collapse navbar-responsive-collapse">
-        <ul class="nav navbar-nav">
 
+        <ul id="nav-btns" class="nav navbar-nav">
+
+          <%= content_tag :li, class: highlight_active2(/^\/catalogs/) do %>
+            <%= link_to "Каталоги".html_safe, main_app.catalogs_path, id: 'nav-btns-catalogs' %>
+          <% end %>
+
+          <%= content_tag :li, class: highlight_active2(/^\/brands/) do %>
+            <%= link_to "Производители".html_safe, main_app.brands_path, id: 'nav-btns-brands' %>
+          <% end %>
+
+          <%= content_tag :li, class: highlight_active2(/^\/categories/) do %>
+            <%= link_to "Категории".html_safe, main_app.categories_path, id: 'nav-btns-parts' %>
+          <% end %>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
           <%= content_tag :li, class: highlight_active2(/\/news/) do %>
             <%= link_to "Новости", "/news" %>
           <% end %>
 
-          <!-- <%= content_tag :li, class: highlight_active2(/\/discount/) do %> -->
-          <!--   <%= link_to "Акции и бонусы", "/discount" %> -->
-          <!-- <% end %> -->
-
           <%= content_tag :li, class: highlight_active2(/\/user\/payments/) do %>
-            <%= link_to "Оплата", new_user_payment_path %>
+            <%= link_to "Оплата", main_app.new_user_payment_path %>
           <% end %>
 
           <%= content_tag :li, class: highlight_active([:controller => "/deliveries"]) do %>
-            <%= link_to "Доставка", deliveries_path %>
-          <% end %>
-
-          <%= content_tag :li, class: highlight_active2(/\/catalogs/) do %>
-            <%= link_to "Каталоги", catalogs_path %>
+            <%= link_to "Доставка", main_app.deliveries_path %>
           <% end %>
 
           <%= content_tag :li, class: highlight_active2(/\/faqs/) do %>
-            <%= link_to "Частые вопросы", faqs_path %>
+            <%= link_to "Информация", main_app.faqs_path %>
           <% end %>
 
         </ul>
+
 
       </div>
 
