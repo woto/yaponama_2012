@@ -1,24 +1,16 @@
-<%= row do %>
+<%= twbs_form_for @password_reset, url: contacts_password_reset_path do |f| %>
 
-  <%= c2 do %>
+  <%= f.error_notification %>
 
-    <%= twbs_form_for @password_reset, url: contacts_password_reset_path do |f| %>
-
-      <%= f.error_notification %>
-
-      <% case @password_reset.with %>
-      <% when 'email' %>
-        <%= f.twbs_text_field :value, label: 'E-mail', asterisk: true  %>
-      <% when 'phone' %>
-        <%= f.twbs_text_field :value, rel: 'mobile-mask-on', label: 'Мобильный телефон', asterisk: true %>
-      <% end %>
-
-      <%= f.hidden_field :with %>
-
-      <%= f.twbs_submit %>
-
-    <% end %>
-
+  <% case @password_reset.with %>
+  <% when 'email' %>
+    <%= f.twbs_text_field :value, label: 'E-mail', asterisk: true  %>
+  <% when 'phone' %>
+    <%= f.twbs_text_field :value, rel: 'mobile-mask-on', label: 'Мобильный телефон', asterisk: true %>
   <% end %>
+
+  <%= f.hidden_field :with %>
+
+  <%= f.twbs_submit %>
 
 <% end %>

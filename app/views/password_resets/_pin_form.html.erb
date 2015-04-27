@@ -1,19 +1,11 @@
-<%= row do %>
+<%= twbs_form_for @password_reset, url: pin_password_reset_path do |f| %>
 
-  <%= c2 do %>
+  <%= f.error_notification %>
 
-    <%= twbs_form_for @password_reset, url: pin_password_reset_path do |f| %>
+  <%= f.twbs_text_field :pin, asterisk: true %>
+  <%= f.hidden_field :value %>
+  <%= f.hidden_field :with %>
 
-      <%= f.error_notification %>
-
-      <%= f.twbs_text_field :pin, asterisk: true %>
-      <%= f.hidden_field :value %>
-      <%= f.hidden_field :with %>
-
-      <%= f.twbs_submit %>
-
-    <% end %>
-
-  <% end %>
+  <%= f.twbs_submit %>
 
 <% end %>

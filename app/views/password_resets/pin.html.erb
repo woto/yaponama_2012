@@ -1,19 +1,15 @@
-<%= somebody_tabs do %>
+<%= page do |p| %>
 
-  <%= row do %>
+  <%= p.breadcrumb do %>
+  <% end %>
 
-    <div class="col-sm-16 bottom-space-lg">
+  <%= p.title_sm do %>
+    <% @meta_title = "Ввод PIN кода" %>
+    <%= page_header %>
+  <% end %>
 
-      <% @meta_title = "Ввод PIN кода" %>
-
-      <%= page_header %>
-
-      <%= render 'pin_form' %>
-
-    </div>
-
-    <%= render 'auth_right' %>
-
+  <%= p.content_sm do %>
+    <%= render 'pin_form' %>
   <% end %>
 
 <% end %>
