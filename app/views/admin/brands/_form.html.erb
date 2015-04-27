@@ -1,29 +1,23 @@
 <%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
 
-  <%= row do %>
+  <%= d1 do %>
 
-    <%= c1 do %>
+    <%= f.twbs_text_field :name, asterisk: true%>
 
-      <%= f.twbs_text_field :name, asterisk: true%>
+    <%= f.fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b| %>
 
-      <%= f.fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b| %>
-
-        <%= f.form_group :brand do %>
-          <%= b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, :label => 'Родительский производитель', :hint => 'Все найденные результаты для этого производителя будут переадресованы родительскому' %>
-          <%= f.error(:brand) %>
-        <% end %>
+      <%= f.form_group :brand do %>
+        <%= b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, :label => 'Родительский производитель', :hint => 'Все найденные результаты для этого производителя будут переадресованы родительскому' %>
+        <%= f.error(:brand) %>
       <% end %>
-      <%= f.twbs_collection_select :sign, Brand.signs, :first, :first, include_blank: true %>
-
-      <%= f.twbs_collection_check_boxes 'opts', Rails.application.config_for('application/opts')['opts'], :to_s, :to_s %>
-
-      <%= render 'image_form', f:f, name: 'image' %>
-      <%= f.twbs_text_field :rating %>
-      <%= f.twbs_check_box :is_brand %>
-      <%= f.twbs_check_box :default_display %>
-      <%= f.twbs_text_area :preview, rows: 4 %>
-
     <% end %>
+    <%= f.twbs_collection_select :sign, Brand.signs, :first, :first, include_blank: true %>
+
+    <%= render 'image_form', f:f, name: 'image' %>
+    <%= f.twbs_text_field :rating %>
+    <%= f.twbs_check_box :is_brand %>
+    <%= f.twbs_check_box :default_display %>
+    <%= f.twbs_text_area :preview, rows: 4 %>
 
   <% end %>
 

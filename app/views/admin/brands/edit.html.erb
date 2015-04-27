@@ -1,13 +1,19 @@
-<%= b1 do %>
+<% @meta_title = "Редактирование производителя #{@resource.to_label}" %>
 
-  <% @meta_title = "Редактирование производителя #{@resource.to_label}" %>
+<%= page do |p| %>
 
-  <%= breadcrumb true do |b| %>
-    <%= b.item @meta_title %>
+  <%= p.breadcrumb do %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item @meta_title %>
+    <% end %>
   <% end %>
 
-  <%= page_header %>
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
 
-  <%= render "form" %>
+  <%= p.content do %>
+    <%= render "form" %>
+  <% end %>
 
 <% end %>
