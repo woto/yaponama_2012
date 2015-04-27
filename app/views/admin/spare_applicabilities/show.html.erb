@@ -1,46 +1,55 @@
-<%= b1 do %>
+<% title_show %>
 
-  <% title_show %>
+<%= page do |p| %>
 
-  <%= breadcrumb true do |b| %>
-    <%= b.item @meta_title %>
+  <%= p.breadcrumb do %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item @meta_title %>
+    <% end %>
   <% end %>
 
-  <%= page_header %>
-
-  <%= link_to url_for(action: :new, spare_applicability: {spare_info_attributes: {name: @resource.spare_info.name}}, return_path: request.fullpath), class: "btn btn-primary" do %>
-    <%= icon 'plus' %>
-    Добавить применимость для этой же запчасти
+  <%= p.title do %>
+    <%= page_header %>
   <% end %>
 
-  <br />
-  <br />
+  <%= p.content do %>
+    <%= link_to url_for(action: :new, spare_applicability: {spare_info_attributes: {name: @resource.spare_info.to_label}}, return_path: request.fullpath), class: "btn btn-primary" do %>
+      <%= icon 'plus' %>
+      Добавить применимость для этой же запчасти
+    <% end %>
 
-  <%= link_to url_for(action: :new, spare_applicability: {spare_info_attributes: {name: @resource.spare_info.name}, brand_attributes: {name: @resource.cached_brand}}, return_path: request.fullpath), class: "btn btn-primary" do %>
-    <%= icon 'plus' %>
-    Добавить применимость для этого же бренда
+    <br />
+    <br />
+
+    <%= link_to url_for(action: :new, spare_applicability: {spare_info_attributes: {name: @resource.spare_info.to_label}, brand_attributes: {name: @resource.brand.to_label}}, return_path: request.fullpath), class: "btn btn-primary" do %>
+      <%= icon 'plus' %>
+      Добавить применимость для этого же бренда
+    <% end %>
+
+    <br />
+    <br />
+
+    <%= link_to url_for(action: :new, spare_applicability: {spare_info_attributes: {name: @resource.spare_info.to_label}, brand_attributes: {name: @resource.brand.to_label}, model_attributes: {name: @resource.model.to_label}}, return_path: request.fullpath), class: "btn btn-primary" do %>
+      <%= icon 'plus' %>
+      Добавить применимость для этой же модели
+    <% end %>
+
+    <br />
+    <br />
+
+    <% if false %>
+    <%# TODO это почему-то не работает. Забыл почему %>
+    <%= link_to url_for(action: :new, spare_applicability: {spare_info_attributes: {name: @resource.spare_info.to_label}, brand_attributes: {name: @resource.brand.to_label}, model_attributes: {name: @resource.model.to_label}, generation_attributes: {name: @resource.generation.to_label}}, return_path: request.fullpath), class: "btn btn-primary" do %>
+      <%= icon 'plus' %>
+      Добавить применимость для этого же поколения
+    <% end %>
+
+    <br />
+    <br />
+    <% end %>
+
+
+    <%= render 'smart_show' %>
   <% end %>
-
-  <br />
-  <br />
-
-  <%= link_to url_for(action: :new, spare_applicability: {spare_info_attributes: {name: @resource.spare_info.name}, brand_attributes: {name: @resource.cached_brand}, model_attributes: {name: @resource.cached_model}}, return_path: request.fullpath), class: "btn btn-primary" do %>
-    <%= icon 'plus' %>
-    Добавить применимость для этой же модели
-  <% end %>
-
-  <br />
-  <br />
-
-  <%= link_to url_for(action: :new, spare_applicability: {spare_info_attributes: {name: @resource.spare_info.name}, brand_attributes: {name: @resource.cached_brand}, model_attributes: {name: @resource.cached_model}, generation_attributes: {name: @resource.cached_generation}}, return_path: request.fullpath), class: "btn btn-primary" do %>
-    <%= icon 'plus' %>
-    Добавить применимость для этого же поколения
-  <% end %>
-
-  <br />
-  <br />
-
-
-  <%= render 'smart_show' %>
 
 <% end %>

@@ -1,8 +1,6 @@
 <%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
 
-  <%= row do %>
-
-    <%= c1 do %>
+  <%= d0 do %>
 
       <%= f.fields_for :spare_info, f.object.spare_info || f.object.build_spare_info, include_id: false do |b| %>
         <%= f.form_group :spare_info do %>
@@ -42,7 +40,5 @@
       <%= f.twbs_submit %>
 
     <% end %>
-
-  <% end %>
 
 <% end %>
