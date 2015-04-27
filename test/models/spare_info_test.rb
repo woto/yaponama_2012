@@ -33,4 +33,25 @@ class SpareInfoTest < ActiveSupport::TestCase
 
   end
 
+  test 'Тестируем присвоение правильных и не правильных брендов' do
+    si = SpareInfo.new(spare_catalog: Defaults.spare_catalog, catalog_number: '23948-23829-12384938', brand: Defaults.brand)
+    assert si.valid?
+
+    si.brand = brands(:child1_synonym)
+    refute si.valid?
+    assert si.errors[:brand].any?
+
+    si.brand = brands(:child1_conglomerate)
+    refute si.valid?
+    assert si.errors[:brand].any?
+
+    si.brand = brands(:child2_conglomerate)
+    refute si.valid?
+    assert si.errors[:brand].any?
+
+    si.brand = brands(:child1_child2)
+    assert si.valid?
+    refute si.errors[:brand].any?
+  end
+
 end

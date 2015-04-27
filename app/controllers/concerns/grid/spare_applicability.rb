@@ -11,23 +11,23 @@ module Grid::SpareApplicability
         :type => :integer,
       }
 
-      columns_hash['cached_spare_info'] = {
+      columns_hash['spare_info'] = {
         :type => :string,
       }
 
-      columns_hash['cached_brand'] = {
+      columns_hash['brand'] = {
         :type => :string,
       }
 
-      columns_hash['cached_model'] = {
+      columns_hash['model'] = {
         :type => :string,
       }
 
-      columns_hash['cached_generation'] = {
+      columns_hash['generation'] = {
         :type => :string
       }
 
-      columns_hash['cached_modification'] = {
+      columns_hash['modification'] = {
         :type => :string,
       }
 
@@ -50,11 +50,11 @@ module Grid::SpareApplicability
 
     def set_preferable_columns
       @grid.visible_id = '1'
-      @grid.visible_cached_spare_info = '1'
-      @grid.visible_cached_brand = '1'
-      @grid.visible_cached_model = '1'
-      @grid.visible_cached_generation = '1'
-      @grid.visible_cached_modification = '1'
+      @grid.visible_spare_info = '1'
+      @grid.visible_brand = '1'
+      @grid.visible_model = '1'
+      @grid.visible_generation = '1'
+      @grid.visible_modification = '1'
       @grid.visible_notes = '1'
       @grid.visible_notes_invisible = '1'
       @grid.visible_updated_at = '1'

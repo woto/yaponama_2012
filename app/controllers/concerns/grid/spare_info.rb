@@ -14,11 +14,11 @@ module Grid::SpareInfo
         :type => :string,
       }
 
-      columns_hash['cached_brand'] = {
+      columns_hash['brand'] = {
         :type => :string,
       }
 
-      columns_hash['cached_spare_catalog'] = {
+      columns_hash['spare_catalog'] = {
         :type => :string,
       }
 
@@ -78,8 +78,8 @@ module Grid::SpareInfo
       @grid.visible_min_days = '1'
       @grid.visible_min_cost = '1'
       @grid.visible_catalog_number = '1'
-      @grid.visible_cached_brand = '1'
-      @grid.visible_cached_spare_catalog = '1'
+      @grid.visible_brand = '1'
+      @grid.visible_spare_catalog = '1'
       @grid.visible_image1 = '1'
       @grid.visible_content = '1'
       @grid.visible_notes = '1'

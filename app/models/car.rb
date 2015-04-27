@@ -21,21 +21,21 @@ class Car < ActiveRecord::Base
   validates :brand, presence: true, associated: true
   validates :model, presence: true, associated: true
 
-  ## TODO Написать для этого тест(?!)
-  #validate do
-  #  if brand.try(:brand).present?
-  #    errors[:base] << 'Нельзя указывать в качестве производителя синоним'
-  #  end
-  #end
+
+  validate do
+    unless brand.try(:is_brand?)
+      errors[:brand] << 'Нельзя указать производителя, который не отмечен как выпускающий автомобили.'
+    end
+  end
 
   def to_label
     res = []
     res << vin
     res << frame
-    res << cached_brand
-    res << cached_model
-    res << cached_generation
-    res << cached_modification
+    res << brand.try(:to_label)
+    res << model.try(:to_label)
+    res << generation.try(:to_label)
+    res << modification.try(:to_label)
     res.reject(&:blank?).join(', ')
   end
 

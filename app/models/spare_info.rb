@@ -25,9 +25,6 @@ class SpareInfo < ActiveRecord::Base
   has_one :accumulator, class_name: 'Opts::Accumulator', dependent: :destroy
 
   def to_label
-    # TODO ранее тут был cached_brand. И в общем все работало, за исключением того, что допустим я создаю spare_info,
-    # но валидация не проходит. А т.к. cached_brand заполняется в before_save (и до него доходит), то при выводе ошибки
-    # через to_label cached_brand пустой. Как вариант можно изменить заполнение cached_brand с before_save на before_validation
     "#{catalog_number} (#{brand.to_label})"
   end
 
@@ -72,11 +69,10 @@ class SpareInfo < ActiveRecord::Base
     distinct
   }
 
-  ## TODO Написать для этого тест(?!)
-  #validate do
-  #  if brand.try(:brand).present?
-  #    errors[:base] << 'Нельзя указывать в качестве производителя синоним'
-  #  end
-  #end
+  validate do
+    if brand.try(:brand).present?
+      errors[:brand] << 'Нельзя указывать производителя, у которого есть родитель.'
+    end
+  end
 
 end

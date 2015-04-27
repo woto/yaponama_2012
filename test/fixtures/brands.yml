@@ -138,6 +138,7 @@ mitsubishi:
   creator: otto
   preview: Вступление
   content: Описание
+  is_brand: false
 
 mitsubishi_slang_1:
   name: Митсубиси

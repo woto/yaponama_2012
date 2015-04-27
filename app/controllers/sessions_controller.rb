@@ -33,6 +33,24 @@ class SessionsController < ApplicationController
         redirect_to user_path, attention: attention
       end
 
+      #if params.key?(:sso) && params.key?(:sig)
+      #  secret = "RydFerApp9"
+      #  sso = SingleSignOn.parse(request.query_string, secret)
+      #  sso.email = "user4@email.com"
+      #  sso.name = "Bill Hicks4"
+      #  sso.username = "bill4@hicks.com"
+      #  sso.external_id = "1234"
+      #  sso.sso_secret = secret
+      #  redirect_to sso.to_url("http://192.168.1.252/session/sso_login")
+      #else
+      #  attention = 'Вы успешно вошли, добро пожаловать!'
+      #  if authenticated_user.seller?
+      #    redirect_to admin_path, attention: attention
+      #  else
+      #    redirect_to user_path, attention: attention
+      #  end
+      #end
+
     else
       render 'new'
     end

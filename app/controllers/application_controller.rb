@@ -205,7 +205,7 @@ class ApplicationController < ActionController::Base
 
     res += first[:postfix] if first[:postfix]
 
-    polymorphic_path(res, second)
+    main_app.polymorphic_path(res, second)
 
   end
 
@@ -286,7 +286,9 @@ class ApplicationController < ActionController::Base
 
   def find_resource
     #binding.pry
-    @resource = @resource_class.finder(params[:id])
+    unless params[:controller].in?(['ckpages/public', 'ckpages/public404'])
+      @resource = @resource_class.finder(params[:id])
+    end
   end
 
   def new_resource
