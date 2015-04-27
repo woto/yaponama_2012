@@ -64,6 +64,10 @@ $grid-columns: 24;
 
 /////////////////////
 
+body {
+  background: $gray-lighter;
+}
+
 //@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic&subset=latin,cyrillic,cyrillic-ext);
 //
 //* {
@@ -164,9 +168,9 @@ label.required:after {
   display: block;
   text-align: center;
   float: left;
-  height: 125px;
+  height: 130px;
   padding-top: 100px;
-  width: 96px;
+  width: 100px;
 }
 
 /////////////////////
@@ -239,8 +243,18 @@ input[type=radio]:checked + img{
 }
 
 .breadcrumb {
-  @extend .bottom-space-lg;
+  @extend .bottom-space-none;
+  background: inherit;
 }
+
+.breadcrumb > li > a {
+  color: #777;
+}
+
+.breadcrumb > li.active {
+  color: #999;
+}
+
 
 /////////////////////
 
@@ -293,7 +307,10 @@ input[type=radio]:checked + img{
   background-color: #FAFAFA;
 }
 
-#catalog-brands, #catalog-models, #catalog-spare-catalogs, #categories, #category-brands, #category-models, #category-generations, #category-modifications {
+//#catalogs-show-brands
+//#brands-index-brands
+
+#catalogs-brands-show-models, #catalogs-models-show-catalogs, #categories-index-catalogs, #categories-show-brands, #categories-brands-show-models, #categories-models-show-generations, #categories-generations-show-modifications, #brands-show-catalogs {
 
   @extend .list-unstyled;
 
@@ -307,7 +324,7 @@ input[type=radio]:checked + img{
     margin: 4px;
     display: inline-block;
     width: calc(100% - 10px);
-    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    box-shadow: 0 0 1px rgba(0,0,0,0.3);
     background-color: white;
   }
 

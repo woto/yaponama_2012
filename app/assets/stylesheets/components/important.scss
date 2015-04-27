@@ -1,10 +1,10 @@
 #important {
   @extend .bg-danger;
   @extend .bottom-space-none;
-  padding: 15px 0;
+  margin: 30px 0;
 
   animation: important 1s;
-  //animation-delay: 1.5s;
+  animation-delay: 0.2s;
   animation-fill-mode: forwards;
   background: $alert-danger-bg;
 
@@ -14,7 +14,7 @@
 }
 
 @keyframes important {
-    0%   { background: $alert-danger-bg; }
-    5% { background: $brand-danger; }
-    100%   { background: $alert-danger-bg; }
+  0%   { background: $alert-danger-bg; }
+  5%   { background: $brand-danger; }
+  100% { background: $alert-danger-bg; }
 }
