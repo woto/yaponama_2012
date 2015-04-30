@@ -75,6 +75,7 @@
               <% if ["admin", "manager"].include? current_user.role %>
                 <li> <%= link_to "Закрытая зона", main_app.admin_path %> </li>
                 <%= divider %>
+                <%= content_for :menu_items %>
               <% end %>
               <li> <%= link_to "Личный кабинет", main_app.user_path %> </li>
               <li> <%= link_to "Выход", main_app.logout_path, :method => :delete %> </li>

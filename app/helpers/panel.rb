@@ -23,8 +23,9 @@ class Panel < AbstractBootstrap
     end
   end
 
-  def body
-    @template.content_tag :div, class: 'panel-body' do
+  def body options={}
+    options[:class] = ['panel-body', options[:class] ].compact
+    @template.content_tag :div, options do
       yield
     end
   end

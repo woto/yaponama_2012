@@ -1,0 +1,25 @@
+# TODO
+# https://code.google.com/apis/console
+google_oauth2_key:
+google_oauth2_secret:
+# https://developers.facebook.com/apps
+facebook_key:
+facebook_secret:
+# http://vk.com/developers.php
+vkontakte_key:
+vkontakte_secret:
+# https://dev.twitter.com/apps/new
+twitter_key:
+twitter_secret:
+# https://oauth.yandex.ru/client/new
+yandex_key:
+yandex_secret:
+#
+github_key:
+github_secret:
+#
+odnoklassniki_key:
+odnoklassniki_secret: 
+# http://api.mail.ru/sites/my/add
+mailru_key:
+mailru_secret:

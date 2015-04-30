@@ -13,6 +13,7 @@ class Admin::BrandsControllerTest < ActionController::TestCase
 
     patch :update,
       "brand" => {
+        "sign"=> "synonym",
         "name"=>"KI",
         "brand_attributes" => {
           "name"=>"KIA"
@@ -36,6 +37,7 @@ class Admin::BrandsControllerTest < ActionController::TestCase
 
     patch :update,
       "brand" => {
+        "sign"=> "synonym",
         "brand_attributes" => {
           "name"=>"KIA"
         }
@@ -58,6 +60,7 @@ class Admin::BrandsControllerTest < ActionController::TestCase
 
     patch :update,
       "brand" => {
+        "sign"=> "synonym",
         "brand_attributes" => {
           "name"=>"NISSAN"
         }
@@ -81,6 +84,7 @@ class Admin::BrandsControllerTest < ActionController::TestCase
 
     patch :update,
       "brand" => {
+        "sign"=> "synonym",
         "name"=>"KI",
         "brand_attributes" => {
           "name"=>"KIA"

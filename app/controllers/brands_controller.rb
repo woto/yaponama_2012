@@ -4,6 +4,9 @@ class BrandsController < ApplicationController
   skip_before_action :find_resource, :only => :search
 
   def search
+    # TODO Тут не совсем правильно, из-за того что можно создать бесконечную цепочку, а тут только несколько уровней вложения.
+    # Плюс ко всему не совсем корректные фильтры. Например набрав 'Toy' можно найти 'Toyota', а должно быть 'Toyota Lexus'
+
     brand_t = Brand.arel_table
 
     @resources = Brand

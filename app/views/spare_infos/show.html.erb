@@ -27,7 +27,7 @@
     <%== @resource.content %>
   </div>
 
-  <%= link_to("Публичный просмотр", polymorphic_path([:new, :user,  :product], :catalog_number => @resource.catalog_number, anchor: @resource.cached_brand), target: "_blank", class: "btn btn-primary", target: "_blank") %>
+  <%= link_to("Публичный просмотр", polymorphic_path([:new, :user,  :product], :catalog_number => @resource.catalog_number, anchor: @resource.brand.to_label), target: "_blank", class: "btn btn-primary", target: "_blank") %>
 
   <%= link_to url_for(action: :new, return_path: request.fullpath), class: "btn btn-primary" do %>
     <%= icon 'plus' %>

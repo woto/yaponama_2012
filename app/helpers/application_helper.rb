@@ -2,6 +2,32 @@
 #
 module ApplicationHelper
 
+  def discourse_search_string(prefix)
+    ['Страницы сайта:', t(prefix), @meta_title, @meta_title_small].compact.join(' ')
+  end
+
+  def discourse_content prefix
+    result = $discourse.search discourse_search_string(prefix)
+
+    begin
+      topic = result['topics'][0]
+      post = $discourse.topic(topic['id'])['post_stream']['posts'][0]
+      content_for :menu_items do
+        content_tag :li do
+          link_to "Перейти к #{t prefix}", "http://#{Rails.application.config_for('application/discourse')['host_port']}/t/#{post['topic_slug']}/#{post['topic_id']}"
+        end
+      end
+      post['cooked']
+    rescue StandardError
+    ensure
+      content_for :menu_items do
+        content_tag :li do
+          link_to "Добавить #{t prefix}", "http://#{Rails.application.config_for('application/discourse')['host_port']}/new-topic?title=#{URI.encode(discourse_search_string(prefix))}&body=#{URI.encode('Удалите этот текст и напишите свой. После сохранения можете вернуться назад и обновить страницу, текст сразу отобразится на сайте. Не меняйте заголовок сообщения.')}&category=category_name"
+        end
+      end
+    end
+  end
+
   def icon method, options={}
     content_tag :i, '', options.merge(class: "fa fa-#{method}")
   end
@@ -90,12 +116,10 @@ module ApplicationHelper
     end
   end
 
-  def somebody_tabs(&block)
+  def legacy_somebody_tabs(&block)
 
     res = ''.html_safe
     css_class = 'col-md-24'
-
-    container do
 
     [
 
@@ -179,9 +203,7 @@ module ApplicationHelper
       end
 
     end].join.html_safe
-    end
   end
-
 
   def page(&block)
     capture do
@@ -254,27 +276,14 @@ module ApplicationHelper
     end
   end
 
-  def alert type, dismissable=true, options={}, &block
-    #
-    # TODO
-    # Муть какая-то, разобраться, почему в виде есть разница между do .. end и { "" } и как надо правильно?
-    # В таком вариенте работает в обоих случаях.
+  def alert type, options={}, &block
 
-    if dismissable
-      css_class = "alert-dismissable"
-    else
-      css_style = ["border-top: none; border-right: none; border-bottom: none; border-left-width: 5px; border-radius: 0;", options[:style] ].compact
-    end
-
-    options[:class] = ["alert alert-#{type} #{css_class} fade in", options[:class] ].compact
-    options[:style] = css_style
+    options[:class] = ["alert alert-#{type} fade in", options[:class] ].compact
 
     content_tag :div, options do
 
-      if dismissable
-        a = capture do
-          content_tag(:button, :type=>"button", :class=>"close", :data=>{:dismiss=>"alert"}, :"aria-hidden"=>"true") { "×" }
-        end
+      a = capture do
+        content_tag(:button, :type=>"button", :class=>"close", :data=>{:dismiss=>"alert"}, :"aria-hidden"=>"true") { "×" }
       end
 
       b = capture do
@@ -283,7 +292,6 @@ module ApplicationHelper
       end
 
       a.to_s.html_safe + b.to_s.html_safe
-
     end
 
   end
@@ -319,7 +327,7 @@ module ApplicationHelper
     str4 = capture do yield(Breadcrumb.new(self)) end
 
     content_tag(:ol, :class => 'breadcrumb') do
-      str1 = capture do Breadcrumb.new(self).item(icon('home').html_safe, admin_zone? ? admin_path : root_path) end
+      str1 = capture do Breadcrumb.new(self).item("Главная", admin_zone? ? admin_path : main_app.root_path) end
 
       unless exception
         if @somebody
@@ -384,6 +392,10 @@ module ApplicationHelper
   end
 
   def page_header
+    intro = discourse_content :title
+
+    @meta_title_lead = @meta_title_lead.to_s.html_safe << intro.to_s.html_safe
+
     content_tag :div, class: 'page-header' do
       [content_tag(:h1, class: 'bottom-space-xs') do
         h(@meta_title) +
@@ -396,6 +408,8 @@ module ApplicationHelper
         h(@meta_title_lead) 
       end].join.html_safe
     end
+
+
   end
 
   def btn_toolbar
@@ -538,7 +552,23 @@ module ApplicationHelper
     end
   end
 
+  def d0 options={}, &block
+    row do
+      c0 options, &block
+    end
+  end
 
+  def d1 options={}, &block
+    row do
+      c1 options, &block
+    end
+  end
+
+  def d2 options={}, &block
+    row do
+      c2 options, &block
+    end
+  end
 
   def b1
     container do

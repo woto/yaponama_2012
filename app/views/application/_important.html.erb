@@ -1,40 +1,34 @@
-<%= alert 'danger', false, id: 'important' do %>
+<%- render 'confirm' -%>
+<%- render 'pay' -%>
+<%- render 'attention' -%>
 
-  <%- render 'confirm' -%>
-  <%- render 'pay' -%>
-  <%- render 'attention' -%>
+<% if content_for?(:confirm) || content_for?(:pay) || content_for?(:attention) %>
 
-  <% if content_for?(:confirm) || content_for?(:pay) || content_for?(:attention) %>
+  <%= container do %>
+    <%= row do %>
+      <div class="col-lg-24">
+        <%= alert 'danger' do %>
 
-      <%= container do %>
+          <% if content_for? :attention %>
+            <div id="attention-block">
+              <%= yield :attention %>
+            </div>
+          <% end %>
 
-        <%= row do %>
+          <% if content_for? :confirm %>
+            <div id="confirm-block">
+              <%= yield :confirm %>
+            </div>
+          <% end %>
 
-          <div class="col-lg-24">
-
-            <% if content_for? :attention %>
-              <div id="attention-block">
-                <%= yield :attention %>
-              </div>
-            <% end %>
-
-            <% if content_for? :confirm %>
-              <div id="confirm-block">
-                <%= yield :confirm %>
-              </div>
-            <% end %>
-
-            <% if content_for? :pay %>
-              <div id="pay-block">
-                <%= yield :pay %>
-              </div>
-            <% end %>
-
-          </div>
+          <% if content_for? :pay %>
+            <div id="pay-block">
+              <%= yield :pay %>
+            </div>
+          <% end %>
 
         <% end %>
-
-      <% end %>
-
+      </div>
+    <% end %>
   <% end %>
 <% end %>

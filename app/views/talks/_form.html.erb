@@ -1,7 +1,7 @@
-<%= twbs_form_for @talk, url: polymorphic_path([*jaba3, @talk]), remote: true, method: :post, multipart: true do |f| %>
+<%= twbs_form_for @talk, url: main_app.polymorphic_path([*jaba3, @talk]), remote: true, method: :post, multipart: true do |f| %>
 
   <div class="text-center text-muted text-xs bottom-space-xs">
-    <%= link_to 'укажите авто', new_user_car_path, style: 'color: white;' %>  (при необходимости)
+    <%= link_to 'укажите авто', main_app.new_user_car_path, style: 'color: white;' %>  (при необходимости)
   </div>
 
   <% if current_user.role == 'guest' %>

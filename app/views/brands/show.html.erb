@@ -12,7 +12,6 @@
 
   <%= p.title do %>
     <% @meta_title = "Производитель запчастей #{@brand.name}" %>
-    <% @meta_title_lead = "Выберите группу запчастей" %>
     <% @meta_title_small = "(рус. #{@brand.brands.slang.pluck(:name).join(', ')})" if @brand.brands.slang.exists? %>
     <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
     <%= page_header %>
@@ -20,14 +19,14 @@
 
   <%= p.content do %>
     <% if @spare_catalogs.exists? %>
-      <%= panel 'info', class: 'by-car' do |p| %>
+      <%= panel 'primary', class: 'by-car' do |p| %>
         <%= p.heading do %>
           <%= p.title do %>
             Выберите группу запчастей
           <% end %>
         <% end %>
         <%= p.body do %>
-      <ol id="catalog-spare-catalogs">
+      <ol id="brands-show-catalogs">
         <% @spare_catalogs.each do |spare_catalog| %>
           <li data-clickable-object> <%= link_to safe_join([content_tag(:strong, spare_catalog.name), hidden(" #{@brand.name}")]), category_path(spare_catalog, "q[brand_id_eq_any][]" => @brand.id), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_catalog.count}&nbsp;шт.)</small>".html_safe %></li>
         <% end %>
@@ -46,4 +45,5 @@
     <% end %>
 
   <% end %>
+
 <% end %>

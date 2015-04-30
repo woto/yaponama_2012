@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class Car < ActiveRecord::Base
   include BelongsToSomebody
   include BelongsToCreator
@@ -21,12 +19,11 @@ class Car < ActiveRecord::Base
   validates :brand, presence: true, associated: true
   validates :model, presence: true, associated: true
 
-
-  validate do
-    unless brand.try(:is_brand?)
-      errors[:brand] << 'Нельзя указать производителя, который не отмечен как выпускающий автомобили.'
-    end
-  end
+  #validate do
+  #  unless brand.try(:is_brand?)
+  #    errors[:brand] << 'Нельзя указать производителя, который не отмечен как выпускающий автомобили.'
+  #  end
+  #end
 
   def to_label
     res = []

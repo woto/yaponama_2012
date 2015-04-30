@@ -53,6 +53,9 @@ Yaponama2012::Application.routes.draw do
 
   resources :categories, concerns: [:paginatable_show] do
     scope module: 'categories' do
+      #resources :brands, constraints: lambda {|request|
+      #  request.params[:q][:accumulator_battery_capacity_gt].to_i > 10 && request.params[:q][:accumulator_battery_capacity_lt].to_i < 100
+      #}, defaults: {accumulator: 'Аккумуляторы от 10 до 100'}
       resources :brands, concerns: [:paginatable_show]
       resources :models, concerns: [:paginatable_show]
       resources :generations, concerns: [:paginatable_show]
@@ -470,7 +473,6 @@ Yaponama2012::Application.routes.draw do
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
-
   mount Ckpages::Engine => "/ckpages"
 
 end

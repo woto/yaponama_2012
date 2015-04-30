@@ -10,11 +10,11 @@
       <div id="items-progress"> </div>
 
       <% if @items.num_pages == 0 %>
-        <%= alert 'warning', false do %> 
+        <%= alert 'warning' do %> 
           Не найдено ни одной строки соответствующей данному условию.
         <% end %>
       <% elsif @items.num_pages > 1 && @grid.page.to_i > @items.num_pages %>
-        <%= alert 'warning', false do  %>
+        <%= alert 'warning' do  %>
           Вы находитесь на странице, которая больше доступных,
           <%= alert_link_to "хотите перейти на первую страницу?", smart_route({:postfix => [jaba2]}, jaba.merge(:page => 1)) %>
         <% end %>

@@ -13,13 +13,14 @@ class SpareInfosController < ApplicationController
 
   def search
     spare_info_t = SpareInfo.arel_table
+    brand_t = Brand.arel_table
 
     @resources = SpareInfo
 
     if params[:name].present?
       catalog_number, manufacturer  = params[:name].split(/\s/).map(&:strip)
       @resources = SpareInfo.where(spare_info_t[:catalog_number].matches("#{catalog_number}%"))
-      @resources = @resources.where(spare_info_t[:cached_brand].matches("#{manufacturer}%"))
+      @resources = @resources.joins(:brand).where(brand_t[:name].matches("#{manufacturer}%"))
     end
 
     @resources = @resources.order(:name).page params[:page]

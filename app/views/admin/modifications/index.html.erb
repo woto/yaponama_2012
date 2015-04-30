@@ -1,15 +1,17 @@
-<div class="container">
+<% title_index %>
+<%= page do |p| %>
 
-  <%= somebody_tabs do %>
-
-    <% title_index %>
-
+  <%= p.breadcrumb do %>
     <%= breadcrumb true do |b| %>
       <%= b.item @meta_title %>
     <% end %>
+  <% end %>
 
+  <%= p.title do %>
     <%= title_index %>
+  <% end %>
 
+  <%= p.content do %>
     <%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
 
       <%= panel 'default' do |p| %>
@@ -27,7 +29,5 @@
       <% end %>
 
     <% end %>
-
   <% end %>
-
-</div>
+<% end %>

@@ -18,7 +18,7 @@ class SpareReplacement < ActiveRecord::Base
   end
 
   def to_label
-    "#{from_cached_spare_info} - #{to_cached_spare_info}"
+    "#{from_spare_info.to_label} - #{to_spare_info.to_label}"
   end
 
 end

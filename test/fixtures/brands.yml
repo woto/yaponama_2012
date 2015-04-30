@@ -198,6 +198,7 @@ sending1:
   rating: 1000
   phantom: false
   creator: sending1
+  is_brand: true
 
 receiving1:
   name: RECEIVING1

@@ -70,7 +70,7 @@ class SpareInfo < ActiveRecord::Base
   }
 
   validate do
-    if brand.try(:brand).present?
+    if brand.try(:sign)
       errors[:brand] << 'Нельзя указывать производителя, у которого есть родитель.'
     end
   end

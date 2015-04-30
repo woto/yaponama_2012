@@ -1,4 +1,4 @@
-<% if info && (applicabilities = info.spare_applicabilities.order(:cached_brand, :cached_model, :cached_generation, :cached_modification)).exists? %>
+<% if info && (applicabilities = info.spare_applicabilities.includes(:brand, :model, :generation, :modification).order("brands.name", "models.name", "generations.name", "modifications.name")).exists? %>
   <h3 class="top-space-lg">Применимость</h3>
   <div class="table-responsive">
     <table class="table table-striped bottom-space-none">
@@ -16,10 +16,10 @@
       <tbody>
         <% applicabilities.each do |spare_applicability| %>
           <tr>
-            <td><%= link_to spare_applicability.cached_brand, catalogs_brand_path(spare_applicability.to_brand_param) if spare_applicability.cached_brand %></td>
-            <td><%= link_to spare_applicability.cached_model, catalogs_model_path(spare_applicability.to_model_param) if spare_applicability.cached_model %></td>
-            <td><%= spare_applicability.cached_generation if spare_applicability.cached_generation %></td>
-            <td><%= spare_applicability.cached_modification if spare_applicability.cached_modification %></td>
+            <td><%= link_to spare_applicability.brand.name, catalogs_brand_path(spare_applicability.brand) if spare_applicability.brand %></td>
+            <td><%= link_to spare_applicability.model.name, catalogs_model_path(spare_applicability.model) if spare_applicability.model %></td>
+            <td><%= spare_applicability.generation.name if spare_applicability.generation %></td>
+            <td><%= spare_applicability.modification.name if spare_applicability.modification %></td>
             <% if current_user.seller? %>
               <td>
                 <%= link_to edit_admin_spare_applicability_path(spare_applicability, return_path: request.fullpath), class: 'btn btn-warning' do %>

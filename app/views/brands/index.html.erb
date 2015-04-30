@@ -8,15 +8,26 @@
 
   <%= p.title do %>
     <% @meta_title = 'Бренды' %>
-    <% @meta_title_lead = 'Выберите интересующего вас производителя запчастей' %>
     <%= page_header %>
   <% end %>
 
   <%= p.content do %>
-    <div class="brands clearfix bottom-space-lg">
-      <% @brands.each do |brand| %>
-        <%= brands_decorator(lambda{|brand| brand_path(brand)}, brand, lambda{|brand| "#{brand.name} <br><small class='text-muted'>(#{brand.count} шт.)</small>".html_safe}) %>
+    <% if @brands.exists? %>
+      <%= panel 'primary' do |p| %>
+        <%= p.heading do %>
+          <%= p.title do %>
+            Выберите производителя запчастей
+          <% end %>
+        <% end %>
+        <%= p.body do %>
+          <div id="brands-index-brands" class="brands clearfix bottom-space-lg">
+            <% @brands.each do |brand| %>
+              <%= brands_decorator(lambda{|brand| brand_path(brand)}, brand, lambda{|brand| "#{brand.name} <br><small class='text-muted'>(#{brand.count} шт.)</small>".html_safe}) %>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
-    </div>
+    <% end %>
   <% end %>
+
 <% end %>

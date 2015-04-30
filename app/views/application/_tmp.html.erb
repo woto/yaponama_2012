@@ -21,12 +21,15 @@
   </div>
 
   <div class="col-sm-17 col-md-17 col-lg-18">
-    <% if @resource_class %>
-      <%= render partial: "#{@resource_class.name.underscore.pluralize}/index" %>
+    <% if @spare_infos.exists? %>
+      <% if @resource_class %>
+        <%= render partial: "#{@resource_class.name.underscore.pluralize}/index" %>
+      <% else %>
+        <%= render partial: 'best_parts_list', layout: 'paginator' %>
+      <% end %>
     <% else %>
-      <%= render partial: 'best_parts_list', layout: 'paginator' %>
+      <% @meta_robots = 'noindex' %>
     <% end %>
   </div>
 
 <% end %>
-

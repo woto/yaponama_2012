@@ -12,7 +12,6 @@
 
   <%= p.title do %>
     <% @meta_title = "Запчасти на #{@brand.name}" %>
-    <% @meta_title_lead = "Выберите модель автомобиля #{@brand.name}"  %>
     <% @meta_title_small = "(рус. #{@brand.brands.slang.pluck(:name).join(', ')})" if @brand.brands.slang.exists? %>
     <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
     <%= page_header %>
@@ -20,7 +19,7 @@
 
   <%= p.content do %>
     <% if @models.exists? %>
-      <%= panel 'info', class: 'by-car' do |p| %>
+      <%= panel 'primary', class: 'by-car' do |p| %>
         <%= p.heading do %>
           <%= p.title do %>
             Выберите модель автомобиля <%= @brand.name %>
@@ -47,4 +46,5 @@
       <% end %>
     <% end %>
   <% end %>
+
 <% end %>

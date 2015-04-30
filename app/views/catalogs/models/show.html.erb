@@ -15,14 +15,13 @@
   <%= p.title do %>
     <% @meta_title = "Запчасти на #{@brand.name} #{@model.name}" %>
     <% @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present? %>
-    <% @meta_title_lead = "Выберите группу запчастей #{@brand.name} #{@model.name}" %>
     <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
     <%= page_header %>
   <% end %>
 
   <%= p.content do %>
     <% if @spare_catalogs.exists? %>
-      <%= panel 'info', class: 'by-car' do |p| %>
+      <%= panel 'primary', class: 'by-car' do |p| %>
         <%= p.heading do %>
           <%= p.title do %>
             Выберите группу запчастей <%= @brand.name %> <%= @model.name %>
@@ -47,4 +46,5 @@
       <% end %>
     <% end %>
   <% end %>
+
 <% end %>

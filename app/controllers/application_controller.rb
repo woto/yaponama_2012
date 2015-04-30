@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class ApplicationController < ActionController::Base
 
   helper_method :prepare_talk_form

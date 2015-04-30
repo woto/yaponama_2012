@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class Model < ActiveRecord::Base
   include ByCategoryConcern
   include Selectable
@@ -12,14 +10,13 @@ class Model < ActiveRecord::Base
 
   has_many :generations, :dependent => :destroy, :inverse_of => :model
 
-  has_many :cars, :inverse_of => :generation
+  has_many :cars, :inverse_of => :model
 
   has_many :spare_applicabilities, dependent: :destroy
 
-  ## TODO Написать для этого тест(?!)
   #validate do
-  #  if brand.try(:brand).present?
-  #    errors[:base] << 'Нельзя указывать в качестве производителя синоним'
+  #  unless brand.try(:is_brand?)
+  #    errors[:brand] << 'Нельзя указать производителя, который не отмечен как выпускающий автомобили.'
   #  end
   #end
 

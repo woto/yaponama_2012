@@ -30,12 +30,6 @@ class Product < ActiveRecord::Base
   belongs_to :brand
   validates :brand, :presence => true
 
-  validate :brand do
-    if brand && brand.brand.present?
-      errors.add(:brand, 'Нельзя использовать алиас в качестве связки')
-    end
-  end
-
   validates :buy_cost, :numericality => { :greater_than => 0}
   validates :sell_cost, :numericality => { :greater_than => 0}
 
@@ -270,18 +264,17 @@ class Product < ActiveRecord::Base
 
 
   def to_label
-    "#{catalog_number} (#{cached_brand})"
+    "#{catalog_number} (#{brand.name})"
   end
 
   after_create if: "status == 'incart'" do
     SellerNotifierMailer.incart(self).deliver_later
   end
 
-  ## TODO Написать для этого тест(?!)
-  #validate do
-  #  if brand.try(:brand).present?
-  #    errors[:base] << 'Нельзя указывать в качестве производителя синоним'
-  #  end
-  #end
+  validate do
+    if brand.try(:sign)
+      errors[:brand] << 'Нельзя указывать производителя, у которого есть родитель.'
+    end
+  end
 
 end

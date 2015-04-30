@@ -1,12 +1,17 @@
-<%= somebody_tabs do %>
+<% title_index %>
+<%= page do |p| %>
 
-  <% title_index %>
-
-  <%= breadcrumb true do |b| %>
-    <%= b.item @meta_title %>
+  <%= p.breadcrumb do %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item @meta_title %>
+    <% end %>
   <% end %>
 
-  <%= title_index %>
+  <%= p.title do %>
+    <%= title_index %>
+  <% end %>
+
+  <%= p.content do %>
 
   <%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
 
@@ -23,7 +28,7 @@
       <%= render 'grid_footer', f: f, p: p %>
 
     <% end %>
-
+  <% end %>
 
   <% end %>
 

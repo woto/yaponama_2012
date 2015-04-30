@@ -1,18 +1,21 @@
-<%= somebody_tabs do %>
+<% @meta_title = "Способы оплаты" %>
+<% @meta_title_lead = 'Если вы не пользуетесь электронными деньгами, то можете выбрать вариант оплаты Сбербанк и оплатить наличными в ближайшем отделении банка.' %>
 
-  <%= row do %>
-    <%= c1 do %>
-      <% @meta_title = "Способы оплаты" %>
-      <% @meta_title_lead = 'Если вы не пользуетесь электронными деньгами, то можете выбрать вариант оплаты Сбербанк и оплатить наличными в ближайшем отделении банка.' %>
-      <%= page_header %>
+<%= page do |p| %>
+
+  <%= p.breadcrumb do %>
+    <%= breadcrumb false, exception=true do |b| %>
+      <%= b.item('Оплата') %>
     <% end %>
   <% end %>
 
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
 
     <%= twbs_form_for @resource, url: user_payments_path do |f| %>
-
-      <%= row do %>
-        <%= c1 do %>
 
           <%= f.error_notification %>
 
@@ -30,10 +33,6 @@
             <%= f.error :payment_type %>
 
           <% end %>
-
-        <% end %>
-      <% end %>
-
 
       <%= row do %>
         <%= c1 do %>
@@ -73,4 +72,5 @@
       <% end %>
 
     <% end %>
+  <% end %>
 <% end %>

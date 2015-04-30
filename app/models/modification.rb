@@ -10,7 +10,7 @@ class Modification < ActiveRecord::Base
 
   validates :name, :presence => true, uniqueness: { case_sensitive: false, :scope => :generation_id }
 
-  has_many :cars, :inverse_of => :generation
+  has_many :cars, :inverse_of => :modification
 
   has_many :spare_applicabilities, dependent: :destroy
 

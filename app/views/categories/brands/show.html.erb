@@ -16,17 +16,17 @@
   <%= p.title do %>
     <% @meta_title = "#{@resource.name} на #{@brand.name}" %>
     <% @meta_title_small = "(рус. #{@brand.brands.slang.pluck(:name).join(', ')})" if @brand.brands.slang.exists? %>
-    <% @meta_title_lead = "Подбор #{@resource.name} по автомобилю и характеристикам" %>
     <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
     <%= page_header %>
   <% end %>
 
   <%= p.content do %>
     <% if @models.exists? %>
-      <%= panel 'info', class: 'by-car' do |p| %>
-        <%= p.heading do %>
+      <%= panel 'primary', class: 'by-car' do |p| %>
+        <%= p.heading "data-clickable-object" => true do %>
           <%= p.title do %>
-            <a data-toggle="collapse" href="#by-car-collapse">Подбор <%= @resource.name %> по автомобилю </a>
+            <a data-toggle="collapse" href="#by-car-collapse" data-clickable-href>Подбор <%= @resource.name %> по автомобилю </a>
+            <%= icon 'caret-down pull-right' %>
           <% end %>
         <% end %>
         <%= content_tag :div, 'id' => 'by-car-collapse', 'class' => 'panel-collapse collapse' do %>
@@ -51,4 +51,5 @@
     <% end %>
 
   <% end %>
+
 <% end %>

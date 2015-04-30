@@ -1,23 +1,28 @@
-  <%= somebody_tabs do %>
+<% @meta_title = "Оформление заказа" %>
+<% @meta_title_lead = 'Проверьте пожалуйста еще раз выбранные вами товары и создайте новый заказ или выберите уже сделанный ранее. В нашем магазине вы можете добавлять товары в заказ, пока он имеет статус "Открыт" и не отправлен или не выдан вам.' %>
 
-    <% if false %>
-    <% if @current_user.role == 'guest' %>
-      <%= alert 'info', false do %>
-        <strong>Стоп! Уже делали покупки на нашем сайте?</strong><br/>
-        <%= alert_link_to("Войдите под своей учетной записью", login_with_path) %>, чтобы воспользоваться бонусами накопительной системы.
-      <% end %>
+<%= page do |p| %>
+
+  <% if false %>
+  <% if @current_user.role == 'guest' %>
+    <%= alert 'info' do %>
+      <strong>Стоп! Уже делали покупки на нашем сайте?</strong><br/>
+      <%= alert_link_to("Войдите под своей учетной записью", login_with_path) %>, чтобы воспользоваться бонусами накопительной системы.
     <% end %>
-    <% end %>
+  <% end %>
+  <% end %>
 
-    <% @meta_title = "Оформление заказа" %>
-    <% @meta_title_lead = 'Проверьте пожалуйста еще раз выбранные вами товары и создайте новый заказ или выберите уже сделанный ранее. В нашем магазине вы можете добавлять товары в заказ, пока он имеет статус "Открыт" и не отправлен или не выдан вам.' %>
-
+  <%= p.breadcrumb do %>
     <%= breadcrumb true do |b| %>
       <%= b.item @meta_title %>
     <% end %>
+  <% end %>
 
+  <%= p.title do %>
     <%= page_header %>
+  <% end %>
 
+  <%= p.content do %>
     <%= twbs_form_for @ic, url: smart_route({:prefix => [:inorder_action], :postfix => [:products]}, jaba) do |f| %>
 
       <div class="row">
@@ -45,8 +50,6 @@
           <%= render :partial => 'application/grid' %>
         <% end %>
       <% end %>
-
     <% end %>
-
-
   <% end %>
+<% end %>

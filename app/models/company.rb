@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class Company < ActiveRecord::Base
   include HiddenRecreate
   include BelongsToCreator

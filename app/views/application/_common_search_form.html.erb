@@ -1,5 +1,5 @@
 <% new_or_edit = @resource.is_a?(Product) && @resource.try(:persisted?) ? :edit : :new %>
-<%= form_tag polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource), remote: true, :class => "search-form navbar-form navbar-left", :method => :get do %>
+<%= form_tag main_app.polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource), remote: true, :class => "search-form navbar-form navbar-left", :method => :get do %>
   <div class="form-group">
     <div class="input-group" id="catalog_number_parent">
       <%= text_field_tag :catalog_number, params[:catalog_number] || @preset_catalog_number, :placeholder => 'Артикул детали', :class => "form-control" %>

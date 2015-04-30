@@ -1,1 +1,1 @@
-<li><strong><%= link_to("Публичный просмотр", polymorphic_path([:new, :user,  :product], :catalog_number => @resource.catalog_number, anchor: @resource.cached_brand), target: "_blank") %></strong></li>
+<li><strong><%= link_to("Публичный просмотр", polymorphic_path([:new, :user,  :product], :catalog_number => @resource.catalog_number, anchor: @resource.brand.to_label), target: "_blank") %></strong></li>

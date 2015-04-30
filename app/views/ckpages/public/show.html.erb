@@ -1,0 +1,37 @@
+<% @meta_title = @page.title %>
+<% @meta_description = @page.description %>
+<% @meta_keywords = @page.keywords %>
+<% @meta_robots = @page.robots %>
+
+<%= page do |p| %>
+
+  <%= p.breadcrumb do %>
+    <%= breadcrumb false, exception=true do |b| %>
+      <%= b.item @page.title1, @page.url1 if @page.title1? %>
+      <%= b.item @page.title2, @page.url2 if @page.title2? %>
+      <%= b.item @page.title3, @page.url3 if @page.title3? %>
+      <%= b.item @page.title4, @page.url4 if @page.title4? %>
+      <%= b.item @page.title5, @page.url5 if @page.title5? %>
+      <%= b.item @page.title %>
+    <% end %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
+
+    <div id="ckpages-content">
+      <%== @page.content %>
+    </div>
+
+    <% if @current_user.seller? %>
+      <%= link_to ckpages.edit_page_path(@page), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
+        <%= icon 'edit' %>
+        Редактировать
+      <% end %>
+    <% end %>
+
+  <% end %>
+<% end %>

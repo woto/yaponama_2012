@@ -26,9 +26,9 @@
       необходимо 
       <% amount = @amount.to_i %>
       <% if public_zone? %>
-        <% pay_path = new_user_payment_path(payment: {amount:amount}) %>
+        <% pay_path = main_app.new_user_payment_path(payment: {amount:amount}) %>
       <% else %>
-        <% pay_path = polymorphic_path([:new, *jaba3, :cashes], cash:{debit:amount}) %>
+        <% pay_path = main_app.polymorphic_path([:new, *jaba3, :cashes], cash:{debit:amount}) %>
       <% end %>
       <%= alert_link_to "внести предоплату в размере #{number_to_currency(amount)}", pay_path %>
     <% end %>

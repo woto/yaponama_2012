@@ -122,7 +122,7 @@
                     <div class="text-sm" itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
                       <meta itemprop="priceCurrency" content="RUB" />
                       <a href="#" data-expandable-link>
-                        <%= alert "info #{'hidden' if mf_scope[:offers].size <= shown_counter}", false do %>
+                        <%= alert "info #{'hidden' if mf_scope[:offers].size <= shown_counter}" do %>
                           Не устраивает цена или нужно быстрее? Взгляните на все <span itemprop="offerCount"><%= mf_scope[:offers].size %></span> <%= I18n.translate :offers, count: mf_scope[:offers].size %> от наших поставщиков с ценами от <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span> до <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span> и сроками от <%= mf_scope[:min_days] %> до <%= mf_scope[:max_days] %> дней.
                         <% end %>
                       </a>
@@ -163,7 +163,7 @@
                     <%= brand_preview mf_scope[:brand] %>
                   </div>
                   <div class="brands" style="clear: both; display: block; margin: 0 auto; width: 96px; height: 100px"> 
-                    <%= brands_decorator lambda{|brand| brand_path brand}, mf_scope[:brand], {:title => true} %>
+                    <%= brands_decorator lambda{|brand| brand_path brand}, mf_scope[:brand], lambda{|brand| brand.name} %>
                   </div>
                   <% if false %><%= link_to manufacturer, brand_parts_path(mf_scope[:brand]) %><% end %>
                 <% end %>
@@ -259,7 +259,7 @@
     <% end %>
 
     <% if replacements_link %>
-      <%= alert 'warning', false do %>
+      <%= alert 'warning' do %>
         <%= replacements_link %>
       <% end %>
     <% end %>

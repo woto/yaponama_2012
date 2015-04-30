@@ -80,12 +80,14 @@ module GridHelper
           end
         when *['notes']
           link_to_fast_edit val, item, column_name
-        when *['notes_invisible', 'cached_brand']
+        when *['notes_invisible']
           if admin_zone?
             link_to_fast_edit val, item, column_name
           else
             val
           end
+        when *['spare_info', 'spare_catalog', 'brand', 'model', 'generation', 'modification']
+          content_tag(:strong){ val.try(:to_label) }
         when 'cached_names'
           res = []
           begin

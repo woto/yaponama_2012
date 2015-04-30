@@ -54,4 +54,16 @@ class SpareInfoTest < ActiveSupport::TestCase
     refute si.errors[:brand].any?
   end
 
+  test 'Не допустимо чтобы у объекта был бренд, с заполненным sign' do
+    invalid_brand = brands(:child1_synonym)
+    valid_brand = brands(:child1_child2)
+
+    si = SpareInfo.new(catalog_number: '123', brand: invalid_brand, spare_catalog: Defaults.spare_catalog)
+    refute si.valid?
+    assert si.errors[:brand].any?
+
+    si.brand = valid_brand
+    assert si.valid?
+  end
+
 end

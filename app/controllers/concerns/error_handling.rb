@@ -7,7 +7,10 @@ module ErrorHandling
 
     if Rails.application.config_for('application/common')['suppress_exceptions']
       rescue_from Exception, :with => :render_500
-      rescue_from ActionController::RoutingError, :with => :render_404
+      # Это более не актуально. Необходимо использовать config.exceptions_app ? или
+      # wildcard match (*) как это сейчас в ckpages ? Или config.action_dispatch.rescue_responses ?
+      # http://www.youtube.com/results?search_query=exception+railscasts
+      #rescue_from ActionController::RoutingError, :with => :render_404
       rescue_from ActionController::UnknownController, :with => :render_404
       rescue_from ActiveRecord::RecordNotFound, :with => :render_500
       rescue_from AuthenticationError, with: ->(exception) { redirect_to main_app.root_path, attention: exception.message }

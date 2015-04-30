@@ -18,18 +18,23 @@ class Brand < ActiveRecord::Base
   has_many :spare_applicabilities, dependent: :destroy
   has_many :products
 
-  ## TODO Написать для этого тест(?!)
-  #validate do
-  #  if brand.try(:brand).present?
-  #    errors[:base] << 'Нельзя указывать в качестве производителя синоним'
-  #  end
-  #end
-
   validate do
     if brand == self
       errors[:brand] << 'Нельзя указывать в качестве родительского производителя себя'
     end
   end
+
+  validate do
+    if sign.nil? ^ brand.nil?
+      errors[:brand] << 'У сленга, синонима или конгломерации должен быть родительский бренд'
+    end
+  end
+
+  #validate do
+  #  if sign.in?([Brand.signs[:slang], Brand.signs[:synonym]]) && is_brand?
+  #    errors[:brand] << 'Вам необходимо Сленговое название или синоним не могут являться производителем автомобилей. Указывайте этот флаг только у родителя.'
+  #  end
+  #end
 
   def to_label
     name

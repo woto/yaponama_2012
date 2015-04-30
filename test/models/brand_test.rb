@@ -20,8 +20,29 @@ class BrandTest < ActiveSupport::TestCase
     si = spare_infos(:ki_2103)
     br = si.brand
     assert_equal "KI", br.name
-    br.update(brand: brands(:kia))
+    br.update(brand: brands(:kia), sign: Brand.signs[:synonym])
     assert_equal "KIA", si.reload.brand.name
+  end
+
+  test 'У сленга, синонима или конгломерации должен быть родительский бренд' do
+    brand1 = Brand.new(name: 'Brand 1')
+    assert brand1.valid?
+
+    brand2 = Brand.create(name: 'Brand 2')
+    assert brand2.valid?
+
+    brand1.brand = brand2
+    refute brand1.valid?
+    brand1.brand = nil
+
+    brand1.sign = Brand.signs[:synonym]
+    refute brand1.valid?
+
+    brand1.sign = Brand.signs[:slang]
+    refute brand1.valid?
+
+    brand1.sign = Brand.signs[:conglomerate]
+    refute brand1.valid?
   end
 
   test 'Проверяем удаление родительского бренда' do

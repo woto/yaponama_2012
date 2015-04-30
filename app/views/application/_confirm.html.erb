@@ -8,7 +8,7 @@
       <% if !phone.confirmed? && phone.persisted? %>
         <div>
           Пожалуйста, подтвердите номер мобильного телефона
-          <%= alert_link_to phone.to_label, view_user_confirm_phone_path(phone), remote: true, class: 'confirm-link confirm-phone' %>
+          <%= alert_link_to phone.to_label, main_app.view_user_confirm_phone_path(phone), remote: true, class: 'confirm-link confirm-phone' %>
           <!-- чтобы мы были уверены, что вы получаете от нас SMS.  -->
         </div>
       <% elsif phone.confirmed? && phone.persisted? %>
@@ -20,7 +20,7 @@
       <% if !email.confirmed? && email.persisted? %>
         <div>
           Пожалуйста, подтвердите e-mail адрес 
-          <%= alert_link_to email.to_label, view_user_confirm_email_path(email), remote: true, class: 'confirm-link confirm-email' %>
+          <%= alert_link_to email.to_label, main_app.view_user_confirm_email_path(email), remote: true, class: 'confirm-link confirm-email' %>
           <!-- чтобы мы были уверены, что вы получаете от нас письма. -->
         </div>
       <% elsif email.confirmed? && email.persisted? %>

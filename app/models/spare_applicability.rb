@@ -13,13 +13,13 @@ class SpareApplicability < ActiveRecord::Base
   validates :spare_info, uniqueness: { scope: [:brand_id, :model_id, :generation_id, :modification_id] }
 
   def to_label
-    "#{cached_spare_info} - #{cached_brand} - #{cached_model} - #{cached_generation} - #{cached_modification}"
+    "#{spare_info.to_label} - #{brand.to_label} - #{model.to_label} - #{generation.try(:to_label)} - #{modification.try(:to_label)}"
   end
 
-  ## TODO Написать для этого тест(?!)
+  # TODO доработать когда окончательно разберусь с is_brand
   #validate do
-  #  if brand.try(:brand).present?
-  #    errors[:base] << 'Нельзя указывать в качестве производителя синоним'
+  #  unless brand.try(:is_brand?)
+  #    errors[:brand] << 'Нельзя указать производителя, который не отмечен как выпускающий автомобили.'
   #  end
   #end
 

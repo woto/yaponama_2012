@@ -1,19 +1,13 @@
 <% if @current_user.seller? %>
-
-  <hr style="margin-top: 200px" />
-
   <% if @exception.present? %>
-
-    <%= row do  %>
-      <div class="col-lg-24">
-          <ul class="list-unstyled text-sm">
-            <% @exception.backtrace.each do |item| %>
-              <li><code> <%= item %> </code></li>
-            <% end %>
-          </ul>
+    <%= b1 do %>
+      <div class="well">
+        <ul class="list-unstyled text-sm">
+          <% @exception.backtrace.each do |item| %>
+            <li><code> <%= item %> </code></li>
+          <% end %>
+        </ul>
       </div>
     <% end %>
-
   <% end %>
-
 <% end %>

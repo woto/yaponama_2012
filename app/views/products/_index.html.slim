@@ -1,56 +1,59 @@
-= somebody_tabs do
+=  page do |p|
 
   - if params[:order_id]
 
     - @meta_title = "Просмотр заказа"
     - @meta_title_small =  "№ #{@resource.token}"
 
-    = breadcrumb true do |b|
-      = b.item "Заказы", "#{polymorphic_path([*jaba3, :orders])}"
-      = b.item @meta_title + " " + @meta_title_small
+    = p.breadcrumb do
+      = breadcrumb true do |b|
+        = b.item "Заказы", "#{polymorphic_path([*jaba3, :orders])}"
+        = b.item @meta_title + " " + @meta_title_small
 
-    = page_header
+    = p.title
+      = page_header
 
-    = row class: 'bottom-space' do
+    = p.content do
+      = row do
 
-      .col-sm-8
+        .col-sm-8
 
-        = panel 'primary' do |p|
+          = panel 'primary' do |p|
 
-          = p.heading do
-            = p.title style:"display: inline" do
-              'Получатель
-            = link_to polymorphic_path([:edit, *jaba3, :consignee], {id: @resource, return_path: request.fullpath}), class: 'pull-right btn btn-warning btn-xs' do
-              = icon 'edit'
+            = p.heading do
+              = p.title style:"display: inline" do
+                'Получатель
+              = link_to polymorphic_path([:edit, *jaba3, :consignee], {id: @resource, return_path: request.fullpath}), class: 'pull-right btn btn-warning btn-xs' do
+                = icon 'edit'
 
-          = p.body do
-            = parsed_cached_profile(@resource.cached_profile)
+            = p.body do
+              = parsed_cached_profile(@resource.cached_profile)
 
-      .col-sm-8
+        .col-sm-8
 
-        = panel 'primary' do |p|
+          = panel 'primary' do |p|
 
-          = p.heading do
-            = p.title style:"display: inline" do
-              'Способ доставки
-            = link_to polymorphic_path([:edit, *jaba3, :delivery], {id: @resource, return_path: request.fullpath}),  class: 'pull-right btn btn-warning btn-xs' do
-              = icon 'edit'
+            = p.heading do
+              = p.title style:"display: inline" do
+                'Способ доставки
+              = link_to polymorphic_path([:edit, *jaba3, :delivery], {id: @resource, return_path: request.fullpath}),  class: 'pull-right btn btn-warning btn-xs' do
+                = icon 'edit'
 
-          = p.body do
-            ul.list-unstyled
-              /li Самовывоз. 
-              /li ул. Красноармейская, д.8, корп. 3
-              li= @resource.delivery_variant.try(:place).try(:to_label)
-              li= @resource.postal_address.try(:to_label)
-              li= @resource.delivery_variant.try(:to_label)
-              li 
-                ' Стоимость доставки: 
-                = number_to_currency @resource.delivery_cost
+            = p.body do
+              ul.list-unstyled
+                /li Самовывоз. 
+                /li ул. Красноармейская, д.8, корп. 3
+                li= @resource.delivery_variant.try(:place).try(:to_label)
+                li= @resource.postal_address.try(:to_label)
+                li= @resource.delivery_variant.try(:to_label)
+                li 
+                  ' Стоимость доставки: 
+                  = number_to_currency @resource.delivery_cost
 
-      .col-sm-8
-                            
-        p Статус заказа: <span class='label label-#{@resource.status}'>#{Rails.configuration.orders_status[@resource.status].try(:[], 'title')} </span>
-        p.text-muted.text-sm Вы просматриваете #{Rails.configuration.orders_status[@resource.status]['hint']}
+        .col-sm-8
+                              
+          p Статус заказа: <span class='label label-#{@resource.status}'>#{Rails.configuration.orders_status[@resource.status].try(:[], 'title')} </span>
+          p.text-muted.text-sm Вы просматриваете #{Rails.configuration.orders_status[@resource.status]['hint']}
 
 
   - else
@@ -59,18 +62,20 @@
     - @meta_title_small = Rails.configuration.products_status[params[:status] || 'all']['full_title']
     - @meta_title_lead = "Вы просматриваете #{Rails.configuration.products_status[params[:status] || 'all']['hint']}"
 
-    = breadcrumb true do |b|
-      = b.item @meta_title
+    = p.breadcrumb
+      = breadcrumb true do |b|
+        = b.item @meta_title
 
-    = title_index
+    = p.title
+      = title_index
 
+  = p.content
+    = twbs_form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f|
 
-  = twbs_form_for @grid, :as => "grid", :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f|
-
-    = panel 'default' do |p|
-      = p.heading do
-        = render "head"
-      = p.body do
-        = render 'grid', f: f
-      = render 'grid_footer', f: f, p: p
+      = panel 'default' do |p|
+        = p.heading do
+          = render "head"
+        = p.body do
+          = render 'grid', f: f
+        = render 'grid_footer', f: f, p: p
 
