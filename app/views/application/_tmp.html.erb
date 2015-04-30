@@ -21,7 +21,7 @@
   </div>
 
   <div class="col-sm-17 col-md-17 col-lg-18">
-    <% if @spare_infos.exists? %>
+    <% if @spare_infos.present? %>
       <% if @resource_class %>
         <%= render partial: "#{@resource_class.name.underscore.pluralize}/index" %>
       <% else %>
