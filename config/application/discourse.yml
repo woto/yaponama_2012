@@ -2,8 +2,6 @@ defaults: &defaults
   host: '192.168.1.252'
   port: '80'
   api_username: woto
-  host_port: '192.168.1.250'
-  api_key: 563fbcff433d21553a0705ce00e842e6b964dcdff1986078acbde439d8686f7a
   #host_port: '192.168.1.252'
   #api_key: 00dd957fde6299d9cfe89b8245fd8a70bd7bcf17a0ec85e93c5896b41e4d5225
   #host_port: 'forum.avtorif.ru'
@@ -11,6 +9,15 @@ defaults: &defaults
 
 development:
   <<: *defaults
+  host_port: '192.168.1.250'
+  api_key: 5d100032841c2b9fb3bd88aececf628626b390624217ef7b1b9550295a0d587e
+  categories:
+    head:
+      title: Вступления
+      id: 6
+    body:
+      title: Статьи
+      id: 7
 
 test:
   <<: *defaults
@@ -20,8 +27,16 @@ production:
     <<: *defaults
     host: 'forum.avtorif.ru'
     port: '80'
-    api_username: woto
+    api_username: robot
     host_port: 'forum.avtorif.ru'
-    api_key: 0b7e161b9c70e33b05eb5d2d818c48c06b5db1bf587b41c5df8baf123ccc2958
+    api_key: 02950e0701e3765c5f98bc4f0fafab773dd50e62ada590a0caec1cf218f420c9
+  categories:
+    head:
+      title: Вступления
+      id: 14
+    body:
+      title: Статьи
+      id: 15
+
   zapstok.ru:
     <<: *defaults

@@ -1,32 +1,4 @@
-# encoding: utf-8
-#
 module ApplicationHelper
-
-  def discourse_search_string(prefix)
-    ['Страницы сайта:', t(prefix), @meta_title, @meta_title_small].compact.join(' ')
-  end
-
-  def discourse_content prefix
-    result = $discourse.search discourse_search_string(prefix)
-
-    begin
-      topic = result['topics'][0]
-      post = $discourse.topic(topic['id'])['post_stream']['posts'][0]
-      content_for :menu_items do
-        content_tag :li do
-          link_to "Перейти к #{t prefix}", "http://#{Rails.application.config_for('application/discourse')['host_port']}/t/#{post['topic_slug']}/#{post['topic_id']}"
-        end
-      end
-      post['cooked']
-    rescue StandardError
-    ensure
-      content_for :menu_items do
-        content_tag :li do
-          link_to "Добавить #{t prefix}", "http://#{Rails.application.config_for('application/discourse')['host_port']}/new-topic?title=#{URI.encode(discourse_search_string(prefix))}&body=#{URI.encode('Удалите этот текст и напишите свой. После сохранения можете вернуться назад и обновить страницу, текст сразу отобразится на сайте. Не меняйте заголовок сообщения.')}&category=category_name"
-        end
-      end
-    end
-  end
 
   def icon method, options={}
     content_tag :i, '', options.merge(class: "fa fa-#{method}")
@@ -392,10 +364,6 @@ module ApplicationHelper
   end
 
   def page_header
-    intro = discourse_content :title
-
-    @meta_title_lead = @meta_title_lead.to_s.html_safe << intro.to_s.html_safe
-
     content_tag :div, class: 'page-header' do
       [content_tag(:h1, class: 'bottom-space-xs') do
         h(@meta_title) +
@@ -410,6 +378,46 @@ module ApplicationHelper
     end
 
 
+  end
+
+  def discourse_head(*titles)
+    d = Discourse.new('head', titles)
+    @meta_title_lead ||= ''.html_safe
+
+    d.get_posts(1) do |post, link_to_edit|
+      @meta_title_lead << post
+      if @current_user.seller?
+        @meta_title_lead << link_to("Редактировать вступление", link_to_edit, class: 'btn btn-warning')
+      end
+    end
+
+    if @current_user.seller?
+      @meta_title_lead << " "
+      @meta_title_lead << link_to("Добавить вступление", d.link_to_new, class: 'btn btn-warning')
+    end
+  end
+
+  def discourse_body(*titles)
+    discourse = Discourse.new('body', titles)
+
+    page do |page|
+      page.content do
+        discourse.get_posts(1) do |post, link|
+          concat(panel('default') do |panel|
+            concat(panel.heading do
+              panel.title do
+                'Статьи с форума'
+              end
+            end)
+            concat(panel.body do
+              concat post
+              concat link_to('Редактировать статью', link, class: 'btn btn-warning') if @current_user.seller?
+            end)
+          end)
+        end
+        concat link_to('Новая статья', discourse.link_to_new, class: 'btn btn-warning') if @current_user.seller?
+      end
+    end
   end
 
   def btn_toolbar

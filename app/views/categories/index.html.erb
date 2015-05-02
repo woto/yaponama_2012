@@ -8,11 +8,11 @@
 
   <%= p.title do %>
     <% @meta_title = "Запчасти" %>
+    <% discourse_head(@meta_title, @meta_title_small) %>
     <%= page_header %>
   <% end %>
 
   <%= p.content do %>
-
     <% if @spare_catalogs.exists? %>
       <%= panel 'primary', class: 'by-car' do |p| %>
         <%= p.heading do %>
@@ -31,3 +31,5 @@
     <% end %>
   <% end %>
 <% end %>
+
+<%= discourse_body(@meta_title, @meta_title_small) %>

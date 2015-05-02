@@ -238,17 +238,6 @@
         </div>
       <% end %>
 
-      <% discourse_search_result = $discourse.search(catalog_number) %>
-      <% if discourse_search_result.key? 'posts' %>
-        <% $discourse.search(catalog_number)['posts'].each do |post| %>
-          <%= panel 'default' do |p| %>
-            <%= p.body do %>
-              <%== post['cooked'] %>
-            <% end %>
-          <% end %>
-        <% end %>
-      <% end %>
-
     <% end %>
 
     <% replacements_link = capture do %>

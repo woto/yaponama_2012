@@ -27,6 +27,7 @@
   <%= p.title do %>
     <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
     <% @meta_title = "#{@resource.name} на #{@brand.name} #{@model.name} #{@generation.name}" %>
+    <% discourse_head(@meta_title, @meta_title_small) %>
     <%= page_header %>
   <% end %>
 
@@ -53,13 +54,17 @@
 
     <%= render 'tmp' %>
 
+    <% if false %>
     <% if @current_user.seller? %>
       <%= link_to edit_admin_generation_path(@generation, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
         <%= icon 'edit' %>
         Редактировать
       <% end %>
     <% end %>
+    <% end %>
 
   <% end %>
 
 <% end %>
+
+<%= discourse_body(@meta_title, @meta_title_small) %>

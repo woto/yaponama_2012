@@ -1,6 +1,6 @@
 ru:
-  title: Заголовок
-  article: Статья
+  title: заголовок
+  body: статья
   offers:
     one: предложение
     few: предложения

@@ -1,18 +1,5 @@
 <%= render :partial => 'layouts/shared/prefix' %>
 
-<%# Из-за того, что мы добавляем пункты меню, то мы должны выполнить этот код до вывода самого меню %>
-<% content_for :discourse_article do %>
-  <% discourse_article = discourse_content(:article) %>
-  <% if discourse_article.present? %>
-    <hr>
-    <%= page do |p| %>
-      <%= p.content do %>
-        <%== discourse_article %>
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %>
-
 <%= render '/layouts/user_navbar' %>
 
 <div id="important">
@@ -20,7 +7,6 @@
 </div>
 
 <%= yield %>
-<%= yield :discourse_article %>
 
 <%= render 'layouts/user_footer' %>
 

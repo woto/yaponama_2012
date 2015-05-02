@@ -15,22 +15,6 @@
 <% end %>
 <% end %>
 
-<% if false %>
-<%= page do |p| %>
-  <%= p.content do %>
-    <% result = $discourse.search(@meta_title) %>
-    <% result['posts'].each do |post| %>
-      <%= panel 'default' do |p| %>
-        <%= p.body do %>
-          <%== post['cooked'] %>
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %>
-<% end %>
-
-
 <% if Rails.application.config_for('application/common')['share_buttons'] %>
   <%= b1 do %>
     <h4>Поделиться ссылкой на эту страницу.</h4>
