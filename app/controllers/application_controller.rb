@@ -284,9 +284,7 @@ class ApplicationController < ActionController::Base
 
   def find_resource
     #binding.pry
-    unless params[:controller].in?(['ckpages/public', 'ckpages/public404'])
-      @resource = @resource_class.finder(params[:id])
-    end
+    @resource = @resource_class.finder(params[:id])
   end
 
   def new_resource
