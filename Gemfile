@@ -148,5 +148,5 @@ gem 'discourse_api', github: 'discourse/discourse_api' # added 22.03.2015
 gem 'discourse_static_assets', github: 'woto/discourse_static_assets'
 #gem 'mysql2'
 
-#gem 'ckpages', github: 'woto/ckpages'
-gem 'ckpages', path: '../ckpages'
+gem 'ckpages', github: 'woto/ckpages'
+#gem 'ckpages', path: '../ckpages'

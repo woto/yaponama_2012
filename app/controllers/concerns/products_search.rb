@@ -20,7 +20,7 @@ module ProductsSearch
 
       @parsed_json = { "result_prices" => [] }
 
-      @meta_title = "Поиск запчастей по номеру"
+      @meta_title = "Ничего не найдено"
 
       if c9.present?
 

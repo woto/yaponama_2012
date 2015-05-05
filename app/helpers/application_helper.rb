@@ -381,7 +381,7 @@ module ApplicationHelper
   end
 
   def discourse_head(*titles)
-    d = Discourse.new('head', titles)
+    d = Discourse.new('head', *titles)
     @meta_title_lead ||= ''.html_safe
 
     d.get_posts(1) do |post, link_to_edit|
@@ -398,7 +398,7 @@ module ApplicationHelper
   end
 
   def discourse_body(*titles)
-    discourse = Discourse.new('body', titles)
+    discourse = Discourse.new('body', *titles)
 
     page do |page|
       page.content do
