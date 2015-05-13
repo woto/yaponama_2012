@@ -471,8 +471,15 @@ Yaponama2012::Application.routes.draw do
     "/brands/#{brand.to_param}"
   }
 
+
   require 'sidekiq/web'
+
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    username == 'woto' && password == 'woto'
+  end if Rails.env.production?
+
   mount Sidekiq::Web => '/sidekiq'
+
   mount Ckpages::Engine => "/ckpages"
 
 end
