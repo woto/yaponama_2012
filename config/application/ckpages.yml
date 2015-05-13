@@ -1,11 +1,10 @@
 defaults: &defaults
-  suppress_exceptions: true
-  login: 'woto'
-  password: 'woto'
+  enabled: true
+  root: false
 
 development:
   <<: *defaults
-  suppress_exceptions: false
+  enabled: true
 
 test:
   <<: *defaults

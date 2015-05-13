@@ -1,3 +1,2 @@
-Ckpages.suppress_exceptions = Rails.application.config_for('application/ckpages')['suppress_exceptions']
-Ckpages.login = Rails.application.config_for('application/ckpages')['login']
-Ckpages.password = Rails.application.config_for('application/ckpages')['password']
+Ckpages.enabled = Rails.application.config_for('application/ckpages')['enabled']
+Ckpages.root = Rails.application.config_for('application/ckpages')['root']
