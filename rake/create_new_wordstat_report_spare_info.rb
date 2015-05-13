@@ -1,7 +1,8 @@
 class CreateNewWordstatReportSpareInfo
 
   # Массив интересующих брендов (конгломераций)
-  BRANDS = ['Toyota Lexus', 'Nissan Infiniti', 'Mitsubishi']
+  BRANDS = []
+  #BRANDS = ['Toyota Lexus', 'Nissan Infiniti', 'Mitsubishi']
 
   def self.create_new_wordstat_report_spare_info
 
@@ -18,7 +19,7 @@ class CreateNewWordstatReportSpareInfo
 
       1.upto(5) do |i|
         phrases = SpareInfoPhrase.
-          includes(:spare_info).
+          includes(:spare_info => :brand).
           where("min_cost > ?", 500).
           where("min_cost < ?", 15000).
           where(:yandex_shows => nil).
@@ -28,7 +29,7 @@ class CreateNewWordstatReportSpareInfo
           offset(offset)
 
         if BRANDS.any?
-          phrases = phrases.where(:spare_infos => { :cached_brand => BRANDS })
+          phrases = phrases.where({ :brands => {name:  BRANDS} })
         end
 
         phrases = phrases.pluck(:phrase)
