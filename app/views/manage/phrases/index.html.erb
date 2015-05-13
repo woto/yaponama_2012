@@ -106,6 +106,7 @@
            <table class="table">
              <th> <%= sort_link(@q, :id) %> </td>
              <th> <%= sort_link(@q, :spare_info_id) %> </td>
+             <th> Картинки </th>
              <th> <%= sort_link(@q, :catalog_number) %> </td>
              <th> <%= sort_link(@q, :spare_info_catalog_number) %> </td>
              <th> <%= sort_link(@q, :spare_info_brand_name) %> </td>
@@ -124,6 +125,14 @@
                <tr>
                  <td><%= phrase.id %></td>
                  <td><%= link_to phrase.spare_info_id, admin_spare_info_path(phrase.spare_info_id) %></td>
+                 <td>
+                   <% (1..8).each do |n| %>
+                     <% if phrase.spare_info.instance_eval("image#{n}").present? %>
+                       <%= image_tag phrase.spare_info.instance_eval("image#{n}.fit_thumb.url") %>
+                     <% end %>
+                   <% end %>
+                 </td>
+
                  <td><%= phrase.catalog_number %></td>
                  <td><%= phrase.spare_info.catalog_number %></td>
                  <td><%= phrase.spare_info.brand.name %></td>
