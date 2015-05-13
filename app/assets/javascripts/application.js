@@ -13,7 +13,6 @@
 // OTHER LIBRARIES
 //
 //= require autosize/jquery.autosize.min.js
-//= require nprogress/nprogress
 //= require purl/purl
 //
 //= require nanoScrollerJS/bin/javascripts/overthrow.min
@@ -94,7 +93,6 @@
 //= require assa
 //= require spare_catalog
 //= require spare_info
-//= require nprogress_init
 //= require image_view
 //
 //= require pings

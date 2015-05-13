@@ -82,9 +82,6 @@
 [submodule "system/submodules/list.js"]
 	path = system/submodules/list.js
 	url = https://github.com/woto/list.js
-[submodule "system/submodules/nprogress"]
-	path = system/submodules/nprogress
-	url = https://github.com/woto/nprogress
 [submodule "system/submodules/list.pagination.js"]
 	path = system/submodules/list.pagination.js
 	url = https://github.com/javve/list.pagination.js
