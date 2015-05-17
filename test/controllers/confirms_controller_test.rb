@@ -7,7 +7,7 @@ class ConfirmsControllerTest < ActionController::TestCase
   test 'Если я подтверждаю контакт гостя, то меня редиректит на стр. регистрации и пишут чтобы зарегился' do
     id = emails(:guest_with_profile).id
     xhr :get, :make, id: id, resource_class: 'Email', confirm: { pin: '8888' }
-    assert_redirected_to edit_register_path(with: :email)
+    assert_match edit_register_path(with: :email), response.body
     assert_equal 'guest_with_profile@example.com успешно подтвержден.', flash[:attention]
     # TODO у нас рендерится js, который пробрасывает с помощью Turbolinks на нужную страницу
   end

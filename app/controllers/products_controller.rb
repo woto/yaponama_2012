@@ -59,7 +59,7 @@ class ProductsController < ApplicationController
         search catalog_number, params[:manufacturer], params[:replacements]
       end
       format.js do
-        redirect_via_turbolinks_to polymorphic_path([*jaba3, :product], params )
+        redirect_to polymorphic_path([*jaba3, :product], params ), turbolinks: true
       end
     end
   end
@@ -83,7 +83,7 @@ class ProductsController < ApplicationController
         search catalog_number, params[:manufacturer], params[:replacements]
       end
       format.js do
-        redirect_via_turbolinks_to polymorphic_path([*jaba3, :product], params )
+        redirect_to polymorphic_path([*jaba3, :product], params ), turbolinks: true
       end
     end
     
@@ -96,7 +96,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @resource.save
         format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно добавлен в корзину.") }
-        format.js { redirect_via_turbolinks_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно добавлен в корзину.") }
+        format.js { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно добавлен в корзину.", turbolinks: true) }
       else
         format.html { render action: 'new' }
         format.js { render action: 'new' }
@@ -108,7 +108,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @resource.save
         format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно изменен.") }
-        format.js { redirect_via_turbolinks_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно изменен.") }
+        format.js { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно изменен.", turbolinks: true) }
       else
         format.html { render action: 'new' }
         format.js { render action: 'new' }

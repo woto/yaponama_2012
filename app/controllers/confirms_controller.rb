@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class ConfirmsController < ApplicationController
 
   include SetResourceClassDummy
@@ -10,7 +8,7 @@ class ConfirmsController < ApplicationController
 
   def ask
     _ask
-    redirect_to url_for(action: 'view'), info: t("helpers.flash.confirm.#{params[:resource_class]}")
+    redirect_to url_for(action: 'view'), info: t("helpers.flash.confirm.#{params[:resource_class]}"), turbolinks: false
   end
 
   def make
@@ -19,7 +17,7 @@ class ConfirmsController < ApplicationController
     if @contact.update(confirm_params)
       if @contact.profile.somebody.role == 'guest'
         cookies[:auth_token] = { :expire => nil, :value => @contact.profile.somebody.auth_token } 
-        redirect_to edit_register_path(with: @contact.class.name.underscore), attention: "#{@contact.to_label} успешно подтвержден."
+        redirect_to edit_register_path(with: @contact.class.name.underscore), attention: "#{@contact.to_label} успешно подтвержден.", turbolinks: true
       else
         redirect_to user_path, attention: "#{@contact.to_label} успешно подтвержден."
       end

@@ -161,7 +161,7 @@ module GridConcern
         if [:filters, :per_page].any?{ |p| params[p] }
           # Редиректим на первую, если меняем кол-во эл-ов на странице или применяем фильтр
           add = :index if ActiveSupport::Inflector.pluralize(@resource_class.to_s.underscore).eql? @resource_class.to_s.underscore
-          redirect_to( smart_route({:prefix => [:filter], :postfix => [@resource_class.to_s.pluralize.underscore, add]}, :user_id => params[:user_id], :order_id => params[:order_id], :page => 1, :status => params[:status], :primary_key => params[:primary_key], return_path: params[:return_path]))
+          redirect_to( smart_route({:prefix => [:filter], :postfix => [@resource_class.to_s.pluralize.underscore, add]}, :user_id => params[:user_id], :order_id => params[:order_id], :page => 1, :status => params[:status], :primary_key => params[:primary_key], return_path: params[:return_path]), turbolinks: false)
         elsif params[:items]
           # Дописываем к ранее сохраненному grid
           if params[:grid][:item_ids]
@@ -188,7 +188,7 @@ module GridConcern
 
           $redis.set("grid:#{params[:primary_key]}", @grid.to_json)
 
-          redirect_to url_for(:primary_key => params[:primary_key], return_path: params[:return_path])
+          redirect_to url_for(:primary_key => params[:primary_key], return_path: params[:return_path]), turbolinks: false
 
         end
 

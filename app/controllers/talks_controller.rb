@@ -5,10 +5,9 @@ class TalksController < ApplicationController
   # POST /talks
   # POST /talks.json
   def create
-    #binding.pry
     respond_to do |format|
       if @talk.save
-        format.js { redirect_to url_for(action: :index) }
+        format.js { redirect_to url_for(action: :index), turbolinks: false }
       else
         format.js { render 'new' }
       end

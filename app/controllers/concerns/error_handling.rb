@@ -13,7 +13,7 @@ module ErrorHandling
       #rescue_from ActionController::RoutingError, :with => :render_404
       rescue_from ActionController::UnknownController, :with => :render_404
       rescue_from ActiveRecord::RecordNotFound, :with => :render_500
-      rescue_from AuthenticationError, with: ->(exception) { redirect_to main_app.root_path, attention: exception.message }
+      rescue_from AuthenticationError, with: ->(exception) { redirect_to main_app.root_path, attention: exception.message, turbolinks: false }
       rescue_from BanishError, with: ->(exception) { redirect_to 'http://example.com' }
       rescue_from ActionController::InvalidAuthenticityToken, :with => :render_500
       rescue_from RobokassaError, with: :render_500
