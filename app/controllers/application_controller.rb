@@ -21,27 +21,20 @@ class ApplicationController < ActionController::Base
   helper_method :sort_column
   helper_method :sort_direction
 
-  before_action :set_resource_class
 
   before_action :somebody_set
   before_action :user_set
   before_action :supplier_set
 
-  before_action :find_resource, except: [:new, :create, :index]
 
 
-  # Потом вынести в concern transactionable?
-  skip_before_action :find_resource, only: [:transactions]
 
   include Actions
+  include Resource
   before_action :somebody_get, only: [:show, :edit, :update, :destroy]
   before_action :user_get, only: [:show, :edit, :update, :destroy]
   before_action :supplier_get, only: [:show, :edit, :update, :destroy]
 
-  before_action :new_resource, only: [:new]
-  before_action :edit_resource, only: [:edit]
-  before_action :create_resource, only: [:create]
-  before_action :update_resource, only: [:update]
 
   before_action :set_user_and_creation_reason, only: [:create, :update]
 
@@ -224,43 +217,12 @@ class ApplicationController < ActionController::Base
     @visible_columns
   end
 
-  def set_resource_class
-  end
-
-  def find_resource
-    #binding.pry
-    @resource = @resource_class.finder(params[:id])
-  end
-
-  def new_resource
-    #binding.pry
-    @resource = @resource_class.new resource_params
-  end
-
-  def edit_resource
-  end
-
-  def create_resource
-    #binding.pry
-    @resource = @resource_class.new(resource_params)
-  end
-
-  def update_resource
-    #binding.pry
-    @resource.assign_attributes(resource_params)
-  end
-
   def set_user_and_creation_reason
     #binding.pry
     # #TODO вроде не правильно && ... не должно быть нужно
     if @resource.respond_to?(:somebody) && @resource.somebody.blank?
       @resource.somebody = @somebody
     end
-  end
-
-  def resource_params
-    # TODO DANGER!
-    params.fetch(@resource_class.name.underscore.gsub('/', '_').to_sym, {}).permit!
   end
 
   def user_set
