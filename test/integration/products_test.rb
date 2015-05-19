@@ -62,7 +62,6 @@ class ProductsTest < ActionDispatch::IntegrationTest
     get '/user/products/new?catalog_number=2102&return_path=%2F'
     assert_select "link[rel=canonical][href='http://www.example.com/user/products/new?catalog_number=2102']"
 
-    #binding.pry
     get '/user/products/new?catalog_number=2102&replacements=1&return_path=%2F'
     assert_select "link[rel=canonical][href='http://www.example.com/user/products/new?catalog_number=2102&replacements=1']"
   end

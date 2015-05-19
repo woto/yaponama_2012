@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
   include CurrentUserInModel
   include SmsSenderHelper
   helper_method :current_user
-  helper_method :admin_zone?
-  helper_method :public_zone?
   helper_method :jaba3
   #helper_method :complex_namespace_helper
   helper_method :smart_route
@@ -31,6 +29,8 @@ class ApplicationController < ActionController::Base
 
   include Actions
   include Resource
+  include Zone
+
   before_action :somebody_get, only: [:show, :edit, :update, :destroy]
   before_action :user_get, only: [:show, :edit, :update, :destroy]
   before_action :supplier_get, only: [:show, :edit, :update, :destroy]
@@ -97,10 +97,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def admin_zone?
-    params[:controller].partition('/').first == 'admin'
-  end
-
   def jaba3
     [
       (admin_zone? ? :admin : :user),
@@ -108,11 +104,6 @@ class ApplicationController < ActionController::Base
     ]
   end
 
-
-
-  def public_zone?
-    !admin_zone?
-  end
 
   #def complex_namespace_helper
   #  #(namespace_helper == 'admin') ? [namespace_helper, @user] : ( namespace_helper == 'products' ? [:user] : [:user])
