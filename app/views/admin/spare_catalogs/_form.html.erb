@@ -1,10 +1,10 @@
-<%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
+<%= simple_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
 
   <%= row do %>
 
     <%= c1 do %>
 
-      <%= f.twbs_text_field :name %>
+      <%= f.input :name %>
 
       <%= f.simple_fields_for :spare_catalog_tokens do |sct| %>
         <%= render 'spare_catalog_token_fields', :f => sct %>
@@ -14,13 +14,13 @@
         <%= link_to_add_association 'Добавить токен', f, :spare_catalog_tokens, class: "btn btn-default"  %>
       <% end %>
 
-      <%= f.twbs_text_area :intro, rows: 8 %>
+      <%= f.input :intro, input_html: { rows: 8 } %>
 
     <% end %>
 
   <% end %>
 
-  <%= f.twbs_text_area :page, class: 'ckeditor-extended', rows: 15 %>
-  <%= f.twbs_submit %>
+  <%= f.input :page, class: 'ckeditor', input_html: { rows: 15 } %>
+  <%= f.button :submit %>
 
 <% end %>
