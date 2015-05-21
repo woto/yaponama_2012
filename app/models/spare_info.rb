@@ -62,7 +62,6 @@ class SpareInfo < ActiveRecord::Base
   }
 
   scope :by_category, ->(id) {
-    joins(:spare_applicabilities).
     includes(:spare_catalog).
     order("spare_catalogs.name").
     where(spare_catalog_id: id.to_i).
