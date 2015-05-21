@@ -41,7 +41,7 @@ class BrandsController < ApplicationController
 
   def index
     @brands = Brand.
-      joins(:spare_infos => :spare_applicabilities).
+      joins(:spare_infos).
       select("brands.id, brands.name, brands.image, count(spare_infos.id) as count").
       order("brands.name").
       group("brands.id, brands.name")
@@ -50,8 +50,8 @@ class BrandsController < ApplicationController
   def show
     @brand = Brand.find(params[:id])
     @spare_catalogs = SpareCatalog.
-      select("spare_catalogs.id, spare_catalogs.name, count(spare_applicabilities.id) as count").
-      joins(:spare_infos => :spare_applicabilities).
+      select("spare_catalogs.id, spare_catalogs.name, count(spare_infos.id) as count").
+      joins(:spare_infos).
       where(:spare_infos => {:brand_id => params[:id]}).
       group("spare_catalogs.id").
       order("spare_catalogs.name")

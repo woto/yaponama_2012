@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
     @q = SpareCatalog.search(params[:q])
     @spare_catalogs = @q.result(distinct: true)
     @spare_catalogs = @spare_catalogs.
-      joins(:spare_infos => :spare_applicabilities).
+      joins(:spare_infos).
       select("spare_catalogs.id, spare_catalogs.name, count(spare_infos.id) as count").
       order("spare_catalogs.name").
       group("spare_catalogs.id")
@@ -12,7 +12,6 @@ class CategoriesController < ApplicationController
 
   def show
     @brands = Brand.
-      joins(:spare_applicabilities).
       order("brands.name").
       where("spare_applicabilities.brand_id IS NOT NULL").
       select("brands.id, brands.name, count(spare_applicabilities.id) as count").
