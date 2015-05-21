@@ -1,21 +1,5 @@
-#$(document).on 'page:before-change', ->
-#  alert 'page:before-change'
-#$(document).on 'page:fetch', ->
-#  alert 'page:fetch'
-#$(document).on 'page:receive', ->
-#  alert 'page:receive'
-#$(document).on 'page:change', ->
-#  alert 'page:change'
-#$(document).on 'page:update', ->
-#  alert 'page:update'
-#$(document).on 'page:load', ->
-#  alert 'page:load'
-#$(document).on 'page:restore', ->
-#  alert 'page:restore'
-
 $(document).on 'page:change', ->
   FastClick.attach(document.body)
-
 
 App = exports ? this
 

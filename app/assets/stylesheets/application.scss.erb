@@ -294,6 +294,7 @@ input[type=radio]:checked + img{
 
 .by-car {
   background-color: #FAFAFA;
+  @extend .bottom-space-lg;
 }
 
 //#catalogs-show-brands
@@ -323,4 +324,10 @@ input[type=radio]:checked + img{
 
 [data-clickable-object] {
   cursor: pointer;
+}
+
+/////////////////////
+
+.hide-empty:empty {
+  display: none;
 }
