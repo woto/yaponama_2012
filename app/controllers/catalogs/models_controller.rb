@@ -4,7 +4,7 @@ class Catalogs::ModelsController < ApplicationController
     @spare_catalogs = SpareCatalog.
       joins(:spare_infos => :spare_applicabilities).
       where(:spare_applicabilities => {:model_id => params[:id].to_i}).
-      select("spare_catalogs.id, spare_catalogs.name, count(spare_infos.id) as count").
+      select("spare_catalogs.id, spare_catalogs.name, count(spare_infos.id) as count, LENGTH(spare_catalogs.opt) > 0 special").
       order("spare_catalogs.name").
       group("spare_catalogs.id")
   end

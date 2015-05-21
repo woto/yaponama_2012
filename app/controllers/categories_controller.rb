@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
     @spare_catalogs = @q.result(distinct: true)
     @spare_catalogs = @spare_catalogs.
       joins(:spare_infos).
-      select("spare_catalogs.id, spare_catalogs.name, count(spare_infos.id) as count").
+      select("spare_catalogs.id, spare_catalogs.name, count(spare_infos.id) as count, LENGTH(spare_catalogs.opt) > 0 special").
       order("spare_catalogs.name").
       group("spare_catalogs.id")
   end
