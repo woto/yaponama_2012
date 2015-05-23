@@ -1,7 +1,7 @@
-<% if false %>
-<div class="top-space bottom-space">
-  <%= paginate @spare_infos %>
-</div>
+<div class="bottom-space hide-empty"><%= paginate @spare_infos %></div>
+
+<% if params[:page].to_i > 1 %>
+  <% @meta_title += ", страница #{params[:page]}" %>
 <% end %>
 
 <%= content_for :head do %>
@@ -10,6 +10,4 @@
 
 <%= yield %>
 
-<div class="top-space bottom-space">
-  <%= paginate @spare_infos %>
-</div>
+<div class="top-space bottom-space hide-empty"><%= paginate @spare_infos %></div>

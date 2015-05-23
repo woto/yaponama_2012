@@ -51,11 +51,11 @@ defaults: &defaults
   accumulator_layout:
     checkboxes:
       - :value: '0'
-        :label: "[+ -] ПРЯМАЯ"
+        :label: "[+ -] Прямая"
       - :value: '1'
-        :label: "[- +] ОБРАТНАЯ"
+        :label: "[- +] Обратная"
       - :value: '2'
-        :label: "УНИВЕРСАЛЬНАЯ"
+        :label: "Универсальная"
   accumulator_terminal_types:
     question: Клеммы
     checkboxes:

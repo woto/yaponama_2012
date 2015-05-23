@@ -26,7 +26,6 @@ class BrandsHierarchyroutesTest < ActionDispatch::IntegrationTest
 
   test 'В категориях. Если мы конгломерат, то мы НЕ ДОЛЖНЫ редиректнуться выше' do
     get "/categories/#{@shatun.to_param}/brands/#{@child1_conglomerate.to_param}"
-    File.write('1.html', response.body)
     assert_response 200
   end
 

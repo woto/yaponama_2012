@@ -8,6 +8,4 @@ bosch_s4004:
   base_hold_down: 13
   layout: 0
   terminal_types: 1
-  case_size: nil
-  weight_filled: nil
   spare_info: bosch_s4004

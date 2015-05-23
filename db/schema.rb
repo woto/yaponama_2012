@@ -395,6 +395,13 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.text     "url5"
   end
 
+  create_table "ckpages_parts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ckpages_uploads", force: :cascade do |t|
     t.string   "image"
     t.datetime "created_at", null: false
@@ -814,8 +821,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "base_hold_down"
     t.integer  "layout"
     t.integer  "terminal_types"
-    t.integer  "case_size"
-    t.integer  "weight_filled"
     t.integer  "spare_info_id"
     t.integer  "creator_id"
     t.datetime "created_at",         null: false
@@ -824,6 +829,20 @@ ActiveRecord::Schema.define(version: 99999999999999) do
 
   add_index "opts_accumulators", ["creator_id"], name: "index_opts_accumulators_on_creator_id", using: :btree
   add_index "opts_accumulators", ["spare_info_id"], name: "index_opts_accumulators_on_spare_info_id", using: :btree
+
+  create_table "opts_truck_tires", force: :cascade do |t|
+    t.integer  "height"
+    t.integer  "width"
+    t.integer  "diameter"
+    t.integer  "spare_info_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "load"
+    t.integer  "speed"
+    t.integer  "line"
+  end
+
+  add_index "opts_truck_tires", ["spare_info_id"], name: "index_opts_truck_tires_on_spare_info_id", using: :btree
 
   create_table "order_deliveries", force: :cascade do |t|
     t.integer  "creator_id"

@@ -21,8 +21,17 @@
           <% end %>
         <% end %>
         <%= p.body do %>
+
           <ol id="categories-index-catalogs">
-            <% @spare_catalogs.each do |spare_catalog| %>
+            <% @spare_catalogs.select(&:special?).each do |spare_catalog| %>
+              <li data-clickable-object> <%= link_to content_tag(:strong, spare_catalog.name), category_path(spare_catalog), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_catalog.count}&nbsp;шт.)</small>".html_safe %></li>
+            <% end %>
+          </ol>
+
+          <hr />
+
+          <ol id="categories-index-catalogs">
+            <% @spare_catalogs.reject(&:special?).each do |spare_catalog| %>
               <li data-clickable-object> <%= link_to content_tag(:strong, spare_catalog.name), category_path(spare_catalog), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_catalog.count}&nbsp;шт.)</small>".html_safe %></li>
             <% end %>
           </ol>

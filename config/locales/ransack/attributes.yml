@@ -16,3 +16,11 @@ ru:
         accumulator_terminal_types: Токовыводы
         accumulator_case_size: Размер
         accumulator_weight_filled: Масса
+        truck_tire_width: Ширина
+        truck_tire_height: Профиль
+        truck_tire_diameter: Диаметр
+        truck_tire_load: Нагрузка
+        truck_tire_speed: Скорость
+        truck_tire_line: Линейка продукции
+
+

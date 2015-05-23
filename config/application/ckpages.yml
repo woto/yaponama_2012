@@ -4,7 +4,6 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  enabled: true
 
 test:
   <<: *defaults

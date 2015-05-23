@@ -9,6 +9,7 @@
       <% end %>
       <%= p.body do %>
         <%= search_form_for @q, url: url_for, class: 'top-space-none'  do |f| %>
+          <%= text_field_tag "q[titles_as_string_cont]", (params[:q][:titles_as_string_cont] if params.try(:[], :q).try(:[], :titles_as_string_cont)), class: 'form-control bottom-space-sm', placeholder: 'Название содержит...' %>
           <%= render 'opts/checkboxes', f:f, name: 'brand_id', checkboxes: @resource.brands.order("brands.name").map{|obj| {label: obj.name, value: obj.id}} %>
           <%= render 'opts/checkboxes', f:f, name: 'places_id', checkboxes: Deliveries::Place.where(active: true, display_marker: true).map{|obj| {label: obj.name, value: obj.id}} %>
           <% if @resource_class %>
@@ -22,15 +23,10 @@
 
   <div class="col-sm-17 col-md-17 col-lg-18">
     <% if @spare_infos.present? %>
-      <% if @resource_class %>
-        <%= render partial: "#{@resource_class.name.underscore.pluralize}/index" %>
-      <% else %>
-        <%= render partial: 'best_parts_list', layout: 'paginator' %>
-      <% end %>
+      <%= render partial: 'best_parts_list', layout: 'paginator' %>
     <% else %>
       <% @meta_robots = 'noindex' %>
     <% end %>
-
   </div>
 
 <% end %>

@@ -12,6 +12,7 @@
 <% end %>
 
 <div class="bottom-space-sm <%= css_class %>">
+  <div style="overflow-y: auto; max-height: 300px">
   <% checkboxes.each do |checkbox| %>
     <div class="checkbox" style="margin-top: 0; margin-bottom: 5px">
       <label>
@@ -21,4 +22,5 @@
       </label>
     </div>
   <% end %>
+  </div>
 </div>

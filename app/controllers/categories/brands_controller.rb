@@ -14,6 +14,7 @@ class Categories::BrandsController < ApplicationController
 
     @q = SpareInfo.search(params[:q])
     @spare_infos = @q.result(distinct: true)
+    @spare_infos = @spare_infos.includes(@resource_class.name.demodulize.underscore) if @resource_class
     @spare_infos = @spare_infos.by_brand(params[:id]).by_category(params[:category_id])
     @spare_infos = @spare_infos.page(params[:page]).per(params[:per])
   end

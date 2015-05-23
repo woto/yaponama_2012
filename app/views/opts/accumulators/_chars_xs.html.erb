@@ -1,0 +1,15 @@
+<% if part.accumulator %>
+   <%= resource_class.human_attribute_name(:voltage) %>:
+   <%= si(opts_checkbox('voltage', part, resource_class), :accumulator, :voltage) %>,
+   <%= resource_class.human_attribute_name(:battery_capacity) %>:
+   <%= si(part.accumulator.battery_capacity, :accumulator, :battery_capacity) %>,
+   <%= resource_class.human_attribute_name(:cold_cranking_amps) %>:
+   <%= si(part.accumulator.cold_cranking_amps, :accumulator, :cold_cranking_amps) %>,
+   <%= resource_class.human_attribute_name(:layout) %>:
+   <%= opts_checkbox 'layout', part, resource_class %>,
+   <%= resource_class.human_attribute_name(:base_hold_down) %>:
+   <%= opts_checkbox 'base_hold_down', part, resource_class %>,
+   <%= resource_class.human_attribute_name(:terminal_types) %>:
+   <%= opts_checkbox 'terminal_types', part, resource_class %>,
+   <%= part.accumulator.length %>x<%= part.accumulator.width %>x<%= part.accumulator.height %> мм
+<% end %>

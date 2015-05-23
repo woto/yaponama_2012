@@ -1,0 +1,28 @@
+<%= simple_form_for(@resource, url: polymorphic_path([:admin, @resource], return_path: params[:return_path])) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+    <%= row do %>
+
+      <%= c1 do %>
+
+        <%= f.input :width, as: :opts_checkboxes_select %>
+        <%= f.input :height, as: :opts_checkboxes_select  %>
+        <%= f.input :diameter, as: :opts_checkboxes_select %>
+        <%= f.input :load, as: :opts_checkboxes_select %>
+        <%= f.input :speed, as: :opts_checkboxes_select %>
+        <%= f.input :line, as: :opts_checkboxes_select %>
+        <%= f.input :spare_info_id, as: :hidden %>
+
+      <% end %>
+
+    <% end %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.buttons %>
+  </div>
+<% end %>
+

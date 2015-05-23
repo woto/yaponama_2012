@@ -20,6 +20,7 @@ class CategoriesController < ApplicationController
 
     @q = SpareInfo.search(params[:q])
     @spare_infos = @q.result(distinct: true)
+    @spare_infos = @spare_infos.includes(@resource_class.name.demodulize.underscore) if @resource_class
     @spare_infos = @spare_infos.by_category(params[:id])
     @spare_infos = @spare_infos.page(params[:page]).per(params[:per])
   end
@@ -32,6 +33,5 @@ class CategoriesController < ApplicationController
       @resource_class = "Opts::#{@resource.opt.camelize}".constantize
     end
   end
-
 
 end

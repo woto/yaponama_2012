@@ -77,6 +77,7 @@ Yaponama2012::Application.routes.draw do
   concern :only_admin do
     namespace :opts do
       resources :accumulators, concerns: [:gridable]
+      resources :truck_tires, concerns: [:gridable]
     end
 
     resources :galleries, concerns: [:gridable]

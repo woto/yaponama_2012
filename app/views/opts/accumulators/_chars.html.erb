@@ -1,15 +1,16 @@
+<% if part.accumulator %>
 <div class="table-responsive">
   <table class="table table-striped bottom-space-none">
     <tr>
       <td> <%= resource_class.human_attribute_name(:voltage) %> </td>
-      <td> <%= opts_checkbox 'voltage', part, resource_class %> </td>
+      <td> <%= si(opts_checkbox('voltage', part, resource_class), :accumulator, :voltage) %> </td>
       <td> <%= resource_class.human_attribute_name(:battery_capacity) %> </td>
-      <td> <%= part.accumulator.battery_capacity %> А·ч </td>
+      <td> <%= si(part.accumulator.battery_capacity, :accumulator, :battery_capacity) %> </td>
     </tr>
 
     <tr>
       <td> <%= resource_class.human_attribute_name(:cold_cranking_amps) %> </td>
-      <td> <%= part.accumulator.cold_cranking_amps %> А </td>
+      <td> <%= si(part.accumulator.cold_cranking_amps, :accumulator, :cold_cranking_amps) %> </td>
       <td> <%= resource_class.human_attribute_name(:layout) %> </td>
       <td> <%= opts_checkbox 'layout', part, resource_class %> </td>
     </tr>
@@ -18,23 +19,24 @@
       <td> <%= resource_class.human_attribute_name(:base_hold_down) %> </td>
       <td> <%= opts_checkbox 'base_hold_down', part, resource_class %> </td>
       <td> <%= resource_class.human_attribute_name(:length) %> </td>
-      <td> <%= part.accumulator.length %> мм </td>
+      <td> <%= si(part.accumulator.length, :accumulator, :length) %> </td>
     </tr>
 
     <tr>
       <td> <%= resource_class.human_attribute_name(:terminal_types) %> </td>
       <td> <%= opts_checkbox 'terminal_types', part, resource_class %> </td>
       <td> <%= resource_class.human_attribute_name(:width) %> </td>
-      <td> <%= part.accumulator.width %> мм </td>
+      <td> <%= si(part.accumulator.width, :accumulator, :width) %> </td>
     </tr>
 
     <tr>
       <td> <%= Brand.human_attribute_name(:name) %> </td>
       <td> <%= part.brand.name %> </td>
       <td> <%= resource_class.human_attribute_name(:height) %> </td>
-      <td> <%= part.accumulator.height %> мм </td>
+      <td> <%= si(part.accumulator.height, :accumulator, :height) %> </td>
     </tr>
 
 
   </table>
 </div>
+<% end %>

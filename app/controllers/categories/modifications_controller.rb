@@ -8,6 +8,7 @@ class Categories::ModificationsController < ApplicationController
 
     @q = SpareInfo.search(params[:q])
     @spare_infos = @q.result(distinct: true)
+    @spare_infos = @spare_infos.includes(@resource_class.name.demodulize.underscore) if @resource_class
     @spare_infos = @spare_infos.by_modification(params[:id]).by_category(params[:category_id])
     @spare_infos = @spare_infos.page(params[:page]).per(params[:per])
   end

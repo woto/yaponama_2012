@@ -1,0 +1,47 @@
+<div class="col-md-12 col-lg-8">
+
+  <div data-clickable-object class="thumbnail wrapper" style="min-height: 400px">
+    <% if part.image1.present? %>
+      <%= image_tag part.image1.fit_thumb.url, alt: part.to_label, style: "width: 300px; height: 168px" %>
+    <% else %>
+      <%= image_tag 'no_photo.jpg', alt: "Изображение отстутствует", style: "width: 300px; height: 168px" %>
+    <% end %>
+    <div class="caption">
+      <h4 class="top-space-xs bottom-space-xs text-center">
+        <div class="bottom-space-xs">
+        <%= part.brand.name %>
+        </div>
+        <div class="top-space-xs">
+          <%= link_to part.catalog_number, new_user_product_path(catalog_number: part.catalog_number, anchor: part.brand.name), class: 'text-warning', "data-clickable-href" => true %>
+        </div>
+      </h4>
+      <% if part.warehouses.exists? %>
+        <div class="ribbon-wrapper-green">
+          <div class="ribbon-green">
+            Наличие
+          </div>
+        </div>
+      <% end %>
+
+      <small class="text-muted" style="word-wrap: break-word; display: block; overflow: hidden; max-height: 80px">
+        <%= render "#{resource_class.name.underscore.pluralize}/chars_xs", part: part, resource_class: resource_class if resource_class && part.send(resource_class.name.demodulize.underscore) %>
+        <% titles = part.titles.join(', ') %>
+        <% if resource_class && part.send(resource_class.name.demodulize.underscore) %>
+          <% titles = excerpt(titles, params.try(:[], :q).try(:[], :titles_as_string_cont).to_s, radius: 20) %>
+        <% else %>
+          <% titles = excerpt(titles, params.try(:[], :q).try(:[], :titles_as_string_cont).to_s, radius: 160) %>
+        <% end %>
+        <% titles = highlight(titles, params.try(:[], :q).try(:[], :titles_as_string_cont).to_s) %>
+        <%= titles %>
+      </small>
+
+      <% if part.min_cost %>
+        <div style="position: absolute; bottom: 35px; left: 30px; right: 30px" class="btn btn-success">
+          Цены от <%= number_to_currency(part.min_cost, :precision => 0) %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+
+</div>

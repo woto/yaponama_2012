@@ -31,7 +31,7 @@
               <%= p.title itemprop: 'name' do %>
                 <%= link_to "Запчасти", categories_path %> <%= icon 'angle-right' %>
                 <% if mf_scope[:catalog] %>
-                  <%= link_to mf_scope[:catalog].name, category_brands_path(mf_scope[:catalog]) %> <%= icon 'angle-right' %>
+                  <%= link_to mf_scope[:catalog].name, category_path(mf_scope[:catalog]) %> <%= icon 'angle-right' %>
                 <% end %>
                 <%= link_to("#{catalog_number} (#{manufacturer})", "##{manufacturer}") %>
 
@@ -219,6 +219,15 @@
                     <%# Описание %>
                     <%= link_to icon('file-text-o'), edit_admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-warning" %>
                     <%= link_to icon('file-text-o'), admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-danger", method: :delete, data: {confirm: 'Уверены, что хотите удалить?'} %>
+
+                    <%# Каталогизируемый %>
+                    <% if mf_scope[:catalog].opt %>
+                      <% if mf_scope[:info].send(mf_scope[:catalog].opt) %>
+                        <%= link_to icon('cogs'), polymorphic_path([:edit, :admin, :opts, mf_scope[:catalog].opt], :id => mf_scope[:info].send(mf_scope[:catalog].opt).id, :return_path => request.fullpath), :class => "btn btn-warning" %>
+                      <% else %>
+                        <%= link_to icon('cogs'), polymorphic_path([:new, :admin, :opts, mf_scope[:catalog].opt], "opts_#{mf_scope[:catalog].opt}[spare_info_id]" => mf_scope[:info].id, :return_path => request.fullpath), :class => "btn btn-warning" %>
+                      <% end %>
+                    <% end %>
 
                     <%# Замены %>
                     <%= link_to icon('random'), new_admin_spare_replacement_path(spare_replacement: {from_spare_info_attributes: { name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-warning" %>

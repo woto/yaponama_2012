@@ -16,9 +16,7 @@
         <%= f.input :base_hold_down, as: :opts_checkboxes_select %>
         <%= f.input :layout, as: :opts_checkboxes_select %>
         <%= f.input :terminal_types, as: :opts_checkboxes_select %>
-        <%= f.input :case_size %>
-        <%= f.input :weight_filled %>
-        <%# f.association :spare_info %>
+        <%= f.input :spare_info_id, as: :hidden %>
 
       <% end %>
 
@@ -27,6 +25,6 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.buttons %>
   </div>
 <% end %>

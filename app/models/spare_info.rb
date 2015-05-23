@@ -5,6 +5,10 @@ class SpareInfo < ActiveRecord::Base
   include BrandAttributes
   include SpareCatalogAttributes
 
+  ransacker :titles_as_string do
+    Arel.sql("array_to_string(titles, '|')")
+  end
+
   has_many :warehouses
   has_many :places, :through => :warehouses
   has_many :spare_info_phrases, dependent: :destroy
@@ -23,6 +27,7 @@ class SpareInfo < ActiveRecord::Base
   end
 
   has_one :accumulator, class_name: 'Opts::Accumulator', dependent: :destroy
+  has_one :truck_tire, class_name: 'Opts::TruckTire', dependent: :destroy
 
   def to_label
     "#{catalog_number} (#{brand.to_label})"

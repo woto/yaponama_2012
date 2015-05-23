@@ -14,13 +14,14 @@
         <%= link_to_add_association 'Добавить токен', f, :spare_catalog_tokens, class: "btn btn-default"  %>
       <% end %>
 
+      <%= f.input :opt %>
       <%= f.input :intro, input_html: { rows: 8 } %>
 
     <% end %>
 
   <% end %>
 
-  <%= f.input :page, class: 'ckeditor', input_html: { rows: 15 } %>
-  <%= f.button :submit %>
+  <%= f.input :page, class: 'ckeditor-extended', input_html: { rows: 15 } %>
+  <%= f.buttons %>
 
 <% end %>
