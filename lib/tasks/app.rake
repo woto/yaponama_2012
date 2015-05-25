@@ -46,11 +46,12 @@ namespace :app do
 
   desc 'Открываем поочередно страницы нашего сайта'
   task :progon => :environment do
-    while true do
+    #while true do
       Progon.progon
-      puts Time.zone.now
-      sleep 1
-    end
+      puts 'done!'
+      #puts Time.zone.now
+      #sleep 1
+    #end
   end
 
   task :y => :environment do

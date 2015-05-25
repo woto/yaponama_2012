@@ -66,7 +66,7 @@ class PriceMate
         catalog = SpareCatalog.
           joins(:spare_catalog_tokens).
           where("? SIMILAR TO spare_catalog_tokens.name", mf_scope[:titles].keys.join(' ')).
-          where("COALESCE(spare_catalog_tokens.subtract IS NULL, ? NOT SIMILAR TO spare_catalog_tokens.subtract)", mf_scope[:titles].keys.join(' ')).
+          where("CASE WHEN spare_catalog_tokens.subtract IS NULL THEN TRUE ELSE ? NOT SIMILAR TO spare_catalog_tokens.subtract END", mf_scope[:titles].keys.join(' ')).
           references(:spare_catalog_tokens).
           group('spare_catalogs.id').
           order('sum(spare_catalog_tokens.weight) DESC').
