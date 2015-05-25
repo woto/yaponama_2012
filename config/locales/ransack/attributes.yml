@@ -17,10 +17,11 @@ ru:
         accumulator_case_size: Размер
         accumulator_weight_filled: Масса
         truck_tire_width: Ширина
-        truck_tire_height: Профиль
+        truck_tire_height: Высота (Профиль)
         truck_tire_diameter: Диаметр
-        truck_tire_load: Нагрузка
-        truck_tire_speed: Скорость
+        truck_tire_load: Индекс нагрузки
+        truck_tire_speed: Индекс скорости
+        truck_tire_axle: Ось применения
         truck_tire_line: Линейка продукции
 
 

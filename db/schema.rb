@@ -840,6 +840,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.integer  "load"
     t.integer  "speed"
     t.integer  "line"
+    t.integer  "axle"
   end
 
   add_index "opts_truck_tires", ["spare_info_id"], name: "index_opts_truck_tires_on_spare_info_id", using: :btree
@@ -1485,6 +1486,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "weight",           default: 1
+    t.string   "subtract"
   end
 
   add_index "spare_catalog_tokens", ["spare_catalog_id"], name: "index_spare_catalog_tokens_on_spare_catalog_id", using: :btree

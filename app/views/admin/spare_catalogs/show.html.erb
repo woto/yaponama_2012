@@ -43,7 +43,7 @@
       <ul class="list-unstyled">
         <% @resource.spare_catalog_tokens.each do |token| %>
           <li>
-            <%= token.name %>
+            <%= token.name %> - <%= token.subtract %>
           </li>
         <% end %>
       </ul>

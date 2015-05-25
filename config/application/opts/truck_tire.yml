@@ -71,6 +71,19 @@ defaults: &defaults
     checkboxes:
       - :value: '0'
         :label: 'Заполнить'
+  truck_tire_axle:
+    si:
+    checkboxes:
+      - :value: '0'
+        :label: 'Рулевое'
+      - :value: '1'
+        :label: 'Ведущее'
+      - :value: '2'
+        :label: 'Прицеп'
+      - :value: '3'
+        :label: 'Рулевое-прицеп'
+      - :value: '4'
+        :label: 'Универсальная ось'
 
 development:
   <<: *defaults
