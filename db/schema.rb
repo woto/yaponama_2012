@@ -1546,11 +1546,12 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.string   "file7"
     t.string   "file8"
     t.hstore   "hstore"
-    t.text     "titles",                                    default: [], array: true
+    t.text     "titles",                                    default: [],                 array: true
     t.integer  "min_days"
     t.integer  "min_cost"
     t.integer  "offers"
     t.datetime "aggregated_content_updated_at"
+    t.boolean  "fix_spare_catalog",                         default: false, null: false
   end
 
   add_index "spare_infos", ["brand_id"], name: "index_spare_infos_on_brand_id", using: :btree

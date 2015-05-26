@@ -11,6 +11,8 @@
       <% end %>
     <% end %>
 
+    <%= f.twbs_check_box :fix_spare_catalog %>
+    <%= f.twbs_hidden_field :change_spare_catalog, value: '1' %>
 
     <%= f.fields_for :spare_catalog, f.object.spare_catalog || f.object.build_spare_catalog, include_id: false do |b| %>
       <%= f.form_group :spare_catalog do %>

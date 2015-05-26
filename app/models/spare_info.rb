@@ -42,6 +42,15 @@ class SpareInfo < ActiveRecord::Base
     self.name = to_label
   end
 
+  attr_accessor :change_spare_catalog
+
+  before_save do
+    if change_spare_catalog || !fix_spare_catalog
+    else
+      restore_attributes [:spare_catalog_id]
+    end
+  end
+
   scope :by_brand, ->(id) {
     joins(:spare_applicabilities).
     where(spare_applicabilities: {brand_id: id.to_i}).

@@ -2,6 +2,34 @@ require 'test_helper'
 
 class SpareInfoTest < ActiveSupport::TestCase
 
+  test 'Категорию можно изменить если не установлен флаг fix_spare_catalog (из Job можно изменить категорию)' do
+    si = spare_infos(:ki_2103)
+    sc = si.spare_catalog
+    si.update(fix_spare_catalog: false)
+    si.update(spare_catalog: Defaults.spare_catalog)
+    si.reload
+    assert_equal Defaults.spare_catalog, si.spare_catalog
+  end
+
+  test 'Категорию нельзя изменить если установлен флаг fix_spare_catalog (Из Job нельзя изменить категорию)' do
+    si = spare_infos(:ki_2103)
+    sc = si.spare_catalog
+    si.update(fix_spare_catalog: true)
+    si.update(spare_catalog: Defaults.spare_catalog)
+    si.reload
+    assert_equal sc, si.spare_catalog 
+  end
+
+  test 'Категорию можно изменить если установлен флаг fix_spare_catalog и отправлен флаг change_spare_catalog (Ручное изменение категории)' do
+    si = spare_infos(:ki_2103)
+    sc = si.spare_catalog
+    si.update(fix_spare_catalog: true)
+    si.update(change_spare_catalog: true, spare_catalog: Defaults.spare_catalog)
+    binding.pry
+    si.reload
+    assert_equal Defaults.spare_catalog, si.spare_catalog
+  end
+
   test 'Проверяем изменение каталожника + производителя товара через аттрибуты. Замены и применимость должны обновиться' do
     si = spare_infos(:ki_2103)
     assert_equal 'KI', si.brand.name

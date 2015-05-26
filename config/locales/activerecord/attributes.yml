@@ -35,6 +35,7 @@ ru:
 
         #=> [:"activerecord.attributes.payment/profile/names.name", {:count=>1, :default=>[:"activerecord.attributes.profile/names.name", :"attributes.name", "Profile names name", "Name"]}]
       spare_info:
+        fix_spare_catalog: Категория зафиксирована
         catalog_number: Каталожный номер
         #brand: Производитель
         content: Содержание
