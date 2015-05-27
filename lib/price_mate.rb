@@ -58,7 +58,7 @@ class PriceMate
           catalog = info.spare_catalog
         end
 
-        unless info.fix_spare_catalog
+        if info.present? && !info.fix_spare_catalog
           catalog = SpareCatalog.
             joins(:spare_catalog_tokens).
             where("? SIMILAR TO spare_catalog_tokens.name", mf_scope[:titles].keys.join(' ')).
