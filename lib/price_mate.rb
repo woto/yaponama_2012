@@ -51,27 +51,24 @@ class PriceMate
     formatted_data.each do |catalog_number, cn_scope|
       cn_scope.each do |manufacturer, mf_scope|
         mf_scope[:title] = (mf_scope[:titles].sort_by{|a, b| -b} + ([["", 0]]))[0][0]
-        info = SpareInfo.where(:catalog_number => catalog_number, :brand_id => mf_scope[:brand].id).first
+        info = SpareInfo.find_by(:catalog_number => catalog_number, :brand_id => mf_scope[:brand].id)
 
-        # Если такой SpareInfo имеется, то все последующие данные получаем через него
         if info.present?
           mf_scope[:info] = info
           catalog = info.spare_catalog
-        # Если категория получена с сервера прайсов
-        #elsif mf_scope["image_url"].present?
-        #  catalog = SpareCatalog.find_by(name: mf_scope["image_url"])
-        # Если категори получена из названий
         end
 
-        catalog = SpareCatalog.
-          joins(:spare_catalog_tokens).
-          where("? SIMILAR TO spare_catalog_tokens.name", mf_scope[:titles].keys.join(' ')).
-          where("CASE WHEN spare_catalog_tokens.subtract IS NULL THEN TRUE ELSE ? NOT SIMILAR TO spare_catalog_tokens.subtract END", mf_scope[:titles].keys.join(' ')).
-          references(:spare_catalog_tokens).
-          group('spare_catalogs.id').
-          order('sum(spare_catalog_tokens.weight) DESC').
-          select('spare_catalogs.*').
-          limit(1).first || Defaults.spare_catalog
+        unless info.fix_spare_catalog
+          catalog = SpareCatalog.
+            joins(:spare_catalog_tokens).
+            where("? SIMILAR TO spare_catalog_tokens.name", mf_scope[:titles].keys.join(' ')).
+            where("CASE WHEN spare_catalog_tokens.subtract IS NULL THEN TRUE ELSE ? NOT SIMILAR TO spare_catalog_tokens.subtract END", mf_scope[:titles].keys.join(' ')).
+            references(:spare_catalog_tokens).
+            group('spare_catalogs.id').
+            order('sum(spare_catalog_tokens.weight) DESC').
+            select('spare_catalogs.*').
+            limit(1).first || Defaults.spare_catalog
+        end
 
         if info.present?
           SpareInfoJob.perform_later(info, catalog, mf_scope[:catalog_number_origs].keys, mf_scope[:titles].keys, mf_scope[:min_days], mf_scope[:min_cost], mf_scope[:offers].size)
