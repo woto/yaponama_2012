@@ -2,13 +2,10 @@ class Progon
 
   LOGGER = Logger.new(STDOUT)
 
-  # Пустой массив
-  # Массив номеров кампаний
   YANDEX_CAMPAIGNS_IDS = []
-  # true  - Только наличие
-  # false - Все
   ONLY_WAREHOUSES = false
   PUBLISHED_STATUS = []
+  SPARE_CATALOG_IDS = []
 
   def self.progon
     spare_infos = SpareInfo.
@@ -23,6 +20,10 @@ class Progon
       spare_infos = spare_infos.where(:spare_info_phrases => {:yandex_campaign_id => YANDEX_CAMPAIGNS_IDS})
     end
 
+    if SPARE_CATALOG_IDS.any?
+      spare_infos = spare_infos.where(:spare_catalog_id => SPARE_CATALOG_IDS)
+    end
+
     if ONLY_WAREHOUSES
       spare_infos = spare_infos.joins(:warehouses)
     end
@@ -31,6 +32,7 @@ class Progon
       begin
         LOGGER.info "probing #{spare_info.to_label}"
         open("http://#{Rails.application.config_for('application/site')['host']}:#{Rails.application.config_for('application/site')['port']}/user/products/new?catalog_number=#{spare_info.catalog_number}")
+        spare_info.update_column(:aggregated_content_checked_at, Time.zone.now)
         sleep 0.5
       rescue Exception => e
         sleep 1

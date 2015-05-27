@@ -40,7 +40,7 @@
         <% if info.instance_eval("image#{n}").present? %>
           <div class="item <%= 'active' if n-1 == 0 %>">
             <%= link_to info.instance_eval("image#{n}.url"), target: '_blank', class: 'image-view' do %>
-              <%= image_tag info.instance_eval("image#{n}.fill_thumb.url"), alt: "#{info.to_label}", class: 'center-block text-center' %>
+              <%= image_tag info.instance_eval("image#{n}.fit_thumb.url"), alt: "#{info.to_label}", class: 'center-block text-center' %>
             <% end %>
           </div>
         <% end %>

@@ -2,9 +2,9 @@
 
   <div data-clickable-object class="thumbnail wrapper" style="min-height: 400px">
     <% if part.image1.present? %>
-      <%= image_tag part.image1.fit_thumb.url, alt: part.to_label, style: "width: 300px; height: 168px" %>
+      <%= image_tag part.image1.fill_thumb.url, alt: part.to_label, style: "height: 190px" %>
     <% else %>
-      <%= image_tag 'no_photo.jpg', alt: "Изображение отстутствует", style: "width: 300px; height: 168px" %>
+      <%= image_tag 'no_photo.jpg', alt: "Изображение отстутствует", style: "height: 190px;" %>
     <% end %>
     <div class="caption">
       <h4 class="top-space-xs bottom-space-xs text-center">

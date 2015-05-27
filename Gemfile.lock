@@ -44,6 +44,21 @@ GIT
       coffee-rails
 
 GIT
+  remote: git://github.com/woto/ckpages.git
+  revision: 75ae6743ccb4a8aadc61b3033a3c75b3ca41c02a
+  specs:
+    ckpages (0.0.1)
+      bootstrap-sass
+      carrierwave
+      jquery-rails
+      kaminari
+      rails (~> 4.2.1)
+      ransack
+      simple_form
+      simple_form
+      turbolinks
+
+GIT
   remote: git://github.com/woto/discourse_static_assets.git
   revision: 3df03ae16821fc2605cb74165ac60c8fdc7536e4
   specs:
@@ -62,20 +77,6 @@ GIT
   revision: 8c25c063a81e6be6b0e59355d7bcec290d39a33d
   specs:
     cocoon (1.2.6)
-
-PATH
-  remote: ../ckpages
-  specs:
-    ckpages (0.0.1)
-      bootstrap-sass
-      carrierwave
-      jquery-rails
-      kaminari
-      rails (~> 4.2.1)
-      ransack
-      simple_form
-      simple_form
-      turbolinks
 
 GEM
   remote: https://rubygems.org/

@@ -60,17 +60,60 @@ defaults: &defaults
     si:
     checkboxes:
       - :value: '0'
-        :label: 'Заполнить'
+        :label: 'J'
+      - :value: '1'
+        :label: 'K'
+      - :value: '2'
+        :label: 'L'
+      - :value: '3'
+        :label: 'M'
   truck_tire_load:
     si:
     checkboxes:
       - :value: '0'
-        :label: 'Заполнить'
+        :label: '122/118'
+      - :value: '1'
+        :label: '126/124'
+      - :value: '2'
+        :label: '132/130'
+      - :value: '3'
+        :label: '143/141'
+      - :value: '4'
+        :label: '144/142'
+      - :value: '5'
+        :label: '146/143'
+      - :value: '6'
+        :label: '148/145'
+      - :value: '7'
+        :label: '149/145'
+      - :value: '8'
+        :label: '150/147'
+      - :value: '9'
+        :label: '152/148'
+      - :value: '10'
+        :label: '154/150'
+      - :value: '11'
+        :label: '154/151'
+      - :value: '12'
+        :label: '158/155'
+
   truck_tire_line:
     si:
     checkboxes:
       - :value: '0'
-        :label: 'Заполнить'
+        :label: 'CST 18'
+      - :value: '1'
+        :label: 'CST 27'
+      - :value: '2'
+        :label: 'CST 35'
+      - :value: '3'
+        :label: 'CST 46'
+      - :value: '4'
+        :label: 'CST 56'
+      - :value: '5'
+        :label: 'CST 68'
+      - :value: '6'
+        :label: 'CST 78'
   truck_tire_axle:
     si:
     checkboxes:
