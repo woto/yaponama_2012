@@ -98,4 +98,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.assets.prefix = "/assets-production"
+
+  config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOW-FROM http://inpage.metrika.yandex.ru/' }
 end
