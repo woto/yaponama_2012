@@ -1,0 +1,54 @@
+infiniti_3310:
+  catalog_number: '3310'
+  spare_info: infiniti_3310
+  primary: true
+
+toyota_3310:
+  catalog_number: '3310'
+  spare_info: toyota_3310
+  primary: true
+
+ns_3310:
+  catalog_number: '3310'
+  spare_info: ns_3310
+  primary: true
+
+nissan_2102:
+  catalog_number: '2102'
+  spare_info: nissan_2102
+  primary: true
+
+kia_2102:
+  catalog_number: '2102'
+  spare_info: kia_2102
+  primary: true
+
+ki_2102:
+  catalog_number: '2102'
+  spare_info: ki_2102
+  primary: true
+
+ki_2103:
+  catalog_number: '2103'
+  spare_info: ki_2103
+  primary: true
+
+ms_2103:
+  catalog_number: '2103'
+  spare_info: ms_2103
+  primary: true
+
+bosch_s4004:
+  catalog_number: 's4004'
+  spare_info: bosch_s4004
+  primary: true
+
+spare_info1:
+  catalog_number: 'SPARE_INFO1'
+  spare_info: spare_info1
+  primary: true
+
+spare_info2:
+  catalog_number: 'SPARE_INFO2'
+  spare_info: spare_info2
+  primary: true

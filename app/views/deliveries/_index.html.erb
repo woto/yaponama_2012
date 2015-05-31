@@ -68,7 +68,7 @@
             <p class="text-sm top-space-none text-muted bottom-space">Выберите магазин из списка или на карте.</p>
 
             <div class="panel-group" id="deliveries-accordion">
-              <% Deliveries::Place.where(active: true).order(z_index: :desc).each do |delivery_zone| %>
+              <% Deliveries::Place.where(active: true, partner: false).order(z_index: :desc).each do |delivery_zone| %>
                 <div itemscope itemtype="http://schema.org/Organization" class="panel accordion-group panel-primary <%= delivery_zone.display_marker? ? '' : 'hidden' %>">
                   <div class="panel-heading delivery_zone" data-clickable-object>
                     <%# Картографические данные области %>

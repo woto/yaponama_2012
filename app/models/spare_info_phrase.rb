@@ -1,4 +1,5 @@
 class SpareInfoPhrase < ActiveRecord::Base
+
   belongs_to :spare_info
 
   validates :catalog_number, :presence => true, uniqueness:  { case_sensitive: false, :scope => :spare_info_id }

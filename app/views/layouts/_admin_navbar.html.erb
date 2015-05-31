@@ -96,6 +96,7 @@
             <li> <%= link_to "Описания", admin_spare_infos_path %> </li>
             <li> <%= link_to "Применимость", admin_spare_applicabilities_path %> </li>
             <li> <%= link_to "Каталогизатор", admin_spare_catalogs_path %> </li>
+            <% if false %>
             <%= dd.submenu do %>
               <%= dd.toggle do %>
                 Категории
@@ -103,6 +104,7 @@
               <%= dd.menu do %>
                 <li> <%= link_to 'Аккумуляторы', admin_opts_accumulators_path %> </li>
               <% end %>
+            <% end %>
             <% end %>
             <li> <%= link_to "Замены", admin_spare_replacements_path %> </li>
           <% end %>

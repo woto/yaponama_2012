@@ -25,7 +25,6 @@ class SpareInfoTest < ActiveSupport::TestCase
     sc = si.spare_catalog
     si.update(fix_spare_catalog: true)
     si.update(change_spare_catalog: true, spare_catalog: Defaults.spare_catalog)
-    binding.pry
     si.reload
     assert_equal Defaults.spare_catalog, si.spare_catalog
   end
@@ -61,8 +60,16 @@ class SpareInfoTest < ActiveSupport::TestCase
 
   end
 
+  test 'Валидный объект SpareInfo с 1-м SpareInfoPhrase, который является primary' do
+    si = SpareInfo.new(spare_catalog: Defaults.spare_catalog, catalog_number: '23828-99232-238', brand: Defaults.brand)
+    si.spare_info_phrases.new(catalog_number: '23948-23829-12384938', primary: true)
+    assert si.valid?
+  end
+
   test 'Тестируем присвоение правильных и не правильных брендов' do
     si = SpareInfo.new(spare_catalog: Defaults.spare_catalog, catalog_number: '23948-23829-12384938', brand: Defaults.brand)
+    si.spare_info_phrases.new(catalog_number: '23948-23829-12384938', primary: true)
+
     assert si.valid?
 
     si.brand = brands(:child1_synonym)
@@ -82,11 +89,29 @@ class SpareInfoTest < ActiveSupport::TestCase
     refute si.errors[:brand].any?
   end
 
+  test 'Нельзя чтобы у объекта было два SpareInfoPhrase и оба primary' do
+    si = SpareInfo.new(catalog_number: '123', brand: Defaults.brand, spare_catalog: Defaults.spare_catalog)
+    si.spare_info_phrases.new(catalog_number: '123', primary: true)
+    assert si.valid?
+    si.spare_info_phrases.new(catalog_number: '123', primary: true)
+    refute si.valid?
+  end
+
+  test 'Можно чтобы у объекта было два SpareInfoPhrase один из которых primary' do
+    si = SpareInfo.new(catalog_number: '123', brand: Defaults.brand, spare_catalog: Defaults.spare_catalog)
+    si.spare_info_phrases.new(catalog_number: '123', primary: true)
+    assert si.valid?
+    si.spare_info_phrases.new(catalog_number: '123', primary: false)
+    assert si.valid?
+  end
+
   test 'Не допустимо чтобы у объекта был бренд, с заполненным sign' do
     invalid_brand = brands(:child1_synonym)
     valid_brand = brands(:child1_child2)
 
     si = SpareInfo.new(catalog_number: '123', brand: invalid_brand, spare_catalog: Defaults.spare_catalog)
+    si.spare_info_phrases.new(catalog_number: '123', primary: true)
+
     refute si.valid?
     assert si.errors[:brand].any?
 

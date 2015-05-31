@@ -1,5 +1,5 @@
 <li>
-  <a href="#">
+  <%= link_to deliveries_path do %>
     <img style="margin-bottom: 3px;" src="http://www.avz.ru/assets/templates/imgs/mos_metro_logo_16.jpg"> <%= navbar_shop.metro %>
     <br />
     <% (1..5).each do |n| %>
@@ -8,5 +8,5 @@
         <span><%= navbar_shop.instance_eval("phone#{n}") %></span><br />
       <% end %>
     <% end %>
-  </a>
+  <% end %>
 </li>

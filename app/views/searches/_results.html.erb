@@ -33,8 +33,8 @@
                 <% if mf_scope[:catalog] %>
                   <%= link_to mf_scope[:catalog].name, category_path(mf_scope[:catalog]) %> <%= icon 'angle-right' %>
                 <% end %>
-                <%= link_to("#{catalog_number} (#{manufacturer})", "##{manufacturer}") %>
 
+                <%= link_to("#{mf_scope[:keyword]} (#{manufacturer})", "##{manufacturer}") %>
               <% end %>
             <% end %>
 
@@ -51,7 +51,7 @@
                       <p class="other-brands text-muted text-xs"><%= raw mf_scope[:manufacturer_origs].keys.map{|val| h(val)}.join(', ') %></p>
                     <% end %>
 
-                    <h4 class="bottom-space-none text-warning"> <%= catalog_number %> </h4>
+                    <h4 class="bottom-space-none text-warning"> <%= mf_scope[:keyword] %> </h4>
 
                     <% if mf_scope[:catalog_number_origs].size > 0 %>
                       <p class="other-catalog-numbers text-muted text-xs"><%= raw mf_scope[:catalog_number_origs].keys.map{|val| h(val)}.join(', ') %></p>

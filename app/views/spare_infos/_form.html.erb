@@ -1,5 +1,9 @@
 <%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
 
+  <%= f.alert_danger do %>
+    <%= f.object.errors[:base].join('<br>'.html_safe) %>
+  <% end %>
+
   <%= d1 do %>
 
     <%= f.twbs_text_field :catalog_number %>
@@ -19,6 +23,14 @@
         <%= b.twbs_select2 :name, rel: 'select2-spare_catalog', data: {"true-id" => f.object.spare_catalog_id}, asterisk: true %>
         <%= f.error(:spare_catalog) %>
       <% end %>
+    <% end %>
+
+    <%= f.fields_for :spare_info_phrases do |spare_info_phrase| %>
+      <%= render 'spare_infos/spare_info_phrase_fields', f: spare_info_phrase %>
+    <% end %>
+
+    <%= f.form_group do %>
+      <%= link_to_add_association 'Добавить фразу', f, :spare_info_phrases, class: "btn btn-success btn-small", :data => {"association-insertion-node" => ".form-group", "association-insertion-traversal" => "closest"}  %>
     <% end %>
 
     <% (1..8).each do |n| %>

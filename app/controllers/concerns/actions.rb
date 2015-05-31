@@ -17,7 +17,7 @@ module Actions
   end
 
   def create
-    # binding.pry
+    #binding.pry
     # TODO postal_address_type здесь нужен для того чтобы после создания адреса доставки переброска на show происходила с postal_address_type, чтобы на следующем шаге мы знали показывать например поле для ввода квартиры или нет. Потом как-нибудь подумать, как сделать лучше
     respond_to do |format|
       if @resource.save
@@ -31,6 +31,7 @@ module Actions
   end
 
   def update
+    #binding.pry
     respond_to do |format|
       if @resource.save
         format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path]) }

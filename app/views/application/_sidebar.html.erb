@@ -1,7 +1,7 @@
 <div class="text-sm text-success bottom-space-lg top-space-lg hidden-xs">
-  <% Deliveries::Place.where(display_marker: true, active: true).each do |dp| %>
+  <% Deliveries::Place.where(display_marker: true, active: true, partner: false).each do |dp| %>
     <address>
-      <strong><span> <%= link_to('Магазин', deliveries_path) %> </span></strong>
+      <strong><span> <%= link_to('Магазин автозапчастей', deliveries_path) %> </span></strong>
       <br />
       <img style="margin-bottom: 3px;" src="http://www.avz.ru/assets/templates/imgs/mos_metro_logo_16.jpg"> <%= dp.metro %>
       <br />

@@ -7,7 +7,7 @@ development:
   <<: *defaults
   share_buttons: false
   send_pings: false
-  suppress_exceptions: true
+  suppress_exceptions: false
 
 test:
   <<: *defaults

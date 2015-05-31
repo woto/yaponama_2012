@@ -58,11 +58,11 @@ bosch_s4004:
   spare_catalog: akb
 
 spare_info1:
-  catalog_number: SPARE_INFO1
+  catalog_number: 'SPARE_INFO1'
   brand: brand1
   spare_catalog: shatun
 
 spare_info2:
-  catalog_number: SPARE_INFO2
+  catalog_number: 'SPARE_INFO2'
   brand: brand2
   spare_catalog: shatun

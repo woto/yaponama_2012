@@ -56,24 +56,30 @@ class PriceMate
         if info.present?
           mf_scope[:info] = info
           catalog = info.spare_catalog
-        end
 
-        if info.present? && !info.fix_spare_catalog
-          catalog = SpareCatalog.
-            joins(:spare_catalog_tokens).
-            where("? SIMILAR TO spare_catalog_tokens.name", mf_scope[:titles].keys.join(' ')).
-            where("CASE WHEN spare_catalog_tokens.subtract IS NULL THEN TRUE ELSE ? NOT SIMILAR TO spare_catalog_tokens.subtract END", mf_scope[:titles].keys.join(' ')).
-            references(:spare_catalog_tokens).
-            group('spare_catalogs.id').
-            order('sum(spare_catalog_tokens.weight) DESC').
-            select('spare_catalogs.*').
-            limit(1).first || Defaults.spare_catalog
-        end
+          mf_scope[:keyword] = info.spare_info_phrase.catalog_number
+          mf_scope[:phrases] = info.spare_info_phrases
 
-        if info.present?
+          unless info.fix_spare_catalog
+            catalog = SpareCatalog.
+              joins(:spare_catalog_tokens).
+              where("? SIMILAR TO spare_catalog_tokens.name", mf_scope[:titles].keys.join(' ')).
+              where("CASE WHEN spare_catalog_tokens.subtract IS NULL THEN TRUE ELSE ? NOT SIMILAR TO spare_catalog_tokens.subtract END", mf_scope[:titles].keys.join(' ')).
+              references(:spare_catalog_tokens).
+              group('spare_catalogs.id').
+              order('sum(spare_catalog_tokens.weight) DESC').
+              select('spare_catalogs.*').
+              limit(1).first || Defaults.spare_catalog
+          end
+
           SpareInfoJob.perform_later(info, catalog, mf_scope[:catalog_number_origs].keys, mf_scope[:titles].keys, mf_scope[:min_days], mf_scope[:min_cost], mf_scope[:offers].size)
+        else
+          mf_scope[:keyword] = catalog_number
+          mf_scope[:phrases] = []
         end
+
         mf_scope[:catalog] = catalog
+
       end
     end
     formatted_data
@@ -94,7 +100,8 @@ class PriceMate
       meta_title << "#{b9} " if b9
     else
       # Каталожник тут всегда будет 1? TODO
-      meta_title << formatted_data.map{|k, v| k}.flatten.uniq.reject{|kk| kk.size < 2}[0, 2].join(', ')
+      # meta_title << formatted_data.map{|k, v| k}.flatten.uniq.reject{|kk| kk.size < 2}[0, 2].join(', ')
+      meta_title << formatted_data.map{|k, v| v.map{|kk, vv| vv[:keyword]}}.flatten.uniq.reject{|kk| kk.size < 2}[0, 2].join(', ')
       # Производители
       meta_title << " "
       meta_title << formatted_data.map{|k, v| v.map{|kk, vv| kk}}.flatten.uniq.reject{|kk| kk.size < 2}[0, 5].join(', ')

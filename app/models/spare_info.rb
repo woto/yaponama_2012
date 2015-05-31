@@ -11,7 +11,22 @@ class SpareInfo < ActiveRecord::Base
 
   has_many :warehouses
   has_many :places, :through => :warehouses
+
   has_many :spare_info_phrases, dependent: :destroy
+  validates :spare_info_phrases, presence: true
+  accepts_nested_attributes_for :spare_info_phrases
+
+  #before_validation on: :create do
+  #  unless spare_info_phrase
+  #    spare_info_phrases.new(catalog_number: catalog_number, primary: true)
+  #  end
+  #end
+
+  validate do
+    errors.add(:base, 'Должна существовать хотя бы одна фраза и она должна быть отмечена как главная.') if !spare_info_phrases.one?(&:primary)
+  end
+
+  has_one :spare_info_phrase, -> { where(primary: true) }
 
   has_many :from_spare_replacements, foreign_key: :from_spare_info_id, class_name: SpareReplacement, dependent: :destroy
   has_many :to_spare_replacements, foreign_key: :to_spare_info_id, class_name: SpareReplacement, dependent: :destroy
@@ -42,6 +57,8 @@ class SpareInfo < ActiveRecord::Base
     self.name = to_label
   end
 
+
+  # Используется в ручной/автоматической смене категории
   attr_accessor :change_spare_catalog
 
   before_save do

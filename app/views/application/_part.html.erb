@@ -12,7 +12,7 @@
         <%= part.brand.name %>
         </div>
         <div class="top-space-xs">
-          <%= link_to part.catalog_number, new_user_product_path(catalog_number: part.catalog_number, anchor: part.brand.name), class: 'text-warning', "data-clickable-href" => true %>
+          <%= link_to part.spare_info_phrase.catalog_number, new_user_product_path(catalog_number: part.catalog_number, anchor: part.brand.name), class: 'text-warning', "data-clickable-href" => true %>
         </div>
       </h4>
       <% if part.warehouses.exists? %>

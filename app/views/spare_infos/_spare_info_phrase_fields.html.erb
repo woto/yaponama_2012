@@ -1,0 +1,19 @@
+<%= f.nested_fields do %>
+  <%= panel 'default' do |p| %>
+
+    <%= p.heading do %>
+      <%= p.title do %>
+        Фраза
+        <%= f.standard_remove %>
+      <% end %>
+    <% end %>
+
+    <%= p.body do %>
+      <%= f.destroyable do %>
+        <%= f.twbs_text_field :catalog_number %>
+        <%= f.twbs_check_box :primary %>
+      <% end %>
+    <% end %>
+
+  <% end %>
+<% end %>

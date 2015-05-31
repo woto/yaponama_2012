@@ -32,7 +32,7 @@
             Контакты
           <% end %>
           <%= dd.menu do %>
-              <%= render partial: 'navbar_shop', collection:  Deliveries::Place.where(display_marker: true, active: true).reverse, spacer_template: "navbar_divider" %>
+              <%= render partial: 'navbar_shop', collection:  Deliveries::Place.where(display_marker: true, active: true, partner: false), spacer_template: "navbar_divider" %>
               <li class="divider"></li>
               <li class="dropdown-header">Не можете дозвониться? Оставьте <br />номер телефона и мы вам перезвоним.</li>
               <li>
