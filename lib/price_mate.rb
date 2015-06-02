@@ -59,23 +59,25 @@ class PriceMate
 
           mf_scope[:keyword] = info.spare_info_phrase.catalog_number
           mf_scope[:phrases] = info.spare_info_phrases
-
-          unless info.fix_spare_catalog
-            catalog = SpareCatalog.
-              joins(:spare_catalog_tokens).
-              where("? SIMILAR TO spare_catalog_tokens.name", mf_scope[:titles].keys.join(' ')).
-              where("CASE WHEN spare_catalog_tokens.subtract IS NULL THEN TRUE ELSE ? NOT SIMILAR TO spare_catalog_tokens.subtract END", mf_scope[:titles].keys.join(' ')).
-              references(:spare_catalog_tokens).
-              group('spare_catalogs.id').
-              order('sum(spare_catalog_tokens.weight) DESC').
-              select('spare_catalogs.*').
-              limit(1).first || Defaults.spare_catalog
-          end
-
-          SpareInfoJob.perform_later(info, catalog, mf_scope[:catalog_number_origs].keys, mf_scope[:titles].keys, mf_scope[:min_days], mf_scope[:min_cost], mf_scope[:offers].size)
         else
           mf_scope[:keyword] = catalog_number
           mf_scope[:phrases] = []
+        end
+
+        if info.blank? || ( info.present? && !info.fix_spare_catalog )
+          catalog = SpareCatalog.
+            joins(:spare_catalog_tokens).
+            where("? SIMILAR TO spare_catalog_tokens.name", mf_scope[:titles].keys.join(' ')).
+            where("CASE WHEN spare_catalog_tokens.subtract IS NULL THEN TRUE ELSE ? NOT SIMILAR TO spare_catalog_tokens.subtract END", mf_scope[:titles].keys.join(' ')).
+            references(:spare_catalog_tokens).
+            group('spare_catalogs.id').
+            order('sum(spare_catalog_tokens.weight) DESC').
+            select('spare_catalogs.*').
+            limit(1).first || Defaults.spare_catalog
+        end
+
+        if info.present?
+          SpareInfoJob.perform_later(info, catalog, mf_scope[:catalog_number_origs].keys, mf_scope[:titles].keys, mf_scope[:min_days], mf_scope[:min_cost], mf_scope[:offers].size)
         end
 
         mf_scope[:catalog] = catalog
