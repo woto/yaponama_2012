@@ -1,11 +1,11 @@
 class CreateNewWordstatReportSpareInfo
 
-  MIN = 1
-  MAX = 500000
+  MIN = 300
+  MAX = 5000
 
   # Массив интересующих брендов (конгломераций)
-  #BRANDS = []
-  BRANDS = ['Toyota Lexus', 'Nissan Infiniti', 'Mitsubishi']
+  BRANDS = []
+  OFFERS = 5
 
   def self.create_new_wordstat_report_spare_info
 
@@ -25,9 +25,10 @@ class CreateNewWordstatReportSpareInfo
           includes(:spare_info => :brand).
           where("min_cost > ?", MIN).
           where("min_cost < ?", MAX).
+          where("offers > ?", OFFERS).
           where(:yandex_shows => nil).
           where(:publish => nil).
-          where("LENGTH(phrase) >= ?", 10).
+          where("LENGTH(spare_info_phrases.catalog_number) >= ?", 10).
           limit(limit).
           offset(offset)
 
