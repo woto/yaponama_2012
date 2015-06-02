@@ -5,6 +5,7 @@ defaults: &defaults
 development:
   <<: *defaults
   enabled: false
+  root: false
 
 test:
   <<: *defaults

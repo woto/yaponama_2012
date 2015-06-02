@@ -86,6 +86,7 @@ Yaponama2012::Application.routes.draw do
   concern :only_global do
     resources :faqs, only: [:index]
     resources :news, only: [:index]
+    resources :deliveries
   end
 
   concern :somebody_and_admin_somebody do
@@ -450,8 +451,6 @@ Yaponama2012::Application.routes.draw do
   end
   post 'trash_help/make_payment_to_supplier'
   get 'clear_session' => "trash_help#clear_session"
-
-  resources :deliveries
 
   concerns :cars_searchable
 
