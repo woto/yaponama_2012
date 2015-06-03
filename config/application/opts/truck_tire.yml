@@ -25,10 +25,14 @@ defaults: &defaults
       - :value: '10'
         :label: '275'
       - :value: '11'
-        :label: '295'
+        :label: '280'
       - :value: '12'
-        :label: '315'
+        :label: '295'
       - :value: '13'
+        :label: '315'
+      - :value: '14'
+        :label: '320'
+      - :value: '15'
         :label: '385'
   truck_tire_height:
     si:
