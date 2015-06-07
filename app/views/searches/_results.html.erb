@@ -93,6 +93,11 @@
                         <tbody>
                           <% mf_scope[:offers].each do |offer| %>
                             <% if offer[:min_days] == 0 && offer[:max_days] == 0 && offer[:probability] == 100 %>
+                              <script type="text/javascript">
+                                window.onload = function() {
+                                  window.yaCounter14980414.reachGoal('nalichie', { shop: '<%= offer[:tech] %>' } );
+                                }
+                              </script>
                               <% shown_counter += 1 %>
                               <% default_show = true %>
                             <% else %>
