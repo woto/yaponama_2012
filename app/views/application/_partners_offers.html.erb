@@ -3,7 +3,7 @@
   var catalog_number, ignore, ignore_str, request;
 
   catalog_number = '<%= PriceMate.catalog_number(@c9).downcase %>';
-  ignore = [263, 264];
+  ignore = [263, 264, 284, 285, 286];
 
   ignore_str = ignore.map(function(value, index) {
     return '&ignore[]=' + value;
