@@ -1,9 +1,1 @@
-<% if part.truck_tire %>
-  <%= resource_class.human_attribute_name(:width) %>
-  <%= si(opts_checkbox('width', part, resource_class), :truck_tire, :width) %>,
-  <%= resource_class.human_attribute_name(:height) %>
-  <%= si(opts_checkbox('height', part, resource_class), :truck_tire, :height) %>,
-  <%= resource_class.human_attribute_name(:diameter) %>
-  <%= si(opts_checkbox('diameter', part, resource_class), :truck_tire, :diameter) %>
-<% end %>
-
+<%= render 'opts/truck_tires/chars_xs', resource_class: resource_class, part: part %>

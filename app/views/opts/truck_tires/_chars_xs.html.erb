@@ -1,8 +1,14 @@
 <% if part.truck_tire %>
+  <%= resource_class.human_attribute_name(:line) %>:
+  <%= si(opts_checkbox('line', part, resource_class), :truck_tire, :line) %>,
   <%= resource_class.human_attribute_name(:width) %>:
   <%= si(opts_checkbox('width', part, resource_class), :truck_tire, :width) %>,
   <%= resource_class.human_attribute_name(:height) %>:
   <%= si(opts_checkbox('height', part, resource_class), :truck_tire, :height) %>,
   <%= resource_class.human_attribute_name(:diameter) %>:
-  <%= si(opts_checkbox('diameter', part, resource_class), :truck_tire, :diameter) %>
+  <%= si(opts_checkbox('diameter', part, resource_class), :truck_tire, :diameter) %>,
+  <%= resource_class.human_attribute_name(:load) %>:
+  <%= si(opts_checkbox('load', part, resource_class), :truck_tire, :load) %>,
+  <%= resource_class.human_attribute_name(:speed) %>:
+  <%= si(opts_checkbox('speed', part, resource_class), :truck_tire, :speed) %>
 <% end %>

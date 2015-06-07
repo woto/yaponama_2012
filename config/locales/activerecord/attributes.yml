@@ -2,9 +2,12 @@ ru:
   activerecord:
     attributes:
       opts/truck_tire:
+        line: Линейка продукции
         width: Ширина
         height: Профиль
         diameter: Диаметр
+        load: Индекс нагрузки
+        speed: Индекс скорости
       opts/accumulator:
         voltage: Напряжение
         battery_capacity: Емкость

@@ -1,6 +1,6 @@
 defaults: &defaults
   truck_tire_width:
-    si:
+    si: мм
     checkboxes:
       - :value: '0'
         :label: '7'
