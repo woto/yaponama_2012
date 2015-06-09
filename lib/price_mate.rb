@@ -1,7 +1,7 @@
 class PriceMate
 
   def self.catalog_number catalog_number
-    catalog_number.to_s.mb_chars.upcase.gsub(/[^A-Z0-9]/i, '')
+    catalog_number.to_s.mb_chars.upcase.gsub(/[^А-ЯA-Z0-9]/i, '')
   end
 
   def self.manufacturer manufacturer
