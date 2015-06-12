@@ -7,10 +7,10 @@ module Grid::SpareReplacement
       columns_hash['id'] = {
         :type => :integer,
       }
-      columns_hash['from_cached_spare_info'] = {
+      columns_hash['from_spare_info'] = {
         :type => :string,
       }
-      columns_hash['to_cached_spare_info'] = {
+      columns_hash['to_spare_info'] = {
         :type => :string,
       }
       columns_hash['wrong'] = {
@@ -32,8 +32,8 @@ module Grid::SpareReplacement
 
     def set_preferable_columns
       @grid.visible_id = '1'
-      @grid.visible_from_cached_spare_info = '1'
-      @grid.visible_to_cached_spare_info = '1'
+      @grid.visible_from_spare_info = '1'
+      @grid.visible_to_spare_info = '1'
       @grid.visible_wrong = '1'
       @grid.visible_notes = '1'
       @grid.visible_notes_invisible = '1'

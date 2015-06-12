@@ -1,11 +1,9 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  height: 1
-  width: 1
-  diameter: 1
-
-two:
-  height: 1
-  width: 1
-  diameter: 1
+truck_tire_destroy_test:
+  height: '1'
+  width: '10'
+  diameter: '3'
+  spare_info: truck_tire_destroy_test
+  load: '0'
+  speed: '0'
+  line: '0'
+  axle: 

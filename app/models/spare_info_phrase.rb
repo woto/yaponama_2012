@@ -17,4 +17,8 @@ class SpareInfoPhrase < ActiveRecord::Base
       prepend('!')
   end
 
+  def to_label
+    "#{catalog_number} - #{phrase}"
+  end
+
 end

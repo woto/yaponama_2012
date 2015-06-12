@@ -1,0 +1,5 @@
+warehouse_destroy_test:
+  spare_info: warehouse_destroy_test
+  count: '1'
+  price: '50'
+  place_id: '1'

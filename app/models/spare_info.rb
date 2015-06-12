@@ -1,7 +1,6 @@
 class SpareInfo < ActiveRecord::Base
 
   include Selectable
-
   include BrandAttributes
   include SpareCatalogAttributes
 
@@ -9,7 +8,7 @@ class SpareInfo < ActiveRecord::Base
     Arel.sql("array_to_string(titles, '|')")
   end
 
-  has_many :warehouses
+  has_many :warehouses, dependent: :restrict_with_error
   has_many :places, :through => :warehouses
 
   has_many :spare_info_phrases, dependent: :destroy
@@ -28,10 +27,35 @@ class SpareInfo < ActiveRecord::Base
 
   has_one :spare_info_phrase, -> { where(primary: true) }
 
-  has_many :from_spare_replacements, foreign_key: :from_spare_info_id, class_name: SpareReplacement, dependent: :destroy
-  has_many :to_spare_replacements, foreign_key: :to_spare_info_id, class_name: SpareReplacement, dependent: :destroy
-  has_many :spare_applicabilities, dependent: :destroy
-  has_many :warehouses, dependent: :destroy
+  has_many :from_spare_replacements, foreign_key: :from_spare_info_id, class_name: SpareReplacement, dependent: :restrict_with_error
+  has_many :to_spare_replacements, foreign_key: :to_spare_info_id, class_name: SpareReplacement, dependent: :restrict_with_error
+  has_many :spare_applicabilities, dependent: :restrict_with_error
+
+  before_destroy :check_attributes
+
+  def check_attributes
+    (1..8).each do |n|
+      if self.send("image#{n}").present?
+        errors.add(:base, "Невозможно удалить SpareInfo, т.к. у него заполнен image#{n}")
+        return false
+      end
+    end
+    (1..8).each do |n|
+      if self.send("file#{n}").present?
+        errors.add(:base, "Невозможно удалить SpareInfo, т.к. у него заполнен file#{n}")
+        return false
+      end
+    end
+    if content.present?
+      errors.add(:base, "Невозможно удалить SpareInfo, т.к. у него заполнен content")
+      return false
+    end
+    if hstore.present?
+      errors.add(:base, "Невозможно удалить SpareInfo, т.к. у него заполнен hstore")
+      return false
+    end
+  end
+
 
   (1..8).each do |n|
     mount_uploader "image#{n}", ApplicationUploader
@@ -41,8 +65,8 @@ class SpareInfo < ActiveRecord::Base
     mount_uploader "file#{n}", ApplicationUploader
   end
 
-  has_one :accumulator, class_name: 'Opts::Accumulator', dependent: :destroy
-  has_one :truck_tire, class_name: 'Opts::TruckTire', dependent: :destroy
+  has_one :accumulator, class_name: 'Opts::Accumulator', dependent: :restrict_with_error
+  has_one :truck_tire, class_name: 'Opts::TruckTire', dependent: :restrict_with_error
 
   def to_label
     "#{catalog_number} (#{brand.to_label})"

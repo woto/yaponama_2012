@@ -66,3 +66,66 @@ spare_info2:
   catalog_number: 'SPARE_INFO2'
   brand: brand2
   spare_catalog: shatun
+
+destroy_test:
+  catalog_number: destroy_test
+  brand: destroy_test
+  name: destroy_test (destroy_test)
+  spare_catalog: destroy_test
+
+
+hstore_destroy_test:
+  catalog_number: hstore_destroy_test
+  brand: destroy_test
+  name: hstore_destroy_test (destroy_test)
+  spare_catalog: destroy_test
+  hstore: '"key"=>"value"'
+
+content_destroy_test:
+  catalog_number: content_destroy_test
+  brand: destroy_test
+  name: content_destroy_test (destroy_test)
+  spare_catalog: destroy_test
+  content: Содержимое, блокирующее удаление SpareInfo
+
+accumulator_destroy_test:
+  catalog_number: '0092S40190'
+  brand: bosch
+  name: 0092S40190 (Bosch)
+  spare_catalog: akb
+
+truck_tire_destroy_test:
+  catalog_number: A238429347834782348923489
+  brand: wanshine
+  name: A238429347834782348923489 (Wanshine)
+  spare_catalog: truck_tire
+
+from_spare_replacements_destroy_test:
+  catalog_number: from_spare_replacements_destroy_test
+  brand: destroy_test
+  name: from_spare_replacements_destroy_test (destroy_test)
+  spare_catalog: destroy_test
+
+to_spare_replacements_destroy_test:
+  catalog_number: to_spare_replacements_destroy_test
+  brand: destroy_test
+  name: to_spare_replacements_destroy_test (destroy_test)
+  spare_catalog: destroy_test
+
+another_spare_info_destroy_test:
+  catalog_number: another_spare_info_destroy_test
+  brand: destroy_test
+  name: another_spare_info_destroy_test (destroy_test)
+  spare_catalog: destroy_test
+
+warehouse_destroy_test:
+  catalog_number: warehouse_destroy_test
+  brand: destroy_test
+  name: warehouse_destroy_test (destroy_test)
+  spare_catalog: destroy_test
+
+applicabilities_destroy_test:
+  catalog_number: applicabilities_destroy_test
+  brand: destroy_test
+  name: applicabilities_destroy_test (destroy_test)
+  spare_catalog: destroy_test

@@ -116,3 +116,8 @@ brand2_model2_generation2_modification2:
   model: model2
   generation: generation2
   modification: modification2
+
+applicabilities_destroy_test:
+  spare_info: applicabilities_destroy_test
+  brand: destroy_test
+  model: applicabilities_destroy_test

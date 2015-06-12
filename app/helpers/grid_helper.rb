@@ -86,7 +86,7 @@ module GridHelper
           else
             val
           end
-        when *['spare_info', 'spare_catalog', 'brand', 'model', 'generation', 'modification']
+        when *['spare_info', 'spare_catalog', 'brand', 'from_spare_info', 'to_spare_info', 'model', 'generation', 'modification']
           content_tag(:strong){ val.try(:to_label) }
         when 'cached_names'
           res = []

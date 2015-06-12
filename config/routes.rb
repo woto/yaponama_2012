@@ -316,6 +316,8 @@ Yaponama2012::Application.routes.draw do
       concerns :transactionable
     end
 
+    resources :phrases
+
     resources :users do
       concerns :somebody_and_admin_somebody
       concerns :aaa

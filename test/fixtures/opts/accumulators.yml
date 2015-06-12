@@ -9,3 +9,15 @@ bosch_s4004:
   layout: 0
   terminal_types: 1
   spare_info: bosch_s4004
+
+accumulator_destroy_test:
+  voltage: 1 
+  battery_capacity: 50
+  cold_cranking_amps: 330
+  length: 187
+  width: 127
+  height: 227
+  base_hold_down: 13
+  layout: 0
+  terminal_types: 1
+  spare_info: accumulator_destroy_test

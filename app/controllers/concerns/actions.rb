@@ -54,7 +54,13 @@ module Actions
         end
         format.json { head :no_content }
       else
-        format.html { redirect_to url_for(:controller => :users, :action => :show), attention: "Невозможно удалить" }
+        attention = @resource.errors.full_messages_for(:base).join("<br>")
+
+        if params[:return_path].present?
+          format.html { redirect_to url_for(params[:return_path]), attention: attention }
+        end
+
+        #format.html { redirect_to url_for(:controller => :users, :action => :show), attention: "Невозможно удалить" }
       end
     end
   end

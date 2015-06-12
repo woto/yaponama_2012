@@ -1,0 +1,27 @@
+<% if phrases.any? %>
+  <h3 class="top-space-lg">Индекс популярности</h3>
+    <% phrases.each do |phrase| %>
+      <% if current_user.seller? %>
+        <%= link_to admin_phrase_path(phrase, return_path: request.fullpath), method: :delete, class: 'btn btn-danger' do %>
+          <%= icon 'remove' %>
+        <% end %>
+      <% end %>
+      <ul>
+        <li>id: <%= phrase.id %></li> 
+        <li>spare_info_id: <%= phrase.spare_info_id %></li> 
+        <li>catalog_number: <%= phrase.catalog_number %></li> 
+        <li>yandex_campaign_id: <%= phrase.yandex_campaign_id %></li> 
+        <li>yandex_banner_id: <%= phrase.yandex_banner_id %></li> 
+        <li>yandex_banner_updated_at: <%= phrase.yandex_banner_updated_at %></li> 
+        <li>yandex_wordstat_updated_at: <%= phrase.yandex_wordstat_updated_at %></li> 
+        <li>yandex_shows: <%= phrase.yandex_shows %></li> 
+        <li>created_at: <%= phrase.created_at %></li> 
+        <li>updated_at: <%= phrase.updated_at %></li> 
+        <li>phrase: <%= phrase.phrase %></li> 
+        <li>publish: <%= phrase.publish %></li> 
+        <li>yclicks: <%= phrase.yclicks %></li> 
+        <li>yshows: <%= phrase.yshows %></li> 
+        <li>primary: <%= phrase.primary %></li> 
+      </ul>
+    <% end %>
+<% end %>

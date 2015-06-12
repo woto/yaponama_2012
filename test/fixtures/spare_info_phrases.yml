@@ -52,3 +52,18 @@ spare_info2:
   catalog_number: 'SPARE_INFO2'
   spare_info: spare_info2
   primary: true
+
+truck_tire_destroy_test:
+  catalog_number: A238429347834782348923489
+  spare_info: truck_tire_destroy_test
+  primary: true
+
+hstore_destroy_test:
+  catalog_number: hstore_destroy_test
+  spare_info: hstore_destroy_test
+  primary: true
+
+content_destroy_test:
+  catalog_number: content_destroy_test
+  spare_info: content_destroy_test
+  primary: true

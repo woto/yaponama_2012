@@ -17,3 +17,16 @@ ns_3310_ki_2103:
   to_spare_info: ki_2103
   wrong: false
   status: 3
+
+from_spare_replacements_destroy_test:
+  from_spare_info: from_spare_replacements_destroy_test
+  to_spare_info: another_spare_info_destroy_test
+  wrong: false
+  status: 3
+
+
+to_spare_replacements_destroy_test:
+  from_spare_info: another_spare_info_destroy_test
+  to_spare_info: to_spare_replacements_destroy_test
+  wrong: false
+  status: 3

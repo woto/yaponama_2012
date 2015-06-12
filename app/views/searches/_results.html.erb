@@ -156,6 +156,10 @@
                 <%= render 'spare_info_replacements', info: mf_scope[:info] %>
               <% end %>
 
+              <% phrases = capture do %>
+                <%= render 'spare_info_phrases', phrases: mf_scope[:phrases] %>
+              <% end %>
+
               <% applicabilities = capture do %>
                 <%= render 'spare_info_applicabilities', info: mf_scope[:info] %>
               <% end %>
@@ -185,6 +189,9 @@
                   <% if applicabilities.present? %>
                     <li role="presentation"><a href="#applicabilities-<%= mf_scope[:brand].to_label.parameterize %>" aria-controls="applicabilities-<%= mf_scope[:brand].to_label.parameterize %>" role="tab" data-toggle="tab">Применимость</a></li>
                   <% end %>
+                  <% if phrases.present? %>
+                    <li role="presentation"><a href="#phrases-<%= mf_scope[:brand].to_label.parameterize %>" aria-controls="phrases-<%= mf_scope[:brand].to_label.parameterize %>" role="tab" data-toggle="tab">Индекс популярности</a></li>
+                  <% end %>
                   <% if brand.present? %>
                     <li role="presentation"><a href="#brand-<%= mf_scope[:brand].to_label.parameterize %>" aria-controls="brand-<%= mf_scope[:brand].to_label.parameterize %>" role="tab" data-toggle="tab">Производитель</a></li>
                   <% end %>
@@ -205,6 +212,11 @@
                   <% if applicabilities.present? %>
                     <div role="tabpanel" class="tab-pane" id="applicabilities-<%= mf_scope[:brand].to_label.parameterize %>">
                       <%= applicabilities %>
+                    </div>
+                  <% end %>
+                  <% if phrases.present? %>
+                    <div role="tabpanel" class="tab-pane" id="phrases-<%= mf_scope[:brand].to_label.parameterize %>">
+                      <%= phrases %>
                     </div>
                   <% end %>
                   <% if brand.present? %>

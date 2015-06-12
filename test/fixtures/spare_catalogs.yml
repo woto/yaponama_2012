@@ -21,3 +21,13 @@ akb:
   page: Текст страницы аккумуляторной батареи
   opt: accumulator
   shows: 33577
+
+truck_tire:
+  name: Шина Грузовая
+  intro: Вступление к грузовой шине
+  page: Текст страницы грузовой шины
+  opt: truck_tire
+  shows: 322
+
+destroy_test:
+  name: Тест удаления связных записей

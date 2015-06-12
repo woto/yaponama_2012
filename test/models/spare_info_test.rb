@@ -119,4 +119,114 @@ class SpareInfoTest < ActiveSupport::TestCase
     assert si.valid?
   end
 
+  test 'Мы не можем удалить SpareInfo, если у него есть связанный Accumulator' do
+    si = spare_infos(:accumulator_destroy_test)
+    si.destroy
+    assert si.persisted?
+    si.accumulator.destroy
+    si.reload.destroy
+    refute si.persisted?
+  end
+
+  test 'Мы не можем удалить SpareInfo, если у него есть связанный TruckTire' do
+    si = spare_infos(:truck_tire_destroy_test)
+    si.destroy
+    assert si.persisted?
+    si.truck_tire.destroy
+    si.reload.destroy
+    refute si.persisted?
+  end
+
+  test 'Мы не можем удалить SpareInfo, если у него есть связанный Warehouse' do
+    si = spare_infos(:warehouse_destroy_test)
+    si.destroy
+    assert si.persisted?
+    si.warehouses.destroy_all
+    si.reload.destroy
+    refute si.persisted?
+  end
+
+  test 'Мы не можем удалить SpareInfo, если у него есть связанный from_spare_replacements' do
+    si = spare_infos(:from_spare_replacements_destroy_test)
+    si.destroy
+    assert si.persisted?
+    si.from_spare_replacements.destroy_all
+    si.reload.destroy
+    refute si.persisted?
+  end
+
+  test 'Мы не можем удалить SpareInfo, если у него есть связанный to_spare_replacements' do
+    si = spare_infos(:to_spare_replacements_destroy_test)
+    si.destroy
+    assert si.persisted?
+    si.to_spare_replacements.destroy_all
+    si.reload.destroy
+    refute si.persisted?
+  end
+
+  test 'Мы не можем удалить SpareInfo, если у него есть связанный spare_applicabilities' do
+    si = spare_infos(:applicabilities_destroy_test)
+    si.destroy
+    assert si.persisted?
+    si.spare_applicabilities.destroy_all
+    si.reload.destroy
+    refute si.persisted?
+  end
+
+  test 'Мы не можем удалить SpareInfo, если у него есть хотя бы одна картинка. Проверяем только первую' do
+    extend ActionDispatch::TestProcess
+    si = spare_infos(:destroy_test)
+    si.spare_info_phrases.new(catalog_number: 'destroy_test', primary: true)
+    si.image1 = fixture_file_upload('rails.png','image/png')
+    si.save!
+
+    assert si.persisted?
+    si.destroy
+
+    assert si.persisted?
+    si.reload.remove_image1!
+
+    si.reload.destroy
+    refute si.persisted?
+  end
+
+  test 'Мы не можем удалить SpareInfo, если у него есть хотя бы один файл. Проверяем только восьмой' do
+    extend ActionDispatch::TestProcess
+    si = spare_infos(:destroy_test)
+    si.spare_info_phrases.new(catalog_number: 'destroy_test', primary: true)
+    si.file8 = fixture_file_upload('rails.png','image/png')
+    si.save!
+
+    assert si.persisted?
+    si.destroy
+
+    assert si.persisted?
+    si.reload.remove_file8!
+
+    si.reload.destroy
+    refute si.persisted?
+  end
+
+  test 'Мы не можем удалить SpareInfo, если у него есть content' do
+    si = spare_infos(:content_destroy_test)
+    si.destroy
+
+    assert si.persisted?
+    si.reload.update!(content: '')
+
+    si.reload.destroy
+    refute si.persisted?
+  end
+
+  test 'Мы не можем удалть SpareInfo, если у него есть hstore' do
+    si = spare_infos(:hstore_destroy_test)
+    si.destroy
+
+    assert si.persisted?
+    si.reload.update!(hstore: {})
+
+    si.reload.destroy
+    refute si.persisted?
+  end
+
 end

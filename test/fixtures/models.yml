@@ -64,3 +64,7 @@ model1:
 model2:
   brand: brand2
   name: Model
+
+destroy_test:
+  brand: destroy_test
+  name: destroy_test
