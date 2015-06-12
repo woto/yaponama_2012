@@ -54,6 +54,11 @@ namespace :app do
     #end
   end
 
+  desc 'Выгрузка конгломераций в виде "Toyota Lexus,Toyota"'
+  task :unload_conglomerates => :environment do
+    UnloadConglomerates.unload_conglomerates
+  end
+
   task :y => :environment do
     Y.y
   end
