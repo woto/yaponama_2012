@@ -93,27 +93,27 @@ class Y
     {
       "BannerID" => banner_id,
       "CampaignID" => campaign_id,
-      "Title" => "#{spare_info_phrase.spare_info.cached_brand} - #{spare_info_phrase.catalog_number}",
-      "Text" => "#{spare_info_phrase.spare_info.cached_spare_catalog} #{ActionController::Base.helpers.number_to_currency(spare_info_phrase.spare_info.min_cost, :precision => 0, :delimiter => '')} от #{spare_info_phrase.spare_info.min_days} дн.",
+      "Title" => "#{spare_info_phrase.spare_info.brand.name} - #{spare_info_phrase.catalog_number}",
+      "Text" => "#{spare_info_phrase.spare_info.spare_catalog.name}. Сеть магазинов.",
       "Href" => "http://www.avtorif.ru/user/products/new?catalog_number=#{spare_info_phrase.spare_info.catalog_number}",
       "Geo" => "213",
-      "ContactInfo" => {
-         "Country" => "Россия",
-         "CountryCode" => "+7",
-         "City" => "Москва",
-         "Street" => "Щёлковское шоссе",
-         "House" => "29",
-         "CityCode" => "495",
-         "Phone" => "213-80-23",
-         "CompanyName" => "Авториф",
-         "ContactEmail" => "info@avtorif.ru",
-         "WorkTime" => "0;4;9;0;20;0;5;5;10;0;18;0;6;6;10;0;17;0",
-         "OGRN" => "313774624200711"
-      },
+      #"ContactInfo" => {
+      #   "Country" => spare_info_phrase.ycountry,
+      #   "CountryCode" => spare_info_phrase.ycountry_code,
+      #   "City" => spare_info_phrase.ycity,
+      #   "Street" => spare_info_phrase.ystreet,
+      #   "House" => spare_info_phrase.yhouse,
+      #   "CityCode" => spare_info_phrase.ycity_code,
+      #   "Phone" => spare_info_phrase.yphone,
+      #   "CompanyName" => spare_info_phrase.ycompany_name,
+      #   "ContactEmail" => spare_info_phrase.ycontact_email,
+      #   "WorkTime" => spare_info_phrase.ywork_time,
+      #   "OGRN" => spare_info_phrase.yogrn
+      #},
       "Phrases" => [{
         "PhraseID" => phrase_id,
         "Phrase" => spare_info_phrase.phrase,
-        "Price" => 2,
+        "Price" => 4,
         "Currency" => "RUB"
       }]
     }
