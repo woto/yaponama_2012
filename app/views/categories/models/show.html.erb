@@ -23,7 +23,7 @@
 
   <%= p.title do %>
     <% @meta_title = "#{@resource.name} на #{@brand.name} #{@model.name}" %>
-    <% @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present? %>
+    <%# TODO @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present? %>
     <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
     <% discourse_head(@meta_title, @meta_title_small) %>
     <%= page_header %>
