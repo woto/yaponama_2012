@@ -7,7 +7,7 @@ class YandexDirect
 
   def initialize(*params)
     @request = (params[1] || {}).merge(
-      "token" => 'ae654db7b6664ab888a4dfd79f2bccba',
+      "token" => Rails.application.secrets.yandex_direct_token,
       "method" => params[0],
       "locale" => 'ru'
     )
