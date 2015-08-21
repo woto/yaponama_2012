@@ -1,5 +1,5 @@
 <div class="text-sm text-success bottom-space-lg top-space-lg hidden-xs">
-  <% Deliveries::Place.where(display_marker: true, active: true, partner: false).each do |dp| %>
+  <% Deliveries::Place.random_list.each do |dp| %>
     <address>
       <strong><span> <%= link_to('Магазин автозапчастей', deliveries_path) %> </span></strong>
       <br />

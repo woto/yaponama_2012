@@ -33,4 +33,8 @@ class Deliveries::Place < ActiveRecord::Base
     end
   end
 
+  def self.random_list
+    where(display_marker: true, active: true, partner: false).order("RANDOM()")
+  end
+
 end
