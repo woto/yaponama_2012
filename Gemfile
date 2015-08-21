@@ -150,3 +150,5 @@ gem 'discourse_static_assets', github: 'woto/discourse_static_assets'
 
 gem 'ckpages', github: 'woto/ckpages'
 #gem 'ckpages', path: '../ckpages'
+
+gem 'dotenv-rails'
