@@ -1,13 +1,18 @@
-<%= b1 do %>
+<%= page do |p| %>
 
-  <% title_edit %>
-
-  <%= breadcrumb true do |b| %>
-    <%= b.item @meta_title %>
+  <%= p.breadcrumb do |b| %>
+    <%= breadcrumb true do |b| %>
+      <% title_edit %>
+      <%= b.item @meta_title %>
+    <% end %>
   <% end %>
 
-  <%= title_edit %>
+  <%= p.title do %>
+    <%= title_edit %>
+  <% end %>
 
-  <%= render 'form' %>
+  <%= p.content do %>
+    <%= render 'form' %>
+  <% end %>
 
 <% end %>
