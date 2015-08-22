@@ -1,11 +1,9 @@
 <%= page do |p| %>
 
   <%= p.breadcrumb do %>
-    <% b = Breadcrumb.new(self) %>
-    <ol class="breadcrumb">
-      <%= b.item('Главная', '/') %>
+    <%= breadcrumb false, true do |b| %>
       <%= b.item('Информация') %>
-    </ol>
+    <% end %>
   <% end %>
 
   <%= p.title do %>
