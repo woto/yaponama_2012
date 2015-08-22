@@ -1,70 +1,73 @@
-<%= b1 do %>
+<% @meta_title = "Просмотр категории товаров #{@resource.to_label}" %>
 
-  <% @meta_title = "Просмотр категории товаров #{@resource.to_label}" %>
+<%= page do |p| %>
 
-  <%= breadcrumb true do |b| %>
-    <%= b.item @meta_title %>
+  <%= p.breadcrumb do %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item @meta_title %>
+    <% end %>
   <% end %>
 
-  <%= page_header %>
-
-  <dl>
-    <dt>
-      <%= SpareCatalog.human_attribute_name :name %>
-    </dt>
-    <dd>
-      <%= @resource.name %>
-    </dd>
-  </dl>
-
-  <dl>
-    <dt>
-      <%= SpareCatalog.human_attribute_name :intro %>
-    </dt>
-    <dd>
-      <%== @resource.intro %>
-    </dd>
-  </dl>
-
-  <dl>
-    <dt>
-      <%= SpareCatalog.human_attribute_name :page %>
-    </dt>
-    <dd>
-      <%== @resource.page %>
-    </dd>
-  </dl>
-
-  <dl>
-    <dt>
-    <%= SpareCatalog.human_attribute_name :spare_catalog_tokens %>
-    </dt>
-    <dd>
-      <ul class="list-unstyled">
-        <% @resource.spare_catalog_tokens.each do |token| %>
-          <li>
-            <%= token.name %> - <%= token.subtract %>
-          </li>
-        <% end %>
-      </ul>
-    </dd>
-  </dl>
-
-
-
-  <br />
-  <br />
-
-  <%= link_to url_for(action: :new, return_path: request.fullpath), class: "btn btn-primary" do %>
-    <%= icon 'plus' %>
+  <%= p.title do %>
+    <%= page_header %>
   <% end %>
 
-  <br />
-  <br />
-  <%= link_to("Публичный просмотр", polymorphic_path([:category_brands], category_id: @resource), target: "_blank", class: 'btn btn-primary') %>
-  <br />
-  <br />
+  <%= p.content do %>
+    <dl>
+      <dt>
+        <%= SpareCatalog.human_attribute_name :name %>
+      </dt>
+      <dd>
+        <%= @resource.name %>
+      </dd>
+    </dl>
 
-  <%= render 'smart_show' %>
+    <dl>
+      <dt>
+        <%= SpareCatalog.human_attribute_name :intro %>
+      </dt>
+      <dd>
+        <%== @resource.intro %>
+      </dd>
+    </dl>
 
+    <dl>
+      <dt>
+        <%= SpareCatalog.human_attribute_name :page %>
+      </dt>
+      <dd>
+        <%== @resource.page %>
+      </dd>
+    </dl>
+
+    <dl>
+      <dt>
+      <%= SpareCatalog.human_attribute_name :spare_catalog_tokens %>
+      </dt>
+      <dd>
+        <ul class="list-unstyled">
+          <% @resource.spare_catalog_tokens.each do |token| %>
+            <li>
+              <%= token.name %> - <%= token.subtract %>
+            </li>
+          <% end %>
+        </ul>
+      </dd>
+    </dl>
+
+    <br />
+    <br />
+
+    <%= link_to url_for(action: :new, return_path: request.fullpath), class: "btn btn-primary" do %>
+      <%= icon 'plus' %>
+    <% end %>
+
+    <br />
+    <br />
+    <%= link_to("Публичный просмотр", polymorphic_path([:category_brands], category_id: @resource), target: "_blank", class: 'btn btn-primary') %>
+    <br />
+    <br />
+
+    <%= render 'smart_show' %>
+  <% end %>
 <% end %>
