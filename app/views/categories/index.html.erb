@@ -28,13 +28,12 @@
             <% end %>
           </ol>
 
-          <hr />
+          <div class="tree">
+            <ul>
+              <%= build_full_tree(SpareCatalogGroup.arrange, @spare_catalogs.reject(&:special?),  -> (spare_catalog) { link_to(safe_join([spare_catalog.name, content_tag(:small, " (#{spare_catalog.count} шт.)", class: 'text-muted')]), category_path(spare_catalog)) }) %>
+            </ul>
+          </div>
 
-          <ol id="categories-index-catalogs">
-            <% @spare_catalogs.reject(&:special?).each do |spare_catalog| %>
-              <li data-clickable-object> <%= link_to content_tag(:strong, spare_catalog.name), category_path(spare_catalog), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_catalog.count}&nbsp;шт.)</small>".html_safe %></li>
-            <% end %>
-          </ol>
         <% end %>
       <% end %>
     <% end %>

@@ -1,0 +1,5 @@
+<%= simple_form_for @resource, url: polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :parent_id, collection: nested_dropdown(SpareCatalogGroup.arrange(order: :name)), as: :select, include_blank: true %>
+  <%= f.buttons %>
+<% end %>

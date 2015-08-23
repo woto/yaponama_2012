@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  spare_catalog_id: 
-  name: MyString
+bamper_zadniy_zad:
+  spare_catalog: bamper_zadniy
+  name: '%ЗАД%'
+  weight: 1
 
-two:
-  spare_catalog_id: 
-  name: MyString
+bamper_zadniy_bamper:
+  spare_catalog: bamper_zadniy
+  name: '%БАМПЕР%'
+  weight: 1

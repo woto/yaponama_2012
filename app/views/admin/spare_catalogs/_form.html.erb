@@ -6,6 +6,8 @@
 
       <%= f.input :name %>
 
+      <%= f.input :spare_catalog_group_id, collection: nested_dropdown(SpareCatalogGroup.arrange(order: :name)), as: :select, include_blank: true %>
+
       <%= f.simple_fields_for :spare_catalog_tokens do |sct| %>
         <%= render 'spare_catalog_token_fields', :f => sct %>
       <% end %>

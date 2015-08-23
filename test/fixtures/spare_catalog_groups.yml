@@ -1,0 +1,10 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+rulevoe_upravlenie:
+  id: 980190963
+  name: "Рулевое управление"
+
+rulevoi_reduktor_rulevaya_reika:
+  id: 980190964
+  name: "Рулевой редуктор, рулевая рейка"
+  ancestry: '980190963'

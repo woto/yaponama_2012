@@ -3,6 +3,7 @@ module Resource
   included do
   before_action :set_resource_class
   before_action :find_resource, except: [:new, :create, :index]
+  before_action :find_resources, only: [:index]
   before_action :new_resource, only: [:new]
   before_action :edit_resource, only: [:edit]
   before_action :create_resource, only: [:create]
@@ -11,6 +12,11 @@ module Resource
   skip_before_action :find_resource, only: [:transactions]
 
   def set_resource_class
+  end
+
+
+  def find_resources
+    @resources = @resource_class.page(params[:page]).per(params[:per]) if @resource_class
   end
 
   def find_resource

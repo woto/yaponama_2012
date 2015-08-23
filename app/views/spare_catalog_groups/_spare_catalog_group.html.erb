@@ -1,0 +1,15 @@
+<% ancestry_with_id = (spare_catalog_group.ancestry.to_s.present? ? "/#{spare_catalog_group.ancestry.to_s}/" : "/") + spare_catalog_group.id.to_s + "/" %>
+
+<% if spare_catalogs.any?{|spare_catalog| spare_catalog.ancestry.starts_with? ancestry_with_id} %>
+  <li class="collapsible">
+    <a href="#"> <%= icon 'plus' %> <%= spare_catalog_group.name %> </a>
+    <ul>
+    <%= build_full_tree(sub_rows, spare_catalogs, block) %>
+      <% spare_catalogs.select{|spare_catalog| spare_catalog.ancestry == ancestry_with_id}.each do |spare_catalog| %>
+        <li>
+          <%= block.call(spare_catalog) %>
+        </li>
+      <% end %>
+    </ul>
+  </li>
+<% end %>

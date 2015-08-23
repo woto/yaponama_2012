@@ -42,6 +42,7 @@
 // COMPONENTS
 //
 //= require opts
+//= require components/tree
 //
 //=========================
 // LIBS

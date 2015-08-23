@@ -29,19 +29,19 @@
           <% end %>
         <% end %>
         <%= p.body do %>
+
           <ol id="catalogs-models-show-catalogs">
             <% @spare_catalogs.select(&:special?).each do |spare_catalog| %>
               <li data-clickable-object> <%= link_to safe_join([content_tag(:strong, spare_catalog.name), hidden(" на #{@brand.name} #{@model.name}")]), category_model_path(spare_catalog, @model), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_catalog.count}&nbsp;шт.)</small>".html_safe %> </li>
             <% end %>
           </ol>
 
-          <hr />
+          <div class="tree">
+            <ul>
+              <%= build_full_tree(SpareCatalogGroup.arrange, @spare_catalogs.reject(&:special?), -> (spare_catalog) { link_to(safe_join([spare_catalog.name, hidden(" на #{@brand.name} #{@model.name}"), content_tag(:small, " (#{spare_catalog.count} шт.)", class: 'text-muted')]), category_model_path(spare_catalog, @model)) }) %>
+            </ul>
+          </div>
 
-          <ol id="catalogs-models-show-catalogs">
-            <% @spare_catalogs.reject(&:special?).each do |spare_catalog| %>
-              <li data-clickable-object> <%= link_to safe_join([content_tag(:strong, spare_catalog.name), hidden(" на #{@brand.name} #{@model.name}")]), category_model_path(spare_catalog, @model), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_catalog.count}&nbsp;шт.)</small>".html_safe %> </li>
-            <% end %>
-          </ol>
         <% end %>
       <% end %>
     <% else %>

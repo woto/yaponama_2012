@@ -1,5 +1,6 @@
 rulevaya_tyga:
   name: "РУЛЕВАЯ ТЯГА"
+  spare_catalog_group_id: 980190964
 
 sailentblock:
   name: "САЙЛЕНТБЛОК"
@@ -11,6 +12,7 @@ pylnik_rulevoi_reiki:
   name: "ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ"
   intro: "<p>Короткое описание что такое пыльник рулевой тяги.</p>\r\n"
   page: "<p>Подробное описание что такое пыльник рулевой тяги.</p>\r\n"
+  spare_catalog_group_id: 980190963
 
 shatun:
   name: ШАТУН

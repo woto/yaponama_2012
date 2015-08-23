@@ -47,6 +47,17 @@ class PriceMate
     parsed_json
   end
 
+  def self.find_a_category(titles)
+    catalog = SpareCatalog.
+      select('spare_catalogs.*').
+      joins(:spare_catalog_tokens).
+      references(:spare_catalog_tokens).
+      where("? SIMILAR TO spare_catalog_tokens.name", titles).
+      group('spare_catalogs.id').
+      order('sum(spare_catalog_tokens.weight) DESC').
+      limit(1).first || Defaults.spare_catalog
+  end
+
   def self.database formatted_data
     formatted_data.each do |catalog_number, cn_scope|
       cn_scope.each do |manufacturer, mf_scope|
@@ -65,15 +76,7 @@ class PriceMate
         end
 
         if info.blank? || ( info.present? && !info.fix_spare_catalog )
-          catalog = SpareCatalog.
-            joins(:spare_catalog_tokens).
-            where("? SIMILAR TO spare_catalog_tokens.name", mf_scope[:titles].keys.join(' ')).
-            where("CASE WHEN spare_catalog_tokens.subtract IS NULL THEN TRUE ELSE ? NOT SIMILAR TO spare_catalog_tokens.subtract END", mf_scope[:titles].keys.join(' ')).
-            references(:spare_catalog_tokens).
-            group('spare_catalogs.id').
-            order('sum(spare_catalog_tokens.weight) DESC').
-            select('spare_catalogs.*').
-            limit(1).first || Defaults.spare_catalog
+          find_a_category(mf_scope[:titles].keys.join(' '))
         end
 
         if info.present?

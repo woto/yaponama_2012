@@ -1,7 +1,7 @@
-<% title_index %>
 <%= page do |p| %>
 
   <%= p.breadcrumb do %>
+    <% title_index %>
     <%= breadcrumb true do |b| %>
       <%= b.item @meta_title %>
     <% end %>
@@ -13,23 +13,69 @@
 
   <%= p.content do %>
 
-  <%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
-
     <%= panel 'default' do |p| %>
-
-      <%= p.heading do %>
-        <%= render 'head' %>
+      <%= search_form_for @q, url: url_for(action: :index) do |f| %>
+        <%= p.body do %>
+            <dl class="dl-horizontal">
+              <dt> <%= f.label :name_matches %> </dt>
+              <dd> <%= f.search_field :name_matches %> </dd>
+            </dl>
+            <dl class="dl-horizontal">
+              <dt> <%= f.label :spare_catalog_tokens_name_cont %> </dt>
+              <dd> <%= f.search_field :spare_catalog_tokens_name_cont %> </dd>
+            </dl>
+        <% end %>
+        <%= p.footer do %>
+          <%= f.button 'Фильтровать', class: 'btn btn-primary' %>
+        <% end %>
       <% end %>
-
-      <%= p.body do %>
-        <%= render 'grid', f: f %>
-      <% end %>
-
-      <%= render 'grid_footer', f: f, p: p %>
-
     <% end %>
-  <% end %>
+
+    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary', style: "vertical-align: top" do %>
+      <%= icon 'plus' %>
+    <% end %>
+    <%= paginate @resources %>
+
+    <div class="table-responsive top-space bottom-space">
+      <table class="table">
+        <thead>
+          <tr>
+            <th> .  </th>
+            <th> <%= @resource_class.human_attribute_name :name %> </th>
+            <th> <%= @resource_class.human_attribute_name :spare_catalog_tokens %> </th>
+            <th> <%= @resource_class.human_attribute_name :opt %> </th>
+            <th> <%= @resource_class.human_attribute_name :shows %> </th>
+            <th> <%= @resource_class.human_attribute_name :created_at %> </th>
+            <th> <%= @resource_class.human_attribute_name :updated_at %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @resources.each do |r| %>
+            <tr>
+              <td> .  </td>
+              <td>
+                <%= (nice_tree(r.spare_catalog_group.path) + " " + icon('angle-right') + " ") if r.spare_catalog_group %>
+                <%= r.name %> <br />
+                <%= link_to r.id, edit_admin_spare_catalog_path(r, return_path: request.fullpath) %> 
+                <%= link_to("Публичный просмотр", polymorphic_path([:category_brands], category_id: r)) %> <br />
+              </td>
+              <td>
+                <% r.spare_catalog_tokens.each do |t| %>
+                  <div class="well well-sm text-sm"><%= t.name %> : <%= t.weight %></div>
+                <% end %>
+              </td>
+              <td> <%= r.opt %> </td>
+              <td> <%= r.shows %> </td>
+              <td> <%= l r.created_at %> </td>
+              <td> <%= l r.updated_at %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+
+    <%= paginate @resources %>
 
   <% end %>
-
 <% end %>

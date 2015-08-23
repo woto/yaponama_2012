@@ -1,13 +1,18 @@
 class CategoriesController < ApplicationController
 
   def index
+
+    scgt = SpareCatalogGroup.arel_table
+    sct = SpareCatalog.arel_table
+
     @q = SpareCatalog.search(params[:q])
     @spare_catalogs = @q.result(distinct: true)
     @spare_catalogs = @spare_catalogs.
       joins(:spare_infos).
-      select("spare_catalogs.id, spare_catalogs.name, count(spare_infos.id) as count, LENGTH(spare_catalogs.opt) > 0 special").
+      joins(sct.join(scgt, Arel::Nodes::OuterJoin).on(scgt[:id].eq(sct[:spare_catalog_group_id])).join_sources).
+      select("CONCAT(CONCAT(CASE WHEN spare_catalog_groups.ancestry IS NULL THEN '/' ELSE CONCAT(CONCAT('/', spare_catalog_groups.ancestry), '/') END, spare_catalog_groups.id), '/') as ancestry, spare_catalogs.id, spare_catalogs.name, count(spare_infos.id) as count, LENGTH(spare_catalogs.opt) > 0 special").
       order("spare_catalogs.name").
-      group("spare_catalogs.id")
+      group("spare_catalogs.id, spare_catalog_groups.id, spare_catalog_groups.ancestry")
   end
 
   def show

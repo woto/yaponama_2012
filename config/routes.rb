@@ -68,13 +68,14 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :global_and_admin do
-    resources :spare_catalogs, concerns: [:gridable, :searchable]
     resources :bots, concerns: [:gridable]
     resources :spare_infos, concerns: [:gridable, :transactionable, :searchable]
     resources :spare_replacements, concerns: [:gridable]
   end
 
   concern :only_admin do
+    resources :spare_catalogs
+    resources :spare_catalog_groups
     namespace :opts do
       resources :accumulators, concerns: [:gridable]
       resources :truck_tires, concerns: [:gridable]

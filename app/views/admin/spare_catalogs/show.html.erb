@@ -1,8 +1,7 @@
-<% @meta_title = "Просмотр категории товаров #{@resource.to_label}" %>
-
 <%= page do |p| %>
 
   <%= p.breadcrumb do %>
+    <% title_show %>
     <%= breadcrumb true do |b| %>
       <%= b.item @meta_title %>
     <% end %>
@@ -19,6 +18,15 @@
       </dt>
       <dd>
         <%= @resource.name %>
+      </dd>
+    </dl>
+
+    <dl>
+      <dt>
+        <%= SpareCatalog.human_attribute_name :spare_catalog_group %>
+      </dt>
+      <dd>
+        <%= nice_tree(@resource.spare_catalog_group.path) if @resource.spare_catalog_group %>
       </dd>
     </dl>
 
@@ -48,7 +56,7 @@
         <ul class="list-unstyled">
           <% @resource.spare_catalog_tokens.each do |token| %>
             <li>
-              <%= token.name %> - <%= token.subtract %>
+              <%= token.name %> - <%= token.weight %>
             </li>
           <% end %>
         </ul>

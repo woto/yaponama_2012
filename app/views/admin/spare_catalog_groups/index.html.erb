@@ -1,0 +1,61 @@
+<%= page do |p| %>
+
+  <%= p.breadcrumb do %>
+    <% title_index %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item @meta_title %>
+    <% end %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= title_index %>
+  <% end %>
+
+  <%= p.content do %>
+
+    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary' do %>
+      <%= icon 'plus' %>
+    <% end %>
+
+    <br />
+    <br />
+
+    <%= paginate @resources %>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+            <%= @resource_class.human_attribute_name :id %>
+            </th>
+            <th>
+            <%= @resource_class.human_attribute_name :path %>
+            </th>
+            <th>
+            <%= @resource_class.human_attribute_name :name %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @resources.each do |r| %>
+            <tr>
+              <td>
+                <%= link_to r.id, edit_admin_spare_catalog_group_path(r, return_path: request.fullpath) %>
+              </td>
+              <td>
+                <%= nice_tree(r.path) %>
+              </td>
+              <td>
+                <%= r.name %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <%= paginate @resources %>
+
+  <% end %>
+<% end %>

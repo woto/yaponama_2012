@@ -85,6 +85,7 @@ module ProductsSearch
 
       end
 
+
       if @formatted_data.blank?
         render :status => 404 and return
       else
