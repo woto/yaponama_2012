@@ -17,6 +17,8 @@
 *.swo
 *.swp
 
+.env
+
 /public/sitemap*
 /public/data
 /public/assets-production
