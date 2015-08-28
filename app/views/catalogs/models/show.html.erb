@@ -38,7 +38,7 @@
 
           <div class="tree">
             <ul>
-              <%= build_full_tree(SpareCatalogGroup.arrange, @spare_catalogs.reject(&:special?), -> (spare_catalog) { link_to(safe_join([spare_catalog.name, hidden(" на #{@brand.name} #{@model.name}"), content_tag(:small, " (#{spare_catalog.count} шт.)", class: 'text-muted')]), category_model_path(spare_catalog, @model)) }) %>
+              <%= build_full_tree(SpareCatalogGroup.arrange(order: :name), @spare_catalogs.reject(&:special?), -> (spare_catalog) { link_to(safe_join([spare_catalog.name, hidden(" на #{@brand.name} #{@model.name}"), content_tag(:small, " (#{spare_catalog.count} шт.)", class: 'text-muted')]), category_model_path(spare_catalog, @model)) }) %>
             </ul>
           </div>
 

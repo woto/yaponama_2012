@@ -48,7 +48,7 @@ class PriceMate
   end
 
   def self.find_a_category(titles)
-    catalog = SpareCatalog.
+    SpareCatalog.
       select('spare_catalogs.*').
       joins(:spare_catalog_tokens).
       references(:spare_catalog_tokens).
@@ -76,7 +76,7 @@ class PriceMate
         end
 
         if info.blank? || ( info.present? && !info.fix_spare_catalog )
-          find_a_category(mf_scope[:titles].keys.join(' '))
+          catalog = find_a_category(mf_scope[:titles].keys.join(' '))
         end
 
         if info.present?

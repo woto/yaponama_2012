@@ -34,13 +34,11 @@
             <% end %>
           </ol>
 
-          <hr />
-
-          <ol id="brands-show-catalogs">
-            <% @spare_catalogs.reject(&:special?).each do |spare_catalog| %>
-              <li data-clickable-object> <%= link_to safe_join([content_tag(:strong, spare_catalog.name), hidden(" #{@brand.name}")]), category_path(spare_catalog, "q[brand_id_eq_any][]" => @brand.id), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{spare_catalog.count}&nbsp;шт.)</small>".html_safe %></li>
-            <% end %>
-          </ol>
+          <div class="tree">
+            <ul>
+              <%= build_full_tree(SpareCatalogGroup.arrange(order: :name), @spare_catalogs.reject(&:special?), -> (spare_catalog) { link_to safe_join([spare_catalog.name, hidden(" #{@brand.name}"), content_tag(:small, " (#{spare_catalog.count} шт.)", class: 'text-muted')]), category_path(spare_catalog, "q[brand_id_eq_any][]" => @brand.id) }) %>
+            </ul>
+          </div>
 
         <% end %>
       <% end %>

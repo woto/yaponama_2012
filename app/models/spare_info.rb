@@ -13,7 +13,7 @@ class SpareInfo < ActiveRecord::Base
 
   has_many :spare_info_phrases, dependent: :destroy
   validates :spare_info_phrases, presence: true
-  accepts_nested_attributes_for :spare_info_phrases
+  accepts_nested_attributes_for :spare_info_phrases, allow_destroy: true
 
   #before_validation on: :create do
   #  unless spare_info_phrase

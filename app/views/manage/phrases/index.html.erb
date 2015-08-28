@@ -107,6 +107,7 @@
              <th> <%= sort_link(@q, :id) %> </td>
              <th> <%= sort_link(@q, :spare_info_id) %> </td>
              <th> Картинки </th>
+             <th> . </td>
              <th> <%= sort_link(@q, :catalog_number) %> </td>
              <th> <%= sort_link(@q, :spare_info_catalog_number) %> </td>
              <th> <%= sort_link(@q, :spare_info_brand_name) %> </td>
@@ -133,6 +134,7 @@
                    <% end %>
                  </td>
 
+                 <td><%= phrase.spare_info.spare_catalog.to_label %></td>
                  <td><%= phrase.catalog_number %></td>
                  <td><%= phrase.spare_info.catalog_number %></td>
                  <td><%= phrase.spare_info.brand.name %></td>
