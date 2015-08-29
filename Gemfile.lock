@@ -45,7 +45,7 @@ GIT
 
 GIT
   remote: git://github.com/woto/ckpages.git
-  revision: 56071104706adcf89f97fa50197ee6f9c923cfe6
+  revision: 8a7fc2ffb068356eff52352bdbad760afd12a564
   specs:
     ckpages (0.0.3)
       bootstrap-sass
