@@ -19,32 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
- # TODO переезд, закомментировал
- #every 5.minutes do
- #  rake "app:notify"
- #end
-
- # TODO переезд, уже было закомментировано
- #every 10.minute do
- #  command "cd #{path}/system/ && node ./static_builder.js >> #{path}/log/static_builder.log"
- #end
-
- # TODO переезд, закомментировал
- #every 10.minute do
- #  command "cd #{path}/system/ && $(lockfile -r 0 ./static_builder.lock) || exit 1 && $(which node) ./static_builder.js >> #{path}/log/static_builder.log && $(rm -f ./static_builder.lock)"
- #end
-
- # TODO переезд, закомментировал
- #every 1.day do
- # rake "app:clear_old_sessions"
- #end
-
- # TODO переезд, закомментировал
- #every 1.day do
- #  rake "app:clear_old_search_histories"
- #end
-
- every 1.day do
+ every 1.week do
   rake "sitemap:refresh"
  end
 

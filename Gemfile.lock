@@ -167,6 +167,9 @@ GEM
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
     erubis (2.7.0)
+    exception_notification (4.1.1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     execjs (2.6.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
@@ -466,6 +469,7 @@ DEPENDENCIES
   discourse_api!
   discourse_static_assets!
   dotenv-rails
+  exception_notification
   font-awesome-sass
   hiredis (~> 0.4.5)
   htmlentities
