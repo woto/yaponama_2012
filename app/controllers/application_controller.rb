@@ -51,6 +51,8 @@ class ApplicationController < ActionController::Base
     render "grid_modal_filters", :layout => false
   end
 
+  include ErrorHandling
+
   private
 
   #def set_cache_buster
