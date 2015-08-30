@@ -152,4 +152,3 @@ gem 'ckpages', github: 'woto/ckpages'
 #gem 'ckpages', path: '../ckpages'
 
 gem 'dotenv-rails'
-gem 'exception_notification'
