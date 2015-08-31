@@ -113,7 +113,7 @@
                               <td> <%= raw days_decorator offer[:max_days] %> </td>
                               <td> <%= raw count_decorator offer[:count] %> </td>
                               <td>
-                                <% options = {rel: "tooltip", title: (offer[:tech] if current_user.seller?), class: "btn btn-#{default_show ? 'success' : 'success'} buy-button"} %>
+                                <% options = {rel: "tooltip", title: (offer[:tech] if current_user && current_user.seller?), class: "btn btn-#{default_show ? 'success' : 'success'} buy-button"} %>
                                 <% options.merge!(disabled: 'disabled') if nalichie %>
                                 <%= buy_button offer, catalog_number, manufacturer, short_name, long_name, options do %>
                                   <%= nalichie ? 'Звоните' : 'Купить' %>
@@ -232,7 +232,7 @@
 
               </div>
 
-              <% if @current_user.seller? %>
+              <% if current_user && current_user.seller? %>
                 <div class="top-space-lg">
                   <% if mf_scope[:info].present? %>
                     <%# Описание %>
@@ -281,6 +281,5 @@
       <% end %>
     <% end %>
 
-    <%# render 'poll' %>
   </div>
 <% end %>

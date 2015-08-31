@@ -1,6 +1,6 @@
 window.Application ||= {}
 
-format_result = (data) -> 
+format_result = (data) ->
   if data.new?
     "Создать: " + data.text.toString().toUpperCase()
   else
@@ -14,9 +14,6 @@ format_selection = (data) ->
   data.text.toString().toUpperCase()
 
 $ ->
-  Application.initSelect2()
-
-$(document).on 'page:load', ->
   Application.initSelect2()
 
 # TODO позже разобраться, когда начну делать подгрузку фильтров через ajax
@@ -61,7 +58,7 @@ Application.initSelect2 = ->
     #minimumInputLength: 1
     query: (options) ->
 
-      params = 
+      params =
         page: options.page
         name: options.term
         is_brand: $(options.element).data('is-brand')

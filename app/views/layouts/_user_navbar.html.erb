@@ -41,6 +41,7 @@
               <li class="divider"></li>
               <li class="dropdown-header">Если вам необходимо передать номера<br /> деталей, фотографию, VIN код и тд, <br />то рекомендуем воспользоваться чатом.</li>
               <li>
+                <%# TODO talk %>
                 <%= link_to "Онлайн консультант", '#', class: 'talk-show link' %>
               </li>
           <% end %>
@@ -49,7 +50,7 @@
         <li class="<%= highlight_active([:controller => '/products', :status => 'incart']) %>">
           <%= link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do %>
             <%= icon 'shopping-cart' %> 
-            <% count = current_user.products.where(:status => 'incart').count %>
+            <% count = current_user && current_user.products.where(:status => 'incart').count || 0 %>
             Корзина <span id="products_incart" class="badge"><%= count if count > 0 %></span>
           <% end %>
         </li>
@@ -58,7 +59,7 @@
 
           <%= dd.toggle do %>
             <%= icon 'user' %>
-            <% if current_user.role != 'guest' %>
+            <% if current_user && current_user.role != 'guest' %>
               <span class="hidden-sm"><%= current_user.name %></span>
             <% else %>
               Вход
@@ -66,7 +67,7 @@
           <% end %>
 
           <%= dd.menu do %>
-            <% if current_user.role == 'guest' %>
+            <% if !current_user || current_user.role == 'guest' %>
               <li> <%= link_to "Вход на сайт", main_app.login_path %> </li>
               <li> <%= link_to "Регистрация", main_app.register_path %> </li>
               <%= divider %>

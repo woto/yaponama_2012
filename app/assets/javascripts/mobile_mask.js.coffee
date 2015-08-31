@@ -4,6 +4,3 @@ $(document).on 'update-mobile-mask', ->
 
 $ ->
   $(document).trigger 'update-mobile-mask'
-
-$(document).on 'page:update', (event) ->
-  $(document).trigger 'update-mobile-mask'

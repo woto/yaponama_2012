@@ -307,7 +307,7 @@ module ApplicationHelper
       end
 
       if flag
-        if ['new', 'edit', 'show'].include? params[:action]
+        unless params[:action] == 'index'
           str3 = capture do 
             add = :index if ActiveSupport::Inflector.pluralize(@resource_class.to_s.underscore).eql? @resource_class.to_s.underscore
             Breadcrumb.new(self).item(t("helpers.titles.#{@resource_class.to_s.underscore}.index"), 
@@ -385,12 +385,12 @@ module ApplicationHelper
 
     d.get_posts(1) do |post, link_to_edit|
       @meta_title_lead << post
-      if @current_user.seller?
+      if current_user && current_user.seller?
         @meta_title_lead << link_to("Редактировать вступление", link_to_edit, class: 'btn btn-warning')
       end
     end
 
-    if @current_user.seller?
+    if current_user && current_user.seller?
       @meta_title_lead << " "
       @meta_title_lead << link_to("Добавить вступление", d.link_to_new, class: 'btn btn-warning')
     end
@@ -410,11 +410,11 @@ module ApplicationHelper
             end)
             concat(panel.body do
               concat post
-              concat link_to('Редактировать статью', link, class: 'btn btn-warning') if @current_user.seller?
+              concat link_to('Редактировать статью', link, class: 'btn btn-warning') if current_user && current_user.seller?
             end)
           end)
         end
-        concat link_to('Новая статья', discourse.link_to_new, class: 'btn btn-warning') if @current_user.seller?
+        concat link_to('Новая статья', discourse.link_to_new, class: 'btn btn-warning') if current_user && current_user.seller?
       end
     end
   end

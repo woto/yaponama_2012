@@ -152,3 +152,4 @@ gem 'ckpages', github: 'woto/ckpages'
 #gem 'ckpages', path: '../ckpages'
 
 gem 'dotenv-rails'
+gem 'postgres_ext'

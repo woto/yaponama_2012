@@ -68,7 +68,9 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :global_and_admin do
-    resources :bots, concerns: [:gridable]
+    resources :bots do
+      get :preview, on: :member
+    end
     resources :spare_infos, concerns: [:gridable, :transactionable, :searchable]
     resources :spare_replacements, concerns: [:gridable]
   end
@@ -88,10 +90,6 @@ Yaponama2012::Application.routes.draw do
     resources :faqs, only: [:index]
     resources :news, only: [:index]
     resources :deliveries
-  end
-
-  concern :somebody_and_admin_somebody do
-    resources :pings
   end
 
   resources :tests
@@ -120,10 +118,6 @@ Yaponama2012::Application.routes.draw do
     end
   end
 
-
-  concern :talkable do
-    resources :talks
-  end
 
   concern :cashable do
     resource :cashes, :only => [:new, :create, :show]
@@ -268,7 +262,6 @@ Yaponama2012::Application.routes.draw do
     concerns :global_and_admin
     concerns :only_admin
 
-    concerns :talkable
     concerns :accountable
 
     namespace :deliveries do
@@ -304,7 +297,6 @@ Yaponama2012::Application.routes.draw do
       #end
       concerns :cashable
 
-      concerns :talkable
     end
 
     concerns :profileable
@@ -320,7 +312,6 @@ Yaponama2012::Application.routes.draw do
     resources :phrases
 
     resources :users do
-      concerns :somebody_and_admin_somebody
       concerns :aaa
 
       concerns :accountable
@@ -342,7 +333,6 @@ Yaponama2012::Application.routes.draw do
       delete :logout_from_all_places, on: :member
 
 
-      concerns :talkable
     end
 
 
@@ -368,7 +358,6 @@ Yaponama2012::Application.routes.draw do
       end
     end
 
-    concerns :somebody_and_admin_somebody
     concerns :accountable
     concerns :profileable
     #concerns :productable
@@ -380,7 +369,6 @@ Yaponama2012::Application.routes.draw do
     #get :password, :on => :member, action: "passwords#edit"
     #patch :password, :on => :member, action: "passwords#update"
     delete :logout_from_all_places
-    concerns :talkable
     post 'pretype', action: 'users#update'
   end
   resources :uploads do
@@ -432,9 +420,6 @@ Yaponama2012::Application.routes.draw do
 
   # OPENSEARCH.XML
   get 'opensearch.xml' => "opensearch_xml#index"
-
-  # STATS
-  resources :stats, :only => [:create]
 
   post 'robokassa/result' => 'robokassa#result'
   post 'robokassa/success' => 'robokassa#success'

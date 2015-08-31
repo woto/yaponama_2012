@@ -1,51 +1,28 @@
 class Bot < ActiveRecord::Base
-  include BelongsToCreator
-  #include ActiveRecord::ConnectionAdapters::PostgreSQLColumn::Cast
+
+  scope :matched_records_by_remote_ip, -> (remote_ip) {where(arel_table[:inet].contains_or_equals(remote_ip).or(arel_table[:inet].eq(nil)))}
+  scope :matched_records_by_user_agent, -> (user_agent) {where(arel_table[:user_agent].eq(user_agent.to_s).or(arel_table[:user_agent].eq(nil)))}
+
+  validates :inet, presence: true, if: -> {user_agent.blank?}
+  validates :user_agent, presence: true, if: -> {inet.blank?}
 
   validate :inet do |record|
-    if inet.present?
-      record.errors.add(:inet, nil) if (IPAddr.new(inet_before_type_cast) rescue nil).nil?
+    if inet_before_type_cast.present?
+      record.errors.add(:inet, 'not valid ip address') if ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Cidr.new.cast_value(inet_before_type_cast).nil?
     end
+  end
+
+  before_validation do
+    self.user_agent = nil if user_agent.blank?
+    self.inet = nil if inet.blank?
   end
 
   def to_label
-    "#{title} #{user_agent} #{to_inet(inet)} #{comment}"
+    "#{title} #{user_agent} #{cidr}"
   end
 
-  after_save do
-
-    removing_bot
-
-    if inet.present?
-      Somebody.where("remote_ip <<= ?", to_inet(inet)).update_all(bot: true)
-    end
-
-    if user_agent.present?
-      Somebody.where(Somebody.arel_table[:user_agent].matches("%#{user_agent}%")).update_all(bot: true)
-    end
-
-  end
-
-  after_destroy do
-    removing_bot
-  end
-
-  def to_inet(value)
-    "#{value.to_s}/#{value.instance_variable_get(:@mask_addr).to_s(2).count('1')}" if value
-  end
-
-  private
-
-  def removing_bot
-
-    if inet_was.present?
-      Somebody.where("remote_ip <<= ?", to_inet(inet_was)).update_all(bot: false)
-    end
-
-    if user_agent_was.present?
-      Somebody.where(Somebody.arel_table[:user_agent].matches("%#{user_agent_was}%")).update_all(bot: false)
-    end
-
+  def cidr
+    ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Cidr.new.type_cast_for_database inet
   end
 
 end

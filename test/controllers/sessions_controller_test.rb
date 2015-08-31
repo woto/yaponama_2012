@@ -98,7 +98,6 @@ class SessionsControllerTest < ActionController::TestCase
     email = emails :sending1
     name = names :sending1
     passport = passports :sending1
-    talk = talks :sending1
     postal_address = postal_addresses :sending1
     company = companies :sending1
     car = cars :sending1
@@ -115,7 +114,6 @@ class SessionsControllerTest < ActionController::TestCase
     assert_equal receiving1, email.reload.somebody
     assert_equal receiving1, name.reload.somebody
     assert_equal receiving1, passport.reload.somebody
-    assert_equal receiving1, talk.reload.somebody
     assert_equal receiving1, postal_address.reload.somebody
     assert_equal receiving1, company.reload.somebody
     assert_equal receiving1, car.reload.somebody

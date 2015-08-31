@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class Somebody < ActiveRecord::Base
 
   include BelongsToCreator
@@ -16,23 +14,9 @@ class Somebody < ActiveRecord::Base
 
   #validates :profile, presence: true, unless: -> { role == 'guest' } (Пользователь может входить с помощью социальных сетей не имея профиля в начала)
 
-  has_many :talks, inverse_of: :somebody
-  accepts_nested_attributes_for :talks
-
-  has_many :talks_where_i_am_addresse, class_name: "Talk"
-
   # TODO сделать.
   #has_many :brands
   #has_many :models
-
-  has_many :stats, :dependent => :destroy, inverse_of: :somebody, after_add: :save_first_referrer
-
-  def save_first_referrer(stat)
-    if stats.length == 1
-      self.first_referrer = stat.referrer
-      save!
-    end
-  end
 
   [:name, :phone, :email, :passport, :postal_address, :car, :company, :order, :profile, :product].each do |table_name|
     has_many "#{table_name}_transactions".to_sym, :inverse_of => :somebody
@@ -91,6 +75,12 @@ class Somebody < ActiveRecord::Base
   has_one :account, :dependent => :destroy, inverse_of: :somebody
   #validates :account, :presence => true
 
+  concerning :Bot do
+    included do
+      scope :matched_records_by_remote_ip, -> (cidr) {where(arel_table[:remote_ip].contained_within_or_equals(cidr))}
+      scope :matched_records_by_user_agent, -> (user_agent) {where(arel_table[:user_agent].eq(user_agent))}
+    end
+  end
 
   def pretty_id
     id.to_s.scan(/.{2}|.+/).join("-")

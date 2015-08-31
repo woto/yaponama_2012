@@ -1,0 +1,8 @@
+<%= simple_form_for @resource, url: polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :title %>
+  <%= f.input :user_agent %>
+  <%= f.input :inet, as: 'string' %>
+  <%= f.input :block %>
+  <%= f.buttons %>
+<% end %>

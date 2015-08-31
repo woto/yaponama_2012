@@ -7,7 +7,6 @@ class BuyButtonTest < ActionDispatch::IntegrationTest
   test 'Проверяем правильность заполнения полей при нажатии на кнопке Купить от buyer' do
     Capybara.reset!
     visit '/'
-    create_cookie "talk", "0"
     visit '/user/products/new/?catalog_number=1111111111'
 
     common()
@@ -17,7 +16,6 @@ class BuyButtonTest < ActionDispatch::IntegrationTest
   test 'Проверяем кнопку Купить от лица seller' do
     Capybara.reset!
     visit '/'
-    create_cookie "talk", "0"
 
     auth('+7 (111) 111-11-11', '1111111111')
     otto = somebodies(:otto)

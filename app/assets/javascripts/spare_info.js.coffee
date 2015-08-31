@@ -1,4 +1,4 @@
-format_result = (data) -> 
+format_result = (data) ->
   if data.new?
     "Создать: " + data.text.toString().toUpperCase()
   else
@@ -11,7 +11,7 @@ format_result = (data) ->
 format_selection = (data) ->
   data.text.toString().toUpperCase()
 
-$(document).on 'page:change', ->
+$ ->
   $("[rel='select2-spare-info']").select2
     #placeholder: ''
     allowClear: true
@@ -26,7 +26,7 @@ $(document).on 'page:change', ->
     #minimumInputLength: 1
     query: (options) ->
 
-      params = 
+      params =
         page: options.page
         name: options.term
         is_brand: $(options.element).data('is-brand')

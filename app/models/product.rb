@@ -26,7 +26,6 @@ class Product < ActiveRecord::Base
   #attr_accessor :_destroy
 
   validates :catalog_number, :presence => true
-
   belongs_to :brand
   validates :brand, :presence => true
 
@@ -261,12 +260,9 @@ class Product < ActiveRecord::Base
   before_save do
     self.cached_order = order.token if order
   end
-
-
   def to_label
     "#{catalog_number} (#{brand.name})"
   end
-
   after_create if: "status == 'incart'" do
     SellerNotifierMailer.incart(self).deliver_later
   end
@@ -276,5 +272,4 @@ class Product < ActiveRecord::Base
       errors[:brand] << 'Нельзя указывать производителя, у которого есть родитель.'
     end
   end
-
 end

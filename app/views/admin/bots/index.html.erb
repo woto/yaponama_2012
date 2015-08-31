@@ -1,0 +1,57 @@
+<%= page do |p| %>
+
+  <%= p.breadcrumb do %>
+    <% title_index %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item @meta_title %>
+    <% end %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
+
+    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary', style: "vertical-align: top" do %>
+      <%= icon 'plus' %>
+    <% end %>
+
+    <%= paginate @resources %>
+
+    <div class="table-responsive top-space bottom-space">
+      <table class="table">
+        <thead>
+          <tr>
+            <th> <%= @resource_class.human_attribute_name :id %> </th>
+            <th> <%= @resource_class.human_attribute_name :title %> </th>
+            <th> <%= @resource_class.human_attribute_name :user_agent %> </th>
+            <th> <%= @resource_class.human_attribute_name :inet %> </th>
+            <th> <%= @resource_class.human_attribute_name :block %> </th>
+            <th> <%= @resource_class.human_attribute_name :created_at %> </th>
+            <th> <%= @resource_class.human_attribute_name :updated_at %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @resources.each do |r| %>
+            <tr>
+              <td>
+                <%= link_to r.id, edit_admin_bot_path(r, return_path: request.fullpath) %> <br />
+                <%= link_to 'Предпросмотр правила', preview_admin_bot_path(r, return_path: request.fullpath) %>
+              </td>
+              <td> <%= r.title %> </td>
+              <td> <%= r.user_agent %> </td>
+              <td> <%= r.inet %> </td>
+              <td> <%= r.block %> </td>
+              <td> <%= l r.created_at %> </td>
+              <td> <%= l r.updated_at %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <%= paginate @resources %>
+
+  <% end %>
+<% end %>

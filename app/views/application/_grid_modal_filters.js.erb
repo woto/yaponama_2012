@@ -23,8 +23,6 @@
         <%= f.twbs_text_field :"filter_#{column_name}_like" %>
       <%- when :string %>
         <%= f.twbs_text_field :"filter_#{column_name}_like" %>
-      <%- when :ip_address %>
-        <%= f.twbs_text_field :"filter_#{column_name}_ip_address" %>
       <%- when :single_integer %>
         <%= f.twbs_text_field :"filter_#{column_name}_single_integer" %>
       <%- when :number %>

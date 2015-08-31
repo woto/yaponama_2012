@@ -111,15 +111,6 @@ module GridConcern
 
                 @grid.instance_variable_set("@filter_#{column_name}_set", set)
 
-              when :ip_address
-                if params["grid"].try(:key?, "filter_#{column_name}_ip_address")
-                  ip_address = @grid.instance_variable_get("@filter_#{column_name}_ip_address")
-                else
-                  ip_address = old_grid.instance_variable_get("@filter_#{column_name}_ip_address")
-                end
-
-                @grid.instance_variable_set("@filter_#{column_name}_ip_address", ip_address)
-
               when :belongs_to
                 if params["grid"].try(:key?, "filter_#{column_name}_belongs_to")
                   belongs_to = @grid.instance_variable_get("@filter_#{column_name}_belongs_to")
@@ -253,16 +244,6 @@ module GridConcern
               @items = @items.where(arel[column_name.to_sym].matches("%#{like}%"))
               mark_as_filter_enabled(column_name)
             end
-
-          when :ip_address
-
-            ip_address = eval("@grid.filter_#{column_name}_ip_address")
-
-            if ip_address.present?
-              @items = @items.where("? <<= #{column_name}", ip_address)
-              mark_as_filter_enabled(column_name)
-            end
-
 
           when :single_integer
 

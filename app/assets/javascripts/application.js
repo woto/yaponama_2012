@@ -4,7 +4,6 @@
 //  require jquery.ui.all
 //= require jquery_ujs
 //= require bootstrap
-//= require turbolinks
 //= require cocoon
 //= require fastclick/lib/fastclick
 //= require discourse_static_assets
@@ -14,9 +13,6 @@
 //
 //= require autosize/jquery.autosize.min.js
 //= require purl/purl
-//
-//= require nanoScrollerJS/bin/javascripts/overthrow.min
-//= require nanoScrollerJS/bin/javascripts/jquery.nanoscroller.min
 //
 //= require console.log-wrapper/consolelog.min.js
 //= require console.log-wrapper/consolelog.detailprint.min.js
@@ -53,7 +49,6 @@
 // APPLICATION
 //
 //= require common
-//= require stat
 //= require profileables
 //= require mobile_mask
 //= require phone_input
@@ -82,7 +77,6 @@
 
 //= require items_progress
 //= require 'auth'
-//= require 'tests'
 //= require 'jquery.editableHighlight'
 
 //= require 'jquery-cookie/src/jquery.cookie'
@@ -95,6 +89,3 @@
 //= require spare_catalog
 //= require spare_info
 //= require image_view
-//
-//= require pings
-//

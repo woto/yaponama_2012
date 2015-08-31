@@ -13,28 +13,19 @@
 
   <%= p.content do %>
 
-    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary' do %>
+    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary', style: "vertical-align: top" do %>
       <%= icon 'plus' %>
     <% end %>
 
-    <br />
-    <br />
-
     <%= paginate @resources %>
 
-    <div class="table-responsive">
+    <div class="table-responsive top-space bottom-space">
       <table class="table">
         <thead>
           <tr>
-            <th>
-            <%= @resource_class.human_attribute_name :id %>
-            </th>
-            <th>
-            <%= @resource_class.human_attribute_name :path %>
-            </th>
-            <th>
-            <%= @resource_class.human_attribute_name :name %>
-            </th>
+            <th> <%= @resource_class.human_attribute_name :id %> </th>
+            <th> <%= @resource_class.human_attribute_name :path %> </th>
+            <th> <%= @resource_class.human_attribute_name :name %> </th>
           </tr>
         </thead>
         <tbody>

@@ -1,12 +1,10 @@
 defaults: &defaults
   share_buttons: true
-  send_pings: true
   suppress_exceptions: true
 
 development:
   <<: *defaults
   share_buttons: false
-  send_pings: false
   suppress_exceptions: false
 
 test:

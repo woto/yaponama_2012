@@ -72,16 +72,8 @@ module Grid::User
         :type => :boolean
       }
 
-      columns_hash['bot'] = {
-        :type => :boolean
-      }
-
       columns_hash['logout_from_other_places'] = {
         :type => :boolean
-      }
-
-      columns_hash['chat'] = {
-        :type => :string
       }
 
       columns_hash['profile_id'] = {
@@ -92,35 +84,15 @@ module Grid::User
         :type => :string
       }
 
-      columns_hash['cached_location'] = {
+      columns_hash['location'] = {
         :type => :string
       }
 
-      columns_hash['cached_title'] = {
-        :type => :string
-      }
-
-      columns_hash['cached_referrer'] = {
+      columns_hash['referrer'] = {
         :type => :string
       }
 
       columns_hash['first_referrer'] = {
-        :type => :string
-      }
-
-      columns_hash['cached_screen_width'] = {
-        :type => :string
-      }
-
-      columns_hash['cached_screen_height'] = {
-        :type => :string
-      }
-
-      columns_hash['cached_client_width'] = {
-        :type => :string
-      }
-
-      columns_hash['cached_client_height'] = {
         :type => :string
       }
 
@@ -137,22 +109,6 @@ module Grid::User
         :type => :number
       }
 
-      columns_hash['stats_count'] = {
-        :type => :number
-      }
-
-      columns_hash['cached_talk'] = {
-        :type => :string
-      }
-
-      columns_hash['total_talks'] = {
-        :type => :number
-      }
-
-      columns_hash['unread_talks'] = {
-        :type => :number
-      }
-
       columns_hash['created_at'] = {
         :type => :date
       }
@@ -166,13 +122,10 @@ module Grid::User
 
     def set_preferable_columns
       @grid.visible_id = '1'
-      @grid.visible_bot = '1'
       @grid.visible_user_agent = '1'
-      @grid.visible_stats_count = '1'
-      @grid.visible_cached_location = '1'
-      @grid.visible_cached_title = '1'
+      @grid.visible_location = '1'
+      @grid.visible_remote_ip = '1'
       @grid.visible_updated_at = '1'
-
     end
 
   end

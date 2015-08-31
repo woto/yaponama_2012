@@ -13,7 +13,6 @@ first_admin:
   ipgeobase_names_depth_cache: 
   accept_language: 
   user_agent: 
-  cached_russian_time_zone_auto_id: 33
   remote_ip: 
   notes: 
   notes_invisible: 
@@ -33,7 +32,6 @@ first_user:
   order_rule: all
   # password: 1231231231
   password_digest: $2a$10$90bFORwosYEHSW28BqmF8eacXIBXwLuZ1P9pp0.bEpVp5c2FrgLI.
-  cached_russian_time_zone_auto_id: 4
   profile: first_user
   cached_profile: '{"names":[{"surname":"","name":"Пользователь","patronymic":""}],"phones":[{"value":"+7 (123) 123-12-31"}],"emails":[{"value":"first_user_email@example.com"}],"passports":[]}'
 
@@ -49,7 +47,6 @@ stan:
   logout_from_other_places: false
   # password: 3333333333
   password_digest: $2a$10$CDmB19dFAPadZyy/CS8rQ.kkTbVUv8XvbXMfEV7OgkrACk3Ts6kma
-  cached_russian_time_zone_auto_id: 9
   profile: stan
   cached_profile: '{"names":[{"surname":"","name":"Стэн","patronymic":""}],"phones":[{"value":"+7 (333) 333-33-33"}],"emails":[],"passports":[]}'
 
@@ -65,7 +62,6 @@ fry:
   logout_from_other_places: false
   # password: 3213213213
   password_digest: $2a$10$c7lned5SgUsMMeCjsIqDpuLJKTQlho8Xt/r7qnEBIBSUBEtsHRO6.
-  cached_russian_time_zone_auto_id: 9
   profile: fry
   cached_profile: '{"names":[{"surname":"","name":"Фрай","patronymic":""}],"phones":[{"value":"+7 (321) 321-32-13"}],"emails":[],"passports":[]}'
 
@@ -83,7 +79,6 @@ otto:
   password_digest: $2a$10$wQ1IG8ZsZX0PbzpDxWSgJ.qyB9XOvKceIckyzwEESavUNWGQZapvW
   password_reset_token: 55555
   password_reset_sent_at: <%= 1.second.ago.to_s(:db) %>
-  cached_russian_time_zone_auto_id: 5
   profile: otto
   cached_profile: '{"names":[{"surname":"","name":"Отто","patronymic":""}],"phones":[{"value":"+7 (666) 666-66-66"},{"value":"8-888-888-88-88"},{"value":"+7 (555) 555-55-55"},{"value":"+7 (111) 111-11-11"}],"emails":[{"value":"fake@example.com"},{"value":"foo@example.com"}],"passports":[]}'
 
@@ -99,11 +94,8 @@ mark:
   logout_from_other_places: false
   # password: 4444444444
   password_digest: $2a$10$3.PKll4wcX7cf2oDKkRZBOCdDDvHeO3XwTCwHBgHxQifFery8Fo5W
-  cached_russian_time_zone_auto_id: 12
   profile: mark
   cached_profile: '{"names":[{"surname":"","name":"Марк","patronymic":""}],"phones":[{"value":"+7 (444) 444-44-44"}],"emails":[{"value":"mark@example.com"}],"passports":[]}'
-  total_talks: 5
-  unread_talks: 4
 
 mike:
   type: User
@@ -165,7 +157,6 @@ anton:
   logout_from_other_places: false
   # password: 1122334455
   password_digest: $2a$10$iHUevIXm7uoYSWpTWLZf3O5bz0yiEzDGDFh22tkLQ9jmhQPnyNZPy
-  cached_russian_time_zone_auto_id: 9
   profile: anton
   cached_profile: '{"names":[{"surname":"Чехов","name":"Антон","patronymic":"Павлович"}],"phones":[{"value":"+7 (112) 233-44-55"},{"value":"+7 (554) 433-22-11"}],"emails":[],"passports":[]}'
 
@@ -251,8 +242,6 @@ petr:
   order_rule: all
   profile: petr
   cached_profile: '{"names":[{"surname":"Петров","name":"Пётр","patronymic":"Петрович"}],"phones":[{"value":"+7 (222) 222-22-22"}],"emails":[{"value":"seven@example.com"}],"passports":[]}'
-  total_talks: 3
-  unread_talks: 3
 
 sidor:
   type: User
@@ -268,8 +257,6 @@ sidor:
   profile: sidor
   cached_profile: '{"names":[{"surname":"Сидоров","name":"Сидор","patronymic":"Сидорович"}],"phones":[{"value":"+7 (000) 000-00-00"}],"emails":[],"passports":[]}'
   logout_from_other_places: false
-  total_talks: 3
-  unread_talks: 3
 
 max:
   type: User
@@ -283,7 +270,6 @@ max:
   logout_from_other_places: true
   # password: maxmax
   password_digest: "$2a$10$mbYYVLe03awy7Oik4LlWs.md9.qCIaL6cQ/c2dw9gH95X7SjSG6xW"
-  cached_russian_time_zone_auto_id: 9
 
 sending1:
   type: User
@@ -296,7 +282,6 @@ sending1:
   logout_from_other_places: false
   # password: sending1
   password_digest: "$2a$10$7rY9..jpSFZoBufCPjFc6.FFG2ZeWx0UcrrmBvBVUtdcqwsbAWg7C"
-  cached_russian_time_zone_auto_id: 9
   profile: sending1
   cached_profile: '{"names":[{"surname":"sending1","name":"sending1","patronymic":"sending1"}],"phones":[{"value":"sending1"}],"emails":[{"value":"sending1@example.com"}],"passports":[{"seriya":"sending1","nomer":"sending1","mesto_rozhdeniya":"sending1"}]}'
 
@@ -311,7 +296,6 @@ receiving1:
   logout_from_other_places: false
   # password: receiving1
   password_digest: "$2a$10$HwSg7Aw8NXNHkk8D/KCL.eqVtB5..ZgSqLwFWbGguF1DceI.zRvH."
-  cached_russian_time_zone_auto_id: 9
   profile: receiving1
   cached_profile: '{"names":[{"surname":"receiving1","name":"receiving1","patronymic":"receiving1"}],"phones":[{"value":"receiving1"}],"emails":[{"value":"receiving1@example.com"}],"passports":[{"seriya":"receiving1","nomer":"receiving1","mesto_rozhdeniya":"receiving1"}]}'
 
@@ -329,29 +313,8 @@ alena:
   password_digest: $2a$10$wQ1IG8ZsZX0PbzpDxWSgJ.qyB9XOvKceIckyzwEESavUNWGQZapvW
   password_reset_token: 55555
   password_reset_sent_at: <%= 1.second.ago.to_s(:db) %>
-  cached_russian_time_zone_auto_id: 5
   profile: alena
   cached_profile: '{"names":[{"surname":"","name":"Алена","patronymic":""}],"phones":[],"emails":[{"value":"alena@example.com"}],"passports":[]}'
-
-wrong_cached_russian_time_zone_auto_id:
-  type: User
-  discount: 0.0
-  prepayment: 20.0
-  role: guest
-  auth_token: ZxzR9NGl0nMPaV6tQIWb6O
-  cached_russian_time_zone_auto_id: 33
-  order_rule: all
-  logout_from_other_places: false
-
-wrong_cached_russian_time_zone_auto_id_2:
-  type: User
-  discount: 0
-  prepayment: 100
-  role: guest
-  auth_token: F0w8aF28eoqmbOYW9HSRBE
-  cached_russian_time_zone_auto_id: 1
-  order_rule: all
-  logout_from_other_places: true
 
 michael:
   type: User
@@ -365,6 +328,5 @@ michael:
   logout_from_other_places: false
   # password: 234234
   password_digest: $2a$10$IiL09DPiy.KiDrdtc4yMB.Jj0/GFjVKgm3LYK0s6dgnldamIJlljO
-  cached_russian_time_zone_auto_id: 9
   profile: stan
   cached_profile: '{"names":[{"surname":"","name":"Michael","patronymic":""}],"phones":[{"value":"+7 (234) 234-23-23"}],"emails":[],"passports":[]}'

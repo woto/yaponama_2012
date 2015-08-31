@@ -26,15 +26,6 @@ module SessionsPasswordResetsCommon
         profile.save!
       end
 
-      # Переносим диалоги
-      old.talks.each do |talk|
-        if talk.creator == old
-          talk.creator = new
-        end
-        talk.somebody = new
-        talk.save!
-      end
-
       # Переносим имена
       old.names.each do |name|
         name.somebody = new
@@ -93,25 +84,11 @@ module SessionsPasswordResetsCommon
 
       ##################
       
-      # TODO Разобраться с counters
-      #User.reset_counters(new.id, :talks)
-      #new.total_talks = new.talks.length
-      #new.unread_talks = new.talks.where(read: false).length
-      #
-      #
-      #
       #reset_session
       #session[:user_id] = authenticated.id
       # TODO Сделал так чтобы если пользователь зарегистрирован в системе, значит он имеет какие-то привилении
       # соответственно старный гостевой аккаунт не нужен и 'он не хотел под ним работать на сайте'
  
-      # Переносим историю
-      old.stats.each do |stat|
-        stat.somebody = new
-        stat.save!
-      end
-
-
       if new.changes.present?
         binding.pry
       end

@@ -1,0 +1,18 @@
+<%= page do |p| %>
+
+  <%= p.breadcrumb do %>
+    <% title_edit %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item @meta_title %>
+    <% end %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
+    <%= render :partial => "form" %>
+  <% end %>
+
+<% end %>

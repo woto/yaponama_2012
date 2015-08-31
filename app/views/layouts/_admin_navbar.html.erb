@@ -150,8 +150,6 @@
 
       <ul class="nav navbar-nav navbar-right">
 
-        <%= render 'bell' %>
-
         <%= dropdown do |dd| %>
           <%= dd.toggle do %>
             <%= icon 'envelope' %>
@@ -177,13 +175,9 @@
         <%= dropdown do |dd| %>
           <%= dd.toggle do %>
             <%= icon 'user' %>
-            <% if current_user.role != 'guest' %>
-              <span class="hidden-sm">
-                <%= current_user.name %>
-              </span>
-            <% else %>
-              Личный кабинет
-            <% end %>
+            <span class="hidden-sm">
+              <%= current_user.name %>
+            </span>
             <%= caret %>
           <% end %>
           <%= dd.menu do %>

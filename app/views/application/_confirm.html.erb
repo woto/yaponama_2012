@@ -2,7 +2,7 @@
 
   <% confirmed_any = [] %>
 
-  <% current_user.profiles.each do |profile| %>
+  <% current_user && current_user.profiles.each do |profile| %>
 
     <% profile.phones.where(mobile: true).each do |phone| %>
       <% if !phone.confirmed? && phone.persisted? %>
@@ -31,7 +31,7 @@
 
   <% end %>
 
-  <% if confirmed_any.any? && current_user.role == 'guest' %>
+  <% if current_user && confirmed_any.any? && current_user.role == 'guest' %>
     Отлично!
     <%= alert_link_to "Придумайте себе пароль", edit_register_path(return_path: request.fullpath, with: confirmed_any.first) %>
     чтобы завершить регистрацию и иметь возможность входить с других компьютеров.

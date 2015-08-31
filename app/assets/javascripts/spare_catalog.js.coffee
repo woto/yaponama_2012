@@ -1,4 +1,4 @@
-format_result = (data) -> 
+format_result = (data) ->
   if data.new?
     "Создать: " + data.text.toString().toUpperCase()
   else
@@ -11,7 +11,7 @@ format_result = (data) ->
 format_selection = (data) ->
   data.text.toString().toUpperCase()
 
-$(document).on 'page:change', ->
+$ ->
   $("[rel='select2-spare_catalog']").select2
     #placeholder: ''
     allowClear: true
@@ -26,9 +26,10 @@ $(document).on 'page:change', ->
     #minimumInputLength: 1
     query: (options) ->
 
-      params = 
+      params =
         page: options.page
-        name: options.term
+        q:
+          name_matches: options.term
 
       zzz = undefined
       zzz = results: []
@@ -41,7 +42,7 @@ $(document).on 'page:change', ->
               text: options.term
               new: true
 
-      $.getJSON "/admin/spare_catalogs/search/?" + $.param(params), (data) ->
+      $.getJSON "/admin/spare_catalogs/?" + $.param(params), (data) ->
 
         data.map (data) ->
           zzz.results.push

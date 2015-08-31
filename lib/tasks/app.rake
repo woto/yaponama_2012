@@ -107,13 +107,4 @@ namespace :app do
     ImportSpareInfo.import_spare_info args
   end
 
-  desc 'Отправляем не полученное сообщение на почту/телефон'
-  task :talk_notifier => :environment  do
-    while true do
-      TalkNotifier.talk_notifier
-      puts Time.zone.now
-      sleep 1
-    end
-  end
-
 end

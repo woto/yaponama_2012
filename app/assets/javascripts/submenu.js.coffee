@@ -1,5 +1,4 @@
-$(document).on 'page:update', (event) ->
-
+$ ->
   selector = 'ul.dropdown-menu [data-toggle=dropdown]'
 
   $(selector).on 'click', (event) ->

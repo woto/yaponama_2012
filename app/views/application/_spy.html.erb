@@ -6,12 +6,10 @@
   <% if @somebody.ipgeobase_names_depth_cache? %><li>Регион: <%= @somebody.ipgeobase_names_depth_cache %></li><% end %>
   <% if @somebody.user_agent? %><li>Версия браузера: <%= @somebody.user_agent %></li><% end %>
   <% if @somebody.accept_language? %><li>Язы браузера: <%= @somebody.accept_language %></li><% end %>
-  <% if @somebody.cached_russian_time_zone_auto_id? %><li>Часовой пояс: <%= @somebody.cached_russian_time_zone_auto_id %></li><% end %>
+  <%# TODO time zone %>
   <% if @somebody.remote_ip? %><li>IP адрес: <%= @somebody.remote_ip %></li><% end %>
-  <% if @somebody.stats_count? %><li>Просмотров страниц: <%= @somebody.stats_count %></li><% end %>
-  <% if @somebody.cached_location? %><li>Текущее расположение: <a href="<%= @somebody.cached_location %>"><%= @somebody.cached_location %></a></li><% end %>
-  <% if @somebody.cached_title? %><li>Заголовок страницы: <%= @somebody.cached_title %></li><% end %>
-  <% if @somebody.cached_referrer? %><li>Пришел со страницы: <a href="<%= @somebody.cached_referrer %>"><%= @somebody.cached_referrer %></a></li><% end %>
+  <% if @somebody.location? %><li>Текущее расположение: <a href="<%= @somebody.location %>"><%= @somebody.location %></a></li><% end %>
+  <% if @somebody.referrer? %><li>Пришел со страницы: <a href="<%= @somebody.referrer %>"><%= @somebody.referrer %></a></li><% end %>
   <% if @somebody.first_referrer? %><li>Откуда пришел впервые: <a href="<%= @somebody.first_referrer %>"><%= @somebody.first_referrer %></a></li><% end %>
 </ul>
 

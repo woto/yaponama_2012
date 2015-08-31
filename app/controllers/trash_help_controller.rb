@@ -55,8 +55,6 @@ EOF
       #end
     end
 
-    user_3.ping = Ping.new
-
     #has_one_reflection = User.reflect_on_all_associations(:has_one)
     #has_one_reflection.each do |refl|
     #  user_1_obj = user_1.send(refl.name)

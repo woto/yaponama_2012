@@ -1,9 +1,0 @@
-<% talks = @somebody.talks.order(id: :desc).page(params[:page]) %>
-
-<%= paginate talks %>
-
-<% talks.each do |talk| %>
-  <%= debug talk %>
-<% end %>
-
-<%= paginate talks %>

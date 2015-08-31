@@ -17,11 +17,6 @@
 }
 
 /////////////////////
-
-#unread_talks:empty {
-  @extend .hidden;
-}
-
 #products_incart:empty {
   @extend .hidden;
 }

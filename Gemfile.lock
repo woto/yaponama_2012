@@ -287,12 +287,17 @@ GEM
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
     pg (0.18.1)
+    pg_array_parser (0.0.9)
     pg_search (1.0.0)
       activerecord (>= 3.1)
       activesupport (>= 3.1)
       arel
     polyamorous (1.2.0)
       activerecord (>= 3.0)
+    postgres_ext (2.4.1)
+      activerecord (>= 4.0.0)
+      arel (>= 4.0.1)
+      pg_array_parser (~> 0.0.9)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -492,6 +497,7 @@ DEPENDENCIES
   pg
   pg_search
   poltergeist!
+  postgres_ext
   pry
   pry-doc
   pry-nav

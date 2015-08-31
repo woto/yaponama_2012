@@ -3,7 +3,7 @@ App = exports ? this
 App.toTop = ->
   $("html, body").animate({scrollTop: 0}, 'fast')
 
-$(document).on 'page:update', ->
+$ ->
   $("#slide-top").affix
     offset:
       top: 100

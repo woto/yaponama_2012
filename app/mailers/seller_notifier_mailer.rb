@@ -6,11 +6,6 @@ class SellerNotifierMailer < ApplicationMailer
     "www.#{Rails.application.config_for('application/site')['host']}"
   end
 
-  def email(talk)
-    @talk = talk
-    mail subject: "#{@talk.somebody.to_label} прислал сообщение, #{sitename}"
-  end
-
   def incart product
     @product = product
     mail subject: "#{@product.creator.to_label} поместил товар #{@product.to_label} в корзину, #{sitename}"

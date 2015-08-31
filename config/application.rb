@@ -89,15 +89,6 @@ module Yaponama2012
     # Enable the asset pipeline
     config.assets.enabled = true
 
-    config.talkables = {
-    }
-
-    config.talkables_creation_reason = {
-    }
-
-    config.talk_creation_reason = {
-    }
-
     config.somebody_creation_reason = { 
       'session' => 'Посетил сайт',
       'order' => 'В процессе оформления заказа',
@@ -252,11 +243,6 @@ module Yaponama2012
       'backend' => 'Менеджер',
       'backend' => 'Заполнение профиля',
       'frontend' => 'Заполнение профиля',
-    }
-
-    config.talk_creation_reason = {
-      'email' => 'Прислал e-mail',
-      'chat' => 'Сообщение чата'
     }
 
     config.page_creation_reason = {

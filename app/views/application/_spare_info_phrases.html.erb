@@ -1,7 +1,7 @@
 <% if phrases.any? %>
   <h3 class="top-space-lg">Индекс популярности</h3>
     <% phrases.each do |phrase| %>
-      <% if current_user.seller? %>
+      <% if current_user && current_user.seller? %>
         <%= link_to admin_phrase_path(phrase, return_path: request.fullpath), method: :delete, class: 'btn btn-danger' do %>
           <%= icon 'remove' %>
         <% end %>

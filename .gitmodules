@@ -97,9 +97,6 @@
 [submodule "system/submodules/autosize"]
 	path = system/submodules/autosize
 	url = https://github.com/jackmoore/autosize
-[submodule "system/submodules/nanoScrollerJS"]
-	path = system/submodules/nanoScrollerJS
-	url = https://github.com/jamesflorentino/nanoScrollerJS
 [submodule "./system/submodules/console.log-wrapper"]
 	path = system/submodules/console.log-wrapper
 	url = https://github.com/cpatik/console.log-wrapper.git

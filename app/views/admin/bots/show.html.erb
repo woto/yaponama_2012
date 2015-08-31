@@ -1,0 +1,22 @@
+<%= page do |p| %>
+
+  <%= p.breadcrumb do %>
+    <% title_show %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item @meta_title %>
+    <% end %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
+
+    <%= link_to "Предпросмотр правила #{@resource.to_label}", preview_admin_bot_path(@resource) %>
+    <br />
+    <br />
+    <%= render 'smart_show' %>
+  <% end %>
+
+<% end %>

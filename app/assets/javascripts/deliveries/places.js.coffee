@@ -143,16 +143,9 @@ window.initMap = ->
 
   window.drawingManager = undefined
   selectedShape = undefined
-  initialize();
+  initialize()
 
 
 $ ->
-  if $('#map').length != 0
-    $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry&callback=initMap')
-
-# В свете версии 2.0 (еще не выпущена)
-# Раньше было (до того момента как page:load стал так же вызываться на DOM Ready)
-# $(document).on 'page:change', ->
-$(document).on 'page:load', ->
   if $('#map').length != 0
     $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry&callback=initMap')

@@ -302,28 +302,6 @@ class RegistersControllerTest < ActionController::TestCase
     assert_redirected_to user_path
   end
 
-  test 'Если прохожу регистрацию и неверно заполняю форму, то имя и телефон не должны быть заполнены в форме чата' do
-    put :update, {
-       "user"=>
-        {"profile_attributes"=>
-          {"names_attributes"=>{"0"=>{"name"=>"ИМЯ", "hidden_recreate"=>"1"}},
-           "phones_attributes"=>
-            {"0"=>
-              {"value"=>"+7 (234) 782-34-87",
-               "_mobile"=>"BAhU--8275d15a2146ff217747035d9eea333f14f5defd",
-               "hidden_recreate"=>"1",
-               "_creation_reason"=>"BAhJIg1yZWdpc3RlcgY6BkVU--ee6b919c9378e629c6b6da704f8fa99215cbf280",
-               "_confirmed"=>"BAgw--9cd2826b363ae4eca4108a4dd6ea8ac718e088e6"}},
-           "_creation_reason"=>"BAhJIg1yZWdpc3RlcgY6BkVU--ee6b919c9378e629c6b6da704f8fa99215cbf280"},
-         "password"=>"123",
-         "password_confirmation"=>"123"},
-       "with"=>"phone"}
-
-    assert_select '#talk_somebody_attributes_profile_attributes_names_attributes_0_name:not([value])'
-    assert_select '#talk_somebody_attributes_profile_attributes_phones_attributes_0_value:not([value])'
-  end
-
-
   test 'Успешная регистрация с помощью телефона' do
     # Была ошибка. Отправленный PIN не равнялся записанному. Включить этот тест
     # В принципе то же самое, что и регистрация с не подтвержденным

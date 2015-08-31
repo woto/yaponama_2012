@@ -1,8 +1,87 @@
-# encoding: utf-8
-#
 require 'test_helper'
 
 class WelcomeControllerTest < ActionController::TestCase
+
+  test 'Для правила inet: 192.168.1.0/24 должен определиться как бот клиент 192.168.1.2' do
+    Bot.create!(inet: '192.168.1.0/24')
+    @request.remote_addr = '192.168.1.2'
+    get :index
+    assert_nil assigns(:current_user)
+  end
+
+  test 'Для правила inet: 192.168.1.0/24 должен определиться как бот клиент 192.168.1.2 и быть заблокированным' do
+    Bot.create!(inet: '192.168.1.0/24', block: true)
+    @request.remote_addr = '192.168.1.2'
+    get :index
+    assert_redirected_to 'http://example.com'
+  end
+
+  test 'Для правила inet: 192.168.1.0/24 НЕ должен определиться как бот клиент 192.168.2.2' do
+    Bot.create!(inet: '192.168.1.0/24')
+    @request.remote_addr = '192.168.2.2'
+    get :index
+    refute_nil assigns(:current_user)
+  end
+
+  test 'Для правила user_agent: Mozilla Firefox должен определиться как бот клиент Mozilla Firefox' do
+    Bot.create!(user_agent: 'Mozilla Firefox')
+    @request.user_agent = 'Mozilla Firefox'
+    get :index
+    assert_nil assigns(:current_user)
+  end
+
+  test 'Для правила user_agent: Mozilla не должен определиться как бот клиент Mozilla Firefox' do
+    Bot.create!(user_agent: 'Mozilla')
+    @request.user_agent = 'Mozilla Firefox'
+    get :index
+    refute_nil assigns(:current_user)
+  end
+
+  test 'Для правила user_agent: Mozilla Firefox Browser не должен определиться как бот клиент Mozilla Firefox' do
+    Bot.create!(user_agent: 'Mozilla Firefox Browser')
+    @request.user_agent = 'Mozilla Firefox'
+    get :index
+    refute_nil assigns(:current_user)
+  end
+
+  test 'Создавая Bot с пустым user_agent должно записаться nil' do
+    bot = Bot.create!(user_agent: '', inet: '0.0.0.0')
+    assert_equal nil, bot.user_agent
+  end
+
+  test 'Создавая Bot с пустым inet должно записаться nil' do
+    bot = Bot.create!(user_agent: 'Google Chrome', inet: '')
+    assert_equal nil, bot.inet
+  end
+
+
+  test 'Если условие и на user_agent и на inet, то они должны оба совпадать при проверке 1' do
+    bot = Bot.create!(user_agent: 'Mozilla Firefox', inet: '192.168.0.0/24')
+    @request.user_agent = 'Mozilla Firefox'
+    get :index
+    refute_nil assigns(:current_user)
+  end
+
+  test 'Если условие и на user_agent и на inet, то они должны оба совпадать при проверке 2' do
+    bot = Bot.create!(user_agent: 'Mozilla Firefox', inet: '192.168.0.0/24')
+    @request.remote_addr = '192.168.0.1'
+    get :index
+    refute_nil assigns(:current_user)
+  end
+
+  test 'Если условие и на user_agent и на inet, то они должны оба совпадать при проверке 3' do
+    bot = Bot.create!(user_agent: 'Mozilla Firefox', inet: '192.168.0.0/24')
+    @request.user_agent = 'Mozilla Firefox'
+    @request.remote_addr = '192.168.0.1'
+    get :index
+    assert_nil assigns(:current_user)
+  end
+
+
+
+
+
+
 
   test 'Проверка отображения ссылок для подтверждения у пользователя' do
 
@@ -61,7 +140,6 @@ class WelcomeControllerTest < ActionController::TestCase
     cookies[:role] = 'user'
     get :index
     assert_redirected_to :root
-    assert_equal 'Вы посещали сайт с другого комьютера, в целях безопасности мы автоматически сделали автовыход со всех прочих устройств. Вы можете отключить функцию автоматического выхода в Личном кабинете для возможности одновременной работы с разных компьютеров.', flash[:attention]
   end
 
   test 'Сделать проверку @meta_...' do

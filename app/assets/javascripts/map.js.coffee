@@ -1,4 +1,4 @@
-$(document).on 'page:update', ->
+$ ->
   if $('#clientMap').length > 0
     # Выставляем в динамике высоту.
     #$("#clientMap").css('height', 100 + $(window).height() - $('#myTab').offset().top - $('#myTab').height())

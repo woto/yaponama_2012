@@ -1,8 +1,5 @@
 <%= icon 'arrow-circle-o-up fa-4x', id: "slide-top" %>
 
-<div id="modal-form-placeholder"> </div>
-<div id="modal-talk-holder"> </div>
-
 <%= b1 do %>
   <% if Rails.application.config_for('application/counter')['enabled'] %>
     <%== Rails.application.config_for('application/counter')['yandex'] %>
@@ -73,84 +70,6 @@
   <%= panel 'info' do |p| %>
     <%= p.heading do %>
       <%= p.title do %>
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#NotifySound">
-          NotifySound
-        </a>
-      <% end %>
-    <% end %>
-    <%= p.collapse id: 'NotifySound' do %>
-      <%= p.body do %> 
-        <dl>
-          <dt> playing-count </dt>
-          <dd id="playing-count"> </dd>
-        </dl>
-        <dl>
-          <dt> is-playing </dt>
-          <dd id="is-playing"> </dd>
-        </dl>
-        <dl>
-          <dt> can-play-through </dt>
-          <dd id="can-play-through"> </dd>
-        </dl>
-      <% end %>
-    <% end %>
-  <% end %>
-
-  <%= panel 'info' do |p| %>
-    <%= p.heading do %>
-      <%= p.title do %>
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Stat"> Stat </a>
-      <% end %>
-    <% end %>
-    <%= p.collapse id: "Stat" do %>
-      <%= p.body do %>
-        <dl>
-          <dt> #server-time </dt>
-          <dd id="server-time"><%= Time.now.utc.iso8601 %></dd>
-        </dl>
-        <dl>
-          <dt> #debug-server </dt>
-          <dd id="debug-server"> </dd>
-        </dl>
-        <dl>
-          <dt> #debug-local </dt>
-          <dd id="debug-local"> </dd>
-        </dl>
-        <dl>
-          <dt> #debug-zone </dt>
-          <dd id="debug-zone"> </dd>
-        </dl>
-        <dl>
-          <dt> #debug-offset </dt>
-          <dd id="debug-offset"> </dd>
-        </dl>
-        <dl>
-          <dt> #debug-stat-result </dt>
-          <dd> <pre id="debug-stat-result" class="incomplete"> </pre> </dd>
-        </dl>
-      <% end %>
-    <% end %>
-  <% end %>
-
-  <%= panel 'info' do |p| %>
-    <%= p.heading do %>
-      <%= p.title do %>
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Time"> Time </a>
-      <% end %>
-    <% end %>
-    <%= p.collapse id: "Time" do %>
-      <%= p.body do %>
-        <dl>
-          <dt> #anton-time </dt>
-          <dd id="anton-time"><%= Product.where(catalog_number: 'TIME').first.created_at %></dd>
-        </dl>
-      <% end %>
-    <% end %>
-  <% end %>
-
-  <%= panel 'info' do |p| %>
-    <%= p.heading do %>
-      <%= p.title do %>
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#CatchEnter"> CatchEnter </a>
       <% end %>
     <% end %>
@@ -176,7 +95,7 @@
       <%= p.body do %> 
         <dl>
           <dt> #current_user_id </dt>
-          <dd id="current_user_id"><%= current_user.id %></dd>
+          <dd id="current_user_id"><%= current_user.try(:id) %></dd>
         </dl>
         <dl>
           <dt> #auth_token </dt>
@@ -201,26 +120,6 @@
 
       <% end %>
     <% end %>
-  <% end %>
-
-  <% if @somebody %>
-  <%= panel 'info' do |p| %>
-    <%= p.heading do %>
-      <%= p.title do %>
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Talk"> Talk </a>
-      <% end %>
-    <% end %>
-    <%= p.collapse id: 'Talk' do %>
-      <%= p.body do %>
-        <dl> 
-          <dt> #pings_path </dt>
-          <dd id="pings_path"> <%= main_app.polymorphic_path([*jaba3, :pings]) %> </dd>
-          <dt> #send_pings </dt>
-          <dd id="send_pings"><%= Rails.application.config_for('application/common')['send_pings'] %></dd>
-        </dl>
-      <% end %>
-    <% end %>
-  <% end %>
   <% end %>
 
   <%= panel 'info' do |p| %>

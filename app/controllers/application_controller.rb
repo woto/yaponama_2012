@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
 
-  helper_method :prepare_talk_form
-
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -11,8 +9,7 @@ class ApplicationController < ActionController::Base
   helper_method :jaba3
   #helper_method :complex_namespace_helper
   helper_method :smart_route
-  around_action :set_user_time_zone
-  before_action :ipgeobase
+  before_action :stats, if: -> {current_user}
   helper_method :visible_columns
   helper_method :available_columns
 
@@ -24,9 +21,6 @@ class ApplicationController < ActionController::Base
   before_action :user_set
   before_action :supplier_set
 
-
-
-
   include Actions
   include Resource
   include Zone
@@ -34,7 +28,6 @@ class ApplicationController < ActionController::Base
   before_action :somebody_get, only: [:show, :edit, :update, :destroy]
   before_action :user_get, only: [:show, :edit, :update, :destroy]
   before_action :supplier_get, only: [:show, :edit, :update, :destroy]
-
 
   before_action :set_user_and_creation_reason, only: [:create, :update]
 
@@ -55,46 +48,24 @@ class ApplicationController < ActionController::Base
 
   private
 
-  #def set_cache_buster
-  #  response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
-  #  response.headers["Pragma"] = "no-cache"
-  #  response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
-  #end
+  def stats
 
-  def ipgeobase
+    remote_ip = request.remote_ip
 
-    if [/pings/, /stats/, /talks/].none?{|str| request.original_fullpath =~ str}
-
-      # GEO
-      remote_ip = request.remote_ip
-
-      if current_user.remote_ip != remote_ip
-        res = Ipgeobase::find_region_by_ip(remote_ip)
-        current_user.remote_ip = remote_ip
-        current_user.ipgeobase_name = res && res.name || ''
-        current_user.ipgeobase_names_depth_cache = res && res.names_depth_cache || ''
-      end
-
-      current_user.user_agent                = request.user_agent.to_s
-      current_user.accept_language           = request.accept_language.to_s
-
-      current_user.cached_location = request.protocol + request.host_with_port + request.original_fullpath
-      current_user.cached_referrer = request.referer
-
-      # BOT
-
-      bot = Bot.where("? <<= inet", remote_ip).first ||
-        Bot.where("? LIKE '%' || user_agent || '%' AND length(user_agent) > 0", "#{current_user.user_agent}").first
-
-      current_user.bot = bot.present?
-      current_user.save!
-
-      if bot.present? && bot.block
-        raise BanishError
-        # Невозможно удалть пользователя, у которого есть хотя бы 1 профиль
-        # current_user.class.reflect_on_all_associations.select { |a| a.options[:dependent] == :destroy }.map(&:name)
-      end
+    if current_user.remote_ip != remote_ip
+      res = Ipgeobase::find_region_by_ip(remote_ip)
+      current_user.remote_ip = remote_ip
+      current_user.ipgeobase_name = res && res.name || ''
+      current_user.ipgeobase_names_depth_cache = res && res.names_depth_cache || ''
     end
+
+    current_user.user_agent = request.user_agent.to_s
+    current_user.accept_language = request.accept_language.to_s
+    current_user.location = request.protocol + request.host_with_port + request.original_fullpath
+    current_user.referrer = request.referer
+    current_user.first_referrer = request.referer if current_user.first_referrer.nil?
+
+    current_user.save!
   end
 
   def jaba3
@@ -137,51 +108,42 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    unless @current_user
-      if cookies[:auth_token].present?
-        @current_user = User.find_by(auth_token: cookies[:auth_token])
-        unless @current_user.present?
-          cookies.delete :auth_token
-          unless cookies[:role] == 'guest'
-            raise AuthenticationError.new 'Вы посещали сайт с другого комьютера, в целях безопасности мы автоматически сделали автовыход со всех прочих устройств. Вы можете отключить функцию автоматического выхода в Личном кабинете для возможности одновременной работы с разных компьютеров.'
-          else
-            raise AuthenticationError.new ''
-          end
+
+    unless defined? @current_user
+
+      bot = Bot.matched_records_by_remote_ip(request.remote_ip).matched_records_by_user_agent(request.user_agent).first
+
+      if bot
+        if bot.block
+          raise BanishError
+        else
+          @current_user = nil
         end
       else
-        @current_user = User.new
-        @current_user.assign_attributes(Rails.application.config_for('application/user')['default'])
-        @current_user.code_1 = 'session'
-        @current_user.build_account
-        @current_user.phantom = false
-        @current_user.save!
-        cookies.permanent[:auth_token] = @current_user.auth_token
-        cookies.permanent[:role] = 'guest'
+        if cookies[:auth_token].present?
+          @current_user = User.find_by(auth_token: cookies[:auth_token])
+          unless @current_user.present?
+            cookies.delete :auth_token
+            raise AuthenticationError.new ''
+          end
+        else
+          @current_user = User.new
+          @current_user.assign_attributes(Rails.application.config_for('application/user')['default'])
+          @current_user.code_1 = 'session'
+          @current_user.build_account
+          @current_user.phantom = false
+          @current_user.save!
+          cookies.permanent[:auth_token] = @current_user.auth_token
+          cookies.permanent[:role] = 'guest'
+        end
       end
-
     end
+
     @current_user
   end
 
-  def set_user_time_zone
-
-    tz =
-    if Rails.configuration.russian_time_zones.key?(current_user.cached_russian_time_zone_auto_id.to_s)
-      current_user.cached_russian_time_zone_auto_id
-    else
-      # Несмотря на то, что такая временная зона может и есть, в России её нет.
-      # Поэтому для других стран пусть показвается дефолтной выбранное в настройках сайта (т.е. локальное для этого места)
-      Rails.application.config_for('application/time')['zone_id']
-    end
-
-    Time.use_zone(tz) {
-      yield
-    }
-
-  end
-
   def only_not_authenticated
-    if ["admin", "manager", "user"].include? current_user.role
+    if current_user && ["admin", "manager", "user"].include?(current_user.role)
       redirect_to root_path, :attention => "Вы уже вошли на сайт" and return
     end
   end
@@ -262,20 +224,6 @@ class ApplicationController < ActionController::Base
     @order_delivery.new_postal_address = @somebody.postal_addresses.new(postcode: '000000', region: 'Москва', city: 'Москва')
 
   end
-
-  def prepare_talk_form
-    talk = @somebody.talks.new
-    if @somebody.profile.nil? || @somebody.profile.new_record?
-      profile = @somebody.build_profile
-    else
-      profile = @somebody.profile
-    end
-    profile.names.new if profile.names.empty?
-    profile.phones.new if profile.phones.empty?
-    profile.emails.new if profile.emails.empty?
-    talk
-  end
-
 
   helper_method :get_news
 

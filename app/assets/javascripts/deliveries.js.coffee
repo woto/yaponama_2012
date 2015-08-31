@@ -14,7 +14,7 @@ App.calcRoute = (destination) ->
 
   #console.log request
 
-  directionsService = new google.maps.DirectionsService();
+  directionsService = new google.maps.DirectionsService()
 
   directionsService.route request, (response, status) ->
     switch status
@@ -122,7 +122,7 @@ window.initClientMap = ->
 
     infoWindow.close(map)
 
-    that.closest('.accordion-group').find('.collapse').collapse('show');
+    that.closest('.accordion-group').find('.collapse').collapse('show')
     # TODO Раньше (до удаления ui) была подсветка
     #that.parent().effect('highlight')
 
@@ -147,7 +147,7 @@ window.initClientMap = ->
 
   infoWindow = new google.maps.InfoWindow(
     maxWidth: 200
-  );
+  )
 
   add_event_listener_to_object = (object, that) ->
 
@@ -171,19 +171,19 @@ window.initClientMap = ->
     poly = new google.maps.Polygon
       zIndex: $(this).find('.z_index').text()
 
-    poly.common_style = 
+    poly.common_style =
       zoom: parseInt($(this).find('.zoom').text())
       lat: parseFloat(($(this).find('.lat').text()))
       lng: parseFloat(($(this).find('.lng').text()))
 
-    poly.active_style = 
+    poly.active_style =
       fillColor: $(this).find('.active .fill_color').text()
       fillOpacity: $(this).find('.active .fill_opacity').text()
       strokeColor: $(this).find('.active .stroke_color').text()
       strokeOpacity: $(this).find('.active .stroke_opacity').text()
       strokeWeight: $(this).find('.active .stroke_weight').text()
 
-    poly.inactive_style = 
+    poly.inactive_style =
       fillColor: $(this).find('.inactive .fill_color').text()
       fillOpacity: $(this).find('.inactive .fill_opacity').text()
       strokeColor: $(this).find('.inactive .stroke_color').text()
@@ -219,7 +219,7 @@ window.initClientMap = ->
 
       add_event_listener_to_object(marker, $(this))
 
-$(document).on 'page:change', ->
+$ ->
   if $('#clientMap').length != 0
     $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&callback=initClientMap')
 

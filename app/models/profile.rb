@@ -38,20 +38,6 @@ class Profile < ActiveRecord::Base
     end
   end
 
-  ## Если имеются ошибки, и пишем в чате. То создаем заново поля для ввода
-  #after_validation if: -> {errors.present?} do
-  #  if somebody.profile.emails.blank?
-  #    somebody.profile.emails.new
-  #  end
-  #  if somebody.profile.phones.blank?
-  #    somebody.profile.phones.new
-  #  end
-  #end
-
-  ## Если пишем в чате и не заполнен ни email, ни телефон
-  #validate if: -> {creation_reason == 'talk'} do
-
-
   validate do
     email = emails.reject{|r| r.marked_for_destruction?}.first
     phone = phones.reject{|r| r.marked_for_destruction?}.first
@@ -59,18 +45,6 @@ class Profile < ActiveRecord::Base
       errors.add(:base, 'укажите телефон и/или email')
     end
   end
-
-  ## Если имеются ошибки, и пишем в чате. То создаем заново поля для ввода
-  #after_validation if: -> {errors.present? && creation_reason == 'talk'} do
-  #  binding.pry
-  #  if emails.blank?
-  #    emails.new
-  #  end
-  #  if phones.blank?
-  #    phones.new
-  #  end
-  #end
-
 
   before_validation do
     # 1. (somebody != user_where_is_profile) Если не делаю такой

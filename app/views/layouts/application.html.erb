@@ -10,8 +10,6 @@
 
 <%= render 'layouts/user_footer' %>
 
-<% if current_user.buyer? %>
-  <%= render 'talk' %>
-<% end %>
+<%= render 'tawk_to' %>
 
 <%= render :partial => "layouts/shared/suffix" %>

@@ -54,21 +54,6 @@ module GridHelper
 
       content_tag_for(:span, item, column_name, :class => column_name) do
         case column_name
-        when 'inet'
-          item.to_inet(val)
-        # READ ONLY
-        when *['content', 'preview', 'user_agent', 'accept_language', 'path', 'title', 'first_referrer', 'cached_referrer']
-          new_val = truncate(val, length: 40)
-          content_tag :span, (new_val != val ? {data: { title: val }, rel: 'tooltip'} : {} ) do
-            truncate val, length: 40
-          end
-        # EDITABLE
-        when *['name', 'short_name', 'long_name']
-          if admin_zone?
-            link_to_fast_edit(val, item, column_name)
-          else
-            val
-          end
         when *['id', 'token']
           link_to item[column_name], '#', data: {html: true, title: 'Информация об элементе', placement: 'right', :"poload" => polymorphic_path([:info, (admin_zone? ? :admin : :user), item], :primary_key => params[:primary_key], :return_path => request.fullpath, :status => params[:status] ) }, class: "btn btn-primary btn-xs ignoredirty", style: "min-width: 30px"
         when 'checkbox'
@@ -205,8 +190,6 @@ module GridHelper
           else
             val
           end
-        when *['cached_russian_time_zone_auto_id']
-          Rails.configuration.russian_time_zones[val.to_s]
         when 'order_rule'
           Rails.configuration.somebody_order_rules[val]
         when 'status'

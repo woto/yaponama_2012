@@ -28,12 +28,6 @@ update = ->
 
   form.trigger("submit.rails")
 
-#$(document).on 'page:restore', -> 
-#  alert('page:restore')
-#  update(false)
-# Конечно прикольней сделать в онлайне, 
-# поэтому чтобы не усложнять пока вообще уберу
-
 # К сожалению через data-dismiss="modal" либо не сабмитится и скрывается модальное окно
 # либо сабмитится, но backdrop не пропадает
 $(document).on 'submit', '#new_grid', ->

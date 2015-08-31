@@ -34,6 +34,7 @@
     <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary', style: "vertical-align: top" do %>
       <%= icon 'plus' %>
     <% end %>
+
     <%= paginate @resources %>
 
     <div class="table-responsive top-space bottom-space">
@@ -72,7 +73,6 @@
           <% end %>
         </tbody>
       </table>
-
     </div>
 
     <%= paginate @resources %>

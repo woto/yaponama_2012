@@ -1,6 +1,3 @@
-$(document).on 'page:load', ->
-  profileables_buttons()
-
 $ ->
   profileables_buttons()
 

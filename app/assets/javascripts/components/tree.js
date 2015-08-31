@@ -1,4 +1,4 @@
-$(document).on('page:change', function(){
+$(function(){
     $('.tree li li').hide();
     //$('.tree li:first').show();
     $('.tree li').on('click', function (e) {

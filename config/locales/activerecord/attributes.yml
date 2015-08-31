@@ -175,8 +175,6 @@ ru:
         cached_russian_time_zone_auto_id: Автоматическое время кешированное
         remote_ip: IP адрес
         stats_count: Просмотров страниц
-        total_talks: Всего сообщений
-        unread_talks: Не прочитанных сообщений
         online: Онлайн
         accept_language: Язык браузера
         user_agent: Версия браузера

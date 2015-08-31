@@ -1,0 +1,52 @@
+<%= page do |p| %>
+
+  <%= p.breadcrumb do %>
+    <% @meta_title = "Предпросмотр правила: #{@resource.to_label}" %>
+    <%= breadcrumb true do |b| %>
+      <%= b.item @meta_title %>
+    <% end %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
+
+    <%= link_to "Редактировать: #{@resource.to_label}", url_for(action: :edit, return_path: request.fullpath) %>
+
+    <br />
+    <br />
+
+    <%= paginate @resources %>
+
+    <div class="table-responsive top-space bottom-space">
+      <table class="table">
+        <thead>
+          <tr>
+            <th> <%= @resource_class.human_attribute_name :id %> </th>
+            <th> <%= @resource_class.human_attribute_name :user_agent %> </th>
+            <th> <%= @resource_class.human_attribute_name :remote_ip %> </th>
+            <th> <%= @resource_class.human_attribute_name :created_at %> </th>
+            <th> <%= @resource_class.human_attribute_name :updated_at %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @resources.each do |r| %>
+            <tr>
+              <td> <%= link_to r.id, url_for(action: :edit, return_path: request.fullpath) %> </td>
+              <td> <%= r.user_agent %> </td>
+              <td> <%= r.remote_ip %> </td>
+              <td> <%= l r.created_at %> </td>
+              <td> <%= l r.updated_at %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <%= paginate @resources %>
+
+  <% end %>
+<% end %>
+

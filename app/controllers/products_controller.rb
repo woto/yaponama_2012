@@ -58,9 +58,6 @@ class ProductsController < ApplicationController
 
         search catalog_number, params[:manufacturer], params[:replacements]
       end
-      format.js do
-        redirect_to polymorphic_path([*jaba3, :product], params ), turbolinks: true
-      end
     end
   end
 
@@ -82,24 +79,19 @@ class ProductsController < ApplicationController
 
         search catalog_number, params[:manufacturer], params[:replacements]
       end
-      format.js do
-        redirect_to polymorphic_path([*jaba3, :product], params ), turbolinks: true
-      end
     end
     
   end
 
   def create
 
-    #search @resource.catalog_number, @resource.cached_brand, nil
+    search @resource.catalog_number, nil, nil
 
     respond_to do |format|
       if @resource.save
         format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно добавлен в корзину.") }
-        format.js { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно добавлен в корзину.", turbolinks: true) }
       else
         format.html { render action: 'new' }
-        format.js { render action: 'new' }
       end
     end
   end
@@ -108,14 +100,11 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @resource.save
         format.html { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно изменен.") }
-        format.js { redirect_to(polymorphic_path([:status, *jaba3, :products], {status: 'incart'}), attention: "Товар #{@resource.to_label} успешно изменен.", turbolinks: true) }
       else
         format.html { render action: 'new' }
-        format.js { render action: 'new' }
       end
     end
   end
-
   before_action do
     # Доработать
     Rails.application.routes.recognize_path params[:return_path]
