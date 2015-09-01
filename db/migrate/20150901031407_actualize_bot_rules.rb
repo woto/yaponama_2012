@@ -6,7 +6,7 @@ class ActualizeBotRules < ActiveRecord::Migration
           b.update(user_agent: nil)
         end
         Bot.where.not(user_agent: nil).each do |b|
-          b.user_agent = "%#{b.user_agent}%"
+          b.update(user_agent: "%#{b.user_agent}%")
         end
       end
     end
