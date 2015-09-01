@@ -2,7 +2,7 @@ require 'csv'
 
 class Protcenka
 
-  def protcenka
+  def self.protcenka(t, args)
 
     file1 = open(args[:arg1])
 
@@ -10,7 +10,8 @@ class Protcenka
       file1.each_line do |line|
         row = CSV.parse(line)[0]
 
-        price_request_url = "http://#{SiteConfig.price_full_address}/prices/search?catalog_number=#{CGI::escape(row[0].to_s)}&manufacturer=#{CGI::escape(row[2].to_s)}&replacements=0&ext_ws=0&format=json&for_stock=1&cached=0"
+        price_config = Rails.application.config_for('application/price')
+        price_request_url = "http://#{price_config['host']}:#{price_config['port']}/prices/search?catalog_number=#{CGI::escape(row[0].to_s)}&manufacturer=#{CGI::escape(row[2].to_s)}&replacements=0&ext_ws=0&format=json&for_stock=1&cached=0"
 
         parsed_price_request_url = URI.parse(price_request_url)
         resp = Net::HTTP.get_response(parsed_price_request_url)
