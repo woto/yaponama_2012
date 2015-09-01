@@ -77,6 +77,13 @@ class WelcomeControllerTest < ActionController::TestCase
     assert_nil assigns(:current_user)
   end
 
+  test 'Если условие для user_agent: знак_процентаChromeзнак_процента, то пользователь с Google Chrome Browser определится как бот' do
+    bot = Bot.create!(user_agent: '%Chrome%')
+    @request.user_agent = 'Google Chrome Browser'
+    get :index
+    assert_nil assigns(:current_user)
+  end
+
 
 
 

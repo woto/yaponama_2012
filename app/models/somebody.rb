@@ -78,7 +78,7 @@ class Somebody < ActiveRecord::Base
   concerning :Bot do
     included do
       scope :matched_records_by_remote_ip, -> (cidr) {where(arel_table[:remote_ip].contained_within_or_equals(cidr))}
-      scope :matched_records_by_user_agent, -> (user_agent) {where(arel_table[:user_agent].eq(user_agent))}
+      scope :matched_records_by_user_agent, -> (user_agent) {where(arel_table[:user_agent].matches(user_agent))}
     end
   end
 
