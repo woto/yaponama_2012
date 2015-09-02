@@ -1,13 +1,13 @@
 <%= icon 'arrow-circle-o-up fa-4x', id: "slide-top" %>
 
 <%= b1 do %>
-  <% if Rails.application.config_for('application/counter')['enabled'] %>
-    <%== Rails.application.config_for('application/counter')['yandex'] %>
-    <%== Rails.application.config_for('application/counter')['mail'] %>
-    <%== Rails.application.config_for('application/counter')['rambler'] %>
-    <%== Rails.application.config_for('application/counter')['google'] %>
-    <%== Rails.application.config_for('application/counter')['openstat'] %>
-    <%== Rails.application.config_for('application/counter')['liveinternet'] %>
+  <% if Rails.configuration.common['display_counters'] %>
+    <%== Rails.configuration.counter['yandex'] %>
+    <%== Rails.configuration.counter['mail'] %>
+    <%== Rails.configuration.counter['rambler'] %>
+    <%== Rails.configuration.counter['google'] %>
+    <%== Rails.configuration.counter['openstat'] %>
+    <%== Rails.configuration.counter['liveinternet'] %>
   <% end %>
 <% end %>
 
@@ -25,31 +25,31 @@
       <%= p.body do %>
         <p>
           <b> initial_map_zoom </b>
-          <div id="initial_map_zoom"><%= Rails.application.config_for('application/map')['initial_zoom'] %></div>
+          <div id="initial_map_zoom"><%= Rails.configuration.map['initial_zoom'] %></div>
         </p>
         <p>
           <b> initial_map_lat </b>
-          <div id="initial_map_lat"><%= Rails.application.config_for('application/map')['initial_lat'] %></div>
+          <div id="initial_map_lat"><%= Rails.configuration.map['initial_lat'] %></div>
         </p>
         <p>
           <b> initial_map_lng </b>
-          <div id="initial_map_lng"><%= Rails.application.config_for('application/map')['initial_lng'] %></div>
+          <div id="initial_map_lng"><%= Rails.configuration.map['initial_lng'] %></div>
         </p>
         <p>
           <b> warehouse_address </b>
-          <div id="warehouse_address"><%= Rails.application.config_for('application/map')['warehouse_address'] %></div>
+          <div id="warehouse_address"><%= Rails.configuration.map['warehouse_address'] %></div>
         </p>
         <p>
           <b> delivery_minute_cost </b>
-          <div id="delivery_minute_cost"><%= Rails.application.config_for('application/map')['delivery_minute_cost'] %></div>
+          <div id="delivery_minute_cost"><%= Rails.configuration.map['delivery_minute_cost'] %></div>
         </p>
         <p>
           <b> google_maps_key </b>
-          <div id="google_maps_key"><%= Rails.application.config_for('application/map')['google_maps_key'] %></div>
+          <div id="google_maps_key"><%= Rails.configuration.map['google_maps_key'] %></div>
         </p>
         <p>
           <b> travel_mode </b>
-          <div id="travel_mode"><%= Rails.application.config_for('application/map')['travel_mode'] %></div>
+          <div id="travel_mode"><%= Rails.configuration.map['travel_mode'] %></div>
         </p>
         <p>
           <b> auth-result </b>
@@ -57,11 +57,11 @@
         </p>
         <p>
           <b> automatic_calculate_active </b>
-          <div id="automatic_calculate_active"><%= Rails.application.config_for('application/map')['automatic_calculate_active'] %></div>
+          <div id="automatic_calculate_active"><%= Rails.configuration.map['automatic_calculate_active'] %></div>
         </p>
         <p>
           <b> max_automatic_calculated_cost </b>
-          <div id="max_automatic_calculated_cost"><%= Rails.application.config_for('application/map')['max_automatic_calculated_cost'] %></div>
+          <div id="max_automatic_calculated_cost"><%= Rails.configuration.map['max_automatic_calculated_cost'] %></div>
         </p>
       <% end %>
     <% end %>

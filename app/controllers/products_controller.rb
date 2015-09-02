@@ -85,7 +85,7 @@ class ProductsController < ApplicationController
 
   def create
 
-    search @resource.catalog_number, nil, nil
+    #search @resource.catalog_number, nil, nil
 
     respond_to do |format|
       if @resource.save

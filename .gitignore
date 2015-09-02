@@ -4,9 +4,6 @@
 /.bundler
 /.idea
 
-/config/database.yml
-/config/config.yml
-
 /public/uploads
 
 .DS_Store

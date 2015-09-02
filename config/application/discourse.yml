@@ -2,15 +2,15 @@ defaults: &defaults
   host: '192.168.1.250'
   port: '80'
   host_port: '192.168.1.250'
-  api_username: woto
-  api_key: 5d100032841c2b9fb3bd88aececf628626b390624217ef7b1b9550295a0d587e
+  api_username: robot
+  api_key: 02950e0701e3765c5f98bc4f0fafab773dd50e62ada590a0caec1cf218f420c9
   categories:
     head:
       title: Вступления
-      id: 6
+      id: 14
     body:
       title: Статьи
-      id: 7
+      id: 15
 
 development:
   <<: *defaults

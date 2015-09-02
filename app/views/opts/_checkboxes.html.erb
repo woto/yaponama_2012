@@ -1,4 +1,4 @@
-<% checkboxes = Rails.application.config_for("application/#{@resource_class.name.underscore}")[name]['checkboxes'] if checkboxes.nil? %>
+<% checkboxes = Rails.configuration.send("opts_#{@resource_class.name.demodulize.underscore}")[name]['checkboxes'] if checkboxes.nil? %>
 
 <div rel="collapse-next" class="collapse-reset-checkboxes">
   <%= render 'opts/name', f: f, name: name %>

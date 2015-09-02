@@ -100,4 +100,7 @@ Rails.application.configure do
   config.assets.prefix = "/assets-production"
 
   config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOW-FROM http://inpage.metrika.yandex.ru/' }
+
+  config.active_job.queue_adapter = :sidekiq
+
 end

@@ -136,7 +136,7 @@ class PriceMate
     emex = "&ext_ws=#{true_or_false(emex)}"
     cached = "&cached=#{true_or_false(cached)}"
 
-    price_request_url = "http://#{Rails.application.config_for('application/price')['host']}:#{Rails.application.config_for('application/price')['port']}/prices/search?catalog_number=#{catalog_number}&manufacturer=#{manufacturer}&replacements=#{replacements}#{emex}&format=json&for_site=1#{cached}"
+    price_request_url = "http://#{Rails.configuration.price['host']}:#{Rails.configuration.price['port']}/prices/search?catalog_number=#{catalog_number}&manufacturer=#{manufacturer}&replacements=#{replacements}#{emex}&format=json&for_site=1#{cached}"
 
     parsed_price_request_url = URI.parse(price_request_url)
     resp = Net::HTTP.get_response(parsed_price_request_url)

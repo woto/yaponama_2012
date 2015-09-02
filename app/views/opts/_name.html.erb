@@ -1,5 +1,5 @@
-<% si = @resource_class ? Rails.application.config_for("application/#{@resource_class.name.underscore}").try(:[], name).try(:[], 'si') : '' %>
-<% si.prepend ", " if si.present? %>
+<% si = @resource_class ? Rails.configuration.send("opts_#{@resource_class.name.demodulize.underscore}").try(:[], name).try(:[], 'si') : '' %>
+<% si = ", #{si}" if si.present? %>
 
 <span class="text-info" style="cursor: pointer" data-toggle="collapse-next">
   <%= icon 'chevron-circle-right' %>

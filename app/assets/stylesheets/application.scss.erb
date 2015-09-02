@@ -44,7 +44,7 @@
 /////////////////////
 
 
-<% if Rails.application.config_for('application/site')['host'] == 'zapstok.ru' %>
+<% if Rails.configuration.site['host'] == 'zapstok.ru' %>
   @import "bootswatch/spacelab/variables";
 <% end %>
 

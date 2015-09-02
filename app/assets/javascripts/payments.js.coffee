@@ -20,10 +20,10 @@ $(document).on 'custom-change', '[rel~="select-and-fill"]', ->
   type_store = $(this).closest('[rel~="type-store"]')
 
   type_store.find('.select-and-fill').hide()
-  type_store.find('.select-and-fill').find(":input").prop("disabled", true);
+  type_store.find('.select-and-fill').find(":input").prop("disabled", true)
 
   type_store.find('#select-and-fill-' + $(this).val()).show()
-  type_store.find('#select-and-fill-' + $(this).val()).find(":input").prop("disabled", false);
+  type_store.find('#select-and-fill-' + $(this).val()).find(":input").prop("disabled", false)
 
 
 $(document).on 'change', '[name~="payment[payment_type]"]', ->

@@ -128,7 +128,7 @@ class ApplicationController < ActionController::Base
           end
         else
           @current_user = User.new
-          @current_user.assign_attributes(Rails.application.config_for('application/user')['default'])
+          @current_user.assign_attributes(Rails.configuration.user['default'])
           @current_user.code_1 = 'session'
           @current_user.build_account
           @current_user.phantom = false

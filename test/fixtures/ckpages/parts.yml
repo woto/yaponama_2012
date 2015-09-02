@@ -1,0 +1,26 @@
+name:
+  title: 'name'
+
+welcome.index.description:
+  title: 'welcome.index.description'
+
+welcome.index.title:
+  title: 'welcome.index.title'
+
+payments.print.recipient:
+  title: 'payments.print.recipient'
+
+payments.print.inn:
+  title: 'payments.print.inn'
+
+payments.print.account:
+  title: 'payments.print.account'
+
+payments.print.bank:
+  title: 'payments.print.bank'
+
+payments.print.bik:
+  title: 'payments.print.bik'
+
+payments.print.correspondent:
+  title: 'payments.print.correspondent'

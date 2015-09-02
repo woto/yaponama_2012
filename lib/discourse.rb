@@ -7,7 +7,7 @@ class Discourse
 
   def initialize category, *title
     @title = title
-    @category = Rails.application.config_for('application/discourse')['categories'][category]
+    @category = Rails.configuration.discourse['categories'][category]
   end
 
   def get_posts limit, &block
@@ -23,13 +23,13 @@ class Discourse
     posts.each do |post|
       result = {}
       result[:content] = post['cooked'].html_safe
-      result[:link] = "http://#{Rails.application.config_for('application/discourse')['host_port']}/t/#{post['topic_slug']}/#{post['topic_id']}"
+      result[:link] = "http://#{Rails.configuration.discourse['host_port']}/t/#{post['topic_slug']}/#{post['topic_id']}"
       yield result[:content], result[:link]
     end
   end
 
   def link_to_new
-    "http://#{Rails.application.config_for('application/discourse')['host_port']}/new-topic?title=#{URI.encode(search_string)}&body=#{URI.encode('Удалите этот текст и напишите свой. После сохранения можете вернуться назад и обновить страницу, текст сразу отобразится на сайте. Не меняйте заголовок сообщения.')}&category_id=#{@category['id']}"
+    "http://#{Rails.configuration.discourse['host_port']}/new-topic?title=#{URI.encode(search_string)}&body=#{URI.encode('Удалите этот текст и напишите свой. После сохранения можете вернуться назад и обновить страницу, текст сразу отобразится на сайте. Не меняйте заголовок сообщения.')}&category_id=#{@category['id']}"
   end
 
 end

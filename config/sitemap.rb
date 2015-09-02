@@ -3,7 +3,7 @@ require 'sitemap_generator'
 #require 'net/http'
 #require 'csv'
 
-SitemapGenerator::Sitemap.default_host = "http://www.#{Rails.application.config_for('application/site')['host']}/"
+SitemapGenerator::Sitemap.default_host = "http://www.#{Rails.configuration.site['host']}/"
 
 SitemapGenerator::Sitemap.create do
 

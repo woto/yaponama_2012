@@ -5,7 +5,7 @@ module ErrorHandling
 
     skip_before_action :find_resource, only: [:render_404, :render_500]
 
-    if Rails.application.config_for('application/common')['suppress_exceptions']
+    if Rails.configuration.common['suppress_exceptions']
       rescue_from Exception, :with => :render_500
       # Это более не актуально. Необходимо использовать config.exceptions_app ? или
       # wildcard match (*) как это сейчас в ckpages ? Или config.action_dispatch.rescue_responses ?
@@ -27,7 +27,7 @@ module ErrorHandling
     Rails.logger.error(exception)
     respond_to do |format|
       format.html { render 'error_404', :status => 404 }
-      format.js { render js: "alert('Возникла непредвиденная ошибка на сайте #{Rails.application.config_for('application/site')['host']}, поробуйте перезагрузить страницу или связаться с разработчиками сайта.');" }
+      format.js { render js: "alert('Возникла непредвиденная ошибка на сайте #{Rails.configuration.site['host']}, поробуйте перезагрузить страницу или связаться с разработчиками сайта.');" }
     end
   end
 
@@ -36,7 +36,7 @@ module ErrorHandling
     Rails.logger.error(exception)
     respond_to do |format|
       format.html { render 'error_500', :status => 500 }
-      format.js { render js: "alert('Возникла непредвиденная ошибка на сайте #{Rails.application.config_for('application/site')['host']}, поробуйте перезагрузить страницу или связаться с разработчиками сайта.');" }
+      format.js { render js: "alert('Возникла непредвиденная ошибка на сайте #{Rails.configuration.site['host']}, поробуйте перезагрузить страницу или связаться с разработчиками сайта.');" }
     end
   end
 

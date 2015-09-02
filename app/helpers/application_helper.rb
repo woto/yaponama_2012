@@ -1,5 +1,7 @@
 module ApplicationHelper
 
+  include Ckpages::ApplicationHelper
+
   def icon method, options={}
     content_tag :i, '', options.merge(class: "fa fa-#{method}")
   end
@@ -595,14 +597,14 @@ module ApplicationHelper
   end
 
   def opts_checkbox name, part, resource_class
-    Rails.application.config_for("application/#{resource_class.name.underscore}")["#{resource_class.name.demodulize.underscore}_#{name}"]['checkboxes'].find{|hash| hash[:value].to_i == instance_eval("part.#{resource_class.name.demodulize.underscore}.#{name}.to_i")}[:label]
+    Rails.configuration.send("opts_#{resource_class.name.demodulize.underscore}")["#{resource_class.name.demodulize.underscore}_#{name}"]['checkboxes'].find{|hash| hash[:value].to_i == instance_eval("part.#{resource_class.name.demodulize.underscore}.#{name}.to_i")}[:label]
   end
 
   def si str, model, attribute
     capture do
       concat str
       concat " "
-      concat Rails.application.config_for("application/opts/#{model}")["#{model}_#{attribute}"]['si'].to_s
+      concat Rails.configuration.send("opts_#{model}")["#{model}_#{attribute}"]['si'].to_s
     end
   end
 

@@ -3,8 +3,8 @@
   <div id="discourse-comments"></div>
 
   <script type="text/javascript">
-      var discourseUrl = "http://<%= Rails.application.config_for('application/discourse')['host_port'] %>/",
-          discourseEmbedUrl = "http://www.<%= Rails.application.config_for('application/site')['host_port'] + request.fullpath %>";
+      var discourseUrl = "http://<%= Rails.configuration.discourse['host_port'] %>/",
+          discourseEmbedUrl = "http://www.<%= Rails.configuration.site['host_port'] + request.fullpath %>";
 
     (function() {
       var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
@@ -15,7 +15,7 @@
 <% end %>
 <% end %>
 
-<% if Rails.application.config_for('application/common')['share_buttons'] %>
+<% if Rails.configuration.common['share_buttons'] %>
   <%= b1 do %>
     <h4>Поделиться ссылкой на эту страницу.</h4>
     <div style="margin-left: -4px" class="bottom-space-sm">

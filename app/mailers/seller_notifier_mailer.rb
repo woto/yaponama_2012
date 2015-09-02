@@ -1,9 +1,9 @@
 class SellerNotifierMailer < ApplicationMailer
   include ActionView::Helpers::NumberHelper
-  default to: Rails.application.config_for('application/mail')['from']
+  default to: Rails.configuration.mail['from']
 
   def sitename
-    "www.#{Rails.application.config_for('application/site')['host']}"
+    "www.#{Rails.configuration.site['host']}"
   end
 
   def incart product

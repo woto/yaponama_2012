@@ -576,6 +576,26 @@ module Yaponama2012
 
     config.active_record.raise_in_transactional_callbacks = true
 
+    Rails.application.configure do
+      config.active_merchant = config_for('application/active_merchant')
+      config.auth = config_for('application/auth')
+      config.backup = config_for('application/backup')
+      config.ckpages = config_for('application/ckpages')
+      config.common = config_for('application/common')
+      config.counter = config_for('application/counter')
+      config.direct = config_for('application/direct')
+      config.discourse = config_for('application/discourse')
+      config.mail = config_for('application/mail')
+      config.map = config_for('application/map')
+      config.opts_accumulator = config_for('application/opts/accumulator')
+      config.opts_truck_tire = config_for('application/opts/truck_tire')
+      config.price = config_for('application/price')
+      config.redis = config_for('application/redis')
+      config.site = config_for('application/site')
+      config.sms = config_for('application/sms')
+      config.user = config_for('application/user')
+    end
+
     def config_for name
       require 'socket'
       if Rails.env.production?

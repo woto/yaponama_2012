@@ -7,7 +7,7 @@ class UpdateSpareCatalog
       catalog_number = spare_info.catalog_number
       puts "Поиск #{catalog_number}"
       begin
-        open("http://#{Rails.application.config_for('application/site')['host']}:#{Rails.application.config_for('application/site')['port']}/user/products/new?catalog_number=#{PriceMate.catalog_number(catalog_number)}")
+        open("http://#{Rails.configuration.site['host']}:#{Rails.configuration.site['port']}/user/products/new?catalog_number=#{PriceMate.catalog_number(catalog_number)}")
       rescue OpenURI::HTTPError => e
         puts "Не найден: #{catalog_number}"
       end

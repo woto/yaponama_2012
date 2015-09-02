@@ -1,5 +1,5 @@
 CarrierWave.configure do |config|
-  config.asset_host = "http://#{Rails.application.config_for('application/site')['host']}:#{Rails.application.config_for('application/site')['port']}"
+  config.asset_host = "http://#{Rails.configuration.site['host']}:#{Rails.configuration.site['port']}"
 end
 
 CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/

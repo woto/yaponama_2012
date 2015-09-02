@@ -24,7 +24,7 @@ module ProductsSearch
 
       if c9.present?
 
-        if Rails.application.config_for('application/price')['request_emex']
+        if Rails.configuration.price['request_emex']
           e8 = true
         end
 
@@ -51,9 +51,9 @@ module ProductsSearch
           plog.debug '/Большой цикл очистки JSON'
 
           if r9
-            expires_in = Rails.application.config_for('application/price')['price_request_cache_with_replacements_in_seconds']
+            expires_in = Rails.configuration.price['price_request_cache_with_replacements_in_seconds']
           else
-            expires_in = Rails.application.config_for('application/price')['price_request_cache_without_replacements_in_seconds']
+            expires_in = Rails.configuration.price['price_request_cache_without_replacements_in_seconds']
           end
 
           @parsed_json = PriceMate.sort_by_godness @parsed_json

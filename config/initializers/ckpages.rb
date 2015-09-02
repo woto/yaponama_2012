@@ -1,5 +1,5 @@
-Ckpages.enabled = Rails.application.config_for('application/ckpages')['enabled']
-Ckpages.root = Rails.application.config_for('application/ckpages')['root']
+Ckpages.enabled = Rails.configuration.ckpages['enabled']
+Ckpages.root = Rails.configuration.ckpages['root']
 
 
 Ckpages::Engine.configure do |config|

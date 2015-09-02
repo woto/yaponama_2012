@@ -6,9 +6,9 @@
 
 <div class="clearfix visible-xs bottom-space"></div>
 
-<a href="mailto:info@<%= Rails.application.config_for('application/site')['host'] %>" class="btn btn-primary btn-lg right-space-sm" style="border: #293d49; color: white">
+<a href="mailto:info@<%= Rails.configuration.site['host'] %>" class="btn btn-primary btn-lg right-space-sm" style="border: #293d49; color: white">
   <%= icon 'envelope' %>
-  info@<%=Rails.application.config_for('application/site')['host'] %>
+  info@<%=Rails.configuration.site['host'] %>
 </a>
 
 <div class="clearfix visible-xs bottom-space"></div>

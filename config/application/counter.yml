@@ -1,5 +1,4 @@
 defaults: &defaults
-  enabled: false
   counter_yandex: <!-- yandex counter -->
   counter_mail: <!-- mail counter -->
   counter_rambler: <!-- rambler counter -->
