@@ -18,4 +18,9 @@ class Categories::GenerationsControllerTest < ActionController::TestCase
     #assert_select '#best-parts-list', '3310 (TOYOTA) РУЛЕВАЯ ТЯГА на MITSUBISHI Galant 2008 - 2013, 9 поколение [2-й рестайлинг]'
   end
 
+  test 'Проверяем @discourse на :show' do
+    get :show, id: generations(:camry_xv50), category_id: spare_catalogs(:akb)
+    assert_equal ['Батарея аккумуляторная на TOYOTA Camry Camry (XV50) (2011)'], assigns(:discourse)
+  end
+
 end

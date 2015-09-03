@@ -57,4 +57,14 @@ class BrandsControllerTest < ActionController::TestCase
     assert_empty body
   end
 
+  test 'Проверяем @discourse на :index' do
+    get :index
+    assert_equal ['Бренды'], assigns(:discourse)
+  end
+
+  test 'Проверяем @discourse на :show' do
+    get :show, id: brands(:toyota)
+    assert_equal ["Производитель запчастей TOYOTA"], assigns(:discourse)
+  end
+
 end

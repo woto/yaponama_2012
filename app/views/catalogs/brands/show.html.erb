@@ -1,6 +1,3 @@
-<% @discourse = {} %>
-<% @discourse[:brand] = @brand.name %>
-
 <%= page do |p| %>
 
   <%= p.breadcrumb do %>
@@ -11,11 +8,9 @@
   <% end %>
 
   <%= p.title do %>
-    <% @meta_title = "Запчасти на #{@brand.name}" %>
-    <%# TODO @meta_title_small = "(рус. #{@brand.brands.slang.pluck(:name).join(', ')})" if @brand.brands.slang.exists? %>
     <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
-    <% discourse_head(@meta_title, @meta_title_small) %>
     <%= page_header %>
+    <%= discourse_head %>
   <% end %>
 
   <%= p.content do %>
@@ -52,4 +47,4 @@
 
 <% end %>
 
-<%= discourse_body(@meta_title, @meta_title_small) %>
+<%= discourse_body %>

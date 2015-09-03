@@ -19,20 +19,16 @@ test:
   <<: *defaults
 
 production:
-  avtorif.ru:
-    <<: *defaults
-    host: 'forum.avtorif.ru'
-    port: '80'
-    host_port: 'forum.avtorif.ru'
-    api_username: robot
-    api_key: 02950e0701e3765c5f98bc4f0fafab773dd50e62ada590a0caec1cf218f420c9
-    categories:
-      head:
-        title: Вступления
-        id: 14
-      body:
-        title: Статьи
-        id: 15
-
-  zapstok.ru:
-    <<: *defaults
+  <<: *defaults
+  host: 'forum.avtorif.ru'
+  port: '80'
+  host_port: 'forum.avtorif.ru'
+  api_username: robot
+  api_key: 02950e0701e3765c5f98bc4f0fafab773dd50e62ada590a0caec1cf218f420c9
+  categories:
+    head:
+      title: Вступления
+      id: 14
+    body:
+      title: Статьи
+      id: 15

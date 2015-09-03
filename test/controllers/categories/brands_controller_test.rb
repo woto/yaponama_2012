@@ -9,4 +9,9 @@ class Categories::BrandsControllerTest < ActionController::TestCase
     assert_select '#categories-brands-show-models', /^ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ на MITSUBISHI Galant \(1 шт.\)\s+ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ на MITSUBISHI Lancer \(1 шт.\)\s+ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ на MITSUBISHI Lancer Ralliart \(1 шт.\)$/m
   end
 
+  test 'Проверяем @discourse на :show' do
+    get :show, id: brands(:toyota), category_id: spare_catalogs(:akb)
+    assert_equal ['Батарея аккумуляторная на TOYOTA'], assigns(:discourse)
+  end
+
 end

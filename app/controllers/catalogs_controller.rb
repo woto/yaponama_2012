@@ -8,5 +8,8 @@ class CatalogsController < ApplicationController
       where("spare_applicabilities.brand_id IS NOT NULL").
       select("brands.id, brands.name, brands.image, count(spare_applicabilities.id) as count").
       group("brands.id")
+
+    @meta_title = 'Каталоги автозапчастей'
+    @discourse = [@meta_title]
   end
 end

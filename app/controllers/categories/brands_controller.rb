@@ -17,6 +17,10 @@ class Categories::BrandsController < ApplicationController
     @spare_infos = @spare_infos.includes(@resource_class.name.demodulize.underscore) if @resource_class
     @spare_infos = @spare_infos.by_brand(params[:id]).by_category(params[:category_id])
     @spare_infos = @spare_infos.page(params[:page]).per(params[:per])
+
+    @meta_title = "#{@resource.name} на #{@brand.name}"
+    @meta_title_small = "(рус. #{@brand.brands.slang.pluck(:name).join(', ')})" if @brand.brands.slang.exists?
+    @discourse = [@meta_title]
   end
 
   private

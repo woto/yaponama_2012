@@ -34,4 +34,9 @@ class Catalogs::ModelsControllerTest < ActionController::TestCase
     #assert_select '#best-parts-list', /3310 \(INFINITI\) ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ на MITSUBISHI Galant.*3310 \(TOYOTA\) РУЛЕВАЯ ТЯГА на MITSUBISHI Galant.*2102 \(NISSAN\) САЙЛЕНТБЛОК на MITSUBISHI Galant.*/m
   end
 
+  test 'Проверяем @discourse на :show' do
+    get :show, id: models(:teana)
+    assert_equal ['Запчасти на NISSAN teana'], assigns(:discourse)
+  end
+
 end

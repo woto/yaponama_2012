@@ -11,4 +11,9 @@ class Catalogs::BrandsControllerTest < ActionController::TestCase
     #assert_select '#best-parts-list', /.*2103 \(KI\).*2102 \(KI\).*3310 \(INFINITI\).*3310 \(TOYOTA\).*2102 \(NISSAN\).*/m
   end
 
+  test 'Проверяем @discourse на :show' do
+    get :show, id: brands(:toyota)
+    assert_equal ['Запчасти на TOYOTA'], assigns(:discourse)
+  end
+
 end

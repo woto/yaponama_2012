@@ -1,1 +1,1 @@
-$redis = Redis.new(:host => ::Rails.configuration.redis['host'], :port => ::Rails.configuration.redis['port'])
+$redis = Redis.new(host: 'localhost', port: 6379)

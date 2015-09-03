@@ -11,6 +11,9 @@ class Categories::ModificationsController < ApplicationController
     @spare_infos = @spare_infos.includes(@resource_class.name.demodulize.underscore) if @resource_class
     @spare_infos = @spare_infos.by_modification(params[:id]).by_category(params[:category_id])
     @spare_infos = @spare_infos.page(params[:page]).per(params[:per])
+
+    @meta_title = "#{@resource.name} на #{@brand.name} #{@model.name} #{@generation.name} #{@modification.name}"
+    @discourse = [@meta_title]
   end
 
   def find_resource

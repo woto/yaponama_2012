@@ -45,6 +45,8 @@ class BrandsController < ApplicationController
       select("brands.id, brands.name, brands.image, count(spare_infos.id) as count").
       order("brands.name").
       group("brands.id, brands.name")
+    @meta_title = 'Бренды'
+    @discourse = [@meta_title]
   end
 
   def show
@@ -60,6 +62,10 @@ class BrandsController < ApplicationController
       where(:spare_infos => {:brand_id => params[:id]}).
       group("spare_catalogs.id, spare_catalog_groups.id, spare_catalog_groups.ancestry").
       order("spare_catalogs.name")
+
+    @meta_title = "Производитель запчастей #{@brand.name}"
+    @meta_title_small = "(рус. #{@brand.brands.slang.pluck(:name).join(', ')})" if @brand.brands.slang.exists?
+    @discourse = [@meta_title]
   end
 
   private

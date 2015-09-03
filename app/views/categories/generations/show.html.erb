@@ -1,9 +1,3 @@
-<% @discourse = {} %>
-<% @discourse[:category] = @resource.name %>
-<% @discourse[:brand] = @brand.name %>
-<% @discourse[:model] = @model.name %>
-<% @discourse[:generation] = @generation.name %>
-
 <%= page do |p| %>
 
   <%= p.breadcrumb do %>
@@ -26,9 +20,8 @@
 
   <%= p.title do %>
     <%= image_tag @brand.image_url, class: 'pull-right img-thumbnail', style: 'margin-top: -60px;' %>
-    <% @meta_title = "#{@resource.name} на #{@brand.name} #{@model.name} #{@generation.name}" %>
-    <% discourse_head(@meta_title, @meta_title_small) %>
     <%= page_header %>
+    <%= discourse_head %>
   <% end %>
 
   <%= p.content do %>
@@ -67,4 +60,4 @@
 
 <% end %>
 
-<%= discourse_body(@meta_title, @meta_title_small) %>
+<%= discourse_body %>

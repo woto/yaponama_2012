@@ -18,8 +18,11 @@ class Categories::ModelsController < ApplicationController
     @spare_infos = @spare_infos.includes(@resource_class.name.demodulize.underscore) if @resource_class
     @spare_infos = @spare_infos.by_model(params[:id]).by_category(params[:category_id])
     @spare_infos = @spare_infos.page(params[:page]).per(params[:per])
-  end
 
+    @meta_title = "#{@resource.name} на #{@brand.name} #{@model.name}"
+    @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present?
+    @discourse = [@meta_title]
+  end
 
   def find_resource
     @resource = SpareCatalog.find(params[:category_id])

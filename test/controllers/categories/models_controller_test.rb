@@ -17,4 +17,10 @@ class Categories::ModelsControllerTest < ActionController::TestCase
     #TODO переработать
     #assert_select '#best-parts-list', '3310 (INFINITI) ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ на MITSUBISHI Galant'
   end
+
+  test 'Проверяем @discourse на :show' do
+    get :show, id: models(:teana), category_id: spare_catalogs(:akb)
+    assert_equal ['Батарея аккумуляторная на NISSAN teana'], assigns(:discourse)
+  end
+
 end

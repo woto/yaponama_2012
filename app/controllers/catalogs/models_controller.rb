@@ -12,11 +12,14 @@ class Catalogs::ModelsController < ApplicationController
       where(:spare_applicabilities => {:model_id => params[:id].to_i}).
       group("spare_catalogs.id, spare_catalog_groups.id, spare_catalog_groups.ancestry").
       order("spare_catalogs.name")
+
+    @meta_title = "Запчасти на #{@brand.name} #{@model.name}"
+    @meta_title_small = "(рус. #{@model.slang})" if @model.slang.present?
+    @discourse = [@meta_title]
   end
 
   private
  
-
   def find_resource
     @model = Model.find(params[:id])
     @brand = @model.brand

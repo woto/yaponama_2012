@@ -13,13 +13,7 @@ test:
   host_port: 'test.host'
 
 production:
-  avtorif.ru:
-    <<: *defaults
-    host: 'avtorif.ru'
-    port: '80'
-    host_port: 'avtorif.ru'
-  zapstok.ru:
-    <<: *defaults
-    host: 'zapstok.ru'
-    port: '80'
-    host_port: 'zapstok.ru'
+  <<: *defaults
+  host: 'avtorif.ru'
+  port: '80'
+  host_port: 'avtorif.ru'

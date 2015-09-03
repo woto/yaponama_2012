@@ -381,25 +381,26 @@ module ApplicationHelper
 
   end
 
-  def discourse_head(*titles)
-    d = Discourse.new('head', *titles)
-    @meta_title_lead ||= ''.html_safe
+  def discourse_head
+    d = Discourse.new('head', @discourse)
 
-    d.get_posts(1) do |post, link_to_edit|
-      @meta_title_lead << post
-      if current_user && current_user.seller?
-        @meta_title_lead << link_to("Редактировать вступление", link_to_edit, class: 'btn btn-warning')
+    content_tag :div, class: "bottom-space" do
+      d.get_posts(1) do |post, link_to_edit|
+        concat(post)
+        if current_user && current_user.seller?
+          concat link_to("Редактировать вступление", link_to_edit, class: 'btn btn-warning')
+        end
       end
-    end
 
-    if current_user && current_user.seller?
-      @meta_title_lead << " "
-      @meta_title_lead << link_to("Добавить вступление", d.link_to_new, class: 'btn btn-warning')
+      if current_user && current_user.seller?
+        concat " "
+        concat link_to("Добавить вступление", d.link_to_new, class: 'btn btn-warning')
+      end
     end
   end
 
-  def discourse_body(*titles)
-    discourse = Discourse.new('body', *titles)
+  def discourse_body
+    discourse = Discourse.new('body', @discourse)
 
     page do |page|
       page.content do

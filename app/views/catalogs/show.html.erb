@@ -7,9 +7,8 @@
   <% end %>
 
   <%= p.title do %>
-    <% @meta_title = 'Каталоги автозапчастей' %>
-    <% discourse_head(@meta_title, @meta_title_small) %>
     <%= page_header %>
+    <%= discourse_head %>
   <% end %>
 
   <%= p.content do %>
@@ -35,4 +34,4 @@
 
 <% end %>
 
-<%= discourse_body(@meta_title, @meta_title_small) %>
+<%= discourse_body %>

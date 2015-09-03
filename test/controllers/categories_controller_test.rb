@@ -35,4 +35,14 @@ class CategoriesControllerTest < ActionController::TestCase
     #assert_select '#category-page', 'Подробное описание что такое пыльник рулевой тяги.'
   end
 
+  test 'Проверяем @discourse на :index' do
+    get :index
+    assert_equal ["Запчасти"], assigns(:discourse)
+  end
+
+  test 'Проверяем @discourse на :show' do
+    get :show, id: spare_catalogs(:bamper_zadniy)
+    assert_equal ["БАМПЕР ЗАДНИЙ"], assigns(:discourse)
+  end
+
 end

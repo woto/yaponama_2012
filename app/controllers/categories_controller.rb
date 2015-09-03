@@ -13,6 +13,9 @@ class CategoriesController < ApplicationController
       joins(sct.join(scgt, Arel::Nodes::OuterJoin).on(scgt[:id].eq(sct[:spare_catalog_group_id])).join_sources).
       group("spare_catalogs.id, spare_catalog_groups.id, spare_catalog_groups.ancestry").
       order("spare_catalogs.name")
+
+    @meta_title = "Запчасти"
+    @discourse = [@meta_title]
   end
 
   def show
@@ -28,6 +31,9 @@ class CategoriesController < ApplicationController
     @spare_infos = @spare_infos.includes(@resource_class.name.demodulize.underscore) if @resource_class
     @spare_infos = @spare_infos.by_category(params[:id])
     @spare_infos = @spare_infos.page(params[:page]).per(params[:per])
+
+    @meta_title = "#{@resource.name}"
+    @discourse = [@meta_title]
   end
 
   private
