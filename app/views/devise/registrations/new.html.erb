@@ -1,0 +1,28 @@
+<% @meta_title = 'Регистрация' %>
+
+<%= page do |p| %>
+
+  <%= p.breadcrumb do %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content :xs do %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
+
+      <%= f.input :email, required: true, autofocus: true, placeholder: 'Адрес электронной почты, например pavel@mail.ru' %>
+      <%= f.input :password, required: true, placeholder: 'Придумайте пароль не короче 8 символов' %>
+      <%= f.input :password_confirmation, required: true, placeholder: 'Повторите ввод пароля' %>
+
+      <br />
+      <%= f.button :submit, "Зарегистрироваться", class: 'btn btn-primary btn-lg' %>
+    <% end %>
+    <br />
+    <br />
+    <%= render "devise/shared/links" %>
+  <% end %>
+
+<% end %>
