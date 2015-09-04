@@ -1,0 +1,27 @@
+<% @meta_title = 'Вход на сайт' %>
+
+<%= page do |p| %>
+
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content :xs do %>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= f.input :email, required: false, autofocus: true %>
+      <%= f.input :password, required: false %>
+      <%= f.input :remember_me, as: :boolean, label: 'Запомнить меня' if devise_mapping.rememberable? %>
+      <br />
+      <%= f.button :submit, "Войти на сайт", class: "btn btn-primary btn-lg" %>
+    <% end %>
+    <br />
+    <br />
+    <%= render "devise/shared/links" %>
+  <% end %>
+
+<% end %>

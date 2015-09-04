@@ -2,7 +2,9 @@
 
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item @meta_title %>
   <% end %>
 
   <%= p.title do %>

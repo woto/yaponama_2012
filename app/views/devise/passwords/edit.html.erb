@@ -1,0 +1,34 @@
+<% @meta_title = 'Cмена пароля' %>
+<% @meta_title_lead = '' %>
+
+<%= page do |p| %>
+
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content :xs do %>
+
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.error_notification %>
+
+      <%= f.input :reset_password_token, as: :hidden %>
+      <%= f.full_error :reset_password_token %>
+
+      <%= f.input :password, required: true, autofocus: true, placeholder: "Придумайте себе новый пароль" %>
+      <%= f.input :password_confirmation, required: true, placeholder: "Повторите ввод" %>
+
+      <br />
+      <%= f.button :submit, "Сменить пароль", class: "btn btn-primary btn-lg" %>
+    <% end %>
+
+    <br />
+    <%= render "devise/shared/links" %>
+  <% end %>
+
+<% end %>
