@@ -1,0 +1,24 @@
+<% @meta_title = 'Восстановление пароля' %>
+
+<%= page do |p| %>
+
+  <%= p.breadcrumb do %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content :xs do %>
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :email, required: true, autofocus: true, placeholder: 'Адрес электронной почты, например pavel@mail.ru' %>
+      <br />
+      <%= f.button :submit, "Выслать", class: "btn btn-primary btn-lg" %>
+    <% end %>
+    <br />
+    <br />
+    <%= render "devise/shared/links" %>
+  <% end %>
+
+<% end %>
