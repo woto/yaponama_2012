@@ -3,67 +3,50 @@ class PageTemplate < ActionView::Helpers::FormBuilder
     @template = template
   end
 
-  def breadcrumb
+  def breadcrumb(size = :lg)
     @template.container do
       @template.row class: 'top-space bottom-space-sm' do
-        @template.content_tag :div, class: 'col-lg-24' do
+        @template.content_tag :div, class: css_class(size) do
+          @template.content_tag(:ol, :class => 'breadcrumb') do
+            yield Breadcrumb.new @template
+          end
+        end
+      end
+    end
+  end
+
+  def title(size = :lg)
+    @template.container do
+      @template.row class: 'top-space-sm' do
+        @template.content_tag :div, class: css_class(size) do
           yield
         end
       end
     end
   end
 
-  def title
-    @template.container do
-      @template.row class: 'top-space-sm' do
-        @template.content_tag :div, class: 'col-lg-24' do
-          #@template.content_tag(:div, :style => 'background: #FAFAFA; padding: 15px 15px 15px 15px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);') do
-          @template.content_tag :div do
-            yield
-          end
-        end
-      end
-    end
-  end
-
-  # TODO зарефакторить. Убрать дубликат.
-  def title_sm
-    @template.container do
-      @template.row class: 'top-space-sm' do
-        @template.content_tag :div, class: 'col-lg-12 col-lg-offset-6' do
-          #@template.content_tag(:div, :style => 'background: #FAFAFA; padding: 15px 15px 15px 15px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);') do
-          @template.content_tag :div do
-            yield
-          end
-        end
-      end
-    end
-  end
-
-  def content
+  def content(size = :lg)
     @template.container do
       @template.row do
-        @template.content_tag :div, class: 'col-lg-24' do
-          #@template.content_tag(:div, :style => 'background: white; padding: 25px 15px 15px 15px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);') do
-          @template.content_tag :div do
-            yield
-          end
+        @template.content_tag :div, class: css_class(size) do
+          yield
         end
       end
     end
   end
 
-  # TODO зарефакторить. Убрать дубликат.
-  def content_sm
-    @template.container do
-      @template.row do
-        @template.content_tag :div, class: 'col-lg-12 col-lg-offset-6' do
-          #@template.content_tag(:div, :style => 'background: white; padding: 25px 15px 15px 15px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);') do
-          @template.content_tag(:div) do
-            yield
-          end
-        end
-      end
+  private
+
+  def css_class(size)
+    case size
+    when :xs
+      'col-lg-8 col-md-12 col-sm-16'
+    when :sm
+      'col-lg-12 col-md-16 col-sm-20'
+    when :md
+      'col-lg-14 col-md-18 col-sm-24'
+    when :lg
+      'col-lg-24'
     end
   end
 

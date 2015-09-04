@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class Breadcrumb < AbstractBootstrap
 
   def item title, url=nil
@@ -13,4 +11,3 @@ class Breadcrumb < AbstractBootstrap
   end
 
 end
-
