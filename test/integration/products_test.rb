@@ -2,6 +2,11 @@ require 'test_helper'
 
 class ProductsTest < ActionDispatch::IntegrationTest
 
+  test 'После поиска артикула у нас должна заполниться история' do
+    get new_user_product_path(catalog_number: '2103')
+    assert_equal [['2103', '2103 MITSUBISHI, KI Задний бампер']], session[:history]
+  end
+
   test 'Если у товара стоит сокрытие каталожного номера, то показывается только звездочка' do
     id = products(:anton_first).id
     cookies['auth_token'] = somebodies(:anton).auth_token
