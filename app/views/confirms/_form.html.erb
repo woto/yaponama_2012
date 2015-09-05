@@ -1,4 +1,0 @@
-<%= twbs_form_for @contact, as: :confirm, url: polymorphic_path([:make, :user, :confirm, params[:resource_class].underscore]), method: :get, remote: true  do |f| %>
-  <%= f.twbs_text_field :pin %>
-  <%= f.twbs_submit 'Подтвердить' %>
-<% end %>

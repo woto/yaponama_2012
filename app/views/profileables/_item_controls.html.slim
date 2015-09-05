@@ -1,6 +1,0 @@
-.profileable-item-controls
-  = link_to smart_route({:prefix => [:edit], :postfix => [resource]}), class: "btn btn-warning btn-sm" do
-    = icon 'edit'
-  '
-  = link_to smart_route({:postfix => [resource]}, :return_path => url_for(controller: '/users', action: 'show', id: @somebody.id) ), method: 'delete', data: {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))}, class: "btn btn-danger btn-sm" do
-    = icon 'times'
