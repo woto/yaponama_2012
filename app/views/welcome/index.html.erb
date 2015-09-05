@@ -1,7 +1,7 @@
 <% @meta_title = ckpart('welcome.index.title') %>
 <% @meta_description = ckpart('welcome.index.description') %>
 
-<%= content_tag :div, "smoothScrollingDuration" => "100", "data-smooth-scrolling" => "off", "data-0" => "background-position: -300px -430px", "data-top-bottom" => "background-position: -300px -230px", style: "padding: 80px 0px; background: #5A5A5A url('#{asset_url 'parts.jpg'}') 0px 0px;" do %>
+<%= content_tag :div, style: "padding: 80px 0px; background: #5A5A5A url('#{asset_url 'parts.jpg'}') 0px 0px;" do %>
 
   <div class="container">
 
@@ -14,7 +14,7 @@
 
       <div class="col-md-12 col-lg-10">
         <div class="col-lg-20 col-lg-offset-2 top-space-lg bottom-space-lg">
-          <%= form_tag polymorphic_path([:new, *jaba3, :product]), remote: true, :method => :get, class: 'bottom-space-lg' do %>
+          <%= form_tag new_user_product_path remote: true, :method => :get, class: 'bottom-space-lg' do %>
             <div class="input-group">
               <input type="text" name="catalog_number" class="form-control input-lg" placeholder="Артикул детали">
               <span class="input-group-btn">
@@ -77,7 +77,7 @@
 
       <div class="col-lg-24" style="position: relative">
         <% @topics.each do |topic| %>
-          <p data-top="top:<%= -Random.rand(800) %>px" data-bottom="top:<%=Random.rand(800)%>px" class="text-muted unselectable" style="color: #555; font-size: <%= 20 + Random.rand(20) %>px; font-weight: bold; position: absolute; top: <%= Random.rand(340) - 40 %>px ; left: <%= Random.rand(800) - 100 %>px; padding: 0; display: block; white-space: nowrap"><%= topic['title'] %></p>
+          <p class="text-muted unselectable" style="color: #555; font-size: <%= 20 + Random.rand(20) %>px; font-weight: bold; position: absolute; top: <%= Random.rand(340) - 40 %>px ; left: <%= Random.rand(800) - 100 %>px; padding: 0; display: block; white-space: nowrap"><%= topic['title'] %></p>
         <% end %>
 
         <div style="top: 180px; position: absolute; left: 0; right: 0; width: 300px" class="center-block">

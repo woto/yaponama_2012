@@ -14,6 +14,9 @@
 //= require autosize/jquery.autosize.min.js
 //= require purl/purl
 //
+//= require jstz
+//= require browser_timezone_rails/set_time_zone
+//
 //= require console.log-wrapper/consolelog.min.js
 //= require console.log-wrapper/consolelog.detailprint.min.js
 //
@@ -28,9 +31,6 @@
 //= require pickadate.js/lib/legacy
 //= require pickadate.js/lib/translations/ru_RU
 //
-//= require skrollr/src/skrollr
-//= require skrollr
-//
 //= require bootbox/bootbox
 //
 //= require noUiSlider/distribute/jquery.nouislider.all.min
@@ -39,6 +39,7 @@
 //
 //= require opts
 //= require components/tree
+//= require components/phone
 //
 //=========================
 // LIBS
@@ -50,7 +51,6 @@
 //
 //= require common
 //= require profileables
-//= require mobile_mask
 //= require phone_input
 //= require stand_alone_house
 //= require collapse_next
