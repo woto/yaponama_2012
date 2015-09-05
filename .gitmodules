@@ -88,9 +88,6 @@
 [submodule "system/submodules/files"]
 	path = system/submodules/files
 	url = https://github.com/woto/files
-[submodule "system/submodules/skrollr"]
-	path = system/submodules/skrollr
-	url = https://github.com/Prinzhorn/skrollr
 [submodule "system/submodules/bootbox"]
 	path = system/submodules/bootbox
 	url = https://github.com/makeusabrew/bootbox
