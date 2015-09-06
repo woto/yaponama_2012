@@ -11,7 +11,7 @@
     <%= page_header %>
   <% end %>
 
-  <%= p.content :xs do %>
+  <%= p.content :sm do %>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= f.input :email, required: false, autofocus: true %>
       <%= f.input :password, required: false %>
