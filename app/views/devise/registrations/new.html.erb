@@ -11,7 +11,7 @@
     <%= page_header %>
   <% end %>
 
-  <%= p.content :xs do %>
+  <%= p.content :sm do %>
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= f.error_notification %>
       <%= f.input :email, required: true, autofocus: true, placeholder: 'Адрес электронной почты, например pavel@mail.ru' %>

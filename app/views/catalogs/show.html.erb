@@ -1,9 +1,8 @@
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <%= breadcrumb false, exception=true do |b| %>
-      <%= b.item('Каталоги') %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', link_to(root_path) %>
+    <%= b.item 'Каталоги' %>
   <% end %>
 
   <%= p.title do %>

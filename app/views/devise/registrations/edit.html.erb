@@ -1,4 +1,4 @@
-<% @meta_title = "Редактирование профиля" %>
+<% @meta_title = "Смена пароля" %>
 
 <%= page do |p| %>
 
@@ -25,18 +25,13 @@
 
       <%= f.error_notification %>
 
-      <%= f.input :name %>
-      <%= f.input :phone %>
-      <%= f.input :email, required: true, autofocus: true %>
-
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+        <p>Ожидается подтверждение e-mail адреса: <%= resource.unconfirmed_email %></p>
       <% end %>
 
-      <%= f.input :password, autocomplete: "off", hint: "Не заполняйте поле если не хотите менять пароль", required: false %>
-      <%= f.input :password_confirmation, required: false %>
-
-      <%= f.input :comment %>
+      <%= f.input :password, autocomplete: "off", label: 'Новый пароль', required: false %>
+      <%= f.input :password_confirmation, label: 'Подтверждение пароля', required: false %>
+      <%= f.input :current_password, autocomplete: "off", label: 'Текущий пароль', required: true %>
 
       <div class="col-sm-offset-6">
         <%= f.buttons %>
