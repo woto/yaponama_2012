@@ -1,0 +1,10 @@
+.breadcrumb {
+  background: white;
+  padding-left: 0;
+  @extend .bottom-space-none;
+}
+
+.breadcrumb > li + li:before {
+  font-family: "FontAwesome";
+  content: "\f0da";
+}

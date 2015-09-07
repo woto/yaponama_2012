@@ -1,20 +1,40 @@
-<% @meta_title = 'Настройки пользователя' %>
+<% @meta_title = "Редактирование профиля" %>
 
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <%= breadcrumb false do |b| %>
-      <% b.item @meta_title %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Личный кабинет', user_path %>
+    <%= b.item @meta_title %>
   <% end %>
 
   <%= p.title do %>
     <%= page_header %>
   <% end %>
 
+  <%= p.content :sm do %>
 
-  <%= p.content do %>
-    <%= render 'form' %>
+    <%= simple_form_for(@resource, url: user_path(return_path: params[:return_path]), html: { method: :put }, html: { class: 'form-horizontal' },
+        wrapper: :horizontal_form,
+        wrapper_mappings: {
+          check_boxes: :horizontal_radio_and_checkboxes,
+          radio_buttons: :horizontal_radio_and_checkboxes,
+          file: :horizontal_file_input,
+          boolean: :horizontal_boolean
+        }) do |f| %>
+
+      <%= f.error_notification %>
+
+      <%= f.input :name, autofocus: true %>
+      <%= f.input :email, required: true %>
+      <%= f.input :phone %>
+      <%= f.input :comment, :input_html => { :rows => 5 } %>
+
+      <div class="col-sm-offset-6">
+        <%= f.buttons %>
+      </div>
+
+    <% end %>
   <% end %>
 
 <% end %>

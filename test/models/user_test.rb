@@ -23,7 +23,7 @@ class UserTest < ActiveSupport::TestCase
 
   test 'Проверка работы метода move_to' do
     postal_address = user_postal_addresses :sending1
-    car = cars :sending1
+    car = user_cars :sending1
     order = orders :sending1
     product = products :sending1
 

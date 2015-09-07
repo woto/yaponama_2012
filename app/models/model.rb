@@ -1,6 +1,5 @@
 class Model < ActiveRecord::Base
   include ByCategoryConcern
-  include Selectable
   include BelongsToCreator
 
   belongs_to :brand, :inverse_of => :models
