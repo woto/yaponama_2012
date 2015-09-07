@@ -36,8 +36,8 @@ class User::PostalAddressesControllerTest < ActionController::TestCase
         room: '1'
       }
     end
-    assert_equal User.last, User::PostalAddress.last.user
-    assert_equal User.last, User::PostalAddress.last.creator
+    assert_equal User.last, assigns(:resource).user
+    assert_equal User.last, assigns(:resource).creator
   end
 
 end

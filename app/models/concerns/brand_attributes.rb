@@ -1,6 +1,4 @@
-# encoding: utf-8
-#
-module BrandAttributes
+module Concerns::BrandAttributes
 
   extend ActiveSupport::Concern
 
@@ -15,7 +13,7 @@ module BrandAttributes
         if brand.present?
           self.brand = brand
         else
-          self.brand = Brand.new(name: attr["name"], phantom: true)
+          self.brand = Brand.new(name: attr["name"], is_brand: attr["is_brand"])
         end
       else
         self.brand = nil
