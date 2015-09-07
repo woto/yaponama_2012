@@ -8,7 +8,17 @@ end
 
 Yaponama2012::Application.routes.draw do
 
-  resources :polls
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    passwords: 'users/passwords',
+  }
+
+  #devise_scope :user do
+  #  authenticated :user do
+  #    root 'users#show', as: :authenticated_root
+  #  end
+  #end
 
   # /brands/дочерний_id/parts -> /brands/родительский_id
   get "/brands/:id/parts", to: redirect{ |params, request|
@@ -116,11 +126,6 @@ Yaponama2012::Application.routes.draw do
         end
       end
     end
-  end
-
-
-  concern :cashable do
-    resource :cashes, :only => [:new, :create, :show]
   end
 
 
