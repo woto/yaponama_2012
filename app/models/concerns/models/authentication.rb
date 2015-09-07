@@ -2,7 +2,6 @@ module Concerns::Models::Authentication
   extend ActiveSupport::Concern
 
   included do
-
     # Пропускаем валидацию у гостей
     def email_required?
       super && !guest?

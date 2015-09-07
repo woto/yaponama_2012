@@ -1,7 +1,31 @@
 lee:
-  role: guest
+  role: <%= User.roles['guest'] %>
 
 ben:
   role: user
   encrypted_password: <%= User.new.send(:password_digest, "12345678") %>
   email: 'ben@example.com'
+
+sending1:
+  role: <%= User.roles['guest'] %>
+
+receiving1:
+  role: <%= User.roles['user'] %>
+
+first_admin:
+  role: <%= User.roles['manager'] %>
+
+guest:
+  role: <%= User.roles['guest'] %>
+
+user:
+  encrypted_password: <%= User.new.send(:password_digest, "12345678") %>
+  role: <%= User.roles['user'] %>
+
+manager:
+  encrypted_password: <%= User.new.send(:password_digest, "12345678") %>
+  role: <%= User.roles['manager'] %>
+
+admin:
+  encrypted_password: <%= User.new.send(:password_digest, "12345678") %>
+  role: <%= User.roles['admin'] %>

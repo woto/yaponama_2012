@@ -14,11 +14,6 @@ class User < ActiveRecord::Base
     has_many :products
     has_many :postal_addresses
     has_many :orders
-    has_many :payments
-  end
-
-  def to_label
-    "#{id.to_s.scan(/.{3}|.+/).join("-")} #{Date.today}"
   end
 
 end
