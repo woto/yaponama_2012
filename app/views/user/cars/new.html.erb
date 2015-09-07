@@ -1,0 +1,19 @@
+<% title_new %>
+
+<%= page do |p| %>
+
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Личный кабинет', user_path %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content :md do %>
+    <%= render "form" %>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,63 @@
+<%= simple_form_for(@resource, :url => polymorphic_path([@resource], return_path: params[:return_path]), html: { class: 'form-horizontal' },
+        wrapper: :horizontal_form,
+        wrapper_mappings: {
+          check_boxes: :horizontal_radio_and_checkboxes,
+          radio_buttons: :horizontal_radio_and_checkboxes,
+          file: :horizontal_file_input,
+          boolean: :horizontal_boolean
+        }) do |f| %>
+
+  <%= f.error_notification %>
+
+  <%= f.input :vin_or_frame, collection: [['VIN код', 'vin'], ['FRAME код', 'frame']],
+    label_method: :first,
+    value_method: :last,
+    as: :radio_buttons,
+    item_label_class: "radio-inline",
+    item_wrapper_tag: false,
+    label: '',
+    input_html: {
+      vin_or_frame:'',
+      rel: 'radio' } %>
+
+  <%= f.input :vin, label: '', wrapper_html: {vin:''} %>
+  <%= f.input :frame, label: '', wrapper_html: {frame:''} %>
+
+  <% has_error = f.object.errors[:brand].empty? ? {} : {wrapper_html: {class: 'has-error'}}%>
+  <%= f.simple_fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b| %>
+    <%= b.input :name, has_error do %>
+      <%= b.hidden_field :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id, "is-brand" => '1'}, placeholder: 'Выберите или добавьте нового производителя' %>
+      <%= f.error(:brand) %>
+    <% end %>
+  <% end %>
+
+  <% has_error = f.object.errors[:model].empty? ? {} : {wrapper_html: {class: 'has-error'}}%>
+  <%= f.simple_fields_for :model, f.object.model || f.object.build_model, include_id: false do |b| %>
+    <%= b.input :name, has_error do %>
+      <%= b.hidden_field :name, rel: 'select2-model', data: {"true-id" => f.object.model_id}, placeholder: 'Выберите или добавьте новую модель' %>
+      <%= f.error(:model) %>
+    <% end %>
+  <% end %>
+
+  <%= f.simple_fields_for :generation, f.object.generation || f.object.build_generation, include_id: false do |b| %>
+    <%= b.input :name, required: false do %>
+      <%= b.hidden_field :name, rel: 'select2-generation', data: {"true-id" => f.object.generation_id}, placeholder: 'Выберите или добавьте новое поколение' %>
+      <%= f.error(:generation) %>
+    <% end %>
+  <% end %>
+
+
+  <%= f.simple_fields_for :modification, f.object.modification || f.object.build_modification, include_id: false do |b| %>
+    <%= b.input :name, required: false do %>
+      <%= b.hidden_field :name, rel: 'select2-modification', data: {"true-id" => f.object.modification_id}, placeholder: 'Выберите или добавьте новую модификацию' %>
+      <%= f.error(:modification) %>
+    <% end %>
+  <% end %>
+
+  <%= f.input :notes %>
+
+  <div class="col-sm-offset-6 col-sm-18">
+    <%= f.buttons %>
+  </div>
+
+<% end %>
