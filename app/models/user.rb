@@ -1,18 +1,24 @@
-# encoding: utf-8
-#
-class User < Somebody
+class User < ActiveRecord::Base
 
-  validates :discount, :prepayment, :numericality => true
-  validates :order_rule, :inclusion => { :in => Rails.configuration.somebody_order_rules.keys }
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
-  validates :role, :inclusion => Rails.configuration.somebody_roles_keys
+  include Concerns::Models::Bot
+  include Concerns::Models::Authentication
+  include Concerns::Models::Authorization
 
-  before_validation if: -> {code_1 == 'register'} do
-    self.password_required = true
+  with_options dependent: :destroy do
+    has_many :cars
+    has_many :products
+    has_many :postal_addresses
+    has_many :orders
+    has_many :payments
   end
 
-  before_save if: -> {code_1 == 'register'} do
-    self.role = 'user'
+  def to_label
+    "#{id.to_s.scan(/.{3}|.+/).join("-")} #{Date.today}"
   end
 
 end
