@@ -13,14 +13,6 @@ class UserTest < ActiveSupport::TestCase
     assert u.valid?
   end
 
-  test 'Метод to_label для гостя должен возвращать его красивый номер pretty_id' do
-    travel_to Time.new(2004, 11, 24, 01, 04, 44)
-    user = User.new
-    user.stub(:id, 12382398) do
-      assert_equal '123-823-98 2004-11-24', user.to_label
-    end
-  end
-
   test 'Проверка работы метода move_to' do
     postal_address = user_postal_addresses :sending1
     car = user_cars :sending1
@@ -36,6 +28,12 @@ class UserTest < ActiveSupport::TestCase
     assert_equal receiving1, car.reload.user
     assert_equal receiving1, order.reload.user
     assert_equal receiving1, product.reload.user
+  end
+
+  test 'Нельзя менять роль на гостя' do
+    user = User.create!(role: 'user', email: 'fake@example.com', password: '12345678')
+    user.role = 'guest'
+    refute user.save
   end
 
 end
