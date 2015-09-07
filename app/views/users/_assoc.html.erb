@@ -1,0 +1,32 @@
+<tr class="active">
+  <th>
+    <%= icon item[:icon] %>
+    <%= item[:title] %>
+  </th>
+  <td>
+    <div class="left-space">
+      <%= link_to polymorphic_path([:new, :user, item[:assoc]], return_path: request.fullpath) do %>
+        <small>добав.</small>
+      <% end %>
+    </div>
+  </td>
+</tr>
+
+<% current_user.send(item[:assoc].pluralize).each do |partial| %>
+  <tr>
+    <td>
+      <%= render :partial => partial.class.name.underscore, :locals => {partial.class.name.demodulize.underscore.to_sym => partial} %>
+    </td>
+    <td>
+      <div class="left-space">
+        <%= link_to polymorphic_path([:edit, resource], return_path: user_path) do %>
+          <small>редакт.</small>
+        <% end %>
+
+        <%= link_to polymorphic_path([resource], return_path: user_path), method: 'delete', data: {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Уверены, что хотите удалить?'))} do %>
+          <small>удал.</small>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+<% end %>

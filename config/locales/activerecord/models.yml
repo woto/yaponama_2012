@@ -7,9 +7,8 @@ ru:
       profile: Контактное лицо
       postal_address: Почтовый адрес
       car: Автомобиль
-      company: Компанию
-      user: Пользователя
-      deliveries/place: Зону доставки
-      page: Страницу
+      company: Компания
+      user: Пользователь
+      page: Страница
       spare_info: Описание товара
       generation: Поколение

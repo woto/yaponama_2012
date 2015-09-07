@@ -54,10 +54,10 @@
     <% end %>
   <% end %>
 
-  <%= f.input :notes %>
+  <%= f.input :notes, input_html: {rows: 5} %>
 
   <div class="col-sm-offset-6 col-sm-18">
-    <%= f.buttons %>
+    <%= f.buttons 'Сохранить' %>
   </div>
 
 <% end %>

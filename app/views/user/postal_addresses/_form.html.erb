@@ -18,10 +18,10 @@
   <%= f.input :stand_alone_house, input_html: {rel: 'checkbox', stand_alone_house:''} %>
   <%= f.input :room, wrapper_html: {room:''} %>
 
-  <%= f.input :notes %>
+  <%= f.input :notes, input_html: {rows: 5} %>
 
   <div class="col-sm-offset-6">
-    <%= f.buttons %>
+    <%= f.buttons 'Сохранить' %>
   </div>
 
 <% end %>

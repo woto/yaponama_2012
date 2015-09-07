@@ -2,35 +2,70 @@
 
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <%= breadcrumb false, exception=true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item @meta_title %>
   <% end %>
 
   <%= p.title do %>
     <%= page_header %>
   <% end %>
 
-  <%= p.content do %>
-    <%= legacy_somebody_tabs do %>
+  <%= container do %>
+    <%= row do %>
 
-      <%= row do %>
-        <div class="col-md-6 bottom-space-lg">
-          <ul class="list-unstyled">
-            <li><h4><%= link_to 'Движение средств', transactions_user_accounts_path(return_path: request.fullpath) %></h4></li>
-            <li><h4><%= link_to 'Выйти со всех компьютеров', logout_from_all_places_user_path, method: :delete, data: {confirm: 'Вы уверены что хотите выйти?'} %></h4></li>
-            <li><h4><%= link_to 'Сменить пароль', edit_user_password_path(return_path: request.fullpath) %></h4></li>
-            <li><h4><%= link_to 'Настройки', edit_user_path(return_path: request.fullpath), id: @resource.id %></h4></li>
-          </ul>
-        </div>
-        <div class="col-md-6 bottom-space-lg">
-        </div>
-      <% end %>
+      <div class="col-lg-8 col-md-10 col-sm-12">
 
-      <%= render 'profileables/right' %>
+        <% array = [ 
+          {title: 'Адреса', icon: 'home', assoc: 'postal_address'},
+          {title: 'Автомобили', icon: 'truck', assoc: 'car'} ] %>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr class="active">
+                <th colspan="2">
+                  <%= icon 'user' %>
+                  Профиль
+                </th>
+              </tr>
+              <tr>
+                <td>
+                  <%= user_to_label(current_user) %>
+                </td>
+                <td>
+                  <div class="left-space">
+                    <%= link_to edit_user_path(return_path: request.fullpath) do %>
+                      <small>редакт.</small>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            </thead>
+            <%= safe_join(array.map{|item| render 'assoc', item: item}) %>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="col-lg-12 col-md-10 col-sm-8">
+        <div class="responsive-table">
+          <table class="table">
+            z
+          </table>
+        </div>
+      </div>
 
     <% end %>
 
+    <%= row class: "top-space-lg" do %>
+      <div class="col-lg-24">
+        <%= link_to edit_user_registration_path(return_path: request.fullpath) do %>
+          Сменить пароль
+        <% end %>
+        <br />
+        <%= link_to "Удалить свой аккаунт", user_registration_path, data: { confirm: "Вы действительно хотите удалить свой аккаунт?" }, method: :delete %></p>
+      </div>
+    <% end %>
   <% end %>
+    
 <% end %>
