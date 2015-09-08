@@ -1,4 +1,4 @@
-class Admin::Deliveries::OptionsController < Deliveries::OptionsController
+class Admin::Deliveries::OptionsController < ApplicationController
   include Admin::Admined
 
   private

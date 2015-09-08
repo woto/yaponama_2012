@@ -1,134 +1,126 @@
-<%= row do %>
+<%= simple_form_for(@resource, url:([:admin, @resource])) do |f| %>
 
-  <div class="col-md-16">
+  <%= f.error_notification %>
 
-    <%= simple_form_for(@resource, url:([:admin, @resource])) do |f| %>
-
-      <%= f.error_notification %>
-
-      <%= f.input :partner %>
-      <%= f.input :active %>
-      <%= f.input :z_index %>
+  <%= f.input :partner %>
+  <%= f.input :active %>
+  <%= f.input :z_index %>
 
 
+  <div class="form-group">
+    <div class="input-group">
+      <%= text_field_tag '', '', class: "form-control", placeholder: "Введите искомый адрес", id: "geocode-address-text", :"catch-enter"=>"" %>
+      <span class="input-group-btn">
+        <button id="geocode-address-button" class="btn btn-default" press-enter type="button"> Найти адрес </button>
+      </span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div id="map"> </div>
+    <%= f.hint 'Обратите внимание, что увеличение (zoom) и позиция на карте так же сохраняются.' %>
+  </div>
+
+  <%= f.input :realize %>
+
+  <div class="block">
+
+    <%= f.input :name %>
+    <%= f.input :metro %>
+    <%= f.input :content, class: 'ckeditor-extended' %>
+
+    <div id="variants" class="top-space bottom-space">
+      <%= f.simple_fields_for :variants do |variant| %>
+        <%= render 'variant_fields', :f => variant %>
+      <% end %>
       <div class="form-group">
-        <div class="input-group">
-          <%= text_field_tag '', '', class: "form-control", placeholder: "Введите искомый адрес", id: "geocode-address-text", :"catch-enter"=>"" %>
-          <span class="input-group-btn">
-            <button id="geocode-address-button" class="btn btn-default" press-enter type="button"> Найти адрес </button>
-          </span>
-        </div>
+        <%= link_to_add_association 'Добавить вариант доставки', f, :variants, class: "btn btn-success btn-small", :data => {"association-insertion-node" => ".form-group", "association-insertion-traversal" => "closest"}  %>
       </div>
+    </div>
 
-      <div class="form-group">
-        <div id="map"> </div>
-        <%= f.hint 'Обратите внимание, что увеличение (zoom) и позиция на карте так же сохраняются.' %>
-      </div>
+    <%= f.input :display_marker %>
 
-      <%= f.input :realize %>
+    <% (1..5).each do |n| %>
+      <%= f.instance_eval("input :phone#{n}") %>
+    <% end %>
 
-      <div class="block">
+    <% (1..3).each do |n| %>
+      <%= f.instance_eval("input :email#{n}") %>
+    <% end %>
 
-        <%= f.input :name %>
-        <%= f.input :metro %>
-        <%= f.input :content, class: 'ckeditor-extended' %>
+    <%= f.input :address_locality %>
+    <%= f.input :postal_code %>
+    <%= f.input :street_address %>
+    <%= f.input :price_url %>
 
-        <div id="variants" class="top-space bottom-space">
-          <%= f.simple_fields_for :variants do |variant| %>
-            <%= render 'variant_fields', :f => variant %>
-          <% end %>
-          <div class="form-group">
-            <%= link_to_add_association 'Добавить вариант доставки', f, :variants, class: "btn btn-success btn-small", :data => {"association-insertion-node" => ".form-group", "association-insertion-traversal" => "closest"}  %>
-          </div>
-        </div>
+    <% (1..5).each do |n| %>
+      <%= f.input "image#{n}", as: :image_preview %>
+    <% end %>
 
-        <%= f.input :display_marker %>
+    <%= panel 'default' do |p| %>
 
-        <% (1..5).each do |n| %>
-          <%= f.instance_eval("input :phone#{n}") %>
+      <%= p.heading do %>
+        <% p.title do %>
+          Стиль области
         <% end %>
+      <% end %>
 
-        <% (1..3).each do |n| %>
-          <%= f.instance_eval("input :email#{n}") %>
-        <% end %>
+      <%= p.body do %>
 
-        <%= f.input :address_locality %>
-        <%= f.input :postal_code %>
-        <%= f.input :street_address %>
-        <%= f.input :price_url %>
+        <ul class="nav nav-tabs">
 
-        <% (1..5).each do |n| %>
-          <%= f.input "image#{n}", as: :image_preview %>
-        <% end %>
-
-        <%= panel 'default' do |p| %>
-
-          <%= p.heading do %>
-            <% p.title do %>
-              Стиль области
-            <% end %>
+          <% ['active', 'inactive'].each do |style| %>
+            <li class="<%=style == 'active' ? 'active' : ''%>">
+              <a href="#<%=style%>" data-toggle="tab"> <%=style%> </a>
+            </li>
           <% end %>
 
-          <%= p.body do %>
+        </ul>
 
-            <ul class="nav nav-tabs">
+        <div class="tab-content top-space">
 
-              <% ['active', 'inactive'].each do |style| %>
-                <li class="<%=style == 'active' ? 'active' : ''%>">
-                  <a href="#<%=style%>" data-toggle="tab"> <%=style%> </a>
-                </li>
-              <% end %>
+          <% ['active', 'inactive'].each do |style| %>
 
-            </ul>
-
-            <div class="tab-content top-space">
-
-              <% ['active', 'inactive'].each do |style| %>
-
-                <div id="<%=style%>" class="tab-pane <%=style == 'active' ? 'active' : ''%>">
-                  <%= f.input :"#{style}_fill_color" %>
-                  <%= f.input :"#{style}_fill_opacity" %>
-                  <%= f.input :"#{style}_stroke_color" %>
-                  <%= f.input "#{style}_stroke_opacity" %>
-                  <%= f.input "#{style}_stroke_weight" %>
-                </div>
-
-              <% end %>
-
+            <div id="<%=style%>" class="tab-pane <%=style == 'active' ? 'active' : ''%>">
+              <%= f.input :"#{style}_fill_color" %>
+              <%= f.input :"#{style}_fill_opacity" %>
+              <%= f.input :"#{style}_stroke_color" %>
+              <%= f.input "#{style}_stroke_opacity" %>
+              <%= f.input "#{style}_stroke_weight" %>
             </div>
 
           <% end %>
 
-        <% end %>
+        </div>
 
-      </div>
-
-      <%= f.hidden_field :vertices %>
-      <%= f.hidden_field :lat %>
-      <%= f.hidden_field :lng %>
-      <%= f.hidden_field :zoom %>
-
-
-      <%= panel 'default' do |p| %>
-        <%= p.body do %>
-          <%= f.input :ycountry, as: :string %>
-          <%= f.input :ycountry_code, as: :string %>
-          <%= f.input :ycity %>
-          <%= f.input :ystreet %>
-          <%= f.input :yhouse %>
-          <%= f.input :ycity_code %>
-          <%= f.input :yphone %>
-          <%= f.input :ycompany_name %>
-          <%= f.input :ycontact_email %>
-          <%= f.input :ywork_time %>
-          <%= f.input :yogrn %>
-        <% end %>
       <% end %>
-
-      <%= f.buttons %>
 
     <% end %>
 
   </div>
+
+  <%= f.hidden_field :vertices %>
+  <%= f.hidden_field :lat %>
+  <%= f.hidden_field :lng %>
+  <%= f.hidden_field :zoom %>
+
+
+  <%= panel 'default' do |p| %>
+    <%= p.body do %>
+      <%= f.input :ycountry, as: :string %>
+      <%= f.input :ycountry_code, as: :string %>
+      <%= f.input :ycity %>
+      <%= f.input :ystreet %>
+      <%= f.input :yhouse %>
+      <%= f.input :ycity_code %>
+      <%= f.input :yphone %>
+      <%= f.input :ycompany_name %>
+      <%= f.input :ycontact_email %>
+      <%= f.input :ywork_time %>
+      <%= f.input :yogrn %>
+    <% end %>
+  <% end %>
+
+  <%= f.buttons %>
 
 <% end %>

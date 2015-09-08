@@ -1,4 +1,4 @@
-class Admin::Deliveries::PlacesController < Deliveries::PlacesController
+class Admin::Deliveries::PlacesController < ApplicationController
   include Admin::Admined
 
   private
