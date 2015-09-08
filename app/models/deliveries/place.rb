@@ -4,8 +4,6 @@ class Deliveries::Place < ActiveRecord::Base
     mount_uploader "image#{n}", ApplicationUploader
   end
 
-  include Selectable
-
   has_many :variants, dependent: :destroy
   accepts_nested_attributes_for :variants, :reject_if => :all_blank, :allow_destroy => true
   validates :variants, :length => { :minimum => 1 }, if: -> { realize }

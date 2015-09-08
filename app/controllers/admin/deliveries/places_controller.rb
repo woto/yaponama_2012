@@ -1,5 +1,4 @@
 class Admin::Deliveries::PlacesController < Deliveries::PlacesController
-  include Grid::Place
   include Admin::Admined
 
   private
