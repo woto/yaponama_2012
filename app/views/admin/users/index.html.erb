@@ -13,7 +13,7 @@
   <% end %>
 
   <%= p.content do %>
-    <%= search_form_for(@q, url: admin_users_path, html: { class: 'form-inline' }) do |f| %>
+    <%= search_form_for(@q, url: admin_users_path, html: {class: 'form-inline'}) do |f| %>
 
       <%= f.input :name_cont, placeholder: 'Имя', label: false %>
       <%= f.input :phone_eq, placeholder: 'Телефон', input_html: {data: {'mobile-mask' => ''}}, label: false %>

@@ -1,6 +1,5 @@
 class Bot < ActiveRecord::Base
 
-
   scope :matched_records_by_remote_ip, -> (remote_ip) {where(arel_table[:inet].eq(nil).or(arel_table[:inet].contains_or_equals(remote_ip)))}
   scope :matched_records_by_user_agent, -> (user_agent) {where(arel_table[:user_agent].eq(nil).or(Arel::Nodes::Matches.new(Arel::Nodes.build_quoted(user_agent.to_s), arel_table[:user_agent])))}
 
@@ -19,7 +18,7 @@ class Bot < ActiveRecord::Base
   end
 
   def to_label
-    "#{title} #{user_agent} #{cidr}"
+    title || "#{user_agent} #{cidr}"
   end
 
   def cidr

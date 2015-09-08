@@ -1,8 +1,13 @@
+<% title_edit %>
+
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <% title_edit %>
-    <%= breadcrumb true do |b| %>
+  <%= p.breadcrumb do |b| %>
+    <%= p.breadcrumb do |b| %>
+      <%= b.item 'Главная', root_path %>
+      <%= b.item 'Администрирование', admin_root_path %>
+      <%= b.item 'Правила ботов', admin_bots_path %>
+      <%= b.item @resource.to_label, admin_bot_path(@resource) %>
       <%= b.item @meta_title %>
     <% end %>
   <% end %>
@@ -11,7 +16,7 @@
     <%= page_header %>
   <% end %>
 
-  <%= p.content do %>
+  <%= p.content :md do %>
     <%= render :partial => "form" %>
   <% end %>
 

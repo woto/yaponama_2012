@@ -1,10 +1,10 @@
+<% title_index %>
+
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <% title_index %>
-    <%= breadcrumb true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item @meta_title %>
   <% end %>
 
   <%= p.title do %>
@@ -13,9 +13,15 @@
 
   <%= p.content do %>
 
-    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary', style: "vertical-align: top" do %>
-      <%= icon 'plus' %>
+    <%= search_form_for(@q, url: admin_bots_path, html: {class: 'form-inline'}) do |f| %>
+      <%= f.input :title_cont, placeholder: "Название правила", label: false %>
+      <%= f.input :user_agent_cont, placeholder: "User-Agent", label: false %>
+      <%= f.input :inet_contained_within_or_equals, placeholder: "Диапазон IP", label: false %>
+      <%= f.input :block_true, as: :select, label: false %>
+      <%= f.button :submit, "Поиск" %>
     <% end %>
+
+    <br />
 
     <%= paginate @resources %>
 
@@ -36,7 +42,9 @@
           <% @resources.each do |r| %>
             <tr>
               <td>
-                <%= link_to r.id, edit_admin_bot_path(r, return_path: request.fullpath) %> <br />
+                <%= r.id %> <br />
+                <%= link_to "Просмотр", admin_bot_path(r, return_path: request.fullpath) %> <br />
+                <%= link_to "Редактирование", edit_admin_bot_path(r, return_path: request.fullpath) %> <br />
                 <%= link_to 'Предпросмотр правила', preview_admin_bot_path(r, return_path: request.fullpath) %>
               </td>
               <td> <%= r.title %> </td>
@@ -52,6 +60,10 @@
     </div>
 
     <%= paginate @resources %>
+
+    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary' do %>
+      Новое правило
+    <% end %>
 
   <% end %>
 <% end %>

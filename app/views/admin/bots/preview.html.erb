@@ -1,10 +1,13 @@
+<% title_show %>
+
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <% @meta_title = "Предпросмотр правила: #{@resource.to_label}" %>
-    <%= breadcrumb true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Правила ботов', admin_bots_path %>
+    <%= b.item @resource.to_label, admin_bot_path(@resource) %>
+    <%= b.item @meta_title %>
   <% end %>
 
   <%= p.title do %>
@@ -13,10 +16,13 @@
 
   <%= p.content do %>
 
-    <%= link_to "Редактировать: #{@resource.to_label}", url_for(action: :edit, return_path: request.fullpath) %>
+    <%= link_to "Редактировать", url_for(action: :edit, return_path: request.fullpath), class: "btn btn-warning" %>
 
     <br />
     <br />
+
+
+    <h2>Пользователи, попадающие под данное правило</h2>
 
     <%= paginate @resources %>
 
@@ -26,7 +32,7 @@
           <tr>
             <th> <%= @resource_class.human_attribute_name :id %> </th>
             <th> <%= @resource_class.human_attribute_name :user_agent %> </th>
-            <th> <%= @resource_class.human_attribute_name :remote_ip %> </th>
+            <th> <%= @resource_class.human_attribute_name :current_sign_in_ip %> </th>
             <th> <%= @resource_class.human_attribute_name :created_at %> </th>
             <th> <%= @resource_class.human_attribute_name :updated_at %> </th>
           </tr>
@@ -36,7 +42,7 @@
             <tr>
               <td> <%= link_to r.id, url_for(action: :edit, return_path: request.fullpath) %> </td>
               <td> <%= r.user_agent %> </td>
-              <td> <%= r.remote_ip %> </td>
+              <td> <%= r.current_sign_in_ip %> </td>
               <td> <%= l r.created_at %> </td>
               <td> <%= l r.updated_at %> </td>
             </tr>
