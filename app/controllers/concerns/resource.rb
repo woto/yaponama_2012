@@ -4,7 +4,7 @@ module Concerns::Resource
   included do
     with_options unless: -> {params[:controller].include?('users/')} do
       before_action :set_resource_class
-      before_action :find_resource, except: [:new, :create, :index]
+      before_action :find_resource, only: [:show, :edit, :update, :destroy]
       before_action :find_resources, only: [:index]
       before_action :new_resource, only: [:new]
       before_action :show_resource, only: [:show]

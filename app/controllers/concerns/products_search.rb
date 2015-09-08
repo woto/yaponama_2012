@@ -14,6 +14,8 @@ module ProductsSearch
       @b9 = b9
       @r9 = r9
 
+      @discourse = PriceMate.catalog_number(@c9).downcase
+
       plog = Logger.new Rails.root.join('log', 'prices.log')
       plog.formatter = Logger::Formatter.new
       plog.debug "-----------------------------"
@@ -102,6 +104,16 @@ module ProductsSearch
         plog.debug 'Title'
         @meta_title = PriceMate.meta_title c9, b9, r9, titles, @formatted_data
         plog.debug '/Title'
+
+
+        plog.debug 'History'
+          unless r9
+            session[:history] ||= []
+            session[:history].unshift [c9, @meta_title]
+            session[:history].pop if session[:history].size > 10
+          end
+        plog.debug '/History'
+
 
         plog.debug 'Description'
         @meta_description = PriceMate.meta_description titles

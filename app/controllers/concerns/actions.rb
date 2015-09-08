@@ -17,7 +17,8 @@ module Concerns::Actions
     def create
       respond_to do |format|
         if @resource.save
-          format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path], :id => @resource.id) }
+          notice = %Q(#{@resource_class.model_name.human} "#{@resource.to_label}" был успешно создан)
+          format.html { redirect_to params[:return_path] || url_for(:action => :show, id: @resource.id), notice: notice }
         else
           format.html { render action: 'new' }
         end
@@ -27,7 +28,8 @@ module Concerns::Actions
     def update
       respond_to do |format|
         if @resource.save
-          format.html { redirect_to url_for(:action => :show, :return_path => params[:return_path]) }
+          notice = %Q(#{@resource_class.model_name.human} "#{@resource.to_label}" был успешно обновлен)
+          format.html { redirect_to params[:return_path] || url_for(:action => :show, id: @resource.id), notice: notice }
         else
           format.html { render action: 'edit' }
         end
@@ -37,12 +39,8 @@ module Concerns::Actions
     def destroy
       respond_to do |format|
         if @resource.destroy
-          notice = %Q(#{I18n.t(@resource_class)} "#{@resource.to_label}" Был успешно удален)
-          if params[:return_path].present?
-            format.html { redirect_to url_for(params[:return_path]), notice: notice }
-          else
-            format.html { redirect_to url_for(action: :index), notice: notice }
-          end
+          notice = %Q(#{@resource_class.model_name.human} "#{@resource.to_label}" был успешно удален)
+          format.html { redirect_to params[:return_path] || url_for(action: :index), notice: notice }
         else
           alert = @resource.errors.full_messages_for(:base).join("<br>")
 
