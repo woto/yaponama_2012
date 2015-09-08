@@ -2,70 +2,63 @@
 
   <div class="col-md-16">
 
-    <%= twbs_form_for @resource, url: [:admin, @resource] do |f| %>
+    <%= simple_form_for(@resource, url:([:admin, @resource])) do |f| %>
 
       <%= f.error_notification %>
 
-      <%= f.twbs_check_box :partner %>
+      <%= f.input :partner %>
+      <%= f.input :active %>
+      <%= f.input :z_index %>
 
-      <%= f.twbs_check_box :active %>
-      <%= f.twbs_text_field :z_index, asterisk: true %>
 
-      <%= f.form_group do %>
-        <%= input_group do |ig| %>
-          <%= twbs_text_field_tag '', '', id: "geocode-address-text", rel: "catch-enter" %>
-          <%= ig.btn do %>
-            <button id="geocode-address-button" class="btn btn-default" rel="press-enter" type="button"> Найти адрес </button>
-          <% end %>
-        <% end %>
-      <% end %>
+      <div class="form-group">
+        <div class="input-group">
+          <%= text_field_tag '', '', class: "form-control", placeholder: "Введите искомый адрес", id: "geocode-address-text", :"catch-enter"=>"" %>
+          <span class="input-group-btn">
+            <button id="geocode-address-button" class="btn btn-default" press-enter type="button"> Найти адрес </button>
+          </span>
+        </div>
+      </div>
 
-      <%= f.form_group do %>
-        <%# a1 do %>
-          <div id="map"> </div>
-          <%= hint do %>
-            Обратите внимание, что увеличение (zoom) и позиция на карте так же сохраняются.
-          <% end %>
-        <%# end %>
-      <% end %>
+      <div class="form-group">
+        <div id="map"> </div>
+        <%= f.hint 'Обратите внимание, что увеличение (zoom) и позиция на карте так же сохраняются.' %>
+      </div>
 
-      <%# / TODO  button_swap был удален и заменен на check_boxes_themed (пока не написан :) ) %>
-      <%= f.twbs_check_box :realize %>
+      <%= f.input :realize %>
 
       <div class="block">
 
-        <%= f.twbs_text_field :name, asterisk: true %>
-        <%= f.twbs_text_field :metro %>
-        <%= f.twbs_text_area :content, class: 'ckeditor-extended' %>
+        <%= f.input :name %>
+        <%= f.input :metro %>
+        <%= f.input :content, class: 'ckeditor-extended' %>
 
         <div id="variants" class="top-space bottom-space">
-          <%= f.fields_for :variants do |variant| %>
+          <%= f.simple_fields_for :variants do |variant| %>
             <%= render 'variant_fields', :f => variant %>
           <% end %>
-          <%= f.form_group do %>
-            <%# a1 do %>
-              <%= link_to_add_association 'Добавить вариант доставки', f, :variants, class: "btn btn-success btn-small", :data => {"association-insertion-node" => ".form-group", "association-insertion-traversal" => "closest"}  %>
-            <%# end %>
-          <% end %>
+          <div class="form-group">
+            <%= link_to_add_association 'Добавить вариант доставки', f, :variants, class: "btn btn-success btn-small", :data => {"association-insertion-node" => ".form-group", "association-insertion-traversal" => "closest"}  %>
+          </div>
         </div>
 
-        <%= f.twbs_check_box :display_marker %>
+        <%= f.input :display_marker %>
 
         <% (1..5).each do |n| %>
-          <%= f.instance_eval("twbs_text_field :phone#{n}") %>
+          <%= f.instance_eval("input :phone#{n}") %>
         <% end %>
 
         <% (1..3).each do |n| %>
-          <%= f.instance_eval("twbs_text_field :email#{n}") %>
+          <%= f.instance_eval("input :email#{n}") %>
         <% end %>
 
-        <%= f.twbs_text_field :address_locality %>
-        <%= f.twbs_text_field :postal_code %>
-        <%= f.twbs_text_field :street_address %>
-        <%= f.twbs_text_field :price_url %>
+        <%= f.input :address_locality %>
+        <%= f.input :postal_code %>
+        <%= f.input :street_address %>
+        <%= f.input :price_url %>
 
         <% (1..5).each do |n| %>
-          <%= render 'image_form', f:f, name: "image#{n}" %>
+          <%= f.input "image#{n}", as: :image_preview %>
         <% end %>
 
         <%= panel 'default' do |p| %>
@@ -93,11 +86,11 @@
               <% ['active', 'inactive'].each do |style| %>
 
                 <div id="<%=style%>" class="tab-pane <%=style == 'active' ? 'active' : ''%>">
-                  <%= f.twbs_text_field :"#{style}_fill_color", asterisk: true %>
-                  <%= f.twbs_text_field :"#{style}_fill_opacity", asterisk: true %>
-                  <%= f.twbs_text_field :"#{style}_stroke_color", asterisk: true %>
-                  <%= f.twbs_text_field "#{style}_stroke_opacity", asterisk: true %>
-                  <%= f.twbs_text_field "#{style}_stroke_weight", asterisk: true %>
+                  <%= f.input :"#{style}_fill_color" %>
+                  <%= f.input :"#{style}_fill_opacity" %>
+                  <%= f.input :"#{style}_stroke_color" %>
+                  <%= f.input "#{style}_stroke_opacity" %>
+                  <%= f.input "#{style}_stroke_weight" %>
                 </div>
 
               <% end %>
@@ -116,19 +109,23 @@
       <%= f.hidden_field :zoom %>
 
 
-      <%= f.twbs_text_field :ycountry %>
-      <%= f.twbs_text_field :ycountry_code %>
-      <%= f.twbs_text_field :ycity %>
-      <%= f.twbs_text_field :ystreet %>
-      <%= f.twbs_text_field :yhouse %>
-      <%= f.twbs_text_field :ycity_code %>
-      <%= f.twbs_text_field :yphone %>
-      <%= f.twbs_text_field :ycompany_name %>
-      <%= f.twbs_text_field :ycontact_email %>
-      <%= f.twbs_text_field :ywork_time %>
-      <%= f.twbs_text_field :yogrn %>
+      <%= panel 'default' do |p| %>
+        <%= p.body do %>
+          <%= f.input :ycountry, as: :string %>
+          <%= f.input :ycountry_code, as: :string %>
+          <%= f.input :ycity %>
+          <%= f.input :ystreet %>
+          <%= f.input :yhouse %>
+          <%= f.input :ycity_code %>
+          <%= f.input :yphone %>
+          <%= f.input :ycompany_name %>
+          <%= f.input :ycontact_email %>
+          <%= f.input :ywork_time %>
+          <%= f.input :yogrn %>
+        <% end %>
+      <% end %>
 
-      <%= f.twbs_submit %>
+      <%= f.buttons %>
 
     <% end %>
 

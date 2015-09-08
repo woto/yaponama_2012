@@ -10,9 +10,6 @@
 [submodule "system/submodules/select2"]
 	path = system/submodules/select2
 	url = https://github.com/ivaynberg/select2
-[submodule "system/submodules/jQuery-File-Upload"]
-	path = system/submodules/jQuery-File-Upload
-	url = https://github.com/blueimp/jQuery-File-Upload.git
 [submodule "system/submodules/jquery.transit"]
 	path = system/submodules/jquery.transit
 	url = https://github.com/rstacruz/jquery.transit
@@ -97,9 +94,6 @@
 [submodule "./system/submodules/console.log-wrapper"]
 	path = system/submodules/console.log-wrapper
 	url = https://github.com/cpatik/console.log-wrapper.git
-[submodule "system/submodules/fastclick"]
-	path = system/submodules/fastclick
-	url = https://github.com/ftlabs/fastclick
 [submodule "system/submodules/ckeditor-dev"]
 	path = system/submodules/ckeditor-dev
 	url = git://github.com/ckeditor/ckeditor-dev.git

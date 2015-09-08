@@ -16,7 +16,7 @@
     <%= search_form_for(@q, url: admin_users_path, html: { class: 'form-inline' }) do |f| %>
 
       <%= f.input :name_cont, placeholder: 'Имя', label: false %>
-      <%= f.input :phone_eq, placeholder: 'Телефон', label: false %>
+      <%= f.input :phone_eq, placeholder: 'Телефон', input_html: {data: {'mobile-mask' => ''}}, label: false %>
       <%= f.input :email_cont, placeholder: 'Email', label: false, html5: false %>
       <%= f.input :notes_cont, placeholder: 'Комментарий', label: false %>
       <%= f.input :notes_invisible_cont, placeholder: 'Служебный комментарий', label: false %>

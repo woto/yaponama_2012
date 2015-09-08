@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', '~> 4.2'
 
 gem 'pg'
 
@@ -150,4 +150,6 @@ gem 'ckpages', github: 'woto/ckpages'
 
 gem 'dotenv-rails'
 gem 'postgres_ext'
+gem 'devise', '~> 3.5'
 gem 'browser-timezone-rails'
+gem "pundit"

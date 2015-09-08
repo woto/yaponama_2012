@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       registered_user = warden.authenticate(scope: :user)
       if registered_user
         registered_user.update_column(:role, User.roles['user'])
-        old_user.move_to(registered_user) 
+        old_user.move_to(registered_user)
         old_user.reload.destroy!
       end
     end

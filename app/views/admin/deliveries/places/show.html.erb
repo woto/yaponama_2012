@@ -1,13 +1,19 @@
-<%= b1 do %>
+<% @meta_title = @resource.to_label %>
 
-  <% @meta_title = "Просмотр #{@resource.to_label}" %>
-
-  <%= breadcrumb true do |b| %>
+<%= page do |p| %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Зоны доставок', admin_deliveries_places_path %>
     <%= b.item @meta_title %>
   <% end %>
 
-  <%= page_header %>
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
 
-  <%= render 'smart_show' %>
+  <%= p.content do %>
+    <%= render 'smart_show' %>
+  <% end %>
 
 <% end %>

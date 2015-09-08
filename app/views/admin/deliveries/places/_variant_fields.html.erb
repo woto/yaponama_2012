@@ -13,12 +13,12 @@
 
       <%= f.destroyable do %>
 
-        <%= f.twbs_text_field :name, asterisk: true %>
-        <%= f.twbs_check_box :active %>
-        <%= f.twbs_text_field :sequence, asterisk: true %>
-        <%= f.twbs_text_field :delivery_cost, asterisk: true %>
-        <%= f.twbs_collection_select :option_id, Deliveries::Option.all, :id, :name %>
-        <%= f.twbs_text_area :content, class: 'ckeditor-extended' %>
+        <%= f.input :name %>
+        <%= f.input :active %>
+        <%= f.input :sequence %>
+        <%= f.input :delivery_cost %>
+        <%= f.input :option_id, collection: Deliveries::Option.all, value_method: :id, label_method: :name %>
+        <%= f.input :content, class: 'ckeditor-extended' %>
 
       <% end %>
 

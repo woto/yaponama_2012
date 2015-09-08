@@ -29,7 +29,7 @@
 
       <%= f.input :name, autofocus: true %>
       <%= f.input :email, required: true %>
-      <%= f.input :phone %>
+      <%= f.input :phone, input_html: {data: {'mobile-mask' => ''}} %>
       <%= f.input :password %>
       <%= f.input :password_confirmation %>
       <%= f.input :notes, :input_html => { :rows => 5 } %>

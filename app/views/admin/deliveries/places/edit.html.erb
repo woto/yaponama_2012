@@ -1,13 +1,20 @@
-<div class="container">
-  <%= row class: 'top-space' do %>
-    <% title_edit %>
+<% title_edit %>
 
-    <%= breadcrumb true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
+<%= page do |p| %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Зоны доставок', admin_deliveries_places_path %>
+    <%= b.item @resource.to_label, admin_deliveries_place_path(@resource) %>
+    <%= b.item @meta_title %>
+  <% end %>
 
-    <%= title_edit %>
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
 
+  <%= p.content do %>
     <%= render 'form' %>
   <% end %>
-</div>
+
+<% end %>
