@@ -3,22 +3,21 @@ defaults: &defaults
   suppress_exceptions: true
   display_tawk_to: true
   display_counters: true
+  mail: "Авториф <info@avtorif.ru>"
 
 development:
   <<: *defaults
   share_buttons: false
   suppress_exceptions: false
-  display_tawk_to: false
+  display_tawk_to: true
   display_counters: false
 
 test:
   <<: *defaults
   share_buttons: false
+  suppress_exceptions: true
   display_tawk_to: false
   display_counters: false
 
 production:
-  avtorif.ru:
-    <<: *defaults
-  zapstok.ru:
-    <<: *defaults
+  <<: *defaults

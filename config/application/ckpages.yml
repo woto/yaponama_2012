@@ -11,7 +11,4 @@ test:
   <<: *defaults
 
 production:
-  avtorif.ru:
-    <<: *defaults
-  zapstok.ru:
-    <<: *defaults
+  <<: *defaults

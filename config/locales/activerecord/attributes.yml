@@ -1,6 +1,9 @@
 ru:
   activerecord:
     attributes:
+      user/postal_address:
+        stand_alone_house: Отдельно стоящее здание
+        comment: Комментарий к адресу
       opts/truck_tire:
         line: Линейка продукции
         width: Ширина
@@ -91,30 +94,27 @@ ru:
         mesto_rozhdeniya: Место рождения
         comment: Комментарий к паспорту
       brand:
-        #parent_brand_id: Родительский производитель
-        name: Название производителя
+        parent_brand_id: Родительский производитель
+        name: Производитель
         image: Логотип
         rating: Рейтинг
         content: Описание
       model:
-        name: Название модели
-        #parent_brand_id: Бренд
+        name: Модель
+        parent_brand_id: Бренд
         from: С даты
         to: По дату
         slang: Сленговое название
       generation:
         model_id: Модель
-        name: Название поколения
+        name: Поколение
         from: С даты
         to: По дату
       modification:
-        name: Название модификации
+        name: Модификация
         generation_id: Поколение
         from: С даты
         to: По дату
-      postal_address:
-        stand_alone_house: Отдельно стоящее здание
-        comment: Комментарий к адресу
       metro:
         metro: Станция метро
         delivery_cost: Стоимость доставки
@@ -153,6 +153,8 @@ ru:
         comment: Комментарий к имени
       
       user:
+        name: ФИО
+        current_password: Текущий пароль
         cached_location: Текущее расположение URL кешированное
         cached_title: Заголовок страницы кешированный
         cached_referrer: Пришел со страницы URL кешированное

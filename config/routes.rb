@@ -14,12 +14,6 @@ Yaponama2012::Application.routes.draw do
     passwords: 'users/passwords',
   }
 
-  #devise_scope :user do
-  #  authenticated :user do
-  #    root 'users#show', as: :authenticated_root
-  #  end
-  #end
-
   # /brands/дочерний_id/parts -> /brands/родительский_id
   get "/brands/:id/parts", to: redirect{ |params, request|
     brand = BrandMate.find_conglomerate_by_id params[:id]
@@ -81,19 +75,20 @@ Yaponama2012::Application.routes.draw do
     resources :bots do
       get :preview, on: :member
     end
-    resources :spare_infos, concerns: [:gridable, :transactionable, :searchable]
-    resources :spare_replacements, concerns: [:gridable]
+    resources :spare_infos, concerns: [:searchable]
+    resources :spare_replacements
   end
 
   concern :only_admin do
+    root to: 'welcome#index'
     resources :spare_catalogs
     resources :spare_catalog_groups
     namespace :opts do
-      resources :accumulators, concerns: [:gridable]
-      resources :truck_tires, concerns: [:gridable]
+      resources :accumulators
+      resources :truck_tires
     end
-
-    resources :galleries, concerns: [:gridable]
+    resources :users
+    resources :galleries
   end
 
   concern :only_global do
@@ -102,22 +97,8 @@ Yaponama2012::Application.routes.draw do
     resources :deliveries
   end
 
-  resources :tests
-
-  concern :aaa do
-    resource :order_deliveries
-  end
-
-  concern :fast_editable do
-    member do
-      get 'fast_edit'
-      get 'fast_show'
-      patch 'fast_update'
-    end
-  end
-
   concern :cars_searchable do
-    resources :brands, :models, :generations, :modifications, :concerns => [:transactionable, :gridable, :searchable]
+    resources :brands, :models, :generations, :modifications, :concerns => [:searchable]
 
     resources :brands, :shallow => true do
       resources :models, :shallow => true do
@@ -266,24 +247,13 @@ Yaponama2012::Application.routes.draw do
   namespace :admin do
     concerns :global_and_admin
     concerns :only_admin
-
-    concerns :accountable
-
     namespace :deliveries do
-      resources :options do
-        concerns :gridable
-      end
-      resources :places do
-        concerns :gridable
-      end
+      resources :options
+      resources :places
     end
-
     resources :calls
-
     resources :blocks
-
     concerns :cars_searchable
-
     resources :uploads
 
     #get 'pages/new/:path' => "pages#new", :as => 'new_predefined_page', :constraints => {:path => /.*/}

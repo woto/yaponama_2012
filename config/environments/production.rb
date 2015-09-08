@@ -103,4 +103,18 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :sidekiq
 
+
+  config.action_mailer.smtp_settings = {
+    address:                "smtp.yandex.ru",
+    port:                   465,
+    user_name:              "info@avtorif.ru",
+    password:               Rails.application.secrets.smtp_password,
+    authentication:         "plain",
+    enable_starttls_auto:   true,
+    ssl:                    true }
+
+  config.action_mailer.asset_host = "http://#{Rails.configuration.site['host']}:#{Rails.configuration.site['port']}"
+  config.action_mailer.default from: Rails.configuration.common['mail']
+  config.action_mailer.delivery_method = :smtp
+
 end
