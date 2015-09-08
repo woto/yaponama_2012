@@ -3,6 +3,12 @@ class Admin::UsersController < ApplicationController
 
   private
 
+  def find_resources
+    super
+    @q = @resources.ransack(params[:q])
+    @resources = @q.result(distinct: true)
+  end
+
   def update_resource
     super
     authorize @resource

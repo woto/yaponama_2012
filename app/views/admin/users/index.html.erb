@@ -1,33 +1,58 @@
-<div class="container">
+<% @meta_title = 'Пользователи' %>
 
-  <%= row class: 'top-space' do %>
+<%= page do |p| %>
 
-    <% title_index %>
-
-    <%= breadcrumb true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
-
-    <%= title_index %>
-
-    <%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
-
-      <%= panel 'default' do |p| %>
-
-        <%= p.heading do %>
-          <%= render 'head' %>
-        <% end %>
-
-        <%= p.body do %>
-          <%= render :partial => 'grid' %>
-        <% end %>
-
-        <%= render 'grid_footer', f: f, p: p %>
-
-      <% end %>
-
-    <% end %>
-
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item @meta_title %>
   <% end %>
 
-</div>
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
+    <%= search_form_for(@q, url: admin_users_path, html: { class: 'form-inline' }) do |f| %>
+
+      <%= f.input :name_cont, placeholder: 'Имя', label: false %>
+      <%= f.input :phone_eq, placeholder: 'Телефон', label: false %>
+      <%= f.input :email_cont, placeholder: 'Email', label: false, html5: false %>
+      <%= f.input :notes_cont, placeholder: 'Комментарий', label: false %>
+      <%= f.input :notes_invisible_cont, placeholder: 'Служебный комментарий', label: false %>
+
+      <%= f.button :submit, 'Поиск' %>
+    <% end %>
+  <% end %>
+
+  <br />
+
+  <%= p.content do %>
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th> <%= @resource_class.human_attribute_name(:id) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:name) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:phone) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:email) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:notes) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:notes_invisible) %> </th>
+        </tr>
+        <% @resources.each do |resource| %>
+          <tr>
+            <td> 
+              <%= link_to resource.id, admin_user_path(resource.id, return_path: request.fullpath) %> <br />
+              <%= link_to 'Редактировать', edit_admin_user_path(resource.id, return_path: request.fullpath) %> 
+            </td>
+            <td> <%= resource.name %> </td>
+            <td> <%= resource.phone %> </td>
+            <td> <%= resource.email %> </td>
+            <td> <%= resource.notes %> </td>
+            <td> <%= resource.notes_invisible %> </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% end %>
+
+<% end %>

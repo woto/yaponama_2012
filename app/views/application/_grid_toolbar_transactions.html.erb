@@ -1,5 +1,0 @@
-<div id="grid-toolbar-transactions">
-  <%= link_to smart_route({:prefix => [:transactions], :postfix => [@resource_class.to_s.underscore.pluralize]}, :user_id => params[:user_id], :order_id => params[:order_id]), data: {toggle: "tooltip", placement: 'bottom'}, title: "#{ t('.transactions', :default => t("helpers.links.transactions")) }",  :class => "btn btn-default", rel: 'tooltip' do %>
-    <%= icon 'clock-o' %>
-  <% end %>
-</div>
