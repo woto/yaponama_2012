@@ -2,6 +2,23 @@ require 'test_helper'
 
 class WelcomeControllerTest < ActionController::TestCase
 
+  test 'Проверка выставления ipgeobase' do
+    @request.remote_addr = '85.117.95.1'
+    get :index
+    assert_equal User.last.ipgeobase_name, 'Норильск'
+    assert_equal User.last.ipgeobase_names_depth_cache, 'Россия/Сибирский федеральный округ/Красноярский край'
+  end
+
+  test 'Проверка выставления User-Agent' do
+    @request.user_agent = 'Browser 1'
+    assert_equal User.last.user_agent, 'Browser 1'
+  end
+
+  test 'Проверка выставления Accept-Langugage' do
+    @request.accept_langugage = 'Language 1'
+    assert_equal User.last.accept_language, 'Language 1'
+  end
+
   test 'Для правила inet: 192.168.1.0/24 должен определиться как бот клиент 192.168.1.2' do
     Bot.create!(inet: '192.168.1.0/24')
     @request.remote_addr = '192.168.1.2'
