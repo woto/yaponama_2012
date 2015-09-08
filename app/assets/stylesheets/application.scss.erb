@@ -1,15 +1,17 @@
 //=========================
 // FIRST CLASS LIBRARIES
 //
-// require jquery.ui.all
+//= require select2/select2
 //
+//
+//
+//=========================
 //
 //=========================
 // OTHER LIBRARIES
 
 //= require discourse_static_assets
 //
-//= require select2/select2
 //
 //= require pickadate.js/lib/themes/default
 //= require pickadate.js/lib/themes/default.date
@@ -30,19 +32,20 @@
 //
 
 
-//$font-size-base:          14px;
-//$font-size-large:         ceil(($font-size-base * 1.25));
-//$font-size-small:         ceil(($font-size-base * 0.85));
-//
-//$font-size-h1:            floor(($font-size-base * 1.9));
-//$font-size-h2:            floor(($font-size-base * 1.5));
-//$font-size-h3:            ceil(($font-size-base * 1.3));
-//$font-size-h4:            ceil(($font-size-base * 1.1));
-//$font-size-h5:            $font-size-base;
-//$font-size-h6:            ceil(($font-size-base * 0.85));
+$font-size-base:          14px;
+$font-size-large:         ceil(($font-size-base * 1.25));
+$font-size-small:         ceil(($font-size-base * 0.85));
+
+$font-size-h1:            floor(($font-size-base * 2));
+$font-size-h2:            floor(($font-size-base * 1.6));
+$font-size-h3:            ceil(($font-size-base * 1.4));
+$font-size-h4:            ceil(($font-size-base * 1.2));
+$font-size-h5:            $font-size-base;
+$font-size-h6:            ceil(($font-size-base * 0.85));
 
 /////////////////////
 
+//@import "bootswatch/cerulean/variables";
 
 $grid-columns: 24;
 
@@ -57,17 +60,21 @@ $grid-columns: 24;
 
 /////////////////////
 
-body {
-  //background: $gray-lighter;
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600&subset=latin,cyrillic);
+
+* {
+  font-family: 'Open Sans', sans-serif;
 }
 
-//@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic&subset=latin,cyrillic,cyrillic-ext);
-//
-//* {
-//  font-family: 'Ubuntu', sans-serif;
-//}
-
 /////////////////////
+/////////////////////
+/////////////////////
+/////////////////////
+
+// APPLICATION
+
+@import "components/navbar";
+
 
 @import 'components/space';
 
@@ -84,14 +91,6 @@ body {
 .shadowed {
   text-shadow: 0 0 9px black;
 }
-
-
-// Звездочки для обязательных полей asterisk: true
-label.required:after {
-  content: "\00a0*"
-}
-
-/////////////////////
 
 
 // Пока не уверен что это правильный способ
@@ -116,40 +115,12 @@ label.required:after {
 
 /////////////////////
 
-#items-progress {
-  background: white;
-  z-index: 1000;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.5;
-  display: none;
-}
-
-
-#auth-buttons a {
-  text-decoration: none;
-}
-
-#auth-buttons img {
-  width: 28px;
-  height: 28px;
-}
-
-#auth-buttons li {
-  margin-bottom: 10px;
-}
-
-/////////////////////
-
 @import 'components/map';
 
 /////////////////////
 
 .page-header {
-  margin-top: 0;
+  margin-top: 5px;
   margin-bottom: 30px;
   border-bottom: none;
   padding-bottom: 0;
@@ -185,62 +156,12 @@ label.required:after {
 
 /////////////////////
 
-.confirm-link {
-  white-space: nowrap;
-}
-
-/////////////////////
-
-#sound-standard {
-  @extend .hidden;
-}
-
-/////////////////////
-
-@import "components/topbar";
 @import "components/stars";
 
 /////////////////////
 
 #main {
   @extend .bottom-space-lg;
-}
-
-/////////////////////
-
-.payment > input[type=radio]{
-  display: none;
-}
-
-
-input[type=radio] + img{
-  @include user-select(none);
-  cursor: pointer;
-  margin: 3px;
-  border: 2px solid transparent;
-  &:hover {
-    border: 2px solid #DDD;
-  }
-}
-
-input[type=radio]:checked + img{
-  border: 2px solid #285e8e;
-}
-
-/////////////////////
-
-[rel="old"], [rel="new"], .payment-block {
-  //background: #999;
-  display: none;
-}
-
-.breadcrumb > li + li:before {
-  font-family: "FontAwesome";
-  content: "\f0da";
-}
-
-.breadcrumb {
-  @extend .bottom-space-none;
 }
 
 /////////////////////
@@ -277,7 +198,6 @@ input[type=radio]:checked + img{
 
 /////////////////////
 
-@import 'components/leftbar';
 @import 'components/text';
 
 @import 'components/submenu';
@@ -375,3 +295,5 @@ input[type=radio]:checked + img{
 
 
 /////////////////////
+
+@import 'components/breadcrumb';

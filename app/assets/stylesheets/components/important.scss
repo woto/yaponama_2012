@@ -1,6 +1,11 @@
 #important .alert {
-  @extend .bg-danger;
-  @extend .bottom-space-none;
-  margin: 30px 0;
-  background: $alert-danger-bg;
+  margin: 0;
+}
+
+.alert-alert {
+  @extend .alert-danger;
+}
+
+.alert-notice {
+  @extend .alert-info;
 }
