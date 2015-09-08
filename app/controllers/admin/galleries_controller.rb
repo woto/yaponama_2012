@@ -1,5 +1,4 @@
 class Admin::GalleriesController < ApplicationController
-  include Grid::Gallery
   include Admin::Admined
 
   private

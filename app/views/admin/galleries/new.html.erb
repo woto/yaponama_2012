@@ -1,13 +1,19 @@
-<%= b1 do %>
+<% title_new %>
 
-  <% title_new %>
-
-  <%= breadcrumb true do |b| %>
+<%= page do |p| %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Галерея', admin_galleries_path %>
     <%= b.item @meta_title %>
   <% end %>
 
-  <%= title_new %>
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
 
-  <%= render 'form' %>
+  <%= p.content :md do %>
+    <%= render 'form' %>
+  <% end %>
 
 <% end %>

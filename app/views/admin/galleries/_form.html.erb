@@ -1,25 +1,6 @@
-<%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
-
-  <%= row do %>
-
-    <%= c1 do %>
-
-      <%= f.twbs_text_field :title %>
-      <%= render 'image_form', f:f, name: "image" %>
-
-    <% end %>
-
-  <% end %>
-
-  <%= row do %>
-
-    <div class="col-md-12">
-
-        <%= f.twbs_text_area :content, class: 'ckeditor-extended' %>
-        <%= f.twbs_submit %>
-
-    </div>
-
-  <% end %>
-
+<%= simple_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
+  <%= f.input :title %>
+  <%= f.input :image, as: :image_preview %>
+  <%= f.input :content, class: 'ckeditor-extended' %>
+  <%= f.buttons %>
 <% end %>
