@@ -1,7 +1,7 @@
 window.initMap = ->
 
   $(document).on 'click', '#geocode-address-button', ->
-    window.geocoder = new google.maps.Geocoder();
+    window.geocoder = new google.maps.Geocoder()
     window.codeAddress($('#geocode-address-text').val())
 
   window.codeAddress = (address) ->
