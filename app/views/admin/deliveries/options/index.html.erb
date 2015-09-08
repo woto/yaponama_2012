@@ -1,26 +1,21 @@
 <% title_index %>
 
-<%= breadcrumb true do |b| %>
-  <%= b.item @meta_title %>
-<% end %>
-
-<%= title_index %>
-
-<%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
-
-  <%= panel 'default' do |p| %>
-
-    <%= p.heading do %>
-      <%= render 'head' %>
-    <% end %>
-
-    <%= p.body do %>
-      <%= render 'grid', f: f %>
-    <% end %>
-
-    <%= render 'grid_footer', f: f, p: p %>
-
+<%= page do |p| %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item @meta_title %>
   <% end %>
 
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
+    <% @resources.each do |resource| %>
+      <%= debug resource.attributes %>
+    <% end %>
+    <%= link_to 'Новая опция заказа', new_admin_deliveries_option_path %>
+  <% end %>
 
 <% end %>
