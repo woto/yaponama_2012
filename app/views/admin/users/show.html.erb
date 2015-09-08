@@ -1,15 +1,15 @@
-<% @meta_title = 'Личный кабинет' %>
+<% @meta_title = guest_or_user_to_label(@resource) %>
 
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <%= breadcrumb false, exception=true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Пользователи', admin_users_path %>
+    <%= b.item @meta_title %>
   <% end %>
 
   <%= p.title do %>
-    <% @meta_title = 'Личный кабинет' %>
     <%= page_header %>
   <% end %>
 
@@ -18,15 +18,10 @@
     <%= legacy_somebody_tabs do %>
 
       <ul class="list-unstyled">
-        <li><h4><%= link_to 'Движение средств', transactions_admin_user_accounts_path(@resource, return_path: request.fullpath) %></h4></li>
-        <li><h4><%= link_to 'Разлогинить со всех компьютеров.', logout_from_all_places_admin_user_path(@resource, return_path: request.fullpath), remote: true, method: :delete, data: {confirm: 'Вы уверены? Пользователю необходимо будет заново войти на сайт.'} %></h4></li>
-        <li><h4><%= link_to 'Сменить пароль', edit_admin_user_password_path(@resource, return_path: request.fullpath) %></h4></li>
-        <li><h4><%= link_to 'Настройки', edit_admin_user_path(@resource, return_path: request.fullpath) %></h4></li>
-        <li><h4><%= link_to 'История изменения настроек', transactions_admin_user_path(@resource, return_path: request.fullpath) %></h4></li>
+        <li><h4><%# link_to 'Сменить пароль', edit_admin_user_password_path(@resource, return_path: request.fullpath) %></h4></li>
+        <li><h4><%# link_to 'Настройки', edit_admin_user_path(@resource, return_path: request.fullpath) %></h4></li>
+        <li><h4><%# link_to 'История изменения настроек', transactions_admin_user_path(@resource, return_path: request.fullpath) %></h4></li>
       </ul>
-
-      <%= render 'profileables/right' %>
-      <%= render 'application/spy' %>
 
       <%= render 'smart_show' %>
 

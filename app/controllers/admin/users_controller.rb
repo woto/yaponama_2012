@@ -14,6 +14,11 @@ class Admin::UsersController < ApplicationController
     authorize @resource
   end
 
+  def create_resource
+    super
+    authorize @resource
+  end
+
   def set_resource_class
     @resource_class = User
   end

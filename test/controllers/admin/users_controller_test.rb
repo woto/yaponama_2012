@@ -73,4 +73,56 @@ class Admin::UsersControllerTest < ActionController::TestCase
     assert_equal 'Недостаточно прав для данного действия', flash[:alert]
   end
 
+  test 'Менеджер не может создать гостя' do
+    sign_in(users(:manager))
+    post :create, {user: {name: 'user', role: 'guest'}}
+    assert_equal 'Недостаточно прав для данного действия', flash[:alert]
+  end
+
+  test 'Менеджер может создать пользователя' do
+    sign_in(users(:manager))
+    assert_difference -> {User.count} do
+      post :create, {user: {name: 'fake', role: 'user', email: 'fake@example.com', password: '12345678'}}
+    end
+  end
+
+  test 'Менеджер не может создать менеджера' do
+    sign_in(users(:manager))
+    post :create, {user: {name: 'user', role: 'manager'}}
+    assert_equal 'Недостаточно прав для данного действия', flash[:alert]
+  end
+
+  test 'Менеджер не может создать администратора' do
+    sign_in(users(:manager))
+    post :create, {user: {name: 'user', role: 'admin'}}
+    assert_equal 'Недостаточно прав для данного действия', flash[:alert]
+  end
+
+  test 'Администратор не может создать гостя' do
+    sign_in(users(:admin))
+    post :create, {user: {name: 'user', role: 'guest'}}
+    assert_equal 'Недостаточно прав для данного действия', flash[:alert]
+  end
+
+  test 'Администратор может создать пользователя' do
+    sign_in(users(:admin))
+    assert_difference -> {User.count} do
+      post :create, {user: {name: 'fake', role: 'user', email: 'fake@example.com', password: '12345678'}}
+    end
+  end
+
+  test 'Администратор может создать менеджера' do
+    sign_in(users(:admin))
+    assert_difference -> {User.count} do
+      post :create, {user: {name: 'fake', role: 'manager', email: 'fake@example.com', password: '12345678'}}
+    end
+  end
+
+  test 'Администратор может создать администратора' do
+    sign_in(users(:admin))
+    assert_difference -> {User.count} do
+      post :create, {user: {name: 'fake', role: 'admin', email: 'fake@example.com', password: '12345678'}}
+    end
+  end
+
 end

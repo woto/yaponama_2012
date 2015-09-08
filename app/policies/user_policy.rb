@@ -14,4 +14,11 @@ class UserPolicy
     end
   end
 
+  def create?
+    if record.encrypted_password?
+      ((user.admin? && record.role.in?(['user', 'manager', 'admin'])) ||
+       (user.manager? && record.role == 'user'))
+    end
+  end
+
 end

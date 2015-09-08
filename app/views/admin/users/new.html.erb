@@ -1,4 +1,4 @@
-<% @meta_title = "Редактирование профиля" %>
+<% title_new %>
 
 <%= page do |p| %>
 
@@ -6,7 +6,6 @@
     <%= b.item 'Главная', root_path %>
     <%= b.item 'Администрирование', admin_root_path %>
     <%= b.item 'Пользователи', admin_users_path %>
-    <%= b.item guest_or_user_to_label(@resource), admin_user_path(@resource) %>
     <%= b.item @meta_title %>
   <% end %>
 
