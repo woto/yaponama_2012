@@ -1,6 +1,4 @@
-# encoding: utf-8
-#
-module GenerationAttributes
+module Concerns::GenerationAttributes
 
   extend ActiveSupport::Concern
 

@@ -1,6 +1,4 @@
-# encoding: utf-8
-#
-module ModelAttributes
+module Concerns::ModelAttributes
 
   extend ActiveSupport::Concern
 

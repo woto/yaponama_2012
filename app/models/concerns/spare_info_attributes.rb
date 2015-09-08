@@ -1,9 +1,5 @@
-# encoding: utf-8
-#
-module SpareInfoAttributes
-
+module Concerns::SpareInfoAttributes
   extend ActiveSupport::Concern
-
   included do
 
     belongs_to :spare_info
