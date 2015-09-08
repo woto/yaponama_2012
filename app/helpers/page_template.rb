@@ -8,7 +8,7 @@ class PageTemplate < ActionView::Helpers::FormBuilder
       @template.row class: 'top-space bottom-space-sm' do
         @template.content_tag :div, class: css_class(size) do
           @template.content_tag(:ol, :class => 'breadcrumb') do
-            yield Breadcrumb.new @template
+            yield Bootstrap::Breadcrumb.new @template
           end
         end
       end

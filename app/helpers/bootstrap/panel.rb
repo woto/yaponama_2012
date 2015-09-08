@@ -1,6 +1,4 @@
-# encoding: utf-8
-#
-class Panel < AbstractBootstrap
+class Bootstrap::Panel < Bootstrap::Bootstrap
 
   def heading options={}
     options[:class] = ['panel-heading', options[:class] ].compact

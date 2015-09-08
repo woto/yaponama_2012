@@ -1,4 +1,4 @@
-class Breadcrumb < AbstractBootstrap
+class Bootstrap::Breadcrumb < Bootstrap::Bootstrap
 
   def item title, url=nil
     if url

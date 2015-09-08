@@ -1,6 +1,4 @@
-# encoding: utf-8
-#
-class Dropdown < AbstractBootstrap
+class Bootstrap::Dropdown < Bootstrap::Bootstrap
 
   def toggle options={}
     options[:class] = ['dropdown-toggle', options[:class] ].compact

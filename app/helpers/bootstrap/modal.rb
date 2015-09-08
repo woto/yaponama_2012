@@ -1,6 +1,4 @@
-# encoding: utf-8
-#
-class Modal < AbstractBootstrap
+class Bootstrap::Modal < Bootstrap::Bootstrap
 
   def header options={}
     options[:class] = ['modal-header', options[:class] ].compact

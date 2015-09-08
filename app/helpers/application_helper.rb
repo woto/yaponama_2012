@@ -219,55 +219,14 @@ module ApplicationHelper
     html_escape("#{((value = (value.to_s.gsub(/\D/, '').to_i)) > 0) ? "#{value} шт." : 'Скрыто'}")
   end
   
-  def cost_decorator value
-    html_escape("#{(value).round.to_s}") + "&nbsp;руб.".html_safe
-  end
-
   def country_decorator value
     value.presence || "Скрыто"
   end
 
 
-  def phone_decorator value
-    value.gsub(/(\d{3})(\d{3})(\d{2})(\d{2})/, '(\1) \2-\3-\4')
-  end
-
-  def probability_decorator value
-    value.present? ? "#{value.to_i}%" : ""
-  end
-
-  def hint_decorator value, add_class=''
-    raw "<p><span class=\"label #{add_class}\">К сведению</span> #{value}</p>"
-  end
-
   ##################################3
   # / ВЫРЕЗКА СО СТАРОГО
 
-  def hint &block
-    content_tag(:span, class: "help-block") do
-      yield
-    end
-  end
-
-  def alert type, options={}, &block
-
-    options[:class] = ["alert alert-#{type} fade in", options[:class] ].compact
-
-    content_tag :div, options do
-
-      a = capture do
-        content_tag(:button, :type=>"button", :class=>"close", :data=>{:dismiss=>"alert"}, :"aria-hidden"=>"true") { "×" }
-      end
-
-      b = capture do
-        #block.call
-        yield
-      end
-
-      a.to_s.html_safe + b.to_s.html_safe
-    end
-
-  end
 
   def highlight_active(routes)
     begin
@@ -290,41 +249,6 @@ module ApplicationHelper
     end
   end
 
-
-  #def breadcrumb_divider
-  #  content_tag(:span, '/', :class => 'divider')
-  #end
-
-  def breadcrumb flag, exception=false
-
-    str4 = capture do yield(Breadcrumb.new(self)) end
-
-    content_tag(:ol, :class => 'breadcrumb') do
-      str1 = capture do Breadcrumb.new(self).item("Главная", admin_zone? ? admin_path : main_app.root_path) end
-
-      unless exception
-        if @somebody
-          str2 = capture do Breadcrumb.new(self).item('Личный кабинет', jaba3) end
-        end
-      end
-
-      if flag
-        unless params[:action] == 'index'
-          str3 = capture do 
-            add = :index if ActiveSupport::Inflector.pluralize(@resource_class.to_s.underscore).eql? @resource_class.to_s.underscore
-            Breadcrumb.new(self).item(t("helpers.titles.#{@resource_class.to_s.underscore}.index"), 
-                                      polymorphic_path([*jaba3, @resource_class.to_s.underscore.parameterize.underscore.pluralize, add]))
-          end
-          #polymorphic_path([*jaba3, params['controller'].camelize.demodulize.underscore.to_sym])
-          #t("helpers.titles.#{params['controller'].camelize.demodulize.underscore.singularize}.index")
-        end
-      end
-
-      [str1, str2, str3, str4].join.html_safe
-
-    end
-  end
-
   def _build_dropdowns(singular, plural, statuses, menu, somebody)
 
     dropdowns = []
@@ -344,7 +268,7 @@ module ApplicationHelper
       {
        :title => title.html_safe,
        :catch => [],
-       :link => smart_route({:prefix => [:status], :postfix => [plural]}, :status => k.to_sym, :user_id => somebody),
+       :link => polymorphic_path([:status, :user, plural], :status => k.to_sym, :user_id => somebody),
        :class => v.any? ? 'dropdown-submenu' : '',
        :dropdown => v.any? ? _build_dropdowns(singular, plural, statuses, v, somebody) : []
       }
@@ -448,67 +372,10 @@ module ApplicationHelper
     end
   end
 
-  def twbs_form_for(name, *args, &block)
-    options = args.extract_options!
-    options[:class] = ['dirtyforms', options[:class] ].compact
-    # TODO замутить fieldset disabled?
-    #content_tag :fieldset do
-    # fieldset должен быть внутри формы
-    # убрал form-horizontal
-    form_for(name, *(args << options.merge(builder: TwitterBootstrapFormBuilder, html: { class: options[:class] } )), &block)
-    #end
-  end
-
-  def input_group options={}, &block
-    content_tag :div, class: 'input-group' do
-      yield InputGroup.new(self)
-    end
-  end
-
-  def list_group options={}, &block
-    content_tag :div, class: 'list-group' do
-      yield ListGroup.new(self)
-    end
-  end
-
-  def panel type, options={}, &block
-    options[:class] = ["panel panel-#{type}", options[:class] ].compact
-    content_tag :div, options do
-      yield Panel.new(self)
-    end
-  end
-
   def alert_link_to name = nil, options = nil, html_options = nil, &block
     html_options ||= {}
     html_options[:class] = ['alert-link', html_options[:class] ].compact
     link_to(name, options, html_options, &block)
-  end
-
-
-
-  def modal options={}, &block
-    # TODO
-    # Добавить сюда aria-labelledby: "auth-label"
-    # А у строки - заголовка - h3, расположенного внутри modal-header id="auth-label" (На данный момент в 3-м bootstrap'e не нашел)
-    options[:class] = [ 'modal', options[:class] ].compact
-    # К сожалению если раскомментировать, то select2 перестанет работать
-    #options[:tabindex] = "-1"
-    options[:role] = "dialog"
-    options["aria-hidden"] = "true"
-    content_tag :div, options do
-      content_tag :div, class: "modal-dialog" do
-        content_tag :div, class: "modal-content" do
-          yield Modal.new(self)
-        end
-      end
-    end
-  end
-
-  def dropdown options={}, &block
-    options[:class] = ['dropdown', options[:class] ].compact
-    content_tag :li, options do
-      yield Dropdown.new(self)
-    end
   end
 
   def caret
@@ -618,5 +485,6 @@ module ApplicationHelper
       select{|topic| topic['pinned']}.
       reject{|topic| topic['closed']}
   end
+
 
 end
