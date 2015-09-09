@@ -14,4 +14,9 @@ class Categories::BrandsControllerTest < ActionController::TestCase
     assert_equal ['Батарея аккумуляторная на TOYOTA'], assigns(:discourse)
   end
 
+  test 'Проверяем работу titles_as_string' do
+    get :show, {id: brands(:mitsubishi), category_id: spare_catalogs(:rulevaya_tyga), "q" => {"titles_as_string_cont"=>"itles_as_strin"}}
+    assert_equal SpareInfo.where(id: spare_infos(:titles_as_string)).to_a, assigns(:spare_infos).to_a
+  end
+
 end

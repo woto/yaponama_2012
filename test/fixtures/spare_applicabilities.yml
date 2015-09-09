@@ -121,3 +121,10 @@ applicabilities_destroy_test:
   spare_info: applicabilities_destroy_test
   brand: destroy_test
   model: applicabilities_destroy_test
+
+titles_as_string:
+  spare_info: titles_as_string
+  brand: mitsubishi
+  model: galant
+  generation: galant_9_2
+  modification: mitsubishi_galant_9_2_cn_sedan

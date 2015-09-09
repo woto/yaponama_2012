@@ -23,4 +23,9 @@ class Categories::ModificationsControllerTest < ActionController::TestCase
     assert_equal ["Батарея аккумуляторная на TOYOTA Camry Camry (XV50) (2011) 2.0 AT (148 л. с.) стандарт"], assigns(:discourse)
   end
 
+  test 'Проверяем работу titles_as_string' do
+    get :show, {id: modifications(:mitsubishi_galant_9_2_cn_sedan), category_id: spare_catalogs(:rulevaya_tyga), "q" => {"titles_as_string_cont"=>"itles_as_strin"}}
+    assert_equal SpareInfo.where(id: spare_infos(:titles_as_string)).to_a, assigns(:spare_infos).to_a
+  end
+
 end
