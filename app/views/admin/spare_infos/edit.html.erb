@@ -1,20 +1,21 @@
-<% title_new %>
+<% title_edit %>
 
 <%= page do |p| %>
 
   <%= p.breadcrumb do |b| %>
     <%= b.item 'Главная', root_path %>
     <%= b.item 'Администрирование', admin_root_path %>
-    <%= b.item 'Категории', admin_spare_catalogs_path %>
+    <%= b.item 'Описания товаров', admin_spare_infos_path %>
+    <%= b.item @resource.to_label, admin_spare_info_path(@resource) %>
     <%= b.item @meta_title %>
   <% end %>
 
   <%= p.title do %>
-    <%= title_new %>
+    <%= page_header %>
   <% end %>
 
   <%= p.content :sm do %>
-    <%= render 'form' %>
+    <%= render 'form'%>
   <% end %>
 
 <% end %>

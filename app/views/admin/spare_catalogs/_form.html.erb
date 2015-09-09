@@ -1,27 +1,18 @@
 <%= simple_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
 
-  <%= row do %>
+  <%= f.input :name %>
+  <%= f.input :spare_catalog_group_id, collection: nested_dropdown(SpareCatalogGroup.arrange(order: :name)), as: :select, include_blank: true %>
 
-    <%= c1 do %>
-
-      <%= f.input :name %>
-
-      <%= f.input :spare_catalog_group_id, collection: nested_dropdown(SpareCatalogGroup.arrange(order: :name)), as: :select, include_blank: true %>
-
-      <%= f.simple_fields_for :spare_catalog_tokens do |sct| %>
-        <%= render 'spare_catalog_token_fields', :f => sct %>
-      <% end %>
-
-      <%= f.form_group do %>
-        <%= link_to_add_association 'Добавить токен', f, :spare_catalog_tokens, class: "btn btn-default"  %>
-      <% end %>
-
-      <%= f.input :opt %>
-      <%= f.input :intro, input_html: { rows: 8 } %>
-
-    <% end %>
-
+  <%= f.simple_fields_for :spare_catalog_tokens do |sct| %>
+    <%= render 'spare_catalog_token_fields', :f => sct %>
   <% end %>
+
+  <%= f.form_group do %>
+    <%= link_to_add_association 'Добавить токен', f, :spare_catalog_tokens, class: "btn btn-default"  %>
+  <% end %>
+
+  <%= f.input :opt %>
+  <%= f.input :intro, input_html: { rows: 8 } %>
 
   <%= f.input :page, class: 'ckeditor-extended', input_html: { rows: 15 } %>
   <%= f.buttons %>

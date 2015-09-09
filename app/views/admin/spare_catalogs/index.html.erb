@@ -1,10 +1,9 @@
+<% title_index %>
+
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <% title_index %>
-    <%= breadcrumb true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item @meta_title %>
   <% end %>
 
   <%= p.title do %>
@@ -12,27 +11,10 @@
   <% end %>
 
   <%= p.content do %>
-
-    <%= panel 'default' do |p| %>
-      <%= search_form_for @q, url: url_for(action: :index) do |f| %>
-        <%= p.body do %>
-            <dl class="dl-horizontal">
-              <dt> <%= f.label :name_matches %> </dt>
-              <dd> <%= f.search_field :name_matches %> </dd>
-            </dl>
-            <dl class="dl-horizontal">
-              <dt> <%= f.label :spare_catalog_tokens_name_cont %> </dt>
-              <dd> <%= f.search_field :spare_catalog_tokens_name_cont %> </dd>
-            </dl>
-        <% end %>
-        <%= p.footer do %>
-          <%= f.button 'Фильтровать', class: 'btn btn-primary' %>
-        <% end %>
-      <% end %>
-    <% end %>
-
-    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary', style: "vertical-align: top" do %>
-      <%= icon 'plus' %>
+    <%= search_form_for @q, url: url_for(action: :index), html: {class: 'form-inline'} do |f| %>
+      <%= f.input :name_cont, placeholder: "Название категории", label: false %>
+      <%= f.input :spare_catalog_tokens_name_cont, placeholder: 'Токен', label: false %>
+      <%= f.button :submit, 'Поиск' %>
     <% end %>
 
     <%= paginate @resources %>
@@ -41,34 +23,48 @@
       <table class="table">
         <thead>
           <tr>
-            <th> .  </th>
+            <th> <%= @resource_class.human_attribute_name :id %> </th>
+            <th> <%= @resource_class.human_attribute_name :spare_catalog_group %> </th>
             <th> <%= @resource_class.human_attribute_name :name %> </th>
-            <th> <%= @resource_class.human_attribute_name :spare_catalog_tokens %> </th>
-            <th> <%= @resource_class.human_attribute_name :opt %> </th>
-            <th> <%= @resource_class.human_attribute_name :shows %> </th>
             <th> <%= @resource_class.human_attribute_name :created_at %> </th>
             <th> <%= @resource_class.human_attribute_name :updated_at %> </th>
+            <th> <%= @resource_class.human_attribute_name :intro %> </th>
+            <th> <%= @resource_class.human_attribute_name :page %> </th>
+            <th> <%= @resource_class.human_attribute_name :opt %> </th>
+            <th> <%= @resource_class.human_attribute_name :shows %> </th>
+            <th> <%= @resource_class.human_attribute_name :spare_catalog_group_id %> </th>
+            <th> <%= @resource_class.human_attribute_name :page %> </th>
+            <th> <%= @resource_class.human_attribute_name :spare_catalog_tokens %> </th>
           </tr>
         </thead>
         <tbody>
           <% @resources.each do |r| %>
             <tr>
-              <td> .  </td>
-              <td>
-                <%= (nice_tree(r.spare_catalog_group.path) + " " + icon('angle-right') + " ") if r.spare_catalog_group %>
-                <%= r.name %> <br />
-                <%= link_to r.id, edit_admin_spare_catalog_path(r, return_path: request.fullpath) %> 
+              <td> 
+                <%= r.id %> <br />
+                <%= link_to "Просмотр", admin_spare_catalog_path(r.id) %> <br />
+                <%= link_to "Редактирование", edit_admin_spare_catalog_path(r, return_path: request.fullpath) %> 
                 <%= link_to("Публичный просмотр", polymorphic_path([:category_brands], category_id: r)) %> <br />
               </td>
               <td>
+                <%= nice_tree(r.spare_catalog_group.path) if r.spare_catalog_group %>
+              </td>
+              <td> 
+                <%= r.name %>
+              </td>
+              <td> <%= l r.created_at %> </td>
+              <td> <%= l r.updated_at %> </td>
+              <td> <%= r.intro %> </td>
+              <td> <%= r.page %> </td>
+              <td> <%= r.opt %> </td>
+              <td> <%= r.shows %> </td>
+              <td> <%= r.spare_catalog_group_id %> </td>
+              <td> <%= r.page %> </td>
+              <td> 
                 <% r.spare_catalog_tokens.each do |t| %>
                   <div class="well well-sm text-sm"><%= t.name %> : <%= t.weight %></div>
                 <% end %>
               </td>
-              <td> <%= r.opt %> </td>
-              <td> <%= r.shows %> </td>
-              <td> <%= l r.created_at %> </td>
-              <td> <%= l r.updated_at %> </td>
             </tr>
           <% end %>
         </tbody>
@@ -76,6 +72,11 @@
     </div>
 
     <%= paginate @resources %>
+
+    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary', style: "vertical-align: top" do %>
+      Новая категория
+    <% end %>
+
 
   <% end %>
 <% end %>

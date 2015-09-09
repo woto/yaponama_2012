@@ -1,17 +1,12 @@
-# encoding: utf-8
-#
 class SpareInfosController < ApplicationController
 
-  include Grid::SpareInfo
-
   skip_before_action :find_resource, :only => :search
-
-  skip_before_filter :set_grid, :only => [:new, :create, :edit, :update, :show, :destroy, :search]
 
   # TODO Не забыть вернуть!
   skip_before_action :verify_authenticity_token
 
   def search
+    binding.pry
     spare_info_t = SpareInfo.arel_table
     brand_t = Brand.arel_table
 
@@ -28,27 +23,6 @@ class SpareInfosController < ApplicationController
     respond_to do |format|
       format.json { render json: @resources }
     end
-  end
-
-  def transactions
-    render :text => "SpareInfosController::transactions"
-  end
-
-  def index
-    respond_to do |format|
-      format.html # index.html.erb
-      format.js { render 'grid_filter' }
-    end
-  end
-
-  private
-
-  def set_resource_class
-    @resource_class = SpareInfo
-  end
-
-  def new_resource
-    @resource = @resource_class.new(resource_params)
   end
 
 end

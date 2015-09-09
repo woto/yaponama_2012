@@ -1,0 +1,107 @@
+<% title_index %>
+
+<%= page do |p| %>
+
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
+
+    <%= paginate @resources %>
+
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th> <%= @resource_class.human_attribute_name :id %> </th>
+          <th> <%= @resource_class.human_attribute_name :catalog_number %> </th>
+          <th> <%= @resource_class.human_attribute_name :brand_id %> </th>
+          <th> <%= @resource_class.human_attribute_name :content %> </th>
+          <th> <%= @resource_class.human_attribute_name :created_at %> </th>
+          <th> <%= @resource_class.human_attribute_name :updated_at %> </th>
+          <th> <%= @resource_class.human_attribute_name :name %> </th>
+          <th> <%= @resource_class.human_attribute_name :spare_catalog_id %> </th>
+          <th> <%= @resource_class.human_attribute_name :notes %> </th>
+          <th> <%= @resource_class.human_attribute_name :notes_invisible %> </th>
+          <th> <%= @resource_class.human_attribute_name :image1 %> </th>
+          <th> <%= @resource_class.human_attribute_name :image2 %> </th>
+          <th> <%= @resource_class.human_attribute_name :image3 %> </th>
+          <th> <%= @resource_class.human_attribute_name :image4 %> </th>
+          <th> <%= @resource_class.human_attribute_name :image5 %> </th>
+          <th> <%= @resource_class.human_attribute_name :image6 %> </th>
+          <th> <%= @resource_class.human_attribute_name :image7 %> </th>
+          <th> <%= @resource_class.human_attribute_name :image8 %> </th>
+          <th> <%= @resource_class.human_attribute_name :file1 %> </th>
+          <th> <%= @resource_class.human_attribute_name :file2 %> </th>
+          <th> <%= @resource_class.human_attribute_name :file3 %> </th>
+          <th> <%= @resource_class.human_attribute_name :file4 %> </th>
+          <th> <%= @resource_class.human_attribute_name :file5 %> </th>
+          <th> <%= @resource_class.human_attribute_name :file6 %> </th>
+          <th> <%= @resource_class.human_attribute_name :file7 %> </th>
+          <th> <%= @resource_class.human_attribute_name :file8 %> </th>
+          <th> <%= @resource_class.human_attribute_name :hstore %> </th>
+          <th> <%= @resource_class.human_attribute_name :titles %> </th>
+          <th> <%= @resource_class.human_attribute_name :min_days %> </th>
+          <th> <%= @resource_class.human_attribute_name :min_cost %> </th>
+          <th> <%= @resource_class.human_attribute_name :offers %> </th>
+          <th> <%= @resource_class.human_attribute_name :aggregated_content_updated_at %> </th>
+          <th> <%= @resource_class.human_attribute_name :aggregated_content_checked_at %> </th>
+          <th> <%= @resource_class.human_attribute_name :fix_spare_catalog %> </th>
+        </tr>
+                      
+        <% @resources.each do |resource| %>
+          <tr>
+            <td> 
+              <%= resource.id %>
+              <%= link_to "Просмотр", admin_spare_info_path(resource.id, return_path: request.fullpath) %>
+              <%= link_to "Редактирование", edit_admin_spare_info_path(resource.id, return_path: request.fullpath) %>
+              <%= link_to("Публичный просмотр", polymorphic_path([:new, :user,  :product], :catalog_number => resource.catalog_number, anchor: resource.brand.to_label), target: "_blank") %>
+            </td>
+            <td> <%= resource.catalog_number %> </td>
+            <td> <%= resource.brand_id %> </td>
+            <td> <%= resource.content %> </td>
+            <td> <%= resource.created_at %> </td>
+            <td> <%= resource.updated_at %> </td>
+            <td> <%= resource.name %> </td>
+            <td> <%= resource.spare_catalog_id %> </td>
+            <td> <%= resource.notes %> </td>
+            <td> <%= resource.notes_invisible %> </td>
+            <td> <%= resource.image1 %> </td>
+            <td> <%= resource.image2 %> </td>
+            <td> <%= resource.image3 %> </td>
+            <td> <%= resource.image4 %> </td>
+            <td> <%= resource.image5 %> </td>
+            <td> <%= resource.image6 %> </td>
+            <td> <%= resource.image7 %> </td>
+            <td> <%= resource.image8 %> </td>
+            <td> <%= resource.file1 %> </td>
+            <td> <%= resource.file2 %> </td>
+            <td> <%= resource.file3 %> </td>
+            <td> <%= resource.file4 %> </td>
+            <td> <%= resource.file5 %> </td>
+            <td> <%= resource.file6 %> </td>
+            <td> <%= resource.file7 %> </td>
+            <td> <%= resource.file8 %> </td>
+            <td> <%= resource.hstore %> </td>
+            <td> <%= resource.titles %> </td>
+            <td> <%= resource.min_days %> </td>
+            <td> <%= resource.min_cost %> </td>
+            <td> <%= resource.offers %> </td>
+            <td> <%= resource.aggregated_content_updated_at %> </td>
+            <td> <%= resource.aggregated_content_checked_at %> </td>
+            <td> <%= resource.fix_spare_catalog %> </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+
+    <%= paginate @resources %>
+
+  <% end %>
+<% end %>

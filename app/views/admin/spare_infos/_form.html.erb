@@ -1,0 +1,38 @@
+<%= simple_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
+
+  <%= f.error_notification %>
+
+  <%= f.input :catalog_number %>
+
+  <%= f.fields_for :brand, f.object.brand, include_id: false do |b| %>
+    <%= b.input :brand, as: :select2 %>
+  <% end %>
+
+  <%= f.input :fix_spare_catalog %>
+  <%= f.input :change_spare_catalog, as: :hidden, input_html: {value: '1'} %>
+
+  <%= f.simple_fields_for :spare_catalog, f.object.spare_catalog, include_id: false do |b| %>
+    <%= b.input :spare_catalog, as: :select2 %>
+  <% end %>
+
+  <%= f.simple_fields_for :spare_info_phrases do |spare_info_phrase| %>
+    <%= render 'spare_infos/spare_info_phrase_fields', f: spare_info_phrase %>
+  <% end %>
+
+  <%= f.form_group do %>
+    <%= link_to_add_association 'Добавить фразу', f, :spare_info_phrases, class: "btn btn-success btn-small", :data => {"association-insertion-node" => ".form-group", "association-insertion-traversal" => "closest"}  %>
+  <% end %>
+
+  <% (1..8).each do |n| %>
+    <%= f.input "image#{n}", as: :image_field %>
+  <% end %>
+
+  <% (1..8).each do |n| %>
+    <%= f.input "file#{n}", as: :file_field %>
+  <% end %>
+
+  <%= f.input :content, :class => "ckeditor-extended" %>
+
+  <%= f.buttons %>
+
+<% end %>
