@@ -2,33 +2,76 @@
 
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <%= breadcrumb true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item @meta_title %>
   <% end %>
 
   <%= p.title do %>
-    <%= title_index %>
+    <%= page_header %>
   <% end %>
 
   <%= p.content do %>
 
-    <%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
+    <%= paginate @resources %>
+    <br />
+    <br />
 
-      <%= panel 'default' do |p| %>
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th> <%= @resource_class.human_attribute_name :id %> </th>
+          <th> <%= @resource_class.human_attribute_name :name %> </th>
+          <th> <%= @resource_class.human_attribute_name :brand_id %> </th>
+          <th> <%= @resource_class.human_attribute_name :image %> </th>
+          <th> <%= @resource_class.human_attribute_name :rating %> </th>
+          <th> <%= @resource_class.human_attribute_name :content %> </th>
+          <th> <%= @resource_class.human_attribute_name :creator_id %> </th>
+          <th> <%= @resource_class.human_attribute_name :phantom %> </th>
+          <th> <%= @resource_class.human_attribute_name :is_brand %> </th>
+          <th> <%= @resource_class.human_attribute_name :created_at %> </th>
+          <th> <%= @resource_class.human_attribute_name :updated_at %> </th>
+          <th> <%= @resource_class.human_attribute_name :preview %> </th>
+          <th> <%= @resource_class.human_attribute_name :default_display %> </th>
+          <th> <%= @resource_class.human_attribute_name :opts %> </th>
+          <th> <%= @resource_class.human_attribute_name :sign %> </th>
+        </tr>
 
-        <%= p.heading do %>
-          <%= render 'head' %>
+        <% @resources.each do |resource| %>
+          <tr>
+            <td> 
+              <%= resource.id %>
+              <%= link_to "Просмотр", admin_brand_path(resource.id, return_path: request.fullpath) %>
+              <%= link_to "Редактирование", edit_admin_brand_path(resource.id, return_path: request.fullpath) %>
+            </td>
+            <td> <%= resource.name %> </td>
+            <td> <%= resource.brand_id %> </td>
+            <td> <%= resource.image %> </td>
+            <td> <%= resource.rating %> </td>
+            <td> <%= resource.content %> </td>
+            <td> <%= resource.creator_id %> </td>
+            <td> <%= resource.phantom %> </td>
+            <td> <%= resource.is_brand %> </td>
+            <td> <%= resource.created_at %> </td>
+            <td> <%= resource.updated_at %> </td>
+            <td> <%= resource.preview %> </td>
+            <td> <%= resource.default_display %> </td>
+            <td> <%= resource.opts %> </td>
+            <td> <%= resource.sign %> </td>
+          </tr>
         <% end %>
+      </table>
+    </div>
 
-        <%= p.body do %>
-          <%= render 'grid', f: f %>
-        <% end %>
+    <br />
+    <%= paginate @resources %>
+    <br />
+    <br />
 
-        <%= render 'grid_footer', f: f, p: p %>
-
-      <% end %>
+    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary' do %>
+      Новый бренд
     <% end %>
+
   <% end %>
 <% end %>

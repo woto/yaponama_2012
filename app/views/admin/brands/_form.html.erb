@@ -1,31 +1,21 @@
-<%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
+<%= simple_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
 
-  <%= d1 do %>
+  <%= f.error_notification %>
 
-    <%= f.twbs_text_field :name, asterisk: true%>
+  <%= f.input :name %>
 
-    <%= f.fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b| %>
-
-      <%= f.form_group :brand do %>
-        <%= b.twbs_select2 :name, rel: 'select2-brand', data: {"true-id" => f.object.brand_id}, :label => 'Родительский производитель', :hint => 'Все найденные результаты для этого производителя будут переадресованы родительскому' %>
-        <%= f.error(:brand) %>
-      <% end %>
-    <% end %>
-    <%= f.twbs_collection_select :sign, Brand.signs, :first, :first, include_blank: true %>
-
-    <%= render 'image_form', f:f, name: 'image' %>
-    <%= f.twbs_text_field :rating %>
-    <%= f.twbs_check_box :is_brand %>
-    <%= f.twbs_check_box :default_display %>
-    <%= f.twbs_text_area :preview, rows: 4 %>
-
+  <%= f.simple_fields_for :brand, f.object.brand || f.object.build_brand, include_id: false do |b| %>
+    <%= b.input :brand, as: :select2 %>
   <% end %>
 
-  <%= row do %>
-    <div class="col-md-24">
-      <%= f.twbs_text_area :content, :class => "ckeditor-extended" %>
-      <%= f.twbs_submit %>
-    </div>
-  <% end %>
+  <%= f.input :sign, collection: Brand.signs, value_method: :first, label_method: :first, include_blank: true %>
+
+  <%= f.input :image, as: :image_field %>
+  <%= f.input :rating %>
+  <%= f.input :is_brand %>
+  <%= f.input :default_display %>
+  <%= f.input :preview %>
+  <%= f.input :content, :class => "ckeditor-extended" %>
+  <%= f.buttons %>
 
 <% end %>

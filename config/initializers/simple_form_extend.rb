@@ -1,4 +1,16 @@
 module SimpleForm
+
+  class ErrorNotification
+    def render
+      if has_errors?
+        template.capture do
+          base_errors = error_message + template.safe_join(@builder.object.errors[:base].map{|value| template.content_tag(:p, value)})
+          template.concat template.content_tag(error_notification_tag, base_errors, html_options)
+        end
+      end
+    end
+  end
+
   class FormBuilder
     def buttons *args, &block
       options = args.extract_options!.dup

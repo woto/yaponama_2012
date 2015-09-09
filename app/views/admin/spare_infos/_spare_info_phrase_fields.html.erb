@@ -1,4 +1,5 @@
 <%= f.nested_fields do %>
+      <%= f.destroyable do %>
   <%= panel 'default' do |p| %>
 
     <%= p.heading do %>
@@ -9,7 +10,6 @@
     <% end %>
 
     <%= p.body do %>
-      <%= f.destroyable do %>
         <%= f.input :catalog_number %>
         <%= f.input :primary %>
       <% end %>

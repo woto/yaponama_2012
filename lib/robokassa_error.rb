@@ -1,2 +1,0 @@
-class RobokassaError < StandardError
-end

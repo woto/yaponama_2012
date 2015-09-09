@@ -23,22 +23,20 @@
         <thead>
           <tr>
             <th> <%= @resource_class.human_attribute_name :id %> </th>
-            <th> <%= @resource_class.human_attribute_name :path %> </th>
+            <th> <%= @resource_class.human_attribute_name :ancestry %> </th>
             <th> <%= @resource_class.human_attribute_name :name %> </th>
+            <th> <%= @resource_class.human_attribute_name :created_at %> </th>
+            <th> <%= @resource_class.human_attribute_name :updated_at %> </th>
           </tr>
         </thead>
         <tbody>
           <% @resources.each do |r| %>
             <tr>
-              <td>
-                <%= link_to r.id, edit_admin_spare_catalog_group_path(r, return_path: request.fullpath) %>
-              </td>
-              <td>
-                <%= nice_tree(r.path) %>
-              </td>
-              <td>
-                <%= r.name %>
-              </td>
+              <td> <%= link_to r.id, edit_admin_spare_catalog_group_path(r, return_path: request.fullpath) %> </td>
+              <td> <%= nice_tree(r.path) %> </td>
+              <td> <%= r.name %> </td>
+              <td> <%= r.created_at %> </td>
+              <td> <%= r.updated_at %> </td>
             </tr>
           <% end %>
         </tbody>

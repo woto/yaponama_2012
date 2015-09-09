@@ -1,8 +1,8 @@
 class Brand < ActiveRecord::Base
+
   include ByCategoryConcern
-  include Selectable
   include BelongsToCreator
-  include BrandAttributes
+  include Concerns::BrandAttributes
 
   enum sign: [:slang, :synonym, :conglomerate]
 
@@ -12,7 +12,7 @@ class Brand < ActiveRecord::Base
 
   has_and_belongs_to_many :spare_catalogs
   has_many :brands, :inverse_of => :brand, :dependent => :destroy
-  has_many :cars, :inverse_of => :brand, :dependent => :destroy
+  has_many :cars, :inverse_of => :brand, :dependent => :destroy, class_name: "User::Car"
   has_many :models, :inverse_of => :brand, :dependent => :destroy
   has_many :spare_infos, dependent: :destroy
   has_many :spare_applicabilities, dependent: :destroy
@@ -26,7 +26,7 @@ class Brand < ActiveRecord::Base
 
   validate do
     if sign.nil? ^ brand.nil?
-      errors[:brand] << 'У сленга, синонима или конгломерации должен быть родительский бренд'
+      errors[:base] << 'Указывая родительский бренд так же необходимо указать тип принадлежности как сленг, синоним или конгломерация'
     end
   end
 

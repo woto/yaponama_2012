@@ -44,7 +44,6 @@ ru:
         fix_spare_catalog: Категория зафиксирована
         catalog_number: Каталожный номер
         #brand: Производитель
-        content: Содержание
       spare_catalog:
         name: Название категории
         intro: Вступление
@@ -98,7 +97,6 @@ ru:
         name: Производитель
         image: Логотип
         rating: Рейтинг
-        content: Описание
       model:
         name: Модель
         parent_brand_id: Бренд

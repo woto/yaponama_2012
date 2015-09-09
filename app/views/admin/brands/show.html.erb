@@ -1,4 +1,4 @@
-<% title_new %>
+<% @meta_title = @resource.to_label %>
 
 <%= page do |p| %>
 
@@ -13,8 +13,9 @@
     <%= page_header %>
   <% end %>
 
-  <%= p.content :sm do %>
-    <%= render 'form'%>
+  <%= p.content do %>
+    <%= link_to 'Добавить модель', new_admin_brand_model_path(@resource.id) %>
+    <br />
+    <%= render 'smart_show' %>
   <% end %>
-
 <% end %>

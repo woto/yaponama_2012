@@ -105,6 +105,14 @@ class SpareInfoTest < ActiveSupport::TestCase
     assert si.valid?
   end
 
+  test 'Удаляя SpareInfo мы так же должны автоматом удалить SpareInfoPhrase' do
+    si = spare_infos(:spare_info_phrases_destroy_test)
+    assert_equal 2, si.spare_info_phrases.count
+    assert_difference -> {SpareInfoPhrase.count}, -2 do
+      si.destroy
+    end
+  end
+
   test 'Не допустимо чтобы у объекта был бренд, с заполненным sign' do
     invalid_brand = brands(:child1_synonym)
     valid_brand = brands(:child1_child2)
@@ -227,6 +235,12 @@ class SpareInfoTest < ActiveSupport::TestCase
 
     si.reload.destroy
     refute si.persisted?
+  end
+
+  test 'После сохранения SpareInfo у нас заполняется name. Пока что нужно для использования в заменах, применимостях и т.д.' do
+    si = SpareInfo.new(catalog_number: '123', spare_catalog: Defaults.spare_catalog, brand: Defaults.brand, spare_info_phrases: [SpareInfoPhrase.new({catalog_number: '123', primary: true})])
+    si.save!
+    assert_equal '123 (ОРИГИНАЛ)', si.name
   end
 
 end

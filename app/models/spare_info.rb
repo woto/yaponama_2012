@@ -4,6 +4,7 @@ class SpareInfo < ActiveRecord::Base
     included do
       belongs_to :spare_catalog
       accepts_nested_attributes_for :spare_catalog
+      validates :spare_catalog, :presence => true
     end
 
     def spare_catalog_attributes=(attr)
@@ -24,6 +25,7 @@ class SpareInfo < ActiveRecord::Base
     included do
       belongs_to :brand
       accepts_nested_attributes_for :brand
+      validates :brand, presence: true
     end
     def brand_attributes=(attr)
       if attr["name"].present?
@@ -91,7 +93,6 @@ class SpareInfo < ActiveRecord::Base
     end
   end
 
-
   (1..8).each do |n|
     mount_uploader "image#{n}", ApplicationUploader
   end
@@ -109,7 +110,6 @@ class SpareInfo < ActiveRecord::Base
 
   validates :catalog_number, :presence => true, uniqueness:  { case_sensitive: false, :scope => :brand_id }
 
-  validates :spare_catalog, :presence => true
 
   before_save do
     self.name = to_label

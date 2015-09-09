@@ -1,19 +1,21 @@
-<% @meta_title = "Редактирование производителя #{@resource.to_label}" %>
+<% title_edit %>
 
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <%= breadcrumb true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Бренды', admin_brands_path %>
+    <%= b.item @resource.to_label, admin_brand_path(@resource) %>
+    <%= b.item @meta_title %>
   <% end %>
 
   <%= p.title do %>
     <%= page_header %>
   <% end %>
 
-  <%= p.content do %>
-    <%= render "form" %>
+  <%= p.content :sm do %>
+    <%= render 'form'%>
   <% end %>
 
 <% end %>
