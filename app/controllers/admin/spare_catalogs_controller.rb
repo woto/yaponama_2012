@@ -6,7 +6,6 @@ class Admin::SpareCatalogsController < ApplicationController
     @resources = @q.result(distinct: true)
     respond_to do |format|
       format.html
-      format.json {render json: @resources}
     end
   end
 
