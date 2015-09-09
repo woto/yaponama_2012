@@ -4,7 +4,6 @@ class SpareInfo < ActiveRecord::Base
     included do
       belongs_to :spare_catalog
       accepts_nested_attributes_for :spare_catalog
-      validates :spare_catalog, presence: true
     end
 
     def spare_catalog_attributes=(attr)
@@ -25,7 +24,6 @@ class SpareInfo < ActiveRecord::Base
     included do
       belongs_to :brand
       accepts_nested_attributes_for :brand
-      validates :spare_catalog, presence: true
     end
     def brand_attributes=(attr)
       if attr["name"].present?
