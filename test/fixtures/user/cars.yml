@@ -1,5 +1,5 @@
 stan:
-  somebody: stan
+  user: stan
   brand: mitsubishi
   model: galant
   vin: 17171717171717171
@@ -7,7 +7,7 @@ stan:
   creation_reason: 'fixtures'
 
 otto:
-  somebody: otto
+  user: otto
   brand: mitsubishi
   model: galant
   vin_or_frame: 'frame'
@@ -15,7 +15,7 @@ otto:
   creation_reason: 'fixtures'
 
 mark:
-  somebody: mark
+  user: mark
   brand: nissan
   model: teana
   generation: luxury
@@ -23,7 +23,7 @@ mark:
   creation_reason: 'fixtures'
 
 sending1:
-  somebody: sending1
+  user: sending1
   brand: sending1
   model: sending1
   vin_or_frame: frame
@@ -31,7 +31,7 @@ sending1:
   creation_reason: fixtures
 
 receiving1:
-  somebody: receiving1
+  user: receiving1
   brand: receiving1
   model: receiving1
   vin_or_frame: frame

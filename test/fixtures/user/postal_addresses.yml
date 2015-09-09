@@ -1,3 +1,12 @@
+lee:
+  postcode: '123456'
+  region: '1'
+  city: '1'
+  street: '1'
+  house: '1'
+  stand_alone_house: true
+  user: first_user
+
 first_user:
   postcode: '123456'
   region: '1'
@@ -6,7 +15,7 @@ first_user:
   house: '1'
   stand_alone_house: true
   creation_reason: fixtures
-  somebody: first_user
+  user: first_user
 
 shuhova:
   postcode: '000000'
@@ -17,7 +26,7 @@ shuhova:
   stand_alone_house: false
   room: '21'
   creation_reason: fixtures
-  somebody: mike
+  user: mike
   creator: mike
 
 bolshaya_yakimanka:
@@ -29,7 +38,7 @@ bolshaya_yakimanka:
   stand_alone_house: false
   room: '32'
   creation_reason: fixtures
-  somebody: mike
+  user: mike
   creator: mike
 
 ryazanka:
@@ -41,7 +50,7 @@ ryazanka:
   stand_alone_house: false
   room: '143'
   creation_reason: fixtures
-  somebody: mike
+  user: mike
   creator: mike
 
 rublyevskoe_shosse:
@@ -54,7 +63,7 @@ rublyevskoe_shosse:
   creation_reason: fixtures
   notes: 'На въезде нужен паспорт'
   notes_invisible: 'Внтуреняя служба безопасности, без удостоверения (не водит. удост.) не пропустят'
-  somebody: mike
+  user: mike
   creator: mike
 
 sending1:
@@ -66,7 +75,7 @@ sending1:
   stand_alone_house: false
   room: 'sending1'
   creation_reason: fixtures
-  somebody: sending1
+  user: sending1
   creator: sending1
 
 receiving1:
@@ -78,5 +87,5 @@ receiving1:
   stand_alone_house: false
   room: 'receiving1'
   creation_reason: fixtures
-  somebody: receiving1
+  user: receiving1
   creator: receiving1

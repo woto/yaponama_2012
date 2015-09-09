@@ -1,6 +1,5 @@
 sending1:
   postal_address: 
-  company: 
   delivery_cost: !ruby/object:BigDecimal 18:0.0
   status: open
   delivery_place: 
@@ -18,12 +17,11 @@ sending1:
   creation_reason: 
   notes: ''
   notes_invisible: ''
-  somebody: sending1
+  user: sending1
   creator: sending1
 
 receiving1:
   postal_address: 
-  company: 
   delivery_cost: !ruby/object:BigDecimal 18:0.0
   status: open
   delivery_place: 
@@ -41,7 +39,7 @@ receiving1:
   creation_reason: 
   notes: ''
   notes_invisible: ''
-  somebody: receiving1
+  user: receiving1
   creator: receiving1
 
 michael:
@@ -64,5 +62,5 @@ michael:
   creation_reason: 
   notes: ''
   notes_invisible: ''
-  somebody: michael
+  user: michael
   creator: michael

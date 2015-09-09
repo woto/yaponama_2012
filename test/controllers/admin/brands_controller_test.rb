@@ -9,8 +9,6 @@ class Admin::BrandsControllerTest < ActionController::TestCase
     assert_equal "KI", spare_infos(:ki_2102).brand.name
     assert_equal nil, brands(:ki).brand
 
-    cookies['auth_token'] = somebodies(:first_admin).auth_token
-
     patch :update,
       "brand" => {
         "sign"=> "synonym",
@@ -33,8 +31,6 @@ class Admin::BrandsControllerTest < ActionController::TestCase
     assert_equal nil, brands(:ki).brand
     assert_equal "2103 (KI)", spare_replacements(:ki_2103_ns_3310).from_spare_info.to_label
 
-    cookies['auth_token'] = somebodies(:first_admin).auth_token
-
     patch :update,
       "brand" => {
         "sign"=> "synonym",
@@ -55,8 +51,6 @@ class Admin::BrandsControllerTest < ActionController::TestCase
 
     assert_equal nil, brands(:ns).brand
     assert_equal "3310 (NS)", spare_replacements(:ki_2103_ns_3310).to_spare_info.to_label
-
-    cookies['auth_token'] = somebodies(:first_admin).auth_token
 
     patch :update,
       "brand" => {
@@ -79,8 +73,6 @@ class Admin::BrandsControllerTest < ActionController::TestCase
     assert_equal "KI", spare_infos(:ki_2102).brand.name
     assert_equal nil, brands(:ki).brand
     assert_equal "2103 (KI)", spare_applicabilities(:sa_16).spare_info.to_label
-
-    cookies['auth_token'] = somebodies(:first_admin).auth_token
 
     patch :update,
       "brand" => {
