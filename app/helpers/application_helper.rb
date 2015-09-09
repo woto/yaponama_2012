@@ -435,12 +435,6 @@ module ApplicationHelper
     end
   end
 
-  def d1 options={}, &block
-    row do
-      c1 options, &block
-    end
-  end
-
   def d2 options={}, &block
     row do
       c2 options, &block
