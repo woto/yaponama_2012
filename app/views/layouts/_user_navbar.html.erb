@@ -23,44 +23,33 @@
 
     <div class="navbar-collapse collapse navbar-responsive-collapse">
 
-      <%= render 'common_search_form' %>
+      <%= render 'frontend/shared/search_form' %>
 
       <ul class="nav navbar-nav navbar-right">
 
         <%= dropdown id: 'dropdown-phone' do |dd| %>
-          <%= dd.toggle id: 'toggle-phone' do %>
+          <%= dd.toggle do %>
             Контакты
           <% end %>
           <%= dd.menu do %>
-              <%= render partial: 'navbar_shop', collection:  Deliveries::Place.random_list, spacer_template: "navbar_divider" %>
-              <li class="divider"></li>
-              <li class="dropdown-header">Не можете дозвониться? Оставьте <br />номер телефона и мы вам перезвоним.</li>
-              <li>
-                <%= link_to "Обратный звонок", '#', class: 'link callback-link' %>
-              </li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Если вам необходимо передать номера<br /> деталей, фотографию, VIN код и тд, <br />то рекомендуем воспользоваться чатом.</li>
-              <li>
-                <%# TODO talk %>
-                <%= link_to "Онлайн консультант", '#', class: 'talk-show link' %>
-              </li>
+            <%= render partial: 'navbar_shop', collection:  Deliveries::Place.random_list, spacer_template: "navbar_divider" %>
           <% end %>
         <% end %>
 
         <li class="<%= highlight_active([:controller => '/products', :status => 'incart']) %>">
-          <%= link_to smart_route({:prefix => [:status], :postfix => [:products]}, :status => 'incart') do %>
+          <%= link_to "status_user_products_path(:status => 'incart')" do %>
             <%= icon 'shopping-cart' %> 
-            <% count = current_user && current_user.products.where(:status => 'incart').count || 0 %>
-            Корзина <span id="products_incart" class="badge"><%= count if count > 0 %></span>
+            Корзина <span id="products_incart" class="badge"><%= 0 %></span>
           <% end %>
         </li>
 
+        <% # TODO %>
         <%= dropdown class: highlight_active2([/\/login/, /\/register/, /\/password_reset/]) do |dd| %>
 
           <%= dd.toggle do %>
             <%= icon 'user' %>
             <% if current_user && current_user.role != 'guest' %>
-              <span class="hidden-sm"><%= current_user.name %></span>
+              <span class="hidden-md"><%= current_user.name %></span>
             <% else %>
               Вход
             <% end %>
@@ -68,18 +57,18 @@
 
           <%= dd.menu do %>
             <% if !current_user || current_user.role == 'guest' %>
-              <li> <%= link_to "Вход на сайт", main_app.login_path %> </li>
-              <li> <%= link_to "Регистрация", main_app.register_path %> </li>
+              <li> <%= link_to "Вход на сайт", main_app.new_user_session_path %> </li>
+              <li> <%= link_to "Регистрация", main_app.new_user_registration_path %> </li>
               <%= divider %>
-              <li> <%= link_to "Забыли пароль?", main_app.password_reset_path %> </li>
+              <li> <%= link_to "Забыли пароль?", main_app.new_user_password_path %> </li>
             <% else %>
               <% if ["admin", "manager"].include? current_user.role %>
-                <li> <%= link_to "Закрытая зона", main_app.admin_path %> </li>
+                <li> <%= link_to "Закрытая зона", admin_root_path %> </li>
                 <%= divider %>
                 <%= content_for :menu_items %>
               <% end %>
               <li> <%= link_to "Личный кабинет", main_app.user_path %> </li>
-              <li> <%= link_to "Выход", main_app.logout_path, :method => :delete %> </li>
+              <li> <%= link_to "Выход", main_app.destroy_user_session_path, :method => :delete %> </li>
             <% end %>
           <% end %>
 
@@ -116,7 +105,7 @@
           <% end %>
 
           <%= content_tag :li, class: highlight_active2(/\/user\/payments/) do %>
-            <%= link_to "Оплата", main_app.new_user_payment_path %>
+            <%= link_to "Оплата", "/user/payments/new" %>
           <% end %>
 
           <%= content_tag :li, class: highlight_active([:controller => "/deliveries"]) do %>

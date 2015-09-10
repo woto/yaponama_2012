@@ -30,3 +30,15 @@ to_spare_replacements_destroy_test:
   to_spare_info: to_spare_replacements_destroy_test
   wrong: false
   status: 3
+
+bosh_s4_005_same_number:
+  from_spare_info: bosh_s4_005_same_number
+  to_spare_info: bosch_0092S40050_same_number
+  wrong: false
+  status: 2
+
+bosch_0092S40050_same_number:
+  from_spare_info: bosch_0092S40050_same_number
+  to_spare_info: bosh_s4_005_same_number
+  wrong: false
+  status: 2

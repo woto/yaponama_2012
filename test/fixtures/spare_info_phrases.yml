@@ -67,3 +67,38 @@ content_destroy_test:
   catalog_number: content_destroy_test
   spare_info: content_destroy_test
   primary: true
+
+bosh_s4_005_same_number:
+  catalog_number: S4005
+  spare_info: bosh_s4_005_same_number
+  primary: true
+
+bosch_0092S40050_same_number:
+  catalog_number: 0092S40050
+  spare_info: bosch_0092S40050_same_number
+  primary: true
+
+accumulator_destroy_test:
+  catalog_number: '0092S40190'
+  spare_info: accumulator_destroy_test
+  primary: true
+
+fix_spare_catalog:
+  catalog_number: '83848283058384'
+  spare_info: fix_spare_catalog
+  primary: true
+
+titles_as_string:
+  catalog_number: '465748327576329472'
+  spare_info: titles_as_string
+  primary: true
+
+spare_info_phrases_destroy_test1:
+  catalog_number: 'spare_info_phrases_destroy_test1'
+  spare_info: spare_info_phrases_destroy_test
+  primary: true
+
+spare_info_phrases_destroy_test2:
+  catalog_number: 'spare_info_phrases_destroy_test2'
+  spare_info: spare_info_phrases_destroy_test
+  primary: false

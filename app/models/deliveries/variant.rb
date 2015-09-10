@@ -1,7 +1,6 @@
 # encoding: utf-8
 #
 class Deliveries::Variant < ActiveRecord::Base
-  include HiddenRecreate
   belongs_to :place
 
   #has_one :option

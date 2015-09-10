@@ -1,10 +1,10 @@
 class SpareApplicability < ActiveRecord::Base
 
-  include BrandAttributes
-  include ModelAttributes
-  include GenerationAttributes
-  include ModificationAttributes
-  include SpareInfoAttributes
+  include Concerns::BrandAttributes
+  include Concerns::ModelAttributes
+  include Concerns::GenerationAttributes
+  include Concerns::ModificationAttributes
+  include Concerns::SpareInfoAttributes
 
   validates :spare_info, presence: true
   validates :brand, presence: true

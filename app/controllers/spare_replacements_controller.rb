@@ -1,5 +1,4 @@
 class SpareReplacementsController < ApplicationController
-  include Grid::SpareReplacement
 
   private
 

@@ -58,6 +58,8 @@
 //= require admin/deliveries/places
 //
 //= require select2/spare_catalog
+//= require select2/brand_model
+//= require select2/spare_info
 //
 //=========================
 // LIBS
@@ -71,9 +73,6 @@
 //
 //= require submenu
 
-//= require callbacks
-
-//= require brand_model
 
 //= require 'buy_button'
 //= require 'modal_form'
@@ -90,5 +89,4 @@
 //= require slide_top
 //= require map
 //= require assa
-//= require spare_info
 //= require image_view

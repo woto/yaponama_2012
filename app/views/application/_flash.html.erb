@@ -1,5 +1,5 @@
 <% content_for :flash do %>
-  <% [:success, :info, :warning, :danger].each do |key| %>
+  <% [:success, :info, :warning, :danger, :notice, :alert].each do |key| %>
     <%= alert key do %>
       <%= flash[key] %>
     <% end if flash[key] %>

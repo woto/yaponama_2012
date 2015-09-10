@@ -1,3 +1,4 @@
+<% if false %>
 <%= modal :id => 'modal_form' do |m| %>
 
   <%= m.header do |h| %>
@@ -148,4 +149,5 @@
   $(document).on('shown.bs.modal', '#modal_form', function(){
     $('#product_quantity_ordered:first').focus();
   });
+<% end %>
 <% end %>

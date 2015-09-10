@@ -46,10 +46,10 @@
         <div id="brands">
           <%= row do %>
             <div class="col-lg-20 col-lg-offset-2 top-space-lg">
-              <%= form_tag search_brands_path, remote: true, id: 'brands-fast-search-form', method: 'get' do %>
+              <%= form_tag search_brands_path, remote: true, method: 'get' do %>
                 <div class="input-group input-group-lg">
                   <span class="input-group-addon"><%= icon 'search' %></span>
-                  <%= text_field_tag :name, nil, class: "form-control brands-fast-search-input", placeholder: "Быстрый поиск" %>
+                  <%= text_field_tag :name, nil, class: "form-control", "brands-fast-search"=>"", placeholder: "Быстрый поиск" %>
                   <%= hidden_field_tag :is_brand, '1' %>
                 </div>
               <% end %>

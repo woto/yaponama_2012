@@ -2,7 +2,24 @@
   <h3 class="top-space-lg">Замены и аналоги</h3>
   <ul>
     <% replacements.each do |replacement| %>
-      <li><%= replacement.to_spare_info.to_label %> <%= replacement.status %></li>
+      <% case replacement.status %>
+      <% when 'same_number' %>
+          <li><strong> Следующие товары являются абсолютно идентичными и используются в качестве альтернативного обозначения товара: </strong></li>
+          <li>
+          <%= link_to replacement.to_spare_info.to_label, polymorphic_path([:new, *jaba3, :product], :catalog_number => replacement.to_spare_info.catalog_number) %>
+            <% if replacement.to_spare_info.warehouses.present? %>
+              <ul>
+                <% replacement.to_spare_info.warehouses.each do |warehouse| %>
+                  <li> 
+                    В наличии <%= warehouse.place.to_label %>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+          </li>
+        <% else %>
+          <li><%= replacement.to_spare_info.to_label %> <%= replacement.status %></li> 
+        <% end %>
     <% end %>
   </ul>
 <% end %>

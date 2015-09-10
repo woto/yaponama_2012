@@ -17,7 +17,6 @@ module ErrorHandling
       rescue_from BanishError, with: ->(exception) { redirect_to 'http://example.com' }
       rescue_from Pundit::NotAuthorizedError, with: -> {redirect_to( (request.referrer || admin_root_path), alert: 'Недостаточно прав для данного действия')}
       #rescue_from ActionController::InvalidAuthenticityToken, :with => :render_500
-      #rescue_from RobokassaError, with: :render_500
     end
 
   end

@@ -1,0 +1,1 @@
+irb(main):082:0> Brand.joins(:spare_infos).group("brands.id").count.select{|id, count| count < 100}.each{|id, count| Brand.find(id).spare_infos.destroy_all}^C

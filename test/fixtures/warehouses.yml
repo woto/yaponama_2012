@@ -1,5 +1,11 @@
 warehouse_destroy_test:
   spare_info: warehouse_destroy_test
-  count: '1'
-  price: '50'
-  place_id: '1'
+  count: 1
+  price: 50
+  place: first
+
+bosh_s4_005_same_number:
+  spare_info: bosh_s4_005_same_number
+  count: 1
+  price: 5500
+  place: first

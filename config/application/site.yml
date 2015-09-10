@@ -3,7 +3,7 @@ defaults: &defaults
 development:
   <<: *defaults
   host: '192.168.1.253'
-  port: '3002'
+  port: '3000'
   host_port: '192.168.1.253'
 
 test:

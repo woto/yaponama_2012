@@ -1,9 +1,20 @@
 <% title_new %>
 
-<%= breadcrumb true do |b| %>
-  <%= b.item @meta_title %>
+<%= page do |p| %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content :sm do %>
+    <%= render 'form' %>
+  <% end %>
+
 <% end %>
 
-<%= title_new %>
 
-<%= render 'form' %>

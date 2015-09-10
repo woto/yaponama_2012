@@ -271,7 +271,7 @@
     <% replacements_link = capture do %>
       <% if @replacements.map{|obj| obj['replacements'].map{|obj2| obj2['catalog_number']}}.flatten.length >= 1 %>
         <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-        <h5>Возможно вас так же могут заинтересовать <%= link_to "аналоги и замены номера #{@c9}", polymorphic_path([new_or_edit, *jaba3,  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %>.</h5>
+        <h5>Возможно вас так же могут заинтересовать <%= link_to "аналоги и замены номера #{@c9}", polymorphic_path([new_or_edit, :user,  :product], :id => @resource, :catalog_number => @c9, :manufacturer => nil, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' %>.</h5>
       <% end %>
     <% end %>
 

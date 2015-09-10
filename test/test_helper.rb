@@ -36,7 +36,7 @@ require "minitest/autorun"
 #Capybara.app_host
 #Capybara.always_include_port
 #Capybara.default_host
-Capybara.server_port = 3000
+Capybara.server_port = 4000
 Capybara.server_host = '127.0.0.1'
 Capybara.default_driver = :selenium
 Capybara.default_driver = :selenium
@@ -50,6 +50,8 @@ Capybara.default_wait_time = 20
 
 
 class ActionDispatch::IntegrationTest
+  include Warden::Test::Helpers
+  Warden.test_mode!
   include Capybara::DSL
   include ShowMeTheCookies
 
@@ -74,6 +76,12 @@ class ActionDispatch::IntegrationTest
     #assert page.has_css? ".alert-success", text: "Вы успешно вошли."
   end
 
+end
+
+
+class ActionController::TestCase
+  include Devise::TestHelpers
+  Warden.test_mode!
 end
 
 class ActiveSupport::TestCase

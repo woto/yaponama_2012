@@ -9,7 +9,7 @@ development:
   <<: *defaults
   share_buttons: false
   suppress_exceptions: false
-  display_tawk_to: true
+  display_tawk_to: false
   display_counters: false
 
 test:

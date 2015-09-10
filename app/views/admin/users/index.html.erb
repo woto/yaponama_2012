@@ -1,4 +1,4 @@
-<% @meta_title = 'Пользователи' %>
+<% title_index %>
 
 <%= page do |p| %>
 
@@ -28,6 +28,9 @@
   <br />
 
   <%= p.content do %>
+
+    <%= paginate @resources %>
+
     <div class="table-responsive">
       <table class="table">
         <tr>
@@ -53,6 +56,12 @@
         <% end %>
       </table>
     </div>
-  <% end %>
 
+    <%= paginate @resources %>
+
+    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary' do %>
+      Новый пользователь
+    <% end %>
+
+  <% end %>
 <% end %>

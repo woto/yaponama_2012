@@ -33,8 +33,7 @@
                 <td> <span class="visible-xs"> Производитель: </span><%= manufacturer %> </td>
                 <td> 
                   <span class="visible-xs"> Каталожный номер: </span>
-                  <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-                  <%= link_to catalog_number, polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource, :catalog_number => catalog_number, :product_id => @resource.try(:product_id), :return_path => params[:return_path], :anchor => manufacturer ), :class => 'search-button', :"data-clickable-href" => '' %>
+                  <%= link_to catalog_number, new_user_product_path(:catalog_number => catalog_number, :return_path => params[:return_path], :anchor => manufacturer ), :class => 'search-button', :"data-clickable-href" => '' %>
                 </td>
 
                 <td>

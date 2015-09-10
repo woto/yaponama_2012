@@ -1,6 +1,6 @@
 Rails.application.configure do
 
-  config.web_console.whitelisted_ips = '192.168.1.33'
+  config.web_console.whitelisted_ips = '192.168.1.0/24'
 
   # Settings specified here will take precedence over those in config/application.rb.
 

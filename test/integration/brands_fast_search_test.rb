@@ -23,4 +23,3 @@ class WelcomeTest < ActionDispatch::IntegrationTest
   #end
 
 end
-

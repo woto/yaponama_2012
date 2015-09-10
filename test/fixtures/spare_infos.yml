@@ -129,3 +129,30 @@ applicabilities_destroy_test:
   brand: destroy_test
   name: applicabilities_destroy_test (destroy_test)
   spare_catalog: destroy_test
+
+bosh_s4_005_same_number:
+  catalog_number: S4005
+  brand: bosch
+  spare_catalog: akb
+
+bosch_0092S40050_same_number:
+  catalog_number: 0092S40050
+  brand: bosch
+  spare_catalog: akb
+
+fix_spare_catalog:
+  catalog_number: '83848283058384'
+  brand: toyota
+  spare_catalog: rulevaya_tyga
+  fix_spare_catalog: true
+
+titles_as_string:
+  catalog_number: '465748327576329472'
+  brand: toyota
+  spare_catalog: rulevaya_tyga
+  titles: ['titles_as_string']
+
+spare_info_phrases_destroy_test:
+  catalog_number: 'spare_info_phrases_destroy_test'
+  brand: toyota
+  spare_catalog: rulevaya_tyga

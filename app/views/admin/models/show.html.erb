@@ -1,13 +1,20 @@
-<%= b1 do %>
+<% @meta_title = @resource.to_label %>
 
-  <% @meta_title = "Просмотр модели #{@resource.to_label}" %>
+<%= page do |p| %>
 
-  <%= breadcrumb true do |b| %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Модели', admin_models_path %>
     <%= b.item @meta_title %>
   <% end %>
 
-  <%= page_header %>
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
 
-  <%= render 'smart_show' %>
-
+  <%= p.content do %>
+    <%= link_to 'Добавить поколение', new_admin_model_generation_path(@resource.id, return_path: params[:return_path]) %>
+    <%= render 'smart_show' %>
+  <% end %>
 <% end %>

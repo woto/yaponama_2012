@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
     has_many :orders
   end
 
+  def to_label
+    [name, phone, email].reject{|value| value.blank?}.join(', ')
+  end
+
 end

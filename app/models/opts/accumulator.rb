@@ -1,6 +1,6 @@
 class Opts::Accumulator < ActiveRecord::Base
-  include BelongsToCreator
 
+  include BelongsToCreator
   belongs_to :spare_info
 
   validates :spare_info, presence: true

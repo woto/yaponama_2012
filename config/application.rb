@@ -92,7 +92,6 @@ module Yaponama2012
       config.opts_truck_tire = config_for('application/opts/truck_tire')
       config.price = config_for('application/price')
       config.site = config_for('application/site')
-      config.user = config_for('application/user')
     end
 
 

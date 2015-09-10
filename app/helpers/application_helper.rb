@@ -277,17 +277,6 @@ module ApplicationHelper
     return dropdowns
   end
 
-  def order_decorator(order)
-    # TODO Пересмотреть
-    if order
-      link_to smart_route({:postfix => [:order]}, :user_id => order.user_id, :id => order.id, :status => nil) do 
-        content_tag(:i, '', class: "icon-shopping-cart").html_safe +
-        " " +
-        order.to_label 
-      end
-    end
-  end
-
   def page_header
     content_tag :div, class: 'page-header' do
       [content_tag(:h1, class: 'bottom-space-xs') do
@@ -301,8 +290,6 @@ module ApplicationHelper
         h(@meta_title_lead) 
       end].join.html_safe
     end
-
-
   end
 
   def discourse_head
@@ -386,68 +373,10 @@ module ApplicationHelper
     content_tag :li, '', class: 'divider'
   end
 
-  def jaba
-     { 
-      :user_id => params[:user_id], 
-      :supplier_id => params[:supplier_id], 
-      :order_id => params[:order_id], 
-      :primary_key => params[:primary_key], 
-      :status => params[:status], 
-      #:return_path => params[:return_path]
-     }
-  end
-
-  def jaba2
-    @resource_class.name.pluralize.underscore.gsub('/', '_').to_sym
-  end
-
   ['index', 'new', 'edit', 'show'].each do |method_name|
     define_method "title_#{method_name}" do
       @meta_title = t("helpers.titles.#{@resource_class.to_s.underscore}.#{method_name}")
       page_header
-    end
-  end
-
-  def c0 options={}
-    options[:class] = ['col-lg-12 col-md-14 col-sm-16', options[:class] ].compact
-    content_tag :div, options do
-      yield
-    end
-  end
-
-  def c1 options={}
-    options[:class] = ['col-lg-14 col-md-16 col-sm-18', options[:class] ].compact
-    content_tag :div, options do
-      yield
-    end
-  end
-
-  def c2 options={}
-    options[:class] = ['col-lg-20 col-md-22 col-sm-24', options[:class] ].compact
-    content_tag :div, options do
-      yield
-    end
-  end
-
-  def d0 options={}, &block
-    row do
-      c0 options, &block
-    end
-  end
-
-  def d2 options={}, &block
-    row do
-      c2 options, &block
-    end
-  end
-
-  def b1
-    container do
-      row class: 'top-space bottom-space' do
-        content_tag :div, class: 'col-lg-24' do
-          yield
-        end
-      end
     end
   end
 

@@ -1,11 +1,12 @@
-<% title_show %>
+<% @meta_title = @resource.to_label %>
 
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <%= breadcrumb true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Замены', admin_spare_infos_path %>
+    <%= b.item @meta_title %>
   <% end %>
 
   <%= p.title do %>
@@ -48,8 +49,6 @@
     <br />
     <% end %>
 
-
     <%= render 'smart_show' %>
   <% end %>
-
 <% end %>

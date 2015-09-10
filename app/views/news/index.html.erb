@@ -1,9 +1,8 @@
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <%= breadcrumb false, exception=true do |b| %>
-      <%= b.item('Новости') %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Новости' %>
   <% end %>
 
   <%= p.title do %>

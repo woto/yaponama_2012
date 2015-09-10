@@ -54,7 +54,7 @@
     <%= f.input :price_url %>
 
     <% (1..5).each do |n| %>
-      <%= f.input "image#{n}", as: :image_preview %>
+      <%= f.input "image#{n}", as: :image_field %>
     <% end %>
 
     <%= panel 'default' do |p| %>

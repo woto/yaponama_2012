@@ -17,8 +17,7 @@ anton_first:
   creation_reason: fixtures
   notes:
   notes_invisible:
-  somebody: anton
-  supplier: mile
+  user: anton
   creator: first_admin
 
 
@@ -41,8 +40,7 @@ anton_second:
   creation_reason: fixtures
   notes: Коммент.
   notes_invisible: Невидимый комментарий
-  somebody: anton
-  supplier: exist
+  user: anton
   creator: first_admin
 
 anton_third:
@@ -61,8 +59,7 @@ anton_third:
   created_at: 2012-08-12 03:45:38.527055000 Z
   updated_at: 2012-09-01 03:45:38.527055000 Z
   creation_reason: fixtures
-  somebody: anton
-  supplier: exist
+  user: anton
   creator: anton
 
 anton_fourth:
@@ -77,13 +74,11 @@ anton_fourth:
   buy_cost: 332.0
   sell_cost: 350.0
   hide_catalog_number: false
-  status: pre_supplier
   probability: 95
   created_at: 2012-08-12 03:45:38.527055000 Z
   updated_at: 2012-09-01 03:45:38.527055000 Z
   creation_reason: fixtures
-  somebody: anton
-  supplier: exist
+  user: anton
   creator: anton
 
 anton_fifth:
@@ -98,13 +93,11 @@ anton_fifth:
   buy_cost: 352.0
   sell_cost: 390.0
   hide_catalog_number: true
-  status: post_supplier
   probability: 95
   created_at: 2012-08-12 03:45:38.527055000 Z
   updated_at: 2012-09-01 03:45:38.527055000 Z
   creation_reason: fixtures
-  somebody: anton
-  supplier: exist
+  user: anton
   creator: anton
 
 anton_sixth:
@@ -124,8 +117,7 @@ anton_sixth:
   created_at: 2012-08-12 03:45:38.527055000 Z
   updated_at: 2012-09-01 03:45:38.527055000 Z
   creation_reason: fixtures
-  somebody: anton
-  supplier: exist
+  user: anton
   creator: anton
 
 anton_seventh:
@@ -145,8 +137,7 @@ anton_seventh:
   created_at: 2012-08-12 03:45:38.527055000 Z
   updated_at: 2012-09-01 03:45:38.527055000 Z
   creation_reason: fixtures
-  somebody: anton
-  supplier: exist
+  user: anton
   creator: anton
 
 anton_eighth:
@@ -166,8 +157,7 @@ anton_eighth:
   created_at: 2012-08-12 03:45:38.527055000 Z
   updated_at: 2012-09-01 03:45:38.527055000 Z
   creation_reason: fixtures
-  somebody: anton
-  supplier: exist
+  user: anton
   creator: anton
 
 anton_ninth:
@@ -187,8 +177,7 @@ anton_ninth:
   created_at: 2012-08-12 03:45:38.527055000 Z
   updated_at: 2012-09-01 03:45:38.527055000 Z
   creation_reason: fixtures
-  somebody: anton
-  supplier: exist
+  user: anton
   creator: anton
 
 anton_time_check:
@@ -204,8 +193,7 @@ anton_time_check:
   created_at: 2012-04-12 03:45:38.527055000 Z
   updated_at: 2012-05-03 02:23:18.327055000 Z
   creation_reason: fixtures
-  somebody: anton
-  supplier: exist
+  user: anton
   creator: anton
 
 first_user_first_product:
@@ -227,8 +215,7 @@ first_user_first_product:
   creation_reason: fixtures
   notes: Комментарии
   notes_invisible: Служебные комментарии
-  somebody: first_user
-  supplier: first
+  user: first_user
   creator: first_user
 
 
@@ -242,8 +229,7 @@ first_user_second_product:
   hide_catalog_number: false
   status: incart
   creation_reason: fixtures
-  somebody: first_user
-  supplier: first
+  user: first_user
   creator: first_user
 
 otto:
@@ -265,8 +251,7 @@ otto:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 
@@ -289,10 +274,8 @@ otto2:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
+  user: otto
   creator: otto
-  supplier: first
-  product: otto3
 
 otto3:
   catalog_number: 19392918
@@ -313,8 +296,7 @@ otto3:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 
@@ -337,10 +319,8 @@ otto4:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
+  user: otto
   creator: otto
-  supplier: first
-  product: otto5
 
 otto5:
   catalog_number: 392918-4322391
@@ -361,8 +341,7 @@ otto5:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 otto6:
@@ -384,8 +363,7 @@ otto6:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 
@@ -408,8 +386,7 @@ otto7:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 otto8:
@@ -431,8 +408,7 @@ otto8:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 otto9:
@@ -454,8 +430,7 @@ otto9:
   creation_reason: backend
   notes: 93921jdasd
   notes_invisible: 3248234j 
-  somebody: otto
-  supplier: first
+  user: otto
   creator: first_user
 
 
@@ -478,8 +453,7 @@ otto10:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 otto11:
@@ -494,15 +468,13 @@ otto11:
   buy_cost: 10
   sell_cost: 132
   hide_catalog_number: true
-  status: post_supplier
   probability: 80 
   created_at: 2012-05-21 03:45:38.527055000 Z
   updated_at: 2012-05-21 03:45:38.527055000 Z
   creation_reason: fixtures
   notes: 1
   notes_invisible: 13adfadfadsf
-  somebody: otto
-  supplier: mile
+  user: otto
   creator: first_user
 
 
@@ -518,15 +490,13 @@ otto12:
   buy_cost: 120.30
   sell_cost: 150.0
   hide_catalog_number: true
-  status: pre_supplier
   probability: 90
   created_at: 2012-05-10 03:45:38.527055000 Z
   updated_at: 2012-05-10 03:45:38.527055000 Z
   creation_reason: backend
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: first_user
 
 otto13:
@@ -548,8 +518,7 @@ otto13:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 otto14:
@@ -571,8 +540,7 @@ otto14:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 otto15:
@@ -594,8 +562,7 @@ otto15:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 otto16:
@@ -617,8 +584,7 @@ otto16:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 otto17:
@@ -640,8 +606,7 @@ otto17:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 otto18:
@@ -663,8 +628,7 @@ otto18:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 otto19:
@@ -686,8 +650,7 @@ otto19:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
-  supplier: first
+  user: otto
   creator: otto
 
 otto20:
@@ -709,10 +672,8 @@ otto20:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
+  user: otto
   creator: otto
-  supplier: first
-  product: otto3
 
 otto21:
   catalog_number: 398394-32921
@@ -733,10 +694,8 @@ otto21:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
+  user: otto
   creator: otto
-  supplier: first
-  product: otto3
 
 otto22:
   catalog_number: 398394-32921
@@ -757,9 +716,8 @@ otto22:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
+  user: otto
   creator: otto
-  supplier: first
 
 otto23:
   catalog_number: 398394-32921
@@ -780,10 +738,8 @@ otto23:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
+  user: otto
   creator: otto
-  supplier: second
-  product: otto3
 
 otto24:
   catalog_number: 398394-32921
@@ -804,9 +760,8 @@ otto24:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
+  user: otto
   creator: otto
-  supplier: first
 
 otto25:
   catalog_number: 398394-32921
@@ -827,10 +782,8 @@ otto25:
   creation_reason: fixtures
   notes: 1
   notes_invisible: 1
-  somebody: otto
+  user: otto
   creator: otto
-  supplier: first
-  product: otto3
 
 otto26:
   catalog_number: 93123123
@@ -844,15 +797,13 @@ otto26:
   buy_cost: 212
   sell_cost: 1483
   hide_catalog_number: true
-  status: pre_supplier
   probability: 80 
   created_at: 2012-05-21 03:45:38.527055000 Z
   updated_at: 2012-05-21 03:45:38.527055000 Z
   creation_reason: fixtures
   notes: 1
   notes_invisible: 13adfadfadsf
-  somebody: otto
-  supplier: second
+  user: otto
   creator: first_user
 
 otto27:
@@ -867,15 +818,13 @@ otto27:
   buy_cost: 1000
   sell_cost: 1200
   hide_catalog_number: true
-  status: pre_supplier
   probability: 80 
   created_at: 2012-05-21 03:45:38.527055000 Z
   updated_at: 2012-05-21 03:45:38.527055000 Z
   creation_reason: fixtures
   notes: 1
   notes_invisible: 13adfadfadsf
-  somebody: otto
-  supplier: second
+  user: otto
   creator: first_user
 
 ivan1:
@@ -897,8 +846,7 @@ ivan1:
   creation_reason: fixtures
   notes:
   notes_invisible:
-  somebody: ivan
-  supplier:
+  user: ivan
   creator: ivan
 
 ivan2:
@@ -920,8 +868,7 @@ ivan2:
   creation_reason: fixtures
   notes:
   notes_invisible:
-  somebody: ivan
-  supplier:
+  user: ivan
   creator: ivan
 
 ivan3:
@@ -943,8 +890,7 @@ ivan3:
   creation_reason: fixtures
   notes:
   notes_invisible:
-  somebody: ivan
-  supplier:
+  user: ivan
   creator: ivan
 
 ivan4:
@@ -966,8 +912,7 @@ ivan4:
   creation_reason: fixtures
   notes:
   notes_invisible:
-  somebody: ivan
-  supplier:
+  user: ivan
   creator: ivan
 
 sending1:
@@ -985,15 +930,13 @@ sending1:
   hide_catalog_number: false
   status: cancel
   probability: 55
-  product: 
   order: 1
-  supplier: 
   created_at: 2014-07-14 06:32:52.959452000 Z
   updated_at: 2014-07-14 06:33:02.456622000 Z
   creation_reason: 
   notes:
   notes_invisible:
-  somebody: sending1
+  user: sending1
   creator: sending1
 
 receiving1:
@@ -1011,15 +954,13 @@ receiving1:
   hide_catalog_number: false
   status: inorder
   probability: 55
-  product: 
   order: 1
-  supplier: 
   created_at: 2014-07-14 06:32:52.959452000 Z
   updated_at: 2014-07-14 06:33:02.456622000 Z
   creation_reason: 
   notes:
   notes_invisible:
-  somebody: receiving1
+  user: receiving1
   creator: receiving1
 
 michael:
@@ -1039,11 +980,10 @@ michael:
   probability: '55'
   product_id: 
   order: michael
-  supplier_id: 
   created_at: '2014-10-14 05:30:18.875194'
   updated_at: '2014-10-14 05:30:38.959572'
   creation_reason: 
   notes: ''
   notes_invisible: ''
-  somebody: michael
+  user: michael
   creator: michael

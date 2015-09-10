@@ -1,10 +1,9 @@
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <%= breadcrumb false, exception=true do |b| %>
-      <%= b.item('Запчасти', categories_path) %>
-      <%= b.item("#{@resource.name}") %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item('Запчасти', categories_path) %>
+    <%= b.item("#{@resource.name}") %>
   <% end %>
 
   <%= p.title do %>

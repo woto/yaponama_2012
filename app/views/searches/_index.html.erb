@@ -15,8 +15,8 @@
       <h4>Ничего не найдено <%= (catalog_number = @c9).present? ? "по каталожному номеру #{catalog_number}" : "" %> <%= (manufacturer = @b9).present? ? "и производителю #{manufacturer}" : ""%> <%= @r9 == '1' ? "с учетом аналогов" : "без учета аналогов"  %></h4>
 
       <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-      <h4><%= "Повторить поиск #{ link_to 'с учетом аналогов', polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource, :catalog_number => @c9, :manufacturer => @b9, :replacements => '1', :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'replacement-button' } <br />".html_safe if (@r9.to_i != 1) %></h4>
-      <h4><%= "Повторить поиск #{ link_to 'без указания производителя', polymorphic_path([new_or_edit, *jaba3, :product], :id => @resource, :catalog_number => @c9, :replacements => @r9, :product_id => @resource.try(:product_id), :return_path => params[:return_path]), :class => 'search-button' } <br />".html_safe if @b9.present? %></h4>
+      <h4><%= "Повторить поиск #{ link_to 'с учетом аналогов', new_user_product_path(:catalog_number => @c9, :manufacturer => @b9, :replacements => '1', :return_path => params[:return_path]), :class => 'replacement-button' } <br />".html_safe if (@r9.to_i != 1) %></h4>
+      <h4><%= "Повторить поиск #{ link_to 'без указания производителя', new_user_product_path(:id => @resource, :catalog_number => @c9, :replacements => @r9, :return_path => params[:return_path]), :class => 'search-button' } <br />".html_safe if @b9.present? %></h4>
     <% end %>
   <% end %>
 <% end %>

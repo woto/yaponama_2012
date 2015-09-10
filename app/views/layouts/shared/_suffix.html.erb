@@ -1,14 +1,12 @@
 <%= icon 'arrow-circle-o-up fa-4x', id: "slide-top" %>
 
-<%= b1 do %>
-  <% if Rails.configuration.common['display_counters'] %>
-    <%== Rails.configuration.counter['yandex'] %>
-    <%== Rails.configuration.counter['mail'] %>
-    <%== Rails.configuration.counter['rambler'] %>
-    <%== Rails.configuration.counter['google'] %>
-    <%== Rails.configuration.counter['openstat'] %>
-    <%== Rails.configuration.counter['liveinternet'] %>
-  <% end %>
+<% if Rails.configuration.common['display_counters'] %>
+  <%== Rails.configuration.counter['yandex'] %>
+  <%== Rails.configuration.counter['mail'] %>
+  <%== Rails.configuration.counter['rambler'] %>
+  <%== Rails.configuration.counter['google'] %>
+  <%== Rails.configuration.counter['openstat'] %>
+  <%== Rails.configuration.counter['liveinternet'] %>
 <% end %>
 
 <div class="panel-group hidden" id="accordion">
@@ -70,69 +68,14 @@
   <%= panel 'info' do |p| %>
     <%= p.heading do %>
       <%= p.title do %>
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#CatchEnter"> CatchEnter </a>
-      <% end %>
-    <% end %>
-    <%= p.collapse id: "CatchEnter" do %>
-      <%= p.body do %>
-        <dl>
-          <dt> #debug-catch-enter </dt>
-          <dd id="debug-catch-enter"> </dd>
-        </dl>
-      <% end %>
-    <% end %>
-  <% end %>
-
-  <%= panel 'info' do |p| %>
-    <%= p.heading do %>
-      <%= p.title do %>
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#User">
-          User
-        </a>
-      <% end %>
-    <% end %>
-    <%= p.collapse id: 'User' do %>
-      <%= p.body do %> 
-        <dl>
-          <dt> #current_user_id </dt>
-          <dd id="current_user_id"><%= current_user.try(:id) %></dd>
-        </dl>
-        <dl>
-          <dt> #auth_token </dt>
-          <dd id="auth_token"><%= @somebody.try(:auth_token) %></dd>
-        </dl>
-        <dl>
-          <dt> #user_id </dt>
-          <dd id="user_id"><%= @somebody.try(:id) %></dd>
-        </dl>
-        <dl>
-          <dt> #current_user_role </dt>
-          <dd id="current_user_role"><%= current_user.try(:role) %></dd>
-        </dl>
-        <dl>
-          <dt> #somebody_role </dt>
-          <dd id="somebody_role"><%= @somebody.try(:role) %></dd>
-        </dl>
-        <dl>
-          <dt> #admin_zone </dt>
-          <dd id="admin_zone" data-value="<%= admin_zone? %>"><%= admin_zone? %></dd>
-        </dl>
-
-      <% end %>
-    <% end %>
-  <% end %>
-
-  <%= panel 'info' do |p| %>
-    <%= p.heading do %>
-      <%= p.title do %>
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#XXX">
           XXX
         </a>
       <% end %>
     <% end %>
-    <%= p.collapse id: 'XXX' do %>
+    <%= p.collapse do %>
       <%= p.body do %>
-        XXX
+        <div id="XXX"></div>
       <% end %>
     <% end %>
   <% end %>

@@ -30,7 +30,7 @@
               </tr>
               <tr>
                 <td>
-                  <%= user_to_label(current_user) %>
+                  <%= [current_user.name, current_user.phone, current_user.email].reject{|value| value.blank?}.join(', ') %>
                 </td>
                 <td>
                   <div class="left-space">

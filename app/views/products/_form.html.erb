@@ -1,31 +1,3 @@
-<% if @resource.product.present? && !@resource.persisted? %>
-  <% @preset_catalog_number = @resource.product.catalog_number %>
-  <%= alert 'info' do %>
-    <strong>Обратите внимание!</strong> Добавляемая позиция при дальнейшей работе будет отражена как перезаказанная с <%= @resource.product.to_label %>. Если это не то что вы хотите, то просто перейдите на главную страницу и воспользуйтесь формой поиска как обычно.
-  <% end %>
-<% end %>
-
-
-<% if @resource.persisted? %>
-  <% @preset_catalog_number = @resource.catalog_number %>
-  <%= alert 'info' do %>
-    <strong>Обратите внимание!</strong> Производится редактирование позиции. После добавления товара в корзину, товар <%= @resource.to_label %> будет изменен на вновь добавленный. Если это не то что вы хотите, то просто перейдите на главную страницу и воспользуйтесь формой поиска как обычно.
-  <% end %>
-<% end %>
-
-
-<% if admin_zone? %>
-  <%= row do %>
-    <div class="clearfix">
-      <%= render 'common_search_form' %>
-      <div class="navbar-form">
-        <a data-toggle="modal" href="#modal_form" class="btn btn-warning">Форма</a>
-      </div>
-    </div>
-  <% end %>
-<% end %>
-
-
-<%= twbs_form_for @resource, url: polymorphic_path([*jaba3, @resource], :return_path => params[:return_path], :skip => true, :modal => true), class: 'product' do |f| %>
+<%= simple_form_for @resource, url: polymorphic_path([:user, @resource], :return_path => params[:return_path], :skip => true, :modal => true), class: 'product' do |f| %>
   <%= render 'modal_form', f: f %>
 <% end %>

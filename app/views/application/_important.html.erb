@@ -1,34 +1,20 @@
-<%- render 'confirm' -%>
-<%- render 'pay' -%>
 <%- render 'attention' -%>
+<%- render 'flash' -%>
 
-<% if content_for?(:confirm) || content_for?(:pay) || content_for?(:attention) %>
+<% if content_for?(:attention) || content_for?(:flash) %>
 
-  <%= container do %>
-    <%= row do %>
-      <div class="col-lg-24">
-        <%= alert 'danger' do %>
-
-          <% if content_for? :attention %>
-            <div id="attention-block">
-              <%= yield :attention %>
-            </div>
-          <% end %>
-
-          <% if content_for? :confirm %>
-            <div id="confirm-block">
-              <%= yield :confirm %>
-            </div>
-          <% end %>
-
-          <% if content_for? :pay %>
-            <div id="pay-block">
-              <%= yield :pay %>
-            </div>
-          <% end %>
-
-        <% end %>
+  <% if content_for? :attention %>
+    <%= alert 'warning' do %>
+      <div id="attention-block">
+        <%= yield :attention %>
       </div>
     <% end %>
   <% end %>
+
+  <% if content_for? :flash %>
+    <div id="flash-block">
+      <%= yield :flash %>
+    </div>
+  <% end %>
+
 <% end %>

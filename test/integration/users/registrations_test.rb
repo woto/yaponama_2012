@@ -5,7 +5,7 @@ class Users::RegistrationsTest < ActionDispatch::IntegrationTest
   test 'После регистрации вызывается move_to и текущий пользователь удаляется. К сожалению замокать не удалось.' do
     get '/'
     old_user = User.last
-    old_user.postal_addresses.create!(city: '1', street: '1', house: '1', region: '1', postcode: '123456')
+    old_user.postal_addresses.create!(city: '1', street: '1', house: '1', region: '1', postcode: '123456', room: '1')
     post user_registration_path, {user: {email: 'new@example.com', password: '123123123', password_confirmation: '123123123'}}
     new_user = User.last
     refute_equal new_user, old_user

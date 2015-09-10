@@ -1,8 +1,5 @@
-# encoding: utf-8
-#
 class Generation < ActiveRecord::Base
   include ByCategoryConcern
-  include Selectable
   include BelongsToCreator
 
   belongs_to :model, :inverse_of => :generations
