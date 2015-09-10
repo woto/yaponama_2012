@@ -1,14 +1,5 @@
 <%= icon 'arrow-circle-o-up fa-4x', id: "slide-top" %>
 
-<% if Rails.configuration.common['display_counters'] %>
-  <%== Rails.configuration.counter['yandex'] %>
-  <%== Rails.configuration.counter['mail'] %>
-  <%== Rails.configuration.counter['rambler'] %>
-  <%== Rails.configuration.counter['google'] %>
-  <%== Rails.configuration.counter['openstat'] %>
-  <%== Rails.configuration.counter['liveinternet'] %>
-<% end %>
-
 <div class="panel-group hidden" id="accordion">
 
   <%= panel 'info' do |p| %>
