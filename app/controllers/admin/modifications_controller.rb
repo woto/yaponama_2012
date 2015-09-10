@@ -1,5 +1,4 @@
 class Admin::ModificationsController < ModificationsController
-  include Grid::Modification
   include Admin::Admined
 
   def new_resource

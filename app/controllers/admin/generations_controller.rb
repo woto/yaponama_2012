@@ -1,5 +1,4 @@
 class Admin::GenerationsController < GenerationsController
-  include Grid::Generation
   include Admin::Admined
 
   def new_resource

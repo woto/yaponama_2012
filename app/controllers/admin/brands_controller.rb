@@ -1,5 +1,4 @@
 class Admin::BrandsController < BrandsController
-  include Grid::Brand
   include Admin::Admined
 
   private

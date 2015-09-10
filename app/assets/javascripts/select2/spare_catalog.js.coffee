@@ -29,7 +29,7 @@ $ ->
       params =
         page: options.page
         q:
-          name_matches: options.term
+          name_cont: options.term
 
       zzz = undefined
       zzz = results: []

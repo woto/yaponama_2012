@@ -57,6 +57,8 @@
 //
 //= require admin/deliveries/places
 //
+//= require select2/spare_catalog
+//
 //=========================
 // LIBS
 //
@@ -88,6 +90,5 @@
 //= require slide_top
 //= require map
 //= require assa
-//= require spare_catalog
 //= require spare_info
 //= require image_view

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :stats, if: -> {current_user}
+  before_action :stats, if: -> {request.get? && current_user}
 
   include Concerns::Resource
   include Concerns::Actions
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   include Concerns::Discourse
   include Concerns::Controllers::Authentication
 
-  add_flash_types :success, :info, :warning, :danger, :attention
+  add_flash_types :success, :info, :warning, :danger
 
   private
 
