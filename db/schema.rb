@@ -15,8 +15,9 @@ ActiveRecord::Schema.define(version: 99999999999999) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "citext"
   enable_extension "hstore"
+  enable_extension "citext"
+  enable_extension "uuid-ossp"
 
   create_table "account_transactions", force: :cascade do |t|
     t.integer  "account_id"
@@ -141,10 +142,34 @@ ActiveRecord::Schema.define(version: 99999999999999) do
 
   add_index "auths", ["somebody_id"], name: "index_auths_on_somebody_id", using: :btree
 
+  create_table "block_transactions", force: :cascade do |t|
+    t.integer  "block_id"
+    t.string   "operation",      limit: 255
+    t.integer  "creator_id"
+    t.string   "name_before",    limit: 255
+    t.string   "name_after",     limit: 255
+    t.text     "content_before"
+    t.text     "content_after"
+    t.datetime "created_at"
+  end
+
+  add_index "block_transactions", ["block_id"], name: "index_block_transactions_on_block_id", using: :btree
+  add_index "block_transactions", ["creator_id"], name: "index_block_transactions_on_creator_id", using: :btree
+
+  create_table "blocks", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "bots", force: :cascade do |t|
     t.string   "title",      limit: 255
+    t.string   "comment",    limit: 255
     t.string   "user_agent", limit: 255
     t.inet     "inet"
+    t.boolean  "phantom"
+    t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "block",                  default: false
@@ -923,6 +948,49 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "orders", ["profile_id"], name: "index_orders_on_profile_id", using: :btree
   add_index "orders", ["somebody_id"], name: "index_orders_on_somebody_id", using: :btree
 
+  create_table "page_transactions", force: :cascade do |t|
+    t.integer  "page_id"
+    t.string   "operation",              limit: 255
+    t.integer  "creator_id"
+    t.string   "path_before",            limit: 255
+    t.string   "path_after",             limit: 255
+    t.text     "content_before"
+    t.text     "content_after"
+    t.text     "keywords_before"
+    t.text     "keywords_after"
+    t.text     "description_before"
+    t.text     "description_after"
+    t.string   "title_before",           limit: 255
+    t.string   "title_after",            limit: 255
+    t.string   "robots_before",          limit: 255
+    t.string   "robots_after",           limit: 255
+    t.string   "creation_reason_before", limit: 255
+    t.string   "creation_reason_after",  limit: 255
+    t.boolean  "phantom_before"
+    t.boolean  "phantom_after"
+    t.datetime "created_at"
+    t.string   "redirect_url_before",    limit: 255
+    t.string   "redirect_url_after",     limit: 255
+  end
+
+  add_index "page_transactions", ["creator_id"], name: "index_page_transactions_on_creator_id", using: :btree
+  add_index "page_transactions", ["page_id"], name: "index_page_transactions_on_page_id", using: :btree
+
+  create_table "pages", force: :cascade do |t|
+    t.string   "path",            limit: 255
+    t.text     "content"
+    t.text     "keywords"
+    t.text     "description"
+    t.string   "title",           limit: 255
+    t.string   "robots",          limit: 255
+    t.integer  "creator_id"
+    t.string   "creation_reason", limit: 255
+    t.boolean  "phantom"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "redirect_url",    limit: 255
+  end
+
   create_table "pages_uploads", id: false, force: :cascade do |t|
     t.integer "page_id"
     t.integer "upload_id"
@@ -1052,6 +1120,16 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "phones", ["creator_id"], name: "index_phones_on_creator_id", using: :btree
   add_index "phones", ["profile_id"], name: "index_phones_on_profile_id", using: :btree
   add_index "phones", ["somebody_id"], name: "index_phones_on_somebody_id", using: :btree
+
+  create_table "polls", force: :cascade do |t|
+    t.integer  "price"
+    t.integer  "awaiting"
+    t.integer  "reach"
+    t.text     "comment"
+    t.inet     "remote_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "postal_address_transactions", force: :cascade do |t|
     t.integer  "postal_address_id"
@@ -1247,43 +1325,56 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "somebodies", force: :cascade do |t|
-    t.decimal  "discount",                                precision: 8, scale: 2
-    t.decimal  "prepayment",                              precision: 8, scale: 2
-    t.string   "role",                        limit: 255
-    t.string   "auth_token",                  limit: 255
-    t.string   "password_digest",             limit: 255
-    t.string   "password_reset_token",        limit: 255
+    t.decimal  "discount",                                     precision: 8, scale: 2
+    t.decimal  "prepayment",                                   precision: 8, scale: 2
+    t.string   "role",                             limit: 255
+    t.string   "auth_token",                       limit: 255
+    t.string   "password_digest",                  limit: 255
+    t.string   "password_reset_token",             limit: 255
     t.datetime "password_reset_sent_at"
-    t.string   "ipgeobase_name",              limit: 255
-    t.string   "ipgeobase_names_depth_cache", limit: 255
-    t.string   "accept_language",             limit: 255
-    t.string   "user_agent",                  limit: 255
+    t.string   "ipgeobase_name",                   limit: 255
+    t.string   "ipgeobase_names_depth_cache",      limit: 255
+    t.string   "accept_language",                  limit: 255
+    t.string   "user_agent",                       limit: 255
+    t.integer  "cached_russian_time_zone_auto_id"
+    t.integer  "russian_time_zone_manual_id"
+    t.boolean  "use_auto_russian_time_zone",                                           default: true
     t.inet     "remote_ip"
-    t.string   "creation_reason",             limit: 255
+    t.string   "creation_reason",                  limit: 255
     t.text     "notes"
     t.text     "notes_invisible"
     t.integer  "creator_id"
-    t.boolean  "phantom",                                                         default: false
-    t.boolean  "logout_from_other_places",                                        default: true
+    t.boolean  "phantom",                                                              default: false
+    t.boolean  "logout_from_other_places",                                             default: true
+    t.text     "chat"
     t.integer  "place_id"
-    t.string   "post",                        limit: 255
+    t.string   "post",                             limit: 255
     t.integer  "profile_id"
     t.text     "cached_profile"
-    t.decimal  "cached_debit",                            precision: 8, scale: 2, default: 0.0
-    t.decimal  "cached_credit",                           precision: 8, scale: 2, default: 0.0
-    t.string   "type",                        limit: 255
-    t.string   "order_rule",                  limit: 255
-    t.text     "location"
-    t.text     "referrer"
+    t.decimal  "cached_debit",                                 precision: 8, scale: 2, default: 0.0
+    t.decimal  "cached_credit",                                precision: 8, scale: 2, default: 0.0
+    t.string   "type",                             limit: 255
+    t.string   "order_rule",                       limit: 255
+    t.integer  "stats_count"
+    t.datetime "touch_confirm"
+    t.text     "cached_location"
+    t.string   "cached_title",                     limit: 255
+    t.text     "cached_referrer"
     t.text     "first_referrer"
+    t.string   "cached_screen_width",              limit: 255
+    t.string   "cached_screen_height",             limit: 255
+    t.string   "cached_client_width",              limit: 255
+    t.string   "cached_client_height",             limit: 255
+    t.string   "cached_talk",                      limit: 255
+    t.integer  "unread_talks",                                                         default: 0
+    t.integer  "total_talks",                                                          default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "bot",                                                                  default: false
   end
 
   add_index "somebodies", ["creator_id"], name: "index_somebodies_on_creator_id", using: :btree
-  add_index "somebodies", ["remote_ip"], name: "index_somebodies_on_remote_ip", using: :btree
   add_index "somebodies", ["type", "auth_token"], name: "index_somebodies_on_type_and_auth_token", unique: true, using: :btree
-  add_index "somebodies", ["user_agent"], name: "index_somebodies_on_user_agent", using: :btree
 
   create_table "somebody_transactions", force: :cascade do |t|
     t.integer  "somebody_id"
@@ -1378,10 +1469,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.datetime "created_at"
     t.boolean  "bot_before"
     t.boolean  "bot_after"
-    t.text     "location_before"
-    t.text     "location_after"
-    t.text     "referrer_before"
-    t.text     "referrer_after"
   end
 
   add_index "somebody_transactions", ["creator_id"], name: "index_somebody_transactions_on_creator_id", using: :btree
@@ -1507,6 +1594,23 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "spare_replacements", ["from_spare_info_id"], name: "index_spare_replacements_on_from_spare_info_id", using: :btree
   add_index "spare_replacements", ["to_spare_info_id"], name: "index_spare_replacements_on_to_spare_info_id", using: :btree
 
+  create_table "stats", force: :cascade do |t|
+    t.text     "location"
+    t.string   "title",                     limit: 255
+    t.text     "referrer"
+    t.integer  "russian_time_zone_auto_id"
+    t.integer  "screen_width"
+    t.integer  "screen_height"
+    t.integer  "client_width"
+    t.integer  "client_height"
+    t.integer  "somebody_id"
+    t.boolean  "is_search"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "stats", ["somebody_id"], name: "index_stats_on_somebody_id", using: :btree
+
   create_table "suppliers", force: :cascade do |t|
     t.integer  "creator_id"
     t.decimal  "debit",      precision: 8, scale: 2, default: 0.0
@@ -1516,6 +1620,26 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   end
 
   add_index "suppliers", ["creator_id"], name: "index_suppliers_on_creator_id", using: :btree
+
+  create_table "talks", force: :cascade do |t|
+    t.boolean  "read",                        default: false
+    t.boolean  "received",                    default: false
+    t.text     "cached_talk"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "creation_reason", limit: 255
+    t.text     "notes",                       default: ""
+    t.text     "notes_invisible",             default: ""
+    t.integer  "somebody_id"
+    t.integer  "creator_id"
+    t.text     "text"
+    t.string   "file",            limit: 255
+    t.string   "file_name",       limit: 255
+    t.boolean  "notified",                    default: false
+  end
+
+  add_index "talks", ["creator_id"], name: "index_talks_on_creator_id", using: :btree
+  add_index "talks", ["somebody_id"], name: "index_talks_on_somebody_id", using: :btree
 
   create_table "tests", force: :cascade do |t|
     t.binary   "binary"
