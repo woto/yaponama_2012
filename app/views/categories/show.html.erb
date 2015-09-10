@@ -34,7 +34,7 @@
 
     <%= render 'tmp' %>
 
-    <% if @current_user.seller? %>
+    <% if current_user && current_user.seller? %>
       <%= link_to edit_admin_spare_catalog_path(@resource, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
         <%= icon 'edit' %>
         Редактировать

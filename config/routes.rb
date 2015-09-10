@@ -146,6 +146,7 @@ Yaponama2012::Application.routes.draw do
     scope module: :user do
       resources :postal_addresses
       resources :cars
+    post :pings, to: "deprecated#create"
     end
   end
 
@@ -162,6 +163,8 @@ Yaponama2012::Application.routes.draw do
   concerns :only_global
   concerns :cars_searchable
   resources :brands
+
+  post :stats, to: "deprecated#create"
 
   ## TODO Для перехвата /searches/2102/KURYAKYN
   #resources :searches do

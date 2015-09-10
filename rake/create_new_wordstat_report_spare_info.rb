@@ -1,11 +1,12 @@
 class CreateNewWordstatReportSpareInfo
 
-  MIN = 300
-  MAX = 5000
+  MIN = 1000
+  MAX = 10000
 
   # Массив интересующих брендов (конгломераций)
   BRANDS = []
-  OFFERS = 5
+  OFFERS = 3
+  MIN_CATALOG_NUMBER_LENGTH = 8
 
   def self.create_new_wordstat_report_spare_info
 
@@ -28,7 +29,7 @@ class CreateNewWordstatReportSpareInfo
           where("offers > ?", OFFERS).
           where(:yandex_shows => nil).
           where(:publish => nil).
-          where("LENGTH(spare_info_phrases.catalog_number) >= ?", 10).
+          where("LENGTH(spare_info_phrases.catalog_number) >= ?", MIN_CATALOG_NUMBER_LENGTH).
           limit(limit).
           offset(offset)
 

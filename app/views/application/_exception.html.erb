@@ -1,4 +1,4 @@
-<% if @current_user.seller? %>
+<% if current_user && current_user.seller? %>
   <% if @exception.present? %>
     <%= b1 do %>
       <div class="well">

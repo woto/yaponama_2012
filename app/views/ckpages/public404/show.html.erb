@@ -14,7 +14,7 @@
     <div class="top-space"> <%= debug params %> </div>
     <h3 class="top-space"> <%= @exception.to_s.force_encoding("UTF-8") %> </h3>
 
-    <% if @current_user.seller? %>
+    <% if current_user && current_user.seller? %>
       <%= link_to ckpages.new_page_path(path: request.original_fullpath), class: 'btn btn-lg btn-primary top-space-lg bottom-space-lg' do %>
         <%= icon 'plus' %>
         Создать страницу
