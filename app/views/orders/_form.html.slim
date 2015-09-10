@@ -1,5 +1,0 @@
-= simple_form_for @order, :url => smart_route({:postfix => [@order]}, :id => @order.id,  :user_id => @order.user_id), :html => { :class => 'form-horizontal' } do |f|
-  = f.input :delivery_cost
-
-  .form-actions
-    = f.button :submit, :class => 'btn-primary'
