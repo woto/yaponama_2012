@@ -105,12 +105,19 @@ ActiveRecord::Schema.define(version: 20150910104117) do
     t.datetime "updated_at"
     t.string   "car_number"
     t.integer  "user_id"
+    t.string   "creation_reason"
+    t.text     "notes",               default: ""
+    t.text     "notes_invisible",     default: ""
+    t.integer  "somebody_id"
+    t.integer  "creator_id"
   end
 
   add_index "cars", ["brand_id"], name: "index_cars_on_brand_id", using: :btree
+  add_index "cars", ["creator_id"], name: "index_cars_on_creator_id", using: :btree
   add_index "cars", ["generation_id"], name: "index_cars_on_generation_id", using: :btree
   add_index "cars", ["model_id"], name: "index_cars_on_model_id", using: :btree
   add_index "cars", ["modification_id"], name: "index_cars_on_modification_id", using: :btree
+  add_index "cars", ["somebody_id"], name: "index_cars_on_somebody_id", using: :btree
   add_index "cars", ["user_id"], name: "index_cars_on_user_id", using: :btree
 
   create_table "ckpages_pages", force: :cascade do |t|
@@ -404,14 +411,21 @@ ActiveRecord::Schema.define(version: 20150910104117) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "creation_reason"
+    t.text     "notes",                                            default: ""
+    t.text     "notes_invisible",                                  default: ""
+    t.integer  "somebody_id"
+    t.integer  "creator_id"
   end
 
   add_index "orders", ["company_id"], name: "index_orders_on_company_id", using: :btree
+  add_index "orders", ["creator_id"], name: "index_orders_on_creator_id", using: :btree
   add_index "orders", ["delivery_option_id"], name: "index_orders_on_delivery_option_id", using: :btree
   add_index "orders", ["delivery_place_id"], name: "index_orders_on_delivery_place_id", using: :btree
   add_index "orders", ["delivery_variant_id"], name: "index_orders_on_delivery_variant_id", using: :btree
   add_index "orders", ["postal_address_id"], name: "index_orders_on_postal_address_id", using: :btree
   add_index "orders", ["profile_id"], name: "index_orders_on_profile_id", using: :btree
+  add_index "orders", ["somebody_id"], name: "index_orders_on_somebody_id", using: :btree
   add_index "orders", ["token"], name: "index_orders_on_token", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
@@ -470,8 +484,15 @@ ActiveRecord::Schema.define(version: 20150910104117) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "creation_reason"
+    t.text     "notes",             default: ""
+    t.text     "notes_invisible",   default: ""
+    t.integer  "somebody_id"
+    t.integer  "creator_id"
   end
 
+  add_index "postal_addresses", ["creator_id"], name: "index_postal_addresses_on_creator_id", using: :btree
+  add_index "postal_addresses", ["somebody_id"], name: "index_postal_addresses_on_somebody_id", using: :btree
   add_index "postal_addresses", ["user_id"], name: "index_postal_addresses_on_user_id", using: :btree
 
   create_table "products", force: :cascade do |t|
@@ -496,10 +517,17 @@ ActiveRecord::Schema.define(version: 20150910104117) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "creation_reason"
+    t.text     "notes",                                       default: ""
+    t.text     "notes_invisible",                             default: ""
+    t.integer  "somebody_id"
+    t.integer  "creator_id"
   end
 
+  add_index "products", ["creator_id"], name: "index_products_on_creator_id", using: :btree
   add_index "products", ["order_id"], name: "index_products_on_order_id", using: :btree
   add_index "products", ["product_id"], name: "index_products_on_product_id", using: :btree
+  add_index "products", ["somebody_id"], name: "index_products_on_somebody_id", using: :btree
   add_index "products", ["supplier_id"], name: "index_products_on_supplier_id", using: :btree
   add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
 

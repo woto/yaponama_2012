@@ -1,4 +1,4 @@
-class User::Car < ActiveRecord::Base
+class Car < ActiveRecord::Base
 
   include BelongsToCreator
   include BelongsToUser

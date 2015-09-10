@@ -1,4 +1,4 @@
-class User::PostalAddress < ActiveRecord::Base
+class PostalAddress < ActiveRecord::Base
 
   include BelongsToCreator
   include BelongsToUser

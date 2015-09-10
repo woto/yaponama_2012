@@ -3,7 +3,7 @@ class User::CarsController < ApplicationController
   private
 
   def set_resource_class
-    @resource_class = User::Car
+    @resource_class = Car
   end
 
   def new_resource

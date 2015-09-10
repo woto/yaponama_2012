@@ -3,7 +3,7 @@ class User::PostalAddressesController < ApplicationController
   private
 
   def set_resource_class
-    @resource_class = User::PostalAddress
+    @resource_class = PostalAddress
   end
 
   def create_resource
