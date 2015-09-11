@@ -31,6 +31,9 @@
 
     <%= paginate @resources %>
 
+    <br />
+    <br />
+
     <div class="table-responsive">
       <table class="table">
         <tr>
@@ -57,7 +60,12 @@
       </table>
     </div>
 
+    <br />
+
     <%= paginate @resources %>
+
+    <br />
+    <br />
 
     <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary' do %>
       Новый пользователь

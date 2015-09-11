@@ -8,7 +8,7 @@ class Car < ActiveRecord::Base
   include Concerns::ModificationAttributes
 
   validates :vin_or_frame, :inclusion => { :in => ['vin', 'frame'] }
-  validates :vin, :length => {:within => 17..17}, if: -> {vin_or_frame == 'vin'}
+  #validates :vin, :length => {:within => 17..17}, if: -> {vin_or_frame == 'vin'}
 
   validates :brand, presence: true, associated: true
   validates :model, presence: true, associated: true

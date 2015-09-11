@@ -131,17 +131,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.boolean  "smtp_enable_starttls_auto"
   end
 
-  create_table "auths", force: :cascade do |t|
-    t.string   "provider",    limit: 255
-    t.string   "uid",         limit: 255
-    t.integer  "somebody_id"
-    t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "auths", ["somebody_id"], name: "index_auths_on_somebody_id", using: :btree
-
   create_table "block_transactions", force: :cascade do |t|
     t.integer  "block_id"
     t.string   "operation",      limit: 255
@@ -165,7 +154,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
 
   create_table "bots", force: :cascade do |t|
     t.string   "title",      limit: 255
-    t.string   "comment",    limit: 255
     t.string   "user_agent", limit: 255
     t.inet     "inet"
     t.boolean  "phantom"
@@ -364,6 +352,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.text     "notes_invisible",                 default: ""
     t.integer  "somebody_id"
     t.integer  "creator_id"
+    t.integer  "user_id"
   end
 
   add_index "cars", ["brand_id"], name: "index_cars_on_brand_id", using: :btree
@@ -372,6 +361,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "cars", ["model_id"], name: "index_cars_on_model_id", using: :btree
   add_index "cars", ["modification_id"], name: "index_cars_on_modification_id", using: :btree
   add_index "cars", ["somebody_id"], name: "index_cars_on_somebody_id", using: :btree
+  add_index "cars", ["user_id"], name: "index_cars_on_user_id", using: :btree
 
   create_table "ckpages_pages", force: :cascade do |t|
     t.text     "path"
@@ -403,9 +393,11 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   end
 
   create_table "ckpages_uploads", force: :cascade do |t|
-    t.string   "image"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "file"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "content_type"
+    t.integer  "file_size"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -937,6 +929,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.text     "notes_invisible",                                              default: ""
     t.integer  "somebody_id"
     t.integer  "creator_id"
+    t.integer  "user_id"
   end
 
   add_index "orders", ["company_id"], name: "index_orders_on_company_id", using: :btree
@@ -947,6 +940,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "orders", ["postal_address_id"], name: "index_orders_on_postal_address_id", using: :btree
   add_index "orders", ["profile_id"], name: "index_orders_on_profile_id", using: :btree
   add_index "orders", ["somebody_id"], name: "index_orders_on_somebody_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "page_transactions", force: :cascade do |t|
     t.integer  "page_id"
@@ -1121,16 +1115,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "phones", ["profile_id"], name: "index_phones_on_profile_id", using: :btree
   add_index "phones", ["somebody_id"], name: "index_phones_on_somebody_id", using: :btree
 
-  create_table "polls", force: :cascade do |t|
-    t.integer  "price"
-    t.integer  "awaiting"
-    t.integer  "reach"
-    t.text     "comment"
-    t.inet     "remote_ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "postal_address_transactions", force: :cascade do |t|
     t.integer  "postal_address_id"
     t.string   "operation",                limit: 255
@@ -1178,10 +1162,12 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.text     "notes_invisible",               default: ""
     t.integer  "somebody_id"
     t.integer  "creator_id"
+    t.integer  "user_id"
   end
 
   add_index "postal_addresses", ["creator_id"], name: "index_postal_addresses_on_creator_id", using: :btree
   add_index "postal_addresses", ["somebody_id"], name: "index_postal_addresses_on_somebody_id", using: :btree
+  add_index "postal_addresses", ["user_id"], name: "index_postal_addresses_on_user_id", using: :btree
 
   create_table "product_transactions", force: :cascade do |t|
     t.integer  "product_id"
@@ -1263,6 +1249,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
     t.text     "notes_invisible",                                         default: ""
     t.integer  "somebody_id"
     t.integer  "creator_id"
+    t.integer  "user_id"
   end
 
   add_index "products", ["creator_id"], name: "index_products_on_creator_id", using: :btree
@@ -1270,6 +1257,7 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "products", ["product_id"], name: "index_products_on_product_id", using: :btree
   add_index "products", ["somebody_id"], name: "index_products_on_somebody_id", using: :btree
   add_index "products", ["supplier_id"], name: "index_products_on_supplier_id", using: :btree
+  add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
 
   create_table "profile_transactions", force: :cascade do |t|
     t.integer  "profile_id"
@@ -1325,56 +1313,45 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "somebodies", force: :cascade do |t|
-    t.decimal  "discount",                                     precision: 8, scale: 2
-    t.decimal  "prepayment",                                   precision: 8, scale: 2
-    t.string   "role",                             limit: 255
-    t.string   "auth_token",                       limit: 255
-    t.string   "password_digest",                  limit: 255
-    t.string   "password_reset_token",             limit: 255
+    t.decimal  "discount",                                precision: 8, scale: 2
+    t.decimal  "prepayment",                              precision: 8, scale: 2
+    t.string   "role",                        limit: 255
+    t.string   "auth_token",                  limit: 255
+    t.string   "password_digest",             limit: 255
+    t.string   "password_reset_token",        limit: 255
     t.datetime "password_reset_sent_at"
-    t.string   "ipgeobase_name",                   limit: 255
-    t.string   "ipgeobase_names_depth_cache",      limit: 255
-    t.string   "accept_language",                  limit: 255
-    t.string   "user_agent",                       limit: 255
-    t.integer  "cached_russian_time_zone_auto_id"
+    t.string   "ipgeobase_name",              limit: 255
+    t.string   "ipgeobase_names_depth_cache", limit: 255
+    t.string   "accept_language",             limit: 255
+    t.string   "user_agent",                  limit: 255
     t.integer  "russian_time_zone_manual_id"
-    t.boolean  "use_auto_russian_time_zone",                                           default: true
+    t.boolean  "use_auto_russian_time_zone",                                      default: true
     t.inet     "remote_ip"
-    t.string   "creation_reason",                  limit: 255
+    t.string   "creation_reason",             limit: 255
     t.text     "notes"
     t.text     "notes_invisible"
     t.integer  "creator_id"
-    t.boolean  "phantom",                                                              default: false
-    t.boolean  "logout_from_other_places",                                             default: true
-    t.text     "chat"
+    t.boolean  "phantom",                                                         default: false
+    t.boolean  "logout_from_other_places",                                        default: true
     t.integer  "place_id"
-    t.string   "post",                             limit: 255
+    t.string   "post",                        limit: 255
     t.integer  "profile_id"
     t.text     "cached_profile"
-    t.decimal  "cached_debit",                                 precision: 8, scale: 2, default: 0.0
-    t.decimal  "cached_credit",                                precision: 8, scale: 2, default: 0.0
-    t.string   "type",                             limit: 255
-    t.string   "order_rule",                       limit: 255
-    t.integer  "stats_count"
-    t.datetime "touch_confirm"
-    t.text     "cached_location"
-    t.string   "cached_title",                     limit: 255
-    t.text     "cached_referrer"
+    t.decimal  "cached_debit",                            precision: 8, scale: 2, default: 0.0
+    t.decimal  "cached_credit",                           precision: 8, scale: 2, default: 0.0
+    t.string   "type",                        limit: 255
+    t.string   "order_rule",                  limit: 255
+    t.text     "location"
+    t.text     "referrer"
     t.text     "first_referrer"
-    t.string   "cached_screen_width",              limit: 255
-    t.string   "cached_screen_height",             limit: 255
-    t.string   "cached_client_width",              limit: 255
-    t.string   "cached_client_height",             limit: 255
-    t.string   "cached_talk",                      limit: 255
-    t.integer  "unread_talks",                                                         default: 0
-    t.integer  "total_talks",                                                          default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "bot",                                                                  default: false
   end
 
   add_index "somebodies", ["creator_id"], name: "index_somebodies_on_creator_id", using: :btree
+  add_index "somebodies", ["remote_ip"], name: "index_somebodies_on_remote_ip", using: :btree
   add_index "somebodies", ["type", "auth_token"], name: "index_somebodies_on_type_and_auth_token", unique: true, using: :btree
+  add_index "somebodies", ["user_agent"], name: "index_somebodies_on_user_agent", using: :btree
 
   create_table "somebody_transactions", force: :cascade do |t|
     t.integer  "somebody_id"
@@ -1594,23 +1571,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   add_index "spare_replacements", ["from_spare_info_id"], name: "index_spare_replacements_on_from_spare_info_id", using: :btree
   add_index "spare_replacements", ["to_spare_info_id"], name: "index_spare_replacements_on_to_spare_info_id", using: :btree
 
-  create_table "stats", force: :cascade do |t|
-    t.text     "location"
-    t.string   "title",                     limit: 255
-    t.text     "referrer"
-    t.integer  "russian_time_zone_auto_id"
-    t.integer  "screen_width"
-    t.integer  "screen_height"
-    t.integer  "client_width"
-    t.integer  "client_height"
-    t.integer  "somebody_id"
-    t.boolean  "is_search"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "stats", ["somebody_id"], name: "index_stats_on_somebody_id", using: :btree
-
   create_table "suppliers", force: :cascade do |t|
     t.integer  "creator_id"
     t.decimal  "debit",      precision: 8, scale: 2, default: 0.0
@@ -1620,26 +1580,6 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   end
 
   add_index "suppliers", ["creator_id"], name: "index_suppliers_on_creator_id", using: :btree
-
-  create_table "talks", force: :cascade do |t|
-    t.boolean  "read",                        default: false
-    t.boolean  "received",                    default: false
-    t.text     "cached_talk"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "creation_reason", limit: 255
-    t.text     "notes",                       default: ""
-    t.text     "notes_invisible",             default: ""
-    t.integer  "somebody_id"
-    t.integer  "creator_id"
-    t.text     "text"
-    t.string   "file",            limit: 255
-    t.string   "file_name",       limit: 255
-    t.boolean  "notified",                    default: false
-  end
-
-  add_index "talks", ["creator_id"], name: "index_talks_on_creator_id", using: :btree
-  add_index "talks", ["somebody_id"], name: "index_talks_on_somebody_id", using: :btree
 
   create_table "tests", force: :cascade do |t|
     t.binary   "binary"
@@ -1668,6 +1608,39 @@ ActiveRecord::Schema.define(version: 99999999999999) do
   end
 
   add_index "uploads", ["somebody_id"], name: "index_uploads_on_somebody_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                       default: "", null: false
+    t.string   "encrypted_password",          default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",               default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.text     "user_agent"
+    t.text     "accept_language"
+    t.text     "location"
+    t.text     "referrer"
+    t.text     "first_referrer"
+    t.integer  "credit",                      default: 0
+    t.integer  "debit",                       default: 0
+    t.integer  "role"
+    t.string   "name"
+    t.string   "phone"
+    t.string   "ipgeobase_name"
+    t.string   "ipgeobase_names_depth_cache"
+    t.string   "time_zone"
+    t.text     "notes"
+    t.text     "notes_invisible"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "warehouses", force: :cascade do |t|
     t.integer  "spare_info_id"

@@ -14,17 +14,6 @@
   <% end %>
 
   <%= p.content do %>
-
-    <%= legacy_somebody_tabs do %>
-
-      <ul class="list-unstyled">
-        <li><h4><%# link_to 'Сменить пароль', edit_admin_user_password_path(@resource, return_path: request.fullpath) %></h4></li>
-        <li><h4><%# link_to 'Настройки', edit_admin_user_path(@resource, return_path: request.fullpath) %></h4></li>
-        <li><h4><%# link_to 'История изменения настроек', transactions_admin_user_path(@resource, return_path: request.fullpath) %></h4></li>
-      </ul>
-
-      <%= render 'smart_show' %>
-
-    <% end %>
+    <%= render 'smart_show' %>
   <% end %>
 <% end %>
