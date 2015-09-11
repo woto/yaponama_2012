@@ -6,6 +6,15 @@ class UserPolicy
     @record = record
   end
 
+  def impersonate?
+    case @user.role
+    when 'manager'
+      @record.role.in? ['guest', 'user']
+    when 'admin'
+      true
+    end
+  end
+
   def update?
     if record.encrypted_password?
       ((user.admin? && record.role.in?(['user', 'manager', 'admin'])) ||

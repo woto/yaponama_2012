@@ -125,4 +125,36 @@ class Admin::UsersControllerTest < ActionController::TestCase
     end
   end
 
+  test 'Менеджер может стать гостем' do
+    sign_in(users(:manager))
+    get :impersonate, id: users(:guest)
+    assert_redirected_to user_path
+  end
+
+  test 'Менеджер может стать пользователем' do
+    sign_in(users(:manager))
+    get :impersonate, id: users(:user)
+    assert_redirected_to user_path
+  end
+
+  test 'Менеджер не может стать другим менеджером' do
+    sign_in(users(:manager1))
+    get :impersonate, id: users(:manager2)
+    assert_redirected_to admin_root_path
+    assert_equal 'Недостаточно прав для данного действия', flash[:alert]
+  end
+
+  test 'Менеджер не может стать администратором' do
+    sign_in(users(:manager))
+    get :impersonate, id: users(:admin)
+    assert_redirected_to admin_root_path
+    assert_equal 'Недостаточно прав для данного действия', flash[:alert]
+  end
+
+  test 'Администратор может стать менеджером' do
+    sign_in(users(:admin))
+    get :impersonate, id: users(:manager)
+    assert_redirected_to user_path
+  end
+
 end

@@ -19,11 +19,11 @@
     </td>
     <td>
       <div class="left-space">
-        <%= link_to polymorphic_path([:edit, partial], return_path: user_path) do %>
+        <%= link_to polymorphic_path([:edit, :user, partial], return_path: user_path) do %>
           <small>редакт.</small>
         <% end %>
 
-        <%= link_to polymorphic_path([partial], return_path: user_path), method: 'delete', data: {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Уверены, что хотите удалить?'))} do %>
+        <%= link_to polymorphic_path([:user, partial], return_path: user_path), method: 'delete', data: {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Уверены, что хотите удалить?'))} do %>
           <small>удал.</small>
         <% end %>
       </div>

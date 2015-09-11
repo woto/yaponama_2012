@@ -1,6 +1,13 @@
 class Admin::UsersController < ApplicationController
   include Admin::Admined
 
+  def impersonate
+    @resource = User.find(params[:id])
+    authorize @resource
+    sign_in(:user, @resource)
+    redirect_to user_path
+  end
+
   private
 
   def find_resources
@@ -24,9 +31,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def resource_params
-    params[:user].delete(:password) if params[:user][:password].blank?
-    params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
+    if params[:user][:password].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
 
-    params.require(:user).permit([:name, :email, :phone, :notes, :notes_invisible, :role, :password, :password_confirmation])
+    params.require(:user).permit([:name, :email, :phone, :notes, :notes_invisible,
+                                  :role, :password, :password_confirmation])
   end
 end

@@ -47,7 +47,8 @@
         <% @resources.each do |resource| %>
           <tr>
             <td> 
-              <%= link_to resource.id, admin_user_path(resource.id, return_path: request.fullpath) %> <br />
+              <%= resource.id %> <br />
+              <%= link_to 'Просмотр', admin_user_path(resource.id, return_path: request.fullpath) %> <br />
               <%= link_to 'Редактировать', edit_admin_user_path(resource.id, return_path: request.fullpath) %> 
             </td>
             <td> <%= resource.name %> </td>

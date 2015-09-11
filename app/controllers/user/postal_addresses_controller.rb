@@ -11,7 +11,7 @@ class User::PostalAddressesController < ApplicationController
   end
 
   def resource_params
-    params.require(:user_postal_address).permit("postcode","region", "city", "street", "house", "stand_alone_house", "room", "notes")
+    params.require(:postal_address).permit("postcode","region", "city", "street", "house", "stand_alone_house", "room", "notes")
   end
 
 end

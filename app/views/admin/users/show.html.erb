@@ -14,6 +14,8 @@
   <% end %>
 
   <%= p.content do %>
+    <%= link_to 'Войти под пользователем', url_for(action: :impersonate) %> <br />
     <%= render 'smart_show' %>
+
   <% end %>
 <% end %>

@@ -87,7 +87,9 @@ Yaponama2012::Application.routes.draw do
       resources :accumulators
       resources :truck_tires
     end
-    resources :users
+    resources :users do
+      get :impersonate, on: :member
+    end
     resources :galleries
   end
 
