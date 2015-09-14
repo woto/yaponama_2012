@@ -3,12 +3,12 @@ require 'test_helper'
 class Admin::BrandsControllerTest < ActionController::TestCase
 
 
+  #####################################################################################################
   test 'Проверяем смену spare_infos при присвоении производителю KI родительского производителя KIA' do
 
     assert_equal "KI", spare_infos(:ki_2103).brand.name
     assert_equal "KI", spare_infos(:ki_2102).brand.name
     assert_equal nil, brands(:ki).brand
-
     patch :update,
       "brand" => {
         "sign"=> "synonym",
@@ -26,6 +26,7 @@ class Admin::BrandsControllerTest < ActionController::TestCase
     assert_equal "KI", spare_infos(:ki_2102).reload.brand.name
   end
 
+  #################################################################################################################
   test 'Проверяем смену from_spare_replacements при присвоении производителю KI родительского производителя KIA' do
 
     assert_equal nil, brands(:ki).brand
@@ -47,6 +48,7 @@ class Admin::BrandsControllerTest < ActionController::TestCase
     assert_equal "2103 (KIA)", spare_replacements(:ki_2103_ns_3310).reload.from_spare_info.to_label
   end
 
+  ##################################################################################################################
   test 'Проверяем смену to_spare_replacements при присвоении производителю NS родительского производителя NISSAN' do
 
     assert_equal nil, brands(:ns).brand
@@ -67,6 +69,7 @@ class Admin::BrandsControllerTest < ActionController::TestCase
     assert_equal "3310 (NISSAN)", spare_replacements(:ki_2103_ns_3310).reload.to_spare_info.to_label
   end
 
+  ###############################################################################################################
   test 'Проверяем смену spare_applicabilities при присвоении производителю KI родительского производителя KIA' do
 
     assert_equal "KI", spare_infos(:ki_2103).brand.name

@@ -11,7 +11,7 @@ class PostalAddressesTest < ActionDispatch::IntegrationTest
 
   test 'С выставленной галочкой stand_alone_house room должен быть спрятанным' do
     login_as(users(:lee))
-    visit edit_user_postal_address_path(user_postal_addresses(:lee))
+    visit edit_user_postal_address_path(postal_addresses(:lee))
     assert has_css?('[room]', visible: false)
   end
 end

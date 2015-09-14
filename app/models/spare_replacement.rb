@@ -2,8 +2,8 @@ class SpareReplacement < ActiveRecord::Base
 
   enum status: Rails.configuration.replacements_statuses
 
-  include FromSpareInfoAttributes
-  include ToSpareInfoAttributes
+  include Concerns::FromSpareInfoAttributes
+  include Concerns::ToSpareInfoAttributes
 
   validates :from_spare_info, :to_spare_info, presence: true
   validates :from_spare_info, uniqueness: { scope: [:to_spare_info, :status] }

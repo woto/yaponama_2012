@@ -18,7 +18,7 @@ module Concerns::Resource
 
 
   def find_resources
-    @resources = @resource_class.page(params[:page]).per(params[:per]) if @resource_class
+    @resources = @resource_class.page(params[:page]).per(params[:per])
   end
 
   def find_resource

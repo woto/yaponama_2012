@@ -9,7 +9,7 @@ class WelcomeTest < ActionDispatch::IntegrationTest
 
   test 'Если мы пишем букву T, то должны увидеть TOYOTA' do
     visit '/'
-    fill_in 'name', with: 'T'
+    fill_in 'q_name_cont', with: 'T'
     assert has_text? 'TOYOTA'
   end
 

@@ -17,7 +17,7 @@ class Catalogs::ModelsControllerTest < ActionController::TestCase
               assert_select 'ul' do
                 assert_select 'li' do
                   assert_select 'a[href=?]', category_model_path(spare_catalogs(:rulevaya_tyga), models(:galant)), html: 'РУЛЕВАЯ ТЯГА<div class="hidden"> на MITSUBISHI Galant</div>
-<small class="text-muted"> (1 шт.)</small>'
+<small class="text-muted"> (2 шт.)</small>'
                 end
               end
             end

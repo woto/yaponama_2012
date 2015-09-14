@@ -60,8 +60,9 @@ Application.initSelect2 = ->
 
       params =
         page: options.page
-        name: options.term
-        is_brand: $(options.element).data('is-brand')
+        q:
+          name_cont: options.term
+        manufacturer: $(options.element).data('manufacturer')
 
       zzz = undefined
       zzz = results: []
@@ -115,7 +116,8 @@ Application.initSelect2 = ->
 
       params =
         page: options.page
-        name: options.term
+        q:
+          name_cont: options.term
         brand_id: -1
 
       if $(brand).length > 0 && $(brand).select2('data')? && $(brand).select2('data').true_id?
@@ -170,7 +172,8 @@ Application.initSelect2 = ->
 
       params =
         page: options.page
-        name: options.term
+        q:
+          name_cont: options.term
         model_id: -1
 
       if $(model).length > 0 && $(model).select2('data') && $(model).select2('data').true_id?
@@ -225,7 +228,8 @@ Application.initSelect2 = ->
 
       params =
         page: options.page
-        name: options.term
+        q:
+          name_cont: options.term
         generation_id: -1
 
       if $(generation).length > 0 && $(generation).select2('data')? && $(generation).select2('data').true_id?

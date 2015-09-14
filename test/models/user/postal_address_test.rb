@@ -3,7 +3,7 @@ require 'test_helper'
 class PostalAddressTest < ActiveSupport::TestCase
 
   def setup
-    @pa = user_postal_addresses(:first_user)
+    @pa = postal_addresses(:first_user)
   end
 
   test 'Не отдельно стоящее здание' do

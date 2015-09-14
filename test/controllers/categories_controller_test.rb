@@ -4,7 +4,7 @@ class CategoriesControllerTest < ActionController::TestCase
 
   test 'Быстрый тест на содержание страницы 23498234' do
     get :index
-    assert_select '.page-header', 'ЗапчастиЭто тестовое вступление к странице Запчасти'
+    assert_select '.page-header', 'Запчасти'
     assert_select '#categories-index-catalogs', /Батарея аккумуляторная \(4 шт.\)\s+Шина Грузовая \(1 шт.\)/m
     assert_select '.tree' do
       assert_select 'ul' do
@@ -15,7 +15,7 @@ class CategoriesControllerTest < ActionController::TestCase
               assert_select 'a', text: 'Рулевой редуктор, рулевая рейка'
               assert_select 'ul' do
                 assert_select 'li' do
-                  assert_select 'a[href=?]', category_path(spare_catalogs(:rulevaya_tyga)), html: 'РУЛЕВАЯ ТЯГА<small class="text-muted"> (2 шт.)</small>'
+                  assert_select 'a[href=?]', category_path(spare_catalogs(:rulevaya_tyga)), html: 'РУЛЕВАЯ ТЯГА<small class="text-muted"> (5 шт.)</small>'
                 end
               end
             end

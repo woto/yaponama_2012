@@ -54,28 +54,6 @@ class ActionDispatch::IntegrationTest
   Warden.test_mode!
   include Capybara::DSL
   include ShowMeTheCookies
-
-  private
-
-  def fill_phone(id, login)
-    assert has_css?(id)
-    page.execute_script "$('" + id + "').val('#{login}')"
-  end
-
-  def auth(login, password, remember_me=false)
-    visit '/login/phone'
-    fill_phone '#session_value', login
-    fill_in 'session[password]', with: password
-    check 'remember_me' if remember_me
-    uncheck 'remember_me' unless remember_me
-    # debugger
-    #find('type["submit"], text: 'Войти').click
-    click_button 'Войти'
-    #find('#submit').click
-    #save_screenshot('1.png', full: true)
-    #assert page.has_css? ".alert-success", text: "Вы успешно вошли."
-  end
-
 end
 
 

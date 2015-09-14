@@ -63,7 +63,7 @@
               <li> <%= link_to "Забыли пароль?", main_app.new_user_password_path %> </li>
             <% else %>
               <% if ["admin", "manager"].include? current_user.role %>
-                <li> <%= link_to "Закрытая зона", admin_root_path %> </li>
+                <li> <%= link_to "Администрирование", admin_root_path %> </li>
                 <%= divider %>
                 <%= content_for :menu_items %>
               <% end %>

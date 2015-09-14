@@ -1,31 +1,49 @@
+<% title_index %>
+
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <% title_index %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item @meta_title %>
+  <% end %>
 
-    <%= breadcrumb true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
+  <%= p.title do %>
+    <%= page_header %>
   <% end %>
 
   <%= p.content do %>
-    <%= title_index %>
 
-    <%= twbs_form_for @grid, :url => smart_route({:prefix => [:filter], :postfix => [jaba2]}, jaba), :remote => true do |f| %>
+    <%= paginate @resources %>
 
-      <%= panel 'default' do |p| %>
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th> <%= @resource_class.human_attribute_name :id %> </th>
+        </tr>
 
-        <%= p.heading do %>
-          <%= render 'head' %>
+        <% @resources.each do |resource| %>
+          <tr>
+            <td> 
+              <%= resource.id %> <br />
+              <%= link_to "Просмотр", polymorphic_path([:admin, resource], return_path: request.fullpath) %> <br />
+              <%= link_to "Редактирование", polymorphic_path([:edit, :admin, resource], return_path: request.fullpath) %>
+            </td>
+          </tr>
         <% end %>
+      </table>
+    </div>
 
-        <%= p.body do %>
-          <%= render 'grid', f: f %>
-        <% end %>
+    <br />
+    <%= paginate @resources %>
+    <br />
+    <br />
 
-        <%= render 'grid_footer', f: f, p: p %>
-
-      <% end %>
+    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary' do %>
+      Новое поколение
     <% end %>
+    <br />
+    <br />
+
   <% end %>
 <% end %>

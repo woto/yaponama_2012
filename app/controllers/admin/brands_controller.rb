@@ -1,11 +1,10 @@
-class Admin::BrandsController < BrandsController
+class Admin::BrandsController < ApplicationController
   include Admin::Admined
 
   private
 
-  def set_user_and_creation_reason
-    super
-    @resource.phantom = false
+  def set_resource_class
+    @resource_class = Brand
   end
 
 end

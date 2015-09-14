@@ -1,13 +1,21 @@
-<%= b1 do %>
+<% title_edit %>
 
-  <% @meta_title = "Редактирование поколения #{@resource.to_label}" %>
+<%= page do |p| %>
 
-  <%= breadcrumb true do |b| %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Поколения', admin_generations_path %>
+    <%= b.item @resource.to_label, polymorphic_path([:admin, @resource]) %>
     <%= b.item @meta_title %>
   <% end %>
 
-  <%= page_header %>
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
 
-  <%= render "form" %>
+  <%= p.content :sm do %>
+    <%= render 'form'%>
+  <% end %>
 
 <% end %>

@@ -26,7 +26,7 @@ class Admin::Deliveries::PlacesController < ApplicationController
   private
 
   def set_resource_class
-    @resource_class = Deliveries::Place
+    @resource_class = ::Deliveries::Place
   end
 
 end

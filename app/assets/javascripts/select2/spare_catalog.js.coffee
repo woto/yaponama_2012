@@ -42,7 +42,7 @@ $ ->
               text: options.term
               new: true
 
-      $.getJSON "/admin/spare_catalogs/?" + $.param(params), (data) ->
+      $.getJSON "/spare_catalogs/search/?" + $.param(params), (data) ->
 
         data.map (data) ->
           zzz.results.push

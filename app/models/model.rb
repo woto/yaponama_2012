@@ -13,11 +13,11 @@ class Model < ActiveRecord::Base
 
   has_many :spare_applicabilities, dependent: :destroy
 
-  #validate do
-  #  unless brand.try(:is_brand?)
-  #    errors[:brand] << 'Нельзя указать производителя, который не отмечен как выпускающий автомобили.'
-  #  end
-  #end
+  validate do
+    unless brand.try(:is_brand?)
+      errors[:brand] << 'Нельзя указать производителя, который не отмечен как выпускающий автомобили'
+    end
+  end
 
   def to_label
     name

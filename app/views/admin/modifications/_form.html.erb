@@ -1,13 +1,9 @@
 <%= simple_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
-  <%= row do %>
-    <%= c1 do %>
-      <%= f.error_notification %>
-      <%= f.input :generation_id, as: :hidden %>
-      <%= f.input :name %>
-      <%= f.input :from, as: :cars_date, wrapper: :date_wrapper %>
-      <%= f.input :to, as: :cars_date, wrapper: :date_wrapper %>
-    <% end %>
-  <% end %>
+  <%= f.error_notification %>
+  <%= f.input :generation_id, as: :hidden %>
+  <%= f.input :name %>
+  <%= f.input :from, as: :cars_date, wrapper: :date_wrapper %>
+  <%= f.input :to, as: :cars_date, wrapper: :date_wrapper %>
   <%= f.input :content, label: false, input_html: {class: "ckeditor-extended"} %>
   <%= f.buttons %>
 <% end %>

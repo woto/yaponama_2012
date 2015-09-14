@@ -4,6 +4,10 @@ SimpleForm.setup do |config|
   config.button_class = 'btn btn-default'
   config.boolean_label_class = nil
 
+  config.wrappers :select2_wrapper do |b|
+    b.use :input
+  end
+
   # date_wrapper. Заворачиваем date поля в общий div и задаем дополнительные стили для .date и .datetime
   config.wrappers :date_wrapper, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5

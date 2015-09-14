@@ -179,7 +179,6 @@ kia:
 
 ki:
   name: KI
-  is_brand: true
 
 hyundai:
   name: HYUNDAI
@@ -208,7 +207,6 @@ receiving1:
 
 proizvodit:
   name: "ПРОИЗВОДИТ"
-  brand_id: 
   image: 
   rating: 
   content: 
@@ -231,7 +229,7 @@ brand2:
 child1_synonym:
   brand: child1_conglomerate
   name: 'Synonym of Child 1'
-  is_brand: true
+  is_brand: false
   sign: <%= Brand.signs[:synonym] %>
 
 child1_conglomerate:
@@ -248,7 +246,7 @@ child2_conglomerate:
 
 child1_child2:
   name: 'Child 1 & Child 2'
-  is_brand: true
+  is_brand: false
 
 wanshine:
   name: 'Warehouse'

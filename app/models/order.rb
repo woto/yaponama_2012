@@ -3,6 +3,8 @@ class Order < ActiveRecord::Base
   include BelongsToCreator
 
   belongs_to :delivery_place
+  belongs_to :delivery_variant, class_name: 'Deliveries::Variant'
+  belongs_to :delivery_option
   belongs_to :postal_address
 
   has_many :products, :dependent => :destroy

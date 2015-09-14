@@ -1,45 +1,7 @@
 class SpareInfo < ActiveRecord::Base
 
-  concerning :SpareCatalogConcern do
-    included do
-      belongs_to :spare_catalog
-      accepts_nested_attributes_for :spare_catalog
-      validates :spare_catalog, :presence => true
-    end
-
-    def spare_catalog_attributes=(attr)
-      if attr["name"].present?
-        spare_catalog = ::SpareCatalog.where(name: attr["name"]).first
-        if spare_catalog.present?
-          self.spare_catalog = spare_catalog
-        else
-          self.spare_catalog = ::SpareCatalog.new(name: attr["name"])
-        end
-      else
-        self.spare_catalog = ::SpareCatalog.new
-      end
-    end
-  end
-
-  concerning :BrandConcern do
-    included do
-      belongs_to :brand
-      accepts_nested_attributes_for :brand
-      validates :brand, presence: true
-    end
-    def brand_attributes=(attr)
-      if attr["name"].present?
-        brand = ::Brand.where(name: attr["name"]).first
-        if brand.present?
-          self.brand = brand
-        else
-          self.brand = ::Brand.new(name: attr["name"])
-        end
-      else
-        self.brand = ::Brand.new
-      end
-    end
-  end
+  include Concerns::BrandAttributes
+  include Concerns::SpareCatalogAttributes
 
   ransacker :titles_as_string do
     Arel.sql("array_to_string(titles, '|')")
@@ -57,6 +19,9 @@ class SpareInfo < ActiveRecord::Base
   #    spare_info_phrases.new(catalog_number: catalog_number, primary: true)
   #  end
   #end
+
+  validates :brand, presence: true
+  validates :spare_catalog, presence: true
 
   validate do
     errors.add(:base, 'Должна существовать хотя бы одна фраза и она должна быть отмечена как главная.') if !spare_info_phrases.one?(&:primary)
@@ -105,15 +70,15 @@ class SpareInfo < ActiveRecord::Base
   has_one :truck_tire, class_name: 'Opts::TruckTire', dependent: :restrict_with_error
 
   def to_label
-    "#{catalog_number} (#{brand.to_label})"
+    "#{catalog_number} (#{brand.to_label})" if [catalog_number, brand].any?
   end
+
+  def name
+    to_label
+  end
+
 
   validates :catalog_number, :presence => true, uniqueness:  { case_sensitive: false, :scope => :brand_id }
-
-
-  before_save do
-    self.name = to_label
-  end
 
 
   # Используется в ручной/автоматической смене категории

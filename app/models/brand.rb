@@ -12,7 +12,7 @@ class Brand < ActiveRecord::Base
 
   has_and_belongs_to_many :spare_catalogs
   has_many :brands, :inverse_of => :brand, :dependent => :destroy
-  has_many :cars, :inverse_of => :brand, :dependent => :destroy, class_name: "User::Car"
+  has_many :cars, :inverse_of => :brand, :dependent => :destroy
   has_many :models, :inverse_of => :brand, :dependent => :destroy
   has_many :spare_infos, dependent: :destroy
   has_many :spare_applicabilities, dependent: :destroy
@@ -26,15 +26,21 @@ class Brand < ActiveRecord::Base
 
   validate do
     if sign.nil? ^ brand.nil?
-      errors[:base] << 'Указывая родительский бренд так же необходимо указать тип принадлежности как сленг, синоним или конгломерация'
+      errors[:base] << 'В случае когда заполняется родительский бренд или признак принадлежности родительскому бренду, то должен быть заполнен и второй параметр'
     end
   end
 
-  #validate do
-  #  if sign.in?([Brand.signs[:slang], Brand.signs[:synonym]]) && is_brand?
-  #    errors[:brand] << 'Вам необходимо Сленговое название или синоним не могут являться производителем автомобилей. Указывайте этот флаг только у родителя.'
-  #  end
-  #end
+  validate do
+    if sign == "slang" && is_brand?
+      errors[:base] << 'slang не может быть is_brand'
+    end
+  end
+
+  validate do
+    if sign == "synonym" && is_brand?
+      errors[:base] << "synonym не может быть is_brand"
+    end
+  end
 
   def to_label
     name

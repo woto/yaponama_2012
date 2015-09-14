@@ -99,19 +99,22 @@
           <%= dd.toggle do %>
             <%= icon 'envelope' %>
               <span class="hidden-sm">
-                Почта
+                Запросы
               </span>
             <%= caret %>
           <% end %>
           <%= dd.menu do %>
             <li class="dropdown-header">
-              Логин: info@avtorif.ru<br />Пароль: avtorif-2015
+              Логин: info@avtorif.ru<br />Пароль: <%= Rails.application.secrets.smtp_password %>
             </li>
-            <%= divider %>
             <li>
               <%= link_to 'http://mail.avtorif.ru', target: '_blank' do %>
                 Перейти в почту
               <% end %>
+            </li>
+            <%= divider %>
+            <li>
+              <a href="https://dashboard.tawk.to/", target: '_blank' do %> Перейти в чат </a>
             </li>
           <% end %>
         <% end %>
@@ -126,8 +129,6 @@
             <%= caret %>
           <% end %>
           <%= dd.menu do %>
-            <li> <%= link_to "Публичная зона", root_path %> </li>
-            <%= divider %>
             <li> <%= link_to "Личный кабинет", admin_user_path(current_user) %> </li>
             <li> <%= link_to "Выход", destroy_user_session_path, :method => :delete %> </li>
           <% end %>

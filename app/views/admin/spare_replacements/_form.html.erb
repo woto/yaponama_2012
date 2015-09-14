@@ -1,34 +1,10 @@
-<%= twbs_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
+<%= simple_form_for @resource, :url => polymorphic_path([:admin, @resource], return_path: params[:return_path]) do |f| %>
+  <%= f.error_notification %>
 
-  <%= row do %>
-
-    <%= c1 do %>
-
-      <%= f.error_notification %>
-
-      <%= f.fields_for :from_spare_info, f.object.from_spare_info || f.object.build_from_spare_info, include_id: false do |b| %>
-        <%= f.form_group :from_spare_info do %>
-          <%= b.twbs_select2 :name, rel: 'select2-spare-info', label: 'С запчасти', data: {"true-id" => f.object.from_spare_info_id}, asterisk: true %>
-          <%= f.error(:from_spare_info) %>
-        <% end %>
-      <% end %>
-
-      <%= f.fields_for :to_spare_info, f.object.to_spare_info || f.object.build_to_spare_info, include_id: false do |b| %>
-        <%= f.form_group :to_spare_info do %>
-          <%= b.twbs_select2 :name, rel: 'select2-spare-info', label: 'На запчасть', data: {"true-id" => f.object.to_spare_info_id}, asterisk: true %>
-          <%= f.error(:to_spare_info) %>
-        <% end %>
-      <% end %>
-
-      <%= f.twbs_collection_select :status, Rails.configuration.replacements_statuses, :first, :first %>
-
-      <%= f.twbs_select :wrong, [['Замены правильная', true], ['Замена не правильная', false]] %>
-
-
-      <%= f.twbs_submit %>
-
-    <% end %>
-
-  <% end %>
+  <%= f.input :from_spare_info, as: :select2  %>
+  <%= f.input :to_spare_info, as: :select2  %>
+  <%= f.input :status, collection: Rails.configuration.replacements_statuses, label_method: :first, value_method: :first %>
+  <%= f.input :wrong, collection: [['Замены правильная', true], ['Замена не правильная', false]] %>
+  <%= f.buttons %>
 
 <% end %>

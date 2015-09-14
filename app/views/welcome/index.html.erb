@@ -49,15 +49,15 @@
               <%= form_tag search_brands_path, remote: true, method: 'get' do %>
                 <div class="input-group input-group-lg">
                   <span class="input-group-addon"><%= icon 'search' %></span>
-                  <%= text_field_tag :name, nil, class: "form-control", "brands-fast-search"=>"", placeholder: "Быстрый поиск" %>
-                  <%= hidden_field_tag :is_brand, '1' %>
+                  <%= text_field_tag "q[name_cont]", nil, class: "form-control", "brands-fast-search"=>"", placeholder: "Быстрый поиск" %>
+                  <%= hidden_field_tag :manufacturer, '1' %>
                 </div>
               <% end %>
             </div>
           <% end %>
           <ul class="clearfix brands list-inline" id="brands-fast-search-list" style="background: #FFF; padding: 10px 0;">
-            <% @resources = Brand.where(:default_display => true).order(:name => :asc).limit(15) %>
-              <%= render partial: 'brands_fast_search_list', collection: @resources %>
+            <% @brands = Brand.where(:default_display => true).order(:name => :asc).limit(15) %>
+              <%= render partial: 'brands_fast_search_list', collection: @brands %>
           </ul>
         </div>
       </div>
@@ -92,7 +92,7 @@
 
 <% end %>
 
-<%= content_tag :div, style: "padding: 60px 0; background: #3c5868; border-top: 3px solid #333" do %>
+<%= content_tag :div, style: "padding: 80px 0; background: #3c5868; border-top: 3px solid #333" do %>
 
   <div class="container">
 

@@ -76,12 +76,12 @@ Yaponama2012::Application.routes.draw do
       get :preview, on: :member
     end
     resources :spare_infos, concerns: [:searchable]
+    resources :spare_catalogs, concerns: [:searchable]
     resources :spare_replacements
   end
 
   concern :only_admin do
     root to: 'welcome#index'
-    resources :spare_catalogs
     resources :spare_catalog_groups
     namespace :opts do
       resources :accumulators

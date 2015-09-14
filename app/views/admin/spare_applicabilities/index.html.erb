@@ -34,13 +34,17 @@
       </table>
     </div>
 
+    <br />
     <%= paginate @resources %>
-
+    <br />
     <br />
 
     <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary' do %>
-      Новая замена
+      Новая применимость 
     <% end %>
+
+    <br />
+    <br />
 
   <% end %>
 <% end %>

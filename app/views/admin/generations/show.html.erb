@@ -1,13 +1,20 @@
-<%= b1 do %>
+<% @meta_title = @resource.to_label %>
 
-  <% @meta_title = "Просмотр поколения #{@resource.to_label}" %>
+<%= page do |p| %>
 
-  <%= breadcrumb true do |b| %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Поколения', admin_generations_path %>
     <%= b.item @meta_title %>
   <% end %>
 
-  <%= page_header %>
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
 
-  <%= render 'smart_show' %>
-
+  <%= p.content do %>
+    <%= link_to 'Добавить модификацию', new_admin_generation_modification_path(@resource.id, return_path: params[:return_path]) %>
+    <%= render 'smart_show' %>
+  <% end %>
 <% end %>

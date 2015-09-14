@@ -1,13 +1,20 @@
-<%= b1 do %>
+<% title_new %>
 
-  <% title_new %>
+<%= page do |p| %>
 
-  <%= breadcrumb true do |b| %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Модификации', [:admin, @resource_class] %>
     <%= b.item @meta_title %>
   <% end %>
 
-  <%= title_new %>
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
 
-  <%= render :partial => "form" %>
+  <%= p.content :sm do %>
+    <%= render 'form' %>
+  <% end %>
 
 <% end %>

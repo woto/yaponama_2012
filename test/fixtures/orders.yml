@@ -1,0 +1,60 @@
+sending1:
+  postal_address: 
+  delivery_cost: !ruby/object:BigDecimal 18:0.0
+  status: open
+  delivery_place: 
+  delivery_variant: first
+  delivery_option: 
+  full_prepayment_required: 
+  legal: 
+  phantom: false
+  token: 283-14-074
+  track_number: 
+  created_at: 2014-07-14 06:33:02.333555000 Z
+  updated_at: 2014-07-14 06:33:19.838119000 Z
+  creation_reason: 
+  notes: ''
+  notes_invisible: ''
+  user: sending1
+  creator: sending1
+
+receiving1:
+  postal_address: 
+  delivery_cost: !ruby/object:BigDecimal 18:0.0
+  status: open
+  delivery_place: 
+  delivery_variant: first
+  delivery_option: 
+  full_prepayment_required: 
+  legal: 
+  phantom: false
+  token: 321-14-074
+  track_number: 
+  created_at: 2014-07-14 06:33:02.333555000 Z
+  updated_at: 2014-07-14 06:33:19.838119000 Z
+  creation_reason: 
+  notes: ''
+  notes_invisible: ''
+  user: receiving1
+  creator: receiving1
+
+michael:
+  postal_address_id: 
+  company_id: 
+  delivery_cost: '0.00'
+  status: open
+  delivery_place_id: 
+  delivery_variant: first
+  delivery_option_id: 
+  full_prepayment_required: 
+  legal: 
+  phantom: f
+  token: 404-14-104
+  track_number: 
+  created_at: '2014-10-14 05:30:38.949126'
+  updated_at: '2014-10-14 05:31:41.598614'
+  creation_reason: 
+  notes: ''
+  notes_invisible: ''
+  user: michael
+  creator: michael

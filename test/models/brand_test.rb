@@ -20,29 +20,54 @@ class BrandTest < ActiveSupport::TestCase
     si = spare_infos(:ki_2103)
     br = si.brand
     assert_equal "KI", br.name
-    br.update(brand: brands(:kia), sign: Brand.signs[:synonym])
+    br.update!(brand: brands(:kia), sign: Brand.signs[:synonym], is_brand: false)
     assert_equal "KIA", si.reload.brand.name
   end
 
-  test 'У сленга, синонима или конгломерации должен быть родительский бренд' do
-    brand1 = Brand.new(name: 'Brand 1')
-    assert brand1.valid?
+  test 'Если заполнен sign: slang, то должен быть и brand' do
+    brand = Brand.new(name: 'Brand', sign: Brand.signs[:slang])
+    refute brand.valid?
+    assert_equal ['В случае когда заполняется родительский бренд или признак принадлежности родительскому бренду, то должен быть заполнен и второй параметр'], brand.errors[:base]
+  end
 
-    brand2 = Brand.create(name: 'Brand 2')
-    assert brand2.valid?
+  test 'Если заполнен sign: synonym, то должен быть и brand' do
+    brand = Brand.new(name: 'Brand', sign: Brand.signs[:synonym])
+    refute brand.valid?
+    assert_equal ['В случае когда заполняется родительский бренд или признак принадлежности родительскому бренду, то должен быть заполнен и второй параметр'], brand.errors[:base]
+  end
 
-    brand1.brand = brand2
-    refute brand1.valid?
-    brand1.brand = nil
+  test 'Если заполнен sign: conglomerate, то должен быть и brand' do
+    brand = Brand.new(name: 'Brand', sign: Brand.signs[:conglomerate])
+    refute brand.valid?
+    assert_equal ['В случае когда заполняется родительский бренд или признак принадлежности родительскому бренду, то должен быть заполнен и второй параметр'], brand.errors[:base]
+  end
 
-    brand1.sign = Brand.signs[:synonym]
-    refute brand1.valid?
+  test 'Если заполнен brand, то должен быть и sign' do
+    brand = Brand.new(name: 'Brand', brand: Brand.new(name: 'Brand'))
+    refute brand.valid?
+    assert_equal ['В случае когда заполняется родительский бренд или признак принадлежности родительскому бренду, то должен быть заполнен и второй параметр'], brand.errors[:base]
+  end
 
-    brand1.sign = Brand.signs[:slang]
-    refute brand1.valid?
+  test 'slang не может быть is_brand' do
+    brand = Brand.new(name: 'Brand', is_brand: true, sign: Brand.signs[:slang], brand: Brand.new(name: 'Brand'))
+    refute brand.valid?
+    assert_equal ['slang не может быть is_brand'], brand.errors[:base]
+  end
 
-    brand1.sign = Brand.signs[:conglomerate]
-    refute brand1.valid?
+  test 'synonym не может быть is_brand' do
+    brand = Brand.new(name: 'Brand', is_brand: true, sign: Brand.signs[:synonym], brand: Brand.new(name: 'Brand'))
+    refute brand.valid?
+    assert_equal ['synonym не может быть is_brand'], brand.errors[:base]
+  end
+
+  test 'Конгломерат может быть is_brand' do
+    brand = Brand.new(name: 'Brand', is_brand: true, sign: Brand.signs[:conglomerate], brand: Brand.new(name: 'Brand'))
+    assert brand.valid?
+  end
+
+  test 'Производитель без sign может быть is_brand' do
+    brand = Brand.new(name: 'Brand', is_brand: true)
+    assert brand.valid?
   end
 
   test 'Проверяем удаление родительского бренда' do

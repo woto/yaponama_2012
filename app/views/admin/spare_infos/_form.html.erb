@@ -4,16 +4,10 @@
 
   <%= f.input :catalog_number %>
 
-  <%= f.simple_fields_for :brand, f.object.brand, include_id: false do |b| %>
-    <%= b.input :brand, as: :select2, required: true %>
-  <% end %>
-
+  <%= f.input :brand, as: :select2, input_html: {data: {manufacturer: '0'}}, placeholder: 'Выберите или добавьте нового производителя'  %>
   <%= f.input :fix_spare_catalog %>
   <%= f.input :change_spare_catalog, as: :hidden, input_html: {value: '1'} %>
-
-  <%= f.simple_fields_for :spare_catalog, f.object.spare_catalog, include_id: false do |b| %>
-    <%= b.input :spare_catalog, as: :select2, required: true %>
-  <% end %>
+  <%= f.input :spare_catalog, as: :select2 %>
 
   <%= f.simple_fields_for :spare_info_phrases do |spare_info_phrase| %>
     <%= render 'spare_infos/spare_info_phrase_fields', f: spare_info_phrase %>

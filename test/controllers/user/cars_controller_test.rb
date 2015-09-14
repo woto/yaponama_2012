@@ -10,8 +10,8 @@ class User::CarsControllerTest < ActionController::TestCase
   end
 
   test 'У созданного автомобиля должен быть правильно выставлен creator и user' do
-    assert_difference -> {User::Car.count} do
-      post :create, "user_car"=>{
+    assert_difference -> {Car.count} do
+      post :create, car: {
         "vin_or_frame"=>"vin",
         "vin"=>"12345678901234567",
         "brand_attributes"=>{"name"=>"Brand"},
@@ -22,7 +22,7 @@ class User::CarsControllerTest < ActionController::TestCase
   end
 
   test 'Бренд созданного автомобиля должен быть отмечен как is_brand' do
-    post :create, "user_car"=>{
+    post :create, car: {
       "vin_or_frame"=>"vin",
       "vin"=>"12345678901234567",
       "brand_attributes"=>{"name"=>"Brand"},
@@ -32,7 +32,7 @@ class User::CarsControllerTest < ActionController::TestCase
   end
 
   test 'Проверка созданных бренда, модели, поколения, модификации' do
-    post :create, user_car: {
+    post :create, car: {
       "vin_or_frame"=>"vin",
       "vin"=>"12345678901234567",
       "brand_attributes"=>{"name"=>"New brand"},
@@ -52,7 +52,7 @@ class User::CarsControllerTest < ActionController::TestCase
     generations_count = Generation.count
     modifications_count = Modification.count
 
-    post :create, user_car: {
+    post :create, car: {
       "vin_or_frame"=>"vin",
       "vin"=>"12345678901234567",
       "brand_attributes"=>{"name"=>"TOYOTA"},
@@ -67,7 +67,7 @@ class User::CarsControllerTest < ActionController::TestCase
   end
 
   test 'Проверка нового поколения' do
-    post :create, user_car: {
+    post :create, car: {
       "vin_or_frame"=>"vin",
       "vin"=>"12345678901234567",
       "brand_attributes"=>{"name"=>"TOYOTA"},
@@ -82,7 +82,7 @@ class User::CarsControllerTest < ActionController::TestCase
   end
 
   test 'Проверка новой модели' do
-    post :create, user_car: {
+    post :create, car: {
       "vin_or_frame"=>"vin",
       "vin"=>"12345678901234567",
       "brand_attributes"=>{"name"=>"TOYOTA"},
@@ -97,7 +97,7 @@ class User::CarsControllerTest < ActionController::TestCase
   end
 
   test 'Проверка нового бренда' do
-    post :create, user_car: {
+    post :create, car: {
       "vin_or_frame"=>"vin",
       "vin"=>"12345678901234567",
       "brand_attributes"=>{"name"=>"New brand"},

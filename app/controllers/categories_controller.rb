@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  skip_before_action :find_resources
 
   def index
 

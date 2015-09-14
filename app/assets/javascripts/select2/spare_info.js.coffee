@@ -12,7 +12,7 @@ format_selection = (data) ->
   data.text.toString().toUpperCase()
 
 $ ->
-  $("[rel='select2-spare_info']").select2
+  $("[rel='select2-spare_info'],[rel='select2-from_spare_info'],[rel='select2-to_spare_info']").select2
     #placeholder: ''
     allowClear: true
     initSelection: (element, callback) ->
@@ -28,7 +28,8 @@ $ ->
 
       params =
         page: options.page
-        name: options.term
+        q:
+          catalog_number_cont: options.term
         is_brand: $(options.element).data('is-brand')
 
       zzz = undefined
@@ -42,7 +43,7 @@ $ ->
               text: options.term
               new: true
 
-      $.getJSON "/admin/spare_infos/search/?" + $.param(params), (data) ->
+      $.getJSON "/spare_infos/search/?" + $.param(params), (data) ->
 
         data.map (data) ->
           zzz.results.push

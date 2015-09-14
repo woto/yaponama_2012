@@ -11,12 +11,14 @@ class WelcomeControllerTest < ActionController::TestCase
 
   test 'Проверка выставления User-Agent' do
     @request.user_agent = 'Browser 1'
+    get :index
     assert_equal User.last.user_agent, 'Browser 1'
   end
 
   test 'Проверка выставления Accept-Langugage' do
-    @request.accept_langugage = 'Language 1'
-    assert_equal User.last.accept_language, 'Language 1'
+    @request.headers['Accept-Language'] = 'Language 1'
+    get :index
+    assert_equal 'Language 1', User.last.accept_language
   end
 
   test 'Для правила inet: 192.168.1.0/24 должен определиться как бот клиент 192.168.1.2' do

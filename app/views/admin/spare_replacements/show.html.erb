@@ -1,20 +1,19 @@
-<%= b1 do %>
+<% @meta_title = @resource.to_label %>
 
-  <% title_show %>
+<%= page do |p| %>
 
-  <%= breadcrumb true do |b| %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Замены', admin_spare_replacements_path %>
     <%= b.item @meta_title %>
   <% end %>
 
-  <%= page_header %>
-
-  <%= link_to url_for(action: :new, return_path: request.fullpath), class: "btn btn-primary" do %>
-    <%= icon 'plus' %>
+  <%= p.title do %>
+    <%= page_header %>
   <% end %>
 
-  <br />
-  <br />
-
-  <%= render 'smart_show' %>
-
+  <%= p.content do %>
+    <%= render 'smart_show' %>
+  <% end %>
 <% end %>

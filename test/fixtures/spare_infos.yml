@@ -2,44 +2,37 @@ infiniti_3310:
   catalog_number: '3310'
   brand: infiniti
   content: "<p>Описание категории: Пыльник Рулевой Рейки.</p>\r\n"
-  name: 3310 (INFINITI)
   spare_catalog: pylnik_rulevoi_reiki
 
 toyota_3310:
   catalog_number: '3310'
   brand: toyota
   content: "<p>Описание категории рулевая тяга.</p>\r\n"
-  name: 3310 (TOYOTA)
   spare_catalog: rulevaya_tyga
 
 ns_3310:
   catalog_number: '3310'
   brand: ns
-  name: 3310 (NS)
   spare_catalog: rulevaya_tyga
 
 nissan_2102:
   catalog_number: '2102'
   brand: nissan
-  name: 2102 (NISSAN)
   spare_catalog: sailentblock
 
 kia_2102:
   catalog_number: '2102'
   brand: kia
-  name: 2102 (KIA)
   spare_catalog: bamper_zadniy
 
 ki_2102:
   catalog_number: '2102'
   brand: ki
-  name: 2102 (KI)
   spare_catalog: bamper_zadniy
 
 ki_2103:
   catalog_number: '2103'
   brand: ki
-  name: 2103 (KI)
   spare_catalog: bamper_zadniy
   image1: '1.png'
   file1: '1.bin'
@@ -48,13 +41,11 @@ ki_2103:
 ms_2103:
   catalog_number: '2103'
   brand: ms
-  name: 2103 (MS)
   spare_catalog: bamper_zadniy
 
 bosch_s4004:
   catalog_number: 's4004'
   brand: bosch
-  name: s4004 (Bosch)
   spare_catalog: akb
 
 spare_info1:
@@ -70,64 +61,54 @@ spare_info2:
 destroy_test:
   catalog_number: destroy_test
   brand: destroy_test
-  name: destroy_test (destroy_test)
   spare_catalog: destroy_test
 
 
 hstore_destroy_test:
   catalog_number: hstore_destroy_test
   brand: destroy_test
-  name: hstore_destroy_test (destroy_test)
   spare_catalog: destroy_test
   hstore: '"key"=>"value"'
 
 content_destroy_test:
   catalog_number: content_destroy_test
   brand: destroy_test
-  name: content_destroy_test (destroy_test)
   spare_catalog: destroy_test
   content: Содержимое, блокирующее удаление SpareInfo
 
 accumulator_destroy_test:
   catalog_number: '0092S40190'
   brand: bosch
-  name: 0092S40190 (Bosch)
   spare_catalog: akb
 
 truck_tire_destroy_test:
   catalog_number: A238429347834782348923489
   brand: wanshine
-  name: A238429347834782348923489 (Wanshine)
   spare_catalog: truck_tire
 
 from_spare_replacements_destroy_test:
   catalog_number: from_spare_replacements_destroy_test
   brand: destroy_test
-  name: from_spare_replacements_destroy_test (destroy_test)
   spare_catalog: destroy_test
 
 to_spare_replacements_destroy_test:
   catalog_number: to_spare_replacements_destroy_test
   brand: destroy_test
-  name: to_spare_replacements_destroy_test (destroy_test)
   spare_catalog: destroy_test
 
 another_spare_info_destroy_test:
   catalog_number: another_spare_info_destroy_test
   brand: destroy_test
-  name: another_spare_info_destroy_test (destroy_test)
   spare_catalog: destroy_test
 
 warehouse_destroy_test:
   catalog_number: warehouse_destroy_test
   brand: destroy_test
-  name: warehouse_destroy_test (destroy_test)
   spare_catalog: destroy_test
 
 applicabilities_destroy_test:
   catalog_number: applicabilities_destroy_test
   brand: destroy_test
-  name: applicabilities_destroy_test (destroy_test)
   spare_catalog: destroy_test
 
 bosh_s4_005_same_number:

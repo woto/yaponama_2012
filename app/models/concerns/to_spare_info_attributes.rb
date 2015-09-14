@@ -1,4 +1,4 @@
-module ToSpareInfoAttributes
+module Concerns::ToSpareInfoAttributes
 
   extend ActiveSupport::Concern
 
