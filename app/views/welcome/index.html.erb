@@ -14,7 +14,7 @@
 
       <div class="col-md-12 col-lg-10">
         <div class="col-lg-20 col-lg-offset-2 top-space-lg bottom-space-lg">
-          <%= form_tag new_user_product_path remote: true, :method => :get, class: 'bottom-space-lg' do %>
+          <%= form_tag new_user_product_path, :method => :get, class: 'bottom-space-lg' do %>
             <div class="input-group">
               <input type="text" name="catalog_number" class="form-control input-lg" placeholder="Артикул детали">
               <span class="input-group-btn">
