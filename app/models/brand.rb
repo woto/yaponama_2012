@@ -31,16 +31,23 @@ class Brand < ActiveRecord::Base
   end
 
   validate do
-    if sign == "slang" && is_brand?
-      errors[:base] << 'slang не может быть is_brand'
+    if sign.in?(["slang", "synonym"]) && is_brand?
+      errors[:base] << 'slang или synonym не может быть is_brand'
     end
   end
 
   validate do
-    if sign == "synonym" && is_brand?
-      errors[:base] << "synonym не может быть is_brand"
+    if brand && brand.sign.in?(['slang', 'synonym'])
+      errors[:base] << 'В качестве родителя нельзя выбирать бренд, у которого выставлен slang или synonym'
     end
   end
+
+  validate do
+    if sign == 'conglomerate' && brand && brand.sign == 'conglomerate'
+      errors[:base] << 'У conglomerate не может быть родительский бренд, у которого так же выставлен conglomerate'
+    end
+  end
+
 
   def to_label
     name

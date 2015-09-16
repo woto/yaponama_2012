@@ -51,13 +51,13 @@ class BrandTest < ActiveSupport::TestCase
   test 'slang не может быть is_brand' do
     brand = Brand.new(name: 'Brand', is_brand: true, sign: Brand.signs[:slang], brand: Brand.new(name: 'Brand'))
     refute brand.valid?
-    assert_equal ['slang не может быть is_brand'], brand.errors[:base]
+    assert_equal ['slang или synonym не может быть is_brand'], brand.errors[:base]
   end
 
   test 'synonym не может быть is_brand' do
     brand = Brand.new(name: 'Brand', is_brand: true, sign: Brand.signs[:synonym], brand: Brand.new(name: 'Brand'))
     refute brand.valid?
-    assert_equal ['synonym не может быть is_brand'], brand.errors[:base]
+    assert_equal ['slang или synonym не может быть is_brand'], brand.errors[:base]
   end
 
   test 'Конгломерат может быть is_brand' do
@@ -78,8 +78,60 @@ class BrandTest < ActiveSupport::TestCase
     skip
   end
 
-  test 'Связка Синоним -> Производитель, запретить создание дополнительных вложений' do
-    skip
+  test 'у synonym нельзя указывать в качестве родителя бренд, у которого выставлен synonym' do
+    brand1 = Brand.create!(name: 'Brand 1')
+    brand2 = Brand.create!(name: 'Brand 2', sign: Brand.signs[:synonym], brand: brand1)
+    brand3 = Brand.create(name: 'Brand 3', sign: Brand.signs[:synonym], brand: brand2)
+    refute brand3.persisted?
+    assert_equal ["В качестве родителя нельзя выбирать бренд, у которого выставлен slang или synonym"], brand3.errors[:base]
+  end
+
+  test 'у slang нельзя указывать в качестве родителя бренд, у которого выставлен synonym' do
+    brand1 = Brand.create!(name: 'Brand 1')
+    brand2 = Brand.create!(name: 'Brand 2', sign: Brand.signs[:synonym], brand: brand1)
+    brand3 = Brand.create(name: 'Brand 3', sign: Brand.signs[:slang], brand: brand2)
+    refute brand3.persisted?
+    assert_equal ["В качестве родителя нельзя выбирать бренд, у которого выставлен slang или synonym"], brand3.errors[:base]
+  end
+
+  test 'у conglomerate нельзя указывать в качестве родителя бренд, у которого выставлен synonym' do
+    brand1 = Brand.create!(name: 'Brand 1')
+    brand2 = Brand.create!(name: 'Brand 2', sign: Brand.signs[:synonym], brand: brand1)
+    brand3 = Brand.create(name: 'Brand 3', sign: Brand.signs[:conglomerate], brand: brand2)
+    refute brand3.persisted?
+    assert_equal ["В качестве родителя нельзя выбирать бренд, у которого выставлен slang или synonym"], brand3.errors[:base]
+  end
+
+  test 'у synonym нельзя указывать в качестве родителя бренд, у которого выставлен slang' do
+    brand1 = Brand.create!(name: 'Brand 1')
+    brand2 = Brand.create!(name: 'Brand 2', sign: Brand.signs[:slang], brand: brand1)
+    brand3 = Brand.create(name: 'Brand 3', sign: Brand.signs[:synonym], brand: brand2)
+    refute brand3.persisted?
+    assert_equal ["В качестве родителя нельзя выбирать бренд, у которого выставлен slang или synonym"], brand3.errors[:base]
+  end
+
+  test 'у slang нельзя указывать в качестве родителя бренд, у которого выставлен slang' do
+    brand1 = Brand.create!(name: 'Brand 1')
+    brand2 = Brand.create!(name: 'Brand 2', sign: Brand.signs[:slang], brand: brand1)
+    brand3 = Brand.create(name: 'Brand 3', sign: Brand.signs[:slang], brand: brand2)
+    refute brand3.persisted?
+    assert_equal ["В качестве родителя нельзя выбирать бренд, у которого выставлен slang или synonym"], brand3.errors[:base]
+  end
+
+  test 'у conglomerate нельзя указывать в качестве родителя бренд, у которого выставлен slang' do
+    brand1 = Brand.create!(name: 'Brand 1')
+    brand2 = Brand.create!(name: 'Brand 2', sign: Brand.signs[:slang], brand: brand1)
+    brand3 = Brand.create(name: 'Brand 3', sign: Brand.signs[:conglomerate], brand: brand2)
+    refute brand3.persisted?
+    assert_equal ["В качестве родителя нельзя выбирать бренд, у которого выставлен slang или synonym"], brand3.errors[:base]
+  end
+
+  test 'у conglomerate нельзя указывать в качестве родителя бренд, у которого так же выставлен conglomerate' do
+    brand1 = Brand.create!(name: 'Brand 1')
+    brand2 = Brand.create!(name: 'Brand 2', sign: Brand.signs[:conglomerate], brand: brand1)
+    brand3 = Brand.create(name: 'Brand 3', sign: Brand.signs[:conglomerate], brand: brand2)
+    refute brand3.persisted?
+    assert_equal ["У conglomerate не может быть родительский бренд, у которого так же выставлен conglomerate"], brand3.errors[:base]
   end
 
 end
