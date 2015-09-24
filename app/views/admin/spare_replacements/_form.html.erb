@@ -3,8 +3,8 @@
 
   <%= f.input :from_spare_info, as: :select2  %>
   <%= f.input :to_spare_info, as: :select2  %>
-  <%= f.input :status, collection: Rails.configuration.replacements_statuses, label_method: :first, value_method: :first %>
-  <%= f.input :wrong, collection: [['Замены правильная', true], ['Замена не правильная', false]] %>
+  <%= f.input :status, collection: SpareReplacement.statuses, label_method: :first, value_method: :first %>
+  <%= f.input :wrong, collection: [['Замены правильная', false], ['Замена не правильная', true]] %>
   <%= f.buttons %>
 
 <% end %>

@@ -9,11 +9,13 @@ module Concerns::ToSpareInfoAttributes
 
     def to_spare_info_attributes=(attr)
       if attr["name"].present?
-        spare_info = SpareInfo.where(name: attr["name"]).first
+        catalog_number, brand = attr["name"].match(/(.+) \((.+)\)/)[1,2]
+        spare_info = SpareInfo.joins(:brand).where(catalog_number: catalog_number).where(brands: {name: brand}).first
         if spare_info.present?
           self.to_spare_info = spare_info
         else
-          self.to_spare_info = SpareInfo.new(name: attr["name"], phantom: true)
+          raise 'Тут пока что нельзя создавать SpareInfo'
+          self.to_spare_info = SpareInfo.new(name: attr["name"])
         end
       else
         self.to_spare_info = nil

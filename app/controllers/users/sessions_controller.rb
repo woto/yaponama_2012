@@ -1,5 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
-# before_filter :configure_sign_in_params, only: [:create]
+  # before_filter :configure_sign_in_params, only: [:create]
+  include Users::Concerns::ExistingUser
 
   # GET /resource/sign_in
   # def new
@@ -7,9 +8,10 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super
+    existing_user
+  end
 
   # DELETE /resource/sign_out
   # def destroy

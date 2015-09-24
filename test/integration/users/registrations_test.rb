@@ -2,17 +2,24 @@ require 'test_helper'
 
 class Users::RegistrationsTest < ActionDispatch::IntegrationTest
   
-  test 'После регистрации вызывается move_to и текущий пользователь удаляется. К сожалению замокать не удалось.' do
+  test 'После регистрации вызывается move_to, текущий пользователь удаляется и сбрасывается guest_user_id. К сожалению замокать не удалось.' do
+    brand = Brand.create!(name: 'Brand', is_brand: true)
+    model = Model.create!(name: 'Model', brand: brand)
     get '/'
     old_user = User.last
-    old_user.postal_addresses.create!(city: '1', street: '1', house: '1', region: '1', postcode: '123456', room: '1')
+    old_user.postal_addresses.create!(city: '95838284948384959488294958392', street: '1', house: '1', region: '1', postcode: '123456', room: '1')
+    old_user.cars.create!(brand: brand, model: model, vin: '38289347839858385938493', vin_or_frame: 'vin')
+    # TODO дописать проверку переноса orders и products, когда закончу с заказами
+
     post user_registration_path, {user: {email: 'new@example.com', password: '123123123', password_confirmation: '123123123'}}
     new_user = User.last
     refute_equal new_user, old_user
     assert_raise do
       old_user.reload
     end
-    assert new_user.postal_addresses.exists?
+    assert_nil session[:guest_user_id]
+    assert new_user.postal_addresses.where(city: '95838284948384959488294958392').exists?
+    assert new_user.cars.where(vin: '38289347839858385938493').exists?
   end
 
   test 'После успешной регистрации нас должно перебросить на /user' do

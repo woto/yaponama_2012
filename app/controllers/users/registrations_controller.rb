@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_filter :configure_sign_up_params, only: [:create]
-  before_filter :configure_account_update_params, only: [:update]
+  # before_filter :configure_account_update_params, only: [:update]
+  include Users::Concerns::ExistingUser
 
   # GET /resource/sign_up
   # def new
@@ -9,16 +10,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    User.transaction do
-      old_user = current_user
-      super
-      registered_user = warden.authenticate(scope: :user)
-      if registered_user
-        registered_user.update_column(:role, User.roles['user'])
-        old_user.move_to(registered_user)
-        old_user.reload.destroy!
-      end
-    end
+    super
+    existing_user
   end
 
   # GET /resource/edit
