@@ -48,6 +48,9 @@ class Brand < ActiveRecord::Base
     end
   end
 
+  # TODO Еще подумать на валидацией, например в цепочке не может быть 2 конгломерата.
+  # А так же можно попасть в просак, играя с цепочками и назначениями родительских брендов и is_brand,
+  # но по идее поправив is_brand и запустив повторно задачу можно решить вопрос
 
   def to_label
     name
@@ -57,51 +60,10 @@ class Brand < ActiveRecord::Base
     "#{id}-#{name.parameterize}"
   end
 
-  #before_validation :upcase_name
+  after_save :brand_rebuild, if: ->{changes[:brand_id] && !brand.nil?}
 
-  #def upcase_name
-  #  self.name = name.to_s.mb_chars.upcase
-  #end
-
-  after_update :rebuild
-
-  def rebuild
-
-    # Стоит не забывать, что если такая деталь уже есть (например делаем у KI родителем производителя KIA).
-    # И есть в обоих случаях деталь 2102 (KI) и 2102 (KIA). То валидация на уникальность в Описаниях не пропустит.
-    # В связи с этим Замены и Применимость так же останутся в лимбе.
-
-    # Мы вызываем сохранение кешированных версий ассоциаций, где имеется brand, из-за того, что там
-    # практически везде используется accepts_nested_attributes_for, который пытается сохранить бренд
-    # исходя из того, что в нем присутствуют изменения мы прилетаем сюда и в конце как правило вылетаем 
-    # по stack overflow, поэтому используем #clear_changes_information
-
-    # Если изменения в name
-    if changes[:name]
-
-      clear_changes_information
-
-      spare_infos.each {|s| s.save}
-      cars.each {|c| c.save}
-      models.each {|m| m.save}
-      products.each {|p| p.save}
-      spare_applicabilities.each{|s| s.save}
-      brands.each {|b| b.save}
-
-    # Иначе если изменения в brand_id
-    # и выставили родительский бренд
-    elsif changes[:brand_id] && !brand.nil?
-
-      clear_changes_information
-
-      spare_infos.each {|s| s.update(brand: brand)}
-      cars.each {|c| c.update(brand: brand)} unless conglomerate?
-      models.each {|m| m.update(brand: brand)} unless conglomerate?
-      products.each {|p| p.update(brand: brand)}
-      spare_applicabilities.each{|s| s.update(brand: brand)} unless conglomerate?
-      brands.each {|b| b.update(brand: brand)} unless conglomerate?
-
-    end
+  def brand_rebuild
+    BrandChainJob.perform_later brand
   end
 
 end
