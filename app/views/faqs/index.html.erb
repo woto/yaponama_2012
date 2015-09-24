@@ -12,24 +12,27 @@
   <% end %>
 
   <%= p.content do %>
-        <div class="panel-group" id="faqs">
-          <% @topics.each do |topic| %>
-            <%= panel 'default' do |p| %>
-              <%= p.heading :"data-clickable-object" => '' do %>
-                <%= p.title do %>
-                  <a data-toggle="collapse" data-clickable-href data-parent="#faqs" href="#faq-<%= topic['id'] %>">
-                    <%= topic['title'] %>
-                    <%= icon 'caret-down pull-right' %>
-                  </a>
-                <% end %>
-              <% end %>
-              <div id="faq-<%= topic['id'] %>" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <%== topic['post'] %>
-                </div>
-              </div>
+    <div class="panel-group" id="faqs">
+      <% @topics.each do |topic| %>
+        <%= panel 'default', id: "faq-panel-#{topic['id']}" do |p| %>
+          <%= p.heading :"data-clickable-object" => '' do %>
+            <%= p.title do %>
+              <a data-toggle="collapse" data-clickable-href data-parent="#faqs" href="#faq-collapse-<%= topic['id'] %>">
+                <%= topic['title'] %>
+                <%= icon 'caret-down pull-right' %>
+              </a>
             <% end %>
           <% end %>
-        </div>
+          <div id="faq-collapse-<%= topic['id'] %>" class="panel-collapse collapse">
+            <div class="panel-body discourse-cooked">
+              <%== topic['post'] %>
+              <br />
+              <br />
+              <%= link_to 'Открыть в новом окне', faq_path(topic['id']), target: "_blank", class: 'dashed' %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
 <% end %>

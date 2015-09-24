@@ -1,0 +1,15 @@
+<div screen-margin>
+
+  <h1><%= @topic['title'] %></h1>
+
+  <div class="hidden-print">
+    <%= link_to 'Распечатать', '#', class: 'dashed pull-right', onclick: 'window.print()' %>
+    <br />
+    <br />
+  </div>
+
+  <div class="discourse-cooked">
+    <%== @topic['post'] %>
+  </div>
+
+</div>
