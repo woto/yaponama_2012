@@ -22,13 +22,12 @@
 //= require jquery.maskedinput/dist/jquery.maskedinput.min
 //= require underscore/underscore
 //= require moment/moment
-
-
+//= require uri.js.js
+//= require iCheck
+//
 // OTHER LIBRARIES
 //
 //= require autosize/jquery.autosize.min.js
-//= require purl/purl
-//
 //
 //= require console.log-wrapper/consolelog.min.js
 //= require console.log-wrapper/consolelog.detailprint.min.js

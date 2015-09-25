@@ -152,4 +152,9 @@ gem 'dotenv-rails'
 gem 'postgres_ext'
 gem 'devise', '~> 3.5'
 gem 'browser-timezone-rails'
-gem "pundit"
+gem 'pundit'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-uri.js'
+  gem 'rails-assets-iCheck'
+end

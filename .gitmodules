@@ -34,9 +34,6 @@
 [submodule "system/submodules/Respond"]
 	path = system/submodules/Respond
 	url = https://github.com/scottjehl/Respond.git
-[submodule "system/submodules/iCheck"]
-	path = system/submodules/iCheck
-	url = https://github.com/fronteed/iCheck.git
 [submodule "system/submodules/sockjs-client"]
 	path = system/submodules/sockjs-client
 	url = https://github.com/sockjs/sockjs-client

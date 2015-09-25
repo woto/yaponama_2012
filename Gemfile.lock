@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: git://github.com/woto/discourse_static_assets.git
-  revision: 3df03ae16821fc2605cb74165ac60c8fdc7536e4
+  revision: b04014b6a6f4aafc9bf6c9474f03f1b0181167d1
   specs:
     discourse_static_assets (0.0.1)
       rails (~> 4)
@@ -72,6 +72,7 @@ GIT
 
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     actionmailer (4.2.4)
       actionpack (= 4.2.4)
@@ -338,6 +339,10 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.4)
       sprockets-rails
+    rails-assets-iCheck (1.0.2)
+      rails-assets-jquery (>= 1.7)
+    rails-assets-jquery (2.1.4)
+    rails-assets-uri.js (1.16.0)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -521,6 +526,8 @@ DEPENDENCIES
   pundit
   rack-rewrite
   rails (~> 4.2)
+  rails-assets-iCheck!
+  rails-assets-uri.js!
   rails-html-sanitizer (~> 1.0)
   rails-i18n (~> 4.0.0)
   ransack
