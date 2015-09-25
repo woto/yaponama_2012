@@ -85,6 +85,9 @@ module ProductsSearch
         @formatted_data = PriceMate.database @formatted_data
         plog.debug '/Получаем сведения с текущей базы'
 
+        plog.debug 'Получаем сведения о заменах'
+        @formatted_data = PriceMate.replacements @formatted_data
+        plog.debug '/Получаем сведения о заменах'
       end
 
 

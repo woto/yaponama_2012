@@ -1,44 +1,83 @@
-kia_2102_toyota_3310:
-  from_spare_info: kia_2102
-  to_spare_info: toyota_3310
-  wrong: false
-  status: 1
-
-
 ki_2103_ns_3310:
   from_spare_info: ki_2103
   to_spare_info: ns_3310
   wrong: false
-  status: 2
-
+  status: <%= SpareReplacement.statuses[:same_num] %>
 
 ns_3310_ki_2103:
   from_spare_info: ns_3310
   to_spare_info: ki_2103
   wrong: false
-  status: 3
+  status: <%= SpareReplacement.statuses[:repl_num] %>
 
 from_spare_replacements_destroy_test:
   from_spare_info: from_spare_replacements_destroy_test
   to_spare_info: another_spare_info_destroy_test
   wrong: false
-  status: 3
-
+  status: <%= SpareReplacement.statuses[:repl_num] %>
 
 to_spare_replacements_destroy_test:
   from_spare_info: another_spare_info_destroy_test
   to_spare_info: to_spare_replacements_destroy_test
   wrong: false
-  status: 3
+  status: <%= SpareReplacement.statuses[:repl_num] %>
 
 bosh_s4_005_same_number:
   from_spare_info: bosh_s4_005_same_number
   to_spare_info: bosch_0092S40050_same_number
   wrong: false
-  status: 2
+  status: <%= SpareReplacement.statuses[:repl_num] %>
 
 bosch_0092S40050_same_number:
   from_spare_info: bosch_0092S40050_same_number
   to_spare_info: bosh_s4_005_same_number
   wrong: false
-  status: 2
+  status: <%= SpareReplacement.statuses[:same_num] %>
+
+new_num_from:
+  from_spare_info: kia_2102
+  to_spare_info: toyota_3310
+  wrong: false
+  status: <%= SpareReplacement.statuses[:new_num] %>
+
+new_num_to:
+  from_spare_info: toyota_3310
+  to_spare_info: kia_2102
+  wrong: false
+  status: <%= SpareReplacement.statuses[:new_num] %>
+
+same_num_from:
+  from_spare_info: kia_2102
+  to_spare_info: toyota_3310
+  wrong: false
+  status: <%= SpareReplacement.statuses[:same_num] %>
+
+same_num_to:
+  from_spare_info: toyota_3310
+  to_spare_info: kia_2102
+  wrong: false
+  status: <%= SpareReplacement.statuses[:same_num] %>
+
+repl_num_from:
+  from_spare_info: kia_2102
+  to_spare_info: toyota_3310
+  wrong: false
+  status: <%= SpareReplacement.statuses[:repl_num] %>
+
+repl_num_to:
+  from_spare_info: toyota_3310
+  to_spare_info: kia_2102
+  wrong: false
+  status: <%= SpareReplacement.statuses[:repl_num] %>
+
+part_num_from:
+  from_spare_info: kia_2102
+  to_spare_info: toyota_3310
+  wrong: false
+  status: <%= SpareReplacement.statuses[:part_num] %>
+
+part_num_to:
+  from_spare_info: toyota_3310
+  to_spare_info: kia_2102
+  wrong: false
+  status: <%= SpareReplacement.statuses[:part_num] %>

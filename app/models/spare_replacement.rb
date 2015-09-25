@@ -1,33 +1,38 @@
 class SpareReplacement < ActiveRecord::Base
 
-  enum status: Rails.configuration.replacements_statuses
-
   include Concerns::FromSpareInfoAttributes
   include Concerns::ToSpareInfoAttributes
 
-  validates :from_spare_info, :to_spare_info, presence: true
-  validates :from_spare_info, uniqueness: { scope: [:to_spare_info, :status] }
-  #validates :to_spare_info, uniqueness: { scope: [:from_spare_info, :status] }
+  # new_num - левая устаревшая, правая новая
+  # same_num - такая же деталь (для аккумуляторов и т.д.)
+  # repl_num - замена с левой на правую
+  # part_num - левая является частью правой
+
+  enum status: ['new_num', 'same_num', 'repl_num', 'part_num']
+
+  validates :from_spare_info, presence: true, uniqueness: { scope: [:to_spare_info] }
+  validates :to_spare_info, presence: true, uniqueness: { scope: [:from_spare_info] }
   validates :status, presence: true
   validates :wrong, inclusion: {in: [false, true] }
 
-  validate :to_spare_info do
-    errors.add(:to_spare_info, 'Товары идентичны, выберите другой') if to_spare_info == from_spare_info
+  validate do
+    errors.add(:base, 'товары идентичны, выберите другой') if to_spare_info == from_spare_info
+  end
+
+  validate if: -> {status.in? ['new_num', 'same_num', 'part_num'] } do
+    if SpareReplacement.where(from_spare_info: to_spare_info, to_spare_info: from_spare_info).any?
+      errors.add(:base, 'невозможно сохранить замену, т.к. существует дубликат')
+    end
+  end
+
+  validate if: -> {status.in? ['repl_num']} do
+    if SpareReplacement.where(from_spare_info: to_spare_info, to_spare_info: from_spare_info).where.not(status: SpareReplacement.statuses['repl_num']).any?
+      errors.add(:base, 'невозможно сохранить замену, т.к. существует дубликат')
+    end
   end
 
   def to_label
     "#{from_spare_info.to_label} - #{to_spare_info.to_label}"
-  end
-
-  after_create do
-    case status
-      #when :new_number
-      #when :old_number
-      #when :same_number
-      when :replacement
-      #when :part_of
-      #when :consists_of
-    end
   end
 
 end

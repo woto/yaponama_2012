@@ -14,12 +14,34 @@
 
   <%= p.content do %>
 
+    <% if false %>
+    <%= row class: 'bottom-space-lg' do %>
+      <div class="col-md-10">
+        <%= search_form_for(@q, url: url_for(action: :index)) do |f| %>
+          <%= f.input :catalog_number_eq %>
+          <%= f.input :image1_present, as: :select %>
+          <%= f.button :submit, 'Поиск' %>
+        <% end %>
+      </div>
+    <% end %>
+    <% end %>
+
     <%= paginate @resources %>
+    <br />
+    <br />
 
     <div class="table-responsive">
       <table class="table">
         <tr>
           <th> <%= @resource_class.human_attribute_name :id %> </th>
+          <th> <%= @resource_class.human_attribute_name :from_spare_info %> </th>
+          <th> <%= @resource_class.human_attribute_name :to_spare_info %> </th>
+          <th> <%= @resource_class.human_attribute_name :wrong %> </th>
+          <th> <%= @resource_class.human_attribute_name :status %> </th>
+          <th> <%= @resource_class.human_attribute_name :notes %> </th>
+          <th> <%= @resource_class.human_attribute_name :notes_invisible %> </th>
+          <th> <%= @resource_class.human_attribute_name :created_at %> </th>
+          <th> <%= @resource_class.human_attribute_name :updated_at %> </th>
         </tr>
                       
         <% @resources.each do |resource| %>
@@ -28,7 +50,22 @@
               <%= resource.id %> <br />
               <%= link_to "Просмотр", polymorphic_path([:admin, resource], return_path: request.fullpath) %> <br />
               <%= link_to "Редактирование", polymorphic_path([:edit, :admin, resource], return_path: request.fullpath) %>
+              <%= link_to "Удалить", polymorphic_path([:admin, resource], return_path: request.fullpath), method: :delete %>
             </td>
+            <td>
+              <%= resource.from_spare_info_id %> <br />
+              <%= resource.from_spare_info.try(:to_label) %>
+            </td>
+            <td>
+              <%= resource.to_spare_info_id %> <br />
+              <%= resource.to_spare_info.to_label %>
+            </td>
+            <td> <%= resource.wrong %> </td>
+            <td> <%= resource.status %> </td>
+            <td> <%= resource.notes %> </td>
+            <td> <%= resource.notes_invisible %> </td>
+            <td> <%= l resource.created_at %> </td>
+            <td> <%= l resource.updated_at %> </td>
           </tr>
         <% end %>
       </table>

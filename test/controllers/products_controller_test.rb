@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 require 'test_helper'
 
 class ProductsControllerTest < ActionController::TestCase
@@ -10,7 +8,10 @@ class ProductsControllerTest < ActionController::TestCase
   end
 
   test 'Если сервер прайсов не доступен' do
-    skip 'То отдается 503, придумать как написать тест'
+    old = Rails.configuration.price['host']
+    Rails.configuration.price['host'] = 'example.com'
+    get :new, catalog_number: 238943923849853240382
+    Rails.configuration.price['host'] = old
   end
 
   test 'Редактировать и перезаказывать мы можем только свои товары' do
@@ -102,9 +103,9 @@ class ProductsControllerTest < ActionController::TestCase
 
   test 'Ищем товар 2. У него производители TOYOTA и TY. Должны сгруппироваться в TOYOTA' do
     get :new, catalog_number: 2
-    assert_select '#TOYOTA'
-    assert_select '#TY', false
-    assert_select '#TOYOTA' do
+    assert_select '#toyota'
+    assert_select '#ty', false
+    assert_select '#toyota' do
       assert_select 'p', text: '1, 22'
     end
   end
@@ -121,16 +122,16 @@ class ProductsControllerTest < ActionController::TestCase
 
   test 'Деталь 838383 внесена как 838383 и 83-83.83 с производителями ОРИГИНАЛ и СИНОНИМ, на сервере прайсов должны слиться' do
     get :new, catalog_number: 838383
-    assert_select "div[id='ОРИГИНАЛ']" do
+    assert_select "div[id='original']" do
       assert_select 'p.other-names', 'НАЗВАНИЕ СИНОНИМА, НАЗВАНИЕ ОРИГИНАЛА'
-      assert_select 'p.other-brands', 'СИНОНИМ'
-      assert_select 'p.other-catalog-numbers', '83-83.83'
+      assert_select 'small.other-brands', '(СИНОНИМ)'
+      assert_select 'small.other-catalog-numbers', '(83-83.83)'
     end
   end
 
   test 'Если сервер прайсов отдает нам деталь без производителя, то не должно быть 500 ошибки. Производитель должен подмениться на ОРИГИНАЛ' do
     get :new, catalog_number: '543385'
-    assert_select "div[id='ОРИГИНАЛ']"
+    assert_select "div[id='original']"
   end
 
   test 'Ссылки' do
@@ -143,15 +144,63 @@ class ProductsControllerTest < ActionController::TestCase
     assert_select "table", html: /.*Свойство1.*Значение1/m
   end
 
-  # TODO Я как понимаю это устаревший тест. Надо еще на сервере прайсов его выпилить
-  #test 'Если spare_info имеет image1, то она должна отобразиться' do
-  #  get :new, catalog_number: '2103'
-  #  assert_select "[alt='2103 (KI)']"
-  #end
+  test 'Если spare_info имеет image1, то она должна отобразиться' do
+    get :new, catalog_number: '2103'
+    assert_select "[alt='2103 (KI)']"
+  end
 
   test 'Если spare_info имеет file1, то должна отобразиться ссылка на его скачивание' do
     get :new, catalog_number: '2103'
     assert_select "a", text: '1.bin'
+  end
+
+  test 'Проверяем заполнение :replacements' do
+    get :new, catalog_number: '2102'
+    replacements = assigns(:formatted_data)[0][1][1][1][:replacements]
+    assert_equal [spare_infos(:toyota_3310)], replacements[:new_num_from]
+    assert_equal [spare_infos(:toyota_3310)], replacements[:new_num_to]
+    assert_equal [spare_infos(:toyota_3310)], replacements[:same_num_from]
+    assert_equal [spare_infos(:toyota_3310)], replacements[:same_num_to]
+    assert_equal [spare_infos(:toyota_3310)], replacements[:repl_num_from]
+    assert_equal [spare_infos(:toyota_3310)], replacements[:repl_num_to]
+    assert_equal [spare_infos(:toyota_3310)], replacements[:part_num_from]
+    assert_equal [spare_infos(:toyota_3310)], replacements[:part_num_to]
+  end
+
+  test 'Проверяем визуальное представление замен' do
+    get :new, catalog_number: '3310'
+    assert_select '.new_num_from' do
+      assert_select 'h4', text: 'Просматриваемый вами номер ранее поставлялся производителем под номером:'
+      assert_select 'a[href="/user/products/new?catalog_number=2102"]'
+    end
+    assert_select '.new_num_to' do
+      assert_select 'h4', text: 'Просматриваемый вами номер был заменен производителем на номер:'
+      assert_select 'a[href="/user/products/new?catalog_number=2102"]'
+    end
+    assert_select '.same_num_from' do
+      assert_select 'h4', text: 'Просматриваемый вами номер так же маркируется как:'
+      assert_select 'a[href="/user/products/new?catalog_number=2102"]'
+    end
+    assert_select '.same_num_to' do
+      assert_select 'h4', text: 'Просматриваемый вами номер так же маркируется как:'
+      assert_select 'a[href="/user/products/new?catalog_number=2102"]'
+    end
+    assert_select '.repl_num_from' do
+      assert_select 'h4', text: 'Просматриваемый вами номер является заменой для следующих номеров:'
+      assert_select 'a[href="/user/products/new?catalog_number=2102"]'
+    end
+    assert_select '.repl_num_to' do
+      assert_select 'h4', text: 'Просматриваемый вами номер можно заменить следующими номерами:'
+      assert_select 'a[href="/user/products/new?catalog_number=2102"]'
+    end
+    assert_select '.part_num_from' do
+      assert_select 'h4', text: 'Просматриваемый вами товар содержит следующие товары:'
+      assert_select 'a[href="/user/products/new?catalog_number=2102"]'
+    end
+    assert_select '.part_num_to' do
+      assert_select 'h4', text: 'Просматриваемый вами товар входит в состав следующих товаров:'
+      assert_select 'a[href="/user/products/new?catalog_number=2102"]'
+    end
   end
 
 end

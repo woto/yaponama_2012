@@ -58,6 +58,43 @@ class PriceMate
       limit(1).first || Defaults.spare_catalog
   end
 
+  def self.replacements(formatted_data)
+    formatted_data.each do |catalog_number, cn_scope|
+      cn_scope.each do |manufacturer, mf_scope|
+        if mf_scope[:info].present?
+          from = mf_scope[:info].from_spare_replacements.where(wrong: false)
+          to =  mf_scope[:info].to_spare_replacements.where(wrong: false)
+
+          to.each do |replacement|
+            case replacement.status
+            when 'new_num'
+              mf_scope[:replacements][:new_num_from] << replacement.from_spare_info
+            when 'same_num'
+              mf_scope[:replacements][:same_num_from] << replacement.from_spare_info
+            when 'repl_num'
+              mf_scope[:replacements][:repl_num_from] << replacement.from_spare_info
+            when 'part_num'
+              mf_scope[:replacements][:part_num_from] << replacement.from_spare_info
+            end
+          end
+
+          from.each do |replacement|
+            case replacement.status
+            when 'new_num'
+              mf_scope[:replacements][:new_num_to] << replacement.to_spare_info
+            when 'same_num'
+              mf_scope[:replacements][:same_num_to] << replacement.to_spare_info
+            when 'repl_num'
+              mf_scope[:replacements][:repl_num_to] << replacement.to_spare_info
+            when 'part_num'
+              mf_scope[:replacements][:part_num_to] << replacement.to_spare_info
+            end
+          end
+        end
+      end
+    end
+  end
+
   def self.database formatted_data
     formatted_data.each do |catalog_number, cn_scope|
       cn_scope.each do |manufacturer, mf_scope|
@@ -178,6 +215,16 @@ class PriceMate
             :max_cost => nil,
             :offers => [],
             :brand => canonical_brand,
+            :replacements => {
+              new_num_from: [],
+              new_num_to: [],
+              same_num_from: [],
+              same_num_to: [],
+              repl_num_from: [],
+              repl_num_to: [],
+              part_num_from: [],
+              part_num_to: []
+            }
             # image_url у всех одинаковый по определению, т.к. берется из price_catalogs
             # несмотря на то, что на сервере прайсов заполняется по образу weights
             #:image_url => item["image_url"]
