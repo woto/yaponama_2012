@@ -1,7 +1,9 @@
 class NewsController < ApplicationController
 
-  def index
-    @topics = get_news.
+  private
+
+  def find_resources
+    @resources = get_news.
       reject{|topic| topic['pinned']}.
       reject{|topic| topic['closed']}.
       take(5)

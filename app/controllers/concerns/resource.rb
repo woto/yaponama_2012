@@ -26,7 +26,7 @@ module Concerns::Resource
   end
 
   def new_resource
-    @resource = @resource_class.new
+    @resource = @resource_class.new resource_params
   end
 
   def show_resource

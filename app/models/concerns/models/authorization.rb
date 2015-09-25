@@ -15,11 +15,11 @@ module Concerns::Models::Authorization
   end
 
   def seller?
-    [:manager, :admin].include? role
+    ["manager", "admin"].include? role
   end
 
   def buyer?
-    [:guest, :user].include? role
+    ["guest", "user"].include? role
   end
 
 end

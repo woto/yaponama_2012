@@ -1,10 +1,4 @@
 class OpensearchXmlController < ApplicationController
-  include SetResourceClassDummy
-
-  def index
-    render 'index', layout: false
-  end
-
-  private
-
+  skip_before_action :find_resources
+  layout false
 end

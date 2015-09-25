@@ -3,7 +3,7 @@ class Bootstrap::Modal < Bootstrap::Bootstrap
   def header options={}
     options[:class] = ['modal-header', options[:class] ].compact
     @template.content_tag :div, class: options[:class] do
-      yield Modal::Header.new(@template)
+      yield Header.new(@template)
     end
   end
 
@@ -17,7 +17,7 @@ class Bootstrap::Modal < Bootstrap::Bootstrap
   def footer options={}
     options[:class] = ['modal-footer', options[:class] ].compact
     @template.content_tag :div, class: options[:class] do
-      yield Modal::Footer.new(@template)
+      yield Footer.new(@template)
     end
   end
 

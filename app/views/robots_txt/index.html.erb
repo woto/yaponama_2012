@@ -3,8 +3,8 @@ Allow: /
 Sitemap: http://www.<%= "#{Rails.configuration.site['host']}" %>/sitemap.xml.gz
 Host: www.<%= "#{Rails.configuration.site['host']}" %>
 
-<% @blocked_bots.each do |bot| %>
-User-agent: <%= bot.user_agent %>
+<% @resources.each do |resource| %>
+User-agent: <%= resource.user_agent %>
 Disallow: /
 
 <% end %>

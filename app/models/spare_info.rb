@@ -69,15 +69,6 @@ class SpareInfo < ActiveRecord::Base
   has_one :accumulator, class_name: 'Opts::Accumulator', dependent: :restrict_with_error
   has_one :truck_tire, class_name: 'Opts::TruckTire', dependent: :restrict_with_error
 
-  def to_label
-    "#{catalog_number} (#{brand.to_label})" if [catalog_number, brand].any?
-  end
-
-  def name
-    to_label
-  end
-
-
   validates :catalog_number, :presence => true, uniqueness:  { case_sensitive: false, :scope => :brand_id }
 
 
@@ -127,5 +118,15 @@ class SpareInfo < ActiveRecord::Base
       errors[:brand] << 'Нельзя указывать производителя, у которого есть родитель.'
     end
   end
+
+  def to_label
+    "#{catalog_number} (#{brand.to_label})" if [catalog_number, brand].any?
+  end
+
+  def name
+    to_label
+  end
+
+
 
 end

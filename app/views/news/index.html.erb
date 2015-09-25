@@ -12,7 +12,7 @@
   <% end %>
 
   <%= p.content do %>
-    <% @topics.each do |topic| %>
+    <% @resources.each do |topic| %>
       <div class="bottom-space-lg">
         <span class="pull-right text-sm text-muted top-space-xs"><%= l Time.zone.parse(topic['created_at']), format: :news %></span>
         <h2 class="top-space-none bottom-space">

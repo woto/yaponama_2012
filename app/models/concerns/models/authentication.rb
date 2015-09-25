@@ -2,6 +2,12 @@ module Concerns::Models::Authentication
   extend ActiveSupport::Concern
 
   included do
+
+    # Include default devise modules. Others available are:
+    # :confirmable, :lockable, :timeoutable and :omniauthable
+    devise :database_authenticatable, :registerable,
+           :recoverable, :rememberable, :trackable, :validatable
+
     # Пропускаем валидацию у гостей
     def email_required?
       super && !guest?

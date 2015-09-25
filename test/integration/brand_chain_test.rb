@@ -18,4 +18,3 @@ class BrandChainTest < ActionDispatch::IntegrationTest
   end
 
 end
-

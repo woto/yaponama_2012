@@ -16,14 +16,6 @@ class BrandTest < ActiveSupport::TestCase
     assert_equal "КИА", si.reload.brand.name
   end
 
-  test 'Проверяем выставление родительского бренда' do
-    si = spare_infos(:ki_2103)
-    br = si.brand
-    assert_equal "KI", br.name
-    br.update!(brand: brands(:kia), sign: Brand.signs[:synonym], is_brand: false)
-    assert_equal "KIA", si.reload.brand.name
-  end
-
   test 'Если заполнен sign: slang, то должен быть и brand' do
     brand = Brand.new(name: 'Brand', sign: Brand.signs[:slang])
     refute brand.valid?
@@ -133,5 +125,6 @@ class BrandTest < ActiveSupport::TestCase
     refute brand3.persisted?
     assert_equal ["У conglomerate не может быть родительский бренд, у которого так же выставлен conglomerate"], brand3.errors[:base]
   end
+
 
 end

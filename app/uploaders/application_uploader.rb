@@ -55,11 +55,11 @@ class ApplicationUploader < CarrierWave::Uploader::Base
   process :set_content_type
 
   version :fit_thumb, if: :image? do
-    process :resize_to_fit => [300, 240]
+    process :resize_to_fit => [400, 320]
   end
 
   version :fill_thumb, if: :image? do
-    process :resize_to_fill => [300, 240]
+    process :resize_to_fill => [400, 320]
   end
 
   def image?(upload)

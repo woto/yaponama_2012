@@ -1,6 +1,4 @@
-# encoding: utf-8
-#
-class Modal::Footer < AbstractBootstrap
+class Bootstrap::Modal::Footer < Bootstrap::Bootstrap
   #def close
   #  @template.content_tag :button, "Закрыть", class: 'btn btn-default', type: 'button', data: { dismiss: 'modal' }, 'aria-hidden' => 'true'
   #end
