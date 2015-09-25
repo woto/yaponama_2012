@@ -14,6 +14,17 @@
 
   <%= p.content do %>
 
+    <%= search_form_for(@q, url: url_for(action: :index), html: {class: 'form-inline'}) do |f| %>
+      <%= f.input :name_eq, label: false, placeholder: 'Производитель' %>
+      <%= f.input :brand_name_eq, label: false, placeholder: 'Родительский производитель' %>
+      <%= f.button :submit, 'Поиск' %>
+    <% end %>
+  <% end %>
+
+  <br />
+
+  <%= p.content do %>
+
     <%= paginate @resources %>
     <br />
     <br />
@@ -23,42 +34,46 @@
         <tr>
           <th> <%= @resource_class.human_attribute_name :id %> </th>
           <th> <%= @resource_class.human_attribute_name :name %> </th>
-          <th> <%= @resource_class.human_attribute_name :brand_id %> </th>
+          <th> <%= @resource_class.human_attribute_name :brand %> </th>
+          <th> <%= @resource_class.human_attribute_name :sign %> </th>
           <th> <%= @resource_class.human_attribute_name :image %> </th>
           <th> <%= @resource_class.human_attribute_name :rating %> </th>
           <th> <%= @resource_class.human_attribute_name :content %> </th>
           <th> <%= @resource_class.human_attribute_name :creator_id %> </th>
           <th> <%= @resource_class.human_attribute_name :phantom %> </th>
           <th> <%= @resource_class.human_attribute_name :is_brand %> </th>
-          <th> <%= @resource_class.human_attribute_name :created_at %> </th>
-          <th> <%= @resource_class.human_attribute_name :updated_at %> </th>
           <th> <%= @resource_class.human_attribute_name :preview %> </th>
           <th> <%= @resource_class.human_attribute_name :default_display %> </th>
           <th> <%= @resource_class.human_attribute_name :opts %> </th>
-          <th> <%= @resource_class.human_attribute_name :sign %> </th>
+          <th> <%= @resource_class.human_attribute_name :created_at %> </th>
+          <th> <%= @resource_class.human_attribute_name :updated_at %> </th>
         </tr>
 
         <% @resources.each do |resource| %>
           <tr>
             <td> 
-              <%= resource.id %>
-              <%= link_to "Просмотр", admin_brand_path(resource.id, return_path: request.fullpath) %>
+              <%= resource.id %> <br />
+              <%= link_to "Просмотр", admin_brand_path(resource.id, return_path: request.fullpath) %> <br />
               <%= link_to "Редактирование", edit_admin_brand_path(resource.id, return_path: request.fullpath) %>
+              <%= link_to "Удалить", polymorphic_path([:admin, resource], return_path: request.fullpath), method: :delete %>
             </td>
             <td> <%= resource.name %> </td>
-            <td> <%= resource.brand_id %> </td>
+            <td> 
+              <%= resource.brand_id %> <br />
+              <%= resource.brand.try(:to_label) %>
+            </td>
+            <td> <%= resource.sign %> </td>
             <td> <%= resource.image %> </td>
             <td> <%= resource.rating %> </td>
             <td> <%= resource.content %> </td>
             <td> <%= resource.creator_id %> </td>
             <td> <%= resource.phantom %> </td>
             <td> <%= resource.is_brand %> </td>
-            <td> <%= resource.created_at %> </td>
-            <td> <%= resource.updated_at %> </td>
             <td> <%= resource.preview %> </td>
             <td> <%= resource.default_display %> </td>
             <td> <%= resource.opts %> </td>
-            <td> <%= resource.sign %> </td>
+            <td> <%= resource.created_at %> </td>
+            <td> <%= resource.updated_at %> </td>
           </tr>
         <% end %>
       </table>

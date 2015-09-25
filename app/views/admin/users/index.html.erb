@@ -13,7 +13,7 @@
   <% end %>
 
   <%= p.content do %>
-    <%= search_form_for(@q, url: admin_users_path, html: {class: 'form-inline'}) do |f| %>
+    <%= search_form_for(@q, url: url_for(action: :index), html: {class: 'form-inline'}) do |f| %>
 
       <%= f.input :name_cont, placeholder: 'Имя', label: false %>
       <%= f.input :phone_eq, placeholder: 'Телефон', input_html: {data: {'mobile-mask' => ''}}, label: false %>
@@ -30,7 +30,6 @@
   <%= p.content do %>
 
     <%= paginate @resources %>
-
     <br />
     <br />
 
@@ -48,8 +47,9 @@
           <tr>
             <td> 
               <%= resource.id %> <br />
-              <%= link_to 'Просмотр', admin_user_path(resource.id, return_path: request.fullpath) %> <br />
-              <%= link_to 'Редактировать', edit_admin_user_path(resource.id, return_path: request.fullpath) %> 
+              <%= link_to "Просмотр", polymorphic_path([:admin, resource], return_path: request.fullpath) %> <br />
+              <%= link_to "Редактирование", polymorphic_path([:edit, :admin, resource], return_path: request.fullpath) %> <br />
+              <%= link_to "Удалить", polymorphic_path([:admin, resource], return_path: request.fullpath), method: :delete %>
             </td>
             <td> <%= resource.name %> </td>
             <td> <%= resource.phone %> </td>
