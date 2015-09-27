@@ -81,10 +81,6 @@ namespace :app do
     UpdateSpareCatalog.update_spare_catalog
   end
 
-  task :update_brand => :environment do
-    UpdateBrand.update_brand
-  end
-
   task :create_new_wordstat_report_spare_info => :environment do
     CreateNewWordstatReportSpareInfo.create_new_wordstat_report_spare_info
   end

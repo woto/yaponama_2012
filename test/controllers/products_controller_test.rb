@@ -167,6 +167,19 @@ class ProductsControllerTest < ActionController::TestCase
     assert_equal [spare_infos(:toyota_3310)], replacements[:part_num_to]
   end
 
+  test 'Даже если у нас отсутствуют замены в PostreSQL, то набор ключей всё равно должен присутствовать' do
+    get :new, catalog_number: '543385'
+    replacements = assigns(:formatted_data)[0][1][0][1][:replacements]
+    assert_equal [], replacements[:new_num_from]
+    assert_equal [], replacements[:new_num_to]
+    assert_equal [], replacements[:same_num_from]
+    assert_equal [], replacements[:same_num_to]
+    assert_equal [], replacements[:repl_num_from]
+    assert_equal [], replacements[:repl_num_to]
+    assert_equal [], replacements[:part_num_from]
+    assert_equal [], replacements[:part_num_to]
+  end
+
   test 'Проверяем визуальное представление замен' do
     get :new, catalog_number: '3310'
     assert_select '.new_num_from' do
