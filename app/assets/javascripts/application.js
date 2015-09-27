@@ -46,7 +46,6 @@
 //= require components/brands_fast_search
 //= require components/vin_or_frame
 //= require components/clickable_object
-//= require components/expandable_link
 //= require components/popover
 //= require components/tooltip
 //= require components/radio
