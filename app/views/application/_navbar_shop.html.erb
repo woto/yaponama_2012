@@ -1,11 +1,11 @@
 <li>
-  <%= link_to main_app.deliveries_path do %>
+  <%= link_to main_app.faqs_path(anchor: navbar_shop.faq_id), :"faq-translocation" => ''  do %>
     <img style="margin-bottom: 3px;" src="http://www.avz.ru/assets/templates/imgs/mos_metro_logo_16.jpg"> <%= navbar_shop.metro %>
     <br />
     <% (1..5).each do |n| %>
-      <% if navbar_shop.instance_eval("phone#{n}").present? %>
+      <% if navbar_shop.send("phone#{n}").present? %>
         <%= icon 'phone-square' %>&nbsp;
-        <span><%= navbar_shop.instance_eval("phone#{n}") %></span><br />
+        <span><%= navbar_shop.send("phone#{n}") %></span><br />
       <% end %>
     <% end %>
   <% end %>

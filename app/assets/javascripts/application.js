@@ -52,6 +52,8 @@
 //= require components/checkbox
 //= require components/select
 //= require components/catch_enter
+//= require components/window_dialog
+//= require components/faq_translocation
 //
 //= require admin/deliveries/places
 //

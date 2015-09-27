@@ -132,4 +132,9 @@ class WelcomeControllerTest < ActionController::TestCase
     end
     assert_equal session["guest_user_id"], User.last.id
   end
+
+  test 'Проверка выставленных faq-translocation' do
+    get :index
+    assert_select '[faq-translocation]', count: 5
+  end
 end
