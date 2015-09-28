@@ -238,15 +238,6 @@ class PriceMate
         end
 
       end
-
-      ["title", "title_en", "description", "applicability", "parts_group"].each do |field_title|
-        if item[field_title].present?
-          title = item[field_title].to_s.mb_chars.upcase.to_s
-          unless formatted_data[cn][mf][:titles][title]
-            formatted_data[cn][mf][:titles][title] = 1
-          else
-            formatted_data[cn][mf][:titles][title] += 1
-          end
         end
       end
 
@@ -281,6 +272,8 @@ class PriceMate
         end
       end
 
+      
+      formatted_data[cn][brand.name][:titles] = fill_titles(formatted_data[cn][brand.name], item)
     end
 
 
@@ -389,6 +382,21 @@ class PriceMate
 
     formatted_data
 
+  end
+
+
+  def self.fill_titles(data, item)
+    ["title", "title_en", "description", "applicability", "parts_group"].each do |field_title|
+      if item[field_title].present?
+        title = item[field_title].to_s.mb_chars.upcase.to_s
+        unless data[:titles][title]
+          data[:titles][title] = 1
+        else
+          data[:titles][title] += 1
+        end
+      end
+    end
+    data[:titles]
   end
 
 

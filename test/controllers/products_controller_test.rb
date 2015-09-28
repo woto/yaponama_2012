@@ -118,7 +118,16 @@ class ProductsControllerTest < ActionController::TestCase
 
   test 'Ищем замены 2 без производителя, находим и TOYOTA и TY сгруппированным' do
     get :new, catalog_number: 2, replacements: '1'
-    assert_match '1 - 17 руб.', response.body
+    assert_match '1 - 1 руб.', response.body
+  end
+
+  test 'Ищем деталь grouptest123, находим и group.test.123 - Conglomerate child, и group-test-123 - Conglomerate сгруппированными с минимальной ценой (группировка происходит на стороне интернет магазина)' do
+    get :new, catalog_number: 'grouptest123'
+    assert_select 'b', text: 'Conglomerate'
+    assert_select 'small', text: '(CONGLOMERATE, CONGLOMERATE CHILD)'
+    assert_select 'b', text: 'GROUPTEST123'
+    assert_select 'small', text: '(GROUP-TEST-123, GROUP.TEST.123)'
+    assert_select '*', text: /3 624 руб/
   end
 
   test 'Деталь 838383 внесена как 838383 и 83-83.83 с производителями ОРИГИНАЛ и СИНОНИМ, на сервере прайсов должны слиться' do
@@ -128,6 +137,11 @@ class ProductsControllerTest < ActionController::TestCase
       assert_select 'small.other-brands', '(СИНОНИМ)'
       assert_select 'small.other-catalog-numbers', '(83-83.83)'
     end
+  end
+
+  test 'Проверяем, что PriceMate.fill_titles берет названия из нужных столбцов и они правильно выводятся в результатах поиска' do
+    get :new, catalog_number: 'titles-test'
+    assert_select '.other-names', 'TITLE, TITLE_EN, DESCRIPTION, APPLICABILITY, PARTS_GROUP'
   end
 
   test 'Если сервер прайсов отдает нам деталь без производителя, то не должно быть 500 ошибки. Производитель должен подмениться на ОРИГИНАЛ' do
