@@ -3,15 +3,6 @@
   <h3 class="top-space-lg">Замены и аналоги</h3>
   <% replacements.each do |key, value| %>
     <% case key %>
-    <% when :new_num_to %>
-      <div class="new_num_to">
-        <% if value.any? %>
-          <h4>Просматриваемый вами номер был заменен производителем на номер:</h4>
-          <% value.each do |spare_info| %>
-            <%= link_to spare_info.to_label, polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %>
-          <% end  %>
-        <% end %>
-      </div>
     <% when :new_num_from %>
       <div class="new_num_from">
         <% if value.any? %>
@@ -21,10 +12,10 @@
           <% end  %>
         <% end %>
       </div>
-    <% when :same_num_to %>
-      <div class="same_num_to">
+    <% when :new_num_to %>
+      <div class="new_num_to">
         <% if value.any? %>
-          <h4>Просматриваемый вами номер так же маркируется как:</h4>
+          <h4>Просматриваемый вами номер был заменен производителем на номер:</h4>
           <% value.each do |spare_info| %>
             <%= link_to spare_info.to_label, polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %>
           <% end  %>
@@ -32,6 +23,15 @@
       </div>
     <% when :same_num_from %>
       <div class="same_num_from">
+        <% if value.any? %>
+          <h4>Просматриваемый вами номер так же маркируется как:</h4>
+          <% value.each do |spare_info| %>
+            <%= link_to spare_info.to_label, polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %>
+          <% end  %>
+        <% end %>
+      </div>
+    <% when :same_num_to %>
+      <div class="same_num_to">
         <% if value.any? %>
           <h4>Просматриваемый вами номер так же маркируется как:</h4>
           <% value.each do |spare_info| %>
@@ -57,15 +57,6 @@
           <% end  %>
         <% end %>
       </div>
-    <% when :part_num_to %>
-      <div class="part_num_to">
-        <% if value.any? %>
-          <h4>Просматриваемый вами товар входит в состав следующих товаров:</h4>
-          <% value.each do |spare_info| %>
-            <%= link_to spare_info.to_label, polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %>
-          <% end  %>
-        <% end %>
-      </div>
     <% when :part_num_from %>
       <div class="part_num_from">
         <% if value.any? %>
@@ -75,7 +66,15 @@
           <% end  %>
         <% end %>
       </div>
+    <% when :part_num_to %>
+      <div class="part_num_to">
+        <% if value.any? %>
+          <h4>Просматриваемый вами товар входит в состав следующих товаров:</h4>
+          <% value.each do |spare_info| %>
+            <%= link_to spare_info.to_label, polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %>
+          <% end  %>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
-
 <% end %>
