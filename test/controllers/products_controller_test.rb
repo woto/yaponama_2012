@@ -11,6 +11,7 @@ class ProductsControllerTest < ActionController::TestCase
     old = Rails.configuration.price['host']
     Rails.configuration.price['host'] = 'example.com'
     get :new, catalog_number: 238943923849853240382
+    assert_response 503
     Rails.configuration.price['host'] = old
   end
 

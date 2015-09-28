@@ -1,3 +1,5 @@
+require 'timeout'
+
 class PriceMate
 
   def self.catalog_number catalog_number
@@ -178,18 +180,20 @@ class PriceMate
   end
 
 
-  def self.search catalog_number, manufacturer, replacements, emex, cached
-    catalog_number = CGI::escape(PriceMate.catalog_number(catalog_number))
-    manufacturer = CGI::escape(PriceMate.manufacturer(manufacturer) || '')
-    replacements = true_or_false(replacements)
-    emex = "&ext_ws=#{true_or_false(emex)}"
-    cached = "&cached=#{true_or_false(cached)}"
+  def self.search host, port, catalog_number, manufacturer, replacements, emex, cached
+    status = Timeout::timeout(3) {
+      catalog_number = CGI::escape(PriceMate.catalog_number(catalog_number))
+      manufacturer = CGI::escape(PriceMate.manufacturer(manufacturer) || '')
+      replacements = true_or_false(replacements)
+      emex = "&ext_ws=#{true_or_false(emex)}"
+      cached = "&cached=#{true_or_false(cached)}"
 
-    price_request_url = "http://#{Rails.configuration.price['host']}:#{Rails.configuration.price['port']}/prices/search?catalog_number=#{catalog_number}&manufacturer=#{manufacturer}&replacements=#{replacements}#{emex}&format=json&for_site=1#{cached}"
+      price_request_url = "http://#{host}:#{port}/prices/search?catalog_number=#{catalog_number}&manufacturer=#{manufacturer}&replacements=#{replacements}#{emex}&format=json&for_site=1#{cached}"
 
-    parsed_price_request_url = URI.parse(price_request_url)
-    resp = Net::HTTP.get_response(parsed_price_request_url)
-    ActiveSupport::JSON.decode(resp.body)
+      parsed_price_request_url = URI.parse(price_request_url)
+      resp = Net::HTTP.get_response(parsed_price_request_url)
+      ActiveSupport::JSON.decode(resp.body)
+    }
   end
 
   def self.process parsed_json

@@ -41,8 +41,8 @@ module ProductsSearch
 
           plog.debug "Запрос к серверу прайсов"
           begin
-            @parsed_json = ::PriceMate.search(c9, b9, r9, e8, false)
-          rescue Exception => e
+            @parsed_json = ::PriceMate.search(Rails.configuration.price['host'], Rails.configuration.price['port'], c9, b9, r9, e8, false)
+          rescue Timeout::Error => e
             response.headers["Retry-After"] = (Time.now + 1.day).httpdate.to_s
             render :status => 503 and return
           end
