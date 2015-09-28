@@ -181,7 +181,7 @@ class PriceMate
 
 
   def self.search host, port, catalog_number, manufacturer, replacements, emex, cached
-    status = Timeout::timeout(3) {
+    status = Timeout::timeout(5) {
       catalog_number = CGI::escape(PriceMate.catalog_number(catalog_number))
       manufacturer = CGI::escape(PriceMate.manufacturer(manufacturer) || '')
       replacements = true_or_false(replacements)
@@ -203,40 +203,10 @@ class PriceMate
     parsed_json["result_prices"].each do |item|
 
       cn = item["catalog_number"].to_s
-      canonical_brand = BrandMate.find_or_create_conglomerate item["manufacturer"]
-      mf = canonical_brand.name.to_s
+      brand = BrandMate.find_or_create_conglomerate item["manufacturer"]
 
-      h = cn + " - " + mf
+      h = cn + " - " + brand.name
       counter[h] += 1
-
-      #if counter[h] <= 10
-      if true
-
-        # Если нет такого каталожника, создаем
-        unless formatted_data.include?(cn)
-          formatted_data[cn] = {}
-        end
-
-        # Если нет такого производителя, создаем производителя и внутри него структуру
-        unless formatted_data[cn].include? mf
-
-          formatted_data[cn][mf] = {
-            :titles => {},
-            :manufacturer_origs => {},
-            :catalog_number_origs => {},
-            :weights => {},
-            :min_days => nil,
-            :max_days => nil,
-            :min_cost => nil,
-            :max_cost => nil,
-            :offers => [],
-            :brand => canonical_brand,
-            # image_url у всех одинаковый по определению, т.к. берется из price_catalogs
-            # несмотря на то, что на сервере прайсов заполняется по образу weights
-            #:image_url => item["image_url"]
-          }
-
-        end
 
 
         techs = ["supplier_title", "supplier_title_full", "price_logo_emex", "job_title", "supplier_title_en", "income_cost"]
@@ -253,6 +223,8 @@ class PriceMate
           :income_cost => item["income_cost"].to_f.round,
           :tech => techs.map{|tech| item[tech].to_s}.reject(&:blank?).join(', ')
         }
+      if counter[h] <= 1
+        formatted_data = prepare_structure(cn, brand, formatted_data)
 
         if offer[:probability] > 0
 
@@ -403,4 +375,36 @@ class PriceMate
     end
     parsed_json
   end
+
+  def self.prepare_structure cn, brand, formatted_data
+
+    # Если нет такого каталожника, создаем
+    unless formatted_data.include?(cn)
+      formatted_data[cn] = {}
+    end
+
+    # Если нет такого производителя, создаем производителя и внутри него структуру
+    unless formatted_data[cn].include? brand.name
+
+      formatted_data[cn][brand.name] = {
+        :titles => {},
+        :manufacturer_origs => {},
+        :catalog_number_origs => {},
+        :weights => {},
+        :min_days => nil,
+        :max_days => nil,
+        :min_cost => nil,
+        :max_cost => nil,
+        :offers => [],
+        :brand => brand,
+        # image_url у всех одинаковый по определению, т.к. берется из price_catalogs
+        # несмотря на то, что на сервере прайсов заполняется по образу weights
+        #:image_url => item["image_url"]
+      }
+    end
+
+    formatted_data
+
+  end
+
 end
