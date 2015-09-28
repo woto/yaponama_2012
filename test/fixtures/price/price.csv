@@ -30,3 +30,6 @@
 38,838383,СИНОНИМ,Название синонима, 828
 32,83-83.83, ОРИГИНАЛ, НАЗВАНИЕ ОРИГИНАЛА, 900
 2,543385,,,100
+5, proverka_search, ПРОИЗВОДИТЕЛЬ, НАЗВАНИЕ, 991
+2, group-test-123, Conglomerate, Name, 4832
+4, group.test.123, Conglomerate child, Another name, 5212

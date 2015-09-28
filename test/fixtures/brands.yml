@@ -130,6 +130,7 @@ ty:
   phantom: false
   creator: first_admin
   brand: toyota
+  sign: <%= Brand.signs['synonym'] %>
 
 mitsubishi:
   name: MITSUBISHI
@@ -185,6 +186,11 @@ hyundai:
   rating: 1000
   phantom: false
   creator: first_admin
+  is_brand: true
+
+hy:
+  name: HY
+  is_brand: true
 
 vag:
   name: VAG
@@ -254,4 +260,12 @@ wanshine:
 
 destroy_test:
   name: Бренд для тестирования удаления связных записей
+  is_brand: true
+
+conglomerate:
+  name: Conglomerate
+
+conglomerate_child:
+  brand: conglomerate
+  name: Conglomerate child
   is_brand: true

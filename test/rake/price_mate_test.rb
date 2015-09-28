@@ -1,6 +1,7 @@
 require 'test_helper'
 
-class PriceMateTest < ActionController::TestCase
+class PriceMateTest < ActiveSupport::TestCase
+
   test 'Сверяем ответы search 1' do
     result = PriceMate.search(Rails.configuration.price['host'], Rails.configuration.price['port'], 'proverka_search', 'ПРОИЗВОДИТ', '0', '0', '0')
     assert_equal({"result_prices"=>[{"ps_absolute_weight_rate"=>0.0, "ps_absolute_buy_rate"=>0.0, "retail_cost"=>743.25, "job_import_job_output_order"=>nil, "unit"=>nil, "income_cost_in_currency_with_weight"=>495.5, "job_import_job_country"=>"Москва", "supplier_inn"=>"Авториф", "supplier_title_full"=>"", "description"=>nil, "md5"=>"3c", "ps_kilo_price"=>0.0, "job_import_job_presence"=>1, "job_title"=>"Прайс", "supplier_title"=>"Авториф", "parts_group"=>nil, "catalog_number_orig"=>"proverka_search", "ps_relative_buy_rate"=>0.5, "ij_income_rate"=>1.0, "currency"=>"1", "job_import_job_delivery_days_declared"=>1, "multiply_factor"=>nil, "weight_grams"=>"0", "title"=>"НАЗВАНИЕ", "id"=>6, "retail_cost_with_discounts"=>495.5, "job_import_job_delivery_summary"=>"Москва", "supplier_kpp"=>"", "created_at"=>nil, "country"=>nil, "price_goodness"=>1.0, "ps_weight_unavailable_rate"=>1.0, "c_weight_value"=>1.0, "income_cost"=>495.5, "updated_at"=>nil, "applicability"=>nil, "processed"=>nil, "catalog_number"=>"PROVERKASEARCH", "job_id"=>1, "job_import_job_country_short"=>"Москва", "minimal_income_cost"=>nil, "supplier_id"=>1, "manufacturer_orig"=>"ПРОИЗВОДИТЕЛЬ", "ps_relative_weight_rate"=>1.0, "supplier_title_en"=>"", "delivery_days_declared"=>0, "image_url"=>nil, "success_percent"=>55, "job_import_job_kilo_price"=>0.0, "job_import_job_delivery_days_average"=>nil, "unit_package"=>nil, "delivery_days_price"=>nil, "bit_original"=>0, "price_setting_id"=>1, "manufacturer"=>"ПРОИЗВОДИТ", "count"=>5, "real_job_id"=>2, "ps_retail_rate"=>"1.5", "c_buy_value"=>1.0, "income_cost_in_currency_without_weight"=>495.5, "external_supplier_id"=>nil, "min_order"=>nil, "external_id"=>nil, "price_cost"=>"991.0", "title_en"=>nil}], "result_replacements"=>[{"catalog_number"=>"PROVERKASEARCH", "yield"=>true, "replacements"=>[], "manufacturer"=>"ПРОИЗВОДИТ"}], "result_message"=>"Ок"}, result)
@@ -80,6 +81,44 @@ class PriceMateTest < ActionController::TestCase
            :offers=>[],
            :brand=> Defaults.brand}}},
       result)
+  end
+
+  test 'PriceMate.fill_offer' do
+    item = {
+      'supplier_title' => 'supplier_title',
+      'supplier_title_full' => 'supplier_title_full',
+      'price_logo_emex' => 'price_logo_emex',
+      'job_title' => 'job_title',
+      'supplier_title_en' => 'supplier_title_en',
+      'income_cost' => 200.75,
+      'job_import_job_country_short' => 'job_import_job_country_short',
+      'job_import_job_delivery_days_declared' => 2,
+      'job_import_job_delivery_days_average' => 3,
+      'success_percent' => 'success_percent',
+      'retail_cost' => 300.05,
+      'count' => 'count',
+      'job_import_job_delivery_summary' => 'job_import_job_delivery_summary',
+      'supplier_id' => 'supplier_id',
+      'price_setting_id' => 'price_setting_id'}
+
+    offer = {
+      :country => "job_import_job_country_short",
+      :min_days => 2,
+      :max_days => 3,
+      :probability => "success_percent",
+      :retail_cost => 300,
+      :count => 'count',
+      :title => '',
+      :delivery => "job_import_job_delivery_summary",
+      :income_cost => 201,
+      :supplier_id => "supplier_id",
+      :price_setting_id => "price_setting_id",
+      :tech => "supplier_title, supplier_title_full, price_logo_emex, job_title, supplier_title_en, 200.75"
+    }
+
+    result = PriceMate.fill_offer(item)
+
+    assert_equal(offer, result)
   end
 
 end

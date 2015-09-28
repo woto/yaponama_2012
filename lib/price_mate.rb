@@ -208,23 +208,9 @@ class PriceMate
       h = cn + " - " + brand.name
       counter[h] += 1
 
-
-        techs = ["supplier_title", "supplier_title_full", "price_logo_emex", "job_title", "supplier_title_en", "income_cost"]
-
-        offer = {
-          :country => item["job_import_job_country_short"],
-          :min_days => [ item["job_import_job_delivery_days_declared"], item["job_import_job_delivery_days_average"] ].compact.min,
-          :max_days => [ item["job_import_job_delivery_days_declared"], item["job_import_job_delivery_days_average"] ].compact.max,
-          :probability => item["success_percent"],
-          :retail_cost => item["retail_cost"].to_f.round,
-          :count => item["count"],
-          :title => '',
-          :delivery => item["job_import_job_delivery_summary"],
-          :income_cost => item["income_cost"].to_f.round,
-          :tech => techs.map{|tech| item[tech].to_s}.reject(&:blank?).join(', ')
-        }
       if counter[h] <= 1
         formatted_data = prepare_structure(cn, brand, formatted_data)
+        offer = fill_offer(item)
 
         if offer[:probability] > 0
 
@@ -337,7 +323,6 @@ class PriceMate
       item.delete "ps_relative_buy_rate"
       item.delete "income_cost_in_currency_without_weight"
       item.delete "created_at"
-      item.delete "price_setting_id"
       item.delete "ij_income_rate"
       item.delete "ps_retail_rate"
       item.delete "min_order"
@@ -354,7 +339,6 @@ class PriceMate
       item.delete "unit"
       item.delete "supplier_kpp"
       item.delete "c_weight_value"
-      item.delete "supplier_id"
       item.delete "ps_absolute_weight_rate"
       item.delete "external_supplier_id"
       item.delete "currency"
@@ -406,5 +390,26 @@ class PriceMate
     formatted_data
 
   end
+
+
+  def self.fill_offer(item)
+    techs = ["supplier_title", "supplier_title_full", "price_logo_emex", "job_title", "supplier_title_en", "income_cost"]
+
+    offer = {
+      :country => item["job_import_job_country_short"],
+      :min_days => [ item["job_import_job_delivery_days_declared"], item["job_import_job_delivery_days_average"] ].compact.min,
+      :max_days => [ item["job_import_job_delivery_days_declared"], item["job_import_job_delivery_days_average"] ].compact.max,
+      :probability => item["success_percent"],
+      :retail_cost => item["retail_cost"].to_f.round,
+      :count => item["count"],
+      :title => '',
+      :delivery => item["job_import_job_delivery_summary"],
+      :income_cost => item["income_cost"].to_f.round,
+      :supplier_id => item["supplier_id"],
+      :price_setting_id => item["price_setting_id"],
+      :tech => techs.map{|tech| item[tech].to_s}.reject(&:blank?).join(', ')
+    }
+  end
+
 
 end
