@@ -177,4 +177,19 @@ class PriceMateTest < ActiveSupport::TestCase
     assert_equal 3, data[:min_days]
   end
 
+  test 'PriceMate.max_days' do
+    data = {}
+    offer = {max_days: 3}
+    data[:max_days] = PriceMate.max_days(data, offer)
+    assert_equal 3, data[:max_days]
+
+    offer = {max_days: 7}
+    data[:max_days] = PriceMate.max_days(data, offer)
+    assert_equal 7, data[:max_days]
+
+    offer = {max_days: 5}
+    data[:max_days] = PriceMate.max_days(data, offer)
+    assert_equal 7, data[:max_days]
+  end
+
 end

@@ -208,15 +208,11 @@ class PriceMate
       h = cn + " - " + brand.name
       counter[h] += 1
 
-      if counter[h] <= 1
+      if counter[h] <= 5
         formatted_data = prepare_structure(cn, brand, formatted_data)
         offer = fill_offer(item)
 
         if offer[:probability] > 0
-          # Макс. кол-во дней
-          comparsion = formatted_data[cn][mf][:max_days].nil? ? [] : [formatted_data[cn][mf][:max_days]]
-          comparsion.push offer[:max_days]
-          formatted_data[cn][mf][:max_days] = comparsion.max
 
           # Мин. цена
           comparsion = formatted_data[cn][mf][:min_cost].nil? ? [] : [formatted_data[cn][mf][:min_cost]]
@@ -254,6 +250,7 @@ class PriceMate
           formatted_data[cn][mf][:manufacturer_origs][manufacturer_orig] += 1
           formatted_data[cn][brand.name][:offers].push(offer)
           formatted_data[cn][brand.name][:min_days] = min_days(formatted_data[cn][brand.name], offer)
+          formatted_data[cn][brand.name][:max_days] = max_days(formatted_data[cn][brand.name], offer)
         end
       end
 
@@ -277,9 +274,7 @@ class PriceMate
       end
       formatted_data.delete(catalog_number) unless cn_scope.any?
     end
-
     formatted_data
-
   end
 
   def self.clear parsed_json
@@ -383,6 +378,13 @@ class PriceMate
     comparsion = data[:min_days].nil? ? [] : [data[:min_days]]
     comparsion.push offer[:min_days]
     comparsion.min
+  end
+  
+  # Макс. кол-во дней
+  def self.max_days(data, offer)
+    comparsion = data[:max_days].nil? ? [] : [data[:max_days]]
+    comparsion.push offer[:max_days]
+    comparsion.max
   end
 
   def self.fill_titles(data, item)
