@@ -60,6 +60,11 @@ class PriceMate
       limit(1).first || Defaults.spare_catalog
   end
 
+  def self.warehouses(formatted_data)
+    # TODO
+    formatted_data
+  end
+
   def self.replacements(formatted_data)
     formatted_data.each do |catalog_number, cn_scope|
       cn_scope.each do |manufacturer, mf_scope|

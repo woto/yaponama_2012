@@ -75,6 +75,10 @@ module ProductsSearch
         @formatted_data = PriceMate.process @parsed_json
         plog.debug '/Большой цикл обработки JSON'
 
+        plog.debug 'Warehouse'
+        @formatted_data = PriceMate.warehouses @formatted_data
+        plog.debug '/Warehouse'
+
         @replacements = @parsed_json['result_replacements']
 
         plog.debug 'Сортировка по рейтингам брендов'
