@@ -214,7 +214,9 @@ class PriceMate
       counter[h] += 1
 
       if counter[h] <= 5
-        formatted_data = prepare_structure(cn, brand, formatted_data)
+
+        formatted_data[cn] = {} unless formatted_data.key?(cn)
+        formatted_data[cn][brand.name] = {:brand => brand } unless formatted_data[cn].key?(brand.name)
         offer = fill_offer(item)
 
         if offer[:probability] > 0
@@ -235,7 +237,7 @@ class PriceMate
           formatted_data[cn][mf][:manufacturer_origs][manufacturer_orig] = 1
         else
           formatted_data[cn][mf][:manufacturer_origs][manufacturer_orig] += 1
-          formatted_data[cn][brand.name][:offers].push(offer)
+          (formatted_data[cn][brand.name][:offers] ||= []) << offer
           formatted_data[cn][brand.name][:min_days] = min_days(formatted_data[cn][brand.name], offer)
           formatted_data[cn][brand.name][:max_days] = max_days(formatted_data[cn][brand.name], offer)
           formatted_data[cn][brand.name][:min_cost] = min_cost(formatted_data[cn][brand.name], offer)
@@ -323,37 +325,6 @@ class PriceMate
       item.delete "real_job_id"
     end
     parsed_json
-  end
-
-  def self.prepare_structure cn, brand, formatted_data
-
-    # Если нет такого каталожника, создаем
-    unless formatted_data.include?(cn)
-      formatted_data[cn] = {}
-    end
-
-    # Если нет такого производителя, создаем производителя и внутри него структуру
-    unless formatted_data[cn].include? brand.name
-
-      formatted_data[cn][brand.name] = {
-        :titles => {},
-        :manufacturer_origs => {},
-        :catalog_number_origs => {},
-        :weights => {},
-        #:min_days => nil,
-        #:max_days => nil,
-        #:min_cost => nil,
-        #:max_cost => nil,
-        :offers => [],
-        :brand => brand,
-        # image_url у всех одинаковый по определению, т.к. берется из price_catalogs
-        # несмотря на то, что на сервере прайсов заполняется по образу weights
-        #:image_url => item["image_url"]
-      }
-    end
-
-    formatted_data
-
   end
 
   # Мин. кол-во дней

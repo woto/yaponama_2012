@@ -18,61 +18,6 @@ class PriceMateTest < ActiveSupport::TestCase
     Rails.configuration.price['host'] = old
   end
 
-  test 'Проверяем PriceMate.prepare_structure передавая пустой хеш' do
-    hash = {}
-    result = PriceMate.prepare_structure('1', Defaults.brand, hash)
-    assert_equal(
-      {"1"=>
-        {"ОРИГИНАЛ"=>
-          {:titles=>{},
-           :manufacturer_origs=>{},
-           :catalog_number_origs=>{},
-           :weights=>{},
-           :offers=>[],
-           :brand=> Defaults.brand}}},
-      result)
-  end
-
-  test 'Проверяем PriceMate.prepare_structure с уже заполненным хешем с другим артикулом' do
-    hash = {'эмуляция другого артикула' => { 'эмуляция другого производителя' => {}}}
-    result = PriceMate.prepare_structure('1', Defaults.brand, hash)
-    assert_equal(
-      {'эмуляция другого артикула' => { 'эмуляция другого производителя' => {}},
-      "1"=>
-        {"ОРИГИНАЛ"=>
-          {:titles=>{},
-           :manufacturer_origs=>{},
-           :catalog_number_origs=>{},
-           :weights=>{},
-           :offers=>[],
-           :brand=> Defaults.brand}}},
-      result)
-  end
-
-  test 'Проверяем PriceMate.prepare_structure с уже заполненным таким же артикулом и производителем' do
-    hash = {'1' => { 'ОРИГИНАЛ' => {}}}
-    result = PriceMate.prepare_structure('1', Defaults.brand, hash)
-    assert_equal(
-      {'1' => { 'ОРИГИНАЛ' => {}}},
-      result)
-  end
-
-  test 'Проверяем PriceMate.prepare_structure с уже заполненным таким же артикулом, но другим производителем' do
-    hash = {'1' => { 'эмуляция другого производителя' => {}}}
-    result = PriceMate.prepare_structure('1', Defaults.brand, hash)
-    assert_equal(
-      {"1"=> {
-        'эмуляция другого производителя' => {},
-        "ОРИГИНАЛ"=>
-          {:titles=>{},
-           :manufacturer_origs=>{},
-           :catalog_number_origs=>{},
-           :weights=>{},
-           :offers=>[],
-           :brand=> Defaults.brand}}},
-      result)
-  end
-
   test 'PriceMate.fill_offer' do
     item = {
       'supplier_title' => 'supplier_title',
