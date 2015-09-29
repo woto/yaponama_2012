@@ -213,14 +213,6 @@ class PriceMate
         offer = fill_offer(item)
 
         if offer[:probability] > 0
-
-          formatted_data[cn][mf][:offers].push(offer)
-
-          # Мин. кол-во дней
-          comparsion = formatted_data[cn][mf][:min_days].nil? ? [] : [formatted_data[cn][mf][:min_days]]
-          comparsion.push offer[:min_days]
-          formatted_data[cn][mf][:min_days] = comparsion.min
-
           # Макс. кол-во дней
           comparsion = formatted_data[cn][mf][:max_days].nil? ? [] : [formatted_data[cn][mf][:max_days]]
           comparsion.push offer[:max_days]
@@ -260,6 +252,8 @@ class PriceMate
           formatted_data[cn][mf][:manufacturer_origs][manufacturer_orig] = 1
         else
           formatted_data[cn][mf][:manufacturer_origs][manufacturer_orig] += 1
+          formatted_data[cn][brand.name][:offers].push(offer)
+          formatted_data[cn][brand.name][:min_days] = min_days(formatted_data[cn][brand.name], offer)
         end
       end
 
@@ -384,6 +378,12 @@ class PriceMate
 
   end
 
+  # Мин. кол-во дней
+  def self.min_days(data, offer)
+    comparsion = data[:min_days].nil? ? [] : [data[:min_days]]
+    comparsion.push offer[:min_days]
+    comparsion.min
+  end
 
   def self.fill_titles(data, item)
     ["title", "title_en", "description", "applicability", "parts_group"].each do |field_title|

@@ -118,7 +118,7 @@ class ProductsControllerTest < ActionController::TestCase
 
   test 'Ищем замены 2 без производителя, находим и TOYOTA и TY сгруппированным' do
     get :new, catalog_number: 2, replacements: '1'
-    assert_match '1 - 1 руб.', response.body
+    assert_match '1 - 17 руб.', response.body
   end
 
   test 'Ищем деталь grouptest123, находим и group.test.123 - Conglomerate child, и group-test-123 - Conglomerate сгруппированными с минимальной ценой (группировка происходит на стороне интернет магазина)' do
@@ -229,6 +229,14 @@ class ProductsControllerTest < ActionController::TestCase
       assert_select 'h4', text: 'Просматриваемый вами товар входит в состав следующих товаров:'
       assert_select 'a[href="/user/products/new?catalog_number=2102"]'
     end
+  end
+
+  test 'PriceMate.min_days and PriceMate.max_days' do
+    brand = Defaults.brand
+    spare_catalog = Defaults.spare_catalog
+    get :new, catalog_number: 'min_max_days'
+    sample = [["MINMAXDAYS", [["ОРИГИНАЛ", {:titles=>{"TITLE"=>2}, :manufacturer_origs=>{}, :catalog_number_origs=>{"MIN_MAX_DAYS"=>2}, :weights=>{}, :min_days=>1, :max_days=>2, :min_cost=>2423, :max_cost=>7842, :offers=>[{:country=>"Москва", :min_days=>1, :max_days=>1, :probability=>55, :retail_cost=>2423, :count=>5, :title=>"", :delivery=>"Москва", :income_cost=>1616, :supplier_id=>1, :price_setting_id=>1, :tech=>"Авториф, Прайс, 1615.5"}, {:country=>"Москва", :min_days=>2, :max_days=>2, :probability=>55, :retail_cost=>7842, :count=>5, :title=>"", :delivery=>"Москва", :income_cost=>7842, :supplier_id=>1, :price_setting_id=>2, :tech=>"Авториф, Прайс 2, 7842.0"}], :brand=>brand, :title=>"TITLE", :keyword=>"MINMAXDAYS", :phrases=>[], :catalog=>spare_catalog, :replacements=>{:new_num_from=>[], :new_num_to=>[], :same_num_from=>[], :same_num_to=>[], :repl_num_from=>[], :repl_num_to=>[], :part_num_from=>[], :part_num_to=>[]}}]]]]
+    assert_equal(sample, assigns(:formatted_data))
   end
 
 end

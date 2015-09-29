@@ -162,4 +162,19 @@ class PriceMateTest < ActiveSupport::TestCase
       }}, data)
   end
 
+  test 'PriceMate.min_days' do
+    offer = {min_days: 5}
+    data = {}
+    data[:min_days] = PriceMate.min_days(data, offer)
+    assert_equal 5, data[:min_days]
+
+    offer = {min_days: 3}
+    data[:min_days] = PriceMate.min_days(data, offer)
+    assert_equal 3, data[:min_days]
+
+    offer = {min_days: 7}
+    data[:min_days] = PriceMate.min_days(data, offer)
+    assert_equal 3, data[:min_days]
+  end
+
 end
