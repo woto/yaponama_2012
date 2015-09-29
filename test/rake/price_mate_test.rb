@@ -228,6 +228,19 @@ class PriceMateTest < ActiveSupport::TestCase
     assert_equal({'123.QWE' => 1, '123-QWE' => 2}, res)
   end
 
+  test 'PriceMate.cleanup' do
+    data = {
+      'Catalog Number 1' => {
+        'Brand' => {offers: []}},
+      'Catalog Number 2' => {
+        'Brand' => {offers: [{}]}}}
+    sample = {
+      'Catalog Number 2' => {
+        'Brand' => {offers: [{}]}}}
+    res = PriceMate.cleanup(data)
+    assert_equal sample, data
+  end
+
   test 'PriceMate.warehouses' do
     skip
   end

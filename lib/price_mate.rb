@@ -209,23 +209,19 @@ class PriceMate
 
       cn = item["catalog_number"].to_s
       brand = BrandMate.find_or_create_conglomerate item["manufacturer"]
-
       h = cn + " - " + brand.name
-      counter[h] += 1
 
-      if counter[h] <= 5
+      formatted_data[cn] = {} unless formatted_data.key?(cn)
+      formatted_data[cn][brand.name] = {:brand => brand, :offers => []} unless formatted_data[cn].key?(brand.name)
 
-        formatted_data[cn] = {} unless formatted_data.key?(cn)
-        formatted_data[cn][brand.name] = {:brand => brand } unless formatted_data[cn].key?(brand.name)
+      if counter[h] <= 5 && item["success_percent"] > 0
+        counter[h] += 1
         offer = fill_offer(item)
-
-        if offer[:probability] > 0
-          (formatted_data[cn][brand.name][:offers] ||= []) << offer
-          formatted_data[cn][brand.name][:min_days] = min_days(formatted_data[cn][brand.name], offer)
-          formatted_data[cn][brand.name][:max_days] = max_days(formatted_data[cn][brand.name], offer)
-          formatted_data[cn][brand.name][:min_cost] = min_cost(formatted_data[cn][brand.name], offer)
-          formatted_data[cn][brand.name][:max_cost] = max_cost(formatted_data[cn][brand.name], offer)
-        end
+        formatted_data[cn][brand.name][:offers] << offer
+        formatted_data[cn][brand.name][:min_days] = min_days(formatted_data[cn][brand.name], offer)
+        formatted_data[cn][brand.name][:max_days] = max_days(formatted_data[cn][brand.name], offer)
+        formatted_data[cn][brand.name][:min_cost] = min_cost(formatted_data[cn][brand.name], offer)
+        formatted_data[cn][brand.name][:max_cost] = max_cost(formatted_data[cn][brand.name], offer)
       end
 
       formatted_data[cn][brand.name][:titles] = fill_titles(formatted_data[cn][brand.name], item)
@@ -238,6 +234,7 @@ class PriceMate
 
   end
 
+  def self.cleanup(formatted_data)
     formatted_data.each do |catalog_number, cn_scope|
       cn_scope.each do |manufacturer, mf_scope|
         formatted_data[catalog_number].delete(manufacturer) unless mf_scope[:offers].any?
