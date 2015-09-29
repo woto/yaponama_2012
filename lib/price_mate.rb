@@ -220,16 +220,6 @@ class PriceMate
         offer = fill_offer(item)
 
         if offer[:probability] > 0
-      catalog_number_orig = item["catalog_number_orig"].to_s.mb_chars.upcase.to_s
-      # Запоминаем количество повторений одного и того же оригинального написания кат. номера
-      if catalog_number_orig.present? && catalog_number_orig != cn
-        unless formatted_data[cn][mf][:catalog_number_origs][catalog_number_orig]
-          formatted_data[cn][mf][:catalog_number_origs][catalog_number_orig] = 1
-        else
-          formatted_data[cn][mf][:catalog_number_origs][catalog_number_orig] += 1
-        end
-      end
-
           (formatted_data[cn][brand.name][:offers] ||= []) << offer
           formatted_data[cn][brand.name][:min_days] = min_days(formatted_data[cn][brand.name], offer)
           formatted_data[cn][brand.name][:max_days] = max_days(formatted_data[cn][brand.name], offer)
@@ -239,6 +229,7 @@ class PriceMate
       end
 
       formatted_data[cn][brand.name][:titles] = fill_titles(formatted_data[cn][brand.name], item)
+      formatted_data[cn][brand.name][:catalog_number_origs] = catalog_number_origs(formatted_data[cn][brand.name], cn, item)
       formatted_data[cn][brand.name][:manufacturer_origs] = manufacturer_origs(formatted_data[cn][brand.name], brand.name, item)
       formatted_data[cn][brand.name][:weights] = weights(formatted_data[cn][brand.name], item)
     end
@@ -366,13 +357,27 @@ class PriceMate
   end
 
 
+  # Запоминаем количество повторений одного и того же оригинального написания кат. номера
+  def self.catalog_number_origs(data, cn, item)
+    data[:catalog_number_origs] = {} unless data.key?(:catalog_number_origs)
+    catalog_number_orig = item["catalog_number_orig"].to_s.mb_chars.upcase.to_s
+
+    if catalog_number_orig.present? && catalog_number_orig != cn.to_s.mb_chars.upcase.to_s
+      unless data[:catalog_number_origs][catalog_number_orig]
+        data[:catalog_number_origs][catalog_number_orig] = 1
+      else
+        data[:catalog_number_origs][catalog_number_orig] += 1
+      end
+    end
+    data[:catalog_number_origs]
+  end
 
   # Запоминаем количество повторений одного и того же оригинального производителя
   def self.manufacturer_origs(data, brand_name, item)
     data[:manufacturer_origs] = {} unless data.key?(:manufacturer_origs)
     manufacturer_orig = item["manufacturer_orig"].to_s.mb_chars.upcase.to_s
 
-    if manufacturer_orig.present? && manufacturer_orig != brand_name.to_s.mb_chars.upcase
+    if manufacturer_orig.present? && manufacturer_orig != brand_name.to_s.mb_chars.upcase.to_s
       unless data[:manufacturer_origs][manufacturer_orig]
         data[:manufacturer_origs][manufacturer_orig] = 1
       else

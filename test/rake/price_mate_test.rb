@@ -203,6 +203,31 @@ class PriceMateTest < ActiveSupport::TestCase
     assert_equal({'MANUFACTURER 1' => 1, 'MANUFACTURER 2' => 2}, res)
   end
 
+  test 'PriceMate.catalog_number_origs' do
+    data = {}
+    item = {}
+    catalog_number = '123QWE'
+
+    res = PriceMate.catalog_number_origs(data, catalog_number, item)
+    assert_equal({}, res)
+
+    item = {'catalog_number_orig' => '123.qwe'}
+    res = PriceMate.catalog_number_origs(data, catalog_number, item)
+    assert_equal({'123.QWE' => 1}, res)
+
+    item = {'catalog_number_orig' => '123qwe'}
+    res = PriceMate.catalog_number_origs(data, catalog_number, item)
+    assert_equal({'123.QWE' => 1}, res)
+
+    item = {'catalog_number_orig' => '123-qwe'}
+    res = PriceMate.catalog_number_origs(data, catalog_number, item)
+    assert_equal({'123.QWE' => 1, '123-QWE' => 1}, res)
+
+    item = {'catalog_number_orig' => '123-qwe'}
+    res = PriceMate.catalog_number_origs(data, catalog_number, item)
+    assert_equal({'123.QWE' => 1, '123-QWE' => 2}, res)
+  end
+
   test 'PriceMate.warehouses' do
     skip
   end
