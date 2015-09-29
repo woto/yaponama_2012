@@ -28,10 +28,6 @@ class PriceMateTest < ActiveSupport::TestCase
            :manufacturer_origs=>{},
            :catalog_number_origs=>{},
            :weights=>{},
-           :min_days=>nil,
-           :max_days=>nil,
-           :min_cost=>nil,
-           :max_cost=>nil,
            :offers=>[],
            :brand=> Defaults.brand}}},
       result)
@@ -48,10 +44,6 @@ class PriceMateTest < ActiveSupport::TestCase
            :manufacturer_origs=>{},
            :catalog_number_origs=>{},
            :weights=>{},
-           :min_days=>nil,
-           :max_days=>nil,
-           :min_cost=>nil,
-           :max_cost=>nil,
            :offers=>[],
            :brand=> Defaults.brand}}},
       result)
@@ -76,10 +68,6 @@ class PriceMateTest < ActiveSupport::TestCase
            :manufacturer_origs=>{},
            :catalog_number_origs=>{},
            :weights=>{},
-           :min_days=>nil,
-           :max_days=>nil,
-           :min_cost=>nil,
-           :max_cost=>nil,
            :offers=>[],
            :brand=> Defaults.brand}}},
       result)
@@ -163,8 +151,9 @@ class PriceMateTest < ActiveSupport::TestCase
   end
 
   test 'PriceMate.min_days' do
-    offer = {min_days: 5}
     data = {}
+
+    offer = {min_days: 5}
     data[:min_days] = PriceMate.min_days(data, offer)
     assert_equal 5, data[:min_days]
 
@@ -179,6 +168,7 @@ class PriceMateTest < ActiveSupport::TestCase
 
   test 'PriceMate.max_days' do
     data = {}
+
     offer = {max_days: 3}
     data[:max_days] = PriceMate.max_days(data, offer)
     assert_equal 3, data[:max_days]
@@ -190,6 +180,38 @@ class PriceMateTest < ActiveSupport::TestCase
     offer = {max_days: 5}
     data[:max_days] = PriceMate.max_days(data, offer)
     assert_equal 7, data[:max_days]
+  end
+
+  test 'PriceMate.min_cost' do
+    data = {}
+
+    offer = {retail_cost: 500}
+    data[:min_cost] = PriceMate.min_cost(data, offer)
+    assert_equal 500, data[:min_cost]
+
+    offer = {retail_cost: 300}
+    data[:min_cost] = PriceMate.min_cost(data, offer)
+    assert_equal 300, data[:min_cost]
+
+    offer = {retail_cost: 400}
+    data[:min_cost] = PriceMate.min_cost(data, offer)
+    assert_equal 300, data[:min_cost]
+  end
+
+  test 'PriceMate.max_cost' do
+    data = {}
+
+    offer = {retail_cost: 300}
+    data[:max_cost] = PriceMate.max_cost(data, offer)
+    assert_equal 300, data[:max_cost]
+
+    offer = {retail_cost: 500}
+    data[:max_cost] = PriceMate.max_cost(data, offer)
+    assert_equal 500, data[:max_cost]
+
+    offer = {retail_cost: 400}
+    data[:max_cost] = PriceMate.max_cost(data, offer)
+    assert_equal 500, data[:max_cost]
   end
 
 end

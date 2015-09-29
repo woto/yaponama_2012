@@ -213,22 +213,6 @@ class PriceMate
         offer = fill_offer(item)
 
         if offer[:probability] > 0
-
-          # Мин. цена
-          comparsion = formatted_data[cn][mf][:min_cost].nil? ? [] : [formatted_data[cn][mf][:min_cost]]
-          comparsion.push offer[:retail_cost]
-          formatted_data[cn][mf][:min_cost] = comparsion.min
-
-          # Макс. цена
-          comparsion = formatted_data[cn][mf][:max_cost].nil? ? [] : [formatted_data[cn][mf][:max_cost]]
-          comparsion.push offer[:retail_cost]
-          formatted_data[cn][mf][:max_cost] = comparsion.max
-        end
-
-      end
-        end
-      end
-
       manufacturer_orig = item["manufacturer_orig"].to_s.mb_chars.upcase.to_s
       catalog_number_orig = item["catalog_number_orig"].to_s.mb_chars.upcase.to_s
       weight = ((tmp = item["weight_grams"].to_f) > 0 ? ((tmp + 100) / 1000).round(1) : nil)
@@ -251,6 +235,8 @@ class PriceMate
           formatted_data[cn][brand.name][:offers].push(offer)
           formatted_data[cn][brand.name][:min_days] = min_days(formatted_data[cn][brand.name], offer)
           formatted_data[cn][brand.name][:max_days] = max_days(formatted_data[cn][brand.name], offer)
+          formatted_data[cn][brand.name][:min_cost] = min_cost(formatted_data[cn][brand.name], offer)
+          formatted_data[cn][brand.name][:max_cost] = max_cost(formatted_data[cn][brand.name], offer)
         end
       end
 
@@ -267,6 +253,9 @@ class PriceMate
       formatted_data[cn][brand.name][:titles] = fill_titles(formatted_data[cn][brand.name], item)
     end
 
+    formatted_data
+
+  end
 
     formatted_data.each do |catalog_number, cn_scope|
       cn_scope.each do |manufacturer, mf_scope|
@@ -357,10 +346,10 @@ class PriceMate
         :manufacturer_origs => {},
         :catalog_number_origs => {},
         :weights => {},
-        :min_days => nil,
-        :max_days => nil,
-        :min_cost => nil,
-        :max_cost => nil,
+        #:min_days => nil,
+        #:max_days => nil,
+        #:min_cost => nil,
+        #:max_cost => nil,
         :offers => [],
         :brand => brand,
         # image_url у всех одинаковый по определению, т.к. берется из price_catalogs
@@ -384,6 +373,20 @@ class PriceMate
   def self.max_days(data, offer)
     comparsion = data[:max_days].nil? ? [] : [data[:max_days]]
     comparsion.push offer[:max_days]
+    comparsion.max
+  end
+
+  # Мин. цена
+  def self.min_cost(data, offer)
+    comparsion = data[:min_cost].nil? ? [] : [data[:min_cost]]
+    comparsion.push offer[:retail_cost]
+    comparsion.min
+  end
+
+  # Макс. цена
+  def self.max_cost(data, offer)
+    comparsion = data[:max_cost].nil? ? [] : [data[:max_cost]]
+    comparsion.push offer[:retail_cost]
     comparsion.max
   end
 
@@ -420,6 +423,5 @@ class PriceMate
       :tech => techs.map{|tech| item[tech].to_s}.reject(&:blank?).join(', ')
     }
   end
-
 
 end
