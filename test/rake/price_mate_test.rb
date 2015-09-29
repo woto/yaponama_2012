@@ -178,6 +178,30 @@ class PriceMateTest < ActiveSupport::TestCase
     assert_equal({0.1 => 2, 0.2 => 1}, res)
   end
 
+  test 'PriceMate.manufacturer_origs' do
+    data = {}
+    item = {}
+    brand_name = 'Brand'
+
+    res = PriceMate.manufacturer_origs(data, brand_name, item)
+    assert_equal({}, res)
+
+    item = {'manufacturer_orig' => 'Manufacturer 1'}
+    res = PriceMate.manufacturer_origs(data, brand_name, item)
+    assert_equal({'MANUFACTURER 1' => 1}, res)
+
+    item = {'manufacturer_orig' => 'Brand'}
+    res = PriceMate.manufacturer_origs(data, brand_name, item)
+    assert_equal({'MANUFACTURER 1' => 1}, res)
+
+    item = {'manufacturer_orig' => 'Manufacturer 2'}
+    res = PriceMate.manufacturer_origs(data, brand_name, item)
+    assert_equal({'MANUFACTURER 1' => 1, 'MANUFACTURER 2' => 1}, res)
+
+    item = {'manufacturer_orig' => 'Manufacturer 2'}
+    res = PriceMate.manufacturer_origs(data, brand_name, item)
+    assert_equal({'MANUFACTURER 1' => 1, 'MANUFACTURER 2' => 2}, res)
+  end
 
   test 'PriceMate.warehouses' do
     skip

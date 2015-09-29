@@ -124,7 +124,7 @@ class ProductsControllerTest < ActionController::TestCase
   test 'Ищем деталь grouptest123, находим и group.test.123 - Conglomerate child, и group-test-123 - Conglomerate сгруппированными с минимальной ценой (группировка происходит на стороне интернет магазина)' do
     get :new, catalog_number: 'grouptest123'
     assert_select 'b', text: 'Conglomerate'
-    assert_select 'small', text: '(CONGLOMERATE, CONGLOMERATE CHILD)'
+    assert_select 'small', text: '(CONGLOMERATE CHILD)'
     assert_select 'b', text: 'GROUPTEST123'
     assert_select 'small', text: '(GROUP-TEST-123, GROUP.TEST.123)'
     assert_select '*', text: /3 624 руб/

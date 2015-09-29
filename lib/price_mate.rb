@@ -220,7 +220,6 @@ class PriceMate
         offer = fill_offer(item)
 
         if offer[:probability] > 0
-      manufacturer_orig = item["manufacturer_orig"].to_s.mb_chars.upcase.to_s
       catalog_number_orig = item["catalog_number_orig"].to_s.mb_chars.upcase.to_s
       # Запоминаем количество повторений одного и того же оригинального написания кат. номера
       if catalog_number_orig.present? && catalog_number_orig != cn
@@ -231,12 +230,6 @@ class PriceMate
         end
       end
 
-      # Запоминаем количество повторений одного и того же оригинального производителя
-      if manufacturer_orig.present? && manufacturer_orig != mf
-        unless formatted_data[cn][mf][:manufacturer_origs][manufacturer_orig]
-          formatted_data[cn][mf][:manufacturer_origs][manufacturer_orig] = 1
-        else
-          formatted_data[cn][mf][:manufacturer_origs][manufacturer_orig] += 1
           (formatted_data[cn][brand.name][:offers] ||= []) << offer
           formatted_data[cn][brand.name][:min_days] = min_days(formatted_data[cn][brand.name], offer)
           formatted_data[cn][brand.name][:max_days] = max_days(formatted_data[cn][brand.name], offer)
@@ -246,6 +239,7 @@ class PriceMate
       end
 
       formatted_data[cn][brand.name][:titles] = fill_titles(formatted_data[cn][brand.name], item)
+      formatted_data[cn][brand.name][:manufacturer_origs] = manufacturer_origs(formatted_data[cn][brand.name], brand.name, item)
       formatted_data[cn][brand.name][:weights] = weights(formatted_data[cn][brand.name], item)
     end
 
@@ -356,6 +350,8 @@ class PriceMate
   end
 
   def self.fill_titles(data, item)
+    data[:titles] = {} unless data.key?(:titles)
+
     ["title", "title_en", "description", "applicability", "parts_group"].each do |field_title|
       if item[field_title].present?
         title = item[field_title].to_s.mb_chars.upcase.to_s
@@ -370,6 +366,21 @@ class PriceMate
   end
 
 
+
+  # Запоминаем количество повторений одного и того же оригинального производителя
+  def self.manufacturer_origs(data, brand_name, item)
+    data[:manufacturer_origs] = {} unless data.key?(:manufacturer_origs)
+    manufacturer_orig = item["manufacturer_orig"].to_s.mb_chars.upcase.to_s
+
+    if manufacturer_orig.present? && manufacturer_orig != brand_name.to_s.mb_chars.upcase
+      unless data[:manufacturer_origs][manufacturer_orig]
+        data[:manufacturer_origs][manufacturer_orig] = 1
+      else
+        data[:manufacturer_origs][manufacturer_orig] += 1
+      end
+    end
+    data[:manufacturer_origs]
+  end
 
   # Запоминаем количество повторений одного и того же веса
   def self.weights(data, item)
