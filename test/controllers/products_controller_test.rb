@@ -239,4 +239,15 @@ class ProductsControllerTest < ActionController::TestCase
     assert_equal(sample, assigns(:formatted_data))
   end
 
+  test 'Проверяем отображение сроков PriceMate.min_days and PriceMate.max_days' do
+    get :new, catalog_number: 'min_max_days', replacements: '1'
+    assert_select '*', /1 - 2 дн./
+  end
+
+  test 'PriceMate.weights' do
+    get :new, catalog_number: 'WEIGHTGRAMS'
+    assert_select 'h3', 'Сколько весит'
+    assert_select '*', /Масса: 0.5 кг./
+  end
+
 end

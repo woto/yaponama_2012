@@ -1,4 +1,4 @@
-Количество, Каталожный номер, Производитель, Название, Цена, title_en, description, applicability, parts_group
+Количество, Каталожный номер, Производитель, Название, Цена, title_en, description, applicability, parts_group, weight_grams
 2, s4 005, Bosch, Стартерная аккумуляторная батарея S4, 5500
 2, 0092S40050, Bosch, Аккумуляторная батарея S4, 5501
 500, Ба17-3414029, БЗАК, Комплект шарниров рулевой трапеции в сборе, 1395.10
@@ -35,3 +35,6 @@
 4, group.test.123, Conglomerate child, Another name, 5212
 3, titles-test, brand, title, 39, title_en, description, applicability, parts_group
 5, min_max_days,, title, 3231
+1, weight_grams, brand, title, 1,,,,,500
+3, weight_grams, brand, title, 1,,,,,455
+3, weight_grams, brand, title, 1,,,,,500

@@ -214,4 +214,23 @@ class PriceMateTest < ActiveSupport::TestCase
     assert_equal 500, data[:max_cost]
   end
 
+  test 'PriceMate.weights' do
+    data = {}
+    item = {}
+    res = PriceMate.weights(data, item)
+    assert_equal({}, res)
+
+    item = {'weight_grams' => 100}
+    res = PriceMate.weights(data, item)
+    assert_equal({0.1 => 1}, res)
+
+    item = {'weight_grams' => 200}
+    res = PriceMate.weights(data, item)
+    assert_equal({0.1 => 1, 0.2 => 1}, res)
+
+    item = {'weight_grams' => 100}
+    res = PriceMate.weights(data, item)
+    assert_equal({0.1 => 2, 0.2 => 1}, res)
+  end
+
 end

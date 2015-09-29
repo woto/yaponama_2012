@@ -215,8 +215,6 @@ class PriceMate
         if offer[:probability] > 0
       manufacturer_orig = item["manufacturer_orig"].to_s.mb_chars.upcase.to_s
       catalog_number_orig = item["catalog_number_orig"].to_s.mb_chars.upcase.to_s
-      weight = ((tmp = item["weight_grams"].to_f) > 0 ? ((tmp + 100) / 1000).round(1) : nil)
-
       # Запоминаем количество повторений одного и того же оригинального написания кат. номера
       if catalog_number_orig.present? && catalog_number_orig != cn
         unless formatted_data[cn][mf][:catalog_number_origs][catalog_number_orig]
@@ -240,17 +238,8 @@ class PriceMate
         end
       end
 
-      # Запоминаем количество повторений одного и того же веса
-      if weight.present?
-        unless formatted_data[cn][mf][:weights][weight]
-          formatted_data[cn][mf][:weights][weight] = 1
-        else
-          formatted_data[cn][mf][:weights][weight] += 1
-        end
-      end
-
-      
       formatted_data[cn][brand.name][:titles] = fill_titles(formatted_data[cn][brand.name], item)
+      formatted_data[cn][brand.name][:weights] = weights(formatted_data[cn][brand.name], item)
     end
 
     formatted_data
@@ -404,6 +393,23 @@ class PriceMate
     data[:titles]
   end
 
+
+
+  # Запоминаем количество повторений одного и того же веса
+  def self.weights(data, item)
+    data[:weights] = {} unless data.key?(:weights)
+    weight = item["weight_grams"].to_f
+    weight = weight > 0 ? (weight / 1000).round(1) : nil
+
+    if weight.present?
+      unless data[:weights][weight]
+        data[:weights][weight] = 1
+      else
+        data[:weights][weight] += 1
+      end
+    end
+    data[:weights]
+  end
 
   def self.fill_offer(item)
     techs = ["supplier_title", "supplier_title_full", "price_logo_emex", "job_title", "supplier_title_en", "income_cost"]
