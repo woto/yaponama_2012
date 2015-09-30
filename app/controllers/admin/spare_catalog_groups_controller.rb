@@ -7,4 +7,10 @@ class Admin::SpareCatalogGroupsController < ApplicationController
     @resource_class = SpareCatalogGroup
   end
 
+  def find_resources
+    super
+    @q = @resources.ransack(params[:q])
+    @resources = @q.result(distinct: true)
+  end
+
 end
