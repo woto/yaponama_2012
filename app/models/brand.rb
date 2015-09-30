@@ -25,6 +25,12 @@ class Brand < ActiveRecord::Base
   end
 
   validate do
+    if self.name == brand.try(:name)
+      errors[:brand] << 'имя родительского бренда должно отличаться от создаваемого'
+    end
+  end
+
+  validate do
     if sign.nil? ^ brand.nil?
       errors[:base] << 'В случае когда заполняется родительский бренд или признак принадлежности родительскому бренду, то должен быть заполнен и второй параметр'
     end

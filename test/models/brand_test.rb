@@ -126,5 +126,11 @@ class BrandTest < ActiveSupport::TestCase
     assert_equal ["У conglomerate не может быть родительский бренд, у которого так же выставлен conglomerate"], brand3.errors[:base]
   end
 
+  test 'Дополнительная валидация на уникальность имени и родительского имени' do
+    brand = Brand.new(name: 'Brand', brand: Brand.new(name: 'Brand'))
+    refute brand.valid?
+    assert_equal ['имя родительского бренда должно отличаться от создаваемого'], brand.errors[:brand]
+  end
+
 
 end
