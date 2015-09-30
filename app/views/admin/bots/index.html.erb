@@ -45,6 +45,7 @@
                 <%= r.id %> <br />
                 <%= link_to "Просмотр", admin_bot_path(r, return_path: request.fullpath) %> <br />
                 <%= link_to "Редактирование", edit_admin_bot_path(r, return_path: request.fullpath) %> <br />
+                <%= link_to "Удалить", polymorphic_path([:admin, resource], return_path: request.fullpath), method: :delete %>
                 <%= link_to 'Предпросмотр правила', preview_admin_bot_path(r, return_path: request.fullpath) %>
               </td>
               <td> <%= r.title %> </td>
