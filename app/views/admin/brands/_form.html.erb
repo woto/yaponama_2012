@@ -3,7 +3,7 @@
   <%= f.error_notification %>
 
   <%= f.input :name %>
-  <%= f.input :brand, as: :select2, input_html: {data: {manufacturer: '0'}}, placeholder: 'Выберите или добавьте нового производителя'  %>
+  <%= f.input :brand, as: :select2, placeholder: 'Выберите или добавьте нового производителя'  %>
   <%= f.input :sign, collection: Brand.signs, value_method: :first, label_method: :first, include_blank: true %>
   <%= f.input :image, as: :image_field %>
   <%= f.input :rating %>

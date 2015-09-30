@@ -53,7 +53,7 @@ class BrandTest < ActiveSupport::TestCase
   end
 
   test 'Конгломерат может быть is_brand' do
-    brand = Brand.new(name: 'Brand', is_brand: true, sign: Brand.signs[:conglomerate], brand: Brand.new(name: 'Brand'))
+    brand = Brand.new(name: 'Brand 1', is_brand: true, sign: Brand.signs[:conglomerate], brand: Brand.new(name: 'Brand 2'))
     assert brand.valid?
   end
 
