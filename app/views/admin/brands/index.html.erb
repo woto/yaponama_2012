@@ -17,6 +17,8 @@
     <%= search_form_for(@q, url: url_for(action: :index), html: {class: 'form-inline'}) do |f| %>
       <%= f.input :name_eq, label: false, placeholder: 'Производитель' %>
       <%= f.input :brand_name_eq, label: false, placeholder: 'Родительский производитель' %>
+      <%= f.input :sign_eq, collection: Brand.signs, as: :select, label: false, placeholder: 'Признак принадлежности'%>
+      <%= f.input :is_brand_true, as: :select, label: false, placeholder: 'Выпускает автомобили' %>
       <%= f.button :submit, 'Поиск' %>
     <% end %>
   <% end %>

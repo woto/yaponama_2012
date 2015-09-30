@@ -178,13 +178,13 @@ child1_synonym:
 
 child1_conglomerate:
   brand: child1_child2
-  name: 'Child 1'
+  name: 'Child 1 conglomerate'
   is_brand: true
   sign: <%= Brand.signs[:conglomerate] %>
 
 child2_conglomerate:
   brand: child1_child2
-  name: 'Child 2'
+  name: 'Child 2 conglomerate'
   is_brand: true
   sign: <%= Brand.signs[:conglomerate] %>
 

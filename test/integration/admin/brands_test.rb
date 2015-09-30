@@ -13,8 +13,8 @@ class Admin::BrandsTest < ActionDispatch::IntegrationTest
     visit "/admin/brands/new"
     execute_script %q($("input[rel='select2-brand']").select2('open'))
     assert has_text? "Child 1 Synonym"
-    assert has_text? "Child 1"
-    assert has_text? "Child 2"
+    assert has_text? "Child 1 conglomerate"
+    assert has_text? "Child 2 conglomerate"
     assert has_text? "Child 2 Slang"
     assert has_text? "Child 1 & Child 2"
   end

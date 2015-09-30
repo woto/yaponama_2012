@@ -36,4 +36,14 @@ class User::CarsTest < ActionDispatch::IntegrationTest
     assert has_no_text? "A.B.S."
   end
 
+  test 'Похожий на предыдущий тест. Проверяем, что видим только is_brand' do
+    visit "/user/cars/new"
+    execute_script %q($("input[rel='select2-brand']").select2('open'))
+    assert has_no_text? "Child 1 Synonym"
+    assert has_text? "Child 1 conglomerate"
+    assert has_text? "Child 2 conglomerate"
+    assert has_no_text? "Child 2 Slang"
+    assert has_no_text? "Child 1 & Child 2"
+  end
+
 end

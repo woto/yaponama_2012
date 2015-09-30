@@ -50,7 +50,7 @@ class BrandsControllerTest < ActionController::TestCase
   test 'Если мы передаем флаг manufacturer: 1, то находим Child 1, т.к. у него выставлен is_brand, несмотря на наличие родительского бренда' do
     get :search, q: {name_cont: 'Child 1'}, manufacturer: '1', format: :json
     body = JSON.parse(response.body)
-    assert_equal 'Child 1', body.first['name']
+    assert_equal 'Child 1 conglomerate', body.first['name']
   end
 
   test 'Если мы передаем флаг manufacturer: 0, то мы не находим Child 2, т.к. у него выставлен родительский бренд, зато находим Child 1 & Child 2' do
