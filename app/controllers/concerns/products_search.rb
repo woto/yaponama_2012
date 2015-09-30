@@ -60,7 +60,6 @@ module ProductsSearch
 
           @parsed_json = PriceMate.sort_by_godness @parsed_json
 
-
           Rails.cache.write(price_request_cache_key, @parsed_json, :expires_in => expires_in)
           plog.debug 'Кеш записан'
         end

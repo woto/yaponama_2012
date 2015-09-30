@@ -250,4 +250,10 @@ class ProductsControllerTest < ActionController::TestCase
     assert_select '*', /Масса: 0.5 кг./
   end
 
+
+  test 'Проверяем наличие класса icheck' do
+    get :new, catalog_number: '2102'
+    assert_select '.icheck'
+  end
+
 end

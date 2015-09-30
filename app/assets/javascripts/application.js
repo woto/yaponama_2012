@@ -90,3 +90,4 @@
 //= require map
 //= require assa
 //= require image_view
+//= require pages/products
