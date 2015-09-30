@@ -1,9 +1,11 @@
 <% title_new %>
 
 <%= page do |p| %>
+
   <%= p.breadcrumb do |b| %>
-    <%= b.item 'Главная', root_path %>
-    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Главная', [:root] %>
+    <%= b.item 'Администрирование', [:admin, :root] %>
+    <%= b.item 'Опции заказов', [:admin, @resource_class] %>
     <%= b.item @meta_title %>
   <% end %>
 

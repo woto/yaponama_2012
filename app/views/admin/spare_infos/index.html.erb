@@ -3,8 +3,8 @@
 <%= page do |p| %>
 
   <%= p.breadcrumb do |b| %>
-    <%= b.item 'Главная', root_path %>
-    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Главная', [:root] %>
+    <%= b.item 'Администрирование', [:admin, :root] %>
     <%= b.item @meta_title %>
   <% end %>
 
@@ -13,6 +13,16 @@
   <% end %>
 
   <%= p.content do %>
+
+    <%= row class: 'bottom-space-lg' do %>
+      <div class="col-md-10">
+        <%= search_form_for(@q, url: url_for(action: :index)) do |f| %>
+          <%= f.input :catalog_number_eq %>
+          <%= f.input :image1_present, as: :select %>
+          <%= f.button :submit, 'Поиск' %>
+        <% end %>
+      </div>
+    <% end %>
 
     <%= paginate @resources %>
     <br />
@@ -23,12 +33,10 @@
         <tr>
           <th> <%= @resource_class.human_attribute_name :id %> </th>
           <th> <%= @resource_class.human_attribute_name :catalog_number %> </th>
-          <th> <%= @resource_class.human_attribute_name :brand_id %> </th>
+          <th> <%= @resource_class.human_attribute_name :brand %> </th>
           <th> <%= @resource_class.human_attribute_name :content %> </th>
-          <th> <%= @resource_class.human_attribute_name :created_at %> </th>
-          <th> <%= @resource_class.human_attribute_name :updated_at %> </th>
-          <th> <%= @resource_class.human_attribute_name :name %> </th>
-          <th> <%= @resource_class.human_attribute_name :spare_catalog_id %> </th>
+          <th> <%= @resource_class.human_attribute_name :spare_catalog %> </th>
+          <th> <%= @resource_class.human_attribute_name :fix_spare_catalog %> </th>
           <th> <%= @resource_class.human_attribute_name :notes %> </th>
           <th> <%= @resource_class.human_attribute_name :notes_invisible %> </th>
           <th> <%= @resource_class.human_attribute_name :image1 %> </th>
@@ -54,7 +62,8 @@
           <th> <%= @resource_class.human_attribute_name :offers %> </th>
           <th> <%= @resource_class.human_attribute_name :aggregated_content_updated_at %> </th>
           <th> <%= @resource_class.human_attribute_name :aggregated_content_checked_at %> </th>
-          <th> <%= @resource_class.human_attribute_name :fix_spare_catalog %> </th>
+          <th> <%= @resource_class.human_attribute_name :created_at %> </th>
+          <th> <%= @resource_class.human_attribute_name :updated_at %> </th>
         </tr>
                       
         <% @resources.each do |resource| %>
@@ -63,15 +72,20 @@
               <%= resource.id %>
               <%= link_to "Просмотр", admin_spare_info_path(resource.id, return_path: request.fullpath) %>
               <%= link_to "Редактирование", edit_admin_spare_info_path(resource.id, return_path: request.fullpath) %>
-              <%= link_to("Публичный просмотр", polymorphic_path([:new, :user,  :product], :catalog_number => resource.catalog_number, anchor: resource.brand.to_label), target: "_blank") %>
+              <%= link_to "Удалить", polymorphic_path([:admin, resource], return_path: request.fullpath), method: :delete %>
+              <%= link_to("Публичный просмотр", polymorphic_path([:new, :user,  :product], :catalog_number => resource.catalog_number, anchor: resource.brand.to_label.parameterize), target: "_blank") %>
             </td>
             <td> <%= resource.catalog_number %> </td>
-            <td> <%= resource.brand_id %> </td>
+            <td> 
+              <%= resource.brand_id %><br />
+              <%= resource.brand.to_label %>
+            </td>
             <td> <%= resource.content %> </td>
-            <td> <%= resource.created_at %> </td>
-            <td> <%= resource.updated_at %> </td>
-            <td> <%= resource.name %> </td>
-            <td> <%= resource.spare_catalog_id %> </td>
+            <td> 
+              <%= resource.spare_catalog_id %> <br />
+              <%= resource.spare_catalog.to_label %> <br />
+            </td>
+            <td> <%= resource.fix_spare_catalog %> </td>
             <td> <%= resource.notes %> </td>
             <td> <%= resource.notes_invisible %> </td>
             <td> <%= resource.image1 %> </td>
@@ -97,7 +111,8 @@
             <td> <%= resource.offers %> </td>
             <td> <%= resource.aggregated_content_updated_at %> </td>
             <td> <%= resource.aggregated_content_checked_at %> </td>
-            <td> <%= resource.fix_spare_catalog %> </td>
+            <td> <%= resource.created_at %> </td>
+            <td> <%= resource.updated_at %> </td>
           </tr>
         <% end %>
       </table>

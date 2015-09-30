@@ -3,6 +3,8 @@
 <%= page do |p| %>
 
   <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', admin_root_path %>
     <%= b.item @meta_title %>
   <% end %>
 
@@ -11,12 +13,19 @@
   <% end %>
 
   <%= p.content do %>
-
-    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary', style: "vertical-align: top" do %>
-      <%= icon 'plus' %>
+    <%= search_form_for(@q, url: url_for(action: :index), html: {class: 'form-inline'}) do |f| %>
+      <%= f.input :name_cont, placeholder: 'Название', label: false %>
+      <%= f.button :submit, 'Поиск' %>
     <% end %>
+  <% end %>
+
+  <br />
+
+  <%= p.content do %>
 
     <%= paginate @resources %>
+    <br />
+    <br />
 
     <div class="table-responsive top-space bottom-space">
       <table class="table">
@@ -30,20 +39,35 @@
           </tr>
         </thead>
         <tbody>
-          <% @resources.each do |r| %>
+          <% @resources.each do |resource| %>
             <tr>
-              <td> <%= link_to r.id, edit_admin_spare_catalog_group_path(r, return_path: request.fullpath) %> </td>
-              <td> <%= nice_tree(r.path) %> </td>
-              <td> <%= r.name %> </td>
-              <td> <%= r.created_at %> </td>
-              <td> <%= r.updated_at %> </td>
+              <td>
+                <%= resource.id %> <br />
+                <%= link_to "Просмотр", polymorphic_path([:admin, resource], return_path: request.fullpath) %> <br />
+                <%= link_to "Редактирование", polymorphic_path([:edit, :admin, resource], return_path: request.fullpath) %> <br />
+                <%= link_to "Удалить", polymorphic_path([:admin, resource], return_path: request.fullpath), method: :delete %>
+              </td>
+              <td> <%= nice_tree(resource.ancestors) %> </td>
+              <td> <%= resource.name %> </td>
+              <td> <%= l resource.created_at %> </td>
+              <td> <%= l resource.updated_at %> </td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
 
+    <br />
     <%= paginate @resources %>
+    <br />
+    <br />
+
+    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary' do %>
+      Новая группа категорий
+    <% end %>
+
+    <br />
+    <br />
 
   <% end %>
 <% end %>

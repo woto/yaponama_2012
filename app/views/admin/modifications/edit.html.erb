@@ -4,7 +4,7 @@
 
   <%= p.breadcrumb do |b| %>
     <%= b.item 'Главная', root_path %>
-    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Администрирование', [:admin, :root] %>
     <%= b.item 'Модификации', [:admin, @resource_class] %>
     <%= b.item @resource.to_label, [:admin, @resource] %>
     <%= b.item @meta_title %>

@@ -3,8 +3,8 @@
 <%= page do |p| %>
 
   <%= p.breadcrumb do |b| %>
-    <%= b.item 'Главная', root_path %>
-    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Главная', [:root] %>
+    <%= b.item 'Администрирование', [:admin, :root] %>
     <%= b.item @meta_title %>
   <% end %>
 
@@ -13,18 +13,20 @@
   <% end %>
 
   <%= p.content do %>
+    <%= search_form_for(@q, url: url_for(action: :index), html: {class: 'form-inline'}) do |f| %>
+      <%= f.input :from_spare_info_catalog_number_eq, label: false, placeholder: "Каталожный номер from" %>
+      <%= f.input :to_spare_info_catalog_number_eq, label: false, placeholder: "Каталожный номер to" %>
+      <%= f.input :notes_cont, label: false, placeholder: 'Комментарий содержит' %>
+      <%= f.input :notes_invisible_cont, label: false, placeholder: 'Служебный комментарий содержит' %>
+      <%= f.input :wrong_true, as: :select, label: false %>
 
-    <% if false %>
-    <%= row class: 'bottom-space-lg' do %>
-      <div class="col-md-10">
-        <%= search_form_for(@q, url: url_for(action: :index)) do |f| %>
-          <%= f.input :catalog_number_eq %>
-          <%= f.input :image1_present, as: :select %>
-          <%= f.button :submit, 'Поиск' %>
-        <% end %>
-      </div>
+      <%= f.button :submit, 'Поиск' %>
     <% end %>
-    <% end %>
+  <% end %>
+
+  <br />
+
+  <%= p.content do %>
 
     <%= paginate @resources %>
     <br />

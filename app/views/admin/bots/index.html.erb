@@ -3,7 +3,8 @@
 <%= page do |p| %>
 
   <%= p.breadcrumb do |b| %>
-    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Главная', [:root] %>
+    <%= b.item 'Администрирование', [:admin, :root] %>
     <%= b.item @meta_title %>
   <% end %>
 
@@ -39,21 +40,21 @@
           </tr>
         </thead>
         <tbody>
-          <% @resources.each do |r| %>
+          <% @resources.each do |resource| %>
             <tr>
               <td>
-                <%= r.id %> <br />
-                <%= link_to "Просмотр", admin_bot_path(r, return_path: request.fullpath) %> <br />
-                <%= link_to "Редактирование", edit_admin_bot_path(r, return_path: request.fullpath) %> <br />
-                <%= link_to "Удалить", polymorphic_path([:admin, resource], return_path: request.fullpath), method: :delete %>
-                <%= link_to 'Предпросмотр правила', preview_admin_bot_path(r, return_path: request.fullpath) %>
+                <%= resource.id %> <br />
+                <%= link_to "Просмотр", admin_bot_path(resource, return_path: request.fullpath) %> <br />
+                <%= link_to "Редактирование", edit_admin_bot_path(resource, return_path: request.fullpath) %> <br />
+                <%= link_to "Удалить", polymorphic_path([:admin, resource], return_path: request.fullpath), method: :delete %> <br />
+                <%= link_to 'Предпросмотр правила', preview_admin_bot_path(resource, return_path: request.fullpath) %>
               </td>
-              <td> <%= r.title %> </td>
-              <td> <%= r.user_agent %> </td>
-              <td> <%= r.inet %> </td>
-              <td> <%= r.block %> </td>
-              <td> <%= l r.created_at %> </td>
-              <td> <%= l r.updated_at %> </td>
+              <td> <%= resource.title %> </td>
+              <td> <%= resource.user_agent %> </td>
+              <td> <%= resource.inet %> </td>
+              <td> <%= resource.block %> </td>
+              <td> <%= l resource.created_at %> </td>
+              <td> <%= l resource.updated_at %> </td>
             </tr>
           <% end %>
         </tbody>

@@ -3,13 +3,11 @@
 <%= page do |p| %>
 
   <%= p.breadcrumb do |b| %>
-    <%= p.breadcrumb do |b| %>
-      <%= b.item 'Главная', root_path %>
-      <%= b.item 'Администрирование', admin_root_path %>
-      <%= b.item 'Правила ботов', admin_bots_path %>
-      <%= b.item @resource.to_label, admin_bot_path(@resource) %>
-      <%= b.item @meta_title %>
-    <% end %>
+    <%= b.item 'Главная', root_path %>
+    <%= b.item 'Администрирование', [:admin, :root] %>
+    <%= b.item 'Правила ботов', [:admin, @resource_class] %>
+    <%= b.item @resource.to_label, [:admin, @resource] %>
+    <%= b.item @meta_title %>
   <% end %>
 
   <%= p.title do %>

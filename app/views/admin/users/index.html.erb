@@ -3,8 +3,8 @@
 <%= page do |p| %>
 
   <%= p.breadcrumb do |b| %>
-    <%= b.item 'Главная', root_path %>
-    <%= b.item 'Администрирование', admin_root_path %>
+    <%= b.item 'Главная', [:root] %>
+    <%= b.item 'Администрирование', [:admin, :root] %>
     <%= b.item @meta_title %>
   <% end %>
 
@@ -62,15 +62,17 @@
     </div>
 
     <br />
-
     <%= paginate @resources %>
-
     <br />
     <br />
 
     <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary' do %>
       Новый пользователь
     <% end %>
+
+    <br />
+    <br />
+
 
   <% end %>
 <% end %>

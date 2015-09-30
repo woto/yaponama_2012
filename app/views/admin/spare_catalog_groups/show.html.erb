@@ -3,6 +3,9 @@
 <%= page do |p| %>
 
   <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', [:root] %>
+    <%= b.item 'Администрирование', [:admin, :root] %>
+    <%= b.item 'Группы категорий', [:admin, @resource_class] %>
     <%= b.item @meta_title %>
   <% end %>
 

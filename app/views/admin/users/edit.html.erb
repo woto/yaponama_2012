@@ -4,9 +4,9 @@
 
   <%= p.breadcrumb do |b| %>
     <%= b.item 'Главная', root_path %>
-    <%= b.item 'Администрирование', admin_root_path %>
-    <%= b.item 'Пользователи', admin_users_path %>
-    <%= b.item guest_or_user_to_label(@resource), admin_user_path(@resource) %>
+    <%= b.item 'Администрирование', [:admin, :root] %>
+    <%= b.item 'Пользователи', [:admin, @resource_class] %>
+    <%= b.item guest_or_user_to_label(@resource), [:admin, @resource] %>
     <%= b.item @meta_title %>
   <% end %>
 

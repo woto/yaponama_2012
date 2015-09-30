@@ -1,10 +1,12 @@
+<% title_show %>
+
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <% title_show %>
-    <%= breadcrumb true do |b| %>
-      <%= b.item @meta_title %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', [:root] %>
+    <%= b.item 'Администрирование', [:admin, :root] %>
+    <%= b.item 'Правила ботов', [:admin, @resource_class] %>
+    <%= b.item @meta_title %>
   <% end %>
 
   <%= p.title do %>
