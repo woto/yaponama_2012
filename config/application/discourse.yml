@@ -1,7 +1,7 @@
 defaults: &defaults
-  host: 'forum.avtorif.ru'
+  host: '192.168.1.251'
   port: '80'
-  host_port: 'forum.avtorif.ru'
+  host_port: '192.168.1.251'
   api_username: robot
   api_key: 02950e0701e3765c5f98bc4f0fafab773dd50e62ada590a0caec1cf218f420c9
   categories:

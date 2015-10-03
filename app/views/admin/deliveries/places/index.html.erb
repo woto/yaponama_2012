@@ -16,7 +16,19 @@
     <% @resources.each do |resource| %>
       <%= debug resource.attributes %>
     <% end %>
-    <%= link_to 'Новая зона', new_admin_deliveries_place_path %>
-  <% end %>
 
+    <br />
+    <%= paginate @resources %>
+    <br />
+    <br />
+
+    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary' do %>
+      Новая зона
+    <% end %>
+
+    <br />
+    <br />
+
+
+  <% end %>
 <% end %>

@@ -1,0 +1,50 @@
+<%= row do %>
+  <div class="col-sm-12">
+    <%= render 'form' %>
+  </div>
+  <div class="col-sm-12">
+    <div id="deliveries-calculate-result">
+      Укажите пожалуйста адрес доставки.
+    </div>
+    <div class="panel-group hidden" id="deliveries-accordion">
+      <% Deliveries::Place.where(active: true, partner: false, display_marker: false).order(z_index: :desc).each do |delivery_zone| %>
+        <div class="panel accordion-group panel-primary">
+
+          <div class="panel-heading delivery_zone" data-clickable-object>
+            <%# Картографические данные области %>
+            <div>
+              <div class="vertices"><%= delivery_zone.vertices %></div>
+              <div class="z_index"><%= delivery_zone.z_index %></div>
+              <div class="realize"><%= delivery_zone.realize %></div>
+            </div>
+            <h4 class="panel-title">
+              <a class="accordion-toggle" data-toggle="collapse" data-clickable-href data-parent="#deliveries-accordion">
+                <span><%= delivery_zone.name %></span>
+                <%= icon 'caret-down pull-right' %>
+              </a>
+            </h4>
+          </div>
+          <div class="panel-collapse collapse" data-parent="#deliveries-accordion">
+            <div class="panel-body">
+              <% delivery_zone.variants.order(sequence: :desc).each do |variant| %>
+                <div class="delivery-variant">
+                  <strong>
+                    <%= variant.name %>
+                  </strong>
+                  <p>
+                    <%== variant.content %>
+                  </p>
+                  <p>
+                    <%= number_to_currency variant.delivery_cost %>
+                  </p>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div id="clientMap" style="widht: 100%; height: 300px"></div>

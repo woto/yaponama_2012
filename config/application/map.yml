@@ -6,7 +6,6 @@ defaults: &defaults
   delivery_minute_cost:           10
   google_maps_key:                'AIzaSyBDWdW4KtQCWa1y4aHIqKIEI77v5emnlEs'
   travel_mode:                    'TRANSIT'   # DRIVING, TRANSIT
-  automatic_calculate_active:     true
   max_automatic_calculated_cost:  500
 
 development:

@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  full_prepayment_required: false
-  postal_address_required: false
-
-two:
-  full_prepayment_required: false
-  postal_address_required: false

@@ -1,0 +1,23 @@
+<%= panel 'default' do |p| %>
+  <%= p.body do %>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="street" class="col-sm-6 control-label">Улица</label>
+        <div class="col-sm-18">
+          <input class="form-control" id="street">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="house" class="col-sm-6 control-label">Дом</label>
+        <div class="col-sm-18">
+          <input class="form-control" id="house">
+        </div>
+      </div>
+      <div class="form-group top-space-lg bottom-space-none">
+        <div class="col-sm-offset-6 col-sm-18">
+          <button type="submit" class="btn btn-primary btn-block" id="geocode-address-button">Узнать стоимость доставки</button>
+        </div>
+      </div>
+    </form>
+  <% end %>
+<% end %>
