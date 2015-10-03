@@ -1,9 +1,5 @@
 class Deliveries::Place < ActiveRecord::Base
 
-  (1..5).each do |n|
-    mount_uploader "image#{n}", ApplicationUploader
-  end
-
   has_many :variants, dependent: :destroy
   accepts_nested_attributes_for :variants, :reject_if => :all_blank, :allow_destroy => true
   validates :variants, :length => { :minimum => 1 }, if: -> { realize }
@@ -30,6 +26,9 @@ class Deliveries::Place < ActiveRecord::Base
       end
     end
   end
+
+  validates :price_url, presence: true, if: -> {display_marker?}
+  validates :faq_id, presence: true, if: -> {display_marker?}
 
   def self.random_list
     where(display_marker: true, active: true, partner: false).order("RANDOM()")
