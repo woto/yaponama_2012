@@ -20,8 +20,8 @@
       vin_or_frame:'',
       rel: 'radio' } %>
 
-  <%= f.input :vin, label: '', wrapper_html: {vin:''} %>
-  <%= f.input :frame, label: '', wrapper_html: {frame:''} %>
+  <%= f.input :vin, wrapper_html: {vin:''}, required: true %>
+  <%= f.input :frame, wrapper_html: {frame:''}, required: true %>
 
   <%= f.input :brand, as: :select2, input_html: {data: {manufacturer: '1'}}, placeholder: 'Выберите или добавьте нового производителя'  %>
   <%= f.input :model, as: :select2, placeholder: 'Выберите или добавьте новую модель'  %>
