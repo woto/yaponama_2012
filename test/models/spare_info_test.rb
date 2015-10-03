@@ -236,4 +236,34 @@ class SpareInfoTest < ActiveSupport::TestCase
     si.reload.destroy
     refute si.persisted?
   end
+
+  test 'Нельзя загрузить вторую картинку без первой' do
+    extend ActionDispatch::TestProcess
+    si = spare_infos(:infiniti_3310)
+    si.image2 = fixture_file_upload('rails.png','image/png')
+    refute si.valid?
+    assert_equal ["фотографии должны быть загружены по-порядку"], si.errors[:image1]
+  end
+
+  test 'Нельзя загрузить второй файл без первого' do
+    extend ActionDispatch::TestProcess
+    si = spare_infos(:infiniti_3310)
+    si.file2 = fixture_file_upload('rails.png','image/png')
+    refute si.valid?
+    assert_equal ["файлы должны быть загружены по-порядку"], si.errors[:file1]
+  end
+
+  test 'Проверяем целостность работы требования загрузки изображений по очереди в условиях передачи remove' do
+    extend ActionDispatch::TestProcess
+    si = spare_infos(:ki_2103)
+    si.remove_image1 = true
+    si.image2 = fixture_file_upload('rails.png','image/png')
+    si.save
+    assert_equal ["фотографии должны быть загружены по-порядку"], si.errors[:image1]
+
+    si.remove_image1 = false
+    assert si.save
+
+
+  end
 end

@@ -60,10 +60,24 @@ class SpareInfo < ActiveRecord::Base
 
   (1..8).each do |n|
     mount_uploader "image#{n}", ApplicationUploader
+    if n>1
+      validate do
+        if send("image#{n}").present? && !send("remove_image#{n}?") && !(send("image#{n-1}").present? && !send("remove_image#{n-1}?"))
+          errors["image#{n-1}"] << 'фотографии должны быть загружены по-порядку'
+        end
+      end
+    end
   end
 
   (1..8).each do |n|
     mount_uploader "file#{n}", ApplicationUploader
+    if n>1
+      validate do
+        if send("file#{n}").present? && !send("remove_file#{n}?") && !(send("file#{n-1}").present? && !send("remove_file#{n-1}?"))
+          errors["file#{n-1}"] << 'файлы должны быть загружены по-порядку'
+        end
+      end
+    end
   end
 
   has_one :accumulator, class_name: 'Opts::Accumulator', dependent: :restrict_with_error
@@ -120,13 +134,12 @@ class SpareInfo < ActiveRecord::Base
   end
 
   def to_label
+    # TODO всё таки по-хорошему тут не должно быть пустых значений
     "#{catalog_number} (#{brand.to_label})" if [catalog_number, brand].any?
   end
 
   def name
     to_label
   end
-
-
 
 end
