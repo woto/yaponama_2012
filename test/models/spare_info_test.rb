@@ -236,11 +236,4 @@ class SpareInfoTest < ActiveSupport::TestCase
     si.reload.destroy
     refute si.persisted?
   end
-
-  test 'После сохранения SpareInfo у нас заполняется name. Пока что нужно для использования в заменах, применимостях и т.д.' do
-    si = SpareInfo.new(catalog_number: '123', spare_catalog: Defaults.spare_catalog, brand: Defaults.brand, spare_info_phrases: [SpareInfoPhrase.new({catalog_number: '123', primary: true})])
-    si.save!
-    assert_equal '123 (ОРИГИНАЛ)', si.name
-  end
-
 end
