@@ -55,21 +55,12 @@ window.initMap = ->
 
   initialize = ->
     window.map = new google.maps.Map(document.getElementById("map"),
-      zoom: parseInt($('#deliveries_place_zoom').val())
-      center: new google.maps.LatLng(parseFloat($('#deliveries_place_lat').val()), parseFloat($('#deliveries_place_lng').val()))
+      zoom: parseInt($('#initial_map_zoom').text())
+      center: new google.maps.LatLng(parseFloat($('#initial_map_lat').text()), parseFloat($('#initial_map_lng').text()))
       mapTypeId: google.maps.MapTypeId.ROADMAP
       disableDefaultUI: true
       zoomControl: true
     )
-
-    # Вешаем обработчики событий изменения позиции на карте и зума
-
-    google.maps.event.addListener window.map, 'zoom_changed', ->
-      $('#deliveries_place_zoom').val(window.map.getZoom())
-    google.maps.event.addListener window.map, 'bounds_changed', ->
-      $('#deliveries_place_lat').val(window.map.getCenter().lat())
-      $('#deliveries_place_lng').val(window.map.getCenter().lng())
-
 
     polyOptions =
       strokeWeight: 0
@@ -95,10 +86,10 @@ window.initMap = ->
       drawingManager.setOptions
         drawingControl: false
 
-    zoom_and_center_to_polygon = ->
-      window.map.setZoom(parseInt($('#deliveries_place_zoom').val()))
-      lat = parseFloat($('#deliveries_place_lat').val())
-      lng = parseFloat($('#deliveries_place_lng').val())
+    zoom_and_center = ->
+      window.map.setZoom(parseInt($('#initial_map_zoom').text()))
+      lat = parseFloat($('#initial_map_lat').text())
+      lng = parseFloat($('#initial_map_lng').text())
       coords = new google.maps.LatLng(lat, lng)
       window.map.setCenter(coords)
 
@@ -131,7 +122,7 @@ window.initMap = ->
       setSelection poly
       add_events_handler_to_shape(poly)
       dont_allow_further_adding()
-      zoom_and_center_to_polygon()
+      zoom_and_center()
 
     
     # Clear the current selection when the drawing mode is changed, or when the
