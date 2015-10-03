@@ -18,8 +18,9 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # PUT /resource/password
   def update
-    super
-    existing_user
+    super do |user|
+      existing_user(user)
+    end
   end
 
   # protected

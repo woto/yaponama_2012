@@ -3,12 +3,10 @@ module Users::Concerns::ExistingUser
 
   included do
 
-    def existing_user
+    def existing_user(user)
       User.transaction do
-        registered_user = current_user
-        if registered_user
-          registered_user.update_column(:role, User.roles['user'])
-          guest_user.move_to(registered_user)
+        if user.persisted?
+          guest_user.move_to(user)
           guest_user.reload.destroy!
           session.delete(:guest_user_id)
         end

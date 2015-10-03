@@ -10,8 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
-    existing_user
+    super do |user|
+      existing_user(user)
+    end
   end
 
   # GET /resource/edit
@@ -67,7 +68,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def sign_up_params
-    super.merge(role: 'guest')
+    super.merge(role: 'user')
   end
 
 end
