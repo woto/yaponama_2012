@@ -54,6 +54,8 @@
 //= require components/catch_enter
 //= require components/window_dialog
 //= require components/faq_translocation
+//= require components/collapse_next
+//= require components/slide_top
 //
 //= require admin/deliveries/places
 //
@@ -68,8 +70,6 @@
 /////////////////////
 
 // APPLICATION
-//
-//= require collapse_next
 //
 //= require submenu
 
@@ -86,7 +86,6 @@
 //= require 'jquery-cookie/src/jquery.cookie'
 
 //= legal
-//= require slide_top
 //= require map
 //= require assa
 //= require image_view
