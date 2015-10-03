@@ -81,12 +81,9 @@
 
 //= require jquery.cachedScript
 
-//= require deliveries
 
 //= require 'jquery-cookie/src/jquery.cookie'
 
-//= legal
-//= require map
-//= require assa
 //= require image_view
 //= require pages/products
+//= require pages/deliveries
