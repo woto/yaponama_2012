@@ -1,3 +1,4 @@
+# TODO объединить from_spare_info_attributes, to_spare_info_attributes, spare_info_attributes
 module Concerns::ToSpareInfoAttributes
 
   extend ActiveSupport::Concern

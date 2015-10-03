@@ -157,4 +157,5 @@ gem 'pundit'
 source 'https://rails-assets.org' do
   gem 'rails-assets-uri.js'
   gem 'rails-assets-iCheck'
+  gem 'rails-assets-magnific-popup'
 end

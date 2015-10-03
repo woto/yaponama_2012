@@ -38,6 +38,13 @@ ki_2103:
   file1: '1.bin'
   hstore: '"Свойство1"=>"Значение1", "Свойство2"=>"Значение2"'
 
+mitsubishi_2103:
+  catalog_number: '2103'
+  brand: mitsubishi
+  spare_catalog: shatun
+  image1: '1.png'
+  image2: '2.png'
+
 ms_2103:
   catalog_number: '2103'
   brand: ms

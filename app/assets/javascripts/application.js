@@ -24,6 +24,7 @@
 //= require moment/moment
 //= require uri.js.js
 //= require iCheck
+//= require magnific-popup
 //
 // OTHER LIBRARIES
 //
@@ -84,6 +85,5 @@
 
 //= require 'jquery-cookie/src/jquery.cookie'
 
-//= require image_view
 //= require pages/products
 //= require pages/deliveries

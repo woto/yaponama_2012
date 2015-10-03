@@ -33,6 +33,11 @@ ki_2103:
   spare_info: ki_2103
   primary: true
 
+mitsubishi_2103:
+  catalog_number: '2103'
+  spare_info: mitsubishi_2103
+  primary: true
+
 ms_2103:
   catalog_number: '2103'
   spare_info: ms_2103

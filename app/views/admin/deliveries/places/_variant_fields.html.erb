@@ -17,7 +17,6 @@
         <%= f.input :active %>
         <%= f.input :sequence %>
         <%= f.input :delivery_cost %>
-        <%= f.input :option_id, collection: Deliveries::Option.all, value_method: :id, label_method: :name %>
         <%= f.input :content, class: 'ckeditor-extended' %>
 
       <% end %>

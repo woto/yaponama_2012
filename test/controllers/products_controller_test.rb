@@ -159,9 +159,59 @@ class ProductsControllerTest < ActionController::TestCase
     assert_select "table", html: /.*Свойство1.*Значение1/m
   end
 
-  test 'Если spare_info имеет image1, то она должна отобразиться' do
+  test 'Тестируем разметку с 1-м изображением товара' do
     get :new, catalog_number: '2103'
-    assert_select "[alt='2103 (KI)']"
+    assert_select '#ki' do
+      assert_select '.image' do
+        assert_select '#gallery-carousel.carousel.slide' do
+          assert_select 'ol.carousel-indicators', false
+          assert_select '.carousel-inner.gallery' do
+            assert_select '.item.active', 1 do
+              assert_select 'a' do
+                assert_select "img[alt='2103 (KI)'].text-center"
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  test 'Тестируем разметку с более 1-м изображением товара' do
+    get :new, catalog_number: '2103'
+    assert_select '#mitsubishi' do
+      assert_select '.image' do
+        assert_select '#gallery-carousel.carousel.slide' do
+          assert_select 'ol.carousel-indicators > li', 2 do |elements|
+            elements.each_with_index do |element, index|
+              case index
+              when 0
+                assert_select 'li[data-target="#gallery-carousel"][data-slide-to="0"].active'
+              when 1
+                assert_select 'li[data-target="#gallery-carousel"][data-slide-to="1"]'
+              end
+            end
+          end
+          assert_select '.carousel-inner.gallery > div', 2 do |elements|
+            elements.each_with_index do |element, index|
+              case index
+              when 0
+                assert_select '.item.active' do
+                  assert_select 'a[href="http://test.host:80/uploads/spare_info/image1/410347112/1.png"]' do
+                    assert_select 'img.text-center[src="http://test.host:80/uploads/spare_info/image1/410347112/fill_thumb_1.png"][alt="2103 (MITSUBISHI)"]'
+                  end
+                end
+              when 1
+                assert_select 'a[href="http://test.host:80/uploads/spare_info/image2/410347112/2.png"]' do
+                  assert_select 'img.text-center[src="http://test.host:80/uploads/spare_info/image2/410347112/fill_thumb_2.png"][alt="2103 (MITSUBISHI)"]'
+                end
+              end
+            end
+
+          end
+        end
+      end
+    end
   end
 
   test 'Если spare_info имеет file1, то должна отобразиться ссылка на его скачивание' do
