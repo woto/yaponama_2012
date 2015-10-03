@@ -115,7 +115,7 @@ module ProductsSearch
         plog.debug 'History'
           unless r9
             session[:history] ||= []
-            session[:history].unshift [c9, @meta_title]
+            session[:history] |= [[c9, @meta_title]]
             session[:history].pop if session[:history].size > 10
           end
         plog.debug '/History'

@@ -40,15 +40,22 @@ class ProductsTest < ActionDispatch::IntegrationTest
     get_via_redirect '/user/orders/404-14-104/products/'
     assert_select 'title', 'Просмотр заказа № 404-14-104'
   end
+  test 'Если такой элемент уже имеется в истории, то он не должен добавиться повторно' do
+    get new_user_product_path(catalog_number: '2103')
+    assert_equal [['2103', '2103 MITSUBISHI, KI Задний бампер']], session[:history]
 
   test 'Просматриваем страницу изменения способа доставки' do
     get_via_redirect '/user/orders/404-14-104/delivery/edit'
     assert_select 'title', 'Выбор способа доставки'
   end
+    get new_user_product_path(catalog_number: '3310')
+    assert_equal [["2103", "2103 MITSUBISHI, KI Задний бампер"], ["3310", "3310 TOYOTA, INFINITI Пыльник рул. рейки"]], session[:history]
 
   test '(Как бы) Кликаем на info кнопке заказа' do
     get_via_redirect '/user/orders/404-14-104/info'
     assert_template 'application/info'
+    get new_user_product_path(catalog_number: '2103')
+    assert_equal [["2103", "2103 MITSUBISHI, KI Задний бампер"], ["3310", "3310 TOYOTA, INFINITI Пыльник рул. рейки"]], session[:history]
   end
 
   test 'Проверяем meta_canonical' do
