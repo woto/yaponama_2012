@@ -161,14 +161,16 @@ class ProductsControllerTest < ActionController::TestCase
 
   test 'Тестируем разметку с 1-м изображением товара' do
     get :new, catalog_number: '2103'
-    assert_select '#ki' do
-      assert_select '.image' do
-        assert_select '#gallery-carousel.carousel.slide' do
-          assert_select 'ol.carousel-indicators', false
-          assert_select '.carousel-inner.gallery' do
-            assert_select '.item.active', 1 do
-              assert_select 'a' do
-                assert_select "img[alt='2103 (KI)'].text-center"
+    assert_select '#products' do
+      assert_select '#ki' do
+        assert_select '.image' do
+          assert_select '#gallery-carousel.carousel.slide' do
+            assert_select 'ol.carousel-indicators', false
+            assert_select '.carousel-inner.gallery' do
+              assert_select '.item.active', 1 do
+                assert_select 'a' do
+                  assert_select "img[alt='2103 (KI)'].text-center"
+                end
               end
             end
           end
@@ -179,35 +181,37 @@ class ProductsControllerTest < ActionController::TestCase
 
   test 'Тестируем разметку с более 1-м изображением товара' do
     get :new, catalog_number: '2103'
-    assert_select '#mitsubishi' do
-      assert_select '.image' do
-        assert_select '#gallery-carousel.carousel.slide' do
-          assert_select 'ol.carousel-indicators > li', 2 do |elements|
-            elements.each_with_index do |element, index|
-              case index
-              when 0
-                assert_select 'li[data-target="#gallery-carousel"][data-slide-to="0"].active'
-              when 1
-                assert_select 'li[data-target="#gallery-carousel"][data-slide-to="1"]'
+    assert_select '#products' do
+      assert_select '#mitsubishi' do
+        assert_select '.image' do
+          assert_select '#gallery-carousel.carousel.slide' do
+            assert_select 'ol.carousel-indicators > li', 2 do |elements|
+              elements.each_with_index do |element, index|
+                case index
+                when 0
+                  assert_select 'li[data-target="#gallery-carousel"][data-slide-to="0"].active'
+                when 1
+                  assert_select 'li[data-target="#gallery-carousel"][data-slide-to="1"]'
+                end
               end
             end
-          end
-          assert_select '.carousel-inner.gallery > div', 2 do |elements|
-            elements.each_with_index do |element, index|
-              case index
-              when 0
-                assert_select '.item.active' do
-                  assert_select 'a[href="http://test.host:80/uploads/spare_info/image1/410347112/1.png"]' do
-                    assert_select 'img.text-center[src="http://test.host:80/uploads/spare_info/image1/410347112/fill_thumb_1.png"][alt="2103 (MITSUBISHI)"]'
+            assert_select '.carousel-inner.gallery > div', 2 do |elements|
+              elements.each_with_index do |element, index|
+                case index
+                when 0
+                  assert_select '.item.active' do
+                    assert_select 'a[href="http://test.host:80/uploads/spare_info/image1/410347112/1.png"]' do
+                      assert_select 'img.text-center[src="http://test.host:80/uploads/spare_info/image1/410347112/fill_thumb_1.png"][alt="2103 (MITSUBISHI)"]'
+                    end
+                  end
+                when 1
+                  assert_select 'a[href="http://test.host:80/uploads/spare_info/image2/410347112/2.png"]' do
+                    assert_select 'img.text-center[src="http://test.host:80/uploads/spare_info/image2/410347112/fill_thumb_2.png"][alt="2103 (MITSUBISHI)"]'
                   end
                 end
-              when 1
-                assert_select 'a[href="http://test.host:80/uploads/spare_info/image2/410347112/2.png"]' do
-                  assert_select 'img.text-center[src="http://test.host:80/uploads/spare_info/image2/410347112/fill_thumb_2.png"][alt="2103 (MITSUBISHI)"]'
-                end
               end
-            end
 
+            end
           end
         end
       end
@@ -222,27 +226,27 @@ class ProductsControllerTest < ActionController::TestCase
   test 'Проверяем заполнение :replacements' do
     get :new, catalog_number: '2102'
     replacements = assigns(:formatted_data)[0][1][1][1][:replacements]
-    assert_equal [spare_infos(:toyota_3310)], replacements[:new_num_from]
-    assert_equal [spare_infos(:toyota_3310)], replacements[:new_num_to]
-    assert_equal [spare_infos(:toyota_3310)], replacements[:same_num_from]
-    assert_equal [spare_infos(:toyota_3310)], replacements[:same_num_to]
-    assert_equal [spare_infos(:toyota_3310)], replacements[:repl_num_from]
-    assert_equal [spare_infos(:toyota_3310)], replacements[:repl_num_to]
-    assert_equal [spare_infos(:toyota_3310)], replacements[:part_num_from]
-    assert_equal [spare_infos(:toyota_3310)], replacements[:part_num_to]
+    assert_equal({spare_infos(:toyota_3310) => []}, replacements[:new_num_from])
+    assert_equal({spare_infos(:toyota_3310) => []}, replacements[:new_num_to])
+    assert_equal({spare_infos(:toyota_3310) => []}, replacements[:same_num_from])
+    assert_equal({spare_infos(:toyota_3310) => []}, replacements[:same_num_to])
+    assert_equal({spare_infos(:toyota_3310) => []}, replacements[:repl_num_from])
+    assert_equal({spare_infos(:toyota_3310) => []}, replacements[:repl_num_to])
+    assert_equal({spare_infos(:toyota_3310) => []}, replacements[:part_num_from])
+    assert_equal({spare_infos(:toyota_3310) => []}, replacements[:part_num_to])
   end
 
   test 'Даже если у нас отсутствуют замены в PostreSQL, то набор ключей всё равно должен присутствовать' do
     get :new, catalog_number: '543385'
     replacements = assigns(:formatted_data)[0][1][0][1][:replacements]
-    assert_equal [], replacements[:new_num_from]
-    assert_equal [], replacements[:new_num_to]
-    assert_equal [], replacements[:same_num_from]
-    assert_equal [], replacements[:same_num_to]
-    assert_equal [], replacements[:repl_num_from]
-    assert_equal [], replacements[:repl_num_to]
-    assert_equal [], replacements[:part_num_from]
-    assert_equal [], replacements[:part_num_to]
+    assert_equal({}, replacements[:new_num_from])
+    assert_equal({}, replacements[:new_num_to])
+    assert_equal({}, replacements[:same_num_from])
+    assert_equal({}, replacements[:same_num_to])
+    assert_equal({}, replacements[:repl_num_from])
+    assert_equal({}, replacements[:repl_num_to])
+    assert_equal({}, replacements[:part_num_from])
+    assert_equal({}, replacements[:part_num_to])
   end
 
   test 'Проверяем визуальное представление замен' do
@@ -285,7 +289,7 @@ class ProductsControllerTest < ActionController::TestCase
     brand = Defaults.brand
     spare_catalog = Defaults.spare_catalog
     get :new, catalog_number: 'min_max_days'
-    sample = [["MINMAXDAYS", [["ОРИГИНАЛ", {:titles=>{"TITLE"=>2}, :manufacturer_origs=>{}, :catalog_number_origs=>{"MIN_MAX_DAYS"=>2}, :weights=>{}, :min_days=>1, :max_days=>2, :min_cost=>2423, :max_cost=>7842, :offers=>[{:country=>"Москва", :min_days=>1, :max_days=>1, :probability=>55, :retail_cost=>2423, :count=>5, :title=>"", :delivery=>"Москва", :income_cost=>1616, :supplier_id=>1, :price_setting_id=>1, :tech=>"Авториф, Прайс, 1615.5"}, {:country=>"Москва", :min_days=>2, :max_days=>2, :probability=>55, :retail_cost=>7842, :count=>5, :title=>"", :delivery=>"Москва", :income_cost=>7842, :supplier_id=>1, :price_setting_id=>2, :tech=>"Авториф, Прайс 2, 7842.0"}], :brand=>brand, :title=>"TITLE", :keyword=>"MINMAXDAYS", :phrases=>[], :catalog=>spare_catalog, :replacements=>{:new_num_from=>[], :new_num_to=>[], :same_num_from=>[], :same_num_to=>[], :repl_num_from=>[], :repl_num_to=>[], :part_num_from=>[], :part_num_to=>[]}}]]]]
+    sample = [["MINMAXDAYS", [["ОРИГИНАЛ", {:brand=>brand, :offers=>[{:country=>"Москва", :min_days=>1, :max_days=>1, :probability=>55, :retail_cost=>2423, :count=>5, :title=>"", :delivery=>"Москва", :income_cost=>1616, :supplier_id=>1, :price_setting_id=>1, :tech=>"Авториф, Прайс, 1615.5"}, {:country=>"Москва", :min_days=>2, :max_days=>2, :probability=>55, :retail_cost=>7842, :count=>5, :title=>"", :delivery=>"Москва", :income_cost=>7842, :supplier_id=>1, :price_setting_id=>2, :tech=>"Авториф, Прайс 2, 7842.0"}], :min_days=>1, :max_days=>2, :min_cost=>2423, :max_cost=>7842, :titles=>{"TITLE"=>2}, :manufacturer_origs=>{}, :catalog_number_origs=>{"MIN_MAX_DAYS"=>2}, :weights=>{}, :title=>"TITLE", :keyword=>"MINMAXDAYS", :phrases=>[], :catalog=>spare_catalog, :replacements=>{:new_num_from=>{}, :new_num_to=>{}, :same_num_from=>{}, :same_num_to=>{}, :repl_num_from=>{}, :repl_num_to=>{}, :part_num_from=>{}, :part_num_to=>{}}, :warehouses => {}}]]]]
     assert_equal(sample, assigns(:formatted_data))
   end
 
@@ -300,10 +304,100 @@ class ProductsControllerTest < ActionController::TestCase
     assert_select '*', /Масса: 0.5 кг./
   end
 
+  test 'PriceMate.warehouses' do
+    get :new, catalog_number: 's4 005'
+    assert_select '*', text: /5 500 руб. в наличии 1 шт./
+  end
 
   test 'Проверяем наличие класса icheck' do
     get :new, catalog_number: '2102'
     assert_select '.icheck'
+  end
+
+  test 'Проверяем разметку формы' do
+    get :new, catalog_number: 'proverka_search'
+    assert_select 'form[action="/user/products"][data-remote="true"][method="post"]'
+  end
+
+  test 'У магазина должна быть ссылка контакты' do
+    get :new, catalog_number: 'S4 005'
+    assert_select '#deliveries_place_309456473.deliveries_place' do
+      assert_select 'a[window-dialog="/faqs/1069"][href="/faqs/1069"]', text: '(контакты)'
+    end
+  end
+
+  test 'Проверяем отображение наличия' do
+    get :new, catalog_number: 'S4 005'
+    assert_select '#deliveries_place_309456473.deliveries_place' do
+      assert_select '.radio:not(.disabled)' do
+        assert_select 'label' do
+          assert_select 'input[type="radio"][name="offer"]:not([disabled])'
+          assert_select 'h4.text-success' do
+            assert_select 'img.metro'
+            assert_select '*', text: /Динамо,\s+5 500 руб. в наличии 1 шт./
+          end
+        end
+      end
+    end
+  end
+
+  test 'Проверяем отображение отсутствующей позиции' do
+    get :new, catalog_number: 'S4 005'
+    assert_select '#deliveries_place_908005739.deliveries_place' do
+      assert_select '.radio.disabled' do
+        assert_select 'label' do
+          assert_select 'input[type="radio"][name="offer"][disabled]'
+          assert_select 'h4.text-muted' do
+            assert_select 'img.metro'
+            assert_select '*', text: /Медведково,\s+нет в наличии/
+          end
+        end
+      end
+    end
+  end
+
+  test 'Проверяем отображение замен на отсутствующую позицию' do
+    get :new, catalog_number: '0092S40050'
+    assert_select '#deliveries_place_309456473.deliveries_place' do
+      assert_select '.radio.disabled' do
+        assert_select 'label' do
+          assert_select 'input[type="radio"][name="offer"][disabled]'
+          assert_select 'h4.text-success' do
+            assert_select 'img.metro'
+            assert_select 'a.text-success[href="#"]', text: /Динамо,\s+в наличии 2 замены/
+          end
+        end
+      end
+    end
+  end
+
+  test 'Проверяем отображение формы добавления в корзину и заказаной позиции' do
+    travel_to Time.new(2015, 10, 04, 00, 00, 00) do
+      get :new, catalog_number: 'proverka_search'
+      assert_select '#deliveries_place.deliveries_place' do
+        assert_select ".radio" do
+          assert_select "label" do
+            assert_select 'input[type="radio"][name="offer"]'
+            assert_select 'h4.text-success' do
+              assert_select '*', text: /Под заказ,\s+743 руб.\s+доставка\s+4 окт./
+              assert_select 'small' do
+                assert_select 'a[window-dialog="/deliveries"][href="/deliveries"]', text: '(узнать стоимость доставки)'
+              end
+              assert_select 'span.text-success.text-xs' do
+                assert_select '*', text: /Акция/
+                assert_select '*', text: /219 руб./
+                assert_select 'a[href="/faqs/1074"][window-dialog="/faqs/1074"]', text: 'подробнее...'
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  test 'Проверяем отображение формы, когда заказной позиции нет, но есть в наличии в каком-нибудь из магазинов' do
+    #TODO это получится реализовать только когда буду работать с 404 страницей
+    skip
   end
 
 end

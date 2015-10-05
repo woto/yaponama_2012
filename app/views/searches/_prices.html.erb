@@ -1,0 +1,60 @@
+<%= simple_form_for @resource, url: [:user, @resource], remote: true do |f| %>
+
+  <div class="bottom-space-lg top-space-lg">
+
+    <% Deliveries::Place.random_list.each_with_index do |delivery_place, index| %>
+      <%= div_for(delivery_place) do %>
+        <% presence = mf_scope[:warehouses].find{|key, value| key == delivery_place.id}.try(:[], 1) %>
+        <% replacements = Hash[mf_scope[:replacements].map{|replacement_type, values| [replacement_type, Hash[values.map{|spare_info, warehouses| [spare_info, warehouses.find{|warehouse| warehouse.place_id == delivery_place.id}]}]]}] %>
+        <% replacements_count = replacements.count{|replacement_type, replacement| replacement.values.any?} %>
+
+        <div class="radio <%= 'disabled' if presence.blank? %>">
+          <label>
+            <input type="radio" name="offer" id="" value="" <%= 'disabled' if presence.blank? %>>
+            <h4 class="top-space-none bottom-space-none <%= (presence.blank? && replacements_count == 0) ? 'text-muted' : 'text-success' %>"> 
+              <% if presence.present? %>
+                <%= image_tag 'metro.jpg', class: 'metro' %> <%= delivery_place.metro %>,
+                <%= number_to_currency(presence.price, precision: 0) %> в наличии <%== count_decorator(presence.count) %>
+              <% elsif replacements_count > 0 %>
+                <%= image_tag 'metro.jpg', class: 'metro' %>
+                <a href="#" class="text-success"><%= delivery_place.metro %>,
+                  в наличии <%= replacements_count %> замены</a>
+              <% else %>
+                <%= image_tag 'metro.jpg', class: 'metro' %> <%= delivery_place.metro %>,
+                нет в наличии
+              <% end %>
+              <small><%= link_to '(контакты)', faq_path(delivery_place.faq_id), :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
+            </h4>
+          </label>
+        </div>
+        <hr />
+      <% end %>
+    <% end %>
+
+    <% offer = mf_scope[:offers].first %>
+
+    <div class="deliveries_place" id="deliveries_place">
+      <div class="radio <%= 'disabled' if offer.blank? %>">
+        <label>
+          <input type="radio" name="offer" id="" value="" <%= 'disabled' if offer.blank? %>>
+          <h4 class="top-space-none bottom-space-none <%= offer.blank? ? 'text-muted' : 'text-success'  %>">
+            <% if offer.present? %>
+              Под заказ,
+              <%= number_to_currency(offer[:retail_cost], precision: 0) %>
+              доставка
+              <%= l(Date.current + offer[:min_days].to_i.days, format: :short) %>
+              <small><%= link_to '(узнать стоимость доставки)', deliveries_path, :"window-dialog" => deliveries_path %></small><br />
+              <span class="text-success text-xs">Акция! Сделайте немного фотографий, напишите о процессе установки или использования товара и мы вернем вам на телефон или банковску карту <%= number_to_currency((offer[:retail_cost] - offer[:retail_cost]/100*4) - offer[:income_cost], precision: 0) %> <%= link_to 'подробнее...', faq_path(1074), :"window-dialog" => faq_path(1074) %></span>
+            <% else %>
+              доставка невозможна
+            <% end %>
+          </h4>
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+  <%= f.button :submit, title: 'Добавить в корзину', class: 'btn btn-success btn-lg', style: 'margin-left: 45px' %>
+
+<% end %>
