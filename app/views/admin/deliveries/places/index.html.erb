@@ -13,9 +13,39 @@
   <% end %>
 
   <%= p.content do %>
-    <% @resources.each do |resource| %>
-      <%= debug resource.attributes %>
+    <%= search_form_for(@q, url: url_for(action: :index), html: {class: 'form-inline'}) do |f| %>
+
+      <%= f.input :display_marker_true, as: :select, label: false %>
+
+      <%= f.button :submit, 'Поиск' %>
     <% end %>
+  <% end %>
+
+  <%= p.content do %>
+
+    <%= paginate @resources %>
+    <br />
+    <br />
+
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th> <%= @resource_class.human_attribute_name(:id) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:name) %> </th>
+        </tr>
+        <% @resources.each do |resource| %>
+          <tr>
+            <td> 
+              <%= resource.id %> <br />
+              <%= link_to "Просмотр", polymorphic_path([:admin, resource], return_path: request.fullpath) %> <br />
+              <%= link_to "Редактирование", polymorphic_path([:edit, :admin, resource], return_path: request.fullpath) %> <br />
+              <%= link_to "Удалить", polymorphic_path([:admin, resource], return_path: request.fullpath), method: :delete %>
+            </td>
+            <td> <%= resource.name %> </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
 
     <br />
     <%= paginate @resources %>
@@ -28,7 +58,6 @@
 
     <br />
     <br />
-
 
   <% end %>
 <% end %>
