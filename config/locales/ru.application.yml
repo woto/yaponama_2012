@@ -1,0 +1,14 @@
+ru:
+  replacements:
+    one: '%{count} замена'
+    few: '%{count} замены'
+    many: '%{count} замен'
+    other: '%{count} замен'
+  title: заголовок
+  body: статья
+  offers:
+    one: предложение
+    few: предложения
+    many: предложений
+    other: предложения
+  accumulators: аккумуляторов

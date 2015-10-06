@@ -149,11 +149,6 @@ class ProductsControllerTest < ActionController::TestCase
     assert_select "div[id='original']"
   end
 
-  test 'Ссылки' do
-    skip
-    # Протестировать ссылки на замены, купить и т.д.
-  end
-
   test 'Если spare_info имеет заполненный hstore, то он должен отобразиться в виде таблицы' do
     get :new, catalog_number: '2103'
     assert_select "table", html: /.*Свойство1.*Значение1/m
@@ -252,36 +247,63 @@ class ProductsControllerTest < ActionController::TestCase
   test 'Проверяем визуальное представление замен' do
     get :new, catalog_number: '3310'
     assert_select '.new_num_from' do
-      assert_select 'h4', text: 'Просматриваемый вами номер ранее поставлялся производителем под номером:'
+      assert_select 'h5', text: 'Просматриваемый вами товар ранее поставлялся производителем под номером:'
       assert_select 'a[href="/user/products/new?catalog_number=2102"]'
     end
     assert_select '.new_num_to' do
-      assert_select 'h4', text: 'Просматриваемый вами номер был заменен производителем на номер:'
+      assert_select 'h5', text: 'Просматриваемый вами товар теперь поставляется производителем под номером:'
       assert_select 'a[href="/user/products/new?catalog_number=2102"]'
     end
     assert_select '.same_num_from' do
-      assert_select 'h4', text: 'Просматриваемый вами номер так же маркируется как:'
+      assert_select 'h5', text: 'Просматриваемый вами товар так же маркируется производителем как:'
       assert_select 'a[href="/user/products/new?catalog_number=2102"]'
     end
     assert_select '.same_num_to' do
-      assert_select 'h4', text: 'Просматриваемый вами номер так же маркируется как:'
+      assert_select 'h5', text: 'Просматриваемый вами товар так же маркируется производителем как:'
       assert_select 'a[href="/user/products/new?catalog_number=2102"]'
     end
     assert_select '.repl_num_from' do
-      assert_select 'h4', text: 'Просматриваемый вами номер является заменой для следующих номеров:'
+      assert_select 'h5', text: 'Просматриваемый вами товар является заменой для следующих номеров:'
       assert_select 'a[href="/user/products/new?catalog_number=2102"]'
     end
     assert_select '.repl_num_to' do
-      assert_select 'h4', text: 'Просматриваемый вами номер можно заменить следующими номерами:'
+      assert_select 'h5', text: 'Просматриваемый вами товар можно заменить следующими номерами:'
       assert_select 'a[href="/user/products/new?catalog_number=2102"]'
     end
     assert_select '.part_num_from' do
-      assert_select 'h4', text: 'Просматриваемый вами товар содержит следующие товары:'
+      assert_select 'h5', text: 'Просматриваемый вами товар содержит следующие товары:'
       assert_select 'a[href="/user/products/new?catalog_number=2102"]'
     end
     assert_select '.part_num_to' do
-      assert_select 'h4', text: 'Просматриваемый вами товар входит в состав следующих товаров:'
+      assert_select 'h5', text: 'Просматриваемый вами товар входит в состав следующих товаров:'
       assert_select 'a[href="/user/products/new?catalog_number=2102"]'
+    end
+  end
+
+  test 'Проверяем наличие разметки модального окна и ссылки для его вызова, в случае наличия замен' do
+    get :new, catalog_number: '3310'
+    assert_select '#deliveries_place_309456473' do
+      assert_select 'a[data-toggle="modal"][data-target="#replacements_deliveries_place_309456473"]'
+    end
+    assert_select '#replacements_deliveries_place_309456473.modal'
+  end
+
+  test 'Если нет наличия и замен, то модальное окно отсутствует' do
+    get :new, catalog_number: '3310'
+    assert_select '#deliveries_place_908005739.modal', false
+  end
+
+  test 'Если есть наличие и замены, то модальное окно все равно не показывается' do
+    get :new, catalog_number: '2102'
+    assert_equal deliveries_places(:first), warehouses(:infiniti_3310).place
+    assert_equal deliveries_places(:first), warehouses(:nissan_2102).place
+    assert_select '#replacements_deliveries_place_309456473', false
+  end
+
+  test 'Проверяем, строчку с заменами на предмет отображения минимальной цены' do
+    get :new, catalog_number: 'REPLMINCOST1'
+    assert_select '#deliveries_place_309456473' do
+      assert_select 'h4', text: /Динамо,\s+в наличии 2 замены, от 2 492 руб./
     end
   end
 

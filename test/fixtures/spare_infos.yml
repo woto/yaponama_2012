@@ -144,3 +144,18 @@ spare_info_phrases_destroy_test:
   catalog_number: 'spare_info_phrases_destroy_test'
   brand: toyota
   spare_catalog: rulevaya_tyga
+
+repl_min_cost_1:
+  catalog_number: REPLMINCOST1
+  spare_catalog: rulevaya_tyga
+  brand: nissan
+
+repl_min_cost_2:
+  catalog_number: REPLMINCOST2
+  spare_catalog: rulevaya_tyga
+  brand: nissan
+
+repl_min_cost_3:
+  catalog_number: REPLMINCOST3
+  spare_catalog: rulevaya_tyga
+  brand: nissan

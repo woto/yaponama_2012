@@ -81,3 +81,21 @@ part_num_to:
   to_spare_info: kia_2102
   wrong: false
   status: <%= SpareReplacement.statuses[:part_num] %>
+
+nissan_2102_inifiniti_3310:
+  from_spare_info: nissan_2102
+  to_spare_info: infiniti_3310
+  wrong: false
+  status: <%= SpareReplacement.statuses[:repl_num] %>
+
+repl_min_cost_1_repl_min_cost_2:
+  from_spare_info: repl_min_cost_1
+  to_spare_info: repl_min_cost_2
+  wrong: false
+  status: <%= SpareReplacement.statuses[:repl_num] %>
+
+repl_min_cost_1_repl_min_cost_3:
+  from_spare_info: repl_min_cost_1
+  to_spare_info: repl_min_cost_3
+  wrong: false
+  status: <%= SpareReplacement.statuses[:repl_num] %>

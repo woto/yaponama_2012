@@ -38,3 +38,6 @@
 1, weight_grams, brand, title, 1,,,,,500
 3, weight_grams, brand, title, 1,,,,,455
 3, weight_grams, brand, title, 1,,,,,500
+5, repl_min_cost_1, NISSAN, title, 9381
+2, repl_min_cost_2, NISSAN, title, 10212
+8, repl_min_cost_3, NISSAN, title, 3912

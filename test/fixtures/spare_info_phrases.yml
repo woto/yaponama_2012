@@ -107,3 +107,18 @@ spare_info_phrases_destroy_test2:
   catalog_number: 'spare_info_phrases_destroy_test2'
   spare_info: spare_info_phrases_destroy_test
   primary: false
+
+repl_min_cost_1:
+  catalog_number: 'REPLMINCOST1'
+  spare_info: repl_min_cost_1
+  primary: true
+
+repl_min_cost_2:
+  catalog_number: 'REPLMINCOST2'
+  spare_info: repl_min_cost_2
+  primary: true
+
+repl_min_cost_3:
+  catalog_number: 'REPLMINCOST3'
+  spare_info: repl_min_cost_3
+  primary: true

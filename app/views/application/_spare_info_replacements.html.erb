@@ -1,77 +1,92 @@
 <% if replacements.any?{|key, value| value.any?} %>
 
-  <h3 class="top-space-lg">Замены и аналоги</h3>
   <% replacements.each do |key, value| %>
     <% case key %>
     <% when :new_num_from %>
       <div class="new_num_from">
         <% if value.any? %>
-          <h4>Просматриваемый вами номер ранее поставлялся производителем под номером:</h4>
-          <% value.each do |spare_info| %>
-            <%= link_to spare_info.to_label, polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %>
+          <h5 class="top-space-none">Просматриваемый вами товар ранее поставлялся производителем под номером:</h5>
+          <% value.each do |spare_info, warehouses| %>
+            <% warehouses.each do |warehouse| %>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+            <% end %>
           <% end  %>
         <% end %>
       </div>
     <% when :new_num_to %>
       <div class="new_num_to">
         <% if value.any? %>
-          <h4>Просматриваемый вами номер был заменен производителем на номер:</h4>
-          <% value.each do |spare_info| %>
-            <%= link_to spare_info.to_label, polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %>
+          <h5>Просматриваемый вами товар теперь поставляется производителем под номером:</h5>
+          <% value.each do |spare_info, warehouses| %>
+            <% warehouses.each do |warehouse| %>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+            <% end %>
           <% end  %>
         <% end %>
       </div>
     <% when :same_num_from %>
       <div class="same_num_from">
         <% if value.any? %>
-          <h4>Просматриваемый вами номер так же маркируется как:</h4>
-          <% value.each do |spare_info| %>
-            <%= link_to spare_info.to_label, polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %>
+          <h5>Просматриваемый вами товар так же маркируется производителем как:</h5>
+          <% value.each do |spare_info, warehouses| %>
+            <% warehouses.each do |warehouse| %>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+            <% end %>
           <% end  %>
         <% end %>
       </div>
     <% when :same_num_to %>
       <div class="same_num_to">
         <% if value.any? %>
-          <h4>Просматриваемый вами номер так же маркируется как:</h4>
-          <% value.each do |spare_info| %>
-            <%= link_to spare_info.to_label, polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %>
+          <h5>Просматриваемый вами товар так же маркируется производителем как:</h5>
+          <% value.each do |spare_info, warehouses| %>
+            <% warehouses.each do |warehouse| %>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+            <% end %>
           <% end  %>
         <% end %>
       </div>
     <% when :repl_num_from %>
       <div class="repl_num_from">
         <% if value.any? %>
-          <h4>Просматриваемый вами номер является заменой для следующих номеров:</h4>
-          <% value.each do |spare_info| %>
-            <%= link_to spare_info.to_label, polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %>
+          <h5>Просматриваемый вами товар является заменой для следующих номеров:</h5>
+          <% value.each do |spare_info, warehouses| %>
+            <% warehouses.each do |warehouse| %>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+            <% end %>
           <% end  %>
         <% end %>
       </div>
     <% when :repl_num_to %>
       <div class="repl_num_to">
         <% if value.any? %>
-          <h4>Просматриваемый вами номер можно заменить следующими номерами:</h4>
-          <% value.each do |spare_info| %>
-            <%= link_to spare_info.to_label, polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %>
+          <h5>Просматриваемый вами товар можно заменить следующими номерами:</h5>
+          <% value.each do |spare_info, warehouses| %>
+            <% warehouses.each do |warehouse| %>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+            <% end %>
           <% end  %>
         <% end %>
       </div>
     <% when :part_num_from %>
       <div class="part_num_from">
         <% if value.any? %>
-          <h4>Просматриваемый вами товар содержит следующие товары:</h4>
-          <% value.each do |spare_info| %>
-            <%= link_to spare_info.to_label, polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %>
+          <h5>Просматриваемый вами товар содержит следующие товары:</h5>
+          <% value.each do |spare_info, warehouses| %>
+            <% warehouses.each do |warehouse| %>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+            <% end %>
           <% end  %>
         <% end %>
       </div>
     <% when :part_num_to %>
       <div class="part_num_to">
         <% if value.any? %>
-          <h4>Просматриваемый вами товар входит в состав следующих товаров:</h4>
-          <% value.each do |spare_info| %>
-            <%= link_to spare_info.to_label, polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %>
+          <h5>Просматриваемый вами товар входит в состав следующих товаров:</h5>
+          <% value.each do |spare_info, warehouses| %>
+            <% warehouses.each do |warehouse| %>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+            <% end %>
           <% end  %>
         <% end %>
       </div>

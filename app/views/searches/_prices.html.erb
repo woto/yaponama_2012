@@ -3,11 +3,42 @@
   <div class="bottom-space-lg top-space-lg">
 
     <% Deliveries::Place.random_list.each_with_index do |delivery_place, index| %>
-      <%= div_for(delivery_place) do %>
-        <% presence = mf_scope[:warehouses].find{|key, value| key == delivery_place.id}.try(:[], 1) %>
-        <% replacements = Hash[mf_scope[:replacements].map{|replacement_type, values| [replacement_type, Hash[values.map{|spare_info, warehouses| [spare_info, warehouses.find{|warehouse| warehouse.place_id == delivery_place.id}]}]]}] %>
-        <% replacements_count = replacements.count{|replacement_type, replacement| replacement.values.any?} %>
 
+
+      <% presence = mf_scope[:warehouses].find{|key, value| key == delivery_place.id}.try(:[], 1) %>
+      <%# replacements = Hash[mf_scope[:replacements].map{|replacement_type, values| [replacement_type, Hash[values.map{|spare_info, warehouses| [spare_info, warehouses.find{|warehouse| warehouse.place_id == delivery_place.id}]}]]}] %>
+      <%# replacements_count = replacements.count{|replacement_type, replacement| replacement.values.any?} %>
+      <% replacements_min_cost = 10000000 %>
+      <% replacements = Hash[mf_scope[:replacements].map do |replacement_type, values| %>
+        <% res = {} %>
+        <% values.each do |spare_info, warehouses| %>
+          <% if warehouse = warehouses.find{|warehouse| warehouse.place_id == delivery_place.id} %>
+            <% replacements_min_cost = [replacements_min_cost, warehouse.price].min %>
+            <% res[spare_info] = [warehouse] %>
+          <% end %>
+        <% end %>
+        <% [replacement_type, res] %>
+      <% end] %>
+      <% replacements_count = replacements.sum{|replacement_type, replacement| replacement.values.count} %>
+
+
+      <!-- Replacements -->
+      <% if presence.blank? && replacements_count > 0 %>
+        <%= modal id: dom_id(delivery_place, :replacements) do |m| %>
+          <%= m.header do |h| %>
+            <%= h.close %>
+            <%= h.title do %>
+              Замены для <%= catalog_number %> (<%= manufacturer %>) в наличии на <%= image_tag 'metro.jpg', class: 'metro' %> <%= delivery_place.metro %>
+            <% end %>
+          <% end %>
+          <%= m.body do %>
+            <%= render 'spare_info_replacements', replacements: replacements %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+
+      <%= div_for(delivery_place) do %>
         <div class="radio <%= 'disabled' if presence.blank? %>">
           <label>
             <input type="radio" name="offer" id="" value="" <%= 'disabled' if presence.blank? %>>
@@ -17,8 +48,8 @@
                 <%= number_to_currency(presence.price, precision: 0) %> в наличии <%== count_decorator(presence.count) %>
               <% elsif replacements_count > 0 %>
                 <%= image_tag 'metro.jpg', class: 'metro' %>
-                <a href="#" class="text-success"><%= delivery_place.metro %>,
-                  в наличии <%= replacements_count %> замены</a>
+                <a href="#" class="text-success" data-toggle="modal" data-target="#<%= dom_id(delivery_place, :replacements) %>"><%= delivery_place.metro %>,
+                  в наличии <%= I18n.translate :replacements, count: replacements_count %>, от <%= number_to_currency(replacements_min_cost, precision: 0) %></a>
               <% else %>
                 <%= image_tag 'metro.jpg', class: 'metro' %> <%= delivery_place.metro %>,
                 нет в наличии

@@ -9,3 +9,33 @@ bosh_s4_005_same_number:
   count: 1
   price: 5500
   place: first
+
+kia_2102:
+  spare_info: kia_2102
+  count: 1
+  price: 3321
+  place: first
+
+nissan_2102:
+  spare_info: nissan_2102
+  count: 5
+  price: 3821
+  place: first
+
+infiniti_3310:
+  spare_info: infiniti_3310
+  count: 3
+  price: 3921
+  place: first
+
+repl_min_cost_2:
+  spare_info: repl_min_cost_2
+  count: 3
+  price: 2492
+  place: first
+
+repl_min_cost_3:
+  spare_info: repl_min_cost_3
+  count: 5
+  price: 2812
+  place: first

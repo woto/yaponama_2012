@@ -61,7 +61,12 @@ class PriceMate
   end
 
   def self.warehouses(formatted_data)
-    # TODO
+    formatted_data.each do |catalog_number, cn_scope|
+      cn_scope.each do |manufacturer, mf_scope|
+        warehouses = mf_scope[:info] ? mf_scope[:info].warehouses : []
+        mf_scope[:warehouses] = Hash[warehouses.map{|warehouse| [warehouse.place_id, warehouse]}]
+      end
+    end
     formatted_data
   end
 
@@ -70,43 +75,43 @@ class PriceMate
       cn_scope.each do |manufacturer, mf_scope|
 
         mf_scope[:replacements] = {
-          new_num_from: [],
-          new_num_to: [],
-          same_num_from: [],
-          same_num_to: [],
-          repl_num_from: [],
-          repl_num_to: [],
-          part_num_from: [],
-          part_num_to: []
+          new_num_from: {},
+          new_num_to: {},
+          same_num_from: {},
+          same_num_to: {},
+          repl_num_from: {},
+          repl_num_to: {},
+          part_num_from: {},
+          part_num_to: {}
         }
 
         if mf_scope[:info].present?
-          from = mf_scope[:info].from_spare_replacements.where(wrong: false)
-          to =  mf_scope[:info].to_spare_replacements.where(wrong: false)
+          from = mf_scope[:info].from_spare_replacements.where(wrong: false).includes(:to_spare_info => :warehouses)
+          to =  mf_scope[:info].to_spare_replacements.where(wrong: false).includes(:from_spare_info => :warehouses)
 
           to.each do |replacement|
             case replacement.status
             when 'new_num'
-              mf_scope[:replacements][:new_num_from] << replacement.from_spare_info
+              mf_scope[:replacements][:new_num_from].merge!(replacement.from_spare_info => replacement.from_spare_info.warehouses)
             when 'same_num'
-              mf_scope[:replacements][:same_num_from] << replacement.from_spare_info
+              mf_scope[:replacements][:same_num_from].merge!(replacement.from_spare_info => replacement.from_spare_info.warehouses)
             when 'repl_num'
-              mf_scope[:replacements][:repl_num_from] << replacement.from_spare_info
+              mf_scope[:replacements][:repl_num_from].merge!(replacement.from_spare_info => replacement.from_spare_info.warehouses)
             when 'part_num'
-              mf_scope[:replacements][:part_num_from] << replacement.from_spare_info
+              mf_scope[:replacements][:part_num_from].merge!(replacement.from_spare_info => replacement.from_spare_info.warehouses)
             end
           end
 
           from.each do |replacement|
             case replacement.status
             when 'new_num'
-              mf_scope[:replacements][:new_num_to] << replacement.to_spare_info
+              mf_scope[:replacements][:new_num_to].merge!(replacement.to_spare_info => replacement.to_spare_info.warehouses)
             when 'same_num'
-              mf_scope[:replacements][:same_num_to] << replacement.to_spare_info
+              mf_scope[:replacements][:same_num_to].merge!(replacement.to_spare_info => replacement.to_spare_info.warehouses)
             when 'repl_num'
-              mf_scope[:replacements][:repl_num_to] << replacement.to_spare_info
+              mf_scope[:replacements][:repl_num_to].merge!(replacement.to_spare_info => replacement.to_spare_info.warehouses)
             when 'part_num'
-              mf_scope[:replacements][:part_num_to] << replacement.to_spare_info
+              mf_scope[:replacements][:part_num_to].merge!(replacement.to_spare_info => replacement.to_spare_info.warehouses)
             end
           end
         end

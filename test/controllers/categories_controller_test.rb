@@ -15,7 +15,7 @@ class CategoriesControllerTest < ActionController::TestCase
               assert_select 'a', text: 'Рулевой редуктор, рулевая рейка'
               assert_select 'ul' do
                 assert_select 'li' do
-                  assert_select 'a[href=?]', category_path(spare_catalogs(:rulevaya_tyga)), html: 'РУЛЕВАЯ ТЯГА<small class="text-muted"> (5 шт.)</small>'
+                  assert_select 'a[href=?]', category_path(spare_catalogs(:rulevaya_tyga)), html: 'РУЛЕВАЯ ТЯГА<small class="text-muted"> (8 шт.)</small>'
                 end
               end
             end
