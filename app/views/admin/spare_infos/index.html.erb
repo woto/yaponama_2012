@@ -13,16 +13,16 @@
   <% end %>
 
   <%= p.content do %>
-
-    <%= row class: 'bottom-space-lg' do %>
-      <div class="col-md-10">
-        <%= search_form_for(@q, url: url_for(action: :index)) do |f| %>
-          <%= f.input :catalog_number_eq %>
-          <%= f.input :image1_present, as: :select %>
-          <%= f.button :submit, 'Поиск' %>
-        <% end %>
-      </div>
+    <%= search_form_for @q, url: url_for(action: :index), html: {class: 'form-inline'} do |f| %>
+      <%= f.input :catalog_number_eq, label: false, placeholder: "Каталожный номер" %>
+      <%= f.input :brand_name_eq, label: false, placeholder: "Производитель" %>
+      <%= f.button :submit, 'Поиск' %>
     <% end %>
+  <% end %>
+
+  <br />
+
+  <%= p.content do %>
 
     <%= paginate @resources %>
     <br />
