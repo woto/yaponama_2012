@@ -4,7 +4,6 @@ class CreateBrands < ActiveRecord::Migration
       t.string :name
       t.string :path
       t.references :brand, index: true
-      t.string :cached_brand
       t.string :image
       t.integer :rating
       t.text :content

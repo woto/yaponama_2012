@@ -5,16 +5,9 @@ class CreateCars < ActiveRecord::Migration
       t.string :period
 
       t.belongs_to :brand, index: true
-      t.string :cached_brand
-
       t.belongs_to :model, index: true
-      t.string :cached_model
-
       t.belongs_to :generation, index: true
-      t.string :cached_generation
-
       t.belongs_to :modification, index: true
-      t.string :cached_modification
 
       t.string :dvigatel
       t.string :tip
