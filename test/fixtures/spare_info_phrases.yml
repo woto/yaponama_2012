@@ -122,3 +122,8 @@ repl_min_cost_3:
   catalog_number: 'REPLMINCOST3'
   spare_info: repl_min_cost_3
   primary: true
+
+product_incart:
+  catalog_number: 'PRODUCTINCART'
+  spare_info: product_incart
+  primary: true

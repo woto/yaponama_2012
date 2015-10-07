@@ -15,10 +15,7 @@ class CreateProducts < ActiveRecord::Migration
       t.boolean :hide_catalog_number, default: false
       t.string :status
       t.integer :probability
-
-      t.references :product, index: true
       t.references :order, index: true
-      t.references :supplier, index: true
 
       t.timestamps
     end

@@ -7,6 +7,7 @@ sailentblock:
 
 bamper_zadniy:
   name: "БАМПЕР ЗАДНИЙ"
+  spare_catalog_group: kuzov
 
 pylnik_rulevoi_reiki:
   name: "ПЫЛЬНИК РУЛЕВОЙ РЕЙКИ"
@@ -33,3 +34,6 @@ truck_tire:
 
 destroy_test:
   name: Тест удаления связных записей
+
+unsorted:
+  name: Не разобранные

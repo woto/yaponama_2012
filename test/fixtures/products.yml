@@ -918,7 +918,6 @@ ivan4:
 sending1:
   catalog_number: 1
   brand: sending1
-  cached_order: 283-14-074
   short_name: 1
   long_name: 1
   quantity_ordered: 1
@@ -942,7 +941,6 @@ sending1:
 receiving1:
   catalog_number: 1
   brand: receiving1
-  cached_order: 321-14-074
   short_name: 1
   long_name: 1
   quantity_ordered: 1
@@ -966,7 +964,6 @@ receiving1:
 michael:
   catalog_number: '1111111111'
   brand: michael
-  cached_order: 404-14-104
   short_name: "НАЗВАНИЕ 1"
   long_name: "НАЗВАНИЕ 1, НАЗВАНИЕ 2"
   quantity_ordered: '1'
@@ -978,7 +975,6 @@ michael:
   hide_catalog_number: f
   status: inorder
   probability: '55'
-  product_id: 
   order: michael
   created_at: '2014-10-14 05:30:18.875194'
   updated_at: '2014-10-14 05:30:38.959572'
@@ -987,3 +983,15 @@ michael:
   notes_invisible: ''
   user: michael
   creator: michael
+
+ki_2103:
+  catalog_number: '2103'
+  brand: ki
+  buy_cost: 1
+  sell_cost: 1
+  quantity_ordered: 1
+
+product_incart:
+  catalog_number: 'PRODUCTINCART'
+  brand: nissan
+  user: user

@@ -159,3 +159,8 @@ repl_min_cost_3:
   catalog_number: REPLMINCOST3
   spare_catalog: rulevaya_tyga
   brand: nissan
+
+product_incart:
+  catalog_number: 'PRODUCTINCART'
+  spare_catalog: unsorted
+  brand: nissan

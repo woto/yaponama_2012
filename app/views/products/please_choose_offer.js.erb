@@ -1,0 +1,7 @@
+dialog = bootbox.dialog({
+  title: "Пожалуйста выберите способ получения товара",
+  message: '<%== j "<div class='discourse-cooked'>#{(get_faqs.find{|faq| faq['id'] == 1076}['post'])}</div>" %>',
+  backdrop: true,
+  onEscape: function(){dialog.modal("hide");},
+  size: 'large'
+});

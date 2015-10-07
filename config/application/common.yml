@@ -1,7 +1,7 @@
 defaults: &defaults
   share_buttons: true
   suppress_exceptions: true
-  display_tawk_to: true
+  display_tawk_to: false
   display_counters: true
   mail: "Авториф <info@avtorif.ru>"
 

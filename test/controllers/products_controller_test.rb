@@ -2,6 +2,10 @@ require 'test_helper'
 
 class ProductsControllerTest < ActionController::TestCase
 
+  class FakeController < ApplicationController
+    include ProductsConcern
+  end
+
   test 'Искомый артикул отсутствует' do
     get :new, catalog_number: 473983473298432894
     assert_response 404
@@ -338,13 +342,13 @@ class ProductsControllerTest < ActionController::TestCase
 
   test 'Проверяем разметку формы' do
     get :new, catalog_number: 'proverka_search'
-    assert_select 'form[action="/user/products"][data-remote="true"][method="post"]'
+    assert_select '#form-PROVERKASEARCH-proizvodit[action="/user/products"][data-remote="true"][method="post"]'
   end
 
   test 'У магазина должна быть ссылка контакты' do
     get :new, catalog_number: 'S4 005'
     assert_select '#deliveries_place_309456473.deliveries_place' do
-      assert_select 'a[window-dialog="/faqs/1069"][href="/faqs/1069"]', text: '(контакты)'
+      assert_select 'a[window-dialog="/faqs/1069"][href="/faqs/1069"]', text: 'контакты'
     end
   end
 
@@ -353,7 +357,7 @@ class ProductsControllerTest < ActionController::TestCase
     assert_select '#deliveries_place_309456473.deliveries_place' do
       assert_select '.radio:not(.disabled)' do
         assert_select 'label' do
-          assert_select 'input[type="radio"][name="offer"]:not([disabled])'
+          assert_select 'input#offer_deliveries_place_309456473[type="radio"][name="offer"]:not([disabled])'
           assert_select 'h4.text-success' do
             assert_select 'img.metro'
             assert_select '*', text: /Динамо,\s+5 500 руб. в наличии 1 шт./
@@ -399,11 +403,11 @@ class ProductsControllerTest < ActionController::TestCase
       assert_select '#deliveries_place.deliveries_place' do
         assert_select ".radio" do
           assert_select "label" do
-            assert_select 'input[type="radio"][name="offer"]'
+            assert_select 'input#offer_deliveries_place[type="radio"][name="offer"]'
             assert_select 'h4.text-success' do
               assert_select '*', text: /Под заказ,\s+743 руб.\s+доставка\s+4 окт./
               assert_select 'small' do
-                assert_select 'a[window-dialog="/deliveries"][href="/deliveries"]', text: '(узнать стоимость доставки)'
+                assert_select 'a[window-dialog="/deliveries"][href="/deliveries"]', text: 'узнать стоимость доставки'
               end
               assert_select 'span.text-success.text-xs' do
                 assert_select '*', text: /Акция/
@@ -414,6 +418,51 @@ class ProductsControllerTest < ActionController::TestCase
           end
         end
       end
+    end
+  end
+
+  test 'Если товара нет в корзине, то отображается кнопка Добавить в корзину' do
+    get :new, catalog_number: 'proverka_search'
+    assert_select 'input#submit-PROVERKASEARCH-proizvodit[type=submit][name=proizvodit]'
+  end
+
+  test 'Если товар уже находится в корзине, то кнопки добавления в корзину нет' do
+    sign_in users(:user)
+    get :new, catalog_number: 'product_incart'
+    assert_select 'input#submit-PROVERKASEARCH-proizvodit[type=submit][name=proizvodit]', false
+  end
+
+  test 'Если товар уже находится в корзине, то отображется текст об этом' do
+    sign_in users(:user)
+    get :new, catalog_number: 'product_incart'
+    assert_select 'h4#incart-PRODUCTINCART-nissan'
+  end
+
+  test 'Ну и если товара в корзине у пользователя нет, то текст о наличии товара в корзине соответственно не показывается' do
+    get :new, catalog_number: 'product_incart'
+    assert_select 'h4#incart-PRODUCTINCART-nissan', false
+  end
+
+  test 'Пустой переданный offer должен привести к отображению справочной информации' do
+    xhr :post, :create
+    assert_template 'please_choose_offer'
+  end
+
+  test 'Переданный правильный offer должен добавить товар покупателю со статусом incart' do
+    user = users(:guest)
+    sign_in(user)
+    brand_id = brands(:nissan).id
+    cntrl = FakeController.new
+
+    assert_difference -> {user.products.count} do
+      xhr :post, :create, offer: cntrl.serialize_product(catalog_number: 'catalog_number', brand_id: brand_id, quantity_ordered: 1, sell_cost: 1, short_name: 1, long_name: 1, buy_cost: 1, quantity_available: 1, probability: 1, min_days: 1, max_days: 1)
+    end
+    assert_equal 'incart', assigns(:resource).status
+  end
+
+  test 'Переданный неправильно offer должен сгенерировать исключение' do
+    assert_raise ActiveRecord::RecordInvalid do
+      xhr :post, :create, offer: '123'
     end
   end
 
