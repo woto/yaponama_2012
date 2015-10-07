@@ -128,3 +128,8 @@ titles_as_string:
   model: galant
   generation: galant_9_2
   modification: mitsubishi_galant_9_2_cn_sedan
+
+hy_solaris:
+  spare_info: kia_2102
+  brand: hy
+  model: hy_solaris

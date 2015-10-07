@@ -16,6 +16,7 @@
     <%= search_form_for @q, url: url_for(action: :index), html: {class: 'form-inline'} do |f| %>
       <%= f.input :catalog_number_eq, label: false, placeholder: "Каталожный номер" %>
       <%= f.input :brand_name_eq, label: false, placeholder: "Производитель" %>
+      <%= f.input :image1_present, as: :select %>
       <%= f.button :submit, 'Поиск' %>
     <% end %>
   <% end %>
@@ -39,22 +40,8 @@
           <th> <%= @resource_class.human_attribute_name :fix_spare_catalog %> </th>
           <th> <%= @resource_class.human_attribute_name :notes %> </th>
           <th> <%= @resource_class.human_attribute_name :notes_invisible %> </th>
-          <th> <%= @resource_class.human_attribute_name :image1 %> </th>
-          <th> <%= @resource_class.human_attribute_name :image2 %> </th>
-          <th> <%= @resource_class.human_attribute_name :image3 %> </th>
-          <th> <%= @resource_class.human_attribute_name :image4 %> </th>
-          <th> <%= @resource_class.human_attribute_name :image5 %> </th>
-          <th> <%= @resource_class.human_attribute_name :image6 %> </th>
-          <th> <%= @resource_class.human_attribute_name :image7 %> </th>
-          <th> <%= @resource_class.human_attribute_name :image8 %> </th>
-          <th> <%= @resource_class.human_attribute_name :file1 %> </th>
-          <th> <%= @resource_class.human_attribute_name :file2 %> </th>
-          <th> <%= @resource_class.human_attribute_name :file3 %> </th>
-          <th> <%= @resource_class.human_attribute_name :file4 %> </th>
-          <th> <%= @resource_class.human_attribute_name :file5 %> </th>
-          <th> <%= @resource_class.human_attribute_name :file6 %> </th>
-          <th> <%= @resource_class.human_attribute_name :file7 %> </th>
-          <th> <%= @resource_class.human_attribute_name :file8 %> </th>
+          <th> <%= @resource_class.human_attribute_name :images %> </th>
+          <th> <%= @resource_class.human_attribute_name :files %> </th>
           <th> <%= @resource_class.human_attribute_name :hstore %> </th>
           <th> <%= @resource_class.human_attribute_name :titles %> </th>
           <th> <%= @resource_class.human_attribute_name :min_days %> </th>
@@ -88,22 +75,26 @@
             <td> <%= resource.fix_spare_catalog %> </td>
             <td> <%= resource.notes %> </td>
             <td> <%= resource.notes_invisible %> </td>
-            <td> <%= resource.image1 %> </td>
-            <td> <%= resource.image2 %> </td>
-            <td> <%= resource.image3 %> </td>
-            <td> <%= resource.image4 %> </td>
-            <td> <%= resource.image5 %> </td>
-            <td> <%= resource.image6 %> </td>
-            <td> <%= resource.image7 %> </td>
-            <td> <%= resource.image8 %> </td>
-            <td> <%= resource.file1 %> </td>
-            <td> <%= resource.file2 %> </td>
-            <td> <%= resource.file3 %> </td>
-            <td> <%= resource.file4 %> </td>
-            <td> <%= resource.file5 %> </td>
-            <td> <%= resource.file6 %> </td>
-            <td> <%= resource.file7 %> </td>
-            <td> <%= resource.file8 %> </td>
+            <td>
+              <%= resource.image1 %> <br />
+              <%= resource.image2 %> <br />
+              <%= resource.image3 %> <br />
+              <%= resource.image4 %> <br />
+              <%= resource.image5 %> <br />
+              <%= resource.image6 %> <br />
+              <%= resource.image7 %> <br />
+              <%= resource.image8 %>
+            </td>
+            <td>
+              <%= resource.file1 %> <br />
+              <%= resource.file2 %> <br />
+              <%= resource.file3 %> <br />
+              <%= resource.file4 %> <br />
+              <%= resource.file5 %> <br />
+              <%= resource.file6 %> <br />
+              <%= resource.file7 %> <br />
+              <%= resource.file8 %>
+            </td>
             <td> <%= resource.hstore %> </td>
             <td> <%= resource.titles %> </td>
             <td> <%= resource.min_days %> </td>

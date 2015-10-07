@@ -242,7 +242,18 @@ class PriceMateTest < ActiveSupport::TestCase
   end
 
   test 'PriceMate.warehouses' do
-    skip
+    spare_info = spare_infos(:bosh_s4_005_same_number)
+    delivery_place = deliveries_places(:first)
+    warehouse = warehouses(:bosh_s4_005_same_number)
+    data = {
+      "S4005" => {
+        "Bosch" => {
+          info: spare_info
+        }
+      }
+    }
+    res = PriceMate.warehouses(data)
+    assert_equal({delivery_place.id => warehouse}, res["S4005"]["Bosch"][:warehouses])
   end
 
 end

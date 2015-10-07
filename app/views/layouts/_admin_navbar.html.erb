@@ -4,7 +4,7 @@
 
     <div class="navbar-header">
 
-      <a class="navbar-brand" href="/admin">
+      <a class="navbar-brand" href="/">
         <%= image_tag "logo.png", alt: ckpart('name') %>
       </a>
 
@@ -49,8 +49,6 @@
             <li role="presentation" class="dropdown-header">Товары</li>
             <li> <%= link_to "Описания", admin_spare_infos_path %> </li>
             <li> <%= link_to "Применимость", admin_spare_applicabilities_path %> </li>
-            <li> <%= link_to "Категории", admin_spare_catalogs_path %> </li>
-            <li> <%= link_to "Группы категорий", admin_spare_catalog_groups_path %> </li>
             <% if false %>
             <%= dd.submenu do %>
               <%= dd.toggle do %>
@@ -62,6 +60,10 @@
             <% end %>
             <% end %>
             <li> <%= link_to "Замены", admin_spare_replacements_path %> </li>
+            <%= divider %>
+            <li role="presentation" class="dropdown-header">Категории</li>
+            <li> <%= link_to "Категории", admin_spare_catalogs_path %> </li>
+            <li> <%= link_to "Группы категорий", admin_spare_catalog_groups_path %> </li>
           <% end %>
         <% end %>
 
@@ -79,7 +81,6 @@
                 Доставка
               <% end %>
               <%= dd.menu do %>
-                <li> <%= link_to "Опции заказов", admin_deliveries_options_path  %> </li>
                 <li> <%= link_to "Выделенные зоны", admin_deliveries_places_path %> </li>
                 <!--
                 /= divider
@@ -129,6 +130,8 @@
             <%= caret %>
           <% end %>
           <%= dd.menu do %>
+            <li> <%= link_to "Главная страница", root_path %> </li>
+            <%= divider %>
             <li> <%= link_to "Личный кабинет", admin_user_path(current_user) %> </li>
             <li> <%= link_to "Выход", destroy_user_session_path, :method => :delete %> </li>
           <% end %>

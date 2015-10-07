@@ -1,7 +1,7 @@
 class Bootstrap::Modal::Header < Bootstrap::Bootstrap
 
   def close &block
-    @template.content_tag :button, '×', class: 'close', type: 'button', data: { dismiss: 'modal' }, 'aria-hidden' => 'true'
+    @template.content_tag :button, '×', class: 'close', type: 'button', data: { dismiss: 'modal' }
   end
 
   def title

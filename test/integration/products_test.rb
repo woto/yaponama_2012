@@ -93,5 +93,25 @@ class ProductsTest < ActionDispatch::IntegrationTest
     assert_response 200
   end
 
+  test 'iCheck должен добавлять id с написанным iCheck вначале к элементу управления' do
+    visit new_user_product_path(catalog_number: '2102')
+    find('#iCheck-offer_deliveries_place_309456473').click
+    click_button 'submit-2102-nissan'
+    assert_text 'Товар добавлен в корзину'
+    sleep 10
+  end
+
+  test 'После успешного добавления товара в корзину должны появиться слова о том, что товар помещен в корзину' do
+    visit new_user_product_path(catalog_number: '2102')
+    find('#iCheck-offer_deliveries_place').click
+    click_button 'submit-2102-nissan'
+    assert_text 'Товар добавлен в корзину'
+  end
+
+  test 'В случае если не выбрали способ получения товара, то должна появиться подсказка' do
+    visit new_user_product_path(catalog_number: '2102')
+    click_button 'submit-2102-nissan'
+    assert_text 'Пожалуйста выберите способ получения товара'
+  end
 
 end

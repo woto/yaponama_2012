@@ -2,16 +2,17 @@ module ApplicationHelper
 
   include Ckpages::ApplicationHelper
 
+  def product_css_id(catalog_number, brand)
+    "#{catalog_number}-#{brand_css_id(brand)}"
+  end
+
+  def brand_css_id(brand)
+    brand.to_label.parameterize
+  end
+
   def icon method, options={}
     content_tag :i, '', options.merge(class: "fa fa-#{method}")
   end
-
-  def buy_button offer, catalog_number, manufacturer, short_name, long_name, options
-    # TODO Вроде бы title всегда пустой... ? Потом когда вернусь к 'производителю' посмотрю
-    link_to '#', options.merge( data: {short_name: short_name, long_name: long_name, cost: offer[:retail_cost], catalog_number: catalog_number, manufacturer: manufacturer, title: offer[:title], count: offer[:count], max_days: offer[:max_days], min_days: offer[:min_days], country: offer[:country], probability: offer[:probability], tech: offer[:tech], income_cost: offer[:income_cost] } ) do
-      yield
-    end
-  end 
 
   def brand_rating brand
 
@@ -357,12 +358,6 @@ module ApplicationHelper
     content_tag :div, class: "nested-visualize" do
       yield
     end
-  end
-
-  def alert_link_to name = nil, options = nil, html_options = nil, &block
-    html_options ||= {}
-    html_options[:class] = ['alert-link', html_options[:class] ].compact
-    link_to(name, options, html_options, &block)
   end
 
   def caret

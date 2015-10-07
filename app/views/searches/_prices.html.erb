@@ -26,7 +26,7 @@
           <%= m.header do |h| %>
             <%= h.close %>
             <%= h.title do %>
-              Замены для <%= catalog_number %> (<%= manufacturer %>) в наличии на <%= image_tag 'metro.jpg', class: 'metro' %> <%= delivery_place.metro %>
+              Замены для <%= catalog_number %> (<%= manufacturer %>) в наличии на <%= image_tag 'metro.png', class: 'metro' %> <%= delivery_place.metro %>
             <% end %>
           <% end %>
           <%= m.body do %>
@@ -53,25 +53,24 @@
                 min_days: 0,
                 max_days: 0) %>">
               <h4 class="top-space-none bottom-space-none text-success">
-                <%= image_tag 'metro.jpg', class: 'metro' %> <%= delivery_place.metro %>,
+                <%= image_tag 'metro.png', class: 'metro' %> <%= delivery_place.metro %>,
                 <%= number_to_currency(presence.price, precision: 0) %> в наличии <%== count_decorator(presence.count) %>
                 <small><%= link_to 'контакты', faq_path(delivery_place.faq_id), class: 'text-warning', :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
               </h4>
             <% elsif replacements_count > 0 %>
               <input type="radio" name="offer" value="" disabled>
               <h4 class="top-space-none bottom-space-none text-success">
-                <%= image_tag 'metro.jpg', class: 'metro' %>
+                <%= image_tag 'metro.png', class: 'metro' %>
                 <a href="#" class="text-success" data-toggle="modal" data-target="#<%= dom_id(delivery_place, :replacements) %>"><%= delivery_place.metro %>,
-                  в наличии <%= I18n.translate :replacements, count: replacements_count %>, от <%= number_to_currency(replacements_min_cost, precision: 0) %>
-                </a>
+                  в наличии <%= I18n.translate :replacements, count: replacements_count %>, от <%= number_to_currency(replacements_min_cost, precision: 0) %></a>
                 <small><%= link_to 'контакты', faq_path(delivery_place.faq_id), class: 'text-warning', :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
               </h4>
             <% else %>
               <input type="radio" name="offer" value="" disabled>
               <h4 class="top-space-none bottom-space-none text-muted">
-                <%= image_tag 'metro.jpg', class: 'metro' %> <%= delivery_place.metro %>,
+                <%= image_tag 'metro.png', class: 'metro' %> <%= delivery_place.metro %>,
                 нет в наличии
-                <small><%= link_to 'контакты', faq_path(delivery_place.faq_id), class: 'text-warning', :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
+                <small><%= link_to 'контакты', faq_path(delivery_place.faq_id), class: 'text-muted', :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
               </h4>
             <% end %>
           </label>
@@ -118,7 +117,7 @@
   <div style="margin-left: 45px">
     <% if current_user.products.find_by(catalog_number: catalog_number, brand: mf_scope[:brand]) %>
       <h4 id="<%= "incart-" + product_css_id(catalog_number, mf_scope[:brand]) %>" class="text-info">
-        Товар уже находится <%= link_to 'в корзине', incart_user_products_path %>
+        Товар уже находится в корзине. <%= link_to 'Перейти в корзину.', user_cart_index_path %>
       </h4>
     <% else %>
       <%= f.button :submit, title: 'Добавить в корзину', id: "submit-#{product_css_id(catalog_number, mf_scope[:brand])}", name: mf_scope[:brand].to_label.parameterize, class: 'btn btn-success btn-lg' %>

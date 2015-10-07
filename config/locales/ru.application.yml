@@ -12,3 +12,6 @@ ru:
     many: предложений
     other: предложения
   accumulators: аккумуляторов
+  time:
+    formats:
+      news: "%d %B %Y"

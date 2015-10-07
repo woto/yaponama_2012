@@ -86,7 +86,7 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :only_global do
-    resources :faqs, only: [:index]
+    resources :faqs, only: [:index, :show]
     resources :news, only: [:index]
     resources :deliveries
   end
@@ -124,7 +124,6 @@ Yaponama2012::Application.routes.draw do
     concerns :global_and_admin
     concerns :only_admin
     namespace :deliveries do
-      resources :options
       resources :places
     end
     resources :calls

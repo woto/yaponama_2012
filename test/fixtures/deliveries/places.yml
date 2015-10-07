@@ -1,91 +1,37 @@
 first:
   name: ул. Красноармейская, д.8, корп. 3, кв. 18
-  content: ! "<p>Описание выделенной зоны</p>\r\n"
   vertices: ugqsI_tddFnAmCYm@qAhC
-  active_fill_color: ! '#73FF00'
-  active_fill_opacity: '0.8'
-  active_stroke_color: ! '#FF0080'
-  active_stroke_opacity: '0.5'
-  active_stroke_weight: '0.3'
-  inactive_fill_color: ! '#6B00FF'
-  inactive_fill_opacity: '0.2'
-  inactive_stroke_color: ! '#FF8400'
-  inactive_stroke_opacity: '0.5'
-  inactive_stroke_weight: '0.8'
   realize: true
   active: true
-  lat: 55.7989839846724
-  lng: 37.5488625509262
-  zoom: 16
   z_index: 100
   display_marker: true
   created_at: 2013-12-14 08:12:52.518059000 Z
   updated_at: 2013-12-14 08:22:57.328159000 Z
+  faq_id: 1069
+  metro: Динамо
 
 second:
   name: ул. Норильская, д.4
-  content: ! "<p>Пункт выдачи</p>\r\n\r\n<p><img alt=\"Пункт выдачи\" height=\"106\"
-    src=\"http://archrecord.construction.com/news/images/091112Riley.jpg\" width=\"300\"
-    /></p>\r\n\r\n<div>&nbsp;</div>\r\n"
   vertices: _m`tIamaeFbEJDuIcEK
-  active_fill_color: ! '#000000'
-  active_fill_opacity: '0.5'
-  active_stroke_color: ! '#000000'
-  active_stroke_opacity: '0.5'
-  active_stroke_weight: '0.5'
-  inactive_fill_color: ! '#000000'
-  inactive_fill_opacity: '0.5'
-  inactive_stroke_color: ! '#000000'
-  inactive_stroke_opacity: '0.5'
-  inactive_stroke_weight: '0.5'
   realize: true
   active: true
-  lat: 55.87635718674
-  lng: 37.6966048134918
-  zoom: 15
   z_index: 100
   display_marker: true
+  faq_id: 1070
+  metro: Медведково
 
 ttk:
   name: Доставка в пределах ТТК
-  content: ''
   vertices: gahsI_jadFkxAse@oMyJsIkQwPuRiB_MaAuTmDkOu^yYqa@_o@me@mu@}Buu@VegAoBe{@uAshAdCqiAlC{ZeAy`@aJyz@TiMfA}KbEsLfGgKxs@{bAnN{]lQor@pX_b@bW{h@l@nAvEgCfe@CzRRpHK|G}@tTmNvIoJxH_IbJaDzCc@|Cn@|KdGfKbDfIXrH{@jPwJ`g@gp@nW}\dC{AbDn@hCdD`Obo@`M`q@xOd~@bJv`@xGj_@dy@znB?tb@sElkAiJnlBrEtTnJrKvFrKjDzOL~OgQd~@oTlkAyr@jgAwF~Pe`@hkBmDjLaHjLkl@rj@wMfC}QnZyRnSoSfFgR~B
-  active_fill_color: ! '#000000'
-  active_fill_opacity: '0.5'
-  active_stroke_color: ! '#000000'
-  active_stroke_opacity: '0.5'
-  active_stroke_weight: '0.5'
-  inactive_fill_color: ! '#000000'
-  inactive_fill_opacity: '0'
-  inactive_stroke_color: ! '#000000'
-  inactive_stroke_opacity: '0'
-  inactive_stroke_weight: '0'
   realize: true
   active: true
-  lat: 55.747583970085
-  lng: 37.6255576354981
-  zoom: 11
   z_index: 100
   display_marker: false
 
 sadovoe:
   name: Садовое кольцо
-  content: ''
   vertices: qglsI{rqdFa@kt@d@sSvGodAjU{jAlZgg@lLmEzL{@jNG~P`DtNrD~Sr@pYnBrHz@tKfJxb@ps@hTbe@jCvM|EjgAP|_A}@dMuVvkAgXdhAuC~IyHdEyh@zOcY_Cw_@{DiM_BsJcE{VaRsUw\kKuSqG}S{Io`@mAyU
-  active_fill_color: ! '#000000'
-  active_fill_opacity: '0.5'
-  active_stroke_color: ! '#000000'
-  active_stroke_opacity: '0.5'
-  active_stroke_weight: '0.5'
-  inactive_fill_color: ! '#000000'
-  inactive_fill_opacity: '0.5'
-  inactive_stroke_color: ! '#000000'
-  inactive_stroke_opacity: '0.5'
-  inactive_stroke_weight: '0.5'
   realize: false
   active: true
-  lat: 55.7505186269485
-  lng: 37.6213090164185
-  zoom: 12
   z_index: 300
   display_marker: false

@@ -60,22 +60,6 @@ module Yaponama2012
     # Enable the asset pipeline
     config.assets.enabled = true
 
-    # new number  - Новый номер производителя
-    # old number  - Старый номер производителя
-    # same number - Абсолютно такая же деталь, только под другим номером
-    # part_of     - Является частью
-    # consists_of - Состоит из
-
-    config.replacements_statuses = {
-      new_number:       0,
-      old_number:       1,
-      same_number:      2,
-      replacement_from: 3,
-      replacement_to:   4,
-      part_of:          5,
-      consists_of:      6
-    }
-
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
       binding.pry
       "#{html_tag}".html_safe 

@@ -75,11 +75,6 @@
 //= require submenu
 
 
-//= require 'buy_button'
-//= require 'modal_form'
-
-//= require toolbar-checkboxes
-
 //= require jquery.cachedScript
 
 

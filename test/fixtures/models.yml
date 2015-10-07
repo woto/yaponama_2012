@@ -16,6 +16,10 @@ receiving1:
   phantom: false
   creator: receiving1
 
+hy_solaris:
+  name: Solaris
+  brand: hy
+
 camry:
   brand: toyota
   name: Camry
@@ -66,5 +70,10 @@ model2:
   name: Model
 
 destroy_test:
+  brand: destroy_test
+  name: destroy_test
+
+
+applicabilities_destroy_test:
   brand: destroy_test
   name: destroy_test

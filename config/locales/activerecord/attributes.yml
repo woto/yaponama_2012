@@ -48,6 +48,8 @@ ru:
         name: Название категории
         intro: Вступление
         page: Подробное описание
+        spare_catalog_group: Группа категории
+        spare_catalog_tokens: Токены
       spare_catalog_token:
         name: Токен
         weight: Вес токена
@@ -62,6 +64,8 @@ ru:
         full_prepayment_required: Требуется полная предоплата
         name: Название
         z_index: Приоритет
+        price_host: Адрес сервера прайсов
+        price_port: Порт сервера прайсов
       deliveries/variant:
         name: Название
         active: Активен
@@ -93,10 +97,13 @@ ru:
         mesto_rozhdeniya: Место рождения
         comment: Комментарий к паспорту
       brand:
-        parent_brand_id: Родительский производитель
+        brand: Родительский производитель
+        sign: Признак принадлежности
         name: Производитель
         image: Логотип
         rating: Рейтинг
+        is_brand: Выпускает автомобили
+        default_display: Отображать на главной
       model:
         name: Модель
         parent_brand_id: Бренд

@@ -12,8 +12,8 @@ class ImportSpareInfo
         f.each_line do |line|
           begin
             row = CSV.parse(line)[0]
-            result = PriceMate.search(row[1], nil, false, false, true)
-            size = result['result_prices'].select{|item| item['success_percent'] > 0 && item['count'].to_i >= 2 && item['retail_cost'] > 300 && item['delivery_days_declared'].to_i < 5}.size
+            result = PriceMate.search(Rails.configuration.price['host'], Rails.configuration.price['port'], row[1], nil, false, false, true)
+            size = result['result_prices'].select{|item| item['success_percent'] > 0 && item['count'].to_i >= 5 && item['retail_cost'] > 300 && item['delivery_days_declared'].to_i < 5}.size
             if size >= 5
               LOGGER.info "Positive #{row}"
               spare_info = SpareInfo.find_or_initialize_by(
@@ -27,7 +27,7 @@ class ImportSpareInfo
             end
           rescue ActiveRecord::RecordInvalid => e
             LOGGER.warn e.message
-          rescue Exception => e
+          rescue StandardError => e
             LOGGER.warn "Ошибка #{e.message}"
           end
         end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914194756) do
+ActiveRecord::Schema.define(version: 20151006134626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,8 +66,6 @@ ActiveRecord::Schema.define(version: 20150914194756) do
     t.string   "path_after"
     t.integer  "brand_id_before"
     t.integer  "brand_id_after"
-    t.string   "cached_brand_before"
-    t.string   "cached_brand_after"
     t.string   "image_before"
     t.string   "image_after"
     t.integer  "rating_before"
@@ -89,7 +87,6 @@ ActiveRecord::Schema.define(version: 20150914194756) do
   create_table "brands", force: :cascade do |t|
     t.citext   "name"
     t.integer  "brand_id"
-    t.string   "cached_brand"
     t.string   "image"
     t.integer  "rating"
     t.text     "content"
@@ -133,20 +130,12 @@ ActiveRecord::Schema.define(version: 20150914194756) do
     t.string   "period_after"
     t.integer  "brand_id_before"
     t.integer  "brand_id_after"
-    t.string   "cached_brand_before"
-    t.string   "cached_brand_after"
     t.integer  "model_id_before"
     t.integer  "model_id_after"
-    t.string   "cached_model_before"
-    t.string   "cached_model_after"
     t.integer  "generation_id_before"
     t.integer  "generation_id_after"
-    t.string   "cached_generation_before"
-    t.string   "cached_generation_after"
     t.integer  "modification_id_before"
     t.integer  "modification_id_after"
-    t.string   "cached_modification_before"
-    t.string   "cached_modification_after"
     t.string   "dvigatel_before"
     t.string   "dvigatel_after"
     t.string   "tip_before"
@@ -197,13 +186,9 @@ ActiveRecord::Schema.define(version: 20150914194756) do
     t.integer  "god"
     t.string   "period"
     t.integer  "brand_id"
-    t.string   "cached_brand"
     t.integer  "model_id"
-    t.string   "cached_model"
     t.integer  "generation_id"
-    t.string   "cached_generation"
     t.integer  "modification_id"
-    t.string   "cached_modification"
     t.string   "dvigatel"
     t.string   "tip"
     t.string   "moschnost"
@@ -223,8 +208,8 @@ ActiveRecord::Schema.define(version: 20150914194756) do
     t.datetime "updated_at"
     t.string   "car_number"
     t.string   "creation_reason"
-    t.text     "notes",               default: ""
-    t.text     "notes_invisible",     default: ""
+    t.text     "notes",           default: ""
+    t.text     "notes_invisible", default: ""
     t.integer  "somebody_id"
     t.integer  "creator_id"
     t.integer  "user_id"
@@ -372,58 +357,18 @@ ActiveRecord::Schema.define(version: 20150914194756) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "deliveries_options", force: :cascade do |t|
-    t.string   "name"
-    t.boolean  "full_prepayment_required"
-    t.boolean  "postal_address_required"
-    t.boolean  "passport_required"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "deliveries_places", force: :cascade do |t|
     t.string   "name"
-    t.text     "content"
     t.text     "vertices"
-    t.string   "active_fill_color"
-    t.string   "active_fill_opacity"
-    t.string   "active_stroke_color"
-    t.string   "active_stroke_opacity"
-    t.string   "active_stroke_weight"
-    t.string   "inactive_fill_color"
-    t.string   "inactive_fill_opacity"
-    t.string   "inactive_stroke_color"
-    t.string   "inactive_stroke_opacity"
-    t.string   "inactive_stroke_weight"
-    t.boolean  "realize",                 default: true
-    t.boolean  "active",                  default: true
-    t.float    "lat"
-    t.float    "lng"
-    t.integer  "zoom"
+    t.boolean  "realize",        default: true
+    t.boolean  "active",         default: true
     t.integer  "z_index"
     t.boolean  "display_marker"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "phone1"
-    t.string   "phone2"
-    t.string   "phone3"
-    t.string   "phone4"
-    t.string   "phone5"
-    t.string   "postal_address"
-    t.string   "image1"
-    t.string   "image2"
-    t.string   "image3"
-    t.string   "address_locality"
-    t.string   "postal_code"
-    t.string   "street_address"
-    t.string   "email1"
-    t.string   "email2"
-    t.string   "email3"
-    t.string   "image4"
-    t.string   "image5"
     t.string   "price_url"
     t.string   "metro"
-    t.boolean  "partner",                 default: false, null: false
+    t.boolean  "partner",        default: false, null: false
     t.string   "ycountry"
     t.string   "ycountry_code"
     t.string   "ycity"
@@ -435,6 +380,7 @@ ActiveRecord::Schema.define(version: 20150914194756) do
     t.string   "ycontact_email"
     t.string   "ywork_time"
     t.string   "yogrn"
+    t.integer  "faq_id"
   end
 
   create_table "deliveries_variants", force: :cascade do |t|
@@ -550,7 +496,6 @@ ActiveRecord::Schema.define(version: 20150914194756) do
 
   create_table "models", force: :cascade do |t|
     t.integer  "brand_id"
-    t.string   "cached_brand"
     t.citext   "name"
     t.text     "content"
     t.integer  "creator_id"
@@ -954,10 +899,6 @@ ActiveRecord::Schema.define(version: 20150914194756) do
     t.string   "catalog_number_after"
     t.integer  "brand_id_before"
     t.integer  "brand_id_after"
-    t.string   "cached_brand_before"
-    t.string   "cached_brand_after"
-    t.string   "cached_order_before"
-    t.string   "cached_order_after"
     t.string   "short_name_before"
     t.string   "short_name_after"
     t.text     "long_name_before"
@@ -980,12 +921,8 @@ ActiveRecord::Schema.define(version: 20150914194756) do
     t.string   "status_after"
     t.integer  "probability_before"
     t.integer  "probability_after"
-    t.integer  "product_id_before"
-    t.integer  "product_id_after"
     t.integer  "order_id_before"
     t.integer  "order_id_after"
-    t.integer  "supplier_id_before"
-    t.integer  "supplier_id_after"
     t.string   "creation_reason_before"
     t.string   "creation_reason_after"
     t.text     "notes_before"
@@ -1003,8 +940,6 @@ ActiveRecord::Schema.define(version: 20150914194756) do
   create_table "products", force: :cascade do |t|
     t.string   "catalog_number"
     t.integer  "brand_id"
-    t.string   "cached_brand"
-    t.string   "cached_order"
     t.string   "short_name"
     t.text     "long_name"
     t.integer  "quantity_ordered"
@@ -1014,11 +949,9 @@ ActiveRecord::Schema.define(version: 20150914194756) do
     t.decimal  "buy_cost",            precision: 8, scale: 2
     t.decimal  "sell_cost",           precision: 8, scale: 2
     t.boolean  "hide_catalog_number",                         default: false
-    t.string   "status"
+    t.integer  "status"
     t.integer  "probability"
-    t.integer  "product_id"
     t.integer  "order_id"
-    t.integer  "supplier_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "creation_reason"
@@ -1031,9 +964,7 @@ ActiveRecord::Schema.define(version: 20150914194756) do
 
   add_index "products", ["creator_id"], name: "index_products_on_creator_id", using: :btree
   add_index "products", ["order_id"], name: "index_products_on_order_id", using: :btree
-  add_index "products", ["product_id"], name: "index_products_on_product_id", using: :btree
   add_index "products", ["somebody_id"], name: "index_products_on_somebody_id", using: :btree
-  add_index "products", ["supplier_id"], name: "index_products_on_supplier_id", using: :btree
   add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
 
   create_table "profile_transactions", force: :cascade do |t|

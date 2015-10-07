@@ -65,8 +65,6 @@ ru:
     redis_port: Порт redis
     realtime_address: Адрес realtime
     realtime_port: Порт realtime
-    price_address: Адрес сервера прайсов
-    price_port: Порт сервера прайсов
     juggernaut_address: Адрес Juggernaut
     juggernaut_port: Порт Juggernaut
     sms_notify_method: Способ уведомления SMS

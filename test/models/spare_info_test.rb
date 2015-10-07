@@ -181,7 +181,7 @@ class SpareInfoTest < ActiveSupport::TestCase
     refute si.persisted?
   end
 
-  test 'Мы не можем удалить SpareInfo, если у него есть хотя бы одна картинка. Проверяем только первую' do
+  test 'Мы не можем удалить SpareInfo, если у него есть хотя бы одна картинка' do
     extend ActionDispatch::TestProcess
     si = spare_infos(:destroy_test)
     si.spare_info_phrases.new(catalog_number: 'destroy_test', primary: true)
@@ -198,18 +198,18 @@ class SpareInfoTest < ActiveSupport::TestCase
     refute si.persisted?
   end
 
-  test 'Мы не можем удалить SpareInfo, если у него есть хотя бы один файл. Проверяем только восьмой' do
+  test 'Мы не можем удалить SpareInfo, если у него есть хотя бы один файл' do
     extend ActionDispatch::TestProcess
     si = spare_infos(:destroy_test)
     si.spare_info_phrases.new(catalog_number: 'destroy_test', primary: true)
-    si.file8 = fixture_file_upload('rails.png','image/png')
+    si.file1 = fixture_file_upload('rails.png','image/png')
     si.save!
 
     assert si.persisted?
     si.destroy
 
     assert si.persisted?
-    si.reload.remove_file8!
+    si.reload.remove_file1!
 
     si.reload.destroy
     refute si.persisted?

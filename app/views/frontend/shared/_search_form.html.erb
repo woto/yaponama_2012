@@ -20,9 +20,5 @@
       </div><!-- /btn-group -->
     </div><!-- /input-group -->
   </div><!-- /form-group -->
-  <%# hidden_field_tag :manufacturer, params[:manufacturer] %>
-  <%# hidden_field_tag :replacements, params[:replacements] %>
-  <%= hidden_field_tag :product_id, @resource.try(:product_id) %>
 
-  <%= hidden_field_tag :return_path, params[:return_path] || request.fullpath %>
 <% end %>

@@ -45,7 +45,7 @@ $font-size-h6:            ceil(($font-size-base * 0.85));
 
 /////////////////////
 
-//@import "bootswatch/cerulean/variables";
+//@import "bootswatch/paper/variables";
 
 $grid-columns: 24;
 
@@ -67,24 +67,24 @@ $grid-columns: 24;
 }
 
 /////////////////////
-/////////////////////
-/////////////////////
-/////////////////////
 
 // APPLICATION
 
 @import "components/navbar";
-
-
 @import 'components/space';
-
-/////////////////////
-
 @import 'components/dashed';
-
-/////////////////////
-
 @import 'components/tree';
+@import 'components/breadcrumb';
+@import 'components/text';
+@import 'components/submenu';
+@import 'components/btn_file';
+@import 'components/slide_top';
+@import 'components/label';
+@import 'components/important';
+@import 'components/metro';
+@import "components/stars";
+@import 'pages/faqs';
+@import 'pages/products';
 
 /////////////////////
 
@@ -153,12 +153,6 @@ $grid-columns: 24;
   margin-bottom: 0;
 }
 
-/////////////////////
-
-@import "components/stars";
-
-/////////////////////
-
 #main {
   @extend .bottom-space-lg;
 }
@@ -184,17 +178,6 @@ $grid-columns: 24;
 .other-names, .other-brands, .other-catalog-numbers {
   word-wrap: break-word;
 }
-
-/////////////////////
-
-@import 'components/text';
-
-@import 'components/submenu';
-@import 'components/btn_file';
-@import 'components/slide_top';
-@import 'components/label';
-@import 'components/important';
-@import 'components/metro';
 
 /////////////////////
 
@@ -285,6 +268,3 @@ $grid-columns: 24;
 
 /////////////////////
 
-@import 'components/breadcrumb';
-@import 'pages/faqs';
-@import 'pages/products'

@@ -8,3 +8,6 @@ rulevoi_reduktor_rulevaya_reika:
   id: 980190964
   name: "Рулевой редуктор, рулевая рейка"
   ancestry: '980190963'
+
+kuzov:
+  name: 'Кузовные детали'

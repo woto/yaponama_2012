@@ -4,12 +4,13 @@ class Product < ActiveRecord::Base
   include BelongsToUser
   include Concerns::BrandAttributes
 
+  enum status: [:incart, :inorder, :ordered, :pre_supplier, :post_supplier, :stock, :complete, :cancel]
+
   def self.summa
     sum("sell_cost * quantity_ordered").to_d
   end
 
   validates :catalog_number, :presence => true
-  belongs_to :brand
   validates :brand, :presence => true
 
   validates :buy_cost, :numericality => { :greater_than => 0}

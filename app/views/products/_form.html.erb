@@ -1,3 +1,0 @@
-<%= simple_form_for @resource, url: polymorphic_path([:user, @resource], :return_path => params[:return_path], :skip => true, :modal => true), class: 'product' do |f| %>
-  <%= render 'modal_form', f: f %>
-<% end %>

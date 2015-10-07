@@ -1,3 +1,25 @@
 <div id="products">
-  <%= render 'new' %>
+
+  <%= page do |p| %>
+
+    <br />
+
+    <%= p.title do %>
+      <%= page_header %>
+    <% end %>
+
+    <%= p.content do %>
+      <%= render 'searches/index' %>
+    <% end %>
+
+  <% end %>
+
+  <br>
+  <%= render 'partners_offers' %>
+  <br>
+
+  <% if @c9.present? %>
+    <%= discourse_body %>
+  <% end %>
+
 </div>

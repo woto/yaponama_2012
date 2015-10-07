@@ -7,14 +7,9 @@ module BootstrapHelper
   end
 
   def modal options={}, &block
-    # TODO
-    # Добавить сюда aria-labelledby: "auth-label"
-    # А у строки - заголовка - h3, расположенного внутри modal-header id="auth-label" (На данный момент в 3-м bootstrap'e не нашел)
     options[:class] = [ 'modal', options[:class] ].compact
     # К сожалению если раскомментировать, то select2 перестанет работать
-    #options[:tabindex] = "-1"
-    options[:role] = "dialog"
-    options["aria-hidden"] = "true"
+    options[:tabindex] = "-1"
     content_tag :div, options do
       content_tag :div, class: "modal-dialog" do
         content_tag :div, class: "modal-content" do
@@ -50,4 +45,11 @@ module BootstrapHelper
     end
 
   end
+
+  def alert_link_to name = nil, options = nil, html_options = nil, &block
+    html_options ||= {}
+    html_options[:class] = ['alert-link', html_options[:class] ].compact
+    link_to(name, options, html_options, &block)
+  end
+
 end

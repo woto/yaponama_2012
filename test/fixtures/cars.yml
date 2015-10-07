@@ -37,3 +37,9 @@ receiving1:
   vin_or_frame: frame
   frame: receiving1
   creation_reason: fixtures
+
+hy_solaris:
+  brand: hy
+  model: hy_solaris
+  vin_or_frame: 'frame'
+  frame: 'frame'

@@ -15,7 +15,8 @@
   <%= p.content do %>
     <%= search_form_for(@q, url: url_for(action: :index), html: {class: 'form-inline'}) do |f| %>
 
-      <%= f.input :display_marker_true, as: :select, label: false %>
+      <%= f.input :display_marker_true, as: :select %>
+      <%= f.input :active_true, as: :select %>
 
       <%= f.button :submit, 'Поиск' %>
     <% end %>

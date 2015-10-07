@@ -10,6 +10,8 @@ class BrandsController < ApplicationController
       @brands.where(is_brand: true)
     when '0'
       @brands.where(sign: nil, brand_id: nil)
+    else
+      @brands
     end
 
     respond_to do |format|

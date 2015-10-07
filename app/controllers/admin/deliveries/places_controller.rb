@@ -11,6 +11,12 @@ class Admin::Deliveries::PlacesController < ApplicationController
 
   private
 
+  def find_resources
+    super
+    @q = @resources.ransack(params[:q])
+    @resources = @q.result(distinct: true)
+  end
+
   def set_resource_class
     @resource_class = ::Deliveries::Place
   end
