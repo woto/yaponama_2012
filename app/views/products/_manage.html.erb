@@ -1,0 +1,29 @@
+<% if current_user && current_user.seller? %>
+  <div class="top-space-lg">
+    <% if mf_scope[:info].present? %>
+      <%# Описание %>
+      <%= link_to icon('file-text-o'), edit_admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-warning" %>
+      <%= link_to icon('file-text-o'), admin_spare_info_path(mf_scope[:info], :return_path => request.fullpath), :class => "btn btn-danger", method: :delete, data: {confirm: 'Уверены, что хотите удалить?'} %>
+
+      <%# Каталогизируемый %>
+      <% if mf_scope[:catalog].opt %>
+        <% if mf_scope[:info].send(mf_scope[:catalog].opt) %>
+          <%= link_to icon('cogs'), polymorphic_path([:edit, :admin, :opts, mf_scope[:catalog].opt], :id => mf_scope[:info].send(mf_scope[:catalog].opt).id, :return_path => request.fullpath), :class => "btn btn-warning" %>
+        <% else %>
+          <%= link_to icon('cogs'), polymorphic_path([:new, :admin, :opts, mf_scope[:catalog].opt], "opts_#{mf_scope[:catalog].opt}[spare_info_id]" => mf_scope[:info].id, :return_path => request.fullpath), :class => "btn btn-warning" %>
+        <% end %>
+      <% end %>
+
+      <%# Замены %>
+      <%= link_to icon('random'), new_admin_spare_replacement_path(spare_replacement: {from_spare_info_attributes: { name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-warning" %>
+
+      <%# Применимость %>
+      <%= link_to icon('automobile'), new_admin_spare_applicability_path(spare_applicability: {spare_info_attributes: {name: mf_scope[:info].name}}, :return_path => request.fullpath), :class => "btn btn-warning" %>
+    <% else %>
+      <%= link_to icon('file-text-o'), new_admin_spare_info_path(:spare_info => { :catalog_number => catalog_number, :brand_attributes => { :name => manufacturer } }, :return_path => request.fullpath), :class => "btn btn-warning" %>
+    <% end %>
+    <%= link_to icon('building'), edit_admin_brand_path(mf_scope[:brand], :return_path => request.fullpath), :class => "btn btn-warning" %>
+  </div>
+
+<% end %>
+

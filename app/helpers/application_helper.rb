@@ -209,26 +209,6 @@ module ApplicationHelper
     (request.car.vin + " " + request.car.frame + " " + request.car.marka + " " + request.car.model + " " + request.car.god).strip
   end
   
-  ##################################3
-  # ВЫРЕЗКА СО СТАРОГО
-  #
-  def days_decorator value
-    html_escape("#{((value = value.to_i) > 0) ? value.to_s + " дн.".html_safe : 'В наличии'}")
-  end 
-  
-  def count_decorator value
-    html_escape("#{((value = (value.to_s.gsub(/\D/, '').to_i)) > 0) ? "#{value} шт." : 'Скрыто'}")
-  end
-  
-  def country_decorator value
-    value.presence || "Скрыто"
-  end
-
-
-  ##################################3
-  # / ВЫРЕЗКА СО СТАРОГО
-
-
   def highlight_active(routes)
     begin
       if routes.map{|route| current_page?(route)}.any?

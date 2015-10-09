@@ -5,7 +5,6 @@
   }
 
   calcRoute = function(destination) {
-    debugger;
     var request = {
       origin: $('#warehouse_address').text(),
       destination: destination,

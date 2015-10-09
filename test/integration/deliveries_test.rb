@@ -6,46 +6,46 @@ class DeliveriesTest < ActionDispatch::IntegrationTest
     Capybara.reset!
     visit '/deliveries'
     click_button 'Рассчитать'
-    assert_selector('#order_delivery_new_postal_address_attributes_street + span > b', text: 'не может быть пустым')
-    assert_selector('#order_delivery_new_postal_address_attributes_house + span > b', text: 'не может быть пустым')
+    assert has_css? '.form-horizontal'
+    assert has_css? '.form-group.has-error', count: 2
+    assert has_css? '#deliveries-calculate-result', text: 'Адрес доставки указан неверно.'
   end
 
-  test 'Вводим новый адрес' do
+  test 'Обслуживаемая область' do
     Capybara.reset!
     visit '/deliveries'
-    fill_in 'order_delivery[new_postal_address_attributes][street]', with: 'Ленинский проспект'
-    fill_in 'order_delivery[new_postal_address_attributes][house]', with: '1'
+    fill_in 'street', with: 'Ленинский проспект'
+    fill_in 'house', with: '1'
     click_button 'Рассчитать'
-    assert has_text?('Проверить другой адрес')
+    assert has_text? 'Вариант 1'
   end
 
-  test 'После успешного ввода нового адреса у нас есть возможность ввести новый или выбрать уже имеющийся' do
+  test 'Не обслуживаемая область' do
     Capybara.reset!
     visit '/deliveries'
-    fill_in 'order_delivery[new_postal_address_attributes][street]', with: 'Ленинский проспект'
-    fill_in 'order_delivery[new_postal_address_attributes][house]', with: '1'
+    fill_in 'street', with: 'Гончарная'
+    fill_in 'house', with: '14'
     click_button 'Рассчитать'
-    click_link 'Проверить другой адрес'
-
-    # По-умолчанию выбран radio с select'ом для выбора имеющегося адреса
-    assert has_checked_field? 'order_delivery_postal_address_type_old'
-
-    # Есть возможность выбора между вводом нового адреса или выбором имеющегося
-    assert_selector '#order_delivery_postal_address_type_new'
-    assert_selector '#order_delivery_postal_address_type_old'
-
-    # Есть select с возможностью выбора имеющегося
-    assert_selector '#order_delivery_old_postal_address_id'
-
-    # Выбираем radio для ввода нового адреса
-    choose 'order_delivery_postal_address_type_new'
-
-    # Теперь появились поля для ввода нового
-    assert_selector '#order_delivery_new_postal_address_attributes_street'
-    assert_selector '#order_delivery_new_postal_address_attributes_house'
-
+    assert has_text? 'Не обслуживаемая область'
   end
 
+  test 'Автоматический рассчет в зависимости от удаленности' do
+    Capybara.reset!
+    visit '/deliveries'
+    fill_in 'street', with: 'Коккинаки'
+    fill_in 'house', with: '6'
+    click_button 'Рассчитать'
+    assert has_text? 'составляет 144 руб.'
+  end
+
+  test 'Превышено расстояние от центрального склада' do
+    Capybara.reset!
+    visit '/deliveries'
+    fill_in 'street', with: 'Сиреневый бульвар'
+    fill_in 'house', with: '12'
+    click_button 'Рассчитать'
+    assert has_text? 'Превышено расстояние от центрального склада'
+  end
 end
 
 

@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  include ProductsConcern
+  include ProductSerializer
   include ProductsSearch
 
   def new

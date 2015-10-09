@@ -10,6 +10,9 @@ class SpareReplacement < ActiveRecord::Base
 
   enum status: ['new_num', 'same_num', 'repl_num', 'part_num']
 
+  #has_many :from_warehouses, through: :from_spare_info, source: :warehouses
+  #has_many :to_warehouses, through: :to_spare_info, source: :warehouses
+
   validates :from_spare_info, presence: true, uniqueness: { scope: [:to_spare_info] }
   validates :to_spare_info, presence: true, uniqueness: { scope: [:from_spare_info] }
   validates :status, presence: true

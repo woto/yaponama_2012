@@ -1,3 +1,11 @@
+<div class="hidden" itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+  <meta itemprop="priceCurrency" content="RUB" />
+  <span itemprop="offerCount"><%= mf_scope[:offers].size %></span>
+  <span itemprop="lowPrice"><%= number_to_currency(mf_scope[:min_cost]) %></span>
+  <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
+</div>
+
+
 <%= simple_form_for @resource, url: [:user, @resource], remote: true, html: {id: "form-"+product_css_id(catalog_number, mf_scope[:brand])} do |f| %>
 
   <div class="bottom-space-lg top-space-lg">
@@ -5,8 +13,6 @@
     <% Deliveries::Place.random_list.each_with_index do |delivery_place, index| %>
 
       <% presence = mf_scope[:warehouses].find{|key, value| key == delivery_place.id}.try(:[], 1) %>
-      <%# replacements = Hash[mf_scope[:replacements].map{|replacement_type, values| [replacement_type, Hash[values.map{|spare_info, warehouses| [spare_info, warehouses.find{|warehouse| warehouse.place_id == delivery_place.id}]}]]}] %>
-      <%# replacements_count = replacements.count{|replacement_type, replacement| replacement.values.any?} %>
       <% replacements_min_cost = 10000000 %>
       <% replacements = Hash[mf_scope[:replacements].map do |replacement_type, values| %>
         <% res = {} %>
@@ -40,30 +46,38 @@
         <div class="radio <%= 'disabled' if presence.blank? %>">
           <label>
             <% if presence.present? %>
+
+              <script type="text/javascript">
+                window.onload = function() {
+                  window.yaCounter14980414.reachGoal('nalichie', { shop: '<%= delivery_place.to_label %>' } );
+                }
+              </script>
+
               <input type="radio" id="<%= dom_id(delivery_place, :offer) %>" name="offer" value="<%= serialize_product(
                 catalog_number: catalog_number,
                 brand_id: mf_scope[:brand].id,
+                deliveries_place_id: delivery_place.id,
                 quantity_ordered: 1,
                 sell_cost: presence.price,
-                short_name: short_name,
-                long_name: long_name,
+                title: mf_scope[:title],
+                titles: mf_scope[:titles].keys,
                 buy_cost: presence.price,
                 quantity_available: presence.count,
                 probability: 100,
                 min_days: 0,
                 max_days: 0) %>">
-              <h4 class="top-space-none bottom-space-none text-success">
+              <h4 class="top-space-none bottom-space-none">
                 <%= image_tag 'metro.png', class: 'metro' %> <%= delivery_place.metro %>,
-                <%= number_to_currency(presence.price, precision: 0) %> в наличии <%== count_decorator(presence.count) %>
-                <small><%= link_to 'контакты', faq_path(delivery_place.faq_id), class: 'text-warning', :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
+                <%= number_to_currency(presence.price, precision: 0) %> в наличии <%= presence.count %> шт.
+                <small><%= link_to 'контакты', faq_path(delivery_place.faq_id), class: 'dashed', :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
               </h4>
             <% elsif replacements_count > 0 %>
               <input type="radio" name="offer" value="" disabled>
-              <h4 class="top-space-none bottom-space-none text-success">
+              <h4 class="top-space-none bottom-space-none">
                 <%= image_tag 'metro.png', class: 'metro' %>
-                <a href="#" class="text-success" data-toggle="modal" data-target="#<%= dom_id(delivery_place, :replacements) %>"><%= delivery_place.metro %>,
+                <a href="#" class="text-default" data-toggle="modal" data-target="#<%= dom_id(delivery_place, :replacements) %>"><%= delivery_place.metro %>,
                   в наличии <%= I18n.translate :replacements, count: replacements_count %>, от <%= number_to_currency(replacements_min_cost, precision: 0) %></a>
-                <small><%= link_to 'контакты', faq_path(delivery_place.faq_id), class: 'text-warning', :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
+                <small><%= link_to 'контакты', faq_path(delivery_place.faq_id), class: 'dashed', :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
               </h4>
             <% else %>
               <input type="radio" name="offer" value="" disabled>
@@ -80,30 +94,30 @@
     <% end %>
 
     <% offer = mf_scope[:offers].first %>
-
     <div class="deliveries_place" id="deliveries_place">
       <div class="radio <%= 'disabled' if offer.blank? %>">
         <label>
           <input type="radio" id="offer_deliveries_place" name="offer" value="<%= serialize_product(
             catalog_number: catalog_number,
             brand_id: mf_scope[:brand].id,
+            deliveries_place_id: nil,
             quantity_ordered: 1,
             sell_cost: offer[:retail_cost],
-            short_name: short_name,
-            long_name: long_name,
+            title: mf_scope[:title],
+            titles: mf_scope[:titles].keys,
             buy_cost: offer[:income_cost],
             quantity_available: offer[:count],
             probability: offer[:probability],
             min_days: offer[:min_days],
             max_days: offer[:max_days]) %>" <%= 'disabled' if offer.blank? %>>
-          <h4 class="top-space-none bottom-space-none <%= offer.blank? ? 'text-muted' : 'text-success' %>">
+          <h4 class="top-space-none bottom-space-none <%= offer.blank? ? 'text-muted' : '' %>">
             <% if offer.present? %>
               Под заказ,
               <%= number_to_currency(offer[:retail_cost], precision: 0) %>
               доставка
               <%= l(Date.current + offer[:min_days].to_i.days, format: :short) %>
-              <small><%= link_to 'узнать стоимость доставки', deliveries_path, class: 'text-warning', :"window-dialog" => deliveries_path %></small><br />
-              <span class="text-success text-xs">Акция! Сделайте немного фотографий, напишите о процессе установки или использования товара и мы вернем вам на телефон или банковску карту <%= number_to_currency((offer[:retail_cost] - offer[:retail_cost]/100*4) - offer[:income_cost], precision: 0) %> <%= link_to 'подробнее...', faq_path(1074), class: 'text-warning', :"window-dialog" => faq_path(1074) %></span>
+              <small><%= link_to 'узнать стоимость доставки', deliveries_path, class: 'dashed', :"window-dialog" => deliveries_path %></small><br />
+              <span class="text-xs">Акция! Сделайте немного фотографий, напишите о процессе установки или использования товара и мы вернем вам на телефон или банковску карту <%= number_to_currency((offer[:retail_cost] - offer[:retail_cost]/100*4) - offer[:income_cost], precision: 0) %> <%= link_to 'подробнее...', faq_path(1074), class: 'dashed', :"window-dialog" => faq_path(1074) %></span>
             <% else %>
               доставка невозможна
             <% end %>
@@ -116,8 +130,8 @@
 
   <div style="margin-left: 45px">
     <% if current_user.products.find_by(catalog_number: catalog_number, brand: mf_scope[:brand]) %>
-      <h4 id="<%= "incart-" + product_css_id(catalog_number, mf_scope[:brand]) %>" class="text-info">
-        Товар уже находится в корзине. <%= link_to 'Перейти в корзину.', user_cart_index_path %>
+      <h4 id="<%= "incart-" + product_css_id(catalog_number, mf_scope[:brand]) %>">
+        Товар уже находится в корзине, <%= link_to 'перейти в корзину', user_cart_index_path %>
       </h4>
     <% else %>
       <%= f.button :submit, title: 'Добавить в корзину', id: "submit-#{product_css_id(catalog_number, mf_scope[:brand])}", name: mf_scope[:brand].to_label.parameterize, class: 'btn btn-success btn-lg' %>

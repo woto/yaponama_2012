@@ -42,7 +42,7 @@ module ProductsSearch
           plog.debug "Запрос к серверу прайсов"
           begin
             @parsed_json = ::PriceMate.search(Rails.configuration.price['host'], Rails.configuration.price['port'], c9, b9, r9, e8, false)
-          rescue Timeout::Error => e
+          rescue *[Timeout::Error, Errno::ECONNREFUSED] => e
             response.headers["Retry-After"] = (Time.now + 1.day).httpdate.to_s
             render :status => 503 and return
           end
@@ -74,26 +74,30 @@ module ProductsSearch
         @formatted_data = PriceMate.process @parsed_json
         plog.debug '/Большой цикл обработки JSON'
 
-        plog.debug 'Warehouse'
-        @formatted_data = PriceMate.warehouses @formatted_data
-        plog.debug '/Warehouse'
+        plog.debug 'Вычищение'
+        @formatted_data = PriceMate.cleanup @formatted_data
+        plog.debug '/Вычищение'
 
         @replacements = @parsed_json['result_replacements']
-
-        plog.debug 'Сортировка по рейтингам брендов'
-        @formatted_data = PriceMate.sort_by_brand_rating @formatted_data
-        plog.debug '/Сортировка по рейтингам брендов'
 
         plog.debug 'Получаем сведения с текущей базы'
         @formatted_data = PriceMate.database @formatted_data
         plog.debug '/Получаем сведения с текущей базы'
 
-        plog.debug 'Получаем сведения о заменах'
+        plog.debug 'Получаем сведения о заменах PostgreSQL'
         @formatted_data = PriceMate.replacements @formatted_data
-        plog.debug '/Получаем сведения о заменах'
+        plog.debug '/Получаем сведения о заменах PostgreSQL'
+
+        plog.debug 'Warehouse'
+        @formatted_data = PriceMate.warehouses @formatted_data
+        plog.debug '/Warehouse'
+
+        plog.debug 'Сортировка по рейтингам брендов'
+        @formatted_data = PriceMate.sort_by_brand_rating @formatted_data
+        plog.debug '/Сортировка по рейтингам брендов'
       end
 
-
+      # TODO переделать через throw или exception ?! (невозможно из метода прекратить выполнение кода контроллера)
       if @formatted_data.blank?
         render :status => 404 and return
       else

@@ -1,0 +1,73 @@
+<% @meta_title = "Корзина" %>
+
+<%= page do |p| %>
+
+  <br />
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content :md do %>
+    <% if @resources.size > 0 %>
+      <% @resources.group_by{|resource| resource.deliveries_place}.sort_by{|k, v| k.try(:id).to_i}.each do |deliveries_place, products| %>
+        <div class="clearfix bottom-space-lg">
+          <div id="<%= deliveries_place ? dom_id(deliveries_place) : 'deliveries_place' %>">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th> <h4>Товар</h4> </th>
+                    <th> <h4>Цена</h4> </th>
+                    <th> <h4>Количество</h4> </th>
+                    <th> <h4 class="pull-right">Сумма</h4> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% products.each do |product| %>
+                    <%= content_tag_for :tr, product, :row do %>
+                      <td class="col-sm-10"> 
+                        <h5 class="top-space-sm"><%= product.to_label %></h5>
+                      </td>
+                      <td class="col-sm-4">
+                        <h5 class="top-space-sm"><%= number_to_currency(product.sell_cost, precision: 0) %></h5>
+                      </td>
+                      <td class="col-sm-4">
+                        <%= simple_form_for product, url: user_cart_path(product), remote: true do |f| %>
+                          <div class="input-group input-group-sm" style="width: 100px">
+                            <div class="input-group-btn">
+                              <%= f.button :button, icon('minus'), id: dom_id(product, :minus), value: 'minus', class: "btn btn-default" %>
+                            </div>
+                            <%= f.text_field :quantity_ordered, class: 'form-control', id: dom_id(product, :count), style: 'width: 50px' %>
+                            <div class="input-group-btn">
+                              <%= f.button :button, icon('plus'), id: dom_id(product, :plus), value: 'plus', class: "btn btn-default" %>
+                            </div>
+                          </div>
+                        <% end %>
+                      </td>
+                      <td class="col-sm-4">
+                        <h5 class="top-space-sm pull-right"> <%= number_to_currency(product.quantity_ordered * product.sell_cost, precision: 0) %> </h5>
+                      </td>
+                    <% end %>
+                  <% end %>
+                  <tr>
+                    <td class="warning" colspan="4">
+                      <h4 class="text-right">
+                        <p class="total"> Итого: <%= number_to_currency products.sum{|product| product.quantity_ordered*product.sell_cost}, precision: 0 %></p>
+                        <p class="place">Способ получения товара: <%= deliveries_place.try(:to_label).presence || 'Доставка' %></p>
+                      </h4>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <button type="submit" class="btn btn-success btn-lg pull-right">Оформить заказ</button>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <h4>Вы пока что не добавили ни одного товара в корзину</h4>
+    <% end %>
+  <% end %>
+<% end %>
+

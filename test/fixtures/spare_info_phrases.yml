@@ -127,3 +127,8 @@ product_incart:
   catalog_number: 'PRODUCTINCART'
   spare_info: product_incart
   primary: true
+
+shop_product_incart:
+  catalog_number: 'SHOPPRODUCTINCART'
+  spare_info: shop_product_incart
+  primary: true

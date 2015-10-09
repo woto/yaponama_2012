@@ -21,7 +21,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'therubyracer', platforms: :ruby
  
 
-group :development, :test do
+group :development, :test, :staging do
   gem 'pry-nav'
   gem 'pry'
   gem 'pry-rescue'
@@ -31,6 +31,7 @@ group :development, :test do
   gem 'show_me_the_cookies'
   gem 'selenium-webdriver'
   gem 'poltergeist', github: 'jonleighton/poltergeist'
+  gem 'database_cleaner'
   #gem 'capybara-webkit'
 end
 
@@ -58,7 +59,7 @@ gem 'rails-html-sanitizer', '~> 1.0'
 # gem 'capistrano-rails', group: :development
 
 
-group :development, :test do
+group :development, :test, :staging do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 

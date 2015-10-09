@@ -1,0 +1,11 @@
+bootbox.setLocale('ru');
+
+bootbox.confirm("Действительно хотите удалить товар из корзины?", function(result) {
+  if(result) {
+    $.ajax({
+      type: "POST",
+      url: '<%= confirm_remove_user_cart_path(@resource) %>',
+      method: "DELETE",
+    });
+  }
+}); 

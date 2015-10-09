@@ -164,3 +164,8 @@ product_incart:
   catalog_number: 'PRODUCTINCART'
   spare_catalog: unsorted
   brand: nissan
+
+shop_product_incart:
+  catalog_number: 'SHOPPRODUCTINCART'
+  spare_catalog: unsorted
+  brand: mazda

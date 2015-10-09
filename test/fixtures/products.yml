@@ -1,925 +1,925 @@
-anton_first:
-  catalog_number: 2102
-  brand: abs
-  short_name: УСТРОЙСТВО ДЛЯ НАТЯЖЕНИЯ РЕМНЯ
-  long_name: РОЛИК НАТЯЖНОЙ РЕМНЯ КОНДИЦИОНЕРА, УСТРОЙСТВО ДЛЯ НАТЯЖЕНИЯ РЕМНЯ, РЕМЕНЬ ГРМ, НАТЯЖИТЕЛЬ РЕМНЯ, НАТЯЖИТЕЛЬ ПРИВОДА РЕМНЯ ГЕНЕРАТОРА
-  quantity_ordered: 2
-  quantity_available: 10
-  min_days: 2
-  max_days: 5
-  buy_cost: 518.0
-  sell_cost: 820.0
-  hide_catalog_number: true
-  status: incart
-  probability: 83
-  created_at: 2012-08-21 03:45:38.527055000 Z
-  updated_at: 2012-08-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes:
-  notes_invisible:
-  user: anton
-  creator: first_admin
-
-
-anton_second:
-  catalog_number: 3310
-  brand: bando
-  short_name: Клиновой ремень
-  long_name: Ремень КЛИНОВОЙ, Генератор, клиновой ремень,
-  quantity_ordered: 3
-  quantity_available: 98
-  min_days: 1
-  max_days: 2
-  buy_cost: 932.0
-  sell_cost: 1211.0
-  hide_catalog_number: false
-  status: ordered
-  probability: 95
-  created_at: 2012-08-11 03:45:38.527055000 Z
-  updated_at: 2012-08-30 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: Коммент.
-  notes_invisible: Невидимый комментарий
-  user: anton
-  creator: first_admin
-
-anton_third:
-  catalog_number: 3515
-  brand: Производитель
-  short_name: Название
-  quantity_ordered: 1
-  quantity_available: 2
-  min_days: 1
-  max_days: 2
-  buy_cost: 32.0
-  sell_cost: 211.0
-  hide_catalog_number: false
-  status: incart
-  probability: 95
-  created_at: 2012-08-12 03:45:38.527055000 Z
-  updated_at: 2012-09-01 03:45:38.527055000 Z
-  creation_reason: fixtures
-  user: anton
-  creator: anton
-
-anton_fourth:
-  catalog_number: MR245368
-  brand: mitsubishi
-  short_name: НАСОС ОМЫВАТЕЛЯ
-  long_name: НАСОС ОМЫВАТЕЛЯ СТЕКЛА, ЛОБОВОГО
-  quantity_ordered: 2
-  quantity_available: 3
-  min_days: 3
-  max_days: 4
-  buy_cost: 332.0
-  sell_cost: 350.0
-  hide_catalog_number: false
-  probability: 95
-  created_at: 2012-08-12 03:45:38.527055000 Z
-  updated_at: 2012-09-01 03:45:38.527055000 Z
-  creation_reason: fixtures
-  user: anton
-  creator: anton
-
-anton_fifth:
-  catalog_number: MR245368
-  brand: mitsubishi
-  short_name: НАСОС ОМЫВАТЕЛЯ
-  long_name: НАСОС ОМЫВАТЕЛЯ СТЕКЛА, ЛОБОВОГО
-  quantity_ordered: 4
-  quantity_available: 2
-  min_days: 5
-  max_days: 9
-  buy_cost: 352.0
-  sell_cost: 390.0
-  hide_catalog_number: true
-  probability: 95
-  created_at: 2012-08-12 03:45:38.527055000 Z
-  updated_at: 2012-09-01 03:45:38.527055000 Z
-  creation_reason: fixtures
-  user: anton
-  creator: anton
-
-anton_sixth:
-  catalog_number: MR245368
-  brand: mitsubishi
-  short_name: НАСОС ОМЫВАТЕЛЯ
-  long_name: НАСОС ОМЫВАТЕЛЯ СТЕКЛА, ЛОБОВОГО
-  quantity_ordered: 4
-  quantity_available: 2
-  min_days: 5
-  max_days: 9
-  buy_cost: 352.0
-  sell_cost: 390.0
-  hide_catalog_number: true
-  status: stock
-  probability: 95
-  created_at: 2012-08-12 03:45:38.527055000 Z
-  updated_at: 2012-09-01 03:45:38.527055000 Z
-  creation_reason: fixtures
-  user: anton
-  creator: anton
-
-anton_seventh:
-  catalog_number: MR245368
-  brand: mitsubishi
-  short_name: НАСОС ОМЫВАТЕЛЯ
-  long_name: НАСОС ОМЫВАТЕЛЯ СТЕКЛА, ЛОБОВОГО
-  quantity_ordered: 4
-  quantity_available: 2
-  min_days: 5
-  max_days: 9
-  buy_cost: 352.0
-  sell_cost: 390.0
-  hide_catalog_number: true
-  status: complete
-  probability: 95
-  created_at: 2012-08-12 03:45:38.527055000 Z
-  updated_at: 2012-09-01 03:45:38.527055000 Z
-  creation_reason: fixtures
-  user: anton
-  creator: anton
-
-anton_eighth:
-  catalog_number: MR245368
-  brand: mitsubishi
-  short_name: НАСОС ОМЫВАТЕЛЯ
-  long_name: НАСОС ОМЫВАТЕЛЯ СТЕКЛА, ЛОБОВОГО
-  quantity_ordered: 4
-  quantity_available: 2
-  min_days: 5
-  max_days: 9
-  buy_cost: 352.0
-  sell_cost: 390.0
-  hide_catalog_number: true
-  status: cancel
-  probability: 95
-  created_at: 2012-08-12 03:45:38.527055000 Z
-  updated_at: 2012-09-01 03:45:38.527055000 Z
-  creation_reason: fixtures
-  user: anton
-  creator: anton
-
-anton_ninth:
-  catalog_number: MR245368
-  brand: mitsubishi
-  short_name: НАСОС ОМЫВАТЕЛЯ
-  long_name: НАСОС ОМЫВАТЕЛЯ СТЕКЛА, ЛОБОВОГО
-  quantity_ordered: 4
-  quantity_available: 2
-  min_days: 5
-  max_days: 9
-  buy_cost: 352.0
-  sell_cost: 390.0
-  hide_catalog_number: true
-  status: inorder
-  probability: 95
-  created_at: 2012-08-12 03:45:38.527055000 Z
-  updated_at: 2012-09-01 03:45:38.527055000 Z
-  creation_reason: fixtures
-  user: anton
-  creator: anton
-
-anton_time_check:
-  catalog_number: TIME
-  brand: mitsubishi
-  quantity_ordered: 1
-  quantity_available: 1
-  buy_cost: 1
-  sell_cost: 1
-  hide_catalog_number: false
-  status: inorder
-  probability: 95
-  created_at: 2012-04-12 03:45:38.527055000 Z
-  updated_at: 2012-05-03 02:23:18.327055000 Z
-  creation_reason: fixtures
-  user: anton
-  creator: anton
-
-first_user_first_product:
-  catalog_number: MR508329
-  brand: nissan
-  short_name: Цилиндр сцепления рабочий
-  long_name: Цилиндр, цилиндр для сцепления
-  quantity_ordered: 3
-  quantity_available: 11
-  min_days: 3
-  max_days: 2
-  buy_cost: 2518.0
-  sell_cost: 2820.0
-  hide_catalog_number: false
-  status: incart
-  probability: 80
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: Комментарии
-  notes_invisible: Служебные комментарии
-  user: first_user
-  creator: first_user
-
-
-first_user_second_product:
-  catalog_number: 13401−20030
-  brand: nissens
-  short_name: Выключатель обогрева заднего стекла
-  quantity_ordered: 4
-  buy_cost: 1425.0
-  sell_cost: 3236.0
-  hide_catalog_number: false
-  status: incart
-  creation_reason: fixtures
-  user: first_user
-  creator: first_user
-
-otto:
-  catalog_number: 1
-  brand: ty
-  short_name: Ламбрусское
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 121.0
-  sell_cost: 1392.0
-  hide_catalog_number: false
-  status: incart
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-
-otto2:
-  catalog_number: 398394-32921
-  brand: mitsubishi
-  short_name: Либрусек
-  long_name: adsfl;kj
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 101.0
-  sell_cost: 1391.0
-  hide_catalog_number: false
-  status: inorder
-  probability: 90
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto3:
-  catalog_number: 19392918
-  brand: toyota
-  short_name: adsfkljadsf
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 99.0
-  sell_cost: 120.0
-  hide_catalog_number: false
-  status: ordered
-  probability: 12
-  created_at: 2012-11-21 03:45:38.527055000 Z
-  updated_at: 2012-11-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-
-otto4:
-  catalog_number: 19291293-12329239
-  brand: nissan
-  short_name: Кардаган
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 119.0
-  sell_cost: 112.0
-  hide_catalog_number: false
-  status: incart
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto5:
-  catalog_number: 392918-4322391
-  brand: nissan
-  short_name: Оттава
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 1112.0
-  sell_cost: 932.0
-  hide_catalog_number: false
-  status: cancel
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto6:
-  catalog_number: 129123012-329128
-  brand: kia
-  short_name: Кишенев
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 12.0
-  sell_cost: 3291.0
-  hide_catalog_number: false
-  status: cancel
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-
-otto7:
-  catalog_number: 2391920-322312
-  brand: kia
-  short_name: Армавир
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 91.0
-  sell_cost: 121.50
-  hide_catalog_number: false
-  status: incart
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto8:
-  catalog_number: 3291-321
-  brand: nissan
-  short_name: Арзамас
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 21.0
-  sell_cost: 123.12
-  hide_catalog_number: false
-  status: incart
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto9:
-  catalog_number: 19392121
-  brand: nissan
-  short_name: gaG
-  long_name: adfjs
-  quantity_ordered: 12
-  quantity_available: 50
-  min_days: 4
-  max_days: 7
-  buy_cost: 900
-  sell_cost: 1300
-  hide_catalog_number: true
-  status: complete
-  probability: 38
-  created_at: 2012-04-21 03:45:38.527055000 Z
-  updated_at: 2012-04-21 03:45:38.527055000 Z
-  creation_reason: backend
-  notes: 93921jdasd
-  notes_invisible: 3248234j 
-  user: otto
-  creator: first_user
-
-
-otto10:
-  catalog_number: 9291919
-  brand: kia
-  short_name: gaga
-  long_name: gaga
-  quantity_ordered: 8
-  quantity_available: 19
-  min_days: 1
-  max_days: 1
-  buy_cost: 8.0
-  sell_cost: 21.0
-  hide_catalog_number: false
-  status: incart
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto11:
-  catalog_number: 39282828
-  brand: mitsubishi
-  short_name: aga
-  long_name: Проверка
-  quantity_ordered: 5
-  quantity_available: 10
-  min_days: 3
-  max_days: 9
-  buy_cost: 10
-  sell_cost: 132
-  hide_catalog_number: true
-  probability: 80 
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 13adfadfadsf
-  user: otto
-  creator: first_user
-
-
-otto12:
-  catalog_number: 667744
-  brand: nissan
-  short_name: Кентуки шт.
-  long_name: 1
-  quantity_ordered: 12
-  quantity_available: 13
-  min_days: 10
-  max_days: 20
-  buy_cost: 120.30
-  sell_cost: 150.0
-  hide_catalog_number: true
-  probability: 90
-  created_at: 2012-05-10 03:45:38.527055000 Z
-  updated_at: 2012-05-10 03:45:38.527055000 Z
-  creation_reason: backend
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: first_user
-
-otto13:
-  catalog_number: 392918-4322391
-  brand: nissan
-  short_name: Оттава
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 1112.0
-  sell_cost: 932.0
-  hide_catalog_number: false
-  status: cancel
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto14:
-  catalog_number: 392918-4322391
-  brand: mitsubishi
-  short_name: Оттава
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 1112.0
-  sell_cost: 932.0
-  hide_catalog_number: false
-  status: cancel
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto15:
-  catalog_number: 392918-4322391
-  brand: ty
-  short_name: Оттава
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 1112.0
-  sell_cost: 932.0
-  hide_catalog_number: false
-  status: cancel
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto16:
-  catalog_number: 392918-4322391
-  brand: kia
-  short_name: Оттава
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 1112.0
-  sell_cost: 932.0
-  hide_catalog_number: false
-  status: cancel
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto17:
-  catalog_number: 392918-4322391
-  brand: kia
-  short_name: Оттава
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 1112.0
-  sell_cost: 932.0
-  hide_catalog_number: false
-  status: cancel
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto18:
-  catalog_number: 392918-4322391
-  brand: nissan
-  short_name: Оттава
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 1112.0
-  sell_cost: 932.0
-  hide_catalog_number: false
-  status: cancel
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto19:
-  catalog_number: 392918-4322391
-  brand: nissan
-  short_name: Оттава
-  long_name: 1
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 1112.0
-  sell_cost: 932.0
-  hide_catalog_number: false
-  status: cancel
-  probability: 1
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto20:
-  catalog_number: 398394-32921
-  brand: nissan
-  short_name: Либрусек
-  long_name: adsfl;kj
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 101.0
-  sell_cost: 1391.0
-  hide_catalog_number: false
-  status: inorder
-  probability: 90
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto21:
-  catalog_number: 398394-32921
-  brand: kia
-  short_name: Либрусек
-  long_name: adsfl;kj
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 101.0
-  sell_cost: 1391.0
-  hide_catalog_number: false
-  status: inorder
-  probability: 90
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto22:
-  catalog_number: 398394-32921
-  brand: kia
-  short_name: Либрусек
-  long_name: adsfl;kj
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 101.0
-  sell_cost: 1391.0
-  hide_catalog_number: false
-  status: inorder
-  probability: 90
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto23:
-  catalog_number: 398394-32921
-  brand: nissan
-  short_name: Либрусек
-  long_name: adsfl;kj
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 101.0
-  sell_cost: 1391.0
-  hide_catalog_number: false
-  status: inorder
-  probability: 90
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto24:
-  catalog_number: 398394-32921
-  brand: mitsubishi
-  short_name: Либрусек
-  long_name: adsfl;kj
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 101.0
-  sell_cost: 1391.0
-  hide_catalog_number: false
-  status: inorder
-  probability: 90
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto25:
-  catalog_number: 398394-32921
-  brand: nissan
-  short_name: Либрусек
-  long_name: adsfl;kj
-  quantity_ordered: 1
-  quantity_available: 1
-  min_days: 1
-  max_days: 1
-  buy_cost: 101.0
-  sell_cost: 1391.0
-  hide_catalog_number: false
-  status: inorder
-  probability: 90
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 1
-  user: otto
-  creator: otto
-
-otto26:
-  catalog_number: 93123123
-  brand: ty
-  short_name: Деталька
-  long_name: Проверка
-  quantity_ordered: 5
-  quantity_available: 10
-  min_days: 3
-  max_days: 9
-  buy_cost: 212
-  sell_cost: 1483
-  hide_catalog_number: true
-  probability: 80 
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 13adfadfadsf
-  user: otto
-  creator: first_user
-
-otto27:
-  catalog_number: 982342132
-  brand: kia
-  short_name: aga
-  long_name: Проверочка
-  quantity_ordered: 3
-  quantity_available: 101
-  min_days: 4
-  max_days: 9
-  buy_cost: 1000
-  sell_cost: 1200
-  hide_catalog_number: true
-  probability: 80 
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes: 1
-  notes_invisible: 13adfadfadsf
-  user: otto
-  creator: first_user
-
-ivan1:
-  catalog_number: MN102555
-  brand: mitsubishi
-  short_name: CLIP
-  long_name: CLIP, CLIP,RR AXLE BRAKE TUBE, CLIP,BRAKE FLUID LINE,O
-  quantity_ordered: 6
-  quantity_available: 25
-  min_days: 14
-  max_days: 30
-  buy_cost: 294
-  sell_cost: 330
-  hide_catalog_number: false
-  status: incart
-  probability: 80 
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes:
-  notes_invisible:
-  user: ivan
-  creator: ivan
-
-ivan2:
-  catalog_number: L3YC1370Z
-  brand: mazda
-  short_name: TURBOCHARGER
-  long_name: TURBOCHARGER, ТУРБИНА МАЗДА СХ-7/MPS, ТУРБОКОМПРЕССОР, ТУРБИНА В СБОРЕ CX-7 2007-, ДЕТАЛЬ
-  quantity_ordered: 1
-  quantity_available: 5
-  min_days: 4
-  max_days: 7
-  buy_cost: 265342
-  sell_cost: 280400
-  hide_catalog_number: true
-  status: incart
-  probability: 99
-  created_at: 2013-05-21 03:45:38.527055000 Z
-  updated_at: 2013-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes:
-  notes_invisible:
-  user: ivan
-  creator: ivan
-
-ivan3:
-  catalog_number: 5654024000
-  brand: hyundai
-  short_name: ТЯГА РУЛЕВАЯ
-  long_name: РУЛЕВАЯ ТЯГА (БЕЗ Г/У) HMC, ТЯГА РУЛЕВАЯ, РУЛЕВАЯ ТЯГА, MOBIS/3-7, ДЕТАЛЬ
-  quantity_ordered: 6
-  quantity_available: 20
-  min_days: 2
-  max_days: 4
-  buy_cost: 2160
-  sell_cost: 2500
-  hide_catalog_number: false
-  status: incart
-  probability:  75
-  created_at: 2012-05-21 03:45:38.527055000 Z
-  updated_at: 2012-05-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes:
-  notes_invisible:
-  user: ivan
-  creator: ivan
-
-ivan4:
-  catalog_number: 191199279E
-  brand: vag
-  short_name: ОПОРА ДВИГАТЕЛЯ ПЕРЕДНЯЯ
-  long_name: ДЕТАЛЬ, GUMMILAGER, ОПОРА ДВИГАТЕЛЯ ПЕРЕДНЯЯ
-  quantity_ordered: 4
-  quantity_available: 10
-  min_days: 2
-  max_days: 4
-  buy_cost: 1950
-  sell_cost: 2400
-  hide_catalog_number: true
-  status: incart
-  probability: 81 
-  created_at: 2012-06-21 03:45:38.527055000 Z
-  updated_at: 2012-06-21 03:45:38.527055000 Z
-  creation_reason: fixtures
-  notes:
-  notes_invisible:
-  user: ivan
-  creator: ivan
-
+#anton_first:
+#  catalog_number: 2102
+#  brand: abs
+#  short_name: УСТРОЙСТВО ДЛЯ НАТЯЖЕНИЯ РЕМНЯ
+#  long_name: РОЛИК НАТЯЖНОЙ РЕМНЯ КОНДИЦИОНЕРА, УСТРОЙСТВО ДЛЯ НАТЯЖЕНИЯ РЕМНЯ, РЕМЕНЬ ГРМ, НАТЯЖИТЕЛЬ РЕМНЯ, НАТЯЖИТЕЛЬ ПРИВОДА РЕМНЯ ГЕНЕРАТОРА
+#  quantity_ordered: 2
+#  quantity_available: 10
+#  min_days: 2
+#  max_days: 5
+#  buy_cost: 518.0
+#  sell_cost: 820.0
+#  hide_catalog_number: true
+#  status: incart
+#  probability: 83
+#  created_at: 2012-08-21 03:45:38.527055000 Z
+#  updated_at: 2012-08-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes:
+#  notes_invisible:
+#  user: anton
+#  creator: first_admin
+#
+#
+#anton_second:
+#  catalog_number: 3310
+#  brand: bando
+#  short_name: Клиновой ремень
+#  long_name: Ремень КЛИНОВОЙ, Генератор, клиновой ремень,
+#  quantity_ordered: 3
+#  quantity_available: 98
+#  min_days: 1
+#  max_days: 2
+#  buy_cost: 932.0
+#  sell_cost: 1211.0
+#  hide_catalog_number: false
+#  status: ordered
+#  probability: 95
+#  created_at: 2012-08-11 03:45:38.527055000 Z
+#  updated_at: 2012-08-30 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: Коммент.
+#  notes_invisible: Невидимый комментарий
+#  user: anton
+#  creator: first_admin
+#
+#anton_third:
+#  catalog_number: 3515
+#  brand: Производитель
+#  short_name: Название
+#  quantity_ordered: 1
+#  quantity_available: 2
+#  min_days: 1
+#  max_days: 2
+#  buy_cost: 32.0
+#  sell_cost: 211.0
+#  hide_catalog_number: false
+#  status: incart
+#  probability: 95
+#  created_at: 2012-08-12 03:45:38.527055000 Z
+#  updated_at: 2012-09-01 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  user: anton
+#  creator: anton
+#
+#anton_fourth:
+#  catalog_number: MR245368
+#  brand: mitsubishi
+#  short_name: НАСОС ОМЫВАТЕЛЯ
+#  long_name: НАСОС ОМЫВАТЕЛЯ СТЕКЛА, ЛОБОВОГО
+#  quantity_ordered: 2
+#  quantity_available: 3
+#  min_days: 3
+#  max_days: 4
+#  buy_cost: 332.0
+#  sell_cost: 350.0
+#  hide_catalog_number: false
+#  probability: 95
+#  created_at: 2012-08-12 03:45:38.527055000 Z
+#  updated_at: 2012-09-01 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  user: anton
+#  creator: anton
+#
+#anton_fifth:
+#  catalog_number: MR245368
+#  brand: mitsubishi
+#  short_name: НАСОС ОМЫВАТЕЛЯ
+#  long_name: НАСОС ОМЫВАТЕЛЯ СТЕКЛА, ЛОБОВОГО
+#  quantity_ordered: 4
+#  quantity_available: 2
+#  min_days: 5
+#  max_days: 9
+#  buy_cost: 352.0
+#  sell_cost: 390.0
+#  hide_catalog_number: true
+#  probability: 95
+#  created_at: 2012-08-12 03:45:38.527055000 Z
+#  updated_at: 2012-09-01 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  user: anton
+#  creator: anton
+#
+#anton_sixth:
+#  catalog_number: MR245368
+#  brand: mitsubishi
+#  short_name: НАСОС ОМЫВАТЕЛЯ
+#  long_name: НАСОС ОМЫВАТЕЛЯ СТЕКЛА, ЛОБОВОГО
+#  quantity_ordered: 4
+#  quantity_available: 2
+#  min_days: 5
+#  max_days: 9
+#  buy_cost: 352.0
+#  sell_cost: 390.0
+#  hide_catalog_number: true
+#  status: stock
+#  probability: 95
+#  created_at: 2012-08-12 03:45:38.527055000 Z
+#  updated_at: 2012-09-01 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  user: anton
+#  creator: anton
+#
+#anton_seventh:
+#  catalog_number: MR245368
+#  brand: mitsubishi
+#  short_name: НАСОС ОМЫВАТЕЛЯ
+#  long_name: НАСОС ОМЫВАТЕЛЯ СТЕКЛА, ЛОБОВОГО
+#  quantity_ordered: 4
+#  quantity_available: 2
+#  min_days: 5
+#  max_days: 9
+#  buy_cost: 352.0
+#  sell_cost: 390.0
+#  hide_catalog_number: true
+#  status: complete
+#  probability: 95
+#  created_at: 2012-08-12 03:45:38.527055000 Z
+#  updated_at: 2012-09-01 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  user: anton
+#  creator: anton
+#
+#anton_eighth:
+#  catalog_number: MR245368
+#  brand: mitsubishi
+#  short_name: НАСОС ОМЫВАТЕЛЯ
+#  long_name: НАСОС ОМЫВАТЕЛЯ СТЕКЛА, ЛОБОВОГО
+#  quantity_ordered: 4
+#  quantity_available: 2
+#  min_days: 5
+#  max_days: 9
+#  buy_cost: 352.0
+#  sell_cost: 390.0
+#  hide_catalog_number: true
+#  status: cancel
+#  probability: 95
+#  created_at: 2012-08-12 03:45:38.527055000 Z
+#  updated_at: 2012-09-01 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  user: anton
+#  creator: anton
+#
+#anton_ninth:
+#  catalog_number: MR245368
+#  brand: mitsubishi
+#  short_name: НАСОС ОМЫВАТЕЛЯ
+#  long_name: НАСОС ОМЫВАТЕЛЯ СТЕКЛА, ЛОБОВОГО
+#  quantity_ordered: 4
+#  quantity_available: 2
+#  min_days: 5
+#  max_days: 9
+#  buy_cost: 352.0
+#  sell_cost: 390.0
+#  hide_catalog_number: true
+#  status: inorder
+#  probability: 95
+#  created_at: 2012-08-12 03:45:38.527055000 Z
+#  updated_at: 2012-09-01 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  user: anton
+#  creator: anton
+#
+#anton_time_check:
+#  catalog_number: TIME
+#  brand: mitsubishi
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  buy_cost: 1
+#  sell_cost: 1
+#  hide_catalog_number: false
+#  status: inorder
+#  probability: 95
+#  created_at: 2012-04-12 03:45:38.527055000 Z
+#  updated_at: 2012-05-03 02:23:18.327055000 Z
+#  creation_reason: fixtures
+#  user: anton
+#  creator: anton
+#
+#first_user_first_product:
+#  catalog_number: MR508329
+#  brand: nissan
+#  short_name: Цилиндр сцепления рабочий
+#  long_name: Цилиндр, цилиндр для сцепления
+#  quantity_ordered: 3
+#  quantity_available: 11
+#  min_days: 3
+#  max_days: 2
+#  buy_cost: 2518.0
+#  sell_cost: 2820.0
+#  hide_catalog_number: false
+#  status: incart
+#  probability: 80
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: Комментарии
+#  notes_invisible: Служебные комментарии
+#  user: first_user
+#  creator: first_user
+#
+#
+#first_user_second_product:
+#  catalog_number: 13401−20030
+#  brand: nissens
+#  short_name: Выключатель обогрева заднего стекла
+#  quantity_ordered: 4
+#  buy_cost: 1425.0
+#  sell_cost: 3236.0
+#  hide_catalog_number: false
+#  status: incart
+#  creation_reason: fixtures
+#  user: first_user
+#  creator: first_user
+#
+#otto:
+#  catalog_number: 1
+#  brand: ty
+#  short_name: Ламбрусское
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 121.0
+#  sell_cost: 1392.0
+#  hide_catalog_number: false
+#  status: incart
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#
+#otto2:
+#  catalog_number: 398394-32921
+#  brand: mitsubishi
+#  short_name: Либрусек
+#  long_name: adsfl;kj
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 101.0
+#  sell_cost: 1391.0
+#  hide_catalog_number: false
+#  status: inorder
+#  probability: 90
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto3:
+#  catalog_number: 19392918
+#  brand: toyota
+#  short_name: adsfkljadsf
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 99.0
+#  sell_cost: 120.0
+#  hide_catalog_number: false
+#  status: ordered
+#  probability: 12
+#  created_at: 2012-11-21 03:45:38.527055000 Z
+#  updated_at: 2012-11-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#
+#otto4:
+#  catalog_number: 19291293-12329239
+#  brand: nissan
+#  short_name: Кардаган
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 119.0
+#  sell_cost: 112.0
+#  hide_catalog_number: false
+#  status: incart
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto5:
+#  catalog_number: 392918-4322391
+#  brand: nissan
+#  short_name: Оттава
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 1112.0
+#  sell_cost: 932.0
+#  hide_catalog_number: false
+#  status: cancel
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto6:
+#  catalog_number: 129123012-329128
+#  brand: kia
+#  short_name: Кишенев
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 12.0
+#  sell_cost: 3291.0
+#  hide_catalog_number: false
+#  status: cancel
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#
+#otto7:
+#  catalog_number: 2391920-322312
+#  brand: kia
+#  short_name: Армавир
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 91.0
+#  sell_cost: 121.50
+#  hide_catalog_number: false
+#  status: incart
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto8:
+#  catalog_number: 3291-321
+#  brand: nissan
+#  short_name: Арзамас
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 21.0
+#  sell_cost: 123.12
+#  hide_catalog_number: false
+#  status: incart
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto9:
+#  catalog_number: 19392121
+#  brand: nissan
+#  short_name: gaG
+#  long_name: adfjs
+#  quantity_ordered: 12
+#  quantity_available: 50
+#  min_days: 4
+#  max_days: 7
+#  buy_cost: 900
+#  sell_cost: 1300
+#  hide_catalog_number: true
+#  status: complete
+#  probability: 38
+#  created_at: 2012-04-21 03:45:38.527055000 Z
+#  updated_at: 2012-04-21 03:45:38.527055000 Z
+#  creation_reason: backend
+#  notes: 93921jdasd
+#  notes_invisible: 3248234j 
+#  user: otto
+#  creator: first_user
+#
+#
+#otto10:
+#  catalog_number: 9291919
+#  brand: kia
+#  short_name: gaga
+#  long_name: gaga
+#  quantity_ordered: 8
+#  quantity_available: 19
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 8.0
+#  sell_cost: 21.0
+#  hide_catalog_number: false
+#  status: incart
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto11:
+#  catalog_number: 39282828
+#  brand: mitsubishi
+#  short_name: aga
+#  long_name: Проверка
+#  quantity_ordered: 5
+#  quantity_available: 10
+#  min_days: 3
+#  max_days: 9
+#  buy_cost: 10
+#  sell_cost: 132
+#  hide_catalog_number: true
+#  probability: 80 
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 13adfadfadsf
+#  user: otto
+#  creator: first_user
+#
+#
+#otto12:
+#  catalog_number: 667744
+#  brand: nissan
+#  short_name: Кентуки шт.
+#  long_name: 1
+#  quantity_ordered: 12
+#  quantity_available: 13
+#  min_days: 10
+#  max_days: 20
+#  buy_cost: 120.30
+#  sell_cost: 150.0
+#  hide_catalog_number: true
+#  probability: 90
+#  created_at: 2012-05-10 03:45:38.527055000 Z
+#  updated_at: 2012-05-10 03:45:38.527055000 Z
+#  creation_reason: backend
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: first_user
+#
+#otto13:
+#  catalog_number: 392918-4322391
+#  brand: nissan
+#  short_name: Оттава
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 1112.0
+#  sell_cost: 932.0
+#  hide_catalog_number: false
+#  status: cancel
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto14:
+#  catalog_number: 392918-4322391
+#  brand: mitsubishi
+#  short_name: Оттава
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 1112.0
+#  sell_cost: 932.0
+#  hide_catalog_number: false
+#  status: cancel
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto15:
+#  catalog_number: 392918-4322391
+#  brand: ty
+#  short_name: Оттава
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 1112.0
+#  sell_cost: 932.0
+#  hide_catalog_number: false
+#  status: cancel
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto16:
+#  catalog_number: 392918-4322391
+#  brand: kia
+#  short_name: Оттава
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 1112.0
+#  sell_cost: 932.0
+#  hide_catalog_number: false
+#  status: cancel
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto17:
+#  catalog_number: 392918-4322391
+#  brand: kia
+#  short_name: Оттава
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 1112.0
+#  sell_cost: 932.0
+#  hide_catalog_number: false
+#  status: cancel
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto18:
+#  catalog_number: 392918-4322391
+#  brand: nissan
+#  short_name: Оттава
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 1112.0
+#  sell_cost: 932.0
+#  hide_catalog_number: false
+#  status: cancel
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto19:
+#  catalog_number: 392918-4322391
+#  brand: nissan
+#  short_name: Оттава
+#  long_name: 1
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 1112.0
+#  sell_cost: 932.0
+#  hide_catalog_number: false
+#  status: cancel
+#  probability: 1
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto20:
+#  catalog_number: 398394-32921
+#  brand: nissan
+#  short_name: Либрусек
+#  long_name: adsfl;kj
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 101.0
+#  sell_cost: 1391.0
+#  hide_catalog_number: false
+#  status: inorder
+#  probability: 90
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto21:
+#  catalog_number: 398394-32921
+#  brand: kia
+#  short_name: Либрусек
+#  long_name: adsfl;kj
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 101.0
+#  sell_cost: 1391.0
+#  hide_catalog_number: false
+#  status: inorder
+#  probability: 90
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto22:
+#  catalog_number: 398394-32921
+#  brand: kia
+#  short_name: Либрусек
+#  long_name: adsfl;kj
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 101.0
+#  sell_cost: 1391.0
+#  hide_catalog_number: false
+#  status: inorder
+#  probability: 90
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto23:
+#  catalog_number: 398394-32921
+#  brand: nissan
+#  short_name: Либрусек
+#  long_name: adsfl;kj
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 101.0
+#  sell_cost: 1391.0
+#  hide_catalog_number: false
+#  status: inorder
+#  probability: 90
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto24:
+#  catalog_number: 398394-32921
+#  brand: mitsubishi
+#  short_name: Либрусек
+#  long_name: adsfl;kj
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 101.0
+#  sell_cost: 1391.0
+#  hide_catalog_number: false
+#  status: inorder
+#  probability: 90
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto25:
+#  catalog_number: 398394-32921
+#  brand: nissan
+#  short_name: Либрусек
+#  long_name: adsfl;kj
+#  quantity_ordered: 1
+#  quantity_available: 1
+#  min_days: 1
+#  max_days: 1
+#  buy_cost: 101.0
+#  sell_cost: 1391.0
+#  hide_catalog_number: false
+#  status: inorder
+#  probability: 90
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 1
+#  user: otto
+#  creator: otto
+#
+#otto26:
+#  catalog_number: 93123123
+#  brand: ty
+#  short_name: Деталька
+#  long_name: Проверка
+#  quantity_ordered: 5
+#  quantity_available: 10
+#  min_days: 3
+#  max_days: 9
+#  buy_cost: 212
+#  sell_cost: 1483
+#  hide_catalog_number: true
+#  probability: 80 
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 13adfadfadsf
+#  user: otto
+#  creator: first_user
+#
+#otto27:
+#  catalog_number: 982342132
+#  brand: kia
+#  short_name: aga
+#  long_name: Проверочка
+#  quantity_ordered: 3
+#  quantity_available: 101
+#  min_days: 4
+#  max_days: 9
+#  buy_cost: 1000
+#  sell_cost: 1200
+#  hide_catalog_number: true
+#  probability: 80 
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes: 1
+#  notes_invisible: 13adfadfadsf
+#  user: otto
+#  creator: first_user
+#
+#ivan1:
+#  catalog_number: MN102555
+#  brand: mitsubishi
+#  short_name: CLIP
+#  long_name: CLIP, CLIP,RR AXLE BRAKE TUBE, CLIP,BRAKE FLUID LINE,O
+#  quantity_ordered: 6
+#  quantity_available: 25
+#  min_days: 14
+#  max_days: 30
+#  buy_cost: 294
+#  sell_cost: 330
+#  hide_catalog_number: false
+#  status: incart
+#  probability: 80 
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes:
+#  notes_invisible:
+#  user: ivan
+#  creator: ivan
+#
+#ivan2:
+#  catalog_number: L3YC1370Z
+#  brand: mazda
+#  short_name: TURBOCHARGER
+#  long_name: TURBOCHARGER, ТУРБИНА МАЗДА СХ-7/MPS, ТУРБОКОМПРЕССОР, ТУРБИНА В СБОРЕ CX-7 2007-, ДЕТАЛЬ
+#  quantity_ordered: 1
+#  quantity_available: 5
+#  min_days: 4
+#  max_days: 7
+#  buy_cost: 265342
+#  sell_cost: 280400
+#  hide_catalog_number: true
+#  status: incart
+#  probability: 99
+#  created_at: 2013-05-21 03:45:38.527055000 Z
+#  updated_at: 2013-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes:
+#  notes_invisible:
+#  user: ivan
+#  creator: ivan
+#
+#ivan3:
+#  catalog_number: 5654024000
+#  brand: hyundai
+#  short_name: ТЯГА РУЛЕВАЯ
+#  long_name: РУЛЕВАЯ ТЯГА (БЕЗ Г/У) HMC, ТЯГА РУЛЕВАЯ, РУЛЕВАЯ ТЯГА, MOBIS/3-7, ДЕТАЛЬ
+#  quantity_ordered: 6
+#  quantity_available: 20
+#  min_days: 2
+#  max_days: 4
+#  buy_cost: 2160
+#  sell_cost: 2500
+#  hide_catalog_number: false
+#  status: incart
+#  probability:  75
+#  created_at: 2012-05-21 03:45:38.527055000 Z
+#  updated_at: 2012-05-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes:
+#  notes_invisible:
+#  user: ivan
+#  creator: ivan
+#
+#ivan4:
+#  catalog_number: 191199279E
+#  brand: vag
+#  short_name: ОПОРА ДВИГАТЕЛЯ ПЕРЕДНЯЯ
+#  long_name: ДЕТАЛЬ, GUMMILAGER, ОПОРА ДВИГАТЕЛЯ ПЕРЕДНЯЯ
+#  quantity_ordered: 4
+#  quantity_available: 10
+#  min_days: 2
+#  max_days: 4
+#  buy_cost: 1950
+#  sell_cost: 2400
+#  hide_catalog_number: true
+#  status: incart
+#  probability: 81 
+#  created_at: 2012-06-21 03:45:38.527055000 Z
+#  updated_at: 2012-06-21 03:45:38.527055000 Z
+#  creation_reason: fixtures
+#  notes:
+#  notes_invisible:
+#  user: ivan
+#  creator: ivan
+#
 sending1:
   catalog_number: 1
   brand: sending1
-  short_name: 1
-  long_name: 1
+  title: 1
+  titles: [1]
   quantity_ordered: 1
   quantity_available: 1
   min_days: 1
@@ -941,8 +941,8 @@ sending1:
 receiving1:
   catalog_number: 1
   brand: receiving1
-  short_name: 1
-  long_name: 1
+  title: 1
+  titles: [1]
   quantity_ordered: 1
   quantity_available: 1
   min_days: 1
@@ -960,29 +960,29 @@ receiving1:
   notes_invisible:
   user: receiving1
   creator: receiving1
-
-michael:
-  catalog_number: '1111111111'
-  brand: michael
-  short_name: "НАЗВАНИЕ 1"
-  long_name: "НАЗВАНИЕ 1, НАЗВАНИЕ 2"
-  quantity_ordered: '1'
-  quantity_available: '10'
-  min_days: '1'
-  max_days: '1'
-  buy_cost: '23.00'
-  sell_cost: '26.00'
-  hide_catalog_number: f
-  status: inorder
-  probability: '55'
-  order: michael
-  created_at: '2014-10-14 05:30:18.875194'
-  updated_at: '2014-10-14 05:30:38.959572'
-  creation_reason: 
-  notes: ''
-  notes_invisible: ''
-  user: michael
-  creator: michael
+#
+#michael:
+#  catalog_number: '1111111111'
+#  brand: michael
+#  short_name: "НАЗВАНИЕ 1"
+#  long_name: "НАЗВАНИЕ 1, НАЗВАНИЕ 2"
+#  quantity_ordered: '1'
+#  quantity_available: '10'
+#  min_days: '1'
+#  max_days: '1'
+#  buy_cost: '23.00'
+#  sell_cost: '26.00'
+#  hide_catalog_number: f
+#  status: inorder
+#  probability: '55'
+#  order: michael
+#  created_at: '2014-10-14 05:30:18.875194'
+#  updated_at: '2014-10-14 05:30:38.959572'
+#  creation_reason: 
+#  notes: ''
+#  notes_invisible: ''
+#  user: michael
+#  creator: michael
 
 ki_2103:
   catalog_number: '2103'
@@ -995,3 +995,31 @@ product_incart:
   catalog_number: 'PRODUCTINCART'
   brand: nissan
   user: user
+  quantity_ordered: 1
+  sell_cost: 256
+  status: <%= Product.statuses['incart'] %>
+
+product_count_1:
+  catalog_number: 'PRODUCTCOUNT1'
+  brand: nissan
+  user: user
+  quantity_ordered: 1
+  sell_cost: 1112
+  status: <%= Product.statuses['incart'] %>
+
+product_count_2:
+  catalog_number: 'PRODUCTCOUNT2'
+  brand: nissan
+  user: user
+  quantity_ordered: 2
+  sell_cost: 1921
+  status: <%= Product.statuses['incart'] %>
+
+shop_product_incart:
+  catalog_number: 'SHOPPRODUCTINCART'
+  brand: mazda
+  user: user
+  quantity_ordered: 5
+  sell_cost: 2912
+  status: <%= Product.statuses['incart'] %>
+  deliveries_place: first

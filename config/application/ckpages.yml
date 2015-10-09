@@ -1,14 +1,17 @@
 defaults: &defaults
-  enabled: true
+  enabled: false
   root: false
 
 development:
   <<: *defaults
-  enabled: false
-  root: false
 
 test:
   <<: *defaults
 
 production:
+  <<: *defaults
+  enabled: true
+  root: false
+
+staging:
   <<: *defaults

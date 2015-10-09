@@ -8,11 +8,11 @@
     <%= b.item @meta_title %>
   <% end %>
 
-  <%= p.title do %>
+  <%= p.title :auth do %>
     <%= page_header %>
   <% end %>
 
-  <%= p.content :sm do %>
+  <%= p.content :auth do %>
 
     <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
       <%= f.error_notification %>

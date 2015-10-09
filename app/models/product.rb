@@ -4,6 +4,8 @@ class Product < ActiveRecord::Base
   include BelongsToUser
   include Concerns::BrandAttributes
 
+  belongs_to :deliveries_place, class_name: "Deliveries::Place"
+
   enum status: [:incart, :inorder, :ordered, :pre_supplier, :post_supplier, :stock, :complete, :cancel]
 
   def self.summa
@@ -21,7 +23,7 @@ class Product < ActiveRecord::Base
   belongs_to :order
 
   def to_label
-    "#{catalog_number} (#{brand.name})"
+    "#{catalog_number} (#{brand.to_label})"
   end
 
   validate do

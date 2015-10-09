@@ -6,12 +6,9 @@
 //= require magnific-popup
 //
 //=========================
-//
-//=========================
 // OTHER LIBRARIES
 
 //= require discourse_static_assets
-//
 //
 //= require pickadate.js/lib/themes/default
 //= require pickadate.js/lib/themes/default.date
@@ -23,10 +20,6 @@
 // LIBS
 //
 //= require libs/jquery-details/jquery_details
-
-
-/////////////////////
-//
 //
 //=========================
 // APPLICATION
@@ -45,13 +38,16 @@ $font-size-h6:            ceil(($font-size-base * 0.85));
 
 /////////////////////
 
-//@import "bootswatch/paper/variables";
 
 $grid-columns: 24;
+
+//@import "bootswatch/slate/variables";
 
 // Then bootstrap itself
 @import 'bootstrap';
 @import 'bootstrap-sprockets';
+
+//@import "bootswatch/slate/bootswatch";
 
 /////////////////////
 
@@ -83,6 +79,7 @@ $grid-columns: 24;
 @import 'components/important';
 @import 'components/metro';
 @import "components/stars";
+@import 'components/ribbon';
 @import 'pages/faqs';
 @import 'pages/products';
 
@@ -91,7 +88,6 @@ $grid-columns: 24;
 .shadowed {
   text-shadow: 0 0 9px black;
 }
-
 
 // Пока не уверен что это правильный способ
 .select2-container {
@@ -111,10 +107,10 @@ $grid-columns: 24;
 
 /////////////////////
 
-.form-control.date, .form-control.datetime {
-  width: auto !important;
-  display: inline-block !important;
-}
+//.form-control.date, .form-control.datetime {
+//  width: auto !important;
+//  display: inline-block !important;
+//}
 
 /////////////////////
 
@@ -141,20 +137,10 @@ $grid-columns: 24;
 }
 
 /////////////////////
-.stars {
-  white-space: nowrap;
-  //color: @text-muted;
-}
-
-/////////////////////
 
 .pagination {
   margin-top: 0;
   margin-bottom: 0;
-}
-
-#main {
-  @extend .bottom-space-lg;
 }
 
 /////////////////////
@@ -171,12 +157,6 @@ $grid-columns: 24;
 
 .modal {
   z-index: 1070;
-}
-
-/////////////////////
-
-.other-names, .other-brands, .other-catalog-numbers {
-  word-wrap: break-word;
 }
 
 /////////////////////
@@ -220,51 +200,3 @@ $grid-columns: 24;
 .hide-empty:empty {
   display: none;
 }
-
-/////////////////////
-
-.ribbon-wrapper-green {
-  width: 85px;
-  height: 88px;
-  overflow: hidden;
-  position: absolute;
-  top: -3px;
-  right: 13px;
-}
-
-.ribbon-green {
-  font: bold 15px Sans-Serif;
-  color: #333;
-  text-align: center;
-  text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
-  transform: rotate(45deg);
-  position: relative;
-  padding: 7px 0;
-  left: -5px;
-  top: 15px;
-  width: 120px;
-  background-color: #BFDC7A;
-  background-image: gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45));
-  color: #6a6340;
-  box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
-}
-
-.ribbon-green:before, .ribbon-green:after {
-  content: "";
-  border-top: 3px solid #6e8900;
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
-  position: absolute;
-  bottom: -3px;
-}
-
-.ribbon-green:before {
-  left: 0;
-}
-.ribbon-green:after {
-  right: 0;
-}
-
-
-/////////////////////
-

@@ -1,14 +1,15 @@
-module ProductsConcern
+module ProductSerializer
   extend ActiveSupport::Concern
   included do
     helper_method :serialize_product
 
     def serialize_product(catalog_number:,
                          brand_id:,
+                         deliveries_place_id:,
                          quantity_ordered:,
                          sell_cost:,
-                         short_name:,
-                         long_name:,
+                         titles:,
+                         title:,
                          buy_cost:,
                          quantity_available:,
                          probability:,

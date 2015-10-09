@@ -1,5 +1,6 @@
 .breadcrumb {
-  background: white;
+  border: none;
+  background: $body-bg;
   padding-left: 0;
   @extend .bottom-space-none;
 

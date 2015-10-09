@@ -8,7 +8,7 @@
           <h5 class="top-space-none">Просматриваемый вами товар ранее поставлялся производителем под номером:</h5>
           <% value.each do |spare_info, warehouses| %>
             <% warehouses.each do |warehouse| %>
-              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}, в наличии #{warehouse.count} шт.", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
             <% end %>
           <% end  %>
         <% end %>
@@ -19,7 +19,7 @@
           <h5>Просматриваемый вами товар теперь поставляется производителем под номером:</h5>
           <% value.each do |spare_info, warehouses| %>
             <% warehouses.each do |warehouse| %>
-              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}, в наличии #{warehouse.count} шт.", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
             <% end %>
           <% end  %>
         <% end %>
@@ -30,7 +30,7 @@
           <h5>Просматриваемый вами товар так же маркируется производителем как:</h5>
           <% value.each do |spare_info, warehouses| %>
             <% warehouses.each do |warehouse| %>
-              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}, в наличии #{warehouse.count} шт.", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
             <% end %>
           <% end  %>
         <% end %>
@@ -41,7 +41,7 @@
           <h5>Просматриваемый вами товар так же маркируется производителем как:</h5>
           <% value.each do |spare_info, warehouses| %>
             <% warehouses.each do |warehouse| %>
-              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}, в наличии #{warehouse.count} шт.", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
             <% end %>
           <% end  %>
         <% end %>
@@ -52,7 +52,7 @@
           <h5>Просматриваемый вами товар является заменой для следующих номеров:</h5>
           <% value.each do |spare_info, warehouses| %>
             <% warehouses.each do |warehouse| %>
-              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}, в наличии #{warehouse.count} шт.", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
             <% end %>
           <% end  %>
         <% end %>
@@ -63,7 +63,7 @@
           <h5>Просматриваемый вами товар можно заменить следующими номерами:</h5>
           <% value.each do |spare_info, warehouses| %>
             <% warehouses.each do |warehouse| %>
-              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}, в наличии #{warehouse.count} шт.", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
             <% end %>
           <% end  %>
         <% end %>
@@ -74,7 +74,7 @@
           <h5>Просматриваемый вами товар содержит следующие товары:</h5>
           <% value.each do |spare_info, warehouses| %>
             <% warehouses.each do |warehouse| %>
-              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}, в наличии #{warehouse.count} шт.", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
             <% end %>
           <% end  %>
         <% end %>
@@ -85,7 +85,7 @@
           <h5>Просматриваемый вами товар входит в состав следующих товаров:</h5>
           <% value.each do |spare_info, warehouses| %>
             <% warehouses.each do |warehouse| %>
-              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
+              <p><%= link_to "#{spare_info.to_label}, #{number_to_currency(warehouse.price, precision: 0)}, в наличии #{warehouse.count} шт.", polymorphic_path([:new, :user, :product], :catalog_number => spare_info.catalog_number) %></p>
             <% end %>
           <% end  %>
         <% end %>

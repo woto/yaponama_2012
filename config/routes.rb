@@ -137,9 +137,12 @@ Yaponama2012::Application.routes.draw do
   resource :user  do
     resources :products
     scope module: :user do
+      resources :cart, only: [:index, :update] do
+        delete :confirm_remove, on: :member
+      end
       resources :postal_addresses
       resources :cars
-    post :pings, to: "deprecated#create"
+      post :pings, to: "deprecated#create"
     end
   end
 

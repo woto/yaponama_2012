@@ -23,6 +23,48 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: citext; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION citext; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION citext IS 'data type for case-insensitive character strings';
+
+
+--
+-- Name: hstore; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
+
+
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -36,9 +78,8 @@ SET default_with_oids = false;
 CREATE TABLE account_transactions (
     id integer NOT NULL,
     account_id integer,
+    operation character varying,
     creator_id integer,
-    product_transaction_id integer,
-    comment text,
     debit_before numeric,
     debit_after numeric,
     credit_before numeric,
@@ -102,116 +143,13 @@ ALTER SEQUENCE accounts_id_seq OWNED BY accounts.id;
 
 
 --
--- Name: auths; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE auths (
-    id integer NOT NULL,
-    provider character varying(255),
-    uid character varying(255),
-    somebody_id integer,
-    data text,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: auths_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE auths_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: auths_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE auths_id_seq OWNED BY auths.id;
-
-
---
--- Name: block_transactions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE block_transactions (
-    id integer NOT NULL,
-    block_id integer,
-    operation character varying(255),
-    creator_id integer,
-    name_before character varying(255),
-    name_after character varying(255),
-    content_before text,
-    content_after text,
-    created_at timestamp without time zone
-);
-
-
---
--- Name: block_transactions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE block_transactions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: block_transactions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE block_transactions_id_seq OWNED BY block_transactions.id;
-
-
---
--- Name: blocks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE blocks (
-    id integer NOT NULL,
-    name character varying(255),
-    content text,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: blocks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE blocks_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: blocks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE blocks_id_seq OWNED BY blocks.id;
-
-
---
 -- Name: bots; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bots (
     id integer NOT NULL,
-    title character varying(255),
-    comment character varying(255),
-    user_agent character varying(255),
+    title character varying,
+    user_agent character varying,
     inet inet,
     phantom boolean,
     creator_id integer,
@@ -247,18 +185,16 @@ ALTER SEQUENCE bots_id_seq OWNED BY bots.id;
 CREATE TABLE brand_transactions (
     id integer NOT NULL,
     brand_id integer,
-    operation character varying(255),
+    operation character varying,
     creator_id integer,
-    name_before character varying(255),
-    name_after character varying(255),
-    path_before character varying(255),
-    path_after character varying(255),
+    name_before character varying,
+    name_after character varying,
+    path_before character varying,
+    path_after character varying,
     brand_id_before integer,
     brand_id_after integer,
-    cached_brand_before character varying(255),
-    cached_brand_after character varying(255),
-    image_before character varying(255),
-    image_after character varying(255),
+    image_before character varying,
+    image_after character varying,
     rating_before integer,
     rating_after integer,
     content_before text,
@@ -269,11 +205,7 @@ CREATE TABLE brand_transactions (
     catalog_after boolean,
     is_brand_before boolean,
     is_brand_after boolean,
-    created_at timestamp without time zone,
-    manufacturer_before boolean,
-    manufacturer_after boolean,
-    preview_before text,
-    preview_after text
+    created_at timestamp without time zone
 );
 
 
@@ -302,21 +234,20 @@ ALTER SEQUENCE brand_transactions_id_seq OWNED BY brand_transactions.id;
 
 CREATE TABLE brands (
     id integer NOT NULL,
-    name character varying(255),
-    path character varying(255),
+    name citext,
     brand_id integer,
-    cached_brand character varying(255),
-    image character varying(255),
+    image character varying,
     rating integer,
     content text,
     creator_id integer,
     phantom boolean,
-    catalog boolean,
     is_brand boolean,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    manufacturer boolean,
-    preview text
+    preview text,
+    default_display boolean,
+    opts character varying[] DEFAULT '{}'::character varying[],
+    sign integer
 );
 
 
@@ -340,6 +271,16 @@ ALTER SEQUENCE brands_id_seq OWNED BY brands.id;
 
 
 --
+-- Name: brands_spare_catalogs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE brands_spare_catalogs (
+    spare_catalog_id integer NOT NULL,
+    brand_id integer NOT NULL
+);
+
+
+--
 -- Name: calls; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -347,7 +288,7 @@ CREATE TABLE calls (
     id integer NOT NULL,
     phone_id integer,
     somebody_id integer,
-    file character varying(255),
+    file character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -379,62 +320,54 @@ ALTER SEQUENCE calls_id_seq OWNED BY calls.id;
 CREATE TABLE car_transactions (
     id integer NOT NULL,
     car_id integer,
-    operation character varying(255),
+    operation character varying,
     creator_id integer,
     god_before integer,
     god_after integer,
-    period_before character varying(255),
-    period_after character varying(255),
+    period_before character varying,
+    period_after character varying,
     brand_id_before integer,
     brand_id_after integer,
-    cached_brand_before character varying(255),
-    cached_brand_after character varying(255),
     model_id_before integer,
     model_id_after integer,
-    cached_model_before character varying(255),
-    cached_model_after character varying(255),
     generation_id_before integer,
     generation_id_after integer,
-    cached_generation_before character varying(255),
-    cached_generation_after character varying(255),
     modification_id_before integer,
     modification_id_after integer,
-    cached_modification_before character varying(255),
-    cached_modification_after character varying(255),
-    dvigatel_before character varying(255),
-    dvigatel_after character varying(255),
-    tip_before character varying(255),
-    tip_after character varying(255),
-    moschnost_before character varying(255),
-    moschnost_after character varying(255),
-    privod_before character varying(255),
-    privod_after character varying(255),
-    tip_kuzova_before character varying(255),
-    tip_kuzova_after character varying(255),
-    kpp_before character varying(255),
-    kpp_after character varying(255),
-    kod_kuzova_before character varying(255),
-    kod_kuzova_after character varying(255),
-    kod_dvigatelya_before character varying(255),
-    kod_dvigatelya_after character varying(255),
-    rinok_before character varying(255),
-    rinok_after character varying(255),
-    vin_before character varying(255),
-    vin_after character varying(255),
-    frame_before character varying(255),
-    frame_after character varying(255),
-    vin_or_frame_before character varying(255),
-    vin_or_frame_after character varying(255),
-    komplektaciya_before character varying(255),
-    komplektaciya_after character varying(255),
+    dvigatel_before character varying,
+    dvigatel_after character varying,
+    tip_before character varying,
+    tip_after character varying,
+    moschnost_before character varying,
+    moschnost_after character varying,
+    privod_before character varying,
+    privod_after character varying,
+    tip_kuzova_before character varying,
+    tip_kuzova_after character varying,
+    kpp_before character varying,
+    kpp_after character varying,
+    kod_kuzova_before character varying,
+    kod_kuzova_after character varying,
+    kod_dvigatelya_before character varying,
+    kod_dvigatelya_after character varying,
+    rinok_before character varying,
+    rinok_after character varying,
+    vin_before character varying,
+    vin_after character varying,
+    frame_before character varying,
+    frame_after character varying,
+    vin_or_frame_before character varying,
+    vin_or_frame_after character varying,
+    komplektaciya_before character varying,
+    komplektaciya_after character varying,
     dverey_before integer,
     dverey_after integer,
-    rul_before character varying(255),
-    rul_after character varying(255),
-    car_number_before character varying(255),
-    car_number_after character varying(255),
-    creation_reason_before character varying(255),
-    creation_reason_after character varying(255),
+    rul_before character varying,
+    rul_after character varying,
+    car_number_before character varying,
+    car_number_after character varying,
+    creation_reason_before character varying,
+    creation_reason_after character varying,
     notes_before text,
     notes_after text,
     notes_invisible_before text,
@@ -471,38 +404,35 @@ ALTER SEQUENCE car_transactions_id_seq OWNED BY car_transactions.id;
 CREATE TABLE cars (
     id integer NOT NULL,
     god integer,
-    period character varying(255),
+    period character varying,
     brand_id integer,
-    cached_brand character varying(255),
     model_id integer,
-    cached_model character varying(255),
     generation_id integer,
-    cached_generation character varying(255),
     modification_id integer,
-    cached_modification character varying(255),
-    dvigatel character varying(255),
-    tip character varying(255),
-    moschnost character varying(255),
-    privod character varying(255),
-    tip_kuzova character varying(255),
-    kpp character varying(255),
-    kod_kuzova character varying(255),
-    kod_dvigatelya character varying(255),
-    rinok character varying(255),
-    vin character varying(255),
-    frame character varying(255),
-    vin_or_frame character varying(255),
-    komplektaciya character varying(255),
+    dvigatel character varying,
+    tip character varying,
+    moschnost character varying,
+    privod character varying,
+    tip_kuzova character varying,
+    kpp character varying,
+    kod_kuzova character varying,
+    kod_dvigatelya character varying,
+    rinok character varying,
+    vin character varying,
+    frame character varying,
+    vin_or_frame character varying,
+    komplektaciya character varying,
     dverey integer,
-    rul character varying(255),
+    rul character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    car_number character varying(255),
-    creation_reason character varying(255),
+    car_number character varying,
+    creation_reason character varying,
     notes text DEFAULT ''::text,
     notes_invisible text DEFAULT ''::text,
     somebody_id integer,
-    creator_id integer
+    creator_id integer,
+    user_id integer
 );
 
 
@@ -526,30 +456,142 @@ ALTER SEQUENCE cars_id_seq OWNED BY cars.id;
 
 
 --
+-- Name: ckpages_pages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE ckpages_pages (
+    id integer NOT NULL,
+    path text,
+    content text,
+    keywords text,
+    description text,
+    title text,
+    robots text,
+    redirect_url text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    title1 text,
+    url1 text,
+    title2 text,
+    url2 text,
+    title3 text,
+    url3 text,
+    title4 text,
+    url4 text,
+    title5 text,
+    url5 text
+);
+
+
+--
+-- Name: ckpages_pages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ckpages_pages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ckpages_pages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE ckpages_pages_id_seq OWNED BY ckpages_pages.id;
+
+
+--
+-- Name: ckpages_parts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE ckpages_parts (
+    id integer NOT NULL,
+    title character varying,
+    text text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: ckpages_parts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ckpages_parts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ckpages_parts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE ckpages_parts_id_seq OWNED BY ckpages_parts.id;
+
+
+--
+-- Name: ckpages_uploads; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE ckpages_uploads (
+    id integer NOT NULL,
+    file character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    content_type character varying,
+    file_size integer
+);
+
+
+--
+-- Name: ckpages_uploads_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ckpages_uploads_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ckpages_uploads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE ckpages_uploads_id_seq OWNED BY ckpages_uploads.id;
+
+
+--
 -- Name: companies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE companies (
     id integer NOT NULL,
-    ownership character varying(255),
-    name character varying(255),
-    inn character varying(255),
-    kpp character varying(255),
-    ogrn character varying(255),
-    account character varying(255),
-    bank character varying(255),
-    bik character varying(255),
-    correspondent character varying(255),
-    okpo character varying(255),
-    okved character varying(255),
-    okato character varying(255),
+    ownership character varying,
+    name character varying,
+    inn character varying,
+    kpp character varying,
+    ogrn character varying,
+    account character varying,
+    bank character varying,
+    bik character varying,
+    correspondent character varying,
+    okpo character varying,
+    okved character varying,
+    okato character varying,
     legal_address_id integer,
-    cached_legal_address character varying(255),
+    cached_legal_address character varying,
     actual_address_id integer,
-    cached_actual_address character varying(255),
+    cached_actual_address character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    creation_reason character varying(255),
+    creation_reason character varying,
     notes text DEFAULT ''::text,
     notes_invisible text DEFAULT ''::text,
     somebody_id integer,
@@ -583,42 +625,42 @@ ALTER SEQUENCE companies_id_seq OWNED BY companies.id;
 CREATE TABLE company_transactions (
     id integer NOT NULL,
     company_id integer,
-    operation character varying(255),
+    operation character varying,
     creator_id integer,
-    ownership_before character varying(255),
-    ownership_after character varying(255),
-    name_before character varying(255),
-    name_after character varying(255),
-    inn_before character varying(255),
-    inn_after character varying(255),
-    kpp_before character varying(255),
-    kpp_after character varying(255),
-    ogrn_before character varying(255),
-    ogrn_after character varying(255),
-    account_before character varying(255),
-    account_after character varying(255),
-    bank_before character varying(255),
-    bank_after character varying(255),
-    bik_before character varying(255),
-    bik_after character varying(255),
-    correspondent_before character varying(255),
-    correspondent_after character varying(255),
-    okpo_before character varying(255),
-    okpo_after character varying(255),
-    okved_before character varying(255),
-    okved_after character varying(255),
-    okato_before character varying(255),
-    okato_after character varying(255),
+    ownership_before character varying,
+    ownership_after character varying,
+    name_before character varying,
+    name_after character varying,
+    inn_before character varying,
+    inn_after character varying,
+    kpp_before character varying,
+    kpp_after character varying,
+    ogrn_before character varying,
+    ogrn_after character varying,
+    account_before character varying,
+    account_after character varying,
+    bank_before character varying,
+    bank_after character varying,
+    bik_before character varying,
+    bik_after character varying,
+    correspondent_before character varying,
+    correspondent_after character varying,
+    okpo_before character varying,
+    okpo_after character varying,
+    okved_before character varying,
+    okved_after character varying,
+    okato_before character varying,
+    okato_after character varying,
     legal_address_id_before integer,
     legal_address_id_after integer,
-    cached_legal_address_before character varying(255),
-    cached_legal_address_after character varying(255),
+    cached_legal_address_before character varying,
+    cached_legal_address_after character varying,
     actual_address_id_before integer,
     actual_address_id_after integer,
-    cached_actual_address_before character varying(255),
-    cached_actual_address_after character varying(255),
-    creation_reason_before character varying(255),
-    creation_reason_after character varying(255),
+    cached_actual_address_before character varying,
+    cached_actual_address_after character varying,
+    creation_reason_before character varying,
+    creation_reason_after character varying,
     notes_before text,
     notes_after text,
     notes_invisible_before text,
@@ -661,8 +703,8 @@ CREATE TABLE delayed_jobs (
     run_at timestamp without time zone,
     locked_at timestamp without time zone,
     failed_at timestamp without time zone,
-    locked_by character varying(255),
-    queue character varying(255),
+    locked_by character varying,
+    queue character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -688,82 +730,34 @@ ALTER SEQUENCE delayed_jobs_id_seq OWNED BY delayed_jobs.id;
 
 
 --
--- Name: deliveries_options; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE deliveries_options (
-    id integer NOT NULL,
-    name character varying(255),
-    full_prepayment_required boolean,
-    postal_address_required boolean,
-    passport_required boolean,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: deliveries_options_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE deliveries_options_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: deliveries_options_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE deliveries_options_id_seq OWNED BY deliveries_options.id;
-
-
---
 -- Name: deliveries_places; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE deliveries_places (
     id integer NOT NULL,
-    name character varying(255),
-    content text,
+    name character varying,
     vertices text,
-    active_fill_color character varying(255),
-    active_fill_opacity character varying(255),
-    active_stroke_color character varying(255),
-    active_stroke_opacity character varying(255),
-    active_stroke_weight character varying(255),
-    inactive_fill_color character varying(255),
-    inactive_fill_opacity character varying(255),
-    inactive_stroke_color character varying(255),
-    inactive_stroke_opacity character varying(255),
-    inactive_stroke_weight character varying(255),
     realize boolean DEFAULT true,
     active boolean DEFAULT true,
-    lat double precision,
-    lng double precision,
-    zoom integer,
     z_index integer,
     display_marker boolean,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    phone1 character varying(255),
-    phone2 character varying(255),
-    phone3 character varying(255),
-    phone4 character varying(255),
-    phone5 character varying(255),
-    postal_address character varying(255),
-    image1 character varying(255),
-    image2 character varying(255),
-    image3 character varying(255),
-    address_locality character varying(255),
-    postal_code character varying(255),
-    street_address character varying(255),
-    email1 character varying(255),
-    email2 character varying(255),
-    email3 character varying(255)
+    price_url character varying,
+    metro character varying,
+    partner boolean DEFAULT false NOT NULL,
+    ycountry character varying,
+    ycountry_code character varying,
+    ycity character varying,
+    ystreet character varying,
+    yhouse character varying,
+    ycity_code character varying,
+    yphone character varying,
+    ycompany_name character varying,
+    ycontact_email character varying,
+    ywork_time character varying,
+    yogrn character varying,
+    faq_id integer
 );
 
 
@@ -796,7 +790,7 @@ CREATE TABLE deliveries_variants (
     option_id integer,
     active boolean,
     sequence integer,
-    name character varying(255),
+    name character varying,
     delivery_cost double precision,
     content text,
     created_at timestamp without time zone,
@@ -830,20 +824,20 @@ ALTER SEQUENCE deliveries_variants_id_seq OWNED BY deliveries_variants.id;
 CREATE TABLE email_transactions (
     id integer NOT NULL,
     email_id integer,
-    operation character varying(255),
+    operation character varying,
     creator_id integer,
-    value_before character varying(255),
-    value_after character varying(255),
+    value_before character varying,
+    value_after character varying,
     profile_id_before integer,
     profile_id_after integer,
     confirmed_before boolean,
     confirmed_after boolean,
     confirmation_datetime_before timestamp without time zone,
     confirmation_datetime_after timestamp without time zone,
-    confirmation_token_before character varying(255),
-    confirmation_token_after character varying(255),
-    creation_reason_before character varying(255),
-    creation_reason_after character varying(255),
+    confirmation_token_before character varying,
+    confirmation_token_after character varying,
+    creation_reason_before character varying,
+    creation_reason_after character varying,
     notes_before text,
     notes_after text,
     notes_invisible_before text,
@@ -879,14 +873,14 @@ ALTER SEQUENCE email_transactions_id_seq OWNED BY email_transactions.id;
 
 CREATE TABLE emails (
     id integer NOT NULL,
-    value character varying(255),
+    value character varying,
     profile_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     confirmed boolean,
     confirmation_datetime timestamp without time zone,
-    confirmation_token character varying(255),
-    creation_reason character varying(255),
+    confirmation_token character varying,
+    creation_reason character varying,
     notes text DEFAULT ''::text,
     notes_invisible text DEFAULT ''::text,
     somebody_id integer,
@@ -914,98 +908,14 @@ ALTER SEQUENCE emails_id_seq OWNED BY emails.id;
 
 
 --
--- Name: faq_transactions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE faq_transactions (
-    id integer NOT NULL,
-    faq_id integer,
-    operation character varying(255),
-    creator_id integer,
-    question_before text,
-    question_after text,
-    answer_before text,
-    answer_after text,
-    phantom_before boolean,
-    phantom_after boolean,
-    creation_reason_before character varying(255),
-    creation_reason_after character varying(255),
-    notes_before text,
-    notes_after text,
-    notes_invisible_before text,
-    notes_invisible_after text,
-    somebody_id_before integer,
-    somebody_id_after integer,
-    created_at timestamp without time zone
-);
-
-
---
--- Name: faq_transactions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE faq_transactions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: faq_transactions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE faq_transactions_id_seq OWNED BY faq_transactions.id;
-
-
---
--- Name: faqs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE faqs (
-    id integer NOT NULL,
-    question text,
-    answer text,
-    phantom boolean DEFAULT false,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    creation_reason character varying(255),
-    notes text DEFAULT ''::text,
-    notes_invisible text DEFAULT ''::text,
-    somebody_id integer,
-    creator_id integer
-);
-
-
---
--- Name: faqs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE faqs_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: faqs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE faqs_id_seq OWNED BY faqs.id;
-
-
---
 -- Name: galleries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE galleries (
     id integer NOT NULL,
-    title character varying(255),
+    title character varying,
     content text,
-    image character varying(255),
+    image character varying,
     creator_id integer,
     phantom boolean DEFAULT false,
     created_at timestamp without time zone,
@@ -1038,16 +948,17 @@ ALTER SEQUENCE galleries_id_seq OWNED BY galleries.id;
 
 CREATE TABLE generations (
     id integer NOT NULL,
-    name character varying(255),
+    name citext,
     content text,
     model_id integer,
-    cached_model character varying(255),
+    cached_model character varying,
     creator_id integer,
     phantom boolean,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     "from" date,
-    "to" date
+    "to" date,
+    preview text
 );
 
 
@@ -1087,8 +998,8 @@ CREATE TABLE ipgeobase_ips (
 
 CREATE TABLE ipgeobase_regions (
     id integer NOT NULL,
-    name character varying(255),
-    ancestry character varying(255),
+    name character varying,
+    ancestry character varying,
     names_depth_cache text,
     region_id integer,
     created_at timestamp without time zone,
@@ -1152,15 +1063,16 @@ ALTER SEQUENCE metro_id_seq OWNED BY metro.id;
 CREATE TABLE models (
     id integer NOT NULL,
     brand_id integer,
-    cached_brand character varying(255),
-    name character varying(255),
+    name citext,
     content text,
     creator_id integer,
     phantom boolean,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     "from" date,
-    "to" date
+    "to" date,
+    slang character varying,
+    preview text
 );
 
 
@@ -1189,10 +1101,10 @@ ALTER SEQUENCE models_id_seq OWNED BY models.id;
 
 CREATE TABLE modifications (
     id integer NOT NULL,
-    name character varying(255),
+    name citext,
     content text,
     generation_id integer,
-    cached_generation character varying(255),
+    cached_generation character varying,
     creator_id integer,
     phantom boolean,
     created_at timestamp without time zone,
@@ -1228,18 +1140,18 @@ ALTER SEQUENCE modifications_id_seq OWNED BY modifications.id;
 CREATE TABLE name_transactions (
     id integer NOT NULL,
     name_id integer,
-    operation character varying(255),
+    operation character varying,
     creator_id integer,
-    surname_before character varying(255),
-    surname_after character varying(255),
-    name_before character varying(255),
-    name_after character varying(255),
-    patronymic_before character varying(255),
-    patronymic_after character varying(255),
+    surname_before character varying,
+    surname_after character varying,
+    name_before character varying,
+    name_after character varying,
+    patronymic_before character varying,
+    patronymic_after character varying,
     profile_id_before integer,
     profile_id_after integer,
-    creation_reason_before character varying(255),
-    creation_reason_after character varying(255),
+    creation_reason_before character varying,
+    creation_reason_after character varying,
     notes_before text,
     notes_after text,
     notes_invisible_before text,
@@ -1275,13 +1187,13 @@ ALTER SEQUENCE name_transactions_id_seq OWNED BY name_transactions.id;
 
 CREATE TABLE names (
     id integer NOT NULL,
-    surname character varying(255),
-    name character varying(255),
-    patronymic character varying(255),
+    surname character varying,
+    name character varying,
+    patronymic character varying,
     profile_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    creation_reason character varying(255),
+    creation_reason character varying,
     notes text DEFAULT ''::text,
     notes_invisible text DEFAULT ''::text,
     somebody_id integer,
@@ -1309,24 +1221,32 @@ ALTER SEQUENCE names_id_seq OWNED BY names.id;
 
 
 --
--- Name: order_deliveries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: opts_accumulators; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE order_deliveries (
+CREATE TABLE opts_accumulators (
     id integer NOT NULL,
+    voltage integer,
+    battery_capacity integer,
+    cold_cranking_amps integer,
+    length integer,
+    width integer,
+    height integer,
+    base_hold_down integer,
+    layout integer,
+    terminal_types integer,
+    spare_info_id integer,
     creator_id integer,
-    somebody_id integer,
-    postal_address_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
 --
--- Name: order_deliveries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: opts_accumulators_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE order_deliveries_id_seq
+CREATE SEQUENCE opts_accumulators_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1335,10 +1255,48 @@ CREATE SEQUENCE order_deliveries_id_seq
 
 
 --
--- Name: order_deliveries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: opts_accumulators_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE order_deliveries_id_seq OWNED BY order_deliveries.id;
+ALTER SEQUENCE opts_accumulators_id_seq OWNED BY opts_accumulators.id;
+
+
+--
+-- Name: opts_truck_tires; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE opts_truck_tires (
+    id integer NOT NULL,
+    height integer,
+    width integer,
+    diameter integer,
+    spare_info_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    load integer,
+    speed integer,
+    line integer,
+    axle integer
+);
+
+
+--
+-- Name: opts_truck_tires_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE opts_truck_tires_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: opts_truck_tires_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE opts_truck_tires_id_seq OWNED BY opts_truck_tires.id;
 
 
 --
@@ -1348,7 +1306,7 @@ ALTER SEQUENCE order_deliveries_id_seq OWNED BY order_deliveries.id;
 CREATE TABLE order_transactions (
     id integer NOT NULL,
     order_id integer,
-    operation character varying(255),
+    operation character varying,
     creator_id integer,
     postal_address_id_before integer,
     postal_address_id_after integer,
@@ -1356,8 +1314,8 @@ CREATE TABLE order_transactions (
     company_id_after integer,
     delivery_cost_before numeric,
     delivery_cost_after numeric,
-    status_before character varying(255),
-    status_after character varying(255),
+    status_before character varying,
+    status_after character varying,
     delivery_place_id_before integer,
     delivery_place_id_after integer,
     delivery_variant_id_before integer,
@@ -1374,12 +1332,12 @@ CREATE TABLE order_transactions (
     legal_after boolean,
     phantom_before boolean,
     phantom_after boolean,
-    token_before character varying(255),
-    token_after character varying(255),
-    track_number_before character varying(255),
-    track_number_after character varying(255),
-    creation_reason_before character varying(255),
-    creation_reason_after character varying(255),
+    token_before character varying,
+    token_after character varying,
+    track_number_before character varying,
+    track_number_after character varying,
+    creation_reason_before character varying,
+    creation_reason_after character varying,
     notes_before text,
     notes_after text,
     notes_invisible_before text,
@@ -1418,7 +1376,7 @@ CREATE TABLE orders (
     postal_address_id integer,
     company_id integer,
     delivery_cost numeric(8,2) DEFAULT 0,
-    status character varying(255) DEFAULT 'open'::character varying,
+    status character varying DEFAULT 'open'::character varying,
     delivery_place_id integer,
     delivery_variant_id integer,
     delivery_option_id integer,
@@ -1427,15 +1385,16 @@ CREATE TABLE orders (
     full_prepayment_required boolean,
     legal boolean,
     phantom boolean DEFAULT true,
-    token character varying(255),
-    track_number character varying(255),
+    token character varying,
+    track_number character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    creation_reason character varying(255),
+    creation_reason character varying,
     notes text DEFAULT ''::text,
     notes_invisible text DEFAULT ''::text,
     somebody_id integer,
-    creator_id integer
+    creator_id integer,
+    user_id integer
 );
 
 
@@ -1465,22 +1424,22 @@ ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
 CREATE TABLE page_transactions (
     id integer NOT NULL,
     page_id integer,
-    operation character varying(255),
+    operation character varying,
     creator_id integer,
-    path_before character varying(255),
-    path_after character varying(255),
+    path_before character varying,
+    path_after character varying,
     content_before text,
     content_after text,
     keywords_before text,
     keywords_after text,
     description_before text,
     description_after text,
-    title_before character varying(255),
-    title_after character varying(255),
-    robots_before character varying(255),
-    robots_after character varying(255),
-    creation_reason_before character varying(255),
-    creation_reason_after character varying(255),
+    title_before character varying,
+    title_after character varying,
+    robots_before character varying,
+    robots_after character varying,
+    creation_reason_before character varying,
+    creation_reason_after character varying,
     phantom_before boolean,
     phantom_after boolean,
     created_at timestamp without time zone
@@ -1512,17 +1471,18 @@ ALTER SEQUENCE page_transactions_id_seq OWNED BY page_transactions.id;
 
 CREATE TABLE pages (
     id integer NOT NULL,
-    path character varying(255),
+    path character varying,
     content text,
     keywords text,
     description text,
-    title character varying(255),
-    robots character varying(255),
+    title character varying,
+    robots character varying,
     creator_id integer,
-    creation_reason character varying(255),
+    creation_reason character varying,
     phantom boolean,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    redirect_url character varying
 );
 
 
@@ -1546,44 +1506,34 @@ ALTER SEQUENCE pages_id_seq OWNED BY pages.id;
 
 
 --
--- Name: pages_uploads; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE pages_uploads (
-    page_id integer,
-    upload_id integer
-);
-
-
---
 -- Name: passport_transactions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE passport_transactions (
     id integer NOT NULL,
     passport_id integer,
-    operation character varying(255),
+    operation character varying,
     creator_id integer,
-    seriya_before character varying(255),
-    seriya_after character varying(255),
-    nomer_before character varying(255),
-    nomer_after character varying(255),
-    passport_vidan_before character varying(255),
-    passport_vidan_after character varying(255),
+    seriya_before character varying,
+    seriya_after character varying,
+    nomer_before character varying,
+    nomer_after character varying,
+    passport_vidan_before character varying,
+    passport_vidan_after character varying,
     data_vidachi_before date,
     data_vidachi_after date,
-    kod_podrazdeleniya_before character varying(255),
-    kod_podrazdeleniya_after character varying(255),
-    gender_before character varying(255),
-    gender_after character varying(255),
+    kod_podrazdeleniya_before character varying,
+    kod_podrazdeleniya_after character varying,
+    gender_before character varying,
+    gender_after character varying,
     data_rozhdeniya_before date,
     data_rozhdeniya_after date,
-    mesto_rozhdeniya_before character varying(255),
-    mesto_rozhdeniya_after character varying(255),
+    mesto_rozhdeniya_before character varying,
+    mesto_rozhdeniya_after character varying,
     profile_id_before integer,
     profile_id_after integer,
-    creation_reason_before character varying(255),
-    creation_reason_after character varying(255),
+    creation_reason_before character varying,
+    creation_reason_after character varying,
     notes_before text,
     notes_after text,
     notes_invisible_before text,
@@ -1619,18 +1569,18 @@ ALTER SEQUENCE passport_transactions_id_seq OWNED BY passport_transactions.id;
 
 CREATE TABLE passports (
     id integer NOT NULL,
-    seriya character varying(255),
-    nomer character varying(255),
-    passport_vidan character varying(255),
+    seriya character varying,
+    nomer character varying,
+    passport_vidan character varying,
     data_vidachi date,
-    kod_podrazdeleniya character varying(255),
-    gender character varying(255),
+    kod_podrazdeleniya character varying,
+    gender character varying,
     data_rozhdeniya date,
-    mesto_rozhdeniya character varying(255),
+    mesto_rozhdeniya character varying,
     profile_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    creation_reason character varying(255),
+    creation_reason character varying,
     notes text DEFAULT ''::text,
     notes_invisible text DEFAULT ''::text,
     somebody_id integer,
@@ -1658,52 +1608,16 @@ ALTER SEQUENCE passports_id_seq OWNED BY passports.id;
 
 
 --
--- Name: payments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE payments (
-    id integer NOT NULL,
-    amount integer,
-    creator_id integer,
-    somebody_id integer,
-    profile_id integer,
-    postal_address_id integer,
-    payment_type character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: payments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE payments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: payments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE payments_id_seq OWNED BY payments.id;
-
-
---
 -- Name: phone_transactions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE phone_transactions (
     id integer NOT NULL,
     phone_id integer,
-    operation character varying(255),
+    operation character varying,
     creator_id integer,
-    value_before character varying(255),
-    value_after character varying(255),
+    value_before character varying,
+    value_after character varying,
     mobile_before boolean,
     mobile_after boolean,
     profile_id_before integer,
@@ -1712,10 +1626,10 @@ CREATE TABLE phone_transactions (
     confirmed_after boolean,
     confirmation_datetime_before timestamp without time zone,
     confirmation_datetime_after timestamp without time zone,
-    confirmation_token_before character varying(255),
-    confirmation_token_after character varying(255),
-    creation_reason_before character varying(255),
-    creation_reason_after character varying(255),
+    confirmation_token_before character varying,
+    confirmation_token_after character varying,
+    creation_reason_before character varying,
+    creation_reason_after character varying,
     notes_before text,
     notes_after text,
     notes_invisible_before text,
@@ -1751,15 +1665,15 @@ ALTER SEQUENCE phone_transactions_id_seq OWNED BY phone_transactions.id;
 
 CREATE TABLE phones (
     id integer NOT NULL,
-    value character varying(255),
+    value character varying,
     mobile boolean,
     profile_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     confirmed boolean,
     confirmation_datetime timestamp without time zone,
-    confirmation_token character varying(255),
-    creation_reason character varying(255),
+    confirmation_token character varying,
+    creation_reason character varying,
     notes text DEFAULT ''::text,
     notes_invisible text DEFAULT ''::text,
     somebody_id integer,
@@ -1793,24 +1707,24 @@ ALTER SEQUENCE phones_id_seq OWNED BY phones.id;
 CREATE TABLE postal_address_transactions (
     id integer NOT NULL,
     postal_address_id integer,
-    operation character varying(255),
+    operation character varying,
     creator_id integer,
-    postcode_before character varying(255),
-    postcode_after character varying(255),
-    region_before character varying(255),
-    region_after character varying(255),
-    city_before character varying(255),
-    city_after character varying(255),
-    street_before character varying(255),
-    street_after character varying(255),
-    house_before character varying(255),
-    house_after character varying(255),
+    postcode_before character varying,
+    postcode_after character varying,
+    region_before character varying,
+    region_after character varying,
+    city_before character varying,
+    city_after character varying,
+    street_before character varying,
+    street_after character varying,
+    house_before character varying,
+    house_after character varying,
     stand_alone_house_before boolean,
     stand_alone_house_after boolean,
-    room_before character varying(255),
-    room_after character varying(255),
-    creation_reason_before character varying(255),
-    creation_reason_after character varying(255),
+    room_before character varying,
+    room_after character varying,
+    creation_reason_before character varying,
+    creation_reason_after character varying,
     notes_before text,
     notes_after text,
     notes_invisible_before text,
@@ -1846,20 +1760,21 @@ ALTER SEQUENCE postal_address_transactions_id_seq OWNED BY postal_address_transa
 
 CREATE TABLE postal_addresses (
     id integer NOT NULL,
-    postcode character varying(255),
-    region character varying(255),
-    city character varying(255),
-    street character varying(255),
-    house character varying(255),
+    postcode character varying,
+    region character varying,
+    city character varying,
+    street character varying,
+    house character varying,
     stand_alone_house boolean,
-    room character varying(255),
+    room character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    creation_reason character varying(255),
+    creation_reason character varying,
     notes text DEFAULT ''::text,
     notes_invisible text DEFAULT ''::text,
     somebody_id integer,
-    creator_id integer
+    creator_id integer,
+    user_id integer
 );
 
 
@@ -1889,18 +1804,14 @@ ALTER SEQUENCE postal_addresses_id_seq OWNED BY postal_addresses.id;
 CREATE TABLE product_transactions (
     id integer NOT NULL,
     product_id integer,
-    operation character varying(255),
+    operation character varying,
     creator_id integer,
-    catalog_number_before character varying(255),
-    catalog_number_after character varying(255),
+    catalog_number_before character varying,
+    catalog_number_after character varying,
     brand_id_before integer,
     brand_id_after integer,
-    cached_brand_before character varying(255),
-    cached_brand_after character varying(255),
-    cached_order_before character varying(255),
-    cached_order_after character varying(255),
-    short_name_before character varying(255),
-    short_name_after character varying(255),
+    short_name_before character varying,
+    short_name_after character varying,
     long_name_before text,
     long_name_after text,
     quantity_ordered_before integer,
@@ -1917,18 +1828,14 @@ CREATE TABLE product_transactions (
     sell_cost_after numeric,
     hide_catalog_number_before boolean,
     hide_catalog_number_after boolean,
-    status_before character varying(255),
-    status_after character varying(255),
+    status_before character varying,
+    status_after character varying,
     probability_before integer,
     probability_after integer,
-    product_id_before integer,
-    product_id_after integer,
     order_id_before integer,
     order_id_after integer,
-    supplier_id_before integer,
-    supplier_id_after integer,
-    creation_reason_before character varying(255),
-    creation_reason_after character varying(255),
+    creation_reason_before character varying,
+    creation_reason_after character varying,
     notes_before text,
     notes_after text,
     notes_invisible_before text,
@@ -1964,12 +1871,10 @@ ALTER SEQUENCE product_transactions_id_seq OWNED BY product_transactions.id;
 
 CREATE TABLE products (
     id integer NOT NULL,
-    catalog_number character varying(255),
+    catalog_number character varying,
     brand_id integer,
-    cached_brand character varying(255),
-    cached_order character varying(255),
-    short_name character varying(255),
-    long_name text,
+    title character varying,
+    titles text[] DEFAULT '{}'::text[],
     quantity_ordered integer,
     quantity_available integer,
     min_days integer,
@@ -1977,18 +1882,18 @@ CREATE TABLE products (
     buy_cost numeric(8,2),
     sell_cost numeric(8,2),
     hide_catalog_number boolean DEFAULT false,
-    status character varying(255),
+    status integer,
     probability integer,
-    product_id integer,
     order_id integer,
-    supplier_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    creation_reason character varying(255),
+    creation_reason character varying,
     notes text DEFAULT ''::text,
     notes_invisible text DEFAULT ''::text,
     somebody_id integer,
-    creator_id integer
+    creator_id integer,
+    user_id integer,
+    deliveries_place_id integer
 );
 
 
@@ -2018,7 +1923,7 @@ ALTER SEQUENCE products_id_seq OWNED BY products.id;
 CREATE TABLE profile_transactions (
     id integer NOT NULL,
     profile_id integer,
-    operation character varying(255),
+    operation character varying,
     creator_id integer,
     cached_names_before text,
     cached_names_after text,
@@ -2028,8 +1933,8 @@ CREATE TABLE profile_transactions (
     cached_emails_after text,
     cached_passports_before text,
     cached_passports_after text,
-    creation_reason_before character varying(255),
-    creation_reason_after character varying(255),
+    creation_reason_before character varying,
+    creation_reason_after character varying,
     notes_before text,
     notes_after text,
     notes_invisible_before text,
@@ -2071,7 +1976,7 @@ CREATE TABLE profiles (
     cached_passports text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    creation_reason character varying(255),
+    creation_reason character varying,
     notes text DEFAULT ''::text,
     notes_invisible text DEFAULT ''::text,
     somebody_id integer,
@@ -2103,7 +2008,7 @@ ALTER SEQUENCE profiles_id_seq OWNED BY profiles.id;
 --
 
 CREATE TABLE schema_migrations (
-    version character varying(255) NOT NULL
+    version character varying NOT NULL
 );
 
 
@@ -2113,7 +2018,7 @@ CREATE TABLE schema_migrations (
 
 CREATE TABLE sessions (
     id integer NOT NULL,
-    session_id character varying(255) NOT NULL,
+    session_id character varying NOT NULL,
     data text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -2147,47 +2052,33 @@ CREATE TABLE somebodies (
     id integer NOT NULL,
     discount numeric(8,2),
     prepayment numeric(8,2),
-    role character varying(255),
-    auth_token character varying(255),
-    password_digest character varying(255),
-    password_reset_token character varying(255),
+    role character varying,
+    auth_token character varying,
+    password_digest character varying,
+    password_reset_token character varying,
     password_reset_sent_at timestamp without time zone,
-    ipgeobase_name character varying(255),
-    ipgeobase_names_depth_cache character varying(255),
-    accept_language character varying(255),
-    user_agent character varying(255),
-    cached_russian_time_zone_auto_id integer,
+    ipgeobase_name character varying,
+    ipgeobase_names_depth_cache character varying,
+    accept_language character varying,
+    user_agent character varying,
     remote_ip inet,
-    creation_reason character varying(255),
+    creation_reason character varying,
     notes text,
     notes_invisible text,
     creator_id integer,
     phantom boolean DEFAULT false,
     logout_from_other_places boolean DEFAULT true,
-    online boolean DEFAULT false,
-    chat text,
     profile_id integer,
     cached_profile text,
     cached_debit numeric(8,2) DEFAULT 0,
     cached_credit numeric(8,2) DEFAULT 0,
-    type character varying(255),
-    order_rule character varying(255),
-    stats_count integer,
-    touch_confirm timestamp without time zone,
-    cached_location text,
-    cached_title character varying(255),
-    cached_referrer text,
+    type character varying,
+    order_rule character varying,
+    location text,
+    referrer text,
     first_referrer text,
-    cached_screen_width character varying(255),
-    cached_screen_height character varying(255),
-    cached_client_width character varying(255),
-    cached_client_height character varying(255),
-    cached_talk character varying(255),
-    unread_talks integer DEFAULT 0,
-    total_talks integer DEFAULT 0,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    bot boolean DEFAULT false
+    updated_at timestamp without time zone
 );
 
 
@@ -2217,36 +2108,36 @@ ALTER SEQUENCE somebodies_id_seq OWNED BY somebodies.id;
 CREATE TABLE somebody_transactions (
     id integer NOT NULL,
     somebody_id integer,
-    operation character varying(255),
+    operation character varying,
     creator_id integer,
     discount_before numeric,
     discount_after numeric,
     prepayment_before numeric,
     prepayment_after numeric,
-    role_before character varying(255),
-    role_after character varying(255),
-    auth_token_before character varying(255),
-    auth_token_after character varying(255),
-    password_digest_before character varying(255),
-    password_digest_after character varying(255),
-    password_reset_token_before character varying(255),
-    password_reset_token_after character varying(255),
+    role_before character varying,
+    role_after character varying,
+    auth_token_before character varying,
+    auth_token_after character varying,
+    password_digest_before character varying,
+    password_digest_after character varying,
+    password_reset_token_before character varying,
+    password_reset_token_after character varying,
     password_reset_sent_at_before timestamp without time zone,
     password_reset_sent_at_after timestamp without time zone,
-    ipgeobase_name_before character varying(255),
-    ipgeobase_name_after character varying(255),
-    ipgeobase_names_depth_cache_before character varying(255),
-    ipgeobase_names_depth_cache_after character varying(255),
-    accept_language_before character varying(255),
-    accept_language_after character varying(255),
-    user_agent_before character varying(255),
-    user_agent_after character varying(255),
+    ipgeobase_name_before character varying,
+    ipgeobase_name_after character varying,
+    ipgeobase_names_depth_cache_before character varying,
+    ipgeobase_names_depth_cache_after character varying,
+    accept_language_before character varying,
+    accept_language_after character varying,
+    user_agent_before character varying,
+    user_agent_after character varying,
     cached_russian_time_zone_auto_id_before integer,
     cached_russian_time_zone_auto_id_after integer,
     remote_ip_before inet,
     remote_ip_after inet,
-    creation_reason_before character varying(255),
-    creation_reason_after character varying(255),
+    creation_reason_before character varying,
+    creation_reason_after character varying,
     notes_before text,
     notes_after text,
     notes_invisible_before text,
@@ -2257,6 +2148,8 @@ CREATE TABLE somebody_transactions (
     logout_from_other_places_after boolean,
     online_before boolean,
     online_after boolean,
+    sound_before boolean,
+    sound_after boolean,
     chat_before text,
     chat_after text,
     profile_id_before integer,
@@ -2267,39 +2160,41 @@ CREATE TABLE somebody_transactions (
     cached_debit_after numeric,
     cached_credit_before numeric,
     cached_credit_after numeric,
-    type_before character varying(255),
-    type_after character varying(255),
-    order_rule_before character varying(255),
-    order_rule_after character varying(255),
+    type_before character varying,
+    type_after character varying,
+    order_rule_before character varying,
+    order_rule_after character varying,
     stats_count_before integer,
     stats_count_after integer,
     touch_confirm_before timestamp without time zone,
     touch_confirm_after timestamp without time zone,
     cached_location_before text,
     cached_location_after text,
-    cached_title_before character varying(255),
-    cached_title_after character varying(255),
+    cached_title_before character varying,
+    cached_title_after character varying,
     cached_referrer_before text,
     cached_referrer_after text,
     first_referrer_before text,
     first_referrer_after text,
-    cached_screen_width_before character varying(255),
-    cached_screen_width_after character varying(255),
-    cached_screen_height_before character varying(255),
-    cached_screen_height_after character varying(255),
-    cached_client_width_before character varying(255),
-    cached_client_width_after character varying(255),
-    cached_client_height_before character varying(255),
-    cached_client_height_after character varying(255),
-    cached_talk_before character varying(255),
-    cached_talk_after character varying(255),
+    cached_screen_width_before character varying,
+    cached_screen_width_after character varying,
+    cached_screen_height_before character varying,
+    cached_screen_height_after character varying,
+    cached_client_width_before character varying,
+    cached_client_width_after character varying,
+    cached_client_height_before character varying,
+    cached_client_height_after character varying,
+    cached_talk_before character varying,
+    cached_talk_after character varying,
+    transport_before character varying,
+    transport_after character varying,
     unread_talks_before integer,
     unread_talks_after integer,
     total_talks_before integer,
     total_talks_after integer,
-    created_at timestamp without time zone,
-    bot_before boolean,
-    bot_after boolean
+    default_addressee_id_before integer,
+    default_addressee_id_after integer,
+    created_at timestamp without time zone
 );
 
 
@@ -2323,17 +2218,121 @@ ALTER SEQUENCE somebody_transactions_id_seq OWNED BY somebody_transactions.id;
 
 
 --
+-- Name: spare_applicabilities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE spare_applicabilities (
+    id integer NOT NULL,
+    spare_info_id integer,
+    brand_id integer,
+    model_id integer,
+    generation_id integer,
+    modification_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    notes text,
+    notes_invisible text
+);
+
+
+--
+-- Name: spare_applicabilities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE spare_applicabilities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: spare_applicabilities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE spare_applicabilities_id_seq OWNED BY spare_applicabilities.id;
+
+
+--
+-- Name: spare_catalog_groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE spare_catalog_groups (
+    id integer NOT NULL,
+    name character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    ancestry character varying
+);
+
+
+--
+-- Name: spare_catalog_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE spare_catalog_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: spare_catalog_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE spare_catalog_groups_id_seq OWNED BY spare_catalog_groups.id;
+
+
+--
+-- Name: spare_catalog_tokens; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE spare_catalog_tokens (
+    id integer NOT NULL,
+    spare_catalog_id integer,
+    name character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    weight integer DEFAULT 1
+);
+
+
+--
+-- Name: spare_catalog_tokens_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE spare_catalog_tokens_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: spare_catalog_tokens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE spare_catalog_tokens_id_seq OWNED BY spare_catalog_tokens.id;
+
+
+--
 -- Name: spare_catalogs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE spare_catalogs (
     id integer NOT NULL,
-    name character varying(255),
-    content text,
+    name character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     intro text,
-    page text
+    page text,
+    opt character varying,
+    shows integer,
+    spare_catalog_group_id integer
 );
 
 
@@ -2357,17 +2356,85 @@ ALTER SEQUENCE spare_catalogs_id_seq OWNED BY spare_catalogs.id;
 
 
 --
+-- Name: spare_info_phrases; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE spare_info_phrases (
+    id integer NOT NULL,
+    spare_info_id integer,
+    catalog_number character varying,
+    yandex_campaign_id integer,
+    yandex_banner_id integer,
+    yandex_banner_updated_at timestamp without time zone,
+    yandex_wordstat_updated_at timestamp without time zone,
+    yandex_shows integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    phrase character varying,
+    publish boolean,
+    yclicks integer,
+    yshows integer,
+    "primary" boolean
+);
+
+
+--
+-- Name: spare_info_phrases_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE spare_info_phrases_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: spare_info_phrases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE spare_info_phrases_id_seq OWNED BY spare_info_phrases.id;
+
+
+--
 -- Name: spare_infos; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE spare_infos (
     id integer NOT NULL,
-    catalog_number character varying(255),
+    catalog_number character varying,
     brand_id integer,
-    cached_brand character varying(255),
     content text,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    spare_catalog_id integer,
+    notes text,
+    notes_invisible text,
+    image1 character varying,
+    image2 character varying,
+    image3 character varying,
+    image4 character varying,
+    image5 character varying,
+    image6 character varying,
+    image7 character varying,
+    image8 character varying,
+    file1 character varying,
+    file2 character varying,
+    file3 character varying,
+    file4 character varying,
+    file5 character varying,
+    file6 character varying,
+    file7 character varying,
+    file8 character varying,
+    hstore hstore,
+    titles text[] DEFAULT '{}'::text[],
+    min_days integer,
+    min_cost integer,
+    offers integer,
+    aggregated_content_updated_at timestamp without time zone,
+    aggregated_content_checked_at timestamp without time zone,
+    fix_spare_catalog boolean DEFAULT false NOT NULL
 );
 
 
@@ -2391,106 +2458,27 @@ ALTER SEQUENCE spare_infos_id_seq OWNED BY spare_infos.id;
 
 
 --
--- Name: stats; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: spare_replacements; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE stats (
+CREATE TABLE spare_replacements (
     id integer NOT NULL,
-    location text,
-    title character varying(255),
-    referrer text,
-    russian_time_zone_auto_id integer,
-    screen_width integer,
-    screen_height integer,
-    client_width integer,
-    client_height integer,
-    somebody_id integer,
-    is_search boolean,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: stats_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE stats_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: stats_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE stats_id_seq OWNED BY stats.id;
-
-
---
--- Name: suppliers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE suppliers (
-    id integer NOT NULL,
-    creator_id integer,
-    debit numeric(8,2) DEFAULT 0,
-    credit numeric(8,2) DEFAULT 0,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: suppliers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE suppliers_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: suppliers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE suppliers_id_seq OWNED BY suppliers.id;
-
-
---
--- Name: talks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE talks (
-    id integer NOT NULL,
-    read boolean DEFAULT false,
-    received boolean DEFAULT false,
-    cached_talk text,
+    from_spare_info_id integer,
+    to_spare_info_id integer,
+    wrong boolean,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    creation_reason character varying(255),
-    notes text DEFAULT ''::text,
-    notes_invisible text DEFAULT ''::text,
-    somebody_id integer,
-    creator_id integer,
-    text text,
-    file character varying(255),
-    file_name character varying(255),
-    notified boolean DEFAULT false
+    notes text,
+    notes_invisible text,
+    status integer
 );
 
 
 --
--- Name: talks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: spare_replacements_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE talks_id_seq
+CREATE SEQUENCE spare_replacements_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2499,10 +2487,10 @@ CREATE SEQUENCE talks_id_seq
 
 
 --
--- Name: talks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: spare_replacements_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE talks_id_seq OWNED BY talks.id;
+ALTER SEQUENCE spare_replacements_id_seq OWNED BY spare_replacements.id;
 
 
 --
@@ -2518,7 +2506,7 @@ CREATE TABLE tests (
     "decimal" numeric,
     "float" double precision,
     "integer" integer,
-    string character varying(255),
+    string character varying,
     text text,
     "time" time without time zone,
     "timestamp" timestamp without time zone,
@@ -2547,26 +2535,47 @@ ALTER SEQUENCE tests_id_seq OWNED BY tests.id;
 
 
 --
--- Name: uploads; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE uploads (
+CREATE TABLE users (
     id integer NOT NULL,
-    upload character varying(255),
-    content_type character varying(255),
-    file_size integer,
-    somebody_id integer,
-    creation_reason character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip inet,
+    last_sign_in_ip inet,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    user_agent text,
+    accept_language text,
+    location text,
+    referrer text,
+    first_referrer text,
+    credit integer DEFAULT 0,
+    debit integer DEFAULT 0,
+    role integer,
+    name character varying,
+    phone character varying,
+    creator_id integer,
+    ipgeobase_name character varying,
+    ipgeobase_names_depth_cache character varying,
+    time_zone character varying,
+    notes text,
+    notes_invisible text
 );
 
 
 --
--- Name: uploads_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE uploads_id_seq
+CREATE SEQUENCE users_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2575,10 +2584,44 @@ CREATE SEQUENCE uploads_id_seq
 
 
 --
--- Name: uploads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE uploads_id_seq OWNED BY uploads.id;
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: warehouses; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE warehouses (
+    id integer NOT NULL,
+    spare_info_id integer,
+    count integer,
+    price integer,
+    place_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: warehouses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE warehouses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: warehouses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE warehouses_id_seq OWNED BY warehouses.id;
 
 
 --
@@ -2593,27 +2636,6 @@ ALTER TABLE ONLY account_transactions ALTER COLUMN id SET DEFAULT nextval('accou
 --
 
 ALTER TABLE ONLY accounts ALTER COLUMN id SET DEFAULT nextval('accounts_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY auths ALTER COLUMN id SET DEFAULT nextval('auths_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY block_transactions ALTER COLUMN id SET DEFAULT nextval('block_transactions_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY blocks ALTER COLUMN id SET DEFAULT nextval('blocks_id_seq'::regclass);
 
 
 --
@@ -2662,6 +2684,27 @@ ALTER TABLE ONLY cars ALTER COLUMN id SET DEFAULT nextval('cars_id_seq'::regclas
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY ckpages_pages ALTER COLUMN id SET DEFAULT nextval('ckpages_pages_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ckpages_parts ALTER COLUMN id SET DEFAULT nextval('ckpages_parts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ckpages_uploads ALTER COLUMN id SET DEFAULT nextval('ckpages_uploads_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY companies ALTER COLUMN id SET DEFAULT nextval('companies_id_seq'::regclass);
 
 
@@ -2677,13 +2720,6 @@ ALTER TABLE ONLY company_transactions ALTER COLUMN id SET DEFAULT nextval('compa
 --
 
 ALTER TABLE ONLY delayed_jobs ALTER COLUMN id SET DEFAULT nextval('delayed_jobs_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY deliveries_options ALTER COLUMN id SET DEFAULT nextval('deliveries_options_id_seq'::regclass);
 
 
 --
@@ -2712,20 +2748,6 @@ ALTER TABLE ONLY email_transactions ALTER COLUMN id SET DEFAULT nextval('email_t
 --
 
 ALTER TABLE ONLY emails ALTER COLUMN id SET DEFAULT nextval('emails_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY faq_transactions ALTER COLUMN id SET DEFAULT nextval('faq_transactions_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY faqs ALTER COLUMN id SET DEFAULT nextval('faqs_id_seq'::regclass);
 
 
 --
@@ -2788,7 +2810,14 @@ ALTER TABLE ONLY names ALTER COLUMN id SET DEFAULT nextval('names_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY order_deliveries ALTER COLUMN id SET DEFAULT nextval('order_deliveries_id_seq'::regclass);
+ALTER TABLE ONLY opts_accumulators ALTER COLUMN id SET DEFAULT nextval('opts_accumulators_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY opts_truck_tires ALTER COLUMN id SET DEFAULT nextval('opts_truck_tires_id_seq'::regclass);
 
 
 --
@@ -2831,13 +2860,6 @@ ALTER TABLE ONLY passport_transactions ALTER COLUMN id SET DEFAULT nextval('pass
 --
 
 ALTER TABLE ONLY passports ALTER COLUMN id SET DEFAULT nextval('passports_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY payments ALTER COLUMN id SET DEFAULT nextval('payments_id_seq'::regclass);
 
 
 --
@@ -2921,7 +2943,35 @@ ALTER TABLE ONLY somebody_transactions ALTER COLUMN id SET DEFAULT nextval('some
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY spare_applicabilities ALTER COLUMN id SET DEFAULT nextval('spare_applicabilities_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY spare_catalog_groups ALTER COLUMN id SET DEFAULT nextval('spare_catalog_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY spare_catalog_tokens ALTER COLUMN id SET DEFAULT nextval('spare_catalog_tokens_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY spare_catalogs ALTER COLUMN id SET DEFAULT nextval('spare_catalogs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY spare_info_phrases ALTER COLUMN id SET DEFAULT nextval('spare_info_phrases_id_seq'::regclass);
 
 
 --
@@ -2935,21 +2985,7 @@ ALTER TABLE ONLY spare_infos ALTER COLUMN id SET DEFAULT nextval('spare_infos_id
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY stats ALTER COLUMN id SET DEFAULT nextval('stats_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY suppliers ALTER COLUMN id SET DEFAULT nextval('suppliers_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY talks ALTER COLUMN id SET DEFAULT nextval('talks_id_seq'::regclass);
+ALTER TABLE ONLY spare_replacements ALTER COLUMN id SET DEFAULT nextval('spare_replacements_id_seq'::regclass);
 
 
 --
@@ -2963,7 +2999,14 @@ ALTER TABLE ONLY tests ALTER COLUMN id SET DEFAULT nextval('tests_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY uploads ALTER COLUMN id SET DEFAULT nextval('uploads_id_seq'::regclass);
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY warehouses ALTER COLUMN id SET DEFAULT nextval('warehouses_id_seq'::regclass);
 
 
 --
@@ -2980,30 +3023,6 @@ ALTER TABLE ONLY account_transactions
 
 ALTER TABLE ONLY accounts
     ADD CONSTRAINT accounts_pkey PRIMARY KEY (id);
-
-
---
--- Name: auths_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY auths
-    ADD CONSTRAINT auths_pkey PRIMARY KEY (id);
-
-
---
--- Name: block_transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY block_transactions
-    ADD CONSTRAINT block_transactions_pkey PRIMARY KEY (id);
-
-
---
--- Name: blocks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY blocks
-    ADD CONSTRAINT blocks_pkey PRIMARY KEY (id);
 
 
 --
@@ -3055,6 +3074,30 @@ ALTER TABLE ONLY cars
 
 
 --
+-- Name: ckpages_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ckpages_pages
+    ADD CONSTRAINT ckpages_pages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ckpages_parts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ckpages_parts
+    ADD CONSTRAINT ckpages_parts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ckpages_uploads_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ckpages_uploads
+    ADD CONSTRAINT ckpages_uploads_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: companies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3076,14 +3119,6 @@ ALTER TABLE ONLY company_transactions
 
 ALTER TABLE ONLY delayed_jobs
     ADD CONSTRAINT delayed_jobs_pkey PRIMARY KEY (id);
-
-
---
--- Name: deliveries_options_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY deliveries_options
-    ADD CONSTRAINT deliveries_options_pkey PRIMARY KEY (id);
 
 
 --
@@ -3116,22 +3151,6 @@ ALTER TABLE ONLY email_transactions
 
 ALTER TABLE ONLY emails
     ADD CONSTRAINT emails_pkey PRIMARY KEY (id);
-
-
---
--- Name: faq_transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY faq_transactions
-    ADD CONSTRAINT faq_transactions_pkey PRIMARY KEY (id);
-
-
---
--- Name: faqs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY faqs
-    ADD CONSTRAINT faqs_pkey PRIMARY KEY (id);
 
 
 --
@@ -3199,11 +3218,19 @@ ALTER TABLE ONLY names
 
 
 --
--- Name: order_deliveries_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: opts_accumulators_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY order_deliveries
-    ADD CONSTRAINT order_deliveries_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY opts_accumulators
+    ADD CONSTRAINT opts_accumulators_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: opts_truck_tires_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY opts_truck_tires
+    ADD CONSTRAINT opts_truck_tires_pkey PRIMARY KEY (id);
 
 
 --
@@ -3252,14 +3279,6 @@ ALTER TABLE ONLY passport_transactions
 
 ALTER TABLE ONLY passports
     ADD CONSTRAINT passports_pkey PRIMARY KEY (id);
-
-
---
--- Name: payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY payments
-    ADD CONSTRAINT payments_pkey PRIMARY KEY (id);
 
 
 --
@@ -3351,11 +3370,43 @@ ALTER TABLE ONLY somebody_transactions
 
 
 --
+-- Name: spare_applicabilities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY spare_applicabilities
+    ADD CONSTRAINT spare_applicabilities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: spare_catalog_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY spare_catalog_groups
+    ADD CONSTRAINT spare_catalog_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: spare_catalog_tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY spare_catalog_tokens
+    ADD CONSTRAINT spare_catalog_tokens_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: spare_catalogs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY spare_catalogs
     ADD CONSTRAINT spare_catalogs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: spare_info_phrases_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY spare_info_phrases
+    ADD CONSTRAINT spare_info_phrases_pkey PRIMARY KEY (id);
 
 
 --
@@ -3367,27 +3418,11 @@ ALTER TABLE ONLY spare_infos
 
 
 --
--- Name: stats_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: spare_replacements_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY stats
-    ADD CONSTRAINT stats_pkey PRIMARY KEY (id);
-
-
---
--- Name: suppliers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY suppliers
-    ADD CONSTRAINT suppliers_pkey PRIMARY KEY (id);
-
-
---
--- Name: talks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY talks
-    ADD CONSTRAINT talks_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY spare_replacements
+    ADD CONSTRAINT spare_replacements_pkey PRIMARY KEY (id);
 
 
 --
@@ -3399,11 +3434,19 @@ ALTER TABLE ONLY tests
 
 
 --
--- Name: uploads_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY uploads
-    ADD CONSTRAINT uploads_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: warehouses_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY warehouses
+    ADD CONSTRAINT warehouses_pkey PRIMARY KEY (id);
 
 
 --
@@ -3428,38 +3471,10 @@ CREATE INDEX index_account_transactions_on_creator_id ON account_transactions US
 
 
 --
--- Name: index_account_transactions_on_product_transaction_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_account_transactions_on_product_transaction_id ON account_transactions USING btree (product_transaction_id);
-
-
---
 -- Name: index_accounts_on_somebody_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_accounts_on_somebody_id ON accounts USING btree (somebody_id);
-
-
---
--- Name: index_auths_on_somebody_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_auths_on_somebody_id ON auths USING btree (somebody_id);
-
-
---
--- Name: index_block_transactions_on_block_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_block_transactions_on_block_id ON block_transactions USING btree (block_id);
-
-
---
--- Name: index_block_transactions_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_block_transactions_on_creator_id ON block_transactions USING btree (creator_id);
 
 
 --
@@ -3561,6 +3576,13 @@ CREATE INDEX index_cars_on_somebody_id ON cars USING btree (somebody_id);
 
 
 --
+-- Name: index_cars_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_cars_on_user_id ON cars USING btree (user_id);
+
+
+--
 -- Name: index_companies_on_actual_address_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3635,34 +3657,6 @@ CREATE INDEX index_emails_on_profile_id ON emails USING btree (profile_id);
 --
 
 CREATE INDEX index_emails_on_somebody_id ON emails USING btree (somebody_id);
-
-
---
--- Name: index_faq_transactions_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_faq_transactions_on_creator_id ON faq_transactions USING btree (creator_id);
-
-
---
--- Name: index_faq_transactions_on_faq_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_faq_transactions_on_faq_id ON faq_transactions USING btree (faq_id);
-
-
---
--- Name: index_faqs_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_faqs_on_creator_id ON faqs USING btree (creator_id);
-
-
---
--- Name: index_faqs_on_somebody_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_faqs_on_somebody_id ON faqs USING btree (somebody_id);
 
 
 --
@@ -3764,24 +3758,24 @@ CREATE INDEX index_names_on_somebody_id ON names USING btree (somebody_id);
 
 
 --
--- Name: index_order_deliveries_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_opts_accumulators_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_order_deliveries_on_creator_id ON order_deliveries USING btree (creator_id);
-
-
---
--- Name: index_order_deliveries_on_postal_address_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_order_deliveries_on_postal_address_id ON order_deliveries USING btree (postal_address_id);
+CREATE INDEX index_opts_accumulators_on_creator_id ON opts_accumulators USING btree (creator_id);
 
 
 --
--- Name: index_order_deliveries_on_somebody_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_opts_accumulators_on_spare_info_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_order_deliveries_on_somebody_id ON order_deliveries USING btree (somebody_id);
+CREATE INDEX index_opts_accumulators_on_spare_info_id ON opts_accumulators USING btree (spare_info_id);
+
+
+--
+-- Name: index_opts_truck_tires_on_spare_info_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_opts_truck_tires_on_spare_info_id ON opts_truck_tires USING btree (spare_info_id);
 
 
 --
@@ -3855,6 +3849,20 @@ CREATE INDEX index_orders_on_somebody_id ON orders USING btree (somebody_id);
 
 
 --
+-- Name: index_orders_on_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_orders_on_token ON orders USING btree (token);
+
+
+--
+-- Name: index_orders_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_orders_on_user_id ON orders USING btree (user_id);
+
+
+--
 -- Name: index_page_transactions_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3901,34 +3909,6 @@ CREATE INDEX index_passports_on_profile_id ON passports USING btree (profile_id)
 --
 
 CREATE INDEX index_passports_on_somebody_id ON passports USING btree (somebody_id);
-
-
---
--- Name: index_payments_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_payments_on_creator_id ON payments USING btree (creator_id);
-
-
---
--- Name: index_payments_on_postal_address_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_payments_on_postal_address_id ON payments USING btree (postal_address_id);
-
-
---
--- Name: index_payments_on_profile_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_payments_on_profile_id ON payments USING btree (profile_id);
-
-
---
--- Name: index_payments_on_somebody_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_payments_on_somebody_id ON payments USING btree (somebody_id);
 
 
 --
@@ -3995,6 +3975,13 @@ CREATE INDEX index_postal_addresses_on_somebody_id ON postal_addresses USING btr
 
 
 --
+-- Name: index_postal_addresses_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_postal_addresses_on_user_id ON postal_addresses USING btree (user_id);
+
+
+--
 -- Name: index_product_transactions_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4016,17 +4003,17 @@ CREATE INDEX index_products_on_creator_id ON products USING btree (creator_id);
 
 
 --
+-- Name: index_products_on_deliveries_place_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_products_on_deliveries_place_id ON products USING btree (deliveries_place_id);
+
+
+--
 -- Name: index_products_on_order_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_products_on_order_id ON products USING btree (order_id);
-
-
---
--- Name: index_products_on_product_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_products_on_product_id ON products USING btree (product_id);
 
 
 --
@@ -4037,10 +4024,10 @@ CREATE INDEX index_products_on_somebody_id ON products USING btree (somebody_id)
 
 
 --
--- Name: index_products_on_supplier_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_products_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_products_on_supplier_id ON products USING btree (supplier_id);
+CREATE INDEX index_products_on_user_id ON products USING btree (user_id);
 
 
 --
@@ -4093,6 +4080,27 @@ CREATE INDEX index_somebodies_on_creator_id ON somebodies USING btree (creator_i
 
 
 --
+-- Name: index_somebodies_on_remote_ip; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_somebodies_on_remote_ip ON somebodies USING btree (remote_ip);
+
+
+--
+-- Name: index_somebodies_on_type_and_auth_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_somebodies_on_type_and_auth_token ON somebodies USING btree (type, auth_token);
+
+
+--
+-- Name: index_somebodies_on_user_agent; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_somebodies_on_user_agent ON somebodies USING btree (user_agent);
+
+
+--
 -- Name: index_somebody_transactions_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4107,6 +4115,62 @@ CREATE INDEX index_somebody_transactions_on_somebody_id ON somebody_transactions
 
 
 --
+-- Name: index_spare_applicabilities_on_brand_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_spare_applicabilities_on_brand_id ON spare_applicabilities USING btree (brand_id);
+
+
+--
+-- Name: index_spare_applicabilities_on_generation_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_spare_applicabilities_on_generation_id ON spare_applicabilities USING btree (generation_id);
+
+
+--
+-- Name: index_spare_applicabilities_on_model_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_spare_applicabilities_on_model_id ON spare_applicabilities USING btree (model_id);
+
+
+--
+-- Name: index_spare_applicabilities_on_modification_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_spare_applicabilities_on_modification_id ON spare_applicabilities USING btree (modification_id);
+
+
+--
+-- Name: index_spare_applicabilities_on_spare_info_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_spare_applicabilities_on_spare_info_id ON spare_applicabilities USING btree (spare_info_id);
+
+
+--
+-- Name: index_spare_catalog_tokens_on_spare_catalog_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_spare_catalog_tokens_on_spare_catalog_id ON spare_catalog_tokens USING btree (spare_catalog_id);
+
+
+--
+-- Name: index_spare_catalogs_on_spare_catalog_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_spare_catalogs_on_spare_catalog_group_id ON spare_catalogs USING btree (spare_catalog_group_id);
+
+
+--
+-- Name: index_spare_info_phrases_on_spare_info_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_spare_info_phrases_on_spare_info_id ON spare_info_phrases USING btree (spare_info_id);
+
+
+--
 -- Name: index_spare_infos_on_brand_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4114,38 +4178,59 @@ CREATE INDEX index_spare_infos_on_brand_id ON spare_infos USING btree (brand_id)
 
 
 --
--- Name: index_stats_on_somebody_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_spare_infos_on_spare_catalog_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_stats_on_somebody_id ON stats USING btree (somebody_id);
-
-
---
--- Name: index_suppliers_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_suppliers_on_creator_id ON suppliers USING btree (creator_id);
+CREATE INDEX index_spare_infos_on_spare_catalog_id ON spare_infos USING btree (spare_catalog_id);
 
 
 --
--- Name: index_talks_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_spare_replacements_on_from_spare_info_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_talks_on_creator_id ON talks USING btree (creator_id);
-
-
---
--- Name: index_talks_on_somebody_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_talks_on_somebody_id ON talks USING btree (somebody_id);
+CREATE INDEX index_spare_replacements_on_from_spare_info_id ON spare_replacements USING btree (from_spare_info_id);
 
 
 --
--- Name: index_uploads_on_somebody_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_spare_replacements_on_to_spare_info_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_uploads_on_somebody_id ON uploads USING btree (somebody_id);
+CREATE INDEX index_spare_replacements_on_to_spare_info_id ON spare_replacements USING btree (to_spare_info_id);
+
+
+--
+-- Name: index_users_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_creator_id ON users USING btree (creator_id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
+
+
+--
+-- Name: index_warehouses_on_place_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_warehouses_on_place_id ON warehouses USING btree (place_id);
+
+
+--
+-- Name: index_warehouses_on_spare_info_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_warehouses_on_spare_info_id ON warehouses USING btree (spare_info_id);
 
 
 --
@@ -4153,6 +4238,30 @@ CREATE INDEX index_uploads_on_somebody_id ON uploads USING btree (somebody_id);
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: fk_rails_266f4f9407; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY spare_info_phrases
+    ADD CONSTRAINT fk_rails_266f4f9407 FOREIGN KEY (spare_info_id) REFERENCES spare_infos(id);
+
+
+--
+-- Name: fk_rails_7c301f2df7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY products
+    ADD CONSTRAINT fk_rails_7c301f2df7 FOREIGN KEY (deliveries_place_id) REFERENCES deliveries_places(id);
+
+
+--
+-- Name: fk_rails_c02d25e658; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY spare_catalogs
+    ADD CONSTRAINT fk_rails_c02d25e658 FOREIGN KEY (spare_catalog_group_id) REFERENCES spare_catalog_groups(id);
 
 
 --
@@ -4177,8 +4286,6 @@ INSERT INTO schema_migrations (version) VALUES ('20121024192648');
 
 INSERT INTO schema_migrations (version) VALUES ('20121024192711');
 
-INSERT INTO schema_migrations (version) VALUES ('20121027124845');
-
 INSERT INTO schema_migrations (version) VALUES ('20121027175844');
 
 INSERT INTO schema_migrations (version) VALUES ('20121106143606');
@@ -4189,11 +4296,7 @@ INSERT INTO schema_migrations (version) VALUES ('20121207143942');
 
 INSERT INTO schema_migrations (version) VALUES ('20121221143230');
 
-INSERT INTO schema_migrations (version) VALUES ('20121222095424');
-
 INSERT INTO schema_migrations (version) VALUES ('20121224004534');
-
-INSERT INTO schema_migrations (version) VALUES ('20121228131534');
 
 INSERT INTO schema_migrations (version) VALUES ('20130106092934');
 
@@ -4229,31 +4332,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130527063301');
 
 INSERT INTO schema_migrations (version) VALUES ('20130527065612');
 
-INSERT INTO schema_migrations (version) VALUES ('20130607164715');
-
-INSERT INTO schema_migrations (version) VALUES ('20130627000127');
-
 INSERT INTO schema_migrations (version) VALUES ('20130922203206');
-
-INSERT INTO schema_migrations (version) VALUES ('20131016040326');
-
-INSERT INTO schema_migrations (version) VALUES ('20131028130959');
-
-INSERT INTO schema_migrations (version) VALUES ('20131201202601');
-
-INSERT INTO schema_migrations (version) VALUES ('20131201202627');
-
-INSERT INTO schema_migrations (version) VALUES ('20131201212428');
-
-INSERT INTO schema_migrations (version) VALUES ('20131202004245');
-
-INSERT INTO schema_migrations (version) VALUES ('20131202023213');
-
-INSERT INTO schema_migrations (version) VALUES ('20140110081258');
-
-INSERT INTO schema_migrations (version) VALUES ('20140125140823');
-
-INSERT INTO schema_migrations (version) VALUES ('20140201225959');
 
 INSERT INTO schema_migrations (version) VALUES ('20140210162300');
 
@@ -4267,19 +4346,7 @@ INSERT INTO schema_migrations (version) VALUES ('20140304135621');
 
 INSERT INTO schema_migrations (version) VALUES ('20140304201547');
 
-INSERT INTO schema_migrations (version) VALUES ('20140304201759');
-
 INSERT INTO schema_migrations (version) VALUES ('20140308162758');
-
-INSERT INTO schema_migrations (version) VALUES ('20140308173959');
-
-INSERT INTO schema_migrations (version) VALUES ('20140401053343');
-
-INSERT INTO schema_migrations (version) VALUES ('20140401055103');
-
-INSERT INTO schema_migrations (version) VALUES ('20140401063956');
-
-INSERT INTO schema_migrations (version) VALUES ('20140401234808');
 
 INSERT INTO schema_migrations (version) VALUES ('20140409194938');
 
@@ -4288,8 +4355,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140409195035');
 INSERT INTO schema_migrations (version) VALUES ('20140409195051');
 
 INSERT INTO schema_migrations (version) VALUES ('20140414150436');
-
-INSERT INTO schema_migrations (version) VALUES ('20140414155247');
 
 INSERT INTO schema_migrations (version) VALUES ('20140419155001');
 
@@ -4301,31 +4366,11 @@ INSERT INTO schema_migrations (version) VALUES ('20140613155843');
 
 INSERT INTO schema_migrations (version) VALUES ('20140613160003');
 
-INSERT INTO schema_migrations (version) VALUES ('20140613160422');
-
-INSERT INTO schema_migrations (version) VALUES ('20140613160554');
-
-INSERT INTO schema_migrations (version) VALUES ('20140613160659');
-
-INSERT INTO schema_migrations (version) VALUES ('20140613160710');
-
-INSERT INTO schema_migrations (version) VALUES ('20140613160720');
-
-INSERT INTO schema_migrations (version) VALUES ('20140613160730');
-
-INSERT INTO schema_migrations (version) VALUES ('20140613161050');
-
-INSERT INTO schema_migrations (version) VALUES ('20140613170705');
-
 INSERT INTO schema_migrations (version) VALUES ('20140615054649');
 
 INSERT INTO schema_migrations (version) VALUES ('20140615054718');
 
-INSERT INTO schema_migrations (version) VALUES ('20140615054917');
-
 INSERT INTO schema_migrations (version) VALUES ('20140615065414');
-
-INSERT INTO schema_migrations (version) VALUES ('20140615070010');
 
 INSERT INTO schema_migrations (version) VALUES ('20140617025202');
 
@@ -4333,5 +4378,213 @@ INSERT INTO schema_migrations (version) VALUES ('20140706053926');
 
 INSERT INTO schema_migrations (version) VALUES ('20140712231753');
 
-INSERT INTO schema_migrations (version) VALUES ('20140712231832');
+INSERT INTO schema_migrations (version) VALUES ('20140714212333');
+
+INSERT INTO schema_migrations (version) VALUES ('20140725230738');
+
+INSERT INTO schema_migrations (version) VALUES ('20140731082734');
+
+INSERT INTO schema_migrations (version) VALUES ('20140803012109');
+
+INSERT INTO schema_migrations (version) VALUES ('20140803012115');
+
+INSERT INTO schema_migrations (version) VALUES ('20140804054308');
+
+INSERT INTO schema_migrations (version) VALUES ('20140806150318');
+
+INSERT INTO schema_migrations (version) VALUES ('20140906072213');
+
+INSERT INTO schema_migrations (version) VALUES ('20140906201729');
+
+INSERT INTO schema_migrations (version) VALUES ('20140913152339');
+
+INSERT INTO schema_migrations (version) VALUES ('20140915071435');
+
+INSERT INTO schema_migrations (version) VALUES ('20141006025353');
+
+INSERT INTO schema_migrations (version) VALUES ('20141011053349');
+
+INSERT INTO schema_migrations (version) VALUES ('20141011053357');
+
+INSERT INTO schema_migrations (version) VALUES ('20141011053405');
+
+INSERT INTO schema_migrations (version) VALUES ('20141107160440');
+
+INSERT INTO schema_migrations (version) VALUES ('20141107161606');
+
+INSERT INTO schema_migrations (version) VALUES ('20141110045739');
+
+INSERT INTO schema_migrations (version) VALUES ('20141111210657');
+
+INSERT INTO schema_migrations (version) VALUES ('20141111210706');
+
+INSERT INTO schema_migrations (version) VALUES ('20141111210712');
+
+INSERT INTO schema_migrations (version) VALUES ('20141111210807');
+
+INSERT INTO schema_migrations (version) VALUES ('20141115052731');
+
+INSERT INTO schema_migrations (version) VALUES ('20141123095157');
+
+INSERT INTO schema_migrations (version) VALUES ('20141123132440');
+
+INSERT INTO schema_migrations (version) VALUES ('20141129220602');
+
+INSERT INTO schema_migrations (version) VALUES ('20141203210937');
+
+INSERT INTO schema_migrations (version) VALUES ('20141204183826');
+
+INSERT INTO schema_migrations (version) VALUES ('20141205155812');
+
+INSERT INTO schema_migrations (version) VALUES ('20141205160245');
+
+INSERT INTO schema_migrations (version) VALUES ('20141216044524');
+
+INSERT INTO schema_migrations (version) VALUES ('20150112112945');
+
+INSERT INTO schema_migrations (version) VALUES ('20150114174108');
+
+INSERT INTO schema_migrations (version) VALUES ('20150117202141');
+
+INSERT INTO schema_migrations (version) VALUES ('20150121135654');
+
+INSERT INTO schema_migrations (version) VALUES ('20150121141753');
+
+INSERT INTO schema_migrations (version) VALUES ('20150214233552');
+
+INSERT INTO schema_migrations (version) VALUES ('20150214234355');
+
+INSERT INTO schema_migrations (version) VALUES ('20150214235607');
+
+INSERT INTO schema_migrations (version) VALUES ('20150219204555');
+
+INSERT INTO schema_migrations (version) VALUES ('20150220093637');
+
+INSERT INTO schema_migrations (version) VALUES ('20150220100938');
+
+INSERT INTO schema_migrations (version) VALUES ('20150225035028');
+
+INSERT INTO schema_migrations (version) VALUES ('20150225042143');
+
+INSERT INTO schema_migrations (version) VALUES ('20150228074529');
+
+INSERT INTO schema_migrations (version) VALUES ('20150304113125');
+
+INSERT INTO schema_migrations (version) VALUES ('20150304113458');
+
+INSERT INTO schema_migrations (version) VALUES ('20150306183309');
+
+INSERT INTO schema_migrations (version) VALUES ('20150306194354');
+
+INSERT INTO schema_migrations (version) VALUES ('20150313035357');
+
+INSERT INTO schema_migrations (version) VALUES ('20150326194116');
+
+INSERT INTO schema_migrations (version) VALUES ('20150416123919');
+
+INSERT INTO schema_migrations (version) VALUES ('20150416154252');
+
+INSERT INTO schema_migrations (version) VALUES ('20150416161036');
+
+INSERT INTO schema_migrations (version) VALUES ('20150416161556');
+
+INSERT INTO schema_migrations (version) VALUES ('20150416161643');
+
+INSERT INTO schema_migrations (version) VALUES ('20150418110510');
+
+INSERT INTO schema_migrations (version) VALUES ('20150425032739');
+
+INSERT INTO schema_migrations (version) VALUES ('20150425123410');
+
+INSERT INTO schema_migrations (version) VALUES ('20150425152814');
+
+INSERT INTO schema_migrations (version) VALUES ('20150505030808');
+
+INSERT INTO schema_migrations (version) VALUES ('20150512221516');
+
+INSERT INTO schema_migrations (version) VALUES ('20150513150519');
+
+INSERT INTO schema_migrations (version) VALUES ('20150522092733');
+
+INSERT INTO schema_migrations (version) VALUES ('20150523043528');
+
+INSERT INTO schema_migrations (version) VALUES ('20150524033803');
+
+INSERT INTO schema_migrations (version) VALUES ('20150524221102');
+
+INSERT INTO schema_migrations (version) VALUES ('20150525052444');
+
+INSERT INTO schema_migrations (version) VALUES ('20150526090432');
+
+INSERT INTO schema_migrations (version) VALUES ('20150527023128');
+
+INSERT INTO schema_migrations (version) VALUES ('20150528104139');
+
+INSERT INTO schema_migrations (version) VALUES ('20150605124316');
+
+INSERT INTO schema_migrations (version) VALUES ('20150822031229');
+
+INSERT INTO schema_migrations (version) VALUES ('20150822151002');
+
+INSERT INTO schema_migrations (version) VALUES ('20150822151448');
+
+INSERT INTO schema_migrations (version) VALUES ('20150822162006');
+
+INSERT INTO schema_migrations (version) VALUES ('20150823132425');
+
+INSERT INTO schema_migrations (version) VALUES ('20150830182557');
+
+INSERT INTO schema_migrations (version) VALUES ('20150830183518');
+
+INSERT INTO schema_migrations (version) VALUES ('20150830204409');
+
+INSERT INTO schema_migrations (version) VALUES ('20150830212934');
+
+INSERT INTO schema_migrations (version) VALUES ('20150830214155');
+
+INSERT INTO schema_migrations (version) VALUES ('20150830223925');
+
+INSERT INTO schema_migrations (version) VALUES ('20150830224449');
+
+INSERT INTO schema_migrations (version) VALUES ('20150830224753');
+
+INSERT INTO schema_migrations (version) VALUES ('20150831054546');
+
+INSERT INTO schema_migrations (version) VALUES ('20150831074318');
+
+INSERT INTO schema_migrations (version) VALUES ('20150831235524');
+
+INSERT INTO schema_migrations (version) VALUES ('20150901031407');
+
+INSERT INTO schema_migrations (version) VALUES ('20150903085312');
+
+INSERT INTO schema_migrations (version) VALUES ('20150903103919');
+
+INSERT INTO schema_migrations (version) VALUES ('20150903105540');
+
+INSERT INTO schema_migrations (version) VALUES ('20150903131505');
+
+INSERT INTO schema_migrations (version) VALUES ('20150903164913');
+
+INSERT INTO schema_migrations (version) VALUES ('20150904095232');
+
+INSERT INTO schema_migrations (version) VALUES ('20150907052955');
+
+INSERT INTO schema_migrations (version) VALUES ('20150907053042');
+
+INSERT INTO schema_migrations (version) VALUES ('20150910103005');
+
+INSERT INTO schema_migrations (version) VALUES ('20150910104117');
+
+INSERT INTO schema_migrations (version) VALUES ('20150910150422');
+
+INSERT INTO schema_migrations (version) VALUES ('20150919133514');
+
+INSERT INTO schema_migrations (version) VALUES ('20150925055346');
+
+INSERT INTO schema_migrations (version) VALUES ('20151006134626');
+
+INSERT INTO schema_migrations (version) VALUES ('20151007051155');
+
+INSERT INTO schema_migrations (version) VALUES ('20151008232547');
 

@@ -54,6 +54,14 @@ class ActionDispatch::IntegrationTest
   Warden.test_mode!
   include Capybara::DSL
   include ShowMeTheCookies
+
+  def capybara_sign_in(login, password)
+    visit new_user_session_path
+    fill_in 'user[email]', with: login
+    fill_in 'user[password]', with: password
+    click_button 'Войти на сайт'
+  end
+
 end
 
 

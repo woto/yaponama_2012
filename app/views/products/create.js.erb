@@ -1,1 +1,1 @@
-$('#submit-<%= product_css_id(@resource.catalog_number, @resource.brand) %>').replaceWith('<h4 class="text-info">Товар добавлен в корзину. <%= link_to 'Перейти в корзину.', incart_user_products_path %></h4>');
+$('#submit-<%= product_css_id(@resource.catalog_number, @resource.brand) %>').replaceWith('<h4>Товар добавлен в корзину, <%= link_to 'перейти в корзину', user_cart_index_path %></h4>');

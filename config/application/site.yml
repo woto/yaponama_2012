@@ -1,10 +1,10 @@
 defaults: &defaults
-
-development:
-  <<: *defaults
   host: '192.168.1.253'
   port: '3000'
   host_port: '192.168.1.253'
+
+development:
+  <<: *defaults
 
 test:
   <<: *defaults
@@ -17,3 +17,6 @@ production:
   host: 'avtorif.ru'
   port: '80'
   host_port: 'avtorif.ru'
+
+staging:
+  <<: *defaults

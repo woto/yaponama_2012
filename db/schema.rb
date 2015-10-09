@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006134626) do
+ActiveRecord::Schema.define(version: 20151008232547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -940,8 +940,8 @@ ActiveRecord::Schema.define(version: 20151006134626) do
   create_table "products", force: :cascade do |t|
     t.string   "catalog_number"
     t.integer  "brand_id"
-    t.string   "short_name"
-    t.text     "long_name"
+    t.string   "title"
+    t.text     "titles",                                      default: [],    array: true
     t.integer  "quantity_ordered"
     t.integer  "quantity_available"
     t.integer  "min_days"
@@ -960,9 +960,11 @@ ActiveRecord::Schema.define(version: 20151006134626) do
     t.integer  "somebody_id"
     t.integer  "creator_id"
     t.integer  "user_id"
+    t.integer  "deliveries_place_id"
   end
 
   add_index "products", ["creator_id"], name: "index_products_on_creator_id", using: :btree
+  add_index "products", ["deliveries_place_id"], name: "index_products_on_deliveries_place_id", using: :btree
   add_index "products", ["order_id"], name: "index_products_on_order_id", using: :btree
   add_index "products", ["somebody_id"], name: "index_products_on_somebody_id", using: :btree
   add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
@@ -1333,6 +1335,7 @@ ActiveRecord::Schema.define(version: 20151006134626) do
   add_index "warehouses", ["place_id"], name: "index_warehouses_on_place_id", using: :btree
   add_index "warehouses", ["spare_info_id"], name: "index_warehouses_on_spare_info_id", using: :btree
 
+  add_foreign_key "products", "deliveries_places"
   add_foreign_key "spare_catalogs", "spare_catalog_groups"
   add_foreign_key "spare_info_phrases", "spare_infos"
 end

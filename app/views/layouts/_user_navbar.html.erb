@@ -36,8 +36,8 @@
           <% end %>
         <% end %>
 
-        <li class="<%= highlight_active([:controller => '/products', :status => 'incart']) %>">
-          <%= link_to user_cart_path do %>
+        <li class="<%= highlight_active([:controller => '/user/cart']) %>">
+          <%= link_to user_cart_index_path do %>
             <%= icon 'shopping-cart' %> 
             Корзина <span id="products_incart" class="badge"><%= current_user && current_user.products.incart.count %></span>
           <% end %>

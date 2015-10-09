@@ -1,23 +1,23 @@
 defaults: &defaults
-  share_buttons: true
-  suppress_exceptions: true
-  display_tawk_to: false
-  display_counters: true
-  mail: "Авториф <info@avtorif.ru>"
-
-development:
-  <<: *defaults
   share_buttons: false
   suppress_exceptions: false
   display_tawk_to: false
   display_counters: false
+  mail: "Авториф <info@avtorif.ru>"
+
+development:
+  <<: *defaults
 
 test:
   <<: *defaults
-  share_buttons: false
   suppress_exceptions: true
-  display_tawk_to: false
-  display_counters: false
 
 production:
+  <<: *defaults
+  share_buttons: true
+  suppress_exceptions: true
+  display_tawk_to: true
+  display_counters: true
+
+staging:
   <<: *defaults

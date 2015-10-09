@@ -3,7 +3,7 @@ require 'test_helper'
 class ProductsControllerTest < ActionController::TestCase
 
   class FakeController < ApplicationController
-    include ProductsConcern
+    include ProductSerializer
   end
 
   test 'Искомый артикул отсутствует' do
@@ -19,92 +19,84 @@ class ProductsControllerTest < ActionController::TestCase
     Rails.configuration.price['host'] = old
   end
 
-  test 'Редактировать и перезаказывать мы можем только свои товары' do
-    skip
+  test 'Проверяем наличие класса icheck' do
+    get :new, catalog_number: '2102'
+    assert_select '#products .icheck'
   end
 
-  test 'Просто поиск' do
-    skip
+  test 'Если по номеру найден один производитель, то не показываем pills' do
+    get :new, catalog_number: 'proverkasearch'
+    assert_select 'ul.nav.nav-pills', false
   end
 
-  # РЕДАКТИРОВАНИЕ
-
-  test 'Не нашли уведомление о редактировании на странице редактирования' do
-    get :edit, id: products(:sending1)
-    assert_select '.alert', /Обратите\ внимание!\ Производится\ редактирование\ позиции\.\ После\ добавления\ товара\ в\ корзину,\ товар\ 1\ \(SENDING1\)\ будет\ изменен\ на\ вновь\ добавленный\.\ Если\ это\ не\ то\ что\ вы\ хотите,\ то\ просто\ перейдите\ на\ главную\ страницу\ и\ воспользуйтесь\ формой\ поиска\ как\ обычно\./
+  test 'Если по номеру найдены более одного производителя, то показываем pills' do
+    get :new, catalog_number: '2102'
+    assert_select 'ul.nav.nav-pills' do
+      assert_select 'li.active' do
+        assert_select 'a[href="#nissan"][data-toggle="tab"]', text: 'NISSAN'
+      end
+      assert_select 'li:not(.active)' do
+        assert_select 'a[href="#kia"][data-toggle="tab"]', text: 'KIA'
+        assert_select 'a[href="#ki"][data-toggle="tab"]', text: 'KI'
+      end
+    end
   end
 
-  test 'Не нашли результаты поиска на странице редактирования' do
-    get :edit, id: products(:sending1)
-    assert_select '.page-header', 'NISSAN, TOYOTA, 11111, 1111, 111 1'
+  test 'Проверяем наличие самих .tab-pane с производителями' do
+    get :new, catalog_number: '2102'
+    assert_select '.tab-content' do
+      assert_select '.tab-pane[itemscope][itemtype="http://schema.org/Product"]' do
+        assert_select '#nissan.fade.in.active', count: 1
+        assert_select '#kia.fade:not(.in.active)'
+        assert_select '#ki.fade:not(.in.active)'
+      end
+    end
   end
 
-  test 'Должен быть введен изначальный кат. ном. на странице редактирования' do
-    get :edit, id: products(:sending1)
-    assert_select '#catalog_number[value=?]', '1'
+  test 'Проверяем .panel-heading в .tab-pane' do
+    get :new, catalog_number: '2102'
+    assert_select '#kia.tab-pane' do
+      assert_select '.panel' do
+        assert_select '.panel-heading' do
+          assert_select 'h3.panel-title' do
+            assert_select 'a[href="/categories"]:nth-child(1)', text: 'Запчасти'
+            assert_select 'a[href="/categories/926511968-bamper-zadniy"]:nth-child(3)', text: 'БАМПЕР ЗАДНИЙ'
+            assert_select 'a[href="#kia"]:nth-child(5)' do
+              assert_select '[itemprop="name"]', '2102 (KIA)'
+            end
+          end
+        end
+      end
+    end
   end
 
-  test 'Форма для ввода артикула должна быть в ед. экземпляре на странице редактирования' do
-    get :edit, id: products(:sending1)
-    assert_select '.search-form', 1
+  test 'Проверяем в .panel-body отображение артикула и брнеда' do
+    get :new, catalog_number: 'proverkasearch'
+    assert_select '#proizvodit.tab-pane' do
+      assert_select '.panel' do
+        assert_select '.panel-body' do
+          assert_select 'h3' do
+            assert_select 'small', text: 'Производитель:'
+            assert_select 'b[itemprop="brand"]', 'ПРОИЗВОДИТ'
+            assert_select 'small', text: '(ПРОИЗВОДИТЕЛЬ)'
+          end
+          assert_select 'h3' do
+            assert_select 'small', 'Артикул:'
+            assert_select 'b', 'PROVERKASEARCH'
+            assert_select 'small', '(PROVERKA_SEARCH)'
+          end
+        end
+      end
+    end
   end
 
-  test 'Перезаказываемый товар должен отсутствовать на странице редактирования' do
-    get :edit, id: products(:sending1)
-    assert_select '#product_id:not([value])', true
+  test 'Проверяем заполнение заголовка у панели' do
+    get :new, catalog_number: '2102'
+    assert_select '[itemscope]' do
+      assert_select '[itemprop="name"]', /2102 \(NISSAN\)/
+    end
   end
 
-  test 'Кнопка Форма должна отсутствовать на странице редактирования' do
-    get :edit, id: products(:sending1)
-    assert_select "a[href='#modal_form']", false
-  end
-
-  test 'Урл формы должен быть правильный на странице редактирования' do
-    get :edit, id: products(:sending1)
-    assert_select '.search-form[action=?]', "/user/products/#{products(:sending1).id}/edit"
-  end
-
-  test 'При поиске нового артикула проверяем что форма заполнена новым значением на странице редактирования' do
-    get :edit, id: products(:sending1), catalog_number: '1111111111'
-    assert_select '#catalog_number[value=?]', '1111111111'
-  end
-
-  # ПЕРЕЗАКАЗ
-
-  test 'Не нашли уведомления о перезаказе на странице перезаказа' do
-    get :new, product_id: products(:sending1)
-    assert_select '.alert', /Обратите\ внимание!\ Добавляемая\ позиция\ при\ дальнейшей\ работе\ будет\ отражена\ как\ перезаказанная\ с\ 1\ \(SENDING1\)\.\ Если\ это\ не\ то\ что\ вы\ хотите,\ то\ просто\ перейдите\ на\ главную\ страницу\ и\ воспользуйтесь\ формой\ поиска\ как\ обычно\./
-  end
-
-  test 'Не нашли результаты поиска на странице перезаказа' do
-    get :new, product_id: products(:sending1)
-    assert_select '.page-header', 'NISSAN, TOYOTA, 11111, 1111, 111 1'
-  end
-
-  test 'Должен быть введен изначальный кат. ном. на странице перезаказа' do
-    get :new, product_id: products(:sending1)
-    assert_select '#catalog_number[value=?]', '1'
-  end
-
-  test 'Форма для ввода артикула должна быть в ед. экземпляре на странице перезаказа' do
-    get :new, product_id: products(:sending1)
-    assert_select '.search-form', 1
-  end
-
-  test 'Перезаказываемый товар должен присутствовать на странице перезаказа' do
-    get :new, product_id: products(:sending1)
-    assert_select '#product_id[value=?]', products(:sending1).id.to_s
-  end
-
-  test 'Кнопка Форма должна отсутствовать на странице перезаказа' do
-    get :new, product_id: products(:sending1)
-    assert_select "a[href='#modal_form']", false
-  end
-
-  test 'URL формы должен быть правильный на странице перезаказа' do
-    get :new, product_id: products(:sending1)
-    assert_select '.search-form[action=?]', "/user/products/new"
-  end
 
   test 'Ищем товар 2. У него производители TOYOTA и TY. Должны сгруппироваться в TOYOTA' do
     get :new, catalog_number: 2
@@ -137,15 +129,15 @@ class ProductsControllerTest < ActionController::TestCase
   test 'Деталь 838383 внесена как 838383 и 83-83.83 с производителями ОРИГИНАЛ и СИНОНИМ, на сервере прайсов должны слиться' do
     get :new, catalog_number: 838383
     assert_select "div[id='original']" do
-      assert_select 'p.other-names', 'НАЗВАНИЕ СИНОНИМА, НАЗВАНИЕ ОРИГИНАЛА'
-      assert_select 'small.other-brands', '(СИНОНИМ)'
-      assert_select 'small.other-catalog-numbers', '(83-83.83)'
+      assert_select 'p', 'НАЗВАНИЕ СИНОНИМА, НАЗВАНИЕ ОРИГИНАЛА'
+      assert_select 'small', '(СИНОНИМ)'
+      assert_select 'small', '(83-83.83)'
     end
   end
 
   test 'Проверяем, что PriceMate.fill_titles берет названия из нужных столбцов и они правильно выводятся в результатах поиска' do
     get :new, catalog_number: 'titles-test'
-    assert_select '.other-names', 'TITLE, TITLE_EN, DESCRIPTION, APPLICABILITY, PARTS_GROUP'
+    assert_select '[itemprop=description]', 'TITLE, TITLE_EN, DESCRIPTION, APPLICABILITY, PARTS_GROUP'
   end
 
   test 'Если сервер прайсов отдает нам деталь без производителя, то не должно быть 500 ошибки. Производитель должен подмениться на ОРИГИНАЛ' do
@@ -335,11 +327,6 @@ class ProductsControllerTest < ActionController::TestCase
     assert_select '*', text: /5 500 руб. в наличии 1 шт./
   end
 
-  test 'Проверяем наличие класса icheck' do
-    get :new, catalog_number: '2102'
-    assert_select '.icheck'
-  end
-
   test 'Проверяем разметку формы' do
     get :new, catalog_number: 'proverka_search'
     assert_select '#form-PROVERKASEARCH-proizvodit[action="/user/products"][data-remote="true"][method="post"]'
@@ -358,7 +345,7 @@ class ProductsControllerTest < ActionController::TestCase
       assert_select '.radio:not(.disabled)' do
         assert_select 'label' do
           assert_select 'input#offer_deliveries_place_309456473[type="radio"][name="offer"]:not([disabled])'
-          assert_select 'h4.text-success' do
+          assert_select 'h4' do
             assert_select 'img.metro'
             assert_select '*', text: /Динамо,\s+5 500 руб. в наличии 1 шт./
           end
@@ -388,9 +375,9 @@ class ProductsControllerTest < ActionController::TestCase
       assert_select '.radio.disabled' do
         assert_select 'label' do
           assert_select 'input[type="radio"][name="offer"][disabled]'
-          assert_select 'h4.text-success' do
+          assert_select 'h4' do
             assert_select 'img.metro'
-            assert_select 'a.text-success[href="#"]', text: /Динамо,\s+в наличии 2 замены/
+            assert_select 'a[href="#"]', text: /Динамо,\s+в наличии 2 замены/
           end
         end
       end
@@ -404,12 +391,12 @@ class ProductsControllerTest < ActionController::TestCase
         assert_select ".radio" do
           assert_select "label" do
             assert_select 'input#offer_deliveries_place[type="radio"][name="offer"]'
-            assert_select 'h4.text-success' do
+            assert_select 'h4' do
               assert_select '*', text: /Под заказ,\s+743 руб.\s+доставка\s+4 окт./
               assert_select 'small' do
                 assert_select 'a[window-dialog="/deliveries"][href="/deliveries"]', text: 'узнать стоимость доставки'
               end
-              assert_select 'span.text-success.text-xs' do
+              assert_select 'span.text-xs' do
                 assert_select '*', text: /Акция/
                 assert_select '*', text: /219 руб./
                 assert_select 'a[href="/faqs/1074"][window-dialog="/faqs/1074"]', text: 'подробнее...'
@@ -435,7 +422,7 @@ class ProductsControllerTest < ActionController::TestCase
   test 'Если товар уже находится в корзине, то отображется текст об этом' do
     sign_in users(:user)
     get :new, catalog_number: 'product_incart'
-    assert_select 'h4#incart-PRODUCTINCART-nissan'
+    assert_select 'h4#incart-PRODUCTINCART-nissan', text: 'Товар уже находится в корзине, перейти в корзину'
   end
 
   test 'Ну и если товара в корзине у пользователя нет, то текст о наличии товара в корзине соответственно не показывается' do
@@ -455,7 +442,7 @@ class ProductsControllerTest < ActionController::TestCase
     cntrl = FakeController.new
 
     assert_difference -> {user.products.count} do
-      xhr :post, :create, offer: cntrl.serialize_product(catalog_number: 'catalog_number', brand_id: brand_id, quantity_ordered: 1, sell_cost: 1, short_name: 1, long_name: 1, buy_cost: 1, quantity_available: 1, probability: 1, min_days: 1, max_days: 1)
+      xhr :post, :create, offer: cntrl.serialize_product(catalog_number: 'catalog_number', brand_id: brand_id, deliveries_place_id: nil, quantity_ordered: 1, sell_cost: 1, title: 1, titles: [1], buy_cost: 1, quantity_available: 1, probability: 1, min_days: 1, max_days: 1)
     end
     assert_equal 'incart', assigns(:resource).status
   end

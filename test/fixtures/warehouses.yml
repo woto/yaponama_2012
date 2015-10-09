@@ -39,3 +39,9 @@ repl_min_cost_3:
   count: 5
   price: 2812
   place: first
+
+shop_product_incart:
+  spare_info: shop_product_incart
+  count: 1
+  price: 3912
+  place: first

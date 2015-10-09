@@ -58,3 +58,11 @@ production:
   pool: 5
   username: woto
   password:
+
+staging: 
+  adapter: postgresql
+  encoding: unicode
+  database: yaponama_2012_staging
+  pool: 5
+  username: woto
+  password:

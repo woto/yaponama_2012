@@ -12,3 +12,15 @@
   font-size: 110%;
   line-height: 120%;
 }
+
+.text-default {
+  color: $text-color;
+}
+
+.break-word {
+  word-wrap: break-word;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
