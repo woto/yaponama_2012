@@ -1,4 +1,9 @@
-ip:
+norilsk_ip:
   start_ip: 1433747456
   end_ip: 1433755519
   region_id: 2050
+
+moscow_ip:
+  start_ip: 2965372928
+  end_ip: 2965635071
+  region_id: 2097

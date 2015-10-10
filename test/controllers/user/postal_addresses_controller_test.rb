@@ -40,4 +40,16 @@ class User::PostalAddressesControllerTest < ActionController::TestCase
     assert_equal User.last, assigns(:resource).creator
   end
 
+  test 'Если ipgeobase_name Москва, то is_moscow по-умолчанию true' do
+    sign_in(users(:user))
+    @request.remote_addr = '176.195.87.131'
+    get :new
+    assert_equal true, assigns(:resource).is_moscow
+  end
+
+  test 'Если ipgeobase_name не Москва, то is_moscow по-умолчанию не true' do
+    sign_in(users(:user))
+    get :new
+    assert_not_equal true, assigns(:resource).is_moscow
+  end
 end

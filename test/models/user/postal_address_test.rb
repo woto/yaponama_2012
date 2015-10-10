@@ -18,10 +18,17 @@ class PostalAddressTest < ActiveSupport::TestCase
     assert @pa.errors[:room].blank?
   end
 
-  test 'Индекс не может быть пустым' do
+  test 'Индекс не может быть пустым если не Москва' do
     @pa.postcode = ''
     @pa.valid?
     assert @pa.errors[:postcode].present?
+  end
+
+  test 'Индекс может быть пустым если Москва' do
+    @pa.is_moscow = true
+    @pa.postcode = ''
+    @pa.valid?
+    assert @pa.errors[:postcode].blank?
   end
 
   test 'Индекс должен состоять только из цифр' do
@@ -40,6 +47,32 @@ class PostalAddressTest < ActiveSupport::TestCase
     @pa.postcode = '123456'
     @pa.valid?
     assert @pa.errors[:postcode].blank?
+  end
+
+  test 'Регион не может быть пустым, если не Москва' do
+    @pa.region = ''
+    @pa.valid?
+    assert @pa.errors[:region].present?
+  end
+
+  test 'Регион может быть пустым, если Москва' do
+    @pa.is_moscow = true
+    @pa.region = ''
+    @pa.valid?
+    assert @pa.errors[:region].blank?
+  end
+
+  test 'Город не может быть пустым, если Москва' do
+    @pa.city = ''
+    @pa.valid?
+    assert @pa.errors[:city].present?
+  end
+
+  test 'Город может быть пустым, если Москва' do
+    @pa.is_moscow = true
+    @pa.city = ''
+    @pa.valid?
+    assert @pa.errors[:city].blank?
   end
 
 end

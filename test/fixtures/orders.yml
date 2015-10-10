@@ -4,7 +4,6 @@ sending1:
   status: open
   delivery_place: 
   delivery_variant: first
-  delivery_option: 
   full_prepayment_required: 
   legal: 
   phantom: false
@@ -24,7 +23,6 @@ receiving1:
   status: open
   delivery_place: 
   delivery_variant: first
-  delivery_option: 
   full_prepayment_required: 
   legal: 
   phantom: false
@@ -45,7 +43,6 @@ michael:
   status: open
   delivery_place_id: 
   delivery_variant: first
-  delivery_option_id: 
   full_prepayment_required: 
   legal: 
   phantom: f

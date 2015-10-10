@@ -1,7 +1,5 @@
 lee:
-  postcode: '123456'
-  region: '1'
-  city: '1'
+  is_moscow: true
   street: '1'
   house: '1'
   stand_alone_house: true

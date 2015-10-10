@@ -5,9 +5,12 @@ class PostalAddress < ActiveRecord::Base
 
   has_many :orders
 
-  validates :city, :street, :house, :region, :presence => true
-  validates :postcode, :presence => true, length: {is: 6}, :numericality => { :only_integer => true }
-  validates :room, :presence => true, unless: Proc.new { |pa| pa.stand_alone_house }
+  validates :street, :house, :presence => true
+  validates :room, :presence => true, unless: ->(pa) {pa.stand_alone_house}
+  with_options unless: ->(pa) {pa.is_moscow} do
+    validates :city, :region, :presence => true
+    validates :postcode, :presence => true, length: {is: 6}, :numericality => { :only_integer => true }
+  end
 
   def to_label
     res = []

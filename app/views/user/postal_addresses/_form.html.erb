@@ -9,14 +9,16 @@
 
   <%= f.error_notification %>
 
-  <%= f.input :postcode %>
-  <%= f.input :region %>
-  <%= f.input :city %>
+  <%= f.input :is_moscow, input_html: {rel: 'checkbox', :"data-toggle" => 'optional-attributes', :"data-target" => '.postal_address_postcode, .postal_address_region, .postal_address_city' } %>
+
+  <%= f.input :postcode, required: true %>
+  <%= f.input :region, required: true %>
+  <%= f.input :city, required: true %>
   <%= f.input :street %>
   <%= f.input :house %>
 
-  <%= f.input :stand_alone_house, input_html: {rel: 'checkbox', stand_alone_house:''} %>
-  <%= f.input :room, wrapper_html: {room:''} %>
+  <%= f.input :stand_alone_house, input_html: {rel: 'checkbox', :"data-toggle" => 'optional-attributes', :"data-target" => '.postal_address_room'} %>
+  <%= f.input :room %>
 
   <%= f.input :notes, input_html: {rows: 5} %>
 

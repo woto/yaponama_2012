@@ -1,19 +1,39 @@
-country:
+russia:
   id: 1
   name: Россия
-okrug:
+
+sfo:
   id: 339
   name: Сибирский федеральный округ
   ancestry: 1
   names_depth_cache: Россия/Сибирский федеральный округ
-kray:
+kranoyarskiy:
   id: 534
   name: Красноярский край
   ancestry: 1/339
   names_depth_cache: Россия/Сибирский федеральный округ/Красноярский край
-city:
+norilsk:
   id: 820
   name: Норильск
   ancestry: 1/339/534
   names_depth_cache: Россия/Сибирский федеральный округ/Красноярский край
   region_id: 2050
+
+cfo:
+  id: 335
+  name: Центральный федеральный округ
+  ancestry: 1
+  names_depth_cache: Россия/Центральный федеральный округ
+  region_id: nil
+moscow_region:
+  id: 838
+  name: Москва
+  ancestry: 1/335
+  names_depth_cache: Россия/Центральный федеральный округ/Москва
+  region_id: nil
+moscow_city:
+  id: 839
+  name: Москва
+  ancestry: 1/335/838
+  names_depth_cache: Россия/Центральный федеральный округ/Москва/Москва
+  region_id: 2097

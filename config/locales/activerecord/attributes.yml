@@ -1,8 +1,16 @@
 ru:
   activerecord:
     attributes:
-      user/postal_address:
+      postal_address:
+        is_moscow: г. Москва
+        postcode: Почтовый индекс
+        region: Регион
+        city: Город
+        street: Улица
+        house: Дом
         stand_alone_house: Отдельно стоящее здание
+        room: Квартира
+      user/postal_address:
         comment: Комментарий к адресу
       opts/truck_tire:
         line: Линейка продукции
