@@ -36,6 +36,20 @@ class User::CartControllerTest < ActionController::TestCase
     assert_template 'update'
   end
 
+  test 'Если я гость, то я должен видеть предложение залогиниться' do
+    sign_in(users(:guest))
+    get :index
+    assert_select '#suggest-sign-in' do
+      assert_select 'a[href="/users/sign_in"]', text: 'Войдите на сайт под своей учетной записью'
+    end
+  end
+
+  test 'Если я пользователь, то я не должен видеть предложение залогиниться' do
+    sign_in(users(:user))
+    get :index
+    assert_select '#suggest-sign-in', false
+  end
+
   test 'Уменьшение количества штук позиции, которая в 2-х экземплярах' do
     skip
   end

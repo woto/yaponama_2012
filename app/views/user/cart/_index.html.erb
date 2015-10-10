@@ -9,7 +9,16 @@
   <% end %>
 
   <%= p.content :md do %>
+
     <% if @resources.size > 0 %>
+
+      <% if current_user.guest? %>
+        <%= alert 'info bottom-space-lg', id: 'suggest-sign-in' do %>
+          Уже делали покупки в нашем Интернет магазине? <%= alert_link_to "Войдите на сайт под своей учетной записью", new_user_session_path %>
+        <% end %>
+        <br />
+      <% end %>
+
       <% @resources.group_by{|resource| resource.deliveries_place}.sort_by{|k, v| k.try(:id).to_i}.each do |deliveries_place, products| %>
         <div class="clearfix bottom-space-lg">
           <div id="<%= deliveries_place ? dom_id(deliveries_place) : 'deliveries_place' %>">
