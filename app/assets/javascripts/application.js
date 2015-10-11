@@ -43,7 +43,7 @@
 //= require opts
 //= require components/tree
 //= require components/mobile_mask
-//= require components/stand_alone_house
+//= require components/optional_attributes
 //= require components/brands_fast_search
 //= require components/vin_or_frame
 //= require components/clickable_object
