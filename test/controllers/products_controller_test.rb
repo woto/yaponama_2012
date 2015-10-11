@@ -11,9 +11,17 @@ class ProductsControllerTest < ActionController::TestCase
     assert_response 404
   end
 
-  test 'Если сервер прайсов не доступен' do
+  test 'Если сервер прайсов отдает неверный json' do
     old = Rails.configuration.price['host']
     Rails.configuration.price['host'] = 'example.com'
+    get :new, catalog_number: 8391874372939284927173 
+    assert_response 503
+    Rails.configuration.price['host'] = old
+  end
+
+  test 'Если сервер прайсов не доступен' do
+    old = Rails.configuration.price['host']
+    Rails.configuration.price['host'] = 'jfu389g3jfmdkf9suhj1n239djw03jfnwxow.com'
     get :new, catalog_number: 238943923849853240382
     assert_response 503
     Rails.configuration.price['host'] = old

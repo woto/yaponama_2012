@@ -13,35 +13,42 @@ first_admin:
 
 first_user:
   creator: stan
+  email: 'first_user@example.com'
   role: <%= User.roles['user'] %>
   # password: 1231231231
 
 stan:
   creator: otto
+  email: 'stan@example.com'
   role: <%= User.roles['user'] %>
   # password: 3333333333
 
 fry:
   creator: otto
+  email: 'fry@example.com'
   role: <%= User.roles['user'] %>
   # password: 3213213213
 
 otto:
   creator: mark
+  email: 'otto@example.com'
   role: <%= User.roles['user'] %>
   # password: 5555555555
 
 mark:
   creator: otto
+  email: 'mark@example.com'
   role: <%= User.roles['user'] %>
   # password: 4444444444
 
 mike:
   creator: stan
-  # password: 7777777777
+  email: 'mike@example.com'
   role: <%= User.roles['user'] %>
+  # password: 7777777777
 
 online:
+  email: 'online@example.com'
   role: <%= User.roles['user'] %>
 
 anton:
@@ -91,17 +98,19 @@ sending1:
   # password: sending1
 
 receiving1:
-  role: <%= User.roles['user'] %>
   email: 'receiving1@example.com'
+  role: <%= User.roles['user'] %>
   encrypted_password: <%= User.new.send(:password_digest, "12345678") %>
 
 alena:
   creator: mark
+  email: 'alena@example.com'
   role: <%= User.roles['user'] %>
   # password: 5555555555
 
 michael:
   creator: otto
+  email: 'michael@example.com'
   role: <%= User.roles['user'] %>
   # password: 234234
 
@@ -112,14 +121,14 @@ lee:
   role: <%= User.roles['guest'] %>
 
 ben:
+  email: 'ben@example.com'
   role: <%= User.roles['user'] %>
   encrypted_password: <%= User.new.send(:password_digest, "12345678") %>
-  email: 'ben@example.com'
 
 user:
-  encrypted_password: <%= User.new.send(:password_digest, "12345678") %>
-  role: <%= User.roles['user'] %>
   email: 'user@example.com'
+  role: <%= User.roles['user'] %>
+  encrypted_password: <%= User.new.send(:password_digest, "12345678") %>
 
 manager:
   encrypted_password: <%= User.new.send(:password_digest, "12345678") %>

@@ -39,17 +39,17 @@ class User::CartTest < ActionDispatch::IntegrationTest
   test 'Когда нажимаем минус у товара в 2 и более экземлпярах, то меняется количество в input' do
     capybara_sign_in('user@example.com', '12345678')
     visit user_cart_index_path
-    assert has_field? 'count_product_59641890', with: '2'
+    assert has_field? 'count_product_59641890', with: '2', disabled: true
     find('#minus_product_59641890').click
-    assert has_field? 'count_product_59641890', with: '1'
+    assert has_field? 'count_product_59641890', with: '1', disabled: true
   end
 
   test 'Когда нажимаем плюс у товара, то меняется количество в input' do
     capybara_sign_in('user@example.com', '12345678')
     visit user_cart_index_path
-    assert has_field? 'count_product_445071774', with: '1'
+    assert has_field? 'count_product_445071774', with: '1', disabled: true
     find('#plus_product_445071774').click
-    assert has_field? 'count_product_445071774', with: '2'
+    assert has_field? 'count_product_445071774', with: '2', disabled: true
   end
 
 end

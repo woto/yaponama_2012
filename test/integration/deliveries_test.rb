@@ -35,7 +35,7 @@ class DeliveriesTest < ActionDispatch::IntegrationTest
     fill_in 'street', with: 'Коккинаки'
     fill_in 'house', with: '6'
     click_button 'Рассчитать'
-    assert has_text? 'составляет 144 руб.'
+    assert has_text? /составляет.*руб./
   end
 
   test 'Превышено расстояние от центрального склада' do

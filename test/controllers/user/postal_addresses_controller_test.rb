@@ -13,16 +13,13 @@ class User::PostalAddressesControllerTest < ActionController::TestCase
   end
 
   test 'Проверяем ошибки не заполненной формы' do
-
     post :create, { postal_address: { postcode: '', region: '', city: '', street: '', house: '', room: '', stand_alone_house: '0' } }
-
     assert_equal ["не может быть пустым", "неверной длины (может быть длиной ровно 6 символов)", "не является числом"], assigns(:resource).errors[:postcode]
     assert_equal ["не может быть пустым"], assigns(:resource).errors[:region]
     assert_equal ["не может быть пустым"], assigns(:resource).errors[:city]
     assert_equal ["не может быть пустым"], assigns(:resource).errors[:street]
     assert_equal ["не может быть пустым"], assigns(:resource).errors[:house]
     assert_equal ["не может быть пустым"], assigns(:resource).errors[:room]
-
   end
 
   test 'У созданного адреса должен быть правильно выставлен creator и user' do

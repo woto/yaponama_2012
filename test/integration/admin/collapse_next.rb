@@ -12,7 +12,7 @@ class Admin::CollapseNextTest < ActionDispatch::IntegrationTest
     visit "/admin/users/#{user.id}/postal_addresses/#{postal_address.id}/edit"
 
     # Вначале блок свернут
-    assert page.has_css?('[rel="acceptance-test"]', visible: false)
+    assert page.has_css?('[rel="acceptance-test"]', visible: :hidden)
 
     # Разворачиваем
     find("[rel=collapse-next] span").click

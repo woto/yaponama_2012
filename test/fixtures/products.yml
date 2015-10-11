@@ -999,6 +999,14 @@ product_incart:
   sell_cost: 256
   status: <%= Product.statuses['incart'] %>
 
+product_in_guest_cart:
+  catalog_number: 'PRODUCTINCART'
+  brand: mazda
+  user: guest
+  quantity_ordered: 3
+  sell_cost: 121
+  status: <%= Product.statuses['incart'] %>
+
 product_count_1:
   catalog_number: 'PRODUCTCOUNT1'
   brand: nissan

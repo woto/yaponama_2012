@@ -23,10 +23,10 @@ class User::CarsTest < ActionDispatch::IntegrationTest
     visit '/user/cars/new'
     choose 'car_vin_or_frame_frame'
     assert has_field? 'car_frame'
-    assert has_field? 'car_vin', visible: false
+    assert has_field? 'car_vin', visible: :hidden
     choose 'car_vin_or_frame_vin'
     assert has_field? 'car_vin'
-    assert has_field? 'car_frame', visible: false
+    assert has_field? 'car_frame', visible: :hidden
   end
 
   test 'При щелчке на выпадающее меню выбора производителя мы должны видеть только оригиналы' do
