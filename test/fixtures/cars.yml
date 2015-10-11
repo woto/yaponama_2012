@@ -1,25 +1,9 @@
-stan:
-  user: stan
-  brand: mitsubishi
-  model: galant
-  vin: 17171717171717171
-  vin_or_frame: 'vin'
-  creation_reason: 'fixtures'
-
-otto:
-  user: otto
+user_with_car:
+  user: user_with_car
   brand: mitsubishi
   model: galant
   vin_or_frame: 'frame'
   frame: 123
-  creation_reason: 'fixtures'
-
-mark:
-  user: mark
-  brand: nissan
-  model: teana
-  generation: luxury
-  modification: two_and_half_cvt
   creation_reason: 'fixtures'
 
 sending1:

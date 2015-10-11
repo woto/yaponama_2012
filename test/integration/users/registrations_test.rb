@@ -22,14 +22,6 @@ class Users::RegistrationsTest < ActionDispatch::IntegrationTest
     assert new_user.cars.where(vin: '38289347839858385938493').exists?
   end
 
-  test 'После успешной регистрации нас должно перебросить на /user' do
-    get '/'
-    assert_difference -> {User.count}, 0 do
-      post user_registration_path, {user: {email: 'fake@example.com', password: '12345678', password_confirmation: '12345678'}}
-    end
-    assert_redirected_to user_path
-  end
-
   test 'Если не ввели email' do
     get '/'
     assert_difference -> {User.count}, 0 do

@@ -13,4 +13,18 @@ class Users::RegistrationsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'Если у меня нет товаров в корзине, то после регистрации я должен попасть в личный кабинет' do
+    assert_difference -> {User.count}, 0 do
+      post :create, {user: {email: 'fake@example.com', password: '12345678', password_confirmation: '12345678'}}, {guest_user_id: users(:guest_without_products).id}
+    end
+    assert_redirected_to user_path
+  end
+
+  test 'Если у меня есть товары в корзине, то после регистрации я должен попасть в корзину' do
+    assert_difference -> {User.count}, 0 do
+      post :create, {user: {email: 'fake@example.com', password: '12345678', password_confirmation: '12345678'}}, {guest_user_id: users(:guest).id}
+      assert_redirected_to user_cart_index_path
+    end
+  end
+
 end

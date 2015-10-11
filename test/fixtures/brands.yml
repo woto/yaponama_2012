@@ -57,7 +57,6 @@ toyota:
   name: TOYOTA
   rating: 1000
   phantom: false
-  creator: otto
   default_display: false
   is_brand: true
 
@@ -74,7 +73,6 @@ mitsubishi:
   name: MITSUBISHI
   rating: 950
   phantom: true
-  creator: otto
   preview: Вступление
   content: Описание
   is_brand: false
@@ -154,7 +152,7 @@ proizvodit:
   image: 
   rating: 
   content: 
-  creator: michael
+  creator: first_admin
   phantom: 
   is_brand: 
   created_at: '2014-10-14 05:30:08.54426'

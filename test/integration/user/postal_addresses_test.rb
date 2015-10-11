@@ -10,8 +10,8 @@ class PostalAddressesTest < ActionDispatch::IntegrationTest
   end
 
   test 'С выставленной галочкой stand_alone_house room должен быть спрятанным' do
-    login_as(users(:lee))
-    visit edit_user_postal_address_path(postal_addresses(:lee))
+    login_as(users(:user_from_moscow_in_stand_alone_house))
+    visit edit_user_postal_address_path(postal_addresses(:user_from_moscow_in_stand_alone_house))
     assert has_css?('.postal_address_room', visible: :hidden)
   end
 
@@ -27,8 +27,8 @@ class PostalAddressesTest < ActionDispatch::IntegrationTest
   end
 
   test 'С выставленной галочкой is_moscow лишние поля должен быть спрятанными' do
-    login_as(users(:lee))
-    visit edit_user_postal_address_path(postal_addresses(:lee))
+    login_as(users(:user_from_moscow_in_stand_alone_house))
+    visit edit_user_postal_address_path(postal_addresses(:user_from_moscow_in_stand_alone_house))
     assert has_css?('.postal_address_postcode', visible: :hidden)
     assert has_css?('.postal_address_region', visible: :hidden)
     assert has_css?('.postal_address_city', visible: :hidden)

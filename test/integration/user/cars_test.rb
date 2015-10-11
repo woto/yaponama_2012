@@ -13,7 +13,7 @@ class User::CarsTest < ActionDispatch::IntegrationTest
   end
 
   test 'При редактировании автомобиля с указанным frame кодом должен быть выделен check_box frame и отображено поле для редактироваия frame кода' do
-    car = cars(:otto).id
+    car = cars(:user_with_car).id
     visit "/user/cars/#{car}/edit"
     assert has_checked_field? 'car_vin_or_frame_frame'
     assert has_field? 'car_frame'

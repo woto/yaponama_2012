@@ -7,7 +7,7 @@ class User::CartControllerTest < ActionController::TestCase
     get :index
     assert_select '#deliveries_place .total', text: /Итого:/
     assert_select '#deliveries_place .place', text: 'Способ получения товара: Доставка'
-    assert_select '#deliveries_place  button:nth-child(2)', text: 'Оформить заказ'
+    assert_select '#deliveries_place  a:nth-child(2)', text: 'Оформить заказ'
   end
 
   test 'Когда в корзине есть товар с не пустым deliveries_place_id, то должен отображаться блок этого магазина' do
@@ -15,7 +15,7 @@ class User::CartControllerTest < ActionController::TestCase
     get :index
     assert_select '#deliveries_place_309456473 .total', text: /Итого:/
     assert_select '#deliveries_place_309456473 .place', text: 'Способ получения товара: ул. Красноармейская, д.8, корп. 3, кв. 18'
-    assert_select '#deliveries_place_309456473 button:nth-child(2)', text: 'Оформить заказ'
+    assert_select '#deliveries_place_309456473 a:nth-child(2)', text: 'Оформить заказ'
   end
 
   test 'Если у покупателя нет товаров в корзине, то пишем об этом' do

@@ -61,9 +61,7 @@ class ActionDispatch::IntegrationTest
     fill_in 'user[password]', with: password
     click_button 'Войти на сайт'
   end
-
 end
-
 
 class ActionController::TestCase
   include Devise::TestHelpers
@@ -82,17 +80,6 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   private
-
-  def authenticated_as(login, password)
-    open_session do |sess|
-      post '/login/phone', { session: {value: login, password: password, mobile: true } }
-      follow_redirect!
-      assert flash[:notice] = "Вы успешно вошли."
-      yield sess if block_given?
-      delete '/logout'
-      follow_redirect!
-    end
-  end
 
   def email_fixture(email)
     File.read(File.join(Rails.root, 'test', 'fixtures', 'receive_mailer', email))
