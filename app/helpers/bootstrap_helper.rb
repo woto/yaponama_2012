@@ -6,6 +6,13 @@ module BootstrapHelper
     end
   end
 
+  def well options={}, &block
+    options[:class] = [ 'well', options[:class] ].compact
+    content_tag :div, options do
+      yield
+    end
+  end
+
   def modal options={}, &block
     options[:class] = [ 'modal', options[:class] ].compact
     # К сожалению если раскомментировать, то select2 перестанет работать

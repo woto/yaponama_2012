@@ -12,15 +12,17 @@
   <% end %>
 
   <%= p.content :auth do %>
+    <%= well class: 'bottom-space-lg' do %>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
       <%= f.input :email, required: false, autofocus: true %>
       <%= f.input :password, required: false %>
       <%= f.input :remember_me, as: :boolean, label: 'Запомнить меня' if devise_mapping.rememberable? %>
       <br />
+
       <%= f.button :submit, "Войти на сайт", class: "btn btn-primary btn-lg" %>
     <% end %>
-    <br />
-    <br />
+    <% end %>
     <%= render "devise/shared/links" %>
   <% end %>
 

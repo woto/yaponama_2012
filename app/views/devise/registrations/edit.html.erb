@@ -13,7 +13,7 @@
   <% end %>
 
   <%= p.content :auth do %>
-
+    <%= well class: 'bottom-space-lg' do %>
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name, return_path: params[:return_path]), html: { method: :put }) do |f| %>
       <%= f.error_notification %>
 
@@ -24,9 +24,9 @@
       <%= f.input :password, autocomplete: "off", label: 'Новый пароль', placeholder: 'Придумайте новый пароль не короче 8 символов', required: true %>
       <%= f.input :password_confirmation, label: 'Подтверждение пароля', placeholder: 'Повторите ввод нового пароля', required: true %>
       <%= f.input :current_password, autocomplete: "off", placeholder: 'Введите ваш текущий пароль', label: 'Текущий пароль', required: true %>
-      <br />
-      <%= f.buttons 'Сохранить' %>
 
+      <%= f.buttons 'Сохранить' %>
+    <% end %>
     <% end %>
   <% end %>
 
