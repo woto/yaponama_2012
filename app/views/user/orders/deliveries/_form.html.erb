@@ -1,0 +1,43 @@
+<%= horizontal_simple_form_for @resource, url: url_for(action: :create) do |f| %>
+
+  <%= f.error_notification %>
+
+  <%= f.horizontal_simple_fields_for :user_form, include_id: false do |us| %>
+    <%= render 'user/orders/user', f: us %>
+  <% end %>
+
+  <% if current_user.postal_addresses.any? %>
+    <% collection = [['Добавить новый адрес', '-1']] + current_user.postal_addresses.map{|p| [p.to_label, p.id]} %>
+    <%= f.input :postal_address_id, collection: collection, input_html: {rel: 'select'} %>
+  <% else %>
+    <%= f.input :postal_address_id, input_html: {value: '-1'}, as: :hidden %>
+  <% end %>
+
+  <%= f.horizontal_simple_fields_for :new_postal_address do |pa| %>
+
+    <fieldset id="new-postal-address">
+      <%= pa.input :is_moscow, input_html: {
+        rel: 'checkbox',
+        :"data-toggle" => 'optional-attributes',
+        :"data-target" => '.orders_delivery_form_new_postal_address_postcode, .orders_delivery_form_new_postal_address_region, .orders_delivery_form_new_postal_address_city' } %>
+      <%= pa.input :postcode, required: true %>
+      <%= pa.input :region, required: true %>
+      <%= pa.input :city, required: true %>
+      <%= pa.input :street %>
+      <%= pa.input :house %>
+      <%= pa.input :stand_alone_house, input_html: {
+        rel: 'checkbox',
+        :"data-toggle" => 'optional-attributes',
+        :"data-target" => '.orders_delivery_form_new_postal_address_room'} %>
+      <%= pa.input :room, wrapper_html: {room:''} %>
+    </fieldset>
+
+  <% end %>
+
+  <%= f.input :notes, as: :text, input_html: {rows: 3} %>
+
+  <div class="col-sm-offset-6">
+    <%= f.buttons %>
+  </div>
+
+<% end %>

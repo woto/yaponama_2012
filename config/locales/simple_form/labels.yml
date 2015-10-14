@@ -1,0 +1,7 @@
+ru:
+  simple_form:
+    labels:
+      orders_delivery_form:
+        postal_address_id: Адрес доставки
+      orders_shop_form:
+        deliveries_place_id: Магазин

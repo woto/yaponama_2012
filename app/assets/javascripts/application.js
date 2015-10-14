@@ -82,3 +82,4 @@
 
 //= require pages/products
 //= require pages/deliveries
+//= require pages/user/orders/deliveries

@@ -1,0 +1,16 @@
+<%= horizontal_simple_form_for @resource, url: url_for(action: :create) do |f| %>
+
+  <%= f.error_notification %>
+
+  <%= f.horizontal_simple_fields_for :user_form, include_id: false do |us| %>
+    <%= render 'user/orders/user', f: us %>
+  <% end %>
+
+  <%= f.input :deliveries_place_id, as: :static_reference %>
+  <%= f.input :notes, as: :text, input_html: {rows: 3} %>
+
+  <div class="col-sm-offset-6">
+    <%= f.buttons %>
+  </div>
+
+<% end %>

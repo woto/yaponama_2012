@@ -1,0 +1,17 @@
+<% if current_user.name? %>
+  <%= f.input :name, as: :static %>
+<% else %>
+  <%= f.input :name %>
+<% end %>
+
+<% if current_user.email? %>
+  <%= f.input :email, as: :static %>
+<% else %>
+  <%= f.input :email %>
+<% end %>
+
+<% if current_user.phone? %>
+  <%= f.input :phone, as: :static %>
+<% else %>
+  <%= f.input :phone, input_html: {data: {'mobile-mask' => ''}} %>
+<% end %>
