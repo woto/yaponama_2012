@@ -1,0 +1,56 @@
+<% if current_user.orders.exists? %>
+  <% current_user.orders.order(id: :desc).each do |order| %>
+    <div class="responsive-table">
+      <table class="table">
+          <thead>
+            <tr>
+              <th class="warning" colspan="4">
+                <%= link_to "Заказ № #{order.to_param}", user_order_path(order) %>
+              </th>
+            </tr>
+            <tr>
+              <th>
+                Наименование
+              </th>
+              <th>
+                Количество
+              </th>
+              <th>
+                Цена
+              </th>
+              <th>
+                Сумма
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% order.products.each do |product| %>
+              <tr>
+                <td>
+                  <%= product.to_label %>
+                </td>
+                <td>
+                  <%= product.quantity_ordered %>
+                </td>
+                <td>
+                  <%= number_to_currency(product.sell_cost) %>
+                </td>
+                <td>
+                  <%= number_to_currency(product.quantity_ordered * product.sell_cost) %>
+                </td>
+              </tr>
+            <% end %>
+            <tr>
+              <td class="warning" colspan="4">
+                <span class="total"> Итого: <%= number_to_currency order.products.to_a.sum{|product| product.quantity_ordered*product.sell_cost}, precision: 0 %></span> <br />
+                <span class=""> Дата оформления заказа: <%= l order.created_at, format: :news %> </span> <br />
+                <span class="place">Способ получения товара: <%= order.deliveries_place.try(:to_label).presence || 'Доставка' %> <%= order.postal_address.try(:to_label) %></span>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  <% end %>
+<% else %>
+  <h4> Вы еще не сделали ни одного заказа </h4>
+<% end %>

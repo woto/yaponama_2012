@@ -40,15 +40,15 @@ class PageTemplate < ActionView::Helpers::FormBuilder
   def css_class(size)
     case size
     when :auth
-      'col-lg-offset-7 col-lg-10 col-md-offset-7 col-md-10 col-sm-offset-4 col-sm-16'
+      'col-lg-offset-7 col-lg-10 col-md-offset-6 col-md-12 col-sm-offset-4 col-sm-16'
     when :xs
-      'col-lg-14 col-md-16 col-sm-17'
+      'col-lg-12 col-md-14 col-sm-16'
     when :sm
-      'col-lg-16 col-md-18 col-sm-19'
+      'col-lg-16 col-md-18 col-sm-20'
     when :md
-      'col-lg-18 col-md-20 col-sm-21'
+      'col-lg-18 col-md-20 col-sm-22'
     when :lg
-      'col-lg-20 col-md-24 col-sm-24'
+      'col-lg-20 col-md-22 col-sm-24'
     else
       'col-lg-24'
     end

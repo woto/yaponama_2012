@@ -1,0 +1,19 @@
+<% @meta_title = @resource.to_label %>
+
+<%= page do |p| %>
+
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', [:root] %>
+    <%= b.item 'Администрирование', [:admin, :root] %>
+    <%= b.item 'Заказы', [:admin, @resource_class] %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
+    <%= render 'smart_show' %>
+  <% end %>
+<% end %>

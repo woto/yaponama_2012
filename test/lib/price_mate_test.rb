@@ -1,8 +1,3 @@
-# TODO Если закомментировать этот файл и запустить
-# ./bin/rake test test/controllers/products_controller_test.rb
-# а потом раскомментировать и вновь выполнить эту же команду, то
-# можно увидеть, что этот тест почему-то выполняется невпопад
-#
 require 'test_helper'
 
 class PriceMateTest < ActiveSupport::TestCase
@@ -262,3 +257,4 @@ class PriceMateTest < ActiveSupport::TestCase
   end
 
 end
+

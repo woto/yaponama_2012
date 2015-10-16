@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 #http://ahhrrr.com/2012/08/02/quick-tip-test-custom-activerecord-validators/
 #http://jeffkreeftmeijer.com/2011/isolated-testing-for-custom-validators-in-rails-3/
 #http://stackoverflow.com/questions/7744171/how-to-test-a-custom-validator

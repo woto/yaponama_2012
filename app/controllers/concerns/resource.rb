@@ -6,6 +6,7 @@ module Concerns::Resource
       before_action :set_resource_class
       before_action :find_resource, only: [:show, :edit, :update, :destroy]
       before_action :find_resources, only: [:index]
+      before_action :index_resources, only: [:index]
       before_action :new_resource, only: [:new]
       before_action :show_resource, only: [:show]
       before_action :edit_resource, only: [:edit]
@@ -16,7 +17,6 @@ module Concerns::Resource
   def set_resource_class
   end
 
-
   def find_resources
     @resources = @resource_class.page(params[:page]).per(params[:per])
   end
@@ -25,8 +25,11 @@ module Concerns::Resource
     @resource = @resource_class.finder(params[:id])
   end
 
+  def index_resources
+  end
+
   def new_resource
-    @resource = @resource_class.new resource_params
+    @resource = @resource_class.new(resource_params)
   end
 
   def show_resource

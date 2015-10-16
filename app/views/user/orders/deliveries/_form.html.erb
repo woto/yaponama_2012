@@ -1,4 +1,4 @@
-<%= horizontal_simple_form_for @resource, url: url_for(action: :create) do |f| %>
+<%= horizontal_simple_form_for @resource, url: url_for(action: :create, return_path: params[:return_path]) do |f| %>
 
   <%= f.error_notification %>
 

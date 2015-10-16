@@ -393,14 +393,14 @@ class ProductsControllerTest < ActionController::TestCase
   end
 
   test 'Проверяем отображение формы добавления в корзину и заказаной позиции' do
-    travel_to Time.new(2015, 10, 04, 00, 00, 00) do
+    travel_to Time.utc(2015, 10, 04, 00, 00, 00) do
       get :new, catalog_number: 'proverka_search'
       assert_select '#deliveries_place.deliveries_place' do
         assert_select ".radio" do
           assert_select "label" do
             assert_select 'input#offer_deliveries_place[type="radio"][name="offer"]'
             assert_select 'h4' do
-              assert_select '*', text: /Под заказ,\s+743 руб.\s+доставка\s+4 окт./
+              assert_select '*', text: /Под заказ,\s+743 руб.\s+доставка\s+5 окт./
               assert_select 'small' do
                 assert_select 'a[window-dialog="/deliveries"][href="/deliveries"]', text: 'узнать стоимость доставки'
               end

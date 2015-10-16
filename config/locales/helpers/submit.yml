@@ -11,3 +11,7 @@ ru:
         create: Далее
       split:
         create: Разбить
+      orders_shop_form:
+        create: Оформить заказ
+      orders_delivery_form:
+        create: Оформить заказ

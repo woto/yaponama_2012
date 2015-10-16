@@ -75,4 +75,14 @@ class PostalAddressTest < ActiveSupport::TestCase
     assert @pa.errors[:city].blank?
   end
 
+  test 'Если город Москва, то to_label формируется с этим учётом' do
+    @pa.is_moscow = true
+    assert_equal 'г. Москва, 1, 1', @pa.to_label
+  end
+
+  test 'Если не город Москва, то to_label формируется с этим учётом' do
+    @pa.is_moscow = false
+    assert_equal '123456, 1, 1, 1, 1', @pa.to_label
+  end
+
 end

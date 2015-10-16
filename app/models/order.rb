@@ -2,9 +2,8 @@ class Order < ActiveRecord::Base
   include BelongsToUser
   include BelongsToCreator
 
-  belongs_to :delivery_place
+  belongs_to :deliveries_place, class_name: 'Deliveries::Place'
   belongs_to :delivery_variant, class_name: 'Deliveries::Variant'
-  belongs_to :delivery_option
   belongs_to :postal_address
 
   has_many :products, :dependent => :destroy
@@ -12,6 +11,10 @@ class Order < ActiveRecord::Base
   before_create :generate_token
 
   def to_param
+    token
+  end
+
+  def to_label
     token
   end
 
@@ -35,7 +38,7 @@ class Order < ActiveRecord::Base
       random_token = ''
       random_token += 3.times.map{ [*'0'..'9'].sample }.join
       random_token += '-'
-      random_token += DateTime.now.strftime("%d-%m%y")
+      random_token += Time.now.utc.strftime("%d-%m-%y")
       random_token = random_token[0..8]+random_token[10]
       #random_token += 3.times.map { [*'0'..'9', *'А'..'Я'].sample }.join
       break random_token unless Order.where(token: random_token).exists?

@@ -1,0 +1,54 @@
+<h4> Благодарим вас за оформление заказа в нашем Интернет магазине! </h4>
+
+<p>
+  Заказу присвоен <%= link_to "№ #{@order.to_label}", user_order_path(@order) %>, в ближайшее время с вами свяжется менеджер по работе с покупателями.
+</p>
+
+<br />
+
+<table style="width: 100%; border: 1px solid #DDD" cellpadding="10">
+  <thead  style="background: #FAFAFA">
+    <tr>
+      <th style="text-align: left">
+        Наименование
+      </th>
+      <th style="text-align: left">
+        Цена
+      </th>
+      <th style="text-align: left">
+        Количество
+      </th>
+      <th style="text-align: left">
+        Сумма
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.products.each do |product| %>
+      <tr style="background: #FAFAFA">
+        <td>
+          <%= product.to_label %>
+        </td>
+        <td>
+          <%= number_to_currency product.sell_cost, precision: 0 %>
+        </td>
+        <td>
+          <%= product.quantity_ordered %> шт.
+        </td>
+        <td>
+          <%= number_to_currency product.sell_cost * product.quantity_ordered, precision: 0 %>
+        </td>
+      </tr>
+    <% end %>
+    <tr style="background: #EFEFEF">
+      <td colspan="4">
+        <span class="total"> Итого: <%= number_to_currency @order.products.to_a.sum{|product| product.quantity_ordered*product.sell_cost}, precision: 0 %></span> <br />
+        <span class=""> Дата оформления заказа: <%= l @order.created_at, format: :news %> </span> <br />
+        <span class="place">Способ получения товара: <%= @order.deliveries_place.try(:to_label).presence || 'Доставка' %> <%= @order.postal_address.try(:to_label) %></span>
+      </td>
+    </tr>
+    </tr>
+  </tbody>
+</table>
+
+<br />

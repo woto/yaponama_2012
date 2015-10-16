@@ -40,7 +40,7 @@ class User::CartControllerTest < ActionController::TestCase
     sign_in(users(:guest))
     get :index
     assert_select '#suggest-sign-in' do
-      assert_select 'a[href="/users/sign_in"]', text: 'Войдите на сайт под своей учетной записью'
+      assert_select 'a[href="/users/sign_in"]', text: 'войдите на сайт под своей учетной записью.'
     end
   end
 

@@ -14,9 +14,13 @@ class PostalAddress < ActiveRecord::Base
 
   def to_label
     res = []
-    res << postcode
-    res << region
-    res << city
+    if is_moscow
+      res << 'г. Москва'
+    else
+      res << postcode
+      res << region
+      res << city
+    end
     res << street
     res << house
     res << room

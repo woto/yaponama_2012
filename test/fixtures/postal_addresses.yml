@@ -38,3 +38,22 @@ receiving1:
   creation_reason: fixtures
   user: receiving1
   creator: receiving1
+
+
+user_with_postal_address_and_products_incart:
+  postcode: '123456'
+  region: '1'
+  city: '1'
+  street: '1'
+  house: '1'
+  room: '1'
+  user: user_with_postal_address_and_products_incart
+
+guest_with_postal_address:
+  postcode: '123456'
+  region: '1'
+  city: '1'
+  street: '1'
+  house: '1'
+  room: '1'
+  user: guest_with_postal_address

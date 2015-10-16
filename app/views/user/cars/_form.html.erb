@@ -1,11 +1,4 @@
-<%= simple_form_for(@resource, :url => polymorphic_path([:user, @resource], return_path: params[:return_path]), html: { class: 'form-horizontal' },
-        wrapper: :horizontal_form,
-        wrapper_mappings: {
-          check_boxes: :horizontal_radio_and_checkboxes,
-          radio_buttons: :horizontal_radio_and_checkboxes,
-          file: :horizontal_file_input,
-          boolean: :horizontal_boolean
-        }) do |f| %>
+<%= horizontal_simple_form_for(@resource, :url => polymorphic_path([:user, @resource], return_path: params[:return_path])) do |f| %>
 
   <%= f.error_notification %>
 
@@ -28,7 +21,7 @@
   <%= f.input :generation, as: :select2, placeholder: 'Выберите или добавьте новое поколение'  %>
   <%= f.input :modification, as: :select2, placeholder: 'Выберите или добавьте новую модификацию'  %>
 
-  <%= f.input :notes, input_html: {rows: 5} %>
+  <%= f.input :notes, input_html: {rows: 3} %>
 
   <div class="col-sm-offset-6 col-sm-18">
     <%= f.buttons 'Сохранить' %>

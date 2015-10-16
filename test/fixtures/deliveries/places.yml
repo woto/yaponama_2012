@@ -9,6 +9,7 @@ first:
   updated_at: 2013-12-14 08:22:57.328159000 Z
   faq_id: 1069
   metro: Динамо
+  email: 'shop@example.com'
 
 second:
   name: ул. Норильская, д.4

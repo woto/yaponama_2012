@@ -5,12 +5,6 @@ ru:
     string3: Строка3
     #string4: jei
 
-    postcode: Почтовый индекс
-    region: Регион
-    city: Город
-    street: Улица
-    house: Дом
-    room: Квартира
     pin: PIN код
     password: Пароль
     password_confirmation: Подтверждение пароля

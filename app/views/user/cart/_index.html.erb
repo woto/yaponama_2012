@@ -13,9 +13,9 @@
     <% if @resources.size > 0 %>
 
       <% if current_user.guest? %>
-        <%= alert 'info bottom-space-lg', id: 'suggest-sign-in' do %>
-          Уже делали покупки в нашем Интернет магазине? <%= alert_link_to "Войдите на сайт под своей учетной записью", new_user_session_path %>
-        <% end %>
+        <h4 id="suggest-sign-in" class="text-success bottom-space-lg">
+          Уже делали покупки у нас? Тогда <%= alert_link_to "войдите на сайт под своей учетной записью.", new_user_session_path %>
+        </h4>
         <br />
       <% end %>
 
@@ -47,7 +47,7 @@
                             <div class="input-group-btn">
                               <%= f.button :button, icon('minus'), id: dom_id(product, :minus), value: 'minus', class: "btn btn-default" %>
                             </div>
-                            <%= f.text_field :quantity_ordered, class: 'form-control', id: dom_id(product, :count), style: 'width: 50px' %>
+                            <%= f.text_field :quantity_ordered, class: "form-control #{dom_class(product, :count)}", id: dom_id(product, :count), style: 'width: 50px', disabled: '' %>
                             <div class="input-group-btn">
                               <%= f.button :button, icon('plus'), id: dom_id(product, :plus), value: 'plus', class: "btn btn-default" %>
                             </div>
@@ -70,7 +70,8 @@
                 </tbody>
               </table>
             </div>
-            <button type="submit" class="btn btn-success btn-lg pull-right">Оформить заказ</button>
+            <% url = new_user_order_path(orders_shop_form: {deliveries_place_id: deliveries_place.try(:id)}, return_path: request.fullpath) %>
+            <%= link_to 'Оформить заказ', url, class: "btn btn-success btn-lg pull-right" %>
           </div>
         </div>
       <% end %>

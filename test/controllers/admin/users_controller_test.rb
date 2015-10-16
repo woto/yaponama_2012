@@ -157,4 +157,13 @@ class Admin::UsersControllerTest < ActionController::TestCase
     assert_redirected_to user_path
   end
 
+  test 'Если мы становимся гостем, то должен сброситься переменная сессии warden.user.user.key и присвоиться guest_user_id гостя' do
+    sign_in(users(:manager))
+    assert session["warden.user.user.key"]
+    refute session["guest_user_id"]
+    get :impersonate, {id: users(:guest)}
+    refute session["warden.user.user.key"]
+    assert session["guest_user_id"]
+  end
+
 end

@@ -82,6 +82,7 @@ Yaponama2012::Application.routes.draw do
     resources :users do
       get :impersonate, on: :member
     end
+    resources :orders
     resources :galleries
   end
 
@@ -134,12 +135,19 @@ Yaponama2012::Application.routes.draw do
     resources :phrases
   end
 
+
+  # TODO temporary solution
+  get '/user/orders/:id', to: redirect('/user'), as: :user_order
+
   resource :user  do
     resources :products
     scope module: :user do
       resources :cart, only: [:index, :update] do
         delete :confirm_remove, on: :member
       end
+      resources :orders, only: [:new, :create], controller: 'orders/shops', constraints: ->(request) { request.params.try(:[], :orders_shop_form).try(:[], :deliveries_place_id).present? }
+      resources :orders, only: [:new, :create], controller: 'orders/deliveries'
+      #resources :orders, only: [:show]
       resources :postal_addresses
       resources :cars
       post :pings, to: "deprecated#create"

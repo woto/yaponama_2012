@@ -1,20 +1,3 @@
-#http://8xx8.ru/blog/2012/12/10/katalogh-lib-v-rails/
-#http://stackoverflow.com/questions/18894060/rails-and-minitest-add-additional-folder
-
-# rake test:rake
-namespace :test do
-  desc "Run tests for rake"
-  Rails::TestTask.new(:rake) do |t|
-    t.libs << "test"
-    t.pattern = 'test/rake/**/*_test.rb'
-  end
-end
-
-lib_task = Rake::Task["test:rake"]
-test_task = Rake::Task[:test]
-test_task.enhance { lib_task.invoke }
-
-
 namespace :catalog do
 
   Dir.glob('catalog/*grab*').each do |file|

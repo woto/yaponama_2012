@@ -17,7 +17,8 @@
 
       <%= f.input :name_cont, placeholder: 'Имя', label: false %>
       <%= f.input :phone_eq, placeholder: 'Телефон', input_html: {data: {'mobile-mask' => ''}}, label: false %>
-      <%= f.input :email_cont, placeholder: 'Email', label: false, html5: false %>
+      <%= f.input :email_eq, placeholder: 'Email', label: false, html5: false %>
+      <%= f.input :role_eq, placeholder: 'Роль', label: false, html5: false, as: :select, collection: User.roles %>
       <%= f.input :notes_cont, placeholder: 'Комментарий', label: false %>
       <%= f.input :notes_invisible_cont, placeholder: 'Служебный комментарий', label: false %>
 
@@ -36,26 +37,44 @@
     <div class="table-responsive">
       <table class="table">
         <tr>
-          <th> <%= @resource_class.human_attribute_name(:id) %> </th>
-          <th> <%= @resource_class.human_attribute_name(:name) %> </th>
-          <th> <%= @resource_class.human_attribute_name(:phone) %> </th>
-          <th> <%= @resource_class.human_attribute_name(:email) %> </th>
+          <th> <%= sort_link @q, :id %> </th>
+          <th>
+            <%= @resource_class.human_attribute_name(:name) %> <br />
+            <%= @resource_class.human_attribute_name(:phone) %> <br />
+            <%= @resource_class.human_attribute_name(:email) %>
+          </th>
+          <th> <%= @resource_class.human_attribute_name(:products) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:cars) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:postal_addresses) %> </th>
           <th> <%= @resource_class.human_attribute_name(:notes) %> </th>
           <th> <%= @resource_class.human_attribute_name(:notes_invisible) %> </th>
         </tr>
         <% @resources.each do |resource| %>
           <tr>
-            <td> 
+            <td>
               <%= resource.id %> <br />
               <%= link_to "Просмотр", polymorphic_path([:admin, resource], return_path: request.fullpath) %> <br />
               <%= link_to "Редактирование", polymorphic_path([:edit, :admin, resource], return_path: request.fullpath) %> <br />
               <%= link_to "Удалить", polymorphic_path([:admin, resource], return_path: request.fullpath), method: :delete %>
             </td>
-            <td> <%= resource.name %> </td>
-            <td> <%= resource.phone %> </td>
-            <td> <%= resource.email %> </td>
+            <td> 
+              <%= resource.name %> <br />
+              <%= resource.phone %> <br />
+              <%= resource.email %>
+            </td>
+            <td> <%= safe_join(resource.products.map{|value| content_tag(:p, value.to_label)}, '') %> </td>
+            <td> <%= safe_join(resource.cars.map{|value| content_tag(:p, value.to_label)}, '') %> </td>
+            <td> <%= safe_join(resource.postal_addresses.map{|value| content_tag(:p, value.to_label)}, '') %> </td>
             <td> <%= resource.notes %> </td>
-            <td> <%= resource.notes_invisible %> </td>
+            <td> 
+              <%= resource.notes_invisible %> <br />
+              <%= resource.ipgeobase_name %> <br />
+              <%= resource.ipgeobase_names_depth_cache %>
+              <%= resource.time_zone %> <br />
+              <%= resource.time_zone %> <br />
+              <%= resource.current_sign_in_ip %> <br />
+              <%= resource.last_sign_in_ip %> <br />
+            </td>
           </tr>
         <% end %>
       </table>

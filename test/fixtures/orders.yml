@@ -2,7 +2,7 @@ sending1:
   postal_address: 
   delivery_cost: !ruby/object:BigDecimal 18:0.0
   status: open
-  delivery_place: 
+  deliveries_place: 
   delivery_variant: first
   full_prepayment_required: 
   legal: 
@@ -21,7 +21,7 @@ receiving1:
   postal_address: 
   delivery_cost: !ruby/object:BigDecimal 18:0.0
   status: open
-  delivery_place: 
+  deliveries_place: 
   delivery_variant: first
   full_prepayment_required: 
   legal: 
@@ -35,3 +35,9 @@ receiving1:
   notes_invisible: ''
   user: receiving1
   creator: receiving1
+
+user_with_order:
+  status: open
+  token: 283-14-074
+  user: user_with_order
+  creator: user_with_order

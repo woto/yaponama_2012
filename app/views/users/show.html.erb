@@ -45,27 +45,25 @@
           </table>
         </div>
 
-      </div>
-
-      <div class="col-lg-12 col-md-10 col-sm-8">
-        <div class="responsive-table">
-          <table class="table">
-            z
-          </table>
-        </div>
-      </div>
-
-    <% end %>
-
-    <%= row class: "top-space-lg" do %>
-      <div class="col-lg-24">
-        <%= link_to edit_user_registration_path(return_path: request.fullpath) do %>
-          Сменить пароль
+        <%= row class: "top-space-lg" do %>
+          <div class="col-lg-24">
+            <%= link_to edit_user_registration_path(return_path: request.fullpath) do %>
+              Сменить пароль
+            <% end %>
+            <br />
+            <%# TODO что с этим. Либо окончательно убрать? Закрыть route %>
+            <%# link_to "Удалить свой аккаунт", user_registration_path, data: { confirm: "Вы действительно хотите удалить свой аккаунт?" }, method: :delete %>
+          </div>
         <% end %>
-        <br />
-        <%= link_to "Удалить свой аккаунт", user_registration_path, data: { confirm: "Вы действительно хотите удалить свой аккаунт?" }, method: :delete %></p>
+
       </div>
+
+      <div class="col-lg-16 col-md-14 col-sm-12">
+        <%= render 'orders_list' %>
+      </div>
+
     <% end %>
+
   <% end %>
     
 <% end %>

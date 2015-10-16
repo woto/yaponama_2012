@@ -1,7 +1,7 @@
 <% @meta_title = ckpart('welcome.index.title') %>
 <% @meta_description = ckpart('welcome.index.description') %>
 
-<%= content_tag :div, style: "padding: 80px 0px; background: #5A5A5A url('#{asset_url 'parts.jpg'}') 0px 0px;" do %>
+<%= content_tag :div, style: "padding: 80px 0px; background: #5A5A5A url('#{asset_url 'parts.jpg'}') -300px -430px;" do %>
 
   <div class="container">
 
@@ -14,7 +14,7 @@
 
       <div class="col-md-12 col-lg-10">
         <div class="col-lg-20 col-lg-offset-2 top-space-lg bottom-space-lg">
-          <%= form_tag new_user_product_path, :method => :get, class: 'bottom-space-lg' do %>
+          <%= form_tag new_user_product_path, :method => :get, enforce_utf8: false, class: 'bottom-space-lg' do %>
             <div class="input-group">
               <input type="text" name="catalog_number" class="form-control input-lg" placeholder="Артикул детали">
               <span class="input-group-btn">

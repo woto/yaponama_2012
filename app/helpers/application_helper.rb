@@ -384,5 +384,32 @@ module ApplicationHelper
       reject{|topic| topic['closed']}
   end
 
+  def horizontal_simple_form_for(object, *args, &block)
+    options = args.extract_options!
+    simple_form_for(object, *(args << options.merge({
+      html: { class: 'form-horizontal' },
+      wrapper: :horizontal_form,
+      wrapper_mappings: {
+        check_boxes: :horizontal_radio_and_checkboxes,
+        radio_buttons: :horizontal_radio_and_checkboxes,
+        file: :horizontal_file_input,
+        boolean: :horizontal_boolean},
+      builder: HorizontalFormBuilder
+    })), &block)
+  end
+
+  class HorizontalFormBuilder < SimpleForm::FormBuilder
+    def horizontal_simple_fields_for(*args, &block)
+      options = args.extract_options!
+      simple_fields_for(*(args << options.merge({
+        wrapper: :horizontal_form,
+        wrapper_mappings: {
+          check_boxes: :horizontal_radio_and_checkboxes,
+          radio_buttons: :horizontal_radio_and_checkboxes,
+          file: :horizontal_file_input,
+          boolean: :horizontal_boolean
+        }})), &block)
+    end
+  end
 
 end

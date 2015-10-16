@@ -1,0 +1,15 @@
+<% @meta_title = 'Оформление заказа' %>
+
+<%= page do |p| %>
+
+  <br />
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content :xs do %>
+    <%= render 'form' %>
+  <% end %>
+
+<% end %>

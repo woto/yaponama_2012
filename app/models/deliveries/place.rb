@@ -17,8 +17,11 @@ class Deliveries::Place < ActiveRecord::Base
   validates :z_index, numericality: { only_integer: true }
   validates :name, :variants, :presence => true, if: -> { realize }
 
-  validates :price_url, presence: true, if: -> {display_marker?}
-  validates :faq_id, presence: true, if: -> {display_marker?}
+  with_options presence: true, if: -> {display_marker?} do |attribute|
+    attribute.validates :price_url
+    attribute.validates :faq_id
+    attribute.validates :email
+  end
 
   def self.random_list
     where(display_marker: true, active: true, partner: false).order("RANDOM()")

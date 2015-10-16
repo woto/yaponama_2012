@@ -110,6 +110,7 @@ product_count_1:
   brand: nissan
   user: user
   quantity_ordered: 1
+  buy_cost: 950
   sell_cost: 1112
   status: <%= Product.statuses['incart'] %>
 
@@ -118,6 +119,7 @@ product_count_2:
   brand: nissan
   user: user
   quantity_ordered: 2
+  buy_cost: 1543
   sell_cost: 1921
   status: <%= Product.statuses['incart'] %>
 
@@ -126,6 +128,26 @@ shop_product_incart:
   brand: mazda
   user: user
   quantity_ordered: 5
+  buy_cost: 2443
   sell_cost: 2912
   status: <%= Product.statuses['incart'] %>
   deliveries_place: first
+
+user_with_postal_address_and_products_incart:
+  catalog_number: '1'
+  brand: mazda
+  user: user_with_postal_address_and_products_incart
+  quantity_ordered: 1
+  buy_cost: 1
+  sell_cost: 1
+  status: <%= Product.statuses['incart'] %>
+
+user_with_order:
+  catalog_number: '1'
+  brand: mazda
+  user: user_with_order
+  quantity_ordered: 1
+  buy_cost: 1
+  sell_cost: 1
+  status: <%= Product.statuses['inorder'] %>
+  order: user_with_order

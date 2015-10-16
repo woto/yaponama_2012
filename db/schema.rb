@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008232547) do
+ActiveRecord::Schema.define(version: 20151016131254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -381,6 +381,7 @@ ActiveRecord::Schema.define(version: 20151008232547) do
     t.string   "ywork_time"
     t.string   "yogrn"
     t.integer  "faq_id"
+    t.string   "email"
   end
 
   create_table "deliveries_variants", force: :cascade do |t|
@@ -674,10 +675,12 @@ ActiveRecord::Schema.define(version: 20151008232547) do
     t.integer  "somebody_id"
     t.integer  "creator_id"
     t.integer  "user_id"
+    t.integer  "deliveries_place_id"
   end
 
   add_index "orders", ["company_id"], name: "index_orders_on_company_id", using: :btree
   add_index "orders", ["creator_id"], name: "index_orders_on_creator_id", using: :btree
+  add_index "orders", ["deliveries_place_id"], name: "index_orders_on_deliveries_place_id", using: :btree
   add_index "orders", ["delivery_option_id"], name: "index_orders_on_delivery_option_id", using: :btree
   add_index "orders", ["delivery_place_id"], name: "index_orders_on_delivery_place_id", using: :btree
   add_index "orders", ["delivery_variant_id"], name: "index_orders_on_delivery_variant_id", using: :btree
@@ -885,6 +888,7 @@ ActiveRecord::Schema.define(version: 20151008232547) do
     t.integer  "somebody_id"
     t.integer  "creator_id"
     t.integer  "user_id"
+    t.boolean  "is_moscow"
   end
 
   add_index "postal_addresses", ["creator_id"], name: "index_postal_addresses_on_creator_id", using: :btree
@@ -1335,6 +1339,7 @@ ActiveRecord::Schema.define(version: 20151008232547) do
   add_index "warehouses", ["place_id"], name: "index_warehouses_on_place_id", using: :btree
   add_index "warehouses", ["spare_info_id"], name: "index_warehouses_on_spare_info_id", using: :btree
 
+  add_foreign_key "orders", "deliveries_places"
   add_foreign_key "products", "deliveries_places"
   add_foreign_key "spare_catalogs", "spare_catalog_groups"
   add_foreign_key "spare_info_phrases", "spare_infos"

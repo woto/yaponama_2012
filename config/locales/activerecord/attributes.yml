@@ -250,7 +250,7 @@ ru:
         max_days: Макс. срок
         catalog_number: Каталожный номер
         manufacturer: Производитель
-        buy_cost: Закупочная цена 1 шт.
-        sell_cost:  Продажная цена 1 шт.
+        buy_cost: Закупочная цена
+        sell_cost:  Продажная цена
         order_id: № заказа
         supplier_id: Поставщик

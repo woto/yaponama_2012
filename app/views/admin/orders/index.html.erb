@@ -1,0 +1,78 @@
+<% title_index %>
+
+<%= page do |p| %>
+
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', [:root] %>
+    <%= b.item 'Администрирование', [:admin, :root] %>
+    <%= b.item @meta_title %>
+  <% end %>
+
+  <%= p.title do %>
+    <%= page_header %>
+  <% end %>
+
+  <%= p.content do %>
+    <%= search_form_for(@q, url: url_for(action: :index), html: {class: 'form-inline'}) do |f| %>
+      <%# f.input :name_cont, placeholder: 'Имя', label: false %>
+
+      <%= f.button :submit, 'Поиск' %>
+    <% end %>
+  <% end %>
+
+  <br />
+
+  <%= p.content do %>
+
+    <%= paginate @resources %>
+    <br />
+    <br />
+
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th> <%= sort_link @q, :id %> </th>
+          <th> <%= @resource_class.human_attribute_name(:products) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:postal_address) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:deliveries_place) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:notes) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:notes_invisible) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:created_at) %> </th>
+          <th> <%= @resource_class.human_attribute_name(:updated_at) %> </th>
+        </tr>
+        <% @resources.each do |resource| %>
+          <tr>
+            <td>
+              <%= resource.id %> <br />
+              <%= link_to "Просмотр", polymorphic_path([:admin, resource], return_path: request.fullpath) %> <br />
+              <%= link_to "Редактирование", polymorphic_path([:edit, :admin, resource], return_path: request.fullpath) %> <br />
+              <%= link_to "Удалить", polymorphic_path([:admin, resource], return_path: request.fullpath), method: :delete %>
+            </td>
+            <td> <%= safe_join(resource.products.map{|value| content_tag(:p, value.to_label)}, '') %> </td>
+            <td> <%= resource.postal_address.try(:to_label) %> </td>
+            <td> <%= resource.deliveries_place.try(:to_label) %> </td>
+            <td> <%= resource.notes %> </td>
+            <td> <%= resource.notes_invisible %> </td>
+            <td> <%= l resource.created_at %> </td>
+            <td> <%= l resource.updated_at %> </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+
+    <br />
+    <%= paginate @resources %>
+    <br />
+    <br />
+
+    <%= link_to url_for(action: :new, return_path: request.fullpath), class: 'btn btn-primary' do %>
+      Новый пользователь
+    <% end %>
+
+    <br />
+    <br />
+
+
+  <% end %>
+<% end %>
+

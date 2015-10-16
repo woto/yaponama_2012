@@ -5,7 +5,6 @@
   <span itemprop="highPrice"><%= number_to_currency(mf_scope[:max_cost]) %></span>
 </div>
 
-
 <%= simple_form_for @resource, url: [:user, @resource], remote: true, html: {id: "form-"+product_css_id(catalog_number, mf_scope[:brand])} do |f| %>
 
   <div class="bottom-space-lg top-space-lg">
@@ -84,7 +83,7 @@
               <h4 class="top-space-none bottom-space-none text-muted">
                 <%= image_tag 'metro.png', class: 'metro' %> <%= delivery_place.metro %>,
                 нет в наличии
-                <small><%= link_to 'контакты', faq_path(delivery_place.faq_id), class: 'text-muted', :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
+                <small><%= link_to 'контакты', faq_path(delivery_place.faq_id), class: 'dashed', :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
               </h4>
             <% end %>
           </label>
@@ -129,7 +128,7 @@
   </div>
 
   <div style="margin-left: 45px">
-    <% if current_user.products.find_by(catalog_number: catalog_number, brand: mf_scope[:brand]) %>
+    <% if current_user.products.find_by(catalog_number: catalog_number, brand: mf_scope[:brand], status: 'incart') %>
       <h4 id="<%= "incart-" + product_css_id(catalog_number, mf_scope[:brand]) %>">
         Товар уже находится в корзине, <%= link_to 'перейти в корзину', user_cart_index_path %>
       </h4>

@@ -4,7 +4,12 @@ class Admin::UsersController < ApplicationController
   def impersonate
     @resource = User.find(params[:id])
     authorize @resource
-    sign_in(:user, @resource)
+    if @resource.guest?
+      session.delete("warden.user.user.key")
+      session[:guest_user_id] = @resource.id
+    else
+      sign_in(:user, @resource)
+    end
     redirect_to user_path
   end
 
@@ -13,6 +18,7 @@ class Admin::UsersController < ApplicationController
   def find_resources
     super
     @q = @resources.ransack(params[:q])
+    @q.sorts = 'id desc' if @q.sorts.empty?
     @resources = @q.result(distinct: true)
   end
 

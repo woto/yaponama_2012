@@ -34,9 +34,7 @@ module BootstrapHelper
   end
 
   def alert type, options={}, &block
-
     options[:class] = ["alert alert-#{type} fade in", options[:class] ].compact
-
     content_tag :div, options do
 
       a = capture do

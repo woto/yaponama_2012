@@ -1,11 +1,4 @@
-<%= simple_form_for(@resource, :url => polymorphic_path([:user, @resource], return_path: params[:return_path]), html: { class: 'form-horizontal' },
-        wrapper: :horizontal_form,
-        wrapper_mappings: {
-          check_boxes: :horizontal_radio_and_checkboxes,
-          radio_buttons: :horizontal_radio_and_checkboxes,
-          file: :horizontal_file_input,
-          boolean: :horizontal_boolean
-        }) do |f| %>
+<%= horizontal_simple_form_for(@resource, :url => polymorphic_path([:user, @resource], return_path: params[:return_path])) do |f| %>
 
   <%= f.error_notification %>
 
@@ -18,9 +11,9 @@
   <%= f.input :house %>
 
   <%= f.input :stand_alone_house, input_html: {rel: 'checkbox', :"data-toggle" => 'optional-attributes', :"data-target" => '.postal_address_room'} %>
-  <%= f.input :room %>
+  <%= f.input :room, required: true %>
 
-  <%= f.input :notes, input_html: {rows: 5} %>
+  <%= f.input :notes, input_html: {rows: 3} %>
 
   <div class="col-sm-offset-6">
     <%= f.buttons 'Сохранить' %>
