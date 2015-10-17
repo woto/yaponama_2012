@@ -32,6 +32,7 @@
       <table class="table">
         <tr>
           <th> <%= sort_link @q, :id %> </th>
+          <th> <%= @resource_class.human_attribute_name(:user) %> </th>
           <th> <%= @resource_class.human_attribute_name(:products) %> </th>
           <th> <%= @resource_class.human_attribute_name(:postal_address) %> </th>
           <th> <%= @resource_class.human_attribute_name(:deliveries_place) %> </th>
@@ -48,6 +49,7 @@
               <%= link_to "Редактирование", polymorphic_path([:edit, :admin, resource], return_path: request.fullpath) %> <br />
               <%= link_to "Удалить", polymorphic_path([:admin, resource], return_path: request.fullpath), method: :delete %>
             </td>
+            <td> <%= resource.user.try(:to_label) %> </td>
             <td> <%= safe_join(resource.products.map{|value| content_tag(:p, value.to_label)}, '') %> </td>
             <td> <%= resource.postal_address.try(:to_label) %> </td>
             <td> <%= resource.deliveries_place.try(:to_label) %> </td>
