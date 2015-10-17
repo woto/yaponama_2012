@@ -7,21 +7,21 @@
         <% end %>
       <% end %>
       <ul>
-        <li>id: <%= phrase.id %></li> 
-        <li>spare_info_id: <%= phrase.spare_info_id %></li> 
-        <li>catalog_number: <%= phrase.catalog_number %></li> 
-        <li>yandex_campaign_id: <%= phrase.yandex_campaign_id %></li> 
-        <li>yandex_banner_id: <%= phrase.yandex_banner_id %></li> 
-        <li>yandex_banner_updated_at: <%= phrase.yandex_banner_updated_at %></li> 
-        <li>yandex_wordstat_updated_at: <%= phrase.yandex_wordstat_updated_at %></li> 
-        <li>yandex_shows: <%= phrase.yandex_shows %></li> 
-        <li>created_at: <%= phrase.created_at %></li> 
-        <li>updated_at: <%= phrase.updated_at %></li> 
-        <li>phrase: <%= phrase.phrase %></li> 
-        <li>publish: <%= phrase.publish %></li> 
-        <li>yclicks: <%= phrase.yclicks %></li> 
-        <li>yshows: <%= phrase.yshows %></li> 
-        <li>primary: <%= phrase.primary %></li> 
+        <!-- <li>id: <%= phrase.id %></li> -->
+        <!-- <li>spare_info_id: <%= phrase.spare_info_id %></li> -->
+        <li>Артикул: <%= phrase.catalog_number %></li> 
+        <!-- <li>yandex_campaign_id: <%= phrase.yandex_campaign_id %></li> -->
+        <!-- <li>yandex_banner_id: <%= phrase.yandex_banner_id %></li> -->
+        <!-- <li>yandex_banner_updated_at: <%= phrase.yandex_banner_updated_at %></li> -->
+        <li>Информация получена: <%= l(phrase.yandex_wordstat_updated_at) rescue '' %></li> 
+        <li>Ищут в Yandex в месяц: <%= phrase.yandex_shows %></li> 
+        <!-- <li>created_at: <%= phrase.created_at %></li> -->
+        <!-- <li>updated_at: <%= phrase.updated_at %></li> -->
+        <!-- <li>phrase: <%= phrase.phrase %></li> -->
+        <!-- <li>publish: <%= phrase.publish %></li> -->
+        <!-- <li>yclicks: <%= phrase.yclicks %></li> -->
+        <!-- <li>yshows: <%= phrase.yshows %></li> -->
+        <li>Является основным: <%= phrase.primary ? 'Да' : 'Нет' %></li> 
       </ul>
     <% end %>
 <% end %>

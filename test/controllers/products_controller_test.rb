@@ -400,7 +400,7 @@ class ProductsControllerTest < ActionController::TestCase
           assert_select "label" do
             assert_select 'input#offer_deliveries_place[type="radio"][name="offer"]'
             assert_select 'h4' do
-              assert_select '*', text: /Под заказ,\s+743 руб.\s+доставка\s+5 окт./
+              assert_select '*', text: /Под заказ,\s+743 руб.\s+доставка\s+6 окт./
               assert_select 'small' do
                 assert_select 'a[window-dialog="/deliveries"][href="/deliveries"]', text: 'узнать стоимость доставки'
               end
