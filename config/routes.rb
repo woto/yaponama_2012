@@ -135,10 +135,6 @@ Yaponama2012::Application.routes.draw do
     resources :phrases
   end
 
-
-  # TODO temporary solution
-  get '/user/orders/:id', to: redirect('/user'), as: :user_order
-
   resource :user  do
     resources :products
     scope module: :user do
@@ -153,6 +149,9 @@ Yaponama2012::Application.routes.draw do
       post :pings, to: "deprecated#create"
     end
   end
+
+  # TODO temporary solution
+  get '/user/orders/:id', to: redirect('/user'), as: :user_order
 
 
   root :to => 'welcome#index'
