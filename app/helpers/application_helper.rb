@@ -309,7 +309,7 @@ module ApplicationHelper
             end)
           end)
         end
-        concat link_to('Написать статью на форуме', discourse.link_to_new, class: 'btn btn-warning') if current_user
+        concat link_to('Написать статью на форуме', discourse.link_to_new, class: 'btn btn-warning') if current_user && !current_user.guest?
       end
     end
   end

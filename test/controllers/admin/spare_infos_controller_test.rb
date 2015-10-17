@@ -2,6 +2,10 @@ require 'test_helper'
 
 class Admin::SpareInfosControllerTest < ActionController::TestCase
 
+  def setup
+    sign_in users(:admin)
+  end
+
   test 'Успешное создание SpareInfo, с имеющимся брендом и категорией' do
     assert_difference -> {SpareInfo.count} do
       assert_difference [ -> {Brand.count}, -> {SpareCatalog.count}], 0 do

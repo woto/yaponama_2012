@@ -29,7 +29,7 @@ class Discourse
   end
 
   def link_to_new
-    "http://#{Rails.configuration.discourse['host_port']}/new-topic?title=#{URI.encode(search_string)}&body=#{URI.encode('Удалите этот текст и напишите свой. После сохранения можете вернуться назад и обновить страницу, текст сразу отобразится на сайте. Не меняйте заголовок сообщения.')}&category_id=#{@category['id']}"
+    "http://#{Rails.configuration.discourse['host_port']}/new-topic?title=#{URI.encode(search_string)}&body=#{URI.encode('Удалите этот текст и напишите свой. Не меняйте заголовок сообщения.')}&category_id=#{@category['id']}"
   end
 
 end

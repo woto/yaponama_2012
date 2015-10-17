@@ -4,6 +4,7 @@ class CatchEnterTest < ActionDispatch::IntegrationTest
 
   def setup
     Capybara.reset!
+    capybara_sign_in('admin@example.com', '12345678')
   end
 
   test 'Проверка правильной работы catch enter на странице редактирования карт' do

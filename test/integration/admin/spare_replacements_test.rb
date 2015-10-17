@@ -4,6 +4,7 @@ class Admin::SpareApplicabilitiesTest < ActionDispatch::IntegrationTest
 
   def setup
     Capybara.reset!
+    capybara_sign_in('admin@example.com', '12345678')
   end
 
   test 'Проверяем работу автозаполнения from_spare_info' do

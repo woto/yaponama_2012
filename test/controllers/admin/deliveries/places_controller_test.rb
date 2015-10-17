@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class Admin::Deliveries::PlacesControllerTest < ActionController::TestCase
+
+  def setup
+    sign_in users(:admin)
+  end
+
   test 'Минимальный тест на создание зоны доставки' do
     assert_difference -> {Deliveries::Place.count} do
       post :create, deliveries_place: {

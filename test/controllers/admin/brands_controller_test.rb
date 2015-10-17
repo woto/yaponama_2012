@@ -2,6 +2,10 @@ require 'test_helper'
 
 class Admin::BrandsControllerTest < ActionController::TestCase
 
+  def setup
+    sign_in users(:admin)
+  end
+
   test 'Проверяем сохранение родительско бренда' do
     kia = brands(:kia)
     ki = brands(:ki)
