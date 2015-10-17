@@ -135,6 +135,10 @@ Yaponama2012::Application.routes.draw do
     resources :phrases
   end
 
+  namespace :user do
+    get 'discourse/sso'
+  end
+
   resource :user  do
     resources :products
     scope module: :user do
@@ -152,7 +156,6 @@ Yaponama2012::Application.routes.draw do
 
   # TODO temporary solution
   get '/user/orders/:id', to: redirect('/user'), as: :user_order
-
 
   root :to => 'welcome#index'
 

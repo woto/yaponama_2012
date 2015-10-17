@@ -2,7 +2,7 @@ class Discourse
 
   def search_string
     compacted = @title.reject(&:blank?).join(' ')
-    ['Страницы сайта:', "\"#{compacted}\"", "(#{@category['title']})"].join(' ')
+    ['Страницы сайта:', "“#{compacted}”", "(#{@category['title']})"].join(' ')
   end
 
   def initialize category, *title

@@ -466,4 +466,14 @@ class ProductsControllerTest < ActionController::TestCase
     skip
   end
 
+  test 'Гости не должны видеть кнопку Написать статью' do
+    get :new, catalog_number: '2102'
+    assert_select 'a', text: 'Написать статью на форуме'
+  end
+
+  test 'Пользователи должны видеть кнопку Написать статью' do
+    get :new, catalog_number: '2102'
+    assert_select 'a', text: 'Написать статью на форуме'
+  end
+
 end

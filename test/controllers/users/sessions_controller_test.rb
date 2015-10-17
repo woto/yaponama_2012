@@ -31,11 +31,11 @@ class Users::SessionsControllerTest < ActionController::TestCase
     assert cookies['remember_user_token']
   end
 
-  test 'Если я админ, то после входа под своей учетной записью я должен попасть в админку' do
+  test 'Если я админ, то после входа под своей учетной записью я должен попасть так же в личный кабинет' do
     assert_difference -> {User.count}, -1 do
       post :create, {user: {email: 'admin@example.com', password: '12345678'}}, {guest_user_id: users(:guest_without_products).id}
     end
-    assert_redirected_to admin_root_path
+    assert_redirected_to user_path
   end
 
   test 'Если у меня нет товаров в корзине, то после входа под своей учетной записью я должен попасть в личный кабинет' do

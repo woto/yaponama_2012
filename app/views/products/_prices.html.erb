@@ -48,7 +48,9 @@
 
               <script type="text/javascript">
                 window.onload = function() {
-                  window.yaCounter14980414.reachGoal('nalichie', { shop: '<%= delivery_place.to_label %>' } );
+                  if (window.yaCounter14980414 != null;) {
+                    window.yaCounter14980414.reachGoal('nalichie', { shop: '<%= delivery_place.to_label %>' } );
+                  }
                 }
               </script>
 

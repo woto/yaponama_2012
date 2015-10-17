@@ -309,7 +309,7 @@ module ApplicationHelper
             end)
           end)
         end
-        concat link_to('Новая статья', discourse.link_to_new, class: 'btn btn-warning') if current_user && current_user.seller?
+        concat link_to('Написать статью на форуме', discourse.link_to_new, class: 'btn btn-warning') if current_user
       end
     end
   end
