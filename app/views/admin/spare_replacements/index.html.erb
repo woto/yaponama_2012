@@ -35,7 +35,7 @@
     <div class="table-responsive">
       <table class="table">
         <tr>
-          <th> <%= @resource_class.human_attribute_name :id %> </th>
+          <th> <%= sort_link @q, :id %> </th>
           <th> <%= @resource_class.human_attribute_name :from_spare_info %> </th>
           <th> <%= @resource_class.human_attribute_name :to_spare_info %> </th>
           <th> <%= @resource_class.human_attribute_name :wrong %> </th>

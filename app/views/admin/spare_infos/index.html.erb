@@ -32,7 +32,7 @@
     <div class="table-responsive">
       <table class="table">
         <tr>
-          <th> <%= @resource_class.human_attribute_name :id %> </th>
+          <th> <%= sort_link @q, :id %> </th>
           <th> <%= @resource_class.human_attribute_name :catalog_number %> </th>
           <th> <%= @resource_class.human_attribute_name :brand %> </th>
           <th> <%= @resource_class.human_attribute_name :content %> </th>

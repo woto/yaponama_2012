@@ -6,6 +6,7 @@ class Admin::SpareReplacementsController < ApplicationController
   def find_resources
     super
     @q = @resources.ransack(params[:q])
+    @q.sorts = 'id desc' if @q.sorts.empty?
     @resources = @q.result(distinct: true)
   end
 
