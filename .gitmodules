@@ -104,3 +104,6 @@
 [submodule "system/submodules/jquery-details"]
 	path = system/submodules/jquery-details
 	url = https://github.com/mathiasbynens/jquery-details
+[submodule "system/submodules/febest_de"]
+	path = system/submodules/febest_de
+	url = https://github.com/woto/febest_de
