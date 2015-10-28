@@ -55,6 +55,7 @@
 //= require components/catch_enter
 //= require components/window_dialog
 //= require components/faq_translocation
+//= require components/collapse_next
 //= require components/slide_top
 //
 //= require admin/deliveries/places
