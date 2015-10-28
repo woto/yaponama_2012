@@ -137,6 +137,12 @@
     <% else %>
       <%= f.button :submit, title: 'Добавить в корзину', id: "submit-#{product_css_id(catalog_number, mf_scope[:brand])}", name: mf_scope[:brand].to_label.parameterize, class: 'btn btn-success btn-lg' %>
     <% end %>
+
+    <%= link_to "#", class: 'talk-show btn btn-primary' do %>
+      <%= icon 'comments' %>
+      Задать вопрос
+    <% end %>
+
   </div>
 
 <% end %>
