@@ -57,6 +57,7 @@
 //= require components/faq_translocation
 //= require components/collapse_next
 //= require components/slide_top
+//= require components/tawk
 //
 //= require admin/deliveries/places
 //

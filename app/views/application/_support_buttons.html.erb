@@ -1,12 +1,11 @@
-<%# TODO talk %>
-<%= link_to "#", class: 'talk-show btn btn-primary btn-lg right-space-sm', style: 'border: #293d49; color: white', onclick: "Tawk_API.popup();" do %>
+<%= link_to "#", class: 'talk-show btn btn-primary btn-lg right-space-sm' do %>
   <%= icon 'comments' %>
   Написать
 <% end %>
 
 <div class="clearfix visible-xs bottom-space"></div>
 
-<a href="mailto:info@<%= Rails.configuration.site['host'] %>" class="btn btn-primary btn-lg right-space-sm" style="border: #293d49; color: white">
+<a href="mailto:info@<%= Rails.configuration.site['host'] %>" class="btn btn-primary btn-lg right-space-sm">
   <%= icon 'envelope' %>
   info@<%=Rails.configuration.site['host'] %>
 </a>
