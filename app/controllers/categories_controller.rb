@@ -29,20 +29,20 @@ class CategoriesController < ApplicationController
 
     @q = SpareInfo.search(params[:q])
     @spare_infos = @q.result(distinct: true)
-    @spare_infos = @spare_infos.includes(@resource_class.name.demodulize.underscore) if @resource_class
+    @spare_infos = @spare_infos.includes(@opt_class.name.demodulize.underscore) if @opt_class
     @spare_infos = @spare_infos.by_category(params[:id])
     @spare_infos = @spare_infos.page(params[:page]).per(params[:per])
 
-    @meta_title = "#{@resource.name}"
+    @meta_title = "#{@spare_catalog.name}"
     @discourse = [@meta_title]
   end
 
   private
 
   def find_resource
-    @resource = SpareCatalog.find(params[:id])
-    if @resource.opt
-      @resource_class = "Opts::#{@resource.opt.camelize}".constantize
+    @spare_catalog = SpareCatalog.find(params[:id])
+    if @spare_catalog.opt
+      @opt_class = "Opts::#{@spare_catalog.opt.camelize}".constantize
     end
   end
 

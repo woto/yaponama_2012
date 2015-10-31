@@ -1,10 +1,10 @@
 <%= page do |p| %>
 
   <%= p.breadcrumb do |b| %>
-    <% if @resource.opt %>
+    <% if @spare_catalog.opt %>
       <%= b.item 'Главная', root_path %>
       <%= b.item('Запчасти', categories_path) %>
-      <%= b.item(@resource.name, category_path(params[:category_id])) %>
+      <%= b.item(@spare_catalog.name, category_path(params[:category_id])) %>
       <%= b.item(@brand.name, category_brand_path(params[:category_id], @brand.to_param)) %>
       <%= b.item(@model.name, category_model_path(params[:category_id], @model.to_param)) %>
       <%= b.item(@generation.name) %>
@@ -13,7 +13,7 @@
       <%= b.item('Каталоги', catalogs_path) %>
       <%= b.item(@brand.name, catalogs_brand_path(@brand)) %>
       <%= b.item(@model.name, catalogs_model_path(@model)) %>
-      <%= b.item(@resource.name, category_model_path(params[:category_id], @model.to_param)) %>
+      <%= b.item(@spare_catalog.name, category_model_path(params[:category_id], @model.to_param)) %>
       <%= b.item(@generation.name) %>
     <% end %>
   <% end %>
@@ -29,7 +29,7 @@
       <%= panel 'primary', class: 'by-car' do |p| %>
         <%= p.heading "data-clickable-object" => true do %>
           <%= p.title do %>
-            <a data-toggle="collapse" href="#by-car-collapse" data-clickable-href>Подбор <%= @resource.name %> по автомобилю </a>
+            <a data-toggle="collapse" href="#by-car-collapse" data-clickable-href>Подбор <%= @spare_catalog.name %> по автомобилю </a>
             <%= icon 'caret-down pull-right' %>
           <% end %>
         <% end %>
@@ -37,7 +37,7 @@
           <%= p.body do %>
             <ol id="categories-generations-show-modifications">
               <% @modifications.each do |modification| %>
-                <li data-clickable-object> <%= link_to safe_join([hidden("#{@resource.name} на #{@brand.name} #{@model.name} #{@generation.name} "), content_tag(:strong, modification.name)]), category_modification_path(params[:category_id], modification), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{modification.count}&nbsp;шт.)</small>".html_safe %></li>
+                <li data-clickable-object> <%= link_to safe_join([hidden("#{@spare_catalog.name} на #{@brand.name} #{@model.name} #{@generation.name} "), content_tag(:strong, modification.name)]), category_modification_path(params[:category_id], modification), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{modification.count}&nbsp;шт.)</small>".html_safe %></li>
               <% end %>
             </ol>
           <% end %>

@@ -1,4 +1,4 @@
-<% range = Rails.configuration.send("opts_#{@resource_class.name.demodulize.underscore}")[name]['range'] %>
+<% range = Rails.configuration.send("opts_#{@opt_class.name.demodulize.underscore}")[name]['range'] %>
 <% min = range[:min] %>
 <% max = range[:max] %>
 <% step = range[:step] %>

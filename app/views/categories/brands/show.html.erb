@@ -3,7 +3,7 @@
   <%= p.breadcrumb do |b| %>
     <%= b.item 'Главная', root_path %>
     <%= b.item('Запчасти', categories_path) %>
-    <%= b.item(@resource.name, category_path(params[:category_id])) %>
+    <%= b.item(@spare_catalog.name, category_path(params[:category_id])) %>
     <%= b.item(@brand.name) %>
   <% end %>
 
@@ -19,7 +19,7 @@
       <%= panel 'primary', class: 'by-car' do |p| %>
         <%= p.heading "data-clickable-object" => true do %>
           <%= p.title do %>
-            <a data-toggle="collapse" href="#by-car-collapse" data-clickable-href>Подбор <%= @resource.name %> по автомобилю </a>
+            <a data-toggle="collapse" href="#by-car-collapse" data-clickable-href>Подбор <%= @spare_catalog.name %> по автомобилю </a>
             <%= icon 'caret-down pull-right' %>
           <% end %>
         <% end %>
@@ -27,7 +27,7 @@
           <%= p.body do %>
             <ol id="categories-brands-show-models">
               <% @models.each do |model| %>
-                <li data-clickable-object> <%= link_to safe_join([hidden("#{@resource.name} на #{@brand.name} "), content_tag(:strong, model.name)]), category_model_path(params[:category_id], model), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{model.count}&nbsp;шт.)</small>".html_safe %></li>
+                <li data-clickable-object> <%= link_to safe_join([hidden("#{@spare_catalog.name} на #{@brand.name} "), content_tag(:strong, model.name)]), category_model_path(params[:category_id], model), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{model.count}&nbsp;шт.)</small>".html_safe %></li>
               <% end %>
             </ol>
           <% end %>

@@ -1,10 +1,10 @@
 <%= page do |p| %>
 
   <%= p.breadcrumb do |b| %>
-    <% if @resource.opt %>
+    <% if @spare_catalog.opt %>
       <%= b.item 'Главная', root_path %>
       <%= b.item('Запчасти', categories_path) %>
-      <%= b.item(@resource.name, category_path(params[:category_id])) %>
+      <%= b.item(@spare_catalog.name, category_path(params[:category_id])) %>
       <%= b.item(@brand.name, category_brand_path(params[:category_id], @brand.to_param)) %>
       <%= b.item(@model.name, category_model_path(params[:category_id], @model.to_param)) %>
       <%= b.item(@generation.name, category_generation_path(params[:category_id], @generation.to_param)) %>
@@ -14,7 +14,7 @@
       <%= b.item('Каталоги', catalogs_path) %>
       <%= b.item(@brand.name, catalogs_brand_path(@brand)) %>
       <%= b.item(@model.name, catalogs_model_path(@model)) %>
-      <%= b.item(@resource.name, category_model_path(params[:category_id], @model.to_param)) %>
+      <%= b.item(@spare_catalog.name, category_model_path(params[:category_id], @model.to_param)) %>
       <%= b.item(@generation.name, category_generation_path(params[:category_id], @generation.to_param)) %>
       <%= b.item(@modification.name) %>
     <% end %>

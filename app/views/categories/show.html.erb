@@ -3,7 +3,7 @@
   <%= p.breadcrumb do |b| %>
     <%= b.item 'Главная', root_path %>
     <%= b.item('Запчасти', categories_path) %>
-    <%= b.item("#{@resource.name}") %>
+    <%= b.item("#{@spare_catalog.name}") %>
   <% end %>
 
   <%= p.title do %>
@@ -16,7 +16,7 @@
       <%= panel 'primary', class: 'by-car' do |p| %>
         <%= p.heading "data-clickable-object" => true do %>
           <%= p.title do %>
-            <a data-toggle="collapse" href="#by-car-collapse" data-clickable-href>Подбор <%= @resource.name %> по автомобилю </a>
+            <a data-toggle="collapse" href="#by-car-collapse" data-clickable-href>Подбор <%= @spare_catalog.name %> по автомобилю </a>
             <%= icon 'caret-down pull-right' %>
           <% end %>
         <% end %>
@@ -24,7 +24,7 @@
           <%= p.body do %>
             <ol id="categories-show-brands">
               <% @brands.each do |brand| %>
-                <li data-clickable-object> <%= link_to safe_join([hidden("#{@resource.name} на "), content_tag(:strong, brand.name)]), category_brand_path(params[:id], brand), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{brand.count}&nbsp;шт.)</small>".html_safe %></li>
+                <li data-clickable-object> <%= link_to safe_join([hidden("#{@spare_catalog.name} на "), content_tag(:strong, brand.name)]), category_brand_path(params[:id], brand), 'data-clickable-href' => '' %> <%= "<small class='text-muted'>(#{brand.count}&nbsp;шт.)</small>".html_safe %></li>
               <% end %>
             </ol>
           <% end %>
@@ -35,7 +35,7 @@
     <%= render 'tmp' %>
 
     <% if current_user && current_user.seller? %>
-      <%= link_to edit_admin_spare_catalog_path(@resource, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
+      <%= link_to edit_admin_spare_catalog_path(@spare_catalog, :return_path => request.fullpath), class: 'btn btn-lg btn-warning top-space-lg bottom-space-lg' do %>
         <%= icon 'edit' %>
         Редактировать
       <% end %>
