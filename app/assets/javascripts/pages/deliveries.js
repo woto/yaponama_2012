@@ -5,6 +5,11 @@
   }
 
   calcRoute = function(destination) {
+
+    if (window.yaCounter14980414 != null) {
+      window.yaCounter14980414.reachGoal('deliveries', { address: destination } );
+    }
+
     var request = {
       origin: $('#warehouse_address').text(),
       destination: destination,
