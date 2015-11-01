@@ -1,7 +1,15 @@
 <% content_for :flash do %>
   <% [:success, :info, :warning, :danger, :notice, :alert].each do |key| %>
-    <%= alert key do %>
+    <%= alert "#{key} top-space" do %>
       <%= flash[key] %>
     <% end if flash[key] %>
+  <% end %>
+<% end %>
+
+<% if content_for?(:flash) %>
+  <%= page do |p| %>
+    <%= p.content do %>
+      <%= yield :flash %>
+    <% end %>
   <% end %>
 <% end %>
