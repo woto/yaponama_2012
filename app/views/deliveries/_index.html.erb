@@ -1,4 +1,4 @@
-<% is_moscow = current_user && current_user.ipgeobase_name == 'Москва' %>
+<% is_moscow = current_user && (current_user.ipgeobase_name.blank? || current_user.ipgeobase_name == 'Москва') %>
 
 <ul class="nav nav-tabs bottom-space">
   <li id="moscow-link" class="<%== "active" if is_moscow %>">
