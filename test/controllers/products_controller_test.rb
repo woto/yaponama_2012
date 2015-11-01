@@ -406,7 +406,7 @@ class ProductsControllerTest < ActionController::TestCase
               end
               assert_select 'span.text-xs' do
                 assert_select '*', text: /Акция/
-                assert_select '*', text: /219 руб./
+                assert_select '*', text: /49 руб./
                 assert_select 'a[href="/faqs/1074"][window-dialog="/faqs/1074"]', text: 'подробнее...'
               end
             end

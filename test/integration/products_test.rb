@@ -2,6 +2,14 @@ require 'test_helper'
 
 class ProductsTest < ActionDispatch::IntegrationTest
 
+  def setup
+    Rails.configuration.common['display_counters'] = true
+  end
+
+  def teardown
+    Rails.configuration.common['display_counters'] = false
+  end
+
   test 'После поиска артикула у нас должна заполниться история' do
     get new_user_product_path(catalog_number: '2103')
     assert_equal [['2103', '2103 MITSUBISHI, KI Задний бампер']], session[:history]
