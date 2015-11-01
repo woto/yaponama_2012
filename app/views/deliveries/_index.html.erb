@@ -1,0 +1,23 @@
+<% is_moscow = current_user && current_user.ipgeobase_name == 'Москва' %>
+
+<ul class="nav nav-tabs bottom-space">
+  <li id="moscow-link" class="<%== "active" if is_moscow %>">
+    <a data-toggle="tab" href="#moscow-tab">
+      <h3 style="margin: 2px">Москва</h3>
+    </a>
+  </li>
+  <li id="russia-link" class="<%== "active" unless is_moscow %>">
+    <a data-toggle="tab" href="#russia-tab">
+      <h3 style="margin: 2px">Россия <%= current_user.ipgeobase_name if current_user && !is_moscow %></h3>
+    </a>
+  </li>
+</ul>
+
+<div class="tab-content top-space">
+  <div class="tab-pane <%== "active" if is_moscow %>" id="moscow-tab">
+    <%= render 'deliveries/moscow' %>
+  </div>
+  <div class="tab-pane <%== "active" unless is_moscow %>" id="russia-tab">
+    <%= render 'deliveries/russia' %>
+  </div>
+</div>

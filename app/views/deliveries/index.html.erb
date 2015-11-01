@@ -1,28 +1,9 @@
+<% @meta_title = 'Доставка' %>
+
 <br />
 
 <%= page do |p| %>
-  <%= p.content :md do %>
-
-    <ul class="nav nav-tabs bottom-space">
-      <li class="active">
-        <a data-toggle="tab" href="#moscow">
-          <h3 style="margin: 2px">Москва</h3>
-        </a>
-      </li>
-      <li>
-        <a data-toggle="tab" href="#russia">
-          <h3 style="margin: 2px">Россия</h3>
-        </a>
-      </li>
-    </ul>
-
-    <div class="tab-content top-space">
-      <div class="tab-pane active" id="moscow">
-        <%= render 'moscow' %>
-      </div>
-      <div class="tab-pane" id="russia">
-        <%= render 'russia' %>
-      </div>
-    </div>
+  <%= p.content :center do %>
+    <%= render 'index' %>
   <% end %>
 <% end %>
