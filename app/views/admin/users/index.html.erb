@@ -71,11 +71,17 @@
             <td> 
               <%= resource.notes_invisible %> <br />
               <%= resource.ipgeobase_name %> <br />
-              <%= resource.ipgeobase_names_depth_cache %>
-              <%= resource.time_zone %> <br />
+              <%= resource.ipgeobase_names_depth_cache %> <br />
               <%= resource.time_zone %> <br />
               <%= resource.current_sign_in_ip %> <br />
               <%= resource.last_sign_in_ip %> <br />
+              <%= l resource.created_at %> <br />
+              <%= l resource.updated_at %> <br />
+              <%= resource.user_agent %> <br />
+              <%= resource.accept_language %> <br />
+              <%= resource.location %> <br />
+              <%= resource.referrer %> <br />
+              <%= resource.first_referrer %> <br />
             </td>
           <% end %>
         <% end %>
