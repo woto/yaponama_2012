@@ -1,10 +1,10 @@
 <%= row do %>
   <div class="col-sm-12">
-    <%= render 'form' %>
+    <%= render 'deliveries/form' %>
   </div>
   <div class="col-sm-12">
     <div id="deliveries-calculate-result">
-      Укажите пожалуйста адрес доставки.
+      Укажите пожалуйста адрес, чтобы проверить стоимость доставки. Расчет происходит автоматически. Общая масса заказа не должна превышать 10 кг.
     </div>
     <div class="panel-group hidden" id="deliveries-accordion">
       <% Deliveries::Place.where(active: true, partner: false, display_marker: false).order(z_index: :desc).each do |delivery_zone| %>
