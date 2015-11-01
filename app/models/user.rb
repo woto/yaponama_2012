@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
     has_many :orders
   end
 
+  ransacker :products_exists do |parent|
+    Arel.sql("(select exists (select 1 from products where products.user_id = users.id))")
+  end
+
   def to_label
     [name, phone, email].reject{|value| value.blank?}.join(', ').presence ||
       "#{id.to_s.scan(/.{3}|.+/).join("-")} #{created_at.utc.strftime("%d-%m-%y")}"

@@ -21,6 +21,8 @@
       <%= f.input :role_eq, placeholder: 'Роль', label: false, html5: false, as: :select, collection: User.roles %>
       <%= f.input :notes_cont, placeholder: 'Комментарий', label: false %>
       <%= f.input :notes_invisible_cont, placeholder: 'Служебный комментарий', label: false %>
+      <%= f.input :products_exists_true, collection: [["С товаром в корзине", true], ['Без товаров в корзине', false]] %>
+
 
       <%= f.button :submit, 'Поиск' %>
     <% end %>
