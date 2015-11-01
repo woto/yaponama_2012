@@ -30,7 +30,7 @@ $font-size-large:         ceil(($font-size-base * 1.25));
 $font-size-small:         ceil(($font-size-base * 0.85));
 
 $font-size-h1:            floor(($font-size-base * 2));
-$font-size-h2:            floor(($font-size-base * 1.6));
+$font-size-h2:            floor(($font-size-base * 1.7));
 $font-size-h3:            ceil(($font-size-base * 1.4));
 $font-size-h4:            ceil(($font-size-base * 1.2));
 $font-size-h5:            $font-size-base;
@@ -41,13 +41,13 @@ $font-size-h6:            ceil(($font-size-base * 0.85));
 
 $grid-columns: 24;
 
-//@import "bootswatch/slate/variables";
+@import "bootswatch/spacelab/variables";
 
 // Then bootstrap itself
 @import 'bootstrap';
 @import 'bootstrap-sprockets';
 
-//@import "bootswatch/slate/bootswatch";
+@import "bootswatch/spacelab/bootswatch";
 
 /////////////////////
 
@@ -56,11 +56,12 @@ $grid-columns: 24;
 
 /////////////////////
 
-//@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600&subset=latin,cyrillic);
 
-//*, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-//  font-family: 'Open Sans', sans-serif;
-//}
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin,cyrillic);
+
+*, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Open Sans', sans-serif;
+}
 
 /////////////////////
 
