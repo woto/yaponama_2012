@@ -52,7 +52,7 @@
           <th> <%= @resource_class.human_attribute_name(:notes_invisible) %> </th>
         </tr>
         <% @resources.each do |resource| %>
-          <tr>
+          <%= content_tag_for(:tr, resource) do %>
             <td>
               <%= resource.id %> <br />
               <%= link_to "Просмотр", polymorphic_path([:admin, resource], return_path: request.fullpath) %> <br />
@@ -77,7 +77,7 @@
               <%= resource.current_sign_in_ip %> <br />
               <%= resource.last_sign_in_ip %> <br />
             </td>
-          </tr>
+          <% end %>
         <% end %>
       </table>
     </div>

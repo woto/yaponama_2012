@@ -166,4 +166,30 @@ class Admin::UsersControllerTest < ActionController::TestCase
     assert session["guest_user_id"]
   end
 
+
+  test 'Пользователь с товаром должен отображаться при включенном фильтре products_exists' do
+    sign_in(users(:manager))
+    get :index, q: {products_exists_true: "true", email_cont: 'user@example.com'}
+    assert_select '#user_227792459'
+  end
+
+  test 'Пользователь без товара не должен отображаться при включенном фильтре products_exists' do
+    sign_in(users(:manager))
+    get :index, q: {products_exists_true: "true", email_cont: 'user_without_products@example.com'}
+    assert_select '#user_824968892', false
+  end
+
+  test 'Пользователь с товаром не должен отображаться при выключенном фильтре products_exists' do
+    sign_in(users(:manager))
+    get :index, q: {products_exists_true: "false", email_cont: 'user@example.com'}
+    assert_select '#user_227792459', false
+  end
+
+  test 'Пользователь без товара должен отображаться при выключенном фильтре products_exists' do
+    sign_in(users(:manager))
+    get :index, q: {products_exists_true: "false", email_cont: 'user_without_products@example.com'}
+    assert_select '#user_824968892'
+  end
+  
+
 end
