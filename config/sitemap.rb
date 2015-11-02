@@ -12,7 +12,7 @@ SitemapGenerator::Sitemap.create do
     sitemap.sitemaps_namer.next
   end
 
-  Page.all.each do |page|
+  Ckpages::Page.all.each do |page|
     add "/#{page.path}", :changefreq => 'monthly'
   end
 

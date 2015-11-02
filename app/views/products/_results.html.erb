@@ -5,12 +5,10 @@
 
 <% replacements_link = capture do %>
   <% if @replacements.map{|obj| obj['replacements'].map{|obj2| obj2['catalog_number']}}.flatten.length >= 1 %>
-    <h5>Возможно вас так же могут заинтересовать <%= link_to "аналоги и замены номера #{@c9}", polymorphic_path([:new, :user,  :product], :catalog_number => @c9, :manufacturer => nil, :replacements => '1'), class: 'replacement-button' %>.</h5>
+    <h5>Возможно вас так же могут заинтересовать <%= alert_link_to "аналоги и замены номера #{@c9}", polymorphic_path([:new, :user,  :product], :catalog_number => @c9, :manufacturer => nil, :replacements => '1'), class: 'replacement-button' %>.</h5>
   <% end %>
 <% end %>
 
 <% if replacements_link %>
-  <%= alert 'warning' do %>
-    <%= replacements_link %>
-  <% end %>
+  <%= replacements_link %>
 <% end %>

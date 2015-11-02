@@ -53,4 +53,11 @@
     opacity: 0.8;
   }
 
+
+  .img-responsive-inside {
+    img {
+      @extend .img-responsive;
+    }
+  }
+
 }

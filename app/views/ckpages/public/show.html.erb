@@ -5,15 +5,14 @@
 
 <%= page do |p| %>
 
-  <%= p.breadcrumb do %>
-    <%= breadcrumb false, exception=true do |b| %>
-      <%= b.item @page.title1, @page.url1 if @page.title1? %>
-      <%= b.item @page.title2, @page.url2 if @page.title2? %>
-      <%= b.item @page.title3, @page.url3 if @page.title3? %>
-      <%= b.item @page.title4, @page.url4 if @page.title4? %>
-      <%= b.item @page.title5, @page.url5 if @page.title5? %>
-      <%= b.item @page.title %>
-    <% end %>
+  <%= p.breadcrumb do |b| %>
+    <%= b.item 'Главная', main_app.root_path %>
+    <%= b.item @page.title1, @page.url1 if @page.title1? %>
+    <%= b.item @page.title2, @page.url2 if @page.title2? %>
+    <%= b.item @page.title3, @page.url3 if @page.title3? %>
+    <%= b.item @page.title4, @page.url4 if @page.title4? %>
+    <%= b.item @page.title5, @page.url5 if @page.title5? %>
+    <%= b.item @page.title %>
   <% end %>
 
   <%= p.title do %>

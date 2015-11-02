@@ -72,18 +72,10 @@
 
 /////////////////////
 
-#dropdown-phone .link {
-  color: $link-color;
-  &:hover, &:focus {
-    color: $link-hover-color;
-  }
-}
-
-/////////////////////
-
 #nav-first {
   margin-bottom: 0;
   border: none;
+  z-index: 1005;
 }
 
 
@@ -96,4 +88,5 @@
 
 #nav-admin {
   margin-bottom: 0;
+  z-index: 1005;
 }
