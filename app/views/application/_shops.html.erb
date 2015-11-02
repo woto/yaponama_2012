@@ -1,0 +1,18 @@
+<% if params[:controller] != 'welcome' %>
+  <%= container do %>
+    <div class="btn-group btn-group-justified top-space-sm">
+      <% Deliveries::Place.where(active: true, display_marker: true, partner: false).each do |dp| %>
+        <div class="btn-group">
+          <%= link_to main_app.faqs_path(anchor: dp.faq_id), :"faq-translocation" => '', class: 'btn btn-warning'  do %>
+            <%= image_tag 'metro.png', class: 'metro' %> <%= dp.metro %> <br />
+            <% phones = [dp.phone1, dp.phone2] %>
+            <% phones.each do |phone| %>
+              <%= phone %><br />
+            <% end %>
+            <%= dp.ystreet %> <%= dp.yhouse %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
