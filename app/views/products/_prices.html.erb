@@ -131,13 +131,16 @@
 
   </div>
 
-  <div style="margin-left: 45px">
-    <% if current_user.products.find_by(catalog_number: catalog_number, brand: mf_scope[:brand], status: 'incart') %>
+  <div style="margin-left: 50px">
+    <% if current_user && current_user.products.find_by(catalog_number: catalog_number, brand: mf_scope[:brand], status: 'incart') %>
       <h4 id="<%= "incart-" + product_css_id(catalog_number, mf_scope[:brand]) %>">
         Товар уже находится в корзине, <%= link_to 'перейти в корзину', user_cart_index_path %>
       </h4>
     <% else %>
-      <%= f.button :submit, title: 'Добавить в корзину', id: "submit-#{product_css_id(catalog_number, mf_scope[:brand])}", name: mf_scope[:brand].to_label.parameterize, class: 'btn btn-success btn-lg' %>
+      <%= f.button :button, id: "submit-#{product_css_id(catalog_number, mf_scope[:brand])}", name: mf_scope[:brand].to_label.parameterize, class: 'btn btn-success btn-lg' do %>
+        <%= icon 'shopping-cart' %>
+        Добавить в корзину
+      <% end %>
     <% end %>
 
     <%= link_to "#", class: 'talk-show btn btn-primary' do %>
@@ -147,4 +150,42 @@
 
   </div>
 
+<% content_for :discount, flush: true do %>
+
+  <%= row do %>
+  <div class="col-md-24">
+    <% discount = offer[:retail_cost] - offer[:income_cost] - (offer[:retail_cost] * 0.04) %>
+
+    <%= panel 'info' do |p| %>
+      <%= p.body do %>
+        <h4 class="top-space-none bottom-space-md">Узнайте как купить за <span class="badge left-space-xs"> <%= number_to_currency(offer[:retail_cost] - discount, precision: 0) %>* </span></h4>
+        <span class="fa-stack text-info">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-stack-1x" style="color: white">1</i>
+        </span>
+
+        <span class="left-space-xs">Сделайте немного фотографий, напишите о процессе установки или использования товара и мы вернем вам на телефон или банковску карту <%= number_to_currency( discount / 2, precision: 0) %> <%= link_to 'подробнее...', faq_path(1074), class: 'dashed', :"window-dialog" => faq_path(1074) %></span>
+
+        <br />
+        <br />
+
+        <span class="fa-stack text-info">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-stack-1x" style="color: white">2</i>
+        </span>
+
+        <span class="left-space-xs">
+          Лайкните нас в социальных сетях и получите скидку <%= number_to_currency(discount/2/6, precision: 0) %> за каждый лайк (скидка суммируется) <%= link_to 'подробнее...', faq_path(1122), class: 'dashed', :"window-dialog" => faq_path(1122) %>
+          <br />
+          <br />
+          <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+          <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus" data-yashareTheme="counter"></div>
+        </span>
+      <% end %>
+      <%= p.footer style: 'background: #FAFAFA' do %>
+        * акция распространяется только на заказы, оформленные на доставку
+      <% end %>
+    <% end %>
+  </div>
+  <% end %>
 <% end %>
