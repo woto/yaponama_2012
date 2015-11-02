@@ -1,70 +1,74 @@
 <div class="tab-content">
-
   <% @formatted_data.each do |catalog_number, cn_scope| %>
     <% cn_scope.each_with_index do |(manufacturer, mf_scope), i| %>
       <div class="tab-pane fade <%= 'in active' if i==0 %>" id="<%= manufacturer.parameterize %>" itemscope itemtype="http://schema.org/Product">
-        <%= panel 'primary' do |p| %>
+        <%= container do %>
+          <%= row do %>
+            <div class="col-md-18">
+              <div class="well clearfix">
+                <%= panel 'info' do |p| %>
+                  <%= p.body do %>
+                    <div class="col-md-9">
+                      <div class="text-center bottom-space-lg">
+                        <small style="display: block">Производитель:</small>
+                        <h3 class="top-space-none">
+                          <b class="text-danger" itemprop="brand"><%= manufacturer %></b>
+                          <% if mf_scope[:manufacturer_origs].size > 0 %>
+                            <small style="display: block" class="break-word nowrap">(<%= manufacturer_origs(mf_scope) %>)</small>
+                          <% end %>
+                        </h3>
+                        <small style="display: block">Каталожный номер:</small>
+                        <h3 class="top-space-none">
+                          <b class="text-danger"><%= mf_scope[:keyword] %></b>
+                          <% if mf_scope[:catalog_number_origs].size > 0 %>
+                            <small style="display: block" class="break-word nowrap">(<%= catalog_number_origs(mf_scope) %>)</small>
+                          <% end %>
+                        </h3>
+                      </div>
+                      <%= render 'spare_info_images', mf_scope: mf_scope %>
+                    </div>
+                    <%= render 'prices', mf_scope: mf_scope, catalog_number: catalog_number, manufacturer: manufacturer %>
+                  <% end %>
+                <% end %>
 
-          <%= p.heading do %>
-            <%= p.title do %>
+                <%= content_for :discount %>
+
+                <%= panel 'info' do |p| %>
+                  <%= p.body do %>
+                    <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
+                  <% end %>
+                <% end %>
+
+                <%= panel 'info' do |p| %>
+                  <%= p.body do %>
+                    <%= render 'info', mf_scope: mf_scope %>
+                  <% end %>
+                <% end %>
+
+                <%= panel 'info' do |p| %>
+                  <%= p.body do %>
+                    <div class="brand-preview text-justify">
+                      <%= brand_preview mf_scope[:brand] %>
+                    </div>
+
+                    <div class="nowrap top-space-sm bottom-space-lg clearfix text-center">
+                      <%= brand_rating mf_scope[:brand] %>
+                    </div>
+                  <% end %>
+                <% end %>
+                <%= render 'manage', mf_scope: mf_scope, catalog_number: catalog_number, manufacturer: manufacturer %>
+              </div>
+            </div>
+            <div class="col-md-6">
               <%= link_to "Запчасти", categories_path %> <%= icon 'angle-right' %>
               <%= link_to mf_scope[:catalog].name, category_path(mf_scope[:catalog]) %> <%= icon 'angle-right' %>
               <%= link_to "##{manufacturer.parameterize}" do %>
                 <span itemprop='name'><%= "#{mf_scope[:keyword]} (#{manufacturer})" %></span>
               <% end %>
-            <% end %>
-          <% end %>
-
-          <%= p.body do %>
-            <%= row do %>
-
-              <div class="col-md-9">
-
-                <div class="text-center top-space bottom-space-lg">
-                  <h3 class="top-space-none">
-                    <small>Производитель:</small>
-                    <b class="text-danger" itemprop="brand"><%= manufacturer %></b>
-                    <% if mf_scope[:manufacturer_origs].size > 0 %>
-                      <small class="break-word">(<%= manufacturer_origs(mf_scope) %>)</small>
-                    <% end %>
-                  </h3>
-
-                  <h3 class="top-space-none">
-                    <small>Артикул:</small>
-                    <b class="text-danger"><%= mf_scope[:keyword] %></b>
-                    <% if mf_scope[:catalog_number_origs].size > 0 %>
-                      <small class="break-word">(<%= catalog_number_origs(mf_scope) %>)</small>
-                    <% end %>
-                  </h3>
-
-                </div>
-
-                <%= render 'spare_info_images', info: mf_scope[:info] %>
-
-                <div class="nowrap top-space-sm bottom-space-lg clearfix text-center">
-                  <%= brand_rating mf_scope[:brand] %>
-                </div>
-
-              </div>
-
-              <div class="col-md-15">
-
-                <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
-                <%= render 'prices', mf_scope: mf_scope, catalog_number: catalog_number, manufacturer: manufacturer %>
-              </div>
-
-            <% end %>
-
-            <br />
-            <br />
-
-            <%= render 'info', mf_scope: mf_scope %>
-            <%= render 'manage', mf_scope: mf_scope, catalog_number: catalog_number, manufacturer: manufacturer %>
-
+            </div>
           <% end %>
         <% end %>
-      </div>
+      </div> 
     <% end %>
   <% end %>
-
 </div>
