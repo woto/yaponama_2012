@@ -5,9 +5,13 @@
   <%= panel 'info' do |p| %>
     <%= p.heading do %>
       <%= p.title do %>
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#CONFIG">
-          CONFIG
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#XXX">
+          XXX
         </a>
+      <% end %>
+    <% end %>
+    <%= p.collapse id: 'XXX' do %>
+      <%= p.body do %>
       <% end %>
     <% end %>
   <% end %>
@@ -15,14 +19,17 @@
   <%= panel 'info' do |p| %>
     <%= p.heading do %>
       <%= p.title do %>
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#XXX">
-          XXX
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#CONFIG">
+          CONFIG
         </a>
       <% end %>
     <% end %>
-    <%= p.collapse do %>
+    <%= p.collapse id: 'CONFIG' do %>
       <%= p.body do %>
-        <div id="XXX"></div>
+        <p>
+          <b> user_id </b>
+          <div id="user_id"><%= current_user && current_user.id %></div>
+        </p>
       <% end %>
     <% end %>
   <% end %>

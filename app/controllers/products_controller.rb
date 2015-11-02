@@ -6,6 +6,11 @@ class ProductsController < ApplicationController
   def new
     respond_to do |format|
       format.html do
+        @moscow = get_faqs.find{|faq| faq['id'] == 30}
+        @russia = get_faqs.find{|faq| faq['id'] == 29}
+        @our_works = get_our_works.
+          reject{|topic| topic['pinned']}.
+          reject{|topic| topic['closed']}
         search params[:catalog_number], params[:manufacturer], params[:replacements]
       end
     end
