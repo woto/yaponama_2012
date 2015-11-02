@@ -117,8 +117,10 @@
               <%= number_to_currency(offer[:retail_cost], precision: 0) %>
               доставка
               <%= l(Date.current + offer[:min_days].to_i.days+1, format: :short) %>
-              <small><%= link_to 'узнать стоимость доставки', deliveries_path, class: 'dashed', :"window-dialog" => deliveries_path %></small><br />
-              <span class="text-xs">Акция! Сделайте немного фотографий, напишите о процессе установки или использования товара и мы вернем вам на телефон или банковску карту <%= number_to_currency((diff = offer[:retail_cost] - offer[:income_cost]) - diff*0.8, precision: 0) %> <%= link_to 'подробнее...', faq_path(1074), class: 'dashed', :"window-dialog" => faq_path(1074) %></span>
+              <small><%= link_to 'контакты', faq_path(1123), class: 'dashed', :"window-dialog" => faq_path(1123) %></small>
+              <% if current_user && current_user.admin? %>
+                <p><small class="text-muted"><%= offer[:tech] %> </small></p>
+              <% end %>
             <% else %>
               доставка невозможна
             <% end %>
