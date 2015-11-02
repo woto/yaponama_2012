@@ -135,6 +135,6 @@ class WelcomeControllerTest < ActionController::TestCase
 
   test 'Проверка выставленных faq-translocation' do
     get :index
-    assert_select '[faq-translocation]', count: 5
+    assert_select '[faq-translocation]', count: 4
   end
 end
