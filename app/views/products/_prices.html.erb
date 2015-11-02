@@ -1,3 +1,7 @@
+<% offer = mf_scope[:offers].first %>
+
+<div class="col-md-15">
+
 <div class="hidden" itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
   <meta itemprop="priceCurrency" content="RUB" />
   <span itemprop="offerCount"><%= mf_scope[:offers].size %></span>
@@ -94,7 +98,6 @@
       <% end %>
     <% end %>
 
-    <% offer = mf_scope[:offers].first %>
     <div class="deliveries_place" id="deliveries_place">
       <div class="radio <%= 'disabled' if offer.blank? %>">
         <label>
@@ -149,6 +152,13 @@
     <% end %>
 
   </div>
+
+
+  <br />
+  <br />
+
+<% end %>
+</div>
 
 <% content_for :discount, flush: true do %>
 
