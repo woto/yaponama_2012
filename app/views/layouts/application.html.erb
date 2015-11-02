@@ -1,13 +1,8 @@
-<%= render :partial => 'layouts/shared/prefix' %>
-
-<%= render '/layouts/user_navbar' %>
-
+<%= render 'layouts/shared/prefix' %>
+<%= render 'layouts/user_navbar' %>
 <%= render 'flash' %>
 
 <%= yield %>
 
 <%= render 'layouts/user_footer' %>
-
-<%= render 'tawk_to' %>
-
-<%= render :partial => "layouts/shared/suffix" %>
+<%= render 'layouts/shared/suffix' %>

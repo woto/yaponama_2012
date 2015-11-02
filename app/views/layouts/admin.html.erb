@@ -1,11 +1,8 @@
-<%= render :partial => 'layouts/shared/prefix' %>
-
-<%= render :partial => "layouts/admin_navbar" %>
-
+<%= render 'layouts/shared/prefix' %>
+<%= render 'layouts/admin_navbar' %>
 <%= render 'flash' %>
 
 <%= yield %>
 
-<%= render "layouts/admin_footer" %>
-
-<%= render :partial => "layouts/shared/suffix" %>
+<%= render 'layouts/admin_footer' %>
+<%= render 'layouts/shared/suffix' %>
