@@ -15,7 +15,7 @@ class UserMailer < ApplicationMailer
 
   def bcc_recipients(order)
     bcc = []
-    bcc << Rails.configuration.common['mail']
+    bcc << Rails.configuration.x.common['mail']
     bcc << order.deliveries_place.email if order.deliveries_place
   end
 

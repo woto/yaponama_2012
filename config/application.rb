@@ -8,6 +8,7 @@ require 'rails/all'
 Bundler.require(*Rails.groups(assets: %w(development test)))
 
 module Yaponama2012
+
   class Application < Rails::Application
 
     config.to_prepare do
@@ -71,9 +72,11 @@ module Yaponama2012
 
     config.active_record.raise_in_transactional_callbacks = true
 
+    Rails.application.config.x.common = config_for('application/common')
+
     Rails.application.configure do
       config.ckpages = config_for('application/ckpages')
-      config.common = config_for('application/common')
+      #config.common = config_for('application/common')
       config.discourse = config_for('application/discourse')
       config.map = config_for('application/map')
       config.opts_accumulator = config_for('application/opts/accumulator')

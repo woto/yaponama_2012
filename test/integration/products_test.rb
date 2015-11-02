@@ -3,11 +3,12 @@ require 'test_helper'
 class ProductsTest < ActionDispatch::IntegrationTest
 
   def setup
-    Rails.configuration.common['display_counters'] = true
+    Capybara.reset!
+    Rails.configuration.x.common['display_counters'] = true
   end
 
   def teardown
-    Rails.configuration.common['display_counters'] = false
+    Rails.configuration.x.common['display_counters'] = false
   end
 
   test 'После поиска артикула у нас должна заполниться история' do
