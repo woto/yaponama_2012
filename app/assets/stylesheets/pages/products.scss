@@ -14,7 +14,6 @@
 
   .image {
     img {
-      width: 300px;
       @extend .center-block;
       @extend .img-thumbnail;
     }
@@ -37,6 +36,21 @@
     height: 18px;
     width: 18px;
     background-color: #5cb85c;
+  }
+
+  .brands2 > a {
+    display: block;
+    height: 96px;
+    width: 100px;
+    border: 1px solid #DADADA;
+    position: absolute;
+    background-color: white;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    margin-top: -48px;
+    opacity: 0.8;
   }
 
 }
