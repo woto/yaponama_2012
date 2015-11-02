@@ -37,7 +37,7 @@
         <% end %>
 
         <li class="<%= highlight_active([:controller => '/user/cart']) %>">
-          <%= link_to user_cart_index_path do %>
+          <%= link_to main_app.user_cart_index_path do %>
             <%= icon 'shopping-cart' %> 
             Корзина <span id="products_incart" class="badge"><%= current_user && current_user.products.incart.count %></span>
           <% end %>
@@ -63,7 +63,7 @@
               <li> <%= link_to "Забыли пароль?", main_app.new_user_password_path %> </li>
             <% else %>
               <% if ["admin", "manager"].include? current_user.role %>
-                <li> <%= link_to "Администрирование", admin_root_path %> </li>
+                <li> <%= link_to "Администрирование", main_app.admin_root_path %> </li>
                 <%= divider %>
                 <%= content_for :menu_items %>
               <% end %>
@@ -79,6 +79,7 @@
     </div>
 
   </div> <!-- /.container -->
+
 
   <div id="nav-second" class="navbar-inverse">
     <div class="container">
@@ -109,7 +110,7 @@
           <% end %>
 
           <%= content_tag :li do %>
-            <%= link_to "Доставка", main_app.faqs_path(anchor: 30), :"faq-translocation" => '' %>
+            <%= link_to "Доставка", main_app.deliveries_path, :"window-dialog" => main_app.deliveries_path %>
           <% end %>
 
           <%= content_tag :li, class: highlight_active2(/\/faqs/) do %>
@@ -124,5 +125,7 @@
     </div> <!-- /.container -->
 
   </div>
+
+  <%= render 'attention' -%>
 
 </nav>

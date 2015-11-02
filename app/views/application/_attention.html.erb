@@ -1,7 +1,7 @@
 <% content_for :attention do %>
 
   <% attentioned_news.each do |topic| %>
-    <details>
+    <details class="top-space-sm right-space-md bottom-space-sm left-space-md">
       <summary>
         <b><%= topic['title'] %></b>
       </summary>
@@ -17,3 +17,13 @@
   <% end %>
 
 <% end %>
+
+<div class="navbar-default alert-warning">
+  <div class="container">
+    <div class="collapse navbar-collapse navbar-responsive-collapse">
+      <% if content_for? :attention %>
+        <%= yield :attention %>
+      <% end %>
+    </div>
+  </div>
+</div>

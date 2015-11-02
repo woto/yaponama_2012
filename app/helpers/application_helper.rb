@@ -67,7 +67,7 @@ module ApplicationHelper
       image = asset_url('no_brand.png')
     end
 
-    link_to(title.call(brand), path.call(brand), :style => "background: url(#{image}) no-repeat scroll center center", :class => "brand brands-#{brand.name.parameterize}")
+    link_to(title.call(brand), path.call(brand), :style => "background-image: url(#{image}); background-repeat: no-repeat; background-position: center; background-attachment: scroll", :class => "brand brands-#{brand.name.parameterize}")
 
   end
 
@@ -305,7 +305,7 @@ module ApplicationHelper
             end)
             concat(panel.body do
               concat post
-              concat link_to('Редактировать статью', link, class: 'btn btn-warning') if current_user && current_user.seller?
+              concat link_to('Перейти к статье на форуме', link, class: 'btn btn-warning') if current_user && !current_user.guest?
             end)
           end)
         end

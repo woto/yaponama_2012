@@ -3,7 +3,7 @@
   var catalog_number, ignore, ignore_str, request;
 
   catalog_number = '<%= PriceMate.catalog_number(@c9).downcase %>';
-  ignore = [263, 264, 284, 285, 286];
+  ignore = [263, 264];
 
   ignore_str = ignore.map(function(value, index) {
     return '&ignore[]=' + value;
@@ -25,7 +25,7 @@
       }
       el = document.querySelector('#partners');
       if (html) {
-        el.innerHTML = '<div class="panel panel-default"> <div class="panel-heading"> <h3 class="panel-title"> Этот товар есть в наличии у наших партнеров в Москве! </h3> </div> <div class="panel-body">' + html + '</div> <div class="panel-footer"> <span class="text-sm text-muted">Хотите чтобы ваши предложения тоже отображались в этом списке? Звоните, это бесплатно! +7 (926) 667-75-27 </span> </div> </div>';
+        el.innerHTML = '<div class="panel panel-default"> <div class="panel-heading"> <h3 class="panel-title"> Этот товар есть в наличии у наших партнеров в Москве! </h3> </div> <div class="panel-body">' + html + '</div> <div class="panel-footer"> <span class="text-sm text-muted">Хотите чтобы ваши предложения тоже отображались в этом списке? <a href="#" class="talk-show">Свяжитесь с нами.</a> </span> </div> </div>';
       }
     }
   };
@@ -34,6 +34,8 @@
 
 </script>
 
-<div class="container">
-  <div id="partners"> </div>
-</div>
+<%= page do |p| %>
+  <%= p.content do %>
+    <div id="partners"> </div>
+  <% end %>
+<% end %>
