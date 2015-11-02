@@ -1,38 +1,9 @@
-<% if false %>
-<%= b1 do %>
-  <div id="discourse-comments"></div>
-
-  <script type="text/javascript">
-      var discourseUrl = "http://<%= Rails.configuration.discourse['host_port'] %>/",
-          discourseEmbedUrl = "http://www.<%= Rails.configuration.site['host_port'] + request.fullpath %>";
-
-    (function() {
-      var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
-        d.src = discourseUrl + 'javascripts/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
-    })();
-  </script>
-<% end %>
+<%= page do |p| %>
+  <%= p.content do %>
+    <%= ckpart('specialization') %>
+  <% end %>
 <% end %>
 
-<% if Rails.configuration.common['share_buttons'] %>
-  <h4>Поделиться ссылкой на эту страницу.</h4>
-  <div style="margin-left: -4px" class="bottom-space-sm">
-    <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-    <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir" data-yashareTheme="counter"></div>
-  </div>
-<% end %>
-
-<footer class="clearfix text-xs" style="margin-top: 50px; padding-top: 30px; color: #555; background: #111;">
-  <div class="container bottom-space">
-    <% if Rails.configuration.x.common['display_counters'] %>
-      <%== ckpart('yandex') %>
-      <%== ckpart('mail') %>
-      <%== ckpart('rambler') %>
-      <%== ckpart('google') %>
-      <%== ckpart('openstat') %>
-      <%== ckpart('liveinternet') %>
-    <% end %>
-    <span class="pull-right">© 1997–<%= Time.zone.now.year %> Авториф</span>
-  </div>
-</footer>
+<%= render 'shops' %>
+<%= render 'tawk_to' %>
+<%= render 'layouts/shared/counters' %>
