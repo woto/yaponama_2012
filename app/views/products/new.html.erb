@@ -17,18 +17,7 @@
   <%= discourse_body %>
 <% end %>
 
-<br />
-
-<%= page do |p| %>
-  <%= p.title :xs do %>
-    <h2 class="bottom-space-lg"> Доставка запчастей по России и Москве </h2>
-  <% end %>
-  <%= p.content :xs do %>
-    <%= render 'deliveries/index' %>
-  <% end %>
-<% end %>
-
-<br />
+<% if false %>
 <br />
 
 <%= page do |p| %>
@@ -44,6 +33,8 @@
       <% end %>
     </div>
   <% end %>
+<% end %>
+
 <% end %>
 
 <%= render 'partners_offers' %>

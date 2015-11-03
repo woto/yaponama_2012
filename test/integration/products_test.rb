@@ -35,11 +35,18 @@ class ProductsTest < ActionDispatch::IntegrationTest
     assert_select "link[rel=canonical][href='http://www.example.com/user/products/new?catalog_number=2102&replacements=1']"
   end
 
-  test 'Если мы посылаем запрос с If-Modified-Since с датой позже полученной ранее Last-Modified, то должен отдаться 304' do
-    get new_user_product_path(catalog_number: '2103')
+  test 'И наоборот, если я не бот и посылаю запрос с If-Modified-Since с датой позже полученной ранее Las-Modified, то должен отдаться 200' do
+    # TODO (Если товар удалить из корзины, то будет показываться все равно кешированная версия, на которой будет отображаться товар в корзине)
+    skip
+  end
+
+  test 'Если мы посылаем запрос с If-Modified-Since с датой позже полученной ранее Last-Modified, то для ботов должен отдаться 304' do
+    Bot.create!(inet: '192.168.1.0/24')
+
+    get new_user_product_path(catalog_number: '2103'), nil, {"REMOTE_ADDR" => '192.168.1.2' }
     assert_response 200
 
-    get new_user_product_path(catalog_number: '2103'), {}, {'If-Modified-Since' => (Time.parse(@response.headers['Last-Modified']) + 1.second).httpdate.to_s}
+    get new_user_product_path(catalog_number: '2103'), nil, {"REMOTE_ADDR" => '192.168.1.2', 'If-Modified-Since' => (Time.parse(@response.headers['Last-Modified']) + 1.second).httpdate.to_s}
     assert_response 304
   end
 
@@ -48,11 +55,17 @@ class ProductsTest < ActionDispatch::IntegrationTest
     assert_response 200
   end
 
+  test 'И наоборот, если я не бот и посылаю запрос с :etag, который мне уже известен, то должен отдаться 200' do
+    # TODO (Если товар удалить из корзины, то будет показываться все равно кешированная версия, на которой будет отображаться товар в корзине)
+    skip
+  end
 
-  test 'Если мы посылаем запрос с :etag который нам уже известен, то должен отдаться 304' do
-    get new_user_product_path(catalog_number: '2103')
+  test 'Если мы посылаем запрос с :etag который нам уже известен, то для ботов должен отдаться 304' do
+    Bot.create!(inet: '192.168.1.0/24')
 
-    get new_user_product_path(catalog_number: '2103'), {}, {'If-None-Match' => @response.headers['ETag']}
+    get new_user_product_path(catalog_number: '2103'), nil, {"REMOTE_ADDR" => '192.168.1.2' }
+
+    get new_user_product_path(catalog_number: '2103'), nil, {"REMOTE_ADDR" => '192.168.1.2', 'If-None-Match' => @response.headers['ETag']}
     assert_response 304
   end
 

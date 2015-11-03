@@ -382,6 +382,11 @@ ActiveRecord::Schema.define(version: 20151016131254) do
     t.string   "yogrn"
     t.integer  "faq_id"
     t.string   "email"
+    t.string   "phone1"
+    t.string   "phone2"
+    t.string   "phone3"
+    t.string   "phone4"
+    t.string   "phone5"
   end
 
   create_table "deliveries_variants", force: :cascade do |t|

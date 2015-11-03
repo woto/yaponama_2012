@@ -34,12 +34,12 @@ class ProductsControllerTest < ActionController::TestCase
 
   test 'Если по номеру найден один производитель, то не показываем pills' do
     get :new, catalog_number: 'proverkasearch'
-    assert_select 'ul.nav.nav-pills', false
+    assert_select 'ul#nav-pills.nav.nav-pills', false
   end
 
   test 'Если по номеру найдены более одного производителя, то показываем pills' do
     get :new, catalog_number: '2102'
-    assert_select 'ul.nav.nav-pills' do
+    assert_select 'ul#nav-pills.nav.nav-pills' do
       assert_select 'li.active' do
         assert_select 'a[href="#nissan"][data-toggle="tab"]', text: 'NISSAN'
       end
@@ -64,16 +64,9 @@ class ProductsControllerTest < ActionController::TestCase
   test 'Проверяем .panel-heading в .tab-pane' do
     get :new, catalog_number: '2102'
     assert_select '#kia.tab-pane' do
-      assert_select '.panel' do
-        assert_select '.panel-heading' do
-          assert_select 'h3.panel-title' do
-            assert_select 'a[href="/categories"]:nth-child(1)', text: 'Запчасти'
-            assert_select 'a[href="/categories/926511968-bamper-zadniy"]:nth-child(3)', text: 'БАМПЕР ЗАДНИЙ'
-            assert_select 'a[href="#kia"]:nth-child(5)' do
-              assert_select '[itemprop="name"]', '2102 (KIA)'
-            end
-          end
-        end
+      assert_select 'a[href="/categories/926511968-bamper-zadniy"]', text: 'БАМПЕР ЗАДНИЙ'
+      assert_select 'a[href="#kia"]' do
+        assert_select '[itemprop="name"]', '2102 (KIA)'
       end
     end
   end
@@ -83,13 +76,13 @@ class ProductsControllerTest < ActionController::TestCase
     assert_select '#proizvodit.tab-pane' do
       assert_select '.panel' do
         assert_select '.panel-body' do
+          assert_select 'small', text: 'Производитель:'
           assert_select 'h3' do
-            assert_select 'small', text: 'Производитель:'
             assert_select 'b[itemprop="brand"]', 'ПРОИЗВОДИТ'
             assert_select 'small', text: '(ПРОИЗВОДИТЕЛЬ)'
           end
+          assert_select 'small', 'Каталожный номер:'
           assert_select 'h3' do
-            assert_select 'small', 'Артикул:'
             assert_select 'b', 'PROVERKASEARCH'
             assert_select 'small', '(PROVERKA_SEARCH)'
           end
@@ -402,12 +395,7 @@ class ProductsControllerTest < ActionController::TestCase
             assert_select 'h4' do
               assert_select '*', text: /Под заказ,\s+743 руб.\s+доставка\s+6 окт./
               assert_select 'small' do
-                assert_select 'a[window-dialog="/deliveries"][href="/deliveries"]', text: 'узнать стоимость доставки'
-              end
-              assert_select 'span.text-xs' do
-                assert_select '*', text: /Акция/
-                assert_select '*', text: /49 руб./
-                assert_select 'a[href="/faqs/1074"][window-dialog="/faqs/1074"]', text: 'подробнее...'
+                assert_select 'a[window-dialog="/deliveries"][href="/deliveries"]', text: 'стоимость доставки'
               end
             end
           end
@@ -416,9 +404,19 @@ class ProductsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'Проверяем корректность блока акции' do
+    skip
+    # TODO
+    # assert_select 'span.text-xs' do
+    #   assert_select '*', text: /Акция/
+    #   assert_select '*', text: /49 руб./
+    #   assert_select 'a[href="/faqs/1074"][window-dialog="/faqs/1074"]', text: 'подробнее...'
+    # end
+  end
+
   test 'Если товара нет в корзине, то отображается кнопка Добавить в корзину' do
     get :new, catalog_number: 'proverka_search'
-    assert_select 'input#submit-PROVERKASEARCH-proizvodit[type=submit][name=proizvodit]'
+    assert_select 'button#submit-PROVERKASEARCH-proizvodit[type=submit][name=proizvodit]'
   end
 
   test 'Если товар уже находится в корзине, то кнопки добавления в корзину нет' do

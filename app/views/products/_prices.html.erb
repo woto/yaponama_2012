@@ -74,6 +74,7 @@
               <h4 class="top-space-none bottom-space-none">
                 <%= image_tag 'metro.png', class: 'metro' %> <%= delivery_place.metro %>,
                 <%= number_to_currency(presence.price, precision: 0) %> в наличии <%= presence.count %> шт.
+                <br />
                 <small><%= link_to 'контакты', faq_path(delivery_place.faq_id), class: 'dashed', :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
               </h4>
             <% elsif replacements_count > 0 %>
@@ -82,6 +83,7 @@
                 <%= image_tag 'metro.png', class: 'metro' %>
                 <a href="#" class="text-default" data-toggle="modal" data-target="#<%= dom_id(delivery_place, :replacements) %>"><%= delivery_place.metro %>,
                   в наличии <%= I18n.translate :replacements, count: replacements_count %>, от <%= number_to_currency(replacements_min_cost, precision: 0) %></a>
+                <br />
                 <small><%= link_to 'контакты', faq_path(delivery_place.faq_id), class: 'dashed', :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
               </h4>
             <% else %>
@@ -89,6 +91,7 @@
               <h4 class="top-space-none bottom-space-none text-muted">
                 <%= image_tag 'metro.png', class: 'metro' %> <%= delivery_place.metro %>,
                 нет в наличии
+                <br />
                 <small><%= link_to 'контакты', faq_path(delivery_place.faq_id), class: 'dashed', :"window-dialog" => faq_path(delivery_place.faq_id) %></small>
               </h4>
             <% end %>
@@ -120,7 +123,9 @@
               <%= number_to_currency(offer[:retail_cost], precision: 0) %>
               доставка
               <%= l(Date.current + offer[:min_days].to_i.days+1, format: :short) %>
-              <small><%= link_to 'контакты', faq_path(1123), class: 'dashed', :"window-dialog" => faq_path(1123) %></small>
+              <br />
+              <small><%= link_to 'контакты', faq_path(1123), class: 'dashed', :"window-dialog" => faq_path(1123) %></small>&nbsp;
+              <small><%= link_to 'стоимость доставки', deliveries_path, class: 'dashed', :"window-dialog" => deliveries_path %></small>
               <% if current_user && current_user.admin? %>
                 <p><small class="text-muted"><%= offer[:tech] %> </small></p>
               <% end %>
