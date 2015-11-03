@@ -10,5 +10,11 @@
 <% end %>
 
 <% if replacements_link %>
-  <%= replacements_link %>
+  <%= page do |p| %>
+    <%= p.content do %>
+      <%= alert 'info' do %>
+        <%= replacements_link %>
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>

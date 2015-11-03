@@ -7,16 +7,19 @@
   <% end %>
 
 <% else %>
+  <%= page do |p| %>
+    <%= p.content do %>
+      <% unless params.key? :skip %>
+        <% if @c9.blank? %>
+          <h4>Вы не указали искомый каталожный номер</h4>
+        <% else %>
+          <h4>Ничего не найдено <%= (catalog_number = @c9).present? ? "по каталожному номеру #{catalog_number}" : "" %> <%= (manufacturer = @b9).present? ? "и производителю #{manufacturer}" : ""%> <%= @r9 == '1' ? "с учетом аналогов" : "без учета аналогов"  %></h4>
 
-  <% unless params.key? :skip %>
-    <% if @c9.blank? %>
-      <h4>Вы не указали искомый каталожный номер</h4>
-    <% else %>
-      <h4>Ничего не найдено <%= (catalog_number = @c9).present? ? "по каталожному номеру #{catalog_number}" : "" %> <%= (manufacturer = @b9).present? ? "и производителю #{manufacturer}" : ""%> <%= @r9 == '1' ? "с учетом аналогов" : "без учета аналогов"  %></h4>
-
-      <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
-      <h4><%= "Повторить поиск #{ link_to 'с учетом аналогов', new_user_product_path(:catalog_number => @c9, :manufacturer => @b9, :replacements => '1', :return_path => params[:return_path]), :class => 'replacement-button' } <br />".html_safe if (@r9.to_i != 1) %></h4>
-      <h4><%= "Повторить поиск #{ link_to 'без указания производителя', new_user_product_path(:id => @resource, :catalog_number => @c9, :replacements => @r9, :return_path => params[:return_path]), :class => 'search-button' } <br />".html_safe if @b9.present? %></h4>
+          <% new_or_edit = @resource.try(:persisted?) ? :edit : :new %>
+          <h4><%= "Повторить поиск #{ link_to 'с учетом аналогов', new_user_product_path(:catalog_number => @c9, :manufacturer => @b9, :replacements => '1', :return_path => params[:return_path]), :class => 'replacement-button' } <br />".html_safe if (@r9.to_i != 1) %></h4>
+          <h4><%= "Повторить поиск #{ link_to 'без указания производителя', new_user_product_path(:id => @resource, :catalog_number => @c9, :replacements => @r9, :return_path => params[:return_path]), :class => 'search-button' } <br />".html_safe if @b9.present? %></h4>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

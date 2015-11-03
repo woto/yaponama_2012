@@ -1,8 +1,5 @@
 <div class="image bottom-space-lg">
 
-  <div class="brands2" style="position: relative">
-    <%= brands_decorator lambda{|brand| brand_path brand}, mf_scope[:brand], lambda{|brand| ''} %>
-
   <% if mf_scope[:info] && mf_scope[:info].send("image1").present? %>
     <div id="gallery-carousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
@@ -31,6 +28,5 @@
   <% else %>
     <%= image_tag 'no_photo.jpg', alt: "Изображение отстутствует", style: "width: 300px;"  %>
   <% end %>
-  </div>
 
 </div>

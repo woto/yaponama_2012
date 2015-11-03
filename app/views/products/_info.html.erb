@@ -23,18 +23,6 @@
   <%= render 'spare_info_applicabilities', info: mf_scope[:info] %>
 <% end %>
 
-<% brand = capture do %>
-  <% if mf_scope[:brand].preview.present? %>
-    <div class="brand-preview text-justify">
-      <%= brand_preview mf_scope[:brand] %>
-    </div>
-    <div class="brands" style="clear: both; display: block; margin: 0 auto; width: 96px; height: 100px"> 
-      <%= brands_decorator lambda{|brand| brand_path brand}, mf_scope[:brand], lambda{|brand| brand.name} %>
-    </div>
-    <% if false %><%= link_to manufacturer, brand_parts_path(mf_scope[:brand]) %><% end %>
-  <% end %>
-<% end %>
-
 <div class="top-space">
 
   <!-- Nav tabs -->
@@ -47,9 +35,6 @@
     <% end %>
     <% if phrases.present? %>
       <li><a href="#phrases-<%= brand_css_id(mf_scope[:brand]) %>" data-toggle="tab">Индекс популярности</a></li>
-    <% end %>
-    <% if brand.present? %>
-      <li><a href="#brand-<%= brand_css_id(mf_scope[:brand]) %>" data-toggle="tab">Производитель</a></li>
     <% end %>
   </ul>
 
@@ -69,11 +54,6 @@
     <% if phrases.present? %>
       <div class="tab-pane" id="phrases-<%= brand_css_id(mf_scope[:brand]) %>">
         <%= phrases %>
-      </div>
-    <% end %>
-    <% if brand.present? %>
-      <div class="tab-pane" id="brand-<%= brand_css_id(mf_scope[:brand]) %>">
-        <%= brand %>
       </div>
     <% end %>
   </div>
