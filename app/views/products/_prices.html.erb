@@ -1,6 +1,6 @@
 <% offer = mf_scope[:offers].first %>
 
-<div class="col-md-15">
+<div class="col-lg-15">
 
 <div class="hidden" itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
   <meta itemprop="priceCurrency" content="RUB" />
@@ -11,7 +11,7 @@
 
 <%= simple_form_for @resource, url: [:user, @resource], remote: true, html: {id: "form-"+product_css_id(catalog_number, mf_scope[:brand])} do |f| %>
 
-  <div class="bottom-space-lg top-space-lg">
+  <div class="bottom-space-lg" style="margin-top: 60px">
 
     <% Deliveries::Place.random_list.each_with_index do |delivery_place, index| %>
 
@@ -140,7 +140,7 @@
         Товар уже находится в корзине, <%= link_to 'перейти в корзину', user_cart_index_path %>
       </h4>
     <% else %>
-      <%= f.button :button, id: "submit-#{product_css_id(catalog_number, mf_scope[:brand])}", name: mf_scope[:brand].to_label.parameterize, class: 'btn btn-success btn-lg' do %>
+      <%= f.button :button, id: "submit-#{product_css_id(catalog_number, mf_scope[:brand])}", name: mf_scope[:brand].to_label.parameterize, class: 'btn btn-success' do %>
         <%= icon 'shopping-cart' %>
         Добавить в корзину
       <% end %>

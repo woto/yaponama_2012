@@ -1,7 +1,11 @@
 <% if @formatted_data[0][1].size > 1 %>
-<ul class="nav nav-pills bottom-space-lg">
-  <% @formatted_data.map{|k, v| v.map{|k, v| k}}[0].each_with_index do |brand, index| %>
-    <li class="<%= 'active' if index==0 %>"><a href="#<%=brand.parameterize %>" data-toggle="tab"><%=brand %></a></li>
+  <%= page do |p| %>
+    <%= p.content do %>
+      <ul class="nav nav-pills bottom-space-lg">
+        <% @formatted_data.map{|k, v| v.map{|k, v| k}}[0].each_with_index do |brand, index| %>
+          <li class="<%= 'active' if index==0 %>"><a href="#<%=brand.parameterize %>" data-toggle="tab"><%=brand %></a></li>
+        <% end %>
+      </ul>
+    <% end %>
   <% end %>
-</ul>
 <% end %>
