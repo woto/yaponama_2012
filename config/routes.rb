@@ -188,7 +188,7 @@ Yaponama2012::Application.routes.draw do
 
   require 'sidekiq/web'
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
-    username == 'woto' && password == 'woto'
+    username == Rails.application.secrets.sidekiq_username && password == Rails.application.secrets.sidekiq_password
   end if Rails.env.production?
   mount Sidekiq::Web => '/sidekiq'
   mount Ckpages::Engine => "/ckpages"
