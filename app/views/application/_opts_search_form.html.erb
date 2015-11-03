@@ -6,7 +6,7 @@
   <% end %>
   <%= p.body do %>
 
-    <% if controller == :products && action == :new %>
+    <% if params[:controller] == 'products' && params[:action] == 'new' %>
       <% url = category_path(@spare_catalog) %>
     <% else %>
       <% url = url_for %>

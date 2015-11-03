@@ -3,7 +3,7 @@ defaults: &defaults
   initial_lat:                    55.7304426143438
   initial_lng:                    37.63272449798592
   warehouse_address:              'г. Москва, ул. 8 марта, д. 8, корп. 2'
-  delivery_minute_cost:           10
+  delivery_minute_cost:           8
   google_maps_key:                'AIzaSyBDWdW4KtQCWa1y4aHIqKIEI77v5emnlEs'
   travel_mode:                    'TRANSIT'   # DRIVING, TRANSIT
   max_automatic_calculated_cost:  500

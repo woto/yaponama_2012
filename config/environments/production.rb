@@ -114,7 +114,7 @@ Rails.application.configure do
     ssl:                    true }
 
   config.action_mailer.asset_host = "http://#{Rails.configuration.site['host']}:#{Rails.configuration.site['port']}"
-  config.action_mailer.default from: Rails.configuration.common['mail']
+  config.action_mailer.default from: Rails.configuration.x.common['mail']
   config.action_mailer.delivery_method = :smtp
 
 end

@@ -31,10 +31,10 @@ class Progon
     spare_infos.find_each do |spare_info|
       begin
         LOGGER.info "probing #{spare_info.to_label}"
-        open("http://#{Rails.configuration.site['host']}:#{Rails.configuration.site['port']}/user/products/new?catalog_number=#{spare_info.catalog_number}")
         spare_info.update_column(:aggregated_content_checked_at, Time.zone.now)
-        sleep 0.5
-      rescue Exception => e
+        open("http://#{Rails.configuration.site['host']}:#{Rails.configuration.site['port']}/user/products/new?catalog_number=#{spare_info.catalog_number}")
+        sleep 0.1
+      rescue StandardError => e
         sleep 1
         LOGGER.warn e.message
         LOGGER.warn spare_info.catalog_number

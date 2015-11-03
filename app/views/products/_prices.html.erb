@@ -11,7 +11,7 @@
 
 <%= simple_form_for @resource, url: [:user, @resource], remote: true, html: {id: "form-"+product_css_id(catalog_number, mf_scope[:brand])} do |f| %>
 
-  <div class="bottom-space-lg" style="margin-top: 60px">
+  <div class="bottom-space-lg">
 
     <% Deliveries::Place.random_list.each_with_index do |delivery_place, index| %>
 
