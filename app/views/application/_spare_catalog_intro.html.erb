@@ -1,9 +1,5 @@
-<div class="spare-catalog-intro">
-  <% if catalog.intro? %>
-    <div class="top-space-sm">
-      <div class="text-muted">
-        <%== catalog.intro %>
-      </div>
-    </div>
-  <% end %>
-</div>
+<% if catalog.intro? %>
+  <div class="text-muted">
+    <%== catalog.intro %>
+  </div>
+<% end %>

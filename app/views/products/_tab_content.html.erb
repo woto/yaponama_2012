@@ -14,14 +14,14 @@
                         <h3 class="top-space-none">
                           <b class="text-danger" itemprop="brand"><%= manufacturer %></b>
                           <% if mf_scope[:manufacturer_origs].size > 0 %>
-                            <small style="display: block" class="break-word nowrap">(<%= manufacturer_origs(mf_scope) %>)</small>
+                            <small style="display: block" class="break-word">(<%= manufacturer_origs(mf_scope) %>)</small>
                           <% end %>
                         </h3>
                         <small style="display: block">Каталожный номер:</small>
                         <h3 class="top-space-none">
                           <b class="text-danger"><%= mf_scope[:keyword] %></b>
                           <% if mf_scope[:catalog_number_origs].size > 0 %>
-                            <small style="display: block" class="break-word nowrap">(<%= catalog_number_origs(mf_scope) %>)</small>
+                            <small style="display: block" class="break-word">(<%= catalog_number_origs(mf_scope) %>)</small>
                           <% end %>
                         </h3>
                       </div>
@@ -35,36 +35,67 @@
 
                 <%= panel 'info' do |p| %>
                   <%= p.body do %>
-                    <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
-                  <% end %>
-                <% end %>
-
-                <%= panel 'info' do |p| %>
-                  <%= p.body do %>
                     <%= render 'info', mf_scope: mf_scope %>
                   <% end %>
                 <% end %>
 
-                <%= panel 'info' do |p| %>
-                  <%= p.body do %>
-                    <div class="brand-preview text-justify">
-                      <%= brand_preview mf_scope[:brand] %>
-                    </div>
-
-                    <div class="nowrap top-space-sm bottom-space-lg clearfix text-center">
-                      <%= brand_rating mf_scope[:brand] %>
-                    </div>
-                  <% end %>
-                <% end %>
                 <%= render 'manage', mf_scope: mf_scope, catalog_number: catalog_number, manufacturer: manufacturer %>
               </div>
             </div>
             <div class="col-md-6">
-              <%= link_to "Запчасти", categories_path %> <%= icon 'angle-right' %>
-              <%= link_to mf_scope[:catalog].name, category_path(mf_scope[:catalog]) %> <%= icon 'angle-right' %>
-              <%= link_to "##{manufacturer.parameterize}" do %>
+              <% @q = SpareInfo.search(params[:q]) %>
+              <% @spare_catalog = mf_scope[:catalog] %>
+              <% if @spare_catalog.opt %>
+                <% @opt_class = "Opts::#{@spare_catalog.opt.camelize}".constantize %>
+              <% end %>
+              <%= render 'opts_search_form' %>
+
+              <div class="brands2">
+                <%= brands_decorator lambda{|brand| brand_path brand}, mf_scope[:brand], lambda{|brand| ''} %>
+              </div>
+              <h4> <%= link_to "Продукция компании #{mf_scope[:brand].to_label}", brand_path(mf_scope[:brand]) %> </h4>
+
+              <% if false %>
+                <li><a href="#brand-<%= brand_css_id(mf_scope[:brand]) %>" data-toggle="tab">Производитель</a></li> 
+                <% if brand.present? %>
+                  <div class="tab-pane" id="brand-<%= brand_css_id(mf_scope[:brand]) %>">
+                    <%= brand %>
+                  </div>
+                <% end %>
+              <% end %>
+
+              <% content_for :brand_preview do %>
+                <%= brand_preview mf_scope[:brand] %>
+              <% end %>
+
+              <% if content_for? :brand_preview %>
+                <div class="brand-preview text-justify">
+                  <%= brand_preview mf_scope[:brand] %>
+                </div>
+              <% end %>
+
+              <div class="nowrap top-space-sm bottom-space-lg clearfix">
+                <%= brand_rating mf_scope[:brand] %>
+              </div>
+
+              <hr />
+
+              <h4> <%= link_to "#{mf_scope[:catalog].name}", category_path(mf_scope[:catalog]) %> </h4>
+
+              <% content_for :spare_catalog_intro do %>
+                <%= render 'spare_catalog_intro', catalog: mf_scope[:catalog] %>
+              <% end %>
+
+              <% if content_for? :spare_catalog_intro %>
+                <div class="spare-catalog-intro">
+                  <%= content_for :spare_catalog_intro %>
+                </div>
+              <% end %>
+
+              <%= link_to "##{manufacturer.parameterize}", class: 'hidden' do %>
                 <span itemprop='name'><%= "#{mf_scope[:keyword]} (#{manufacturer})" %></span>
               <% end %>
+
             </div>
           <% end %>
         <% end %>

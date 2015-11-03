@@ -46,7 +46,7 @@ module ApplicationHelper
   def brand_preview brand
 
     if brand.preview.present?
-      output = '<div class="top-space">'
+      output = '<div class="text-muted">'
       output << h(brand.preview)
       output << ' '
       output << link_to('подробнее...', brand)

@@ -43,14 +43,10 @@
     height: 96px;
     width: 100px;
     border: 1px solid #DADADA;
-    position: absolute;
     background-color: white;
-    z-index: 10;
-    left: 50%;
-    top: 50%;
-    margin-left: -50px;
-    margin-top: -48px;
     opacity: 0.8;
+    @extend .right-space;
+    @extend .pull-left;
   }
 
 
