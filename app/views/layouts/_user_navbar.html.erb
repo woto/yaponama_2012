@@ -25,6 +25,18 @@
 
       <%= render 'frontend/shared/search_form' %>
 
+      <% if false %>
+
+      <ul class="nav navbar-nav navbar-left">
+        <li>
+          <a href="#" rel="popover" data-html="true" data-container="body" data-placement="bottom" data-content="<% session.keys.each do |k| %><%= "#{k}<br/>#{session[k].inspect}" %><hr /><% end %>">
+            <%= icon 'cog fa-lg fa-spin' %>
+          </a>
+        </li>
+      </ul>
+      <% end %>
+
+
       <ul class="nav navbar-nav navbar-right">
 
         <%= dropdown id: 'dropdown-phone' do |dd| %>

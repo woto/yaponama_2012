@@ -685,4 +685,3 @@ TOYOTA
 rails g migration AddFieldsToModifications grade:string body:integer power:integer fuel:integer transmission:integer doors:integer generation:string engine:string displacement:integer steering:integer
 
 ----------------
-

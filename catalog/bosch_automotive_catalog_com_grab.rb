@@ -3,7 +3,7 @@ require '_capybara'
 class BoschAutomotiveCatalogComGrab < ActionDispatch::IntegrationTest
 
   def self.bosch_automotive_catalog_com_grab
-    bosch = BrandMate.find_canonical("BOSCH")
+    bosch = BrandMate.find_conglomerate("BOSCH")
     SpareInfo.where(brand: bosch).order("RANDOM()").each do |si|
       begin
         visit "http://www.bosch-automotive-catalog.com/ru/product-detail/-/product/#{si.catalog_number}"
@@ -52,7 +52,7 @@ class BoschAutomotiveCatalogComGrab < ActionDispatch::IntegrationTest
           end
         end
 
-      rescue Exception => e
+      rescue StandardError => e
         puts e.message
         puts si.catalog_number
         puts e.backtrace.join("\n")

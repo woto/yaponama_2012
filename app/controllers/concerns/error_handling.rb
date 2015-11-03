@@ -5,7 +5,7 @@ module ErrorHandling
 
     skip_before_action :find_resource, only: [:render_404, :render_500]
 
-    if Rails.configuration.common['suppress_exceptions']
+    if Rails.configuration.x.common['suppress_exceptions']
       #rescue_from Exception, :with => :render_500
       # Это более не актуально. Необходимо использовать config.exceptions_app ? или
       # wildcard match (*) как это сейчас в ckpages ? Или config.action_dispatch.rescue_responses ?

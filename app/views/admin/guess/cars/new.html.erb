@@ -1,0 +1,26 @@
+<%= page do |p| %>
+
+  <%= p.breadcrumb do |b| %>
+  <% end %>
+
+  <%= p.content :xs do %>
+    <%= simple_form_for @resource, url: url_for(action: :create)  do |f| %>
+      <%= f.input :input %>
+      <%= f.button :submit %>
+    <% end %>
+
+    <br />
+    <br />
+
+    <% @resource.results && @resource.results.each do |result| %>
+      <dl class="dl-horizontal">
+        <dt>Similarity:</dt> <dd><%= result.similarity %> </dd>
+        <dt>Brand:</dt> <dd><%= result.brand.try(:to_label) %> </dd>
+        <dt>Model:</dt> <dd><%= result.model.try(:to_label) %> </dd>
+        <dt>Generation:</dt> <dd><%= result.generation.try(:to_label) %> </dd>
+        <dt>Modification:</dt> <dd><%= result.modification.try(:to_label) %> </dd>
+      </dl>
+    <% end %>
+  <% end %>
+
+<% end %>

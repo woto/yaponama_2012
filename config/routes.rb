@@ -64,6 +64,7 @@ Yaponama2012::Application.routes.draw do
   end
 
   concern :global_and_admin do
+
     resources :bots do
       get :preview, on: :member
     end
@@ -84,6 +85,11 @@ Yaponama2012::Application.routes.draw do
     end
     resources :orders
     resources :galleries
+
+    namespace :guess do
+      resource :car
+    end
+
   end
 
   concern :only_global do
@@ -104,18 +110,6 @@ Yaponama2012::Application.routes.draw do
     end
   end
 
-
-  resources :chats
-
-  # TODO проверить, помоему это очень старое и не нужное
-  #resources :delivery_zone_variants
-  #resources :delivery_zones
-
-  resources :calls
-
-  concern :legal_or_personal do
-    resource :legal_or_personal, :only => [:edit, :update]
-  end
 
   namespace :manage do
     resources :phrases
@@ -184,7 +178,6 @@ Yaponama2012::Application.routes.draw do
     brand = BrandMate.find_conglomerate((params[:brand]).gsub('+', ' '))
     "/brands/#{brand.to_param}"
   }
-
 
   require 'sidekiq/web'
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|

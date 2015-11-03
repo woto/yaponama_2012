@@ -18,9 +18,12 @@ module Concerns::Actions
       respond_to do |format|
         if @resource.save
           notice = %Q(#{@resource_class.model_name.human} "#{@resource.to_label}" был успешно создан)
-          format.html { redirect_to params[:return_path] || url_for(:action => :show, id: @resource.id), notice: notice }
+          url = url_for(:action => :show, id: @resource.id)
+          format.html { redirect_to params[:return_path] || url, notice: notice }
+          format.json { render :show, status: :created, location: url }
         else
           format.html { render action: 'new' }
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -29,9 +32,12 @@ module Concerns::Actions
       respond_to do |format|
         if @resource.save
           notice = %Q(#{@resource_class.model_name.human} "#{@resource.to_label}" был успешно обновлен)
-          format.html { redirect_to params[:return_path] || url_for(:action => :show, id: @resource.id), notice: notice }
+          url = url_for(:action => :show, id: @resource.id)
+          format.html { redirect_to params[:return_path] || url, notice: notice }
+          format.json { render :show, status: :ok, location: url }
         else
           format.html { render action: 'edit' }
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
     end
