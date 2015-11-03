@@ -5,15 +5,11 @@
 
   <%= page do |p| %>
 
-    <br />
-
     <%= p.title do %>
       <%= page_header %>
     <% end %>
 
-    <%= p.content do %>
-      <%= render 'index' %>
-    <% end %>
+    <%= render 'index' %>
 
   <% end %>
 

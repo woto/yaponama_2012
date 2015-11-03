@@ -1,8 +1,5 @@
 <div class="image bottom-space-lg">
 
-  <% if false %><%= link_to manufacturer, brand_parts_path(mf_scope[:brand]) %><% end %>
-
-
   <div class="brands2" style="position: relative">
     <%= brands_decorator lambda{|brand| brand_path brand}, mf_scope[:brand], lambda{|brand| ''} %>
 
@@ -24,7 +21,7 @@
           <% if mf_scope[:info].send("image#{n}").present? %>
             <div class="item <%= 'active' if n-1 == 0 %>">
               <%= link_to mf_scope[:info].send("image#{n}").url do %>
-                <%= image_tag mf_scope[:info].send("image#{n}").fill_thumb.url, alt: "#{mf_scope[:info].to_label}", class: 'text-center' %>
+                <%= image_tag mf_scope[:info].send("image#{n}").fill_thumb.url, style: "width: 300px", alt: "#{mf_scope[:info].to_label}", class: 'text-center' %>
               <% end %>
             </div>
           <% end %>
@@ -32,7 +29,7 @@
       </div>
     </div>
   <% else %>
-    <%= image_tag 'no_photo.jpg', alt: "Изображение отстутствует" %>
+    <%= image_tag 'no_photo.jpg', alt: "Изображение отстутствует", style: "width: 300px;"  %>
   <% end %>
   </div>
 
