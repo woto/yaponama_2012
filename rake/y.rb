@@ -1,6 +1,6 @@
 class Y
 
-  BANNERS_LIMIT = 1000
+  BANNERS_LIMIT = 500
   CREATE_CAMPAIGNS = true
   UPDATE_CAMPAIGNS_IDS = []
 
@@ -34,9 +34,14 @@ class Y
       loop do
 
         spare_info_phrases = SpareInfoPhrase.
+          joins(:spare_info => [:brand, :spare_catalog, { :warehouses => :place }] ).
+          select("spare_info_phrases.id id, brands.name _brand, spare_info_phrases.catalog_number catalog_number, spare_infos.catalog_number _ncn, spare_catalogs.name _catalog, warehouses.price _price, spare_info_phrases.phrase _phrase, deliveries_places.ycountry, deliveries_places.ycountry_code, deliveries_places.ycity, deliveries_places.ystreet, deliveries_places.yhouse, deliveries_places.ycity_code, deliveries_places.yphone, deliveries_places.ycompany_name, deliveries_places.ycontact_email, deliveries_places.ywork_time, deliveries_places.yogrn, 1").
           where(:yandex_campaign_id => nil, :yandex_banner_id => nil, :publish => true).
+          where.not(:deliveries_places => { :partner => true } ).
           order(:id).limit(BANNERS_LIMIT)
 
+        # TODO Replace length to count. Rails bug. https://github.com/rails/rails/issues/11824
+        # UP: Добавил капельку магии ", 1"
         unless spare_info_phrases.count == BANNERS_LIMIT
           break
         else
@@ -93,27 +98,28 @@ class Y
     {
       "BannerID" => banner_id,
       "CampaignID" => campaign_id,
-      "Title" => "#{spare_info_phrase.spare_info.brand.name} - #{spare_info_phrase.catalog_number}",
-      "Text" => "#{spare_info_phrase.spare_info.spare_catalog.name}. Сеть магазинов.",
-      "Href" => "http://www.avtorif.ru/user/products/new?catalog_number=#{spare_info_phrase.spare_info.catalog_number}",
+      "Title" => "#{spare_info_phrase._brand} - #{spare_info_phrase.catalog_number}",
+      #"Text" => "#{spare_info_phrase.spare_info.cached_spare_catalog} #{ActionController::Base.helpers.number_to_currency(spare_info_phrase.spare_info.min_cost, :precision => 0, :delimiter => '')} от #{spare_info_phrase.spare_info.min_days} дн.",
+      "Text" => "#{spare_info_phrase._catalog} #{ActionController::Base.helpers.number_to_currency(spare_info_phrase._price, :precision => 0, :delimiter => '')} Приходите!",
+      "Href" => "http://www.avtorif.ru/user/products/new?catalog_number=#{spare_info_phrase._ncn}",
       "Geo" => "213",
-      #"ContactInfo" => {
-      #   "Country" => spare_info_phrase.ycountry,
-      #   "CountryCode" => spare_info_phrase.ycountry_code,
-      #   "City" => spare_info_phrase.ycity,
-      #   "Street" => spare_info_phrase.ystreet,
-      #   "House" => spare_info_phrase.yhouse,
-      #   "CityCode" => spare_info_phrase.ycity_code,
-      #   "Phone" => spare_info_phrase.yphone,
-      #   "CompanyName" => spare_info_phrase.ycompany_name,
-      #   "ContactEmail" => spare_info_phrase.ycontact_email,
-      #   "WorkTime" => spare_info_phrase.ywork_time,
-      #   "OGRN" => spare_info_phrase.yogrn
-      #},
+      "ContactInfo" => {
+         "Country" => spare_info_phrase.ycountry,
+         "CountryCode" => spare_info_phrase.ycountry_code,
+         "City" => spare_info_phrase.ycity,
+         "Street" => spare_info_phrase.ystreet,
+         "House" => spare_info_phrase.yhouse,
+         "CityCode" => spare_info_phrase.ycity_code,
+         "Phone" => spare_info_phrase.yphone,
+         "CompanyName" => spare_info_phrase.ycompany_name,
+         "ContactEmail" => spare_info_phrase.ycontact_email,
+         "WorkTime" => spare_info_phrase.ywork_time,
+         "OGRN" => spare_info_phrase.yogrn
+      },
       "Phrases" => [{
         "PhraseID" => phrase_id,
-        "Phrase" => spare_info_phrase.phrase,
-        "Price" => 4,
+        "Phrase" => spare_info_phrase._phrase,
+        "Price" => 5,
         "Currency" => "RUB"
       }]
     }
