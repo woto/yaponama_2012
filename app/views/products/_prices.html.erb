@@ -104,7 +104,8 @@
     <div class="deliveries_place" id="deliveries_place">
       <div class="radio <%= 'disabled' if offer.blank? %>">
         <label>
-          <input type="radio" id="offer_deliveries_place" name="offer" value="<%= serialize_product(
+          <% checked = Deliveries::Place.random_list.size == 0 ? "checked=''" : '' %>
+          <input type="radio" <%= checked %> id="offer_deliveries_place" name="offer" value="<%= serialize_product(
             catalog_number: catalog_number,
             brand_id: mf_scope[:brand].id,
             deliveries_place_id: nil,
@@ -141,9 +142,8 @@
 
   <div style="margin-left: 50px">
     <% if current_user && current_user.products.find_by(catalog_number: catalog_number, brand: mf_scope[:brand], status: 'incart') %>
-      <h4 id="<%= "incart-" + product_css_id(catalog_number, mf_scope[:brand]) %>">
-        Товар уже находится в корзине, <%= link_to 'перейти в корзину', user_cart_index_path %>
-      </h4>
+      <% button_content = "#{icon('shopping-cart')} Товар в корзине" %>
+      <%= link_to button_content.html_safe, user_cart_index_path, id: "incart-#{product_css_id(catalog_number, mf_scope[:brand])}", class: 'btn btn-warning' %>
     <% else %>
       <%= f.button :button, id: "submit-#{product_css_id(catalog_number, mf_scope[:brand])}", name: mf_scope[:brand].to_label.parameterize, class: 'btn btn-success' do %>
         <%= icon 'shopping-cart' %>
@@ -190,8 +190,10 @@
         <span class="left-space-xs">
           Лайкните нас в социальных сетях и получите скидку <%= number_to_currency(discount/2/6, precision: 0) %> за каждый лайк (скидка суммируется) <%= link_to 'подробнее...', faq_path(1122), class: 'dashed', :"window-dialog" => faq_path(1122) %>
           <br />
-          <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-          <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus" data-yashareTheme="counter"></div>
+          <% if Rails.configuration.x.common['share_buttons'] %>
+            <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+            <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus" data-yashareTheme="counter"></div>
+          <% end %>
         </span>
       <% end %>
       <%= p.footer style: 'background: #FAFAFA' do %>

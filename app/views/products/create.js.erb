@@ -1,18 +1,22 @@
-dataLayer.push({
-    "ecommerce": {
-        "currencyCode": "RUB",
-        "add": {
-            "products": [
-                {
-                    "name": "<%= @resource.to_label %>",
-                    "price": <%= @resource.sell_cost %>,
-                    "brand": "<%= @resource.brand.to_label %>",
-                    //"category": "Аксессуары/Сумки",
-                    "quantity": <%= @resource.quantity_ordered %>
-                }
-            ]
-        }
-    }
-});
+if ((typeof dataLayer !== "undefined" && dataLayer !== null)) {
+  dataLayer.push({
+      "ecommerce": {
+          "currencyCode": "RUB",
+          "add": {
+              "products": [
+                  {
+                      "name": "<%= @resource.to_label %>",
+                      "price": <%= @resource.sell_cost %>,
+                      "brand": "<%= @resource.brand.to_label %>",
+                      //"category": "Аксессуары/Сумки",
+                      "quantity": <%= @resource.quantity_ordered %>
+                  }
+              ]
+          }
+      }
+  });
+}
 
-$('#submit-<%= product_css_id(@resource.catalog_number, @resource.brand) %>').replaceWith('<h4>Товар добавлен в корзину, <%= link_to 'перейти в корзину', user_cart_index_path %></h4>');
+<% button_content = "#{icon('shopping-cart')} Перейти в корзину" %>
+
+$('#submit-<%= product_css_id(@resource.catalog_number, @resource.brand) %>').replaceWith('<%= link_to button_content.html_safe, user_cart_index_path, class: 'btn btn-warning' %>');
